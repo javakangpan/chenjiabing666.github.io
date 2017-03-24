@@ -189,6 +189,7 @@ $(document).ready(function(){
   c.click(function(){
     a.addClass('fadeOut').css('display', 'none');
     o.css('display', 'block').addClass('fadeIn');
+    $('#toc.toc-aside').css('display', 'block').addClass('fadeIn');//新加的，打开文章时自动隐藏左边的栏
     m.addClass('moveMain');
   });
   o.click(function(){
