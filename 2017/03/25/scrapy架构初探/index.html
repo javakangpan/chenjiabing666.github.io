@@ -4,26 +4,35 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hello World | 觅</title>
+    <title>scrapy架构初探 | 觅</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+    <meta name="description" content="scrapy架构初探引言
+
+Python即时网络爬虫启动的目标是一起把互联网变成大数据库。单纯的开放源代码并不是开源的全部，开源的核心是“开放的思想”，聚合最好的想法、技术、人员，所以将会参照众多领先产品，比如，Scrapy，ScrapingHub，import io等。
+本文简单讲解一下Scrapy的架构。没错，通用提取器gsExtractor就是要集成到Scrapy架构中。
+请注意，本文不想复">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://chenjiabing666.github.io/2017/03/23/hello-world/index.html">
+<meta property="og:title" content="scrapy架构初探">
+<meta property="og:url" content="http://chenjiabing666.github.io/2017/03/25/scrapy架构初探/index.html">
 <meta property="og:site_name" content="觅">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2017-03-23T15:50:59.419Z">
+<meta property="og:description" content="scrapy架构初探引言
+
+Python即时网络爬虫启动的目标是一起把互联网变成大数据库。单纯的开放源代码并不是开源的全部，开源的核心是“开放的思想”，聚合最好的想法、技术、人员，所以将会参照众多领先产品，比如，Scrapy，ScrapingHub，import io等。
+本文简单讲解一下Scrapy的架构。没错，通用提取器gsExtractor就是要集成到Scrapy架构中。
+请注意，本文不想复">
+<meta property="og:updated_time" content="2017-03-25T05:12:46.277Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="scrapy架构初探">
+<meta name="twitter:description" content="scrapy架构初探引言
+
+Python即时网络爬虫启动的目标是一起把互联网变成大数据库。单纯的开放源代码并不是开源的全部，开源的核心是“开放的思想”，聚合最好的想法、技术、人员，所以将会参照众多领先产品，比如，Scrapy，ScrapingHub，import io等。
+本文简单讲解一下Scrapy的架构。没错，通用提取器gsExtractor就是要集成到Scrapy架构中。
+请注意，本文不想复">
 
     
     <link rel="alternative" href="/atom.xml" title="觅" type="application/atom+xml">
@@ -83,14 +92,14 @@ Quick">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/23/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2017/03/25/scrapy架构初探/" title="scrapy架构初探" itemprop="url">scrapy架构初探</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-23T15:50:59.419Z" itemprop="datePublished"> 发表于 2017-03-23</time>
+    <time datetime="2017-03-25T05:11:58.000Z" itemprop="datePublished"> 发表于 2017-03-25</time>
     
   </p>
 </header>
@@ -99,24 +108,86 @@ Quick">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy架构初探"><span class="toc-number">1.</span> <span class="toc-text">scrapy架构初探</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scrapy数据流"><span class="toc-number">1.2.</span> <span class="toc-text">scrapy数据流</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+		<h1 id="scrapy架构初探"><a href="#scrapy架构初探" class="headerlink" title="scrapy架构初探"></a>scrapy架构初探</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
+<blockquote>
+<p>Python即时网络爬虫启动的目标是一起把互联网变成大数据库。单纯的开放源代码并不是开源的全部，开源的核心是“开放的思想”，聚合最好的想法、技术、人员，所以将会参照众多领先产品，比如，Scrapy，ScrapingHub，<a href="http://Import.io" target="_blank" rel="external">import io</a>等。</p>
+<p>本文简单讲解一下Scrapy的架构。没错，通用提取器gsExtractor就是要集成到Scrapy架构中。</p>
+<p>请注意，本文不想复述原文内容，而是为了开源Python爬虫的发展方向找参照，而且以9年来开发网络爬虫经验作为对标，从而本文含有不少笔者主观评述，如果想读Scrapy官方原文，请点击<a href="https://doc.scrapy.org/en/latest/topics/architecture.html" target="_blank" rel="external">Scrapy官网的Architecture</a>。</p>
+</blockquote>
+</blockquote>
+<h2 id="scrapy数据流"><a href="#scrapy数据流" class="headerlink" title="scrapy数据流"></a>scrapy数据流</h2><blockquote>
+<blockquote>
+<p>Scrapy中的数据流由执行引擎控制，下面的原文摘自Scrapy官网，我根据猜测做了点评，为进一步开发GooSeeker开源爬虫指示方向：</p>
+<blockquote>
+<ul>
+<li>The Engine gets the first URLs to crawl from the Spider and schedules them in the Scheduler, as Requests.</li>
+</ul>
+</blockquote>
+<p>URL谁来准备呢？看样子是Spider自己来准备，那么可以猜测Scrapy架构部分（不包括Spider）主要做事件调度，不管网址的存储。看起来类似GooSeeker会员中心的爬虫罗盘，为目标网站准备一批网址，放在罗盘中准备执行爬虫调度操作。所以，这个开源项目的下一个目标是把URL的管理放在一个集中的调度库里面。</p>
+<blockquote>
+<ul>
+<li>The Engine asks the Scheduler for the next URLs to crawl.</li>
+</ul>
+</blockquote>
+<p>看到这里其实挺难理解的，要看一些其他文档才能理解透。接第1点，引擎从Spider中把网址拿到以后，封装成一个Request，交给了事件循环，会被Scheduler收来做调度管理的，暂且理解成对Request做排队。引擎现在就找Scheduler要接下来要下载的网页地址。</p>
+<blockquote>
+<ul>
+<li>The Scheduler returns the next URLs to crawl to the Engine and the Engine sends them to the Downloader, passing through the Downloader Middleware (request direction).</li>
+</ul>
+</blockquote>
+<p>从调度器申请任务，把申请到的任务交给下载器，在下载器和引擎之间有个下载器中间件，这是作为一个开发框架的必备亮点，开发者可以在这里进行一些定制化扩展。</p>
+<blockquote>
+<ul>
+<li>Once the page finishes downloading the Downloader generates a Response (with that page) and sends it to the Engine, passing through the Downloader Middleware (response direction).</li>
+</ul>
+</blockquote>
+<p>下载完成了，产生一个Response，通过下载器中间件交给引擎。注意，Response和前面的Request的首字母都是大写，虽然我还没有看其它Scrapy文档，但是我猜测这是Scrapy框架内部的事件对象，也可以推测出是一个异步的事件驱动的引擎，就像DS打数机的三级事件循环一样，对于高性能、低开销引擎来说，这是必须的。</p>
+<blockquote>
+<ul>
+<li>The Engine receives the Response from the Downloader and sends it to the Spider for processing, passing through the Spider Middleware (input direction).</li>
+</ul>
+</blockquote>
+<p>再次出现一个中间件，给开发者足够的发挥空间。</p>
+<blockquote>
+<ul>
+<li>The Spider processes the Response and returns scraped items and new Requests (to follow) to the Engine.</li>
+</ul>
+</blockquote>
+<p>每个Spider顺序抓取一个个网页，完成一个就构造另一个Request事件，开始另一个网页的抓取。</p>
+<blockquote>
+<ul>
+<li>The Engine passes scraped items and new Requests returned by a spider through Spider Middleware (output direction), and then sends processed items to Item Pipelines and processed Requests to the Scheduler.</li>
+</ul>
+</blockquote>
+<p>引擎作事件分发</p>
+<blockquote>
+<ul>
+<li>The process repeats (from step 1) until there are no more requests from the Scheduler.</li>
+</ul>
+</blockquote>
+<p>持续不断地运行。</p>
+</blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Scrapy学习/">Scrapy学习</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/scrapy/">scrapy</a>
+  </div>
 
 </div>
 
@@ -124,7 +195,7 @@ Quick">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2017/03/23/hello-world/" data-title="Hello World | 觅" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2017/03/25/scrapy架构初探/" data-title="scrapy架构初探 | 觅" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -137,14 +208,14 @@ Quick">
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/03/25/java图形与文本处理一/" title="java图形与文本处理一">
-  <strong>上一篇：</strong><br/>
-  <span>
-  java图形与文本处理一</span>
+
+<div class="next">
+<a href="/2017/03/25/java图形与文本处理一/"  title="java图形与文本处理一">
+ <strong>下一篇：</strong><br/> 
+ <span>java图形与文本处理一
+</span>
 </a>
 </div>
-
 
 </nav>
 
@@ -162,7 +233,7 @@ Quick">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy架构初探"><span class="toc-number">1.</span> <span class="toc-text">scrapy架构初探</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scrapy数据流"><span class="toc-number">1.2.</span> <span class="toc-text">scrapy数据流</span></a></li></ol></li></ol>
  
   </div>
 
