@@ -14,10 +14,12 @@
     <meta name="description" content="scrapy代理的设置
 在我的上一篇文章介绍了scrapy下载器中间件的使用,这里的scrapyIP的代理就是用这个原理实现的，重写了下载器中间件的process_request(self,request,spider)这个函数,这个函数的主要作用就是对request进行处理。
 
-话不多说直接撸代码import random  
+话不多说直接撸代码
+
+import random  
 import scrapy
 import logging
-class">
+cla">
 <meta property="og:type" content="article">
 <meta property="og:title" content="scrapy设置代理ip">
 <meta property="og:url" content="http://chenjiabing666.github.io/2017/03/26/scrapy设置代理ip/index.html">
@@ -25,20 +27,24 @@ class">
 <meta property="og:description" content="scrapy代理的设置
 在我的上一篇文章介绍了scrapy下载器中间件的使用,这里的scrapyIP的代理就是用这个原理实现的，重写了下载器中间件的process_request(self,request,spider)这个函数,这个函数的主要作用就是对request进行处理。
 
-话不多说直接撸代码import random  
+话不多说直接撸代码
+
+import random  
 import scrapy
 import logging
-class">
-<meta property="og:updated_time" content="2017-03-25T16:50:32.057Z">
+cla">
+<meta property="og:updated_time" content="2017-03-25T16:54:57.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="scrapy设置代理ip">
 <meta name="twitter:description" content="scrapy代理的设置
 在我的上一篇文章介绍了scrapy下载器中间件的使用,这里的scrapyIP的代理就是用这个原理实现的，重写了下载器中间件的process_request(self,request,spider)这个函数,这个函数的主要作用就是对request进行处理。
 
-话不多说直接撸代码import random  
+话不多说直接撸代码
+
+import random  
 import scrapy
 import logging
-class">
+cla">
 
     
     <link rel="alternative" href="/atom.xml" title="觅" type="application/atom+xml">
@@ -120,7 +126,9 @@ class">
 		<h1 id="scrapy代理的设置"><a href="#scrapy代理的设置" class="headerlink" title="scrapy代理的设置"></a>scrapy代理的设置</h1><blockquote>
 <p>在我的上一篇文章介绍了<a href="https://chenjiabing666.github.io/2017/03/25/scrapy%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%99%A8%E4%B8%AD%E9%97%B4%E4%BB%B6/">scrapy下载器中间件的使用</a>,这里的scrapy<code>IP</code>的代理就是用这个原理实现的，重写了下载器中间件的<code>process_request(self,request,spider)</code>这个函数,这个函数的主要作用就是对request进行处理。</p>
 <blockquote>
-<h3 id="话不多说直接撸代码"><a href="#话不多说直接撸代码" class="headerlink" title="话不多说直接撸代码"></a>话不多说直接撸代码</h3><pre><code>import random  
+<h3 id="话不多说直接撸代码"><a href="#话不多说直接撸代码" class="headerlink" title="话不多说直接撸代码"></a>话不多说直接撸代码</h3></blockquote>
+</blockquote>
+<pre><code>import random  
 import scrapy
 import logging
 class proxMiddleware(object):
@@ -137,10 +145,7 @@ proxy_list=[
     &quot;http://124.88.67.21:843&quot;,
     &quot;http://106.46.136.226:808&quot;,
     &quot;http://101.81.120.58:8118&quot;,
-    &quot;http://180.175.145.148:808&quot;
-</code></pre></blockquote>
-</blockquote>
-<pre><code>]
+    &quot;http://180.175.145.148:808&quot;]
 def process_request(self,request,spider):
     # if not request.meta[&apos;proxies&apos;]:
     ip = random.choice(self.proxy_list)
@@ -154,7 +159,8 @@ def process_request(self,request,spider):
 </blockquote>
 </blockquote>
 <p><strong>但是现在主要的问题就是没有代理ip可用，如果去买的话又太贵了，自己玩玩买代理不值当，所以只好自己写爬虫去爬取免费的代理了，但是免费的代理存活的时间是有限的，这是个非常麻烦的事情，我提供的方法就是实现自己的一个ip代理池，每天定时更新自己的代理池，具体的实现方法会在下一篇文章中介绍，现在提供一段代码用来爬<br>取西刺网站的代理</strong></p>
-<h2 id="直接撸代码，接招吧"><a href="#直接撸代码，接招吧" class="headerlink" title="直接撸代码，接招吧"></a>直接撸代码，接招吧</h2><pre><code>#coding:utf-8
+<h2 id="直接撸代码，接招吧"><a href="#直接撸代码，接招吧" class="headerlink" title="直接撸代码，接招吧"></a>直接撸代码，接招吧</h2></blockquote>
+<pre><code>#coding:utf-8
 import requests
 from bs4 import BeautifulSoup
 import threading
@@ -180,8 +186,8 @@ def get_ips(self):
             ip_temp = &quot;http://&quot; + tds[1].contents[0] + &quot;:&quot; + tds[2].contents[0]
             # print str(ip_temp)
             self.q.put(str(ip_temp))
-</code></pre></blockquote>
-<pre><code>def review_ips(self):
+
+def review_ips(self):
     while not self.q.empty():
         ip=self.q.get()
         try:
@@ -322,11 +328,11 @@ get_ip()
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>1</sup></a></li>
+				<li><a href="/tags/java基础/" title="java基础">java基础<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>1</sup></a></li>
+				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>1</sup></a></li>
 			
 		
 		</ul>
