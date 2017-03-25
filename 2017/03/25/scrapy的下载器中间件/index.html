@@ -4,50 +4,35 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>scrapy初试 | 觅</title>
+    <title>scrapy的下载器中间件 | 觅</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="scrapy初试
-创建项目
-打开cmd，在终端输入scrapy startproject tutorial,这里将在指定的文件夹下创建一个scrapy工程
+    <meta name="description" content="scrapy中的下载器中间件下载中间件
+下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。
 
-其中将会创建以下的文件：
-
-scrapy.cfg: 项目的配置文件
-tutorial/: 该项目的python模块。之后您将在此加入代码。
-tutorial/items.py: 项目中的item文件.
-tutorial/pipelines.p">
+编写下载器中间件
+1. process_request(request, spider)当每个request通过下载中间件时，该方法被调用。process_request() 必须返回其中之">
 <meta property="og:type" content="article">
-<meta property="og:title" content="scrapy初试">
-<meta property="og:url" content="http://chenjiabing666.github.io/2017/03/25/scrapy初试/index.html">
+<meta property="og:title" content="scrapy的下载器中间件">
+<meta property="og:url" content="http://chenjiabing666.github.io/2017/03/25/scrapy的下载器中间件/index.html">
 <meta property="og:site_name" content="觅">
-<meta property="og:description" content="scrapy初试
-创建项目
-打开cmd，在终端输入scrapy startproject tutorial,这里将在指定的文件夹下创建一个scrapy工程
+<meta property="og:description" content="scrapy中的下载器中间件下载中间件
+下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。
 
-其中将会创建以下的文件：
-
-scrapy.cfg: 项目的配置文件
-tutorial/: 该项目的python模块。之后您将在此加入代码。
-tutorial/items.py: 项目中的item文件.
-tutorial/pipelines.p">
-<meta property="og:updated_time" content="2017-03-25T06:22:17.191Z">
+编写下载器中间件
+1. process_request(request, spider)当每个request通过下载中间件时，该方法被调用。process_request() 必须返回其中之">
+<meta property="og:updated_time" content="2017-03-25T07:05:14.130Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="scrapy初试">
-<meta name="twitter:description" content="scrapy初试
-创建项目
-打开cmd，在终端输入scrapy startproject tutorial,这里将在指定的文件夹下创建一个scrapy工程
+<meta name="twitter:title" content="scrapy的下载器中间件">
+<meta name="twitter:description" content="scrapy中的下载器中间件下载中间件
+下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。
 
-其中将会创建以下的文件：
-
-scrapy.cfg: 项目的配置文件
-tutorial/: 该项目的python模块。之后您将在此加入代码。
-tutorial/items.py: 项目中的item文件.
-tutorial/pipelines.p">
+编写下载器中间件
+1. process_request(request, spider)当每个request通过下载中间件时，该方法被调用。process_request() 必须返回其中之">
 
     
     <link rel="alternative" href="/atom.xml" title="觅" type="application/atom+xml">
@@ -107,14 +92,14 @@ tutorial/pipelines.p">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/25/scrapy初试/" title="scrapy初试" itemprop="url">scrapy初试</a>
+      <a href="/2017/03/25/scrapy的下载器中间件/" title="scrapy的下载器中间件" itemprop="url">scrapy的下载器中间件</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-25T06:21:21.000Z" itemprop="datePublished"> 发表于 2017-03-25</time>
+    <time datetime="2017-03-25T07:04:08.000Z" itemprop="datePublished"> 发表于 2017-03-25</time>
     
   </p>
 </header>
@@ -123,72 +108,64 @@ tutorial/pipelines.p">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy初试"><span class="toc-number">1.</span> <span class="toc-text">scrapy初试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建项目"><span class="toc-number">1.1.</span> <span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其中将会创建以下的文件："><span class="toc-number">1.2.</span> <span class="toc-text">其中将会创建以下的文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写第一个爬虫"><span class="toc-number">1.3.</span> <span class="toc-text">编写第一个爬虫</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#spider代码中内容解析"><span class="toc-number">1.3.1.</span> <span class="toc-text">spider代码中内容解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以下是spider目录下的demo-py的代码"><span class="toc-number">1.3.2.</span> <span class="toc-text">以下是spider目录下的demo.py的代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spider的爬取"><span class="toc-number">1.4.</span> <span class="toc-text">spider的爬取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spider中的数据存取"><span class="toc-number">1.5.</span> <span class="toc-text">spider中的数据存取</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy中的下载器中间件"><span class="toc-number">1.</span> <span class="toc-text">scrapy中的下载器中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载中间件"><span class="toc-number">1.1.</span> <span class="toc-text">下载中间件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写下载器中间件"><span class="toc-number">1.2.</span> <span class="toc-text">编写下载器中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-process-request-request-spider"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. process_request(request, spider)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-process-response-request-response-spider"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. process_response(request, response, spider)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-process-exception-request-exception-spider"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.process_exception(request, exception, spider)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">1.3.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="scrapy初试"><a href="#scrapy初试" class="headerlink" title="scrapy初试"></a>scrapy初试</h1><blockquote>
-<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><blockquote>
-<p>打开<code>cmd</code>，在终端输入<code>scrapy startproject tutorial</code>,这里将在指定的文件夹下创建一个<code>scrapy</code>工程</p>
-</blockquote>
-<h2 id="其中将会创建以下的文件："><a href="#其中将会创建以下的文件：" class="headerlink" title="其中将会创建以下的文件："></a>其中将会创建以下的文件：</h2><blockquote>
+		<h1 id="scrapy中的下载器中间件"><a href="#scrapy中的下载器中间件" class="headerlink" title="scrapy中的下载器中间件"></a>scrapy中的下载器中间件</h1><h2 id="下载中间件"><a href="#下载中间件" class="headerlink" title="下载中间件"></a>下载中间件</h2><blockquote>
+<p>下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。</p>
+<blockquote>
+<h2 id="编写下载器中间件"><a href="#编写下载器中间件" class="headerlink" title="编写下载器中间件"></a>编写下载器中间件</h2><blockquote>
+<h3 id="1-process-request-request-spider"><a href="#1-process-request-request-spider" class="headerlink" title="1. process_request(request, spider)"></a>1. <code>process_request(request, spider)</code></h3><p>当每个<code>request</code>通过下载中间件时，该方法被调用。<br><code>process_request()</code> 必须返回其中之一: 返回 <code>None</code> 、返回一个 <code>Response</code> 对象、返回一个 <code>Request</code>对象或<code>raise IgnoreRequest</code> 。</p>
+<p>如果其返回 <code>None</code> ，Scrapy将继续处理该<code>request</code>，执行其他的中间件的相应方法，直到合适的下载器处理函数(<code>download handler</code>)被调用， 该<code>request</code>被执行(其<code>response</code>被下载)。</p>
+<p>如果其返回 <code>Response</code> 对象，Scrapy将不会调用 任何 其他的 <code>process_request()</code> 或 <code>process_exception()</code> 方法，或相应地下载函数； 其将返回该<code>response</code>。 已安装的中间件的 <code>process_response()</code> 方法则会在每个<code>response</code>返回时被调用。</p>
+<p>如果其返回 <code>Request</code> 对象，Scrapy则停止调用 <code>process_request</code>方法并重新调度返回的<code>request</code>。当新返回的<code>request</code>被执行后， 相应地中间件链将会根据下载的<code>response</code>被调用。</p>
+<p>如果其<code>raise</code>一个 <code>IgnoreRequest</code> 异常，则安装的下载中间件的 <code>process_exception()</code> 方法会被调用。如果没有任何一个方法处理该异常， 则<code>request</code>的<code>errback(Request.errback)</code>方法会被调用。如果没有代码处理抛出的异常， 则该异常被忽略且不记录(不同于其他异常那样)。</p>
+<p>参数:    </p>
+<blockquote>
 <ul>
-<li><code>scrapy.cfg</code>: 项目的配置文件</li>
-<li><code>tutorial/</code>: 该项目的python模块。之后您将在此加入代码。</li>
-<li><code>tutorial/items.py</code>: 项目中的item文件.</li>
-<li><code>tutorial/pipelines.py</code>: 项目中的pipelines文件.</li>
-<li><code>tutorial/settings.py</code>: 项目的设置文件.</li>
-<li><code>tutorial/spiders/</code>: 放置spider代码的目录.</li>
+<li><code>request</code> (<code>Request</code> 对象) – 处理的<code>request</code></li>
+<li><code>spider</code> (<code>Spider</code> 对象) – 该<code>request</code>对应的<code>spider</code></li>
 </ul>
 </blockquote>
-<p>定义item</p>
+<h3 id="2-process-response-request-response-spider"><a href="#2-process-response-request-response-spider" class="headerlink" title="2. process_response(request, response, spider)"></a>2. <code>process_response(request, response, spider)</code></h3><blockquote>
+<p><code>process_response()</code> 必须返回以下之一: 返回一个 <code>Response</code>对象、 返回一个<code>Request</code> 对象或<code>raise</code>一个 <code>IgnoreRequest</code> 异常。</p>
+<p>如果其返回一个 <code>Response</code> (可以与传入的<code>response</code>相同，也可以是全新的对象)， 该<code>response</code>会被在链中的其他中间件的 <code>process_response()</code> 方法处理。</p>
+<p>如果其返回一个 <code>Request</code> 对象，则中间件链停止， 返回的<code>request</code>会被重新调度下载。处理类似于 <code>process_request()</code> 返回<code>request</code>所做的那样。</p>
+<p>如果其抛出一个 <code>IgnoreRequest</code> 异常，则调用<code>request的errback(Request.errback)。</code> 如果没有代码处理抛出的异常，则该异常被忽略且不记录(不同于其他异常那样)。</p>
+<p>参数:    </p>
 <blockquote>
-<p><code>Item</code>是保存爬取到的数据的容器；其使用方法和<code>python</code>字典类似， 并且提供了额外保护机制来避免拼写错误导致的未定义字段错误。</p>
-<p>类似在<code>ORM</code>中做的一样，您可以通过创建一个 <code>scrapy.Item</code> 类， 并且定义类型为 <code>scrapy.Field</code>的类属性来定义一个<code>Item</code>。 (如果不了解<code>ORM</code>, 不用担心，您会发现这个步骤非常简单)</p>
-<p>首先根据需要从<code>dmoz.org</code>获取到的数据对<code>item</code>进行建模。 我们需要从<code>dmoz</code>中获取名字，<code>url</code>，以及网站的描述。 对此，在<code>item</code>中定义相应的字段。编辑 <code>tutorial</code> 目录中的 <code>items.py</code> 文件:</p>
-</blockquote>
-</blockquote>
-<pre><code>import scrapy
-class DmozItem(scrapy.Item):
-title = scrapy.Field()
-link = scrapy.Field()
-desc = scrapy.Field()
-</code></pre><blockquote>
 <blockquote>
-<p>一开始这看起来可能有点复杂，但是通过定义item， 您可以很方便的使用Scrapy的其他方法。而这些方法需要知道您的item的定义.</p>
-</blockquote>
-<h2 id="编写第一个爬虫"><a href="#编写第一个爬虫" class="headerlink" title="编写第一个爬虫"></a>编写第一个爬虫</h2><blockquote>
-<blockquote>
-<p>在工程的根目录下打开终端输入<code>scrapy genspider demo douban.com</code><br>这里的<code>demo</code>是<code>spders</code>文件下的主要<code>py</code>文件<br><code>douban.com</code>是要爬取的域名，会在<code>demo.py</code>中的 <code>allowed_domains</code>中显示，主要的功能就是限制爬取的<code>url</code></p>
-<h3 id="spider代码中内容解析"><a href="#spider代码中内容解析" class="headerlink" title="spider代码中内容解析"></a>spider代码中内容解析</h3><ul>
-<li><code>name</code>: 用于区别<code>Spider</code>。 该名字必须是唯一的，您不可以为不同的<code>Spider</code>设定相同的名字。</li>
-<li><code>start_urls</code>: 包含了<code>Spider</code>在启动时进行爬取的<code>url</code>列表。 因此，第一个被获取到的页面将是其中之一。 后续的<code>URL</code>则从初始的<code>URL</code>获取到的数据中提取。</li>
-<li><code>parse()</code> 是spider的一个方法。 被调用时，每个初始<code>URL</code>完成下载后生成的 Response 对象将会作为唯一的参数传递给该函数。 该方法负责解析返回的数据(<code>response data</code>)，提取数据(生成<code>item</code>)以及生成需要进一步处理的<code>URL</code>的 <code>Request</code>对象。</li>
+<ul>
+<li><code>request</code> (<code>Request</code>对象) – <code>response</code>所对应的request</li>
+<li><code>response</code> (<code>Response</code> 对象) – 被处理的response</li>
+<li><code>spider</code> (<code>Spider</code> 对象) – <code>response</code>所对应的<code>spider</code></li>
 </ul>
 </blockquote>
-<h3 id="以下是spider目录下的demo-py的代码"><a href="#以下是spider目录下的demo-py的代码" class="headerlink" title="以下是spider目录下的demo.py的代码"></a>以下是spider目录下的demo.py的代码</h3><pre><code>import scrapy
-</code></pre></blockquote>
-</blockquote>
-<pre><code>class DmozSpider(scrapy.Spider):
-name = &quot;dmoz&quot;
-allowed_domains = [&quot;dmoz.org&quot;]
-start_urls = [
-        &quot;http://www.dmoz.org/Computers/Programming/Languages/Python/Books/&quot;,
-    &quot;http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/&quot;
-]
-
-def parse(self, response):
-    filename = response.url.split(&quot;/&quot;)[-2]
-    with open(filename, &apos;wb&apos;) as f:
-        f.write(response.body)
-</code></pre><blockquote>
-<h2 id="spider的爬取"><a href="#spider的爬取" class="headerlink" title="spider的爬取"></a>spider的爬取</h2><blockquote>
-<p>进入工程的根目录下打开终端输入：<code>scrapy crawl dmoz</code></p>
-</blockquote>
-<h2 id="spider中的数据存取"><a href="#spider中的数据存取" class="headerlink" title="spider中的数据存取"></a>spider中的数据存取</h2><blockquote>
-<p>在工程的根目录下打开终端输入<code>scrapy crawl dmoz -o items.json</code><br>这里是将数据存储到<code>json</code>文件中</p>
 </blockquote>
 </blockquote>
+<h3 id="3-process-exception-request-exception-spider"><a href="#3-process-exception-request-exception-spider" class="headerlink" title="3.process_exception(request, exception, spider)"></a>3.<code>process_exception(request, exception, spider)</code></h3><blockquote>
+<p>当下载处理器(<code>download handler</code>)或 <code>process_request()</code> (下载中间件)抛出异常(包括 <code>IgnoreRequest</code> 异常)时， Scrapy调用 <code>process_exception()</code> 。</p>
+<p><code>process_exception()</code> 应该返回以下之一: 返回 <code>None</code> 、 一个 <code>Response</code> 对象、或者一个 <code>Request</code> 对象。</p>
+<p>如果其返回 <code>None</code> ，Scrapy将会继续处理该异常，接着调用已安装的其他中间件的 <code>process_exception()</code> 方法，直到所有中间件都被调用完毕，则调用默认的异常处理。</p>
+<p>如果其返回一个 <code>Response</code> 对象，则已安装的中间件链的 <code>process_response()</code> 方法被调用。Scrapy将不会调用任何其他中间件的 <code>process_exception()</code> 方法。</p>
+<p>如果其返回一个 <code>Request</code> 对象， 则返回的<code>request</code>将会被重新调用下载。这将停止中间件的 <code>process_exception()</code> 方法执行，就如返回一个<code>response</code>的那样。</p>
+<p>参数:    </p>
+<blockquote>
+<ul>
+<li><code>request</code> (是 <code>Request</code> 对象) – 产生异常的<code>request</code></li>
+<li><code>exception</code> (<code>Exception</code> 对象) – 抛出的异常</li>
+<li><code>spider</code> (<code>Spider</code> 对象) – <code>request</code>对应的<code>spider</code></li>
+</ul>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><blockquote>
+<p>总的来说下载器中间件就是起到处理request请求并且返回response的作用，一切从网页爬取的url发起的请求会组成一个请求队列，然后一个一个排队经过下载器中间件，之后下载器中间件会对request做出相应的处理，比如添加请求头，添加代理等等，然后通过process_response返回一个response，之后就是用得到的response做出相应的分析，当然这里的内容页可以不实现，但是如果要爬取大型的网站，会遇到被ban的可能就要在下载器中间件这里着手，设置一些相应的请求头，ip代理等等内容。<br><strong>以上纯属个人逐渐摸索总结出来的内容，如果有什么错误欢迎指正</strong></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -211,7 +188,7 @@ def parse(self, response):
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2017/03/25/scrapy初试/" data-title="scrapy初试 | 觅" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2017/03/25/scrapy的下载器中间件/" data-title="scrapy的下载器中间件 | 觅" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -224,19 +201,11 @@ def parse(self, response):
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/03/25/scrapy的下载器中间件/" title="scrapy的下载器中间件">
-  <strong>上一篇：</strong><br/>
-  <span>
-  scrapy的下载器中间件</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/03/25/java中的IO操作/"  title="java中的IO操作">
+<a href="/2017/03/25/scrapy初试/"  title="scrapy初试">
  <strong>下一篇：</strong><br/> 
- <span>java中的IO操作
+ <span>scrapy初试
 </span>
 </a>
 </div>
@@ -257,7 +226,7 @@ def parse(self, response):
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy初试"><span class="toc-number">1.</span> <span class="toc-text">scrapy初试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建项目"><span class="toc-number">1.1.</span> <span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其中将会创建以下的文件："><span class="toc-number">1.2.</span> <span class="toc-text">其中将会创建以下的文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写第一个爬虫"><span class="toc-number">1.3.</span> <span class="toc-text">编写第一个爬虫</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#spider代码中内容解析"><span class="toc-number">1.3.1.</span> <span class="toc-text">spider代码中内容解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以下是spider目录下的demo-py的代码"><span class="toc-number">1.3.2.</span> <span class="toc-text">以下是spider目录下的demo.py的代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spider的爬取"><span class="toc-number">1.4.</span> <span class="toc-text">spider的爬取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spider中的数据存取"><span class="toc-number">1.5.</span> <span class="toc-text">spider中的数据存取</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy中的下载器中间件"><span class="toc-number">1.</span> <span class="toc-text">scrapy中的下载器中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载中间件"><span class="toc-number">1.1.</span> <span class="toc-text">下载中间件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写下载器中间件"><span class="toc-number">1.2.</span> <span class="toc-text">编写下载器中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-process-request-request-spider"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. process_request(request, spider)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-process-response-request-response-spider"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. process_response(request, response, spider)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-process-exception-request-exception-spider"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.process_exception(request, exception, spider)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">1.3.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol>
  
   </div>
 
