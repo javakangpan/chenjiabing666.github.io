@@ -4,12 +4,12 @@
 
     
   <url>
-    <loc>http://chenjiabing666.github.io/2017/03/26/Scrapy%E4%B8%AD%E4%BD%BF%E7%94%A8cookie%E5%85%8D%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%99%BB%E5%BD%95%E5%92%8C%E6%A8%A1%E6%8B%9F%E7%99%BB%E5%BD%95/</loc>
-    <lastmod>2017-03-26T06:21:39.580Z</lastmod>
+    <loc>http://chenjiabing666.github.io/2017/03/26/scrapy%E8%AE%BE%E7%BD%AE%E8%AF%B7%E6%B1%82%E6%B1%A0/</loc>
+    <lastmod>2017-03-26T06:29:55.534Z</lastmod>
     <data>
         <display>
-        <title>Scrapy中使用cookie免于验证登录和模拟登录</title>
-        <pubTime>2017-03-26T05:30:53.000Z</pubTime>
+        <title>scrapy设置请求池</title>
+        <pubTime>2017-03-26T06:20:10.000Z</pubTime>
         
         <tag>scrapy</tag>
          
@@ -24,12 +24,12 @@
 
     
   <url>
-    <loc>http://chenjiabing666.github.io/2017/03/26/scrapy%E8%AE%BE%E7%BD%AE%E8%AF%B7%E6%B1%82%E6%B1%A0/</loc>
-    <lastmod>2017-03-26T06:21:09.285Z</lastmod>
+    <loc>http://chenjiabing666.github.io/2017/03/26/Scrapy%E4%B8%AD%E4%BD%BF%E7%94%A8cookie%E5%85%8D%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%99%BB%E5%BD%95%E5%92%8C%E6%A8%A1%E6%8B%9F%E7%99%BB%E5%BD%95/</loc>
+    <lastmod>2017-03-26T06:21:39.580Z</lastmod>
     <data>
         <display>
-        <title>scrapy设置请求池</title>
-        <pubTime>2017-03-26T06:20:10.000Z</pubTime>
+        <title>Scrapy中使用cookie免于验证登录和模拟登录</title>
+        <pubTime>2017-03-26T05:30:53.000Z</pubTime>
         
         <tag>scrapy</tag>
          
