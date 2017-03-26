@@ -4,29 +4,32 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Scrapy中使用cookie免于验证登录和模拟登录 | 觅</title>
+    <title>scrapy设置请求池 | 觅</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="Scrapy中使用cookie免于验证登录和模拟登录引言
-python爬虫我认为最困难的问题一个是ip代理，另外一个就是模拟登录了，更操蛋的就是模拟登录了之后还有验证码，真的是不让人省心，不过既然有了反爬虫，那么就有反反爬虫的策略，这里就先介绍一个cookie模拟登陆，后续还有seleminum+phantomjs模拟浏览器登录的文章。还不知道cookie是什么朋友们，可以点击这里
-cookie提">
+    <meta name="description" content="scrapy设置”请求池”引言
+相信大家有时候爬虫发出请求的时候会被ban，返回的是403错误，这个就是请求头的问题，其实在python发出请求时，使用的是默认的自己的请求头，网站管理者肯定会不允许机器访问的，但是有些比较low的网站还是可以访问的，有时候网站管理者看到同一个请求头在一秒内请求多次，傻子都知道这是机器在访问，因此会被ban掉，这时就需要设置请求池了，这个和ip代理池是一个概念
+
+话">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Scrapy中使用cookie免于验证登录和模拟登录">
-<meta property="og:url" content="http://chenjiabing666.github.io/2017/03/26/Scrapy中使用cookie免于验证登录和模拟登录/index.html">
+<meta property="og:title" content="scrapy设置请求池">
+<meta property="og:url" content="http://chenjiabing666.github.io/2017/03/26/scrapy设置请求池/index.html">
 <meta property="og:site_name" content="觅">
-<meta property="og:description" content="Scrapy中使用cookie免于验证登录和模拟登录引言
-python爬虫我认为最困难的问题一个是ip代理，另外一个就是模拟登录了，更操蛋的就是模拟登录了之后还有验证码，真的是不让人省心，不过既然有了反爬虫，那么就有反反爬虫的策略，这里就先介绍一个cookie模拟登陆，后续还有seleminum+phantomjs模拟浏览器登录的文章。还不知道cookie是什么朋友们，可以点击这里
-cookie提">
-<meta property="og:updated_time" content="2017-03-26T06:21:39.580Z">
+<meta property="og:description" content="scrapy设置”请求池”引言
+相信大家有时候爬虫发出请求的时候会被ban，返回的是403错误，这个就是请求头的问题，其实在python发出请求时，使用的是默认的自己的请求头，网站管理者肯定会不允许机器访问的，但是有些比较low的网站还是可以访问的，有时候网站管理者看到同一个请求头在一秒内请求多次，傻子都知道这是机器在访问，因此会被ban掉，这时就需要设置请求池了，这个和ip代理池是一个概念
+
+话">
+<meta property="og:updated_time" content="2017-03-26T06:21:09.285Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Scrapy中使用cookie免于验证登录和模拟登录">
-<meta name="twitter:description" content="Scrapy中使用cookie免于验证登录和模拟登录引言
-python爬虫我认为最困难的问题一个是ip代理，另外一个就是模拟登录了，更操蛋的就是模拟登录了之后还有验证码，真的是不让人省心，不过既然有了反爬虫，那么就有反反爬虫的策略，这里就先介绍一个cookie模拟登陆，后续还有seleminum+phantomjs模拟浏览器登录的文章。还不知道cookie是什么朋友们，可以点击这里
-cookie提">
+<meta name="twitter:title" content="scrapy设置请求池">
+<meta name="twitter:description" content="scrapy设置”请求池”引言
+相信大家有时候爬虫发出请求的时候会被ban，返回的是403错误，这个就是请求头的问题，其实在python发出请求时，使用的是默认的自己的请求头，网站管理者肯定会不允许机器访问的，但是有些比较low的网站还是可以访问的，有时候网站管理者看到同一个请求头在一秒内请求多次，傻子都知道这是机器在访问，因此会被ban掉，这时就需要设置请求池了，这个和ip代理池是一个概念
+
+话">
 
     
     <link rel="alternative" href="/atom.xml" title="觅" type="application/atom+xml">
@@ -85,14 +88,14 @@ cookie提">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/26/Scrapy中使用cookie免于验证登录和模拟登录/" title="Scrapy中使用cookie免于验证登录和模拟登录" itemprop="url">Scrapy中使用cookie免于验证登录和模拟登录</a>
+      <a href="/2017/03/26/scrapy设置请求池/" title="scrapy设置请求池" itemprop="url">scrapy设置请求池</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-26T05:30:53.000Z" itemprop="datePublished"> 发表于 2017-03-26</time>
+    <time datetime="2017-03-26T06:20:10.000Z" itemprop="datePublished"> 发表于 2017-03-26</time>
     
   </p>
 </header>
@@ -101,83 +104,75 @@ cookie提">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Scrapy中使用cookie免于验证登录和模拟登录"><span class="toc-number">1.</span> <span class="toc-text">Scrapy中使用cookie免于验证登录和模拟登录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie提取方法："><span class="toc-number">1.2.</span> <span class="toc-text">cookie提取方法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充说明："><span class="toc-number">1.3.</span> <span class="toc-text">补充说明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用cookie操作scrapy"><span class="toc-number">1.4.</span> <span class="toc-text">使用cookie操作scrapy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接撸代码"><span class="toc-number">1.4.1.</span> <span class="toc-text">直接撸代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-number">1.4.2.</span> <span class="toc-text">说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意"><span class="toc-number">1.5.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.6.</span> <span class="toc-text">作者说</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最后欢迎大家看看我的其他scrapy文章"><span class="toc-number">1.6.1.</span> <span class="toc-text">最后欢迎大家看看我的其他scrapy文章</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy设置”请求池”"><span class="toc-number">1.</span> <span class="toc-text">scrapy设置”请求池”</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#话不多说直接撸代码"><span class="toc-number">1.2.</span> <span class="toc-text">话不多说直接撸代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-number">1.3.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意"><span class="toc-number">1.4.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.5.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="Scrapy中使用cookie免于验证登录和模拟登录"><a href="#Scrapy中使用cookie免于验证登录和模拟登录" class="headerlink" title="Scrapy中使用cookie免于验证登录和模拟登录"></a>Scrapy中使用cookie免于验证登录和模拟登录</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
-<p><code>python</code>爬虫我认为最困难的问题一个是ip代理，另外一个就是模拟登录了，更操蛋的就是模拟登录了之后还有验证码，真的是不让人省心，不过既然有了反爬虫，那么就有反反爬虫的策略，这里就先介绍一个cookie模拟登陆，后续还有<code>seleminum+phantomjs</code>模拟浏览器登录的文章。还不知道cookie是什么朋友们，可以<a href="http://bubkoo.com/2014/04/21/http-cookies-explained/" target="_blank" rel="external">点击这里</a></p>
-<h2 id="cookie提取方法："><a href="#cookie提取方法：" class="headerlink" title="cookie提取方法："></a>cookie提取方法：</h2><blockquote>
-<p>打开谷歌浏览器或者火狐浏览器，如果是谷歌浏览器的按<code>F12</code>这个键就会跳出来浏览器控制台，然后点击<code>Network</code>，之后就是刷新网页开始抓包了，之后在抓到的页面中随便打开一个，就能看到cokie了，但是这里的cookie并不符合python中的格式，因此需要转换格式，下面提供了转换的代码</p>
+		<h1 id="scrapy设置”请求池”"><a href="#scrapy设置”请求池”" class="headerlink" title="scrapy设置”请求池”"></a>scrapy设置”请求池”</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
+<p>相信大家有时候爬虫发出请求的时候会被ban，返回的是403错误，这个就是请求头的问题，其实在python发出请求时，使用的是默认的自己的请求头，网站管理者肯定会不允许机器访问的，但是有些比较low的网站还是可以访问的，有时候网站管理者看到同一个请求头在一秒内请求多次，傻子都知道这是机器在访问，因此会被ban掉，这时就需要设置请求池了，这个和ip代理池是一个概念</p>
 </blockquote>
-</blockquote>
-<pre><code># -*- coding: utf-8 -*-
-
-class transCookie:
-def __init__(self, cookie):
-    self.cookie = cookie
-
-def stringToDict(self):
-    &apos;&apos;&apos;
-    将从浏览器上Copy来的cookie字符串转化为Scrapy能使用的Dict
-    :return:
-    &apos;&apos;&apos;
-    itemDict = {}
-    items = self.cookie.split(&apos;;&apos;)
-    for item in items:
-        key = item.split(&apos;=&apos;)[0].replace(&apos; &apos;, &apos;&apos;)
-        value = item.split(&apos;=&apos;)[1]
-        itemDict[key] = value
-    return itemDict
-
-if __name__ == &quot;__main__&quot;:
-cookie = &quot;你复制的cookie&quot;
-trans = transCookie(cookie)
-print trans.stringToDict()
-</code></pre><blockquote>
-<h2 id="补充说明："><a href="#补充说明：" class="headerlink" title="补充说明："></a>补充说明：</h2><blockquote>
-<p>只需要将你网页上的cookie复制到上述代码中直接运行就可以了</p>
-</blockquote>
-<h2 id="使用cookie操作scrapy"><a href="#使用cookie操作scrapy" class="headerlink" title="使用cookie操作scrapy"></a>使用cookie操作scrapy</h2><blockquote>
-<h3 id="直接撸代码"><a href="#直接撸代码" class="headerlink" title="直接撸代码"></a>直接撸代码</h3></blockquote>
-</blockquote>
-<pre><code># -*- coding: utf-8 -*-
-import scrapy
-from scrapy.conf import settings #从settings文件中导入Cookie，这里也可以室友from scrapy.conf import settings.COOKIE
-
-class DemoSpider(scrapy.Spider):
-name = &quot;demo&quot;
-#allowed_domains = [&quot;csdn.com&quot;]
-start_urls = [&quot;http://write.blog.csdn.net/postlist&quot;]
-cookie = settings[&apos;COOKIE&apos;]  # 带着Cookie向网页发请求\
-headers = {
-    &apos;Connection&apos;: &apos;keep - alive&apos;,  # 保持链接状态
-    &apos;User-Agent&apos;: &apos;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36&apos;
-}
-def start_requests(self):
-    yield scrapy.Request(url=self.start_urls[0],headers=self.headers,cookies=self.cookie)# 这里带着cookie发出请求
-
-def parse(self, response):
-    print response.body
-</code></pre><blockquote>
+<h2 id="话不多说直接撸代码"><a href="#话不多说直接撸代码" class="headerlink" title="话不多说直接撸代码"></a>话不多说直接撸代码</h2><pre><code>from scrapy import log
+import random
+from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
+class RotateUserAgentMiddleware(UserAgentMiddleware):
+# for more user agent strings,you can find it in http://www.useragentstring.com/pages/useragentstring.php
+user_agent_list = [
+    &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 &quot;
+    &quot;(KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1&quot;,
+    &quot;Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 &quot;
+    &quot;(KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11&quot;,
+    &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 &quot;
+    &quot;(KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6&quot;,
+    &quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 &quot;
+    &quot;(KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6&quot;,
+    &quot;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.1 &quot;
+    &quot;(KHTML, like Gecko) Chrome/19.77.34.5 Safari/537.1&quot;,
+    &quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/536.5 &quot;
+    &quot;(KHTML, like Gecko) Chrome/19.0.1084.9 Safari/536.5&quot;,
+    &quot;Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 &quot;
+    &quot;(KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5&quot;,
+    &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 &quot;
+    &quot;(KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3&quot;,
+    &quot;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 &quot;
+    &quot;(KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3&quot;,
+    &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/536.3 &quot;
+    &quot;(KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3&quot;,
+    &quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 &quot;
+    &quot;(KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3&quot;,
+    &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 &quot;
+    &quot;(KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3&quot;,
+    &quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 &quot;
+    &quot;(KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3&quot;,
+    &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 &quot;
+    &quot;(KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3&quot;,
+    &quot;Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 &quot;
+    &quot;(KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3&quot;,
+    &quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 &quot;
+    &quot;(KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3&quot;,
+    &quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 &quot;
+    &quot;(KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24&quot;,
+    &quot;Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 &quot;
+    &quot;(KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24&quot;
+]
+def process_request(self, request, spider):
+    ua = random.choice(self.user_agent_list)
+    if ua:
+        # 显示当前使用的useragent
+        print &quot;********Current UserAgent:%s************&quot; % ua
+        # 记录
+        log.msg(&apos;Current UserAgent: &apos; + ua)
+        request.headers.setdefault(&apos;User-Agent&apos;, ua)
+</code></pre><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><blockquote>
 <blockquote>
-<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><blockquote>
-<p>这里是scrapy工程目录下spiders目录下的主要的解析网页的py文件相信学过scrapy的应该不会陌生，上述代码中的cookie值是放在Settings文件中的，因此使用的时候需要导入，当然你也可以直接将cookie粘贴到这个文件中</p>
+<p>这里的思路就是在下载器中间件中对request设置请求，这里是使用<code>request.headers.setdefault(&quot;User-Agent&quot;,user_agent)</code>这个函数设置请求头，对于下载器中间件在我博客前面的文章已经有说明，想要了解的请<a href="https://chenjiabing666.github.io/2017/03/25/scrapy%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%99%A8%E4%B8%AD%E9%97%B4%E4%BB%B6/">点击</a></p>
 </blockquote>
 </blockquote>
 <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><blockquote>
-<p>虽说这里使用直接使用cookie可以省去很多麻烦，但是cookie的生命周期特别的短，不过小型的项目足够使用了，向那些需要爬两三天甚至几个月的项目就不适用了，因此在隔一段时间就要重新换cookie的值，虽说有很多麻烦，但是我还是比较喜欢这种方法的，因为可以省去不少脑筋</p>
+<blockquote>
+<p>这里还要说明的是设置了请求池还要在配置文件settins中设置一下，具体设置方法和设置代理ip一样，详情请看<a href="https://chenjiabing666.github.io/2017/03/26/scrapy%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86ip/">scrapy代理ip的设置</a></p>
 <h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持。</p>
+<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
 </blockquote>
-</blockquote>
-<h3 id="最后欢迎大家看看我的其他scrapy文章"><a href="#最后欢迎大家看看我的其他scrapy文章" class="headerlink" title="最后欢迎大家看看我的其他scrapy文章"></a>最后欢迎大家看看我的其他scrapy文章</h3><blockquote>
-<ul>
-<li><a href="https://chenjiabing666.github.io/2017/03/26/scrapy%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86ip/">scrapy设置代理ip</a></li>
-<li><a href="https://chenjiabing666.github.io/2017/03/25/scrapy%E6%9E%B6%E6%9E%84%E5%88%9D%E6%8E%A2/">scrapy架构初探</a></li>
-<li><a href="https://chenjiabing666.github.io/2017/03/25/scrapy%E5%88%9D%E8%AF%95/">scrapy初试</a></li>
-<li><a href="https://chenjiabing666.github.io/2017/03/25/scrapy%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%99%A8%E4%B8%AD%E9%97%B4%E4%BB%B6/">scrapy下载器中间件</a></li>
-</ul>
 </blockquote>
 </blockquote>
 <p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
@@ -203,7 +198,7 @@ def parse(self, response):
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2017/03/26/Scrapy中使用cookie免于验证登录和模拟登录/" data-title="Scrapy中使用cookie免于验证登录和模拟登录 | 觅" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2017/03/26/scrapy设置请求池/" data-title="scrapy设置请求池 | 觅" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -216,19 +211,11 @@ def parse(self, response):
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/03/26/scrapy设置请求池/" title="scrapy设置请求池">
-  <strong>上一篇：</strong><br/>
-  <span>
-  scrapy设置请求池</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/03/26/scrapy设置代理ip/"  title="scrapy设置代理ip">
+<a href="/2017/03/26/Scrapy中使用cookie免于验证登录和模拟登录/"  title="Scrapy中使用cookie免于验证登录和模拟登录">
  <strong>下一篇：</strong><br/> 
- <span>scrapy设置代理ip
+ <span>Scrapy中使用cookie免于验证登录和模拟登录
 </span>
 </a>
 </div>
@@ -249,7 +236,7 @@ def parse(self, response):
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Scrapy中使用cookie免于验证登录和模拟登录"><span class="toc-number">1.</span> <span class="toc-text">Scrapy中使用cookie免于验证登录和模拟登录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie提取方法："><span class="toc-number">1.2.</span> <span class="toc-text">cookie提取方法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充说明："><span class="toc-number">1.3.</span> <span class="toc-text">补充说明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用cookie操作scrapy"><span class="toc-number">1.4.</span> <span class="toc-text">使用cookie操作scrapy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接撸代码"><span class="toc-number">1.4.1.</span> <span class="toc-text">直接撸代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-number">1.4.2.</span> <span class="toc-text">说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意"><span class="toc-number">1.5.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.6.</span> <span class="toc-text">作者说</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最后欢迎大家看看我的其他scrapy文章"><span class="toc-number">1.6.1.</span> <span class="toc-text">最后欢迎大家看看我的其他scrapy文章</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy设置”请求池”"><span class="toc-number">1.</span> <span class="toc-text">scrapy设置”请求池”</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#话不多说直接撸代码"><span class="toc-number">1.2.</span> <span class="toc-text">话不多说直接撸代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-number">1.3.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意"><span class="toc-number">1.4.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.5.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
  
   </div>
 
