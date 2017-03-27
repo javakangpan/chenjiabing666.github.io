@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>觅</title>
+  <subtitle>爱生活爱编码</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://chenjiabing666.github.io/"/>
+  <updated>2017-03-27T03:31:34.444Z</updated>
+  <id>http://chenjiabing666.github.io/</id>
+  
+  <author>
+    <name>Chenjiabing</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>scrapy设置请求池</title>
+    <link href="http://chenjiabing666.github.io/2017/03/26/scrapy%E8%AE%BE%E7%BD%AE%E8%AF%B7%E6%B1%82%E6%B1%A0/"/>
+    <id>http://chenjiabing666.github.io/2017/03/26/scrapy设置请求池/</id>
+    <published>2017-03-26T06:20:10.000Z</published>
+    <updated>2017-03-27T03:31:34.444Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="scrapy设置”请求池”"><a href="#scrapy设置”请求池”" class="headerlink" title="scrapy设置”请求池”"></a>scrapy设置”请求池”</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
+<p>相信大家有时候爬虫发出请求的时候会被ban，返回的是403错误，这个就是请求头的问题，其实在python发出请求时，使用的是默认的自己的请求头，网站管理者肯定会不允许机器访问的，但是有些比较low的网站还是可以访问的，有时候网站管理者看到同一个请求头在一秒内请求多次，傻子都知道这是机器在访问，因此会被ban掉，这时就需要设置请求池了，这个和ip代理池是一个概念</p>
+<h2 id="爬虫请求常见的错误"><a href="#爬虫请求常见的错误" class="headerlink" title="爬虫请求常见的错误"></a>爬虫请求常见的错误</h2><blockquote>
+<p>200：请求成功      处理方式：获得响应的内容，进行处理<br>201：请求完成，结果是创建了新资源。新创建资源的 URI 可在响应的实体中得到    处理方式：爬虫中不会遇到<br>202：请求被接受，但处理尚未完成    处理方式：阻塞等待<br>204：服务器端已经实现了请求，但是没有返回新的信 息。如果客户是用户代理，则无须为此更新自身的文档视图。    处理方式：丢弃<br>300：该状态码不被 HTTP/1.0 的应用程序直接使用， 只是作为 3XX 类型回应的默认解释。存在多个可用的被请求资源。    处理方式：若程序中能够处理，则进行进一步处理，如果程序中不能处理，则丢弃<br>301：请求到的资源都会分配一个永久的 URL，这样就可以在将来通过该 URL 来访问此资源    处理方式：重定向到分配的 URL<br>302：请求到的资源在一个不同的 URL 处临时保存     处理方式：重定向到临时的 URL<br>304 请求的资源未更新     处理方式：丢弃<br>400 非法请求     处理方式：丢弃<br>401 未授权     处理方式：丢弃<br>403 禁止     处理方式：丢弃<br>404 没有找到     处理方式：丢弃<br>5XX 回应代码以“5”开头的状态码表示服务器端发现自己出现错误，不能继续执行请求    处理方式：丢弃</p>
+</blockquote>
+</blockquote>
+<h2 id="话不多说直接撸代码"><a href="#话不多说直接撸代码" class="headerlink" title="话不多说直接撸代码"></a>话不多说直接撸代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> log</div><div class="line"><span class="keyword">import</span> random</div><div class="line"><span class="keyword">from</span> scrapy.downloadermiddlewares.useragent <span class="keyword">import</span> UserAgentMiddleware</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RotateUserAgentMiddleware</span><span class="params">(UserAgentMiddleware)</span>:</span></div><div class="line"><span class="comment"># for more user agent strings,you can find it in http://www.useragentstring.com/pages/useragentstring.php</span></div><div class="line">user_agent_list = [</div><div class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.1 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/19.77.34.5 Safari/537.1"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/536.5 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/19.0.1084.9 Safari/536.5"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/536.3 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"</span>,</div><div class="line">    <span class="string">"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 "</span></div><div class="line">    <span class="string">"(KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"</span></div><div class="line">]</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_request</span><span class="params">(self, request, spider)</span>:</span></div><div class="line">    ua = random.choice(self.user_agent_list)</div><div class="line">    <span class="keyword">if</span> ua:</div><div class="line">        <span class="comment"># 显示当前使用的useragent</span></div><div class="line">        <span class="keyword">print</span> <span class="string">"********Current UserAgent:%s************"</span> % ua</div><div class="line">        <span class="comment"># 记录</span></div><div class="line">        log.msg(<span class="string">'Current UserAgent: '</span> + ua)</div><div class="line">        request.headers.setdefault(<span class="string">'User-Agent'</span>, ua)</div></pre></td></tr></table></figure>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><blockquote>
+<blockquote>
+<p>这里的思路就是在下载器中间件中对request设置请求，这里是使用<code>request.headers.setdefault(&quot;User-Agent&quot;,user_agent)</code>这个函数设置请求头，对于下载器中间件在我博客前面的文章已经有说明，想要了解的请<a href="https://chenjiabing666.github.io/2017/03/25/scrapy%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%99%A8%E4%B8%AD%E9%97%B4%E4%BB%B6/">点击</a></p>
+</blockquote>
+</blockquote>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><blockquote>
+<blockquote>
+<p>这里还要说明的是设置了请求池还要在配置文件settins中设置一下，具体设置方法和设置代理ip一样，详情请看<a href="https://chenjiabing666.github.io/2017/03/26/scrapy%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86ip/">scrapy代理ip的设置</a></p>
+<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
+<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;scrapy设置”请求池”&quot;&gt;&lt;a href=&quot;#scrapy设置”请求池”&quot; class=&quot;headerlink&quot; title=&quot;scrapy设置”请求池”&quot;&gt;&lt;/a&gt;scrapy设置”请求池”&lt;/h1&gt;&lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; cla
+    
+    </summary>
+    
+      <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scrapy中使用cookie免于验证登录和模拟登录</title>
+    <link href="http://chenjiabing666.github.io/2017/03/26/Scrapy%E4%B8%AD%E4%BD%BF%E7%94%A8cookie%E5%85%8D%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%99%BB%E5%BD%95%E5%92%8C%E6%A8%A1%E6%8B%9F%E7%99%BB%E5%BD%95/"/>
+    <id>http://chenjiabing666.github.io/2017/03/26/Scrapy中使用cookie免于验证登录和模拟登录/</id>
+    <published>2017-03-26T05:30:53.000Z</published>
+    <updated>2017-03-27T03:32:05.186Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Scrapy中使用cookie免于验证登录和模拟登录"><a href="#Scrapy中使用cookie免于验证登录和模拟登录" class="headerlink" title="Scrapy中使用cookie免于验证登录和模拟登录"></a>Scrapy中使用cookie免于验证登录和模拟登录</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
+<p><code>python</code>爬虫我认为最困难的问题一个是ip代理，另外一个就是模拟登录了，更操蛋的就是模拟登录了之后还有验证码，真的是不让人省心，不过既然有了反爬虫，那么就有反反爬虫的策略，这里就先介绍一个cookie模拟登陆，后续还有<code>seleminum+phantomjs</code>模拟浏览器登录的文章。还不知道cookie是什么朋友们，可以<a href="http://bubkoo.com/2014/04/21/http-cookies-explained/" target="_blank" rel="external">点击这里</a></p>
+<h2 id="cookie提取方法："><a href="#cookie提取方法：" class="headerlink" title="cookie提取方法："></a>cookie提取方法：</h2><blockquote>
+<p>打开谷歌浏览器或者火狐浏览器，如果是谷歌浏览器的按<code>F12</code>这个键就会跳出来浏览器控制台，然后点击<code>Network</code>，之后就是刷新网页开始抓包了，之后在抓到的页面中随便打开一个，就能看到cokie了，但是这里的cookie并不符合python中的格式，因此需要转换格式，下面提供了转换的代码</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">transCookie</span>:</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cookie)</span>:</span></div><div class="line">    self.cookie = cookie</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">stringToDict</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="string">'''</span></div><div class="line">    将从浏览器上Copy来的cookie字符串转化为Scrapy能使用的Dict</div><div class="line">    :return:</div><div class="line">    '''</div><div class="line">    itemDict = &#123;&#125;</div><div class="line">    items = self.cookie.split(<span class="string">';'</span>)</div><div class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items:</div><div class="line">        key = item.split(<span class="string">'='</span>)[<span class="number">0</span>].replace(<span class="string">' '</span>, <span class="string">''</span>)</div><div class="line">        value = item.split(<span class="string">'='</span>)[<span class="number">1</span>]</div><div class="line">        itemDict[key] = value</div><div class="line">    <span class="keyword">return</span> itemDict</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">cookie = <span class="string">"你复制的cookie"</span></div><div class="line">trans = transCookie(cookie)</div><div class="line"><span class="keyword">print</span> trans.stringToDict()</div></pre></td></tr></table></figure>
+<blockquote>
+<h2 id="补充说明："><a href="#补充说明：" class="headerlink" title="补充说明："></a>补充说明：</h2><blockquote>
+<p>只需要将你网页上的cookie复制到上述代码中直接运行就可以了</p>
+</blockquote>
+<h2 id="使用cookie操作scrapy"><a href="#使用cookie操作scrapy" class="headerlink" title="使用cookie操作scrapy"></a>使用cookie操作scrapy</h2><blockquote>
+<h3 id="直接撸代码"><a href="#直接撸代码" class="headerlink" title="直接撸代码"></a>直接撸代码</h3></blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="keyword">from</span> scrapy.conf <span class="keyword">import</span> settings <span class="comment">#从settings文件中导入Cookie，这里也可以室友from scrapy.conf import settings.COOKIE</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DemoSpider</span><span class="params">(scrapy.Spider)</span>:</span></div><div class="line">name = <span class="string">"demo"</span></div><div class="line"><span class="comment">#allowed_domains = ["csdn.com"]</span></div><div class="line">start_urls = [<span class="string">"http://write.blog.csdn.net/postlist"</span>]</div><div class="line">cookie = settings[<span class="string">'COOKIE'</span>]  <span class="comment"># 带着Cookie向网页发请求\</span></div><div class="line">headers = &#123;</div><div class="line">    <span class="string">'Connection'</span>: <span class="string">'keep - alive'</span>,  <span class="comment"># 保持链接状态</span></div><div class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36'</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">start_requests</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="keyword">yield</span> scrapy.Request(url=self.start_urls[<span class="number">0</span>],headers=self.headers,cookies=self.cookie)<span class="comment"># 这里带着cookie发出请求</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></div><div class="line">    <span class="keyword">print</span> response.body</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><blockquote>
+<p>这里是scrapy工程目录下spiders目录下的主要的解析网页的py文件相信学过scrapy的应该不会陌生，上述代码中的cookie值是放在Settings文件中的，因此使用的时候需要导入，当然你也可以直接将cookie粘贴到这个文件中</p>
+</blockquote>
+</blockquote>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><blockquote>
+<p>虽说这里使用直接使用cookie可以省去很多麻烦，但是cookie的生命周期特别的短，不过小型的项目足够使用了，向那些需要爬两三天甚至几个月的项目就不适用了，因此在隔一段时间就要重新换cookie的值，虽说有很多麻烦，但是我还是比较喜欢这种方法的，因为可以省去不少脑筋</p>
+<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
+<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持。</p>
+</blockquote>
+</blockquote>
+<h3 id="最后欢迎大家看看我的其他scrapy文章"><a href="#最后欢迎大家看看我的其他scrapy文章" class="headerlink" title="最后欢迎大家看看我的其他scrapy文章"></a>最后欢迎大家看看我的其他scrapy文章</h3><blockquote>
+<ul>
+<li><a href="https://chenjiabing666.github.io/2017/03/26/scrapy%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86ip/">scrapy设置代理ip</a></li>
+<li><a href="https://chenjiabing666.github.io/2017/03/25/scrapy%E6%9E%B6%E6%9E%84%E5%88%9D%E6%8E%A2/">scrapy架构初探</a></li>
+<li><a href="https://chenjiabing666.github.io/2017/03/25/scrapy%E5%88%9D%E8%AF%95/">scrapy初试</a></li>
+<li><a href="https://chenjiabing666.github.io/2017/03/25/scrapy%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%99%A8%E4%B8%AD%E9%97%B4%E4%BB%B6/">scrapy下载器中间件</a></li>
+</ul>
+</blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Scrapy中使用cookie免于验证登录和模拟登录&quot;&gt;&lt;a href=&quot;#Scrapy中使用cookie免于验证登录和模拟登录&quot; class=&quot;headerlink&quot; title=&quot;Scrapy中使用cookie免于验证登录和模拟登录&quot;&gt;&lt;/a&gt;Scrapy中使
+    
+    </summary>
+    
+      <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>scrapy设置代理ip</title>
+    <link href="http://chenjiabing666.github.io/2017/03/26/scrapy%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86ip/"/>
+    <id>http://chenjiabing666.github.io/2017/03/26/scrapy设置代理ip/</id>
+    <published>2017-03-25T16:49:29.000Z</published>
+    <updated>2017-03-27T03:31:13.819Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="scrapy代理的设置"><a href="#scrapy代理的设置" class="headerlink" title="scrapy代理的设置"></a>scrapy代理的设置</h1><blockquote>
+<p>在我的上一篇文章介绍了<a href="https://chenjiabing666.github.io/2017/03/25/scrapy%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%99%A8%E4%B8%AD%E9%97%B4%E4%BB%B6/">scrapy下载器中间件的使用</a>,这里的scrapy<code>IP</code>的代理就是用这个原理实现的，重写了下载器中间件的<code>process_request(self,request,spider)</code>这个函数,这个函数的主要作用就是对request进行处理。</p>
+<blockquote>
+<h3 id="话不多说直接撸代码"><a href="#话不多说直接撸代码" class="headerlink" title="话不多说直接撸代码"></a>话不多说直接撸代码</h3></blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> random  </div><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="keyword">import</span> logging</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">proxMiddleware</span><span class="params">(object)</span>:</span></div><div class="line"><span class="comment">#proxy_list=[&#123;'http': 'http://123.157.146.116:8123'&#125;, &#123;'http': 'http://116.55.16.233:8998'&#125;, &#123;'http': 'http://115.85.233.94:80'&#125;, &#123;'http': 'http://180.76.154.5:8888'&#125;, &#123;'http': 'http://139.213.135.81:80'&#125;, &#123;'http': 'http://124.88.67.14:80'&#125;, &#123;'http': 'http://106.46.136.90:808'&#125;, &#123;'http': 'http://106.46.136.226:808'&#125;, &#123;'http': 'http://124.88.67.21:843'&#125;, &#123;'http': 'http://113.245.84.253:8118'&#125;, &#123;'http': 'http://124.88.67.10:80'&#125;, &#123;'http': 'http://171.38.141.12:8123'&#125;, &#123;'http': 'http://124.88.67.52:843'&#125;, &#123;'http': 'http://106.46.136.237:808'&#125;, &#123;'http': 'http://106.46.136.105:808'&#125;, &#123;'http': 'http://106.46.136.190:808'&#125;, &#123;'http': 'http://106.46.136.186:808'&#125;, &#123;'http': 'http://101.81.120.58:8118'&#125;, &#123;'http': 'http://106.46.136.250:808'&#125;, &#123;'http': 'http://106.46.136.8:808'&#125;, &#123;'http': 'http://111.78.188.157:8998'&#125;, &#123;'http': 'http://106.46.136.139:808'&#125;, &#123;'http': 'http://101.53.101.172:9999'&#125;, &#123;'http': 'http://27.159.125.68:8118'&#125;, &#123;'http': 'http://183.32.88.133:808'&#125;, &#123;'http': 'http://171.38.37.193:8123'&#125;]</span></div><div class="line">proxy_list=[</div><div class="line">    <span class="string">"http://180.76.154.5:8888"</span>,</div><div class="line">    <span class="string">"http://14.109.107.1:8998"</span>,</div><div class="line">    <span class="string">"http://106.46.136.159:808"</span>,</div><div class="line">    <span class="string">"http://175.155.24.107:808"</span>,</div><div class="line">    <span class="string">"http://124.88.67.10:80"</span>,</div><div class="line">    <span class="string">"http://124.88.67.14:80"</span>,</div><div class="line">    <span class="string">"http://58.23.122.79:8118"</span>,</div><div class="line">    <span class="string">"http://123.157.146.116:8123"</span>,</div><div class="line">    <span class="string">"http://124.88.67.21:843"</span>,</div><div class="line">    <span class="string">"http://106.46.136.226:808"</span>,</div><div class="line">    <span class="string">"http://101.81.120.58:8118"</span>,</div><div class="line">    <span class="string">"http://180.175.145.148:808"</span>]</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_request</span><span class="params">(self,request,spider)</span>:</span></div><div class="line">    <span class="comment"># if not request.meta['proxies']:</span></div><div class="line">    ip = random.choice(self.proxy_list)</div><div class="line">    <span class="keyword">print</span> ip</div><div class="line">    <span class="comment">#print 'ip=' %ip</span></div><div class="line">    request.meta[<span class="string">'proxy'</span>] = ip</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<h2 id="主要的原理："><a href="#主要的原理：" class="headerlink" title="主要的原理："></a>主要的原理：</h2><blockquote>
+<p>给出一个代理列表，然后在这个列表中随机取出一个代理，设置在request中，其中<code>request.meta[&#39;proxy&#39;]</code>就是设置代理的格式</p>
+</blockquote>
+</blockquote>
+<p><strong>但是现在主要的问题就是没有代理ip可用，如果去买的话又太贵了，自己玩玩买代理不值当，所以只好自己写爬虫去爬取免费的代理了，但是免费的代理存活的时间是有限的，这是个非常麻烦的事情，我提供的方法就是实现自己的一个ip代理池，每天定时更新自己的代理池，具体的实现方法会在下一篇文章中介绍，现在提供一段代码用来爬<br>取西刺网站的代理</strong></p>
+<h2 id="直接撸代码，接招吧"><a href="#直接撸代码，接招吧" class="headerlink" title="直接撸代码，接招吧"></a>直接撸代码，接招吧</h2></blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding:utf-8</span></div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line"><span class="keyword">import</span> threading</div><div class="line"><span class="keyword">import</span> Queue</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Get_ips</span><span class="params">()</span>:</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,page)</span>:</span></div><div class="line">    self.ips=[]</div><div class="line">    self.urls=[]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(page):</div><div class="line">        self.urls.append(<span class="string">"http://www.xicidaili.com/nn/"</span> + str(i))</div><div class="line">    self.header = &#123;<span class="string">"User-Agent"</span>: <span class="string">'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0'</span>&#125;</div><div class="line">    <span class="comment">#self.file=open("ips",'w')</span></div><div class="line">    self.q=Queue.Queue()</div><div class="line">    self.Lock=threading.Lock()</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ips</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> self.urls:</div><div class="line">        res = requests.get(url, headers=self.header)</div><div class="line">        soup = BeautifulSoup(res.text, <span class="string">'lxml'</span>)</div><div class="line">        ips = soup.find_all(<span class="string">'tr'</span>)</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(ips)):</div><div class="line">            ip = ips[i]</div><div class="line">            tds = ip.find_all(<span class="string">"td"</span>)</div><div class="line">            ip_temp = <span class="string">"http://"</span> + tds[<span class="number">1</span>].contents[<span class="number">0</span>] + <span class="string">":"</span> + tds[<span class="number">2</span>].contents[<span class="number">0</span>]</div><div class="line">            <span class="comment"># print str(ip_temp)</span></div><div class="line">            self.q.put(str(ip_temp))</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">review_ips</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">not</span> self.q.empty():</div><div class="line">        ip=self.q.get()</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            proxy=&#123;<span class="string">"http"</span>: ip&#125;</div><div class="line">            <span class="comment">#print proxy</span></div><div class="line">            res = requests.get(<span class="string">"http://www.baidu.com"</span>, proxies=proxy,timeout=<span class="number">5</span>)</div><div class="line">            self.Lock.acquire()</div><div class="line">            <span class="keyword">if</span> res.status_code == <span class="number">200</span>:</div><div class="line">                self.ips.append(ip)</div><div class="line">                <span class="keyword">print</span> ip</div><div class="line">                self.Lock.release()</div><div class="line">        <span class="keyword">except</span> Exception:</div><div class="line">            <span class="keyword">pass</span></div><div class="line">            <span class="comment">#print 'error'</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(self)</span>:</span></div><div class="line">    self.get_ips()</div><div class="line">    threads=[]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">40</span>):</div><div class="line">        threads.append(threading.Thread(target=self.review_ips,args=[]))</div><div class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> threads:</div><div class="line">        t.start()</div><div class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> threads:</div><div class="line">        t.join()</div><div class="line">    <span class="keyword">return</span> self.ips</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ip</span><span class="params">()</span>:</span></div><div class="line">my=Get_ips(<span class="number">4</span>)</div><div class="line"><span class="keyword">return</span> my.main()</div><div class="line">get_ip()</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<h3 id="实现的原理"><a href="#实现的原理" class="headerlink" title="实现的原理"></a>实现的原理</h3><blockquote>
+<p>这里用到了BeautifulSoup解析页面，然后将提取到的代理交给队列，然后再通过共享队列分配给线程，这里主要开启线程通过设置代理ip访问一个网站，因为访问网站的时间比较长，因此要开起多个线程，相信大家能够学习设置代理ip了应该都是比较上手的了，这里具体的代码就不一一解释了，如果代码有什么问题可以及时联系我，我的联系方式在<strong>关于我</strong>的一栏中有提到</p>
+</blockquote>
+</blockquote>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><blockquote>
+<p>想要ip应用起来，还要在配置文件<code>settings</code>中添加<code>DOWNLOADER_MIDDLEWARES = {
+&#39;demo.proxy.proxMiddleware&#39;:400
+}</code>这里的demo是工程的名字，proxy是py文件的名,proxMiddleware是类的名字</p>
+<blockquote>
+<p>当然这里可能你觉得proxy_list写在这里有点冗余，你可以在配置文件中定义，然后将配置文件的内容<code>import</code>到py文件中</p>
+</blockquote>
+</blockquote>
+<p><strong>以上全是博主慢慢摸索出来的，可以说自学一门技术真的很难，学习python爬虫已经有两三个月了，可以说全是自己通过看项目，网上查资料才有了今天的成功，不过现在还有几个问题没有解决，就是分布式爬虫、移动端爬取，博主接下来就要主攻这两个方面，学好之后会在自己的博客上分享学习心得的，因为网上没有系统的学习教程，对于自学的人来说实在是太痛苦了</strong></p>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;scrapy代理的设置&quot;&gt;&lt;a href=&quot;#scrapy代理的设置&quot; class=&quot;headerlink&quot; title=&quot;scrapy代理的设置&quot;&gt;&lt;/a&gt;scrapy代理的设置&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;在我的上一篇文章介绍了&lt;a href=&quot;h
+    
+    </summary>
+    
+      <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>scrapy的下载器中间件</title>
+    <link href="http://chenjiabing666.github.io/2017/03/25/scrapy%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%99%A8%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    <id>http://chenjiabing666.github.io/2017/03/25/scrapy的下载器中间件/</id>
+    <published>2017-03-25T07:04:08.000Z</published>
+    <updated>2017-03-25T07:08:40.498Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="scrapy中的下载器中间件"><a href="#scrapy中的下载器中间件" class="headerlink" title="scrapy中的下载器中间件"></a>scrapy中的下载器中间件</h1><h2 id="下载中间件"><a href="#下载中间件" class="headerlink" title="下载中间件"></a>下载中间件</h2><blockquote>
+<p>下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。</p>
+<blockquote>
+<h2 id="编写下载器中间件"><a href="#编写下载器中间件" class="headerlink" title="编写下载器中间件"></a>编写下载器中间件</h2><blockquote>
+<h3 id="1-process-request-request-spider"><a href="#1-process-request-request-spider" class="headerlink" title="1. process_request(request, spider)"></a>1. <code>process_request(request, spider)</code></h3><p>当每个<code>request</code>通过下载中间件时，该方法被调用。<br><code>process_request()</code> 必须返回其中之一: 返回 <code>None</code> 、返回一个 <code>Response</code> 对象、返回一个 <code>Request</code>对象或<code>raise IgnoreRequest</code> 。</p>
+<p>如果其返回 <code>None</code> ，Scrapy将继续处理该<code>request</code>，执行其他的中间件的相应方法，直到合适的下载器处理函数(<code>download handler</code>)被调用， 该<code>request</code>被执行(其<code>response</code>被下载)。</p>
+<p>如果其返回 <code>Response</code> 对象，Scrapy将不会调用 任何 其他的 <code>process_request()</code> 或 <code>process_exception()</code> 方法，或相应地下载函数； 其将返回该<code>response</code>。 已安装的中间件的 <code>process_response()</code> 方法则会在每个<code>response</code>返回时被调用。</p>
+<p>如果其返回 <code>Request</code> 对象，Scrapy则停止调用 <code>process_request</code>方法并重新调度返回的<code>request</code>。当新返回的<code>request</code>被执行后， 相应地中间件链将会根据下载的<code>response</code>被调用。</p>
+<p>如果其<code>raise</code>一个 <code>IgnoreRequest</code> 异常，则安装的下载中间件的 <code>process_exception()</code> 方法会被调用。如果没有任何一个方法处理该异常， 则<code>request</code>的<code>errback(Request.errback)</code>方法会被调用。如果没有代码处理抛出的异常， 则该异常被忽略且不记录(不同于其他异常那样)。</p>
+<p>参数:    </p>
+<blockquote>
+<ul>
+<li><code>request</code> (<code>Request</code> 对象) – 处理的<code>request</code></li>
+<li><code>spider</code> (<code>Spider</code> 对象) – 该<code>request</code>对应的<code>spider</code></li>
+</ul>
+</blockquote>
+<h3 id="2-process-response-request-response-spider"><a href="#2-process-response-request-response-spider" class="headerlink" title="2. process_response(request, response, spider)"></a>2. <code>process_response(request, response, spider)</code></h3><blockquote>
+<p><code>process_response()</code> 必须返回以下之一: 返回一个 <code>Response</code>对象、 返回一个<code>Request</code> 对象或<code>raise</code>一个 <code>IgnoreRequest</code> 异常。</p>
+<p>如果其返回一个 <code>Response</code> (可以与传入的<code>response</code>相同，也可以是全新的对象)， 该<code>response</code>会被在链中的其他中间件的 <code>process_response()</code> 方法处理。</p>
+<p>如果其返回一个 <code>Request</code> 对象，则中间件链停止， 返回的<code>request</code>会被重新调度下载。处理类似于 <code>process_request()</code> 返回<code>request</code>所做的那样。</p>
+<p>如果其抛出一个 <code>IgnoreRequest</code> 异常，则调用<code>request的errback(Request.errback)。</code> 如果没有代码处理抛出的异常，则该异常被忽略且不记录(不同于其他异常那样)。</p>
+<p>参数:    </p>
+<blockquote>
+<blockquote>
+<ul>
+<li><code>request</code> (<code>Request</code>对象) – <code>response</code>所对应的request</li>
+<li><code>response</code> (<code>Response</code> 对象) – 被处理的response</li>
+<li><code>spider</code> (<code>Spider</code> 对象) – <code>response</code>所对应的<code>spider</code></li>
+</ul>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="3-process-exception-request-exception-spider"><a href="#3-process-exception-request-exception-spider" class="headerlink" title="3.process_exception(request, exception, spider)"></a>3.<code>process_exception(request, exception, spider)</code></h3><blockquote>
+<p>当下载处理器(<code>download handler</code>)或 <code>process_request()</code> (下载中间件)抛出异常(包括 <code>IgnoreRequest</code> 异常)时， Scrapy调用 <code>process_exception()</code> 。</p>
+<p><code>process_exception()</code> 应该返回以下之一: 返回 <code>None</code> 、 一个 <code>Response</code> 对象、或者一个 <code>Request</code> 对象。</p>
+<p>如果其返回 <code>None</code> ，Scrapy将会继续处理该异常，接着调用已安装的其他中间件的 <code>process_exception()</code> 方法，直到所有中间件都被调用完毕，则调用默认的异常处理。</p>
+<p>如果其返回一个 <code>Response</code> 对象，则已安装的中间件链的 <code>process_response()</code> 方法被调用。Scrapy将不会调用任何其他中间件的 <code>process_exception()</code> 方法。</p>
+<p>如果其返回一个 <code>Request</code> 对象， 则返回的<code>request</code>将会被重新调用下载。这将停止中间件的 <code>process_exception()</code> 方法执行，就如返回一个<code>response</code>的那样。</p>
+<p>参数:    </p>
+<blockquote>
+<ul>
+<li><code>request</code> (是 <code>Request</code> 对象) – 产生异常的<code>request</code></li>
+<li><code>exception</code> (<code>Exception</code> 对象) – 抛出的异常</li>
+<li><code>spider</code> (<code>Spider</code> 对象) – <code>request</code>对应的<code>spider</code></li>
+</ul>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><blockquote>
+<p>总的来说下载器中间件就是起到处理request请求并且返回response的作用，一切从网页爬取的url发起的请求会组成一个请求队列，然后一个一个排队经过下载器中间件，之后下载器中间件会对request做出相应的处理，比如添加请求头，添加代理等等，然后通过process_response返回一个response，之后就是用得到的response做出相应的分析，当然这里的内容页可以不实现，但是如果要爬取大型的网站，会遇到被ban的可能就要在下载器中间件这里着手，设置一些相应的请求头，ip代理等等内容。<br><strong>以上纯属个人逐渐摸索总结出来的内容，如果有什么错误欢迎指正</strong></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;scrapy中的下载器中间件&quot;&gt;&lt;a href=&quot;#scrapy中的下载器中间件&quot; class=&quot;headerlink&quot; title=&quot;scrapy中的下载器中间件&quot;&gt;&lt;/a&gt;scrapy中的下载器中间件&lt;/h1&gt;&lt;h2 id=&quot;下载中间件&quot;&gt;&lt;a href=&quot;#
+    
+    </summary>
+    
+      <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>scrapy初试</title>
+    <link href="http://chenjiabing666.github.io/2017/03/25/scrapy%E5%88%9D%E8%AF%95/"/>
+    <id>http://chenjiabing666.github.io/2017/03/25/scrapy初试/</id>
+    <published>2017-03-25T06:21:21.000Z</published>
+    <updated>2017-03-27T03:30:06.976Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="scrapy初试"><a href="#scrapy初试" class="headerlink" title="scrapy初试"></a>scrapy初试</h1><blockquote>
+<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><blockquote>
+<p>打开<code>cmd</code>，在终端输入<code>scrapy startproject tutorial</code>,这里将在指定的文件夹下创建一个<code>scrapy</code>工程</p>
+</blockquote>
+<h2 id="其中将会创建以下的文件："><a href="#其中将会创建以下的文件：" class="headerlink" title="其中将会创建以下的文件："></a>其中将会创建以下的文件：</h2><blockquote>
+<ul>
+<li><code>scrapy.cfg</code>: 项目的配置文件</li>
+<li><code>tutorial/</code>: 该项目的python模块。之后您将在此加入代码。</li>
+<li><code>tutorial/items.py</code>: 项目中的item文件.</li>
+<li><code>tutorial/pipelines.py</code>: 项目中的pipelines文件.</li>
+<li><code>tutorial/settings.py</code>: 项目的设置文件.</li>
+<li><code>tutorial/spiders/</code>: 放置spider代码的目录.</li>
+</ul>
+</blockquote>
+<p>定义item</p>
+<blockquote>
+<p><code>Item</code>是保存爬取到的数据的容器；其使用方法和<code>python</code>字典类似， 并且提供了额外保护机制来避免拼写错误导致的未定义字段错误。</p>
+<p>类似在<code>ORM</code>中做的一样，您可以通过创建一个 <code>scrapy.Item</code> 类， 并且定义类型为 <code>scrapy.Field</code>的类属性来定义一个<code>Item</code>。 (如果不了解<code>ORM</code>, 不用担心，您会发现这个步骤非常简单)</p>
+<p>首先根据需要从<code>dmoz.org</code>获取到的数据对<code>item</code>进行建模。 我们需要从<code>dmoz</code>中获取名字，<code>url</code>，以及网站的描述。 对此，在<code>item</code>中定义相应的字段。编辑 <code>tutorial</code> 目录中的 <code>items.py</code> 文件:</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DmozItem</span><span class="params">(scrapy.Item)</span>:</span></div><div class="line">title = scrapy.Field()</div><div class="line">link = scrapy.Field()</div><div class="line">desc = scrapy.Field()</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>一开始这看起来可能有点复杂，但是通过定义item， 您可以很方便的使用Scrapy的其他方法。而这些方法需要知道您的item的定义.</p>
+</blockquote>
+<h2 id="编写第一个爬虫"><a href="#编写第一个爬虫" class="headerlink" title="编写第一个爬虫"></a>编写第一个爬虫</h2><blockquote>
+<blockquote>
+<p>在工程的根目录下打开终端输入<code>scrapy genspider demo douban.com</code><br>这里的<code>demo</code>是<code>spders</code>文件下的主要<code>py</code>文件<br><code>douban.com</code>是要爬取的域名，会在<code>demo.py</code>中的 <code>allowed_domains</code>中显示，主要的功能就是限制爬取的<code>url</code></p>
+<h3 id="spider代码中内容解析"><a href="#spider代码中内容解析" class="headerlink" title="spider代码中内容解析"></a>spider代码中内容解析</h3><ul>
+<li><code>name</code>: 用于区别<code>Spider</code>。 该名字必须是唯一的，您不可以为不同的<code>Spider</code>设定相同的名字。</li>
+<li><code>start_urls</code>: 包含了<code>Spider</code>在启动时进行爬取的<code>url</code>列表。 因此，第一个被获取到的页面将是其中之一。 后续的<code>URL</code>则从初始的<code>URL</code>获取到的数据中提取。</li>
+<li><code>parse()</code> 是spider的一个方法。 被调用时，每个初始<code>URL</code>完成下载后生成的 Response 对象将会作为唯一的参数传递给该函数。 该方法负责解析返回的数据(<code>response data</code>)，提取数据(生成<code>item</code>)以及生成需要进一步处理的<code>URL</code>的 <code>Request</code>对象。</li>
+</ul>
+</blockquote>
+<h3 id="以下是spider目录下的demo-py的代码"><a href="#以下是spider目录下的demo-py的代码" class="headerlink" title="以下是spider目录下的demo.py的代码"></a>以下是spider目录下的demo.py的代码</h3></blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DmozSpider</span><span class="params">(scrapy.Spider)</span>:</span></div><div class="line">name = <span class="string">"dmoz"</span></div><div class="line">allowed_domains = [<span class="string">"dmoz.org"</span>]</div><div class="line">start_urls = [</div><div class="line">        <span class="string">"http://www.dmoz.org/Computers/Programming/Languages/Python/Books/"</span>,</div><div class="line">    <span class="string">"http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"</span></div><div class="line">]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></div><div class="line">    filename = response.url.split(<span class="string">"/"</span>)[<span class="number">-2</span>]</div><div class="line">    <span class="keyword">with</span> open(filename, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</div><div class="line">        f.write(response.body)</div></pre></td></tr></table></figure>
+<blockquote>
+<h2 id="spider的爬取"><a href="#spider的爬取" class="headerlink" title="spider的爬取"></a>spider的爬取</h2><blockquote>
+<p>进入工程的根目录下打开终端输入：<code>scrapy crawl dmoz</code></p>
+</blockquote>
+<h2 id="spider中的数据存取"><a href="#spider中的数据存取" class="headerlink" title="spider中的数据存取"></a>spider中的数据存取</h2><blockquote>
+<p>在工程的根目录下打开终端输入<code>scrapy crawl dmoz -o items.json</code><br>这里是将数据存储到<code>json</code>文件中</p>
+</blockquote>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;scrapy初试&quot;&gt;&lt;a href=&quot;#scrapy初试&quot; class=&quot;headerlink&quot; title=&quot;scrapy初试&quot;&gt;&lt;/a&gt;scrapy初试&lt;/h1&gt;&lt;blockquote&gt;
+&lt;h2 id=&quot;创建项目&quot;&gt;&lt;a href=&quot;#创建项目&quot; class=
+    
+    </summary>
+    
+      <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java中的IO操作</title>
+    <link href="http://chenjiabing666.github.io/2017/03/25/java%E4%B8%AD%E7%9A%84IO%E6%93%8D%E4%BD%9C/"/>
+    <id>http://chenjiabing666.github.io/2017/03/25/java中的IO操作/</id>
+    <published>2017-03-25T05:52:53.000Z</published>
+    <updated>2017-03-27T03:28:49.061Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="java中IO操作"><a href="#java中IO操作" class="headerlink" title="java中IO操作"></a>java中IO操作</h1><h2 id="读取文件中的内容"><a href="#读取文件中的内容" class="headerlink" title="读取文件中的内容"></a>读取文件中的内容</h2><blockquote>
+<h4 id="使用Scanner读取文本中的内容"><a href="#使用Scanner读取文本中的内容" class="headerlink" title="使用Scanner读取文本中的内容"></a>使用<code>Scanner</code>读取文本中的内容</h4><blockquote>
+<p>相信大家都知道<code>Scanner console=new Scanner(System.in)</code>是用来读取控制台上输入的内容，但是这里是用来读取文件的内容，原理是一样的，只是对象不同罢了，这里用到的是<code>File</code>对象，用来创建一个文件对象</p>
+</blockquote>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Scanner input=<span class="keyword">new</span> Scanner(<span class="keyword">new</span>                         File(<span class="string">"hello.txt"</span>));<span class="comment">//创建一个对象input</span></div><div class="line"><span class="keyword">while</span>(input.hasNextLine()) <span class="comment">//这里用来判断是否还有内容，    以免读到最后发生错误</span></div><div class="line">&#123;</div><div class="line">String content=input.nextLine();</div><div class="line">System.out.println(content);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>这里顺便补充一下<code>Scannner</code>中的几个函数：</p>
+<blockquote>
+<ol>
+<li><code>nextLine()</code>:读取一行的内容，包括空格，换行</li>
+<li><code>nextInt()</code>:读取一个整型内容</li>
+<li><code>nexDouble()</code>:读取一个双精度的浮点数</li>
+<li><code>next()</code>:读取下一个内容，无论什么类型，其中遇到空格和换行默认是一个标记（即是跳过）和<code>nextLine()</code>类似</li>
+<li><code>hasNext()</code>:用来判断文件中的还有下一个内容，无论什么类型的</li>
+<li><code>hasNextInt()</code></li>
+<li><code>hasNextDouble()</code>://相似，不在赘述</li>
+</ol>
+</blockquote>
+</blockquote>
+<h3 id="使用FileReader读取"><a href="#使用FileReader读取" class="headerlink" title="使用FileReader读取"></a>使用<code>FileReader</code>读取</h3><blockquote>
+<p>用来读取字符文件的便捷类。此类的构造方法假定默认字符编码和默认字节缓冲区大小都是适当的。要自己指定这些值，可以先在 <code>FileInputStream</code>上构造一个 <code>InputStreamReader</code>。<br>FileReader 用于读取字符流。要读取原始字节流，请考虑使用 FileInputStream。</p>
+</blockquote>
+</blockquote>
+<pre><code>//这里使用new File创建一个对象，同样的也可以直接将文件的绝对路径传入
+FileReader file=new FileReader(new File(&quot;hello.txt&quot;));
+while(file.ready())   //用来判断是否还有字符可读
+        {
+        int content=file.read();   //这里的read是读取将单个字符 返回的是int，即是ascii码,这里官方文档说返回的是读取的字符数，但是我实验了一下返回的ascii码
+        System.out.println((char)content);  //所以要将ascii码转换成字符
+        }
+        file.close();
+</code></pre><blockquote>
+<blockquote>
+<blockquote>
+<p>常用的几个方法：</p>
+<blockquote>
+<ol>
+<li><code>read()</code>: return int 上面介绍过</li>
+<li><code>read(char[] cbuf,int int length)</code>:将内容读入到一个<code>char</code>类型的数组，<code>length</code>是读取的字符数，<code>offest</code>是偏移量</li>
+</ol>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="使用BufferedReader的类实现高效的读取文件"><a href="#使用BufferedReader的类实现高效的读取文件" class="headerlink" title="使用BufferedReader的类实现高效的读取文件"></a>使用<code>BufferedReader</code>的类实现高效的读取文件</h3></blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//传入一个reader创建一个对象</span></div><div class="line">        BufferedReader file= <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(<span class="string">"hello.txt"</span>));  </div><div class="line">        System.out.println(file.skip(<span class="number">3</span>));<span class="comment">//实现将指针跳过3个字符</span></div><div class="line">        System.out.println((<span class="keyword">char</span>)file.read()); <span class="comment">//read的方法，和FileReader中的read一样</span></div><div class="line">        String line=file.readLine();   <span class="comment">//读取一行</span></div><div class="line">        System.out.println(line);</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>常用的方法：</p>
+<blockquote>
+<ol>
+<li><code>readLine()</code></li>
+<li><code>read()</code>：如果到了末尾返回-1</li>
+<li><code>read(char [],int off,int length)</code>:和FileReader中的一样</li>
+<li><code>ready()</code>:判断是否还可以读取，一般和read配对使用</li>
+<li><code>skip(long n)</code>:跳过的字符数</li>
+<li><code>close()</code></li>
+</ol>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="文件的写入"><a href="#文件的写入" class="headerlink" title="文件的写入"></a>文件的写入</h2><blockquote>
+<h3 id="用FileWriter写入文件"><a href="#用FileWriter写入文件" class="headerlink" title="用FileWriter写入文件"></a>用<code>FileWriter</code>写入文件</h3></blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*创建将对象f传入FileWriter,其中Filewriter有两个参数，第一个是File对象后者是一个String(即是文件的路径），第二个参数是boolean类型的，表示是否在文件的末尾追加内容，默认的是false表示不用在末尾追加，如果想要在末尾追加要写入另外一个参数true,当然这里可以用更加简洁的方式创建：FileWriter file=new FileWriter("hello.txt",false);</span></div><div class="line">*/</div><div class="line">FileWriter file=<span class="keyword">new</span> FileWriter(f,<span class="keyword">true</span>);</div><div class="line">file.write(<span class="string">"chenjiabing"</span>);<span class="comment">//写入函数write</span></div><div class="line">file.close();  <span class="comment">//最后必须关闭文件的输入流，否则写入将会失败，这里不想c和c++</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>其中Filewriter中的方法还有</p>
+<blockquote>
+<ol>
+<li><code>flush</code>：刷新缓存流</li>
+<li><code>close</code></li>
+<li><code>append()</code>:当前的领会的就是写入数组:<code>append(Arrays.toString(list))</code>;</li>
+<li><code>getEncoding()</code>:返回此流使用的字符编码</li>
+</ol>
+</blockquote>
+</blockquote>
+<h3 id="用PrintStream写入文件"><a href="#用PrintStream写入文件" class="headerlink" title="用PrintStream写入文件"></a>用<code>PrintStream</code>写入文件</h3><blockquote>
+<p>这里同样的是和<code>System.out.println()</code>一样的原理，<code>System.out.println</code>只是内部实现了<code>PrintStream</code>，这里是用来将指定的内容写入到文件中而已</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">PrintStream output=<span class="keyword">new</span> PrintStream(<span class="keyword">new</span>     File(<span class="string">"hello.txt"</span>));</div><div class="line"><span class="comment">//创建一个写入的对象output</span></div><div class="line">output.print(<span class="string">"flan"</span>);</div><div class="line">output.println(<span class="string">"vmlkfamla"</span>);</div><div class="line">output.println(<span class="string">"vmslfkmadvmfs;dm"</span>);</div></pre></td></tr></table></figure>
+<blockquote>
+<h2 id="这里是用BufferedWriter类写入文件-一个高效的写入方式"><a href="#这里是用BufferedWriter类写入文件-一个高效的写入方式" class="headerlink" title="这里是用BufferedWriter类写入文件(一个高效的写入方式)"></a>这里是用<code>BufferedWriter</code>类写入文件(一个高效的写入方式)</h2><blockquote>
+<h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h3><blockquote>
+<p>将文本写入字符输出流，缓冲各个字符，从而提供单个字符、数组和字符串的高效写入。<br>可以指定缓冲区的大小，或者接受默认的大小。在大多数情况下，默认值就足够大了。<br>该类提供了 <code>newLine()</code> 方法，它使用平台自己的行分隔符概念，此概念由系统属性 line.separator 定义。并非所有平台都使用新行符 (‘\n’) 来终止各行。因此调用此方法来终止每个输出行要优于直接写入新行符。<br>通常 <code>Writer</code> 将其输出立即发送到底层字符或字节流。除非要求提示输出，否则建议用 <code>BufferedWriter</code> 包装所有其 <code>write()</code> 操作可能开销很高的 <code>Writer</code>（如 <code>FileWriters</code> 和 <code>OutputStreamWriters</code>）。例如，</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code>PrintWriter out= new PrintWriter(new BufferedWriter(new FileWriter(&quot;foo.out&quot;)));
+</code></pre><p>将缓冲 <code>PrintWriter</code>对文件的输出。如果没有缓冲，则每次调用 <code>print()</code> 方法会导致将字符转换为字节，然后立即入到文件，而这是极其低效的。</p>
+<blockquote>
+<blockquote>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3></blockquote>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">BufferedWriter input=<span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(<span class="string">"hello.txt"</span>));</div><div class="line">        input.write(<span class="string">"这是一个文件读入的方法"</span>);</div><div class="line">        input.newLine();</div><div class="line">        input.write(<span class="string">"一个高效的方法"</span>);</div><div class="line">        input.close();</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<h3 id="其他的方法"><a href="#其他的方法" class="headerlink" title="其他的方法"></a>其他的方法</h3><blockquote>
+<ol>
+<li><code>close()</code></li>
+<li><code>flush()</code></li>
+<li><code>newLine()</code>:写入一个换行，因为每一个操作系统上的换行符可能不一样，不能系统的都用”\n”表示</li>
+<li><code>write()</code><blockquote>
+<p>详情参见<code>API</code></p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;java中IO操作&quot;&gt;&lt;a href=&quot;#java中IO操作&quot; class=&quot;headerlink&quot; title=&quot;java中IO操作&quot;&gt;&lt;/a&gt;java中IO操作&lt;/h1&gt;&lt;h2 id=&quot;读取文件中的内容&quot;&gt;&lt;a href=&quot;#读取文件中的内容&quot; class=&quot;
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>scrapy架构初探</title>
+    <link href="http://chenjiabing666.github.io/2017/03/25/scrapy%E6%9E%B6%E6%9E%84%E5%88%9D%E6%8E%A2/"/>
+    <id>http://chenjiabing666.github.io/2017/03/25/scrapy架构初探/</id>
+    <published>2017-03-25T05:11:58.000Z</published>
+    <updated>2017-03-25T05:12:46.277Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="scrapy架构初探"><a href="#scrapy架构初探" class="headerlink" title="scrapy架构初探"></a>scrapy架构初探</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
+<blockquote>
+<p>Python即时网络爬虫启动的目标是一起把互联网变成大数据库。单纯的开放源代码并不是开源的全部，开源的核心是“开放的思想”，聚合最好的想法、技术、人员，所以将会参照众多领先产品，比如，Scrapy，ScrapingHub，<a href="http://Import.io" target="_blank" rel="external">import io</a>等。</p>
+<p>本文简单讲解一下Scrapy的架构。没错，通用提取器gsExtractor就是要集成到Scrapy架构中。</p>
+<p>请注意，本文不想复述原文内容，而是为了开源Python爬虫的发展方向找参照，而且以9年来开发网络爬虫经验作为对标，从而本文含有不少笔者主观评述，如果想读Scrapy官方原文，请点击<a href="https://doc.scrapy.org/en/latest/topics/architecture.html" target="_blank" rel="external">Scrapy官网的Architecture</a>。</p>
+</blockquote>
+</blockquote>
+<h2 id="scrapy数据流"><a href="#scrapy数据流" class="headerlink" title="scrapy数据流"></a>scrapy数据流</h2><blockquote>
+<blockquote>
+<p>Scrapy中的数据流由执行引擎控制，下面的原文摘自Scrapy官网，我根据猜测做了点评，为进一步开发GooSeeker开源爬虫指示方向：</p>
+<blockquote>
+<ul>
+<li>The Engine gets the first URLs to crawl from the Spider and schedules them in the Scheduler, as Requests.</li>
+</ul>
+</blockquote>
+<p>URL谁来准备呢？看样子是Spider自己来准备，那么可以猜测Scrapy架构部分（不包括Spider）主要做事件调度，不管网址的存储。看起来类似GooSeeker会员中心的爬虫罗盘，为目标网站准备一批网址，放在罗盘中准备执行爬虫调度操作。所以，这个开源项目的下一个目标是把URL的管理放在一个集中的调度库里面。</p>
+<blockquote>
+<ul>
+<li>The Engine asks the Scheduler for the next URLs to crawl.</li>
+</ul>
+</blockquote>
+<p>看到这里其实挺难理解的，要看一些其他文档才能理解透。接第1点，引擎从Spider中把网址拿到以后，封装成一个Request，交给了事件循环，会被Scheduler收来做调度管理的，暂且理解成对Request做排队。引擎现在就找Scheduler要接下来要下载的网页地址。</p>
+<blockquote>
+<ul>
+<li>The Scheduler returns the next URLs to crawl to the Engine and the Engine sends them to the Downloader, passing through the Downloader Middleware (request direction).</li>
+</ul>
+</blockquote>
+<p>从调度器申请任务，把申请到的任务交给下载器，在下载器和引擎之间有个下载器中间件，这是作为一个开发框架的必备亮点，开发者可以在这里进行一些定制化扩展。</p>
+<blockquote>
+<ul>
+<li>Once the page finishes downloading the Downloader generates a Response (with that page) and sends it to the Engine, passing through the Downloader Middleware (response direction).</li>
+</ul>
+</blockquote>
+<p>下载完成了，产生一个Response，通过下载器中间件交给引擎。注意，Response和前面的Request的首字母都是大写，虽然我还没有看其它Scrapy文档，但是我猜测这是Scrapy框架内部的事件对象，也可以推测出是一个异步的事件驱动的引擎，就像DS打数机的三级事件循环一样，对于高性能、低开销引擎来说，这是必须的。</p>
+<blockquote>
+<ul>
+<li>The Engine receives the Response from the Downloader and sends it to the Spider for processing, passing through the Spider Middleware (input direction).</li>
+</ul>
+</blockquote>
+<p>再次出现一个中间件，给开发者足够的发挥空间。</p>
+<blockquote>
+<ul>
+<li>The Spider processes the Response and returns scraped items and new Requests (to follow) to the Engine.</li>
+</ul>
+</blockquote>
+<p>每个Spider顺序抓取一个个网页，完成一个就构造另一个Request事件，开始另一个网页的抓取。</p>
+<blockquote>
+<ul>
+<li>The Engine passes scraped items and new Requests returned by a spider through Spider Middleware (output direction), and then sends processed items to Item Pipelines and processed Requests to the Scheduler.</li>
+</ul>
+</blockquote>
+<p>引擎作事件分发</p>
+<blockquote>
+<ul>
+<li>The process repeats (from step 1) until there are no more requests from the Scheduler.</li>
+</ul>
+</blockquote>
+<p>持续不断地运行。</p>
+</blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;scrapy架构初探&quot;&gt;&lt;a href=&quot;#scrapy架构初探&quot; class=&quot;headerlink&quot; title=&quot;scrapy架构初探&quot;&gt;&lt;/a&gt;scrapy架构初探&lt;/h1&gt;&lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerli
+    
+    </summary>
+    
+      <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java图形与文本处理一</title>
+    <link href="http://chenjiabing666.github.io/2017/03/25/java%E5%9B%BE%E5%BD%A2%E4%B8%8E%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E4%B8%80/"/>
+    <id>http://chenjiabing666.github.io/2017/03/25/java图形与文本处理一/</id>
+    <published>2017-03-25T04:38:51.000Z</published>
+    <updated>2017-03-27T03:40:43.714Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="java绘制图形和文本-lt-一-gt"><a href="#java绘制图形和文本-lt-一-gt" class="headerlink" title="java绘制图形和文本&lt;一&gt;"></a>java绘制图形和文本&lt;一&gt;</h1><h2 id="开篇介绍-官方文档"><a href="#开篇介绍-官方文档" class="headerlink" title="开篇介绍(官方文档)"></a>开篇介绍(<a href="http://tool.oschina.net/apidocs/apidoc?api=jdk-zh" target="_blank" rel="external">官方文档</a>)</h2><blockquote>
+<p>java.awt<br>类 Graphics<br>java.lang.Object<br>继承者 java.awt.Graphics<br>直接已知子类：<br>DebugGraphics, Graphics2D<br>public abstract class Graphics extends Object</p>
+<p>Graphics 类是所有图形上下文的抽象基类，允许应用程序在组件（已经在各种设备上实现）以及闭屏图像上进行绘制。<br>Graphics 对象封装了 Java 支持的基本呈现操作所需的状态信息。此状态信息包括以下属性：<br>要在其上绘制的 Component 对象。<br>呈现和剪贴坐标的转换原点。<br>当前剪贴区。<br>当前颜色。<br>当前字体。<br>当前逻辑像素操作函数（XOR 或 Paint）。<br>当前 XOR 交替颜色（参见 setXORMode(java.awt.Color)）。<br>坐标是无限细分的，并且位于输出设备的像素之间。绘制图形轮廓的操作是通过使用像素大小的画笔遍历像素间无限细分路径的操作，画笔从路径上的锚点向下和向右绘制。填充图形的操作是填充图形内部区域无限细分路径操作。呈现水平文本的操作是呈现字符字形完全位于基线坐标之上的上升部分。<br>图形画笔从要遍历的路径向下和向右绘制。其含义如下：<br>如果绘制一个覆盖给定矩形的图形，那么该图形与填充被相同矩形所限定的图形相比，在右侧和底边多占用一行像素。<br>如果沿着与一行文本基线相同的 y 坐标绘制一条水平线，那么除了文字的所有下降部分外，该线完全画在文本的下面。<br>所有作为此 Graphics 对象方法的参数而出现的坐标，都是相对于调用该方法前的此 Graphics 对象转换原点的。<br>所有呈现操作仅修改当前剪贴区所限定区域内的像素，此剪贴区是由用户空间中的 Shape 指定的，并通过使用 Graphics 对象的程序来控制。此用户剪贴区 被转换到设备空间中，并与设备剪贴区 组合，后者是通过窗口可见性和设备范围定义的。用户剪贴区和设备剪贴区的组合定义复合剪贴区，复合剪贴区确定最终的剪贴区域。用户剪贴区不能由呈现系统修改，以反映得到的复合剪贴区。用户剪贴区只能通过 setClip 或 clipRect 方法更改。所有的绘制或写入都以当前的颜色、当前绘图模式和当前字体完成。</p>
+<blockquote>
+<h2 id="绘制直线"><a href="#绘制直线" class="headerlink" title="绘制直线"></a>绘制直线</h2><p>主要用到的内容是Graphics类中的<strong>drawLine</strong>函数<br>定义：</p>
+<blockquote>
+<p><code>public abstract void drawLine(int x1,int y1,int x2,int y2)</code><br><em>x1,y1是起始点的坐标，x2,y2是尾点的坐标</em></p>
+</blockquote>
+<h4 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h4><blockquote>
+<p><code>SetColor(Color color)</code></p>
+<blockquote>
+<p>setColor是Graphics类中的一个函数，主要是设置颜色作用，其中参数是Color类中的一个对象，用于定义自己的颜色，里面的变量的是RGB,定义的方法：<code>Color color=newe Color(R,G,B)</code></p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4></blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">import</span> java.awt.Graphics;</div><div class="line">    <span class="keyword">import</span> javax.swing.JFrame;</div><div class="line">    <span class="keyword">import</span> javax.swing.JPanel;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DrawLineFrame</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</div><div class="line">    DrawLinePanel linePanel = <span class="keyword">new</span> DrawLinePanel(); </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; <span class="comment">// 主函数</span></div><div class="line">        DrawLineFrame frame = <span class="keyword">new</span> DrawLineFrame(); <span class="comment">// 创建一个继承JFrame的一个类对象</span></div><div class="line">        frame.setVisible(<span class="keyword">true</span>); <span class="comment">// 设置窗体可见，true为可见，false为不可见</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DrawLineFrame</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        setTitle(<span class="string">"绘制直线"</span>); <span class="comment">// 设置窗体的标题</span></div><div class="line">        setBounds(<span class="number">100</span>, <span class="number">100</span>, <span class="number">273</span>, <span class="number">167</span>); <span class="comment">// 设置窗体的显示位置和大小</span></div><div class="line">        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); <span class="comment">// 设置窗体的关闭方式，具体见官方文档</span></div><div class="line">        add(linePanel); <span class="comment">// 将继承Jpanel类的容器对象添加在窗体中</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">DrawLinePanel</span> <span class="keyword">extends</span> <span class="title">JPanel</span> </span>&#123;   <span class="comment">// 继承在JPanel类的一个内部类，用于定义直线</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span> </span>&#123;    <span class="comment">// 重写JCommponent类中的paint方法，用来绘制直线</span></div><div class="line">            Color color=<span class="keyword">new</span> Color(Color.Red);<span class="comment">//这里用的是Color提供的颜色，当然读者也可以自己定义RGB颜色</span></div><div class="line">            g.setColor(Color);<span class="comment">//将颜色作用于绘图上下文</span></div><div class="line">            g.drawLine(<span class="number">70</span>, <span class="number">50</span>, <span class="number">180</span>, <span class="number">50</span>);   <span class="comment">// 调用方法</span></div><div class="line">            g.drawLine(<span class="number">70</span>, <span class="number">80</span>, <span class="number">180</span>, <span class="number">80</span>);   <span class="comment">// 第二条直线</span></div><div class="line">            g.drawLine(<span class="number">110</span>, <span class="number">10</span>, <span class="number">140</span>, <span class="number">120</span>); <span class="comment">// 第三条</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<h2 id="绘制矩形"><a href="#绘制矩形" class="headerlink" title="绘制矩形"></a>绘制矩形</h2><p>主要用到的函数是：<code>public  abstract void drawRect(int x,int y,int width,int height)</code>这里的x,y是矩形左上角的坐标，width，height是矩形的长和宽</p>
+<blockquote>
+<h3 id="拓展-1"><a href="#拓展-1" class="headerlink" title="拓展"></a>拓展</h3><p><code>fillRect(int x,int y,int width,int height)</code>:绘制实心矩形</p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3></blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.awt.Graphics;</div><div class="line"><span class="keyword">import</span> javax.swing.JFrame;</div><div class="line"><span class="keyword">import</span> javax.swing.JPanel;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DrawRectangleFrame</span> <span class="keyword">extends</span> <span class="title">JFrame</span>     </span>&#123;</div><div class="line">DrawRectanglePanel rectPanel = <span class="keyword">new</span>     DrawRectanglePanel(); <span class="comment">// 创建面板类的实例</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; <span class="comment">// 主方法</span></div><div class="line">    DrawRectangleFrame frame = <span class="keyword">new</span> DrawRectangleFrame(); <span class="comment">// 创建窗体类的实例</span></div><div class="line">    frame.setVisible(<span class="keyword">true</span>); <span class="comment">// 显示窗体</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">DrawRectangleFrame</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>(); <span class="comment">// 调用超类的构造方法</span></div><div class="line">    setTitle(<span class="string">"绘制矩形"</span>); <span class="comment">// 窗体标题</span></div><div class="line">    setBounds(<span class="number">100</span>, <span class="number">100</span>, <span class="number">269</span>, <span class="number">184</span>); <span class="comment">// 窗体的显示位置和大小</span></div><div class="line">    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); <span class="comment">// 窗体关闭方式</span></div><div class="line">    add(rectPanel); <span class="comment">// 将面板类的实例添加到窗体容器中</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DrawRectanglePanel</span> <span class="keyword">extends</span> <span class="title">JPanel</span> </span>&#123; <span class="comment">// 创建内部面板类</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span> </span>&#123;       <span class="comment">// 重写paint()方法</span></div><div class="line">        g.drawRect(<span class="number">30</span>, <span class="number">40</span>, <span class="number">80</span>, <span class="number">60</span>);       <span class="comment">// 绘制空心矩形</span></div><div class="line">        g.fillRect(<span class="number">140</span>, <span class="number">40</span>, <span class="number">80</span>, <span class="number">60</span>);      <span class="comment">// 绘制实心矩形</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<h3 id="绘制椭圆"><a href="#绘制椭圆" class="headerlink" title="绘制椭圆"></a>绘制椭圆</h3><blockquote>
+<p>函数：<code>public abstract void drawOval(int x,int y,int width,int height)</code>,其中x,y是外切矩形的左上角的坐标，width，height是长宽</p>
+<blockquote>
+<h2 id="拓展-2"><a href="#拓展-2" class="headerlink" title="拓展"></a>拓展</h2><blockquote>
+<p>其中将令width=height，即是一个圆了，<code>fillOval(int x,int y,int width,int height)</code>用来绘制实心的椭圆</p>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3></blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">    package com.zzk;</div><div class="line">    import java.awt.Graphics;</div><div class="line">    import javax.swing.JFrame;</div><div class="line">    import javax.swing.JPanel;</div><div class="line"></div><div class="line">    public class DrawEllipseFrame extends JFrame &#123;</div><div class="line">    DrawEllipsePanel ellipsePanel = new DrawEllipsePanel(); // 创建面板类的实例</div><div class="line">    </div><div class="line">    public static void main(String args[]) &#123; // 主方法</div><div class="line">        DrawEllipseFrame frame = new DrawEllipseFrame(); // 创建窗体类的实例</div><div class="line">        frame.setVisible(true); // 显示窗体</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public DrawEllipseFrame() &#123;</div><div class="line">        super(); // 调用超类的构造方法</div><div class="line">        setTitle("绘制椭圆"); // 窗体标题</div><div class="line">        setBounds(100, 100, 269, 222); // 窗体的显示位置和大小</div><div class="line">        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 窗体关闭方式</div><div class="line">        add(ellipsePanel); // 将面板类的实例添加到窗体容器中</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    class DrawEllipsePanel extends JPanel &#123; // 创建内部面板类</div><div class="line">        public void paint(Graphics g) &#123;     // 重写paint()方法</div><div class="line">            g.drawOval(30, 20, 80, 50);     // 绘制空心椭圆</div><div class="line">            g.drawOval(150, 10, 50, 80);    // 绘制空心椭圆</div><div class="line">            g.fillOval(40, 90, 50, 80);     // 绘制实心椭圆</div><div class="line">            g.fillOval(140, 110, 80, 50);   // 绘制实心椭圆</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">```    </div><div class="line"></div><div class="line">&gt;&gt;## 绘制圆弧</div><div class="line">&gt;&gt;&gt;主要用到的函数`public astract void drawArc(int x,int y,int width,int height,int startAngle,int arcAngle)`，其中x,y是要绘制圆弧的左上角的坐标，width，height是要绘制的长宽，startAngle是开始角度，arcAngle是相对于开始角度而言的，弧跨越的角度，</div><div class="line">&gt;&gt;&gt;&gt;### 拓展:</div><div class="line">&gt;&gt;&gt;&gt;&gt;fillArc(int x,int y,int width,int height,int startAngle,int arcAngle)用来绘制实心圆弧</div><div class="line">&gt;&gt;&gt;&gt;&gt;当然你也可以用这个来绘制扇形，用drawLine方法将圆弧的两端连起来就可以了，不过这个对坐标的精确度就要求很高了，暂时不想费那个脑筋来搞了</div><div class="line">&gt;&gt;&gt;&gt;### 代码</div><div class="line"></div><div class="line">```java</div><div class="line"></div><div class="line">    package com.zzk;</div><div class="line">    import java.awt.Graphics;</div><div class="line">    import javax.swing.JFrame;</div><div class="line">    import javax.swing.JPanel;</div><div class="line">    public class DrawArcFrame extends JFrame &#123;</div><div class="line">    DrawArcPanel arcPanel = new DrawArcPanel(); // 创建面板类的实例</div><div class="line">    public static void main(String args[]) &#123; // 主方法</div><div class="line">        DrawArcFrame frame = new DrawArcFrame(); // 创建窗体类的实例</div><div class="line">        frame.setVisible(true); // 显示窗体</div><div class="line">    &#125;</div><div class="line">    public DrawArcFrame() &#123;</div><div class="line">        super(); // 调用超类的构造方法</div><div class="line">        setTitle("绘制圆弧"); // 窗体标题</div><div class="line">        setBounds(100, 100, 269, 184); // 窗体的显示位置和大小</div><div class="line">        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 窗体关闭方式</div><div class="line">        add(arcPanel); // 将面板类的实例添加到窗体容器中</div><div class="line">    &#125;</div><div class="line">    class DrawArcPanel extends JPanel &#123; // 创建内部面板类</div><div class="line">        public void paint(Graphics g) &#123; // 重写paint()方法</div><div class="line">            g.drawArc(20, 20, 80, 80, 0, 120);    // 绘制圆弧</div><div class="line">            g.drawArc(20, 40, 80, 80, 0, -120);   // 绘制圆弧</div><div class="line">            g.drawArc(150, 20, 80, 80, 180, -120);// 绘制圆弧</div><div class="line">            g.drawArc(150, 40, 80, 80, 180, 120); // 绘制圆弧</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<h2 id="绘制多边形"><a href="#绘制多边形" class="headerlink" title="绘制多边形"></a>绘制多边形</h2><blockquote>
+<p>主要用到的函数是：<code>public abstract void drawPolygon(int[] xpoints,int[] ypoints,int npoints)</code>，其中xpoints：要绘制多边形的x坐标组，ypoints是要绘制多边形的y坐标组，npoints是多边形的n条边</p>
+<h3 id="拓展-3"><a href="#拓展-3" class="headerlink" title="拓展"></a>拓展</h3><blockquote>
+<p><code>fillPolygon(...)</code>是绘制实心多边形的函数</p>
+<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3></blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.zzk;</div><div class="line"><span class="keyword">import</span> java.awt.Graphics;</div><div class="line"><span class="keyword">import</span> javax.swing.JFrame;</div><div class="line"><span class="keyword">import</span> javax.swing.JPanel;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DrawSectorFrame</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</div><div class="line">DrawSectorPanel sectorPanel = <span class="keyword">new</span> DrawSectorPanel(); <span class="comment">// 创建面板类的实例</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; <span class="comment">// 主方法</span></div><div class="line">    DrawSectorFrame frame = <span class="keyword">new</span> DrawSectorFrame(); <span class="comment">// 创建窗体类的实例</span></div><div class="line">    frame.setVisible(<span class="keyword">true</span>); <span class="comment">// 显示窗体</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">DrawSectorFrame</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>(); <span class="comment">// 调用超类的构造方法</span></div><div class="line">    setTitle(<span class="string">"绘制填充扇形"</span>); <span class="comment">// 窗体标题</span></div><div class="line">    setBounds(<span class="number">100</span>, <span class="number">100</span>, <span class="number">278</span>, <span class="number">184</span>); <span class="comment">// 窗体的显示位置和大小</span></div><div class="line">    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); <span class="comment">// 窗体关闭方式</span></div><div class="line">    add(sectorPanel); <span class="comment">// 将面板类的实例添加到窗体容器中</span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DrawSectorPanel</span> <span class="keyword">extends</span> <span class="title">JPanel</span> </span>&#123; <span class="comment">// 创建内部面板类</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span> </span>&#123; <span class="comment">// 重写paint()方法</span></div><div class="line">        g.fillArc(<span class="number">40</span>, <span class="number">20</span>, <span class="number">80</span>, <span class="number">80</span>, <span class="number">0</span>, <span class="number">150</span>);    <span class="comment">// 绘制填充扇形</span></div><div class="line">        g.fillArc(<span class="number">140</span>, <span class="number">20</span>, <span class="number">80</span>, <span class="number">80</span>, <span class="number">180</span>, -<span class="number">150</span>);<span class="comment">// 绘制填充扇形</span></div><div class="line">        g.fillArc(<span class="number">40</span>, <span class="number">40</span>, <span class="number">80</span>, <span class="number">80</span>, <span class="number">0</span>, -<span class="number">110</span>);   <span class="comment">// 绘制填充扇形</span></div><div class="line">        g.fillArc(<span class="number">140</span>, <span class="number">40</span>, <span class="number">80</span>, <span class="number">80</span>, <span class="number">180</span>, <span class="number">110</span>); <span class="comment">// 绘制填充扇形</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<h2 id="绘制文本"><a href="#绘制文本" class="headerlink" title="绘制文本"></a>绘制文本</h2><blockquote>
+<p>主要用到的函数是：<code>public abstract void drawString(String value,int x,int y)</code>,其中value是要绘制的文本，x,y是第一个字的坐标</p>
+<h3 id="拓展-4"><a href="#拓展-4" class="headerlink" title="拓展"></a>拓展</h3><blockquote>
+<p>SetFont(Font font):这个函数是用来设置文本的字体大小，颜色的，其中参数font是Font类中的</p>
+<h3 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h3></blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.zzk;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.awt.Font;</div><div class="line"><span class="keyword">import</span> java.awt.Graphics;</div><div class="line"><span class="keyword">import</span> javax.swing.JFrame;</div><div class="line"><span class="keyword">import</span> javax.swing.JPanel;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TextFontFrame</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</div><div class="line">ChangeTextFontPanel changeTextFontPanel = <span class="keyword">new</span> ChangeTextFontPanel(); <span class="comment">// 创建面板类的实例</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; <span class="comment">// 主方法</span></div><div class="line">    TextFontFrame frame = <span class="keyword">new</span> TextFontFrame(); <span class="comment">// 创建窗体类的实例</span></div><div class="line">    frame.setVisible(<span class="keyword">true</span>); <span class="comment">// 显示窗体</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">TextFontFrame</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>(); <span class="comment">// 调用超类的构造方法</span></div><div class="line">    setTitle(<span class="string">"设置文本的字体"</span>); <span class="comment">// 窗体标题</span></div><div class="line">    setBounds(<span class="number">100</span>, <span class="number">100</span>, <span class="number">333</span>, <span class="number">199</span>); <span class="comment">// 窗体的显示位置和大小</span></div><div class="line">    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); <span class="comment">// 窗体关闭方式</span></div><div class="line">    add(changeTextFontPanel); <span class="comment">// 将面板类的实例添加到窗体容器中</span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ChangeTextFontPanel</span> <span class="keyword">extends</span> <span class="title">JPanel</span> </span>&#123; <span class="comment">// 创建内部面板类</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span> </span>&#123; <span class="comment">// 重写paint()方法</span></div><div class="line">        String value = <span class="string">"明日编程词典社区"</span>;</div><div class="line">        <span class="keyword">int</span> x = <span class="number">40</span>; <span class="comment">// 文本位置的横坐标</span></div><div class="line">        <span class="keyword">int</span> y = <span class="number">50</span>; <span class="comment">// 文本位置的纵坐标</span></div><div class="line">        Font font = <span class="keyword">new</span> Font(<span class="string">"华文行楷"</span>, Font.BOLD + Font.ITALIC, <span class="number">26</span>); <span class="comment">// 创建字体对象</span></div><div class="line">        g.setFont(font); <span class="comment">// 设置字体</span></div><div class="line">        g.drawString(value, x, y); <span class="comment">// 绘制文本</span></div><div class="line">        value = <span class="string">"http://community.mrbccd.com"</span>;</div><div class="line">        x = <span class="number">10</span>; <span class="comment">// 文本位置的横坐标</span></div><div class="line">        y = <span class="number">100</span>; <span class="comment">// 文本位置的纵坐标</span></div><div class="line">        font = <span class="keyword">new</span> Font(<span class="string">"宋体"</span>, Font.BOLD, <span class="number">20</span>); <span class="comment">// 创建字体对象</span></div><div class="line">        g.setFont(font); <span class="comment">// 设置字体</span></div><div class="line">        g.drawString(value, x, y); <span class="comment">// 绘制文本</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><blockquote>
+<p>字体样式包括Font.BLOD(粗体)，Font.ITALIC(斜体)，Font.PLAIN(普通字体)，其中如果要设置两种样式，可以用”+”连接，如：<code>Font.BLOD+Font.ITALIC</code>，这样就会同时设置了斜体和粗体样式</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><strong>以上是本人的学习成果，通过不断的学习和探索，发现网上没有什么系统的学习java图形处理的文章，就下定决心准备好好写，于是前几天就花了一晚上的时间搭建了博客，以前都是在CSDN上写的，发现在那上面写，没有逼格，为了提高逼格，自己撸了一个博客，让我来自由发挥，另外喜欢编程的朋友可以加我的联系方式，我们可以一起探讨，在下面留言也是可以的哦,联系方式可以在我的<em>关于我</em>可以找到</strong></p>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;java绘制图形和文本-lt-一-gt&quot;&gt;&lt;a href=&quot;#java绘制图形和文本-lt-一-gt&quot; class=&quot;headerlink&quot; title=&quot;java绘制图形和文本&amp;lt;一&amp;gt;&quot;&gt;&lt;/a&gt;java绘制图形和文本&amp;lt;一&amp;gt;&lt;/h1&gt;&lt;h2
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="java图形与文本处理" scheme="http://chenjiabing666.github.io/tags/java%E5%9B%BE%E5%BD%A2%E4%B8%8E%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://chenjiabing666.github.io/2017/03/23/hello-world/"/>
+    <id>http://chenjiabing666.github.io/2017/03/23/hello-world/</id>
+    <published>2017-03-23T15:50:59.419Z</published>
+    <updated>2017-03-23T15:50:59.419Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
