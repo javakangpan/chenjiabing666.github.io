@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-03-27T13:44:12.872Z</updated>
+  <updated>2017-03-27T03:31:34.444Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,75 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Swing干货系列之JSlider(滑块)</title>
-    <link href="http://chenjiabing666.github.io/2017/03/27/Swing-%E5%B9%B2%E8%B4%A7%E7%B3%BB%E5%88%97%E4%B9%8BJSlider/"/>
-    <id>http://chenjiabing666.github.io/2017/03/27/Swing-干货系列之JSlider/</id>
-    <published>2017-03-27T13:43:22.000Z</published>
-    <updated>2017-03-27T13:44:12.872Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Swing干货系列之JSlider-滑块"><a href="#Swing干货系列之JSlider-滑块" class="headerlink" title="Swing干货系列之JSlider(滑块)"></a>Swing干货系列之JSlider(滑块)</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
-<p>一个让用户以图形方式在有界区间内通过移动滑块来选择值的组件。</p>
-<p>滑块可以显示主刻度标记以及主刻度之间的次刻度标记。刻度标记之间的值的个数由 <code>setMajorTickSpacing</code>和 <code>setMinorTickSpacing</code> 来控制。刻度标记的绘制由 setPaintTicks 控制。</p>
-<p>滑块也可以在固定时间间隔（或在任意位置）沿滑块刻度打印文本标签。标签的绘制由 <code>setLabelTable</code> 和 <code>setPaintLabels</code> 控制。</p>
-</blockquote>
-<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
-<ul>
-<li><code>JSlider()</code>:创建一个空值的滑块组件，但是默认的刻度是100，其中如果获得其值的话可以很清楚的看见</li>
-<li><code>JSlider(BoundedRangeModel brm)</code>:使用指定的 <code>BoundedRangeModel</code> 创建一个水平滑块</li>
-<li><code>JSlider(int min,int max)</code>:创建一个带有最小值和最大值得滑块</li>
-<li><code>JSlider(int min,int max,int value)</code>:创建一个带有最小值，最大值和当前值的滑块</li>
-</ul>
-</blockquote>
-<h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
-<ol>
-<li><code>getValue(int x)</code>/<code>setValue(int x)</code>:得到和设置当前值</li>
-<li><code>getPaintsLabels()</code>:return <code>boolean</code> 告知是否绘制了签</li>
-<li><code>SetFont(Font font)</code>:设置组件的字体，其中Font类的font对象是参数</li>
-<li><code>setInverted(boolean b)</code>:反转滑块的刻度</li>
-<li><code>setMaximum(int maximum)</code> ：设置最大值</li>
-<li><code>setMinimum(int min)</code>:设置最小值</li>
-<li><code>setMinorTickSpacing(int n)</code> :设置次刻度，就是主刻度中间不用标记数值的刻度</li>
-<li>setMajorTickSpacing(int n):设置主刻度</li>
-<li>setPaintTicks(boolean b):确定是否在滑块下面显示刻度线，如果为false表示不显示</li>
-<li><code>setPaintLabels(boolean b)</code>:确定是否在刻度线下绘制数值，默认不绘制<br><strong>以上只是列了几个常用的函数，详情见<a href="http://tool.oschina.net/apidocs/apidoc?api=jdk-zh" target="_blank" rel="external">官方文档</a></strong></li>
-</ol>
-</blockquote>
-<h3 id="下面撸个代码试试身手"><a href="#下面撸个代码试试身手" class="headerlink" title="下面撸个代码试试身手"></a>下面撸个代码试试身手</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"><span class="keyword">import</span> javax.swing.*;</div><div class="line"><span class="keyword">import</span> javax.swing.event.ChangeEvent;</div><div class="line"><span class="keyword">import</span> javax.swing.event.ChangeListener;</div><div class="line"><span class="keyword">import</span> java.awt.*;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by chenjiabing on 2017/3/27.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Java_swing</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> JSlider points = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Java_swing</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        setTitle(<span class="string">"记事本"</span>);</div><div class="line">        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</div><div class="line">        setSize(<span class="number">300</span>, <span class="number">400</span>);</div><div class="line"><span class="comment">//        points=new JSlider();</span></div><div class="line">        points = <span class="keyword">new</span> JSlider(<span class="number">0</span>, <span class="number">50</span>, <span class="number">5</span>);</div><div class="line">        points.setMinorTickSpacing(<span class="number">5</span>);<span class="comment">//设置次要的间隔，每个一个间隔，这个显示时中间不标记数值</span></div><div class="line">        points.setMajorTickSpacing(<span class="number">10</span>);<span class="comment">//显示主要的刻度线，每个两个间隔，这个设置了，如果setPaintLabels为true就会显示数值</span></div><div class="line">        points.setPaintTicks(<span class="keyword">true</span>);  <span class="comment">//确定是否显示刻度线</span></div><div class="line">        points.setPaintLabels(<span class="keyword">true</span>); <span class="comment">//确定是否显示刻度的值</span></div><div class="line">        <span class="comment">//points.setInverted(true);//指定为true反转刻 度</span></div><div class="line">        points.setSnapToTicks(<span class="keyword">true</span>);</div><div class="line">        points.addChangeListener(<span class="keyword">new</span> ChangeListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stateChanged</span><span class="params">(ChangeEvent e)</span> </span>&#123;</div><div class="line">                <span class="keyword">int</span> value = points.getValue();</div><div class="line">                System.out.println(value);</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        getContentPane().add(points, BorderLayout.CENTER);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        Java_swing my = <span class="keyword">new</span> Java_swing();</div><div class="line">        my.setVisible(<span class="keyword">true</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="Change-Listener-一个监听机制"><a href="#Change-Listener-一个监听机制" class="headerlink" title="Change Listener(一个监听机制)"></a>Change Listener(一个监听机制)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.awt.Dimension;</div><div class="line"><span class="comment">/*from  w  ww  .  ja  v a 2 s  .c o  m*/</span></div><div class="line"><span class="keyword">import</span> javax.swing.JFrame;</div><div class="line"><span class="keyword">import</span> javax.swing.JSlider;</div><div class="line"><span class="keyword">import</span> javax.swing.event.ChangeEvent;</div><div class="line"><span class="keyword">import</span> javax.swing.event.ChangeListener;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    JFrame f = <span class="keyword">new</span> JFrame();</div><div class="line">    <span class="keyword">final</span> JSlider slider = <span class="keyword">new</span> JSlider(<span class="number">0</span>, <span class="number">150</span>, <span class="number">0</span>);</div><div class="line">    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</div><div class="line">    slider.setPreferredSize(<span class="keyword">new</span> Dimension(<span class="number">150</span>, <span class="number">30</span>));</div><div class="line">    </div><div class="line">    <span class="comment">//添加change Listener,当然这里的和JButton的也是一样，可以在一个类中实现</span></div><div class="line">    slider.addChangeListener(<span class="keyword">new</span> ChangeListener() &#123;</div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stateChanged</span><span class="params">(ChangeEvent event)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> value = slider.getValue();</div><div class="line">        <span class="keyword">if</span> (value == <span class="number">0</span>) &#123;</div><div class="line">          System.out.println(<span class="string">"0"</span>);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value &gt; <span class="number">0</span> &amp;&amp; value &lt;= <span class="number">30</span>) &#123;</div><div class="line">          System.out.println(<span class="string">"value &gt; 0 &amp;&amp; value &lt;= 30"</span>);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value &gt; <span class="number">30</span> &amp;&amp; value &lt; <span class="number">80</span>) &#123;</div><div class="line">          System.out.println(<span class="string">"value &gt; 30 &amp;&amp; value &lt; 80"</span>);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          System.out.println(<span class="string">"max"</span>);</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">    f.add(slider);</div><div class="line">    f.pack();</div><div class="line">    f.setLocationRelativeTo(<span class="keyword">null</span>);</div><div class="line">    f.setVisible(<span class="keyword">true</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>当然以上只是JSlider的一部分内容，还有的后面会陆续更新</strong><br><strong>本文参考的文章：</strong></p>
-<blockquote>
-<blockquote>
-<ul>
-<li><a href="http://tool.oschina.net/apidocs/apidoc?api=jdk-zh" target="_blank" rel="external">中文文档</a></li>
-<li><a href="http://www.java2s.com/Tutorials/Java/Java_Swing/0970__Java_Swing_JSlider.htm" target="_blank" rel="external">英文文档</a></li>
-</ul>
-</blockquote>
-</blockquote>
-<p><strong>福利时间，博主写了一个小例子，想要的朋友可以参见<a href="https://github.com/chenjiabing666/Java_demo/tree/master/031" target="_blank" rel="external">github</a>,不要忘了随手点个赞哦！！！</strong></p>
-<blockquote>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Swing干货系列之JSlider-滑块&quot;&gt;&lt;a href=&quot;#Swing干货系列之JSlider-滑块&quot; class=&quot;headerlink&quot; title=&quot;Swing干货系列之JSlider(滑块)&quot;&gt;&lt;/a&gt;Swing干货系列之JSlider(滑块)&lt;/h1
-    
-    </summary>
-    
-      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="swing" scheme="http://chenjiabing666.github.io/tags/swing/"/>
-    
-  </entry>
   
   <entry>
     <title>scrapy设置请求池</title>
