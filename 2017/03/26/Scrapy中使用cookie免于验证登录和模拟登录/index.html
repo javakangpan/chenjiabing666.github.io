@@ -21,7 +21,7 @@ cookie提">
 <meta property="og:description" content="Scrapy中使用cookie免于验证登录和模拟登录引言
 python爬虫我认为最困难的问题一个是ip代理，另外一个就是模拟登录了，更操蛋的就是模拟登录了之后还有验证码，真的是不让人省心，不过既然有了反爬虫，那么就有反反爬虫的策略，这里就先介绍一个cookie模拟登陆，后续还有seleminum+phantomjs模拟浏览器登录的文章。还不知道cookie是什么朋友们，可以点击这里
 cookie提">
-<meta property="og:updated_time" content="2017-03-26T06:21:39.580Z">
+<meta property="og:updated_time" content="2017-03-27T03:32:05.186Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scrapy中使用cookie免于验证登录和模拟登录">
 <meta name="twitter:description" content="Scrapy中使用cookie免于验证登录和模拟登录引言
@@ -111,55 +111,16 @@ cookie提">
 <p>打开谷歌浏览器或者火狐浏览器，如果是谷歌浏览器的按<code>F12</code>这个键就会跳出来浏览器控制台，然后点击<code>Network</code>，之后就是刷新网页开始抓包了，之后在抓到的页面中随便打开一个，就能看到cokie了，但是这里的cookie并不符合python中的格式，因此需要转换格式，下面提供了转换的代码</p>
 </blockquote>
 </blockquote>
-<pre><code># -*- coding: utf-8 -*-
-
-class transCookie:
-def __init__(self, cookie):
-    self.cookie = cookie
-
-def stringToDict(self):
-    &apos;&apos;&apos;
-    将从浏览器上Copy来的cookie字符串转化为Scrapy能使用的Dict
-    :return:
-    &apos;&apos;&apos;
-    itemDict = {}
-    items = self.cookie.split(&apos;;&apos;)
-    for item in items:
-        key = item.split(&apos;=&apos;)[0].replace(&apos; &apos;, &apos;&apos;)
-        value = item.split(&apos;=&apos;)[1]
-        itemDict[key] = value
-    return itemDict
-
-if __name__ == &quot;__main__&quot;:
-cookie = &quot;你复制的cookie&quot;
-trans = transCookie(cookie)
-print trans.stringToDict()
-</code></pre><blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">transCookie</span>:</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cookie)</span>:</span></div><div class="line">    self.cookie = cookie</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">stringToDict</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="string">'''</span></div><div class="line">    将从浏览器上Copy来的cookie字符串转化为Scrapy能使用的Dict</div><div class="line">    :return:</div><div class="line">    '''</div><div class="line">    itemDict = &#123;&#125;</div><div class="line">    items = self.cookie.split(<span class="string">';'</span>)</div><div class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items:</div><div class="line">        key = item.split(<span class="string">'='</span>)[<span class="number">0</span>].replace(<span class="string">' '</span>, <span class="string">''</span>)</div><div class="line">        value = item.split(<span class="string">'='</span>)[<span class="number">1</span>]</div><div class="line">        itemDict[key] = value</div><div class="line">    <span class="keyword">return</span> itemDict</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">cookie = <span class="string">"你复制的cookie"</span></div><div class="line">trans = transCookie(cookie)</div><div class="line"><span class="keyword">print</span> trans.stringToDict()</div></pre></td></tr></table></figure>
+<blockquote>
 <h2 id="补充说明："><a href="#补充说明：" class="headerlink" title="补充说明："></a>补充说明：</h2><blockquote>
 <p>只需要将你网页上的cookie复制到上述代码中直接运行就可以了</p>
 </blockquote>
 <h2 id="使用cookie操作scrapy"><a href="#使用cookie操作scrapy" class="headerlink" title="使用cookie操作scrapy"></a>使用cookie操作scrapy</h2><blockquote>
 <h3 id="直接撸代码"><a href="#直接撸代码" class="headerlink" title="直接撸代码"></a>直接撸代码</h3></blockquote>
 </blockquote>
-<pre><code># -*- coding: utf-8 -*-
-import scrapy
-from scrapy.conf import settings #从settings文件中导入Cookie，这里也可以室友from scrapy.conf import settings.COOKIE
-
-class DemoSpider(scrapy.Spider):
-name = &quot;demo&quot;
-#allowed_domains = [&quot;csdn.com&quot;]
-start_urls = [&quot;http://write.blog.csdn.net/postlist&quot;]
-cookie = settings[&apos;COOKIE&apos;]  # 带着Cookie向网页发请求\
-headers = {
-    &apos;Connection&apos;: &apos;keep - alive&apos;,  # 保持链接状态
-    &apos;User-Agent&apos;: &apos;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36&apos;
-}
-def start_requests(self):
-    yield scrapy.Request(url=self.start_urls[0],headers=self.headers,cookies=self.cookie)# 这里带着cookie发出请求
-
-def parse(self, response):
-    print response.body
-</code></pre><blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="keyword">from</span> scrapy.conf <span class="keyword">import</span> settings <span class="comment">#从settings文件中导入Cookie，这里也可以室友from scrapy.conf import settings.COOKIE</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DemoSpider</span><span class="params">(scrapy.Spider)</span>:</span></div><div class="line">name = <span class="string">"demo"</span></div><div class="line"><span class="comment">#allowed_domains = ["csdn.com"]</span></div><div class="line">start_urls = [<span class="string">"http://write.blog.csdn.net/postlist"</span>]</div><div class="line">cookie = settings[<span class="string">'COOKIE'</span>]  <span class="comment"># 带着Cookie向网页发请求\</span></div><div class="line">headers = &#123;</div><div class="line">    <span class="string">'Connection'</span>: <span class="string">'keep - alive'</span>,  <span class="comment"># 保持链接状态</span></div><div class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36'</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">start_requests</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="keyword">yield</span> scrapy.Request(url=self.start_urls[<span class="number">0</span>],headers=self.headers,cookies=self.cookie)<span class="comment"># 这里带着cookie发出请求</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></div><div class="line">    <span class="keyword">print</span> response.body</div></pre></td></tr></table></figure>
+<blockquote>
 <blockquote>
 <h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><blockquote>
 <p>这里是scrapy工程目录下spiders目录下的主要的解析网页的py文件相信学过scrapy的应该不会陌生，上述代码中的cookie值是放在Settings文件中的，因此使用的时候需要导入，当然你也可以直接将cookie粘贴到这个文件中</p>
@@ -284,11 +245,11 @@ def parse(self, response):
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>1</sup></a></li>
+				<li><a href="/tags/java基础/" title="java基础">java基础<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>1</sup></a></li>
+				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>1</sup></a></li>
 			
 		
 		</ul>

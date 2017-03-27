@@ -35,7 +35,7 @@ scrapy.cfg: 项目的配置文件
 tutorial/: 该项目的python模块。之后您将在此加入代码。
 tutorial/items.py: 项目中的item文件.
 tutorial/pipelines.p">
-<meta property="og:updated_time" content="2017-03-25T07:09:12.059Z">
+<meta property="og:updated_time" content="2017-03-27T03:30:06.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="scrapy初试">
 <meta name="twitter:description" content="scrapy初试
@@ -147,12 +147,8 @@ tutorial/pipelines.p">
 <p>首先根据需要从<code>dmoz.org</code>获取到的数据对<code>item</code>进行建模。 我们需要从<code>dmoz</code>中获取名字，<code>url</code>，以及网站的描述。 对此，在<code>item</code>中定义相应的字段。编辑 <code>tutorial</code> 目录中的 <code>items.py</code> 文件:</p>
 </blockquote>
 </blockquote>
-<pre><code>import scrapy
-class DmozItem(scrapy.Item):
-title = scrapy.Field()
-link = scrapy.Field()
-desc = scrapy.Field()
-</code></pre><blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DmozItem</span><span class="params">(scrapy.Item)</span>:</span></div><div class="line">title = scrapy.Field()</div><div class="line">link = scrapy.Field()</div><div class="line">desc = scrapy.Field()</div></pre></td></tr></table></figure>
+<blockquote>
 <blockquote>
 <p>一开始这看起来可能有点复杂，但是通过定义item， 您可以很方便的使用Scrapy的其他方法。而这些方法需要知道您的item的定义.</p>
 </blockquote>
@@ -165,22 +161,10 @@ desc = scrapy.Field()
 <li><code>parse()</code> 是spider的一个方法。 被调用时，每个初始<code>URL</code>完成下载后生成的 Response 对象将会作为唯一的参数传递给该函数。 该方法负责解析返回的数据(<code>response data</code>)，提取数据(生成<code>item</code>)以及生成需要进一步处理的<code>URL</code>的 <code>Request</code>对象。</li>
 </ul>
 </blockquote>
-<h3 id="以下是spider目录下的demo-py的代码"><a href="#以下是spider目录下的demo-py的代码" class="headerlink" title="以下是spider目录下的demo.py的代码"></a>以下是spider目录下的demo.py的代码</h3><pre><code>import scrapy
-</code></pre></blockquote>
+<h3 id="以下是spider目录下的demo-py的代码"><a href="#以下是spider目录下的demo-py的代码" class="headerlink" title="以下是spider目录下的demo.py的代码"></a>以下是spider目录下的demo.py的代码</h3></blockquote>
 </blockquote>
-<pre><code>class DmozSpider(scrapy.Spider):
-name = &quot;dmoz&quot;
-allowed_domains = [&quot;dmoz.org&quot;]
-start_urls = [
-        &quot;http://www.dmoz.org/Computers/Programming/Languages/Python/Books/&quot;,
-    &quot;http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/&quot;
-]
-
-def parse(self, response):
-    filename = response.url.split(&quot;/&quot;)[-2]
-    with open(filename, &apos;wb&apos;) as f:
-        f.write(response.body)
-</code></pre><blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DmozSpider</span><span class="params">(scrapy.Spider)</span>:</span></div><div class="line">name = <span class="string">"dmoz"</span></div><div class="line">allowed_domains = [<span class="string">"dmoz.org"</span>]</div><div class="line">start_urls = [</div><div class="line">        <span class="string">"http://www.dmoz.org/Computers/Programming/Languages/Python/Books/"</span>,</div><div class="line">    <span class="string">"http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"</span></div><div class="line">]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></div><div class="line">    filename = response.url.split(<span class="string">"/"</span>)[<span class="number">-2</span>]</div><div class="line">    <span class="keyword">with</span> open(filename, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</div><div class="line">        f.write(response.body)</div></pre></td></tr></table></figure>
+<blockquote>
 <h2 id="spider的爬取"><a href="#spider的爬取" class="headerlink" title="spider的爬取"></a>spider的爬取</h2><blockquote>
 <p>进入工程的根目录下打开终端输入：<code>scrapy crawl dmoz</code></p>
 </blockquote>
@@ -291,11 +275,11 @@ def parse(self, response):
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>1</sup></a></li>
+				<li><a href="/tags/java基础/" title="java基础">java基础<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>1</sup></a></li>
+				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>1</sup></a></li>
 			
 		
 		</ul>

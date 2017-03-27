@@ -16,7 +16,7 @@
 相信大家都知道Scanner console=new Scanner(System.in)是用来读取控制台上输入的内容，但是这里是用来读取文件的内容，原理是一样的，只是对象不同罢了，这里用到的是File对象，用来创建一个文件对象
 
 
-Scanner input=new Scanner(new">
+123456Scanner input=new Scanner(new">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java中的IO操作">
 <meta property="og:url" content="http://chenjiabing666.github.io/2017/03/25/java中的IO操作/index.html">
@@ -26,8 +26,8 @@ Scanner input=new Scanner(new">
 相信大家都知道Scanner console=new Scanner(System.in)是用来读取控制台上输入的内容，但是这里是用来读取文件的内容，原理是一样的，只是对象不同罢了，这里用到的是File对象，用来创建一个文件对象
 
 
-Scanner input=new Scanner(new">
-<meta property="og:updated_time" content="2017-03-25T05:54:11.238Z">
+123456Scanner input=new Scanner(new">
+<meta property="og:updated_time" content="2017-03-27T03:28:49.061Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java中的IO操作">
 <meta name="twitter:description" content="java中IO操作读取文件中的内容
@@ -35,7 +35,7 @@ Scanner input=new Scanner(new">
 相信大家都知道Scanner console=new Scanner(System.in)是用来读取控制台上输入的内容，但是这里是用来读取文件的内容，原理是一样的，只是对象不同罢了，这里用到的是File对象，用来创建一个文件对象
 
 
-Scanner input=new Scanner(new">
+123456Scanner input=new Scanner(new">
 
     
     <link rel="alternative" href="/atom.xml" title="觅" type="application/atom+xml">
@@ -119,13 +119,8 @@ Scanner input=new Scanner(new">
 <p>相信大家都知道<code>Scanner console=new Scanner(System.in)</code>是用来读取控制台上输入的内容，但是这里是用来读取文件的内容，原理是一样的，只是对象不同罢了，这里用到的是<code>File</code>对象，用来创建一个文件对象</p>
 </blockquote>
 </blockquote>
-<pre><code>Scanner input=new Scanner(new                         File(&quot;hello.txt&quot;));//创建一个对象input
-while(input.hasNextLine()) //这里用来判断是否还有内容，    以免读到最后发生错误
-{
-String content=input.nextLine();
-System.out.println(content);
-}
-</code></pre><blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Scanner input=<span class="keyword">new</span> Scanner(<span class="keyword">new</span>                         File(<span class="string">"hello.txt"</span>));<span class="comment">//创建一个对象input</span></div><div class="line"><span class="keyword">while</span>(input.hasNextLine()) <span class="comment">//这里用来判断是否还有内容，    以免读到最后发生错误</span></div><div class="line">&#123;</div><div class="line">String content=input.nextLine();</div><div class="line">System.out.println(content);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
 <blockquote>
 <p>这里顺便补充一下<code>Scannner</code>中的几个函数：</p>
 <blockquote>
@@ -164,13 +159,10 @@ while(file.ready())   //用来判断是否还有字符可读
 </blockquote>
 </blockquote>
 </blockquote>
-<h3 id="使用BufferedReader的类实现高效的读取文件"><a href="#使用BufferedReader的类实现高效的读取文件" class="headerlink" title="使用BufferedReader的类实现高效的读取文件"></a>使用<code>BufferedReader</code>的类实现高效的读取文件</h3><pre><code>//传入一个reader创建一个对象
-        BufferedReader file= new BufferedReader(new FileReader(&quot;hello.txt&quot;));  
-        System.out.println(file.skip(3));//实现将指针跳过3个字符
-        System.out.println((char)file.read()); //read的方法，和FileReader中的read一样
-        String line=file.readLine();   //读取一行
-        System.out.println(line);
-</code></pre><blockquote>
+<h3 id="使用BufferedReader的类实现高效的读取文件"><a href="#使用BufferedReader的类实现高效的读取文件" class="headerlink" title="使用BufferedReader的类实现高效的读取文件"></a>使用<code>BufferedReader</code>的类实现高效的读取文件</h3></blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//传入一个reader创建一个对象</span></div><div class="line">        BufferedReader file= <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(<span class="string">"hello.txt"</span>));  </div><div class="line">        System.out.println(file.skip(<span class="number">3</span>));<span class="comment">//实现将指针跳过3个字符</span></div><div class="line">        System.out.println((<span class="keyword">char</span>)file.read()); <span class="comment">//read的方法，和FileReader中的read一样</span></div><div class="line">        String line=file.readLine();   <span class="comment">//读取一行</span></div><div class="line">        System.out.println(line);</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
 <p>常用的方法：</p>
 <blockquote>
 <ol>
@@ -185,13 +177,10 @@ while(file.ready())   //用来判断是否还有字符可读
 </blockquote>
 </blockquote>
 <h2 id="文件的写入"><a href="#文件的写入" class="headerlink" title="文件的写入"></a>文件的写入</h2><blockquote>
-<h3 id="用FileWriter写入文件"><a href="#用FileWriter写入文件" class="headerlink" title="用FileWriter写入文件"></a>用<code>FileWriter</code>写入文件</h3><pre><code>/*创建将对象f传入FileWriter,其中Filewriter有两个参数，第一个是File对象后者是一个String(即是文件的路径），第二个参数是boolean类型的，表示是否在文件的末尾追加内容，默认的是false表示不用在末尾追加，如果想要在末尾追加要写入另外一个参数true,当然这里可以用更加简洁的方式创建：FileWriter file=new FileWriter(&quot;hello.txt&quot;,false);
-*/
-FileWriter file=new FileWriter(f,true);
-file.write(&quot;chenjiabing&quot;);//写入函数write
-file.close();  //最后必须关闭文件的输入流，否则写入将会失败，这里不想c和c++
-/*
-</code></pre><p>其中Filewriter中的方法还有</p>
+<h3 id="用FileWriter写入文件"><a href="#用FileWriter写入文件" class="headerlink" title="用FileWriter写入文件"></a>用<code>FileWriter</code>写入文件</h3></blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*创建将对象f传入FileWriter,其中Filewriter有两个参数，第一个是File对象后者是一个String(即是文件的路径），第二个参数是boolean类型的，表示是否在文件的末尾追加内容，默认的是false表示不用在末尾追加，如果想要在末尾追加要写入另外一个参数true,当然这里可以用更加简洁的方式创建：FileWriter file=new FileWriter("hello.txt",false);</span></div><div class="line">*/</div><div class="line">FileWriter file=<span class="keyword">new</span> FileWriter(f,<span class="keyword">true</span>);</div><div class="line">file.write(<span class="string">"chenjiabing"</span>);<span class="comment">//写入函数write</span></div><div class="line">file.close();  <span class="comment">//最后必须关闭文件的输入流，否则写入将会失败，这里不想c和c++</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>其中Filewriter中的方法还有</p>
 <blockquote>
 <ol>
 <li><code>flush</code>：刷新缓存流</li>
@@ -204,12 +193,8 @@ file.close();  //最后必须关闭文件的输入流，否则写入将会失败
 <h3 id="用PrintStream写入文件"><a href="#用PrintStream写入文件" class="headerlink" title="用PrintStream写入文件"></a>用<code>PrintStream</code>写入文件</h3><blockquote>
 <p>这里同样的是和<code>System.out.println()</code>一样的原理，<code>System.out.println</code>只是内部实现了<code>PrintStream</code>，这里是用来将指定的内容写入到文件中而已</p>
 </blockquote>
-<pre><code>PrintStream output=new PrintStream(new     File(&quot;hello.txt&quot;));
-//创建一个写入的对象output
-output.print(&quot;flan&quot;);
-output.println(&quot;vmlkfamla&quot;);
-output.println(&quot;vmslfkmadvmfs;dm&quot;);
-</code></pre><blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">PrintStream output=<span class="keyword">new</span> PrintStream(<span class="keyword">new</span>     File(<span class="string">"hello.txt"</span>));</div><div class="line"><span class="comment">//创建一个写入的对象output</span></div><div class="line">output.print(<span class="string">"flan"</span>);</div><div class="line">output.println(<span class="string">"vmlkfamla"</span>);</div><div class="line">output.println(<span class="string">"vmslfkmadvmfs;dm"</span>);</div></pre></td></tr></table></figure>
+<blockquote>
 <h2 id="这里是用BufferedWriter类写入文件-一个高效的写入方式"><a href="#这里是用BufferedWriter类写入文件-一个高效的写入方式" class="headerlink" title="这里是用BufferedWriter类写入文件(一个高效的写入方式)"></a>这里是用<code>BufferedWriter</code>类写入文件(一个高效的写入方式)</h2><blockquote>
 <h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h3><blockquote>
 <p>将文本写入字符输出流，缓冲各个字符，从而提供单个字符、数组和字符串的高效写入。<br>可以指定缓冲区的大小，或者接受默认的大小。在大多数情况下，默认值就足够大了。<br>该类提供了 <code>newLine()</code> 方法，它使用平台自己的行分隔符概念，此概念由系统属性 line.separator 定义。并非所有平台都使用新行符 (‘\n’) 来终止各行。因此调用此方法来终止每个输出行要优于直接写入新行符。<br>通常 <code>Writer</code> 将其输出立即发送到底层字符或字节流。除非要求提示输出，否则建议用 <code>BufferedWriter</code> 包装所有其 <code>write()</code> 操作可能开销很高的 <code>Writer</code>（如 <code>FileWriters</code> 和 <code>OutputStreamWriters</code>）。例如，</p>
@@ -220,12 +205,12 @@ output.println(&quot;vmslfkmadvmfs;dm&quot;);
 </code></pre><p>将缓冲 <code>PrintWriter</code>对文件的输出。如果没有缓冲，则每次调用 <code>print()</code> 方法会导致将字符转换为字节，然后立即入到文件，而这是极其低效的。</p>
 <blockquote>
 <blockquote>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><pre><code>BufferedWriter input=new BufferedWriter(new FileWriter(&quot;hello.txt&quot;));
-        input.write(&quot;这是一个文件读入的方法&quot;);
-        input.newLine();
-        input.write(&quot;一个高效的方法&quot;);
-        input.close();
-</code></pre><h3 id="其他的方法"><a href="#其他的方法" class="headerlink" title="其他的方法"></a>其他的方法</h3><blockquote>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3></blockquote>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">BufferedWriter input=<span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(<span class="string">"hello.txt"</span>));</div><div class="line">        input.write(<span class="string">"这是一个文件读入的方法"</span>);</div><div class="line">        input.newLine();</div><div class="line">        input.write(<span class="string">"一个高效的方法"</span>);</div><div class="line">        input.close();</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<h3 id="其他的方法"><a href="#其他的方法" class="headerlink" title="其他的方法"></a>其他的方法</h3><blockquote>
 <ol>
 <li><code>close()</code></li>
 <li><code>flush()</code></li>
@@ -342,11 +327,11 @@ output.println(&quot;vmslfkmadvmfs;dm&quot;);
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>1</sup></a></li>
+				<li><a href="/tags/java基础/" title="java基础">java基础<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>1</sup></a></li>
+				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>1</sup></a></li>
 			
 		
 		</ul>
