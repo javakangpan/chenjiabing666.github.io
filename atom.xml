@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-03-28T15:50:53.576Z</updated>
+  <updated>2017-03-29T07:16:29.302Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Swing中的JSplitPane</title>
+    <title>Swing干货系列之JSplitPane(分割面板)</title>
     <link href="http://chenjiabing666.github.io/2017/03/28/Swing%E4%B8%AD%E7%9A%84JSplitPane/"/>
     <id>http://chenjiabing666.github.io/2017/03/28/Swing中的JSplitPane/</id>
     <published>2017-03-28T14:49:39.000Z</published>
-    <updated>2017-03-28T15:50:53.576Z</updated>
+    <updated>2017-03-29T07:16:29.302Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Swing中的JSplitPane-分割面板"><a href="#Swing中的JSplitPane-分割面板" class="headerlink" title="Swing中的JSplitPane(分割面板)"></a>Swing中的JSplitPane(分割面板)</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
 <p><code>JSplitPane</code> 用于分隔两个（只能两个）<code>Component</code>。两个 <code>Component</code> 图形化分隔以外观实现为基础，并且这两个 <code>Component</code> 可以由用户交互式调整大小。有关如何使用 <code>JSplitPane</code> 的信息，请参阅 <a href="http://tool.oschina.net/apidocs/apidoc?api=jdk-zh" target="_blank" rel="external">The Java Tutorial</a> 中的 How to Use Split Panes 一节。</p>
@@ -84,7 +84,7 @@
       <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="wing" scheme="http://chenjiabing666.github.io/tags/wing/"/>
+      <category term="swing" scheme="http://chenjiabing666.github.io/tags/swing/"/>
     
   </entry>
   
