@@ -3,13 +3,6 @@
   
     
     <entry>
-      <title><![CDATA[Hello World]]></title>
-      <url>%2F2017%2F04%2F04%2Fhello-world%2F</url>
-      <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
-    </entry>
-
-    
-    <entry>
       <title><![CDATA[matplotlib绘制图形基础]]></title>
       <url>%2F2017%2F04%2F01%2Fmatplotlib%E7%BB%98%E5%88%B6%E5%9B%BE%E5%BD%A2%E5%9F%BA%E7%A1%80%2F</url>
       <content type="text"><![CDATA[matplotlib绘制基本图形折线图12345678import matplotlib.pyplot as pltimport numpy as npx=np.arange(0,10,1) #创建一个0-10之间以1为间隔的numpy数组y=x+10 plt.plot(x,y,color='red',linestyle='--',marker='&gt;',linewidth=3,label='example one') #绘制图形plt.savefig('first.png',dpi=50) #保存图形，dpi表示plt.legend() #显示图例plt.show() #显示图形 图形展示说明plt.plot()可以直接绘制折线，其中marker是折线上的标记，linewidth是折线的宽度，label是图例，如果要想显示就要设置plt.legend(),linestyle是折线的风格，color是颜色 饼状图123456789101112131415import matplotlib.pyplot as pltslices = [2,3,4,9] #指定每一个切片的大小，这里就是每块的比例activities = ['sleeping','eating','working','playing'] #指定标签cols = ['c','m','r','b'] #y颜色plt.pie(slices, labels=activities, colors=cols, #指定每一个区块的颜色 startangle=90, #开始角度，默认是0度，从x轴开始，90度从y轴开始 shadow= True, #阴影效果 explode=(0,0.1,0,0), #拉出第二个切片，如果全为0就不拉出，这里的数字是相对与圆心的距离 autopct='%1.1f%%') #显示百分比plt.title('Interesting Graph\nCheck it out') #设置标题plt.show() 图片展示 散点图12345678import numpy as npimport matplotlib.pyplot as pltx=np.random.rand(1000)y=np.random.rand(len(x))plt.scatter(x,y,color='r',alpha=0.3,label='example one',marker='o') #绘图plt.legend()#plt.axis([0,2,0,2]) #设置坐标的范围plt.show() 图片展示 直方图123456789import matplotlib.pyplot as pltimport numpy as npx=np.random.randint(1,1000,200)axis=plt.gca() #得到当前的绘图对象axis.hist(x,bins=35,facecolor='r',normed=True,histtype='bar',alpha=0.5)#bins表示直方图的个数，histtype表示直方图的样式，normed如果为True就将直方归一化，显示概率密度，默认是Falseaxis.set_xlabel("Values") #设置x的标签axis.set_ylabel("Frequency") axis.set_title("HIST")plt.show() 图片展示 作者说 本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持 版权信息所有者：chenjiabing如若转载请标明出处：chenjiabing666.github.io6]]></content>
