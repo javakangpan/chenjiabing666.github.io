@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-04-05T15:06:47.511Z</updated>
+  <updated>2017-04-05T15:11:05.835Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>java布局管理器</title>
+    <title>swing布局管理器</title>
     <link href="http://chenjiabing666.github.io/2017/04/05/java%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%99%A8/"/>
     <id>http://chenjiabing666.github.io/2017/04/05/java布局管理器/</id>
     <published>2017-04-05T15:06:08.000Z</published>
-    <updated>2017-04-05T15:06:47.511Z</updated>
+    <updated>2017-04-05T15:11:05.835Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Swing系列之布局管理器"><a href="#Swing系列之布局管理器" class="headerlink" title="Swing系列之布局管理器"></a>Swing系列之布局管理器</h1><h2 id="流布局-FlowLayout-默认的JApplet-JPanel-JScrollPane"><a href="#流布局-FlowLayout-默认的JApplet-JPanel-JScrollPane" class="headerlink" title="流布局(FlowLayout)默认的JApplet,JPanel,JScrollPane"></a>流布局(<code>FlowLayout</code>)默认的<code>JApplet</code>,<code>JPanel</code>,<code>JScrollPane</code></h2><blockquote>
 <p>流布局是相对比较简单的一种布局管理器，也是最常用的布局管理器。在流布局中放置控件时，将按照控件的添加顺序，依次将控件从左到右进行摆放，并且在一行的最后会进行自动换行放置 。在一行中，控件是默认<strong>居中</strong>放置的。</p>
