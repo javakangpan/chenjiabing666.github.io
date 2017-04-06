@@ -309,7 +309,7 @@
     <link href="http://chenjiabing666.github.io/2017/03/27/Swing-%E5%B9%B2%E8%B4%A7%E7%B3%BB%E5%88%97%E4%B9%8BJSlider/"/>
     <id>http://chenjiabing666.github.io/2017/03/27/Swing-干货系列之JSlider/</id>
     <published>2017-03-27T13:43:22.000Z</published>
-    <updated>2017-03-27T13:44:12.872Z</updated>
+    <updated>2017-04-06T09:35:41.717Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Swing干货系列之JSlider-滑块"><a href="#Swing干货系列之JSlider-滑块" class="headerlink" title="Swing干货系列之JSlider(滑块)"></a>Swing干货系列之JSlider(滑块)</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
 <p>一个让用户以图形方式在有界区间内通过移动滑块来选择值的组件。</p>
@@ -333,8 +333,8 @@
 <li><code>setMaximum(int maximum)</code> ：设置最大值</li>
 <li><code>setMinimum(int min)</code>:设置最小值</li>
 <li><code>setMinorTickSpacing(int n)</code> :设置次刻度，就是主刻度中间不用标记数值的刻度</li>
-<li>setMajorTickSpacing(int n):设置主刻度</li>
-<li>setPaintTicks(boolean b):确定是否在滑块下面显示刻度线，如果为false表示不显示</li>
+<li><code>setMajorTickSpacing(int n)</code>:设置主刻度</li>
+<li><code>setPaintTicks(boolean b)</code>:确定是否在滑块下面显示刻度线，如果为false表示不显示</li>
 <li><code>setPaintLabels(boolean b)</code>:确定是否在刻度线下绘制数值，默认不绘制<br><strong>以上只是列了几个常用的函数，详情见<a href="http://tool.oschina.net/apidocs/apidoc?api=jdk-zh" target="_blank" rel="external">官方文档</a></strong></li>
 </ol>
 </blockquote>
