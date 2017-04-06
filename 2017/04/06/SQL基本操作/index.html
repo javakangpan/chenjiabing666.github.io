@@ -13,27 +13,33 @@
 
     
     <meta name="description" content="SQL系列之基本操作新建表
-CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]……
+CREATE TABLE &amp;lt;NAME&amp;gt; 
+[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],
+[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]......
 实例
 
-12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex CHAR(2),Sage SMALL">
+12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL干货篇一">
 <meta property="og:url" content="http://chenjiabing666.github.io/2017/04/06/SQL基本操作/index.html">
 <meta property="og:site_name" content="觅">
 <meta property="og:description" content="SQL系列之基本操作新建表
-CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]……
+CREATE TABLE &amp;lt;NAME&amp;gt; 
+[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],
+[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]......
 实例
 
-12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex CHAR(2),Sage SMALL">
-<meta property="og:updated_time" content="2017-04-06T14:41:20.754Z">
+12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex">
+<meta property="og:updated_time" content="2017-04-06T14:45:39.945Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL干货篇一">
 <meta name="twitter:description" content="SQL系列之基本操作新建表
-CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]……
+CREATE TABLE &amp;lt;NAME&amp;gt; 
+[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],
+[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]......
 实例
 
-12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex CHAR(2),Sage SMALL">
+12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex">
 
     
     <link rel="alternative" href="/atom.xml" title="觅" type="application/atom+xml">
@@ -113,7 +119,9 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 		</div>
 		
 		<h1 id="SQL系列之基本操作"><a href="#SQL系列之基本操作" class="headerlink" title="SQL系列之基本操作"></a>SQL系列之基本操作</h1><h2 id="新建表"><a href="#新建表" class="headerlink" title="新建表"></a>新建表</h2><blockquote>
-<p><strong>CREATE TABLE <name><br>[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]],<br>[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]]……</name></strong></p>
+<p><strong><code>CREATE TABLE &lt;NAME&gt; 
+[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]],
+[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]]......</code></strong></p>
 <p><strong>实例</strong></p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student(Sno <span class="built_in">CHAR</span>(<span class="number">9</span>) PRIMARY <span class="keyword">KEY</span>,</div><div class="line">Sname <span class="built_in">CHAR</span>(<span class="number">20</span>) <span class="keyword">UNIQUE</span>,</div><div class="line">Ssex <span class="built_in">CHAR</span>(<span class="number">2</span>),</div><div class="line">Sage <span class="built_in">SMALLINT</span>,</div><div class="line">Sdept <span class="built_in">CHAR</span>(<span class="number">20</span>));</div></pre></td></tr></table></figure>
@@ -138,18 +146,18 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 <li><code>alter table studnet add grade smallint after Sname;</code> //这里将grade插入到表中Sname列的后面</li>
 </ul>
 </blockquote>
-<h3 id="删除列"><a href="#删除列" class="headerlink" title="删除列"></a>删除列</h3><p><strong>alter table 表名 drop 列名</strong></p>
+<h3 id="删除列"><a href="#删除列" class="headerlink" title="删除列"></a>删除列</h3><p><strong><code>alter table 表名 drop 列名</code></strong></p>
 <p><code>alter table student drop Sname</code>;   //输出Sname那一列</p>
-<h3 id="修改列"><a href="#修改列" class="headerlink" title="修改列"></a>修改列</h3><p><strong>alter table 表名 change 列名称 列新名称 新数据类型;</strong></p>
+<h3 id="修改列"><a href="#修改列" class="headerlink" title="修改列"></a>修改列</h3><p><strong><code>alter table 表名 change 列名称 列新名称 新数据类型;</code></strong></p>
 <p><strong>实例</strong></p>
 <ul>
 <li>alter table student change Sname name char(10) not null;    //修改列名Sname为name,并且还可以修改其中的数据类型，如果想要保持不变，就保持原型。</li>
 </ul>
-<h3 id="重命名表"><a href="#重命名表" class="headerlink" title="重命名表"></a>重命名表</h3><p><strong>alter table 表名 rename 新表名;</strong></p>
+<h3 id="重命名表"><a href="#重命名表" class="headerlink" title="重命名表"></a>重命名表</h3><p><strong><code>alter table 表名 rename 新表名;</code></strong></p>
 <p><strong>实例：</strong><br><code>alter table student rename STUDENT;</code>   //将表名改为STUDENT </p>
 </blockquote>
 <h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><blockquote>
-<p>INSERT INTO table_name(列名,列名，列名….)VALUES(DATA);   //这里的data一定要对应每一列的数据类型，当然如果要想要插入所有的数据，就不需要列出所有的列名了</p>
+<p><strong><code>INSERT INTO table_name(列名,列名，列名....)VALUES(DATA);</code></strong>   //这里的data一定要对应每一列的数据类型，当然如果要想要插入所有的数据，就不需要列出所有的列名了</p>
 <p><strong>例子:</strong></p>
 <blockquote>
 <ul>
@@ -159,7 +167,7 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 </blockquote>
 </blockquote>
 <h2 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h2><blockquote>
-<p><strong>update 表名称 set 列名称=新值 where 更新条件;</strong></p>
+<p><strong><code>update 表名称 set 列名称=新值 where 更新条件;</code></strong></p>
 <p><strong>实例：</strong></p>
 <blockquote>
 <ul>
@@ -168,7 +176,7 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 </blockquote>
 </blockquote>
 <h2 id="删除表中的数据"><a href="#删除表中的数据" class="headerlink" title="删除表中的数据"></a>删除表中的数据</h2><blockquote>
-<p><strong>delete from 表名称 where 删除条件;</strong></p>
+<p><strong><code>delete from 表名称 where 删除条件;</code></strong></p>
 <p><strong>实例：</strong></p>
 <blockquote>
 <ul>
