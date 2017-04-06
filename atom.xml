@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-04-06T11:42:07.672Z</updated>
+  <updated>2017-04-06T14:34:56.910Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,76 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL干货篇一</title>
+    <link href="http://chenjiabing666.github.io/2017/04/06/SQL%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
+    <id>http://chenjiabing666.github.io/2017/04/06/SQL基本操作/</id>
+    <published>2017-04-06T14:33:37.000Z</published>
+    <updated>2017-04-06T14:34:56.910Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="SQL系列之基本操作"><a href="#SQL系列之基本操作" class="headerlink" title="SQL系列之基本操作"></a>SQL系列之基本操作</h1><h2 id="新建表"><a href="#新建表" class="headerlink" title="新建表"></a>新建表</h2><blockquote>
+<p>CREATE TABLE <name><br>[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]],<br>[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]]……</name></p>
+<p><strong>实例</strong></p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student(Sno <span class="built_in">CHAR</span>(<span class="number">9</span>) PRIMARY <span class="keyword">KEY</span>,</div><div class="line">Sname <span class="built_in">CHAR</span>(<span class="number">20</span>) <span class="keyword">UNIQUE</span>,</div><div class="line">Ssex <span class="built_in">CHAR</span>(<span class="number">2</span>),</div><div class="line">Sage <span class="built_in">SMALLINT</span>,</div><div class="line">Sdept <span class="built_in">CHAR</span>(<span class="number">20</span>));</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>其中<code>student</code>是表名，<code>Sno</code>,<code>Sname</code>,<code>Ssex</code>,<code>Sage</code>,<code>Sdept</code>都是列名，后面的<code>CHAR</code>都是数据类型,这里的<code>PRIMARY KEY</code>是将<code>Sno</code>定义为主键,<code>UNIQUE</code>是将<code>Sname</code>定义为唯一的也就是后面插入数据的时候不能有重复的名字</strong><br><strong>拓展</strong>：主键的定义是在多个候选码中找出那个能够唯一识别一组数据的列名，如果需要两个列名才能识别一组数据，那么可以将这两个列名都定义为主键：<code>PRIMARY KEY(Sno,Sname)</code></p>
+</blockquote>
+<h2 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h2><blockquote>
+<ul>
+<li><code>DROP TABLE NAME;</code>只能删除没有被其他表引用，或者没有建立视图的，这里的引用可以是作为被参照表或者作为参照表</li>
+<li><code>DROP TABLE NAME CASCADE</code>;将全部删除，包括基本表和视图</li>
+</ul>
+</blockquote>
+<h2 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h2><blockquote>
+<h3 id="添加列"><a href="#添加列" class="headerlink" title="添加列"></a><strong>添加列</strong></h3><blockquote>
+<p><code>alter table 表名 add 列名 列数据类型 [after 插入位置]</code><br><strong>例子</strong><br><code>alter table student add grade smallint;</code> //将grade插入到student表中的末尾一列，这里不加after默认的是在末尾添加<br><code>alter table studnet add grade smallint after Sname;</code> //这里将grade插入到表中Sname列的后面</p>
+</blockquote>
+<h3 id="删除列"><a href="#删除列" class="headerlink" title="删除列"></a>删除列</h3><p>alter table 表名 drop 列名<br><code>alter table student drop Sname</code>;   //输出Sname那一列</p>
+<h3 id="修改列"><a href="#修改列" class="headerlink" title="修改列"></a>修改列</h3><p>alter table 表名 change 列名称 列新名称 新数据类型;<br>alter table student change Sname name char(10) not null;    //修改列名Sname为name,并且还可以修改其中的数据类型，如果想要保持不变，就保持原型。</p>
+<h3 id="重命名表"><a href="#重命名表" class="headerlink" title="重命名表"></a>重命名表</h3><p>alter table 表名 rename 新表名;<br><code>alter table student rename STUDENT;</code>   //将表名改为STUDENT </p>
+</blockquote>
+<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><blockquote>
+<p>INSERT INTO table_name(列名,列名，列名….)VALUES(DATA);   //这里的data一定要对应每一列的数据类型，当然如果要想要插入所有的数据，就不需要列出所有的列名了</p>
+<p><strong>例子:</strong></p>
+<blockquote>
+<ul>
+<li><code>INSERT INTO student(Sno,Sname,Sage,Ssex)values(&#39;201215124&#39;,&#39;jack&#39;,34,&#39;男&#39;);</code>   //这里是插入表中的一些列的数据，并且对应了数据类型</li>
+<li><code>INSERT INTO student values(&#39;201215124&#39;,&#39;男&#39;,&#39;jack&#39;,34,&#39;IS&#39;);</code>     //这里是按照表中的列名顺序插入数据的</li>
+</ul>
+</blockquote>
+</blockquote>
+<h2 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h2><blockquote>
+<p>update 表名称 set 列名称=新值 where 更新条件;<br><strong>实例：</strong></p>
+<blockquote>
+<p><code>update student set Sage=Sage+1 where Sno=&#39;12134&#39;;</code>          //将Sno为12134的那一列数据的年龄加一</p>
+</blockquote>
+</blockquote>
+<h2 id="删除表中的数据"><a href="#删除表中的数据" class="headerlink" title="删除表中的数据"></a>删除表中的数据</h2><blockquote>
+<p>delete from 表名称 where 删除条件;<br><strong>实例：</strong></p>
+<blockquote>
+<p>delete from student where Sno=’121314125’;                //删除Sno为121314125的那一行数据</p>
+<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
+<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;SQL系列之基本操作&quot;&gt;&lt;a href=&quot;#SQL系列之基本操作&quot; class=&quot;headerlink&quot; title=&quot;SQL系列之基本操作&quot;&gt;&lt;/a&gt;SQL系列之基本操作&lt;/h1&gt;&lt;h2 id=&quot;新建表&quot;&gt;&lt;a href=&quot;#新建表&quot; class=&quot;header
+    
+    </summary>
+    
+      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
+    
+    
+      <category term="SQL" scheme="http://chenjiabing666.github.io/tags/SQL/"/>
+    
+  </entry>
   
   <entry>
     <title>swing布局管理器</title>
