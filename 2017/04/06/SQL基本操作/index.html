@@ -13,33 +13,27 @@
 
     
     <meta name="description" content="SQL系列之基本操作新建表
-CREATE TABLE &amp;lt;NAME&amp;gt; 
-[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],
-[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]......
+CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]……
 实例
 
-12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex">
+12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex CHAR(2),Sage SMALL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL干货篇一">
 <meta property="og:url" content="http://chenjiabing666.github.io/2017/04/06/SQL基本操作/index.html">
 <meta property="og:site_name" content="觅">
 <meta property="og:description" content="SQL系列之基本操作新建表
-CREATE TABLE &amp;lt;NAME&amp;gt; 
-[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],
-[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]......
+CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]……
 实例
 
-12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex">
-<meta property="og:updated_time" content="2017-04-06T14:45:39.945Z">
+12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex CHAR(2),Sage SMALL">
+<meta property="og:updated_time" content="2017-04-06T14:47:15.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL干货篇一">
 <meta name="twitter:description" content="SQL系列之基本操作新建表
-CREATE TABLE &amp;lt;NAME&amp;gt; 
-[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],
-[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]......
+CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]……
 实例
 
-12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex">
+12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex CHAR(2),Sage SMALL">
 
     
     <link rel="alternative" href="/atom.xml" title="觅" type="application/atom+xml">
@@ -119,9 +113,7 @@ CREATE TABLE &amp;lt;NAME&amp;gt;
 		</div>
 		
 		<h1 id="SQL系列之基本操作"><a href="#SQL系列之基本操作" class="headerlink" title="SQL系列之基本操作"></a>SQL系列之基本操作</h1><h2 id="新建表"><a href="#新建表" class="headerlink" title="新建表"></a>新建表</h2><blockquote>
-<p><strong><code>CREATE TABLE &lt;NAME&gt; 
-[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]],
-[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]]......</code></strong></p>
+<p><strong>CREATE TABLE <name><br>[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]],<br>[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]]……</name></strong></p>
 <p><strong>实例</strong></p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student(Sno <span class="built_in">CHAR</span>(<span class="number">9</span>) PRIMARY <span class="keyword">KEY</span>,</div><div class="line">Sname <span class="built_in">CHAR</span>(<span class="number">20</span>) <span class="keyword">UNIQUE</span>,</div><div class="line">Ssex <span class="built_in">CHAR</span>(<span class="number">2</span>),</div><div class="line">Sage <span class="built_in">SMALLINT</span>,</div><div class="line">Sdept <span class="built_in">CHAR</span>(<span class="number">20</span>));</div></pre></td></tr></table></figure>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-04-06T14:45:39.945Z</updated>
+  <updated>2017-04-06T14:47:15.114Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,12 +20,10 @@
     <link href="http://chenjiabing666.github.io/2017/04/06/SQL%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
     <id>http://chenjiabing666.github.io/2017/04/06/SQL基本操作/</id>
     <published>2017-04-06T14:33:37.000Z</published>
-    <updated>2017-04-06T14:45:39.945Z</updated>
+    <updated>2017-04-06T14:47:15.114Z</updated>
     
     <content type="html"><![CDATA[<h1 id="SQL系列之基本操作"><a href="#SQL系列之基本操作" class="headerlink" title="SQL系列之基本操作"></a>SQL系列之基本操作</h1><h2 id="新建表"><a href="#新建表" class="headerlink" title="新建表"></a>新建表</h2><blockquote>
-<p><strong><code>CREATE TABLE &lt;NAME&gt; 
-[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]],
-[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]]......</code></strong></p>
+<p><strong>CREATE TABLE <name><br>[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]],<br>[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]]……</name></strong></p>
 <p><strong>实例</strong></p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student(Sno <span class="built_in">CHAR</span>(<span class="number">9</span>) PRIMARY <span class="keyword">KEY</span>,</div><div class="line">Sname <span class="built_in">CHAR</span>(<span class="number">20</span>) <span class="keyword">UNIQUE</span>,</div><div class="line">Ssex <span class="built_in">CHAR</span>(<span class="number">2</span>),</div><div class="line">Sage <span class="built_in">SMALLINT</span>,</div><div class="line">Sdept <span class="built_in">CHAR</span>(<span class="number">20</span>));</div></pre></td></tr></table></figure>
