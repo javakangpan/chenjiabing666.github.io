@@ -5,35 +5,41 @@
   <meta charset="UTF-8">
   
   
-    <title>scrapy的下载器中间件 | 觅</title>
+    <title>scrapy爬取豆瓣全站 | 觅</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="scrapy中的下载器中间件下载中间件
-下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。
+    <meta name="description" content="Scrapy爬取豆瓣读书全站分析网页
+首先打开豆瓣读书中的分类浏览，可以看到其中有很多的分类
+豆瓣应该是一个比较好爬的网站，所有的数据都不是ajax加载的，我们打开谷歌的F12或者是火狐的FireBug可以很轻松的找到每一个分类的链接
 
-编写下载器中间件
-1. process_request(request, spider)当每个request通过下载中间件时，该方法被调用。process_request() 必须返回其中之">
+这里我们使用scrapy中的一个linkextractors库,这个库的作用是会根据提供的限制，自动爬取和深入每一个页面并且提取需要的链接，如果想要找到每一个分类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="scrapy的下载器中间件">
-<meta property="og:url" content="http://chenjiabing666.github.io/2017/03/25/scrapy的下载器中间件/index.html">
+<meta property="og:title" content="scrapy爬取豆瓣全站">
+<meta property="og:url" content="http://chenjiabing666.github.io/2017/04/08/scrapy爬取豆瓣全站/index.html">
 <meta property="og:site_name" content="觅">
-<meta property="og:description" content="scrapy中的下载器中间件下载中间件
-下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。
+<meta property="og:description" content="Scrapy爬取豆瓣读书全站分析网页
+首先打开豆瓣读书中的分类浏览，可以看到其中有很多的分类
+豆瓣应该是一个比较好爬的网站，所有的数据都不是ajax加载的，我们打开谷歌的F12或者是火狐的FireBug可以很轻松的找到每一个分类的链接
 
-编写下载器中间件
-1. process_request(request, spider)当每个request通过下载中间件时，该方法被调用。process_request() 必须返回其中之">
-<meta property="og:updated_time" content="2017-03-25T07:08:40.498Z">
+这里我们使用scrapy中的一个linkextractors库,这个库的作用是会根据提供的限制，自动爬取和深入每一个页面并且提取需要的链接，如果想要找到每一个分类">
+<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/2.bmp">
+<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/NonName.bmp">
+<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/6.bmp">
+<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/4.bmp">
+<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/5.bmp">
+<meta property="og:updated_time" content="2017-04-08T06:25:26.837Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="scrapy的下载器中间件">
-<meta name="twitter:description" content="scrapy中的下载器中间件下载中间件
-下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。
+<meta name="twitter:title" content="scrapy爬取豆瓣全站">
+<meta name="twitter:description" content="Scrapy爬取豆瓣读书全站分析网页
+首先打开豆瓣读书中的分类浏览，可以看到其中有很多的分类
+豆瓣应该是一个比较好爬的网站，所有的数据都不是ajax加载的，我们打开谷歌的F12或者是火狐的FireBug可以很轻松的找到每一个分类的链接
 
-编写下载器中间件
-1. process_request(request, spider)当每个request通过下载中间件时，该方法被调用。process_request() 必须返回其中之">
+这里我们使用scrapy中的一个linkextractors库,这个库的作用是会根据提供的限制，自动爬取和深入每一个页面并且提取需要的链接，如果想要找到每一个分类">
+<meta name="twitter:image" content="http://ono60m7tl.bkt.clouddn.com/2.bmp">
 
     
     <link rel="alternative" href="/atom.xml" title="觅" type="application/atom+xml">
@@ -92,14 +98,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/25/scrapy的下载器中间件/" title="scrapy的下载器中间件" itemprop="url">scrapy的下载器中间件</a>
+      <a href="/2017/04/08/scrapy爬取豆瓣全站/" title="scrapy爬取豆瓣全站" itemprop="url">scrapy爬取豆瓣全站</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-25T07:04:08.000Z" itemprop="datePublished"> 发表于 2017-03-25</time>
+    <time datetime="2017-04-08T06:24:26.000Z" itemprop="datePublished"> 发表于 2017-04-08</time>
     
   </p>
 </header>
@@ -108,60 +114,27 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy中的下载器中间件"><span class="toc-number">1.</span> <span class="toc-text">scrapy中的下载器中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载中间件"><span class="toc-number">1.1.</span> <span class="toc-text">下载中间件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写下载器中间件"><span class="toc-number">1.2.</span> <span class="toc-text">编写下载器中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-process-request-request-spider"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. process_request(request, spider)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-process-response-request-response-spider"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. process_response(request, response, spider)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-process-exception-request-exception-spider"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.process_exception(request, exception, spider)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">1.3.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Scrapy爬取豆瓣读书全站"><span class="toc-number">1.</span> <span class="toc-text">Scrapy爬取豆瓣读书全站</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分析网页"><span class="toc-number">1.1.</span> <span class="toc-text">分析网页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档："><span class="toc-number">1.2.</span> <span class="toc-text">参考文档：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.3.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="scrapy中的下载器中间件"><a href="#scrapy中的下载器中间件" class="headerlink" title="scrapy中的下载器中间件"></a>scrapy中的下载器中间件</h1><h2 id="下载中间件"><a href="#下载中间件" class="headerlink" title="下载中间件"></a>下载中间件</h2><blockquote>
-<p>下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。</p>
+		<h1 id="Scrapy爬取豆瓣读书全站"><a href="#Scrapy爬取豆瓣读书全站" class="headerlink" title="Scrapy爬取豆瓣读书全站"></a>Scrapy爬取豆瓣读书全站</h1><h2 id="分析网页"><a href="#分析网页" class="headerlink" title="分析网页"></a>分析网页</h2><blockquote>
+<p>首先打开<a href="https://book.douban.com/tag/?icn=index-nav" target="_blank" rel="external">豆瓣读书中的分类浏览</a>，可以看到其中有很多的分类<img src="http://ono60m7tl.bkt.clouddn.com/2.bmp" alt="分类"></p>
+<p>豆瓣应该是一个比较好爬的网站，所有的数据都不是ajax加载的，我们打开谷歌的F12或者是火狐的FireBug可以很轻松的找到每一个分类的链接</p>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/NonName.bmp" alt="url所在地"></p>
+<p>这里我们使用scrapy中的一个<a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/link-extractors.html" target="_blank" rel="external">linkextractors库</a>,这个库的作用是会根据提供的限制，自动爬取和深入每一个页面并且提取需要的链接，如果想要找到每一个分类的url,只需<code>Rule(LinkExtractor(allow=&#39;/tag/&#39;,restrict_xpaths=&quot;//div[@class=&#39;article&#39;]&quot;),follow=True),</code>这里的allow是一个正则表达式，用来筛选分类url,restrict_xpaths时限制在哪个结构中筛选url,这里限制的是在<code>&lt;div class=&#39;article&#39;&gt;</code>这个盒模型中，follow表示是否深入，这里当然是要深入,这里就能得到每一个分类url了，自己可以在回调函数中测试下，输入所得的url,可以使用<code>respose.url</code></p>
+<p>得到所有的分类url，就可以继续深入到每一步作品所在的页面了，如下图!</p>
+<p><a href="http://ono60m7tl.bkt.clouddn.com/3.bmp" target="_blank" rel="external">作品网页</a><br>但是我们需要不止是这一页，我们要爬的时全站，因此这里必须实现翻页，我们可以看到页面底部清楚的写着下一页，我们通过解析页面同样可以得到url,如下图所示</p>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/6.bmp" alt="翻页url"><br>可以看到所有的url的规则，我们就可以用正则表达式限制，以获取我们的需要，我们可以写出翻页的代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;Rule(LinkExtractor(allow=<span class="string">"\?&gt;start=\d+\&amp;type="</span>,restrict_xpaths=<span class="string">"//div[@class='pa&gt;ginator']"</span>),follow=<span class="keyword">True</span>),</div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+<p>最后一步就是打开每一部书的网页得到所需的信息了，我们就可以通过这里通过解析网页还是可以很清楚的知道url,这里就不再详细的说怎么解析了，这里可以看到所有的url都在<code>li</code>标签中，如下图<img src="http://ono60m7tl.bkt.clouddn.com/4.bmp" alt="url"><br>我们打开<code>li</code>标签可以很清楚的看大url的规律，因此这里还是用到上面说的库解析深入，连同上面的代码如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;Rule(LinkExtractor(allow=<span class="string">'/tag/'</span>,restrict_xpaths=<span class="string">"/ &gt;/div[@class='article']"</span>),follow=<span class="keyword">True</span>),<span class="comment">#第一步</span></div><div class="line">&gt;Rule(LinkExtractor(allow=<span class="string">"\?&gt;start=\d+\&amp;type="</span>,restrict_xpaths=<span class="string">"//div[@class='pa&gt;ginator']"</span>),follow=<span class="keyword">True</span>),  <span class="comment">#第二步翻翻页</span></div><div class="line">&gt;Rule(LinkExtractor(allow=<span class="string">"/subject/\d+/$"</span>,restrict_&gt;xpaths=<span class="string">"//ul[@class='subject-&gt;list']"</span>),callback=<span class="string">'parse_item'</span>)<span class="comment">#得到所需网页的url</span></div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+<p>到了这里总算是大功告成了，下面就需要解析自己的所需要的信息了,这里附上网页<br><img src="http://ono60m7tl.bkt.clouddn.com/5.bmp" alt="图片"><br>下面就是写自己解析代码了，这里就不需要详细的说了，详细内容请看<a href="https://github.com/chenjiabing666/douban_book_spider" target="_blank" rel="external">源码</a>,值得注意的是爬取的网页速度不要太快，豆瓣会禁IP的，这里可以采用一些反爬虫措施,如请求头的更换，ip地址的更换，下一篇会详细解说。</p>
+</blockquote>
+<h2 id="参考文档："><a href="#参考文档：" class="headerlink" title="参考文档："></a>参考文档：</h2><blockquote>
+<p><strong><a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/index.html#" target="_blank" rel="external">scrapy中文文档</a></strong></p>
+<p><strong>最后附上本人的<a href="https://github.com/chenjiabing666" target="_blank" rel="external">github地址</a>,不要忘了给个star哦</strong></p>
 <blockquote>
-<h2 id="编写下载器中间件"><a href="#编写下载器中间件" class="headerlink" title="编写下载器中间件"></a>编写下载器中间件</h2><blockquote>
-<h3 id="1-process-request-request-spider"><a href="#1-process-request-request-spider" class="headerlink" title="1. process_request(request, spider)"></a>1. <code>process_request(request, spider)</code></h3><p>当每个<code>request</code>通过下载中间件时，该方法被调用。<br><code>process_request()</code> 必须返回其中之一: 返回 <code>None</code> 、返回一个 <code>Response</code> 对象、返回一个 <code>Request</code>对象或<code>raise IgnoreRequest</code> 。</p>
-<p>如果其返回 <code>None</code> ，Scrapy将继续处理该<code>request</code>，执行其他的中间件的相应方法，直到合适的下载器处理函数(<code>download handler</code>)被调用， 该<code>request</code>被执行(其<code>response</code>被下载)。</p>
-<p>如果其返回 <code>Response</code> 对象，Scrapy将不会调用 任何 其他的 <code>process_request()</code> 或 <code>process_exception()</code> 方法，或相应地下载函数； 其将返回该<code>response</code>。 已安装的中间件的 <code>process_response()</code> 方法则会在每个<code>response</code>返回时被调用。</p>
-<p>如果其返回 <code>Request</code> 对象，Scrapy则停止调用 <code>process_request</code>方法并重新调度返回的<code>request</code>。当新返回的<code>request</code>被执行后， 相应地中间件链将会根据下载的<code>response</code>被调用。</p>
-<p>如果其<code>raise</code>一个 <code>IgnoreRequest</code> 异常，则安装的下载中间件的 <code>process_exception()</code> 方法会被调用。如果没有任何一个方法处理该异常， 则<code>request</code>的<code>errback(Request.errback)</code>方法会被调用。如果没有代码处理抛出的异常， 则该异常被忽略且不记录(不同于其他异常那样)。</p>
-<p>参数:    </p>
-<blockquote>
-<ul>
-<li><code>request</code> (<code>Request</code> 对象) – 处理的<code>request</code></li>
-<li><code>spider</code> (<code>Spider</code> 对象) – 该<code>request</code>对应的<code>spider</code></li>
-</ul>
-</blockquote>
-<h3 id="2-process-response-request-response-spider"><a href="#2-process-response-request-response-spider" class="headerlink" title="2. process_response(request, response, spider)"></a>2. <code>process_response(request, response, spider)</code></h3><blockquote>
-<p><code>process_response()</code> 必须返回以下之一: 返回一个 <code>Response</code>对象、 返回一个<code>Request</code> 对象或<code>raise</code>一个 <code>IgnoreRequest</code> 异常。</p>
-<p>如果其返回一个 <code>Response</code> (可以与传入的<code>response</code>相同，也可以是全新的对象)， 该<code>response</code>会被在链中的其他中间件的 <code>process_response()</code> 方法处理。</p>
-<p>如果其返回一个 <code>Request</code> 对象，则中间件链停止， 返回的<code>request</code>会被重新调度下载。处理类似于 <code>process_request()</code> 返回<code>request</code>所做的那样。</p>
-<p>如果其抛出一个 <code>IgnoreRequest</code> 异常，则调用<code>request的errback(Request.errback)。</code> 如果没有代码处理抛出的异常，则该异常被忽略且不记录(不同于其他异常那样)。</p>
-<p>参数:    </p>
-<blockquote>
-<blockquote>
-<ul>
-<li><code>request</code> (<code>Request</code>对象) – <code>response</code>所对应的request</li>
-<li><code>response</code> (<code>Response</code> 对象) – 被处理的response</li>
-<li><code>spider</code> (<code>Spider</code> 对象) – <code>response</code>所对应的<code>spider</code></li>
-</ul>
-</blockquote>
-</blockquote>
-</blockquote>
-<h3 id="3-process-exception-request-exception-spider"><a href="#3-process-exception-request-exception-spider" class="headerlink" title="3.process_exception(request, exception, spider)"></a>3.<code>process_exception(request, exception, spider)</code></h3><blockquote>
-<p>当下载处理器(<code>download handler</code>)或 <code>process_request()</code> (下载中间件)抛出异常(包括 <code>IgnoreRequest</code> 异常)时， Scrapy调用 <code>process_exception()</code> 。</p>
-<p><code>process_exception()</code> 应该返回以下之一: 返回 <code>None</code> 、 一个 <code>Response</code> 对象、或者一个 <code>Request</code> 对象。</p>
-<p>如果其返回 <code>None</code> ，Scrapy将会继续处理该异常，接着调用已安装的其他中间件的 <code>process_exception()</code> 方法，直到所有中间件都被调用完毕，则调用默认的异常处理。</p>
-<p>如果其返回一个 <code>Response</code> 对象，则已安装的中间件链的 <code>process_response()</code> 方法被调用。Scrapy将不会调用任何其他中间件的 <code>process_exception()</code> 方法。</p>
-<p>如果其返回一个 <code>Request</code> 对象， 则返回的<code>request</code>将会被重新调用下载。这将停止中间件的 <code>process_exception()</code> 方法执行，就如返回一个<code>response</code>的那样。</p>
-<p>参数:    </p>
-<blockquote>
-<ul>
-<li><code>request</code> (是 <code>Request</code> 对象) – 产生异常的<code>request</code></li>
-<li><code>exception</code> (<code>Exception</code> 对象) – 抛出的异常</li>
-<li><code>spider</code> (<code>Spider</code> 对象) – <code>request</code>对应的<code>spider</code></li>
-</ul>
-</blockquote>
-</blockquote>
-</blockquote>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><blockquote>
-<p>总的来说下载器中间件就是起到处理request请求并且返回response的作用，一切从网页爬取的url发起的请求会组成一个请求队列，然后一个一个排队经过下载器中间件，之后下载器中间件会对request做出相应的处理，比如添加请求头，添加代理等等，然后通过process_response返回一个response，之后就是用得到的response做出相应的分析，当然这里的内容页可以不实现，但是如果要爬取大型的网站，会遇到被ban的可能就要在下载器中间件这里着手，设置一些相应的请求头，ip代理等等内容。<br><strong>以上纯属个人逐渐摸索总结出来的内容，如果有什么错误欢迎指正</strong></p>
+<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
+<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
 </blockquote>
 </blockquote>
 </blockquote>
@@ -188,7 +161,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2017/03/25/scrapy的下载器中间件/" data-title="scrapy的下载器中间件 | 觅" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2017/04/08/scrapy爬取豆瓣全站/" data-title="scrapy爬取豆瓣全站 | 觅" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -201,19 +174,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/03/26/scrapy设置代理ip/" title="scrapy设置代理ip">
-  <strong>上一篇：</strong><br/>
-  <span>
-  scrapy设置代理ip</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/03/25/scrapy初试/"  title="scrapy初试">
+<a href="/2017/04/06/SQL基本操作/"  title="SQL干货篇一">
  <strong>下一篇：</strong><br/> 
- <span>scrapy初试
+ <span>SQL干货篇一
 </span>
 </a>
 </div>
@@ -234,7 +199,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy中的下载器中间件"><span class="toc-number">1.</span> <span class="toc-text">scrapy中的下载器中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载中间件"><span class="toc-number">1.1.</span> <span class="toc-text">下载中间件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写下载器中间件"><span class="toc-number">1.2.</span> <span class="toc-text">编写下载器中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-process-request-request-spider"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. process_request(request, spider)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-process-response-request-response-spider"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. process_response(request, response, spider)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-process-exception-request-exception-spider"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.process_exception(request, exception, spider)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">1.3.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Scrapy爬取豆瓣读书全站"><span class="toc-number">1.</span> <span class="toc-text">Scrapy爬取豆瓣读书全站</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分析网页"><span class="toc-number">1.1.</span> <span class="toc-text">分析网页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档："><span class="toc-number">1.2.</span> <span class="toc-text">参考文档：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.3.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
  
   </div>
 
