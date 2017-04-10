@@ -28,7 +28,7 @@
 多表查询
 同时查询多个表12SELECT student.Sno,student.Sname,GradeFROM student,SC where Grade&amp;gt;=90;
 说明：这是在学生表student和成绩表SC中查询成绩大于9">
-<meta property="og:updated_time" content="2017-04-09T15:14:28.989Z">
+<meta property="og:updated_time" content="2017-04-09T15:21:08.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL干货篇二">
 <meta name="twitter:description" content="SQL干货篇之查询数据单表查询
@@ -202,8 +202,9 @@
 </ul>
 </blockquote>
 <h3 id="带有IN谓词的嵌套查询"><a href="#带有IN谓词的嵌套查询" class="headerlink" title="带有IN谓词的嵌套查询"></a>带有IN谓词的嵌套查询</h3><blockquote>
-<p><strong>实例：</strong><br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">SELECT Sno,Sname,Sdept from student where Sdept IN</div><div class="line">(SELECT Sdept From student Where Sname='刘晨');</div><div class="line">```  </div><div class="line">&gt;**查询与刘晨在同一个系的学生信息,当然本例中也可以用自身连接查询来完成，如下：**</div><div class="line">```sql</div><div class="line">select first.Sno,first.Sname,first.Sdept </div><div class="line">from student first,student second</div><div class="line">where first.Sdept=second.Sdept and second.Sname='刘晨';</div></pre></td></tr></table></figure></p>
+<p><strong>实例：</strong></p>
 </blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">SELECT Sno,Sname,Sdept from student where Sdept IN</div><div class="line">(SELECT Sdept From student Where Sname='刘晨');</div><div class="line">```  </div><div class="line"></div><div class="line">**查询与刘晨在同一个系的学生信息,当然本例中也可以用自身连接查询来完成，如下：**</div><div class="line"></div><div class="line">```sql</div><div class="line">select first.Sno,first.Sname,first.Sdept </div><div class="line">from student first,student second</div><div class="line">where first.Sdept=second.Sdept and second.Sname='刘晨';</div></pre></td></tr></table></figure>
 <h3 id="带有比较运算符的子查询"><a href="#带有比较运算符的子查询" class="headerlink" title="带有比较运算符的子查询"></a>带有比较运算符的子查询</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> Sno,Cno <span class="keyword">from</span> sc x <span class="keyword">where</span> Grade &gt;</div><div class="line">(<span class="keyword">select</span> <span class="keyword">AVG</span>(Grade) <span class="keyword">from</span> sc y <span class="keyword">where</span> x.Sno=y.Sno);</div></pre></td></tr></table></figure>
 <p><strong>查询了所有学生成绩超过选修课程平均成绩的课程号</strong></p>
 <h3 id="带有ANY或者ALL的谓词子查询"><a href="#带有ANY或者ALL的谓词子查询" class="headerlink" title="带有ANY或者ALL的谓词子查询"></a>带有ANY或者ALL的谓词子查询</h3><blockquote>

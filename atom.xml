@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-04-09T15:14:28.989Z</updated>
+  <updated>2017-04-09T15:21:08.577Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://chenjiabing666.github.io/2017/04/09/SQL%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%BA%8C/"/>
     <id>http://chenjiabing666.github.io/2017/04/09/SQL干货篇二/</id>
     <published>2017-04-09T15:13:13.000Z</published>
-    <updated>2017-04-09T15:14:28.989Z</updated>
+    <updated>2017-04-09T15:21:08.577Z</updated>
     
     <content type="html"><![CDATA[<h1 id="SQL干货篇之查询数据"><a href="#SQL干货篇之查询数据" class="headerlink" title="SQL干货篇之查询数据"></a>SQL干货篇之查询数据</h1><h2 id="单表查询"><a href="#单表查询" class="headerlink" title="单表查询"></a>单表查询</h2><blockquote>
 <p><strong>只在一个表中查询数据</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> student <span class="keyword">where</span> Sno=<span class="string">'13143'</span>;   //根据学号查询数据</div></pre></td></tr></table></figure></p>
@@ -109,8 +109,9 @@
 </ul>
 </blockquote>
 <h3 id="带有IN谓词的嵌套查询"><a href="#带有IN谓词的嵌套查询" class="headerlink" title="带有IN谓词的嵌套查询"></a>带有IN谓词的嵌套查询</h3><blockquote>
-<p><strong>实例：</strong><br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">SELECT Sno,Sname,Sdept from student where Sdept IN</div><div class="line">(SELECT Sdept From student Where Sname='刘晨');</div><div class="line">```  </div><div class="line">&gt;**查询与刘晨在同一个系的学生信息,当然本例中也可以用自身连接查询来完成，如下：**</div><div class="line">```sql</div><div class="line">select first.Sno,first.Sname,first.Sdept </div><div class="line">from student first,student second</div><div class="line">where first.Sdept=second.Sdept and second.Sname='刘晨';</div></pre></td></tr></table></figure></p>
+<p><strong>实例：</strong></p>
 </blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">SELECT Sno,Sname,Sdept from student where Sdept IN</div><div class="line">(SELECT Sdept From student Where Sname='刘晨');</div><div class="line">```  </div><div class="line"></div><div class="line">**查询与刘晨在同一个系的学生信息,当然本例中也可以用自身连接查询来完成，如下：**</div><div class="line"></div><div class="line">```sql</div><div class="line">select first.Sno,first.Sname,first.Sdept </div><div class="line">from student first,student second</div><div class="line">where first.Sdept=second.Sdept and second.Sname='刘晨';</div></pre></td></tr></table></figure>
 <h3 id="带有比较运算符的子查询"><a href="#带有比较运算符的子查询" class="headerlink" title="带有比较运算符的子查询"></a>带有比较运算符的子查询</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> Sno,Cno <span class="keyword">from</span> sc x <span class="keyword">where</span> Grade &gt;</div><div class="line">(<span class="keyword">select</span> <span class="keyword">AVG</span>(Grade) <span class="keyword">from</span> sc y <span class="keyword">where</span> x.Sno=y.Sno);</div></pre></td></tr></table></figure>
 <p><strong>查询了所有学生成绩超过选修课程平均成绩的课程号</strong></p>
 <h3 id="带有ANY或者ALL的谓词子查询"><a href="#带有ANY或者ALL的谓词子查询" class="headerlink" title="带有ANY或者ALL的谓词子查询"></a>带有ANY或者ALL的谓词子查询</h3><blockquote>
@@ -209,20 +210,6 @@
     
     
       <category term="java图形与文本处理" scheme="http://chenjiabing666.github.io/tags/java%E5%9B%BE%E5%BD%A2%E4%B8%8E%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://chenjiabing666.github.io/2017/04/09/java%E6%96%87%E5%AD%97%E7%89%B9%E6%95%88/"/>
-    <id>http://chenjiabing666.github.io/2017/04/09/java文字特效/</id>
-    <published>2017-04-09T08:13:54.817Z</published>
-    <updated>2017-04-09T08:13:54.817Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
     
   </entry>
   
