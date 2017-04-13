@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-04-09T15:21:08.577Z</updated>
+  <updated>2017-04-13T04:30:07.345Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,238 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux干货篇一</title>
+    <link href="http://chenjiabing666.github.io/2017/04/13/Linux%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B8%80/"/>
+    <id>http://chenjiabing666.github.io/2017/04/13/Linux干货篇一/</id>
+    <published>2017-04-13T04:29:34.000Z</published>
+    <updated>2017-04-13T04:30:07.345Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux干货篇一"><a href="#Linux干货篇一" class="headerlink" title="Linux干货篇一"></a>Linux干货篇一</h1><h2 id="虚拟机的安装-VMware"><a href="#虚拟机的安装-VMware" class="headerlink" title="虚拟机的安装(VMware)"></a>虚拟机的安装(VMware)</h2><blockquote>
+<ol>
+<li><strong>选择文件-&gt;新建虚拟机</strong></li>
+<li>选择<strong>自定义</strong></li>
+<li>设置安装来源，选择<strong>稍后安装</strong></li>
+<li>选择安装的操作系统，选择<strong>Linux</strong>,然后选择自己安装的对应版本即可</li>
+<li>设置虚拟机的安装路径，自己选择</li>
+<li>指定磁盘容量，选择默认20G,然后选择<strong>将虚拟磁盘存储为单个文件</strong></li>
+<li>设置cpu数量，内存大小，默认即可</li>
+<li>设置Linux安装镜像文件路径</li>
+<li>点击开启虚拟机即可根据对应的设置安装</li>
+</ol>
+</blockquote>
+<h2 id="目录文件"><a href="#目录文件" class="headerlink" title="目录文件"></a>目录文件</h2><blockquote>
+<ul>
+<li><code>/boot</code>:存放系统引导时所需要的文件，包括Linux内核以及引导程序(BootLoader)</li>
+<li><code>/bin</code>:存放可执行程序</li>
+<li><code>/etc</code>:存放系统配置文件</li>
+<li><code>/home</code>:普通用户的主目录所在位置</li>
+<li><code>/lib</code>:存放基本的共享文件和内核模块</li>
+<li><code>/mnt(mount)</code>:用户为需要挂载的文件系统提供挂载点</li>
+<li><code>/proc(process)</code>:存放与内核进程有关的信息</li>
+<li><code>/root</code>:根用户的主目录</li>
+<li><code>/tmp(temporary)</code>:存放临时性文件</li>
+<li><code>/usr(user)</code>:存放可共享的只读文件</li>
+<li><code>/var(variable)</code>:存放各类的数据文件</li>
+</ul>
+</blockquote>
+<h2 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h2><h4 id="重要选项"><a href="#重要选项" class="headerlink" title="重要选项"></a>重要选项</h4><blockquote>
+<ul>
+<li><code>-a(all)</code> 列出目录中的所有项，包括”.”开头的隐藏文件</li>
+<li><code>-l(list)</code> 以列表的方式显示文件</li>
+<li><code>-R(recursive)</code>  用于递归列出子目录中的内容，如果在选择的目录下还有子文件夹，那么可以列出子文件夹中的文件</li>
+<li><code>-d</code>仅仅列出目录本身的信息<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4></li>
+<li><code>ls -al /etc</code>     以列表的方式列出ect目录下的所有文件</li>
+</ul>
+</blockquote>
+<h2 id="pwd-显示当前路径"><a href="#pwd-显示当前路径" class="headerlink" title="pwd   显示当前路径"></a>pwd   显示当前路径</h2><h2 id="cd-切换目录"><a href="#cd-切换目录" class="headerlink" title="cd(切换目录)"></a>cd(切换目录)</h2><blockquote>
+<ul>
+<li><code>cd ..</code>   跳闸到当前目录的上一级</li>
+<li><code>cd ~</code>    跳转到当前用户的主目录</li>
+</ul>
+</blockquote>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><blockquote>
+<ul>
+<li><code>cd /tmp/testdir</code>   跳转到tmp文件下的testdir目录</li>
+</ul>
+</blockquote>
+<h2 id="stat"><a href="#stat" class="headerlink" title="stat"></a>stat</h2><blockquote>
+<p><strong>获取关于某文件的基本信息，包括创建的信息，大小，时间。。。。</strong></p>
+</blockquote>
+<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><blockquote>
+<ul>
+<li><code>stat test</code>    查看test文件的基本信息</li>
+</ul>
+</blockquote>
+<h2 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h2><blockquote>
+<p><strong>创建或者更新一个文件的访问和修改的时间，如果一个文件存在，那么更新这个文件的创建时间，但是文件的内容不会改变，如果文件不存在，那么就会在当前目录下创建一个文件</strong></p>
+</blockquote>
+<h4 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h4><blockquote>
+<ul>
+<li><code>touch /tmp/testdir/test</code>    在指定路径下创建一个test文件，如果存在那么会更新创建的时间，可以使用stat命令查看创建时间</li>
+</ul>
+</blockquote>
+<h2 id="mkdir-创建目录"><a href="#mkdir-创建目录" class="headerlink" title="mkdir(创建目录)"></a>mkdir(创建目录)</h2><blockquote>
+<ul>
+<li><code>mkdir /tmp/testdir/test_file</code>    在/tmp/testdir目录下创建一个test_file文件夹</li>
+</ul>
+</blockquote>
+<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><blockquote>
+<p><strong>移动或者重命名文件或目录</strong></p>
+</blockquote>
+<h4 id="重要选项-1"><a href="#重要选项-1" class="headerlink" title="重要选项"></a>重要选项</h4><blockquote>
+<ul>
+<li><code>b(backup)</code>:若存在同名文件，覆盖前先备份原来的文件</li>
+<li><code>f(force)</code>:强制覆盖同名的文件</li>
+</ul>
+</blockquote>
+<h4 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mkdir /tmp/testdir    //创建一个目录testdir</div><div class="line">touch test1 test2     //创建两个文件test1  test2</div><div class="line">mv -b test1 test2     //移动test1为test2,这里会先备份原来的test2为test2~</div><div class="line"></div><div class="line">mv -b test1 /tmp/testdir1/test    //移动文件到指定目录下</div></pre></td></tr></table></figure>
+<h2 id="cp-copy"><a href="#cp-copy" class="headerlink" title="cp(copy)"></a>cp(copy)</h2><blockquote>
+<p><strong>复制文件和目录</strong></p>
+</blockquote>
+<h4 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h4><blockquote>
+<ul>
+<li><code>-b :8ball</code>: 若存在同名文件，覆盖前先备份</li>
+<li><code>-f</code> :强制覆盖同名文件</li>
+<li><code>-r</code> : 以递归的方式复制文件，就是复制文件夹，如果不使用这个，那么文件夹就无法复制</li>
+</ul>
+</blockquote>
+<h4 id="实例-4"><a href="#实例-4" class="headerlink" title="实例"></a>实例</h4><blockquote>
+<ul>
+<li><code>cp /tmp/testdir tmp/testdir1</code>  复制文件夹，这里表示不能复制，因此要加上-r选项才能复制文件夹 -&gt;  </li>
+<li><code>cp -r /tmp/testdir /tmp/testdir1</code>   可以复制，复制到/tmp文件夹下命名为testdir1</li>
+<li><code>cp -b /tmp/testdir/test1  /tmp/testdir1/test</code>    将文件test1复制到testdir1文件夹下命名为test</li>
+</ul>
+</blockquote>
+<h2 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h2><blockquote>
+<p><strong>删除命令</strong></p>
+</blockquote>
+<h4 id="选项-1"><a href="#选项-1" class="headerlink" title="选项"></a>选项</h4><blockquote>
+<ul>
+<li><code>-f</code> 强制删除</li>
+<li><code>-r</code> 删除文件夹（递归删除）</li>
+</ul>
+</blockquote>
+<h4 id="实例-5"><a href="#实例-5" class="headerlink" title="实例"></a>实例</h4><blockquote>
+<ul>
+<li><code>rm -rf /tmp/testdir</code>   强制删除testdir目录</li>
+</ul>
+</blockquote>
+<h2 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a>rmdir</h2><blockquote>
+<p><strong>删除目录，但是要求目录必须是空的，这里实用性不大，一般用rm -r</strong></p>
+</blockquote>
+<h2 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h2><blockquote>
+<p><strong>查看文件内容</strong></p>
+</blockquote>
+<h4 id="重要选项-2"><a href="#重要选项-2" class="headerlink" title="重要选项"></a>重要选项</h4><blockquote>
+<ul>
+<li><code>-n</code> 显示行数</li>
+</ul>
+</blockquote>
+<h4 id="实例-6"><a href="#实例-6" class="headerlink" title="实例"></a>实例</h4><blockquote>
+<ul>
+<li><code>cat -n /tmp/testdir/test</code>    查看文件test的内容，显示行数</li>
+</ul>
+</blockquote>
+<h2 id="more"><a href="#more" class="headerlink" title="more"></a>more</h2><blockquote>
+<p><strong>分屏显示文件内容，首先显示一屏后如果还有内容，按回车键在显示下一行，按Space显示下一屏的内容</strong></p>
+</blockquote>
+<h4 id="实例-7"><a href="#实例-7" class="headerlink" title="实例"></a>实例</h4><blockquote>
+<ul>
+<li><code>more /tmp/testdir/test</code></li>
+</ul>
+</blockquote>
+<h2 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h2><blockquote>
+<p><strong>显示文本文件结尾的部分，默认显示最后10行</strong></p>
+</blockquote>
+<h4 id="重要选项-3"><a href="#重要选项-3" class="headerlink" title="重要选项"></a>重要选项</h4><blockquote>
+<ul>
+<li><code>-n</code> 指定显示的行数</li>
+</ul>
+</blockquote>
+<h2 id="head"><a href="#head" class="headerlink" title="head"></a>head</h2><blockquote>
+<p><strong>显示开头的内容，与<code>tail</code>类似</strong></p>
+</blockquote>
+<h2 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h2><blockquote>
+<p><strong>一次显示文本文件的行数，单词数，字节数</strong></p>
+</blockquote>
+<h4 id="重要选项-4"><a href="#重要选项-4" class="headerlink" title="重要选项"></a>重要选项</h4><blockquote>
+<ul>
+<li><code>-c</code>  显示文件字节数</li>
+<li><code>-l(line)</code>   显示文件行数</li>
+<li><code>-w(word)</code>   显示文件单词数</li>
+</ul>
+</blockquote>
+<h4 id="实例-8"><a href="#实例-8" class="headerlink" title="实例"></a>实例</h4><blockquote>
+<ul>
+<li><code>wc -cl  /tmp/testdir/test</code>   查看文件的字数和文件的行数</li>
+</ul>
+</blockquote>
+<h2 id="date"><a href="#date" class="headerlink" title="date"></a>date</h2><p><strong>查看或者修改系统命令</strong></p>
+<h4 id="实例-9"><a href="#实例-9" class="headerlink" title="实例"></a>实例</h4><blockquote>
+<ul>
+<li><code>date</code>  查看系统时间</li>
+<li><code>date 09012017</code>    修改系统时间为2017-09-01</li>
+</ul>
+</blockquote>
+<h2 id="who"><a href="#who" class="headerlink" title="who"></a>who</h2><p><strong>列出当前系统的登录用户</strong></p>
+<h4 id="重要选项-5"><a href="#重要选项-5" class="headerlink" title="重要选项"></a>重要选项</h4><blockquote>
+<ul>
+<li><code>-r</code> 显示系统当前的运行级</li>
+<li><code>-q</code> 显示当前所有登录的用户名称和在线人数</li>
+</ul>
+</blockquote>
+<h2 id="shutdown"><a href="#shutdown" class="headerlink" title="shutdown"></a>shutdown</h2><p><strong>关闭重启系统</strong></p>
+<h4 id="重要选项-6"><a href="#重要选项-6" class="headerlink" title="重要选项"></a>重要选项</h4><blockquote>
+<ul>
+<li><code>-r(reboot)</code>  重启系统</li>
+<li><code>-h(halt)</code>   关闭系统</li>
+<li><code>-P(poweroff)</code>  关闭系统同时关闭电源</li>
+</ul>
+</blockquote>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p><strong>上面选项均可给出数字参数指定多少分钟之后执行操作</strong></p>
+<h4 id="实例-10"><a href="#实例-10" class="headerlink" title="实例"></a>实例</h4><blockquote>
+<ul>
+<li><code>shutdown -h 10</code>    设置10分钟后关闭系统</li>
+</ul>
+</blockquote>
+<h2 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h2><p><strong>清楚当前终端的屏幕内容</strong></p>
+<h2 id="man"><a href="#man" class="headerlink" title="man"></a>man</h2><p><strong>显示命令的使用手册，按上下键移动光标，Q键退出</strong></p>
+<h4 id="实例-11"><a href="#实例-11" class="headerlink" title="实例"></a>实例</h4><blockquote>
+<ul>
+<li><code>man cat</code>     快速查询cat命令的手册</li>
+</ul>
+</blockquote>
+<h2 id="histroy"><a href="#histroy" class="headerlink" title="histroy"></a>histroy</h2><p><strong>查看shell命令的历史记录</strong></p>
+<h4 id="实例-12"><a href="#实例-12" class="headerlink" title="实例"></a>实例</h4><blockquote>
+<ul>
+<li><code>histroy 5</code>  显示最近的5条记录</li>
+</ul>
+</blockquote>
+<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><p><strong>调用<code>vim</code>编辑器，按<code>i</code>键插入，<code>w</code>键保存，<code>q</code>键退出，<code>wq</code>保存后退出</strong></p>
+<blockquote>
+<blockquote>
+<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
+<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Linux干货篇一&quot;&gt;&lt;a href=&quot;#Linux干货篇一&quot; class=&quot;headerlink&quot; title=&quot;Linux干货篇一&quot;&gt;&lt;/a&gt;Linux干货篇一&lt;/h1&gt;&lt;h2 id=&quot;虚拟机的安装-VMware&quot;&gt;&lt;a href=&quot;#虚拟机的安装-VMwar
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://chenjiabing666.github.io/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://chenjiabing666.github.io/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>SQL干货篇二</title>
