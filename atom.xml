@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-04-13T04:30:07.345Z</updated>
+  <updated>2017-04-16T06:14:02.211Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -16,11 +16,92 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>java连接mysql初探篇</title>
+    <link href="http://chenjiabing666.github.io/2017/04/16/java%E8%BF%9E%E6%8E%A5mysql%E5%88%9D%E6%8E%A2%E7%AF%87/"/>
+    <id>http://chenjiabing666.github.io/2017/04/16/java连接mysql初探篇/</id>
+    <published>2017-04-16T06:13:04.000Z</published>
+    <updated>2017-04-16T06:14:02.211Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="java连接mysql"><a href="#java连接mysql" class="headerlink" title="java连接mysql"></a>java连接mysql</h1><h2 id="基本连接"><a href="#基本连接" class="headerlink" title="基本连接"></a>基本连接</h2><blockquote>
+<ul>
+<li><p><strong>加载驱动:</strong> <code>Class.forName(com.mysql.jdbc.Driver)</code></p>
+</li>
+<li><p><strong>建立连接:<code>Connection conn=DriverManager.getConnection(url,user,password)</code></strong></p>
+<blockquote>
+<p>其中<code>url=&quot;jdbc:mysql://localhost:3306/java_demo&quot;</code>,这里的<code>java_demo</code>是自己创建的数据库的名字,<code>user</code>是<code>mysql</code>数据库的管理员，<code>password</code>是密码<br><strong>下面直接连接数据库，返回的是接口Connection对象</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.*;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    Connection conn;</div><div class="line">    String driver=<span class="string">"com.mysql.jdbc.Driver"</span>;   <span class="comment">//驱动名称</span></div><div class="line">    String url=<span class="string">"jdbc:mysql://localhost:3306/java_demo"</span>;   <span class="comment">//url</span></div><div class="line">    String user=<span class="string">"root"</span>;</div><div class="line">    String password=<span class="string">"root"</span>;    <span class="comment">//管理员和密码都是root</span></div><div class="line">    <span class="keyword">try</span>&#123;</div><div class="line">        Class.forName(driver);    <span class="comment">//加载驱动，但是会有ClassNotFoundException异常，因此要避免异常</span></div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            conn = Dri verManager.getConnection(url, user, password);   <span class="comment">//获得数据库连接</span></div><div class="line">            <span class="keyword">return</span> conn;    <span class="comment">//返回conn</span></div><div class="line">             </div><div class="line">        &#125;<span class="keyword">catch</span>(SQLException e)</div><div class="line">        &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    </div><div class="line">        </div><div class="line">    &#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;  <span class="comment">//如果出现异常就会返回null</span></div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><blockquote>
+<ul>
+<li><p>**首先根据所得的<code>Connection</code>对象创建<code>Statement</code>对象：<code>Statement statement = connection.createStatement()</code>;</p>
+</li>
+<li><p><strong>写查询语句：<code>String sql=&quot;select * from student;&quot;</code>这里是查询所有student中的数据，详细内容请看我的<a href="https://chenjiabing666.github.io/2017/04/09/SQL%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%BA%8C/">SQL干货篇二</a></strong></p>
+</li>
+<li><p><strong>创建ResultSet对象存储查询结果:<code>ResultSet res=statement.executeQuery(sql)</code>,详细的内容请看<a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/java/sql/ResultSet.html" target="_blank" rel="external">官方文档ResultSet详细用法</a></strong></p>
+</li>
+</ul>
+</blockquote>
+<p><strong>代码</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">String sql=<span class="string">"select * from student"</span>;</div><div class="line"><span class="keyword">if</span>(!conn.isClosed())</div><div class="line">&#123;</div><div class="line">    Statement statement=conn.createStatement();   <span class="comment">//这里的conn是上面连接数据库的返回的Connection对象</span></div><div class="line">    ResultSet res=statement.executeQuery(sql);   <span class="comment">//执行查询，注意这里只能是executeQuery，Statement还有一些执行mysql函数，但是都不适合查询，后面会详细说</span></div><div class="line">    <span class="keyword">while</span>(res.next())    <span class="comment">//如果res结果中还有元素，那么返回true，否则返回的是false,用来判断是否res中还有结果</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> id=res.getInt(<span class="string">"id"</span>);    <span class="comment">//得到id,这里的id是student表中的属性名 对应的时int BigInt smallint.....</span></div><div class="line">        String name=res.getString(<span class="string">"name"</span>);  <span class="comment">//得到姓名，对应的是mysql中的Char varChar类型</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>当然上面只是对于基本的查询数据，在一些项目中根本用不到，因为不太灵活，上面的方法只适合全局查询，并不适合在项目中根据条件查询，下面介绍预编译sql语句的接口<a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/java/sql/PreparedStatement.html" target="_blank" rel="external">PrepareStatement</a></strong></p>
+<ul>
+<li><p><strong>首先编写sql语句:<code>sql=&quot;select * from student where id=?;&quot;;</code>,这里的<code>?</code>表示一个占位，将条件在后面给出，但是这里一定要用<code>?</code></strong></p>
+</li>
+<li><p><strong>创建对象：<code>PrepareStatement pre=conn.preparestatement(sql);</code>这里传入参数<code>sql</code></strong></p>
+</li>
+<li><p><strong>设置<code>sql</code>中的条件语句，填补占位<code>?</code>的值:pre.setInt(1,1);这里的<code>SetInt</code>设置<code>id</code>值的为1，因为这的<code>id</code>是<code>int</code>类型的，第一个参数是表示<code>prepareindex</code>，就是表示第一个占位<code>?</code>,当然第二个就是2,其中还有<code>SetString(prepareindex String var)</code>,用来给定表中的<code>char</code>后者<code>varchar</code>类型的值</strong></p>
+</li>
+</ul>
+<p><strong>代码：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!connection.isClosed())</div><div class="line">                &#123;</div><div class="line">                    String sql=<span class="string">"select * from course where id=?,name=?"</span>;      </div><div class="line">                    PreparedStatement preparedStatement=connection.prepareStatement(sql);</div><div class="line">                    preparedStatement.setInt(<span class="number">1</span>,<span class="number">1</span>);    <span class="comment">//给定条件中的值</span></div><div class="line">                    prepareStatement.setString(<span class="number">2</span>,<span class="string">"jack"</span>);  <span class="comment">//为第二个？赋值</span></div><div class="line">                    ResultSet res=preparedStatement.executeQuery();    <span class="comment">//执行查询，返回的仍然是ResultSet对象</span></div><div class="line">                    <span class="keyword">while</span>(res.next())</div><div class="line">                    &#123;</div><div class="line">                        <span class="keyword">int</span> id=res.getInt(<span class="string">"id"</span>);</div><div class="line">                        String name=res.getString(<span class="string">"name"</span>);</div><div class="line">                        System.out.println(id+<span class="string">"--"</span>+name);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><blockquote>
+<p><strong>插入数据和上面的两种方法基本是一样的，不同的是<code>mysql</code>语句不同，还有的就是执行语句改成了<code>executeUpdate(sql)</code>，下面的代码值给出了预编译对象的方法，另外一种的方法使用范围并不是很大，只要把上面的查询改为<code>executeUpdate</code>即可</strong></p>
+<p><strong>代码：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">save</span><span class="params">(MemoBean memo)</span> </span>&#123;</div><div class="line">       String sql = <span class="string">"insert into student (username, title, content, momotype, memotime) values (?, ?, ?, ?, ?);"</span>;</div><div class="line">       Connection conn = getConnection();</div><div class="line">       PreparedStatement ps = <span class="keyword">null</span>;</div><div class="line">       <span class="keyword">try</span> &#123;</div><div class="line">           ps = conn.prepareStatement(sql);</div><div class="line">           ps.setString(<span class="number">1</span>, memo.getUsername());     <span class="comment">//设值value中的值 </span></div><div class="line">           ps.setString(<span class="number">2</span>, memo.getTitle());</div><div class="line">           ps.setString(<span class="number">3</span>, memo.getContent());</div><div class="line">           ps.setString(<span class="number">4</span>, memo.getMemotype());</div><div class="line">           ps.setString(<span class="number">5</span>, memo.getMemotime());</div><div class="line">           <span class="keyword">return</span> ps.executeUpdate();     <span class="comment">//这里使用的是excuteUpdate</span></div><div class="line">       &#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">           e.printStackTrace();</div><div class="line">       &#125; <span class="keyword">finally</span> &#123;</div><div class="line">           <span class="keyword">if</span> (ps != <span class="keyword">null</span>) &#123;</div><div class="line">               <span class="keyword">try</span> &#123;</div><div class="line">                   ps.close();   <span class="comment">//关闭预编译对象</span></div><div class="line">               &#125; <span class="keyword">catch</span> (SQLException e) &#123; </div><div class="line">                   e.printStackTrace();   </div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">if</span> (conn != <span class="keyword">null</span>) &#123;</div><div class="line">               <span class="keyword">try</span> &#123;</div><div class="line">                   conn.close();       <span class="comment">//关闭Connection对象</span></div><div class="line">               &#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">                   e.printStackTrace();</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">       &#125; </div><div class="line">       <span class="keyword">return</span> -<span class="number">1</span>;          <span class="comment">//没有插入成功返回-1</span></div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h2><blockquote>
+<p><strong>这里是同样的思路，和插入的基本是一样，只需要改变sql语句即可</strong></p>
+<p><strong>代码：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(MemoBean memo)</span> </span>&#123;</div><div class="line">        String sql = <span class="string">"update student set username=?,title=?,content=?,momotype=?,memotime=? where id=?;"</span>;<span class="comment">//查询语句</span></div><div class="line">        Connection connection = getConnection();</div><div class="line">        PreparedStatement ps = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            ps = connection.prepareStatement(sql);</div><div class="line">            ps.setString(<span class="number">1</span>, memo.getUsername());    <span class="comment">//设置条件语句中的值</span></div><div class="line">            ps.setString(<span class="number">2</span>, memo.getTitle()); </div><div class="line">            ps.setString(<span class="number">3</span>, memo.getContent());</div><div class="line">            ps.setString(<span class="number">4</span>, memo.getMemotype());</div><div class="line">            ps.setString(<span class="number">5</span>, memo.getMemotime());</div><div class="line">            ps.setInt(<span class="number">6</span>,memo.getId());</div><div class="line">            <span class="keyword">return</span> ps.executeUpdate();</div><div class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">if</span>(ps!=<span class="keyword">null</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    ps.close();</div><div class="line">                &#125;<span class="keyword">catch</span> (SQLException e)</div><div class="line">                &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(connection!=<span class="keyword">null</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    connection.close();</div><div class="line">                &#125;<span class="keyword">catch</span> (SQLException e)</div><div class="line">                &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="最后说"><a href="#最后说" class="headerlink" title="最后说"></a>最后说</h2><blockquote>
+<ul>
+<li><p><strong>上面的代码是从自己项目中截取的一部分代码，这个是比较适用于面向对象的，也是最常用的对于目前来看</strong></p>
+</li>
+<li><p><strong>上面只是给出了查询，插入，更新，因为这是最常用到的方法，其中还有创建表，删除表，当然还有一些他的，这里的创建表直接用<code>execute(sql)</code>即可执行，删除表也是用<code>execute(sql)</code>即可执行，当然如果要按照指定的条件删除，那么可以使用预编译对象执行</strong></p>
+</li>
+<li><p><strong>其中<code>executeUpdate(sql)</code>适用于<code>create</code>,<code>insert</code>,<code>update</code>,<code>delete</code>,但是<code>executeQuery(sql)</code>适用于<code>select</code>,具体见官方文档</strong></p>
+</li>
+</ul>
+<blockquote>
+<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
+<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;java连接mysql&quot;&gt;&lt;a href=&quot;#java连接mysql&quot; class=&quot;headerlink&quot; title=&quot;java连接mysql&quot;&gt;&lt;/a&gt;java连接mysql&lt;/h1&gt;&lt;h2 id=&quot;基本连接&quot;&gt;&lt;a href=&quot;#基本连接&quot; class=&quot;
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="java数据库操作" scheme="http://chenjiabing666.github.io/tags/java%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Linux干货篇一</title>
     <link href="http://chenjiabing666.github.io/2017/04/13/Linux%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B8%80/"/>
     <id>http://chenjiabing666.github.io/2017/04/13/Linux干货篇一/</id>
     <published>2017-04-13T04:29:34.000Z</published>
-    <updated>2017-04-13T04:30:07.345Z</updated>
+    <updated>2017-04-13T04:32:08.520Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Linux干货篇一"><a href="#Linux干货篇一" class="headerlink" title="Linux干货篇一"></a>Linux干货篇一</h1><h2 id="虚拟机的安装-VMware"><a href="#虚拟机的安装-VMware" class="headerlink" title="虚拟机的安装(VMware)"></a>虚拟机的安装(VMware)</h2><blockquote>
 <ol>
@@ -106,7 +187,7 @@
 </blockquote>
 <h4 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h4><blockquote>
 <ul>
-<li><code>-b :8ball</code>: 若存在同名文件，覆盖前先备份</li>
+<li><code>-b</code>: 若存在同名文件，覆盖前先备份</li>
 <li><code>-f</code> :强制覆盖同名文件</li>
 <li><code>-r</code> : 以递归的方式复制文件，就是复制文件夹，如果不使用这个，那么文件夹就无法复制</li>
 </ul>
