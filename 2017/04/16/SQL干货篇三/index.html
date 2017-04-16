@@ -5,35 +5,32 @@
   <meta charset="UTF-8">
   
   
-    <title>SQL干货篇一 | 觅</title>
+    <title>SQL干货篇三 | 觅</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="SQL系列之基本操作新建表
-CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]……
-实例
+    <meta name="description" content="SQL干货篇三创建视图
 
-12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex CHAR(2),Sage SMALL">
+create view &amp;lt;视图名&amp;gt;[(列名),(列名)...] as &amp;lt;子查询&amp;gt; [with check option]
+子查询可以是select语句或者包含order by子句，具体情况而定，视图名是一定要有的，列名可以省略，如果省略的话则是由子查询中的目标列的相关字段组成，当然也可以自己指定，with check option表示如果视图或者参">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL干货篇一">
-<meta property="og:url" content="http://chenjiabing666.github.io/2017/04/06/SQL基本操作/index.html">
+<meta property="og:title" content="SQL干货篇三">
+<meta property="og:url" content="http://chenjiabing666.github.io/2017/04/16/SQL干货篇三/index.html">
 <meta property="og:site_name" content="觅">
-<meta property="og:description" content="SQL系列之基本操作新建表
-CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]……
-实例
+<meta property="og:description" content="SQL干货篇三创建视图
 
-12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex CHAR(2),Sage SMALL">
-<meta property="og:updated_time" content="2017-04-06T14:47:15.114Z">
+create view &amp;lt;视图名&amp;gt;[(列名),(列名)...] as &amp;lt;子查询&amp;gt; [with check option]
+子查询可以是select语句或者包含order by子句，具体情况而定，视图名是一定要有的，列名可以省略，如果省略的话则是由子查询中的目标列的相关字段组成，当然也可以自己指定，with check option表示如果视图或者参">
+<meta property="og:updated_time" content="2017-04-16T14:37:37.593Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL干货篇一">
-<meta name="twitter:description" content="SQL系列之基本操作新建表
-CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]……
-实例
+<meta name="twitter:title" content="SQL干货篇三">
+<meta name="twitter:description" content="SQL干货篇三创建视图
 
-12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex CHAR(2),Sage SMALL">
+create view &amp;lt;视图名&amp;gt;[(列名),(列名)...] as &amp;lt;子查询&amp;gt; [with check option]
+子查询可以是select语句或者包含order by子句，具体情况而定，视图名是一定要有的，列名可以省略，如果省略的话则是由子查询中的目标列的相关字段组成，当然也可以自己指定，with check option表示如果视图或者参">
 
     
     <link rel="alternative" href="/atom.xml" title="觅" type="application/atom+xml">
@@ -92,14 +89,14 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/06/SQL基本操作/" title="SQL干货篇一" itemprop="url">SQL干货篇一</a>
+      <a href="/2017/04/16/SQL干货篇三/" title="SQL干货篇三" itemprop="url">SQL干货篇三</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2017-04-06T14:33:37.000Z" itemprop="datePublished"> 发表于 2017-04-06</time>
+    <time datetime="2017-04-16T14:36:33.000Z" itemprop="datePublished"> 发表于 2017-04-16</time>
     
   </p>
 </header>
@@ -108,71 +105,49 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL系列之基本操作"><span class="toc-number">1.</span> <span class="toc-text">SQL系列之基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#新建表"><span class="toc-number">1.1.</span> <span class="toc-text">新建表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表"><span class="toc-number">1.2.</span> <span class="toc-text">删除表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改表"><span class="toc-number">1.3.</span> <span class="toc-text">修改表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加列"><span class="toc-number">1.3.1.</span> <span class="toc-text">添加列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除列"><span class="toc-number">1.3.2.</span> <span class="toc-text">删除列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改列"><span class="toc-number">1.3.3.</span> <span class="toc-text">修改列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重命名表"><span class="toc-number">1.3.4.</span> <span class="toc-text">重命名表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入数据"><span class="toc-number">1.4.</span> <span class="toc-text">插入数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新数据"><span class="toc-number">1.5.</span> <span class="toc-text">更新数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表中的数据"><span class="toc-number">1.6.</span> <span class="toc-text">删除表中的数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.7.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL干货篇三"><span class="toc-number">1.</span> <span class="toc-text">SQL干货篇三</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建视图"><span class="toc-number">1.1.</span> <span class="toc-text">创建视图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除视图"><span class="toc-number">1.2.</span> <span class="toc-text">删除视图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-1"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查询视图"><span class="toc-number">1.3.</span> <span class="toc-text">查询视图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新视图"><span class="toc-number">1.4.</span> <span class="toc-text">更新视图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.5.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="SQL系列之基本操作"><a href="#SQL系列之基本操作" class="headerlink" title="SQL系列之基本操作"></a>SQL系列之基本操作</h1><h2 id="新建表"><a href="#新建表" class="headerlink" title="新建表"></a>新建表</h2><blockquote>
-<p><strong>CREATE TABLE <name><br>[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]],<br>[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]]……</name></strong></p>
-<p><strong>实例</strong></p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student(Sno <span class="built_in">CHAR</span>(<span class="number">9</span>) PRIMARY <span class="keyword">KEY</span>,</div><div class="line">Sname <span class="built_in">CHAR</span>(<span class="number">20</span>) <span class="keyword">UNIQUE</span>,</div><div class="line">Ssex <span class="built_in">CHAR</span>(<span class="number">2</span>),</div><div class="line">Sage <span class="built_in">SMALLINT</span>,</div><div class="line">Sdept <span class="built_in">CHAR</span>(<span class="number">20</span>));</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>其中<code>student</code>是表名，<code>Sno</code>,<code>Sname</code>,<code>Ssex</code>,<code>Sage</code>,<code>Sdept</code>都是列名，后面的<code>CHAR</code>都是数据类型,这里的<code>PRIMARY KEY</code>是将<code>Sno</code>定义为主键,<code>UNIQUE</code>是将<code>Sname</code>定义为唯一的也就是后面插入数据的时候不能有重复的名字</strong></p>
-<p><strong>拓展</strong>：主键的定义是在多个候选码中找出那个能够唯一识别一组数据的列名，如果需要两个列名才能识别一组数据，那么可以将这两个列名都定义为主键：<code>PRIMARY KEY(Sno,Sname)</code></p>
-</blockquote>
-<h2 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h2><blockquote>
+		<h1 id="SQL干货篇三"><a href="#SQL干货篇三" class="headerlink" title="SQL干货篇三"></a>SQL干货篇三</h1><h2 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h2><blockquote>
 <ul>
-<li><code>DROP TABLE NAME;</code>只能删除没有被其他表引用，或者没有建立视图的，这里的引用可以是作为被参照表或者作为参照表</li>
-<li><code>DROP TABLE NAME CASCADE</code>;将全部删除，包括基本表和视图</li>
+<li><strong><code>create view &lt;视图名&gt;[(列名),(列名)...] as &lt;子查询&gt; [with check option]</code></strong></li>
+<li><strong>子查询可以是select语句或者包含order by子句，具体情况而定，视图名是一定要有的，列名可以省略，如果省略的话则是由子查询中的目标列的相关字段组成，当然也可以自己指定，with check option表示如果视图或者参照表执行insert,update,delete时，那么视图或者参照表会随着变化，也就是两个绑定在一起的意思，当然也可以选择不用，那么视图的增删改就和参照表没有关系了</strong><h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><strong>建立在一个表上</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">view</span> IS_student <span class="keyword">as</span> <span class="keyword">select</span> Sno,Sname,Sage <span class="keyword">where</span> Sdept=<span class="string">'IS'</span></div><div class="line"><span class="keyword">with</span> <span class="keyword">check</span> <span class="keyword">option</span> ;   <span class="comment">/*将所有的IS系的学生学号建立一个视图IS_student,其中的列名是Sno,Sname,Sage*/</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>建立在多个表上</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">view</span> IS_Grade(Sno,Sname,Grade) </div><div class="line"><span class="keyword">as</span> <span class="keyword">select</span> student.Sno,Sname,Grade <span class="keyword">from</span> student,SC</div><div class="line"><span class="keyword">where</span> Sdept=<span class="string">'IS'</span> <span class="keyword">and</span> student.Sno=SC.Sno;           <span class="comment">/*建立在两个表上的视图，可以看出这里已经指出指定的列名，但是这个列名并不是固定的，可以根据具体的含义来指定*/</span></div></pre></td></tr></table></figure></p>
+<p><strong>定义一个带有表达式的视图</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">view</span> BT_S(Sno,Sname,Sbirth) </div><div class="line"><span class="keyword">as</span> <span class="keyword">select</span> Sno,Sname,<span class="number">2014</span>-Sage <span class="keyword">from</span> student    <span class="comment">/*这里的2014-Sage是用来计算出生日期的*/</span></div><div class="line"><span class="keyword">with</span> <span class="keyword">check</span> <span class="keyword">option</span>;</div></pre></td></tr></table></figure></p>
+<p><strong>聚集函数的视图</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">create view BT(Sno,Gavg) </div><div class="line">as select Sno,AVG(Grade) from SC Group by Sno;  /*这里的AVG(Grade)是用来计算平均成绩的，Group by是用来根据学号分组，这里就是求同一个人的多门学科的平均成绩*/</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="删除视图"><a href="#删除视图" class="headerlink" title="删除视图"></a>删除视图</h2><blockquote>
+<ul>
+<li><strong><code>Drop view &lt;视图名&gt;&lt;CASCADE]</code>,这里的CASCADE表示如果还导出了其他的视图，那么加上CASCADE就会全部删除</strong></li>
 </ul>
 </blockquote>
-<h2 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h2><blockquote>
-<h3 id="添加列"><a href="#添加列" class="headerlink" title="添加列"></a><strong>添加列</strong></h3><blockquote>
-<p><strong><code>alter table 表名 add 列名 列数据类型 [after 插入位置]</code></strong></p>
-</blockquote>
-<p><strong>例子</strong></p>
-<blockquote>
+<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><blockquote>
 <ul>
-<li><code>alter table student add grade smallint;</code> //将grade插入到student表中的末尾一列，这里不加after默认的是在末尾添加</li>
-<li><code>alter table studnet add grade smallint after Sname;</code> //这里将grade插入到表中Sname列的后面</li>
+<li><code>Drop view IS_Sdept;</code> 删除视图</li>
+<li><code>Drop view IS_Sdept CASCADE;</code>  删除视图和其导出视图</li>
 </ul>
 </blockquote>
-<h3 id="删除列"><a href="#删除列" class="headerlink" title="删除列"></a>删除列</h3><p><strong><code>alter table 表名 drop 列名</code></strong></p>
-<p><code>alter table student drop Sname</code>;   //输出Sname那一列</p>
-<h3 id="修改列"><a href="#修改列" class="headerlink" title="修改列"></a>修改列</h3><p><strong><code>alter table 表名 change 列名称 列新名称 新数据类型;</code></strong></p>
-<p><strong>实例</strong></p>
-<ul>
-<li>alter table student change Sname name char(10) not null;    //修改列名Sname为name,并且还可以修改其中的数据类型，如果想要保持不变，就保持原型。</li>
-</ul>
-<h3 id="重命名表"><a href="#重命名表" class="headerlink" title="重命名表"></a>重命名表</h3><p><strong><code>alter table 表名 rename 新表名;</code></strong></p>
-<p><strong>实例：</strong><br><code>alter table student rename STUDENT;</code>   //将表名改为STUDENT </p>
+<h2 id="查询视图"><a href="#查询视图" class="headerlink" title="查询视图"></a>查询视图</h2><blockquote>
+<p><strong>查询视图和查询表是一样的，请参照我前两章讲的<a href="https://chenjiabing666.github.io/2017/04/09/SQL%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%BA%8C/">SQL语法</a></strong></p>
 </blockquote>
-<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><blockquote>
-<p><strong><code>INSERT INTO table_name(列名,列名，列名....)VALUES(DATA);</code></strong>   //这里的data一定要对应每一列的数据类型，当然如果要想要插入所有的数据，就不需要列出所有的列名了</p>
-<p><strong>例子:</strong></p>
+<h2 id="更新视图"><a href="#更新视图" class="headerlink" title="更新视图"></a>更新视图</h2><blockquote>
+<p><strong>视图的更新包括insert,delete,update,这个和基本表的操作是一样的</strong></p>
+<p><strong>注意：</strong></p>
 <blockquote>
 <ul>
-<li><code>INSERT INTO student(Sno,Sname,Sage,Ssex)values(&#39;201215124&#39;,&#39;jack&#39;,34,&#39;男&#39;);</code>   //这里是插入表中的一些列的数据，并且对应了数据类型</li>
-<li><code>INSERT INTO student values(&#39;201215124&#39;,&#39;男&#39;,&#39;jack&#39;,34,&#39;IS&#39;);</code>     //这里是按照表中的列名顺序插入数据的</li>
+<li>并不是所有的视图都可以更新的,比如上面根据学生多科平均成绩建立的视图，这里如果将视图中的平均成绩更新了，那么参照表的数据就不能对应的更新了，这就会不允许更新，当然这是在添加了<code>with check option</code>语句的情况下</li>
+<li>如果添加了<code>with check option</code>语句,那么对视图的更新就会对应转换成对基本表的更新</li>
+<li>各个系统对视图的更新还有进一步的规定，比如DB2规定：<blockquote>
+<ul>
+<li>如果视图是由两个以上的基本表导出，那么就不可以更新</li>
+<li>如果视图来自字段或者表达式，那么就不允许对此视图执行<code>insert</code>,<code>update</code>,但是可以执行<code>delete</code></li>
+<li>如果定义中有order by子句，那么不可以更新视图</li>
 </ul>
 </blockquote>
-</blockquote>
-<h2 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h2><blockquote>
-<p><strong><code>update 表名称 set 列名称=新值 where 更新条件;</code></strong></p>
-<p><strong>实例：</strong></p>
-<blockquote>
-<ul>
-<li><code>update student set Sage=Sage+1 where Sno=&#39;12134&#39;;</code>          //将Sno为12134的那一列数据的年龄加一</li>
-</ul>
-</blockquote>
-</blockquote>
-<h2 id="删除表中的数据"><a href="#删除表中的数据" class="headerlink" title="删除表中的数据"></a>删除表中的数据</h2><blockquote>
-<p><strong><code>delete from 表名称 where 删除条件;</code></strong></p>
-<p><strong>实例：</strong></p>
-<blockquote>
-<ul>
-<li>delete from student where Sno=’121314125’;                //删除Sno为121314125的那一行数据</li>
+</li>
 </ul>
 <h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
 <p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
@@ -202,7 +177,7 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2017/04/06/SQL基本操作/" data-title="SQL干货篇一 | 觅" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2017/04/16/SQL干货篇三/" data-title="SQL干货篇三 | 觅" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -215,19 +190,11 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/04/08/scrapy爬取豆瓣全站/" title="scrapy爬取豆瓣全站">
-  <strong>上一篇：</strong><br/>
-  <span>
-  scrapy爬取豆瓣全站</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/04/05/java布局管理器/"  title="swing布局管理器">
+<a href="/2017/04/16/java连接mysql初探篇/"  title="java连接mysql初探篇">
  <strong>下一篇：</strong><br/> 
- <span>swing布局管理器
+ <span>java连接mysql初探篇
 </span>
 </a>
 </div>
@@ -248,7 +215,7 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL系列之基本操作"><span class="toc-number">1.</span> <span class="toc-text">SQL系列之基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#新建表"><span class="toc-number">1.1.</span> <span class="toc-text">新建表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表"><span class="toc-number">1.2.</span> <span class="toc-text">删除表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改表"><span class="toc-number">1.3.</span> <span class="toc-text">修改表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加列"><span class="toc-number">1.3.1.</span> <span class="toc-text">添加列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除列"><span class="toc-number">1.3.2.</span> <span class="toc-text">删除列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改列"><span class="toc-number">1.3.3.</span> <span class="toc-text">修改列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重命名表"><span class="toc-number">1.3.4.</span> <span class="toc-text">重命名表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入数据"><span class="toc-number">1.4.</span> <span class="toc-text">插入数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新数据"><span class="toc-number">1.5.</span> <span class="toc-text">更新数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表中的数据"><span class="toc-number">1.6.</span> <span class="toc-text">删除表中的数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.7.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL干货篇三"><span class="toc-number">1.</span> <span class="toc-text">SQL干货篇三</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建视图"><span class="toc-number">1.1.</span> <span class="toc-text">创建视图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除视图"><span class="toc-number">1.2.</span> <span class="toc-text">删除视图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-1"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查询视图"><span class="toc-number">1.3.</span> <span class="toc-text">查询视图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新视图"><span class="toc-number">1.4.</span> <span class="toc-text">更新视图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.5.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
  
   </div>
 

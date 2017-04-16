@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-04-16T06:14:02.211Z</updated>
+  <updated>2017-04-16T14:37:37.593Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,74 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL干货篇三</title>
+    <link href="http://chenjiabing666.github.io/2017/04/16/SQL%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B8%89/"/>
+    <id>http://chenjiabing666.github.io/2017/04/16/SQL干货篇三/</id>
+    <published>2017-04-16T14:36:33.000Z</published>
+    <updated>2017-04-16T14:37:37.593Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="SQL干货篇三"><a href="#SQL干货篇三" class="headerlink" title="SQL干货篇三"></a>SQL干货篇三</h1><h2 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h2><blockquote>
+<ul>
+<li><strong><code>create view &lt;视图名&gt;[(列名),(列名)...] as &lt;子查询&gt; [with check option]</code></strong></li>
+<li><strong>子查询可以是select语句或者包含order by子句，具体情况而定，视图名是一定要有的，列名可以省略，如果省略的话则是由子查询中的目标列的相关字段组成，当然也可以自己指定，with check option表示如果视图或者参照表执行insert,update,delete时，那么视图或者参照表会随着变化，也就是两个绑定在一起的意思，当然也可以选择不用，那么视图的增删改就和参照表没有关系了</strong><h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><strong>建立在一个表上</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">view</span> IS_student <span class="keyword">as</span> <span class="keyword">select</span> Sno,Sname,Sage <span class="keyword">where</span> Sdept=<span class="string">'IS'</span></div><div class="line"><span class="keyword">with</span> <span class="keyword">check</span> <span class="keyword">option</span> ;   <span class="comment">/*将所有的IS系的学生学号建立一个视图IS_student,其中的列名是Sno,Sname,Sage*/</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>建立在多个表上</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">view</span> IS_Grade(Sno,Sname,Grade) </div><div class="line"><span class="keyword">as</span> <span class="keyword">select</span> student.Sno,Sname,Grade <span class="keyword">from</span> student,SC</div><div class="line"><span class="keyword">where</span> Sdept=<span class="string">'IS'</span> <span class="keyword">and</span> student.Sno=SC.Sno;           <span class="comment">/*建立在两个表上的视图，可以看出这里已经指出指定的列名，但是这个列名并不是固定的，可以根据具体的含义来指定*/</span></div></pre></td></tr></table></figure></p>
+<p><strong>定义一个带有表达式的视图</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">view</span> BT_S(Sno,Sname,Sbirth) </div><div class="line"><span class="keyword">as</span> <span class="keyword">select</span> Sno,Sname,<span class="number">2014</span>-Sage <span class="keyword">from</span> student    <span class="comment">/*这里的2014-Sage是用来计算出生日期的*/</span></div><div class="line"><span class="keyword">with</span> <span class="keyword">check</span> <span class="keyword">option</span>;</div></pre></td></tr></table></figure></p>
+<p><strong>聚集函数的视图</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">create view BT(Sno,Gavg) </div><div class="line">as select Sno,AVG(Grade) from SC Group by Sno;  /*这里的AVG(Grade)是用来计算平均成绩的，Group by是用来根据学号分组，这里就是求同一个人的多门学科的平均成绩*/</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="删除视图"><a href="#删除视图" class="headerlink" title="删除视图"></a>删除视图</h2><blockquote>
+<ul>
+<li><strong><code>Drop view &lt;视图名&gt;&lt;CASCADE]</code>,这里的CASCADE表示如果还导出了其他的视图，那么加上CASCADE就会全部删除</strong></li>
+</ul>
+</blockquote>
+<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><blockquote>
+<ul>
+<li><code>Drop view IS_Sdept;</code> 删除视图</li>
+<li><code>Drop view IS_Sdept CASCADE;</code>  删除视图和其导出视图</li>
+</ul>
+</blockquote>
+<h2 id="查询视图"><a href="#查询视图" class="headerlink" title="查询视图"></a>查询视图</h2><blockquote>
+<p><strong>查询视图和查询表是一样的，请参照我前两章讲的<a href="https://chenjiabing666.github.io/2017/04/09/SQL%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%BA%8C/">SQL语法</a></strong></p>
+</blockquote>
+<h2 id="更新视图"><a href="#更新视图" class="headerlink" title="更新视图"></a>更新视图</h2><blockquote>
+<p><strong>视图的更新包括insert,delete,update,这个和基本表的操作是一样的</strong></p>
+<p><strong>注意：</strong></p>
+<blockquote>
+<ul>
+<li>并不是所有的视图都可以更新的,比如上面根据学生多科平均成绩建立的视图，这里如果将视图中的平均成绩更新了，那么参照表的数据就不能对应的更新了，这就会不允许更新，当然这是在添加了<code>with check option</code>语句的情况下</li>
+<li>如果添加了<code>with check option</code>语句,那么对视图的更新就会对应转换成对基本表的更新</li>
+<li>各个系统对视图的更新还有进一步的规定，比如DB2规定：<blockquote>
+<ul>
+<li>如果视图是由两个以上的基本表导出，那么就不可以更新</li>
+<li>如果视图来自字段或者表达式，那么就不允许对此视图执行<code>insert</code>,<code>update</code>,但是可以执行<code>delete</code></li>
+<li>如果定义中有order by子句，那么不可以更新视图</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
+<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;SQL干货篇三&quot;&gt;&lt;a href=&quot;#SQL干货篇三&quot; class=&quot;headerlink&quot; title=&quot;SQL干货篇三&quot;&gt;&lt;/a&gt;SQL干货篇三&lt;/h1&gt;&lt;h2 id=&quot;创建视图&quot;&gt;&lt;a href=&quot;#创建视图&quot; class=&quot;headerlink&quot; titl
+    
+    </summary>
+    
+      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
+    
+    
+      <category term="SQL" scheme="http://chenjiabing666.github.io/tags/SQL/"/>
+    
+  </entry>
   
   <entry>
     <title>java连接mysql初探篇</title>
@@ -1652,102 +1720,6 @@ while(file.ready())   //用来判断是否还有字符可读
     
     
       <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java图形与文本处理一</title>
-    <link href="http://chenjiabing666.github.io/2017/03/25/java%E5%9B%BE%E5%BD%A2%E4%B8%8E%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E4%B8%80/"/>
-    <id>http://chenjiabing666.github.io/2017/03/25/java图形与文本处理一/</id>
-    <published>2017-03-25T04:38:51.000Z</published>
-    <updated>2017-03-27T03:40:43.714Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="java绘制图形和文本-lt-一-gt"><a href="#java绘制图形和文本-lt-一-gt" class="headerlink" title="java绘制图形和文本&lt;一&gt;"></a>java绘制图形和文本&lt;一&gt;</h1><h2 id="开篇介绍-官方文档"><a href="#开篇介绍-官方文档" class="headerlink" title="开篇介绍(官方文档)"></a>开篇介绍(<a href="http://tool.oschina.net/apidocs/apidoc?api=jdk-zh" target="_blank" rel="external">官方文档</a>)</h2><blockquote>
-<p>java.awt<br>类 Graphics<br>java.lang.Object<br>继承者 java.awt.Graphics<br>直接已知子类：<br>DebugGraphics, Graphics2D<br>public abstract class Graphics extends Object</p>
-<p>Graphics 类是所有图形上下文的抽象基类，允许应用程序在组件（已经在各种设备上实现）以及闭屏图像上进行绘制。<br>Graphics 对象封装了 Java 支持的基本呈现操作所需的状态信息。此状态信息包括以下属性：<br>要在其上绘制的 Component 对象。<br>呈现和剪贴坐标的转换原点。<br>当前剪贴区。<br>当前颜色。<br>当前字体。<br>当前逻辑像素操作函数（XOR 或 Paint）。<br>当前 XOR 交替颜色（参见 setXORMode(java.awt.Color)）。<br>坐标是无限细分的，并且位于输出设备的像素之间。绘制图形轮廓的操作是通过使用像素大小的画笔遍历像素间无限细分路径的操作，画笔从路径上的锚点向下和向右绘制。填充图形的操作是填充图形内部区域无限细分路径操作。呈现水平文本的操作是呈现字符字形完全位于基线坐标之上的上升部分。<br>图形画笔从要遍历的路径向下和向右绘制。其含义如下：<br>如果绘制一个覆盖给定矩形的图形，那么该图形与填充被相同矩形所限定的图形相比，在右侧和底边多占用一行像素。<br>如果沿着与一行文本基线相同的 y 坐标绘制一条水平线，那么除了文字的所有下降部分外，该线完全画在文本的下面。<br>所有作为此 Graphics 对象方法的参数而出现的坐标，都是相对于调用该方法前的此 Graphics 对象转换原点的。<br>所有呈现操作仅修改当前剪贴区所限定区域内的像素，此剪贴区是由用户空间中的 Shape 指定的，并通过使用 Graphics 对象的程序来控制。此用户剪贴区 被转换到设备空间中，并与设备剪贴区 组合，后者是通过窗口可见性和设备范围定义的。用户剪贴区和设备剪贴区的组合定义复合剪贴区，复合剪贴区确定最终的剪贴区域。用户剪贴区不能由呈现系统修改，以反映得到的复合剪贴区。用户剪贴区只能通过 setClip 或 clipRect 方法更改。所有的绘制或写入都以当前的颜色、当前绘图模式和当前字体完成。</p>
-<blockquote>
-<h2 id="绘制直线"><a href="#绘制直线" class="headerlink" title="绘制直线"></a>绘制直线</h2><p>主要用到的内容是Graphics类中的<strong>drawLine</strong>函数<br>定义：</p>
-<blockquote>
-<p><code>public abstract void drawLine(int x1,int y1,int x2,int y2)</code><br><em>x1,y1是起始点的坐标，x2,y2是尾点的坐标</em></p>
-</blockquote>
-<h4 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h4><blockquote>
-<p><code>SetColor(Color color)</code></p>
-<blockquote>
-<p>setColor是Graphics类中的一个函数，主要是设置颜色作用，其中参数是Color类中的一个对象，用于定义自己的颜色，里面的变量的是RGB,定义的方法：<code>Color color=newe Color(R,G,B)</code></p>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4></blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">import</span> java.awt.Graphics;</div><div class="line">    <span class="keyword">import</span> javax.swing.JFrame;</div><div class="line">    <span class="keyword">import</span> javax.swing.JPanel;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DrawLineFrame</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</div><div class="line">    DrawLinePanel linePanel = <span class="keyword">new</span> DrawLinePanel(); </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; <span class="comment">// 主函数</span></div><div class="line">        DrawLineFrame frame = <span class="keyword">new</span> DrawLineFrame(); <span class="comment">// 创建一个继承JFrame的一个类对象</span></div><div class="line">        frame.setVisible(<span class="keyword">true</span>); <span class="comment">// 设置窗体可见，true为可见，false为不可见</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DrawLineFrame</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        setTitle(<span class="string">"绘制直线"</span>); <span class="comment">// 设置窗体的标题</span></div><div class="line">        setBounds(<span class="number">100</span>, <span class="number">100</span>, <span class="number">273</span>, <span class="number">167</span>); <span class="comment">// 设置窗体的显示位置和大小</span></div><div class="line">        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); <span class="comment">// 设置窗体的关闭方式，具体见官方文档</span></div><div class="line">        add(linePanel); <span class="comment">// 将继承Jpanel类的容器对象添加在窗体中</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">DrawLinePanel</span> <span class="keyword">extends</span> <span class="title">JPanel</span> </span>&#123;   <span class="comment">// 继承在JPanel类的一个内部类，用于定义直线</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span> </span>&#123;    <span class="comment">// 重写JCommponent类中的paint方法，用来绘制直线</span></div><div class="line">            Color color=<span class="keyword">new</span> Color(Color.Red);<span class="comment">//这里用的是Color提供的颜色，当然读者也可以自己定义RGB颜色</span></div><div class="line">            g.setColor(Color);<span class="comment">//将颜色作用于绘图上下文</span></div><div class="line">            g.drawLine(<span class="number">70</span>, <span class="number">50</span>, <span class="number">180</span>, <span class="number">50</span>);   <span class="comment">// 调用方法</span></div><div class="line">            g.drawLine(<span class="number">70</span>, <span class="number">80</span>, <span class="number">180</span>, <span class="number">80</span>);   <span class="comment">// 第二条直线</span></div><div class="line">            g.drawLine(<span class="number">110</span>, <span class="number">10</span>, <span class="number">140</span>, <span class="number">120</span>); <span class="comment">// 第三条</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<h2 id="绘制矩形"><a href="#绘制矩形" class="headerlink" title="绘制矩形"></a>绘制矩形</h2><p>主要用到的函数是：<code>public  abstract void drawRect(int x,int y,int width,int height)</code>这里的x,y是矩形左上角的坐标，width，height是矩形的长和宽</p>
-<blockquote>
-<h3 id="拓展-1"><a href="#拓展-1" class="headerlink" title="拓展"></a>拓展</h3><p><code>fillRect(int x,int y,int width,int height)</code>:绘制实心矩形</p>
-<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3></blockquote>
-</blockquote>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.awt.Graphics;</div><div class="line"><span class="keyword">import</span> javax.swing.JFrame;</div><div class="line"><span class="keyword">import</span> javax.swing.JPanel;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DrawRectangleFrame</span> <span class="keyword">extends</span> <span class="title">JFrame</span>     </span>&#123;</div><div class="line">DrawRectanglePanel rectPanel = <span class="keyword">new</span>     DrawRectanglePanel(); <span class="comment">// 创建面板类的实例</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; <span class="comment">// 主方法</span></div><div class="line">    DrawRectangleFrame frame = <span class="keyword">new</span> DrawRectangleFrame(); <span class="comment">// 创建窗体类的实例</span></div><div class="line">    frame.setVisible(<span class="keyword">true</span>); <span class="comment">// 显示窗体</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">DrawRectangleFrame</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>(); <span class="comment">// 调用超类的构造方法</span></div><div class="line">    setTitle(<span class="string">"绘制矩形"</span>); <span class="comment">// 窗体标题</span></div><div class="line">    setBounds(<span class="number">100</span>, <span class="number">100</span>, <span class="number">269</span>, <span class="number">184</span>); <span class="comment">// 窗体的显示位置和大小</span></div><div class="line">    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); <span class="comment">// 窗体关闭方式</span></div><div class="line">    add(rectPanel); <span class="comment">// 将面板类的实例添加到窗体容器中</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DrawRectanglePanel</span> <span class="keyword">extends</span> <span class="title">JPanel</span> </span>&#123; <span class="comment">// 创建内部面板类</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span> </span>&#123;       <span class="comment">// 重写paint()方法</span></div><div class="line">        g.drawRect(<span class="number">30</span>, <span class="number">40</span>, <span class="number">80</span>, <span class="number">60</span>);       <span class="comment">// 绘制空心矩形</span></div><div class="line">        g.fillRect(<span class="number">140</span>, <span class="number">40</span>, <span class="number">80</span>, <span class="number">60</span>);      <span class="comment">// 绘制实心矩形</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<h3 id="绘制椭圆"><a href="#绘制椭圆" class="headerlink" title="绘制椭圆"></a>绘制椭圆</h3><blockquote>
-<p>函数：<code>public abstract void drawOval(int x,int y,int width,int height)</code>,其中x,y是外切矩形的左上角的坐标，width，height是长宽</p>
-<blockquote>
-<h2 id="拓展-2"><a href="#拓展-2" class="headerlink" title="拓展"></a>拓展</h2><blockquote>
-<p>其中将令width=height，即是一个圆了，<code>fillOval(int x,int y,int width,int height)</code>用来绘制实心的椭圆</p>
-<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3></blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">    package com.zzk;</div><div class="line">    import java.awt.Graphics;</div><div class="line">    import javax.swing.JFrame;</div><div class="line">    import javax.swing.JPanel;</div><div class="line"></div><div class="line">    public class DrawEllipseFrame extends JFrame &#123;</div><div class="line">    DrawEllipsePanel ellipsePanel = new DrawEllipsePanel(); // 创建面板类的实例</div><div class="line">    </div><div class="line">    public static void main(String args[]) &#123; // 主方法</div><div class="line">        DrawEllipseFrame frame = new DrawEllipseFrame(); // 创建窗体类的实例</div><div class="line">        frame.setVisible(true); // 显示窗体</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public DrawEllipseFrame() &#123;</div><div class="line">        super(); // 调用超类的构造方法</div><div class="line">        setTitle("绘制椭圆"); // 窗体标题</div><div class="line">        setBounds(100, 100, 269, 222); // 窗体的显示位置和大小</div><div class="line">        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 窗体关闭方式</div><div class="line">        add(ellipsePanel); // 将面板类的实例添加到窗体容器中</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    class DrawEllipsePanel extends JPanel &#123; // 创建内部面板类</div><div class="line">        public void paint(Graphics g) &#123;     // 重写paint()方法</div><div class="line">            g.drawOval(30, 20, 80, 50);     // 绘制空心椭圆</div><div class="line">            g.drawOval(150, 10, 50, 80);    // 绘制空心椭圆</div><div class="line">            g.fillOval(40, 90, 50, 80);     // 绘制实心椭圆</div><div class="line">            g.fillOval(140, 110, 80, 50);   // 绘制实心椭圆</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">```    </div><div class="line"></div><div class="line">&gt;&gt;## 绘制圆弧</div><div class="line">&gt;&gt;&gt;主要用到的函数`public astract void drawArc(int x,int y,int width,int height,int startAngle,int arcAngle)`，其中x,y是要绘制圆弧的左上角的坐标，width，height是要绘制的长宽，startAngle是开始角度，arcAngle是相对于开始角度而言的，弧跨越的角度，</div><div class="line">&gt;&gt;&gt;&gt;### 拓展:</div><div class="line">&gt;&gt;&gt;&gt;&gt;fillArc(int x,int y,int width,int height,int startAngle,int arcAngle)用来绘制实心圆弧</div><div class="line">&gt;&gt;&gt;&gt;&gt;当然你也可以用这个来绘制扇形，用drawLine方法将圆弧的两端连起来就可以了，不过这个对坐标的精确度就要求很高了，暂时不想费那个脑筋来搞了</div><div class="line">&gt;&gt;&gt;&gt;### 代码</div><div class="line"></div><div class="line">```java</div><div class="line"></div><div class="line">    package com.zzk;</div><div class="line">    import java.awt.Graphics;</div><div class="line">    import javax.swing.JFrame;</div><div class="line">    import javax.swing.JPanel;</div><div class="line">    public class DrawArcFrame extends JFrame &#123;</div><div class="line">    DrawArcPanel arcPanel = new DrawArcPanel(); // 创建面板类的实例</div><div class="line">    public static void main(String args[]) &#123; // 主方法</div><div class="line">        DrawArcFrame frame = new DrawArcFrame(); // 创建窗体类的实例</div><div class="line">        frame.setVisible(true); // 显示窗体</div><div class="line">    &#125;</div><div class="line">    public DrawArcFrame() &#123;</div><div class="line">        super(); // 调用超类的构造方法</div><div class="line">        setTitle("绘制圆弧"); // 窗体标题</div><div class="line">        setBounds(100, 100, 269, 184); // 窗体的显示位置和大小</div><div class="line">        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 窗体关闭方式</div><div class="line">        add(arcPanel); // 将面板类的实例添加到窗体容器中</div><div class="line">    &#125;</div><div class="line">    class DrawArcPanel extends JPanel &#123; // 创建内部面板类</div><div class="line">        public void paint(Graphics g) &#123; // 重写paint()方法</div><div class="line">            g.drawArc(20, 20, 80, 80, 0, 120);    // 绘制圆弧</div><div class="line">            g.drawArc(20, 40, 80, 80, 0, -120);   // 绘制圆弧</div><div class="line">            g.drawArc(150, 20, 80, 80, 180, -120);// 绘制圆弧</div><div class="line">            g.drawArc(150, 40, 80, 80, 180, 120); // 绘制圆弧</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<h2 id="绘制多边形"><a href="#绘制多边形" class="headerlink" title="绘制多边形"></a>绘制多边形</h2><blockquote>
-<p>主要用到的函数是：<code>public abstract void drawPolygon(int[] xpoints,int[] ypoints,int npoints)</code>，其中xpoints：要绘制多边形的x坐标组，ypoints是要绘制多边形的y坐标组，npoints是多边形的n条边</p>
-<h3 id="拓展-3"><a href="#拓展-3" class="headerlink" title="拓展"></a>拓展</h3><blockquote>
-<p><code>fillPolygon(...)</code>是绘制实心多边形的函数</p>
-<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3></blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.zzk;</div><div class="line"><span class="keyword">import</span> java.awt.Graphics;</div><div class="line"><span class="keyword">import</span> javax.swing.JFrame;</div><div class="line"><span class="keyword">import</span> javax.swing.JPanel;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DrawSectorFrame</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</div><div class="line">DrawSectorPanel sectorPanel = <span class="keyword">new</span> DrawSectorPanel(); <span class="comment">// 创建面板类的实例</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; <span class="comment">// 主方法</span></div><div class="line">    DrawSectorFrame frame = <span class="keyword">new</span> DrawSectorFrame(); <span class="comment">// 创建窗体类的实例</span></div><div class="line">    frame.setVisible(<span class="keyword">true</span>); <span class="comment">// 显示窗体</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">DrawSectorFrame</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>(); <span class="comment">// 调用超类的构造方法</span></div><div class="line">    setTitle(<span class="string">"绘制填充扇形"</span>); <span class="comment">// 窗体标题</span></div><div class="line">    setBounds(<span class="number">100</span>, <span class="number">100</span>, <span class="number">278</span>, <span class="number">184</span>); <span class="comment">// 窗体的显示位置和大小</span></div><div class="line">    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); <span class="comment">// 窗体关闭方式</span></div><div class="line">    add(sectorPanel); <span class="comment">// 将面板类的实例添加到窗体容器中</span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DrawSectorPanel</span> <span class="keyword">extends</span> <span class="title">JPanel</span> </span>&#123; <span class="comment">// 创建内部面板类</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span> </span>&#123; <span class="comment">// 重写paint()方法</span></div><div class="line">        g.fillArc(<span class="number">40</span>, <span class="number">20</span>, <span class="number">80</span>, <span class="number">80</span>, <span class="number">0</span>, <span class="number">150</span>);    <span class="comment">// 绘制填充扇形</span></div><div class="line">        g.fillArc(<span class="number">140</span>, <span class="number">20</span>, <span class="number">80</span>, <span class="number">80</span>, <span class="number">180</span>, -<span class="number">150</span>);<span class="comment">// 绘制填充扇形</span></div><div class="line">        g.fillArc(<span class="number">40</span>, <span class="number">40</span>, <span class="number">80</span>, <span class="number">80</span>, <span class="number">0</span>, -<span class="number">110</span>);   <span class="comment">// 绘制填充扇形</span></div><div class="line">        g.fillArc(<span class="number">140</span>, <span class="number">40</span>, <span class="number">80</span>, <span class="number">80</span>, <span class="number">180</span>, <span class="number">110</span>); <span class="comment">// 绘制填充扇形</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<h2 id="绘制文本"><a href="#绘制文本" class="headerlink" title="绘制文本"></a>绘制文本</h2><blockquote>
-<p>主要用到的函数是：<code>public abstract void drawString(String value,int x,int y)</code>,其中value是要绘制的文本，x,y是第一个字的坐标</p>
-<h3 id="拓展-4"><a href="#拓展-4" class="headerlink" title="拓展"></a>拓展</h3><blockquote>
-<p>SetFont(Font font):这个函数是用来设置文本的字体大小，颜色的，其中参数font是Font类中的</p>
-<h3 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h3></blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.zzk;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.awt.Font;</div><div class="line"><span class="keyword">import</span> java.awt.Graphics;</div><div class="line"><span class="keyword">import</span> javax.swing.JFrame;</div><div class="line"><span class="keyword">import</span> javax.swing.JPanel;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TextFontFrame</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</div><div class="line">ChangeTextFontPanel changeTextFontPanel = <span class="keyword">new</span> ChangeTextFontPanel(); <span class="comment">// 创建面板类的实例</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; <span class="comment">// 主方法</span></div><div class="line">    TextFontFrame frame = <span class="keyword">new</span> TextFontFrame(); <span class="comment">// 创建窗体类的实例</span></div><div class="line">    frame.setVisible(<span class="keyword">true</span>); <span class="comment">// 显示窗体</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">TextFontFrame</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>(); <span class="comment">// 调用超类的构造方法</span></div><div class="line">    setTitle(<span class="string">"设置文本的字体"</span>); <span class="comment">// 窗体标题</span></div><div class="line">    setBounds(<span class="number">100</span>, <span class="number">100</span>, <span class="number">333</span>, <span class="number">199</span>); <span class="comment">// 窗体的显示位置和大小</span></div><div class="line">    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); <span class="comment">// 窗体关闭方式</span></div><div class="line">    add(changeTextFontPanel); <span class="comment">// 将面板类的实例添加到窗体容器中</span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ChangeTextFontPanel</span> <span class="keyword">extends</span> <span class="title">JPanel</span> </span>&#123; <span class="comment">// 创建内部面板类</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">(Graphics g)</span> </span>&#123; <span class="comment">// 重写paint()方法</span></div><div class="line">        String value = <span class="string">"明日编程词典社区"</span>;</div><div class="line">        <span class="keyword">int</span> x = <span class="number">40</span>; <span class="comment">// 文本位置的横坐标</span></div><div class="line">        <span class="keyword">int</span> y = <span class="number">50</span>; <span class="comment">// 文本位置的纵坐标</span></div><div class="line">        Font font = <span class="keyword">new</span> Font(<span class="string">"华文行楷"</span>, Font.BOLD + Font.ITALIC, <span class="number">26</span>); <span class="comment">// 创建字体对象</span></div><div class="line">        g.setFont(font); <span class="comment">// 设置字体</span></div><div class="line">        g.drawString(value, x, y); <span class="comment">// 绘制文本</span></div><div class="line">        value = <span class="string">"http://community.mrbccd.com"</span>;</div><div class="line">        x = <span class="number">10</span>; <span class="comment">// 文本位置的横坐标</span></div><div class="line">        y = <span class="number">100</span>; <span class="comment">// 文本位置的纵坐标</span></div><div class="line">        font = <span class="keyword">new</span> Font(<span class="string">"宋体"</span>, Font.BOLD, <span class="number">20</span>); <span class="comment">// 创建字体对象</span></div><div class="line">        g.setFont(font); <span class="comment">// 设置字体</span></div><div class="line">        g.drawString(value, x, y); <span class="comment">// 绘制文本</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><blockquote>
-<p>字体样式包括Font.BLOD(粗体)，Font.ITALIC(斜体)，Font.PLAIN(普通字体)，其中如果要设置两种样式，可以用”+”连接，如：<code>Font.BLOD+Font.ITALIC</code>，这样就会同时设置了斜体和粗体样式</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><strong>以上是本人的学习成果，通过不断的学习和探索，发现网上没有什么系统的学习java图形处理的文章，就下定决心准备好好写，于是前几天就花了一晚上的时间搭建了博客，以前都是在CSDN上写的，发现在那上面写，没有逼格，为了提高逼格，自己撸了一个博客，让我来自由发挥，另外喜欢编程的朋友可以加我的联系方式，我们可以一起探讨，在下面留言也是可以的哦,联系方式可以在我的<em>关于我</em>可以找到</strong></p>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;java绘制图形和文本-lt-一-gt&quot;&gt;&lt;a href=&quot;#java绘制图形和文本-lt-一-gt&quot; class=&quot;headerlink&quot; title=&quot;java绘制图形和文本&amp;lt;一&amp;gt;&quot;&gt;&lt;/a&gt;java绘制图形和文本&amp;lt;一&amp;gt;&lt;/h1&gt;&lt;h2
-    
-    </summary>
-    
-      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="java图形与文本处理" scheme="http://chenjiabing666.github.io/tags/java%E5%9B%BE%E5%BD%A2%E4%B8%8E%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
