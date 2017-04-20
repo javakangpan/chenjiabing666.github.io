@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-04-16T14:37:37.593Z</updated>
+  <updated>2017-04-20T06:55:40.717Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,199 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JQuery干货篇之选择元素</title>
+    <link href="http://chenjiabing666.github.io/2017/04/20/JQuery%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E9%80%89%E6%8B%A9%E5%85%83%E7%B4%A0/"/>
+    <id>http://chenjiabing666.github.io/2017/04/20/JQuery干货篇之选择元素/</id>
+    <published>2017-04-20T06:55:07.000Z</published>
+    <updated>2017-04-20T06:55:40.717Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="JQuery-干货篇之选择元素"><a href="#JQuery-干货篇之选择元素" class="headerlink" title="JQuery 干货篇之选择元素"></a>JQuery 干货篇之选择元素</h1><h2 id="实验的HTML-CSS的代码"><a href="#实验的HTML-CSS的代码" class="headerlink" title="实验的HTML+CSS的代码"></a>实验的HTML+CSS的代码</h2><blockquote>
+<p><strong>html</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"jquery-3.2.1.min.js"</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"main.css"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"main.js"</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Jacqui's Flower Shop<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"oblock"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"dtable"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"row1"</span> <span class="attr">class</span>=<span class="string">"drow"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"dcell"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"astor.png"</span>/&gt;</span><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"astor"</span>&gt;</span>Astor:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"astor"</span> <span class="attr">value</span>=<span class="string">"0"</span> <span class="attr">required</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"dcell"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"daffodil.png"</span>/&gt;</span><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"daffodil"</span>&gt;</span>Daffodil:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"daffodil"</span> <span class="attr">value</span>=<span class="string">"0"</span> <span class="attr">required</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"dcell"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"rose.png"</span>/&gt;</span><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"rose"</span>&gt;</span>Rose:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"rose"</span> <span class="attr">value</span>=<span class="string">"0"</span> <span class="attr">required</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"row2"</span> <span class="attr">class</span>=<span class="string">"drow"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"dcell"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"peony.png"</span>/&gt;</span><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"peony"</span>&gt;</span>Peony:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"peony"</span> <span class="attr">value</span>=<span class="string">"0"</span> <span class="attr">required</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"dcell"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"primula.png"</span>/&gt;</span><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"primula"</span>&gt;</span>Primula:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"primula"</span> <span class="attr">value</span>=<span class="string">"0"</span> <span class="attr">required</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"dcell"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"snowdrop.png"</span>/&gt;</span><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"snowdrop"</span>&gt;</span>Snowdrop:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"snowdrop"</span> <span class="attr">value</span>=<span class="string">"0"</span> <span class="attr">required</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"buttonDiv"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>Place Order<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><strong>css</strong></p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">h1</span> &#123;</div><div class="line">    <span class="attribute">min-width</span>: <span class="number">70px</span>;</div><div class="line">    <span class="attribute">border</span>: thick double black;</div><div class="line">    <span class="attribute">margin-left</span>: auto;</div><div class="line">    <span class="attribute">margin-right</span>: auto;</div><div class="line">    <span class="attribute">text-align</span>: center;</div><div class="line">    <span class="attribute">font-size</span>: x-large;</div><div class="line">    <span class="attribute">padding</span>: .<span class="number">5em</span>;</div><div class="line">    <span class="attribute">color</span>: darkgreen;</div><div class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">"border.png"</span>);</div><div class="line">    <span class="attribute">background-size</span>: contain;</div><div class="line">    <span class="attribute">margin-top</span>: <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.dtable</span> &#123;</div><div class="line">    <span class="attribute">display</span>: table;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.drow</span> &#123;</div><div class="line">    <span class="attribute">display</span>: table-row;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.dcell</span> &#123;</div><div class="line">    <span class="attribute">display</span>: table-cell;</div><div class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.dcell</span> &gt; * &#123;</div><div class="line">    <span class="attribute">vertical-align</span>: middle</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">input</span> &#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">2em</span>;</div><div class="line">    <span class="attribute">text-align</span>: right;</div><div class="line">    <span class="attribute">border</span>: thin solid black;</div><div class="line">    <span class="attribute">padding</span>: <span class="number">2px</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">label</span> &#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">5em</span>;</div><div class="line">    <span class="attribute">padding-left</span>: .<span class="number">5em</span>;</div><div class="line">    <span class="attribute">display</span>: inline-block;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-id">#buttonDiv</span> &#123;</div><div class="line">    <span class="attribute">text-align</span>: center;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-id">#oblock</span> &#123;</div><div class="line">    <span class="attribute">display</span>: block;</div><div class="line">    <span class="attribute">margin-left</span>: auto;</div><div class="line">    <span class="attribute">margin-right</span>: auto;</div><div class="line">    <span class="attribute">min-width</span>: <span class="number">700px</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.hover</span>&#123;</div><div class="line">    <span class="attribute">background</span>: blue;</div><div class="line">    <span class="attribute">color</span>: white;</div><div class="line">    <span class="attribute">height</span>:<span class="number">300px</span>;</div><div class="line">    <span class="attribute">width</span>:<span class="number">300px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><blockquote>
+<ul>
+<li><code>:animated</code> :选择正在处理动画的元素</li>
+<li><code>:first</code>    :选择第一个元素</li>
+<li><code>:last</code>     :选择最后一个元素</li>
+<li><code>:eq(n)</code>    :选择第n个元素(从0开始)</li>
+<li><code>:even</code>    :选择序号为偶数的元素</li>
+<li><code>:odd</code>      :选择序号为奇数的元素</li>
+<li><code>:gt(n)</code>    :选择序号<strong>大于</strong>n的元素</li>
+<li><code>:lt(n)</code>    :选择序号小于n的元素</li>
+<li><code>:text</code>     :选择所有的文本输入框</li>
+<li><code>:contains(text)</code>   :选择包含指定文本的元素</li>
+<li><code>file</code>     :选择所有文件上传输入框</li>
+<li><code>:button</code>   :选择所有的按钮</li>
+<li><code>:checkbox</code>  :选择所有的复选框</li>
+<li><code>:hidden</code>     :选择隐藏的元素</li>
+</ul>
+<p><strong>实例</strong></p>
+<blockquote>
+<p><code>$(&quot;img:odd&quot;).css(&quot;border&quot;,&quot;thick double red&quot;);</code>选择序号为奇数的<code>img</code>元素<br><code>$(&quot;img:first&quot;).css(&quot;border&quot;,&quot;thick double red&quot;)</code>  选择第一个<code>img</code>元素</p>
+</blockquote>
+</blockquote>
+<h2 id="JQuery对象的方法"><a href="#JQuery对象的方法" class="headerlink" title="JQuery对象的方法"></a>JQuery对象的方法</h2><blockquote>
+<ul>
+<li><code>context</code> 选择元素时使用的上下文对象</li>
+</ul>
+<blockquote>
+<p><code>$(&quot;img:odd&quot;).context.TagName;</code></p>
+</blockquote>
+<ul>
+<li><code>each(function())</code> 在每个选中的元素上运行给定的函数</li>
+</ul>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;$(&quot;img&quot;).each(function(index,elem)&#123;</div><div class="line">        &gt;&gt;console.log(ele.TagName+&quot;   &quot;+elem.id);//这里的index表示每一个元素的索引，elem表示每一个元素的htmlElement对象，并不是jquery对象</div><div class="line">        &gt;&gt;&#125;)</div><div class="line">&gt;&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li>index(jquery) || index(selector)  返回给定jquery对象在住对象中的序号，或者返回给定选择器参数的索引</li>
+</ul>
+<blockquote>
+<p><code>$(&quot;img&quot;).index(&quot;img[src=*astor]&quot;)</code> </p>
+</blockquote>
+<ul>
+<li>length || size()  返回的时jquery对象个数</li>
+</ul>
+<blockquote>
+<p><code>$(&quot;img:odd&quot;).length</code></p>
+</blockquote>
+<ul>
+<li>toArray()  返回一个有jquery对象中包含的htmlEelments数组</li>
+</ul>
+<blockquote>
+<p><code>var content=$(&quot;img:odd&quot;).toArray()</code>  这里content返回的htmlElements数组</p>
+</blockquote>
+</blockquote>
+<h2 id="把jquery当成数组"><a href="#把jquery当成数组" class="headerlink" title="把jquery当成数组"></a>把jquery当成数组</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> content=$(<span class="string">"img:odd"</span>);</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;content.length;i++)</div><div class="line">&#123;</div><div class="line">    <span class="built_in">console</span>.log(content[i].TagName+<span class="string">"    "</span>+content[i].src);    <span class="comment">//这里的content[i]就是htmlElement数组了，$(content[i])就变成了Jquery对象了</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="add"><a href="#add" class="headerlink" title="add"></a>add</h2><blockquote>
+<p><strong><code>add</code>函数允许我们添加更多的项，常用的有<code>add(htmlElement[])</code>,<code>add(selector)</code>,<code>add(jquery)</code></strong></p>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img:odd"</span>).add(<span class="string">"img:even"</span>).css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> jq=$(<span class="string">"img[src*=astor]"</span>);</div><div class="line">$(<span class="string">"img:even"</span>).add(jq).add(<span class="string">"img:even"</span>).css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> label=<span class="built_in">document</span>.getElementsByTagName(<span class="string">"label"</span>);</div><div class="line">$(<span class="string">"img:odd"</span>).add(label).css(<span class="string">"border"</span>,<span class="string">"thick double red"</span>);</div></pre></td></tr></table></figure>
+<h2 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h2><blockquote>
+<p><strong>用来获取特定的一组子元素</strong></p>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img"</span>).slice(<span class="number">0</span>,<span class="number">3</span>).css(<span class="string">"border"</span>,<span class="string">"thick double red"</span>);   <span class="comment">//获取0-2的元素</span></div><div class="line"></div><div class="line"> $(<span class="string">"img"</span>).slice(<span class="number">3</span>).css(<span class="string">"border"</span>,<span class="string">"thick double red"</span>);   <span class="comment">//获取3-结束</span></div></pre></td></tr></table></figure>
+<h2 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h2><blockquote>
+<p><strong>filter可以将不满足指定条件的元素剔除，常用的方法有<code>filter(jquery)</code>,<code>filter(htmlElement)</code>,<code>filter(function(index))</code>,<code>filter(selector)</code></strong></p>
+<p><strong>实例</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//这里填入的参数selector</span></div><div class="line">$(<span class="string">"label"</span>).filter(<span class="string">"[for*=p]"</span>).css(<span class="string">"background-color"</span>,<span class="string">'blue'</span>).css(<span class="string">"font-size"</span>,<span class="string">'20px'</span>).css(<span class="string">"border"</span>,<span class="string">"2px solid red"</span>);</div><div class="line">    </div><div class="line">     $(<span class="string">"img"</span>).filter(<span class="function"><span class="keyword">function</span> (<span class="params">index</span>) </span>&#123;     <span class="comment">//index是每一个元素的索引，如果返回的是true就会选定，false就会剔除这个元素</span></div><div class="line">       <span class="keyword">if</span>(index==<span class="number">4</span>)</div><div class="line">       &#123;</div><div class="line">           <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">   &#125;).css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);</div><div class="line">   </div><div class="line">   </div><div class="line">   <span class="keyword">var</span> elem=<span class="built_in">document</span>.getElementsByTagName(<span class="string">"label"</span>)[<span class="number">1</span>];    <span class="comment">//只选择第二个label</span></div><div class="line">   $(<span class="string">"label"</span>).filter(elem).css(<span class="string">"font-size"</span>,<span class="string">'30px'</span>)     <span class="comment">//这里填入的参数是htmlElement对象</span></div></pre></td></tr></table></figure>
+<h2 id="not"><a href="#not" class="headerlink" title="not"></a>not</h2><blockquote>
+<p><strong><code>not</code>方法是<code>filter</code>方法的补充，主要是删除匹配条件的元素，而<code>filter</code>则是保留满足匹配条件的元素，常用的方法有<code>not(selector)</code>,<code>not(htmlElement)</code>,<code>not(jquery)</code>,<code>not(function(index))</code></strong></p>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"label"</span>).not(<span class="string">"[for*=p]"</span>).css(<span class="string">"background-color"</span>,<span class="string">'red'</span>);    <span class="comment">//选择for不带p的label元素</span></div><div class="line"></div><div class="line">   $(<span class="string">"label"</span>).not(<span class="function"><span class="keyword">function</span> (<span class="params">index</span>) </span>&#123;   <span class="comment">//哪个元素返回true就删除，false保留</span></div><div class="line">       <span class="keyword">if</span>(index==<span class="number">0</span>)</div><div class="line">           <span class="keyword">return</span> <span class="literal">true</span>;      <span class="comment">//这里就会删除第一个label元素，保留后面的元素</span></div><div class="line">       <span class="keyword">else</span></div><div class="line">           <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line"></div><div class="line">   &#125;).css(<span class="string">"background-color"</span>,<span class="string">"yellow"</span>);</div></pre></td></tr></table></figure>
+<h2 id="has"><a href="#has" class="headerlink" title="has"></a>has</h2><blockquote>
+<p><strong>选择拥有指定后代的选择器</strong></p>
+<p><strong>实例：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"div.dcell"</span>).has(<span class="string">"img[src*=astor]"</span>).css(<span class="string">"border"</span>,<span class="string">"thick double red"</span>);  <span class="comment">//选择子代拥有img属性src带有astor的div.dcell元素</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> s=$(<span class="string">"[for*=astor]"</span>);</div><div class="line">$(<span class="string">"div.dcell"</span>).has(s).css(<span class="string">"border"</span>,<span class="string">"thick double red"</span>);   <span class="comment">//参数为jquery对象</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><blockquote>
+<p><strong>以一个函数为参数，map方法能够帮助我们灵活的处理一个<code>jquery</code>对象，从而得到满足需要的一个<code>jquery</code>对象。针对源<code>jquery</code>对象中的每一个元素都调用一次这个函数，而函数返回的<code>HtmlElement</code>对象将会变成一个<code>jquery</code>对象，参数是<code>function(index,elem)</code>,其中`index是序号，elem是jquery对象中的每一个HTMLElelments对象，这里必须要有返回值，不然没有意义</strong></p>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"div.dcell"</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">index,elem</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> elem.getElementsByTagName(<span class="string">"img"</span>)[<span class="number">0</span>];   <span class="comment">//这里的elem是$(div.dcell)中的每一个HtmlElement对象，返回的是img元素</span></div><div class="line">&#125;).css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);      <span class="comment">//可以很清楚的看到这里返回的htmlElement对象变成了Jquery对象，因为调用了函数css</span></div><div class="line"></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">index,elem</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(index==<span class="number">1</span>)</div><div class="line">    <span class="keyword">return</span> elem;   <span class="comment">//返回的是第二个img的HtmlElement对象，但是经过map的包装就会变成jquery对象</span></div><div class="line"></div><div class="line">&#125;).css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);      <span class="comment">//可以很清楚的看到这里返回的htmlElement对象变成了Jquery对象，因为调用了函数css</span></div></pre></td></tr></table></figure>
+<h2 id="is"><a href="#is" class="headerlink" title="is"></a>is</h2><blockquote>
+<p><strong><code>is</code>方法确定<code>jquery</code>对象中的某个或者某些元素是否满足测试条件，其中的形式有<code>is(selector)</code>,<code>is(HtmlElement)</code>,<code>is(jquery)</code>,<code>is(function(index))</code>如果结果集中至少有一个元素匹配指定的条件，那么就返回<code>true</code>,否则<code>false</code></strong></p>
+<p><strong>实例：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log($(<span class="string">"img"</span>).is(<span class="string">"[src*=astor]"</span>));<span class="comment">//这里是判断img中的src属性有没有astor字段的，如果存在返回true</span></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).is(<span class="function"><span class="keyword">function</span>(<span class="params">index</span>)</span>&#123;</div><div class="line"></div><div class="line">&#125;)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> c=$(<span class="string">"img"</span>).is(<span class="function"><span class="keyword">function</span> (<span class="params">index</span>) </span>&#123;    <span class="comment">//函数中如果至少有一个返回true，那么就会返回true，index是索引</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.getAttribute(<span class="string">'src'</span>)==<span class="string">'rose.png'</span>;   <span class="comment">//判断属性</span></div><div class="line">    &#125;);</div><div class="line">    <span class="built_in">console</span>.log(c);</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="end"><a href="#end" class="headerlink" title="end"></a>end</h2><blockquote>
+<p><strong>当我们调用方法链来修改结果集的时候，<code>jquery</code>维护者一个历史结果集的查找，我们可以利用<code>end</code>回退到历史的结果集中,<code>end</code>用来扔掉当前的结果集，返回到上一层结果集</strong></p>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img"</span>).filter(<span class="string">"[src*=astor]"</span>).end().css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);   <span class="comment">//这里回退到$("img")这个结果集中</span></div><div class="line"></div><div class="line"></div><div class="line">$(<span class="string">"div.dcell"</span>).find(<span class="string">"img"</span>).filter(<span class="string">":odd"</span>).filter(<span class="string">":eq(0)"</span>).end().end().css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>); <span class="comment">//这里调用了两个end将结果集回退到$("div.dcell").find("img")中</span></div></pre></td></tr></table></figure>
+<h2 id="addBack"><a href="#addBack" class="headerlink" title="addBack"></a>addBack</h2><blockquote>
+<p><strong>得到当前结果集和上一个结果集的合集</strong></p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"div.dcell"</span>).children(<span class="string">"img"</span>).addBack().css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);<span class="comment">//这里得到的是$("div.dcell")和$("div.dcell").children("img")的合集，并且应用css</span></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).slice(<span class="number">0</span>,<span class="number">3</span>).filter(<span class="string">"[src*=astor]"</span>).addBack().css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);<span class="comment">//$("img").slice(0,3)和$("img").slice(0,3).filter("[src*=astor]")的合集</span></div><div class="line"></div><div class="line"><span class="comment">//这里的选择器参数过滤的是原结果集，相当于$("img").slice(0,3).filter("[src*=daff]")，</span></div><div class="line">$(<span class="string">"img"</span>).slice(<span class="number">0</span>,<span class="number">3</span>).filter(<span class="string">"[src*=astor]"</span>).addBack(<span class="string">"[src*=daff]"</span>).css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);</div></pre></td></tr></table></figure>
+<h2 id="children"><a href="#children" class="headerlink" title="children"></a>children</h2><blockquote>
+<p><strong><code>children</code>是用来访问子元素的，形式有childern(),children(selector),其中第一个是用来得到结果集中所有的子元素，第二个是用来过滤得到的子元素，保留满足<code>selector</code>的子元素</strong></p>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"div.dcell"</span>).children().css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);<span class="comment">//得到所有div.dcell的子元素，包括其中的img和input元素</span></div><div class="line"></div><div class="line">$(<span class="string">"div.dcell"</span>).children(<span class="string">"img"</span>).css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);<span class="comment">//得到所有子元素中的img元素</span></div></pre></td></tr></table></figure>
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><blockquote>
+<p><strong><code>find</code>是用来得到结果集中的所有的后代元素，这里是后代元素，并不是只有子元素，还包括孙子。。。，形式有<code>find()</code>,<code>find(selector)</code>,<code>find(htmlElement)</code>,<code>find(jquery)</code>,<code>find(htmlElment[])</code>，这里会自动去掉含有重复的元素，因此可以用来过滤元素</strong></p>
+<p><strong>实例</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"div.dcell"</span>).find(<span class="string">"img"</span>);   <span class="comment">//找到div.dcell的后代元素img</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> content=<span class="built_in">document</span>.getElementsByTagName(<span class="string">"input"</span>);</div><div class="line">$(<span class="string">"div.dcell"</span>).find(content).filter(<span class="string">":first"</span>).css(<span class="string">"font-size"</span>,<span class="string">'1.5em'</span>);<span class="comment">//找到div.dcell后代元素中的input元素</span></div></pre></td></tr></table></figure>
+<h2 id="parent"><a href="#parent" class="headerlink" title="parent"></a>parent</h2><blockquote>
+<p><strong>选取结果集中的父元素，这里表示一层关系就是父元素，并不是祖先元素，形式有<code>parent()</code>,<code>parent(selector)</code></strong></p>
+<p><strong>实例：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img"</span>).parent();   <span class="comment">//选取img的父元素</span></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).parent(<span class="string">":first"</span>);   <span class="comment">//选取img父元素中的第一个元素</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="parents"><a href="#parents" class="headerlink" title="parents"></a>parents</h2><blockquote>
+<p><strong>选取祖先元素，包括父元素，形式有<code>parents()</code>,<code>parents(selector)</code></strong></p>
+<p><strong>实例：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img"</span>).parents().each(<span class="function"><span class="keyword">function</span>(<span class="params">index,elem</span>)</span>&#123;    <span class="comment">//选取所有的祖先元素</span></div><div class="line">    <span class="built_in">console</span>.log(elem.TagName+<span class="string">"   "</span>+elem.id);</div><div class="line">&#125;)</div><div class="line"></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).parents(<span class="string">"div.dcell"</span>).css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);   <span class="comment">//选择所有的div.dcell元素</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="parentsUntil"><a href="#parentsUntil" class="headerlink" title="parentsUntil"></a>parentsUntil</h2><blockquote>
+<p><strong>选择祖先元素，知道找到这个当前祖先元素匹配参数选择器为止,<code>parentsUntil(selector)</code>,<code>parentsUntil(selector,selector)</code>，其中带有两个参数选择器中的第二个参数是用来筛选所得到的结果集，第一个是用来定位直到这个元素为止</strong></p>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img"</span>).parentsUntil(<span class="string">"div.drow"</span>);<span class="comment">//找img的祖先元素，直到div.drow为止，不包括div.drow</span></div><div class="line"></div><div class="line"> $(<span class="string">"img"</span>).parentsUntil(<span class="string">"div.drow"</span>,<span class="string">":first"</span>).css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);  <span class="comment">//这里选择了结果集中的第一个元素应用了样式</span></div></pre></td></tr></table></figure>
+<h2 id="closest"><a href="#closest" class="headerlink" title="closest"></a>closest</h2><blockquote>
+<p><strong>得到结果集中元素的祖先元素中匹配<code>selector</code>选择器最接近的那个祖先元素，形式为<code>closest(selector)</code>,<code>closest(selctor,context)</code>,<code>closest(htmlElemtent)</code>,<code>closest(jquery)</code></strong></p>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$(<span class="string">"img"</span>).closest(<span class="string">"div.drow"</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">index,elem</span>) </span>&#123;   <span class="comment">//选择满足div.drow的祖先元素，这里的最接近就是辈分最接近，这里的两个class=drow的div都是最接近的，因为这俩个是同级的关系</span></div><div class="line">        <span class="built_in">console</span>.log(elem.tagName+<span class="string">"    "</span>+elem.id);</div><div class="line">    &#125;);</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="keyword">var</span> jq=$(<span class="string">"#row1,#row2,form"</span>);   <span class="comment">//传入jquery对象</span></div><div class="line">    $(<span class="string">"img"</span>).filter(<span class="string">"[src*=astor]"</span>).closest(jq).each(<span class="function"><span class="keyword">function</span> (<span class="params">index,elem</span>) </span>&#123;   <span class="comment">//这里选取的是最接近第一张图的祖先元素，当然是&lt;div id="row1"&gt;</span></div><div class="line">        <span class="built_in">console</span>.log(elem.tagName+<span class="string">"   "</span>+elem.id);</div><div class="line">    &#125;)</div></pre></td></tr></table></figure>
+<h2 id="offestParent"><a href="#offestParent" class="headerlink" title="offestParent"></a>offestParent</h2><blockquote>
+<p><strong>得到距离最近的祖先定位元素，使用<code>fixed</code>,<code>absolute</code>,<code>relative</code>定位的元素，形式为<code>offestParent()</code></strong></p>
+</blockquote>
+<h2 id="siblings"><a href="#siblings" class="headerlink" title="siblings"></a>siblings</h2><blockquote>
+<p><strong>得到所有的兄弟元素，可选的<code>selector</code>用来过滤结果，形式为<code>siblings()</code>,<code>siblings(selector)</code></strong></p>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img"</span>).siblings().css(<span class="string">"font-size"</span>,<span class="string">'1.4em'</span>);<span class="comment">// 得到img的所有兄弟元素，这里是input</span></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).siblings(<span class="string">":last"</span>);     <span class="comment">//得到img所有兄弟元素中的最后一个元素</span></div></pre></td></tr></table></figure>
+<h2 id="prev"><a href="#prev" class="headerlink" title="prev"></a>prev</h2><blockquote>
+<p><strong>得到上一个兄弟元素，形式为<code>prev()</code>,<code>prev(selector)</code>，其中的<code>selector</code>是用来过滤结果的</strong></p>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"input"</span>).prev().css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);   <span class="comment">//这里得到input的上一个元素Label元素</span></div></pre></td></tr></table></figure>
+<h2 id="prevAll"><a href="#prevAll" class="headerlink" title="prevAll"></a>prevAll</h2><blockquote>
+<p><strong>得到当前元素的所有的上面的兄弟元素，形式为<code>prevALl()</code>,<code>prevAll(selector)</code></strong></p>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"input"</span>).prevAll().css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);   <span class="comment">//得到input上面的所有的兄弟元素</span></div><div class="line"></div><div class="line">$(<span class="string">"input"</span>).prev(<span class="string">"img"</span>).css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);   <span class="comment">//得到input上面的所有的img元素</span></div></pre></td></tr></table></figure>
+<h3 id="prevUntil"><a href="#prevUntil" class="headerlink" title="prevUntil"></a>prevUntil</h3><blockquote>
+<p><strong>这个和parentsUntil一样，直到匹配<code>selector</code>就结束了，不包括</strong></p>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"input"</span>).prevUntil(<span class="string">"i"</span>).css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);</div></pre></td></tr></table></figure>
+<h2 id="next"><a href="#next" class="headerlink" title="next"></a>next</h2><blockquote>
+<p><strong>选择当前元素下面的一个兄弟元素，和<code>prev</code>一样</strong></p>
+</blockquote>
+<h2 id="nextAll"><a href="#nextAll" class="headerlink" title="nextAll"></a>nextAll</h2><blockquote>
+<p><strong>选择当前元素下面的所有兄弟元素，和<code>prevAll</code>一样</strong></p>
+</blockquote>
+<h2 id="nextUntil"><a href="#nextUntil" class="headerlink" title="nextUntil"></a>nextUntil</h2><blockquote>
+<p><strong>和<code>prevUntil</code>一样</strong></p>
+<blockquote>
+<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
+<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;JQuery-干货篇之选择元素&quot;&gt;&lt;a href=&quot;#JQuery-干货篇之选择元素&quot; class=&quot;headerlink&quot; title=&quot;JQuery 干货篇之选择元素&quot;&gt;&lt;/a&gt;JQuery 干货篇之选择元素&lt;/h1&gt;&lt;h2 id=&quot;实验的HTML-CSS的代
+    
+    </summary>
+    
+      <category term="JQuery学习" scheme="http://chenjiabing666.github.io/categories/JQuery%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="JQuery" scheme="http://chenjiabing666.github.io/tags/JQuery/"/>
+    
+  </entry>
   
   <entry>
     <title>SQL干货篇三</title>
@@ -1637,89 +1830,6 @@ while(file.ready())   //用来判断是否还有字符可读
     
     
       <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>scrapy架构初探</title>
-    <link href="http://chenjiabing666.github.io/2017/03/25/scrapy%E6%9E%B6%E6%9E%84%E5%88%9D%E6%8E%A2/"/>
-    <id>http://chenjiabing666.github.io/2017/03/25/scrapy架构初探/</id>
-    <published>2017-03-25T05:11:58.000Z</published>
-    <updated>2017-03-25T05:12:46.277Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="scrapy架构初探"><a href="#scrapy架构初探" class="headerlink" title="scrapy架构初探"></a>scrapy架构初探</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
-<blockquote>
-<p>Python即时网络爬虫启动的目标是一起把互联网变成大数据库。单纯的开放源代码并不是开源的全部，开源的核心是“开放的思想”，聚合最好的想法、技术、人员，所以将会参照众多领先产品，比如，Scrapy，ScrapingHub，<a href="http://Import.io" target="_blank" rel="external">import io</a>等。</p>
-<p>本文简单讲解一下Scrapy的架构。没错，通用提取器gsExtractor就是要集成到Scrapy架构中。</p>
-<p>请注意，本文不想复述原文内容，而是为了开源Python爬虫的发展方向找参照，而且以9年来开发网络爬虫经验作为对标，从而本文含有不少笔者主观评述，如果想读Scrapy官方原文，请点击<a href="https://doc.scrapy.org/en/latest/topics/architecture.html" target="_blank" rel="external">Scrapy官网的Architecture</a>。</p>
-</blockquote>
-</blockquote>
-<h2 id="scrapy数据流"><a href="#scrapy数据流" class="headerlink" title="scrapy数据流"></a>scrapy数据流</h2><blockquote>
-<blockquote>
-<p>Scrapy中的数据流由执行引擎控制，下面的原文摘自Scrapy官网，我根据猜测做了点评，为进一步开发GooSeeker开源爬虫指示方向：</p>
-<blockquote>
-<ul>
-<li>The Engine gets the first URLs to crawl from the Spider and schedules them in the Scheduler, as Requests.</li>
-</ul>
-</blockquote>
-<p>URL谁来准备呢？看样子是Spider自己来准备，那么可以猜测Scrapy架构部分（不包括Spider）主要做事件调度，不管网址的存储。看起来类似GooSeeker会员中心的爬虫罗盘，为目标网站准备一批网址，放在罗盘中准备执行爬虫调度操作。所以，这个开源项目的下一个目标是把URL的管理放在一个集中的调度库里面。</p>
-<blockquote>
-<ul>
-<li>The Engine asks the Scheduler for the next URLs to crawl.</li>
-</ul>
-</blockquote>
-<p>看到这里其实挺难理解的，要看一些其他文档才能理解透。接第1点，引擎从Spider中把网址拿到以后，封装成一个Request，交给了事件循环，会被Scheduler收来做调度管理的，暂且理解成对Request做排队。引擎现在就找Scheduler要接下来要下载的网页地址。</p>
-<blockquote>
-<ul>
-<li>The Scheduler returns the next URLs to crawl to the Engine and the Engine sends them to the Downloader, passing through the Downloader Middleware (request direction).</li>
-</ul>
-</blockquote>
-<p>从调度器申请任务，把申请到的任务交给下载器，在下载器和引擎之间有个下载器中间件，这是作为一个开发框架的必备亮点，开发者可以在这里进行一些定制化扩展。</p>
-<blockquote>
-<ul>
-<li>Once the page finishes downloading the Downloader generates a Response (with that page) and sends it to the Engine, passing through the Downloader Middleware (response direction).</li>
-</ul>
-</blockquote>
-<p>下载完成了，产生一个Response，通过下载器中间件交给引擎。注意，Response和前面的Request的首字母都是大写，虽然我还没有看其它Scrapy文档，但是我猜测这是Scrapy框架内部的事件对象，也可以推测出是一个异步的事件驱动的引擎，就像DS打数机的三级事件循环一样，对于高性能、低开销引擎来说，这是必须的。</p>
-<blockquote>
-<ul>
-<li>The Engine receives the Response from the Downloader and sends it to the Spider for processing, passing through the Spider Middleware (input direction).</li>
-</ul>
-</blockquote>
-<p>再次出现一个中间件，给开发者足够的发挥空间。</p>
-<blockquote>
-<ul>
-<li>The Spider processes the Response and returns scraped items and new Requests (to follow) to the Engine.</li>
-</ul>
-</blockquote>
-<p>每个Spider顺序抓取一个个网页，完成一个就构造另一个Request事件，开始另一个网页的抓取。</p>
-<blockquote>
-<ul>
-<li>The Engine passes scraped items and new Requests returned by a spider through Spider Middleware (output direction), and then sends processed items to Item Pipelines and processed Requests to the Scheduler.</li>
-</ul>
-</blockquote>
-<p>引擎作事件分发</p>
-<blockquote>
-<ul>
-<li>The process repeats (from step 1) until there are no more requests from the Scheduler.</li>
-</ul>
-</blockquote>
-<p>持续不断地运行。</p>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;scrapy架构初探&quot;&gt;&lt;a href=&quot;#scrapy架构初探&quot; class=&quot;headerlink&quot; title=&quot;scrapy架构初探&quot;&gt;&lt;/a&gt;scrapy架构初探&lt;/h1&gt;&lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerli
-    
-    </summary>
-    
-      <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
     
   </entry>
   
