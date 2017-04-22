@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-04-21T09:53:49.444Z</updated>
+  <updated>2017-04-22T13:46:01.079Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,152 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JQuery干货篇之处理元素</title>
+    <link href="http://chenjiabing666.github.io/2017/04/22/JQuery%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E5%A4%84%E7%90%86%E5%85%83%E7%B4%A0/"/>
+    <id>http://chenjiabing666.github.io/2017/04/22/JQuery干货篇之处理元素/</id>
+    <published>2017-04-22T13:45:23.000Z</published>
+    <updated>2017-04-22T13:46:01.079Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="JQuery干货篇之处理元素"><a href="#JQuery干货篇之处理元素" class="headerlink" title="JQuery干货篇之处理元素"></a>JQuery干货篇之处理元素</h1><blockquote>
+<p><strong>注意这里用的还是我前两篇用的例子，详情请看<a href="https://chenjiabing666.github.io/2017/04/20/JQuery%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E9%80%89%E6%8B%A9%E5%85%83%E7%B4%A0/">我的博客</a></strong></p>
+<h2 id="attr"><a href="#attr" class="headerlink" title="attr"></a>attr</h2><p><strong><code>attr()</code> 方法设置或返回被选元素的属性值。</strong></p>
+<p><strong>语法：</strong></p>
+<blockquote>
+<ul>
+<li><code>$(selector).attr(attribute)</code> 返回被选元素的属性值。</li>
+<li><code>$(selector).attr(attribute,value)</code> 设置被选元素的属性和值</li>
+<li><code>$(selector).attr(attribute,function(index,oldvalue))</code> 设置被选元素的属性和值。</li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>attribute</code></td>
+<td style="text-align:center">规定属性的名称。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>function(index,oldvalue)</code></td>
+<td style="text-align:center">规定返回属性值的数。该函数可接收并使用选择器的 index 值和当前属性值。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实例：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">    $(<span class="string">"img"</span>).filter(<span class="string">":first"</span>).attr(<span class="string">'src'</span>);   <span class="comment">//得到属性</span></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">index,elem</span>) </span>&#123;    </div><div class="line">        <span class="keyword">if</span>(index%<span class="number">2</span>==<span class="number">0</span>)</div><div class="line">            $(elem).attr(<span class="string">"src"</span>,<span class="string">'lily.png'</span>);      <span class="comment">//设置属性</span></div><div class="line">        <span class="built_in">console</span>.log($(elem).attr(<span class="string">"src"</span>));</div><div class="line">        &#125;)</div><div class="line">        </div><div class="line">        </div><div class="line">        $(<span class="string">"img"</span>).attr(<span class="string">'src'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">index,oldValue</span>) </span>&#123;  <span class="comment">//这里的oldValue表示原来属性的值，index是索引</span></div><div class="line">        <span class="keyword">if</span>(oldValue==<span class="string">"rose.png"</span>)</div><div class="line">            <span class="keyword">return</span> <span class="string">'lily.png'</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="keyword">return</span> <span class="string">'astor.png'</span>;</div><div class="line">    &#125;)</div><div class="line">    </div><div class="line">    </div><div class="line">    attrs=&#123;       <span class="comment">//使用映射对象一次设置多个值</span></div><div class="line">        src:<span class="string">'lily.png'</span>,</div><div class="line">        <span class="attr">style</span>: <span class="string">'border: thick double red'</span></div><div class="line">    &#125;;</div><div class="line">    $(<span class="string">"img:eq(1)"</span>).attr(attrs);</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="removeAttr"><a href="#removeAttr" class="headerlink" title="removeAttr"></a>removeAttr</h2><blockquote>
+<p><strong><code>removeAttr()</code> 方法从被选元素中移除属性。</strong></p>
+<p><strong>语法：</strong></p>
+<ul>
+<li><code>$(selector).removeAttr(attribute)</code>  这里的attribute是属性的名字</li>
+</ul>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img:first"</span>).removeAttr(<span class="string">"src"</span>);  <span class="comment">//删除属性src</span></div></pre></td></tr></table></figure>
+<h2 id="addClass"><a href="#addClass" class="headerlink" title="addClass"></a>addClass</h2><blockquote>
+<p><strong><code>addClass()</code> 方法向被选元素添加一个或多个类</strong></p>
+<p><strong>语法：</strong></p>
+<ul>
+<li><p><code>$(selector).addClass(class)</code> 这里的class是类名如果需要添加多个类，中间用<strong>空格</strong>隔开</p>
+</li>
+<li><p><code>$(selector).addClass(function(index,oldclass))</code>  这里的index是索引，oldClass是原来就有的类名，都是<strong>可选参数</strong>。这个函数的返回的就是要添加的类名</p>
+</li>
+</ul>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img:even"</span>).addClass(<span class="string">"redBar"</span>);  <span class="comment">//向偶数的img添加类redBar</span></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).addClass(<span class="function"><span class="keyword">function</span> (<span class="params">index,currentClass</span>) </span>&#123;    <span class="comment">//这里的currentClass就是原来有的类名，可选</span></div><div class="line">        <span class="keyword">if</span>(index==<span class="number">1</span>)</div><div class="line">            <span class="keyword">return</span> <span class="string">'blueBar'</span>;   <span class="comment">//第二个img应用blueBar这个类</span></div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="keyword">return</span> <span class="string">'redBar'</span>;      <span class="comment">//这里需要注意的是，对同一个img应用类的时候，因为这个类的定义有优先级，上面定义会被后面定义的覆盖，所以要注意类定义的位置</span></div><div class="line">    &#125;)</div><div class="line">    </div><div class="line">    </div><div class="line">    $(<span class="string">"img"</span>).filter(<span class="string">":odd"</span>).addClass(<span class="string">"redBar"</span>).end().filter(<span class="string">":even"</span>).addClass(<span class="string">"blueBar"</span>);  <span class="comment">//链式调用</span></div><div class="line">    </div><div class="line">    $(<span class="string">"img"</span>).addClass(<span class="string">"blueBar redBar"</span>);   <span class="comment">//添加两个类</span></div></pre></td></tr></table></figure>
+<h2 id="hasClass"><a href="#hasClass" class="headerlink" title="hasClass"></a>hasClass</h2><blockquote>
+<p><strong><code>hasClass()</code> 方法检查被选元素是否包含指定的<code>class</code></strong></p>
+<p><strong>语法：</strong></p>
+<ul>
+<li><code>$(selector).hasClass(class)</code>  //返回值是false和true</li>
+</ul>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log($(<span class="string">"img:odd"</span>).hasClass(<span class="string">"redBar"</span>));</div></pre></td></tr></table></figure>
+<h2 id="toggleClass"><a href="#toggleClass" class="headerlink" title="toggleClass"></a>toggleClass</h2><blockquote>
+<p><strong>toggleClass() 对设置或移除被选元素的一个或多个类进行切换。该方法检查每个元素中指定的类。如果不存在则添加类，如果已设置则删除之。这就是所谓的切换效果</strong></p>
+<p><strong>语法：</strong></p>
+<ul>
+<li><p><code>$(selector).toggleClass(class,switch)</code>  <code>class</code>必需的，用来规定添加或移除<code>class</code>的指定元素，如需规定若干 <code>class</code>，请使用空格来分隔类名。<code>switch</code>是<code>boolean</code>可选参数，规定是否添加或移除<code>class</code></p>
+</li>
+<li><p><code>$(selector).toggleClass(function(index,class),switch)</code>   <code>index</code>表示索引，<code>class</code>表示选择器当前拥有的类</p>
+</li>
+</ul>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img"</span>).toggleClass(<span class="string">"redBar"</span>);   <span class="comment">//这里对所有的img在redBar这个类之间切换</span></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).toggleClass(<span class="string">"redBar blueBar"</span>);  <span class="comment">//在两个类之间来回的切换</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">$(<span class="string">"&lt;button&gt;ToggleClass&lt;/button&gt;"</span>).appendTo(<span class="string">"#buttonDiv"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">        $(<span class="string">"img"</span>).toggleClass(<span class="string">'redBar blueBar'</span>);   <span class="comment">//在两种class之间切换，如果有就删除，没有的就添加</span></div><div class="line">        e.preventDefault();    </div><div class="line">        &#125;)</div><div class="line">        </div><div class="line">        </div><div class="line">        <span class="comment">//下面添加一个按钮，完成同时添加多个图片的效果</span></div><div class="line">    $(<span class="string">"&lt;button&gt;ToggleClass&lt;/button&gt;"</span>).appendTo(<span class="string">"#buttonDiv"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">        $(<span class="string">"img"</span>).toggleClass(<span class="function"><span class="keyword">function</span> (<span class="params">index,currentClass</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span>(index%<span class="number">2</span>==<span class="number">0</span>)</div><div class="line">                <span class="keyword">return</span> <span class="string">'blueBar'</span>;   <span class="comment">//动态的切换，这里是偶数就切换blue</span></div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> <span class="string">'redBar blueBar'</span>;  <span class="comment">//这里是奇数的图片在两种颜色来回的切换</span></div><div class="line"></div><div class="line">        &#125;);</div><div class="line">        e.preventDefault();</div><div class="line"></div><div class="line">    &#125;)</div></pre></td></tr></table></figure>
+<h2 id="css"><a href="#css" class="headerlink" title="css"></a>css</h2><blockquote>
+<p><strong><code>css()</code> 方法返回或设置匹配的元素的一个或多个样式属性，这里只说<code>css</code>，还有其他的设置<code>css</code>样式请看<a href="http://www.w3school.com.cn/jquery/jquery_ref_css.asp" target="_blank" rel="external">w3School</a></strong></p>
+<p><strong>语法：</strong></p>
+<ul>
+<li><p><code>$(selector).css(name)</code>  返回第一个匹配元素的 <code>CSS</code>属性值。<code>name</code>是<code>css</code>属性的名称</p>
+</li>
+<li><p><code>$(selector).css(name,value)</code> 设置所有匹配元素的指定 <code>CSS</code> 属性。<code>name</code>表示属性名称，<code>value</code>表示属性的值</p>
+</li>
+<li><p><code>$(selector).css(name,function(index,value))</code>   此函数返回要设置的属性值。接受两个参数，<code>index</code>为元素在对象集合中的索引位置，<code>value</code> 是原先的属性值。<code>name</code>表示要设置的属性名称，返回值就是要设置的属性值</p>
+</li>
+</ul>
+<p><strong>实例：</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"label"</span>).css(<span class="string">'font-size'</span>,<span class="string">'30px'</span>);  <span class="comment">//设置字体大小</span></div><div class="line"></div><div class="line">$(<span class="string">"label"</span>).css(<span class="string">'font-size'</span>,<span class="string">'+=10'</span>);  <span class="comment">//使用相对值设置属性值，在原有的基础上加上10</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log($(<span class="string">"h1"</span>).css(<span class="string">'font-family'</span>));   <span class="comment">//获取h1标签的字体</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> cssValues=&#123;</div><div class="line">    <span class="string">'border'</span>:<span class="string">'thick double red'</span>,</div><div class="line">    <span class="string">'font-size'</span>:<span class="string">'1.5em'</span></div><div class="line">&#125;;</div><div class="line">$(<span class="string">"label"</span>).css(cssValues);   <span class="comment">//同时设置多个属性</span></div></pre></td></tr></table></figure>
+<h2 id="text"><a href="#text" class="headerlink" title="text"></a>text</h2><blockquote>
+<p><strong><code>text()</code> 方法方法设置或返回被选元素的文本内容。当该方法用于返回一个值时，它会返回所有匹配元素的组合的文本内容(会删除 <code>HTML</code> 标记)</strong></p>
+<p><strong>语法：</strong></p>
+<ul>
+<li><code>$(selector).text()</code>   当该方法用于返回一个值时，它会返回所有匹配元素的组合的文本内容（会删除 <code>HTML</code> 标记）。</li>
+<li><code>$(selector).text(content)</code>  当该方法用于设置值时，它会覆盖被选元素的所有内容。</li>
+<li><code>$(selector).text(function(index,oldcontent))</code>  <code>index</code>表示索引,<code>oldcontent</code>表示选择器当前的文本内容</li>
+</ul>
+</blockquote>
+<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><blockquote>
+<p><strong><code>html()</code> 方法返回或设置被选元素的内容 <code>(inner HTML)</code>。如果该方法未设置参数，则返回被选元素的当前内容。</strong></p>
+<p><strong>语法：</strong></p>
+<ul>
+<li><p><code>$(selector).html()</code>    当使用该方法返回一个值时，它会返回<strong>第一个</strong>匹配元素的内容。</p>
+</li>
+<li><p><code>$(selector).html(content)</code>   当使用该方法设置一个值时，它会覆盖所有匹配元素的内容。</p>
+</li>
+<li><p><code>$(selector).html(function(index,oldcontent))</code>  使用函数来设置所有匹配元素的内容。<code>index</code> - 可选。接收选择器的<code>index</code> 位置,<code>oldcontent</code> - 可选。接收选择器的当前内容</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="val"><a href="#val" class="headerlink" title="val"></a>val</h2><blockquote>
+<p><strong><code>val()</code> 方法返回或设置被选元素的值,元素的值是通过 <code>value</code> 属性设置的。该方法大多用于 <code>input</code> 元素,如果该方法未设置参数，则返回被选元素的当前值</strong></p>
+<p><strong>语法：</strong></p>
+<ul>
+<li><code>$(selector).val(value)</code>    设置文本域的值为value</li>
+<li><code>$(selector).val()</code>       得到文本域的值</li>
+<li><code>$(selector).val(function(index,oldvalue))</code>  设置文本域的值，这里函数的返回值将会用来设置文本域的值，<code>index</code>表示元素索引，<code>oldvalue</code>表示选择器当前文本域的值</li>
+</ul>
+<blockquote>
+<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
+<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;JQuery干货篇之处理元素&quot;&gt;&lt;a href=&quot;#JQuery干货篇之处理元素&quot; class=&quot;headerlink&quot; title=&quot;JQuery干货篇之处理元素&quot;&gt;&lt;/a&gt;JQuery干货篇之处理元素&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注
+    
+    </summary>
+    
+      <category term="JQuery学习" scheme="http://chenjiabing666.github.io/categories/JQuery%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="JQuery" scheme="http://chenjiabing666.github.io/tags/JQuery/"/>
+    
+  </entry>
   
   <entry>
     <title>JQuery干货篇之操控DOM</title>
@@ -1760,75 +1906,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;scrapy中的下载器中间件&quot;&gt;&lt;a href=&quot;#scrapy中的下载器中间件&quot; class=&quot;headerlink&quot; title=&quot;scrapy中的下载器中间件&quot;&gt;&lt;/a&gt;scrapy中的下载器中间件&lt;/h1&gt;&lt;h2 id=&quot;下载中间件&quot;&gt;&lt;a href=&quot;#
-    
-    </summary>
-    
-      <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>scrapy初试</title>
-    <link href="http://chenjiabing666.github.io/2017/03/25/scrapy%E5%88%9D%E8%AF%95/"/>
-    <id>http://chenjiabing666.github.io/2017/03/25/scrapy初试/</id>
-    <published>2017-03-25T06:21:21.000Z</published>
-    <updated>2017-03-27T03:30:06.976Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="scrapy初试"><a href="#scrapy初试" class="headerlink" title="scrapy初试"></a>scrapy初试</h1><blockquote>
-<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><blockquote>
-<p>打开<code>cmd</code>，在终端输入<code>scrapy startproject tutorial</code>,这里将在指定的文件夹下创建一个<code>scrapy</code>工程</p>
-</blockquote>
-<h2 id="其中将会创建以下的文件："><a href="#其中将会创建以下的文件：" class="headerlink" title="其中将会创建以下的文件："></a>其中将会创建以下的文件：</h2><blockquote>
-<ul>
-<li><code>scrapy.cfg</code>: 项目的配置文件</li>
-<li><code>tutorial/</code>: 该项目的python模块。之后您将在此加入代码。</li>
-<li><code>tutorial/items.py</code>: 项目中的item文件.</li>
-<li><code>tutorial/pipelines.py</code>: 项目中的pipelines文件.</li>
-<li><code>tutorial/settings.py</code>: 项目的设置文件.</li>
-<li><code>tutorial/spiders/</code>: 放置spider代码的目录.</li>
-</ul>
-</blockquote>
-<p>定义item</p>
-<blockquote>
-<p><code>Item</code>是保存爬取到的数据的容器；其使用方法和<code>python</code>字典类似， 并且提供了额外保护机制来避免拼写错误导致的未定义字段错误。</p>
-<p>类似在<code>ORM</code>中做的一样，您可以通过创建一个 <code>scrapy.Item</code> 类， 并且定义类型为 <code>scrapy.Field</code>的类属性来定义一个<code>Item</code>。 (如果不了解<code>ORM</code>, 不用担心，您会发现这个步骤非常简单)</p>
-<p>首先根据需要从<code>dmoz.org</code>获取到的数据对<code>item</code>进行建模。 我们需要从<code>dmoz</code>中获取名字，<code>url</code>，以及网站的描述。 对此，在<code>item</code>中定义相应的字段。编辑 <code>tutorial</code> 目录中的 <code>items.py</code> 文件:</p>
-</blockquote>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DmozItem</span><span class="params">(scrapy.Item)</span>:</span></div><div class="line">title = scrapy.Field()</div><div class="line">link = scrapy.Field()</div><div class="line">desc = scrapy.Field()</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>一开始这看起来可能有点复杂，但是通过定义item， 您可以很方便的使用Scrapy的其他方法。而这些方法需要知道您的item的定义.</p>
-</blockquote>
-<h2 id="编写第一个爬虫"><a href="#编写第一个爬虫" class="headerlink" title="编写第一个爬虫"></a>编写第一个爬虫</h2><blockquote>
-<blockquote>
-<p>在工程的根目录下打开终端输入<code>scrapy genspider demo douban.com</code><br>这里的<code>demo</code>是<code>spders</code>文件下的主要<code>py</code>文件<br><code>douban.com</code>是要爬取的域名，会在<code>demo.py</code>中的 <code>allowed_domains</code>中显示，主要的功能就是限制爬取的<code>url</code></p>
-<h3 id="spider代码中内容解析"><a href="#spider代码中内容解析" class="headerlink" title="spider代码中内容解析"></a>spider代码中内容解析</h3><ul>
-<li><code>name</code>: 用于区别<code>Spider</code>。 该名字必须是唯一的，您不可以为不同的<code>Spider</code>设定相同的名字。</li>
-<li><code>start_urls</code>: 包含了<code>Spider</code>在启动时进行爬取的<code>url</code>列表。 因此，第一个被获取到的页面将是其中之一。 后续的<code>URL</code>则从初始的<code>URL</code>获取到的数据中提取。</li>
-<li><code>parse()</code> 是spider的一个方法。 被调用时，每个初始<code>URL</code>完成下载后生成的 Response 对象将会作为唯一的参数传递给该函数。 该方法负责解析返回的数据(<code>response data</code>)，提取数据(生成<code>item</code>)以及生成需要进一步处理的<code>URL</code>的 <code>Request</code>对象。</li>
-</ul>
-</blockquote>
-<h3 id="以下是spider目录下的demo-py的代码"><a href="#以下是spider目录下的demo-py的代码" class="headerlink" title="以下是spider目录下的demo.py的代码"></a>以下是spider目录下的demo.py的代码</h3></blockquote>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DmozSpider</span><span class="params">(scrapy.Spider)</span>:</span></div><div class="line">name = <span class="string">"dmoz"</span></div><div class="line">allowed_domains = [<span class="string">"dmoz.org"</span>]</div><div class="line">start_urls = [</div><div class="line">        <span class="string">"http://www.dmoz.org/Computers/Programming/Languages/Python/Books/"</span>,</div><div class="line">    <span class="string">"http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"</span></div><div class="line">]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></div><div class="line">    filename = response.url.split(<span class="string">"/"</span>)[<span class="number">-2</span>]</div><div class="line">    <span class="keyword">with</span> open(filename, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</div><div class="line">        f.write(response.body)</div></pre></td></tr></table></figure>
-<blockquote>
-<h2 id="spider的爬取"><a href="#spider的爬取" class="headerlink" title="spider的爬取"></a>spider的爬取</h2><blockquote>
-<p>进入工程的根目录下打开终端输入：<code>scrapy crawl dmoz</code></p>
-</blockquote>
-<h2 id="spider中的数据存取"><a href="#spider中的数据存取" class="headerlink" title="spider中的数据存取"></a>spider中的数据存取</h2><blockquote>
-<p>在工程的根目录下打开终端输入<code>scrapy crawl dmoz -o items.json</code><br>这里是将数据存储到<code>json</code>文件中</p>
-</blockquote>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;scrapy初试&quot;&gt;&lt;a href=&quot;#scrapy初试&quot; class=&quot;headerlink&quot; title=&quot;scrapy初试&quot;&gt;&lt;/a&gt;scrapy初试&lt;/h1&gt;&lt;blockquote&gt;
-&lt;h2 id=&quot;创建项目&quot;&gt;&lt;a href=&quot;#创建项目&quot; class=
     
     </summary>
     
