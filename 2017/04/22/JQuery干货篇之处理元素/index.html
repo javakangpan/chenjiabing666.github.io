@@ -34,7 +34,7 @@ attrattr() 方法设置或返回被选元素的属性值。
 $(selector).attr(attribute) 返回被选元素的属性值。
 $(selector).attr(attribute,value) 设置被选元素的属性和值
 $(selector).attr(attribute,function(ind">
-<meta property="og:updated_time" content="2017-04-22T13:46:01.079Z">
+<meta property="og:updated_time" content="2017-04-22T13:47:46.741Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JQuery干货篇之处理元素">
 <meta name="twitter:description" content="JQuery干货篇之处理元素
@@ -135,6 +135,7 @@ $(selector).attr(attribute,function(ind">
 <li><code>$(selector).attr(attribute,function(index,oldvalue))</code> 设置被选元素的属性和值。</li>
 </ul>
 </blockquote>
+</blockquote>
 <table>
 <thead>
 <tr>
@@ -153,6 +154,7 @@ $(selector).attr(attribute,function(ind">
 </tr>
 </tbody>
 </table>
+<blockquote>
 <p><strong>实例：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">    $(<span class="string">"img"</span>).filter(<span class="string">":first"</span>).attr(<span class="string">'src'</span>);   <span class="comment">//得到属性</span></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">index,elem</span>) </span>&#123;    </div><div class="line">        <span class="keyword">if</span>(index%<span class="number">2</span>==<span class="number">0</span>)</div><div class="line">            $(elem).attr(<span class="string">"src"</span>,<span class="string">'lily.png'</span>);      <span class="comment">//设置属性</span></div><div class="line">        <span class="built_in">console</span>.log($(elem).attr(<span class="string">"src"</span>));</div><div class="line">        &#125;)</div><div class="line">        </div><div class="line">        </div><div class="line">        $(<span class="string">"img"</span>).attr(<span class="string">'src'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">index,oldValue</span>) </span>&#123;  <span class="comment">//这里的oldValue表示原来属性的值，index是索引</span></div><div class="line">        <span class="keyword">if</span>(oldValue==<span class="string">"rose.png"</span>)</div><div class="line">            <span class="keyword">return</span> <span class="string">'lily.png'</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="keyword">return</span> <span class="string">'astor.png'</span>;</div><div class="line">    &#125;)</div><div class="line">    </div><div class="line">    </div><div class="line">    attrs=&#123;       <span class="comment">//使用映射对象一次设置多个值</span></div><div class="line">        src:<span class="string">'lily.png'</span>,</div><div class="line">        <span class="attr">style</span>: <span class="string">'border: thick double red'</span></div><div class="line">    &#125;;</div><div class="line">    $(<span class="string">"img:eq(1)"</span>).attr(attrs);</div></pre></td></tr></table></figure></p>
 </blockquote>
 <h2 id="removeAttr"><a href="#removeAttr" class="headerlink" title="removeAttr"></a>removeAttr</h2><blockquote>
@@ -282,6 +284,14 @@ $(selector).attr(attribute,function(ind">
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2017/04/23/python爬虫大战京东商城/" title="python爬虫大战京东商城">
+  <strong>上一篇：</strong><br/>
+  <span>
+  python爬虫大战京东商城</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2017/04/21/JQuery干货篇之操控DOM/"  title="JQuery干货篇之操控DOM">
@@ -337,6 +347,10 @@ $(selector).attr(attribute,function(ind">
 		  
 		
 		  
+			<li><a href="/categories/python/" title="python">python<sup>1</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/python数据挖掘与分析/" title="python数据挖掘与分析">python数据挖掘与分析<sup>1</sup></a></li>
 		  
 		
@@ -382,11 +396,15 @@ $(selector).attr(attribute,function(ind">
 			
 		
 			
+				<li><a href="/tags/java数据库操作/" title="java数据库操作">java数据库操作<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java数据库操作/" title="java数据库操作">java数据库操作<sup>1</sup></a></li>
+				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>1</sup></a></li>
 			
 		
 		</ul>
