@@ -5,35 +5,52 @@
   <meta charset="UTF-8">
   
   
-    <title>scrapy的下载器中间件 | 觅</title>
+    <title>Scrapyd部署爬虫 | 觅</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="scrapy中的下载器中间件下载中间件
-下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。
+    <meta name="description" content="Scrapyd部署爬虫准备工作
 
-编写下载器中间件
-1. process_request(request, spider)当每个request通过下载中间件时，该方法被调用。process_request() 必须返回其中之">
+安装scrapyd: pip install scrapyd
+安装scrapyd-client : pip install scrapyd-client
+安装curl:[安装地址](http://ono60m7tl.bkt.clouddn.com/curl.exe),安装完成以后将所在目录配置到环境变量中
+
+
+开始部署
+
+修改scrapy项目目录下的scrapy.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="scrapy的下载器中间件">
-<meta property="og:url" content="http://chenjiabing666.github.io/2017/03/25/scrapy的下载器中间件/index.html">
+<meta property="og:title" content="Scrapyd部署爬虫">
+<meta property="og:url" content="http://chenjiabing666.github.io/2017/04/24/Scrapyd部署爬虫/index.html">
 <meta property="og:site_name" content="觅">
-<meta property="og:description" content="scrapy中的下载器中间件下载中间件
-下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。
+<meta property="og:description" content="Scrapyd部署爬虫准备工作
 
-编写下载器中间件
-1. process_request(request, spider)当每个request通过下载中间件时，该方法被调用。process_request() 必须返回其中之">
-<meta property="og:updated_time" content="2017-03-25T07:08:40.498Z">
+安装scrapyd: pip install scrapyd
+安装scrapyd-client : pip install scrapyd-client
+安装curl:[安装地址](http://ono60m7tl.bkt.clouddn.com/curl.exe),安装完成以后将所在目录配置到环境变量中
+
+
+开始部署
+
+修改scrapy项目目录下的scrapy.">
+<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/scrayd.bmp">
+<meta property="og:updated_time" content="2017-04-24T02:59:07.935Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="scrapy的下载器中间件">
-<meta name="twitter:description" content="scrapy中的下载器中间件下载中间件
-下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。
+<meta name="twitter:title" content="Scrapyd部署爬虫">
+<meta name="twitter:description" content="Scrapyd部署爬虫准备工作
 
-编写下载器中间件
-1. process_request(request, spider)当每个request通过下载中间件时，该方法被调用。process_request() 必须返回其中之">
+安装scrapyd: pip install scrapyd
+安装scrapyd-client : pip install scrapyd-client
+安装curl:[安装地址](http://ono60m7tl.bkt.clouddn.com/curl.exe),安装完成以后将所在目录配置到环境变量中
+
+
+开始部署
+
+修改scrapy项目目录下的scrapy.">
+<meta name="twitter:image" content="http://ono60m7tl.bkt.clouddn.com/scrayd.bmp">
 
     
     <link rel="alternative" href="/atom.xml" title="觅" type="application/atom+xml">
@@ -92,14 +109,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/25/scrapy的下载器中间件/" title="scrapy的下载器中间件" itemprop="url">scrapy的下载器中间件</a>
+      <a href="/2017/04/24/Scrapyd部署爬虫/" title="Scrapyd部署爬虫" itemprop="url">Scrapyd部署爬虫</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-25T07:04:08.000Z" itemprop="datePublished"> 发表于 2017-03-25</time>
+    <time datetime="2017-04-24T02:58:07.000Z" itemprop="datePublished"> 发表于 2017-04-24</time>
     
   </p>
 </header>
@@ -108,60 +125,60 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy中的下载器中间件"><span class="toc-number">1.</span> <span class="toc-text">scrapy中的下载器中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载中间件"><span class="toc-number">1.1.</span> <span class="toc-text">下载中间件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写下载器中间件"><span class="toc-number">1.2.</span> <span class="toc-text">编写下载器中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-process-request-request-spider"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. process_request(request, spider)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-process-response-request-response-spider"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. process_response(request, response, spider)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-process-exception-request-exception-spider"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.process_exception(request, exception, spider)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">1.3.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Scrapyd部署爬虫"><span class="toc-number">1.</span> <span class="toc-text">Scrapyd部署爬虫</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-number">1.1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始部署"><span class="toc-number">1.2.</span> <span class="toc-text">开始部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.3.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="scrapy中的下载器中间件"><a href="#scrapy中的下载器中间件" class="headerlink" title="scrapy中的下载器中间件"></a>scrapy中的下载器中间件</h1><h2 id="下载中间件"><a href="#下载中间件" class="headerlink" title="下载中间件"></a>下载中间件</h2><blockquote>
-<p>下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。</p>
-<blockquote>
-<h2 id="编写下载器中间件"><a href="#编写下载器中间件" class="headerlink" title="编写下载器中间件"></a>编写下载器中间件</h2><blockquote>
-<h3 id="1-process-request-request-spider"><a href="#1-process-request-request-spider" class="headerlink" title="1. process_request(request, spider)"></a>1. <code>process_request(request, spider)</code></h3><p>当每个<code>request</code>通过下载中间件时，该方法被调用。<br><code>process_request()</code> 必须返回其中之一: 返回 <code>None</code> 、返回一个 <code>Response</code> 对象、返回一个 <code>Request</code>对象或<code>raise IgnoreRequest</code> 。</p>
-<p>如果其返回 <code>None</code> ，Scrapy将继续处理该<code>request</code>，执行其他的中间件的相应方法，直到合适的下载器处理函数(<code>download handler</code>)被调用， 该<code>request</code>被执行(其<code>response</code>被下载)。</p>
-<p>如果其返回 <code>Response</code> 对象，Scrapy将不会调用 任何 其他的 <code>process_request()</code> 或 <code>process_exception()</code> 方法，或相应地下载函数； 其将返回该<code>response</code>。 已安装的中间件的 <code>process_response()</code> 方法则会在每个<code>response</code>返回时被调用。</p>
-<p>如果其返回 <code>Request</code> 对象，Scrapy则停止调用 <code>process_request</code>方法并重新调度返回的<code>request</code>。当新返回的<code>request</code>被执行后， 相应地中间件链将会根据下载的<code>response</code>被调用。</p>
-<p>如果其<code>raise</code>一个 <code>IgnoreRequest</code> 异常，则安装的下载中间件的 <code>process_exception()</code> 方法会被调用。如果没有任何一个方法处理该异常， 则<code>request</code>的<code>errback(Request.errback)</code>方法会被调用。如果没有代码处理抛出的异常， 则该异常被忽略且不记录(不同于其他异常那样)。</p>
-<p>参数:    </p>
-<blockquote>
+		<h1 id="Scrapyd部署爬虫"><a href="#Scrapyd部署爬虫" class="headerlink" title="Scrapyd部署爬虫"></a>Scrapyd部署爬虫</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><blockquote>
 <ul>
-<li><code>request</code> (<code>Request</code> 对象) – 处理的<code>request</code></li>
-<li><code>spider</code> (<code>Spider</code> 对象) – 该<code>request</code>对应的<code>spider</code></li>
+<li><strong><code>安装scrapyd: pip install scrapyd</code></strong></li>
+<li><strong>安装<code>scrapyd-client : pip install scrapyd-client</code></strong></li>
+<li><strong><code>安装curl:[安装地址](http://ono60m7tl.bkt.clouddn.com/curl.exe)</code>,安装完成以后将所在目录配置到环境变量中</strong></li>
 </ul>
 </blockquote>
-<h3 id="2-process-response-request-response-spider"><a href="#2-process-response-request-response-spider" class="headerlink" title="2. process_response(request, response, spider)"></a>2. <code>process_response(request, response, spider)</code></h3><blockquote>
-<p><code>process_response()</code> 必须返回以下之一: 返回一个 <code>Response</code>对象、 返回一个<code>Request</code> 对象或<code>raise</code>一个 <code>IgnoreRequest</code> 异常。</p>
-<p>如果其返回一个 <code>Response</code> (可以与传入的<code>response</code>相同，也可以是全新的对象)， 该<code>response</code>会被在链中的其他中间件的 <code>process_response()</code> 方法处理。</p>
-<p>如果其返回一个 <code>Request</code> 对象，则中间件链停止， 返回的<code>request</code>会被重新调度下载。处理类似于 <code>process_request()</code> 返回<code>request</code>所做的那样。</p>
-<p>如果其抛出一个 <code>IgnoreRequest</code> 异常，则调用<code>request的errback(Request.errback)。</code> 如果没有代码处理抛出的异常，则该异常被忽略且不记录(不同于其他异常那样)。</p>
-<p>参数:    </p>
+<h2 id="开始部署"><a href="#开始部署" class="headerlink" title="开始部署"></a>开始部署</h2><blockquote>
+<ol>
+<li><p><strong>修改<code>scrapy</code>项目目录下的<code>scrapy.cfg</code>文件，修改如下</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[deploy:JD_Spider]    <span class="comment">#加上target   :name</span></div><div class="line">url = http://localhost:<span class="number">6800</span>/   <span class="comment">#将前面的#删除</span></div><div class="line">project = JD               <span class="comment">#project的名字，可以使用默认的，当然也可以改变</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>在任意目录下的打开终端，输入<code>scrapyd</code>,观察是否运行成功，运行成功的话，就可以打开<code>http://localhost:6800</code>看是否正常显示，如果正常显示则看到下面的这张图,这里的<code>JD</code>是部署之后才能看到的，现在是看不到的，所以没出现也不要担心：</strong></p>
+</li>
+</ol>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/scrayd.bmp" alt="scrapyd"></p>
+<ol>
+<li><p><strong>在项目的根目录下运行如下的命令：<code>python E:\python2.7\Scripts\scrapyd-deploy target -p project</code>,这里的E:\python2.7\Scripts\是你的python安装目录，Scripts是安装目录下的一个文件夹，注意前面一定要加上python,target是在前面scrapy.cfg中设置的deploy:JD_Spider，JD_Spider就是target,project 是JD,因此这个完整的命令是<code>python E:\python2.7\Scripts\scrapyd-deploy JD_Spider -p JD</code>,现在项目就部署到上面了，这下网页上就有<code>JD</code>了，详情请见上图</strong></p>
+</li>
+<li><p><strong>验证是否成功，你可以在网页上看有没有显示你的工程名字，另外在根目录下输入<code>python E:\python2.7\Scripts\scrapyd-deploy -l</code>就能列出你所有部署过的项目了</strong></p>
+</li>
+<li><p><strong>启动爬虫：<code>curl http://localhost:6800/schedule.json -d project=myproject -d spider=spider_name</code>,这里的<code>project</code>填入的是项目名，<code>spider_name</code>填入的是你的爬虫中定义的<code>name</code>,运行我的实例完整的代码为：<code>curl http://localhost:6800/schedule.json -d project=JD -d spider=spider</code>，这里将会显示如下信息：</strong></p>
+</li>
+</ol>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#这里的jobid比较重要，下面会用到这个取消爬虫</span></div><div class="line">&#123;<span class="string">"status"</span>: <span class="string">"ok"</span>, <span class="string">"jobid"</span>: <span class="string">"3013f9d1283611e79a63acb57dec5d04"</span>, <span class="string">"node_name"</span>: <span class="string">"DESKTOP-L78TJQ7"</span>&#125;</div></pre></td></tr></table></figure>
 <blockquote>
+<ol>
+<li><strong>取消爬虫：<code>curl http://localhost:6800/cancel.json -d project=myproject -d job=jobid</code>,<code>jobid</code>就是上面的提到过的，如果取消我的这个实例代码如：<code>curl http://localhost:6800/cancel.json -d project=JD -d job=3013f9d1283611e79a63acb57dec5d04</code>,那么它的状态就会变成如下：</strong></li>
+</ol>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="string">"status"</span>: <span class="string">"ok"</span>, <span class="string">"prevstate"</span>: <span class="string">"running"</span>, <span class="string">"node_name"</span>: <span class="string">"DESKTOP-L78TJQ7"</span>&#125;</div></pre></td></tr></table></figure>
 <blockquote>
-<ul>
-<li><code>request</code> (<code>Request</code>对象) – <code>response</code>所对应的request</li>
-<li><code>response</code> (<code>Response</code> 对象) – 被处理的response</li>
-<li><code>spider</code> (<code>Spider</code> 对象) – <code>response</code>所对应的<code>spider</code></li>
-</ul>
-</blockquote>
-</blockquote>
-</blockquote>
-<h3 id="3-process-exception-request-exception-spider"><a href="#3-process-exception-request-exception-spider" class="headerlink" title="3.process_exception(request, exception, spider)"></a>3.<code>process_exception(request, exception, spider)</code></h3><blockquote>
-<p>当下载处理器(<code>download handler</code>)或 <code>process_request()</code> (下载中间件)抛出异常(包括 <code>IgnoreRequest</code> 异常)时， Scrapy调用 <code>process_exception()</code> 。</p>
-<p><code>process_exception()</code> 应该返回以下之一: 返回 <code>None</code> 、 一个 <code>Response</code> 对象、或者一个 <code>Request</code> 对象。</p>
-<p>如果其返回 <code>None</code> ，Scrapy将会继续处理该异常，接着调用已安装的其他中间件的 <code>process_exception()</code> 方法，直到所有中间件都被调用完毕，则调用默认的异常处理。</p>
-<p>如果其返回一个 <code>Response</code> 对象，则已安装的中间件链的 <code>process_response()</code> 方法被调用。Scrapy将不会调用任何其他中间件的 <code>process_exception()</code> 方法。</p>
-<p>如果其返回一个 <code>Request</code> 对象， 则返回的<code>request</code>将会被重新调用下载。这将停止中间件的 <code>process_exception()</code> 方法执行，就如返回一个<code>response</code>的那样。</p>
-<p>参数:    </p>
+<ol>
+<li><p><strong>列出项目：<code>curl http://localhost:6800/listprojects.json</code>,下面将会出现你已经部署的项目</strong></p>
+</li>
+<li><p><strong>删除项目：<code>curl http://localhost:6800/delproject.json -d project=myproject</code></strong></p>
+</li>
+<li><p><strong>列出版本：<code>curl http://localhost:6800/listversions.json?project=myproject</code>,这里的<code>project</code>是项目的名字，是在scrapy.cfg设置的</strong></p>
+</li>
+<li><p><strong>列出爬虫：<code>curl http://localhost:6800/listspiders.json?project=myproject</code>这里的<code>project</code>是项目的名字，是在scrapy.cfg设置的</strong></p>
+</li>
+<li><p><strong>列出<code>job</code>:<code>curl http://localhost:6800/listjobs.json?project=myproject</code>这里的<code>project</code>是项目的名字，是在<code>scrapy.cfg</code>设置的</strong></p>
+</li>
+<li><p><strong>删除版本：<code>curl http://localhost:6800/delversion.json -d project=myproject -d version=r99</code>，这里的<code>version</code>是自己的项目版本号，在删除之前需要查看版本号</strong></p>
+</li>
+</ol>
 <blockquote>
-<ul>
-<li><code>request</code> (是 <code>Request</code> 对象) – 产生异常的<code>request</code></li>
-<li><code>exception</code> (<code>Exception</code> 对象) – 抛出的异常</li>
-<li><code>spider</code> (<code>Spider</code> 对象) – <code>request</code>对应的<code>spider</code></li>
-</ul>
-</blockquote>
-</blockquote>
-</blockquote>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><blockquote>
-<p>总的来说下载器中间件就是起到处理request请求并且返回response的作用，一切从网页爬取的url发起的请求会组成一个请求队列，然后一个一个排队经过下载器中间件，之后下载器中间件会对request做出相应的处理，比如添加请求头，添加代理等等，然后通过process_response返回一个response，之后就是用得到的response做出相应的分析，当然这里的内容页可以不实现，但是如果要爬取大型的网站，会遇到被ban的可能就要在下载器中间件这里着手，设置一些相应的请求头，ip代理等等内容。<br><strong>以上纯属个人逐渐摸索总结出来的内容，如果有什么错误欢迎指正</strong></p>
+<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
+<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
 </blockquote>
 </blockquote>
 </blockquote>
@@ -188,7 +205,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2017/03/25/scrapy的下载器中间件/" data-title="scrapy的下载器中间件 | 觅" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2017/04/24/Scrapyd部署爬虫/" data-title="Scrapyd部署爬虫 | 觅" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -201,19 +218,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/03/26/scrapy设置代理ip/" title="scrapy设置代理ip">
-  <strong>上一篇：</strong><br/>
-  <span>
-  scrapy设置代理ip</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/03/25/scrapy初试/"  title="scrapy初试">
+<a href="/2017/04/23/scrapy大战京东商城/"  title="scrapy大战京东商城">
  <strong>下一篇：</strong><br/> 
- <span>scrapy初试
+ <span>scrapy大战京东商城
 </span>
 </a>
 </div>
@@ -234,7 +243,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy中的下载器中间件"><span class="toc-number">1.</span> <span class="toc-text">scrapy中的下载器中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#下载中间件"><span class="toc-number">1.1.</span> <span class="toc-text">下载中间件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写下载器中间件"><span class="toc-number">1.2.</span> <span class="toc-text">编写下载器中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-process-request-request-spider"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. process_request(request, spider)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-process-response-request-response-spider"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. process_response(request, response, spider)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-process-exception-request-exception-spider"><span class="toc-number">1.2.3.</span> <span class="toc-text">3.process_exception(request, exception, spider)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">1.3.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Scrapyd部署爬虫"><span class="toc-number">1.</span> <span class="toc-text">Scrapyd部署爬虫</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-number">1.1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始部署"><span class="toc-number">1.2.</span> <span class="toc-text">开始部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.3.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
  
   </div>
 

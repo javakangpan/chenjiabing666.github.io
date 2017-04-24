@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-04-23T14:16:59.098Z</updated>
+  <updated>2017-04-24T02:59:07.935Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,82 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Scrapyd部署爬虫</title>
+    <link href="http://chenjiabing666.github.io/2017/04/24/Scrapyd%E9%83%A8%E7%BD%B2%E7%88%AC%E8%99%AB/"/>
+    <id>http://chenjiabing666.github.io/2017/04/24/Scrapyd部署爬虫/</id>
+    <published>2017-04-24T02:58:07.000Z</published>
+    <updated>2017-04-24T02:59:07.935Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Scrapyd部署爬虫"><a href="#Scrapyd部署爬虫" class="headerlink" title="Scrapyd部署爬虫"></a>Scrapyd部署爬虫</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><blockquote>
+<ul>
+<li><strong><code>安装scrapyd: pip install scrapyd</code></strong></li>
+<li><strong>安装<code>scrapyd-client : pip install scrapyd-client</code></strong></li>
+<li><strong><code>安装curl:[安装地址](http://ono60m7tl.bkt.clouddn.com/curl.exe)</code>,安装完成以后将所在目录配置到环境变量中</strong></li>
+</ul>
+</blockquote>
+<h2 id="开始部署"><a href="#开始部署" class="headerlink" title="开始部署"></a>开始部署</h2><blockquote>
+<ol>
+<li><p><strong>修改<code>scrapy</code>项目目录下的<code>scrapy.cfg</code>文件，修改如下</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[deploy:JD_Spider]    <span class="comment">#加上target   :name</span></div><div class="line">url = http://localhost:<span class="number">6800</span>/   <span class="comment">#将前面的#删除</span></div><div class="line">project = JD               <span class="comment">#project的名字，可以使用默认的，当然也可以改变</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>在任意目录下的打开终端，输入<code>scrapyd</code>,观察是否运行成功，运行成功的话，就可以打开<code>http://localhost:6800</code>看是否正常显示，如果正常显示则看到下面的这张图,这里的<code>JD</code>是部署之后才能看到的，现在是看不到的，所以没出现也不要担心：</strong></p>
+</li>
+</ol>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/scrayd.bmp" alt="scrapyd"></p>
+<ol>
+<li><p><strong>在项目的根目录下运行如下的命令：<code>python E:\python2.7\Scripts\scrapyd-deploy target -p project</code>,这里的E:\python2.7\Scripts\是你的python安装目录，Scripts是安装目录下的一个文件夹，注意前面一定要加上python,target是在前面scrapy.cfg中设置的deploy:JD_Spider，JD_Spider就是target,project 是JD,因此这个完整的命令是<code>python E:\python2.7\Scripts\scrapyd-deploy JD_Spider -p JD</code>,现在项目就部署到上面了，这下网页上就有<code>JD</code>了，详情请见上图</strong></p>
+</li>
+<li><p><strong>验证是否成功，你可以在网页上看有没有显示你的工程名字，另外在根目录下输入<code>python E:\python2.7\Scripts\scrapyd-deploy -l</code>就能列出你所有部署过的项目了</strong></p>
+</li>
+<li><p><strong>启动爬虫：<code>curl http://localhost:6800/schedule.json -d project=myproject -d spider=spider_name</code>,这里的<code>project</code>填入的是项目名，<code>spider_name</code>填入的是你的爬虫中定义的<code>name</code>,运行我的实例完整的代码为：<code>curl http://localhost:6800/schedule.json -d project=JD -d spider=spider</code>，这里将会显示如下信息：</strong></p>
+</li>
+</ol>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#这里的jobid比较重要，下面会用到这个取消爬虫</span></div><div class="line">&#123;<span class="string">"status"</span>: <span class="string">"ok"</span>, <span class="string">"jobid"</span>: <span class="string">"3013f9d1283611e79a63acb57dec5d04"</span>, <span class="string">"node_name"</span>: <span class="string">"DESKTOP-L78TJQ7"</span>&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li><strong>取消爬虫：<code>curl http://localhost:6800/cancel.json -d project=myproject -d job=jobid</code>,<code>jobid</code>就是上面的提到过的，如果取消我的这个实例代码如：<code>curl http://localhost:6800/cancel.json -d project=JD -d job=3013f9d1283611e79a63acb57dec5d04</code>,那么它的状态就会变成如下：</strong></li>
+</ol>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="string">"status"</span>: <span class="string">"ok"</span>, <span class="string">"prevstate"</span>: <span class="string">"running"</span>, <span class="string">"node_name"</span>: <span class="string">"DESKTOP-L78TJQ7"</span>&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li><p><strong>列出项目：<code>curl http://localhost:6800/listprojects.json</code>,下面将会出现你已经部署的项目</strong></p>
+</li>
+<li><p><strong>删除项目：<code>curl http://localhost:6800/delproject.json -d project=myproject</code></strong></p>
+</li>
+<li><p><strong>列出版本：<code>curl http://localhost:6800/listversions.json?project=myproject</code>,这里的<code>project</code>是项目的名字，是在scrapy.cfg设置的</strong></p>
+</li>
+<li><p><strong>列出爬虫：<code>curl http://localhost:6800/listspiders.json?project=myproject</code>这里的<code>project</code>是项目的名字，是在scrapy.cfg设置的</strong></p>
+</li>
+<li><p><strong>列出<code>job</code>:<code>curl http://localhost:6800/listjobs.json?project=myproject</code>这里的<code>project</code>是项目的名字，是在<code>scrapy.cfg</code>设置的</strong></p>
+</li>
+<li><p><strong>删除版本：<code>curl http://localhost:6800/delversion.json -d project=myproject -d version=r99</code>，这里的<code>version</code>是自己的项目版本号，在删除之前需要查看版本号</strong></p>
+</li>
+</ol>
+<blockquote>
+<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
+<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Scrapyd部署爬虫&quot;&gt;&lt;a href=&quot;#Scrapyd部署爬虫&quot; class=&quot;headerlink&quot; title=&quot;Scrapyd部署爬虫&quot;&gt;&lt;/a&gt;Scrapyd部署爬虫&lt;/h1&gt;&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;
+    
+    </summary>
+    
+      <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
+    
+  </entry>
   
   <entry>
     <title>scrapy大战京东商城</title>
@@ -1865,65 +1941,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;scrapy设置”请求池”&quot;&gt;&lt;a href=&quot;#scrapy设置”请求池”&quot; class=&quot;headerlink&quot; title=&quot;scrapy设置”请求池”&quot;&gt;&lt;/a&gt;scrapy设置”请求池”&lt;/h1&gt;&lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; cla
-    
-    </summary>
-    
-      <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Scrapy中使用cookie免于验证登录和模拟登录</title>
-    <link href="http://chenjiabing666.github.io/2017/03/26/Scrapy%E4%B8%AD%E4%BD%BF%E7%94%A8cookie%E5%85%8D%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%99%BB%E5%BD%95%E5%92%8C%E6%A8%A1%E6%8B%9F%E7%99%BB%E5%BD%95/"/>
-    <id>http://chenjiabing666.github.io/2017/03/26/Scrapy中使用cookie免于验证登录和模拟登录/</id>
-    <published>2017-03-26T05:30:53.000Z</published>
-    <updated>2017-03-27T03:32:05.186Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Scrapy中使用cookie免于验证登录和模拟登录"><a href="#Scrapy中使用cookie免于验证登录和模拟登录" class="headerlink" title="Scrapy中使用cookie免于验证登录和模拟登录"></a>Scrapy中使用cookie免于验证登录和模拟登录</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
-<p><code>python</code>爬虫我认为最困难的问题一个是ip代理，另外一个就是模拟登录了，更操蛋的就是模拟登录了之后还有验证码，真的是不让人省心，不过既然有了反爬虫，那么就有反反爬虫的策略，这里就先介绍一个cookie模拟登陆，后续还有<code>seleminum+phantomjs</code>模拟浏览器登录的文章。还不知道cookie是什么朋友们，可以<a href="http://bubkoo.com/2014/04/21/http-cookies-explained/" target="_blank" rel="external">点击这里</a></p>
-<h2 id="cookie提取方法："><a href="#cookie提取方法：" class="headerlink" title="cookie提取方法："></a>cookie提取方法：</h2><blockquote>
-<p>打开谷歌浏览器或者火狐浏览器，如果是谷歌浏览器的按<code>F12</code>这个键就会跳出来浏览器控制台，然后点击<code>Network</code>，之后就是刷新网页开始抓包了，之后在抓到的页面中随便打开一个，就能看到cokie了，但是这里的cookie并不符合python中的格式，因此需要转换格式，下面提供了转换的代码</p>
-</blockquote>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">transCookie</span>:</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cookie)</span>:</span></div><div class="line">    self.cookie = cookie</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">stringToDict</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="string">'''</span></div><div class="line">    将从浏览器上Copy来的cookie字符串转化为Scrapy能使用的Dict</div><div class="line">    :return:</div><div class="line">    '''</div><div class="line">    itemDict = &#123;&#125;</div><div class="line">    items = self.cookie.split(<span class="string">';'</span>)</div><div class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items:</div><div class="line">        key = item.split(<span class="string">'='</span>)[<span class="number">0</span>].replace(<span class="string">' '</span>, <span class="string">''</span>)</div><div class="line">        value = item.split(<span class="string">'='</span>)[<span class="number">1</span>]</div><div class="line">        itemDict[key] = value</div><div class="line">    <span class="keyword">return</span> itemDict</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">cookie = <span class="string">"你复制的cookie"</span></div><div class="line">trans = transCookie(cookie)</div><div class="line"><span class="keyword">print</span> trans.stringToDict()</div></pre></td></tr></table></figure>
-<blockquote>
-<h2 id="补充说明："><a href="#补充说明：" class="headerlink" title="补充说明："></a>补充说明：</h2><blockquote>
-<p>只需要将你网页上的cookie复制到上述代码中直接运行就可以了</p>
-</blockquote>
-<h2 id="使用cookie操作scrapy"><a href="#使用cookie操作scrapy" class="headerlink" title="使用cookie操作scrapy"></a>使用cookie操作scrapy</h2><blockquote>
-<h3 id="直接撸代码"><a href="#直接撸代码" class="headerlink" title="直接撸代码"></a>直接撸代码</h3></blockquote>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="keyword">from</span> scrapy.conf <span class="keyword">import</span> settings <span class="comment">#从settings文件中导入Cookie，这里也可以室友from scrapy.conf import settings.COOKIE</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DemoSpider</span><span class="params">(scrapy.Spider)</span>:</span></div><div class="line">name = <span class="string">"demo"</span></div><div class="line"><span class="comment">#allowed_domains = ["csdn.com"]</span></div><div class="line">start_urls = [<span class="string">"http://write.blog.csdn.net/postlist"</span>]</div><div class="line">cookie = settings[<span class="string">'COOKIE'</span>]  <span class="comment"># 带着Cookie向网页发请求\</span></div><div class="line">headers = &#123;</div><div class="line">    <span class="string">'Connection'</span>: <span class="string">'keep - alive'</span>,  <span class="comment"># 保持链接状态</span></div><div class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36'</span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">start_requests</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="keyword">yield</span> scrapy.Request(url=self.start_urls[<span class="number">0</span>],headers=self.headers,cookies=self.cookie)<span class="comment"># 这里带着cookie发出请求</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></div><div class="line">    <span class="keyword">print</span> response.body</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><blockquote>
-<p>这里是scrapy工程目录下spiders目录下的主要的解析网页的py文件相信学过scrapy的应该不会陌生，上述代码中的cookie值是放在Settings文件中的，因此使用的时候需要导入，当然你也可以直接将cookie粘贴到这个文件中</p>
-</blockquote>
-</blockquote>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><blockquote>
-<p>虽说这里使用直接使用cookie可以省去很多麻烦，但是cookie的生命周期特别的短，不过小型的项目足够使用了，向那些需要爬两三天甚至几个月的项目就不适用了，因此在隔一段时间就要重新换cookie的值，虽说有很多麻烦，但是我还是比较喜欢这种方法的，因为可以省去不少脑筋</p>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持。</p>
-</blockquote>
-</blockquote>
-<h3 id="最后欢迎大家看看我的其他scrapy文章"><a href="#最后欢迎大家看看我的其他scrapy文章" class="headerlink" title="最后欢迎大家看看我的其他scrapy文章"></a>最后欢迎大家看看我的其他scrapy文章</h3><blockquote>
-<ul>
-<li><a href="https://chenjiabing666.github.io/2017/03/26/scrapy%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86ip/">scrapy设置代理ip</a></li>
-<li><a href="https://chenjiabing666.github.io/2017/03/25/scrapy%E6%9E%B6%E6%9E%84%E5%88%9D%E6%8E%A2/">scrapy架构初探</a></li>
-<li><a href="https://chenjiabing666.github.io/2017/03/25/scrapy%E5%88%9D%E8%AF%95/">scrapy初试</a></li>
-<li><a href="https://chenjiabing666.github.io/2017/03/25/scrapy%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%99%A8%E4%B8%AD%E9%97%B4%E4%BB%B6/">scrapy下载器中间件</a></li>
-</ul>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Scrapy中使用cookie免于验证登录和模拟登录&quot;&gt;&lt;a href=&quot;#Scrapy中使用cookie免于验证登录和模拟登录&quot; class=&quot;headerlink&quot; title=&quot;Scrapy中使用cookie免于验证登录和模拟登录&quot;&gt;&lt;/a&gt;Scrapy中使
     
     </summary>
     
