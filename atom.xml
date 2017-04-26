@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-04-26T15:11:52.962Z</updated>
+  <updated>2017-04-26T15:18:01.666Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://chenjiabing666.github.io/2017/04/26/BootStrap%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E8%A1%A8%E5%8D%95/"/>
     <id>http://chenjiabing666.github.io/2017/04/26/BootStrap干货篇之表单/</id>
     <published>2017-04-26T15:11:37.000Z</published>
-    <updated>2017-04-26T15:11:52.962Z</updated>
+    <updated>2017-04-26T15:18:01.666Z</updated>
     
     <content type="html"><![CDATA[<h1 id="BootStrap干货篇之表单"><a href="#BootStrap干货篇之表单" class="headerlink" title="BootStrap干货篇之表单"></a>BootStrap干货篇之表单</h1><h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><blockquote>
 <p><strong>单独的表单控件会被自动赋予一些全局样式。所有设置了 <code>.form-control</code> 类的 <code>&lt;input&gt;</code>、<code>&lt;textarea&gt;</code> 和 <code>&lt;select&gt;</code> 元素都将被默认设置宽度属性为 <code>width: 100%</code>;。 将 <code>label</code>元素和前面提到的控件包裹在 <code>.form-group</code> 中可以获得最好的排列。</strong></p>
@@ -90,6 +90,10 @@
     
     </summary>
     
+      <category term="BootStrap学习" scheme="http://chenjiabing666.github.io/categories/BootStrap%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="BootStrap" scheme="http://chenjiabing666.github.io/tags/BootStrap/"/>
     
   </entry>
   
