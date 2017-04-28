@@ -5,50 +5,41 @@
   <meta charset="UTF-8">
   
   
-    <title>scrapy初试 | 觅</title>
+    <title>MongoDB干货篇之安装 | 觅</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="scrapy初试
-创建项目
-打开cmd，在终端输入scrapy startproject tutorial,这里将在指定的文件夹下创建一个scrapy工程
+    <meta name="description" content="MongoDB干货篇之安装安装
 
-其中将会创建以下的文件：
+下载地址
 
-scrapy.cfg: 项目的配置文件
-tutorial/: 该项目的python模块。之后您将在此加入代码。
-tutorial/items.py: 项目中的item文件.
-tutorial/pipelines.p">
+点击安装,选择自定义，后选择安装路径，不过最好安装在根目录下(C盘)，然后点解next,这里我安装的路径是C:\MongoDB
+
+创建文件夹:在C:\MongoDB下创建一个文件夹data,然后在data文件夹下创建db,log两个子文件夹,在log文件下创建一个MongoDB.log文档，总得来说创建了C:\MongoDB\data,C:\Mongo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="scrapy初试">
-<meta property="og:url" content="http://chenjiabing666.github.io/2017/03/25/scrapy初试/index.html">
+<meta property="og:title" content="MongoDB干货篇之安装">
+<meta property="og:url" content="http://chenjiabing666.github.io/2017/04/28/MongoDB干货篇之安装/index.html">
 <meta property="og:site_name" content="觅">
-<meta property="og:description" content="scrapy初试
-创建项目
-打开cmd，在终端输入scrapy startproject tutorial,这里将在指定的文件夹下创建一个scrapy工程
+<meta property="og:description" content="MongoDB干货篇之安装安装
 
-其中将会创建以下的文件：
+下载地址
 
-scrapy.cfg: 项目的配置文件
-tutorial/: 该项目的python模块。之后您将在此加入代码。
-tutorial/items.py: 项目中的item文件.
-tutorial/pipelines.p">
-<meta property="og:updated_time" content="2017-03-27T03:30:06.976Z">
+点击安装,选择自定义，后选择安装路径，不过最好安装在根目录下(C盘)，然后点解next,这里我安装的路径是C:\MongoDB
+
+创建文件夹:在C:\MongoDB下创建一个文件夹data,然后在data文件夹下创建db,log两个子文件夹,在log文件下创建一个MongoDB.log文档，总得来说创建了C:\MongoDB\data,C:\Mongo">
+<meta property="og:updated_time" content="2017-04-28T02:54:33.447Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="scrapy初试">
-<meta name="twitter:description" content="scrapy初试
-创建项目
-打开cmd，在终端输入scrapy startproject tutorial,这里将在指定的文件夹下创建一个scrapy工程
+<meta name="twitter:title" content="MongoDB干货篇之安装">
+<meta name="twitter:description" content="MongoDB干货篇之安装安装
 
-其中将会创建以下的文件：
+下载地址
 
-scrapy.cfg: 项目的配置文件
-tutorial/: 该项目的python模块。之后您将在此加入代码。
-tutorial/items.py: 项目中的item文件.
-tutorial/pipelines.p">
+点击安装,选择自定义，后选择安装路径，不过最好安装在根目录下(C盘)，然后点解next,这里我安装的路径是C:\MongoDB
+
+创建文件夹:在C:\MongoDB下创建一个文件夹data,然后在data文件夹下创建db,log两个子文件夹,在log文件下创建一个MongoDB.log文档，总得来说创建了C:\MongoDB\data,C:\Mongo">
 
     
     <link rel="alternative" href="/atom.xml" title="觅" type="application/atom+xml">
@@ -107,14 +98,14 @@ tutorial/pipelines.p">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/25/scrapy初试/" title="scrapy初试" itemprop="url">scrapy初试</a>
+      <a href="/2017/04/28/MongoDB干货篇之安装/" title="MongoDB干货篇之安装" itemprop="url">MongoDB干货篇之安装</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-25T06:21:21.000Z" itemprop="datePublished"> 发表于 2017-03-25</time>
+    <time datetime="2017-04-28T02:53:32.000Z" itemprop="datePublished"> 发表于 2017-04-28</time>
     
   </p>
 </header>
@@ -123,56 +114,58 @@ tutorial/pipelines.p">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy初试"><span class="toc-number">1.</span> <span class="toc-text">scrapy初试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建项目"><span class="toc-number">1.1.</span> <span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其中将会创建以下的文件："><span class="toc-number">1.2.</span> <span class="toc-text">其中将会创建以下的文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写第一个爬虫"><span class="toc-number">1.3.</span> <span class="toc-text">编写第一个爬虫</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#spider代码中内容解析"><span class="toc-number">1.3.1.</span> <span class="toc-text">spider代码中内容解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以下是spider目录下的demo-py的代码"><span class="toc-number">1.3.2.</span> <span class="toc-text">以下是spider目录下的demo.py的代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spider的爬取"><span class="toc-number">1.4.</span> <span class="toc-text">spider的爬取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spider中的数据存取"><span class="toc-number">1.5.</span> <span class="toc-text">spider中的数据存取</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MongoDB干货篇之安装"><span class="toc-number">1.</span> <span class="toc-text">MongoDB干货篇之安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试连接"><span class="toc-number">1.2.</span> <span class="toc-text">测试连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装程windows服务"><span class="toc-number">1.3.</span> <span class="toc-text">安装程windows服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.4.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="scrapy初试"><a href="#scrapy初试" class="headerlink" title="scrapy初试"></a>scrapy初试</h1><blockquote>
-<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><blockquote>
-<p>打开<code>cmd</code>，在终端输入<code>scrapy startproject tutorial</code>,这里将在指定的文件夹下创建一个<code>scrapy</code>工程</p>
-</blockquote>
-<h2 id="其中将会创建以下的文件："><a href="#其中将会创建以下的文件：" class="headerlink" title="其中将会创建以下的文件："></a>其中将会创建以下的文件：</h2><blockquote>
+		<h1 id="MongoDB干货篇之安装"><a href="#MongoDB干货篇之安装" class="headerlink" title="MongoDB干货篇之安装"></a>MongoDB干货篇之安装</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
 <ul>
-<li><code>scrapy.cfg</code>: 项目的配置文件</li>
-<li><code>tutorial/</code>: 该项目的python模块。之后您将在此加入代码。</li>
-<li><code>tutorial/items.py</code>: 项目中的item文件.</li>
-<li><code>tutorial/pipelines.py</code>: 项目中的pipelines文件.</li>
-<li><code>tutorial/settings.py</code>: 项目的设置文件.</li>
-<li><code>tutorial/spiders/</code>: 放置spider代码的目录.</li>
+<li><p><strong><a href="http://www.mongodb.org/downloads" target="_blank" rel="external">下载地址</a></strong></p>
+</li>
+<li><p><strong>点击安装,选择自定义，后选择安装路径，不过最好安装在根目录下(<code>C盘</code>)，然后点解<code>next</code>,这里我安装的路径是<code>C:\MongoDB</code></strong></p>
+</li>
+<li><p><strong>创建文件夹:在<code>C:\MongoDB</code>下创建一个文件夹<code>data</code>,然后在<code>data</code>文件夹下创建<code>db</code>,<code>log</code>两个子文件夹,在<code>log</code>文件下创建一个<code>MongoDB.log</code>文档，总得来说创建了<code>C:\MongoDB\data</code>,<code>C:\MongoDB\data\db</code>,<code>C:\MongoDB\data\log</code>,<code>C:\MongoDB\data\log\MongoDB.log</code></strong></p>
+</li>
+<li><p><strong>在<code>C:\MongoDB\bin</code>文件夹下运行<code>cmd.exe</code>进入<code>dos</code>命令，执行以下命令：</strong></p>
+<blockquote>
+<ul>
+<li><strong>然后在<code>cmd</code>下输入<code>mongod -dbpath &quot;C:\MongoDB\data\db</code>,将会看到一些信息，说明已经安装成功了</strong></li>
 </ul>
 </blockquote>
-<p>定义item</p>
-<blockquote>
-<p><code>Item</code>是保存爬取到的数据的容器；其使用方法和<code>python</code>字典类似， 并且提供了额外保护机制来避免拼写错误导致的未定义字段错误。</p>
-<p>类似在<code>ORM</code>中做的一样，您可以通过创建一个 <code>scrapy.Item</code> 类， 并且定义类型为 <code>scrapy.Field</code>的类属性来定义一个<code>Item</code>。 (如果不了解<code>ORM</code>, 不用担心，您会发现这个步骤非常简单)</p>
-<p>首先根据需要从<code>dmoz.org</code>获取到的数据对<code>item</code>进行建模。 我们需要从<code>dmoz</code>中获取名字，<code>url</code>，以及网站的描述。 对此，在<code>item</code>中定义相应的字段。编辑 <code>tutorial</code> 目录中的 <code>items.py</code> 文件:</p>
-</blockquote>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DmozItem</span><span class="params">(scrapy.Item)</span>:</span></div><div class="line">title = scrapy.Field()</div><div class="line">link = scrapy.Field()</div><div class="line">desc = scrapy.Field()</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>一开始这看起来可能有点复杂，但是通过定义item， 您可以很方便的使用Scrapy的其他方法。而这些方法需要知道您的item的定义.</p>
-</blockquote>
-<h2 id="编写第一个爬虫"><a href="#编写第一个爬虫" class="headerlink" title="编写第一个爬虫"></a>编写第一个爬虫</h2><blockquote>
-<blockquote>
-<p>在工程的根目录下打开终端输入<code>scrapy genspider demo douban.com</code><br>这里的<code>demo</code>是<code>spders</code>文件下的主要<code>py</code>文件<br><code>douban.com</code>是要爬取的域名，会在<code>demo.py</code>中的 <code>allowed_domains</code>中显示，主要的功能就是限制爬取的<code>url</code></p>
-<h3 id="spider代码中内容解析"><a href="#spider代码中内容解析" class="headerlink" title="spider代码中内容解析"></a>spider代码中内容解析</h3><ul>
-<li><code>name</code>: 用于区别<code>Spider</code>。 该名字必须是唯一的，您不可以为不同的<code>Spider</code>设定相同的名字。</li>
-<li><code>start_urls</code>: 包含了<code>Spider</code>在启动时进行爬取的<code>url</code>列表。 因此，第一个被获取到的页面将是其中之一。 后续的<code>URL</code>则从初始的<code>URL</code>获取到的数据中提取。</li>
-<li><code>parse()</code> 是spider的一个方法。 被调用时，每个初始<code>URL</code>完成下载后生成的 Response 对象将会作为唯一的参数传递给该函数。 该方法负责解析返回的数据(<code>response data</code>)，提取数据(生成<code>item</code>)以及生成需要进一步处理的<code>URL</code>的 <code>Request</code>对象。</li>
+</li>
 </ul>
 </blockquote>
-<h3 id="以下是spider目录下的demo-py的代码"><a href="#以下是spider目录下的demo-py的代码" class="headerlink" title="以下是spider目录下的demo.py的代码"></a>以下是spider目录下的demo.py的代码</h3></blockquote>
+<h2 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h2><blockquote>
+<ul>
+<li><p><strong>在<code>C:\MongoDB\bin</code>文件夹下运行<code>cmd.exe</code>,输入<code>mongo</code>或者<code>mongo.exe</code>,将会出现连接的信息，说明已经连接成功了</strong></p>
+</li>
+<li><p><strong>然后在另外一个<code>cmd.exe</code>在<code>bin</code>目录下运行<code>mongo</code>可以看到已经连接上<code>MongoDB</code>了，注意上面打开的终端不能关闭，否则不能成功连接，这是比较麻烦的，需要每次连接都要启动，下面我们需要把它安装为<code>windows</code>服务</strong></p>
+</li>
+</ul>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scrapy</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DmozSpider</span><span class="params">(scrapy.Spider)</span>:</span></div><div class="line">name = <span class="string">"dmoz"</span></div><div class="line">allowed_domains = [<span class="string">"dmoz.org"</span>]</div><div class="line">start_urls = [</div><div class="line">        <span class="string">"http://www.dmoz.org/Computers/Programming/Languages/Python/Books/"</span>,</div><div class="line">    <span class="string">"http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"</span></div><div class="line">]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></div><div class="line">    filename = response.url.split(<span class="string">"/"</span>)[<span class="number">-2</span>]</div><div class="line">    <span class="keyword">with</span> open(filename, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</div><div class="line">        f.write(response.body)</div></pre></td></tr></table></figure>
+<h2 id="安装程windows服务"><a href="#安装程windows服务" class="headerlink" title="安装程windows服务"></a>安装程windows服务</h2><p><strong>注意在管理员的<code>cmd.exe</code>中运行以下命令，否则在<code>MongoDB.log</code>文件里出现遭到拒绝</strong></p>
 <blockquote>
-<h2 id="spider的爬取"><a href="#spider的爬取" class="headerlink" title="spider的爬取"></a>spider的爬取</h2><blockquote>
-<p>进入工程的根目录下打开终端输入：<code>scrapy crawl dmoz</code></p>
+<ul>
+<li><p><strong>运行<code>cmd</code>，进入<code>bin</code>目录，执行：<code>mongod --dbpath &quot;C:\MongoDB\data\db&quot; --logpath &quot;D:\MongoDB\data\log\MongoDB.log&quot; --install --serviceName &quot;MongoDB&quot;</code>,这里的服务名为<code>MongoDB</code>，可以在<code>C:\MongoDB\data\log\MongoDB.log</code>文件里查看相关信息，如果出现遭到拒绝就是没有在管理员的权限下执行命令</strong></p>
+</li>
+<li><p><strong>接下来就是启动服务了，现在在<code>cmd.exe</code>中运行<code>NET START MongoDB</code>，如果看到服务成功启动，那么就成功了，但是我在启动的时候出现<code>48</code>错误，下面将会做出解决方法：</strong></p>
+<blockquote>
+<ul>
+<li><strong>先删除服务:<code>mongod --dbpath &quot;C:\MongoDB\data\db&quot; --logpath &quot;C:\MongoDB\data\log\MongoDB.log&quot; --remove --serviceName &quot;MongoDB&quot;</code></strong></li>
+<li><strong>删除<code>MongoDB</code>目录下的<code>mongod.lock</code></strong></li>
+<li><strong>然后就是重新安装了：<code>mongod --logpath &quot;C:\MongoDB\data\log\MongoDB.log&quot; --logappend --dbpath &quot;C:\Mongodb\data&quot; --directoryperdb --serviceName &quot;MongoDB&quot; --serviceDisplayName &quot;MongoDB&quot; --install</code></strong></li>
+<li><strong>接下来重新启动服务，<code>net start MongoDB</code>,可以看到成功启动了</strong></li>
+</ul>
 </blockquote>
-<h2 id="spider中的数据存取"><a href="#spider中的数据存取" class="headerlink" title="spider中的数据存取"></a>spider中的数据存取</h2><blockquote>
-<p>在工程的根目录下打开终端输入<code>scrapy crawl dmoz -o items.json</code><br>这里是将数据存储到<code>json</code>文件中</p>
+</li>
+</ul>
+<blockquote>
+<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
+<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
 </blockquote>
 </blockquote>
+</blockquote>
+<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -180,13 +173,13 @@ tutorial/pipelines.p">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Scrapy学习/">Scrapy学习</a>
+  <a class="article-category-link" href="/categories/数据库干货篇/">数据库干货篇</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/scrapy/">scrapy</a>
+  <span></span> <a href="/tags/MongoDB/">MongoDB</a>
   </div>
 
 </div>
@@ -195,7 +188,7 @@ tutorial/pipelines.p">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2017/03/25/scrapy初试/" data-title="scrapy初试 | 觅" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2017/04/28/MongoDB干货篇之安装/" data-title="MongoDB干货篇之安装 | 觅" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -208,19 +201,11 @@ tutorial/pipelines.p">
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/03/25/scrapy的下载器中间件/" title="scrapy的下载器中间件">
-  <strong>上一篇：</strong><br/>
-  <span>
-  scrapy的下载器中间件</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/03/25/java中的IO操作/"  title="java中的IO操作">
+<a href="/2017/04/27/JDBC干货篇一/"  title="JDBC干货篇一">
  <strong>下一篇：</strong><br/> 
- <span>java中的IO操作
+ <span>JDBC干货篇一
 </span>
 </a>
 </div>
@@ -241,7 +226,7 @@ tutorial/pipelines.p">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy初试"><span class="toc-number">1.</span> <span class="toc-text">scrapy初试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建项目"><span class="toc-number">1.1.</span> <span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其中将会创建以下的文件："><span class="toc-number">1.2.</span> <span class="toc-text">其中将会创建以下的文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写第一个爬虫"><span class="toc-number">1.3.</span> <span class="toc-text">编写第一个爬虫</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#spider代码中内容解析"><span class="toc-number">1.3.1.</span> <span class="toc-text">spider代码中内容解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以下是spider目录下的demo-py的代码"><span class="toc-number">1.3.2.</span> <span class="toc-text">以下是spider目录下的demo.py的代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spider的爬取"><span class="toc-number">1.4.</span> <span class="toc-text">spider的爬取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spider中的数据存取"><span class="toc-number">1.5.</span> <span class="toc-text">spider中的数据存取</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MongoDB干货篇之安装"><span class="toc-number">1.</span> <span class="toc-text">MongoDB干货篇之安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试连接"><span class="toc-number">1.2.</span> <span class="toc-text">测试连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装程windows服务"><span class="toc-number">1.3.</span> <span class="toc-text">安装程windows服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.4.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
  
   </div>
 
