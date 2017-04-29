@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-04-28T02:59:18.134Z</updated>
+  <updated>2017-04-29T02:07:29.180Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,159 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python爬虫之BeautifulSoup</title>
+    <link href="http://chenjiabing666.github.io/2017/04/29/python%E7%88%AC%E8%99%AB%E4%B9%8BBeautifulSoup/"/>
+    <id>http://chenjiabing666.github.io/2017/04/29/python爬虫之BeautifulSoup/</id>
+    <published>2017-04-29T02:06:56.000Z</published>
+    <updated>2017-04-29T02:07:29.180Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="python爬虫之BeautifulSoup"><a href="#python爬虫之BeautifulSoup" class="headerlink" title="python爬虫之BeautifulSoup"></a>python爬虫之BeautifulSoup</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p><strong><code>Beautiful Soup</code>提供一些简单的、<code>python</code>式的函数用来处理导航、搜索、修改分析树等功能。它是一个工具箱，通过解析文档为用户提供需要抓取的数据，因为简单，所以不需要多少代码就可以写出一个完整的应用程序。<code>Beautiful Soup</code>自动将输入文档转换为<code>Unicode</code>编码，输出文档转换为<code>utf-8</code>编码。你不需要考虑编码方式，除非文档没有指定一个编码方式，这时，<code>Beautiful Soup</code>就不能自动识别编码方式了。然后，你仅仅需要说明一下原始编码方式就可以了。<br><code>Beautiful Soup</code>已成为和<code>lxml</code>、<code>html6lib</code>一样出色的<code>python</code>解释器，为用户灵活地提供不同的解析策略或强劲的速度。</strong></p>
+</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
+<ul>
+<li><strong><code>pip install BeautifulSoup4</code></strong></li>
+<li><strong><code>easy_install BeautifulSoup4</code></strong></li>
+</ul>
+</blockquote>
+<h2 id="创建BeautifulSoup对象"><a href="#创建BeautifulSoup对象" class="headerlink" title="创建BeautifulSoup对象"></a>创建BeautifulSoup对象</h2><blockquote>
+<ul>
+<li><p>首先应该导入<code>BeautifulSoup</code>类库 <code>from bs4 import BeautifulSoup</code></p>
+</li>
+<li><p><strong>下面开始创建对像，在开始之前为了方便演示，先创建一个<code>html</code>文本，如下：</strong></p>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">html = <span class="string">"""</span></div><div class="line">&lt;html&gt;&lt;head&gt;&lt;title&gt;The Dormouse's story&lt;/title&gt;&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;p class="title" name="dromouse"&gt;&lt;b&gt;The Dormouse's story&lt;/b&gt;&lt;/p&gt;</div><div class="line">&lt;p class="story"&gt;Once upon a time there were three little sisters; and their names were</div><div class="line">&lt;a href="http://example.com/elsie" class="sister" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;,</div><div class="line">&lt;a href="http://example.com/lacie" class="sister" id="link2"&gt;Lacie&lt;/a&gt; and</div><div class="line">&lt;a href="http://example.com/tillie" class="sister" id="link3"&gt;Tillie&lt;/a&gt;;</div><div class="line">and they lived at the bottom of a well.&lt;/p&gt;</div><div class="line">&lt;p class="story"&gt;...&lt;/p&gt;</div><div class="line">"""</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><strong>创建对象：<code>soup=BeautifulSoup(html,&#39;lxml&#39;)</code>,这里的lxml是解析的类库，目前来说个人觉得最好的解析器了，一直在用这个，安装方法：<code>pip install lxml</code></strong></li>
+</ul>
+</blockquote>
+<h2 id="Tag"><a href="#Tag" class="headerlink" title="Tag"></a>Tag</h2><blockquote>
+<p><strong><code>Tag</code>就是<code>html</code>中的一个标签，用<code>BeautifulSoup</code>就能解析出来<code>Tag</code>的具体内容，具体的格式为<code>soup.name</code>,其中<code>name</code>是<code>html</code>下的标签，具体实例如下：</strong></p>
+<ul>
+<li><p><strong><code>print soup.title</code>输出<code>title</code>标签下的内容，包括此标签，这个将会输出<code>&lt;title&gt;The Dormouse&#39;s story&lt;/title&gt;</code></strong></p>
+</li>
+<li><p><strong><code>print soup.head</code></strong></p>
+</li>
+</ul>
+</blockquote>
+<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><blockquote>
+<p><strong>这里的格式只能获取这些标签的第一个，后面会讲到获取多个标签的方法。其中对于<code>Tag</code>有两个重要的属性<code>name</code>和<code>attrs</code>,分别表示名字和属性,介绍如下：</strong></p>
+<blockquote>
+<ul>
+<li><p><strong><code>name</code>:对于<code>Tag</code>，它的<code>name</code>就是其本身，如<code>soup.p.name</code>就是<code>p</code></strong></p>
+</li>
+<li><p><strong><code>attrs</code>是一个字典类型的，对应的是属性-值，如<code>print soup.p.attrs</code>,输出的就是<code>{&#39;class&#39;: [&#39;title&#39;], &#39;name&#39;: &#39;dromouse&#39;}</code>,当然你也可以得到具体的值，如<code>print soup.p.attrs[&#39;class&#39;]</code>,输出的就是<code>[title]</code>是一个列表的类型，因为一个属性可能对应多个值,当然你也可以通过get方法得到属性的，如：<code>print soup.p.get(&#39;class&#39;)</code>。还可以直接使用<code>print soup.p[&#39;class&#39;]</code></strong></p>
+</li>
+</ul>
+</blockquote>
+</blockquote>
+<h3 id="get"><a href="#get" class="headerlink" title="get"></a>get</h3><blockquote>
+<p><strong><code>get</code>方法用于得到标签下的属性值，注意这是一个重要的方法，在许多场合都能用到，比如你要得到<code>&lt;img src=&quot;#&quot;&gt;</code>标签下的图像<code>url</code>,那么就可以用<code>soup.img.get(&#39;src&#39;)</code>,具体解析如下：</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.p.get(<span class="string">"class"</span>)   <span class="comment">#得到第一个p标签下的src属性</span></div></pre></td></tr></table></figure>
+<h3 id="string"><a href="#string" class="headerlink" title="string"></a>string</h3><blockquote>
+<p><strong>得到标签下的文本内容，只有在此标签下没有子标签，或者只有一个子标签的情况下才能返回其中的内容，否则返回的是<code>None</code>具体实例如下：</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.p.string <span class="comment">#在上面的一段文本中p标签没有子标签，因此能够正确返回文本的内容</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> soup.html.string  <span class="comment">#这里得到的就是None,因为这里的html中有很多的子标签</span></div></pre></td></tr></table></figure>
+<h3 id="get-text"><a href="#get-text" class="headerlink" title="get_text()"></a>get_text()</h3><blockquote>
+<p><strong>可以获得一个标签中的所有文本内容，包括子孙节点的内容，这是最常用的方法</strong></p>
+</blockquote>
+<h2 id="搜索文档树"><a href="#搜索文档树" class="headerlink" title="搜索文档树"></a>搜索文档树</h2><h3 id="find-all-name-attrs-recursive-text-kwargs"><a href="#find-all-name-attrs-recursive-text-kwargs" class="headerlink" title="find_all( name , attrs , recursive , text , **kwargs )"></a>find_all( name , attrs , recursive , text , **kwargs )</h3><blockquote>
+<p><strong><code>find_all</code>是用于搜索节点中所有符合过滤条件的节点</strong></p>
+<ol>
+<li><strong><code>name</code>参数：是<code>Tag</code>的名字，如<code>p</code>,<code>div</code>,<code>title</code> …..</strong><blockquote>
+<ul>
+<li><strong><code>soup.find_all(&quot;p&quot;)</code>  查找所有的<code>p</code>标签，返回的是<code>[&lt;b&gt;The Dormouse&#39;s story&lt;/b&gt;]</code>，可以通过遍历获取每一个节点，如下：</strong><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ps=soup.find_all(<span class="string">"p"</span>)</div><div class="line"><span class="keyword">for</span> p <span class="keyword">in</span> ps:</div><div class="line">    <span class="keyword">print</span> p.get(<span class="string">'class'</span>)   <span class="comment">#得到p标签下的class属性</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<ul>
+<li><p><strong>传入正则表达式：<code>soup.find_all(re.compile(r&#39;^b&#39;)</code>查找以<code>b</code>开头的所有标签，这里的<code>body</code>和<code>b</code>标签都会被查到</strong></p>
+</li>
+<li><p><strong>传入类列表：如果传入列表参数,<code>BeautifulSoup</code>会将与列表中任一元素匹配的内容返回.下面代码找到文档中所有<code>&lt;a&gt;</code>标签和<code>&lt;b&gt;</code>标签</strong></p>
+</li>
+</ul>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">soup.find_all([<span class="string">"a"</span>, <span class="string">"b"</span>])</div></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li><code>KeyWords</code>参数，就是传入属性和对应的属性值，或者一些其他的表达式<blockquote>
+<ul>
+<li><strong><code>soup.find_all(id=&#39;link2&#39;)</code>,这个将会搜索找到所有的<code>id</code>属性为<code>link2</code>的标签。传入正则表达式<code>soup.find_all(href=re.compile(&quot;elsie&quot;))</code>,这个将会查找所有<code>href</code>属性满足正则表达式的标签</strong></li>
+<li><strong>传入多个值：<code>soup.find_all(id=&#39;link2&#39;,class_=&#39;title&#39;)</code> ,这个将会查找到同时满足这两个属性的标签，这里的<code>class</code>必须用<code>class_</code>传入参数，因为<code>class</code>是<code>python</code>中的关键词</strong></li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<ul>
+<li><strong>有些属性不能通过以上方法直接搜索，比如<code>html5</code>中的<code>data-*</code>属性，不过可以通过<code>attrs</code>参数指定一个字典参数来搜索包含特殊属性的标签，如下：</strong></li>
+</ul>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># [&lt;div data-foo="value"&gt;foo!&lt;/div&gt;]</span></div><div class="line">data_soup.find_all(attrs=&#123;<span class="string">"data-foo"</span>: <span class="string">"value"</span>&#125;)   <span class="comment">#注意这里的atts不仅能够搜索特殊属性，亦可以搜索普通属性</span></div><div class="line"></div><div class="line">soup.find_all(<span class="string">"p"</span>,attrs=&#123;<span class="string">'class'</span>:<span class="string">'title'</span>,<span class="string">'id'</span>:<span class="string">'value'</span>&#125;)  <span class="comment">#相当与soup.find_all('p',class_='title',id='value')</span></div></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li><p>text参数：通过 text 参数可以搜搜文档中的字符串内容.与 <code>name</code> 参数的可选值一样, <code>text</code> 参数接受 字符串 , 正则表达式 , 列表, <code>True</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">soup.find_all(text=<span class="string">"Elsie"</span>)</div><div class="line"><span class="comment"># [u'Elsie']</span></div><div class="line"> </div><div class="line">soup.find_all(text=[<span class="string">"Tillie"</span>, <span class="string">"Elsie"</span>, <span class="string">"Lacie"</span>])</div><div class="line"><span class="comment"># [u'Elsie', u'Lacie', u'Tillie']</span></div><div class="line"> </div><div class="line">soup.find_all(text=re.compile(<span class="string">"Dormouse"</span>))</div><div class="line">[<span class="string">u"The Dormouse's story"</span>, <span class="string">u"The Dormouse's story"</span>]</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>limit</code>参数：<code>find_all()</code> 方法返回全部的搜索结构,如果文档树很大那么搜索会很慢.如果我们不需要全部结果,可以使用 <code>limit</code> 参数限制返回结果的数量.效果与<code>SQL</code>中的<code>limit</code>关键字类似,当搜索到的结果数量达到 <code>limit</code> 的限制时,就停止搜索返回结果.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>文档树中有<code>3</code>个<code>tag</code>符合搜索条件,但结果只返回了<code>2</code>个,因为我们限制了返回数量,代码如下：</strong></p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">soup.find_all(<span class="string">"a"</span>, limit=<span class="number">2</span>)</div><div class="line"><span class="comment"># [&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;Elsie&lt;/a&gt;,</span></div><div class="line"><span class="comment">#  &lt;a class="sister" href="http://example.com/lacie" id="link2"&gt;Lacie&lt;/a&gt;]</span></div></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li><code>recursive</code> 参数:调用<code>tag</code>的 <code>find_all()</code> 方法时,<code>BeautifulSoup</code>会检索当前<code>tag</code>的所有子孙节点,如果只想搜索<code>tag</code>的直接子节点,可以使用参数 <code>recursive=False</code> </li>
+</ol>
+</blockquote>
+<h3 id="find-name-attrs-recursive-text-kwargs"><a href="#find-name-attrs-recursive-text-kwargs" class="headerlink" title="find( name , attrs , recursive , text , **kwargs )"></a>find( name , attrs , recursive , text , **kwargs )</h3><blockquote>
+<p><strong>它与 <code>find_all()</code> 方法唯一的区别是 <code>find_all()</code> 方法的返回结果是值包含一个元素的列表,而 <code>find()</code> 方法直接返回结果,就是直接返回第一匹配到的元素，不是列表，不用遍历，如<code>soup.find(&quot;p&quot;).get(&quot;class&quot;)</code></strong></p>
+</blockquote>
+<h2 id="css选择器"><a href="#css选择器" class="headerlink" title="css选择器"></a>css选择器</h2><blockquote>
+<p><strong>我们在写 <code>CSS</code> 时，标签名不加任何修饰，类名前加点，<code>id</code>名前加<code>#</code>，在这里我们也可以利用类似的方法来筛选元素，用到的方法是 <code>soup.select()</code>，返回类型是 <code>list</code></strong></p>
+</blockquote>
+<h3 id="通过标签名查找"><a href="#通过标签名查找" class="headerlink" title="通过标签名查找"></a>通过标签名查找</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'title'</span>) </div><div class="line"><span class="comment">#[&lt;title&gt;The Dormouse's story&lt;/title&gt;]</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'a'</span>)</div><div class="line"><span class="comment">#[&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, &lt;a class="sister" href="http://example.com/lacie" id="link2"&gt;Lacie&lt;/a&gt;, &lt;a class="sister" href="http://example.com/tillie" id="link3"&gt;Tillie&lt;/a&gt;]</span></div></pre></td></tr></table></figure>
+<h3 id="通过类名查找"><a href="#通过类名查找" class="headerlink" title="通过类名查找"></a>通过类名查找</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'.sister'</span>)</div><div class="line"><span class="comment">#[&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, &lt;a class="sister" href="http://example.com/lacie" id="link2"&gt;Lacie&lt;/a&gt;, &lt;a class="sister" href="http://example.com/tillie" id="link3"&gt;Tillie&lt;/a&gt;]</span></div></pre></td></tr></table></figure>
+<h3 id="通过id名查找"><a href="#通过id名查找" class="headerlink" title="通过id名查找"></a>通过id名查找</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'#link1'</span>)</div><div class="line"><span class="comment">#[&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]</span></div></pre></td></tr></table></figure>
+<h3 id="组合查找"><a href="#组合查找" class="headerlink" title="组合查找"></a>组合查找</h3><blockquote>
+<p><strong>学过<code>css</code>的都知道<code>css</code>选择器，如<code>p #link1</code>是查找<code>p</code>标签下的<code>id</code>属性为<code>link1</code>的标签</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'p #link1'</span>)    <span class="comment">#查找p标签中内容为id属性为link1的标签</span></div><div class="line"><span class="comment">#[&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> soup.select(<span class="string">"head &gt; title"</span>)   <span class="comment">#直接查找子标签</span></div><div class="line"><span class="comment">#[&lt;title&gt;The Dormouse's story&lt;/title&gt;]</span></div></pre></td></tr></table></figure>
+<h3 id="属性查找"><a href="#属性查找" class="headerlink" title="属性查找"></a>属性查找</h3><blockquote>
+<p><strong>查找时还可以加入属性元素，属性需要用中括号括起来，注意属性和标签属于同一节点，所以中间不能加空格，否则会无法匹配到。</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'a[class="sister"]'</span>)</div><div class="line"><span class="comment">#[&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, &lt;a class="sister" href="http://example.com/lacie" id="link2"&gt;Lacie&lt;/a&gt;, &lt;a class="sister" href="http://example.com/tillie" id="link3"&gt;Tillie&lt;/a&gt;]</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'a[href="http://example.com/elsie"]'</span>)</div><div class="line"><span class="comment">#[&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>同样，属性仍然可以与上述查找方式组合，不在同一节点的空格隔开，同一节点的不加空格,代码如下：</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'p a[href="http://example.com/elsie"]'</span>)</div><div class="line"><span class="comment">#[&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>以上的 <code>select</code> 方法返回的结果都是列表形式，可以遍历形式输出，然后用 <code>get_text()</code> 方法来获取它的内容</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">soup = BeautifulSoup(html, <span class="string">'lxml'</span>)</div><div class="line"><span class="keyword">print</span> type(soup.select(<span class="string">'title'</span>))</div><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'title'</span>)[<span class="number">0</span>].get_text()</div><div class="line"></div><div class="line"><span class="keyword">for</span> title <span class="keyword">in</span> soup.select(<span class="string">'title'</span>):</div><div class="line">    <span class="keyword">print</span> title.get_text()</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;python爬虫之BeautifulSoup&quot;&gt;&lt;a href=&quot;#python爬虫之BeautifulSoup&quot; class=&quot;headerlink&quot; title=&quot;python爬虫之BeautifulSoup&quot;&gt;&lt;/a&gt;python爬虫之BeautifulSo
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>MongoDB干货篇之安装</title>
@@ -2004,50 +2157,6 @@
     
     
       <category term="java图形与文本处理" scheme="http://chenjiabing666.github.io/tags/java%E5%9B%BE%E5%BD%A2%E4%B8%8E%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>matplotlib绘制图形基础</title>
-    <link href="http://chenjiabing666.github.io/2017/04/01/matplotlib%E7%BB%98%E5%88%B6%E5%9B%BE%E5%BD%A2%E5%9F%BA%E7%A1%80/"/>
-    <id>http://chenjiabing666.github.io/2017/04/01/matplotlib绘制图形基础/</id>
-    <published>2017-04-01T03:46:34.000Z</published>
-    <updated>2017-04-01T03:49:03.635Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="matplotlib绘制基本图形"><a href="#matplotlib绘制基本图形" class="headerlink" title="matplotlib绘制基本图形"></a>matplotlib绘制基本图形</h1><h2 id="折线图"><a href="#折线图" class="headerlink" title="折线图"></a>折线图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line">x=np.arange(<span class="number">0</span>,<span class="number">10</span>,<span class="number">1</span>) <span class="comment">#创建一个0-10之间以1为间隔的numpy数组</span></div><div class="line">y=x+<span class="number">10</span>   </div><div class="line">plt.plot(x,y,color=<span class="string">'red'</span>,linestyle=<span class="string">'--'</span>,marker=<span class="string">'&gt;'</span>,linewidth=<span class="number">3</span>,label=<span class="string">'example one'</span>)  <span class="comment">#绘制图形</span></div><div class="line">plt.savefig(<span class="string">'first.png'</span>,dpi=<span class="number">50</span>)  <span class="comment">#保存图形，dpi表示</span></div><div class="line">plt.legend()   <span class="comment">#显示图例</span></div><div class="line">plt.show()   <span class="comment">#显示图形</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>图形展示</strong><br><img src="http://ono60m7tl.bkt.clouddn.com/first.png" alt="折线图"><br><strong>说明</strong><br>plt.plot()可以直接绘制折线，其中marker是折线上的标记，linewidth是折线的宽度，label是图例，如果要想显示就要设置plt.legend(),linestyle是折线的风格，color是颜色</p>
-</blockquote>
-<h2 id="饼状图"><a href="#饼状图" class="headerlink" title="饼状图"></a>饼状图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line">slices = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">9</span>]   <span class="comment">#指定每一个切片的大小，这里就是每块的比例</span></div><div class="line">activities = [<span class="string">'sleeping'</span>,<span class="string">'eating'</span>,<span class="string">'working'</span>,<span class="string">'playing'</span>]   <span class="comment">#指定标签</span></div><div class="line">cols = [<span class="string">'c'</span>,<span class="string">'m'</span>,<span class="string">'r'</span>,<span class="string">'b'</span>]   <span class="comment">#y颜色</span></div><div class="line"></div><div class="line">plt.pie(slices,   </div><div class="line">        labels=activities,</div><div class="line">        colors=cols,   <span class="comment">#指定每一个区块的颜色</span></div><div class="line">        startangle=<span class="number">90</span>,     <span class="comment">#开始角度，默认是0度，从x轴开始，90度从y轴开始</span></div><div class="line">        shadow= <span class="keyword">True</span>,    <span class="comment">#阴影效果</span></div><div class="line">        explode=(<span class="number">0</span>,<span class="number">0.1</span>,<span class="number">0</span>,<span class="number">0</span>),     <span class="comment">#拉出第二个切片，如果全为0就不拉出，这里的数字是相对与圆心的距离</span></div><div class="line">        autopct=<span class="string">'%1.1f%%'</span>)       <span class="comment">#显示百分比</span></div><div class="line">plt.title(<span class="string">'Interesting Graph\nCheck it out'</span>)  <span class="comment">#设置标题</span></div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>图片展示</strong><br><img src="http://ono60m7tl.bkt.clouddn.com/second.png" alt="饼状图"></p>
-</blockquote>
-<h2 id="散点图"><a href="#散点图" class="headerlink" title="散点图"></a>散点图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line">x=np.random.rand(<span class="number">1000</span>)</div><div class="line">y=np.random.rand(len(x))</div><div class="line">plt.scatter(x,y,color=<span class="string">'r'</span>,alpha=<span class="number">0.3</span>,label=<span class="string">'example one'</span>,marker=<span class="string">'o'</span>)  <span class="comment">#绘图</span></div><div class="line">plt.legend()</div><div class="line"><span class="comment">#plt.axis([0,2,0,2]) #设置坐标的范围</span></div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>图片展示</strong><br><img src="http://ono60m7tl.bkt.clouddn.com/third.png" alt="散点图"></p>
-</blockquote>
-<h2 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line">x=np.random.randint(<span class="number">1</span>,<span class="number">1000</span>,<span class="number">200</span>)</div><div class="line">axis=plt.gca()   <span class="comment">#得到当前的绘图对象</span></div><div class="line">axis.hist(x,bins=<span class="number">35</span>,facecolor=<span class="string">'r'</span>,normed=<span class="keyword">True</span>,histtype=<span class="string">'bar'</span>,alpha=<span class="number">0.5</span>)<span class="comment">#bins表示直方图的个数，histtype表示直方图的样式，normed如果为True就将直方归一化，显示概率密度，默认是False</span></div><div class="line">axis.set_xlabel(<span class="string">"Values"</span>)  <span class="comment">#设置x的标签</span></div><div class="line">axis.set_ylabel(<span class="string">"Frequency"</span>)   </div><div class="line">axis.set_title(<span class="string">"HIST"</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>图片展示</strong><br><img src="http://ono60m7tl.bkt.clouddn.com/four.png" alt="直方图"></p>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;matplotlib绘制基本图形&quot;&gt;&lt;a href=&quot;#matplotlib绘制基本图形&quot; class=&quot;headerlink&quot; title=&quot;matplotlib绘制基本图形&quot;&gt;&lt;/a&gt;matplotlib绘制基本图形&lt;/h1&gt;&lt;h2 id=&quot;折线图&quot;&gt;&lt;a h
-    
-    </summary>
-    
-      <category term="python数据挖掘与分析" scheme="http://chenjiabing666.github.io/categories/python%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E4%B8%8E%E5%88%86%E6%9E%90/"/>
-    
-    
-      <category term="matplotlib" scheme="http://chenjiabing666.github.io/tags/matplotlib/"/>
     
   </entry>
   
