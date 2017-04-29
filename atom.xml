@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-04-29T02:36:22.104Z</updated>
+  <updated>2017-04-29T02:37:47.616Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://chenjiabing666.github.io/2017/04/29/python%E7%88%AC%E8%99%AB%E4%B9%8BBeautifulSoup/"/>
     <id>http://chenjiabing666.github.io/2017/04/29/python爬虫之BeautifulSoup/</id>
     <published>2017-04-29T02:06:56.000Z</published>
-    <updated>2017-04-29T02:36:22.104Z</updated>
+    <updated>2017-04-29T02:37:47.616Z</updated>
     
     <content type="html"><![CDATA[<h1 id="python爬虫之BeautifulSoup"><a href="#python爬虫之BeautifulSoup" class="headerlink" title="python爬虫之BeautifulSoup"></a>python爬虫之BeautifulSoup</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
 <p><strong><code>Beautiful Soup</code>提供一些简单的、<code>python</code>式的函数用来处理导航、搜索、修改分析树等功能。它是一个工具箱，通过解析文档为用户提供需要抓取的数据，因为简单，所以不需要多少代码就可以写出一个完整的应用程序。<code>Beautiful Soup</code>自动将输入文档转换为<code>Unicode</code>编码，输出文档转换为<code>utf-8</code>编码。你不需要考虑编码方式，除非文档没有指定一个编码方式，这时，<code>Beautiful Soup</code>就不能自动识别编码方式了。然后，你仅仅需要说明一下原始编码方式就可以了。<br><code>Beautiful Soup</code>已成为和<code>lxml</code>、<code>html6lib</code>一样出色的<code>python</code>解释器，为用户灵活地提供不同的解析策略或强劲的速度。</strong></p>
@@ -154,6 +154,10 @@
     
     </summary>
     
+      <category term="python" scheme="http://chenjiabing666.github.io/categories/python/"/>
+    
+    
+      <category term="python爬虫" scheme="http://chenjiabing666.github.io/tags/python%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   
