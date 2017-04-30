@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="觅">
 <meta property="og:description" content="MongoDB干货篇之查询准备工作
 在开始之前我们应该先准备数据方便演示，这里我插入的了几条数据，数据如下：12345678910111213141516171819202122232425262728293031323334db.user.insertMany([&amp;#123;name:&apos;jack&apos;,age:22,sex:&apos;Man&apos;,tags:[&apos;python&apos;,&apos;c++&apos;,&apos;c&apos;],grades">
-<meta property="og:updated_time" content="2017-04-30T21:08:25.279Z">
+<meta property="og:updated_time" content="2017-04-30T21:10:23.666Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB干货篇之查询数据">
 <meta name="twitter:description" content="MongoDB干货篇之查询准备工作
@@ -216,7 +216,7 @@
 <h2 id="迭代游标的查询"><a href="#迭代游标的查询" class="headerlink" title="迭代游标的查询"></a>迭代游标的查询</h2><blockquote>
 <p><strong>学过高级语言的朋友都知道迭代的问题，像java,下面使用迭代的方法查询</strong></p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var cursor=db.usr.find();</div><div class="line"></div><div class="line">//这里使用迭代输出所有的数据</div><div class="line">while(cursor.hasNext())    //这里的hasNext()是判断是否下一个中还有可迭代的值，如果没有返回false</div><div class="line">&#123;</div><div class="line">    printjson(cursor.next());     //这里的cursor.next是迭代的输出，printjson是代替print(tojson()) </div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">print cursor.count()    //输出其中有多少个数据</div><div class="line"></div><div class="line">cursor.forEach(printjson);   //forEach输出</div><div class="line"></div><div class="line"></div><div class="line">var document=cursor.toArray();     //将迭代对象转换成数组</div><div class="line"></div><div class="line">print document[0];       //以数组的形式输出</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cursor=db.usr.find();</div><div class="line"></div><div class="line"><span class="comment">//这里使用迭代输出所有的数据</span></div><div class="line"><span class="keyword">while</span>(cursor.hasNext())    <span class="comment">//这里的hasNext()是判断是否下一个中还有可迭代的值，如果没有返回false</span></div><div class="line">&#123;</div><div class="line">    printjson(cursor.next());     <span class="comment">//这里的cursor.next是迭代的输出，printjson是代替print(tojson()) </span></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">print cursor.count()    <span class="comment">//输出其中有多少个数据</span></div><div class="line"></div><div class="line">cursor.forEach(printjson);   <span class="comment">//forEach输出</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> <span class="built_in">document</span>=cursor.toArray();     <span class="comment">//将迭代对象转换成数组</span></div><div class="line"></div><div class="line">print <span class="built_in">document</span>[<span class="number">0</span>];       <span class="comment">//以数组的形式输出</span></div></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -344,15 +344,11 @@
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/SQL/" title="SQL">SQL<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>2</sup></a></li>
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 			
@@ -364,7 +360,7 @@
 			
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>2</sup></a></li>
 			
 		
 			
@@ -372,11 +368,15 @@
 			
 		
 			
-				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
 			
 		
 		</ul>
