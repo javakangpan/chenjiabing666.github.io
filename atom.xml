@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-05-01T00:14:24.730Z</updated>
+  <updated>2017-05-01T00:16:55.183Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://chenjiabing666.github.io/2017/05/01/MongoDB%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE/"/>
     <id>http://chenjiabing666.github.io/2017/05/01/MongoDB干货篇之更新数据/</id>
     <published>2017-05-01T00:13:32.000Z</published>
-    <updated>2017-05-01T00:14:24.730Z</updated>
+    <updated>2017-05-01T00:16:55.183Z</updated>
     
     <content type="html"><![CDATA[<h1 id="MongoDB干货篇之数据更新"><a href="#MongoDB干货篇之数据更新" class="headerlink" title="MongoDB干货篇之数据更新"></a>MongoDB干货篇之数据更新</h1><h2 id="常用的函数"><a href="#常用的函数" class="headerlink" title="常用的函数"></a>常用的函数</h2><blockquote>
 <ul>
@@ -109,13 +109,13 @@
 <h2 id="数组更新操作符-Array-Update-Operators"><a href="#数组更新操作符-Array-Update-Operators" class="headerlink" title="数组更新操作符 Array Update Operators"></a>数组更新操作符 Array Update Operators</h2><blockquote>
 <p><em>只能用在键值为数组的键上的数组操作。</em></p>
 </blockquote>
-<h2 id="query"><a href="#query" class="headerlink" title="$ (query)"></a>$ (query)</h2><blockquote>
+<h3 id="query"><a href="#query" class="headerlink" title="$ (query)"></a>$ (query)</h3><blockquote>
 <p><strong>语法</strong>:<code>{ &quot;&lt;array&gt;.$&quot; : value }</code></p>
 <p>当对数组字段进行更新时，且没有明确指定的元素在数组中的位置，我们使用定位操作符<code>$</code>标识一个元素，数字都是以<code>0</code>开始的。</p>
-<p><em>注意</em><br>:::info</p>
+<p><strong>注意:</strong></p>
 <ul>
 <li>定位操作符(“$”)作为第一个匹配查询条件的元素的占位符，也就是在数组中的索引值。</li>
-<li>数组字段必须出现查询文档中。<br>:::</li>
+<li>数组字段必须出现查询文档中。</li>
 </ul>
 <p>向集合中插入两条数据</p>
 </blockquote>
