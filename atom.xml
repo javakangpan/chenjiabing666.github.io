@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-04-30T21:10:23.666Z</updated>
+  <updated>2017-05-01T00:14:24.730Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,141 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MongoDB干货篇之更新数据</title>
+    <link href="http://chenjiabing666.github.io/2017/05/01/MongoDB%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE/"/>
+    <id>http://chenjiabing666.github.io/2017/05/01/MongoDB干货篇之更新数据/</id>
+    <published>2017-05-01T00:13:32.000Z</published>
+    <updated>2017-05-01T00:14:24.730Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="MongoDB干货篇之数据更新"><a href="#MongoDB干货篇之数据更新" class="headerlink" title="MongoDB干货篇之数据更新"></a>MongoDB干货篇之数据更新</h1><h2 id="常用的函数"><a href="#常用的函数" class="headerlink" title="常用的函数"></a>常用的函数</h2><blockquote>
+<ul>
+<li><p><code>update(&lt;query&gt;,&lt;update&gt;,&lt;upsert&gt;,&lt;multi&gt;)</code>,其中<code>&lt;query&gt;</code>表示筛选的条件，<code>&lt;update&gt;</code>是要更新的数据</p>
+</li>
+<li><p><code>updateMany()</code>   更新所有匹配到的数据</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="upsert"><a href="#upsert" class="headerlink" title="upsert"></a>upsert</h3><blockquote>
+<p><code>upsert</code>是一个布尔类型的数据，如果为<code>true</code>时，当根据<code>query</code>条件没有找到匹配的数据时，就表示插入此条数据，如果为<code>false</code>就表示不插入数据</p>
+<p>下面将会在一个空的集合中更新数据<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//就会插入此条数据，因为没有找到匹配的信息</span></div><div class="line">db.user.update(&#123;<span class="string">'name'</span>:<span class="string">'chenjiabing'</span>,<span class="string">'age'</span>:<span class="number">22</span>,<span class="string">'sex'</span>:<span class="string">"Man"</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'hobby'</span>:<span class="string">'read'</span>&#125;&#125;,&#123;<span class="string">'upsert'</span>:<span class="literal">true</span>&#125;);  </div><div class="line"></div><div class="line">db.user.update(&#123;<span class="string">'name'</span>:<span class="string">'chenjiabing'</span>,<span class="string">'age'</span>:<span class="number">22</span>,<span class="string">'sex'</span>:<span class="string">"Man"</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'hobby'</span>:<span class="string">'read'</span>&#125;&#125;,<span class="literal">true</span>);   <span class="comment">//和上面的语句等价</span></div><div class="line"></div><div class="line"><span class="comment">//输出  db.user.find()</span></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59067b70856d5893a687655f"</span>), <span class="string">"age"</span> : <span class="number">22</span>, <span class="string">"name"</span> : <span class="string">"chenjiabing"</span>, <span class="string">"sex"</span> : <span class="string">"Man"</span>, <span class="string">"hobby"</span> : <span class="string">"read"</span> &#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="multi"><a href="#multi" class="headerlink" title="multi"></a>multi</h3><blockquote>
+<p><em>如果这个参数为<code>true</code>,就把按条件查出来多条记录全部更新。默认为<code>false</code>,如果为<code>true</code>的话和<code>updateMany()</code>一样的效果</em></p>
+<p>下面将会更新所有匹配到的数据</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'hobby'</span>:<span class="string">'code'</span>&#125;&#125;,&#123;<span class="string">'multi'</span>:<span class="literal">true</span>&#125;);</div></pre></td></tr></table></figure>
+<h2 id="字段更新操作符-Field-Update-Operators"><a href="#字段更新操作符-Field-Update-Operators" class="headerlink" title="字段更新操作符 Field Update Operators"></a>字段更新操作符 Field Update Operators</h2><h3 id="set"><a href="#set" class="headerlink" title="$set"></a>$set</h3><blockquote>
+<p><code>$set</code>用来指定一个键的值。如果这个键不存在，则创建它。<strong>注意这里的更新默认是只更新第一条匹配到的数据，如果第一条匹配的数据已经满足修改后的条件，那么将不会执行下面匹配的信息</strong></p>
+<ul>
+<li>下面我们将会添加一条信息在数据库中</li>
+</ul>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.insert(&#123;<span class="string">"name"</span>:<span class="string">'jack'</span>,<span class="string">"age"</span>:<span class="number">22</span>,<span class="string">"sex"</span>:<span class="string">'Man'</span>,<span class="string">'school'</span>:&#123;<span class="string">'name'</span>:<span class="string">'jsnu'</span>,<span class="string">'city'</span>:<span class="string">'xuzhou'</span>&#125;&#125;);</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>运行下面的代码，将该用户的兴趣设置为“读书”并添加至文档中(此时文档中<code>hobby</code>键是不存在，该条文档就会创建它)</p>
+</blockquote>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'hobby'</span>:<span class="string">'read'</span>&#125;&#125;)</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>下面将会修改用户的<strong>年龄</strong></p>
+</blockquote>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="string">'name'</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'age'</span>:<span class="number">20</span>&#125;&#125;)</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>下面用<code>$set</code>修改<strong>数据类型</strong>，将<code>sex</code>设置为<code>1</code></p>
+</blockquote>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="string">'name'</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'sex'</span>:<span class="number">1</span>&#125;&#125;)</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>下面用<code>$set</code>修改<strong>内嵌文档</strong>，必须指定文档的名字和键值</p>
+</blockquote>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'school.name'</span>:<span class="string">'shida'</span>,<span class="string">'school.city'</span>:<span class="string">'beijing'</span>&#125;&#125;)</div></pre></td></tr></table></figure>
+<h3 id="unset"><a href="#unset" class="headerlink" title="$unset"></a>$unset</h3><blockquote>
+<p>从文档中<strong>移除</strong>指定的键</p>
+<p>下面将要删除上面插入的<code>hobby</code>键</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$unset</span>:&#123;<span class="string">'hobby'</span>:<span class="number">1</span>&#125;&#125;)   <span class="comment">//这里的值是任意给的，随便什么值</span></div></pre></td></tr></table></figure>
+<h3 id="inc"><a href="#inc" class="headerlink" title="$inc"></a>$inc</h3><blockquote>
+<p><code>$inc</code>修改器用来<strong>增加</strong>已有键的值，<strong>或者在键不存在时创建一个键</strong><code>$inc</code>就是专门来增加（和减少）数字的。<code>$inc</code>只能用于<strong>整数、长整数或双精度浮点数</strong>。要是用在其他类型的数据上就会导致操作失败</p>
+<p>例如毎次有人访问该博文，该条博文的浏览数就加<code>1</code>，用键<code>pageViews</code>保存浏览数信息。这个键值上面没有定义过，所以会自动创建一个</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$inc</span>:&#123;<span class="string">'pageViews'</span>:<span class="number">1</span>&#125;&#125;);    <span class="comment">//起初没有就会自动创建一个键</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>下面演示增加和减少</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$inc</span>:&#123;<span class="string">'pageViews'</span>:<span class="number">100</span>&#125;&#125;)  ;  <span class="comment">//这里是在上面的基础上加上100，此时变成了101</span></div><div class="line"></div><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$inc</span>:&#123;<span class="string">"pageViews"</span>:<span class="number">-100</span>&#125;&#125;) ;   <span class="comment">//这里是在上面的基础上减去100,此时还是变成了1</span></div></pre></td></tr></table></figure>
+<h3 id="rename"><a href="#rename" class="headerlink" title="$rename"></a>$rename</h3><blockquote>
+<p><strong>语法：</strong><code>{$rename: { &lt;old name1&gt;: &lt;new name1&gt;, &lt;old name2&gt;: &lt;new name2&gt;, ... } }</code></p>
+<p><code>$rename</code>操作符可以<strong>重命名字段名称</strong>，新的字段名称不能和文档中现有的字段名相同。</p>
+<p>下面重新插入一条数据，并且改变这条数据的键的名称</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">db.user.insert(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>,<span class="string">'age'</span>:<span class="number">22</span>,<span class="string">'sex'</span>:<span class="string">'Man'</span>,<span class="string">'school'</span>:&#123;<span class="string">'name'</span>:<span class="string">'jsnu'</span>,<span class="string">'city'</span>:<span class="string">'beijing'</span>&#125;&#125;);</div><div class="line"></div><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$rename</span>:&#123;<span class="string">'age'</span>:<span class="string">'Age'</span>&#125;&#125;)   <span class="comment">//重命名age为Age</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>下面将要演示怎样改变内嵌文档的键的名称，<strong>注意一定要带上文档的名字</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$rename</span>:&#123;<span class="string">'school.name'</span>:<span class="string">'school.Name'</span>,<span class="string">'school.city'</span>:<span class="string">'school.City'</span>&#125;&#125;);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>如果重命名的字段字和集合中原有的字段名字相同的话就会<strong>覆盖</strong>原有的字段名称，那么就会造成数据的丢失</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="string">'$rename'</span>:&#123;<span class="string">'sex'</span>,<span class="string">'age'</span>&#125;&#125;);  <span class="comment">//这里sex变成age和原来的age相同，那么原来的age就会丢失</span></div><div class="line"></div><div class="line">db.user.find(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;);  </div><div class="line"></div><div class="line"><span class="comment">//输出，可以看到原来的age没有了,变成了覆盖之后的</span></div><div class="line"></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"590674ce30b9f88dd43d7ee4"</span>), <span class="string">"name"</span> : <span class="string">"chenjiabing"</span>, <span class="string">"age"</span> : <span class="string">"Man"</span>, <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"jsnu"</span>, <span class="string">"city"</span> : <span class="string">"beijing"</span> &#125; &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>如果指定的字段不存在，那么将不会更新，对原来的字段没有影响</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$rename</span>:&#123;<span class="attr">value</span>:<span class="string">'name'</span>&#125;&#125;);  <span class="comment">//将不会有任何的改变，因为value这个字段根本不存在</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong><code>$rename</code>操作符也可以将子文档中键值移到其他子文档中</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$rename</span>:&#123;<span class="string">'school.name'</span>:<span class="string">'contact.name'</span>&#125;&#125;);<span class="comment">// 这里将会将school.name这个字段的值移到contact.name之中，如果contact不存在，那么就会创建一个</span></div><div class="line"></div><div class="line"><span class="comment">//输出</span></div><div class="line"></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"590674ce30b9f88dd43d7ee4"</span>), <span class="string">"name"</span> : <span class="string">"chenjiabing"</span>, <span class="string">"age"</span> : <span class="string">"Man"</span>, <span class="string">"school"</span> : &#123; <span class="string">"city"</span> : <span class="string">"beijing"</span> &#125;, <span class="string">"contact"</span> : &#123; <span class="string">"name"</span> : <span class="string">"jsnu"</span> &#125; &#125;</div></pre></td></tr></table></figure>
+<h2 id="数组更新操作符-Array-Update-Operators"><a href="#数组更新操作符-Array-Update-Operators" class="headerlink" title="数组更新操作符 Array Update Operators"></a>数组更新操作符 Array Update Operators</h2><blockquote>
+<p><em>只能用在键值为数组的键上的数组操作。</em></p>
+</blockquote>
+<h2 id="query"><a href="#query" class="headerlink" title="$ (query)"></a>$ (query)</h2><blockquote>
+<p><strong>语法</strong>:<code>{ &quot;&lt;array&gt;.$&quot; : value }</code></p>
+<p>当对数组字段进行更新时，且没有明确指定的元素在数组中的位置，我们使用定位操作符<code>$</code>标识一个元素，数字都是以<code>0</code>开始的。</p>
+<p><em>注意</em><br>:::info</p>
+<ul>
+<li>定位操作符(“$”)作为第一个匹配查询条件的元素的占位符，也就是在数组中的索引值。</li>
+<li>数组字段必须出现查询文档中。<br>:::</li>
+</ul>
+<p>向集合中插入两条数据</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">db.students.insert(&#123; <span class="string">"_id"</span> : <span class="number">1</span>, <span class="string">"grades"</span> : [ <span class="number">78</span>, <span class="number">88</span>, <span class="number">88</span> ] &#125;);</div><div class="line">db.students.insert(&#123; <span class="string">"_id"</span> : <span class="number">2</span>, <span class="string">"grades"</span> : [ <span class="number">88</span>, <span class="number">90</span>, <span class="number">92</span> ] &#125;);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>执行下列操作</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//查询匹配的文档中，数组有2个88，只更新第一个匹配的元素，也就是"grades.1"</span></div><div class="line">db.students.update( &#123; <span class="attr">_id</span>: <span class="number">1</span>, <span class="attr">grades</span>: <span class="number">88</span> &#125;, &#123; <span class="attr">$set</span>: &#123; <span class="string">"grades.$"</span> : <span class="number">82</span> &#125; &#125;) ;</div><div class="line"><span class="comment">//查询文档中没有出现grades字段，查询报错</span></div><div class="line">db.students.update( &#123; <span class="attr">_id</span>: <span class="number">2</span> &#125;, &#123; <span class="attr">$set</span>: &#123; <span class="string">"grades.$"</span> : <span class="number">82</span> &#125; &#125; );</div></pre></td></tr></table></figure>
+<h3 id="push"><a href="#push" class="headerlink" title="$push"></a>$push</h3><blockquote>
+<p><em>如果指定的键已经存在，会向已有的数组末尾加入一个元素，要是没有就会创建一个新的数组。</em></p>
+<p>下面我们将使用<code>$push</code>对该文档添加一条评论信息。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//将会创建一个comments数组，因为一开始这个数组没有存在</span></div><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$push</span>:&#123;<span class="attr">comments</span>:&#123;<span class="string">'name'</span>:<span class="string">'jack'</span>,<span class="string">'content'</span>:<span class="string">'hello thanks'</span>&#125;&#125;&#125;)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//继续添加一条，在comments的末尾进行添加，此时comments变成两条数据了</span></div><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$push</span>:&#123;<span class="attr">comments</span>:&#123;<span class="string">'name'</span>:<span class="string">'john'</span>,<span class="string">'content'</span>:<span class="string">'hello'</span>&#125;&#125;&#125;)</div></pre></td></tr></table></figure>
+<h3 id="pull"><a href="#pull" class="headerlink" title="$pull"></a>$pull</h3><blockquote>
+<p><strong>语法</strong>：<code>db.collection.update( { field: &lt;query&gt; }, { $pull: { field: &lt;query&gt; } } );</code></p>
+<p><em><code>$pull</code>操作符移除指定字段值为数组，且匹配<code>$pull</code>操作符移除指定字段值为数组，且匹配<code>$pull</code>语句声明的查询条件的所有元素。</em></p>
+<p>执行如下操作</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//插入一条文档</span></div><div class="line">db.profiles.insert(&#123; <span class="attr">votes</span>: [ <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">8</span> ] &#125;);</div><div class="line"><span class="comment">//移除数组中所有元素7</span></div><div class="line">db.profiles.update( &#123; <span class="attr">votes</span>: <span class="number">3</span> &#125;, &#123; <span class="attr">$pull</span>: &#123; <span class="attr">votes</span>: <span class="number">7</span> &#125; &#125; );</div><div class="line"><span class="comment">//移除数组中所有大于6的元素</span></div><div class="line">db.profiles.update( &#123; <span class="attr">votes</span>: <span class="number">3</span> &#125;, &#123; <span class="attr">$pull</span>: &#123; <span class="attr">votes</span>: &#123; <span class="attr">$gt</span>: <span class="number">6</span> &#125; &#125; &#125; );</div><div class="line"></div><div class="line"><span class="comment">//Result</span></div><div class="line">&#123; <span class="attr">votes</span>: [ <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">8</span> ] &#125;</div><div class="line"></div><div class="line">&#123; <span class="attr">votes</span>: [ <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span> ] &#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;MongoDB干货篇之数据更新&quot;&gt;&lt;a href=&quot;#MongoDB干货篇之数据更新&quot; class=&quot;headerlink&quot; title=&quot;MongoDB干货篇之数据更新&quot;&gt;&lt;/a&gt;MongoDB干货篇之数据更新&lt;/h1&gt;&lt;h2 id=&quot;常用的函数&quot;&gt;&lt;a hre
+    
+    </summary>
+    
+      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
+    
+    
+      <category term="MongoDB" scheme="http://chenjiabing666.github.io/tags/MongoDB/"/>
+    
+  </entry>
   
   <entry>
     <title>MongoDB干货篇之查询数据</title>
@@ -2103,114 +2238,6 @@
     
     
       <category term="SQL" scheme="http://chenjiabing666.github.io/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>swing布局管理器</title>
-    <link href="http://chenjiabing666.github.io/2017/04/05/java%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%99%A8/"/>
-    <id>http://chenjiabing666.github.io/2017/04/05/java布局管理器/</id>
-    <published>2017-04-05T15:06:08.000Z</published>
-    <updated>2017-04-06T11:42:07.672Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Swing系列之布局管理器"><a href="#Swing系列之布局管理器" class="headerlink" title="Swing系列之布局管理器"></a>Swing系列之布局管理器</h1><h2 id="流布局-FlowLayout-默认的JApplet-JPanel-JScrollPane"><a href="#流布局-FlowLayout-默认的JApplet-JPanel-JScrollPane" class="headerlink" title="流布局(FlowLayout)默认的JApplet,JPanel,JScrollPane"></a>流布局(<code>FlowLayout</code>)默认的<code>JApplet</code>,<code>JPanel</code>,<code>JScrollPane</code></h2><blockquote>
-<p>流布局是相对比较简单的一种布局管理器，也是最常用的布局管理器。在流布局中放置控件时，将按照控件的添加顺序，依次将控件从左到右进行摆放，并且在一行的最后会进行自动换行放置 。在一行中，控件是默认<strong>居中</strong>放置的。</p>
-<p>布局管理器也是通过构造器来创建的。流布局是通过FlowLayout 类来创建，FlowLayout类具有三种构造器。首先是无参构造器， 使用无参构造器能够创建一个默认的以居中对齐方式，控件间水 平和垂直间距为5个像素的流布局。</p>
-<p>FlowLayout类还具有一个需要整型参数的构造器，使用该构造器能够创建一个指定对齐方式的流布局管理器，它的控件间水平和垂直间距仍然是默认的5个像素。流布局管理器的对齐方式如下所示。</p>
-<ul>
-<li><code>LEFT</code>    左对齐方式</li>
-<li><code>CENTER</code>    居中对齐方式</li>
-<li><code>RIGHT</code>    右对齐方式</li>
-<li><code>LEADING</code>    控件与容器开始边对齐</li>
-<li><code>TRAILING</code>    </li>
-</ul>
-<p><strong>构造函数：</strong></p>
-<ol>
-<li><code>FlowLayout()</code>,生成一个默认的FlowLayout布局。默认情况下，组件居中，间隙为5个像素。</li>
-<li><code>FlowLayout(int aligment)</code>,设定每珩的组件的对齐方式。<code>alignment</code>取值可以为<code>FlowLayout.LEFT</code>,<code>FlowLayout.CENTER</code>,<code>FlowLayout.RIGHT</code>。</li>
-<li><code>FlowLayout(int aligment,int horz, int vert)</code>,设定对齐方式，并设定组件的水平间距horz和垂直间距vert，用超类Container的方法<code>setLayout()</code>为容器设定布局。例如，代码<code>setLayout(new FlowLayout())</code>为容器设定 FlowLayout布局。将组件加入容器的方法是add(组件名)。</li>
-</ol>
-<p><strong>常用的函数：</strong><br><strong><code>getAlignment</code>方法和<code>setAlignment</code>方法分别获取和设置流布局管理器的对齐方式。 <code>getHgap</code>方法和<code>setHgap</code>方法分别获取和设置流布局管理器中控件和控件之间的水平间距。getVgap方法和<code>setVgap</code>方法分别获取和 设置流布局管理器中控件和控件之间的垂直间距。</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> javax.swing.*;</div><div class="line"><span class="keyword">import</span> java.awt.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by Chenjiabing on 2017/4/5.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BuJu</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span></div><div class="line">    &#123;</div><div class="line">        JFrame frame=<span class="keyword">new</span> JFrame();</div><div class="line">        FlowLayout flowLayout=<span class="keyword">new</span> FlowLayout(FlowLayout.LEFT);</div><div class="line">        JPanel panel=<span class="keyword">new</span> JPanel(flowLayout);</div><div class="line">        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</div><div class="line">        frame.setBounds(<span class="number">100</span>,<span class="number">100</span>,<span class="number">500</span>,<span class="number">400</span>);</div><div class="line">        flowLayout.setHgap(<span class="number">20</span>);  <span class="comment">//设置水平间距</span></div><div class="line">        flowLayout.setVgap(<span class="number">20</span>); <span class="comment">//控件之间的垂直间距</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">6</span>;i++)</div><div class="line">        &#123;</div><div class="line">            JButton button=<span class="keyword">new</span> JButton(<span class="string">"按钮"</span>);</div><div class="line">            panel.add(button);</div><div class="line">        &#125;</div><div class="line">        frame.getContentPane().add(panel);</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">        frame.setVisible(<span class="keyword">true</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="网格布局-GridLayout"><a href="#网格布局-GridLayout" class="headerlink" title="网格布局(GridLayout)"></a>网格布局(<code>GridLayout</code>)</h2><blockquote>
-<ul>
-<li><p>网络布局也是一种比较常见的布局管理器。使用网格布局管理器后，会将所有的控件尽量按照给出的行数和列数来排列，同时网格布局管理器也会对控件进行尺寸的调整，使所有的控件具有相同的尺寸。在网格布局中，也会尽量使使用的空间成矩形的形式来显示。当窗体发生大小变化时，所有的空间也将自动改变大小来填充窗体。</p>
-</li>
-<li><p>网格布局是通过<code>GridLayout</code>类来创建的。GridLayout类具有三个构造器，使用无参构造器将创建具有默认行和默认列的网格布局。在创建网格布局管理器时最常用的就是具有两个整型参数的构造器，第一个参数表示网格布局管理器的行数，第二个参数表示网格布局管理器的列数。还有一个具有四个参数的构造器，除了可以定义行数和列数外，还可以定义控件间水平间距和垂直间距。</p>
-</li>
-<li><p><code>GridLayout</code>类中还定义了一些方法来对创建的网格布局进行操作 。<code>getRows</code>方法和<code>setRows</code>方法分别是获取和设置网格布局的行数。<code>getColumns</code>方法和<code>setColumns</code>方法分别是获取和设置网格布局 的列数。<code>getHgap</code>方法和<code>setHgap</code>方法分别是获取和设置网格布局 中控件间水平间距。<code>getVgap</code>方法和<code>setVgap</code>方法分别是获取和设 置网络布局中的控件间垂直间距。</p>
-</li>
-</ul>
-<p><strong>构造函数：</strong></p>
-<ol>
-<li><code>GridLayout()</code>,生成一个单列的GridLayout布局。默认情况下，无间隙。<br>1.<code>GridLayout(int row,int col)</code>,设定一个有行<code>row</code>和列`col的GridLayout布局。</li>
-<li>GridLayout(int row,int col,int horz,int vert),设定布局的行数和列数、组件的水平间距和垂直间距</li>
-</ol>
-<p><strong>代码大概和上面的设置一样，这里注意的是，网格布局是以行为基准的，如果定义的控件多了或者少了，不会改变行的数量，会根据情况改变列的数量</strong></p>
-</blockquote>
-<h2 id="边框布局-BorderLayout-默认的是JWindow、JFrame-JDialog"><a href="#边框布局-BorderLayout-默认的是JWindow、JFrame-JDialog" class="headerlink" title="边框布局(BorderLayout)默认的是JWindow、JFrame,JDialog"></a>边框布局(BorderLayout)默认的是<code>JWindow</code>、<code>JFrame</code>,<code>JDialog</code></h2><blockquote>
-<ul>
-<li><p>上面学习的流布局和网格布局具有很多相似的地方，但是边框布局就和他们存在很大的不同。在使用边框布局时，通常都会由程序员来为控件指定在容器中的位置。边框布局将容器分为五个部分，包括东南西北中五部分。在每一个部分中只能放置一个控件 ，所以如果控件超过五个将不能完全显示。在使用边框布局时需 要注意的是，当容器的大小发生变化时，四周的控件是不会发生变化的，只有中间的控件将发生变化。</p>
-</li>
-<li><p>边框布局是通过BorderLayout类创建的。BorderLayout类具有两个构造器，一个是无参构造器，另一个是指定控件间间距的构造器，通常使用无参构造器来创建边框布局管理器。</p>
-</li>
-<li><p>在前面将控件添加到容器中都是通过add方法，将控件作为add方法的参 数来进行添加的。但是在向边框布局容器中添加控件时，这样是不完全 的。在向边框布局容器中添加控件是使用具有两个参数的add方法。其中 第一个参数表示要添加的控件，第二个参数表示要添加到边框布局中的 哪一个位置。边框布局的位置表示是通过常量来表示的，具体常量如下所示</p>
-</li>
-</ul>
-<blockquote>
-<ul>
-<li><code>NORTH</code>    容器顶部</li>
-<li><code>SOUTH</code>    容器底部</li>
-<li><code>WEST</code>    容器左边</li>
-<li><code>EAST</code>    容器右边</li>
-<li><code>CENTER</code>    容器的中央</li>
-</ul>
-</blockquote>
-<p><strong>构造函数：</strong></p>
-<ol>
-<li><code>BorderLayout()</code>,生成一个默认的<code>BorderLayout</code>布局。默认情况下，没有间隙。</li>
-<li><code>BorderLayout(int horz,int vert)</code>,设定组件之间的水平间距和垂直间距。</li>
-</ol>
-<p><strong>注意这里还有一些常用的方法，就是设置水平和垂直的间距，上面已经赘述过了，这里就不再详说了</strong></p>
-</blockquote>
-<h2 id="空布局-null"><a href="#空布局-null" class="headerlink" title="空布局(null)"></a>空布局(<code>null</code>)</h2><blockquote>
-<p>空布局就是没有使用布局管理器，在空布局的情况下将根据控件的自身信息来为控件指定位置。这就使得控件的布局更加灵活，与此同时给开发人员带来了更大的工作量。</p>
-</blockquote>
-<p>空布局是不需要使用类来创建的，只需要在程序指定布局管理器 为null。将控件添加到空布局容器中时，仍然是使用<code>add</code>方法。因 为这里使用的是空布局管理器，所以在添加控件之前，要对控件 进行设置操作。设置操作是通过setBounds方法来完成的， setBounds方法的基本语法格式如下所示。</p>
-<blockquote>
-<p><code>public void setBounds(int x,int y,int width,int height);</code></p>
-<p>其中x和y表示的是控件最左上侧的坐标，从而也固定了该控件的 位置。<code>width</code>和<code>height</code>表示的是空间的宽度和高度，从而也指定了<br>控件的大小。</p>
-<p><strong>示例代码：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;frame.setLayout(<span class="keyword">null</span>);<span class="comment">//布局管理器设置为null</span></div><div class="line">    JLabel label = <span class="keyword">new</span> JLabel(<span class="string">"First Name:"</span>);</div><div class="line">    label.setBounds(<span class="number">20</span>, <span class="number">20</span>, <span class="number">100</span>, <span class="number">20</span>);<span class="comment">//四个参数分别是x,y坐标和label的宽和高</span></div><div class="line">    JTextField textField = <span class="keyword">new</span> JTextField();</div><div class="line">    textField.setBounds(<span class="number">124</span>, <span class="number">25</span>, <span class="number">100</span>, <span class="number">20</span>);</div><div class="line">    frame.add(label);</div><div class="line">    frame.add(textField);</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="BoxLayout"><a href="#BoxLayout" class="headerlink" title="BoxLayout"></a>BoxLayout</h2><blockquote>
-<p><code>BoxLayout</code>是一种能够实现所有的控件水平放置和垂直放置，因为用到的不多，这里就简单的说一下<br><strong>构造函数</strong>：<code>public BoxLayout(Container target,int axis)</code>:其中<code>axis</code>表示放置的样式，主要有两种常用到的:</p>
-<ul>
-<li><code>X_AXIS</code>:指定组件应该从左到右放置。</li>
-<li><code>Y_AXIS</code>：指定组件从上到下放置</li>
-</ul>
-<p><strong>代码</strong></p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> oracle.jrockit.jfr.JFR;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.swing.*;</div><div class="line"><span class="keyword">import</span> java.awt.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BuJu</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        JFrame frame = <span class="keyword">new</span> JFrame();</div><div class="line">        <span class="comment">// frame.setLayout(new BorderLayout(frame.getComponentCount(),BoxLayout.Y_AXIS));</span></div><div class="line">        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</div><div class="line">        JPanel panel = <span class="keyword">new</span> JPanel();</div><div class="line">        BoxLayout boxLayout = <span class="keyword">new</span> BoxLayout(panel, BoxLayout.X_AXIS);</div><div class="line">        panel.setLayout(boxLayout);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">            JButton button = <span class="keyword">new</span> JButton(<span class="string">"cma"</span>);</div><div class="line">            panel.add(button);</div><div class="line">        &#125;</div><div class="line">        frame.getContentPane().add(panel, BorderLayout.CENTER);</div><div class="line">        <span class="comment">// System.out.println(boxLayout.getTarget());</span></div><div class="line">        frame.pack();</div><div class="line">        <span class="comment">//frame.setSize(300,200);</span></div><div class="line">        frame.setVisible(<span class="keyword">true</span>);</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Swing系列之布局管理器&quot;&gt;&lt;a href=&quot;#Swing系列之布局管理器&quot; class=&quot;headerlink&quot; title=&quot;Swing系列之布局管理器&quot;&gt;&lt;/a&gt;Swing系列之布局管理器&lt;/h1&gt;&lt;h2 id=&quot;流布局-FlowLayout-默认的JAp
-    
-    </summary>
-    
-      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="swing" scheme="http://chenjiabing666.github.io/tags/swing/"/>
     
   </entry>
   
