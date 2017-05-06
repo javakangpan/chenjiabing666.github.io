@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-05-06T20:09:51.931Z</updated>
+  <updated>2017-05-06T20:12:45.986Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,199 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>git常用命令</title>
+    <link href="http://chenjiabing666.github.io/2017/05/07/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://chenjiabing666.github.io/2017/05/07/git常用命令/</id>
+    <published>2017-05-06T20:11:50.000Z</published>
+    <updated>2017-05-06T20:12:45.986Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="git常用操作"><a href="#git常用操作" class="headerlink" title="git常用操作"></a>git常用操作</h1><h2 id="第一次连接远程仓库的配置"><a href="#第一次连接远程仓库的配置" class="headerlink" title="第一次连接远程仓库的配置"></a>第一次连接远程仓库的配置</h2><h3 id="配置user-name-和user-email"><a href="#配置user-name-和user-email" class="headerlink" title="配置user.name 和user.email"></a>配置user.name 和user.email</h3><blockquote>
+<ul>
+<li><code>git config --global user.name &quot;name&quot;</code>    设置你的用户名</li>
+<li><p><code>git config --global user.email &quot;emil&quot;</code>    设置用户的email账号</p>
+<h3 id="生成密钥"><a href="#生成密钥" class="headerlink" title="生成密钥"></a>生成密钥</h3></li>
+<li><p><code>ssh-keygen -t rsa -C &quot;your email&quot;</code>  其中填的是你的注册的<code>github</code>的账号，输入之后如果不需要输入密码的话，连续输入三个回车即可，最后在你的在终端输入 cd ~/.ssh 进入到你的文件下可以看到有两个文件<code>id_rsa</code>和<code>id_rsa.pub</code>,最后复制你的<code>id_rsa.pub</code>中的内容到<code>github</code>中的账号中即可</p>
+</li>
+<li><code>ssh -T git@github.com</code> 如果上面的步骤已经完成了，那么就是验证是否完成了，输入上述语句，如果出现信息，那么证明说明你已经成功了</li>
+</ul>
+</blockquote>
+<h2 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a>管理修改</h2><blockquote>
+<p>通常我们在提交之后会想要修改，当然我们是在文件上直接修改，但是修改后在<code>git</code>上输入<code>git status</code>查看此时的工作区的状态，你会发现出现了出现了如下的语句：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">On branch master</div><div class="line">Your branch is ahead of &apos;origin/master&apos; by 2 commits.</div><div class="line">  (use &quot;git push&quot; to publish your local commits)</div><div class="line">Changes not staged for commit:</div><div class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</div><div class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</div><div class="line"></div><div class="line">        modified:   file.txt</div><div class="line"></div><div class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>从上面的提示可以看出我们有如下方案：</p>
+<ul>
+<li><strong>首先执行-&gt;<code>git add file.txt</code>,然后重新提交<code>git commit -m &#39;modified file.txt</code></strong></li>
+</ul>
+</blockquote>
+<h2 id="撤销修改-没有提交的-commit"><a href="#撤销修改-没有提交的-commit" class="headerlink" title="撤销修改(没有提交的[commit])"></a>撤销修改(没有提交的[<code>commit</code>])</h2><blockquote>
+<p><em>这里的撤销修改仅仅是对于没有提交的撤销(<code>git commit -m &#39;&#39;</code>),在下面会讲到如何撤销提交后的撤销</em></p>
+</blockquote>
+<h3 id="未git-add"><a href="#未git-add" class="headerlink" title="未git add"></a>未<code>git add</code></h3><blockquote>
+<p>当我们修改后会出现上面的提示，前面已经贴过了，这里就不再贴代码了，根据提示，我们可以<strong><code>git checkout -- file.txt</code>来丢弃工作区的修改</strong>，之后就可以看见先前的修改已经不见了</p>
+</blockquote>
+<h3 id="已经git-add"><a href="#已经git-add" class="headerlink" title="已经git add"></a>已经<code>git add</code></h3><blockquote>
+<p>当我们修改文件后并且<code>git add</code> 添加到暂存区了，那么查看状态<code>git status</code>,出现的提示如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">On branch master</div><div class="line">Your branch is ahead of &apos;origin/master&apos; by 2 commits.</div><div class="line">  (use &quot;git push&quot; to publish your local commits)</div><div class="line">Changes to be committed:</div><div class="line">  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</div><div class="line"></div><div class="line">        modified:   file.txt</div></pre></td></tr></table></figure>
+<blockquote>
+<p>根据上面提示的方法：输入<code>git reset HEAD file.txt</code>,可以看到文件回到<strong>未<code>git add</code></strong>的状态了，这时如果你想要丢弃修改，使用<code>git checkout -- file.txt</code>,之后就可以看到你的修改已经不见了</p>
+</blockquote>
+<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><blockquote>
+<p>其实删除也是一种修改操作，我们在文件管理器中直接使用<code>rm</code>删除文件，这时输入<code>git status</code>可以看到如下的提示：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">On branch master</div><div class="line">Your branch is ahead of &apos;origin/master&apos; by 2 commits.</div><div class="line">  (use &quot;git push&quot; to publish your local commits)</div><div class="line">Changes not staged for commit:</div><div class="line">  (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)</div><div class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</div><div class="line"></div><div class="line">        deleted:    file.txt</div><div class="line"></div><div class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</div><div class="line">PS G:\file&gt; git checkout -- file.txt</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<ul>
+<li><p>如果你<strong>不想删除</strong>了，想要恢复原来的文件，使用<code>git checkout -- file.txt</code> 这个命令可以让<em>撤销修改，也可以撤销删除</em>，起到一键还原的作用</p>
+</li>
+<li><p>如果你想要继续删除,那么有两种方法：</p>
+<blockquote>
+<ol>
+<li><strong>first:</strong><code>git add file.txt</code>,<strong>second:</strong><code>git commit -m &#39;&#39;</code></li>
+<li><strong>first:</strong><code>git rm file.txt</code>,<strong>second:</strong><code>git commit -m &#39;&#39;</code></li>
+</ol>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<p><strong>注意：</strong> <em><code>git rm file</code> 可以用来删除提交到版本库中的文件，一般删除要执行以下命令：<code>git rm file.txt</code>,<code>git commit -m &#39;delete&#39;</code>，注意在<code>git commit</code>之前还是可以<strong>取消删除</strong>的，使用<code>git checkout -- file.txt</code>，可以一键取消删除</em></p>
+</blockquote>
+<h2 id="创建与合并分支"><a href="#创建与合并分支" class="headerlink" title="创建与合并分支"></a>创建与合并分支</h2><h3 id="常用命令："><a href="#常用命令：" class="headerlink" title="常用命令："></a>常用命令：</h3><blockquote>
+<ul>
+<li><code>git checkout -b dev</code>   创建并且切换到<code>dev</code>分支</li>
+<li><code>git checkout dev</code> 切换到<code>dev</code>分支</li>
+<li><code>git branch</code>   查看所有的分支，带有<code>*</code>的是当前所处的分支</li>
+<li><code>git branch -d dev</code> 删除<code>dev</code>分支，一般在合并之后删除</li>
+<li><code>git branch -D dev</code>  ：强制删除分支，一般在没有合并就删除分支会出现不能删除，这是就要使用强制删除这个分支的命令</li>
+<li><code>git merge dev</code>    将<code>dev</code>分支合并到当前分支,使用到<code>Fast forward</code>模式，但这种模式下，删除分支后，会丢掉分支信息。</li>
+<li><p><code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code>    强制禁用<code>Fast forward</code>模式，<code>Git</code>就会在<code>merge</code>时生成一个新的<code>commit</code>，这样，从分支历史上就可以看出分支信息。</p>
+</li>
+<li><p><code>git log --graph --pretty=oneline --abbrev-commit</code>  查看分支历史</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="创建合并"><a href="#创建合并" class="headerlink" title="创建合并"></a>创建合并</h3><blockquote>
+<ul>
+<li><p>首先我们创建一个<code>dev</code>分支,使用命令：<code>git checkout -b dev</code>(创建一个<code>dev</code>分支，并且切换到<code>dev</code>分支上)，我们可以使用<code>git branch</code>查看所有的分支</p>
+</li>
+<li><p><em>现在在改变之前<code>master</code>分支上的<code>file.txt</code>文件内容，之后<code>git add file.txt</code>,并且提交到<strong>版本库</strong>中了(<code>git commit -m &#39;file.txt&#39;</code>)，此时使用<code>git checkout master</code>切换到<code>master</code>分支上，查看<code>file.txt</code>的文件内容，可以看到里面的内容并<strong>没有改变</strong>，由此可知两个分支是<strong>独立</strong>的，如果你在一个分之上创建了文件并且提交到版本库中了，切换到另外一个分支上，此时可以发现原来创建的文件<strong>不见了</strong>，因为那是另外一个分支的文件，当然我们可以<strong>合并分支</strong>，使用<code>git merge dev</code>,这两个命令将<code>dev</code>分支合并到<strong>当前分支</strong></em></p>
+</li>
+</ul>
+</blockquote>
+<h2 id="Bug分支管理"><a href="#Bug分支管理" class="headerlink" title="Bug分支管理"></a>Bug分支管理</h2><blockquote>
+<p><em>如果正在一个分支上工作，另外一个分支上的程序有一个Bug需要马上修改，但是此时这个分支上的东西还需要很长时间才能完成，这应该怎么办呢？难道要放弃当前分支上的修改吗？当然不是了，幸好，Git还提供了一个stash功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作，具体步骤如下：</em></p>
+<blockquote>
+<ul>
+<li>git stash  将当前的工作状态暂时存储在stash中，输出如下信息</li>
+</ul>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Saved working directory and index state WIP on dev: 6224937 add merge</div><div class="line">HEAD is now at 6224937 add merge</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<ul>
+<li><p>此时可以使用<code>git status</code> 查看当前的分支上的状态，可以知道当前的的工作区就是干净的，因此可以放心的修复另外一个分支上的的<code>Bug</code>了</p>
+</li>
+<li><p><code>git checkout master</code> 切换分支，修复<code>Bug</code></p>
+</li>
+<li><p><code>git checkout dev</code>  修复好Bug继续回到上一个分支干活</p>
+</li>
+<li><p><code>git stash list</code> 可以看到工作现场还在，输出如下信息：</p>
+</li>
+</ul>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">stash@&#123;0&#125;: WIP on dev: 6224937 add merge</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p><em>如果有多个修改的内容，这里的信息肯定不止一条</em></p>
+<ul>
+<li><p><code>git stash apply</code>：恢复修改，但是这只是恢复<code>stash</code>的内容并不会删除，这里建议使用<code>git stash pop</code> 既恢复了又删除了<code>stash</code>中内容，注意这里只能恢复一条数据，此时使用<code>git status</code>查看状态，可以看到已经出现修改的内容了</p>
+</li>
+<li><p><code>git stash list</code> ：此时查看当前<code>stash</code>中的内容可以看到已经什么都没了，当然这只是清除一条，如果本来有多个，那么还是会有其他内容的</p>
+</li>
+</ul>
+</blockquote>
+</blockquote>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><blockquote>
+<ul>
+<li><code>git stash</code> 将当前的分支上的工作暂存到<code>stash</code>中</li>
+<li><code>git stash list</code> 列出<code>stash</code>中的所有暂存的内容</li>
+<li><code>git stash pop</code> 恢复并且删除stash中的内容</li>
+<li><code>git stash apply</code> 恢复但是步删除<code>stash</code>中的内容</li>
+</ul>
+</blockquote>
+<h2 id="远程仓库的操作"><a href="#远程仓库的操作" class="headerlink" title="远程仓库的操作"></a>远程仓库的操作</h2><h3 id="常用的命令"><a href="#常用的命令" class="headerlink" title="常用的命令"></a>常用的命令</h3><blockquote>
+<ul>
+<li><p><code>git remote -v</code> 查看远程仓库的详细信息</p>
+</li>
+<li><p><code>git remote add remote-name URL</code> 添加远程仓库</p>
+</li>
+<li><p><code>git remote rename origin pb</code>   将远程仓库的origin改为pb，此时使用git remote 查看可以知道这里已经没有origin了，变成了pb</p>
+</li>
+<li><p><code>git remote rm origin</code>   将远程仓库origin删除</p>
+</li>
+<li><p><code>git push origin master</code>   将内容提交到远程仓库origin的master上，当然这里亦可以使用其他的分支</p>
+</li>
+<li><p><code>git clone URL</code>      克隆一个远程仓库，这里的URL是远程仓库的地址</p>
+</li>
+<li><p><code>git pull origin</code>    将远程仓库中更新的数据拉到本地</p>
+</li>
+<li><p><code>git checkout -b branch-name origin/branch-name</code>   在本地创建和远程仓库对应的分支，最好分支的名字相同</p>
+</li>
+<li><p><code>git push origin branch-name</code>    推送到远程仓库的分支</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><blockquote>
+<p><em>同一个文件夹中可以添加很多远程仓库，不过可以在提交的时候需要指定远程仓库的名字，比如在你的文件夹下有origin和pb两个远程仓库，可以使用git remote  -v查看详细的信息，此时你在版本库中已经有想要推送的文件了，那么使用git push origin master就可以指定推送到origin远程仓库中</em></p>
+</blockquote>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><blockquote>
+<p><em>假如你新建一个文件夹，此时要在里面添加远程仓库，具体实现如下：</em></p>
+<blockquote>
+<ul>
+<li><p><code>git clone URL</code> 将一个仓库克隆来的同时也具有推送的权限了，这时就可以使用<code>git remote add origin URL</code>来添加远程仓库了</p>
+</li>
+<li><p>如果没有使用<code>clone</code>的方法创建一个版本库，那么先<code>git init</code> 然后<code>git remote add origin URL</code> 添加远程仓库，之后就是将本地仓库和远程仓库对应了，使用<code>git pull origin master</code> 来拉取远程仓库中内容，当然这也可以分两步，使用如下：</p>
+</li>
+</ul>
+<blockquote>
+<ol>
+<li><p><code>git fetch origin master</code>   这是将远程仓库中的文件拉取到本地，但是没有与本地的<code>master</code>合并，因此本地的<code>master</code>分支不能追踪远程仓库中的分支</p>
+</li>
+<li><p><code>git merge origin/master</code>  将远程仓库和本地的<code>master</code>分支合并，那么就可以使用本地的<code>master</code>分支追踪远程仓库了，这就完成了</p>
+</li>
+</ol>
+</blockquote>
+<ul>
+<li>无论<code>clone</code>还是<code>pull</code>都只是拉取远程的<code>master</code>分支，但是一般远程仓库中还有其他的分支，那么怎么办呢？拉取远程仓库的次分支步骤如下：</li>
+</ul>
+<blockquote>
+<ol>
+<li><code>git checkout -b dev origin/dev</code>  拉去远程仓库中的<code>dev</code>仓库到本地的<code>dev</code>分支</li>
+</ol>
+</blockquote>
+</blockquote>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;git常用操作&quot;&gt;&lt;a href=&quot;#git常用操作&quot; class=&quot;headerlink&quot; title=&quot;git常用操作&quot;&gt;&lt;/a&gt;git常用操作&lt;/h1&gt;&lt;h2 id=&quot;第一次连接远程仓库的配置&quot;&gt;&lt;a href=&quot;#第一次连接远程仓库的配置&quot; class=&quot;
+    
+    </summary>
+    
+      <category term="Git" scheme="http://chenjiabing666.github.io/categories/Git/"/>
+    
+    
+      <category term="Git" scheme="http://chenjiabing666.github.io/tags/Git/"/>
+    
+  </entry>
   
   <entry>
     <title>scrapy爬取淘宝女郎</title>
@@ -2183,61 +2376,6 @@
     
     
       <category term="swing" scheme="http://chenjiabing666.github.io/tags/swing/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>scrapy爬取豆瓣全站</title>
-    <link href="http://chenjiabing666.github.io/2017/04/08/scrapy%E7%88%AC%E5%8F%96%E8%B1%86%E7%93%A3%E5%85%A8%E7%AB%99/"/>
-    <id>http://chenjiabing666.github.io/2017/04/08/scrapy爬取豆瓣全站/</id>
-    <published>2017-04-08T06:24:26.000Z</published>
-    <updated>2017-04-08T06:36:20.431Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Scrapy爬取豆瓣读书全站"><a href="#Scrapy爬取豆瓣读书全站" class="headerlink" title="Scrapy爬取豆瓣读书全站"></a>Scrapy爬取豆瓣读书全站</h1><h2 id="分析网页"><a href="#分析网页" class="headerlink" title="分析网页"></a>分析网页</h2><blockquote>
-<p>首先打开<a href="https://book.douban.com/tag/?icn=index-nav" target="_blank" rel="external">豆瓣读书中的分类浏览</a>，可以看到其中有很多的分类</p>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/2.bmp" alt="分类"></p>
-<p>豆瓣应该是一个比较好爬的网站，所有的数据都不是<code>ajax</code>加载的，我们打开谷歌的<code>F12</code>或者是火狐的<code>FireBug</code>可以很轻松的找到每一个分类的链接</p>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/NonName.bmp" alt="url所在地"></p>
-<p>这里我们使用scrapy中的一个<a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/link-extractors.html" target="_blank" rel="external">linkextractors库</a>,这个库的作用是会根据提供的限制，自动爬取和深入每一个页面并且提取需要的链接，如果想要找到每一个分类的url,只需<code>Rule(LinkExtractor(allow=&#39;/tag/&#39;,restrict_xpaths=&quot;//div[@class=&#39;article&#39;]&quot;),follow=True),</code>这里的allow是一个<code>正则表达式</code>，用来筛选分类url,<code>restrict_xpaths</code>是限制在哪个结构中筛选url,这里限制的是在<code>&lt;div class=&#39;article&#39;&gt;</code>这个盒模型中，<code>follow</code>表示是否深入，这里当然是要深入,这里就能得到每一个分类url了，自己可以在<code>回调函数</code>中测试下，输入所得的url,可以使用<code>respose.url</code></p>
-<p>得到所有的分类url，就可以继续深入到每一步作品所在的页面了，如下图!</p>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/3.bmp" alt="作品网页"><br>但是我们需要不止是这一页，我们要爬的时全站，因此这里必须实现翻页，我们可以看到页面底部清楚的写着下一页，我们通过解析页面同样可以得到url,如下图所示</p>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/6.bmp" alt="翻页url"><br>可以看到所有的url的规则，我们就可以用正则表达式限制，以获取我们的需要，我们可以写出翻页的代码</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Rule(LinkExtractor(allow=<span class="string">"\?start=\d+\&amp;type="</span>,restrict_xpaths=<span class="string">"//div[@class='pa&gt;ginator']"</span>),follow=<span class="keyword">True</span>),</div></pre></td></tr></table></figure>
-<blockquote>
-<p>最后一步就是打开每一部书的网页得到所需的信息了，我们就可以通过这里通过解析网页还是可以很清楚的知道url,这里就不再详细的说怎么解析了，这里可以看到所有的url都在<code>li</code>标签中，如下图</p>
-<blockquote>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/4.bmp" alt="url"></p>
-</blockquote>
-<p>我们打开<code>li</code>标签可以很清楚的看大url的规律，因此这里还是用到上面说的库解析深入，连同上面的代码如下</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Rule(LinkExtractor(allow=<span class="string">'/tag/'</span>,restrict_xpaths=<span class="string">"/ /div[@class='article']"</span>),follow=<span class="keyword">True</span>),<span class="comment">#第一步</span></div><div class="line">Rule(LinkExtractor(allow=<span class="string">"\?start=\d+\&amp;type="</span>,restrict_xpaths=<span class="string">"//div[@class='pa&gt;ginator']"</span>),follow=<span class="keyword">True</span>),  <span class="comment">#第二步翻翻页</span></div><div class="line">Rule(LinkExtractor(allow=<span class="string">"/subject/\d+/$"</span>,restrict_&gt;xpaths=<span class="string">"//ul[@class='subject-list']"</span>),callback=<span class="string">'parse_item'</span>)<span class="comment">#得到所需网页的url</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>到了这里总算是大功告成了，下面就需要解析自己的所需要的信息了,这里附上网页</p>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/5.bmp" alt="图片"><br>下面就是写自己解析代码了，这里就不需要详细的说了，详细内容请看<a href="https://github.com/chenjiabing666/douban_book_spider" target="_blank" rel="external">源码</a>,值得注意的是爬取的网页速度不要太快，豆瓣会禁IP的，这里可以采用一些反爬虫措施,如请求头的更换，ip地址的更换，下一篇会详细解说。</p>
-</blockquote>
-<h2 id="参考文档："><a href="#参考文档：" class="headerlink" title="参考文档："></a>参考文档：</h2><blockquote>
-<p><strong><a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/index.html#" target="_blank" rel="external">scrapy中文文档</a></strong></p>
-<p><strong>最后附上本人的<a href="https://github.com/chenjiabing666" target="_blank" rel="external">github地址</a>,不要忘了给个star哦</strong></p>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Scrapy爬取豆瓣读书全站&quot;&gt;&lt;a href=&quot;#Scrapy爬取豆瓣读书全站&quot; class=&quot;headerlink&quot; title=&quot;Scrapy爬取豆瓣读书全站&quot;&gt;&lt;/a&gt;Scrapy爬取豆瓣读书全站&lt;/h1&gt;&lt;h2 id=&quot;分析网页&quot;&gt;&lt;a href=&quot;#分
-    
-    </summary>
-    
-      <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
     
   </entry>
   
