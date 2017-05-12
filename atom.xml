@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-05-12T23:15:48.166Z</updated>
+  <updated>2017-05-12T23:18:12.870Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,77 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python发送邮件</title>
+    <link href="http://chenjiabing666.github.io/2017/05/13/python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/"/>
+    <id>http://chenjiabing666.github.io/2017/05/13/python发送邮件/</id>
+    <published>2017-05-12T23:17:41.000Z</published>
+    <updated>2017-05-12T23:18:12.870Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="python发送邮件"><a href="#python发送邮件" class="headerlink" title="python发送邮件"></a>python发送邮件</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><blockquote>
+<p><em>python中发送邮件主要用的是smtplib和email两个模块，下面主要对这两个模块进行讲解</em></p>
+<p><em>在讲解之前需要准备至少两个测试的邮箱，其中要在邮箱的设置中开启smtplib协议才可以进行发送和接受</em></p>
+</blockquote>
+<h3 id="smtplib"><a href="#smtplib" class="headerlink" title="smtplib"></a>smtplib</h3><blockquote>
+<ul>
+<li><p>smtplib.SMTP( [host [, port [, local_hostname[,timeout]]]])  host是SMTP主机的服务器，其中163邮箱的是smtp.163.com,其他的可以在网上找到，port是端口号，这里默认的是25，local_hostname是你主机的SMTP,如果SMTP在你的本机上，你只需要指定服务器地址为 localhost 即可。timeout是设置的连接的限制时间，如果超过这个时间还没有连接上那么就会出现错误</p>
+</li>
+<li><p>SMTP.set_debuglevel(level)：设置是否为调试模式。默认为False，即非调试模式，表示不输出任何调试信息。如果设置为1就表示输出调试信息</p>
+</li>
+<li><p>SMTP.connect([host[, port]])：连接到指定的smtp服务器。参数分别表示smpt主机和端口。注意: 也可以在host参数中指定端口号（如：smpt.yeah.net:25），这样就没必要给出port参数。</p>
+</li>
+<li><p>SMTP.login(user, password) 登录服务器，这里的user是邮箱的用户名，但是这里的password并不是你邮箱的密码，当你开启SMTP的时候会提示你设置一个密码，这里的密码就是对应的密码</p>
+</li>
+<li><p>SMTP.sendmail(from_addr, [to_addrs,], msg[, mail_options, rcpt_options]) 发送邮件，from_addr是发送方也就是你的邮箱地址，to_addr是接受方的地址，当然这里的可以填上多个邮箱账号发送给多个账号，如果有多个账号需要使用列表传递参数</p>
+</li>
+<li><p>SMTP.quit()断开连接</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="email"><a href="#email" class="headerlink" title="email"></a>email</h2><blockquote>
+<p><em>emial模块用来处理邮件消息，包括MIME和其他基于RFC 2822 的消息文档。使用这些模块来定义邮件的内容，是非常简单的。其包括的类有（更加详细的介绍可见：<a href="http://docs.python.org/library/email.mime.html）：" target="_blank" rel="external">http://docs.python.org/library/email.mime.html）：</a></em></p>
+<ul>
+<li><p>class email.mime.base.MIMEBase(_maintype, _subtype, <strong>_params)：这是MIME的一个基类。一般不需要在使用时创建实例。其中_maintype是内容类型，如text或者image。_subtype是内容的minor type 类型，如plain或者gif。 </strong>_params是一个字典，直接传递给Message.add_header()。</p>
+</li>
+<li><p>class email.mime.multipart.MIMEMultipart([_subtype[, boundary[, _subparts[, _params]]]]：MIMEBase的一个子类，多个MIME对象的集合，_subtype默认值为mixed。boundary是MIMEMultipart的边界，默认边界是可数的。当需要发送附件的时候使用的就是这个类</p>
+</li>
+<li><p>class email.mime.application.MIMEApplication(_data[, _subtype[, _encoder[, **_params]]])：MIMEMultipart的一个子类。</p>
+</li>
+<li><p>class email.mime.audio. MIMEAudio(_audiodata[, _subtype[, _encoder[, **_params]]])： MIME音频对象</p>
+</li>
+<li><p>class email.mime.image.MIMEImage(_imagedata[, _subtype[, _encoder[, **_params]]])：MIME二进制文件对象。主要用来发送图片</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="普通文本邮件"><a href="#普通文本邮件" class="headerlink" title="普通文本邮件"></a>普通文本邮件</h2><blockquote>
+<ul>
+<li><p>class email.mime.text.MIMEText(_text[, _subtype[, _charset]])：MIME文本对象，其中_text是邮件内容，_subtype邮件类型，可以是text/plain（普通文本邮件），html/plain(html邮件),  _charset编码，可以是gb2312等等。</p>
+</li>
+<li><p>普通文本邮件发送的实现，关键是要将MIMEText中_subtype设置为plain。首先导入smtplib和mimetext。创建smtplib.smtp实例，connect邮件smtp服务器，login后发送，具体代码如下*</p>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 一个格式化邮件的函数，可以用来使用</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_format_addr</span><span class="params">(s)</span>:</span></div><div class="line">    name, addr = parseaddr(s)</div><div class="line">    <span class="keyword">return</span> formataddr((</div><div class="line">        Header(name, <span class="string">'utf-8'</span>).encode(),</div><div class="line">        addr.encode(<span class="string">'utf-8'</span>) <span class="keyword">if</span> isinstance(addr, unicode) <span class="keyword">else</span> addr))</div><div class="line"></div><div class="line">from_addr=<span class="string">'××××××××'</span>   <span class="comment">#你的邮箱地址</span></div><div class="line">from_password=<span class="string">'×××××××'</span>   <span class="comment">#你的密码</span></div><div class="line"><span class="comment"># to_email='chenjiabing666@yeah.net'</span></div><div class="line">to_email=<span class="string">'××××××'</span>    <span class="comment">#要发送的邮箱地址</span></div><div class="line"></div><div class="line">msg=MIMEText(<span class="string">'乔装打扮，不择手段'</span>,<span class="string">'plain'</span>,<span class="string">'utf-8'</span>)  <span class="comment">#这里text=乔装打扮，不择手段</span></div><div class="line"></div><div class="line">msg[<span class="string">'From'</span>] = _format_addr(<span class="string">u'Python爱好者 &lt;%s&gt;'</span> % from_addr)  <span class="comment">#格式化发件人</span></div><div class="line">msg[<span class="string">'To'</span>] = _format_addr(<span class="string">u'管理员 &lt;%s&gt;'</span> % to_email)    <span class="comment">#格式化收件人</span></div><div class="line">msg[<span class="string">'Subject'</span>] = Header(<span class="string">u'来自SMTP的问候……'</span>, <span class="string">'utf-8'</span>).encode()    <span class="comment">#格式化主题</span></div><div class="line"></div><div class="line">stmp=<span class="string">'smtp.163.com'</span></div><div class="line">server=smtplib.SMTP(stmp,port=<span class="number">25</span>,timeout=<span class="number">30</span>) <span class="comment">#连接，设置超时时间30s</span></div><div class="line">server.login(from_addr,from_password)    <span class="comment">#登录</span></div><div class="line">server.set_debuglevel(<span class="number">1</span>)        <span class="comment">#输出所有的信息</span></div><div class="line">server.sendmail(from_addr,to_email,msg.as_string())   <span class="comment">#这里的as_string()是将msg转换成字符串类型的,如果你想要发给多个人，需要讲to_email换成一个列表</span></div></pre></td></tr></table></figure>
+<h2 id="发送html邮件"><a href="#发送html邮件" class="headerlink" title="发送html邮件"></a>发送html邮件</h2><blockquote>
+<p><em>还是用MIMEText来发送，不过其中的_subType设置成html即可，详细代码如下：</em></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_format_addr</span><span class="params">(s)</span>:</span></div><div class="line">    name, addr = parseaddr(s)</div><div class="line">    <span class="keyword">return</span> formataddr((</div><div class="line">        Header(name, <span class="string">'utf-8'</span>).encode(),</div><div class="line">        addr.encode(<span class="string">'utf-8'</span>) <span class="keyword">if</span> isinstance(addr, unicode) <span class="keyword">else</span> addr))</div><div class="line"></div><div class="line">from_addr=<span class="string">'××××××××'</span>   <span class="comment">#你的邮箱地址</span></div><div class="line">from_password=<span class="string">'×××××××'</span>   <span class="comment">#你的密码</span></div><div class="line"><span class="comment"># to_email='chenjiabing666@yeah.net'</span></div><div class="line">to_email=<span class="string">'××××××'</span>    <span class="comment">#要发送的邮箱地址</span></div><div class="line">html=<span class="string">"""</span></div><div class="line">&lt;p&gt;&lt;h1 style="color:red"&gt;大家好&lt;/h1&gt;&lt;/p&gt;</div><div class="line">"""</div><div class="line"></div><div class="line">msg=MIMEText(html,<span class="string">'html'</span>,<span class="string">'utf-8'</span>)  <span class="comment">#这里text=html,设置成html格式的</span></div><div class="line"></div><div class="line">msg[<span class="string">'From'</span>] = _format_addr(<span class="string">u'Python爱好者 &lt;%s&gt;'</span> % from_addr)  <span class="comment">#格式化发件人</span></div><div class="line">msg[<span class="string">'To'</span>] = _format_addr(<span class="string">u'管理员 &lt;%s&gt;'</span> % to_email)    <span class="comment">#格式化收件人</span></div><div class="line">msg[<span class="string">'Subject'</span>] = Header(<span class="string">u'来自SMTP的问候……'</span>, <span class="string">'utf-8'</span>).encode()    <span class="comment">#格式化主题</span></div><div class="line"></div><div class="line">stmp=<span class="string">'smtp.163.com'</span></div><div class="line">server=smtplib.SMTP(stmp,port=<span class="number">25</span>,timeout=<span class="number">30</span>) <span class="comment">#连接，设置超时时间30s</span></div><div class="line">server.login(from_addr,from_password)    <span class="comment">#登录</span></div><div class="line">server.set_debuglevel(<span class="number">1</span>)        <span class="comment">#输出所有的信息</span></div><div class="line">server.sendmail(from_addr,to_email,msg.as_string())   <span class="comment">#这里的as_string()是将msg转换成字符串类型的,如果你想要发给多个人，需要讲to_email换成一个列表</span></div></pre></td></tr></table></figure>
+<h2 id="附件的发送"><a href="#附件的发送" class="headerlink" title="附件的发送"></a>附件的发送</h2><blockquote>
+<p><em>发送带附件的邮件，首先要创建MIMEMultipart()实例，然后构造附件，如果有多个附件，可依次构造，最后利用smtplib.smtp发送，具体实力如下：</em></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> email.mime.multipart <span class="keyword">import</span> MIMEMultipart</div><div class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</div><div class="line"><span class="keyword">import</span> smtplib</div><div class="line"><span class="keyword">from</span> email.mime.image <span class="keyword">import</span> MIMEImage</div><div class="line"><span class="keyword">from</span> email.mime.multipart <span class="keyword">import</span> MIMEMultipart</div><div class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</div><div class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_format_addr</span><span class="params">(s)</span>:</span></div><div class="line">    name, addr = parseaddr(s)</div><div class="line">    <span class="keyword">return</span> formataddr((</div><div class="line">        Header(name, <span class="string">'utf-8'</span>).encode(),</div><div class="line">        addr.encode(<span class="string">'utf-8'</span>) <span class="keyword">if</span> isinstance(addr, unicode) <span class="keyword">else</span> addr))</div><div class="line"></div><div class="line">from_addr=<span class="string">'××××××××'</span>   <span class="comment">#你的邮箱地址</span></div><div class="line">from_password=<span class="string">'×××××××'</span>   <span class="comment">#你的密码</span></div><div class="line"><span class="comment"># to_email='chenjiabing666@yeah.net'</span></div><div class="line">to_email=<span class="string">'××××××'</span>    <span class="comment">#要发送的邮箱地址</span></div><div class="line"></div><div class="line"></div><div class="line">msg=MIMEMultipart()   <span class="comment">#创建实例</span></div><div class="line">text=MIMEText(<span class="string">'&lt;h2 style="color:red"&gt;陈加兵&lt;/h2&gt;&lt;br/&gt;&lt;p&gt;大家好&lt;/p&gt;'</span>,<span class="string">'html'</span>,<span class="string">'utf-8'</span>)</div><div class="line">msg.attach(text)   <span class="comment">#添加一个正文信息，这里实在正文中显示的信息</span></div><div class="line"></div><div class="line"><span class="comment">#创建一个文本附件，这里是从指定文本中读取信息，然后创建一个文本信息</span></div><div class="line">att1=MIMEText(open(<span class="string">'/home/chenjiabing/文档/MeiZi_img/full/file.txt'</span>,<span class="string">'rb'</span>).read(),<span class="string">'plain'</span>,<span class="string">'utf-8'</span>)</div><div class="line">att1[<span class="string">"Content-Type"</span>] = <span class="string">'application/octet-stream'</span>  <span class="comment">#指定类型</span></div><div class="line">att1[<span class="string">"Content-Disposition"</span>] = <span class="string">'attachment; filename="123.txt"'</span><span class="comment">#这里的filename可以任意写，写什么名字，邮件中显示什么名字</span></div><div class="line">msg.attach(att1)     <span class="comment">#向其中添加附件</span></div><div class="line"></div><div class="line">img_path=<span class="string">'/home/chenjiabing/文档/MeiZi_img/full/file.jpg'</span>  <span class="comment">#图片路径</span></div><div class="line">image=MIMEImage(open(img_path,<span class="string">'rb'</span>).read())     <span class="comment">#创建一个图片附件</span></div><div class="line">image.add_header(<span class="string">'Content-ID'</span>,<span class="string">'&lt;0&gt;'</span>)   <span class="comment">#指定图片的编号,这个会在后面用到</span></div><div class="line">image.add_header(<span class="string">'Content-Disposition'</span>, <span class="string">'attachment'</span>, filename=<span class="string">'test.jpg'</span>)        </div><div class="line">image.add_header(<span class="string">'X-Attachment-Id'</span>, <span class="string">'0'</span>)</div><div class="line">msg.attach(image)    <span class="comment">#添加附件</span></div><div class="line"></div><div class="line"></div><div class="line">stmp=<span class="string">'smtp.163.com'</span></div><div class="line">server=smtplib.SMTP(stmp,port=<span class="number">25</span>,timeout=<span class="number">30</span>) <span class="comment">#连接，设置超时时间30s</span></div><div class="line">server.login(from_addr,from_password)    <span class="comment">#登录</span></div><div class="line">server.set_debuglevel(<span class="number">1</span>)        <span class="comment">#输出所有的信息</span></div><div class="line">server.sendmail(from_addr,to_email,msg.as_string())   <span class="comment">#这里的as_string()是将msg转换成字符串类型的,如果你想要发给多个人，需要讲to_email换成一个列表</span></div></pre></td></tr></table></figure>
+<h2 id="将图片嵌入到正文信息中"><a href="#将图片嵌入到正文信息中" class="headerlink" title="将图片嵌入到正文信息中"></a>将图片嵌入到正文信息中</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> email.mime.multipart <span class="keyword">import</span> MIMEMultipart</div><div class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</div><div class="line"><span class="keyword">import</span> smtplib</div><div class="line"><span class="keyword">from</span> email.mime.image <span class="keyword">import</span> MIMEImage</div><div class="line"><span class="keyword">from</span> email.mime.multipart <span class="keyword">import</span> MIMEMultipart</div><div class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</div><div class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_format_addr</span><span class="params">(s)</span>:</span></div><div class="line">    name, addr = parseaddr(s)</div><div class="line">    <span class="keyword">return</span> formataddr((</div><div class="line">        Header(name, <span class="string">'utf-8'</span>).encode(),</div><div class="line">        addr.encode(<span class="string">'utf-8'</span>) <span class="keyword">if</span> isinstance(addr, unicode) <span class="keyword">else</span> addr))</div><div class="line"></div><div class="line">from_addr=<span class="string">'××××××××'</span>   <span class="comment">#你的邮箱地址</span></div><div class="line">from_password=<span class="string">'×××××××'</span>   <span class="comment">#你的密码</span></div><div class="line"><span class="comment"># to_email='chenjiabing666@yeah.net'</span></div><div class="line">to_email=<span class="string">'××××××'</span>    <span class="comment">#要发送的邮箱地址</span></div><div class="line"></div><div class="line"></div><div class="line">msg=MIMEMultipart()   <span class="comment">#创建实例</span></div><div class="line">html=<span class="string">"""</span></div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;p&gt;下面演示嵌入图片&lt;/p&gt;</div><div class="line">&lt;section&gt;</div><div class="line">&lt;img src='cid:0' style='float:left'/&gt;</div><div class="line">&lt;img src='cid:1' style='float:left'/&gt;</div><div class="line">&lt;/setcion&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line">"""</div><div class="line"></div><div class="line">text=MIMEText(<span class="string">'&lt;h2 style="color:red"&gt;陈加兵&lt;/h2&gt;&lt;br/&gt;&lt;p&gt;大家好&lt;/p&gt;'</span>,<span class="string">'html'</span>,<span class="string">'utf-8'</span>)</div><div class="line">msg.attach(text)   <span class="comment">#添加一个正文信息，这里实在正文中显示的信息</span></div><div class="line"></div><div class="line"><span class="comment">#创建一个文本附件，这里是从指定文本中读取信息，然后创建一个文本信息</span></div><div class="line">att1=MIMEText(open(<span class="string">'/home/chenjiabing/文档/MeiZi_img/full/file.txt'</span>,<span class="string">'rb'</span>).read(),<span class="string">'plain'</span>,<span class="string">'utf-8'</span>)</div><div class="line">att1[<span class="string">"Content-Type"</span>] = <span class="string">'application/octet-stream'</span>  <span class="comment">#指定类型</span></div><div class="line">att1[<span class="string">"Content-Disposition"</span>] = <span class="string">'attachment; filename="123.txt"'</span><span class="comment">#这里的filename可以任意写，写什么名字，邮件中显示什么名字</span></div><div class="line">msg.attach(att1)     <span class="comment">#向其中添加附件</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">## 创建一个图片附件</span></div><div class="line">img_path=<span class="string">'/home/chenjiabing/文档/MeiZi_img/full/file.jpg'</span>  <span class="comment">#图片路径</span></div><div class="line">image=MIMEImage(open(img_path,<span class="string">'rb'</span>).read())     <span class="comment">#创建一个图片附件</span></div><div class="line">image.add_header(<span class="string">'Content-ID'</span>,<span class="string">'&lt;0&gt;'</span>)   <span class="comment">#指定图片的编号,</span></div><div class="line">image.add_header(<span class="string">'Content-Disposition'</span>, <span class="string">'attachment'</span>, filename=<span class="string">'test.jpg'</span>)        </div><div class="line">image.add_header(<span class="string">'X-Attachment-Id'</span>, <span class="string">'0'</span>)</div><div class="line">msg.attach(image)    <span class="comment">#添加附件</span></div><div class="line"></div><div class="line"><span class="comment">#创建第二个图片附件</span></div><div class="line">img_path_1=<span class="string">'/home/chenjiabing/文档/MeiZi_img/full/test.jpg'</span>  <span class="comment">#图片路径</span></div><div class="line">image1=MIMEImage(open(img_path,<span class="string">'rb'</span>).read())     <span class="comment">#创建一个图片附件</span></div><div class="line">image1.add_header(<span class="string">'Content-ID'</span>,<span class="string">'&lt;1&gt;'</span>)   <span class="comment">#指定图片的编号,这个就是在上面对应的cid:1的那张图片，因此这里的编号一定要对应</span></div><div class="line">image1.add_header(<span class="string">'Content-Disposition'</span>, <span class="string">'attachment'</span>, filename=<span class="string">'img.jpg'</span>)        </div><div class="line">image1.add_header(<span class="string">'X-Attachment-Id'</span>, <span class="string">'0'</span>)</div><div class="line">msg1.attach(image)    <span class="comment">#添加附件</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">stmp=<span class="string">'smtp.163.com'</span></div><div class="line">server=smtplib.SMTP(stmp,port=<span class="number">25</span>,timeout=<span class="number">30</span>) <span class="comment">#连接，设置超时时间30s</span></div><div class="line">server.login(from_addr,from_password)    <span class="comment">#登录</span></div><div class="line">server.set_debuglevel(<span class="number">1</span>)        <span class="comment">#输出所有的信息</span></div><div class="line">server.sendmail(from_addr,to_email,msg.as_string())   <span class="comment">#这里的as_string()是将msg转换成字符串类型的,如果你想要发给多个人，需要讲to_email换成一个列表</span></div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;python发送邮件&quot;&gt;&lt;a href=&quot;#python发送邮件&quot; class=&quot;headerlink&quot; title=&quot;python发送邮件&quot;&gt;&lt;/a&gt;python发送邮件&lt;/h1&gt;&lt;h2 id=&quot;准备&quot;&gt;&lt;a href=&quot;#准备&quot; class=&quot;headerli
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>python制作电子书</title>
@@ -2019,238 +2090,6 @@
     
     
       <category term="JDBC" scheme="http://chenjiabing666.github.io/tags/JDBC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux干货篇一</title>
-    <link href="http://chenjiabing666.github.io/2017/04/13/Linux%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B8%80/"/>
-    <id>http://chenjiabing666.github.io/2017/04/13/Linux干货篇一/</id>
-    <published>2017-04-13T04:29:34.000Z</published>
-    <updated>2017-04-13T04:32:08.520Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Linux干货篇一"><a href="#Linux干货篇一" class="headerlink" title="Linux干货篇一"></a>Linux干货篇一</h1><h2 id="虚拟机的安装-VMware"><a href="#虚拟机的安装-VMware" class="headerlink" title="虚拟机的安装(VMware)"></a>虚拟机的安装(VMware)</h2><blockquote>
-<ol>
-<li><strong>选择文件-&gt;新建虚拟机</strong></li>
-<li>选择<strong>自定义</strong></li>
-<li>设置安装来源，选择<strong>稍后安装</strong></li>
-<li>选择安装的操作系统，选择<strong>Linux</strong>,然后选择自己安装的对应版本即可</li>
-<li>设置虚拟机的安装路径，自己选择</li>
-<li>指定磁盘容量，选择默认20G,然后选择<strong>将虚拟磁盘存储为单个文件</strong></li>
-<li>设置cpu数量，内存大小，默认即可</li>
-<li>设置Linux安装镜像文件路径</li>
-<li>点击开启虚拟机即可根据对应的设置安装</li>
-</ol>
-</blockquote>
-<h2 id="目录文件"><a href="#目录文件" class="headerlink" title="目录文件"></a>目录文件</h2><blockquote>
-<ul>
-<li><code>/boot</code>:存放系统引导时所需要的文件，包括Linux内核以及引导程序(BootLoader)</li>
-<li><code>/bin</code>:存放可执行程序</li>
-<li><code>/etc</code>:存放系统配置文件</li>
-<li><code>/home</code>:普通用户的主目录所在位置</li>
-<li><code>/lib</code>:存放基本的共享文件和内核模块</li>
-<li><code>/mnt(mount)</code>:用户为需要挂载的文件系统提供挂载点</li>
-<li><code>/proc(process)</code>:存放与内核进程有关的信息</li>
-<li><code>/root</code>:根用户的主目录</li>
-<li><code>/tmp(temporary)</code>:存放临时性文件</li>
-<li><code>/usr(user)</code>:存放可共享的只读文件</li>
-<li><code>/var(variable)</code>:存放各类的数据文件</li>
-</ul>
-</blockquote>
-<h2 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h2><h4 id="重要选项"><a href="#重要选项" class="headerlink" title="重要选项"></a>重要选项</h4><blockquote>
-<ul>
-<li><code>-a(all)</code> 列出目录中的所有项，包括”.”开头的隐藏文件</li>
-<li><code>-l(list)</code> 以列表的方式显示文件</li>
-<li><code>-R(recursive)</code>  用于递归列出子目录中的内容，如果在选择的目录下还有子文件夹，那么可以列出子文件夹中的文件</li>
-<li><code>-d</code>仅仅列出目录本身的信息<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4></li>
-<li><code>ls -al /etc</code>     以列表的方式列出ect目录下的所有文件</li>
-</ul>
-</blockquote>
-<h2 id="pwd-显示当前路径"><a href="#pwd-显示当前路径" class="headerlink" title="pwd   显示当前路径"></a>pwd   显示当前路径</h2><h2 id="cd-切换目录"><a href="#cd-切换目录" class="headerlink" title="cd(切换目录)"></a>cd(切换目录)</h2><blockquote>
-<ul>
-<li><code>cd ..</code>   跳闸到当前目录的上一级</li>
-<li><code>cd ~</code>    跳转到当前用户的主目录</li>
-</ul>
-</blockquote>
-<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><blockquote>
-<ul>
-<li><code>cd /tmp/testdir</code>   跳转到tmp文件下的testdir目录</li>
-</ul>
-</blockquote>
-<h2 id="stat"><a href="#stat" class="headerlink" title="stat"></a>stat</h2><blockquote>
-<p><strong>获取关于某文件的基本信息，包括创建的信息，大小，时间。。。。</strong></p>
-</blockquote>
-<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<ul>
-<li><code>stat test</code>    查看test文件的基本信息</li>
-</ul>
-</blockquote>
-<h2 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h2><blockquote>
-<p><strong>创建或者更新一个文件的访问和修改的时间，如果一个文件存在，那么更新这个文件的创建时间，但是文件的内容不会改变，如果文件不存在，那么就会在当前目录下创建一个文件</strong></p>
-</blockquote>
-<h4 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<ul>
-<li><code>touch /tmp/testdir/test</code>    在指定路径下创建一个test文件，如果存在那么会更新创建的时间，可以使用stat命令查看创建时间</li>
-</ul>
-</blockquote>
-<h2 id="mkdir-创建目录"><a href="#mkdir-创建目录" class="headerlink" title="mkdir(创建目录)"></a>mkdir(创建目录)</h2><blockquote>
-<ul>
-<li><code>mkdir /tmp/testdir/test_file</code>    在/tmp/testdir目录下创建一个test_file文件夹</li>
-</ul>
-</blockquote>
-<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><blockquote>
-<p><strong>移动或者重命名文件或目录</strong></p>
-</blockquote>
-<h4 id="重要选项-1"><a href="#重要选项-1" class="headerlink" title="重要选项"></a>重要选项</h4><blockquote>
-<ul>
-<li><code>b(backup)</code>:若存在同名文件，覆盖前先备份原来的文件</li>
-<li><code>f(force)</code>:强制覆盖同名的文件</li>
-</ul>
-</blockquote>
-<h4 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mkdir /tmp/testdir    //创建一个目录testdir</div><div class="line">touch test1 test2     //创建两个文件test1  test2</div><div class="line">mv -b test1 test2     //移动test1为test2,这里会先备份原来的test2为test2~</div><div class="line"></div><div class="line">mv -b test1 /tmp/testdir1/test    //移动文件到指定目录下</div></pre></td></tr></table></figure>
-<h2 id="cp-copy"><a href="#cp-copy" class="headerlink" title="cp(copy)"></a>cp(copy)</h2><blockquote>
-<p><strong>复制文件和目录</strong></p>
-</blockquote>
-<h4 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h4><blockquote>
-<ul>
-<li><code>-b</code>: 若存在同名文件，覆盖前先备份</li>
-<li><code>-f</code> :强制覆盖同名文件</li>
-<li><code>-r</code> : 以递归的方式复制文件，就是复制文件夹，如果不使用这个，那么文件夹就无法复制</li>
-</ul>
-</blockquote>
-<h4 id="实例-4"><a href="#实例-4" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<ul>
-<li><code>cp /tmp/testdir tmp/testdir1</code>  复制文件夹，这里表示不能复制，因此要加上-r选项才能复制文件夹 -&gt;  </li>
-<li><code>cp -r /tmp/testdir /tmp/testdir1</code>   可以复制，复制到/tmp文件夹下命名为testdir1</li>
-<li><code>cp -b /tmp/testdir/test1  /tmp/testdir1/test</code>    将文件test1复制到testdir1文件夹下命名为test</li>
-</ul>
-</blockquote>
-<h2 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h2><blockquote>
-<p><strong>删除命令</strong></p>
-</blockquote>
-<h4 id="选项-1"><a href="#选项-1" class="headerlink" title="选项"></a>选项</h4><blockquote>
-<ul>
-<li><code>-f</code> 强制删除</li>
-<li><code>-r</code> 删除文件夹（递归删除）</li>
-</ul>
-</blockquote>
-<h4 id="实例-5"><a href="#实例-5" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<ul>
-<li><code>rm -rf /tmp/testdir</code>   强制删除testdir目录</li>
-</ul>
-</blockquote>
-<h2 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a>rmdir</h2><blockquote>
-<p><strong>删除目录，但是要求目录必须是空的，这里实用性不大，一般用rm -r</strong></p>
-</blockquote>
-<h2 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h2><blockquote>
-<p><strong>查看文件内容</strong></p>
-</blockquote>
-<h4 id="重要选项-2"><a href="#重要选项-2" class="headerlink" title="重要选项"></a>重要选项</h4><blockquote>
-<ul>
-<li><code>-n</code> 显示行数</li>
-</ul>
-</blockquote>
-<h4 id="实例-6"><a href="#实例-6" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<ul>
-<li><code>cat -n /tmp/testdir/test</code>    查看文件test的内容，显示行数</li>
-</ul>
-</blockquote>
-<h2 id="more"><a href="#more" class="headerlink" title="more"></a>more</h2><blockquote>
-<p><strong>分屏显示文件内容，首先显示一屏后如果还有内容，按回车键在显示下一行，按Space显示下一屏的内容</strong></p>
-</blockquote>
-<h4 id="实例-7"><a href="#实例-7" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<ul>
-<li><code>more /tmp/testdir/test</code></li>
-</ul>
-</blockquote>
-<h2 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h2><blockquote>
-<p><strong>显示文本文件结尾的部分，默认显示最后10行</strong></p>
-</blockquote>
-<h4 id="重要选项-3"><a href="#重要选项-3" class="headerlink" title="重要选项"></a>重要选项</h4><blockquote>
-<ul>
-<li><code>-n</code> 指定显示的行数</li>
-</ul>
-</blockquote>
-<h2 id="head"><a href="#head" class="headerlink" title="head"></a>head</h2><blockquote>
-<p><strong>显示开头的内容，与<code>tail</code>类似</strong></p>
-</blockquote>
-<h2 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h2><blockquote>
-<p><strong>一次显示文本文件的行数，单词数，字节数</strong></p>
-</blockquote>
-<h4 id="重要选项-4"><a href="#重要选项-4" class="headerlink" title="重要选项"></a>重要选项</h4><blockquote>
-<ul>
-<li><code>-c</code>  显示文件字节数</li>
-<li><code>-l(line)</code>   显示文件行数</li>
-<li><code>-w(word)</code>   显示文件单词数</li>
-</ul>
-</blockquote>
-<h4 id="实例-8"><a href="#实例-8" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<ul>
-<li><code>wc -cl  /tmp/testdir/test</code>   查看文件的字数和文件的行数</li>
-</ul>
-</blockquote>
-<h2 id="date"><a href="#date" class="headerlink" title="date"></a>date</h2><p><strong>查看或者修改系统命令</strong></p>
-<h4 id="实例-9"><a href="#实例-9" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<ul>
-<li><code>date</code>  查看系统时间</li>
-<li><code>date 09012017</code>    修改系统时间为2017-09-01</li>
-</ul>
-</blockquote>
-<h2 id="who"><a href="#who" class="headerlink" title="who"></a>who</h2><p><strong>列出当前系统的登录用户</strong></p>
-<h4 id="重要选项-5"><a href="#重要选项-5" class="headerlink" title="重要选项"></a>重要选项</h4><blockquote>
-<ul>
-<li><code>-r</code> 显示系统当前的运行级</li>
-<li><code>-q</code> 显示当前所有登录的用户名称和在线人数</li>
-</ul>
-</blockquote>
-<h2 id="shutdown"><a href="#shutdown" class="headerlink" title="shutdown"></a>shutdown</h2><p><strong>关闭重启系统</strong></p>
-<h4 id="重要选项-6"><a href="#重要选项-6" class="headerlink" title="重要选项"></a>重要选项</h4><blockquote>
-<ul>
-<li><code>-r(reboot)</code>  重启系统</li>
-<li><code>-h(halt)</code>   关闭系统</li>
-<li><code>-P(poweroff)</code>  关闭系统同时关闭电源</li>
-</ul>
-</blockquote>
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p><strong>上面选项均可给出数字参数指定多少分钟之后执行操作</strong></p>
-<h4 id="实例-10"><a href="#实例-10" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<ul>
-<li><code>shutdown -h 10</code>    设置10分钟后关闭系统</li>
-</ul>
-</blockquote>
-<h2 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h2><p><strong>清楚当前终端的屏幕内容</strong></p>
-<h2 id="man"><a href="#man" class="headerlink" title="man"></a>man</h2><p><strong>显示命令的使用手册，按上下键移动光标，Q键退出</strong></p>
-<h4 id="实例-11"><a href="#实例-11" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<ul>
-<li><code>man cat</code>     快速查询cat命令的手册</li>
-</ul>
-</blockquote>
-<h2 id="histroy"><a href="#histroy" class="headerlink" title="histroy"></a>histroy</h2><p><strong>查看shell命令的历史记录</strong></p>
-<h4 id="实例-12"><a href="#实例-12" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<ul>
-<li><code>histroy 5</code>  显示最近的5条记录</li>
-</ul>
-</blockquote>
-<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><p><strong>调用<code>vim</code>编辑器，按<code>i</code>键插入，<code>w</code>键保存，<code>q</code>键退出，<code>wq</code>保存后退出</strong></p>
-<blockquote>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Linux干货篇一&quot;&gt;&lt;a href=&quot;#Linux干货篇一&quot; class=&quot;headerlink&quot; title=&quot;Linux干货篇一&quot;&gt;&lt;/a&gt;Linux干货篇一&lt;/h1&gt;&lt;h2 id=&quot;虚拟机的安装-VMware&quot;&gt;&lt;a href=&quot;#虚拟机的安装-VMwar
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://chenjiabing666.github.io/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://chenjiabing666.github.io/tags/Linux/"/>
     
   </entry>
   
