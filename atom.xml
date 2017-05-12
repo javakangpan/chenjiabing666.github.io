@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-05-12T23:24:43.150Z</updated>
+  <updated>2017-05-12T23:25:56.677Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,10 +20,10 @@
     <link href="http://chenjiabing666.github.io/2017/05/13/python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/"/>
     <id>http://chenjiabing666.github.io/2017/05/13/python发送邮件/</id>
     <published>2017-05-12T23:17:41.000Z</published>
-    <updated>2017-05-12T23:24:43.150Z</updated>
+    <updated>2017-05-12T23:25:56.677Z</updated>
     
     <content type="html"><![CDATA[<h1 id="python发送邮件"><a href="#python发送邮件" class="headerlink" title="python发送邮件"></a>python发送邮件</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><blockquote>
-<p><em>python中发送邮件主要用的是smtplib和email两个模块，下面主要对这两个模块进行讲解</em></p>
+<p><em>python中发送邮件主要用的是<code>smtplib</code>和<code>email</code>两个模块，下面主要对这两个模块进行讲解</em></p>
 <p><em>在讲解之前需要准备至少两个测试的邮箱，其中要在邮箱的设置中开启smtplib协议才可以进行发送和接受</em></p>
 </blockquote>
 <h3 id="smtplib"><a href="#smtplib" class="headerlink" title="smtplib"></a>smtplib</h3><blockquote>
