@@ -455,7 +455,7 @@
     <link href="http://chenjiabing666.github.io/2017/05/07/scrapy%E7%88%AC%E5%8F%96%E6%B7%98%E5%AE%9D%E5%A5%B3%E9%83%8E/"/>
     <id>http://chenjiabing666.github.io/2017/05/07/scrapy爬取淘宝女郎/</id>
     <published>2017-05-06T20:03:54.000Z</published>
-    <updated>2017-05-06T20:09:51.931Z</updated>
+    <updated>2017-05-13T00:00:18.061Z</updated>
     
     <content type="html"><![CDATA[<h1 id="scrapy抓取淘宝女郎"><a href="#scrapy抓取淘宝女郎" class="headerlink" title="scrapy抓取淘宝女郎"></a>scrapy抓取淘宝女郎</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><blockquote>
 <ul>
@@ -536,7 +536,7 @@
       <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="Scrapy" scheme="http://chenjiabing666.github.io/tags/Scrapy/"/>
+      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
     
   </entry>
   
