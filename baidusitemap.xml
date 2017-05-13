@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://chenjiabing666.github.io/2017/04/29/python%E7%88%AC%E8%99%AB%E4%B9%8BBeautifulSoup/</loc>
+    <lastmod>2017-05-13T08:04:35.260Z</lastmod>
+    <data>
+        <display>
+        <title>python爬虫之BeautifulSoup</title>
+        <pubTime>2017-04-29T02:06:56.000Z</pubTime>
+        
+        <tag>python爬虫</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://chenjiabing666.github.io/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://chenjiabing666.github.io/2017/05/07/scrapy%E7%88%AC%E5%8F%96%E6%B7%98%E5%AE%9D%E5%A5%B3%E9%83%8E/</loc>
     <lastmod>2017-05-13T00:00:18.061Z</lastmod>
     <data>
@@ -147,26 +167,6 @@
            
              
               <breadCrumb title="数据库干货篇" url="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://chenjiabing666.github.io/2017/04/29/python%E7%88%AC%E8%99%AB%E4%B9%8BBeautifulSoup/</loc>
-    <lastmod>2017-04-29T02:37:47.616Z</lastmod>
-    <data>
-        <display>
-        <title>python爬虫之BeautifulSoup</title>
-        <pubTime>2017-04-29T02:06:56.000Z</pubTime>
-        
-        <tag>python爬虫</tag>
-         
-         
-           
-             
-              <breadCrumb title="python" url="http://chenjiabing666.github.io/categories/python/"/>
           
         </display>
     </data>
