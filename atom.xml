@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-05-14T19:44:36.088Z</updated>
+  <updated>2017-05-14T19:48:04.688Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://chenjiabing666.github.io/2017/05/15/python%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E6%8E%A5%E5%8F%A3/"/>
     <id>http://chenjiabing666.github.io/2017/05/15/python实现微信接口/</id>
     <published>2017-05-14T19:44:21.000Z</published>
-    <updated>2017-05-14T19:44:36.088Z</updated>
+    <updated>2017-05-14T19:48:04.688Z</updated>
     
     <content type="html"><![CDATA[<h1 id="python实现微信接口-itchat"><a href="#python实现微信接口-itchat" class="headerlink" title="python实现微信接口(itchat)"></a>python实现微信接口(itchat)</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
 <ul>
@@ -166,9 +166,13 @@
 <td>系统消息</td>
 <td>更新内容的用户或群聊的UserName组成的列表</td>
 </tr>
+<tr>
+<td>NOTE</td>
+<td>通知</td>
+<td>通知文本(消息撤回等)</td>
+</tr>
 </tbody>
 </table>
-<p>|NOTE    |通知|通知文本(消息撤回等)|</p>
 <h3 id="附件的下载与发送"><a href="#附件的下载与发送" class="headerlink" title="附件的下载与发送"></a>附件的下载与发送</h3><blockquote>
 <p><em><code>itchat</code> 的附件下载方法存储在 <code>msg</code> 的 <code>Text</code> 键中.</em><br><em>发送的文件名(图片给出的默认文件名), 都存储在 <code>msg</code> 的 <code>FileName</code> 键中.</em><br><em>下载方法, 接受一个可用的位置参数(包括文件名), 并将文件响应的存储.</em><br><strong><em>注意：下载的文件存储在指定的文件中，直接将路径与<code>FileName</code>连接即可，如<code>msg[&quot;Text&quot;](&#39;/tmp/weichat&#39;+msg[&#39;FileName&#39;])</code></em></strong></p>
 </blockquote>

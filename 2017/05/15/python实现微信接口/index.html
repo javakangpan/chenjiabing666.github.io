@@ -32,7 +32,7 @@ sudo pip install itchat
 登录
 
 itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但是这种登录的方式确实短时间的登录，并不会保留登录的状态，也就是下次登录时还是需要扫描二维码，如果加上hotReload==True,那么就会保留登录的状态，至少在后面的几次登录过程中不会再次扫描二维码，该参数生成">
-<meta property="og:updated_time" content="2017-05-14T19:44:36.088Z">
+<meta property="og:updated_time" content="2017-05-14T19:48:04.688Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python实现微信接口">
 <meta name="twitter:description" content="python实现微信接口(itchat)安装
@@ -266,9 +266,13 @@ itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但�
 <td>系统消息</td>
 <td>更新内容的用户或群聊的UserName组成的列表</td>
 </tr>
+<tr>
+<td>NOTE</td>
+<td>通知</td>
+<td>通知文本(消息撤回等)</td>
+</tr>
 </tbody>
 </table>
-<p>|NOTE    |通知|通知文本(消息撤回等)|</p>
 <h3 id="附件的下载与发送"><a href="#附件的下载与发送" class="headerlink" title="附件的下载与发送"></a>附件的下载与发送</h3><blockquote>
 <p><em><code>itchat</code> 的附件下载方法存储在 <code>msg</code> 的 <code>Text</code> 键中.</em><br><em>发送的文件名(图片给出的默认文件名), 都存储在 <code>msg</code> 的 <code>FileName</code> 键中.</em><br><em>下载方法, 接受一个可用的位置参数(包括文件名), 并将文件响应的存储.</em><br><strong><em>注意：下载的文件存储在指定的文件中，直接将路径与<code>FileName</code>连接即可，如<code>msg[&quot;Text&quot;](&#39;/tmp/weichat&#39;+msg[&#39;FileName&#39;])</code></em></strong></p>
 </blockquote>
@@ -603,19 +607,11 @@ itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但�
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/SQL/" title="SQL">SQL<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>2</sup></a></li>
+				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
 			
 		
 			
@@ -623,7 +619,11 @@ itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但�
 			
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>2</sup></a></li>
 			
 		
 			
@@ -631,15 +631,19 @@ itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但�
 			
 		
 			
+				<li><a href="/tags/java基础/" title="java基础">java基础<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>1</sup></a></li>
+				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
 			
 		
 		</ul>
