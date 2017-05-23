@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-05-14T19:48:04.688Z</updated>
+  <updated>2017-05-23T07:25:59.909Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,85 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java IO学习笔记一</title>
+    <link href="http://chenjiabing666.github.io/2017/05/23/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/"/>
+    <id>http://chenjiabing666.github.io/2017/05/23/Java-IO学习笔记一/</id>
+    <published>2017-05-23T07:23:50.000Z</published>
+    <updated>2017-05-23T07:25:59.909Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Java-IO学习笔记一"><a href="#Java-IO学习笔记一" class="headerlink" title="Java IO学习笔记一"></a>Java IO学习笔记一</h1><h2 id="File"><a href="#File" class="headerlink" title="File"></a>File</h2><blockquote>
+<p><code>File</code>是文件和目录路径名的抽象表示形式，总的来说就是java创建删除文件目录的一个类库，但是作用不仅仅于此，详细见官方文档</p>
+</blockquote>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
+<ul>
+<li><code>File(File parent, String child)</code> 根据 <code>parent</code> 抽象路径名和 <code>child</code> 路径名字符串创建一个新 File 实例。</li>
+<li><code>File(String pathname)</code>        通过将给定路径名字符串转换为抽象路径名来创建一个新 File 实例。</li>
+<li><code>File(String parent, String child)</code>        根据 parent 路径名字符串和 <code>child</code> 路径名字符串创建一个新 <code>File</code> 实例。</li>
+<li><code>File(URI uri)</code>    通过将给定的 <code>file: URI</code> 转换为一个抽象路径名来创建一个新的 File 实例。</li>
+</ul>
+</blockquote>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp/demo"</span>); <span class="comment">//File(String pathname)</span></div><div class="line"></div><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>,<span class="string">"demo"</span>);     <span class="comment">//File(String parent, String child)</span></div></pre></td></tr></table></figure>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><h4 id="字段"><a href="#字段" class="headerlink" title="字段"></a>字段</h4><blockquote>
+<ul>
+<li><code>static String pathSeparator</code>   与系统有关的路径分隔符，通常是:</li>
+<li><code>static String separator</code>    与系统有关的默认名称分隔符，为了方便，它被表示为一个字符串。linux是/</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"demo"</span>);   <span class="comment">//使用分隔符创建一个路径</span></div></pre></td></tr></table></figure>
+<h4 id="方法摘要"><a href="#方法摘要" class="headerlink" title="方法摘要"></a>方法摘要</h4><blockquote>
+<ul>
+<li><code>boolean    canExecute()</code> 测试文件或者目录是否是可执行的，测试可执行权限</li>
+<li><code>boolean    canRead()</code>  测试可读权限</li>
+<li><code>boolean    canWrite()</code>    测试可写权限</li>
+<li><code>boolean    setExecutable(boolean executable)</code> 设置文件或者目录的执行权限</li>
+<li><code>setExecutable(boolean executable, boolean ownerOnly)</code> 设置执行权限，如果第二个为true那么只有创建这个文件的用户拥有执行权限</li>
+<li><code>boolean    setReadable(boolean readable)</code> 设置可读的权限</li>
+<li><code>boolean    setReadable(boolean readable, boolean ownerOnly)</code> 同上</li>
+<li><code>boolean setReadOnly()</code>   标记此抽象路径名指定的文件或目录，从而只能对其进行读操作。</li>
+<li><code>boolean setWritable(boolean writable)</code>  设置可写的权限</li>
+<li><code>boolean    createNewFile()</code>   创建一个文件，这里创建的不是目录</li>
+<li><code>boolean mkdir()</code>     创建文件夹</li>
+<li><code>File    getAbsoluteFile()</code>  返回此抽象路径名的绝对路径名形式。</li>
+<li><code>String    getAbsolutePath()</code>  返回此抽象路径名的绝对路径名字符串。</li>
+<li><code>String    getName()</code> 返回由此抽象路径名表示的文件或目录的名称。</li>
+<li><code>boolean    isDirectory()</code> 测试此抽象路径名表示的文件是否是一个目录。</li>
+<li><code>boolean  isFile()</code>    测试此抽象路径名表示的文件是否是一个标准文件。</li>
+<li><code>boolean isHidden()</code>      测试此抽象路径名指定的文件是否是一个隐藏文件。</li>
+<li><code>String[]    list()</code>  返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中的文件和目录。</li>
+<li><code>File[]    listFiles()</code>   返回一个抽象路径名数组，这些路径名表示此抽象路径名表示的目录中的文件。</li>
+</ul>
+</blockquote>
+<h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><h3 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp/demo.txt"</span>);</div><div class="line">    <span class="keyword">if</span>(file.exists())<span class="comment">//如果文件存在就删除这个文件</span></div><div class="line">    &#123;</div><div class="line">        file.delete();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">     <span class="keyword">try</span>&#123;</div><div class="line">        file.createNewFile();   <span class="comment">//创建一个文件</span></div><div class="line">        file.setExecutable(<span class="keyword">false</span>);  <span class="comment">//设置执行权限</span></div><div class="line"></div><div class="line">    &#125;<span class="keyword">catch</span> (IOException e)</div><div class="line">        &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>,<span class="string">"test"</span>);</div><div class="line">        <span class="keyword">if</span>(file.exists())</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(file.isDirectory())  <span class="comment">//如果是一个文件夹</span></div><div class="line">            &#123;</div><div class="line">                System.out.println(<span class="string">"这是一个文件夹"</span>);</div><div class="line">                file.delete();</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(file.isFile())   <span class="comment">//如果是一个文件</span></div><div class="line">            &#123;</div><div class="line">                System.out.println(<span class="string">"这是一个文件"</span>);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            file.mkdir();</div><div class="line">            file.setWritable(<span class="keyword">false</span>);  <span class="comment">//设置权限为不可读</span></div><div class="line"></div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<h3 id="列出全部文件"><a href="#列出全部文件" class="headerlink" title="列出全部文件"></a>列出全部文件</h3><h4 id="list"><a href="#list" class="headerlink" title="list"></a>list</h4><blockquote>
+<p><strong>这个函数列出的是文件的名字并不是文件的路径</strong></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">File f=<span class="keyword">new</span> File(<span class="string">"d:"</span>+File.separator);</div><div class="line">         String[] str=f.list();   <span class="comment">//这里列出的仅仅是文件的名字，并不是文件的路径</span></div><div class="line">         <span class="keyword">for</span>(String s:str)&#123;</div><div class="line">             System.out.println(s);</div><div class="line">         &#125;</div></pre></td></tr></table></figure>
+<h4 id="listFiles"><a href="#listFiles" class="headerlink" title="listFiles"></a>listFiles</h4><blockquote>
+<p><strong>这个列出的是文件的绝对路径</strong></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">File f=<span class="keyword">new</span> File(<span class="string">"d:"</span>+File.separator);</div><div class="line">           File[] files=f.listFiles();</div><div class="line">          <span class="keyword">for</span>(File file:files)&#123;</div><div class="line">              System.out.println(file);</div><div class="line">          &#125;</div></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<ul>
+<li><a href="http://www.cnblogs.com/lich/archive/2011/12/10/2283445.html" target="_blank" rel="external">http://www.cnblogs.com/lich/archive/2011/12/10/2283445.html</a></li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Java-IO学习笔记一&quot;&gt;&lt;a href=&quot;#Java-IO学习笔记一&quot; class=&quot;headerlink&quot; title=&quot;Java IO学习笔记一&quot;&gt;&lt;/a&gt;Java IO学习笔记一&lt;/h1&gt;&lt;h2 id=&quot;File&quot;&gt;&lt;a href=&quot;#File&quot; cla
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>python实现微信接口</title>
@@ -2353,74 +2432,6 @@
     
     
       <category term="JQuery" scheme="http://chenjiabing666.github.io/tags/JQuery/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SQL干货篇三</title>
-    <link href="http://chenjiabing666.github.io/2017/04/16/SQL%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B8%89/"/>
-    <id>http://chenjiabing666.github.io/2017/04/16/SQL干货篇三/</id>
-    <published>2017-04-16T14:36:33.000Z</published>
-    <updated>2017-04-16T14:37:37.593Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="SQL干货篇三"><a href="#SQL干货篇三" class="headerlink" title="SQL干货篇三"></a>SQL干货篇三</h1><h2 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h2><blockquote>
-<ul>
-<li><strong><code>create view &lt;视图名&gt;[(列名),(列名)...] as &lt;子查询&gt; [with check option]</code></strong></li>
-<li><strong>子查询可以是select语句或者包含order by子句，具体情况而定，视图名是一定要有的，列名可以省略，如果省略的话则是由子查询中的目标列的相关字段组成，当然也可以自己指定，with check option表示如果视图或者参照表执行insert,update,delete时，那么视图或者参照表会随着变化，也就是两个绑定在一起的意思，当然也可以选择不用，那么视图的增删改就和参照表没有关系了</strong><h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><strong>建立在一个表上</strong><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">view</span> IS_student <span class="keyword">as</span> <span class="keyword">select</span> Sno,Sname,Sage <span class="keyword">where</span> Sdept=<span class="string">'IS'</span></div><div class="line"><span class="keyword">with</span> <span class="keyword">check</span> <span class="keyword">option</span> ;   <span class="comment">/*将所有的IS系的学生学号建立一个视图IS_student,其中的列名是Sno,Sname,Sage*/</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>建立在多个表上</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">view</span> IS_Grade(Sno,Sname,Grade) </div><div class="line"><span class="keyword">as</span> <span class="keyword">select</span> student.Sno,Sname,Grade <span class="keyword">from</span> student,SC</div><div class="line"><span class="keyword">where</span> Sdept=<span class="string">'IS'</span> <span class="keyword">and</span> student.Sno=SC.Sno;           <span class="comment">/*建立在两个表上的视图，可以看出这里已经指出指定的列名，但是这个列名并不是固定的，可以根据具体的含义来指定*/</span></div></pre></td></tr></table></figure></p>
-<p><strong>定义一个带有表达式的视图</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">view</span> BT_S(Sno,Sname,Sbirth) </div><div class="line"><span class="keyword">as</span> <span class="keyword">select</span> Sno,Sname,<span class="number">2014</span>-Sage <span class="keyword">from</span> student    <span class="comment">/*这里的2014-Sage是用来计算出生日期的*/</span></div><div class="line"><span class="keyword">with</span> <span class="keyword">check</span> <span class="keyword">option</span>;</div></pre></td></tr></table></figure></p>
-<p><strong>聚集函数的视图</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">create view BT(Sno,Gavg) </div><div class="line">as select Sno,AVG(Grade) from SC Group by Sno;  /*这里的AVG(Grade)是用来计算平均成绩的，Group by是用来根据学号分组，这里就是求同一个人的多门学科的平均成绩*/</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="删除视图"><a href="#删除视图" class="headerlink" title="删除视图"></a>删除视图</h2><blockquote>
-<ul>
-<li><strong><code>Drop view &lt;视图名&gt;&lt;CASCADE]</code>,这里的CASCADE表示如果还导出了其他的视图，那么加上CASCADE就会全部删除</strong></li>
-</ul>
-</blockquote>
-<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<ul>
-<li><code>Drop view IS_Sdept;</code> 删除视图</li>
-<li><code>Drop view IS_Sdept CASCADE;</code>  删除视图和其导出视图</li>
-</ul>
-</blockquote>
-<h2 id="查询视图"><a href="#查询视图" class="headerlink" title="查询视图"></a>查询视图</h2><blockquote>
-<p><strong>查询视图和查询表是一样的，请参照我前两章讲的<a href="https://chenjiabing666.github.io/2017/04/09/SQL%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%BA%8C/">SQL语法</a></strong></p>
-</blockquote>
-<h2 id="更新视图"><a href="#更新视图" class="headerlink" title="更新视图"></a>更新视图</h2><blockquote>
-<p><strong>视图的更新包括insert,delete,update,这个和基本表的操作是一样的</strong></p>
-<p><strong>注意：</strong></p>
-<blockquote>
-<ul>
-<li>并不是所有的视图都可以更新的,比如上面根据学生多科平均成绩建立的视图，这里如果将视图中的平均成绩更新了，那么参照表的数据就不能对应的更新了，这就会不允许更新，当然这是在添加了<code>with check option</code>语句的情况下</li>
-<li>如果添加了<code>with check option</code>语句,那么对视图的更新就会对应转换成对基本表的更新</li>
-<li>各个系统对视图的更新还有进一步的规定，比如DB2规定：<blockquote>
-<ul>
-<li>如果视图是由两个以上的基本表导出，那么就不可以更新</li>
-<li>如果视图来自字段或者表达式，那么就不允许对此视图执行<code>insert</code>,<code>update</code>,但是可以执行<code>delete</code></li>
-<li>如果定义中有order by子句，那么不可以更新视图</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;SQL干货篇三&quot;&gt;&lt;a href=&quot;#SQL干货篇三&quot; class=&quot;headerlink&quot; title=&quot;SQL干货篇三&quot;&gt;&lt;/a&gt;SQL干货篇三&lt;/h1&gt;&lt;h2 id=&quot;创建视图&quot;&gt;&lt;a href=&quot;#创建视图&quot; class=&quot;headerlink&quot; titl
-    
-    </summary>
-    
-      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
-    
-    
-      <category term="SQL" scheme="http://chenjiabing666.github.io/tags/SQL/"/>
     
   </entry>
   
