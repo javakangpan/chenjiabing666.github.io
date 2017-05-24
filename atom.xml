@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-05-24T06:47:18.680Z</updated>
+  <updated>2017-05-24T06:49:15.752Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,104 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java IO学习笔记三</title>
+    <link href="http://chenjiabing666.github.io/2017/05/24/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89/"/>
+    <id>http://chenjiabing666.github.io/2017/05/24/Java-IO学习笔记三/</id>
+    <published>2017-05-24T06:48:34.000Z</published>
+    <updated>2017-05-24T06:49:15.752Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Java-IO学习笔记三"><a href="#Java-IO学习笔记三" class="headerlink" title="Java IO学习笔记三"></a>Java IO学习笔记三</h1><blockquote>
+<ul>
+<li><p>在整个<code>IO</code>包中，实际上就是分为字节流和字符流，但是除了这两个流之外，还存在了一组字节流-字符流的转换类。</p>
+</li>
+<li><p><code>OutputStreamWriter</code>：是<code>Writer</code>的子类，将输出的字符流变为字节流，即：将一个字符流的输出对象变成字节流的输出对象。</p>
+</li>
+<li><p><code>InputStreamReader</code>:是<code>Reader</code>的子类，将输入的字节流变为字符流，即：将一个字节流的输入对象变成字符流的输入对象。</p>
+</li>
+<li><p>一般在操作输入输出内容就需要使用字节或字符流，但是有些时候需要将字符流变成字节流的形式，或者将字节流变为字符流的形式，所以，就需要另外一组转换流的操作类。</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="InputStreamReader"><a href="#InputStreamReader" class="headerlink" title="InputStreamReader"></a>InputStreamReader</h2><blockquote>
+<ul>
+<li><p><code>InputStreamReader</code> 是字节流通向字符流的桥梁：它使用指定的 <code>charset</code> 读取字节并将其解码为字符。它使用的字符集可以由名称指定或显式给定，或者可以接受平台默认的字符集。</p>
+</li>
+<li><p>每次调用 <code>InputStreamReader</code> 中的一个 <code>read()</code> 方法都会导致从底层输入流读取一个或多个字节。要启用从字节到字符的有效转换，可以提前从底层流读取更多的字节，使其超过满足当前读取操作所需的字节。</p>
+</li>
+<li><p>主要的功能还是从文件中读取内容，不过是一次性的读取多个字节，这个很像它的子类<code>FileReader</code></p>
+</li>
+</ul>
+</blockquote>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
+<ul>
+<li><code>InputStreamReader(InputStream in)</code> 创建一个使用默认字符集的 <code>InputStreamReader</code>,不过这里的<code>InputStream</code>是抽下类，因此可以使用它的子类<code>FileInputStream</code>实例化，这里的<code>FileInputStream</code>是操作字节流的，显然看出这个类的作用就是字符流和字节流的桥梁</li>
+</ul>
+</blockquote>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><blockquote>
+<ul>
+<li><code>close()</code></li>
+<li><code>int read()</code> 读取单个字符</li>
+<li><code>int read(Char[] c)</code> 读取字符存储在字符数组中</li>
+<li><code>int    read(char[] cbuf, int offset, int length)</code> 将字符读入数组中的某一部分</li>
+<li><code>boolean    ready()</code>   判断此流是否已经准备好用于读取。</li>
+</ul>
+</blockquote>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> IO;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by chenjiabing on 17-5-24.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo4</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        File file = <span class="keyword">new</span> File(<span class="string">"/tmp"</span> + File.separator + <span class="string">"test"</span> + File.separator + <span class="string">"test.txt"</span>);</div><div class="line">        InputStreamReader inputStreamReader = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            inputStreamReader = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(file));  <span class="comment">//初始化</span></div><div class="line">            <span class="keyword">char</span>[] c = <span class="keyword">new</span> <span class="keyword">char</span>[(<span class="keyword">int</span>) file.length()];   <span class="comment">//创建数组</span></div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                <span class="keyword">int</span> len = inputStreamReader.read(c);   <span class="comment">//将内容读取到数组中</span></div><div class="line">                System.out.println(len);</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; c.length; i++) &#123;</div><div class="line">                    System.out.print(c[i]);</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line"></div><div class="line"></div><div class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;<span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">if</span>(inputStreamReader!=<span class="keyword">null</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    inputStreamReader.close();   <span class="comment">//关闭</span></div><div class="line">                &#125;<span class="keyword">catch</span> (IOException e)</div><div class="line">                &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意：</strong>从上面的代码中可以看到这个和<code>FileReader</code>的操作是一样的，只是构造的方法不一样</p>
+</blockquote>
+<h2 id="OutputStreamWriter"><a href="#OutputStreamWriter" class="headerlink" title="OutputStreamWriter"></a>OutputStreamWriter</h2><blockquote>
+<ul>
+<li><p><code>OutputStreamWriter</code> 是字符流通向字节流的桥梁：可使用指定的 charset 将要写入流中的字符编码成字节。它使用的字符集可以由名称指定或显式给定，否则将接受平台默认的字符集。</p>
+</li>
+<li><p>每次调用 <code>write()</code> 方法都会导致在给定字符（或字符集）上调用编码转换器。在写入底层输出流之前，得到的这些字节将在缓冲区中累积。可以指定此缓冲区的大小，不过，默认的缓冲区对多数用途来说已足够大。注意，传递给 <code>write()</code> 方法的字符没有缓冲。</p>
+</li>
+<li><p>主要的功能还是向文件中写入文件</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
+<ul>
+<li><code>OutputStreamWriter(OutputStream out)</code>   创建使用默认字符编码的 <code>OutputStreamWriter</code>。这里同样是抽象类，所以用它的子类<code>FileOutputStream</code>实例化</li>
+</ul>
+</blockquote>
+<h3 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h3><blockquote>
+<ul>
+<li><code>close()</code></li>
+<li><code>flush()</code></li>
+<li><code>write(String str)</code>  写入字符串</li>
+<li><code>void    write(String str, int off, int len)</code>  写入字符串的某一部分。</li>
+<li><code>write(int c)</code>  写入单个字符</li>
+<li><code>void    write(char[] cbuf, int off, int len)</code>   写入字符数组的某一部分。</li>
+</ul>
+</blockquote>
+<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">package</span> IO;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by chenjiabing on 17-5-24.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo5</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">    &#123;</div><div class="line">        File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line">        OutputStreamWriter outputStreamWriter=<span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            outputStreamWriter=<span class="keyword">new</span> OutputStreamWriter(<span class="keyword">new</span> FileOutputStream(file,<span class="keyword">true</span>));</div><div class="line">            String str=<span class="string">"陈加兵\n"</span>;</div><div class="line">            <span class="keyword">int</span> data=<span class="number">48</span>;</div><div class="line">            String name=<span class="string">"chenjiabing"</span>;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                outputStreamWriter.write(str);</div><div class="line">                outputStreamWriter.write(data);</div><div class="line">                outputStreamWriter.write(name,<span class="number">0</span>,<span class="number">2</span>);   <span class="comment">//写入字符串的一部分</span></div><div class="line">            &#125;<span class="keyword">catch</span> (IOException e)</div><div class="line">            &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="keyword">catch</span> (FileNotFoundException e)</div><div class="line">        &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;<span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">if</span>(outputStreamWriter!=<span class="keyword">null</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    outputStreamWriter.flush();</div><div class="line">                    outputStreamWriter.close();</div><div class="line">                &#125;<span class="keyword">catch</span> (IOException e)</div><div class="line">                &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>从上面可以看出<code>OutputStreamWriter</code>和<code>FileWriter</code>的用法一样</strong></p>
+</blockquote>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<ul>
+<li><a href="http://www.cnblogs.com/lich/archive/2011/12/11/2283848.html" target="_blank" rel="external">http://www.cnblogs.com/lich/archive/2011/12/11/2283848.html</a></li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Java-IO学习笔记三&quot;&gt;&lt;a href=&quot;#Java-IO学习笔记三&quot; class=&quot;headerlink&quot; title=&quot;Java IO学习笔记三&quot;&gt;&lt;/a&gt;Java IO学习笔记三&lt;/h1&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;在整个&lt;code
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>Java IO学习笔记二</title>
@@ -2286,144 +2384,6 @@
     
       &lt;h1 id=&quot;JQuery干货篇之处理元素&quot;&gt;&lt;a href=&quot;#JQuery干货篇之处理元素&quot; class=&quot;headerlink&quot; title=&quot;JQuery干货篇之处理元素&quot;&gt;&lt;/a&gt;JQuery干货篇之处理元素&lt;/h1&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;注
-    
-    </summary>
-    
-      <category term="JQuery学习" scheme="http://chenjiabing666.github.io/categories/JQuery%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="JQuery" scheme="http://chenjiabing666.github.io/tags/JQuery/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JQuery干货篇之操控DOM</title>
-    <link href="http://chenjiabing666.github.io/2017/04/21/JQuery%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E6%93%8D%E6%8E%A7DOM/"/>
-    <id>http://chenjiabing666.github.io/2017/04/21/JQuery干货篇之操控DOM/</id>
-    <published>2017-04-21T09:53:16.000Z</published>
-    <updated>2017-04-21T09:53:49.444Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="JQuery干货篇之插入元素"><a href="#JQuery干货篇之插入元素" class="headerlink" title="JQuery干货篇之插入元素"></a>JQuery干货篇之插入元素</h1><p><strong>本次使用的html,css还是我上一篇的源代码，详情请看<a href="https://chenjiabing666.github.io/2017/04/20/JQuery%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E9%80%89%E6%8B%A9%E5%85%83%E7%B4%A0/">上一篇文章</a></strong></p>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ol>
-<li><strong>插入子元素：<code>append</code>,<code>prepend</code> ,<code>appendTo</code>,<code>prependTo</code></strong></li>
-<li><strong>封装包裹元素：<code>wrap</code>,<code>wrapAll</code>,<code>wrapInner</code></strong></li>
-<li><strong>插入兄弟元素：<code>after</code>,<code>before</code>,<code>insertAfter</code>,<code>insertBefore</code></strong></li>
-<li><strong>替换元素：<code>replaceWith</code>,<code>replaceAll</code></strong></li>
-<li><strong>删除元素：<code>remove</code>,<code>deatch</code>,<code>unwrap</code>,<code>empty</code></strong></li>
-</ol>
-<h2 id="创建新元素"><a href="#创建新元素" class="headerlink" title="创建新元素"></a>创建新元素</h2><p><strong>通常在把新元素插入到<code>DOM</code>中的目标位置之前，要先创建一个新元素才能将它插入到指定位置</strong></p>
-<blockquote>
-<p><strong>使用<code>$</code>创建元素</strong></p>
-<blockquote>
-<p><code>$(&lt;div&gt;&lt;img src=&#39;rose.png&#39; alt=&#39;玫瑰&#39;&gt;&lt;/div&gt;)</code></p>
-</blockquote>
-</blockquote>
-<h2 id="clone"><a href="#clone" class="headerlink" title="clone"></a>clone</h2><blockquote>
-<p><strong>克隆元素，使用<code>clone</code>方法以已有的元素为模子生成新的元素，这个在后面的插入元素起到关键作用，如果在要引用html中的一个标签内容的话，不使用<code>clone</code>方法，那么就会将这段内容移动，因此这里使用<code>clone</code>会很方便，详细请看<code>append</code>的用法实例</strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"div.dcell"</span>).clone();    <span class="comment">//这里的clone方法必须是JQuery对象调用</span></div></pre></td></tr></table></figure>
-<h2 id="使用DOM-API创建新元素"><a href="#使用DOM-API创建新元素" class="headerlink" title="使用DOM API创建新元素"></a>使用DOM API创建新元素</h2><blockquote>
-<p><strong><code>DOM API</code>是用<code>js</code>操作的，其实<code>jquery</code>在幕后悄悄的调用<code>DOM API</code></strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">var</span> divElem=<span class="built_in">document</span>.createElement(<span class="string">"div"</span>);    <span class="comment">//创建一个div元素</span></div><div class="line"> divElem.classList.add(<span class="string">"dcell"</span>);       <span class="comment">//为div添加class=dcell</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> imgElem=<span class="built_in">document</span>.createElement(<span class="string">"img"</span>);</div><div class="line">imgElem.src=<span class="string">"lily.png"</span>;</div><div class="line"></div><div class="line">divElem.appendChild(imgElem);   <span class="comment">//在新创建的元素后面插入img</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> newElem=$(divElem);</div><div class="line"></div><div class="line">newElem.each(<span class="function"><span class="keyword">function</span> (<span class="params">index,elem</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(elem.tagName+<span class="string">"    "</span>+elem.className);</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h2 id="append"><a href="#append" class="headerlink" title="append"></a>append</h2><blockquote>
-<p><strong>把参数指定的元素插入到所有的<code>JQuery</code>内含元素内容末尾成为他们的最后一个子元素，形式有<code>append(html)</code>,<code>append(Jquery)</code>,<code>append(HTMLElements[])</code>，<code>append(function())</code></strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这里使用append元素创建了一个div元素，在末尾插入元素成为div的子元素</span></div><div class="line"><span class="comment">//</span></div><div class="line">    <span class="keyword">var</span> orchildElems = $(<span class="string">"&lt;div class='dcell'&gt;&lt;/div&gt;"</span>).append(<span class="string">"&lt;img src='orchid.png'/&gt;"</span>)</div><div class="line">        .append(<span class="string">"&lt;label for='orchild'&gt;Orchild:&lt;/label&gt;"</span>)</div><div class="line">        .append(<span class="string">"&lt;input name='orchild' value='0' required&gt;"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">var</span> newElems = $(<span class="string">"&lt;div class='dcell'&gt;&lt;/div&gt;"</span>).append(<span class="string">"&lt;img src='lily.png'/&gt;"</span>)</div><div class="line">        .append(<span class="string">"&lt;label for='lily'&gt;Lily:&lt;/label&gt;"</span>)</div><div class="line">        .append(<span class="string">"&lt;input name='lily' value='0' required&gt;"</span>)</div><div class="line">        .css(<span class="string">"border"</span>, <span class="string">'thick double red'</span>);</div><div class="line">        </div><div class="line">    $(<span class="string">"div.drow"</span>).append(orchildElems);   <span class="comment">//在末尾插入数据，这里的参数是jquery对象</span></div><div class="line">    </div><div class="line">    </div><div class="line">    $(<span class="string">"div.drow"</span>).append(<span class="function"><span class="keyword">function</span>(<span class="params">index,elem</span>)</span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span>(elem.id==<span class="string">'row1'</span>)</div><div class="line">        <span class="keyword">return</span> orchildElems;</div><div class="line">    </div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.id=<span class="string">'row2'</span>)</div><div class="line">        <span class="keyword">return</span> newElems;</div><div class="line">    &#125;)</div><div class="line">    </div><div class="line">    </div><div class="line">    $(<span class="string">"div.drow"</span>).last().append(orchildElem,newElems);   <span class="comment">//在其中添加两个参数，插入的先后按照参数的先后位置，当然其中的参数个数没有限制</span></div></pre></td></tr></table></figure>
-<h2 id="prepend"><a href="#prepend" class="headerlink" title="prepend"></a>prepend</h2><blockquote>
-<p><strong>和<code>append</code>完全相反,向当前元素的前面插入<code>html</code>节点作为当前元素的子元素,形式有<code>prepen d(Jquery)</code>,<code>prepend(html)</code>,<code>prepend(htmlElemnts[])</code>,<code>prepend(function())</code></strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">var</span> orchildElems = $(<span class="string">"&lt;div class='dcell'&gt;&lt;/div&gt;"</span>).append(<span class="string">"&lt;img src='orchid.png'/&gt;"</span>)</div><div class="line">    .append(<span class="string">"&lt;label for='orchild'&gt;Orchild:&lt;/label&gt;"</span>)</div><div class="line">    .append(<span class="string">"&lt;input name='orchild' value='0' required&gt;"</span>);</div><div class="line">$(<span class="string">"div.dcell"</span>).prepend(orchildElems);    <span class="comment">//将orchildElems插入到div.dcell的最前面，作为他的子元素</span></div><div class="line"></div><div class="line"></div><div class="line">$(<span class="string">"div.dcell"</span>).prepend(<span class="string">"&lt;img src='lily.png'&gt;"</span>); <span class="comment">//将参数html的内容插入到前面，作为子元素</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">$(<span class="string">"div.drow"</span>).append(<span class="function"><span class="keyword">function</span> (<span class="params">index</span>) </span>&#123;     <span class="comment">//参数是函数，index是索引，返回的内容就是要插入到前面的内容</span></div><div class="line"></div><div class="line">     <span class="keyword">if</span> (<span class="keyword">this</span>.id == <span class="string">'row1'</span>)</div><div class="line">         <span class="keyword">return</span> orchildElem;                <span class="comment">//返回的对象可以是jquery对象，也可以是html标签，如：return "&lt;img src='lily.png'&gt;</span></div><div class="line"></div><div class="line">     <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.id = <span class="string">'row2'</span>)</div><div class="line">         <span class="keyword">return</span> newElems;</div><div class="line"> &#125;);</div></pre></td></tr></table></figure>
-<h2 id="appendTo"><a href="#appendTo" class="headerlink" title="appendTo"></a>appendTo</h2><blockquote>
-<p><strong><code>appendTo</code>是和<code>append</code>一样的函数，都是将指定的元素插入到指定元素的前面作为子元素，但是他们的参数就不同了，<code>append</code>是将指定的参数插入到当前调用它的的结果集中，而<code>appendTo</code>是将当前调用它的结果集插入到指定的参数中，主要的形式有<code>appendTo(jquery)</code>,<code>append(HTMLELments[])</code></strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$(<span class="string">"&lt;img src='lily.png'&gt;"</span>).appendTo($(<span class="string">"img"</span>).last().parent());   <span class="comment">//将图片插入到最后一个dcell中，这里参数是目标位置，开头调用的时想要插入的内容</span></div><div class="line"></div><div class="line">$(<span class="string">"img:first"</span>).clone().appendTo($(<span class="string">"img"</span>).last().parent()); <span class="comment">//选择第一个图片插入到最后一个dcell中，这里必须用clone，否则就会将这张图片移到目标位置</span></div><div class="line"></div><div class="line"> $($(<span class="string">"div.dcell"</span>).html()).appendTo($(<span class="string">"img"</span>).last().parent());   <span class="comment">//这里的.html()是获取html文本内容</span></div></pre></td></tr></table></figure>
-<h2 id="prependTo"><a href="#prependTo" class="headerlink" title="prependTo"></a>prependTo</h2><blockquote>
-<p><strong><code>.prepend()</code>和<code>.prependTo()</code>实现同样的功能，主要的不同是语法，插入的内容和目标的位置不同。 对于 <code>.prepend()</code> 而言，选择器表达式写在方法的前面，作为待插入内容的容器，将要被插入的内容作为方法的参数。而 <code>.prependTo()</code> 正好相反，将要被插入的内容写在方法的前面，可以是选择器表达式或动态创建的标记，待插入内容的容器作为参数。</strong></p>
-</blockquote>
-<h2 id="after"><a href="#after" class="headerlink" title="after"></a>after</h2><blockquote>
-<p><strong>在匹配元素集合中的每个元素后面插入参数所指定的内容，作为其兄弟节点。形式有<code>after(content[content,])</code>,<code>after(function())</code>,这里的<code>content</code>内容有HTML字符串，<code>DOM</code> 元素，文本节点，元素和文本节点的数组，或者<code>jQuery</code>对象，用来插入到集合中每个匹配元素的后面</strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">      <span class="keyword">var</span> orchildElems = $(<span class="string">"&lt;div class='dcell'&gt;&lt;/div&gt;"</span>).append(<span class="string">"&lt;img src='orchid.png'/&gt;"</span>)</div><div class="line">        .append(<span class="string">"&lt;label for='orchild'&gt;Orchild:&lt;/label&gt;"</span>)</div><div class="line">        .append(<span class="string">"&lt;input name='orchild' value='0' required&gt;"</span>);     <span class="comment">//创建一个dcell内容</span></div><div class="line">        </div><div class="line">    </div><div class="line">        $(<span class="string">"div.dcell"</span>).after(orchildElems);   <span class="comment">//插入元素作为兄弟元素，在当前元素的后面</span></div><div class="line">        </div><div class="line">        </div><div class="line">        $(<span class="string">"#row1 div.dcell"</span>).after(<span class="function"><span class="keyword">function</span> (<span class="params">index, html</span>) </span>&#123;    <span class="comment">//index表示索引，html表示原来的html文本，指的是没有插入之前的html</span></div><div class="line">        <span class="built_in">console</span>.log(html);</div><div class="line">        <span class="keyword">if</span> (index == <span class="number">0</span>)<span class="keyword">return</span> orchildElem;        <span class="comment">//返回的可以是jquery对象，html文本</span></div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (index == <span class="number">1</span>)</div><div class="line">            <span class="keyword">return</span> newElems;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h2 id="before"><a href="#before" class="headerlink" title="before"></a>before</h2><blockquote>
-<p><strong>根据参数设定，在匹配元素的前面插入内容,形式和<code>after</code>一样，内容也差不多</strong></p>
-</blockquote>
-<h2 id="insertBefore"><a href="#insertBefore" class="headerlink" title="insertBefore"></a>insertBefore</h2><blockquote>
-<p><strong>和<code>prependTo</code>的用法差不多，只是参数是要插入的目标位置，作为兄弟元素插入</strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">orchildElems.clone().insertBefore(<span class="string">"#row2 div.dcell"</span>);</div></pre></td></tr></table></figure>
-<h2 id="insertAfter"><a href="#insertAfter" class="headerlink" title="insertAfter"></a>insertAfter</h2><blockquote>
-<p><strong>和<code>append</code>用法差不多，只是参数是要插入的目标位置，这里的也是作为兄弟元素插入的</strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">orchildElems.insertAfter(<span class="string">"#row1 div.dcell"</span>);</div></pre></td></tr></table></figure>
-<h2 id="wrap"><a href="#wrap" class="headerlink" title="wrap"></a>wrap</h2><blockquote>
-<p><strong>在集合中匹配的每个元素周围包裹一个<code>HTML</code>结构，将会作为父元素存在。形式为<code>wrap(html)</code>,<code>wrap(jquery)</code>,<code>wrap(HtmlElements[])</code>,<code>wrap(function())</code></strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">    div=$(<span class="string">"&lt;div&gt;&lt;/div&gt;"</span>).css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);</div><div class="line">    $(<span class="string">"div.drow"</span>).wrap(div);     <span class="comment">//在drow外层添加了一个div将作为父元素，可以看到现在的源代码变成了&lt;div style...&gt;&lt;div class='drow'&gt;...&lt;/div&gt;&lt;/div&gt;</span></div><div class="line">    </div><div class="line">    </div><div class="line">    $(<span class="string">".drow"</span>).wrap(<span class="function"><span class="keyword">function</span> (<span class="params">index</span>) </span>&#123;   <span class="comment">//index是索引</span></div><div class="line">    <span class="comment">//if($(this).has("img[src*=astor]").length&gt;0)</span></div><div class="line">    <span class="keyword">if</span>(index==<span class="number">0</span>)</div><div class="line">        <span class="keyword">return</span> div;      <span class="comment">//只在第一个drow中添加父元素div</span></div><div class="line">    <span class="keyword">else</span> </div><div class="line">        <span class="keyword">return</span> $(<span class="string">"&lt;div&gt;&lt;/div&gt;"</span>).css(<span class="string">"border"</span>,<span class="string">'thick double blue'</span>);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h2 id="unwrap"><a href="#unwrap" class="headerlink" title="unwrap"></a>unwrap</h2><blockquote>
-<p><strong>将匹配元素集合的父级元素删除，保留自身（和兄弟元素，如果存在）在原来的位置。形式为<code>unwrap()</code>,<code>unwrap(selector)</code></strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"div.dcell"</span>).css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>);</div><div class="line">  $(<span class="string">"div.dcell"</span>).children(<span class="string">"img"</span>).first().unwrap();   <span class="comment">//这里将第一个img元素的父级元素删除，并且保留了其中的子元素</span></div><div class="line">  </div><div class="line">  $(<span class="string">"div.dcell"</span>).children(<span class="string">"img"</span>).unwrap(<span class="string">":first"</span>);   <span class="comment">//这里使用参数来筛选要删除父级元素的当前元素，这里选择第一个元素</span></div></pre></td></tr></table></figure>
-<h2 id="wrapAll"><a href="#wrapAll" class="headerlink" title="wrapAll"></a>wrapAll</h2><blockquote>
-<p><strong>在集合中所有匹配元素的外面包裹一个HTML结构,也就是为结果集中的所有元素都设置了一个相同的父级元素来包裹所有的元素，形式为<code>wrapAll(html)</code>,<code>wrapAll(jquery)</code>,<code>wrapAll(htmlElements[])</code>,<code>wrapAll(function())</code></strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> div = $(<span class="string">"&lt;div&gt;&lt;/div&gt;"</span>).css(<span class="string">"border"</span>, <span class="string">'thick double red'</span>);</div><div class="line">$(<span class="string">"div.drow"</span>).wrapAll(div);    <span class="comment">//这里的div成为了他共有的父级元素，原来的父级元素变成了祖先元素了</span></div><div class="line">$(<span class="string">"img"</span>).wrapAll(div);  <span class="comment">//这里的img没有共同的父元素，那么就会强制的将所有的元素拉在一起为他们设置一个父级元素</span></div></pre></td></tr></table></figure>
-<h2 id="wrapInner"><a href="#wrapInner" class="headerlink" title="wrapInner"></a>wrapInner</h2><blockquote>
-<p><strong>在匹配元素里的内容外包一层结构,也就是为匹配元素的后代元素添加一个父级元素，但是这个父级元素是匹配元素的子代元素，也就是原来的匹配元素变成了祖先元素，形式为<code>wrapInner(html)</code>,<code>wrapInner(jquery)</code>,<code>wrapInner(htmlElements)</code>,<code>wrapInner(function())</code></strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> div = $(<span class="string">"&lt;div&gt;&lt;/div&gt;"</span>).css(<span class="string">"border"</span>, <span class="string">'thick double red'</span>);</div><div class="line">$(<span class="string">".dcell"</span>).wrapInner(div);    <span class="comment">//这里的dcell元素将会变成祖先元素，而div将会变成内部后代元素新的父级元素</span></div></pre></td></tr></table></figure>
-<h2 id="replaceWith"><a href="#replaceWith" class="headerlink" title="replaceWith"></a>replaceWith</h2><blockquote>
-<p><strong>用提供的内容替换集合中所有匹配的元素并且返回被删除元素的集合,形式为<code>replace(html)</code>,<code>replaceWith(jquery)</code>,<code>replaceWith(function())</code></strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">var</span> newElems = $(<span class="string">"&lt;div class='dcell'&gt;&lt;/div&gt;"</span>).append(<span class="string">"&lt;img src='lily.png'&gt;"</span>)</div><div class="line"> .append(<span class="string">"&lt;label for='lily'&gt;Lily&lt;/label&gt;"</span>).append(<span class="string">"&lt;input name='lily' value='0' required&gt;"</span>).css(<span class="string">"border"</span>, <span class="string">'thick   double blue'</span>);</div><div class="line">$(<span class="string">".dcell:first"</span>).replaceWith(newElems);  <span class="comment">//用newElems替换第一个dcell</span></div><div class="line"></div><div class="line"></div><div class="line">$(<span class="string">"div.drow img"</span>).replaceWith(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.src.indexOf(<span class="string">"rose"</span>) &gt; <span class="number">-1</span>)</div><div class="line">        <span class="keyword">return</span> $(<span class="string">"&lt;img src='lily.png'&gt;"</span>).css(<span class="string">"border"</span>,<span class="string">'thick double red'</span>); <span class="comment">//返回的时替换的内容，可以是jquery或者html</span></div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.src.indexOf(<span class="string">"peony"</span>) &gt; <span class="number">-1</span>)</div><div class="line">        <span class="keyword">return</span> newElems;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">return</span> $(<span class="keyword">this</span>.clone()).css(<span class="string">"border"</span>,<span class="string">'thick double blue'</span>);</div><div class="line"></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h2 id="replaceAll"><a href="#replaceAll" class="headerlink" title="replaceAll"></a>replaceAll</h2><blockquote>
-<p><strong>用集合的匹配元素替换每个目标元素。<code>.replaceAll()</code>和<code>.replaceWith()</code>功能类似，但是目标和源相反</strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"&lt;img src='lily.png'&gt;"</span>).replaceAll(<span class="string">"#row1 img"</span>);   <span class="comment">//这里使用&lt;img src='lily.png'&gt;替换所有的img元素</span></div></pre></td></tr></table></figure>
-<h2 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h2><blockquote>
-<p><strong>将匹配元素集合从<code>DOM</code>中删除,并且同时移除元素上的事件及 <code>jQuery</code> 数据</strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"div.dcell"</span>).remove(<span class="string">":has(img[src*=rose])"</span>);  <span class="comment">//删除img</span></div><div class="line"></div><div class="line">$(<span class="string">"div.dcell:first()"</span>).remove();    <span class="comment">//不带参数</span></div></pre></td></tr></table></figure>
-<h2 id="detach"><a href="#detach" class="headerlink" title="detach"></a>detach</h2><blockquote>
-<p><strong>从<code>DOM</code>中去掉所有匹配的元素,<code>.detach()</code> 方法和<code>.remove()</code>一样, 除了 <code>.detach()</code>保存所有<code>jQuery</code>数据和被移走的元素相关联。当需要移走一个元素，不久又将该元素插入DOM时，这种方法很有用。</strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"div.dcell"</span>).detach();</div><div class="line"></div><div class="line">$(<span class="string">"div.dcell"</span>).detach(<span class="string">":has(img[src*=rose])"</span>);</div></pre></td></tr></table></figure>
-<h2 id="empty"><a href="#empty" class="headerlink" title="empty"></a>empty</h2><blockquote>
-<p><strong>从<code>DOM</code>中移除集合中匹配元素的所有子节点。</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&quot;div.dcell:first&quot;).empty();   //删除所有的子节点</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
-<ul>
-<li><a href="http://www.css88.com/jqapi-1.9/" target="_blank" rel="external">JQuery中文文档</a></li>
-</ul>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;JQuery干货篇之插入元素&quot;&gt;&lt;a href=&quot;#JQuery干货篇之插入元素&quot; class=&quot;headerlink&quot; title=&quot;JQuery干货篇之插入元素&quot;&gt;&lt;/a&gt;JQuery干货篇之插入元素&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;本次使用的html,css还
     
     </summary>
     
