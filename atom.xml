@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-05-25T07:35:02.626Z</updated>
+  <updated>2017-05-25T23:40:09.729Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,199 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java IO学习笔记八</title>
+    <link href="http://chenjiabing666.github.io/2017/05/26/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%85%AB/"/>
+    <id>http://chenjiabing666.github.io/2017/05/26/Java-IO学习笔记八/</id>
+    <published>2017-05-25T23:37:55.000Z</published>
+    <updated>2017-05-25T23:40:09.729Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="BufferedReader和BufferedWriter"><a href="#BufferedReader和BufferedWriter" class="headerlink" title="BufferedReader和BufferedWriter"></a>BufferedReader和BufferedWriter</h1><blockquote>
+<ul>
+<li>这两个类是高效率的提高文件的读取速度，它们为字符输入和输出提供了一个缓冲区，可以显著的调高写入和读取的速度，特别针对大量的磁盘文件读取的时候,下面着重的讲讲这两个类</li>
+</ul>
+</blockquote>
+<h2 id="BufferedReader"><a href="#BufferedReader" class="headerlink" title="BufferedReader"></a>BufferedReader</h2><blockquote>
+<ul>
+<li>从字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取,要特别注意的是这个市针对字符流而不是字节流。</li>
+<li>通常，<code>Reader</code> 所作的每个读取请求都会导致对底层字符或字节流进行相应的读取请求。因此，建议用 <code>BufferedReader</code> 包装所有其 <code>read()</code>操作可能开销很高的<code>Reader</code>（如 <code>FileReader</code> 和 <code>InputStreamReader</code>）</li>
+</ul>
+</blockquote>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
+<ul>
+<li><code>BufferedReader(Reader in)</code>  创建一个使用默认大小输入缓冲区的缓冲字符输入流。</li>
+<li><code>BufferedReader(Reader in, int sz)</code>    创建一个使用指定大小输入缓冲区的缓冲字符输入流。</li>
+</ul>
+</blockquote>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><blockquote>
+<ul>
+<li>可以看出构造函数使用了Reader这个抽象类来初始化，我们前面说过这个是针对字符流的读取，因此可以使用<code>Reader</code>类的两个子类<code>FileReader</code>,<code>InputStreamReader</code>来初始化</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line">BufferedReader bufferedReader=<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(file));  <span class="comment">//使用FileReader实例化</span></div><div class="line"><span class="comment">//使用InputStreamReader来实例化</span></div><div class="line">BufferedReader bufferedReader=<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(file)));</div></pre></td></tr></table></figure>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><blockquote>
+<ul>
+<li><code>close()</code></li>
+<li><code>String readLine()</code>  读取一行的数据</li>
+<li><code>int read()</code>   读取一个字符，注意这里的和字节的不一样，这里的汉字占用了一个字节，前面讲到读取字节流的时候使用byte读取汉字占用三个字节</li>
+<li><code>skip(int n)</code>   跳过n个字节</li>
+<li><code>ready()</code>  判断此流是否已准备好被读取。</li>
+</ul>
+</blockquote>
+<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><blockquote>
+<ul>
+<li>用于控制台的读取,前面已经说过<code>System.in</code>返回的是<code>InputStream</code>类型的，因此可以使用<code>InputStreamReader</code>实例化,当然这个有点多余了，我们完全可以使用<code>java.util</code>提供的<code>Scanner</code>直接进行输入</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">BufferedReader bufferedReader=<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</div><div class="line">        String str=bufferedReader.readLine();  <span class="comment">//将控制台输入的字符串读取</span></div><div class="line">        System.out.println(str);  <span class="comment">//打印出来</span></div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>用于文件的读取</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"> BufferedReader bufferedReader=<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(file));</div><div class="line">       <span class="comment">// BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(new FileInputStream(file)));</span></div><div class="line"><span class="comment">//        bufferedReader.skip(2);    //跳过两个字节</span></div><div class="line"><span class="comment">//        </span></div><div class="line"><span class="comment">//        第一种读取的方式</span></div><div class="line">        <span class="keyword">while</span>(bufferedReader.ready())     <span class="comment">//判断是否还有字符</span></div><div class="line">        &#123;</div><div class="line">            String str=bufferedReader.readLine();   <span class="comment">//直接读取一行</span></div><div class="line">            System.out.println(str);  </div><div class="line">        &#125;</div><div class="line">        bufferedReader.close();</div><div class="line">        </div><div class="line">        <span class="comment">//第二种读取方式</span></div><div class="line">        <span class="keyword">int</span> len=bufferedReader.read();</div><div class="line">        <span class="keyword">while</span>(len!=-<span class="number">1</span>)   <span class="comment">//判断是否读到文件的末尾</span></div><div class="line">        &#123;</div><div class="line">            System.out.print((<span class="keyword">char</span>)len);  <span class="comment">//强制转化成字符</span></div><div class="line">            len=bufferedReader.read();</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<h2 id="BufferedWriter"><a href="#BufferedWriter" class="headerlink" title="BufferedWriter"></a>BufferedWriter</h2><blockquote>
+<ul>
+<li>将文本写入字符输出流，缓冲各个字符，从而提供单个字符、数组和字符串的高效写入。</li>
+<li>通常 <code>Writer</code> 将其输出立即发送到底层字符或字节流。除非要求提示输出，否则建议用 BufferedWriter 包装所有其 write() 操作可能开销很高的 Writer（如 <code>FileWriters</code> 和 <code>OutputStreamWriters</code>）。例如</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PrintWriter out</div><div class="line">   = <span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(<span class="string">"foo.out"</span>)));</div></pre></td></tr></table></figure>
+<h3 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
+<ul>
+<li><code>BufferedWriter(Writer out)</code>   创建一个使用默认大小输出缓冲区的缓冲字符输出流。</li>
+<li><code>BufferedWriter(Writer out, int sz)</code>    创建一个使用给定大小输出缓冲区的新缓冲字符输出流。</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line">BufferedWriter bufferedWriter=<span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(file));</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意这里的FileWriter是Writer的子类，因此可以使用其实例化</strong></p>
+</blockquote>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><blockquote>
+<ul>
+<li><code>close()</code></li>
+<li><code>flush()</code></li>
+<li><code>newLine()</code>  写入一个与平台相关的换行符</li>
+<li><code>write(int data)</code> 写入一个字符，这里的写入的不是整数</li>
+<li><code>write(String str)</code>  写入一个字符串</li>
+<li><code>write(String str,int off,int len)</code>  写入部分字符串</li>
+<li><code>write(char[] c)</code></li>
+<li><code>write(char[] c,int off,int len)</code></li>
+</ul>
+</blockquote>
+<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line">File file1=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>);</div><div class="line">File file2=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"demo.txt"</span>);</div><div class="line"><span class="keyword">if</span>(!file1.exists())</div><div class="line">&#123;</div><div class="line">    file1.mkdir();</div><div class="line">    System.out.println(<span class="string">"文件夹创建成功"</span>);</div><div class="line">&#125;</div><div class="line">BufferedWriter bufferedWriter=<span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(file));</div><div class="line">String str=<span class="string">"陈加兵"</span>;</div><div class="line"><span class="keyword">int</span> data=<span class="number">48</span>;</div><div class="line">String name=<span class="string">"chenjiabing"</span>;</div><div class="line"><span class="keyword">char</span>[] chars=name.toCharArray();</div><div class="line">bufferedWriter.write(str);   <span class="comment">//写入一个字符串，当然也可以截取这个字符串的某一段</span></div><div class="line">bufferedWriter.newLine();  <span class="comment">//写入一个平台自带的换行符，因为每一个操作系统的换行符都不一样</span></div><div class="line">bufferedWriter.write(data);   <span class="comment">//写入的并不是整数，而是这个整数所代表的字符</span></div><div class="line">bufferedWriter.newLine();</div><div class="line">bufferedWriter.write(chars,<span class="number">1</span>,<span class="number">4</span>);  <span class="comment">//写入字符数组</span></div><div class="line">bufferedWriter.flush();</div><div class="line">bufferedWriter.close()</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>拓展：</strong>通过了上面的学习，你不觉得使用这个类写入文件数据有点烦了，只能写入<code>String</code> <code>char</code>类型的数据，此时我们就想到了前面说过的打印流(<code>PrintWriter</code>)，这是一个便捷的写入文件的类，可以指定任意格式任意类型的数据，同样是输出流，我么可以将他们结合起来，构成一个更加强大的输出流，如下:</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line"><span class="comment">//用BufferedWriter实例化PrintWriter，显著提高写入的效率</span></div><div class="line">PrintWriter printWriter=<span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(file)));</div><div class="line">String name=<span class="string">"陈加兵"</span>;</div><div class="line"><span class="keyword">int</span> age=<span class="number">22</span>;</div><div class="line"><span class="keyword">float</span> grade=<span class="number">99.9f</span>;</div><div class="line">printWriter.printf(<span class="string">"姓名:%s,年龄:%s,grade:%s"</span>,name,age,grade);  <span class="comment">//格式化的写入</span></div><div class="line">printWriter.close();</div></pre></td></tr></table></figure>
+<h2 id="综合实例"><a href="#综合实例" class="headerlink" title="综合实例"></a>综合实例</h2><blockquote>
+<p>将一个文件中数据转移到另外一个文件中</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> IO;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by chenjiabing on 17-5-26.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo13</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 常用函数：</div><div class="line">     * newLine()</div><div class="line">     * write(String str)</div><div class="line">     * write(String str,int off,int len)</div><div class="line">     * write(Char[] c)</div><div class="line">     * write(Char[] c,int off,int len)</div><div class="line">     * write(int data)</div><div class="line">     * close()</div><div class="line">     * flush()</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        File file = <span class="keyword">new</span> File(<span class="string">"/tmp"</span> + File.separator + <span class="string">"test"</span> + File.separator + <span class="string">"test.txt"</span>);</div><div class="line">        File file1 = <span class="keyword">new</span> File(<span class="string">"/tmp"</span> + File.separator + <span class="string">"test"</span>);</div><div class="line">        File file2 = <span class="keyword">new</span> File(<span class="string">"/tmp"</span> + File.separator + <span class="string">"test"</span> + File.separator + <span class="string">"demo.txt"</span>);</div><div class="line">        BufferedWriter bufferedWriter = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(file2));</div><div class="line">        BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(file));</div><div class="line"></div><div class="line">        <span class="keyword">while</span> (bufferedReader.ready()) &#123;</div><div class="line">            String str = bufferedReader.readLine();  <span class="comment">//读取文件test.txt中的一行数据</span></div><div class="line">            bufferedWriter.write(str);   <span class="comment">//将这一行数据写入文件demo.txt</span></div><div class="line">            bufferedWriter.newLine();</div><div class="line">        &#125;</div><div class="line">        bufferedReader.close();</div><div class="line">        bufferedWriter.flush();</div><div class="line">        bufferedWriter.close();</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<ul>
+<li><a href="http://ifeve.com/java-io-char-buffered-filter/" target="_blank" rel="external">http://ifeve.com/java-io-char-buffered-filter/</a></li>
+<li><a href="http://www.cnblogs.com/lich/archive/2011/12/11/2284223.html" target="_blank" rel="external">http://www.cnblogs.com/lich/archive/2011/12/11/2284223.html</a></li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;BufferedReader和BufferedWriter&quot;&gt;&lt;a href=&quot;#BufferedReader和BufferedWriter&quot; class=&quot;headerlink&quot; title=&quot;BufferedReader和BufferedWriter&quot;&gt;&lt;/a
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java IO学习笔记七</title>
+    <link href="http://chenjiabing666.github.io/2017/05/26/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%83/"/>
+    <id>http://chenjiabing666.github.io/2017/05/26/Java-IO学习笔记七/</id>
+    <published>2017-05-25T23:37:47.000Z</published>
+    <updated>2017-05-25T23:38:54.485Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="System对IO的支持"><a href="#System对IO的支持" class="headerlink" title="System对IO的支持"></a>System对IO的支持</h1><blockquote>
+<ul>
+<li><code>System</code>是系统的类，其中的方法都是在控制台的输入和输出，但是通过重定向也是可以对文件的输入输出</li>
+<li><p><code>System</code>中定义了标准输入、标准输出和错误输出流，定义如下:</p>
+<blockquote>
+<ol>
+<li><code>static PrintStream err</code> “标准”错误输出流。</li>
+<li><code>static InputStream    in</code> “标准”输入流。</li>
+<li><code>static PrintStream    out</code>   “标准”输出流。</li>
+</ol>
+</blockquote>
+</li>
+<li><p>从上面的定义可以知道这里的返回值都是字节的输入和输出流，因此可以使用<code>PrintStream</code>接受这个返回值，然后利用其进行输出，同样的输入也是可以这样做,当然对于<code>OutputStream</code>和<code>InputStream</code>也是可以的，因为<code>PrintStream</code>是继承<code>OutputStream</code></p>
+</li>
+</ul>
+</blockquote>
+<h2 id="System-out"><a href="#System-out" class="headerlink" title="System.out"></a>System.out</h2><blockquote>
+<ul>
+<li><code>System.out</code>是一个标准的输出流，可以使用<code>PrintStream</code>和<code>OutputStream</code>接收返回值，然后使用其进行标准的输出,实例如下</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">PrintStream printStream=System.out;  <span class="comment">//使用PrintStream</span></div><div class="line"><span class="comment">//OutputStream outputStream=System.out;   //使用OutputStream</span></div><div class="line">    String name=<span class="string">"陈加兵"</span>;</div><div class="line">    <span class="keyword">int</span> age=<span class="number">22</span>;</div><div class="line">    printStream.printf(<span class="string">"姓名:%s,年龄:%s"</span>,name,age);  <span class="comment">//使用格式话的输出</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>其实我还是比较用<code>PrintStream</code>进行格式话的输出的</p>
+<ul>
+<li><code>System.out</code>的重定向输出，可以使用这个将指定的内容输出到文件中，实例如下：</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line">        System.setOut(<span class="keyword">new</span> PrintStream(<span class="keyword">new</span> PrintStream(file)));  <span class="comment">//设置重定向的文件</span></div><div class="line">    &#125;<span class="keyword">catch</span> (IOException e) </div><div class="line">    &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"陈加兵的个人博客"</span>)；<span class="comment">//向文件输入内容</span></div></pre></td></tr></table></figure>
+<h2 id="System-in"><a href="#System-in" class="headerlink" title="System.in"></a>System.in</h2><blockquote>
+<ul>
+<li>这是一个标准输入流，可以使用<code>InputStream</code>来接受返回值，然后利用其进行输入，实例如下：</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">byte</span>[] bytes=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">       InputStream inputStream=System.in;   <span class="comment">//使用InputStream来接收这个返回值</span></div><div class="line">       <span class="keyword">try</span> &#123;</div><div class="line">           inputStream.read(bytes);  <span class="comment">//读取控制台输入的字符串</span></div><div class="line">       &#125;<span class="keyword">catch</span> (IOException e)</div><div class="line">       &#123;</div><div class="line">           e.printStackTrace();</div><div class="line">       &#125;</div><div class="line">       System.out.println(<span class="keyword">new</span> String(bytes));  <span class="comment">//输出</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>说实话这种控制台输入的方式不太好，还是使用原来的<code>Scanner</code>比较好</p>
+<ul>
+<li>System.in的重定向</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">File file = <span class="keyword">new</span> File(<span class="string">"/tmp"</span> + File.separator + <span class="string">"test"</span> + File.separator + <span class="string">"test.txt"</span>);</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    System.setIn(<span class="keyword">new</span> FileInputStream(file));  <span class="comment">//设置重定向</span></div><div class="line">    System.in.read(bytes);   <span class="comment">//读取文件中字节数据</span></div><div class="line"></div><div class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div><div class="line">System.out.println(<span class="keyword">new</span> String(bytes));   <span class="comment">//打印出文件中的内容</span></div></pre></td></tr></table></figure>
+<h2 id="System-err"><a href="#System-err" class="headerlink" title="System.err"></a>System.err</h2><blockquote>
+<ul>
+<li>这是一个标准错误输出流，在<code>IDEA</code>中输出的内容是红色的，和<code>System.out</code>输出的格式一样，只是颜色不一样，因为这里的重定向不太重要也不太常用，这里就不再详细说了，详情请看<a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/java/lang/System.html" target="_blank" rel="external">帮助文档</a></li>
+</ul>
+</blockquote>
+<h2 id="System-exit"><a href="#System-exit" class="headerlink" title="System.exit"></a>System.exit</h2><blockquote>
+<ul>
+<li><code>public static void exit(int status)</code></li>
+<li>终止当前的<code>java虚拟机</code>，参数用作状态码；根据惯例，非<code>0</code> 的状态码表示异常终止,如<code>System.exit(0)</code></li>
+</ul>
+</blockquote>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<ul>
+<li><a href="http://www.cnblogs.com/lich/archive/2011/12/11/2284155.html" target="_blank" rel="external">http://www.cnblogs.com/lich/archive/2011/12/11/2284155.html</a></li>
+<li><a href="http://ifeve.com/java-io-system-in-system-out-system-err/" target="_blank" rel="external">http://ifeve.com/java-io-system-in-system-out-system-err/</a></li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;System对IO的支持&quot;&gt;&lt;a href=&quot;#System对IO的支持&quot; class=&quot;headerlink&quot; title=&quot;System对IO的支持&quot;&gt;&lt;/a&gt;System对IO的支持&lt;/h1&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Syste
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>Java IO学习笔记六</title>
@@ -2219,164 +2412,6 @@
     
     
       <category term="JDBC" scheme="http://chenjiabing666.github.io/tags/JDBC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BootStrap干货篇之表单</title>
-    <link href="http://chenjiabing666.github.io/2017/04/26/BootStrap%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E8%A1%A8%E5%8D%95/"/>
-    <id>http://chenjiabing666.github.io/2017/04/26/BootStrap干货篇之表单/</id>
-    <published>2017-04-26T15:11:37.000Z</published>
-    <updated>2017-04-26T15:18:01.666Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="BootStrap干货篇之表单"><a href="#BootStrap干货篇之表单" class="headerlink" title="BootStrap干货篇之表单"></a>BootStrap干货篇之表单</h1><h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><blockquote>
-<p><strong>单独的表单控件会被自动赋予一些全局样式。所有设置了 <code>.form-control</code> 类的 <code>&lt;input&gt;</code>、<code>&lt;textarea&gt;</code> 和 <code>&lt;select&gt;</code> 元素都将被默认设置宽度属性为 <code>width: 100%</code>;。 将 <code>label</code>元素和前面提到的控件包裹在 <code>.form-group</code> 中可以获得最好的排列。</strong></p>
-<p><strong>基本实例：</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">    &lt;div class=&apos;container&apos;&gt;</div><div class="line">    &lt;form&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;label for=&quot;exampleInputEmail1&quot;&gt;Email address&lt;/label&gt;</div><div class="line">    &lt;input type=&quot;email&quot; class=&quot;form-control&quot; id=&quot;exampleInputEmail1&quot; placeholder=&quot;Email&quot;&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;label for=&quot;exampleInputPassword1&quot;&gt;Password&lt;/label&gt;</div><div class="line">    &lt;input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;exampleInputPassword1&quot; placeholder=&quot;Password&quot;&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;label for=&quot;exampleInputFile&quot;&gt;File input&lt;/label&gt;</div><div class="line">    &lt;input type=&quot;file&quot; id=&quot;exampleInputFile&quot;&gt;</div><div class="line">    &lt;p class=&quot;help-block&quot;&gt;Example block-level help text here.&lt;/p&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;checkbox&quot;&gt;</div><div class="line">    &lt;label&gt;</div><div class="line">      &lt;input type=&quot;checkbox&quot;&gt; Check me out</div><div class="line">    &lt;/label&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;Submit&lt;/button&gt;</div><div class="line">&lt;/form&gt;</div><div class="line">    &lt;/div&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>说明：这里的<code>form-control</code>是对所有的输入控件而言的,源码中将width设置为<code>100%</code>，表示会将这个输入控件占满一整行，<code>form-group</code>是用来对<code>label</code>和<code>input</code>更好的排版的，其中还有<code>form-group-sm</code>,<code>form-group-lg</code>，源码中分别利用这个对带有<code>form-control</code>的控件设置了不同的高度，具体看源码，不过正常情况下还是使用<code>form-group</code></strong></p>
-</blockquote>
-<h2 id="内联表单"><a href="#内联表单" class="headerlink" title="内联表单"></a>内联表单</h2><blockquote>
-<p><strong>为 <code>&lt;form&gt;</code> 元素添加 <code>.form-inline</code> 类可使其内容左对齐并且表现为<code>inline-block</code>级别的控件。只适用于视口（<code>viewport</code>）至少在 <code>768px</code> 宽度时（视口宽度再小的话就会使表单折叠）从源码中可以看到对<code>form-inline</code>下的<code>form-group</code>,<code>form-control</code>,<code>form-control-static</code>,<code>input-group</code>,<code>radio</code>,<code>checkbox</code>都是用了<code>display:inline-block</code></strong></p>
-<p><strong>注意：</strong></p>
-<ul>
-<li>在 <code>Bootstrap</code> 中，输入框和单选/多选框控件默认被设置为 <code>width</code>: <code>100%</code>; 宽度。在内联表单，我们将这些元素的宽度设置为<code>width: auto</code>;，因此，多个控件可以排列在同一行。根据你的布局需求，可能需要一些额外的定制化组件。</li>
-<li><strong>一定要有<code>label</code>标签，如果不想要<code>label</code>标签可以设置<code>.sr-only</code>将其隐藏</strong>如果你没有为每个输入控件设置 <code>label</code> 标签，屏幕阅读器将无法正确识别。对于这些内联表单，你可以通过为 label 设置 .sr-only 类将其隐藏。还有一些辅助技术提供label标签的替代方案，比如 <code>aria-label</code>、<code>aria-labelledby</code>或 <code>title</code> 属性。如果这些都不存在，屏幕阅读器可能会采取使用 <code>placeholder</code> 属性，如果存在的话，使用占位符来替代其他的标记，但要注意，这种方法是不妥当的。</li>
-</ul>
-<p><strong>实例:</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;form class=&quot;form-inline&quot;&gt;    &lt;!--指定了form-inline类--&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">  &lt;!--label中的for标签是用于绑定组件的，如果指定了for标签，input中的id也和for标签的内容相同，那么就会当鼠标点击&lt;label&gt;内容时会自动聚焦在input上--&gt;</div><div class="line">    &lt;label class=&quot;sr-only&quot; for=&quot;exampleInputEmail3&quot;&gt;Email address&lt;/label&gt;</div><div class="line">    &lt;input type=&quot;email&quot; class=&quot;form-control&quot; id=&quot;exampleInputEmail3&quot; placeholder=&quot;Email&quot;&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;label class=&quot;sr-only&quot; for=&quot;exampleInputPassword3&quot;&gt;Password&lt;/label&gt;</div><div class="line">    &lt;input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;exampleInputPassword3&quot; placeholder=&quot;Password&quot;&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;checkbox&quot;&gt;</div><div class="line">    &lt;label&gt;</div><div class="line">      &lt;input type=&quot;checkbox&quot;&gt; Remember me</div><div class="line">    &lt;/label&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;Sign in&lt;/button&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
-<h2 id="水平表单"><a href="#水平表单" class="headerlink" title="水平表单"></a>水平表单</h2><blockquote>
-<p><strong>水平表单通过指定为form指定<code>form-horizontal</code>类来设定，其中可以使用<code>BootStrap</code>的栅栏系统设置水平间距，其中的<code>form-group</code>的<code>div</code>就表示一行了，相当于<code>&lt;div class=&#39;row&#39;&gt;&lt;/div&gt;</code>,因此只需要在<code>label</code>和<code>input</code>中指定列就行了，但是<code>input</code>标签不能直接使用，要在外面加上<code>div</code></strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;form class=&quot;form-horizontal&quot;&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;   </div><div class="line">    &lt;label for=&quot;inputEmail3&quot; class=&quot;col-sm-2 control-label&quot;&gt;Email&lt;/label&gt;</div><div class="line">    &lt;div class=&quot;col-sm-10&quot;&gt;</div><div class="line">      &lt;input type=&quot;email&quot; class=&quot;form-control&quot; id=&quot;inputEmail3&quot; placeholder=&quot;Email&quot;&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;   &lt;!--相当与&lt;div class=&apos;row&apos;&gt;&lt;/div&gt;--&gt;</div><div class="line">    &lt;label for=&quot;inputPassword3&quot; class=&quot;col-sm-2 control-label&quot;&gt;Password&lt;/label&gt;</div><div class="line">    &lt;div class=&quot;col-sm-10&quot;&gt;</div><div class="line">      &lt;input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;inputPassword3&quot; placeholder=&quot;Password&quot;&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;div class=&quot;col-sm-offset-2 col-sm-10&quot;&gt;</div><div class="line">      &lt;div class=&quot;checkbox&quot;&gt;</div><div class="line">        &lt;label&gt;</div><div class="line">          &lt;input type=&quot;checkbox&quot;&gt; Remember me</div><div class="line">        &lt;/label&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;div class=&quot;col-sm-offset-2 col-sm-10&quot;&gt;</div><div class="line">      &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;Sign in&lt;/button&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>说明上面的<code>label</code>标签中的<code>control-label</code>主要的作用是设置文字的对齐方式为左对齐，如果不加这个将会在右边出现很大的空白</strong></p>
-</blockquote>
-<h2 id="多选和单选框"><a href="#多选和单选框" class="headerlink" title="多选和单选框"></a>多选和单选框</h2><blockquote>
-<p><strong>多选框<code>（checkbox）</code>用于选择列表中的一个或多个选项，而单选框（<code>radio</code>）用于从多个选项中只选择一个。其中提供的类有<code>checkbox</code>,<code>checkbox-inline</code>,<code>radio</code>,<code>radio-inline</code></strong></p>
-</blockquote>
-<h4 id="内联单选和多选框"><a href="#内联单选和多选框" class="headerlink" title="内联单选和多选框"></a>内联单选和多选框</h4><blockquote>
-<p><strong>通过将 .checkbox-inline 或 .radio-inline 类应用到一系列的多选框（<code>checkbox</code>）或单选框（<code>radio</code>）控件上，可以使这些控件排列在一行。</strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;label class=&quot;checkbox-inline&quot;&gt;</div><div class="line">  &lt;input type=&quot;checkbox&quot; id=&quot;inlineCheckbox1&quot; value=&quot;option1&quot;&gt; 1</div><div class="line">&lt;/label&gt;</div><div class="line">&lt;label class=&quot;checkbox-inline&quot;&gt;</div><div class="line">  &lt;input type=&quot;checkbox&quot; id=&quot;inlineCheckbox2&quot; value=&quot;option2&quot;&gt; 2</div><div class="line">&lt;/label&gt;</div><div class="line">&lt;label class=&quot;checkbox-inline&quot;&gt;</div><div class="line">  &lt;input type=&quot;checkbox&quot; id=&quot;inlineCheckbox3&quot; value=&quot;option3&quot;&gt; 3</div><div class="line">&lt;/label&gt;</div><div class="line"></div><div class="line">&lt;label class=&quot;radio-inline&quot;&gt;</div><div class="line">  &lt;input type=&quot;radio&quot; name=&quot;inlineRadioOptions&quot; id=&quot;inlineRadio1&quot; value=&quot;option1&quot;&gt; 1</div><div class="line">&lt;/label&gt;</div><div class="line">&lt;label class=&quot;radio-inline&quot;&gt;</div><div class="line">  &lt;input type=&quot;radio&quot; name=&quot;inlineRadioOptions&quot; id=&quot;inlineRadio2&quot; value=&quot;option2&quot;&gt; 2</div><div class="line">&lt;/label&gt;</div><div class="line">&lt;label class=&quot;radio-inline&quot;&gt;</div><div class="line">  &lt;input type=&quot;radio&quot; name=&quot;inlineRadioOptions&quot; id=&quot;inlineRadio3&quot; value=&quot;option3&quot;&gt; 3</div><div class="line">&lt;/label&gt;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&lt;div class=&quot;checkbox-inline&quot;&gt;</div><div class="line">            &lt;label for=&quot;sex&quot;&gt;&lt;input type=&quot;checkbox&quot;&gt;男&lt;/label&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;checkbox-inline&quot;&gt;</div><div class="line">        &lt;label for=&quot;sex&quot;&gt;&lt;input type=&quot;checkbox&quot;&gt;男&lt;/label&gt;</div><div class="line">    &lt;/div&gt;</div></pre></td></tr></table></figure>
-<h4 id="不带label文本的Checkbox-和-radio"><a href="#不带label文本的Checkbox-和-radio" class="headerlink" title="不带label文本的Checkbox 和 radio"></a>不带label文本的Checkbox 和 radio</h4><blockquote>
-<p><strong>如果需要 <code>&lt;label&gt;</code> 内没有文字，输入框（<code>input</code>）正是你所期望的。 目前只适用于</strong>非内联<strong>的 <code>checkbox</code>和 <code>radio</code>。 请记住，仍然需要为使用辅助技术的用户提供某种形式的 <code>label</code>（例如，使用 <code>aria-label</code>）。</strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;checkbox&quot;&gt;</div><div class="line">  &lt;label&gt;</div><div class="line">    &lt;input type=&quot;checkbox&quot; id=&quot;blankCheckbox&quot; value=&quot;option1&quot; aria-label=&quot;...&quot;&gt;</div><div class="line">  &lt;/label&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;div class=&quot;radio&quot;&gt;</div><div class="line">  &lt;label&gt;</div><div class="line">    &lt;input type=&quot;radio&quot; name=&quot;blankRadio&quot; id=&quot;blankRadio1&quot; value=&quot;option1&quot; aria-label=&quot;...&quot;&gt;</div><div class="line">  &lt;/label&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<h4 id="下拉列表（select）"><a href="#下拉列表（select）" class="headerlink" title="下拉列表（select）"></a>下拉列表（select）</h4><blockquote>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;select class=&quot;form-control&quot;&gt;</div><div class="line">  &lt;option&gt;1&lt;/option&gt;</div><div class="line">  &lt;option&gt;2&lt;/option&gt;</div><div class="line">  &lt;option&gt;3&lt;/option&gt;</div><div class="line">  &lt;option&gt;4&lt;/option&gt;</div><div class="line">  &lt;option&gt;5&lt;/option&gt;</div><div class="line">&lt;/select&gt;</div></pre></td></tr></table></figure>
-<h2 id="静态控件"><a href="#静态控件" class="headerlink" title="静态控件"></a>静态控件</h2><blockquote>
-<p><strong>如果需要在表单中将一行纯文本和 <code>label</code> 元素放置于同一行，为<code>&lt;p&gt;</code>标签设置为<code>form-control-static</code></strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;form class=&quot;form-horizontal&quot;&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;label class=&quot;col-sm-2 control-label&quot;&gt;Email&lt;/label&gt;</div><div class="line">    &lt;div class=&quot;col-sm-10&quot;&gt;</div><div class="line">      &lt;p class=&quot;form-control-static&quot;&gt;email@example.com&lt;/p&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;label for=&quot;inputPassword&quot; class=&quot;col-sm-2 control-label&quot;&gt;Password&lt;/label&gt;</div><div class="line">    &lt;div class=&quot;col-sm-10&quot;&gt;</div><div class="line">      &lt;input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;inputPassword&quot; placeholder=&quot;Password&quot;&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
-<ul>
-<li><a href="http://v3.bootcss.com/css/#forms-controls-static" target="_blank" rel="external">中文官网</a></li>
-<li><a href="http://www.shouce.ren/api/view/a/779" target="_blank" rel="external">文档手册</a></li>
-</ul>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;BootStrap干货篇之表单&quot;&gt;&lt;a href=&quot;#BootStrap干货篇之表单&quot; class=&quot;headerlink&quot; title=&quot;BootStrap干货篇之表单&quot;&gt;&lt;/a&gt;BootStrap干货篇之表单&lt;/h1&gt;&lt;h2 id=&quot;基本介绍&quot;&gt;&lt;a href
-    
-    </summary>
-    
-      <category term="BootStrap学习" scheme="http://chenjiabing666.github.io/categories/BootStrap%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="BootStrap" scheme="http://chenjiabing666.github.io/tags/BootStrap/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Scrapyd部署爬虫</title>
-    <link href="http://chenjiabing666.github.io/2017/04/24/Scrapyd%E9%83%A8%E7%BD%B2%E7%88%AC%E8%99%AB/"/>
-    <id>http://chenjiabing666.github.io/2017/04/24/Scrapyd部署爬虫/</id>
-    <published>2017-04-24T02:58:07.000Z</published>
-    <updated>2017-04-24T03:07:54.155Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Scrapyd部署爬虫"><a href="#Scrapyd部署爬虫" class="headerlink" title="Scrapyd部署爬虫"></a>Scrapyd部署爬虫</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><blockquote>
-<ul>
-<li><strong><code>安装scrapyd: pip install scrapyd</code></strong></li>
-<li><strong>安装<code>scrapyd-client : pip install scrapyd-client</code></strong></li>
-<li><strong><code>安装curl:[安装地址](http://ono60m7tl.bkt.clouddn.com/curl.exe)</code>,安装完成以后将所在目录配置到环境变量中</strong></li>
-</ul>
-</blockquote>
-<h2 id="开始部署"><a href="#开始部署" class="headerlink" title="开始部署"></a>开始部署</h2><blockquote>
-<ul>
-<li><p><strong>修改<code>scrapy</code>项目目录下的<code>scrapy.cfg</code>文件，修改如下</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[deploy:JD_Spider]    <span class="comment">#加上target   :name</span></div><div class="line">url = http://localhost:<span class="number">6800</span>/   <span class="comment">#将前面的#删除</span></div><div class="line">project = JD               <span class="comment">#project的名字，可以使用默认的，当然也可以改变</span></div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>在任意目录下的打开终端，输入<code>scrapyd</code>,观察是否运行成功，运行成功的话，就可以打开<code>http://localhost:6800</code>看是否正常显示，如果正常显示则看到下面的这张图,这里的<code>JD</code>是部署之后才能看到的，现在是看不到的，所以没出现也不要担心：</strong></p>
-</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/scrayd.bmp" alt="scrapyd"></p>
-<ul>
-<li><p><strong>在项目的根目录下运行如下的命令：<code>python E:\python2.7\Scripts\scrapyd-deploy target -p project</code>,这里的E:\python2.7\Scripts\是你的python安装目录，Scripts是安装目录下的一个文件夹，注意前面一定要加上python,target是在前面scrapy.cfg中设置的deploy:JD_Spider，JD_Spider就是target,project 是JD,因此这个完整的命令是<code>python E:\python2.7\Scripts\scrapyd-deploy JD_Spider -p JD</code>,现在项目就部署到上面了，这下网页上就有<code>JD</code>了，详情请见上图</strong></p>
-</li>
-<li><p><strong>验证是否成功，你可以在网页上看有没有显示你的工程名字，另外在根目录下输入<code>python E:\python2.7\Scripts\scrapyd-deploy -l</code>就能列出你所有部署过的项目了</strong></p>
-</li>
-<li><p><strong>启动爬虫：<code>curl http://localhost:6800/schedule.json -d project=myproject -d spider=spider_name</code>,这里的<code>project</code>填入的是项目名，<code>spider_name</code>填入的是你的爬虫中定义的<code>name</code>,运行我的实例完整的代码为：<code>curl http://localhost:6800/schedule.json -d project=JD -d spider=spider</code>，这里将会显示如下信息：</strong></p>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#这里的jobid比较重要，下面会用到这个取消爬虫</span></div><div class="line">&#123;<span class="string">"status"</span>: <span class="string">"ok"</span>, <span class="string">"jobid"</span>: <span class="string">"3013f9d1283611e79a63acb57dec5d04"</span>, <span class="string">"node_name"</span>: <span class="string">"DESKTOP-L78TJQ7"</span>&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>取消爬虫：<code>curl http://localhost:6800/cancel.json -d project=myproject -d job=jobid</code>,<code>jobid</code>就是上面的提到过的，如果取消我的这个实例代码如：<code>curl http://localhost:6800/cancel.json -d project=JD -d job=3013f9d1283611e79a63acb57dec5d04</code>,那么它的状态就会变成如下：</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="string">"status"</span>: <span class="string">"ok"</span>, <span class="string">"prevstate"</span>: <span class="string">"running"</span>, <span class="string">"node_name"</span>: <span class="string">"DESKTOP-L78TJQ7"</span>&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><p><strong>列出项目：<code>curl http://localhost:6800/listprojects.json</code>,下面将会出现你已经部署的项目</strong></p>
-</li>
-<li><p><strong>删除项目：<code>curl http://localhost:6800/delproject.json -d project=myproject</code></strong></p>
-</li>
-<li><p><strong>列出版本：<code>curl http://localhost:6800/listversions.json?project=myproject</code>,这里的<code>project</code>是项目的名字，是在scrapy.cfg设置的</strong></p>
-</li>
-<li><p><strong>列出爬虫：<code>curl http://localhost:6800/listspiders.json?project=myproject</code>这里的<code>project</code>是项目的名字，是在scrapy.cfg设置的</strong></p>
-</li>
-<li><p><strong>列出<code>job</code>:<code>curl http://localhost:6800/listjobs.json?project=myproject</code>这里的<code>project</code>是项目的名字，是在<code>scrapy.cfg</code>设置的</strong></p>
-</li>
-<li><p><strong>删除版本：<code>curl http://localhost:6800/delversion.json -d project=myproject -d version=r99</code>，这里的<code>version</code>是自己的项目版本号，在删除之前需要查看版本号</strong></p>
-</li>
-</ul>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Scrapyd部署爬虫&quot;&gt;&lt;a href=&quot;#Scrapyd部署爬虫&quot; class=&quot;headerlink&quot; title=&quot;Scrapyd部署爬虫&quot;&gt;&lt;/a&gt;Scrapyd部署爬虫&lt;/h1&gt;&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;
-    
-    </summary>
-    
-      <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
     
   </entry>
   

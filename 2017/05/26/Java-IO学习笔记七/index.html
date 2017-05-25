@@ -5,35 +5,47 @@
   <meta charset="UTF-8">
   
   
-    <title>SQL干货篇一 | 爱撒谎的男孩</title>
+    <title>Java IO学习笔记七 | 爱撒谎的男孩</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="SQL系列之基本操作新建表
-CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]……
-实例
+    <meta name="description" content="System对IO的支持
 
-12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex CHAR(2),Sage SMALL">
+System是系统的类，其中的方法都是在控制台的输入和输出，但是通过重定向也是可以对文件的输入输出
+System中定义了标准输入、标准输出和错误输出流，定义如下:
+
+
+static PrintStream err “标准”错误输出流。
+static InputStream    in “标准”输入流。
+static PrintStream    out   “标准”输出">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL干货篇一">
-<meta property="og:url" content="http://chenjiabing666.github.io/2017/04/06/SQL基本操作/index.html">
+<meta property="og:title" content="Java IO学习笔记七">
+<meta property="og:url" content="http://chenjiabing666.github.io/2017/05/26/Java-IO学习笔记七/index.html">
 <meta property="og:site_name" content="爱撒谎的男孩">
-<meta property="og:description" content="SQL系列之基本操作新建表
-CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]……
-实例
+<meta property="og:description" content="System对IO的支持
 
-12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex CHAR(2),Sage SMALL">
-<meta property="og:updated_time" content="2017-04-06T14:47:15.114Z">
+System是系统的类，其中的方法都是在控制台的输入和输出，但是通过重定向也是可以对文件的输入输出
+System中定义了标准输入、标准输出和错误输出流，定义如下:
+
+
+static PrintStream err “标准”错误输出流。
+static InputStream    in “标准”输入流。
+static PrintStream    out   “标准”输出">
+<meta property="og:updated_time" content="2017-05-25T23:38:54.485Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL干货篇一">
-<meta name="twitter:description" content="SQL系列之基本操作新建表
-CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]……
-实例
+<meta name="twitter:title" content="Java IO学习笔记七">
+<meta name="twitter:description" content="System对IO的支持
 
-12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex CHAR(2),Sage SMALL">
+System是系统的类，其中的方法都是在控制台的输入和输出，但是通过重定向也是可以对文件的输入输出
+System中定义了标准输入、标准输出和错误输出流，定义如下:
+
+
+static PrintStream err “标准”错误输出流。
+static InputStream    in “标准”输入流。
+static PrintStream    out   “标准”输出">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -93,14 +105,14 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/06/SQL基本操作/" title="SQL干货篇一" itemprop="url">SQL干货篇一</a>
+      <a href="/2017/05/26/Java-IO学习笔记七/" title="Java IO学习笔记七" itemprop="url">Java IO学习笔记七</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2017-04-06T14:33:37.000Z" itemprop="datePublished"> 发表于 2017-04-06</time>
+    <time datetime="2017-05-25T23:37:47.000Z" itemprop="datePublished"> 发表于 2017-05-26</time>
     
   </p>
 </header>
@@ -109,78 +121,69 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL系列之基本操作"><span class="toc-number">1.</span> <span class="toc-text">SQL系列之基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#新建表"><span class="toc-number">1.1.</span> <span class="toc-text">新建表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表"><span class="toc-number">1.2.</span> <span class="toc-text">删除表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改表"><span class="toc-number">1.3.</span> <span class="toc-text">修改表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加列"><span class="toc-number">1.3.1.</span> <span class="toc-text">添加列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除列"><span class="toc-number">1.3.2.</span> <span class="toc-text">删除列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改列"><span class="toc-number">1.3.3.</span> <span class="toc-text">修改列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重命名表"><span class="toc-number">1.3.4.</span> <span class="toc-text">重命名表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入数据"><span class="toc-number">1.4.</span> <span class="toc-text">插入数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新数据"><span class="toc-number">1.5.</span> <span class="toc-text">更新数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表中的数据"><span class="toc-number">1.6.</span> <span class="toc-text">删除表中的数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.7.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#System对IO的支持"><span class="toc-number">1.</span> <span class="toc-text">System对IO的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#System-out"><span class="toc-number">1.1.</span> <span class="toc-text">System.out</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#System-in"><span class="toc-number">1.2.</span> <span class="toc-text">System.in</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#System-err"><span class="toc-number">1.3.</span> <span class="toc-text">System.err</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#System-exit"><span class="toc-number">1.4.</span> <span class="toc-text">System.exit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.5.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="SQL系列之基本操作"><a href="#SQL系列之基本操作" class="headerlink" title="SQL系列之基本操作"></a>SQL系列之基本操作</h1><h2 id="新建表"><a href="#新建表" class="headerlink" title="新建表"></a>新建表</h2><blockquote>
-<p><strong>CREATE TABLE <name><br>[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]],<br>[&lt;列名&gt;&lt;数据类型&gt;[表级完整性约束条件]]……</name></strong></p>
-<p><strong>实例</strong></p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student(Sno <span class="built_in">CHAR</span>(<span class="number">9</span>) PRIMARY <span class="keyword">KEY</span>,</div><div class="line">Sname <span class="built_in">CHAR</span>(<span class="number">20</span>) <span class="keyword">UNIQUE</span>,</div><div class="line">Ssex <span class="built_in">CHAR</span>(<span class="number">2</span>),</div><div class="line">Sage <span class="built_in">SMALLINT</span>,</div><div class="line">Sdept <span class="built_in">CHAR</span>(<span class="number">20</span>));</div></pre></td></tr></table></figure>
+		<h1 id="System对IO的支持"><a href="#System对IO的支持" class="headerlink" title="System对IO的支持"></a>System对IO的支持</h1><blockquote>
+<ul>
+<li><code>System</code>是系统的类，其中的方法都是在控制台的输入和输出，但是通过重定向也是可以对文件的输入输出</li>
+<li><p><code>System</code>中定义了标准输入、标准输出和错误输出流，定义如下:</p>
 <blockquote>
-<p><strong>其中<code>student</code>是表名，<code>Sno</code>,<code>Sname</code>,<code>Ssex</code>,<code>Sage</code>,<code>Sdept</code>都是列名，后面的<code>CHAR</code>都是数据类型,这里的<code>PRIMARY KEY</code>是将<code>Sno</code>定义为主键,<code>UNIQUE</code>是将<code>Sname</code>定义为唯一的也就是后面插入数据的时候不能有重复的名字</strong></p>
-<p><strong>拓展</strong>：主键的定义是在多个候选码中找出那个能够唯一识别一组数据的列名，如果需要两个列名才能识别一组数据，那么可以将这两个列名都定义为主键：<code>PRIMARY KEY(Sno,Sname)</code></p>
+<ol>
+<li><code>static PrintStream err</code> “标准”错误输出流。</li>
+<li><code>static InputStream    in</code> “标准”输入流。</li>
+<li><code>static PrintStream    out</code>   “标准”输出流。</li>
+</ol>
 </blockquote>
-<h2 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h2><blockquote>
-<ul>
-<li><code>DROP TABLE NAME;</code>只能删除没有被其他表引用，或者没有建立视图的，这里的引用可以是作为被参照表或者作为参照表</li>
-<li><code>DROP TABLE NAME CASCADE</code>;将全部删除，包括基本表和视图</li>
+</li>
+<li><p>从上面的定义可以知道这里的返回值都是字节的输入和输出流，因此可以使用<code>PrintStream</code>接受这个返回值，然后利用其进行输出，同样的输入也是可以这样做,当然对于<code>OutputStream</code>和<code>InputStream</code>也是可以的，因为<code>PrintStream</code>是继承<code>OutputStream</code></p>
+</li>
 </ul>
 </blockquote>
-<h2 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h2><blockquote>
-<h3 id="添加列"><a href="#添加列" class="headerlink" title="添加列"></a><strong>添加列</strong></h3><blockquote>
-<p><strong><code>alter table 表名 add 列名 列数据类型 [after 插入位置]</code></strong></p>
+<h2 id="System-out"><a href="#System-out" class="headerlink" title="System.out"></a>System.out</h2><blockquote>
+<ul>
+<li><code>System.out</code>是一个标准的输出流，可以使用<code>PrintStream</code>和<code>OutputStream</code>接收返回值，然后使用其进行标准的输出,实例如下</li>
+</ul>
 </blockquote>
-<p><strong>例子</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">PrintStream printStream=System.out;  <span class="comment">//使用PrintStream</span></div><div class="line"><span class="comment">//OutputStream outputStream=System.out;   //使用OutputStream</span></div><div class="line">    String name=<span class="string">"陈加兵"</span>;</div><div class="line">    <span class="keyword">int</span> age=<span class="number">22</span>;</div><div class="line">    printStream.printf(<span class="string">"姓名:%s,年龄:%s"</span>,name,age);  <span class="comment">//使用格式话的输出</span></div></pre></td></tr></table></figure>
 <blockquote>
+<p>其实我还是比较用<code>PrintStream</code>进行格式话的输出的</p>
 <ul>
-<li><code>alter table student add grade smallint;</code> //将grade插入到student表中的末尾一列，这里不加after默认的是在末尾添加</li>
-<li><code>alter table studnet add grade smallint after Sname;</code> //这里将grade插入到表中Sname列的后面</li>
+<li><code>System.out</code>的重定向输出，可以使用这个将指定的内容输出到文件中，实例如下：</li>
 </ul>
 </blockquote>
-<h3 id="删除列"><a href="#删除列" class="headerlink" title="删除列"></a>删除列</h3><p><strong><code>alter table 表名 drop 列名</code></strong></p>
-<p><code>alter table student drop Sname</code>;   //输出Sname那一列</p>
-<h3 id="修改列"><a href="#修改列" class="headerlink" title="修改列"></a>修改列</h3><p><strong><code>alter table 表名 change 列名称 列新名称 新数据类型;</code></strong></p>
-<p><strong>实例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line">        System.setOut(<span class="keyword">new</span> PrintStream(<span class="keyword">new</span> PrintStream(file)));  <span class="comment">//设置重定向的文件</span></div><div class="line">    &#125;<span class="keyword">catch</span> (IOException e) </div><div class="line">    &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"陈加兵的个人博客"</span>)；<span class="comment">//向文件输入内容</span></div></pre></td></tr></table></figure>
+<h2 id="System-in"><a href="#System-in" class="headerlink" title="System.in"></a>System.in</h2><blockquote>
 <ul>
-<li>alter table student change Sname name char(10) not null;    //修改列名Sname为name,并且还可以修改其中的数据类型，如果想要保持不变，就保持原型。</li>
+<li>这是一个标准输入流，可以使用<code>InputStream</code>来接受返回值，然后利用其进行输入，实例如下：</li>
 </ul>
-<h3 id="重命名表"><a href="#重命名表" class="headerlink" title="重命名表"></a>重命名表</h3><p><strong><code>alter table 表名 rename 新表名;</code></strong></p>
-<p><strong>实例：</strong><br><code>alter table student rename STUDENT;</code>   //将表名改为STUDENT </p>
 </blockquote>
-<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><blockquote>
-<p><strong><code>INSERT INTO table_name(列名,列名，列名....)VALUES(DATA);</code></strong>   //这里的data一定要对应每一列的数据类型，当然如果要想要插入所有的数据，就不需要列出所有的列名了</p>
-<p><strong>例子:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">byte</span>[] bytes=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">       InputStream inputStream=System.in;   <span class="comment">//使用InputStream来接收这个返回值</span></div><div class="line">       <span class="keyword">try</span> &#123;</div><div class="line">           inputStream.read(bytes);  <span class="comment">//读取控制台输入的字符串</span></div><div class="line">       &#125;<span class="keyword">catch</span> (IOException e)</div><div class="line">       &#123;</div><div class="line">           e.printStackTrace();</div><div class="line">       &#125;</div><div class="line">       System.out.println(<span class="keyword">new</span> String(bytes));  <span class="comment">//输出</span></div></pre></td></tr></table></figure>
 <blockquote>
+<p>说实话这种控制台输入的方式不太好，还是使用原来的<code>Scanner</code>比较好</p>
 <ul>
-<li><code>INSERT INTO student(Sno,Sname,Sage,Ssex)values(&#39;201215124&#39;,&#39;jack&#39;,34,&#39;男&#39;);</code>   //这里是插入表中的一些列的数据，并且对应了数据类型</li>
-<li><code>INSERT INTO student values(&#39;201215124&#39;,&#39;男&#39;,&#39;jack&#39;,34,&#39;IS&#39;);</code>     //这里是按照表中的列名顺序插入数据的</li>
+<li>System.in的重定向</li>
 </ul>
 </blockquote>
-</blockquote>
-<h2 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h2><blockquote>
-<p><strong><code>update 表名称 set 列名称=新值 where 更新条件;</code></strong></p>
-<p><strong>实例：</strong></p>
-<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">File file = <span class="keyword">new</span> File(<span class="string">"/tmp"</span> + File.separator + <span class="string">"test"</span> + File.separator + <span class="string">"test.txt"</span>);</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    System.setIn(<span class="keyword">new</span> FileInputStream(file));  <span class="comment">//设置重定向</span></div><div class="line">    System.in.read(bytes);   <span class="comment">//读取文件中字节数据</span></div><div class="line"></div><div class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div><div class="line">System.out.println(<span class="keyword">new</span> String(bytes));   <span class="comment">//打印出文件中的内容</span></div></pre></td></tr></table></figure>
+<h2 id="System-err"><a href="#System-err" class="headerlink" title="System.err"></a>System.err</h2><blockquote>
 <ul>
-<li><code>update student set Sage=Sage+1 where Sno=&#39;12134&#39;;</code>          //将Sno为12134的那一列数据的年龄加一</li>
+<li>这是一个标准错误输出流，在<code>IDEA</code>中输出的内容是红色的，和<code>System.out</code>输出的格式一样，只是颜色不一样，因为这里的重定向不太重要也不太常用，这里就不再详细说了，详情请看<a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/java/lang/System.html" target="_blank" rel="external">帮助文档</a></li>
 </ul>
 </blockquote>
-</blockquote>
-<h2 id="删除表中的数据"><a href="#删除表中的数据" class="headerlink" title="删除表中的数据"></a>删除表中的数据</h2><blockquote>
-<p><strong><code>delete from 表名称 where 删除条件;</code></strong></p>
-<p><strong>实例：</strong></p>
-<blockquote>
+<h2 id="System-exit"><a href="#System-exit" class="headerlink" title="System.exit"></a>System.exit</h2><blockquote>
 <ul>
-<li>delete from student where Sno=’121314125’;                //删除Sno为121314125的那一行数据</li>
+<li><code>public static void exit(int status)</code></li>
+<li>终止当前的<code>java虚拟机</code>，参数用作状态码；根据惯例，非<code>0</code> 的状态码表示异常终止,如<code>System.exit(0)</code></li>
 </ul>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
 </blockquote>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<ul>
+<li><a href="http://www.cnblogs.com/lich/archive/2011/12/11/2284155.html" target="_blank" rel="external">http://www.cnblogs.com/lich/archive/2011/12/11/2284155.html</a></li>
+<li><a href="http://ifeve.com/java-io-system-in-system-out-system-err/" target="_blank" rel="external">http://ifeve.com/java-io-system-in-system-out-system-err/</a></li>
+</ul>
 </blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -188,13 +191,13 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/数据库干货篇/">数据库干货篇</a>
+  <a class="article-category-link" href="/categories/java学习/">java学习</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/SQL/">SQL</a>
+  <span></span> <a href="/tags/java基础/">java基础</a>
   </div>
 
 </div>
@@ -203,7 +206,7 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2017/04/06/SQL基本操作/" data-title="SQL干货篇一 | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2017/05/26/Java-IO学习笔记七/" data-title="Java IO学习笔记七 | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -217,18 +220,18 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/04/08/scrapy爬取豆瓣全站/" title="scrapy爬取豆瓣全站">
+ <a href="/2017/05/26/Java-IO学习笔记八/" title="Java IO学习笔记八">
   <strong>上一篇：</strong><br/>
   <span>
-  scrapy爬取豆瓣全站</span>
+  Java IO学习笔记八</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/04/05/java布局管理器/"  title="swing布局管理器">
+<a href="/2017/05/25/Java-IO学习笔记六/"  title="Java IO学习笔记六">
  <strong>下一篇：</strong><br/> 
- <span>swing布局管理器
+ <span>Java IO学习笔记六
 </span>
 </a>
 </div>
@@ -249,7 +252,7 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL系列之基本操作"><span class="toc-number">1.</span> <span class="toc-text">SQL系列之基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#新建表"><span class="toc-number">1.1.</span> <span class="toc-text">新建表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表"><span class="toc-number">1.2.</span> <span class="toc-text">删除表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改表"><span class="toc-number">1.3.</span> <span class="toc-text">修改表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加列"><span class="toc-number">1.3.1.</span> <span class="toc-text">添加列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除列"><span class="toc-number">1.3.2.</span> <span class="toc-text">删除列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改列"><span class="toc-number">1.3.3.</span> <span class="toc-text">修改列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重命名表"><span class="toc-number">1.3.4.</span> <span class="toc-text">重命名表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入数据"><span class="toc-number">1.4.</span> <span class="toc-text">插入数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新数据"><span class="toc-number">1.5.</span> <span class="toc-text">更新数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表中的数据"><span class="toc-number">1.6.</span> <span class="toc-text">删除表中的数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.7.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#System对IO的支持"><span class="toc-number">1.</span> <span class="toc-text">System对IO的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#System-out"><span class="toc-number">1.1.</span> <span class="toc-text">System.out</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#System-in"><span class="toc-number">1.2.</span> <span class="toc-text">System.in</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#System-err"><span class="toc-number">1.3.</span> <span class="toc-text">System.err</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#System-exit"><span class="toc-number">1.4.</span> <span class="toc-text">System.exit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.5.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
  
   </div>
 
