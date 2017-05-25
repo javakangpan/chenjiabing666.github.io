@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-05-24T06:49:15.752Z</updated>
+  <updated>2017-05-25T07:35:02.626Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,287 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java IO学习笔记六</title>
+    <link href="http://chenjiabing666.github.io/2017/05/25/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%85%AD/"/>
+    <id>http://chenjiabing666.github.io/2017/05/25/Java-IO学习笔记六/</id>
+    <published>2017-05-25T07:33:09.000Z</published>
+    <updated>2017-05-25T07:35:02.626Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="打印流"><a href="#打印流" class="headerlink" title="打印流"></a>打印流</h1><blockquote>
+<ul>
+<li>在整个<code>IO</code>包中，打印流是输出信息最方便的类，主要包含<strong>字节打印流</strong>（<code>PrintStream</code>）和<strong>字符打印流</strong>（<code>PrintWrite</code>）。打印流提供了非常方便的打印功能，可以打印任何的数据类型，例如：小数、整数、字符串等等，相对于前面学习的几个文件的操作来说，这里的打印流是最简便的一个类了</li>
+</ul>
+</blockquote>
+<h2 id="PrintStream"><a href="#PrintStream" class="headerlink" title="PrintStream"></a>PrintStream</h2><blockquote>
+<ul>
+<li>主要功能是格式化的将内容写入文件，并不是打印在控制台上</li>
+<li><code>PrintStream</code>最大的好处就是可以格式化的输出，相信学过<code>c</code>的朋友都知道<code>prinf</code>这格式化输出函数，这里的<code>PrintStream</code>实现了更加简单的格式化输出，不需要使用什么<code>%d</code>,<code>%f</code>了，只需要都是用<code>%s</code>即可，这个很像<code>python</code></li>
+<li><code>PrintStream</code> 打印的所有字符都使用平台的默认字符编码转换为字节。在需要写入字符而不是写入字节的情况下，应该使用 <code>PrintWriter</code>类。</li>
+</ul>
+</blockquote>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
+<ul>
+<li><code>PrintStream(File file)</code>       创建具有指定文件且不带自动行刷新的新打印流。</li>
+<li><code>PrintStream(OutputStream out)</code>    创建新的打印流。</li>
+<li><code>PrintStream(OutputStream out, boolean autoFlush)</code>  创建新的打印流，并且设置自动刷新</li>
+<li><code>PrintStream(String fileName)</code>   创建具有指定文件名称且不带自动行刷新的新打印流。</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">File file_2=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line">PrintStream printStream=<span class="keyword">new</span> PrintStream(file_2);  <span class="comment">//直接使用File</span></div><div class="line">PrintStream printStream=<span class="keyword">new</span> PrintStream(<span class="keyword">new</span> FileOutputStream(file_2));  <span class="comment">//使用OutputStream的子类FileOutputStream</span></div></pre></td></tr></table></figure>
+<h3 id="常用的函数"><a href="#常用的函数" class="headerlink" title="常用的函数"></a>常用的函数</h3><blockquote>
+<ul>
+<li><p><code>PrintStream append(char c)</code>  在此输入流的后面追加字符。</p>
+</li>
+<li><p><code>PrintStream    append(CharSequence csq)</code>  将指定字符序列添加到此输出流。</p>
+</li>
+<li><p><code>PrintStream    append(CharSequence csq, int start, int end)</code>   将指定字符序列的子序列添加到此输出流。</p>
+</li>
+<li><p><code>print()</code>  打印常用的数据类型，比如<code>String</code>,<code>char</code>,<code>int</code> ,<code>double</code>,<code>float</code>,<code>boolean</code>,<code>long</code>,<code>short</code></p>
+</li>
+<li><code>println()</code>  打印常用的数据类型，但是带有换行符</li>
+<li><code>printf(String format, Object... args)</code> 使用指定格式字符串和参数将格式化的字符串写入此输出流的便捷方法。</li>
+<li><code>format(String format, Object... args)</code>  使用指定格式字符串和参数将格式化字符串写入此输出流中。</li>
+<li><code>close()</code></li>
+<li><code>flush()</code></li>
+</ul>
+</blockquote>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">package</span> IO;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by chenjiabing on 17-5-25.</div><div class="line"> */</div><div class="line"> </div><div class="line"> </div><div class="line"><span class="comment">/**test.txt文件中的结果如下:</span></div><div class="line"> 陈加兵</div><div class="line"> 2299.9</div><div class="line"> 姓名:陈加兵,n年龄:22,成绩:99.9</div><div class="line"> 姓名:陈加兵,n年龄:22,成绩:99.9</div><div class="line"> c</div><div class="line"> chenjiabi</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo9</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        PrintStream printStream = <span class="keyword">null</span>;</div><div class="line">        File file_1 = <span class="keyword">new</span> File(<span class="string">"/tmp"</span> + File.separator + <span class="string">"test"</span>);</div><div class="line">        File file_2 = <span class="keyword">new</span> File(<span class="string">"/tmp"</span> + File.separator + <span class="string">"test"</span> + File.separator + <span class="string">"test.txt"</span>);</div><div class="line">        <span class="keyword">if</span> (!file_1.exists()) &#123;</div><div class="line">            file_1.mkdir();</div><div class="line">            System.out.println(<span class="string">"文件创建成功"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line"><span class="comment">//            PrintStream printStream=new PrintStream(file_2);</span></div><div class="line">            printStream = <span class="keyword">new</span> PrintStream(<span class="keyword">new</span> FileOutputStream(file_2));</div><div class="line">            String name = <span class="string">"陈加兵"</span>;</div><div class="line">            <span class="keyword">int</span> age = <span class="number">22</span>;</div><div class="line">            <span class="keyword">float</span> grade = <span class="number">99.9f</span>;</div><div class="line"></div><div class="line">            printStream.println(name);<span class="comment">//println()</span></div><div class="line"></div><div class="line">            printStream.print(age);<span class="comment">//print()</span></div><div class="line"></div><div class="line">            printStream.println(grade);<span class="comment">//print()</span></div><div class="line"></div><div class="line">            printStream.format(<span class="string">"姓名:%s,n年龄:%s,成绩:%s%s"</span>, name, age, grade, <span class="string">"\n"</span>);<span class="comment">//format()</span></div><div class="line"></div><div class="line">            printStream.printf(<span class="string">"姓名:%s,n年龄:%s,成绩:%s%s"</span>, name, age, grade, <span class="string">"\n"</span>);</div><div class="line"></div><div class="line">            printStream.append(<span class="string">'c'</span>);   <span class="comment">//append</span></div><div class="line">            printStream.append(<span class="string">"\nchenjiabing"</span>,<span class="number">0</span>,<span class="number">10</span>);  <span class="comment">//append</span></div><div class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">if</span> (printStream != <span class="keyword">null</span>) &#123;</div><div class="line">                printStream.flush();</div><div class="line">                printStream.close();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="PrintWriter"><a href="#PrintWriter" class="headerlink" title="PrintWriter"></a>PrintWriter</h2><blockquote>
+<ul>
+<li>继承<code>Writer</code>，主要针对的是字符流的操作</li>
+<li><p>向文本输出流打印对象的格式化表示形式。此类实现在 <code>PrintStream</code>中的所有 <code>print</code> 方法。它不包含用于写入原始字节的方法，对于这些字节，程序应该使用未编码的字节流进行写入。</p>
+</li>
+<li><p>与<code>PrintStream</code> 类不同，如果启用了自动刷新，则只有在调用 <code>println</code>、<code>printf</code> 或 <code>format</code> 的其中一个方法时才可能完成此操作，而不是每当正好输出换行符时才完成。这些方法使用平台自有的行分隔符概念，而不是换行符。</p>
+</li>
+<li><p>此类中的方法不会抛出 <code>I/O</code> 异常，尽管其某些构造方法可能抛出异常。客户端可能会查询调用 <code>checkError()</code> 是否出现错误。</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
+<ul>
+<li><code>PrintWriter(File file)</code>   使用指定文件创建不具有自动行刷新的新 <code>PrintWriter</code>。</li>
+<li><code>PrintWriter(OutputStream out)</code>   根据现有的 <code>OutputStream</code> 创建不带自动行刷新的新 <code>PrintWriter</code>。</li>
+<li><code>PrintWriter(OutputStream out, boolean autoFlush)</code>     通过现有的 <code>OutputStream</code> 创建新的 <code>PrintWriter</code>。</li>
+<li><code>PrintWriter(String fileName)</code>   创建具有指定文件名称且不带自动行刷新的新 <code>PrintWriter</code>。</li>
+</ul>
+</blockquote>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><blockquote>
+<p>这里的常用到的函数和<code>PrintStream</code>的差不多就不再详细的列出来了，详情请看<a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/java/io/PrintWriter.html" target="_blank" rel="external">帮助文档</a></p>
+</blockquote>
+<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> IO;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by chenjiabing on 17-5-25.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo10</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">    &#123;</div><div class="line">        PrintWriter printWriter=<span class="keyword">null</span>;</div><div class="line">        File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"file.txt"</span>);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            printWriter=<span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> FileOutputStream(file));</div><div class="line">            printWriter.println(<span class="string">"chenjiabing"</span>);</div><div class="line">            printWriter.println(<span class="string">"陈加兵"</span>);</div><div class="line">        &#125;<span class="keyword">catch</span> (IOException e)</div><div class="line">        &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;<span class="keyword">finally</span> &#123;</div><div class="line">                <span class="keyword">if</span>(printWriter!=<span class="keyword">null</span>)</div><div class="line">                &#123;</div><div class="line">                    printWriter.close();</div><div class="line">                &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<ul>
+<li><a href="http://www.cnblogs.com/lich/archive/2011/12/11/2284093.html" target="_blank" rel="external">http://www.cnblogs.com/lich/archive/2011/12/11/2284093.html</a></li>
+<li><a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/java/io/PrintWriter.html" target="_blank" rel="external">http://tool.oschina.net/uploads/apidocs/jdk-zh/java/io/PrintWriter.html</a></li>
+<li><a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/java/io/PrintStream.html" target="_blank" rel="external">http://tool.oschina.net/uploads/apidocs/jdk-zh/java/io/PrintStream.html</a></li>
+<li><a href="http://blog.csdn.net/yyyandroid/article/details/7756390" target="_blank" rel="external">http://blog.csdn.net/yyyandroid/article/details/7756390</a></li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;打印流&quot;&gt;&lt;a href=&quot;#打印流&quot; class=&quot;headerlink&quot; title=&quot;打印流&quot;&gt;&lt;/a&gt;打印流&lt;/h1&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;在整个&lt;code&gt;IO&lt;/code&gt;包中，打印流是输出信息最方便的类，主要包含&lt;strong&gt;
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java IO学习笔记五</title>
+    <link href="http://chenjiabing666.github.io/2017/05/25/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%94/"/>
+    <id>http://chenjiabing666.github.io/2017/05/25/Java-IO学习笔记五/</id>
+    <published>2017-05-25T07:33:00.000Z</published>
+    <updated>2017-05-25T07:34:32.346Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="管道流"><a href="#管道流" class="headerlink" title="管道流"></a>管道流</h1><blockquote>
+<ul>
+<li><p>管道流的主要作用是可以进行两个<strong>线程间的通讯</strong>，分为管道输出流(<code>PipedOutputStream</code>)、管道输入流（<code>PipedInputStream</code>），如果想要进行管道输出，则必须要把输出流连在输入流之上，在PipedOutputStream类上有如下的一个方法用于连接管道：<br><code>public void connect(PipedInputStream snk)throws IOException</code></p>
+</li>
+<li><p>通常是创建两个单独的线程来实现通信，如果是单个线程的话容易出现线程堵塞，因为输出流最多只能向缓冲区写入1024个字节的数据，如果超出就会出现线程堵塞，因此必须创建多个线程实现缓冲区的释放和存储</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="PipedOutputStream"><a href="#PipedOutputStream" class="headerlink" title="PipedOutputStream"></a>PipedOutputStream</h2><blockquote>
+<ul>
+<li>管道输出流是管道的发送端，可以将管道输出流连接到管道输入流来创建一个通信管道，通常，数据由某个线程写入 <code>PipedOutputStream</code>对象，并由其他线程从连接的 <code>PipedInputStream</code> 读取。不建议对这两个对象尝试使用单个线程，因为这样可能会造成该线程死锁。如果某个线程正从连接的管道输入流中读取数据字节，但该线程不再处于活动状态，则该管道被视为处于 毁坏 状态。</li>
+</ul>
+</blockquote>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
+<ul>
+<li><code>PipedOutputStream()</code>  创建尚未连接到管道输入流的管道输出流。</li>
+<li><code>PipedOutputStream(PipedInputStream snk)</code>   创建连接到指定管道输入流的管道输出流。</li>
+</ul>
+</blockquote>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><blockquote>
+<ul>
+<li><code>close()</code>  关闭</li>
+<li><code>void    connect(PipedInputStream snk)</code>  将此管道输出流连接到接收者。</li>
+<li><code>void    flush()</code>    刷新此输出流并强制写出所有缓冲的输出字节。</li>
+<li><code>void    write(byte[] b, int off, int len)</code>      将 <code>len</code> 字节从初始偏移量为 <code>off</code> 的指定 <code>byte</code> 数组写入该管道输出流。</li>
+<li><code>void    write(int b)</code>    将指定 <code>byte</code> 写入传送的输出流。</li>
+</ul>
+</blockquote>
+<h2 id="PipedInputStream"><a href="#PipedInputStream" class="headerlink" title="PipedInputStream"></a>PipedInputStream</h2><blockquote>
+<ul>
+<li>管道输入流应该连接到管道输出流；管道输入流提供要写入管道输出流的所有数据字节。通常，数据由某个线程从 <code>PipedInputStream</code> 对象读取，并由其他线程将其写入到相应的 <code>PipedOutputStream</code>。不建议对这两个对象尝试使用单个线程，因为这样可能死锁线程。管道输入流包含一个缓冲区，可在缓冲区限定的范围内将读操作和写操作分离开。 如果向连接管道输出流提供数据字节的线程不再存在，则认为该管道已损坏。</li>
+</ul>
+</blockquote>
+<h3 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
+<ul>
+<li><code>PipedInputStream()</code>    创建尚未连接的 <code>PipedInputStream</code>。</li>
+<li><code>PipedInputStream(PipedOutputStream src)</code>    创建 <code>PipedInputStream</code>，使其连接到管道输出流 <code>src</code>。</li>
+</ul>
+</blockquote>
+<h3 id="常用函数-1"><a href="#常用函数-1" class="headerlink" title="常用函数"></a>常用函数</h3><blockquote>
+<ul>
+<li><code>int    available()</code>   返回可以不受阻塞地从此输入流中读取的字节数。</li>
+<li><code>void    close()</code>   关闭此管道输入流并释放与该流相关的所有系统资源。</li>
+<li><code>void    connect(PipedOutputStream src)</code>    使此管道输入流连接到管道输出流 <code>src</code>。</li>
+<li><code>int    read()</code>  读取此管道输入流中的下一个数据字节。</li>
+<li><code>int read(byte[] b, int off, int len)</code>    将最多 <code>len</code> 个数据字节从此管道输入流读入 <code>byte</code> 数组。</li>
+<li><code>protected  void    receive(int b)</code>   接收数据字节。</li>
+</ul>
+</blockquote>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> IO;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.PipedInputStream;</div><div class="line"><span class="keyword">import</span> java.io.PipedOutputStream;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by chenjiabing on 17-5-25.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 注意的问题：</div><div class="line"> * 1.写线程正在往缓冲区写数据的时候，但是此时的读线程的管道结束，那么此时的写线程的管道就会发生IOException异常</div><div class="line"> * 2.读线程正在从缓冲区读数据的时候，但是此时的写线程的管道已经结束了，此时就会引起读线程的管道发生IOException异常</div><div class="line"> * 3.必须是启用多线程才能实现管道之间的读写，否则会出现堵塞现象，因为这里的PipeOutputStream每次向缓冲区写入的字节数最大是1024，如果不及时的减少缓冲区的数据量就会出现堵塞</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo7</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> PipedOutputStream outputStream = <span class="keyword">new</span> PipedOutputStream();</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> PipedInputStream inputStream = <span class="keyword">new</span> PipedInputStream();</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 创建一个写入数据进程，使用的是PipeOutStream，将数据写入管道中</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">send</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2000</span>];     <span class="comment">//创建一个2000字节的数组</span></div><div class="line">                <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">                    <span class="keyword">try</span> &#123;</div><div class="line">                        outputStream.write(bytes, <span class="number">0</span>, <span class="number">2000</span>);  <span class="comment">//写入管道，但是这里的缓冲区最多写入1024个字节的数据，因此这个是一次没有写完</span></div><div class="line">                        System.out.println(<span class="string">"写入成功"</span>);</div><div class="line">                    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                        System.out.println(<span class="string">"写入失败"</span>);</div><div class="line">                        System.exit(<span class="number">1</span>);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;).start();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 使用PipeInputStream创建一个读取的线程</div><div class="line">     */</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">receive</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">100</span>];  <span class="comment">//一次性只读取100个字节</span></div><div class="line">                <span class="keyword">int</span> len = <span class="number">0</span>;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    len = inputStream.read(bytes, <span class="number">0</span>, <span class="number">100</span>);  <span class="comment">//读取</span></div><div class="line">                    <span class="keyword">while</span> (len != -<span class="number">1</span>) &#123;</div><div class="line">                        System.out.println(<span class="string">"已经读取了"</span> + len + <span class="string">"个字节"</span>);</div><div class="line">                        len = inputStream.read(bytes, <span class="number">0</span>, <span class="number">100</span>);</div><div class="line">                    &#125;</div><div class="line"></div><div class="line"></div><div class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                    System.out.println(<span class="string">"读取失败"</span>);</div><div class="line">                    System.exit(<span class="number">1</span>);</div><div class="line">                &#125;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;).start();</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            inputStream.connect(outputStream);  <span class="comment">//连接</span></div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            System.out.println(<span class="string">"连接失败"</span>);</div><div class="line">            System.exit(<span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">        send();</div><div class="line">        receive();</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意:</strong>从上面的运行结果可以看出，缓冲区最多可以写入<code>1024</code>个字节的数据，所以在缓冲区满了之后上面的<code>send</code>进程就会堵塞等待缓冲区空闲，如果<code>recieve</code>进程不继续读取数据了，那么就会一直出现堵塞</p>
+</blockquote>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><blockquote>
+<ul>
+<li>写线程正在往缓冲区写数据的时候，但是此时的读线程的结束读取，那么此时的写线程的管道就会发生<code>IOException</code>异常，可以将上面<code>receive</code>进程中的<code>while(true)</code>去掉就可以清楚的看出</li>
+<li>读线程正在从缓冲区读数据的时候，但是此时的写线程的管道已经结束了，此时就会引起读线程的管道发生<code>IOException</code>异常,将上面的<code>send</code>进程中的<code>while(true)</code>去掉就可以实现这个问题</li>
+<li>必须是启用多线程才能实现管道之间的读写，否则会出现堵塞现象，因为这里的<code>PipeOutputStream</code>每次向缓冲区写入的字节数最大是<code>1024</code>，如果不及时的减少缓冲区的数据量就会出现堵塞</li>
+</ul>
+</blockquote>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><blockquote>
+<ul>
+<li>后续更新中……….</li>
+</ul>
+</blockquote>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<ul>
+<li><a href="http://www.cnblogs.com/lich/archive/2011/12/11/2283928.html" target="_blank" rel="external">http://www.cnblogs.com/lich/archive/2011/12/11/2283928.html</a></li>
+<li><a href="http://ifeve.com/java-io-%E7%AE%A1%E9%81%93/" target="_blank" rel="external">http://ifeve.com/java-io-%E7%AE%A1%E9%81%93/</a></li>
+<li><a href="http://www.cnblogs.com/chinareny2k/archive/2010/03/24/1693878.html" target="_blank" rel="external">http://www.cnblogs.com/chinareny2k/archive/2010/03/24/1693878.html</a></li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;管道流&quot;&gt;&lt;a href=&quot;#管道流&quot; class=&quot;headerlink&quot; title=&quot;管道流&quot;&gt;&lt;/a&gt;管道流&lt;/h1&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;管道流的主要作用是可以进行两个&lt;strong&gt;线程间的通讯&lt;/strong&gt;，分为管道输
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java IO学习笔记四</title>
+    <link href="http://chenjiabing666.github.io/2017/05/25/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9B%9B/"/>
+    <id>http://chenjiabing666.github.io/2017/05/25/Java-IO学习笔记四/</id>
+    <published>2017-05-25T07:32:49.000Z</published>
+    <updated>2017-05-25T07:34:03.026Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="内存操作流"><a href="#内存操作流" class="headerlink" title="内存操作流"></a>内存操作流</h1><blockquote>
+<p>之前的所有的流操作都是针对文件的，但是有时候只是想要实现数据间转换，此时如果我们想要创建一个文件然后再删除文件，那样显得有点麻烦，因此此时的内存操作流就显得很适合这类的操作，因为它只是在内存中存储，并不会真正的创建文件，内存操作流涉及的两个类是<code>ByteArrayInputStream</code>,<code>ByteArrayOutputStream</code>.</p>
+</blockquote>
+<h2 id="ByteArrayInputStream"><a href="#ByteArrayInputStream" class="headerlink" title="ByteArrayInputStream"></a>ByteArrayInputStream</h2><blockquote>
+<ul>
+<li><code>ByteArrayInputStream</code> 包含一个内部缓冲区，该缓冲区包含从流中读取的字节。内部计数器跟踪<code>read</code>方法要提供的下一个字节。</li>
+<li>关闭 <code>ByteArrayInputStream</code>无效。此类中的方法在关闭此流后仍可被调用，而不会产生任何 <code>IOException</code>。</li>
+<li>主要的功能是从缓冲区读取字节</li>
+</ul>
+</blockquote>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
+<ul>
+<li><code>ByteArrayInputStream(byte[] buf)</code>   创建一个 <code>ByteArrayInputStream</code>，使用 <code>buf</code> 作为其缓冲区数组。</li>
+<li><code>ByteArrayInputStream(byte[] buf, int offset, int length)</code>    创建 <code>ByteArrayInputStream</code>，使用 buf 作为其缓冲区数组。</li>
+</ul>
+</blockquote>
+<h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
+<ul>
+<li><code>close()</code>  不过对这个无效，因为关闭之后仍然可以使用函数读取而不报错</li>
+<li><code>int read()</code> 从缓冲区中读取一个字节</li>
+<li><code>int read(byte[] bytes)</code>  将缓冲区中的内容读取到数组中</li>
+<li><code>int read(byte[] bytes,int off,int len)</code>    将最多 <code>len</code> 个数据字节从此输入流读入 <code>byte</code> 数组。</li>
+<li><code>long skip(long n)</code>    从此输入流中跳过<code>n</code> 个输入字节。</li>
+<li><code>void reset()</code>  将此 byte 数组输出流的 count 字段重置为零，从而丢弃输出流中目前已累积的所有输出（清除缓冲区）</li>
+</ul>
+</blockquote>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo8</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        String str = <span class="string">"chenjiabing\n陈加兵"</span>;</div><div class="line">        <span class="keyword">byte</span>[] bytes = str.getBytes();  <span class="comment">//创建一个数组</span></div><div class="line">        ByteArrayInputStream inputStream = <span class="keyword">new</span> ByteArrayInputStream(bytes);  <span class="comment">//使用bytes作为缓冲区数组</span></div><div class="line">        <span class="keyword">int</span> temp = <span class="number">0</span>;</div><div class="line">        <span class="comment">/*第一种方法读取缓冲区中的数据，这个和文件的操作不一样，这个可以直接冲缓冲区中读取数据字节*/</span></div><div class="line">        <span class="keyword">while</span> ((temp = inputStream.read()) != -<span class="number">1</span>) &#123;</div><div class="line">            System.out.print((<span class="keyword">char</span>) temp);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/*创建数组用于存储读取的内容，下面是第二种读取数据的方法*/</span></div><div class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[bytes.length];</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">int</span> len = inputStream.read(b);</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="keyword">new</span> String(b));</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="ByteArrayOutputStream"><a href="#ByteArrayOutputStream" class="headerlink" title="ByteArrayOutputStream"></a>ByteArrayOutputStream</h2><blockquote>
+<ul>
+<li><p>此类实现了一个输出流，其中的数据被写入一个<code>byte</code> 数组。缓冲区会随着数据的不断写入而自动增长。可使用 <code>toByteArray()</code> 和 toString() 获取数据。</p>
+</li>
+<li><p>关闭 <code>ByteArrayOutputStream</code> 无效。此类中的方法在关闭此流后仍可被调用，而不会产生任何 <code>IOException</code>。</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
+<ul>
+<li><code>ByteArrayOutputStream()</code>     创建一个新的 <code>byte</code>数组输出流。</li>
+<li><code>ByteArrayOutputStream(int size)</code>    创建一个新的 <code>byte</code> 数组输出流，它具有指定大小的缓冲区容量（以字节为单位）。</li>
+</ul>
+</blockquote>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><blockquote>
+<ul>
+<li><p><code>int size()</code>    返回缓冲区的当前大小。</p>
+</li>
+<li><p><code>byte[] toByteArray()</code>    创建一个新分配的 <code>byte</code> 数组。</p>
+</li>
+<li><p><code>String toString()</code>   将缓冲区的字节转换成字符串</p>
+</li>
+<li><p><code>void    write(byte[] b, int off, int len)</code>  将指定 <code>byte</code> 数组中从偏移量 <code>off</code> 开始的 <code>len</code> 个字节写入此 <code>byte</code> 数组输出流。</p>
+</li>
+<li><p><code>void    write(int b)</code>    将指定的字节写入此 <code>byte</code>数组输出流。</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo8</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        ByteArrayOutputStream outputStream = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line">        String str = <span class="string">"chenjiabing"</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            outputStream.write(str.getBytes());   <span class="comment">//将字符串转换成数组然后写入缓冲区</span></div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                outputStream.close();  <span class="comment">//这里的关闭无效</span></div><div class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//将缓冲区的数据转换成字符串后输出，这里同样可以看出输出流的关闭根本不影响函数的调用</span></div><div class="line">        System.out.println(outputStream.size());  <span class="comment">//输出缓冲区的大小</span></div><div class="line">        System.out.println(outputStream.toString());  <span class="comment">//输出chenjiabing</span></div><div class="line">        outputStream.reset();   <span class="comment">//清除缓冲区的内容，如果不清零那么原先写入的数据还是存在的，但是此时我们已经不需要前面的数据了</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            outputStream.write(<span class="string">"陈加兵"</span>.getBytes());  <span class="comment">//继续向缓冲区写入数据</span></div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        System.out.println(outputStream.size());  <span class="comment">//这里的一个汉字占了三个字节</span></div><div class="line">        System.out.println(outputStream.toString());<span class="comment">//输出陈加兵</span></div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="综合"><a href="#综合" class="headerlink" title="综合"></a>综合</h2><blockquote>
+<p>下面我们结合上面的两个类将<strong>字符串转换大小写</strong></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo8</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        ByteArrayOutputStream outputStream = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line">        String str = <span class="string">"chenjiabing"</span>;</div><div class="line">        ByteArrayInputStream inputStream = <span class="keyword">new</span> ByteArrayInputStream(str.getBytes());  <span class="comment">//实例化输入流</span></div><div class="line">        <span class="keyword">int</span> temp = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span> ((temp = inputStream.read()) != -<span class="number">1</span>)   <span class="comment">//读取缓冲区的字节数据</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">char</span> c = (<span class="keyword">char</span>) temp;  <span class="comment">//将整数转换成字符，ascii码的转换</span></div><div class="line">            outputStream.write(Character.toUpperCase(c));  <span class="comment">//转换成大写，然后写入输出流的缓冲区中</span></div><div class="line">        &#125;</div><div class="line">        System.out.println(outputStream.toString());   <span class="comment">//利用输出流输出转换后的字符串，即是去取出内存中的数据</span></div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<ul>
+<li><p><a href="http://blog.csdn.net/yyyandroid/article/details/7756390" target="_blank" rel="external">http://blog.csdn.net/yyyandroid/article/details/7756390</a></p>
+</li>
+<li><p><a href="http://www.cnblogs.com/lich/archive/2011/12/11/2283883.html" target="_blank" rel="external">http://www.cnblogs.com/lich/archive/2011/12/11/2283883.html</a></p>
+</li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;内存操作流&quot;&gt;&lt;a href=&quot;#内存操作流&quot; class=&quot;headerlink&quot; title=&quot;内存操作流&quot;&gt;&lt;/a&gt;内存操作流&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;之前的所有的流操作都是针对文件的，但是有时候只是想要实现数据间转换，此时如果我们想要创建一
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>Java IO学习笔记三</title>
@@ -2096,301 +2377,6 @@
     
     
       <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>scrapy大战京东商城</title>
-    <link href="http://chenjiabing666.github.io/2017/04/23/scrapy%E5%A4%A7%E6%88%98%E4%BA%AC%E4%B8%9C%E5%95%86%E5%9F%8E/"/>
-    <id>http://chenjiabing666.github.io/2017/04/23/scrapy大战京东商城/</id>
-    <published>2017-04-23T14:12:30.000Z</published>
-    <updated>2017-04-23T14:16:59.098Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="SCrapy爬虫大战京东商城"><a href="#SCrapy爬虫大战京东商城" class="headerlink" title="SCrapy爬虫大战京东商城"></a>SCrapy爬虫大战京东商城</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
-<p><strong>上一篇已经讲过怎样获取链接，怎样获得参数了，详情请看<a href="https://chenjiabing666.github.io/2017/04/23/python%E7%88%AC%E8%99%AB%E5%A4%A7%E6%88%98%E4%BA%AC%E4%B8%9C%E5%95%86%E5%9F%8E/">python爬取京东商城普通篇</a></strong></p>
-</blockquote>
-<h2 id="代码详解"><a href="#代码详解" class="headerlink" title="代码详解"></a>代码详解</h2><blockquote>
-<ul>
-<li><strong>首先应该构造请求，这里使用<a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/spiders.html" target="_blank" rel="external">scrapy.Request</a>,这个方法默认调用的是<code>start_urls</code>构造请求，如果要改变默认的请求，那么必须重载该方法，这个方法的返回值必须是一个可迭代的对象，一般是用<code>yield</code>返回，代码如下：</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">start_requests</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">101</span>):</div><div class="line">        page=i*<span class="number">2</span><span class="number">-1</span>    <span class="comment">#这里是构造请求url的page,表示奇数</span></div><div class="line">        url=self.start_url+str(page)</div><div class="line">        <span class="keyword">yield</span> scrapy.Request(url,meta=&#123;<span class="string">'search_page'</span>:page+<span class="number">1</span>&#125;,callback=self.parse_url)   <span class="comment">#这里使用meta想回调函数传入数据，回调函数使用response.meta['search-page']接受数据</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>下面就是解析网页了，从上面看出这里的解析回调函数是<code>parse_url</code>,因此在此函数中解析网页。这里还是和上面说的一样，这个<code>url</code>得到的仅仅是前一半的信息，如果想要得到后一半的信息还有再次请求，这里还有注意的就是一个技巧：一般先解析出一个数据的数组，不急着取出第一个数，先要用if语句判断，因为如果得到的是<code>[]</code>，那么直接取出<code>[0]</code>是会报错的，这只是一个避免报错的方法吧，代码如下:</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_url</span><span class="params">(self,response)</span>:</span></div><div class="line">    <span class="keyword">if</span> response.status==<span class="number">200</span>:   <span class="comment">#判断是否请求成功</span></div><div class="line">        <span class="comment"># print response.url</span></div><div class="line">        pids = set()    <span class="comment">#这个集合用于过滤和保存得到的id,用于作为后面的ajax请求的url构成</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            all_goods = response.xpath(<span class="string">"//div[@id='J_goodsList']/ul/li"</span>)   <span class="comment">#首先得到所有衣服的整个框架，然后从中抽取每一个框架</span></div><div class="line"></div><div class="line">            <span class="keyword">for</span> goods <span class="keyword">in</span> all_goods:   <span class="comment">#从中解析每一个</span></div><div class="line">                <span class="comment"># scrapy.shell.inspect_response(response,self)   #这是一个调试的方法，这里会直接打开调试模式</span></div><div class="line">                items = JdSpiderItem()   <span class="comment">#定义要抓取的数据</span></div><div class="line">                img_url_src = goods.xpath(<span class="string">"div/div[1]/a/img/@src"</span>).extract()  <span class="comment"># 如果不存在就是一个空数组[]，因此不能在这里取[0]</span></div><div class="line">                img_url_delay = goods.xpath(</div><div class="line">                    <span class="string">"div/div[1]/a/img/@data-lazy-img"</span>).extract()  <span class="comment"># 这个是没有加载出来的图片，这里不能写上数组取第一个[0]</span></div><div class="line">                price = goods.xpath(<span class="string">"div/div[3]/strong/i/text()"</span>).extract()  <span class="comment">#价格</span></div><div class="line">                cloths_name = goods.xpath(<span class="string">"div/div[4]/a/em/text()"</span>).extract()</div><div class="line">                shop_id = goods.xpath(<span class="string">"div/div[7]/@ data-shopid"</span>).extract()</div><div class="line">                cloths_url = goods.xpath(<span class="string">"div/div[1]/a/@href"</span>).extract()</div><div class="line">                person_number = goods.xpath(<span class="string">"div/div[5]/strong/a/text()"</span>).extract()</div><div class="line">                pid = goods.xpath(<span class="string">"@data-pid"</span>).extract()</div><div class="line">                <span class="comment"># product_id=goods.xpath("@data-sku").extract()</span></div><div class="line">                <span class="keyword">if</span> pid:</div><div class="line">                    pids.add(pid[<span class="number">0</span>])</div><div class="line">                <span class="keyword">if</span> img_url_src:  <span class="comment"># 如果img_url_src存在</span></div><div class="line">                    <span class="keyword">print</span> img_url_src[<span class="number">0</span>]</div><div class="line">                    items[<span class="string">'img_url'</span>] = img_url_src[<span class="number">0</span>]</div><div class="line">                <span class="keyword">if</span> img_url_delay:  <span class="comment"># 如果到了没有加载完成的图片，就取这个url</span></div><div class="line">                    <span class="keyword">print</span> img_url_delay[<span class="number">0</span>]</div><div class="line">                    items[<span class="string">'img_url'</span>] = img_url_delay[<span class="number">0</span>]  <span class="comment"># 这里如果数组不是空的，就能写了</span></div><div class="line">                <span class="keyword">if</span> price:</div><div class="line">                    items[<span class="string">'price'</span>] = price[<span class="number">0</span>]</div><div class="line">                <span class="keyword">if</span> cloths_name:</div><div class="line">                    items[<span class="string">'cloths_name'</span>] = cloths_name[<span class="number">0</span>]</div><div class="line">                <span class="keyword">if</span> shop_id:</div><div class="line">                    items[<span class="string">'shop_id'</span>] = shop_id[<span class="number">0</span>]</div><div class="line">                    shop_url = <span class="string">"https://mall.jd.com/index-"</span> + str(shop_id[<span class="number">0</span>]) + <span class="string">".html"</span></div><div class="line">                    items[<span class="string">'shop_url'</span>] = shop_url</div><div class="line">                <span class="keyword">if</span> cloths_url:</div><div class="line">                    items[<span class="string">'cloths_url'</span>] = cloths_url[<span class="number">0</span>]</div><div class="line">                <span class="keyword">if</span> person_number:</div><div class="line">                    items[<span class="string">'person_number'</span>] = person_number[<span class="number">0</span>]</div><div class="line">                <span class="comment"># if product_id:</span></div><div class="line">                <span class="comment">#     print "************************************csdjkvjfskvnk***********************"</span></div><div class="line">                <span class="comment">#     print self.comments_url.format(str(product_id[0]),str(self.count))</span></div><div class="line">                <span class="comment">#     yield scrapy.Request(url=self.comments_url.format(str(product_id[0]),str(self.count)),callback=self.comments)</span></div><div class="line">                <span class="comment">#yield scrapy.Request写在这里就是每解析一个键裤子就会调用回调函数一次</span></div><div class="line">                <span class="keyword">yield</span> items</div><div class="line">        <span class="keyword">except</span> Exception:</div><div class="line">            <span class="keyword">print</span> <span class="string">"********************************************ERROR**********************************************************************"</span></div><div class="line"></div><div class="line">        <span class="keyword">yield</span> scrapy.Request(url=self.search_url.format(str(response.meta[<span class="string">'search_page'</span>]),<span class="string">","</span>.join(pids)),callback=self.next_half_parse)    <span class="comment">#再次请求，这里是请求ajax加载的数据，必须放在这里，因为只有等到得到所有的pid才能构成这个请求，回调函数用于下面的解析</span></div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>从上面代码的最后可以看出最后就是解析<code>ajax</code>加载的网页了，这里调用的<code>next_half_parse</code>函数，和解析前面一个网页一样，这里需要的注意的是，如果前面定义的数据没有搜索完毕是不能使用<code>yield items</code>的，必须将items通过meta传入下一个回调函数继续完善后才能<code>yield items</code>,这里就不需要了，代码如下：</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#分析异步加载的网页</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">next_half_parse</span><span class="params">(self,response)</span>:</span></div><div class="line">        <span class="keyword">if</span> response.status==<span class="number">200</span>:</div><div class="line">            <span class="keyword">print</span> response.url</div><div class="line">            items=JdSpiderItem()</div><div class="line">            <span class="comment">#scrapy.shell.inspect_response(response,self)    #y用来调试的</span></div><div class="line">            <span class="keyword">try</span>:</div><div class="line">                lis=response.xpath(<span class="string">"//li[@class='gl-item']"</span>)</div><div class="line">                <span class="keyword">for</span> li <span class="keyword">in</span> lis:</div><div class="line">                    cloths_url=li.xpath(<span class="string">"div/div[1]/a/@href"</span>).extract()</div><div class="line">                    img_url_1=li.xpath(<span class="string">"div/div[1]/a/img/@src"</span>).extract()</div><div class="line">                    img_url_2=li.xpath(<span class="string">"div/div[1]/a/img/@data-lazy-img"</span>).extract()</div><div class="line">                    cloths_name=li.xpath(<span class="string">"div/div[4]/a/em/text()"</span>).extract()</div><div class="line">                    price=li.xpath(<span class="string">"div/div[3]/strong/i/text()"</span>).extract()</div><div class="line">                    shop_id=li.xpath(<span class="string">"div/div[7]/@data-shopid"</span>).extract()</div><div class="line">                    person_number=li.xpath(<span class="string">"div/div[5]/strong/a/text()"</span>).extract()</div><div class="line">                    <span class="keyword">if</span> cloths_url:</div><div class="line">                        <span class="keyword">print</span> cloths_url[<span class="number">0</span>]</div><div class="line">                        items[<span class="string">'cloths_url'</span>]=cloths_url[<span class="number">0</span>]</div><div class="line">                    <span class="keyword">if</span> img_url_1:</div><div class="line">                        <span class="keyword">print</span> img_url_1[<span class="number">0</span>]</div><div class="line">                        items[<span class="string">'img_url'</span>]=img_url_1</div><div class="line">                    <span class="keyword">if</span> img_url_2:</div><div class="line">                        <span class="keyword">print</span> img_url_2[<span class="number">0</span>]</div><div class="line">                        items[<span class="string">'img_url'</span>]=img_url_2[<span class="number">0</span>]</div><div class="line">                    <span class="keyword">if</span> cloths_name:</div><div class="line">                        items[<span class="string">'cloths_name'</span>]=cloths_name[<span class="number">0</span>]</div><div class="line">                    <span class="keyword">if</span> price:</div><div class="line">                        items[<span class="string">'price'</span>]=price[<span class="number">0</span>]</div><div class="line">                    <span class="keyword">if</span> shop_id:</div><div class="line">                        items[<span class="string">'shop_id'</span>]=shop_id[<span class="number">0</span>]</div><div class="line">                        items[<span class="string">'shop_url'</span>]=<span class="string">"https://mall.jd.com/index-"</span> + str(shop_id[<span class="number">0</span>]) + <span class="string">".html"</span></div><div class="line">                    <span class="keyword">if</span> person_number:</div><div class="line">                        items[<span class="string">'person_number'</span>]=person_number[<span class="number">0</span>]</div><div class="line">                    <span class="keyword">yield</span> items   <span class="comment">#又一次的生成，这里是完整的数据，因此可以yield items</span></div><div class="line">            <span class="keyword">except</span> Exception:</div><div class="line">                <span class="keyword">print</span> <span class="string">"**************************************************"</span></div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>当然这里还用到了设置请求池，<code>mysql</code>存储，没有使用到<code>ip</code>代理，这个在我前面的博客中又讲到，这里就不再赘述了，想看源代码的朋友请<a href="https://github.com/chenjiabing666/JD_Scrapy_Spider" target="_blank" rel="external">点击这里</a></strong></li>
-</ul>
-</blockquote>
-<h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><blockquote>
-<ul>
-<li><p><strong>人们会抱怨为什么自己的爬虫在中途断开就要重头开始爬，为什么不能从断开那里开始爬呢，这里提供一个方法：在配置文件<code>settings.py</code>中加入<code>JOBDIR=file_name</code>,这里的<code>file_name</code>是一个文件的名字</strong></p>
-</li>
-<li><p><strong>设置下载延迟防止被<code>ban</code>:<code>DOWNLOAD_DELAY = 2</code>:设置每一次的间隔时间   <code>RANDOMIZE_DOWNLOAD_DELAY = True</code>:这个是随机设置延迟时间  在设置的时间的<code>0.5-1.5</code>倍之间，这样可以更有效的防止被ban,一般是配套使用的</strong></p>
-</li>
-<li><p><strong><code>ROBOTSTXT_OBEY = False</code> :这里是表示不遵循<code>robots.txt</code>文件，默认是<code>True</code>表示遵循，这里将之改成<code>False</code></strong></p>
-</li>
-<li><p><strong><code>CONCURRENT_REQUESTS</code> :设置最大请求数，这里默认的时<code>16</code>，我们可以根据自己电脑的配置改的大一点来加快请求的速度</strong></p>
-</li>
-</ul>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;SCrapy爬虫大战京东商城&quot;&gt;&lt;a href=&quot;#SCrapy爬虫大战京东商城&quot; class=&quot;headerlink&quot; title=&quot;SCrapy爬虫大战京东商城&quot;&gt;&lt;/a&gt;SCrapy爬虫大战京东商城&lt;/h1&gt;&lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot;
-    
-    </summary>
-    
-      <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python爬虫大战京东商城</title>
-    <link href="http://chenjiabing666.github.io/2017/04/23/python%E7%88%AC%E8%99%AB%E5%A4%A7%E6%88%98%E4%BA%AC%E4%B8%9C%E5%95%86%E5%9F%8E/"/>
-    <id>http://chenjiabing666.github.io/2017/04/23/python爬虫大战京东商城/</id>
-    <published>2017-04-23T10:34:48.000Z</published>
-    <updated>2017-04-23T10:48:02.496Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="python大规模爬取京东"><a href="#python大规模爬取京东" class="headerlink" title="python大规模爬取京东"></a>python大规模爬取京东</h1><h2 id="主要工具"><a href="#主要工具" class="headerlink" title="主要工具"></a>主要工具</h2><blockquote>
-<ul>
-<li><strong><code>scrapy</code></strong></li>
-<li><strong><code>BeautifulSoup</code></strong></li>
-<li><strong><code>requests</code></strong></li>
-</ul>
-</blockquote>
-<h2 id="分析步骤"><a href="#分析步骤" class="headerlink" title="分析步骤"></a>分析步骤</h2><blockquote>
-<ul>
-<li><p><strong>打开京东首页，输入</strong>裤子<strong>将会看到页面跳转到了<a href="https://search.jd.com/Search?keyword=%E8%A3%A4%E5%AD%90&amp;enc=utf-8&amp;wq=%E8%A3%A4%E5%AD%90&amp;pvid=a424f5c84d7844aaa56d4d62286878be" target="_blank" rel="external">这里</a>，这就是我们要分析的起点</strong></p>
-</li>
-<li><p><strong>我们可以看到这个页面并不是完全的，当我们往下拉的时候将会看到图片在不停的加载，这就是<code>ajax</code>,但是当我们下拉到底的时候就会看到整个页面加载了60条裤子的信息，我们打开chrome的调试工具，查找页面元素时可以看到每条裤子的信息都在<code>&lt;li class=&#39;gl-item&#39;&gt;&lt;/li&gt;</code>这个标签中，如下图：</strong></p>
-</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/jd1.bmp" alt="生成图"></p>
-<ul>
-<li><strong>接着我们打开网页源码就会发现其实网页源码只有前30条的数据，后面30条的数据找不到，因此这里就会想到ajax，一种异步加载的方式，于是我们就要开始抓包了，我们打开chrome按F12，点击上面的NetWork,然后点击XHR,这个比较容易好找,下面开始抓包，如下图：</strong></li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/jd2.bmp" alt="抓包图"></p>
-<ul>
-<li><strong>从上面可以找到请求的<code>url</code>，发现有很长的一大段，我们试着去掉一些看看可不可以打开，简化之后的<code>url</code>=<a href="https://search.jd.com/s_new.php?keyword=%E8%A3%A4%E5%AD%90&amp;enc=utf-8&amp;qrst=1&amp;rt=1&amp;stop=1&amp;vt=2&amp;offset=3&amp;wq=%E8%A3%A4%E5%AD%90&amp;page={0}&amp;s=26&amp;scrolling=y&amp;pos=30&amp;show_items={1}" target="_blank" rel="external">https://search.jd.com/s_new.php?keyword=%E8%A3%A4%E5%AD%90&amp;enc=utf-8&amp;qrst=1&amp;rt=1&amp;stop=1&amp;vt=2&amp;offset=3&amp;wq=%E8%A3%A4%E5%AD%90&amp;page={0}&amp;s=26&amp;scrolling=y&amp;pos=30&amp;show_items={1}</a></strong><br><strong>这里的<code>showitems</code>是裤子的<code>id</code>,<code>page</code>是翻页的，可以看出来我们只需要改动两处就可以打开不同的网页了，这里的<code>page</code>很好找，你会发现一个很好玩的事情，就是主网页的<code>page</code>是奇数，但是异步加载的网页中的<code>page</code>是偶数，因此这里只要填上偶数就可以了，但是填奇数也是可以访问的。这里的<code>show_items</code>就是<code>id</code>了，我们可以在页面的源码中找到，通过查找可以看到<code>id</code>在<code>li</code>标签的<code>data-pid</code>中，详情请看下图</strong></li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/jd3.bmp" alt="id"></p>
-<ul>
-<li><strong>上面我们知道怎样找参数了，现在就可以撸代码了</strong></li>
-</ul>
-</blockquote>
-<h2 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h2><blockquote>
-<ul>
-<li><p><strong>首先我们要获取网页的源码，这里我用的requests库，安装方法为<code>pip install requests</code>，代码如下:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_html</span><span class="params">(self)</span>:</span></div><div class="line">    res = requests.get(self.url, headers=self.headers)</div><div class="line">    html = res.text     </div><div class="line">    <span class="keyword">return</span> html    <span class="comment">#返回的源代码</span></div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>根据上面的分析可以知道，第二步就是得到异步加载的url中的参数<code>show_items</code>,就是<code>li</code>标签中的<code>data-pid</code>,代码如下：</strong></p>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_pids</span><span class="params">(self)</span>:</span></div><div class="line">    html = self.get_html()</div><div class="line">    soup = BeautifulSoup(html, <span class="string">'lxml'</span>)    <span class="comment">#创建BeautifulSoup对象</span></div><div class="line">    lis = soup.find_all(<span class="string">"li"</span>, class_=<span class="string">'gl-item'</span>)   <span class="comment">#查找li标签</span></div><div class="line">    <span class="keyword">for</span> li <span class="keyword">in</span> lis:</div><div class="line">        data_pid = li.get(<span class="string">"data-pid"</span>)      <span class="comment">#得到li标签下的data-pid</span></div><div class="line">        <span class="keyword">if</span> (data_pid):</div><div class="line">            self.pids.add(data_pid)    <span class="comment">#这里的self.pids是一个集合，用于过滤重复的</span></div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>下面就是获取前30张图片的url了，也就是主网页上的图片，其中一个问题是img标签的属性并不是一样的，也就是源码中的<code>img</code>中不都是<code>src</code>属性，一开始已经加载出来的图片就是src属性，但是没有加载出来的图片是<code>data-lazy-img</code>，因此在解析页面的时候要加上讨论。代码如下：</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_src_imgs_data</span><span class="params">(self)</span>:</span></div><div class="line">    html = self.get_html()</div><div class="line">    soup = BeautifulSoup(html, <span class="string">'lxml'</span>)</div><div class="line">    divs = soup.find_all(<span class="string">"div"</span>, class_=<span class="string">'p-img'</span>)  <span class="comment"># 图片</span></div><div class="line">    <span class="comment"># divs_prices = soup.find_all("div", class_='p-price')   #价格</span></div><div class="line">    <span class="keyword">for</span> div <span class="keyword">in</span> divs:</div><div class="line">        img_1 = div.find(<span class="string">"img"</span>).get(<span class="string">'data-lazy-img'</span>)  <span class="comment"># 得到没有加载出来的url</span></div><div class="line">        img_2 = div.find(<span class="string">"img"</span>).get(<span class="string">"src"</span>)  <span class="comment"># 得到已经加载出来的url</span></div><div class="line">        <span class="keyword">if</span> img_1:</div><div class="line">            <span class="keyword">print</span> img_1</div><div class="line">            self.sql.save_img(img_1)</div><div class="line">            self.img_urls.add(img_1)</div><div class="line">        <span class="keyword">if</span> img_2:</div><div class="line">            <span class="keyword">print</span> img_2</div><div class="line">            self.sql.save_img(img_2)</div><div class="line">            self.img_urls.add(img_2)</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>前三十张图片找到了，现在开始找后三十张图片了，当然是要请求那个异步加载的<code>url</code>，前面已经把需要的参数给找到了，下面就好办了，直接贴代码：</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_extend_imgs_data</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="comment"># self.search_urls=self.search_urls+','.join(self.pids)</span></div><div class="line">    self.search_urls = self.search_urls.format(str(self.search_page), <span class="string">','</span>.join(self.pids))  <span class="comment">#拼凑url,将获得的单数拼成url,其中show_items中的id是用','隔开的，因此要对集合中的每一个id分割，page就是偶数，这里直接用主网页的page加一就可以了</span></div><div class="line">    <span class="keyword">print</span> self.search_urls</div><div class="line">    html = requests.get(self.search_urls, headers=self.headers).text   <span class="comment">#请求</span></div><div class="line">    soup = BeautifulSoup(html, <span class="string">'lxml'</span>)   </div><div class="line">    div_search = soup.find_all(<span class="string">"div"</span>, class_=<span class="string">'p-img'</span>)   <span class="comment">#解析</span></div><div class="line">    <span class="keyword">for</span> div <span class="keyword">in</span> div_search:  </div><div class="line">        img_3 = div.find(<span class="string">"img"</span>).get(<span class="string">'data-lazy-img'</span>)    <span class="comment">#这里可以看到分开查找img属性了</span></div><div class="line">        img_4 = div.find(<span class="string">"img"</span>).get(<span class="string">"src"</span>)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> img_3:    <span class="comment">#如果是data-lazy-img</span></div><div class="line">            <span class="keyword">print</span> img_3</div><div class="line">            self.sql.save_img(img_3)    <span class="comment">#存储到数据库</span></div><div class="line">            self.img_urls.add(img_3)      <span class="comment">#用集合去重</span></div><div class="line">        <span class="keyword">if</span> img_4:    <span class="comment">#如果是src属性</span></div><div class="line">            <span class="keyword">print</span> img_4</div><div class="line">            self.sql.save_img(img_4)     </div><div class="line">            self.img_urls.add(img_4)</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>通过上面就可以爬取了，但是还是要考虑速度的问题，这里我用了多线程，直接每一页面开启一个线程，速度还是可以的，感觉这个速度还是可以的，几分钟解决问题，总共爬取了<code>100</code>个网页,这里的存储方式是<code>mysql</code>数据库存储的，要用发哦<code>MySQLdb</code>这个库，详情自己百度，当然也可以用mogodb但是还没有学呢，想要的源码的朋友请看<a href="https://github.com/chenjiabing666/JD_Spider_python/tree/master" target="_blank" rel="external">GitHub源码</a></strong></li>
-</ul>
-</blockquote>
-<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><p><strong>写到这里可以看到搜索首页的网址中<code>keyword</code>和<code>wq</code>都是你输入的词，如果你想要爬取更多的信息，可以将这两个词改成你想要搜索的词即可，直接将汉字写上，在请求的时候会自动帮你编码的，我也试过了，可以抓取源码的，如果你想要不断的抓取，可以将要搜索的词写上文件里，然后从文件中读取就可以了。以上只是一个普通的爬虫，并没有用到什么框架，接下来将会写<code>scrapy</code>框架爬取的，请继续关注我的博客哦！！！</strong></p>
-<blockquote>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;python大规模爬取京东&quot;&gt;&lt;a href=&quot;#python大规模爬取京东&quot; class=&quot;headerlink&quot; title=&quot;python大规模爬取京东&quot;&gt;&lt;/a&gt;python大规模爬取京东&lt;/h1&gt;&lt;h2 id=&quot;主要工具&quot;&gt;&lt;a href=&quot;#主要工具&quot;
-    
-    </summary>
-    
-      <category term="python" scheme="http://chenjiabing666.github.io/categories/python/"/>
-    
-    
-      <category term="python爬虫" scheme="http://chenjiabing666.github.io/tags/python%E7%88%AC%E8%99%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JQuery干货篇之处理元素</title>
-    <link href="http://chenjiabing666.github.io/2017/04/22/JQuery%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E5%A4%84%E7%90%86%E5%85%83%E7%B4%A0/"/>
-    <id>http://chenjiabing666.github.io/2017/04/22/JQuery干货篇之处理元素/</id>
-    <published>2017-04-22T13:45:23.000Z</published>
-    <updated>2017-04-22T13:47:46.741Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="JQuery干货篇之处理元素"><a href="#JQuery干货篇之处理元素" class="headerlink" title="JQuery干货篇之处理元素"></a>JQuery干货篇之处理元素</h1><blockquote>
-<p><strong>注意这里用的还是我前两篇用的例子，详情请看<a href="https://chenjiabing666.github.io/2017/04/20/JQuery%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E9%80%89%E6%8B%A9%E5%85%83%E7%B4%A0/">我的博客</a></strong></p>
-<h2 id="attr"><a href="#attr" class="headerlink" title="attr"></a>attr</h2><p><strong><code>attr()</code> 方法设置或返回被选元素的属性值。</strong></p>
-<p><strong>语法：</strong></p>
-<blockquote>
-<ul>
-<li><code>$(selector).attr(attribute)</code> 返回被选元素的属性值。</li>
-<li><code>$(selector).attr(attribute,value)</code> 设置被选元素的属性和值</li>
-<li><code>$(selector).attr(attribute,function(index,oldvalue))</code> 设置被选元素的属性和值。</li>
-</ul>
-</blockquote>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">参数</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><code>attribute</code></td>
-<td style="text-align:center">规定属性的名称。</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>function(index,oldvalue)</code></td>
-<td style="text-align:center">规定返回属性值的数。该函数可接收并使用选择器的 index 值和当前属性值。</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>实例：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">    $(<span class="string">"img"</span>).filter(<span class="string">":first"</span>).attr(<span class="string">'src'</span>);   <span class="comment">//得到属性</span></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">index,elem</span>) </span>&#123;    </div><div class="line">        <span class="keyword">if</span>(index%<span class="number">2</span>==<span class="number">0</span>)</div><div class="line">            $(elem).attr(<span class="string">"src"</span>,<span class="string">'lily.png'</span>);      <span class="comment">//设置属性</span></div><div class="line">        <span class="built_in">console</span>.log($(elem).attr(<span class="string">"src"</span>));</div><div class="line">        &#125;)</div><div class="line">        </div><div class="line">        </div><div class="line">        $(<span class="string">"img"</span>).attr(<span class="string">'src'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">index,oldValue</span>) </span>&#123;  <span class="comment">//这里的oldValue表示原来属性的值，index是索引</span></div><div class="line">        <span class="keyword">if</span>(oldValue==<span class="string">"rose.png"</span>)</div><div class="line">            <span class="keyword">return</span> <span class="string">'lily.png'</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="keyword">return</span> <span class="string">'astor.png'</span>;</div><div class="line">    &#125;)</div><div class="line">    </div><div class="line">    </div><div class="line">    attrs=&#123;       <span class="comment">//使用映射对象一次设置多个值</span></div><div class="line">        src:<span class="string">'lily.png'</span>,</div><div class="line">        <span class="attr">style</span>: <span class="string">'border: thick double red'</span></div><div class="line">    &#125;;</div><div class="line">    $(<span class="string">"img:eq(1)"</span>).attr(attrs);</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="removeAttr"><a href="#removeAttr" class="headerlink" title="removeAttr"></a>removeAttr</h2><blockquote>
-<p><strong><code>removeAttr()</code> 方法从被选元素中移除属性。</strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><code>$(selector).removeAttr(attribute)</code>  这里的attribute是属性的名字</li>
-</ul>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img:first"</span>).removeAttr(<span class="string">"src"</span>);  <span class="comment">//删除属性src</span></div></pre></td></tr></table></figure>
-<h2 id="addClass"><a href="#addClass" class="headerlink" title="addClass"></a>addClass</h2><blockquote>
-<p><strong><code>addClass()</code> 方法向被选元素添加一个或多个类</strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><p><code>$(selector).addClass(class)</code> 这里的class是类名如果需要添加多个类，中间用<strong>空格</strong>隔开</p>
-</li>
-<li><p><code>$(selector).addClass(function(index,oldclass))</code>  这里的index是索引，oldClass是原来就有的类名，都是<strong>可选参数</strong>。这个函数的返回的就是要添加的类名</p>
-</li>
-</ul>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img:even"</span>).addClass(<span class="string">"redBar"</span>);  <span class="comment">//向偶数的img添加类redBar</span></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).addClass(<span class="function"><span class="keyword">function</span> (<span class="params">index,currentClass</span>) </span>&#123;    <span class="comment">//这里的currentClass就是原来有的类名，可选</span></div><div class="line">        <span class="keyword">if</span>(index==<span class="number">1</span>)</div><div class="line">            <span class="keyword">return</span> <span class="string">'blueBar'</span>;   <span class="comment">//第二个img应用blueBar这个类</span></div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="keyword">return</span> <span class="string">'redBar'</span>;      <span class="comment">//这里需要注意的是，对同一个img应用类的时候，因为这个类的定义有优先级，上面定义会被后面定义的覆盖，所以要注意类定义的位置</span></div><div class="line">    &#125;)</div><div class="line">    </div><div class="line">    </div><div class="line">    $(<span class="string">"img"</span>).filter(<span class="string">":odd"</span>).addClass(<span class="string">"redBar"</span>).end().filter(<span class="string">":even"</span>).addClass(<span class="string">"blueBar"</span>);  <span class="comment">//链式调用</span></div><div class="line">    </div><div class="line">    $(<span class="string">"img"</span>).addClass(<span class="string">"blueBar redBar"</span>);   <span class="comment">//添加两个类</span></div></pre></td></tr></table></figure>
-<h2 id="hasClass"><a href="#hasClass" class="headerlink" title="hasClass"></a>hasClass</h2><blockquote>
-<p><strong><code>hasClass()</code> 方法检查被选元素是否包含指定的<code>class</code></strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><code>$(selector).hasClass(class)</code>  //返回值是false和true</li>
-</ul>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log($(<span class="string">"img:odd"</span>).hasClass(<span class="string">"redBar"</span>));</div></pre></td></tr></table></figure>
-<h2 id="toggleClass"><a href="#toggleClass" class="headerlink" title="toggleClass"></a>toggleClass</h2><blockquote>
-<p><strong>toggleClass() 对设置或移除被选元素的一个或多个类进行切换。该方法检查每个元素中指定的类。如果不存在则添加类，如果已设置则删除之。这就是所谓的切换效果</strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><p><code>$(selector).toggleClass(class,switch)</code>  <code>class</code>必需的，用来规定添加或移除<code>class</code>的指定元素，如需规定若干 <code>class</code>，请使用空格来分隔类名。<code>switch</code>是<code>boolean</code>可选参数，规定是否添加或移除<code>class</code></p>
-</li>
-<li><p><code>$(selector).toggleClass(function(index,class),switch)</code>   <code>index</code>表示索引，<code>class</code>表示选择器当前拥有的类</p>
-</li>
-</ul>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img"</span>).toggleClass(<span class="string">"redBar"</span>);   <span class="comment">//这里对所有的img在redBar这个类之间切换</span></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).toggleClass(<span class="string">"redBar blueBar"</span>);  <span class="comment">//在两个类之间来回的切换</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">$(<span class="string">"&lt;button&gt;ToggleClass&lt;/button&gt;"</span>).appendTo(<span class="string">"#buttonDiv"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">        $(<span class="string">"img"</span>).toggleClass(<span class="string">'redBar blueBar'</span>);   <span class="comment">//在两种class之间切换，如果有就删除，没有的就添加</span></div><div class="line">        e.preventDefault();    </div><div class="line">        &#125;)</div><div class="line">        </div><div class="line">        </div><div class="line">        <span class="comment">//下面添加一个按钮，完成同时添加多个图片的效果</span></div><div class="line">    $(<span class="string">"&lt;button&gt;ToggleClass&lt;/button&gt;"</span>).appendTo(<span class="string">"#buttonDiv"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">        $(<span class="string">"img"</span>).toggleClass(<span class="function"><span class="keyword">function</span> (<span class="params">index,currentClass</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span>(index%<span class="number">2</span>==<span class="number">0</span>)</div><div class="line">                <span class="keyword">return</span> <span class="string">'blueBar'</span>;   <span class="comment">//动态的切换，这里是偶数就切换blue</span></div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> <span class="string">'redBar blueBar'</span>;  <span class="comment">//这里是奇数的图片在两种颜色来回的切换</span></div><div class="line"></div><div class="line">        &#125;);</div><div class="line">        e.preventDefault();</div><div class="line"></div><div class="line">    &#125;)</div></pre></td></tr></table></figure>
-<h2 id="css"><a href="#css" class="headerlink" title="css"></a>css</h2><blockquote>
-<p><strong><code>css()</code> 方法返回或设置匹配的元素的一个或多个样式属性，这里只说<code>css</code>，还有其他的设置<code>css</code>样式请看<a href="http://www.w3school.com.cn/jquery/jquery_ref_css.asp" target="_blank" rel="external">w3School</a></strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><p><code>$(selector).css(name)</code>  返回第一个匹配元素的 <code>CSS</code>属性值。<code>name</code>是<code>css</code>属性的名称</p>
-</li>
-<li><p><code>$(selector).css(name,value)</code> 设置所有匹配元素的指定 <code>CSS</code> 属性。<code>name</code>表示属性名称，<code>value</code>表示属性的值</p>
-</li>
-<li><p><code>$(selector).css(name,function(index,value))</code>   此函数返回要设置的属性值。接受两个参数，<code>index</code>为元素在对象集合中的索引位置，<code>value</code> 是原先的属性值。<code>name</code>表示要设置的属性名称，返回值就是要设置的属性值</p>
-</li>
-</ul>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"label"</span>).css(<span class="string">'font-size'</span>,<span class="string">'30px'</span>);  <span class="comment">//设置字体大小</span></div><div class="line"></div><div class="line">$(<span class="string">"label"</span>).css(<span class="string">'font-size'</span>,<span class="string">'+=10'</span>);  <span class="comment">//使用相对值设置属性值，在原有的基础上加上10</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log($(<span class="string">"h1"</span>).css(<span class="string">'font-family'</span>));   <span class="comment">//获取h1标签的字体</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> cssValues=&#123;</div><div class="line">    <span class="string">'border'</span>:<span class="string">'thick double red'</span>,</div><div class="line">    <span class="string">'font-size'</span>:<span class="string">'1.5em'</span></div><div class="line">&#125;;</div><div class="line">$(<span class="string">"label"</span>).css(cssValues);   <span class="comment">//同时设置多个属性</span></div></pre></td></tr></table></figure>
-<h2 id="text"><a href="#text" class="headerlink" title="text"></a>text</h2><blockquote>
-<p><strong><code>text()</code> 方法方法设置或返回被选元素的文本内容。当该方法用于返回一个值时，它会返回所有匹配元素的组合的文本内容(会删除 <code>HTML</code> 标记)</strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><code>$(selector).text()</code>   当该方法用于返回一个值时，它会返回所有匹配元素的组合的文本内容（会删除 <code>HTML</code> 标记）。</li>
-<li><code>$(selector).text(content)</code>  当该方法用于设置值时，它会覆盖被选元素的所有内容。</li>
-<li><code>$(selector).text(function(index,oldcontent))</code>  <code>index</code>表示索引,<code>oldcontent</code>表示选择器当前的文本内容</li>
-</ul>
-</blockquote>
-<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><blockquote>
-<p><strong><code>html()</code> 方法返回或设置被选元素的内容 <code>(inner HTML)</code>。如果该方法未设置参数，则返回被选元素的当前内容。</strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><p><code>$(selector).html()</code>    当使用该方法返回一个值时，它会返回<strong>第一个</strong>匹配元素的内容。</p>
-</li>
-<li><p><code>$(selector).html(content)</code>   当使用该方法设置一个值时，它会覆盖所有匹配元素的内容。</p>
-</li>
-<li><p><code>$(selector).html(function(index,oldcontent))</code>  使用函数来设置所有匹配元素的内容。<code>index</code> - 可选。接收选择器的<code>index</code> 位置,<code>oldcontent</code> - 可选。接收选择器的当前内容</p>
-</li>
-</ul>
-</blockquote>
-<h2 id="val"><a href="#val" class="headerlink" title="val"></a>val</h2><blockquote>
-<p><strong><code>val()</code> 方法返回或设置被选元素的值,元素的值是通过 <code>value</code> 属性设置的。该方法大多用于 <code>input</code> 元素,如果该方法未设置参数，则返回被选元素的当前值</strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><code>$(selector).val(value)</code>    设置文本域的值为value</li>
-<li><code>$(selector).val()</code>       得到文本域的值</li>
-<li><code>$(selector).val(function(index,oldvalue))</code>  设置文本域的值，这里函数的返回值将会用来设置文本域的值，<code>index</code>表示元素索引，<code>oldvalue</code>表示选择器当前文本域的值</li>
-</ul>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;JQuery干货篇之处理元素&quot;&gt;&lt;a href=&quot;#JQuery干货篇之处理元素&quot; class=&quot;headerlink&quot; title=&quot;JQuery干货篇之处理元素&quot;&gt;&lt;/a&gt;JQuery干货篇之处理元素&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;注
-    
-    </summary>
-    
-      <category term="JQuery学习" scheme="http://chenjiabing666.github.io/categories/JQuery%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="JQuery" scheme="http://chenjiabing666.github.io/tags/JQuery/"/>
     
   </entry>
   
