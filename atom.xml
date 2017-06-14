@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-05-26T00:09:51.675Z</updated>
+  <updated>2017-06-14T07:54:41.938Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,168 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java反射机制</title>
+    <link href="http://chenjiabing666.github.io/2017/06/14/Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
+    <id>http://chenjiabing666.github.io/2017/06/14/Java反射机制/</id>
+    <published>2017-06-14T07:53:54.000Z</published>
+    <updated>2017-06-14T07:54:41.938Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Java反射机制"><a href="#Java反射机制" class="headerlink" title="Java反射机制"></a>Java反射机制</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<ul>
+<li><a href="http://tool.oschina.net/apidocs/apidoc?api=jdk-zh" target="_blank" rel="external">网页版的jdk的API</a></li>
+<li><a href="http://download.csdn.net/detail/qq_34162294/9870892" target="_blank" rel="external">离线版API</a></li>
+</ul>
+</blockquote>
+<h2 id="什么是反射机制"><a href="#什么是反射机制" class="headerlink" title="什么是反射机制"></a>什么是反射机制</h2><blockquote>
+<p>反射是java语言的一个特性，它允程序在运行时（注意不是编译的时候）来进行自我检查并且对内部的成员进行操作。例如它允许一个java的类获取他所有的成员变量和方法并且显示出来。这个能特定我们不常看到，但是在其他的比如C或者C++语言中很不就存在这个特性。一个常见的例子是在JavaBean中，一些组件可以通过一个构造器来操作。这个构造器就是用的反射在动态加载的时候来获取的java中类的属性的。</p>
+</blockquote>
+<h2 id="主要的类"><a href="#主要的类" class="headerlink" title="主要的类"></a>主要的类</h2><blockquote>
+<ul>
+<li><code>Class</code> 类的实例表示正在运行的 Java 应用程序中的类和接口。Class没有公共的构造方法，Class 对象是在加载类时由 Java 虚拟机以及通过调用类加载器中的 defineClass 方法自动构造的</li>
+<li><code>Constructor</code>  提供关于类的单个构造方法的信息以及对它的访问权限(主要提供的是对构造方法使用)</li>
+<li><code>Method</code>  提供关于类或接口上单独某个方法（以及如何访问该方法）的信息。所反映的方法可能是类方法或实例方法（包括抽象方法)</li>
+<li><code>Field</code>  主要提供对类中的成员变量的访问和使用</li>
+</ul>
+</blockquote>
+<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class<t></t></h2><blockquote>
+<p>Class类也使用了泛型，即是Class<t>这种形式的，可以直接使用一个具体的类传入，这样的话就不需要强制转换了，比如<code>Class.newInstance()</code>这样使用默认的构造方法构造一个对象就需要不再需要强制转换了即使用<code>(ClassName)Class.newInstance()</code></t></p>
+</blockquote>
+<h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
+<ul>
+<li><code>getConstructor(Class[] params)</code>  获取公共的(public)的构造方法，并且限定其中的参数个数和类型可以获得不同的公共构造方法</li>
+<li><code>Constructor[] getConstructors()</code>   返回所有的公共(public)的构造方法</li>
+<li><code>getDeclaredConstructor(Class[] params)</code>  获取所有指定的构造方法，但是需要注意的是当获取私有的构造方法的时候需要使用setAccessible设置访问权限为true才能进行构造，否则出现异常</li>
+<li><code>Constructor[] getDeclaredConstructors()</code> 返所有的构造方法包括public和private，protected修饰的</li>
+<li><code>T newInstance()</code>  返回的是一个调用默认的构造方法(public class_name())实例化的一个Object对象，如果使用泛型那么就返回T类型的，反之返回的是Object需要强制转换才能使用这个对象调用成员函数和成员变量</li>
+<li><code>Class forName(String class_name)</code>  返回class对象，每一个对都有一个方象法返回Class对象(test.class)   </li>
+<li><code>Package getPackage()</code>   返回此类所在的包名(package demo) 当然也可以使用Package.getName()获得包的名字(demo)比如<code>constructor.getPackage().getName()</code></li>
+<li><code>int getModifiers()</code> 返回的是类的修饰符的整数 类型(修饰符的类型有public private protected)其中得到整数可以使用Modifier中toString(int num)得到public，private，protected的类型,比如Modifier.toString(class1.getModifiers())<br>*<code>Method getMethod(String name, Class&lt;?&gt;... parameterTypes)</code> 返回指定参数的方法Method对象,注意这里仅仅是返回的时公共的方法(public)  比如:<code>Method method=class1.getMethod(&quot;display&quot;,new Class[]{int.class})</code>这里的<code>display</code>是方法的名字，有一个参数，类型为int</li>
+<li><code>Method[] getMethods()</code>  获取所有的公共的方法(public)返回的是一个数组(Method)</li>
+<li><code>Method getDeclaredMethod(String name,Class&lt;?&gt;... parameterTypes)</code>返回所有的指定的参数的方法(public,private,protected，但是不包括继承的),其中参数可以为null(无参数)</li>
+<li><code>Method[] getDeclaredMethods()</code> 获取所有的方法</li>
+<li><code>Field getField(String name)</code>  指定名字的公共成员变量(public)</li>
+<li><code>Field[] getFields()</code>   获取所有的公共的成员变量</li>
+<li><code>Field getDeclaredField(String name)</code>  获取所有的指定名称的成员变量(public,protected,private),同样在调用私有成员变量的时候需要先设置访问的权限,field.setAccessible(true)</li>
+<li><code>Field[] getDeclaredFields()</code>  获取所有的成员变量(public,protected,private)</li>
+<li><code>getSuperclass()</code>   返回表示此 Class 所表示的实体（类、接口、基本类型或 void）的超类的 Class。</li>
+<li><code>URL getResource(String name)</code> 查找指定名称的资源(图片，文件…)注意这个资源一定要和指定类在一个包中，否则返回null，比如查找Test类下的airplane.png图片:<code>Test.class.getResource(&quot;airplane.png&quot;)</code>这里返回的将是绝对路径</li>
+</ul>
+</blockquote>
+<h3 id="获取Class的对象并且实例化"><a href="#获取Class的对象并且实例化" class="headerlink" title="获取Class的对象并且实例化"></a>获取Class的对象并且实例化</h3><blockquote>
+<ul>
+<li><p>使用<code>Class.forName(String className)</code> 其中className一定是包含包的名字，下面的demo就是包的名字，Test是类的名字。这是最常用的方法，学过JDBC的都知道加载驱动的时候就是使用的<code>Class.forName()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 第一种使用forName(String className),其中className一定是包含包的名字，下面的demo就是包的名字，Test是类的名字</div><div class="line"> */</div><div class="line">Class cls=Class.forName(<span class="string">"demo.Test"</span>);</div><div class="line">Test test=(Test)cls.newInstance();    <span class="comment">//这里只是使用了默认的构造方法实例化对象</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>类名.class</code></p>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Class cls=Test.class;</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>使用<code>对象.getClass()</code></li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Test test=<span class="keyword">new</span> Test();</div><div class="line">Class cls=test.getClass();</div></pre></td></tr></table></figure>
+<h2 id="Constructor"><a href="#Constructor" class="headerlink" title="Constructor"></a>Constructor<t></t></h2><blockquote>
+<ul>
+<li>主要是用来对类的构造方法进行操作的，可以看出这个也使用了泛型，和上面的Class是一样的，注意这里如果没有使用泛型，那么原本放回<code>T</code>类型的现在都是返回<code>Object</code></li>
+</ul>
+</blockquote>
+<h3 id="常用的方法-1"><a href="#常用的方法-1" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
+<ul>
+<li><code>T newInstance(Object parms)</code>   使用带有参数的构造方法实例化对象，如果使用了泛型，那么返回的就是T类型的，反之返回的是Object类型的，需要强制转换</li>
+<li><code>getName()</code> 以字符串的形式返回构造方法的名称，具体的路径包含包名(demo.Test)</li>
+<li><code>int getModifiers()</code>  和<code>Class</code>类中的方法一样</li>
+</ul>
+</blockquote>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><blockquote>
+<p>主要提供的是对类中的方法的操作</p>
+</blockquote>
+<h3 id="常用的方法-2"><a href="#常用的方法-2" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
+<ul>
+<li><p><code>Object invoke(Object obj,object args)</code>   使用得到的<code>Method</code>对象调用方法，<code>obj</code>是类的已经构造好的对象，如果是静态方法直接写null,因为静态方法的调用不需要对象，返回值是Object类型的，如果接受返回值，需要使用强制转换成相应的类型,<code>args</code>是传入的参数,如果有多个参数，那么可以直接在后面用逗号添加或者直接创建数组<code>new Object[]{22,&quot;chenjiabing&quot;}</code>比如：<code>method.invoke(test,22,&quot;chenjiabing&quot;)</code>    <code>method.invoke(test,new Object[]{22,&quot;chenjiabing&quot;})</code>注意：如果调用的private类型的方法，那么需要在前面设置访问的权限,<code>method.setAccessible(true)</code></p>
+</li>
+<li><p><code>String getName()</code>  返回此方法的名字(display)</p>
+</li>
+<li><code>Modifier getModifiers()</code> 返回此方法的修饰符的类型表示的整数(public,private…),可以使用<code>Modifier.toString()</code>转换成字符串形式</li>
+<li><code>Class getReturnType()</code>  返回这个方法的返回类型  </li>
+<li><code>String toString()</code>   返回这个方法表示的字符串的形式</li>
+</ul>
+</blockquote>
+<h2 id="Field"><a href="#Field" class="headerlink" title="Field"></a>Field</h2><blockquote>
+<p>主要提供对类的成员变量的操作</p>
+</blockquote>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><blockquote>
+<ul>
+<li><code>String getName()</code>  返回变量名字</li>
+<li><code>Object get(Object obj)</code>  返回此变量在指定对象中的值，因为在构造对象的时候每一个传入的变量的值都不一样，因此需要使用对象obj。obj表示传入的对象，返回的Object类型，因此需要强制转换</li>
+<li><code>void set(Object obj,Object value)</code> 改变obj对象上的变量的值为value</li>
+<li><code>Modifier getModifiers()</code> 返回整数表示修饰的类型</li>
+<li><code>String getType()</code> 获取变量的类型(int,String,double float…..)</li>
+</ul>
+</blockquote>
+<h2 id="Modifier"><a href="#Modifier" class="headerlink" title="Modifier"></a>Modifier</h2><blockquote>
+<p>Modifier 类提供了 static 方法和常量，对类和成员访问修饰符进行解码。修饰符集被表示为整数，用不同的位位置 (bit position) 表示不同的修饰符。</p>
+</blockquote>
+<h3 id="常用的方法-3"><a href="#常用的方法-3" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
+<ul>
+<li><code>static String toString(int mode)</code>   将代表修饰符的整数形式转换为字符串形式的修饰符，比如将1转换成public</li>
+<li><code>static isInterface(int mode)</code>   如果整数参数包括 interface 修饰符，则返回 true，否则返回 false</li>
+<li><code>static isStatic(int mode)</code></li>
+<li><code>static isPrivate(int mode)</code></li>
+<li><code>static isPublic(int mode)</code></li>
+<li><code>static isAbstract(int mode)</code></li>
+</ul>
+</blockquote>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Modifier.toString(Test.class.getModifiers())    <span class="comment">//得到Test类的修饰符</span></div></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><blockquote>
+<p>有了上面的铺垫，我们就可以使用上面的这些类进行操作了，在进行操作之前，我们需要先定义一个类<code>Test</code>,放在<code>demo</code>包下，内容如下</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> demo;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.jar.Attributes.Name;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.print.attribute.standard.MediaSize.NA;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="keyword">public</span> String name;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Test</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = <span class="string">"陈加兵"</span>;</div><div class="line">		<span class="keyword">this</span>.age = <span class="number">23</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Test</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"name="</span> + <span class="keyword">this</span>.name + <span class="string">"----age="</span> + <span class="keyword">this</span>.age);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.age;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="实例化对象"><a href="#实例化对象" class="headerlink" title="实例化对象"></a>实例化对象</h3><blockquote>
+<ul>
+<li>使用Class默认的构造newInstance()</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">      Class class1=Class.forName(<span class="string">"demo.Test"</span>);  <span class="comment">//静态加载Class</span></div><div class="line">Test test=(Test)class1.newInstance();  <span class="comment">//调用默认的构造方法(public Test())实例化对象，由于没有使用泛型，因此需要强转</span></div><div class="line">test.display();    <span class="comment">//调用display方法</span></div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>使用Class中的<code>getConstructor()</code>方法构造对象,需要注意的使用<code>private</code>类型构造方法时一定要先设置访问权限为<code>true</code>-<code>constructor.setAccessible(true)</code>;</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">        <span class="comment">/*</span></div><div class="line">		 *调用public Test(String name,int age)得到Constructor的两种形式</div><div class="line">		 *   1.Constructor constructor=class1.getConstructor(new Class[]&#123;String.class,int.class&#125;);</div><div class="line">		 *   2.Constructor constructor=class1.getConstructor(String.class,int.class);这个和上面的是一样的，就是使用的参数形式不一样</div><div class="line">		 * </div><div class="line">		 * </div><div class="line">		 * </div><div class="line">		 * </div><div class="line">		 *使用newInstance()构造对象的两种方式</div><div class="line">		 *   1.Test test=(Test)constructor.newInstance(new Object[]&#123;"chenjiabing",22&#125;);</div><div class="line">		 *	 2.Test test=(Test)constructor.newInstance("chenjiabing",22); 只是形式不同而已，不过我还是喜欢上面的形式</div><div class="line">		 *</div><div class="line">		 */</div><div class="line">		</div><div class="line">		</div><div class="line">		</div><div class="line">		</div><div class="line">		<span class="comment">/*</span></div><div class="line">		 * 调用public Test(String name,int age)</div><div class="line">		 * 		Class.getConstructor()得到的是公共的构造方法，如果有私有的构造方法，那么就会报错，这时就要使用getDeclaredConstructor(Class&lt;?&gt;... parameterTypes)</div><div class="line">		 * 		Test test=(Test)constructor.newInstance("陈加兵",22);</div><div class="line">		 * </div><div class="line">		 * </div><div class="line">		 * 调用public Test() </div><div class="line">		 *  	Constructor constructor=class1.getConstructor(null);</div><div class="line">		 *  	Test test=(Test)constructor.newInstance(null);</div><div class="line">		 * </div><div class="line">		 * </div><div class="line">		 * 调用private Test(int age)</div><div class="line">		 * 		Constructor constructor=class1.getDeclaredConstructor(new Class[]&#123;int.class&#125;);</div><div class="line">				constructor.setAccessible(true);   //因为private类型是不可以直接访问的，因此需要设置访问权限为true</div><div class="line">				Test test=(Test)constructor.newInstance(new Object[]&#123;1000&#125;);</div><div class="line">		*/</div><div class="line">		</div><div class="line">        </div><div class="line">        </div><div class="line">        Class class1=Class.forName(<span class="string">"demo.Test"</span>);</div><div class="line">		<span class="comment">//访问public Test(String name,int age)</span></div><div class="line"><span class="comment">//		Constructor constructor=class1.getConstructor(new Class[]&#123;String.class,int.class&#125;);</span></div><div class="line"><span class="comment">//		Test test=(Test)constructor.newInstance("陈加兵",22);</span></div><div class="line">		</div><div class="line">		<span class="comment">//访问默认的构造方法</span></div><div class="line"><span class="comment">//		Constructor constructor=class1.getConstructor(null);</span></div><div class="line"><span class="comment">//		Test test=(Test)constructor.newInstance(null);</span></div><div class="line"></div><div class="line">		<span class="comment">//访问private类型的构造方法</span></div><div class="line">		Constructor constructor=class1.getDeclaredConstructor(<span class="keyword">new</span> Class[]&#123;<span class="keyword">int</span>.class&#125;);</div><div class="line">		constructor.setAccessible(<span class="keyword">true</span>);</div><div class="line">		Test test=(Test)constructor.newInstance(<span class="keyword">new</span> Object[]&#123;<span class="number">1000</span>&#125;);</div><div class="line">		test.display();</div></pre></td></tr></table></figure>
+<h3 id="成员方法的操作"><a href="#成员方法的操作" class="headerlink" title="成员方法的操作"></a>成员方法的操作</h3><blockquote>
+<p>使用<code>Class.getMethod()</code>和<code>Class.getDeclaredMethod()</code>方法获取方法，这两个方法的区别前面已经说过了，注意的是调用私有成员方法的之前一定要设置访问权限(<code>method.setAccessible(true)</code>)</p>
+<p>Method类中的其他方法前面也已经说过了，详细使用请自己尝试<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">		<span class="comment">/*</span></div><div class="line">		 * 获取Method对象的两种方式:</div><div class="line">		 * 		1.Method method_set=class1.getMethod("set", new Class[]&#123;String.class,int.class&#125;);</div><div class="line">		 * 		2.Method method_set=class1.getMethod("set", String.class,int.class);</div><div class="line">		 * </div><div class="line">		 * </div><div class="line">		 * 使用Method.invoke()调用方法的两种方式</div><div class="line">		 * 		1.Object o=method_set.invoke(test, new Object[]&#123;"陈加兵",200&#125;);</div><div class="line">		 * 		2.Object object=method_set.invoke(test, "陈加兵",2000);</div><div class="line">		 */</div><div class="line">		</div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">		<span class="comment">/*</span></div><div class="line">		 * 获取公共方法(public)：</div><div class="line">		 * 		1.Method method=class1.getMethod("display",null);  //public void display()</div><div class="line">		 * 		2.Method method_set=class1.getMethod("set", new Class[]&#123;String.class,int.class&#125;);  //获取public void set(String name,int age)</div><div class="line">		 * </div><div class="line">		 * </div><div class="line">		 * 获取私有方法(private,protected)</div><div class="line">		 * 		1.Method method_getAge=class1.getDeclaredMethod("getAge", null);</div><div class="line">		 */</div><div class="line">		</div><div class="line">		</div><div class="line">		<span class="comment">//使用构造方法构造一个Test对象</span></div><div class="line">		Class class1 =Class.forName(<span class="string">"demo.Test"</span>);</div><div class="line">		Constructor&lt;Test&gt; constructor=class1.getDeclaredConstructor(<span class="keyword">new</span> Class[]&#123;String.class,<span class="keyword">int</span>.class&#125;);</div><div class="line">		Test test=constructor.newInstance(<span class="keyword">new</span> Object[]&#123;<span class="string">"陈加兵"</span>,<span class="number">22</span>&#125;);</div><div class="line">		</div><div class="line">		</div><div class="line">		Method method=class1.getMethod(<span class="string">"display"</span>,<span class="keyword">null</span>);   <span class="comment">//获取public void display()方法的Method对象</span></div><div class="line">		Object obj=method.invoke(test, <span class="keyword">null</span>);    <span class="comment">//调用方法display</span></div><div class="line">		</div><div class="line">		<span class="comment">//获取public void set(String name,int age)</span></div><div class="line"><span class="comment">//		Method method_set=class1.getMethod("set", new Class[]&#123;String.class,int.class&#125;);</span></div><div class="line">		Method method_set=class1.getMethod(<span class="string">"set"</span>, String.class,<span class="keyword">int</span>.class);</div><div class="line">		</div><div class="line"><span class="comment">//		Object o=method_set.invoke(test, new Object[]&#123;"陈加兵",200&#125;);</span></div><div class="line">		Object object=method_set.invoke(test, <span class="string">"陈加兵"</span>,<span class="number">2000</span>);</div><div class="line">		test.display();</div><div class="line">		</div><div class="line">		</div><div class="line">		<span class="comment">//获取私有方法private int getAge()</span></div><div class="line">		Method method_getAge=class1.getDeclaredMethod(<span class="string">"getAge"</span>, <span class="keyword">null</span>);</div><div class="line">		method_getAge.setAccessible(<span class="keyword">true</span>);   <span class="comment">//必须设置访问权限为true</span></div><div class="line">		<span class="comment">//判断返回值类型是否为int类型的</span></div><div class="line">		<span class="keyword">if</span>(<span class="string">"int"</span>.equals(method_getAge.getReturnType().toString()))</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">int</span> ReturnData=(<span class="keyword">int</span>) method_getAge.invoke(test, <span class="keyword">null</span>);   <span class="comment">//调用并且获取返回值</span></div><div class="line">			System.out.println(ReturnData);</div><div class="line">		&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="成员变量的操作"><a href="#成员变量的操作" class="headerlink" title="成员变量的操作"></a>成员变量的操作</h3><blockquote>
+<p>主要使用的<code>Field</code>类，前面已经详细的说过了</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">		 * 获取public修饰的成员变量：</div><div class="line">		 * 		1.Field field=class1.getField("name"); //获取public的成员变量name的Filed对象</div><div class="line">		 * </div><div class="line">		 * 获取private，protected修饰的成员变量：</div><div class="line">		 * 		1.	Field field2=class1.getDeclaredField("age");</div><div class="line">		 */</div><div class="line">         </div><div class="line">         </div><div class="line">		Class class1=Class.forName(<span class="string">"demo.Test"</span>);</div><div class="line">		Test test=<span class="keyword">new</span> Test(<span class="string">"陈加兵"</span>,<span class="number">1000</span>);</div><div class="line">		Field field=class1.getField(<span class="string">"name"</span>); <span class="comment">//获取public的成员变量name的Filed对象</span></div><div class="line">		System.out.println(field.get(test));   <span class="comment">//获得test对象中的name属性的值</span></div><div class="line">		</div><div class="line">		<span class="comment">//获取private int age的Field对象</span></div><div class="line">		Field field2=class1.getDeclaredField(<span class="string">"age"</span>);</div><div class="line">		field2.setAccessible(<span class="keyword">true</span>);  <span class="comment">//设置访问权限</span></div><div class="line">		System.out.println(field2.get(test));</div></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<ul>
+<li><a href="http://www.cnblogs.com/octobershiner/archive/2012/03/18/2404751.html" target="_blank" rel="external">http://www.cnblogs.com/octobershiner/archive/2012/03/18/2404751.html</a></li>
+<li><a href="http://www.cnblogs.com/ixenos/p/5699420.html" target="_blank" rel="external">http://www.cnblogs.com/ixenos/p/5699420.html</a></li>
+<li><a href="https://yq.aliyun.com/wenzhang/show_17985" target="_blank" rel="external">https://yq.aliyun.com/wenzhang/show_17985</a></li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Java反射机制&quot;&gt;&lt;a href=&quot;#Java反射机制&quot; class=&quot;headerlink&quot; title=&quot;Java反射机制&quot;&gt;&lt;/a&gt;Java反射机制&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; titl
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>Java IO学习笔记总结</title>
@@ -2280,86 +2442,6 @@
     
     
       <category term="python爬虫" scheme="http://chenjiabing666.github.io/tags/python%E7%88%AC%E8%99%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MongoDB干货篇之安装</title>
-    <link href="http://chenjiabing666.github.io/2017/04/28/MongoDB%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E5%AE%89%E8%A3%85/"/>
-    <id>http://chenjiabing666.github.io/2017/04/28/MongoDB干货篇之安装/</id>
-    <published>2017-04-28T02:53:32.000Z</published>
-    <updated>2017-04-28T02:59:18.134Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="MongoDB干货篇之安装"><a href="#MongoDB干货篇之安装" class="headerlink" title="MongoDB干货篇之安装"></a>MongoDB干货篇之安装</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
-<ul>
-<li><p><strong><a href="http://www.mongodb.org/downloads" target="_blank" rel="external">下载地址</a></strong></p>
-</li>
-<li><p><strong>点击安装,选择自定义，后选择安装路径，不过最好安装在根目录下(<code>C盘</code>)，然后点解<code>next</code>,这里我安装的路径是<code>C:\MongoDB</code></strong></p>
-</li>
-<li><p><strong>创建文件夹:在<code>C:\MongoDB</code>下创建一个文件夹<code>data</code>,然后在<code>data</code>文件夹下创建<code>db</code>,<code>log</code>两个子文件夹,在<code>log</code>文件下创建一个<code>MongoDB.log</code>文档，总得来说创建了<code>C:\MongoDB\data</code>,<code>C:\MongoDB\data\db</code>,<code>C:\MongoDB\data\log</code>,<code>C:\MongoDB\data\log\MongoDB.log</code></strong></p>
-</li>
-<li><p><strong>在<code>C:\MongoDB\bin</code>文件夹下运行<code>cmd.exe</code>进入<code>dos</code>命令，执行以下命令：</strong></p>
-<blockquote>
-<ul>
-<li><strong>然后在<code>cmd</code>下输入<code>mongod -dbpath &quot;C:\MongoDB\data\db</code>,将会看到一些信息，说明已经安装成功了</strong></li>
-</ul>
-</blockquote>
-</li>
-</ul>
-</blockquote>
-<h2 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h2><blockquote>
-<ul>
-<li><p><strong>在<code>C:\MongoDB\bin</code>文件夹下运行<code>cmd.exe</code>,输入<code>mongo</code>或者<code>mongo.exe</code>,将会出现连接的信息，说明已经连接成功了</strong></p>
-</li>
-<li><p><strong>然后在另外一个<code>cmd.exe</code>在<code>bin</code>目录下运行<code>mongo</code>可以看到已经连接上<code>MongoDB</code>了，注意上面打开的终端不能关闭，否则不能成功连接，这是比较麻烦的，需要每次连接都要启动，下面我们需要把它安装为<code>windows</code>服务</strong></p>
-</li>
-</ul>
-</blockquote>
-<h2 id="安装程windows服务"><a href="#安装程windows服务" class="headerlink" title="安装程windows服务"></a>安装程windows服务</h2><p><strong>注意在管理员的<code>cmd.exe</code>中运行以下命令，否则在<code>MongoDB.log</code>文件里出现遭到拒绝</strong></p>
-<blockquote>
-<ul>
-<li><p><strong>运行<code>cmd</code>，进入<code>bin</code>目录，执行以下命令:</strong></p>
-<blockquote>
-<ul>
-<li><strong><code>mongod --dbpath &quot;C:\MongoDB\data\db&quot; --logpath &quot;D:\MongoDB\data\log\MongoDB.log&quot; --install --serviceName &quot;MongoDB&quot;</code>,这里的服务名为<code>MongoDB</code>，可以在<code>C:\MongoDB\data\log\MongoDB.log</code>文件里查看相关信息，如果出现遭到拒绝就是没有在管理员的权限下执行命令</strong></li>
-</ul>
-</blockquote>
-</li>
-<li><p><strong>接下来就是启动服务了，现在在<code>cmd.exe</code>中运行<code>NET START MongoDB</code>，如果看到服务成功启动，那么就成功了，但是我在启动的时候出现<code>48</code>错误，下面将会做出解决方法：</strong></p>
-<blockquote>
-<ul>
-<li><strong>先删除服务:<code>mongod --dbpath &quot;C:\MongoDB\data\db&quot; --logpath &quot;C:\MongoDB\data\log\MongoDB.log&quot; --remove --serviceName &quot;MongoDB&quot;</code></strong></li>
-<li><strong>删除<code>MongoDB</code>目录下的<code>mongod.lock</code></strong></li>
-<li><strong>然后就是重新安装了,执行以下命令：</strong><blockquote>
-<ul>
-<li><strong><code>mongod --logpath &quot;C:\MongoDB\data\log\MongoDB.log&quot; --logappend --dbpath &quot;C:\Mongodb\data&quot; --directoryperdb --serviceName &quot;MongoDB&quot; --serviceDisplayName &quot;MongoDB&quot; --install</code></strong></li>
-</ul>
-</blockquote>
-</li>
-<li><strong>接下来重新启动服务，<code>net start MongoDB</code>,可以看到成功启动了</strong></li>
-</ul>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;MongoDB干货篇之安装&quot;&gt;&lt;a href=&quot;#MongoDB干货篇之安装&quot; class=&quot;headerlink&quot; title=&quot;MongoDB干货篇之安装&quot;&gt;&lt;/a&gt;MongoDB干货篇之安装&lt;/h1&gt;&lt;h2 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; cla
-    
-    </summary>
-    
-      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
-    
-    
-      <category term="MongoDB" scheme="http://chenjiabing666.github.io/tags/MongoDB/"/>
     
   </entry>
   
