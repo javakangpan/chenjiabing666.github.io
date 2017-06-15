@@ -20,7 +20,7 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 <meta property="og:site_name" content="爱撒谎的男孩">
 <meta property="og:description" content="Java正则表达式
 java.util.regex是一个用正则表达式所订制的模式来对字符串进行匹配工作的类库包。它包括两个类：Pattern和Matcher。Pattern是一个正则表达式经编译后的表现模式。Matcher对象是一个状态机器，它依据Pattern对象做为匹配模式对字符串展开匹配检查。 首先一个Pattern实例订制了一个所用语法与PERL的类似的正则表达式经编译后的模式，然后一个M">
-<meta property="og:updated_time" content="2017-06-15T16:21:19.420Z">
+<meta property="og:updated_time" content="2017-06-15T16:23:45.080Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java正则表达式">
 <meta name="twitter:description" content="Java正则表达式
@@ -240,7 +240,7 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">      Pattern pattern=Pattern.compile(<span class="string">"\\d+"</span>);  <span class="comment">//创建Pattern对象</span></div><div class="line">String str=<span class="string">"1234 I am a hero 33455"</span>;  <span class="comment">//需要匹配的字符串</span></div><div class="line">Matcher matcher=pattern.matcher(str);</div><div class="line"><span class="keyword">if</span>(matcher.lookingAt())</div><div class="line">&#123;</div><div class="line">	System.out.println(<span class="string">"开始匹配到下标为"</span>+matcher.start());  <span class="comment">//0</span></div><div class="line">	System.out.println(<span class="string">"匹配结束的下标为"</span>+matcher.end());    <span class="comment">//4</span></div><div class="line">          System.out.println(<span class="string">"匹配的字符串为"</span>+matcher.group());  <span class="comment">//1234</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>boolean find()</code>  查找整个字符串，如果在任意位置有一段字符串能够匹配成功，那么返回true(任意位置),然后如果再次调用这个查找的话，那么就从上次查找到的末尾开始匹配，也就是说查找的是下一个子序列了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">      Pattern pattern=Pattern.compile(&quot;\\d+&quot;);  //创建Pattern对象</div><div class="line">String str=&quot;1234 I am a hero 6666 chenjiabing8888&quot;;  //需要匹配的字符串</div><div class="line">Matcher matcher=pattern.matcher(str);</div><div class="line">while(matcher.find())  //如果还有匹配的字符序列</div><div class="line">&#123;</div><div class="line">	System.out.println(&quot;开始匹配到下标为&quot;+matcher.start()); </div><div class="line">	System.out.println(&quot;匹配结束的下标为&quot;+matcher.end());   </div><div class="line">	System.out.println(&quot;匹配的字符串为&quot;+matcher.group());  </div><div class="line">&#125;  </div><div class="line">      </div><div class="line">  /*结果如下：</div><div class="line">   * </div><div class="line">  开始匹配到下标为0</div><div class="line">  匹配结束的下标为4</div><div class="line">  匹配的字符串为1234</div><div class="line">  开始匹配到下标为17</div><div class="line">  匹配结束的下标为21</div><div class="line">  匹配的字符串为6666</div><div class="line">  开始匹配到下标为33</div><div class="line">  匹配结束的下标为37</div><div class="line">  匹配的字符串为8888</div><div class="line">  */</div><div class="line">  </div><div class="line">  /*</div><div class="line">   * 从上面返回的结果可以知道，find()可以匹配多次只要这个字符串还有可以匹配，</div><div class="line">   * 并且每次的匹配字段的开始下标都是上一次匹配的结束字母的下一个下标</div><div class="line">   */</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">      Pattern pattern=Pattern.compile(<span class="string">"\\d+"</span>);  <span class="comment">//创建Pattern对象</span></div><div class="line">String str=<span class="string">"1234 I am a hero 6666 chenjiabing8888"</span>;  <span class="comment">//需要匹配的字符串</span></div><div class="line">Matcher matcher=pattern.matcher(str);</div><div class="line"><span class="keyword">while</span>(matcher.find())  <span class="comment">//如果还有匹配的字符序列</span></div><div class="line">&#123;</div><div class="line">	System.out.println(<span class="string">"开始匹配到下标为"</span>+matcher.start()); </div><div class="line">	System.out.println(<span class="string">"匹配结束的下标为"</span>+matcher.end());   </div><div class="line">	System.out.println(<span class="string">"匹配的字符串为"</span>+matcher.group());  </div><div class="line">&#125;  </div><div class="line">      </div><div class="line">  <span class="comment">/*结果如下：</span></div><div class="line">   * </div><div class="line">  开始匹配到下标为0</div><div class="line">  匹配结束的下标为4</div><div class="line">  匹配的字符串为1234</div><div class="line">  开始匹配到下标为17</div><div class="line">  匹配结束的下标为21</div><div class="line">  匹配的字符串为6666</div><div class="line">  开始匹配到下标为33</div><div class="line">  匹配结束的下标为37</div><div class="line">  匹配的字符串为8888</div><div class="line">  */</div><div class="line">  </div><div class="line">  <span class="comment">/*</span></div><div class="line">   * 从上面返回的结果可以知道，find()可以匹配多次只要这个字符串还有可以匹配，</div><div class="line">   * 并且每次的匹配字段的开始下标都是上一次匹配的结束字母的下一个下标</div><div class="line">   */</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>boolean find(int start)</code>  从指定的索引start位置开始匹配，这个用于重置find()匹配器，因为直接使用find()它的每次开始的索引都是不一样的</p>
 </li>
@@ -398,14 +398,6 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
@@ -414,7 +406,11 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 			
 		
 			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>2</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>3</sup></a></li>
 			
 		
 			
@@ -422,7 +418,19 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 			
 		
 			
+				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 			
 		
 			
@@ -431,14 +439,6 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 		
 			
 				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
 			
 		
 		</ul>
