@@ -20,7 +20,7 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 <meta property="og:site_name" content="爱撒谎的男孩">
 <meta property="og:description" content="Java正则表达式
 java.util.regex是一个用正则表达式所订制的模式来对字符串进行匹配工作的类库包。它包括两个类：Pattern和Matcher。Pattern是一个正则表达式经编译后的表现模式。Matcher对象是一个状态机器，它依据Pattern对象做为匹配模式对字符串展开匹配检查。 首先一个Pattern实例订制了一个所用语法与PERL的类似的正则表达式经编译后的模式，然后一个M">
-<meta property="og:updated_time" content="2017-06-15T16:19:21.277Z">
+<meta property="og:updated_time" content="2017-06-15T16:21:19.420Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java正则表达式">
 <meta name="twitter:description" content="Java正则表达式
@@ -100,7 +100,7 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java正则表达式"><span class="toc-number">1.</span> <span class="toc-text">Java正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式的构造摘要"><span class="toc-number">1.1.</span> <span class="toc-text">正则表达式的构造摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern"><span class="toc-number">1.2.</span> <span class="toc-text">Pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-number">1.2.1.</span> <span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-number">1.2.2.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Matcher"><span class="toc-number">1.3.</span> <span class="toc-text">Matcher</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的方法"><span class="toc-number">1.3.1.</span> <span class="toc-text">常用的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#捕获组"><span class="toc-number">1.4.</span> <span class="toc-text">捕获组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贪婪模式和非贪婪模式"><span class="toc-number">1.5.</span> <span class="toc-text">贪婪模式和非贪婪模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.5.1.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java正则表达式"><span class="toc-number">1.</span> <span class="toc-text">Java正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式的构造摘要"><span class="toc-number">1.1.</span> <span class="toc-text">正则表达式的构造摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern"><span class="toc-number">1.2.</span> <span class="toc-text">Pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-number">1.2.1.</span> <span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-number">1.2.2.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Matcher"><span class="toc-number">1.3.</span> <span class="toc-text">Matcher</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的方法"><span class="toc-number">1.3.1.</span> <span class="toc-text">常用的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#捕获组"><span class="toc-number">1.4.</span> <span class="toc-text">捕获组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贪婪模式和非贪婪模式"><span class="toc-number">1.5.</span> <span class="toc-text">贪婪模式和非贪婪模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.5.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.6.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -260,6 +260,13 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 <p>贪婪与非贪婪模式影响的是被量词修饰的子表达式的匹配行为，贪婪模式在整个表达式匹配成功的前提下，尽可能多的匹配，而非贪婪模式在整个表达式匹配成功的前提下，尽可能少的匹配<br>一般写<code>python</code>爬虫的时候使用的都是非贪婪模式来匹配<br>使用了贪婪模式后会尽可能匹配更多的字符串，即是到了正则表达式定的末尾但是还是会继续向后匹配，看看是否还能匹配，非贪婪模式则是相反，到了正则表达式定义的结束字符就直接停止匹配了<br>贪婪模式: <code>.*</code> , <code>.+</code><br>非贪婪模式: <code>.*?</code>  , <code>.+?</code></p>
 </blockquote>
 <h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">      <span class="comment">//使用了贪婪模式,因此当匹配到第一个&lt;/div&gt;的时候还要向后面匹配看看是否还能匹配到，由于后面还有&lt;/div&gt;结尾的，因此还是能够匹配的，因此匹配到的是:陈加兵&lt;/div&gt;&lt;div&gt;郑元梅</span></div><div class="line">      Pattern pattern=Pattern.compile(<span class="string">"&lt;div&gt;(.*)&lt;/div&gt;"</span>);   </div><div class="line"></div><div class="line"><span class="comment">//使用了非贪婪模式，因此当匹配到第一个&lt;/div&gt;的时候就不向后面匹配了，直接返回了，因此匹配到的是:陈加兵</span></div><div class="line">Pattern pattern1=Pattern.compile(<span class="string">"&lt;div&gt;(.*?)&lt;/div&gt;"</span>);   </div><div class="line">String str=<span class="string">"&lt;div&gt;陈加兵&lt;/div&gt;&lt;div&gt;郑元梅&lt;/div&gt;"</span>;</div><div class="line">Matcher matcher=pattern1.matcher(str);</div><div class="line"><span class="keyword">if</span>(matcher.find())</div><div class="line">&#123;</div><div class="line">	System.out.println(matcher.groupCount());  <span class="comment">//1</span></div><div class="line">	System.out.println(matcher.group(<span class="number">1</span>));  <span class="comment">//输出匹配到的字符串,此时输出的是:陈加兵,如果使用贪婪模式输出的是：陈加兵&lt;/div&gt;&lt;div&gt;郑元梅</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<ul>
+<li><a href="http://www.cnblogs.com/ggjucheng/p/3423731.html" target="_blank" rel="external">http://www.cnblogs.com/ggjucheng/p/3423731.html</a></li>
+<li><a href="http://www.runoob.com/java/java-regular-expressions.html" target="_blank" rel="external">http://www.runoob.com/java/java-regular-expressions.html</a></li>
+<li><a href="http://blog.csdn.net/lxcnn/article/details/4756030" target="_blank" rel="external">http://blog.csdn.net/lxcnn/article/details/4756030</a></li>
+</ul>
+</blockquote>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -320,7 +327,7 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java正则表达式"><span class="toc-number">1.</span> <span class="toc-text">Java正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式的构造摘要"><span class="toc-number">1.1.</span> <span class="toc-text">正则表达式的构造摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern"><span class="toc-number">1.2.</span> <span class="toc-text">Pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-number">1.2.1.</span> <span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-number">1.2.2.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Matcher"><span class="toc-number">1.3.</span> <span class="toc-text">Matcher</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的方法"><span class="toc-number">1.3.1.</span> <span class="toc-text">常用的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#捕获组"><span class="toc-number">1.4.</span> <span class="toc-text">捕获组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贪婪模式和非贪婪模式"><span class="toc-number">1.5.</span> <span class="toc-text">贪婪模式和非贪婪模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.5.1.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java正则表达式"><span class="toc-number">1.</span> <span class="toc-text">Java正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式的构造摘要"><span class="toc-number">1.1.</span> <span class="toc-text">正则表达式的构造摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern"><span class="toc-number">1.2.</span> <span class="toc-text">Pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-number">1.2.1.</span> <span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-number">1.2.2.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Matcher"><span class="toc-number">1.3.</span> <span class="toc-text">Matcher</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的方法"><span class="toc-number">1.3.1.</span> <span class="toc-text">常用的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#捕获组"><span class="toc-number">1.4.</span> <span class="toc-text">捕获组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贪婪模式和非贪婪模式"><span class="toc-number">1.5.</span> <span class="toc-text">贪婪模式和非贪婪模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.5.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.6.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
  
   </div>
 
@@ -391,14 +398,6 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>3</sup></a></li>
 			
 		
@@ -407,7 +406,11 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 			
 		
 			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>2</sup></a></li>
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
 			
 		
 			
@@ -415,15 +418,11 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 			
 		
 			
+				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 			
 		
 			
@@ -432,6 +431,14 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 		
 			
 				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
 			
 		
 		</ul>
