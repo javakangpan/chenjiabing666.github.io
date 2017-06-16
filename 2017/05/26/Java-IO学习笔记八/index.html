@@ -34,7 +34,7 @@ BufferedReader
 
 从字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取,要特别注意的是这个市针对字符流而不是字节流。
 通常，Reader">
-<meta property="og:updated_time" content="2017-05-25T23:40:09.729Z">
+<meta property="og:updated_time" content="2017-06-16T01:17:06.298Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java IO学习笔记八">
 <meta name="twitter:description" content="BufferedReader和BufferedWriter
@@ -168,7 +168,7 @@ BufferedReader
 <li>用于文件的读取</li>
 </ul>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"> BufferedReader bufferedReader=<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(file));</div><div class="line">       <span class="comment">// BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(new FileInputStream(file)));</span></div><div class="line"><span class="comment">//        bufferedReader.skip(2);    //跳过两个字节</span></div><div class="line"><span class="comment">//        </span></div><div class="line"><span class="comment">//        第一种读取的方式</span></div><div class="line">        <span class="keyword">while</span>(bufferedReader.ready())     <span class="comment">//判断是否还有字符</span></div><div class="line">        &#123;</div><div class="line">            String str=bufferedReader.readLine();   <span class="comment">//直接读取一行</span></div><div class="line">            System.out.println(str);  </div><div class="line">        &#125;</div><div class="line">        bufferedReader.close();</div><div class="line">        </div><div class="line">        <span class="comment">//第二种读取方式</span></div><div class="line">        <span class="keyword">int</span> len=bufferedReader.read();</div><div class="line">        <span class="keyword">while</span>(len!=-<span class="number">1</span>)   <span class="comment">//判断是否读到文件的末尾</span></div><div class="line">        &#123;</div><div class="line">            System.out.print((<span class="keyword">char</span>)len);  <span class="comment">//强制转化成字符</span></div><div class="line">            len=bufferedReader.read();</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"> BufferedReader bufferedReader=<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(file));</div><div class="line">       <span class="comment">// BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(new FileInputStream(file)));</span></div><div class="line"><span class="comment">//        bufferedReader.skip(2);    //跳过两个字节</span></div><div class="line"><span class="comment">//        </span></div><div class="line"><span class="comment">//        第一种读取的方式</span></div><div class="line">        <span class="keyword">while</span>(bufferedReader.ready())     <span class="comment">//判断是否还有字符</span></div><div class="line">        &#123;</div><div class="line">            String str=bufferedReader.readLine();   <span class="comment">//直接读取一行</span></div><div class="line">            System.out.println(str);  </div><div class="line">        &#125;</div><div class="line">        bufferedReader.close();</div><div class="line">        </div><div class="line">        <span class="comment">//第二种读取方式</span></div><div class="line">        <span class="keyword">int</span> len=bufferedReader.read();</div><div class="line">        <span class="keyword">while</span>(len!=-<span class="number">1</span>)   <span class="comment">//判断是否读到文件的末尾</span></div><div class="line">        &#123;</div><div class="line">            System.out.print((<span class="keyword">char</span>)len);  <span class="comment">//强制转化成字符</span></div><div class="line">            len=bufferedReader.read();</div><div class="line">        &#125;</div><div class="line">		</div><div class="line">		<span class="comment">//第三种方式，根据readLine读取一行，如果到达了文件的末尾返回null</span></div><div class="line">		String s;</div><div class="line">		<span class="keyword">while</span>((s=bufferedReader.readLine())!=<span class="keyword">null</span>)</div><div class="line">		&#123;</div><div class="line">			System.out.println(S);</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
 <h2 id="BufferedWriter"><a href="#BufferedWriter" class="headerlink" title="BufferedWriter"></a>BufferedWriter</h2><blockquote>
 <ul>
 <li>将文本写入字符输出流，缓冲各个字符，从而提供单个字符、数组和字符串的高效写入。</li>
@@ -356,10 +356,6 @@ BufferedReader
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>3</sup></a></li>
 			
 		
@@ -368,11 +364,11 @@ BufferedReader
 			
 		
 			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>2</sup></a></li>
+				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>2</sup></a></li>
+				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>2</sup></a></li>
 			
 		
 			
@@ -380,7 +376,7 @@ BufferedReader
 			
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>2</sup></a></li>
 			
 		
 			
@@ -388,11 +384,15 @@ BufferedReader
 			
 		
 			
-				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
+				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
 			
 		
 		</ul>
