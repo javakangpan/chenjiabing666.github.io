@@ -34,7 +34,7 @@
 字节流和字符流
 
 实际上字节流在操作时本身不会用到缓冲区（内存），是文件本身直接操作的，而字符流在操作时使用了缓冲区，通过缓冲区再操作文件">
-<meta property="og:updated_time" content="2017-05-24T06:47:18.680Z">
+<meta property="og:updated_time" content="2017-06-16T00:20:28.072Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java IO学习笔记二">
 <meta name="twitter:description" content="Java IO学习笔记二流的概念
@@ -248,6 +248,7 @@
 <li><code>write(String str)</code>  将字符写入文件</li>
 <li><code>write(String str,int offest,int len)</code>   截取字符串部分内容写入文件</li>
 <li><code>write(int c)</code>   写入单个字符，并不是整数</li>
+<li><code>write(Char[] buf)</code>  写入字符数组</li>
 <li><code>close()</code>  关闭流，在关闭之前必须刷新缓冲区</li>
 <li><code>flush()</code>  刷新缓冲区</li>
 </ul>
@@ -462,15 +463,15 @@
 			
 		
 			
-				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
 			
 		
 			

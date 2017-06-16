@@ -1139,7 +1139,7 @@
     <link href="http://chenjiabing666.github.io/2017/05/24/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/"/>
     <id>http://chenjiabing666.github.io/2017/05/24/Java-IO学习笔记二/</id>
     <published>2017-05-24T06:46:06.000Z</published>
-    <updated>2017-05-24T06:47:18.680Z</updated>
+    <updated>2017-06-16T00:20:28.072Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Java-IO学习笔记二"><a href="#Java-IO学习笔记二" class="headerlink" title="Java IO学习笔记二"></a>Java IO学习笔记二</h1><h2 id="流的概念"><a href="#流的概念" class="headerlink" title="流的概念"></a>流的概念</h2><blockquote>
 <ul>
@@ -1264,6 +1264,7 @@
 <li><code>write(String str)</code>  将字符写入文件</li>
 <li><code>write(String str,int offest,int len)</code>   截取字符串部分内容写入文件</li>
 <li><code>write(int c)</code>   写入单个字符，并不是整数</li>
+<li><code>write(Char[] buf)</code>  写入字符数组</li>
 <li><code>close()</code>  关闭流，在关闭之前必须刷新缓冲区</li>
 <li><code>flush()</code>  刷新缓冲区</li>
 </ul>
