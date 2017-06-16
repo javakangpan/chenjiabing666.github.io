@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-06-15T16:23:45.080Z</updated>
+  <updated>2017-06-16T04:55:10.787Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,107 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java字符串进阶</title>
+    <link href="http://chenjiabing666.github.io/2017/06/16/Java%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9B%E9%98%B6/"/>
+    <id>http://chenjiabing666.github.io/2017/06/16/Java字符串进阶/</id>
+    <published>2017-06-16T04:53:57.000Z</published>
+    <updated>2017-06-16T04:55:10.787Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Java字符串进阶"><a href="#Java字符串进阶" class="headerlink" title="Java字符串进阶"></a>Java字符串进阶</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>最常用的对字符串操作的类有三个，分别是String,StringBuilder,StringBuffer，下面将会详细的说说这三个类……</p>
+</blockquote>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><blockquote>
+<p>String类代表字符串，这个是最基本的对字符串的类，这个也是使用比较多的类，这里就不再详细介绍了</p>
+</blockquote>
+<h3 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h3><blockquote>
+<ul>
+<li><code>new String(String str)</code></li>
+<li><code>new String(StringBuilder str)</code></li>
+<li><code>new String(StringBuffer str)</code></li>
+<li><code>new String(byte[] bys,String charsetName)</code>  通过使用指定的字符集解码指定的 byte 子数组，构造一个新的 String。</li>
+</ul>
+</blockquote>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><blockquote>
+<ul>
+<li><code>str charAt(int index)</code>  返回指定索引处的字符</li>
+<li><code>String concat(String str)</code>  将指定字符串str连接到此字符串的结尾，返回连接成功后的字符，因此需要接受才能有效果</li>
+<li><code>boolean contains(CharSequence s)</code> 判断此字符串是否包含指定的char值序列，这里的 CharSequence是一个接口，可以直接使用它的子类作为参数(String,StringBuffer,StringBuild)</li>
+<li><code>static String copyValueOf(char[] c)</code> 将字符数组变成字符串并且返回</li>
+<li><code>static String copyValueOf(char[] c,int off,int count)</code> 将截取的字符数组变成字符串并且返回，off是开始截取的下标，count是截取的个数</li>
+<li><code>boolean endWith(String s)</code>  判断字符串是否是以s结尾</li>
+<li><code>boolean equals(Object o)</code>  用于比较</li>
+<li><code>int indexOf(char c)</code> 返回字符c在字符串中第一次出现的索引</li>
+<li><code>int indexOf(char c,int fromIndex)</code> 从指定索引处开始搜索，查找第一次出现的索引</li>
+<li><code>int indexOf(String str)</code> 返回指定子字符串在此字符串中第一次出现处的索引。</li>
+<li><code>int indexOf(String str,int fromIndex)</code> 返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始。</li>
+<li><code>boolean isEmpty()</code>  </li>
+<li><code>int length()</code></li>
+<li><code>boolean matches(String regex)</code> 是否匹配正则表达式</li>
+<li><code>trim()</code>   返回字符串的副本，忽略前导空白和尾部空白。</li>
+<li><code>String substring(int beginIndex)</code> 返回一个新的字符串，它是此字符串的一个子字符串。 </li>
+<li><code>String substring(int beginIndex, int endIndex)</code>  返回一个新字符串，它是此字符串的一个子字符串。 </li>
+<li><code>String toUpperCase()</code>  使用默认语言环境的规则将此 String 中的所有字符都转换为大写。 </li>
+<li><code>String[] split(String regex)</code> 根据给定正则表达式的匹配拆分此字符串。</li>
+<li><code>String[] split(String regex, int limit)</code> 根据匹配给定的正则表达式来拆分此字符串。</li>
+<li><code>char[] toCharArray()</code> 将此字符串转换为一个新的字符数组。</li>
+<li><code>byte[] getBytes(Charset charset)</code>  使用给定的 <code>charset</code> 将此 <code>String</code> 编码到 <code>byte</code> 序列，并将结果存储到新的 byte 数组 </li>
+</ul>
+</blockquote>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><blockquote>
+<ul>
+<li>上面的new String(byte[] bys,String charsetName)这个构造方法很重要，它可以改变字符串的编码集(和byte[] getBytes(Charset charset))配合着使用，下面我们来看一个例子,代码如下:<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">      <span class="comment">/*</span></div><div class="line"> * InputStreamReader实现了将字节流FileInputStream转换为字符流，然后使用转换来的字节流创建高效流，从而实现高效的读写</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 编码集(我的eclipse编辑器默认的是utf-8</div><div class="line"> * 下面将中文字符串的编码集变为GBK写入a.txt文件,因为a.txt默认的是utf-8的因此这里在文件中显示的是乱码</div><div class="line"> * 然后我们读出来的还是GBK的，因为我们写入的是GBK编码集的，但是我的eclipse是utf-8的编码集，因此在控制台上输出的还是乱码</div><div class="line"> * new String(byte[] bys,String</div><div class="line"> * charsetName)使用这个构造方法将byte数组改变编码集并且转换为utf-8格式的，那么这次在控制台上输出的就不乱码了</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="comment">// 将GBK格式的中文写入a.txt文件</span></div><div class="line">File file = <span class="keyword">new</span> File(<span class="string">"src/a.txt"</span>);</div><div class="line">FileOutputStream fileOutputStream = <span class="keyword">new</span> FileOutputStream(file);</div><div class="line">String str = <span class="string">"中"</span>;</div><div class="line"><span class="keyword">byte</span>[] by = str.getBytes(<span class="string">"GBK"</span>); <span class="comment">// 将字符串改为GBK编码集</span></div><div class="line">fileOutputStream.write(by);</div><div class="line">fileOutputStream.close();</div><div class="line"></div><div class="line"><span class="comment">//从a.txt文件中读取中文</span></div><div class="line">FileInputStream fileInputStream = <span class="keyword">new</span> FileInputStream(file);</div><div class="line"><span class="keyword">int</span> len;</div><div class="line"><span class="keyword">byte</span>[] bys = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span>];</div><div class="line"><span class="keyword">while</span> ((len = fileInputStream.read(bys)) != -<span class="number">1</span>) &#123;</div><div class="line">	System.out.println(<span class="keyword">new</span> String(bys, <span class="string">"GBK"</span>));</div><div class="line">&#125;</div><div class="line">fileInputStream.close();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h2 id="StringBuffer"><a href="#StringBuffer" class="headerlink" title="StringBuffer"></a>StringBuffer</h2><blockquote>
+<p>线程安全的可变字符序列。一个类似于 <code>String</code> 的字符串缓冲区，但不能修改。当然最重要的一点就是线程安全，我们可以从它的源码中可以看出，对于一些操作(<code>append</code>,<code>insert</code>..)都是使用了线程控制块来实现同步，适合与多线程下的使用，源代码如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> StringBuffer <span class="title">append</span><span class="params">(Object obj)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.append(String.valueOf(obj));</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> StringBuffer <span class="title">append</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.append(str);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> StringBuffer <span class="title">delete</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.delete(start, end);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@throws</span> StringIndexOutOfBoundsException &#123;<span class="doctag">@inheritDoc</span>&#125;</div><div class="line"> * <span class="doctag">@since</span>      1.2</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> StringBuffer <span class="title">deleteCharAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.deleteCharAt(index);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="构造-1"><a href="#构造-1" class="headerlink" title="构造"></a>构造</h3><blockquote>
+<ul>
+<li><code>new StringBuffer(StringBuilder str)</code></li>
+<li><code>new StringBuffer(String str)</code></li>
+</ul>
+</blockquote>
+<h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
+<ul>
+<li><code>StringBuffer append(str)</code>将指定类型的str追加到此字符串的后面(<code>String,char,char[],int,double,float,long,StringBuffer,StringBuilder</code>)</li>
+<li><code>StringBuffer insert(int offest,  str)</code> 将指定类型的str插入到此序列中,offest表示开始插入的位置的索引,类型有 String,char,char[],int,double,float,long,StringBuffer,StringBuilder</li>
+<li><code>String delete(int fromIndex,int endIndex)</code>   移除此序列中的字符串并且返回新的缓冲字符串</li>
+<li><code>StringBuffer reverse()</code>  反转字符串</li>
+<li><code>String substring(int start)</code>  返回一个新的 String，它包含此字符序列当前所包含的字符子序列。</li>
+<li><code>String substring(int start, int end)</code> 返回一个新的 String，它包含此序列当前所包含的字符子序列。</li>
+<li><code>StringBuffer deleteCharAt(int index)</code> 移除此序列指定位置的 char。</li>
+<li><code>int length()</code>  长度</li>
+<li><code>String toString()</code> 返回此序列中数据的字符串表示形式。    </li>
+</ul>
+</blockquote>
+<h2 id="StringBuilder"><a href="#StringBuilder" class="headerlink" title="StringBuilder"></a>StringBuilder</h2><blockquote>
+<p>建议优先采用该类，因为在大多数实现中，它比 <code>StringBuffer</code> 要快。但是这个类不是线程安全的，只适合单线程，如果使用多线程推荐使用<code>StringBuffer</code>,当然使用这个也行，不过需要自己实现同步</p>
+</blockquote>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><blockquote>
+<ul>
+<li><code>new StringBuilder(String str)</code></li>
+</ul>
+</blockquote>
+<h3 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h3><blockquote>
+<p>这个类的常用方法和<code>StringBuffer</code>的一样，这里就不再一一列举了，参照上面的即可使用</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Java字符串进阶&quot;&gt;&lt;a href=&quot;#Java字符串进阶&quot; class=&quot;headerlink&quot; title=&quot;Java字符串进阶&quot;&gt;&lt;/a&gt;Java字符串进阶&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; 
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>Java正则表达式</title>
@@ -2309,141 +2410,6 @@
     
     
       <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MongoDB干货篇之更新数据</title>
-    <link href="http://chenjiabing666.github.io/2017/05/01/MongoDB%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE/"/>
-    <id>http://chenjiabing666.github.io/2017/05/01/MongoDB干货篇之更新数据/</id>
-    <published>2017-05-01T00:13:32.000Z</published>
-    <updated>2017-05-01T00:16:55.183Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="MongoDB干货篇之数据更新"><a href="#MongoDB干货篇之数据更新" class="headerlink" title="MongoDB干货篇之数据更新"></a>MongoDB干货篇之数据更新</h1><h2 id="常用的函数"><a href="#常用的函数" class="headerlink" title="常用的函数"></a>常用的函数</h2><blockquote>
-<ul>
-<li><p><code>update(&lt;query&gt;,&lt;update&gt;,&lt;upsert&gt;,&lt;multi&gt;)</code>,其中<code>&lt;query&gt;</code>表示筛选的条件，<code>&lt;update&gt;</code>是要更新的数据</p>
-</li>
-<li><p><code>updateMany()</code>   更新所有匹配到的数据</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="upsert"><a href="#upsert" class="headerlink" title="upsert"></a>upsert</h3><blockquote>
-<p><code>upsert</code>是一个布尔类型的数据，如果为<code>true</code>时，当根据<code>query</code>条件没有找到匹配的数据时，就表示插入此条数据，如果为<code>false</code>就表示不插入数据</p>
-<p>下面将会在一个空的集合中更新数据<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//就会插入此条数据，因为没有找到匹配的信息</span></div><div class="line">db.user.update(&#123;<span class="string">'name'</span>:<span class="string">'chenjiabing'</span>,<span class="string">'age'</span>:<span class="number">22</span>,<span class="string">'sex'</span>:<span class="string">"Man"</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'hobby'</span>:<span class="string">'read'</span>&#125;&#125;,&#123;<span class="string">'upsert'</span>:<span class="literal">true</span>&#125;);  </div><div class="line"></div><div class="line">db.user.update(&#123;<span class="string">'name'</span>:<span class="string">'chenjiabing'</span>,<span class="string">'age'</span>:<span class="number">22</span>,<span class="string">'sex'</span>:<span class="string">"Man"</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'hobby'</span>:<span class="string">'read'</span>&#125;&#125;,<span class="literal">true</span>);   <span class="comment">//和上面的语句等价</span></div><div class="line"></div><div class="line"><span class="comment">//输出  db.user.find()</span></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59067b70856d5893a687655f"</span>), <span class="string">"age"</span> : <span class="number">22</span>, <span class="string">"name"</span> : <span class="string">"chenjiabing"</span>, <span class="string">"sex"</span> : <span class="string">"Man"</span>, <span class="string">"hobby"</span> : <span class="string">"read"</span> &#125;</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="multi"><a href="#multi" class="headerlink" title="multi"></a>multi</h3><blockquote>
-<p><em>如果这个参数为<code>true</code>,就把按条件查出来多条记录全部更新。默认为<code>false</code>,如果为<code>true</code>的话和<code>updateMany()</code>一样的效果</em></p>
-<p>下面将会更新所有匹配到的数据</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'hobby'</span>:<span class="string">'code'</span>&#125;&#125;,&#123;<span class="string">'multi'</span>:<span class="literal">true</span>&#125;);</div></pre></td></tr></table></figure>
-<h2 id="字段更新操作符-Field-Update-Operators"><a href="#字段更新操作符-Field-Update-Operators" class="headerlink" title="字段更新操作符 Field Update Operators"></a>字段更新操作符 Field Update Operators</h2><h3 id="set"><a href="#set" class="headerlink" title="$set"></a>$set</h3><blockquote>
-<p><code>$set</code>用来指定一个键的值。如果这个键不存在，则创建它。<strong>注意这里的更新默认是只更新第一条匹配到的数据，如果第一条匹配的数据已经满足修改后的条件，那么将不会执行下面匹配的信息</strong></p>
-<ul>
-<li>下面我们将会添加一条信息在数据库中</li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.insert(&#123;<span class="string">"name"</span>:<span class="string">'jack'</span>,<span class="string">"age"</span>:<span class="number">22</span>,<span class="string">"sex"</span>:<span class="string">'Man'</span>,<span class="string">'school'</span>:&#123;<span class="string">'name'</span>:<span class="string">'jsnu'</span>,<span class="string">'city'</span>:<span class="string">'xuzhou'</span>&#125;&#125;);</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>运行下面的代码，将该用户的兴趣设置为“读书”并添加至文档中(此时文档中<code>hobby</code>键是不存在，该条文档就会创建它)</p>
-</blockquote>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'hobby'</span>:<span class="string">'read'</span>&#125;&#125;)</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>下面将会修改用户的<strong>年龄</strong></p>
-</blockquote>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="string">'name'</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'age'</span>:<span class="number">20</span>&#125;&#125;)</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>下面用<code>$set</code>修改<strong>数据类型</strong>，将<code>sex</code>设置为<code>1</code></p>
-</blockquote>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="string">'name'</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'sex'</span>:<span class="number">1</span>&#125;&#125;)</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>下面用<code>$set</code>修改<strong>内嵌文档</strong>，必须指定文档的名字和键值</p>
-</blockquote>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'school.name'</span>:<span class="string">'shida'</span>,<span class="string">'school.city'</span>:<span class="string">'beijing'</span>&#125;&#125;)</div></pre></td></tr></table></figure>
-<h3 id="unset"><a href="#unset" class="headerlink" title="$unset"></a>$unset</h3><blockquote>
-<p>从文档中<strong>移除</strong>指定的键</p>
-<p>下面将要删除上面插入的<code>hobby</code>键</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$unset</span>:&#123;<span class="string">'hobby'</span>:<span class="number">1</span>&#125;&#125;)   <span class="comment">//这里的值是任意给的，随便什么值</span></div></pre></td></tr></table></figure>
-<h3 id="inc"><a href="#inc" class="headerlink" title="$inc"></a>$inc</h3><blockquote>
-<p><code>$inc</code>修改器用来<strong>增加</strong>已有键的值，<strong>或者在键不存在时创建一个键</strong><code>$inc</code>就是专门来增加（和减少）数字的。<code>$inc</code>只能用于<strong>整数、长整数或双精度浮点数</strong>。要是用在其他类型的数据上就会导致操作失败</p>
-<p>例如毎次有人访问该博文，该条博文的浏览数就加<code>1</code>，用键<code>pageViews</code>保存浏览数信息。这个键值上面没有定义过，所以会自动创建一个</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$inc</span>:&#123;<span class="string">'pageViews'</span>:<span class="number">1</span>&#125;&#125;);    <span class="comment">//起初没有就会自动创建一个键</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>下面演示增加和减少</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$inc</span>:&#123;<span class="string">'pageViews'</span>:<span class="number">100</span>&#125;&#125;)  ;  <span class="comment">//这里是在上面的基础上加上100，此时变成了101</span></div><div class="line"></div><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$inc</span>:&#123;<span class="string">"pageViews"</span>:<span class="number">-100</span>&#125;&#125;) ;   <span class="comment">//这里是在上面的基础上减去100,此时还是变成了1</span></div></pre></td></tr></table></figure>
-<h3 id="rename"><a href="#rename" class="headerlink" title="$rename"></a>$rename</h3><blockquote>
-<p><strong>语法：</strong><code>{$rename: { &lt;old name1&gt;: &lt;new name1&gt;, &lt;old name2&gt;: &lt;new name2&gt;, ... } }</code></p>
-<p><code>$rename</code>操作符可以<strong>重命名字段名称</strong>，新的字段名称不能和文档中现有的字段名相同。</p>
-<p>下面重新插入一条数据，并且改变这条数据的键的名称</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">db.user.insert(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>,<span class="string">'age'</span>:<span class="number">22</span>,<span class="string">'sex'</span>:<span class="string">'Man'</span>,<span class="string">'school'</span>:&#123;<span class="string">'name'</span>:<span class="string">'jsnu'</span>,<span class="string">'city'</span>:<span class="string">'beijing'</span>&#125;&#125;);</div><div class="line"></div><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$rename</span>:&#123;<span class="string">'age'</span>:<span class="string">'Age'</span>&#125;&#125;)   <span class="comment">//重命名age为Age</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>下面将要演示怎样改变内嵌文档的键的名称，<strong>注意一定要带上文档的名字</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$rename</span>:&#123;<span class="string">'school.name'</span>:<span class="string">'school.Name'</span>,<span class="string">'school.city'</span>:<span class="string">'school.City'</span>&#125;&#125;);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>如果重命名的字段字和集合中原有的字段名字相同的话就会<strong>覆盖</strong>原有的字段名称，那么就会造成数据的丢失</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="string">'$rename'</span>:&#123;<span class="string">'sex'</span>,<span class="string">'age'</span>&#125;&#125;);  <span class="comment">//这里sex变成age和原来的age相同，那么原来的age就会丢失</span></div><div class="line"></div><div class="line">db.user.find(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;);  </div><div class="line"></div><div class="line"><span class="comment">//输出，可以看到原来的age没有了,变成了覆盖之后的</span></div><div class="line"></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"590674ce30b9f88dd43d7ee4"</span>), <span class="string">"name"</span> : <span class="string">"chenjiabing"</span>, <span class="string">"age"</span> : <span class="string">"Man"</span>, <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"jsnu"</span>, <span class="string">"city"</span> : <span class="string">"beijing"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>如果指定的字段不存在，那么将不会更新，对原来的字段没有影响</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$rename</span>:&#123;<span class="attr">value</span>:<span class="string">'name'</span>&#125;&#125;);  <span class="comment">//将不会有任何的改变，因为value这个字段根本不存在</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong><code>$rename</code>操作符也可以将子文档中键值移到其他子文档中</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$rename</span>:&#123;<span class="string">'school.name'</span>:<span class="string">'contact.name'</span>&#125;&#125;);<span class="comment">// 这里将会将school.name这个字段的值移到contact.name之中，如果contact不存在，那么就会创建一个</span></div><div class="line"></div><div class="line"><span class="comment">//输出</span></div><div class="line"></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"590674ce30b9f88dd43d7ee4"</span>), <span class="string">"name"</span> : <span class="string">"chenjiabing"</span>, <span class="string">"age"</span> : <span class="string">"Man"</span>, <span class="string">"school"</span> : &#123; <span class="string">"city"</span> : <span class="string">"beijing"</span> &#125;, <span class="string">"contact"</span> : &#123; <span class="string">"name"</span> : <span class="string">"jsnu"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<h2 id="数组更新操作符-Array-Update-Operators"><a href="#数组更新操作符-Array-Update-Operators" class="headerlink" title="数组更新操作符 Array Update Operators"></a>数组更新操作符 Array Update Operators</h2><blockquote>
-<p><em>只能用在键值为数组的键上的数组操作。</em></p>
-</blockquote>
-<h3 id="query"><a href="#query" class="headerlink" title="$ (query)"></a>$ (query)</h3><blockquote>
-<p><strong>语法</strong>:<code>{ &quot;&lt;array&gt;.$&quot; : value }</code></p>
-<p>当对数组字段进行更新时，且没有明确指定的元素在数组中的位置，我们使用定位操作符<code>$</code>标识一个元素，数字都是以<code>0</code>开始的。</p>
-<p><strong>注意:</strong></p>
-<ul>
-<li>定位操作符(“$”)作为第一个匹配查询条件的元素的占位符，也就是在数组中的索引值。</li>
-<li>数组字段必须出现查询文档中。</li>
-</ul>
-<p>向集合中插入两条数据</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">db.students.insert(&#123; <span class="string">"_id"</span> : <span class="number">1</span>, <span class="string">"grades"</span> : [ <span class="number">78</span>, <span class="number">88</span>, <span class="number">88</span> ] &#125;);</div><div class="line">db.students.insert(&#123; <span class="string">"_id"</span> : <span class="number">2</span>, <span class="string">"grades"</span> : [ <span class="number">88</span>, <span class="number">90</span>, <span class="number">92</span> ] &#125;);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>执行下列操作</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//查询匹配的文档中，数组有2个88，只更新第一个匹配的元素，也就是"grades.1"</span></div><div class="line">db.students.update( &#123; <span class="attr">_id</span>: <span class="number">1</span>, <span class="attr">grades</span>: <span class="number">88</span> &#125;, &#123; <span class="attr">$set</span>: &#123; <span class="string">"grades.$"</span> : <span class="number">82</span> &#125; &#125;) ;</div><div class="line"><span class="comment">//查询文档中没有出现grades字段，查询报错</span></div><div class="line">db.students.update( &#123; <span class="attr">_id</span>: <span class="number">2</span> &#125;, &#123; <span class="attr">$set</span>: &#123; <span class="string">"grades.$"</span> : <span class="number">82</span> &#125; &#125; );</div></pre></td></tr></table></figure>
-<h3 id="push"><a href="#push" class="headerlink" title="$push"></a>$push</h3><blockquote>
-<p><em>如果指定的键已经存在，会向已有的数组末尾加入一个元素，要是没有就会创建一个新的数组。</em></p>
-<p>下面我们将使用<code>$push</code>对该文档添加一条评论信息。</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//将会创建一个comments数组，因为一开始这个数组没有存在</span></div><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$push</span>:&#123;<span class="attr">comments</span>:&#123;<span class="string">'name'</span>:<span class="string">'jack'</span>,<span class="string">'content'</span>:<span class="string">'hello thanks'</span>&#125;&#125;&#125;)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//继续添加一条，在comments的末尾进行添加，此时comments变成两条数据了</span></div><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$push</span>:&#123;<span class="attr">comments</span>:&#123;<span class="string">'name'</span>:<span class="string">'john'</span>,<span class="string">'content'</span>:<span class="string">'hello'</span>&#125;&#125;&#125;)</div></pre></td></tr></table></figure>
-<h3 id="pull"><a href="#pull" class="headerlink" title="$pull"></a>$pull</h3><blockquote>
-<p><strong>语法</strong>：<code>db.collection.update( { field: &lt;query&gt; }, { $pull: { field: &lt;query&gt; } } );</code></p>
-<p><em><code>$pull</code>操作符移除指定字段值为数组，且匹配<code>$pull</code>操作符移除指定字段值为数组，且匹配<code>$pull</code>语句声明的查询条件的所有元素。</em></p>
-<p>执行如下操作</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//插入一条文档</span></div><div class="line">db.profiles.insert(&#123; <span class="attr">votes</span>: [ <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">8</span> ] &#125;);</div><div class="line"><span class="comment">//移除数组中所有元素7</span></div><div class="line">db.profiles.update( &#123; <span class="attr">votes</span>: <span class="number">3</span> &#125;, &#123; <span class="attr">$pull</span>: &#123; <span class="attr">votes</span>: <span class="number">7</span> &#125; &#125; );</div><div class="line"><span class="comment">//移除数组中所有大于6的元素</span></div><div class="line">db.profiles.update( &#123; <span class="attr">votes</span>: <span class="number">3</span> &#125;, &#123; <span class="attr">$pull</span>: &#123; <span class="attr">votes</span>: &#123; <span class="attr">$gt</span>: <span class="number">6</span> &#125; &#125; &#125; );</div><div class="line"></div><div class="line"><span class="comment">//Result</span></div><div class="line">&#123; <span class="attr">votes</span>: [ <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">8</span> ] &#125;</div><div class="line"></div><div class="line">&#123; <span class="attr">votes</span>: [ <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span> ] &#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;MongoDB干货篇之数据更新&quot;&gt;&lt;a href=&quot;#MongoDB干货篇之数据更新&quot; class=&quot;headerlink&quot; title=&quot;MongoDB干货篇之数据更新&quot;&gt;&lt;/a&gt;MongoDB干货篇之数据更新&lt;/h1&gt;&lt;h2 id=&quot;常用的函数&quot;&gt;&lt;a hre
-    
-    </summary>
-    
-      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
-    
-    
-      <category term="MongoDB" scheme="http://chenjiabing666.github.io/tags/MongoDB/"/>
     
   </entry>
   
