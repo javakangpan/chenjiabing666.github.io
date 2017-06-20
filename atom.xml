@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-06-16T04:55:10.787Z</updated>
+  <updated>2017-06-20T00:54:35.270Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,95 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Thread初探</title>
+    <link href="http://chenjiabing666.github.io/2017/06/20/Thread%E5%88%9D%E6%8E%A2/"/>
+    <id>http://chenjiabing666.github.io/2017/06/20/Thread初探/</id>
+    <published>2017-06-20T00:54:01.000Z</published>
+    <updated>2017-06-20T00:54:35.270Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Thread初探"><a href="#Thread初探" class="headerlink" title="Thread初探"></a>Thread初探</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>以前大家写的都是单线程的程序，全是在main函数中调用方法，可以清楚的看到它的效率是特别低的，就像python中使用单线程取爬一个网站，可以说能让你等的吐血，因为数据量实在太大了，今天我们就来看看java的并发编程多线程的学习</p>
+</blockquote>
+<h2 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h2><blockquote>
+<p>创建一个线程可以有多种方法，比如继承Thread类，实现Runnable接口……下面我们来详细的看看创建的方法</p>
+</blockquote>
+<h3 id="继承Thread"><a href="#继承Thread" class="headerlink" title="继承Thread"></a>继承Thread</h3><blockquote>
+<p>为什么继承<code>Thread</code>可以直接调用<code>start()</code>方法启动线程呢，因为<code>start()</code>本身就是Thread的方法，也就是继承了Thread的start()方法，因此这个类的对象可以调用start()启动线程</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//继承Thread</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;    </div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			System.out.println(<span class="keyword">this</span>.getName()+<span class="string">"正在跑"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">    &#123;</div><div class="line">        Mythread t1=<span class="keyword">new</span> MyThread();   <span class="comment">//创建对象</span></div><div class="line">        t1.start();     <span class="comment">//启动线程</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意:</strong>  继承<code>Thread</code>类的创建方法一个对象只能创建一个线程，并不能多个线程共用一个对象，只能一个线程对应一个对象，因此我们来看看实现<code>Runnable</code>接口的类来实现多个线程共享同一个对象</p>
+</blockquote>
+<h3 id="实现Runnable接口"><a href="#实现Runnable接口" class="headerlink" title="实现Runnable接口"></a>实现Runnable接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//实现Runnable接口</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;  </div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</div><div class="line">		&#123;</div><div class="line">			System.out.println(Thread.currentThread().getName()+<span class="string">"正在跑"</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//测试类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">    &#123;</div><div class="line">        Demo d=<span class="keyword">new</span> Demo();  <span class="comment">//创建对象</span></div><div class="line">        Thread thread1=<span class="keyword">new</span> Thread(d); <span class="comment">//为对象创建一个线程</span></div><div class="line">        Thread thread2=<span class="keyword">new</span> Thread(d);   <span class="comment">//创建另外一个线程</span></div><div class="line">        </div><div class="line">        <span class="comment">//同时启动两个线程</span></div><div class="line">        thread1.start();</div><div class="line">        thread2.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>从上面可以清楚的看到实现<code>Runnable</code>接口的类一个对象可以供多个线程共享，并不像继承Thread类只为一个线程使用</p>
+</blockquote>
+<h3 id="简便的创建方法"><a href="#简便的创建方法" class="headerlink" title="简便的创建方法"></a>简便的创建方法</h3><blockquote>
+<p>直接在<code>main</code>方法中创建，如果创建的普通类的对象在外面，那么必须是final修饰，可以实现多个线程同时共享一个对象，这个和实现<code>Runnable</code>接口一样，这时候就要控制同步条件了，如果在run方法中定义对象，那么，就是一个线程对应一个对象,这个就和继承Thread类一样的效果。所以可以根据条件自由选择</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//普通的一个类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Simple</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</div><div class="line">		&#123;</div><div class="line">			System.out.println(Thread.currentThread().getName()+<span class="string">"正在跑"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//线程测试类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="comment">//如果在外面必须使用final，当然也可以直写在run方法中,不过写在外面可以实现多个线程共享一个对象</span></div><div class="line">		<span class="comment">//写在run方法中当前对象只能为一个线程使用，和继承Thread类一样的效果</span></div><div class="line">		<span class="keyword">final</span> Simple simple=<span class="keyword">new</span> Simple(); </div><div class="line">		</div><div class="line">		</div><div class="line">		<span class="comment">//下面创建使用同一个对象创建同两个线程，实现多个线程共享一个对象，和实现Runnable接口一样的效果</span></div><div class="line">		Thread t1=<span class="keyword">new</span> Thread()&#123;</div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				simple.display();</div><div class="line">			&#125;;</div><div class="line">		&#125;;</div><div class="line">		</div><div class="line">		Thread t2=<span class="keyword">new</span> Thread()&#123;</div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				simple.display();</div><div class="line">			&#125;;</div><div class="line">		&#125;;</div><div class="line">		</div><div class="line">		<span class="comment">//启动这两个线程</span></div><div class="line">		t1.start();   </div><div class="line">		t2.start();</div><div class="line">    &#125;&#125;</div></pre></td></tr></table></figure>
+<h2 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h2><blockquote>
+<ul>
+<li><p><code>static void sleep(long mils)</code> 使正在运行的线程休眠mils毫秒，但是这里需要注意的是如果线程加了锁，那么使线程休眠并不会释放锁</p>
+</li>
+<li><p><code>String getName()</code>   得到线程的名称，上面的程序中已经使用了这个方法</p>
+</li>
+<li><p><code>void setName(String name)</code>  设置正在运行的线程的名字为name</p>
+</li>
+<li><p><code>start()</code>  启动线程，线程的创建并不意味着线程的启动，只有调用start()方法线程才是真正的开始运行</p>
+</li>
+<li><p><code>long getId()</code>  返回线程的标识符</p>
+</li>
+<li><p><code>run()</code>  线程执行的代码都放在run()方法中，在run方法中的调用是有序的，都是按照程序运行的顺序开始执行</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><blockquote>
+<p>下面使用上面的方法创建一个实例</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//线程的类，继承Thread</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; <span class="comment">// 重载run方法，并且在其中写线程执行的代码块</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			<span class="comment">// 获取线程的id和name</span></div><div class="line">			System.out.println(<span class="string">"Thread-Name:   "</span> + <span class="keyword">this</span>.getName()</div><div class="line">					+ <span class="string">"   Thread-id:    "</span> + <span class="keyword">this</span>.getId());</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="keyword">this</span>.sleep(<span class="number">1000</span>); <span class="comment">// 线程休眠1秒</span></div><div class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//线程测试的类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		MyThread1 t1 = <span class="keyword">new</span> MyThread1(); <span class="comment">// 创建线程</span></div><div class="line">		t1.setName(<span class="string">"第一个线程"</span>); <span class="comment">// 设置线程的名字</span></div><div class="line"></div><div class="line">		MyThread1 t2 = <span class="keyword">new</span> MyThread1();</div><div class="line">		t2.setName(<span class="string">"第二个线程"</span>);</div><div class="line"></div><div class="line">		t1.start(); <span class="comment">// 启动线程，开始运行</span></div><div class="line">		t2.start();</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><code>void join()</code>  等待该线程终止才能运行其他的线程</li>
+<li><code>void join(long mils)</code>  等待该线程的时间为mils毫秒，一旦过了这个时间其他线程正常执行</li>
+</ul>
+</blockquote>
+<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//线程类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; <span class="comment">// 重载run方法，并且在其中写线程执行的代码块</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			<span class="comment">// 获取线程的id和name</span></div><div class="line">			System.out.println(<span class="string">"Thread-Name:   "</span> + <span class="keyword">this</span>.getName()</div><div class="line">					+ <span class="string">"   Thread-id:    "</span> + <span class="keyword">this</span>.getId());</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="keyword">this</span>.sleep(<span class="number">1000</span>); <span class="comment">// 线程休眠1秒</span></div><div class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//测试类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		MyThread1 t1 = <span class="keyword">new</span> MyThread1(); <span class="comment">// 创建线程</span></div><div class="line">		t1.setName(<span class="string">"第一个线程"</span>); <span class="comment">// 设置线程的名字</span></div><div class="line"></div><div class="line">		t1.start(); <span class="comment">// 启动线程，开始运行</span></div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			t1.join();   <span class="comment">//阻塞其他线程，只有当这个线程运行完之后才开始运行其他的线程</span></div><div class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			System.out.println(<span class="string">"主线程正在运行"</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//输出结果</span></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line"> */</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><code>getPriority()</code>  得到当前线程优先级</li>
+<li><code>setPriority(int num)</code> 更改线程的优先级(0-10)默认的是5，优先级越高获得cpu资源的几率就会越高</li>
+</ul>
+</blockquote>
+<h3 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//线程类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; <span class="comment">// 重载run方法，并且在其中写线程执行的代码块</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			<span class="comment">// 获取线程的id和name</span></div><div class="line">			System.out.println(<span class="string">"Thread-Name:   "</span> + <span class="keyword">this</span>.getName()</div><div class="line">					+ <span class="string">"   Thread-id:    "</span> + <span class="keyword">this</span>.getId());</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="keyword">this</span>.sleep(<span class="number">1000</span>); <span class="comment">// 线程休眠1秒</span></div><div class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//测试类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		MyThread1 t1 = <span class="keyword">new</span> MyThread1(); <span class="comment">// 创建线程</span></div><div class="line">		t1.setName(<span class="string">"第一个线程"</span>); <span class="comment">// 设置线程的名字</span></div><div class="line"></div><div class="line">		MyThread1 t2 = <span class="keyword">new</span> MyThread1();</div><div class="line">		t2.setName(<span class="string">"第二个线程"</span>);</div><div class="line"></div><div class="line">		t2.setPriority(<span class="number">8</span>);   <span class="comment">//设置第二个线程的优先级为8，第一个线程的优先级为5(是默认的)</span></div><div class="line"></div><div class="line">		t1.start();</div><div class="line">		t2.start();</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 从上面的运行结果可以看出大部分的第二个线程都是在第一个线程之前开始执行的，也就是说优先级越高获得cpu执行的几率就越大</div><div class="line"> * /</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><code>setDaemon(boolean)</code> 是否设置为守护线程，如果设置为守护线程，那么主线程销毁守护线程也会随之销毁</li>
+<li><code>isDaemon()</code>  判断是否为守护线程</li>
+</ul>
+</blockquote>
+<h3 id="使用-3"><a href="#使用-3" class="headerlink" title="使用"></a>使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//测试类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; <span class="comment">// 重载run方法，并且在其中写线程执行的代码块</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			<span class="comment">// 获取线程的id和name</span></div><div class="line">			System.out.println(<span class="string">"Thread-Name:   "</span> + <span class="keyword">this</span>.getName()</div><div class="line">					+ <span class="string">"   Thread-id:    "</span> + <span class="keyword">this</span>.getId());</div><div class="line"></div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				Thread.sleep(<span class="number">1000</span>);  <span class="comment">//休眠一秒，方便主线程运行结束</span></div><div class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		MyThread1 t1 = <span class="keyword">new</span> MyThread1(); <span class="comment">// 创建线程</span></div><div class="line">		t1.setName(<span class="string">"第一个线程"</span>); <span class="comment">// 设置线程的名字</span></div><div class="line">		t1.setDaemon(<span class="keyword">true</span>);</div><div class="line">		t1.start();</div><div class="line"></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1</span>; i++) &#123;</div><div class="line">			System.out.println(i);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//结果：</span></div><div class="line"><span class="comment">/*</span></div><div class="line"> 0</div><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">*/</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 从上面的结果可以看出，一旦主线程结束，那么守护线程就会自动的结束</div><div class="line"> * /</div></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<ul>
+<li><a href="http://www.cnblogs.com/dolphin0520/p/3920357.html" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3920357.html</a></li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Thread初探&quot;&gt;&lt;a href=&quot;#Thread初探&quot; class=&quot;headerlink&quot; title=&quot;Thread初探&quot;&gt;&lt;/a&gt;Thread初探&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; titl
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="java并发编程" scheme="http://chenjiabing666.github.io/tags/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>Java字符串进阶</title>
@@ -597,7 +686,7 @@
     <link href="http://chenjiabing666.github.io/2017/05/26/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93/"/>
     <id>http://chenjiabing666.github.io/2017/05/26/Java-IO学习笔记总结/</id>
     <published>2017-05-26T00:09:27.000Z</published>
-    <updated>2017-05-26T00:09:51.675Z</updated>
+    <updated>2017-06-20T01:00:14.158Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Java-IO学习笔记总结"><a href="#Java-IO学习笔记总结" class="headerlink" title="Java IO学习笔记总结"></a>Java IO学习笔记总结</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>前面的八篇文章详细的讲述了Java IO的操作方法，文章列表如下</p>
@@ -648,6 +737,9 @@
 <li>本人觉得输入流中<code>BufferedReader</code>功能已经很强大了</li>
 </ul>
 </blockquote>
+<h3 id="综合运用"><a href="#综合运用" class="headerlink" title="综合运用"></a>综合运用</h3><blockquote>
+<p><strong>有时候在写程序的时候，你得到了一个字节流，但是你想要创建的却是字符流对象，怎么办了呢？前面已经说过，字节流转换成字符流对象的桥梁是InputStreamReader和InputStreamWiter他们的作用是传入字节流对象构造字符流对象，因此可以完美的实现字节流转换成字符流，这个是非常重要的</strong></p>
+</blockquote>
 ]]></content>
     
     <summary type="html">
@@ -659,7 +751,7 @@
       <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+      <category term="java IO编程" scheme="http://chenjiabing666.github.io/tags/java-IO%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
@@ -668,7 +760,7 @@
     <link href="http://chenjiabing666.github.io/2017/05/26/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%85%AB/"/>
     <id>http://chenjiabing666.github.io/2017/05/26/Java-IO学习笔记八/</id>
     <published>2017-05-25T23:37:55.000Z</published>
-    <updated>2017-06-16T01:17:06.298Z</updated>
+    <updated>2017-06-20T00:55:02.513Z</updated>
     
     <content type="html"><![CDATA[<h1 id="BufferedReader和BufferedWriter"><a href="#BufferedReader和BufferedWriter" class="headerlink" title="BufferedReader和BufferedWriter"></a>BufferedReader和BufferedWriter</h1><blockquote>
 <ul>
@@ -769,7 +861,7 @@
       <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+      <category term="java IO编程" scheme="http://chenjiabing666.github.io/tags/java-IO%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
@@ -778,7 +870,7 @@
     <link href="http://chenjiabing666.github.io/2017/05/26/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%83/"/>
     <id>http://chenjiabing666.github.io/2017/05/26/Java-IO学习笔记七/</id>
     <published>2017-05-25T23:37:47.000Z</published>
-    <updated>2017-05-25T23:38:54.485Z</updated>
+    <updated>2017-06-20T00:55:23.145Z</updated>
     
     <content type="html"><![CDATA[<h1 id="System对IO的支持"><a href="#System对IO的支持" class="headerlink" title="System对IO的支持"></a>System对IO的支持</h1><blockquote>
 <ul>
@@ -852,7 +944,7 @@
       <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+      <category term="java IO编程" scheme="http://chenjiabing666.github.io/tags/java-IO%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
@@ -861,7 +953,7 @@
     <link href="http://chenjiabing666.github.io/2017/05/25/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%85%AD/"/>
     <id>http://chenjiabing666.github.io/2017/05/25/Java-IO学习笔记六/</id>
     <published>2017-05-25T07:33:09.000Z</published>
-    <updated>2017-05-25T07:35:02.626Z</updated>
+    <updated>2017-06-20T00:55:16.903Z</updated>
     
     <content type="html"><![CDATA[<h1 id="打印流"><a href="#打印流" class="headerlink" title="打印流"></a>打印流</h1><blockquote>
 <ul>
@@ -946,7 +1038,7 @@
       <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+      <category term="java IO编程" scheme="http://chenjiabing666.github.io/tags/java-IO%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
@@ -955,7 +1047,7 @@
     <link href="http://chenjiabing666.github.io/2017/05/25/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%94/"/>
     <id>http://chenjiabing666.github.io/2017/05/25/Java-IO学习笔记五/</id>
     <published>2017-05-25T07:33:00.000Z</published>
-    <updated>2017-05-25T07:34:32.346Z</updated>
+    <updated>2017-06-20T00:55:41.829Z</updated>
     
     <content type="html"><![CDATA[<h1 id="管道流"><a href="#管道流" class="headerlink" title="管道流"></a>管道流</h1><blockquote>
 <ul>
@@ -1042,7 +1134,7 @@
       <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+      <category term="java IO编程" scheme="http://chenjiabing666.github.io/tags/java-IO%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
@@ -1051,7 +1143,7 @@
     <link href="http://chenjiabing666.github.io/2017/05/25/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9B%9B/"/>
     <id>http://chenjiabing666.github.io/2017/05/25/Java-IO学习笔记四/</id>
     <published>2017-05-25T07:32:49.000Z</published>
-    <updated>2017-05-25T07:34:03.026Z</updated>
+    <updated>2017-06-20T00:55:36.157Z</updated>
     
     <content type="html"><![CDATA[<h1 id="内存操作流"><a href="#内存操作流" class="headerlink" title="内存操作流"></a>内存操作流</h1><blockquote>
 <p>之前的所有的流操作都是针对文件的，但是有时候只是想要实现数据间转换，此时如果我们想要创建一个文件然后再删除文件，那样显得有点麻烦，因此此时的内存操作流就显得很适合这类的操作，因为它只是在内存中存储，并不会真正的创建文件，内存操作流涉及的两个类是<code>ByteArrayInputStream</code>,<code>ByteArrayOutputStream</code>.</p>
@@ -1133,7 +1225,7 @@
       <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+      <category term="java IO编程" scheme="http://chenjiabing666.github.io/tags/java-IO%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
@@ -1142,7 +1234,7 @@
     <link href="http://chenjiabing666.github.io/2017/05/24/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89/"/>
     <id>http://chenjiabing666.github.io/2017/05/24/Java-IO学习笔记三/</id>
     <published>2017-05-24T06:48:34.000Z</published>
-    <updated>2017-06-16T02:41:26.087Z</updated>
+    <updated>2017-06-20T00:55:30.130Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Java-IO学习笔记三"><a href="#Java-IO学习笔记三" class="headerlink" title="Java IO学习笔记三"></a>Java IO学习笔记三</h1><blockquote>
 <ul>
@@ -1234,7 +1326,7 @@
       <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+      <category term="java IO编程" scheme="http://chenjiabing666.github.io/tags/java-IO%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
@@ -1243,7 +1335,7 @@
     <link href="http://chenjiabing666.github.io/2017/05/24/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/"/>
     <id>http://chenjiabing666.github.io/2017/05/24/Java-IO学习笔记二/</id>
     <published>2017-05-24T06:46:06.000Z</published>
-    <updated>2017-06-16T00:20:28.072Z</updated>
+    <updated>2017-06-20T00:55:10.245Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Java-IO学习笔记二"><a href="#Java-IO学习笔记二" class="headerlink" title="Java IO学习笔记二"></a>Java IO学习笔记二</h1><h2 id="流的概念"><a href="#流的概念" class="headerlink" title="流的概念"></a>流的概念</h2><blockquote>
 <ul>
@@ -1427,7 +1519,7 @@
       <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+      <category term="java IO编程" scheme="http://chenjiabing666.github.io/tags/java-IO%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
@@ -1436,7 +1528,7 @@
     <link href="http://chenjiabing666.github.io/2017/05/23/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/"/>
     <id>http://chenjiabing666.github.io/2017/05/23/Java-IO学习笔记一/</id>
     <published>2017-05-23T07:23:50.000Z</published>
-    <updated>2017-05-23T07:25:59.909Z</updated>
+    <updated>2017-06-20T00:55:48.635Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Java-IO学习笔记一"><a href="#Java-IO学习笔记一" class="headerlink" title="Java IO学习笔记一"></a>Java IO学习笔记一</h1><h2 id="File"><a href="#File" class="headerlink" title="File"></a>File</h2><blockquote>
 <p><code>File</code>是文件和目录路径名的抽象表示形式，总的来说就是java创建删除文件目录的一个类库，但是作用不仅仅于此，详细见官方文档</p>
@@ -1506,7 +1598,7 @@
       <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+      <category term="java IO编程" scheme="http://chenjiabing666.github.io/tags/java-IO%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
@@ -2320,96 +2412,6 @@
     
     
       <category term="Git" scheme="http://chenjiabing666.github.io/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>scrapy爬取淘宝女郎</title>
-    <link href="http://chenjiabing666.github.io/2017/05/07/scrapy%E7%88%AC%E5%8F%96%E6%B7%98%E5%AE%9D%E5%A5%B3%E9%83%8E/"/>
-    <id>http://chenjiabing666.github.io/2017/05/07/scrapy爬取淘宝女郎/</id>
-    <published>2017-05-06T20:03:54.000Z</published>
-    <updated>2017-05-13T00:00:18.061Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="scrapy抓取淘宝女郎"><a href="#scrapy抓取淘宝女郎" class="headerlink" title="scrapy抓取淘宝女郎"></a>scrapy抓取淘宝女郎</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><blockquote>
-<ul>
-<li><p>首先在淘宝女郎的<a href="https://mm.taobao.com/search_tstar_model.htm?spm=5679.126488.640745.2.acXQe3" target="_blank" rel="external">首页</a>这里查看，当然想要爬取更多的话，当然这里要查看翻页的url,不过这操蛋的地方就是这里的翻页是使用javascript加载的，这个就有点尴尬了，找了好久没有找到，这里如果有朋友知道怎样翻页的话，麻烦告诉我一声，谢谢了…，不过就这样坐以待毙了吗，所以就在chrome上搜，结果看到有人直接使用的<a href="https://mm.taobao.com/json/request_top_list.htm?page=1" target="_blank" rel="external">这个网页</a>,我当时一看感觉神奇的样子，这就是简化版的首页啊，只需要改变page的数字就可以实现遍历了，不过还是有点小失落，为什么人家就能找到呢，这个我还是希望知道的朋友能够分享一下，我也会查看相关的资料，把这个空缺不上的，好了，现在开我们的工作了</p>
-</li>
-<li><p>我们的目的是抓取册以及相关的信息，所以我们需要随便打开一个淘女郎的相册页面，然后随便进入一个相册即可，很显然这里的相册是异步加载的，因此我们需要抓包，这里我抓到了含有相册的url以及相关信息的<code>json</code>数据，如下图：</p>
-</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/Taonvlang1.bmp" alt="相册数据"></p>
-<ul>
-<li><p>然后我们查看它的<code>url</code>为<a href="https://mm.taobao.com/album/json/get_album_photo_list.htmuser_id=687471686&amp;album_id=10000702574&amp;top_pic_id=0&amp;cover=%2F%2Fimg.alicdn.com%2Fimgextra%2Fi2%2F687471686%2FTB1TlwDLFXXXXbxaXXXXXXXXXXX_!!2tstar.png&amp;page=1&amp;_ksTS=1494097545509_154&amp;callback=jsonp15" target="_blank" rel="external">https://mm.taobao.com/album/json/get_album_photo_list.htmuser_id=687471686&amp;album_id=10000702574&amp;top_pic_id=0&amp;cover=%2F%2Fimg.alicdn.com%2Fimgextra%2Fi2%2F687471686%2FTB1TlwDLFXXXXbxaXXXXXXXXXXX_!!2tstar.png&amp;page=1&amp;_ksTS=1494097545509_154&amp;callback=jsonp15</a></p>
-</li>
-<li><p>通过我尝试之后这条url可以简化为:</p>
-</li>
-<li><p><a href="https://mm.taobao.com/album/json/get_album_photo_list.htm?user_id={0}&amp;album_id={1}&amp;top_pic_id=0&amp;page={2}&amp;_ksTS=1493654931946_405" target="_blank" rel="external">https://mm.taobao.com/album/json/get_album_photo_list.htm?user_id={0}&amp;album_id={1}&amp;top_pic_id=0&amp;page={2}&amp;_ksTS=1493654931946_405</a></p>
-</li>
-<li><p>其中<code>user_id</code>是每一个女郎对的<code>id</code>,<code>ablum_id</code>时每一个相册的<code>id</code>,这里一个女郎有多个相册，因此这个<code>id</code>是不同的，但是<code>page</code>就是要翻页的作用了,可以看到我去掉了<code>callback=json155</code>这一项，因为如果加上这一项，返回的数据就不是<code>json</code>类型的数据，其中<code>page</code>是在抓包的时候点击翻页才会在下面出现的，可以看到同一个相册返回的除了<code>page</code>不同之外，其他的都是相同的，因此这里通过<code>page</code>来实现翻页的数据</p>
-</li>
-<li><p>上面分析了每一个相册的<code>url</code>数据的由来，可以看到我们下面需要找到<code>user_id</code>,<code>ablum_id</code>这两个数据.</p>
-</li>
-<li><p><code>user_id</code>的获取：我们打开<a href="https://mm.taobao.com/json/request_top_list.htm?page=1" target="_blank" rel="external">首页</a>,然后打开<code>chrome</code>的调试工具，可以看到每一个 女郎的<code>url</code>中都包含<code>user_id</code>这一项，因此我们只需要通过这个实现翻页然后获取每一个女郎的<code>url</code>,之后用正则将<code>user_id</code>匹配出来即可,代码如下</p>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ps=response.xpath(<span class="string">'//p[@class="top"]'</span>)</div><div class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> ps:</div><div class="line">            item=JrtItem()</div><div class="line">            href=p.xpath(<span class="string">'a/@href'</span>).extract()   <span class="comment">#这个得到的是一个数组url</span></div><div class="line">            <span class="keyword">if</span> href:</div><div class="line">                item[<span class="string">'user_id'</span>]=self.pattern_user_id.findall(href[<span class="number">0</span>])[<span class="number">0</span>]   <span class="comment">#用则正匹配出user_id,其中的正则为  pattern_user_id=re.compile(r'user_id=(\d+)')</span></div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><code>ablum_id</code>的获取：想要获取<code>ablum_id</code>当然要在相册的页面查找，于是我们在<a href="https://mm.taobao.com/self/model_album.htm?spm=719.6642053.a312r.18.F3bDux&amp;user_id=687471686" target="_blank" rel="external">相册页面</a>抓包获得了如下图的页面</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/taonvlang2.bmp" alt="ablum_id"></p>
-<ul>
-<li>通过上图我们清晰的知道每一个相册的里面包含多少相册，但最令人开心的是在这个页面中不是动态加载，因此我们可以查看它的源码，当我们查看源码的时候，我们可以看到和<code>user_id</code>一样，这里的<code>ablum_id</code>包含在了<code>href</code>中，因此我们只需要找到每一张相册的<code>url</code>，然后用正则匹配处来即可，其中这个页面的<code>url</code>简化为:</li>
-<li><p><a href="https://mm.taobao.com/self/album/open_album_list.htm?_charset=utf-8&amp;user_id%20={0}&amp;page={1}" target="_blank" rel="external">https://mm.taobao.com/self/album/open_album_list.htm?_charset=utf-8&amp;user_id%20={0}&amp;page={1}</a></p>
-</li>
-<li><p>所以我们可以通过上面得到的<code>user_id</code>构成请求即可,代码如下：</p>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">## 解析得到ablum_id，根据ablum_id解析请求出每一个相册的json数据</span></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">parse_ablum_id</span><span class="params">(self,response)</span>:</span></div><div class="line">       <span class="keyword">if</span> response.status==<span class="number">200</span>:</div><div class="line">           <span class="keyword">print</span> response.url</div><div class="line">           item = response.meta[<span class="string">'item'</span>]</div><div class="line">           soup = BeautifulSoup(response.text, <span class="string">'lxml'</span>)</div><div class="line">           divs = soup.find_all(<span class="string">'div'</span>, class_=<span class="string">'mm-photo-cell-middle'</span>)</div><div class="line">           <span class="keyword">for</span> div <span class="keyword">in</span> divs:</div><div class="line">               href = div.find(<span class="string">'h4'</span>).find(<span class="string">'a'</span>).get(<span class="string">'href'</span>)</div><div class="line">               items = self.pattern_ablum_id.findall(href)    <span class="comment">#这里就得到了ablum_id</span></div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>上面已经获得了<code>user_id</code>和<code>ablum_id</code>，那么现在就可以请求每一个相册的<code>json</code>数据了，这个就不用多说了，详情请看<a href="https://github.com/chenjiabing666/TaoBao_Moman_Scrapy" target="_blank" rel="external">源代码</a></li>
-</ul>
-</blockquote>
-<h2 id="MongoDB存储"><a href="#MongoDB存储" class="headerlink" title="MongoDB存储"></a>MongoDB存储</h2><h3 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h3><blockquote>
-<ul>
-<li><p><code>Windows</code>下安装请看我的<a href="https://chenjiabing666.github.io/tags/MongoDB/">MogoDB干货篇</a></p>
-</li>
-<li><p><code>ubantu</code>直接用<code>sudo apt-get install</code>安装即可</p>
-</li>
-<li><p>安装对应python的包：<code>pip install pymongo</code></p>
-</li>
-<li><p>安装完成以后就可以连接了，下面贴出我的连接代码</p>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pymongo <span class="keyword">import</span> MongoClient</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MongoDBPipelines</span><span class="params">(object)</span>:</span></div><div class="line">    collection_name = <span class="string">'taobao'</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open_spider</span><span class="params">(self,spider)</span>:</span></div><div class="line">        self.client = MongoClient(<span class="string">'localhost'</span>, <span class="number">27017</span>)   <span class="comment">#连接，这里的27017是默认的额端口号</span></div><div class="line">        self.db = self.client[<span class="string">'python'</span>]               <span class="comment">#python是自己的数据库，当然这里不用提前建好也可以</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">close_spider</span><span class="params">(self, spider)</span>:</span>            </div><div class="line">        self.client.close()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self,item,spider)</span>:</span></div><div class="line">        self.db[self.collection_name].update(&#123;<span class="string">'picId'</span>:item[<span class="string">'picId'</span>]&#125;, &#123;<span class="string">'$set'</span>: dict(item)&#125;, <span class="keyword">True</span>)</div><div class="line">        <span class="keyword">return</span> item</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>现在这就算好了，当然这里还有很多东西需要优化的，像代理池。。。最后本人想在暑期找一个地方实习，但是一直没有好的地方，希望有实习的地方推荐的可以联系我，在这里先谢谢了</strong></p>
-</blockquote>
-<h2 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h2><blockquote>
-<p><em>最后推荐博主的一些源码</em></p>
-<ul>
-<li><p><a href="https://github.com/chenjiabing666/MeiZi_Scrapy" target="_blank" rel="external">scrapy爬取妹子网站实现图片的存储</a>，这个只是一个演示怎样存储图片的实例，因此不想过多的投入时间去爬，因此写的不是很详细</p>
-</li>
-<li><p><a href="https://github.com/chenjiabing666/zhihu_Scrapy_Spider/tree/master" target="_blank" rel="external">scrapy爬取知乎用户的详细信息</a></p>
-</li>
-</ul>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;scrapy抓取淘宝女郎&quot;&gt;&lt;a href=&quot;#scrapy抓取淘宝女郎&quot; class=&quot;headerlink&quot; title=&quot;scrapy抓取淘宝女郎&quot;&gt;&lt;/a&gt;scrapy抓取淘宝女郎&lt;/h1&gt;&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; cla
-    
-    </summary>
-    
-      <category term="Scrapy学习" scheme="http://chenjiabing666.github.io/categories/Scrapy%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="scrapy" scheme="http://chenjiabing666.github.io/tags/scrapy/"/>
     
   </entry>
   
