@@ -46,7 +46,7 @@ BufferedReader和BufferedWriter
 
 后续字节流
 字节流的操作都是基于InputStream和Outpu">
-<meta property="og:updated_time" content="2017-06-20T01:00:14.158Z">
+<meta property="og:updated_time" content="2017-06-21T17:21:44.031Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java IO学习笔记总结">
 <meta name="twitter:description" content="Java IO学习笔记总结前言
@@ -194,6 +194,7 @@ BufferedReader和BufferedWriter
 </blockquote>
 <h3 id="综合运用"><a href="#综合运用" class="headerlink" title="综合运用"></a>综合运用</h3><blockquote>
 <p><strong>有时候在写程序的时候，你得到了一个字节流，但是你想要创建的却是字符流对象，怎么办了呢？前面已经说过，字节流转换成字符流对象的桥梁是InputStreamReader和InputStreamWiter他们的作用是传入字节流对象构造字符流对象，因此可以完美的实现字节流转换成字符流，这个是非常重要的</strong></p>
+<p>下面使用转换流将System.in转换成字符流并且使用高效流读取控制台输入的数据,代码如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">// 读取键盘的输入的数据，System.in是字节流，因此要想创建高效流必须使用转换流InputStreamReader</span></div><div class="line">BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</div><div class="line">String line;</div><div class="line"><span class="comment">//从键盘读取输入的数据，直到读到bye结束</span></div><div class="line"><span class="keyword">while</span> ((line = br.readLine()) != <span class="keyword">null</span>) &#123;</div><div class="line">	<span class="keyword">if</span> (<span class="string">"bye"</span>.equals(line)) &#123;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">	System.out.println(line);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 </blockquote>
   
 	</div>
@@ -358,11 +359,11 @@ BufferedReader和BufferedWriter
 			
 		
 			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>2</sup></a></li>
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>2</sup></a></li>
+				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>2</sup></a></li>
 			
 		
 			
@@ -370,19 +371,19 @@ BufferedReader和BufferedWriter
 			
 		
 			
-				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
 			
 		
 			
+				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
 			
 		
 		</ul>
