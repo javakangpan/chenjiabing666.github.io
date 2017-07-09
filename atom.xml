@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-07-01T05:31:28.369Z</updated>
+  <updated>2017-07-09T04:40:56.134Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python操作MongoDB</title>
+    <link href="http://chenjiabing666.github.io/2017/07/09/python%E6%93%8D%E4%BD%9CMongoDB/"/>
+    <id>http://chenjiabing666.github.io/2017/07/09/python操作MongoDB/</id>
+    <published>2017-07-09T04:40:33.000Z</published>
+    <updated>2017-07-09T04:40:56.134Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="python操作MongoDB"><a href="#python操作MongoDB" class="headerlink" title="python操作MongoDB"></a>python操作MongoDB</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>下面推荐本人写的MongoDB的基本操作博文，介绍的还是比较详细的，喜欢的朋友可以去看看</p>
+<blockquote>
+<ul>
+<li><font color="#8BB800" size="3px" face="楷体"><a href="https://chenjiabing666.github.io/2017/04/28/MongoDB%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E5%AE%89%E8%A3%85/">MongoDB干货篇之安装</a></font></li>
+<li><font color="#8BB800" size="3px" face="楷体"><a href="https://chenjiabing666.github.io/2017/04/30/MongoDB%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/">MongoDB干货篇之查询数据</a></font></li>
+<li><font color="#8BB800" size="3px" face="楷体"><a href="https://chenjiabing666.github.io/2017/05/01/MongoDB%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE/">MongoDB干货篇之更新数据</a></font></li>
+</ul>
+</blockquote>
+</blockquote>
+<h2 id="综合应用"><a href="#综合应用" class="headerlink" title="综合应用"></a>综合应用</h2><blockquote>
+<p><font color="#8BB800" size="3px" face="楷体">下面是自己写的一个简单的操作，分别对应了增删改查，虽然不太全面，但是只是简单的示范了一下，当然更多的功能还是需要自己去完善的，因为代码中都有注释，这里就不再详细的说了</font></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding:utf-8</span></div><div class="line"><span class="keyword">import</span> pymongo</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MongoDB</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,db,collections)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        初始化数据库</div><div class="line">        :param db:数据库名称 </div><div class="line">        :param collections: 数据库的集合的名称</div><div class="line">        """</div><div class="line">        self.client = pymongo.MongoClient(<span class="string">'localhost'</span>, <span class="number">27017</span>)    <span class="comment">#获取的连接</span></div><div class="line">        self.db = self.client[db]        <span class="comment">#创建数据库db</span></div><div class="line">        self.post = self.db[collections]    <span class="comment">#创建或者选择要操作的集合</span></div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">(self, data,upsert)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        更新数据库中的数据，如果upsert为Ture，那么当没有找到指定的数据时就直接插入，反之不执行插入</div><div class="line">        :param data: 要插入的数据</div><div class="line">        :param upsert: 判断是插入还是不插入</div><div class="line">        :return: </div><div class="line">        """</div><div class="line">        self.post.update(&#123;<span class="string">"ip"</span>: data&#125;, &#123;<span class="string">'$set'</span>: &#123;<span class="string">'ip'</span>: data&#125;&#125; , upsert)</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(self,select)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        根据传入的参数查找指定的值，注意这里的select是字典</div><div class="line">        :param select: 指定的查找条件，这里的是字典类型的，比如&#123;"name":"chenjiabing","age":22&#125;</div><div class="line">        :return: 返回的是查询的结果，同样是字典类型的</div><div class="line">        """</div><div class="line">        <span class="keyword">return</span> self.post.find(select)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">(self,data)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        向数据库中插入指定的数据</div><div class="line">        :param data: 要插入的数据，这里的是字典的类型比如：&#123;"name":"chenjiabing","age":22&#125;</div><div class="line">        :return: 插入成功返回True,反之返回false</div><div class="line">        """</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            self.post.insert(data)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">except</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">remove</span><span class="params">(self,select)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        删除指定条件的记录</div><div class="line">        :param select: 指定的条件，这里是字典类型的，比如&#123;"age":22&#125; 表示删除age=22的所有数据</div><div class="line">        :return: 如果删除成功返回True，else返回False</div><div class="line">        """</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            self.post.remove(select)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">except</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><font color="#8BB800" size="3px" face="楷体">下面是利用上面的Mongo.py文件获取西刺网站的代理并且存入数据库</font></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding:utf-8</span></div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">from</span> Queue <span class="keyword">import</span> Queue</div><div class="line"><span class="keyword">import</span> threading</div><div class="line"><span class="keyword">from</span> Mongo <span class="keyword">import</span> MongoDB   <span class="comment">#导入文件</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">XICI</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, page)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        self.header:请求头</div><div class="line">        self.q:存储ip的队列</div><div class="line">        slef.urls:页面的url</div><div class="line">        :param page:传入的参数，表示获取多少页的ip</div><div class="line">        """</div><div class="line">        self.header = &#123;<span class="string">"User-Agent"</span>: <span class="string">'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0'</span>&#125;</div><div class="line">        self.q = Queue()</div><div class="line">        self.urls = []</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, page + <span class="number">1</span>):</div><div class="line">            self.urls.append(<span class="string">"http://www.xicidaili.com/nn/"</span> + str(i))</div><div class="line">        self.mongo = MongoDB(<span class="string">'python'</span>,<span class="string">'ip'</span>)  <span class="comment"># 创建MogoDB对象</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_ips</span><span class="params">(self, url)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        根据一页的请求爬取一个页面的ip</div><div class="line">        :param url:传入的参数，表示每一页的链接</div><div class="line">        :return: None</div><div class="line">        """</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            res = requests.get(url, headers=self.header)</div><div class="line">            <span class="keyword">if</span> res.status_code == <span class="number">200</span>:</div><div class="line">                soup = BeautifulSoup(res.text, <span class="string">'lxml'</span>)</div><div class="line">                ips = soup.find_all(<span class="string">'tr'</span>)</div><div class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(ips)):</div><div class="line">                    ip = ips[i]</div><div class="line">                    tds = ip.find_all(<span class="string">"td"</span>)</div><div class="line">                    ip_temp = <span class="string">"http://"</span> + tds[<span class="number">1</span>].contents[<span class="number">0</span>] + <span class="string">":"</span> + tds[<span class="number">2</span>].contents[<span class="number">0</span>]</div><div class="line">                    <span class="keyword">print</span> ip_temp</div><div class="line">                    self.q.put(ip_temp)  <span class="comment"># ip进入队列</span></div><div class="line"></div><div class="line">        <span class="keyword">except</span>:</div><div class="line">            <span class="keyword">print</span> <span class="string">"-------------------------------------------请求出现异常------------------------------------------------"</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">(self, url)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        验证出过来的ip，如果成功就直接存入数据库</div><div class="line">        :param url: 验证ip地址的url</div><div class="line">        :return: 无返回值</div><div class="line">        """</div><div class="line">        <span class="keyword">while</span> <span class="keyword">not</span> self.q.empty():</div><div class="line">            ip = self.q.get()</div><div class="line">            proxy = &#123;<span class="string">"http"</span>: ip&#125;</div><div class="line">            <span class="keyword">print</span> proxy</div><div class="line">            <span class="keyword">try</span>:</div><div class="line">                res = requests.get(url, headers=self.header, proxies=proxy, timeout=<span class="number">5</span>)</div><div class="line">                <span class="keyword">if</span> res.status_code == <span class="number">200</span>:</div><div class="line">                    self.mongo.update(ip,<span class="keyword">True</span>)  <span class="comment"># 如果成功验证直接进入数据库</span></div><div class="line">                    <span class="keyword">print</span> <span class="string">"**************************成功存入数据库********************************************"</span></div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    <span class="keyword">print</span> <span class="string">"这个ip地址不能用"</span></div><div class="line"></div><div class="line">            <span class="keyword">except</span>:</div><div class="line">                <span class="keyword">print</span> <span class="string">"--------------------------请求失败---------------------------------------------"</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">for</span> url <span class="keyword">in</span> self.urls:</div><div class="line">            self.get_ips(url)</div><div class="line">        threads = []</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</div><div class="line">            t=threading.Thread(target=self.insert,args=[<span class="string">"http://blog.csdn.net/qq_34162294/article/details/72353389"</span>])</div><div class="line">            threads.append(t)</div><div class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> threads:</div><div class="line">            t.start()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    p = XICI(<span class="number">3</span>)</div><div class="line">    p.main()</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;python操作MongoDB&quot;&gt;&lt;a href=&quot;#python操作MongoDB&quot; class=&quot;headerlink&quot; title=&quot;python操作MongoDB&quot;&gt;&lt;/a&gt;python操作MongoDB&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Numpy指南</title>
@@ -2302,99 +2338,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;python发送邮件&quot;&gt;&lt;a href=&quot;#python发送邮件&quot; class=&quot;headerlink&quot; title=&quot;python发送邮件&quot;&gt;&lt;/a&gt;python发送邮件&lt;/h1&gt;&lt;h2 id=&quot;准备&quot;&gt;&lt;a href=&quot;#准备&quot; class=&quot;headerli
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>python制作电子书</title>
-    <link href="http://chenjiabing666.github.io/2017/05/13/python%E5%88%B6%E4%BD%9C%E7%94%B5%E5%AD%90%E4%B9%A6/"/>
-    <id>http://chenjiabing666.github.io/2017/05/13/python制作电子书/</id>
-    <published>2017-05-12T23:15:20.000Z</published>
-    <updated>2017-05-12T23:15:48.166Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="python制作pdf电子书"><a href="#python制作pdf电子书" class="headerlink" title="python制作pdf电子书"></a>python制作pdf电子书</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><blockquote>
-<p><em>制作电子书使用的是<code>python</code>的<code>pdfkit</code>这个库，<code>pdfkit</code>是 <code>wkhtmltopdf</code> 的<code>Python</code>封装包，因此在安装这个之前要安装<code>wkhtmltopdf</code></em></p>
-</blockquote>
-<h3 id="安装wkhtmltopdf"><a href="#安装wkhtmltopdf" class="headerlink" title="安装wkhtmltopdf"></a>安装wkhtmltopdf</h3><blockquote>
-<ul>
-<li><p><code>sudo apt-get install wkhtmltopdf</code>  (<code>ubantu</code>下，不过这里安装的时候可能对应的版本不同，会出现错误，如果不行的话还请自己百度下，我安装的时候是可以的)</p>
-</li>
-<li><p><code>windows</code>下的用户直接到<code>wkhtmltopdf</code>官网下载稳定版本，然后直接安装即可，但是安装之后需要注意的是一定要将其添加到环境变量中，否则会出现找不到路径的问题</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="python安装依赖包"><a href="#python安装依赖包" class="headerlink" title="python安装依赖包"></a>python安装依赖包</h3><blockquote>
-<p><strong>以下都是我们需要用到的库</strong></p>
-<ul>
-<li><code>pip install requests</code></li>
-<li><code>pip install BeautifulSoup4</code></li>
-<li><code>pip install pdfkit</code></li>
-</ul>
-</blockquote>
-<h2 id="pdfkit的用法"><a href="#pdfkit的用法" class="headerlink" title="pdfkit的用法"></a>pdfkit的用法</h2><h3 id="初级了解函数"><a href="#初级了解函数" class="headerlink" title="初级了解函数"></a>初级了解函数</h3><blockquote>
-<ul>
-<li><code>pdfkit.from_url([url,],&#39;demo.pdf&#39;)</code>  这个是直接传入一个<code>url</code>或者一个<code>url</code>列表，然后通过这个函数直接将其网页转换成<code>demo.pdf</code>,注意这里只能转换静态文本，如果使用js一些脚本的话是不能直接转换的</li>
-<li><code>pdfkit.from_string(&quot;&lt;h1&gt;&lt;a href=&quot;https://chenjiabing666.gituhb.io&quot;&gt;陈加兵的博客&lt;/a&gt;&lt;/h1&gt;&quot;,&#39;demo.pdf&#39;)</code> 这个是直接讲一个字符串转换成<code>pdf</code>格式的电子书，里面可以直接传一个字符串，也可以用<code>html</code>标签包裹这个字符串</li>
-<li><code>pdfkit.from_file([file_name,],&#39;demo.pdf&#39;)</code>  这个是直接传入一个文件或者一个列表即是多个文件，不过这里传入的文件一般都是html格式的文件</li>
-</ul>
-</blockquote>
-<h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h3><blockquote>
-<p><em>当然知道这个是多么枯燥，生成的电子书书也不能添加各种的样式，下面我们将会介绍一些添加的样式的方法</em></p>
-</blockquote>
-<h4 id="options"><a href="#options" class="headerlink" title="options"></a>options</h4><blockquote>
-<p><strong>这个参数是上面函数的可选参数，其中制定了一些选项，详情请见<a href="http://wkhtmltopdf.org/usage/wkhtmltopdf.txt" target="_blank" rel="external">http://wkhtmltopdf.org/usage/wkhtmltopdf.txt</a>, 你可以移除选项名字前面的 ‘–’ .如果选项没有值, 使用<code>None</code>, <code>Falseor</code> ,<code>*</code> 作为字典值，例子如下：</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">options = &#123;</div><div class="line">        <span class="string">'page-size'</span>: <span class="string">'Letter'</span>,</div><div class="line">        <span class="string">'margin-top'</span>: <span class="string">'0.75in'</span>,</div><div class="line">        <span class="string">'margin-right'</span>: <span class="string">'0.75in'</span>,</div><div class="line">        <span class="string">'margin-bottom'</span>: <span class="string">'0.75in'</span>,</div><div class="line">        <span class="string">'margin-left'</span>: <span class="string">'0.75in'</span>,</div><div class="line">        <span class="string">'encoding'</span>: <span class="string">"UTF-8"</span>,</div><div class="line">        <span class="string">'custom-header'</span>: [</div><div class="line">            (<span class="string">'Accept-Encoding'</span>, <span class="string">'gzip'</span>)</div><div class="line">        ],</div><div class="line">        <span class="string">'cookie'</span>: [</div><div class="line">            (<span class="string">'cookie-name1'</span>, <span class="string">'cookie-value1'</span>),</div><div class="line">            (<span class="string">'cookie-name2'</span>, <span class="string">'cookie-value2'</span>),</div><div class="line">        ],</div><div class="line">        <span class="string">'outline-depth'</span>: <span class="number">10</span>,</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h4 id="cover"><a href="#cover" class="headerlink" title="cover"></a>cover</h4><blockquote>
-<p><strong>这个参数是用来制作封面的，也是函数中的一个参数，如果想要实现的话可以先写一个html文本，在其中嵌入几张图片或者文字作为封面，然后写入出传入函数即可</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">options = &#123;</div><div class="line">            <span class="string">'page-size'</span>: <span class="string">'Letter'</span>,</div><div class="line">            <span class="string">'margin-top'</span>: <span class="string">'0.75in'</span>,</div><div class="line">            <span class="string">'margin-right'</span>: <span class="string">'0.75in'</span>,</div><div class="line">            <span class="string">'margin-bottom'</span>: <span class="string">'0.75in'</span>,</div><div class="line">            <span class="string">'margin-left'</span>: <span class="string">'0.75in'</span>,</div><div class="line">            <span class="string">'encoding'</span>: <span class="string">"UTF-8"</span>,</div><div class="line">            <span class="string">'custom-header'</span>: [</div><div class="line">                (<span class="string">'Accept-Encoding'</span>, <span class="string">'gzip'</span>)</div><div class="line">            ],</div><div class="line">            <span class="string">'cookie'</span>: [</div><div class="line">                (<span class="string">'cookie-name1'</span>, <span class="string">'cookie-value1'</span>),</div><div class="line">                (<span class="string">'cookie-name2'</span>, <span class="string">'cookie-value2'</span>),</div><div class="line">            ],</div><div class="line">            <span class="string">'outline-depth'</span>: <span class="number">10</span>,</div><div class="line">        &#125;</div><div class="line">cover=<span class="string">'demo.html'</span></div><div class="line">pdfkit.from_file(<span class="string">'demo.html'</span>,<span class="string">'demo.pdf'</span>,cover=cover,options=options)</div></pre></td></tr></table></figure>
-<h4 id="css"><a href="#css" class="headerlink" title="css"></a>css</h4><blockquote>
-<p><strong>这里的css也是函数中的一个可选参数，这个参数主要的作用作用就是在其中定义自己喜欢的样式，当然这里也可以传入一个列表，定义多个样式css文件，当然没有这个参数也可以实现定义自己的样式，只需要在自己的html模板中定义内嵌的样式，或者直接用<code>&lt;link&gt;</code>引用外面的样式即可，本人亲试是可以的，具体的使用如下</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">css=<span class="string">'demo.css'</span></div><div class="line">pdfkit.from_file(<span class="string">'demo.html'</span>,<span class="string">'demo.pdf'</span>,options=options,cover=cover,css=css)</div></pre></td></tr></table></figure>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><blockquote>
-<ul>
-<li><p>这里生成<code>pdf</code>的时候可能出现中文的乱码，请一定在<code>html</code>模板开头指定字体<code>utf-8</code>-&gt; <code>&lt;meta charset=&quot;UTF-8&quot;&gt;</code></p>
-</li>
-<li><p>可能在爬取生成的时候会出现<code>ascii</code>错误，只需要在<code>py</code>文件开头写下：</p>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> threading</div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding(<span class="string">'utf8'</span>)</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>写入文件的时候不想<code>python3</code>一样可以指定编码格式，这里我使用的是<code>codecs</code>库，可以向python3一样指定其中的编码格式</li>
-</ul>
-</blockquote>
-<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><blockquote>
-<p><em>本人爬了廖雪峰老师的<code>python2.7</code>的教程，并且做成了电子书，截图如下</em></p>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/liaoxuefeng.png" alt="python教程"></p>
-</blockquote>
-<h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h3><blockquote>
-<ul>
-<li>这里并没有使用框架，如果有兴趣的朋友可以用框架写一个爬取全站的</li>
-<li><p>这里的主要用到的是<code>BeautifulSoup</code>和<code>requests</code>,详情可以看我的博客中的<a href="https://chenjiabing666.github.io/2017/04/29/python%E7%88%AC%E8%99%AB%E4%B9%8BBeautifulSoup/">BeautifulSoup用法</a>,后续还会更新requests的用法</p>
-</li>
-<li><p>源代码请见<a href="https://github.com/chenjiabing666/liaoxuefeng_pdfkit" target="_blank" rel="external">https://github.com/chenjiabing666/liaoxuefeng_pdfkit</a></p>
-</li>
-</ul>
-</blockquote>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
-<ul>
-<li><a href="http://mp.weixin.qq.com/s/LH8nEFfVH4_tvYWo46CF5Q" target="_blank" rel="external">http://mp.weixin.qq.com/s/LH8nEFfVH4_tvYWo46CF5Q</a></li>
-<li><a href="http://www.cnblogs.com/taceywong/p/5643978.html" target="_blank" rel="external">http://www.cnblogs.com/taceywong/p/5643978.html</a></li>
-<li><a href="http://beautifulsoup.readthedocs.io/zh_CN/latest/#id44" target="_blank" rel="external">http://beautifulsoup.readthedocs.io/zh_CN/latest/#id44</a></li>
-</ul>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;python制作pdf电子书&quot;&gt;&lt;a href=&quot;#python制作pdf电子书&quot; class=&quot;headerlink&quot; title=&quot;python制作pdf电子书&quot;&gt;&lt;/a&gt;python制作pdf电子书&lt;/h1&gt;&lt;h2 id=&quot;准备&quot;&gt;&lt;a href=&quot;#准备&quot;
     
     </summary>
     
