@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-07-09T04:40:56.134Z</updated>
+  <updated>2017-07-09T04:44:14.748Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://chenjiabing666.github.io/2017/07/09/python%E6%93%8D%E4%BD%9CMongoDB/"/>
     <id>http://chenjiabing666.github.io/2017/07/09/python操作MongoDB/</id>
     <published>2017-07-09T04:40:33.000Z</published>
-    <updated>2017-07-09T04:40:56.134Z</updated>
+    <updated>2017-07-09T04:44:14.748Z</updated>
     
     <content type="html"><![CDATA[<h1 id="python操作MongoDB"><a href="#python操作MongoDB" class="headerlink" title="python操作MongoDB"></a>python操作MongoDB</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>下面推荐本人写的MongoDB的基本操作博文，介绍的还是比较详细的，喜欢的朋友可以去看看</p>
@@ -48,6 +48,10 @@
     
     </summary>
     
+      <category term="python" scheme="http://chenjiabing666.github.io/categories/python/"/>
+    
+    
+      <category term="MongoDB" scheme="http://chenjiabing666.github.io/tags/MongoDB/"/>
     
   </entry>
   
