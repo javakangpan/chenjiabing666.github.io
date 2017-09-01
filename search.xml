@@ -3,7 +3,7 @@
   
     
     <entry>
-      <title><![CDATA[os模块中常用的的方法“]]></title>
+      <title><![CDATA[os模块中常用的的方法]]></title>
       <url>%2F2017%2F09%2F02%2Fos%E6%A8%A1%E5%9D%97%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E7%9A%84%E6%96%B9%E6%B3%95%2F</url>
       <content type="text"><![CDATA[os模块中常用的方法常用的方法 os.getcwd() 获取当前的路径os.listdir(path) 获取path路径下的全部文件和文件夹，就是显示全部的文件的作用os.mkdir(path) 创建一个文件夹os.rmdir(path) 删除一个文件夹os.remove(path) 删除一个文件os.rename(path1,path2) 将文件或者文件夹重命名，path1是原来件路径，path2是改变后的文件的路径名称os.makedirs(path) 循环创建文件夹，给出一个路径，连续的创建这个路径的全部文件夹，并不是创建文件os.removedirs(path) 循环删除文件夹 会删除整个路径的文件夹os.path.abspath(path) 返回此文件的绝对路径os.path.exists(path) 判断文件或者文件夹是否存在os.path.basename(path) 返回绝对路径中的文件名os.path.normpath(path) 标准化文件路径，Windows下将双斜杠变成单斜杠os.path.commonprefix(list) 返回list中的相同的路径，只是多个路径相同的部分os.path.dirname(path) 返回文件所在上面一层的目录的名称，注意这里是所在紧接着一层的文件夹的名称os.path.split(path) 将路径分割成两个部分，返回的是一个元祖，第一个元素是前面的路径，第二个元素是文件的名称os.path.getatime(path) 返回文件的最后访问时间os.path.getmtime(path) 返回文件的最后修改时间os.path.getctime(path) 在unix的系统上返回的是文件最后修改的时间，在window的系统上返回的是文件的创建时间os.path.getsize(path) 返回文件的大小，以字节为单位os.path.isfile(path) 判断文件是否是文件os.path.isdir(path) 判断文件是否是文件夹os.path.join(path1,path2) 将两个文件的路径拼接在一起 例子 其中的每个方法的例子请点击这里]]></content>
     </entry>
