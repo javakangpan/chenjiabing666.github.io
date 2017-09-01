@@ -5,28 +5,26 @@
   <meta charset="UTF-8">
   
   
-    <title>matplotlib绘制图形基础 | 爱撒谎的男孩</title>
+    <title>os模块中常用的的方法“ | 爱撒谎的男孩</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="matplotlib绘制基本图形折线图12345678import matplotlib.pyplot as pltimport numpy as npx=np.arange(0,10,1) #创建一个0-10之间以1为间隔的numpy数组y=x+10   plt.plot(x,y,color=&apos;red&apos;,linestyle=&apos;--&apos;,marker=&apos;&amp;gt;&apos;,linewidth=3,label">
+    <meta name="description" content="os模块中常用的方法常用的方法
+os.getcwd()   获取当前的路径os.listdir(path)  获取path路径下的全部文件和文件夹，就是显示全部的文件的作用os.mkdir(path)   创建一个文件夹os.rmdir(path)   删除一个文件夹os.remove(path)   删除一个文件os.rename(path1,path2)   将文件或者文件夹重命名，path1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="matplotlib绘制图形基础">
-<meta property="og:url" content="http://chenjiabing666.github.io/2017/04/01/matplotlib绘制图形基础/index.html">
+<meta property="og:title" content="os模块中常用的的方法“">
+<meta property="og:url" content="http://chenjiabing666.github.io/2017/09/02/os模块中常用的的方法/index.html">
 <meta property="og:site_name" content="爱撒谎的男孩">
-<meta property="og:description" content="matplotlib绘制基本图形折线图12345678import matplotlib.pyplot as pltimport numpy as npx=np.arange(0,10,1) #创建一个0-10之间以1为间隔的numpy数组y=x+10   plt.plot(x,y,color=&apos;red&apos;,linestyle=&apos;--&apos;,marker=&apos;&amp;gt;&apos;,linewidth=3,label">
-<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/first.png">
-<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/second.png">
-<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/third.png">
-<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/four.png">
-<meta property="og:updated_time" content="2017-04-01T03:49:03.635Z">
+<meta property="og:description" content="os模块中常用的方法常用的方法
+os.getcwd()   获取当前的路径os.listdir(path)  获取path路径下的全部文件和文件夹，就是显示全部的文件的作用os.mkdir(path)   创建一个文件夹os.rmdir(path)   删除一个文件夹os.remove(path)   删除一个文件os.rename(path1,path2)   将文件或者文件夹重命名，path1">
+<meta property="og:updated_time" content="2017-09-01T23:38:45.762Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="matplotlib绘制图形基础">
-<meta name="twitter:description" content="matplotlib绘制基本图形折线图12345678import matplotlib.pyplot as pltimport numpy as npx=np.arange(0,10,1) #创建一个0-10之间以1为间隔的numpy数组y=x+10   plt.plot(x,y,color=&apos;red&apos;,linestyle=&apos;--&apos;,marker=&apos;&amp;gt;&apos;,linewidth=3,label">
-<meta name="twitter:image" content="http://ono60m7tl.bkt.clouddn.com/first.png">
+<meta name="twitter:title" content="os模块中常用的的方法“">
+<meta name="twitter:description" content="os模块中常用的方法常用的方法
+os.getcwd()   获取当前的路径os.listdir(path)  获取path路径下的全部文件和文件夹，就是显示全部的文件的作用os.mkdir(path)   创建一个文件夹os.rmdir(path)   删除一个文件夹os.remove(path)   删除一个文件os.rename(path1,path2)   将文件或者文件夹重命名，path1">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -86,14 +84,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/01/matplotlib绘制图形基础/" title="matplotlib绘制图形基础" itemprop="url">matplotlib绘制图形基础</a>
+      <a href="/2017/09/02/os模块中常用的的方法/" title="os模块中常用的的方法“" itemprop="url">os模块中常用的的方法“</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2017-04-01T03:46:34.000Z" itemprop="datePublished"> 发表于 2017-04-01</time>
+    <time datetime="2017-09-01T23:37:27.000Z" itemprop="datePublished"> 发表于 2017-09-02</time>
     
   </p>
 </header>
@@ -102,32 +100,16 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#matplotlib绘制基本图形"><span class="toc-number">1.</span> <span class="toc-text">matplotlib绘制基本图形</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#折线图"><span class="toc-number">1.1.</span> <span class="toc-text">折线图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#饼状图"><span class="toc-number">1.2.</span> <span class="toc-text">饼状图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#散点图"><span class="toc-number">1.3.</span> <span class="toc-text">散点图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直方图"><span class="toc-number">1.4.</span> <span class="toc-text">直方图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.5.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#os模块中常用的方法"><span class="toc-number">1.</span> <span class="toc-text">os模块中常用的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的方法"><span class="toc-number">1.1.</span> <span class="toc-text">常用的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例子"><span class="toc-number">1.2.</span> <span class="toc-text">例子</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="matplotlib绘制基本图形"><a href="#matplotlib绘制基本图形" class="headerlink" title="matplotlib绘制基本图形"></a>matplotlib绘制基本图形</h1><h2 id="折线图"><a href="#折线图" class="headerlink" title="折线图"></a>折线图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line">x=np.arange(<span class="number">0</span>,<span class="number">10</span>,<span class="number">1</span>) <span class="comment">#创建一个0-10之间以1为间隔的numpy数组</span></div><div class="line">y=x+<span class="number">10</span>   </div><div class="line">plt.plot(x,y,color=<span class="string">'red'</span>,linestyle=<span class="string">'--'</span>,marker=<span class="string">'&gt;'</span>,linewidth=<span class="number">3</span>,label=<span class="string">'example one'</span>)  <span class="comment">#绘制图形</span></div><div class="line">plt.savefig(<span class="string">'first.png'</span>,dpi=<span class="number">50</span>)  <span class="comment">#保存图形，dpi表示</span></div><div class="line">plt.legend()   <span class="comment">#显示图例</span></div><div class="line">plt.show()   <span class="comment">#显示图形</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>图形展示</strong><br><img src="http://ono60m7tl.bkt.clouddn.com/first.png" alt="折线图"><br><strong>说明</strong><br>plt.plot()可以直接绘制折线，其中marker是折线上的标记，linewidth是折线的宽度，label是图例，如果要想显示就要设置plt.legend(),linestyle是折线的风格，color是颜色</p>
+		<h1 id="os模块中常用的方法"><a href="#os模块中常用的方法" class="headerlink" title="os模块中常用的方法"></a>os模块中常用的方法</h1><h2 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h2><blockquote>
+<p><code>os.getcwd()</code>   获取当前的路径<br><code>os.listdir(path)</code>  获取path路径下的全部文件和文件夹，就是显示全部的文件的作用<br><code>os.mkdir(path)</code>   创建一个文件夹<br><code>os.rmdir(path)</code>   删除一个文件夹<br><code>os.remove(path)</code>   删除一个文件<br><code>os.rename(path1,path2)</code>   将文件或者文件夹重命名，path1是原来件路径，path2是改变后的文件的路径名称<br><code>os.makedirs(path)</code>   循环创建文件夹，给出一个路径，连续的创建这个路径的全部文件夹，并不是创建文件<br><code>os.removedirs(path)</code>   循环删除文件夹  会删除整个路径的文件夹<br><code>os.path.abspath(path)</code>    返回此文件的绝对路径<br><code>os.path.exists(path)</code>    判断文件或者文件夹是否存在<br><code>os.path.basename(path)</code>   返回绝对路径中的文件名<br><code>os.path.normpath(path)</code>     标准化文件路径，Windows下将双斜杠变成单斜杠<br><code>os.path.commonprefix(list)</code>   返回list中的相同的路径，只是多个路径相同的部分<br><code>os.path.dirname(path)</code>        返回文件所在上面一层的目录的名称，注意这里是所在紧接着一层的文件夹的名称<br><code>os.path.split(path)</code>   将路径分割成两个部分，返回的是一个元祖，第一个元素是前面的路径，第二个元素是文件的名称<br><code>os.path.getatime(path)</code>   返回文件的最后访问时间<br><code>os.path.getmtime(path)</code>   返回文件的最后修改时间<br><code>os.path.getctime(path)</code>   在unix的系统上返回的是文件最后修改的时间，在window的系统上返回的是文件的创建时间<br><code>os.path.getsize(path)</code>    返回文件的大小，以字节为单位<br><code>os.path.isfile(path)</code>    判断文件是否是文件<br><code>os.path.isdir(path)</code>    判断文件是否是文件夹<br><code>os.path.join(path1,path2)</code>   将两个文件的路径拼接在一起</p>
 </blockquote>
-<h2 id="饼状图"><a href="#饼状图" class="headerlink" title="饼状图"></a>饼状图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line">slices = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">9</span>]   <span class="comment">#指定每一个切片的大小，这里就是每块的比例</span></div><div class="line">activities = [<span class="string">'sleeping'</span>,<span class="string">'eating'</span>,<span class="string">'working'</span>,<span class="string">'playing'</span>]   <span class="comment">#指定标签</span></div><div class="line">cols = [<span class="string">'c'</span>,<span class="string">'m'</span>,<span class="string">'r'</span>,<span class="string">'b'</span>]   <span class="comment">#y颜色</span></div><div class="line"></div><div class="line">plt.pie(slices,   </div><div class="line">        labels=activities,</div><div class="line">        colors=cols,   <span class="comment">#指定每一个区块的颜色</span></div><div class="line">        startangle=<span class="number">90</span>,     <span class="comment">#开始角度，默认是0度，从x轴开始，90度从y轴开始</span></div><div class="line">        shadow= <span class="keyword">True</span>,    <span class="comment">#阴影效果</span></div><div class="line">        explode=(<span class="number">0</span>,<span class="number">0.1</span>,<span class="number">0</span>,<span class="number">0</span>),     <span class="comment">#拉出第二个切片，如果全为0就不拉出，这里的数字是相对与圆心的距离</span></div><div class="line">        autopct=<span class="string">'%1.1f%%'</span>)       <span class="comment">#显示百分比</span></div><div class="line">plt.title(<span class="string">'Interesting Graph\nCheck it out'</span>)  <span class="comment">#设置标题</span></div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>图片展示</strong><br><img src="http://ono60m7tl.bkt.clouddn.com/second.png" alt="饼状图"></p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><blockquote>
+<p>其中的每个方法的例子<a href="https://github.com/chenjiabing666/Python-notebook/blob/master/os.ipynb" target="_blank" rel="external">请点击这里</a></p>
 </blockquote>
-<h2 id="散点图"><a href="#散点图" class="headerlink" title="散点图"></a>散点图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line">x=np.random.rand(<span class="number">1000</span>)</div><div class="line">y=np.random.rand(len(x))</div><div class="line">plt.scatter(x,y,color=<span class="string">'r'</span>,alpha=<span class="number">0.3</span>,label=<span class="string">'example one'</span>,marker=<span class="string">'o'</span>)  <span class="comment">#绘图</span></div><div class="line">plt.legend()</div><div class="line"><span class="comment">#plt.axis([0,2,0,2]) #设置坐标的范围</span></div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>图片展示</strong><br><img src="http://ono60m7tl.bkt.clouddn.com/third.png" alt="散点图"></p>
-</blockquote>
-<h2 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line">x=np.random.randint(<span class="number">1</span>,<span class="number">1000</span>,<span class="number">200</span>)</div><div class="line">axis=plt.gca()   <span class="comment">#得到当前的绘图对象</span></div><div class="line">axis.hist(x,bins=<span class="number">35</span>,facecolor=<span class="string">'r'</span>,normed=<span class="keyword">True</span>,histtype=<span class="string">'bar'</span>,alpha=<span class="number">0.5</span>)<span class="comment">#bins表示直方图的个数，histtype表示直方图的样式，normed如果为True就将直方归一化，显示概率密度，默认是False</span></div><div class="line">axis.set_xlabel(<span class="string">"Values"</span>)  <span class="comment">#设置x的标签</span></div><div class="line">axis.set_ylabel(<span class="string">"Frequency"</span>)   </div><div class="line">axis.set_title(<span class="string">"HIST"</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>图片展示</strong><br><img src="http://ono60m7tl.bkt.clouddn.com/four.png" alt="直方图"></p>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -135,13 +117,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/python数据挖掘与分析/">python数据挖掘与分析</a>
+  <a class="article-category-link" href="/categories/python/">python</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/matplotlib/">matplotlib</a>
+  <span></span> <a href="/tags/python爬虫/">python爬虫</a>
   </div>
 
 </div>
@@ -150,7 +132,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2017/04/01/matplotlib绘制图形基础/" data-title="matplotlib绘制图形基础 | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2017/09/02/os模块中常用的的方法/" data-title="os模块中常用的的方法“ | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -163,19 +145,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/04/04/java图像处理干货篇/" title="java图像处理干货篇一">
-  <strong>上一篇：</strong><br/>
-  <span>
-  java图像处理干货篇一</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/03/28/Swing中的JSplitPane/"  title="Swing干货系列之JSplitPane(分割面板)">
+<a href="/2017/07/09/python操作MongoDB/"  title="python操作MongoDB">
  <strong>下一篇：</strong><br/> 
- <span>Swing干货系列之JSplitPane(分割面板)
+ <span>python操作MongoDB
 </span>
 </a>
 </div>
@@ -196,7 +170,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#matplotlib绘制基本图形"><span class="toc-number">1.</span> <span class="toc-text">matplotlib绘制基本图形</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#折线图"><span class="toc-number">1.1.</span> <span class="toc-text">折线图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#饼状图"><span class="toc-number">1.2.</span> <span class="toc-text">饼状图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#散点图"><span class="toc-number">1.3.</span> <span class="toc-text">散点图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直方图"><span class="toc-number">1.4.</span> <span class="toc-text">直方图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.5.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#os模块中常用的方法"><span class="toc-number">1.</span> <span class="toc-text">os模块中常用的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的方法"><span class="toc-number">1.1.</span> <span class="toc-text">常用的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例子"><span class="toc-number">1.2.</span> <span class="toc-text">例子</span></a></li></ol></li></ol>
  
   </div>
 
