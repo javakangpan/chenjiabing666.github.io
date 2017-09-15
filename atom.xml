@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-09-15T08:26:29.118Z</updated>
+  <updated>2017-09-15T16:12:41.281Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,61 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Servlet总结三(HttpSession会话管理)</title>
+    <link href="http://chenjiabing666.github.io/2017/09/16/Servlet%E6%80%BB%E7%BB%93%E4%B8%89-HttpSession%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86/"/>
+    <id>http://chenjiabing666.github.io/2017/09/16/Servlet总结三-HttpSession会话管理/</id>
+    <published>2017-09-15T16:12:10.000Z</published>
+    <updated>2017-09-15T16:12:41.281Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Servlet总结三-HttpSession会话管理"><a href="#Servlet总结三-HttpSession会话管理" class="headerlink" title="Servlet总结三(HttpSession会话管理)"></a>Servlet总结三(HttpSession会话管理)</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p><code>HttpSession</code>是提供一种方式，跨多个页面请求或对 Web 站点的多次访问标识用户并存储有关该用户的信息。<br>简单的来说就是能够实现全局的共享数据，可以跨多个页面请求，当然在<code>Servlet</code>中可以在同一个项目中的不同的Servlet中共享数据</p>
+</blockquote>
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><blockquote>
+<ul>
+<li><code>void setAttribute(String name, Object value)</code>  绑定对象到此会话上</li>
+<li><code>public void removeAttribute(String name)</code>  移除绑定的对象</li>
+<li><code>Object getAttribute(String name)</code>   根据指定的属性名称获取指定的值(需要强转)</li>
+<li><code>Enumeration getAttributeNames()</code>    返回一个所有属性的枚举对象,可以通过Enumeration得到其中的值</li>
+<li><code>public int getMaxInactiveInterval()</code>  返回 servlet 容器在客户端访问之间将使此会话保持打开状态的最大时间间隔，以秒为单位（根据测试，这个默认的值为1800秒，如果在这个默认的时间之内没有响应，那么会话将会中断）</li>
+<li><code>public void setMaxInactiveInterval(int interval)</code>   指定在 servlet 容器使此会话失效之前客户端请求之间的时间间隔，以秒为单位。负数时间指示会话永远不会超时。 </li>
+</ul>
+</blockquote>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><blockquote>
+<p>我们可以通过<code>HttpServletRequest</code>的方法<code>getSession()</code> 获取对象，下面我们来使用其中的函数</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">//Demo1中的doGet方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request,HttpServletResponse response)</span></span>&#123;</div><div class="line">        request.setCharacterEncoding(<span class="string">"UTF-8"</span>);</div><div class="line">		response.setContentType(<span class="string">"text/html;charset=UTF-8"</span>);</div><div class="line">        <span class="comment">//获取对象</span></div><div class="line">		HttpSession session=request.getSession();</div><div class="line">		<span class="comment">//设置属性login的值为auto</span></div><div class="line">		session.setAttribute(<span class="string">"login"</span>, <span class="string">"auto"</span>);                                                                   </div><div class="line">        &#125;</div><div class="line"></div><div class="line">    <span class="comment">//Demo2中的doGet方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request,HttpServletResponse response)</span></span>&#123;</div><div class="line">        <span class="comment">//获取对象</span></div><div class="line">		HttpSession session=request.getSession();</div><div class="line">        <span class="comment">//获取其中的login的值</span></div><div class="line">        String login=session.getAttribute(<span class="string">"login"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="简单的例子"><a href="#简单的例子" class="headerlink" title="简单的例子"></a>简单的例子</h2><blockquote>
+<p>下面是一个简单的例子实现自动登录,在填入用户名和密码正确之后，并且勾选其中的自动登录选项，那么登录过一次后在一天之内，如果直接登录首页将会直接跳转到用户界面，实现自动登录的功能</p>
+<ul>
+<li><code>index.jsp</code>文件中实现的是简单的表单登录，并没有加上一些css，js,仅仅是一个例子</li>
+</ul>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">language</span>=<span class="string">"java"</span> <span class="attr">import</span>=<span class="string">"java.util.*"</span> <span class="attr">pageEncoding</span>=<span class="string">"UTF-8"</span>%&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%</span></span></div><div class="line">	<span class="attr">String</span> <span class="attr">path</span> = <span class="string">request.getContextPath();</span></div><div class="line">	<span class="attr">String</span> <span class="attr">basePath</span> = <span class="string">request.getScheme()</span> + "<span class="attr">:</span>//"</div><div class="line">			+ <span class="attr">request.getServerName</span>() + "<span class="attr">:</span>" + <span class="attr">request.getServerPort</span>()</div><div class="line">			+ <span class="attr">path</span> + "/";</div><div class="line">%&gt;</div><div class="line"></div><div class="line"><span class="meta">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">base</span> <span class="attr">href</span>=<span class="string">"&lt;%=basePath%&gt;"</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>My JSP 'index.jsp' starting page<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"pragma"</span> <span class="attr">content</span>=<span class="string">"no-cache"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"cache-control"</span> <span class="attr">content</span>=<span class="string">"no-cache"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"expires"</span> <span class="attr">content</span>=<span class="string">"0"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"keywords"</span> <span class="attr">content</span>=<span class="string">"keyword1,keyword2,keyword3"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"This is my page"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--</span></div><div class="line">	&lt;link rel="stylesheet" type="text/css" href="styles.css"&gt;</div><div class="line">	--&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"Demo3"</span> <span class="attr">method</span>=<span class="string">"get"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">label</span>&gt;</span>username:<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">br</span>&gt;</span> <span class="tag">&lt;<span class="name">label</span>&gt;</span>password:<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span></span></div><div class="line">			<span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;<span class="tag">&lt;/<span class="name">br</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">label</span>&gt;</span>自动登录：<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"login"</span> <span class="attr">value</span>=<span class="string">"auto"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><code>Demo3.java</code>是用户的首页，实现检测自动登录，没有加一些页面在上面，但是其实是用户的首页</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.BufferedReader;</div><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</div><div class="line"><span class="keyword">import</span> java.io.FileReader;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"><span class="keyword">import</span> java.io.InputStreamReader;</div><div class="line"><span class="keyword">import</span> java.io.PrintWriter;</div><div class="line"><span class="keyword">import</span> java.io.Reader;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.RequestDispatcher;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletContext;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.Cookie;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpSession;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo3</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		request.setCharacterEncoding(<span class="string">"UTF-8"</span>);</div><div class="line">		response.setContentType(<span class="string">"text/html;charset=UTF-8"</span>);</div><div class="line">		<span class="comment">// 获取HttpSession对象</span></div><div class="line">		HttpSession session = request.getSession();</div><div class="line">		<span class="comment">// 设置一天的访问时间间隔，如果超过这个时间，那么中断</span></div><div class="line">		session.setMaxInactiveInterval(<span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>);</div><div class="line">		<span class="comment">// 获取转发对象，页面跳转</span></div><div class="line">		RequestDispatcher dispatcher = request</div><div class="line">				.getRequestDispatcher(<span class="string">"HTML/user.html"</span>);</div><div class="line">		<span class="comment">// 获取表单的数据</span></div><div class="line">		String username = request.getParameter(<span class="string">"username"</span>);</div><div class="line">		String password = request.getParameter(<span class="string">"password"</span>);</div><div class="line">		String login = request.getParameter(<span class="string">"login"</span>);</div><div class="line"></div><div class="line">		<span class="comment">// 获取HttpSession中设置的属性名为login的值，如果为null，表示没有设置</span></div><div class="line">		String value = (String) session.getAttribute(<span class="string">"login"</span>);</div><div class="line"></div><div class="line">		<span class="comment">// 如果不为空，表示已经登录过一次了，并且允许自动登录，直接跳转到用户界面即可</span></div><div class="line">		<span class="keyword">if</span> (value != <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="comment">// 直接跳转到用户界面</span></div><div class="line">			dispatcher.forward(request, response);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="comment">// 如果用户名和密码正确</span></div><div class="line">			<span class="keyword">if</span> (<span class="string">"chenjiabing"</span>.equals(username) &amp;&amp; <span class="string">"123456"</span>.equals(password)) &#123;</div><div class="line">				<span class="comment">// 并且设置了自动登录</span></div><div class="line">				<span class="keyword">if</span> (<span class="string">"auto"</span>.equals(login)) &#123;</div><div class="line">					<span class="comment">// 设置session的值</span></div><div class="line">					session.setAttribute(<span class="string">"login"</span>, <span class="string">"auto"</span>);</div><div class="line">				&#125;</div><div class="line">				response.sendRedirect(<span class="string">"HTML/user.html"</span>);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		doGet(request, response);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>说明:</strong> <code>user.html</code>是用户的主页，这里没有给出，可以自己设计</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Servlet总结三-HttpSession会话管理&quot;&gt;&lt;a href=&quot;#Servlet总结三-HttpSession会话管理&quot; class=&quot;headerlink&quot; title=&quot;Servlet总结三(HttpSession会话管理)&quot;&gt;&lt;/a&gt;Servlet
+    
+    </summary>
+    
+      <category term="Java Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
+    
+    
+      <category term="Servlet" scheme="http://chenjiabing666.github.io/tags/Servlet/"/>
+    
+  </entry>
   
   <entry>
     <title>Servlet总结二(文件路径获取）</title>
@@ -1824,97 +1879,6 @@
       &lt;h1 id=&quot;管道流&quot;&gt;&lt;a href=&quot;#管道流&quot; class=&quot;headerlink&quot; title=&quot;管道流&quot;&gt;&lt;/a&gt;管道流&lt;/h1&gt;&lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;管道流的主要作用是可以进行两个&lt;strong&gt;线程间的通讯&lt;/strong&gt;，分为管道输
-    
-    </summary>
-    
-      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="java IO编程" scheme="http://chenjiabing666.github.io/tags/java-IO%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java IO学习笔记四</title>
-    <link href="http://chenjiabing666.github.io/2017/05/25/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9B%9B/"/>
-    <id>http://chenjiabing666.github.io/2017/05/25/Java-IO学习笔记四/</id>
-    <published>2017-05-25T07:32:49.000Z</published>
-    <updated>2017-06-20T00:55:36.157Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="内存操作流"><a href="#内存操作流" class="headerlink" title="内存操作流"></a>内存操作流</h1><blockquote>
-<p>之前的所有的流操作都是针对文件的，但是有时候只是想要实现数据间转换，此时如果我们想要创建一个文件然后再删除文件，那样显得有点麻烦，因此此时的内存操作流就显得很适合这类的操作，因为它只是在内存中存储，并不会真正的创建文件，内存操作流涉及的两个类是<code>ByteArrayInputStream</code>,<code>ByteArrayOutputStream</code>.</p>
-</blockquote>
-<h2 id="ByteArrayInputStream"><a href="#ByteArrayInputStream" class="headerlink" title="ByteArrayInputStream"></a>ByteArrayInputStream</h2><blockquote>
-<ul>
-<li><code>ByteArrayInputStream</code> 包含一个内部缓冲区，该缓冲区包含从流中读取的字节。内部计数器跟踪<code>read</code>方法要提供的下一个字节。</li>
-<li>关闭 <code>ByteArrayInputStream</code>无效。此类中的方法在关闭此流后仍可被调用，而不会产生任何 <code>IOException</code>。</li>
-<li>主要的功能是从缓冲区读取字节</li>
-</ul>
-</blockquote>
-<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
-<ul>
-<li><code>ByteArrayInputStream(byte[] buf)</code>   创建一个 <code>ByteArrayInputStream</code>，使用 <code>buf</code> 作为其缓冲区数组。</li>
-<li><code>ByteArrayInputStream(byte[] buf, int offset, int length)</code>    创建 <code>ByteArrayInputStream</code>，使用 buf 作为其缓冲区数组。</li>
-</ul>
-</blockquote>
-<h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
-<ul>
-<li><code>close()</code>  不过对这个无效，因为关闭之后仍然可以使用函数读取而不报错</li>
-<li><code>int read()</code> 从缓冲区中读取一个字节</li>
-<li><code>int read(byte[] bytes)</code>  将缓冲区中的内容读取到数组中</li>
-<li><code>int read(byte[] bytes,int off,int len)</code>    将最多 <code>len</code> 个数据字节从此输入流读入 <code>byte</code> 数组。</li>
-<li><code>long skip(long n)</code>    从此输入流中跳过<code>n</code> 个输入字节。</li>
-<li><code>void reset()</code>  将此 byte 数组输出流的 count 字段重置为零，从而丢弃输出流中目前已累积的所有输出（清除缓冲区）</li>
-</ul>
-</blockquote>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo8</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        String str = <span class="string">"chenjiabing\n陈加兵"</span>;</div><div class="line">        <span class="keyword">byte</span>[] bytes = str.getBytes();  <span class="comment">//创建一个数组</span></div><div class="line">        ByteArrayInputStream inputStream = <span class="keyword">new</span> ByteArrayInputStream(bytes);  <span class="comment">//使用bytes作为缓冲区数组</span></div><div class="line">        <span class="keyword">int</span> temp = <span class="number">0</span>;</div><div class="line">        <span class="comment">/*第一种方法读取缓冲区中的数据，这个和文件的操作不一样，这个可以直接冲缓冲区中读取数据字节*/</span></div><div class="line">        <span class="keyword">while</span> ((temp = inputStream.read()) != -<span class="number">1</span>) &#123;</div><div class="line">            System.out.print((<span class="keyword">char</span>) temp);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/*创建数组用于存储读取的内容，下面是第二种读取数据的方法*/</span></div><div class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[bytes.length];</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">int</span> len = inputStream.read(b);</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="keyword">new</span> String(b));</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="ByteArrayOutputStream"><a href="#ByteArrayOutputStream" class="headerlink" title="ByteArrayOutputStream"></a>ByteArrayOutputStream</h2><blockquote>
-<ul>
-<li><p>此类实现了一个输出流，其中的数据被写入一个<code>byte</code> 数组。缓冲区会随着数据的不断写入而自动增长。可使用 <code>toByteArray()</code> 和 toString() 获取数据。</p>
-</li>
-<li><p>关闭 <code>ByteArrayOutputStream</code> 无效。此类中的方法在关闭此流后仍可被调用，而不会产生任何 <code>IOException</code>。</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
-<ul>
-<li><code>ByteArrayOutputStream()</code>     创建一个新的 <code>byte</code>数组输出流。</li>
-<li><code>ByteArrayOutputStream(int size)</code>    创建一个新的 <code>byte</code> 数组输出流，它具有指定大小的缓冲区容量（以字节为单位）。</li>
-</ul>
-</blockquote>
-<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><blockquote>
-<ul>
-<li><p><code>int size()</code>    返回缓冲区的当前大小。</p>
-</li>
-<li><p><code>byte[] toByteArray()</code>    创建一个新分配的 <code>byte</code> 数组。</p>
-</li>
-<li><p><code>String toString()</code>   将缓冲区的字节转换成字符串</p>
-</li>
-<li><p><code>void    write(byte[] b, int off, int len)</code>  将指定 <code>byte</code> 数组中从偏移量 <code>off</code> 开始的 <code>len</code> 个字节写入此 <code>byte</code> 数组输出流。</p>
-</li>
-<li><p><code>void    write(int b)</code>    将指定的字节写入此 <code>byte</code>数组输出流。</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo8</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        ByteArrayOutputStream outputStream = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line">        String str = <span class="string">"chenjiabing"</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            outputStream.write(str.getBytes());   <span class="comment">//将字符串转换成数组然后写入缓冲区</span></div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                outputStream.close();  <span class="comment">//这里的关闭无效</span></div><div class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//将缓冲区的数据转换成字符串后输出，这里同样可以看出输出流的关闭根本不影响函数的调用</span></div><div class="line">        System.out.println(outputStream.size());  <span class="comment">//输出缓冲区的大小</span></div><div class="line">        System.out.println(outputStream.toString());  <span class="comment">//输出chenjiabing</span></div><div class="line">        outputStream.reset();   <span class="comment">//清除缓冲区的内容，如果不清零那么原先写入的数据还是存在的，但是此时我们已经不需要前面的数据了</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            outputStream.write(<span class="string">"陈加兵"</span>.getBytes());  <span class="comment">//继续向缓冲区写入数据</span></div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        System.out.println(outputStream.size());  <span class="comment">//这里的一个汉字占了三个字节</span></div><div class="line">        System.out.println(outputStream.toString());<span class="comment">//输出陈加兵</span></div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="综合"><a href="#综合" class="headerlink" title="综合"></a>综合</h2><blockquote>
-<p>下面我们结合上面的两个类将<strong>字符串转换大小写</strong></p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo8</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        ByteArrayOutputStream outputStream = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line">        String str = <span class="string">"chenjiabing"</span>;</div><div class="line">        ByteArrayInputStream inputStream = <span class="keyword">new</span> ByteArrayInputStream(str.getBytes());  <span class="comment">//实例化输入流</span></div><div class="line">        <span class="keyword">int</span> temp = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span> ((temp = inputStream.read()) != -<span class="number">1</span>)   <span class="comment">//读取缓冲区的字节数据</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">char</span> c = (<span class="keyword">char</span>) temp;  <span class="comment">//将整数转换成字符，ascii码的转换</span></div><div class="line">            outputStream.write(Character.toUpperCase(c));  <span class="comment">//转换成大写，然后写入输出流的缓冲区中</span></div><div class="line">        &#125;</div><div class="line">        System.out.println(outputStream.toString());   <span class="comment">//利用输出流输出转换后的字符串，即是去取出内存中的数据</span></div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
-<ul>
-<li><p><a href="http://blog.csdn.net/yyyandroid/article/details/7756390" target="_blank" rel="external">http://blog.csdn.net/yyyandroid/article/details/7756390</a></p>
-</li>
-<li><p><a href="http://www.cnblogs.com/lich/archive/2011/12/11/2283883.html" target="_blank" rel="external">http://www.cnblogs.com/lich/archive/2011/12/11/2283883.html</a></p>
-</li>
-</ul>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;内存操作流&quot;&gt;&lt;a href=&quot;#内存操作流&quot; class=&quot;headerlink&quot; title=&quot;内存操作流&quot;&gt;&lt;/a&gt;内存操作流&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;之前的所有的流操作都是针对文件的，但是有时候只是想要实现数据间转换，此时如果我们想要创建一
     
     </summary>
     
