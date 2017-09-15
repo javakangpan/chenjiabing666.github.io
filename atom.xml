@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-09-14T14:29:17.992Z</updated>
+  <updated>2017-09-15T08:26:29.118Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Servlet总结二(文件路径获取）</title>
+    <link href="http://chenjiabing666.github.io/2017/09/15/Servlet%E6%80%BB%E7%BB%93%E4%BA%8C(%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E8%8E%B7%E5%8F%96)/"/>
+    <id>http://chenjiabing666.github.io/2017/09/15/Servlet总结二(文件路径获取)/</id>
+    <published>2017-09-15T08:25:28.000Z</published>
+    <updated>2017-09-15T08:26:29.118Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Servlet总结二（文件路径）"><a href="#Servlet总结二（文件路径）" class="headerlink" title="Servlet总结二（文件路径）"></a>Servlet总结二（文件路径）</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>前面我们说过<code>ServletContext</code>表示的是web容器中的上下文，下面我们也是用到<code>ServletContext</code>中的方法读取文件</p>
+</blockquote>
+<h2 id="读取WebRoot文件下的文件"><a href="#读取WebRoot文件下的文件" class="headerlink" title="读取WebRoot文件下的文件"></a>读取WebRoot文件下的文件</h2><blockquote>
+<p>我们知道当我们将项目部署到<code>Tomcat</code>服务器中时，项目中的文件路径其实就是在Tomcat中的文件路径，所有的项目都是存储在webapps下的，我们可以看到webaapps下有两个文件夹<code>(WEB-INF,META-INF)</code>，这两个其实就是项目中<code>webRoot</code>下的两个文件夹。</p>
+<ul>
+<li><code>public String getRealPath(String path)</code>   为给定虚拟路径返回包含实际路径的String</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//获取ServletContext的对象</span></div><div class="line">ServletContext context = <span class="keyword">this</span>.getServletContext();</div><div class="line"><span class="comment">//context.getRealPath("/")获取项目的根目录的绝对路径(webRoot的绝对路径)</span></div><div class="line"><span class="comment">//得到了webRoot的绝对路径，下面只要再接着写其他文件的路径即可</span></div><div class="line">File file = <span class="keyword">new</span> File(context.getRealPath(<span class="string">"/"</span>)</div><div class="line">		+ <span class="string">"\\WEB-INF\\lib\\file.txt"</span>);</div><div class="line"><span class="keyword">if</span> (file.exists()) &#123;</div><div class="line">	System.out.println(<span class="string">"文件存在"</span>);</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	System.out.println(<span class="string">"文件不存在，现在我们创建一个"</span>);</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		file.createNewFile();<span class="comment">// 创建一个新的文件</span></div><div class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><code>InputStream getResourceAsStream(String path)</code>   根据传入的路径文件，返回一个<code>InputStream</code>对象</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">      <span class="comment">// 第一个"/"是表示webRoot的根目录，通过这个函数可以不用指定绝对路径就可以构造一个输入字节流</span></div><div class="line">InputStream stream = context</div><div class="line">		.getResourceAsStream(<span class="string">"/WEB-INF/lib/file.txt"</span>);</div><div class="line"><span class="comment">// 通过InputStreamReader将字节流转换为字符流，然后创建缓冲字符流读取文件</span></div><div class="line">BufferedReader reader = <span class="keyword">new</span> BufferedReader(</div><div class="line">		<span class="keyword">new</span> InputStreamReader(stream));</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">	System.out.println(reader.readLine());</div><div class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">	System.out.println(<span class="string">"文件没有成功读取"</span>);</div><div class="line">	e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意：</strong>这个函数中的path传入的第一个<code>&quot;/&quot;</code>就表示根目录，在<code>eclipse</code>项目中表示webRoot的绝对路径，在<code>Tomcat</code>下的webapps表示项目名称的绝对路径，因此在下面的WEB-INF,META-INF文件夹下的文件只需要在后面继续添加即可</p>
+</blockquote>
+<h2 id="读取src下的class文件"><a href="#读取src下的class文件" class="headerlink" title="读取src下的class文件"></a>读取src下的class文件</h2><blockquote>
+<p>前面我们获取的<code>webRoot</code>下的文件路径，但是如果我们想要获取<code>src</code>下的文件，那么我们要如何获取呢。</p>
+<p>我们仔细看看<code>Tomcat</code>下的文件，可以发现在每一个WEB-INF下都有一个<code>classes</code>，这个就是相当于Tomcat下的src，因此我们利用上面得到的路径稍加修改就可以轻易的得到其中的文件路径</p>
+<p>下面我们读取<code>src</code>文件夹下的<code>file.txt</code>中的内容，代码如下:</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">      <span class="comment">// 获取ServletContext对象</span></div><div class="line">ServletContext context = <span class="keyword">this</span>.getServletContext();</div><div class="line"><span class="comment">// 这个是获取项目下的src文件夹下的file.txt文件</span></div><div class="line">File file = <span class="keyword">new</span> File(context.getRealPath(<span class="string">"/"</span>)</div><div class="line">		+ <span class="string">"\\WEB-INF\\classes\\file.txt"</span>);</div><div class="line">BufferedReader reader = <span class="keyword">null</span>;</div><div class="line"><span class="keyword">if</span> (file.exists()) &#123;</div><div class="line">	System.out.println(<span class="string">"文件存在，现在可以读取"</span>);</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		<span class="comment">// 创建缓冲流对象，实现读取文件</span></div><div class="line">		reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(file));</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="comment">// 输出第一行内容</span></div><div class="line">			System.out.println(reader.readLine());</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</div><div class="line">		System.out.println(<span class="string">"文件不存在"</span>);</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		<span class="keyword">if</span> (reader != <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				reader.close(); <span class="comment">// 如果reader不是空，就关闭</span></div><div class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">				System.out.println(<span class="string">"文件关闭失败"</span>);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	System.out.println(<span class="string">"文件不存在，现在开始创建一个"</span>);</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		file.createNewFile();<span class="comment">// 创建一个</span></div><div class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">		System.out.println(<span class="string">"没有创建成功"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Servlet总结二（文件路径）&quot;&gt;&lt;a href=&quot;#Servlet总结二（文件路径）&quot; class=&quot;headerlink&quot; title=&quot;Servlet总结二（文件路径）&quot;&gt;&lt;/a&gt;Servlet总结二（文件路径）&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a hr
+    
+    </summary>
+    
+      <category term="Java Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
+    
+    
+      <category term="Servlet" scheme="http://chenjiabing666.github.io/tags/Servlet/"/>
+    
+  </entry>
   
   <entry>
     <title>Eclipse配置Tomcat</title>
@@ -1868,107 +1915,6 @@
     
       &lt;h1 id=&quot;内存操作流&quot;&gt;&lt;a href=&quot;#内存操作流&quot; class=&quot;headerlink&quot; title=&quot;内存操作流&quot;&gt;&lt;/a&gt;内存操作流&lt;/h1&gt;&lt;blockquote&gt;
 &lt;p&gt;之前的所有的流操作都是针对文件的，但是有时候只是想要实现数据间转换，此时如果我们想要创建一
-    
-    </summary>
-    
-      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="java IO编程" scheme="http://chenjiabing666.github.io/tags/java-IO%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java IO学习笔记三</title>
-    <link href="http://chenjiabing666.github.io/2017/05/24/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89/"/>
-    <id>http://chenjiabing666.github.io/2017/05/24/Java-IO学习笔记三/</id>
-    <published>2017-05-24T06:48:34.000Z</published>
-    <updated>2017-06-20T00:55:30.130Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Java-IO学习笔记三"><a href="#Java-IO学习笔记三" class="headerlink" title="Java IO学习笔记三"></a>Java IO学习笔记三</h1><blockquote>
-<ul>
-<li><p>在整个<code>IO</code>包中，实际上就是分为字节流和字符流，但是除了这两个流之外，还存在了一组字节流-字符流的转换类。</p>
-</li>
-<li><p><code>OutputStreamWriter</code>：是<code>Writer</code>的子类，将输出的字符流变为字节流，即：将一个字符流的输出对象变成字节流的输出对象。</p>
-</li>
-<li><p><code>InputStreamReader</code>:是<code>Reader</code>的子类，将输入的字节流变为字符流，即：将一个字节流的输入对象变成字符流的输入对象。</p>
-</li>
-<li><p>一般在操作输入输出内容就需要使用字节或字符流，但是有些时候需要将字符流变成字节流的形式，或者将字节流变为字符流的形式，所以，就需要另外一组转换流的操作类。</p>
-</li>
-</ul>
-</blockquote>
-<h2 id="InputStreamReader"><a href="#InputStreamReader" class="headerlink" title="InputStreamReader"></a>InputStreamReader</h2><blockquote>
-<ul>
-<li><p><code>InputStreamReader</code> 是字节流通向字符流的桥梁：它使用指定的 <code>charset</code> 读取字节并将其解码为字符。它使用的字符集可以由名称指定或显式给定，或者可以接受平台默认的字符集。</p>
-</li>
-<li><p>每次调用 <code>InputStreamReader</code> 中的一个 <code>read()</code> 方法都会导致从底层输入流读取一个或多个字节。要启用从字节到字符的有效转换，可以提前从底层流读取更多的字节，使其超过满足当前读取操作所需的字节。</p>
-</li>
-<li><p>主要的功能还是从文件中读取内容，不过是一次性的读取多个字节，这个很像它的子类<code>FileReader</code></p>
-</li>
-</ul>
-</blockquote>
-<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
-<ul>
-<li><code>InputStreamReader(InputStream in)</code> 创建一个使用默认字符集的 <code>InputStreamReader</code>,不过这里的<code>InputStream</code>是抽下类，因此可以使用它的子类<code>FileInputStream</code>实例化，这里的<code>FileInputStream</code>是操作字节流的，显然看出这个类的作用就是字符流和字节流的桥梁</li>
-</ul>
-</blockquote>
-<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><blockquote>
-<ul>
-<li><code>close()</code></li>
-<li><code>int read()</code> 读取单个字符</li>
-<li><code>int read(Char[] c)</code> 读取字符存储在字符数组中</li>
-<li><code>int    read(char[] cbuf, int offset, int length)</code> 将字符读入数组中的某一部分</li>
-<li><code>boolean    ready()</code>   判断此流是否已经准备好用于读取。</li>
-</ul>
-</blockquote>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> IO;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by chenjiabing on 17-5-24.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo4</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        File file = <span class="keyword">new</span> File(<span class="string">"/tmp"</span> + File.separator + <span class="string">"test"</span> + File.separator + <span class="string">"test.txt"</span>);</div><div class="line">        InputStreamReader inputStreamReader = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            inputStreamReader = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(file));  <span class="comment">//初始化</span></div><div class="line">            <span class="keyword">char</span>[] c = <span class="keyword">new</span> <span class="keyword">char</span>[(<span class="keyword">int</span>) file.length()];   <span class="comment">//创建数组</span></div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                <span class="keyword">int</span> len = inputStreamReader.read(c);   <span class="comment">//将内容读取到数组中</span></div><div class="line">                System.out.println(len);</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; c.length; i++) &#123;</div><div class="line">                    System.out.print(c[i]);</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line"></div><div class="line"></div><div class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;<span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">if</span>(inputStreamReader!=<span class="keyword">null</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    inputStreamReader.close();   <span class="comment">//关闭</span></div><div class="line">                &#125;<span class="keyword">catch</span> (IOException e)</div><div class="line">                &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>注意：</strong>从上面的代码中可以看到这个和<code>FileReader</code>的操作是一样的，只是构造的方法不一样</p>
-</blockquote>
-<h2 id="OutputStreamWriter"><a href="#OutputStreamWriter" class="headerlink" title="OutputStreamWriter"></a>OutputStreamWriter</h2><blockquote>
-<ul>
-<li><p><code>OutputStreamWriter</code> 是字符流通向字节流的桥梁：可使用指定的 charset 将要写入流中的字符编码成字节。它使用的字符集可以由名称指定或显式给定，否则将接受平台默认的字符集。</p>
-</li>
-<li><p>每次调用 <code>write()</code> 方法都会导致在给定字符（或字符集）上调用编码转换器。在写入底层输出流之前，得到的这些字节将在缓冲区中累积。可以指定此缓冲区的大小，不过，默认的缓冲区对多数用途来说已足够大。注意，传递给 <code>write()</code> 方法的字符没有缓冲。</p>
-</li>
-<li><p>主要的功能还是向文件中写入文件</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
-<ul>
-<li><code>OutputStreamWriter(OutputStream out)</code>   创建使用默认字符编码的 <code>OutputStreamWriter</code>。这里同样是抽象类，所以用它的子类<code>FileOutputStream</code>实例化</li>
-</ul>
-</blockquote>
-<h3 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h3><blockquote>
-<ul>
-<li><code>close()</code></li>
-<li><code>flush()</code></li>
-<li><code>write(String str)</code>  写入字符串</li>
-<li><code>void    write(String str, int off, int len)</code>  写入字符串的某一部分。</li>
-<li><code>write(int c)</code>  写入单个字符</li>
-<li><code>void    write(char[] cbuf, int off, int len)</code>   写入字符数组的某一部分。</li>
-</ul>
-</blockquote>
-<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">package</span> IO;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by chenjiabing on 17-5-24.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo5</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">    &#123;</div><div class="line">        File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line">        OutputStreamWriter outputStreamWriter=<span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            outputStreamWriter=<span class="keyword">new</span> OutputStreamWriter(<span class="keyword">new</span> FileOutputStream(file,<span class="keyword">true</span>));</div><div class="line">            String str=<span class="string">"陈加兵\n"</span>;</div><div class="line">            <span class="keyword">int</span> data=<span class="number">48</span>;</div><div class="line">            String name=<span class="string">"chenjiabing"</span>;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                outputStreamWriter.write(str);</div><div class="line">                outputStreamWriter.write(data);</div><div class="line">                outputStreamWriter.write(name,<span class="number">0</span>,<span class="number">2</span>);   <span class="comment">//写入字符串的一部分</span></div><div class="line">            &#125;<span class="keyword">catch</span> (IOException e)</div><div class="line">            &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="keyword">catch</span> (FileNotFoundException e)</div><div class="line">        &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;<span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">if</span>(outputStreamWriter!=<span class="keyword">null</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    outputStreamWriter.flush();</div><div class="line">                    outputStreamWriter.close();</div><div class="line">                &#125;<span class="keyword">catch</span> (IOException e)</div><div class="line">                &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>从上面可以看出<code>OutputStreamWriter</code>和<code>FileWriter</code>的用法一样</strong></p>
-</blockquote>
-<h2 id="综合使用"><a href="#综合使用" class="headerlink" title="综合使用"></a>综合使用</h2><blockquote>
-<p>上面我们说了OutputStreamWriter和InputStreamWriter是字节流和字符流之间的桥梁，可以实现之间的转换，下面我们使用这两个之间的相互转换完成高效流的创建<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * InputStreamReader实现了将字节流FileInputStream转换为字符流，然后使用转换来的字节流创建高效流，从而实现高效的读写</div><div class="line"> */</div><div class="line"></div><div class="line">File file = <span class="keyword">new</span> File(<span class="string">"/tmp/demo.txt"</span>);</div><div class="line">FileInputStream fileInputStream = <span class="keyword">new</span> FileInputStream(file); <span class="comment">// 创建字节输入流</span></div><div class="line">InputStreamReader inputStreamReader = <span class="keyword">new</span> InputStreamReader(</div><div class="line">		fileInputStream); <span class="comment">// 转换为字符输入流</span></div><div class="line">BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(inputStreamReader); <span class="comment">// 创建高效流对象</span></div></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
-<ul>
-<li><a href="http://www.cnblogs.com/lich/archive/2011/12/11/2283848.html" target="_blank" rel="external">http://www.cnblogs.com/lich/archive/2011/12/11/2283848.html</a></li>
-</ul>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Java-IO学习笔记三&quot;&gt;&lt;a href=&quot;#Java-IO学习笔记三&quot; class=&quot;headerlink&quot; title=&quot;Java IO学习笔记三&quot;&gt;&lt;/a&gt;Java IO学习笔记三&lt;/h1&gt;&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;在整个&lt;code
     
     </summary>
     
