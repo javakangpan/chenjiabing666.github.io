@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-09-17T13:45:17.232Z</updated>
+  <updated>2017-09-17T14:03:28.234Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://chenjiabing666.github.io/2017/09/17/Servlet%E6%80%BB%E7%BB%93%E5%9B%9B-%E8%BF%87%E6%BB%A4%E5%99%A8/"/>
     <id>http://chenjiabing666.github.io/2017/09/17/Servlet总结四-过滤器/</id>
     <published>2017-09-17T13:44:07.000Z</published>
-    <updated>2017-09-17T13:45:17.232Z</updated>
+    <updated>2017-09-17T14:03:28.234Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Servlet总结四-过滤器的使用"><a href="#Servlet总结四-过滤器的使用" class="headerlink" title="Servlet总结四(过滤器的使用)"></a>Servlet总结四(过滤器的使用)</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
 <p>在容器调用Servlet的<code>service()</code>的方法钱，Servlet其实并不会知道有请求的到来，而在<code>service()</code>方法执行后，容器真正对浏览器进行HTTP响应之前，浏览器也不知道Servlet真正响应是什么。过滤器(<code>Filter</code>)正如其名称所示，它介于Servlet之前，可拦截浏览器对Servlet的请求，也可以改变Servlet对浏览器的响应。</p>
@@ -84,7 +84,7 @@
     
     </summary>
     
-      <category term="Java Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
+      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
     
     
       <category term="Servlet" scheme="http://chenjiabing666.github.io/tags/Servlet/"/>
@@ -96,7 +96,7 @@
     <link href="http://chenjiabing666.github.io/2017/09/16/Servlet%E6%80%BB%E7%BB%93%E4%B8%89-HttpSession%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86/"/>
     <id>http://chenjiabing666.github.io/2017/09/16/Servlet总结三-HttpSession会话管理/</id>
     <published>2017-09-15T16:12:10.000Z</published>
-    <updated>2017-09-15T16:12:41.281Z</updated>
+    <updated>2017-09-17T14:03:27.218Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Servlet总结三-HttpSession会话管理"><a href="#Servlet总结三-HttpSession会话管理" class="headerlink" title="Servlet总结三(HttpSession会话管理)"></a>Servlet总结三(HttpSession会话管理)</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
 <p><code>HttpSession</code>是提供一种方式，跨多个页面请求或对 Web 站点的多次访问标识用户并存储有关该用户的信息。<br>简单的来说就是能够实现全局的共享数据，可以跨多个页面请求，当然在<code>Servlet</code>中可以在同一个项目中的不同的Servlet中共享数据</p>
@@ -139,7 +139,7 @@
     
     </summary>
     
-      <category term="Java Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
+      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
     
     
       <category term="Servlet" scheme="http://chenjiabing666.github.io/tags/Servlet/"/>
@@ -151,7 +151,7 @@
     <link href="http://chenjiabing666.github.io/2017/09/15/Servlet%E6%80%BB%E7%BB%93%E4%BA%8C(%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E8%8E%B7%E5%8F%96)/"/>
     <id>http://chenjiabing666.github.io/2017/09/15/Servlet总结二(文件路径获取)/</id>
     <published>2017-09-15T08:25:28.000Z</published>
-    <updated>2017-09-15T08:26:29.118Z</updated>
+    <updated>2017-09-17T14:03:25.978Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Servlet总结二（文件路径）"><a href="#Servlet总结二（文件路径）" class="headerlink" title="Servlet总结二（文件路径）"></a>Servlet总结二（文件路径）</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>前面我们说过<code>ServletContext</code>表示的是web容器中的上下文，下面我们也是用到<code>ServletContext</code>中的方法读取文件</p>
@@ -186,7 +186,7 @@
     
     </summary>
     
-      <category term="Java Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
+      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
     
     
       <category term="Servlet" scheme="http://chenjiabing666.github.io/tags/Servlet/"/>
@@ -198,7 +198,7 @@
     <link href="http://chenjiabing666.github.io/2017/09/14/Eclipse%E9%85%8D%E7%BD%AETomcat/"/>
     <id>http://chenjiabing666.github.io/2017/09/14/Eclipse配置Tomcat/</id>
     <published>2017-09-14T14:28:10.000Z</published>
-    <updated>2017-09-17T13:51:41.394Z</updated>
+    <updated>2017-09-17T14:03:29.848Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Eclipse配置tomcat"><a href="#Eclipse配置tomcat" class="headerlink" title="Eclipse配置tomcat"></a>Eclipse配置tomcat</h1><h2 id="Eclipse"><a href="#Eclipse" class="headerlink" title="Eclipse"></a>Eclipse</h2><h3 id="创建server"><a href="#创建server" class="headerlink" title="创建server"></a>创建server</h3><blockquote>
 <ol>
@@ -224,7 +224,7 @@
     
     </summary>
     
-      <category term="Java Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
+      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
     
     
       <category term="Servlet" scheme="http://chenjiabing666.github.io/tags/Servlet/"/>
@@ -236,7 +236,7 @@
     <link href="http://chenjiabing666.github.io/2017/09/14/Servlet%E6%80%BB%E7%BB%93%E4%B8%80/"/>
     <id>http://chenjiabing666.github.io/2017/09/14/Servlet总结一/</id>
     <published>2017-09-14T14:24:50.000Z</published>
-    <updated>2017-09-15T02:04:23.187Z</updated>
+    <updated>2017-09-17T14:03:49.050Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Servlet总结一"><a href="#Servlet总结一" class="headerlink" title="Servlet总结一"></a>Servlet总结一</h1><h2 id="HttpServlet"><a href="#HttpServlet" class="headerlink" title="HttpServlet"></a>HttpServlet</h2><blockquote>
 <p>想要实现一个servlet必须继承这个类，其实一个servlet就是一个java文件，但是这个类必须是继承HttpServlet。</p>
@@ -443,7 +443,7 @@
     
     </summary>
     
-      <category term="Java web" scheme="http://chenjiabing666.github.io/categories/Java-web/"/>
+      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
     
     
       <category term="Servlet" scheme="http://chenjiabing666.github.io/tags/Servlet/"/>
