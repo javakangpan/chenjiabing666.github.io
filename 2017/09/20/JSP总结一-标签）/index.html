@@ -36,7 +36,7 @@ page
 page指示类型告知容器如何转译目前的JSP网页。
 
 1&amp;lt;">
-<meta property="og:updated_time" content="2017-09-20T14:52:17.169Z">
+<meta property="og:updated_time" content="2017-09-20T14:58:57.321Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSP总结一(标签）">
 <meta name="twitter:description" content="JSP总结一(标签)生命周期
@@ -137,7 +137,7 @@ page指示类型告知容器如何转译目前的JSP网页。
 <h3 id="page"><a href="#page" class="headerlink" title="page"></a>page</h3><blockquote>
 <p><code>page</code>指示类型告知容器如何转译目前的JSP网页。</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language=<span class="string">"java"</span> contentType=<span class="string">"text/html; charset=UTF-8"</span> pageEncoding=<span class="string">"UTF-8"</span> <span class="keyword">import</span>=<span class="string">"java.util.*"</span>%&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language=<span class="string">"java"</span> contentType=<span class="string">"text/html; charset=UTF-8"</span> pageEncoding=<span class="string">"UTF-8"</span> <span class="keyword">import</span>=<span class="string">"java.util.*"</span>%&gt;</div></pre></td></tr></table></figure>
 <blockquote>
 <p><code>language</code>指定解析语言，<code>contentType</code>表明为html文件，<code>pageEncoding</code>告诉容器转译及编译的时候如何处理这个这个JSP网页中的额中文编码，import是导入包的作用，如果有多个包导入，那么可以使用逗号隔开。</p>
 <p><code>errorPage</code>用于设置当JSP运行错误而产生异常的时候，该转发哪一个页面处理这个异常，可以自己定义一个异常的JSP或者html文件显示这个异常，但是这个必须和<code>isErrorPage</code>配合使用，必须在处理异常的<code>page</code>指令中协商<code>isErrorPage=&quot;true&quot;</code></p>
@@ -146,11 +146,11 @@ page指示类型告知容器如何转译目前的JSP网页。
 <h3 id="include"><a href="#include" class="headerlink" title="include"></a>include</h3><blockquote>
 <p><code>include</code>是用于静态的包含其他页面中的内容。这个还是很重要的，如果在网页中每一张页面都需要使用一样的导航栏，导入一样的css，js文件，那么可以将这些内容单独做一个jsp文件或者html文件，要使用的时候就直接包含即可。</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">//file指定文件的相对路径  </span></div><div class="line">&lt;%<span class="meta">@include</span> file=<span class="string">"daoru.jsp"</span> %&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">//file指定文件的相对路径  </span></div><div class="line">&lt;%<span class="meta">@include</span> file=<span class="string">"daoru.jsp"</span> %&gt;</div></pre></td></tr></table></figure>
 <blockquote>
 <p>其实上面的语句在<code>Servlet</code>语句相当于下面这句话：</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">RequestDispatcher dis=request.getRequestDispatcher();</div><div class="line">dis.include(request,response);</div></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">RequestDispatcher dis=request.getRequestDispatcher();</div><div class="line">dis.include(request,response);</div></pre></td></tr></table></figure>
 <blockquote>
 <p>注意这句话写在页面的哪里，那么就将其中的内容导入到哪里，比如要导入<code>css</code>，<code>js</code>文件，那么直接在<code>head</code>标签中直接导入</p>
 <p>静态导入的方式在部署到服务器会自动和当前的<code>JSP</code>文件编译为一个<code>Servlet</code>文件，也就是在一个<code>Servlet</code>类中。因此在包含的JSP文件中如果定义了变量或者方法，那么在当前的JSP页面中就不能重复定义，否则将会出现变量重复的错误，代码如下：</p>
@@ -163,11 +163,11 @@ page指示类型告知容器如何转译目前的JSP网页。
 <p><code>&lt;%! &gt;</code> 这就是声明元素，主要是用来定义类成员和方法声明的。其中不可以出现循环语句等，只能出现定义语句，当然在定义方法的时候函数体中可以出现其他的语句。</p>
 <p>声明元素中的内容在编译的都将变成<code>Servlet</code>中的类的成员变量和方法</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">    &lt;%!</div><div class="line">        <span class="comment">//变量</span></div><div class="line">        String name=<span class="string">"陈加兵"</span>;     </div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> age=<span class="number">20</span>;</div><div class="line"></div><div class="line">        <span class="comment">//方法</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(name+<span class="string">":"</span>+age);</div><div class="line">&#125;</div><div class="line">    %&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">    &lt;%!</div><div class="line">        <span class="comment">//变量</span></div><div class="line">        String name=<span class="string">"陈加兵"</span>;     </div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> age=<span class="number">20</span>;</div><div class="line"></div><div class="line">        <span class="comment">//方法</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(name+<span class="string">":"</span>+age);</div><div class="line">&#125;</div><div class="line">    %&gt;</div></pre></td></tr></table></figure>
 <h2 id="Scriptlet"><a href="#Scriptlet" class="headerlink" title="Scriptlet"></a>Scriptlet</h2><blockquote>
 <p><code>&lt;% %&gt;</code>这个是写正常的java语句的，其中将会转译成<code>_jspService()</code>方法中的内容</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;%</div><div class="line">    String name=<span class="string">"陈加兵"</span>;</div><div class="line">    request.setAttribute(<span class="string">"name"</span>,name);</div><div class="line">%&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;%</div><div class="line">    String name=<span class="string">"陈加兵"</span>;</div><div class="line">    request.setAttribute(<span class="string">"name"</span>,name);</div><div class="line">%&gt;</div></pre></td></tr></table></figure>
 <h2 id="表达式元素"><a href="#表达式元素" class="headerlink" title="表达式元素"></a>表达式元素</h2><blockquote>
 <p><code>&lt;%= %&gt;</code>  其中可以直接写一个表达式</p>
 </blockquote>
@@ -351,11 +351,11 @@ page指示类型告知容器如何转译目前的JSP网页。
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>3</sup></a></li>
+				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>3</sup></a></li>
 			
 		
 			
@@ -375,19 +375,19 @@ page指示类型告知容器如何转译目前的JSP网页。
 			
 		
 			
-				<li><a href="/tags/python数据分析/" title="python数据分析">python数据分析<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 			
 		
 			
+				<li><a href="/tags/python数据分析/" title="python数据分析">python数据分析<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
 			
 		
 			
