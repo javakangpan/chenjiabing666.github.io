@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-09-19T02:38:53.047Z</updated>
+  <updated>2017-09-20T14:52:54.256Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,202 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JSP总结二(动作元素)</title>
+    <link href="http://chenjiabing666.github.io/2017/09/20/JSP%E6%80%BB%E7%BB%93%E4%BA%8C-%E5%8A%A8%E4%BD%9C%E5%85%83%E7%B4%A0/"/>
+    <id>http://chenjiabing666.github.io/2017/09/20/JSP总结二-动作元素/</id>
+    <published>2017-09-20T14:51:42.000Z</published>
+    <updated>2017-09-20T14:52:54.256Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="JSP总结二-动作元素"><a href="#JSP总结二-动作元素" class="headerlink" title="JSP总结二(动作元素)"></a>JSP总结二(动作元素)</h1><h2 id=""><a href="#" class="headerlink" title=""></a><jsp:include></jsp:include></h2><blockquote>
+<p>前面介绍了一种指令元素<code>include</code>，那是一种静态包含<code>JSP</code>文件，这个标签是动态包含一个<code>JSP</code>页面，也就是被包含的<code>JSP</code>页面和原JSP将合并在一起，转译为一个<code>Servlet</code>类。这是有一定的局限性的，如变量的定义不能重复。</p>
+<p>动态的包含JSP文件即是被包含的JSP和原JSP分别转译为一个Servlet类，这就保证了其中的变量可以重复定义了，因为并不是在一个类中了</p>
+<p><code>&lt;jsp:include page=&quot;相对的文件路径&quot;&gt;&lt;/jsp:include&gt;</code>这种标签转译为Servlet和指令元素<code>include</code>是一样的</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;%--动态导入在编译的时候是两个jsp文件各自编译成一个Servlet文件，因此其中的变量是不可以共享的，在当前页面中还是可以定义导入页面定义的变量 --%&gt;</div><div class="line">&lt;jsp:include page="form.jsp"&gt;</div><div class="line">    //定义的param可以在form.jsp中使用request.getParameter(String name)取得其中的值</div><div class="line">    &lt;jsp:param value="陈加兵" name="username"/&gt;</div><div class="line">    &lt;jsp:param value="123456" name="password"/&gt;</div><div class="line">&lt;/jsp:include&gt;</div></pre></td></tr></table></figure>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a><jsp:forward></jsp:forward></h2><blockquote>
+<p>这是将请求转发给另外一个JSP或者Servlet文件处理，这个和<code>RequestDispatcher</code>是一样的原理，就是Servlet中转发<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//绑定属性，在login.jsp中可以获取</div><div class="line">request.setAttribute("username","陈加兵");</div><div class="line"></div><div class="line">//当前页面的请求将会交给login.jsp文件处理</div><div class="line">&lt;jsp:forward page='login.jsp'&gt;&lt;/jsp:forward&gt;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a><jsp:usebean></jsp:usebean></h2><blockquote>
+<p>这个动作元素是用来搭配<code>JavaBean</code>组件的标准标签。<br><code>JavaBean</code>必须满足下面的条件：</p>
+<blockquote>
+<ul>
+<li>必须实现<code>Java.io.Serializable</code>接口</li>
+<li>没有公开的(<code>public</code>)类变量</li>
+<li>具有无参构造函数（默认的都有）</li>
+<li>具有公开的设置方法（<code>setter</code>）与取值方法（<code>getter</code>）</li>
+</ul>
+</blockquote>
+<p>下面就是一个<code>JavaBean</code>组件</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.Serializable;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//这里的变量的值一定要和表单的中的name属性的值一样，否则不能获取</span></div><div class="line">	<span class="keyword">private</span> String username;</div><div class="line">	<span class="keyword">private</span> String password;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> username;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.username = username;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> password;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.password = password;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> age;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> Boolean <span class="title">Checkout</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">"陈加兵"</span>.equals(username)&amp;&amp;<span class="string">"123456"</span>.equals(password);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>使用<code>JavaBean</code>的目的是减少<code>Scriptlet</code>的使用。其中搭配<code>&lt;jsp:useBean&gt;</code>来使用这个<code>JavaBean</code>,并且使用<code>&lt;jsp:setProperty&gt;</code>与<code>&lt;jsp:getProperty&gt;</code>对<code>javaBean</code>进行设值与取值</p>
+<p>注意<code>javaBean</code>一定要搭配表单使用，因为设值的值其实是隐式的调用<code>request.getParameter(String name)</code>来获取表单的值</p>
+<p>下面是一个登录的表单(注意这里的<code>input</code>中的<code>name</code>属性的值一定要和<code>JavaBean</code>组件类的成员变量的名字一样)</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language="java" contentType="text/html; charset=UTF-8"</div><div class="line">    pageEncoding="UTF-8"%&gt;</div><div class="line">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;</div><div class="line">&lt;title&gt;Insert title here&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;!--提交给Demo1.jsp处理，下面就实现Demo1.jsp--&gt;</div><div class="line">&lt;form action="Demo1.jsp"&gt;</div><div class="line">	&lt;label&gt;姓名：&lt;/label&gt;</div><div class="line">	&lt;input type="text" name="username"&gt;</div><div class="line">	&lt;label&gt;密码：&lt;/label&gt;</div><div class="line">	&lt;input type="password" name="password"&gt;</div><div class="line">	&lt;input type="submit" value="提交"&gt;</div><div class="line">&lt;/form&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>下面我们写一个<code>JSP</code>文件设置<code>JavaBean</code></p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language="java" contentType="text/html; charset=UTF-8"</div><div class="line">	pageEncoding="UTF-8"%&gt;</div><div class="line">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;</div><div class="line">&lt;title&gt;Insert title here&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">	&lt;%--使用JavaBean person是Person创建的对象，相当于 Person person=new Person() </div><div class="line">		其中class是JavaBean的类所在的路径(在com包下的Person文件中)</div><div class="line">		id就是相当于创建的对象</div><div class="line">	--%&gt;</div><div class="line">	&lt;jsp:useBean id="person" class="com.Person"&gt;&lt;/jsp:useBean&gt;</div><div class="line">	</div><div class="line">	&lt;%--为username和password设置值,相当于下面的语句</div><div class="line">	person.setUsername(request.getParameter("username"));</div><div class="line">	person.setPassword(request.getParameter("password"));</div><div class="line">	JavaBean中的变量一定要和表单中的值一样，否则就不能对应，出现错误 </div><div class="line">	其中name就是指定上面的id，即是使用的对象，property就是指定变量</div><div class="line">	--%&gt;</div><div class="line">	</div><div class="line">	&lt;jsp:setProperty property="uesrname" name="person"/&gt;</div><div class="line">	&lt;jsp:setProperty property="password" name="person"/&gt;</div><div class="line">	</div><div class="line">	&lt;%--age是另外的变量，并没有对应着表单的name属性，因此我们可以单独的为其设置值，使用value实行即可设置，这里不必考虑类型，因为在内部会自动转换成JavaBean中的类型 --%&gt;</div><div class="line">	&lt;jsp:setProperty property="age" name="person" value="20"/&gt;</div><div class="line">	</div><div class="line">	&lt;%--获取设置的值，相当于下面的语句：</div><div class="line">		person.getUsername();</div><div class="line">		person.getPassword();</div><div class="line">		person.getAge();</div><div class="line">	 --%&gt;</div><div class="line">	&lt;h1&gt;&lt;jsp:getProperty property="username" name="person" /&gt;&lt;/h1&gt;</div><div class="line">	&lt;h1&gt;&lt;jsp:getProperty property="password" name="person" /&gt;&lt;/h1&gt;</div><div class="line">	&lt;h1&gt;&lt;jsp:getProperty property="age" name="person" /&gt;&lt;/h1&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>其实我们还可以不但可以将表单中的值赋值给变量，还可以使用<code>value</code>和<code>param</code>自己设置</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;%-- 将请求的url中的password的值赋值给username，注意这里的使用的get的请求的话，提交的时候url会有请求值的</div><div class="line">		http:<span class="comment">//localhost:8080/web2/JSP/Demo1.jsp?username=%E9%99%88%E5%8A%A0%E5%85%B5&amp;password=123456</span></div><div class="line">	 --%&gt;</div><div class="line">	&lt;jsp:setProperty property=<span class="string">"username"</span> name=<span class="string">"person"</span> param=<span class="string">"password"</span>/&gt;</div><div class="line">    </div><div class="line">    &lt;%--age是另外的变量，并没有对应着表单的name属性，因此我们可以单独的为其设置值，使用value实行即可设置，这里不必考虑类型，因为在内部会自动转换成JavaBean中的类型 --%&gt;</div><div class="line">	&lt;jsp:setProperty property=<span class="string">"age"</span> name=<span class="string">"person"</span> value=<span class="string">"20"</span>/&gt;</div></pre></td></tr></table></figure>
+<h2 id="JavaBean的存活范围"><a href="#JavaBean的存活范围" class="headerlink" title="JavaBean的存活范围"></a>JavaBean的存活范围</h2><blockquote>
+<p><code>Scope</code>属性决定了javabean对象的存在的范围。可选值有:</p>
+<blockquote>
+<ol>
+<li><code>page</code>(默认值)</li>
+<li><p><code>request</code></p>
+</li>
+<li><p><code>session</code></p>
+</li>
+<li><p><code>application</code></p>
+</li>
+</ol>
+</blockquote>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;jsp:useBean id="person" class="com.anllin.bean.Person" scope="page"&gt;&lt;/jsp:useBean&gt;</div></pre></td></tr></table></figure>
+<h3 id="在page范围"><a href="#在page范围" class="headerlink" title="在page范围"></a>在page范围</h3><blockquote>
+<p>客户每次请求访问<code>jsp</code>页面时，都会创建一个<code>javabean</code>对象。JavaBean对象的有效范围就是当前的<code>jsp</code>文件中，如果不在当前Jsp中，那么就不可以使用该<code>JavaBean</code>对象中设置的值</p>
+<p>比如使用<code>forward</code>转发给另外一个JSP文件，那么此时就会再创建一个<code>JavaBean</code>对象，原来页面的JavaBean对象并没有传过来，也就不能使用其中的值，这个和变量的共享是一个道理的，这个JavaBean对象只能在当前的Jsp文件中调用，不能实现共享</p>
+</blockquote>
+<h3 id="在request范围"><a href="#在request范围" class="headerlink" title="在request范围"></a>在request范围</h3><blockquote>
+<p>客户每次请求访问jsp页面时，都会创建新的javabean对象。有效范围为：</p>
+<blockquote>
+<ul>
+<li><p>客户请求访问的当前jsp网页。</p>
+</li>
+<li><p>和当前网页共享一个客户请求的网页，即当前jsp网页中<code>&lt;%@include %&gt;</code>指令以及<code>&lt;forward&gt;</code>标记包含的其他jsp文件,也就是转发和包含的Jsp文件也是可以共享这个<code>JavaBean</code>对象的，这个和Servlet中的<code>request</code>是一样的，一旦转发了，就可以通过<code>setAttribute()</code>设置属性，那么在转发的页面中就可以访问这个属性</p>
+</li>
+</ul>
+<ul>
+<li><p>当所有共享同一个客户请求的jsp页面执行完毕并向客户端发加响应时，javabean对象结束生命周期。</p>
+</li>
+<li><p><code>javabean</code>对象作为属性保存在<code>httpServletRequest</code>对象中，属性名javabean的<code>id</code>,属性值为<code>javabean</code>对象，因此可以通过<code>HttpRequest.getAttribute()</code>方法取得<code>javabean</code>对象</p>
+</li>
+</ul>
+</blockquote>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">    //Demo1.jsp文件  表单请求提交的JSp文件</div><div class="line">    &lt;%@ page language="java" contentType="text/html; charset=UTF-8"</div><div class="line">	pageEncoding="UTF-8"%&gt;</div><div class="line">    &lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</div><div class="line">    &lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">    &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;</div><div class="line">    &lt;title&gt;Insert title here&lt;/title&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">    </div><div class="line">    &lt;%--设置scope属性为request，这个是必须的，这里的JavaBean对象为person--%&gt;</div><div class="line">	&lt;jsp:useBean id="person" class="com.Person" scope="request"&gt;&lt;/jsp:useBean&gt;</div><div class="line">	</div><div class="line">	&lt;jsp:setProperty property="uesrname" name="person"/&gt;</div><div class="line">	&lt;jsp:setProperty property="password" name="person"/&gt;</div><div class="line">	</div><div class="line">	&lt;jsp:setProperty property="age" name="person" value="20"/&gt;</div><div class="line">&gt; </div><div class="line">e    </div><div class="line">    &lt;%--转发请求到Demo2.jsp文件中，那么就可以在Demo.jsp中共享person对象了--%&gt;</div><div class="line">    &lt;jsp:forward page="Demo2.jsp"&gt;&lt;/jsp:forward&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line"></div><div class="line"></div><div class="line">//Demo2.jsp</div><div class="line"></div><div class="line"></div><div class="line">    &lt;%@page import="com.Person"%&gt;</div><div class="line">    &lt;%@ page language="java" contentType="text/html; charset=UTF-8"</div><div class="line">        pageEncoding="UTF-8"%&gt;</div><div class="line">    &lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</div><div class="line">    &lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">    &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;</div><div class="line">    &lt;title&gt;Insert title here&lt;/title&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">    </div><div class="line">    &lt;%-- 使用JavaBean,这里的scope是必须的，一定要和Demo1.jsp一样，id也要一样 --%&gt;</div><div class="line">    &lt;jsp:useBean id="person" class="com.Person" scope="request"&gt;&lt;/jsp:useBean&gt;</div><div class="line"></div><div class="line"></div><div class="line">    &lt;%--获取username的值 --%&gt;</div><div class="line">    &lt;jsp:getProperty property="username" name="person"/&gt;</div><div class="line"></div><div class="line">    &lt;%</div><div class="line">        //使用HttpServletRequest获取对象person</div><div class="line">        Person p=(Person)request.getAttribute("person");</div><div class="line">        out.println(p.getUsername());  //获取username的值</div><div class="line">    %&gt;</div><div class="line"></div><div class="line">    &lt;/body&gt;</div><div class="line">    &lt;/html&gt;</div></pre></td></tr></table></figure>
+<h3 id="在session范围内"><a href="#在session范围内" class="headerlink" title="在session范围内"></a>在session范围内</h3><blockquote>
+<ul>
+<li><p>我们知道<code>HttpSession</code>是可以在会话期间实现数据共享的，只要是同一个项目中的<code>Jsp</code>文件都是可以共享这个JavaBean对象，但是并不是永久的，因为会话也是有时间限制的，</p>
+</li>
+<li><p><code>javabean</code>对象作为属性保存在HttpSession对象中，属性名为javabean的id,属性值为javabean对象。除了可以通过javabean的id直接引用javabean对象外，也可以通过<code>HttpSession.getAttribute（）</code>方法取得<code>javabean</code>对象</p>
+</li>
+<li><p>一定要注意在每一个<code>&lt;jsp:useBean&gt;</code>中都要写上<code>scope=&quot;session&quot;</code></p>
+</li>
+</ul>
+</blockquote>
+<h3 id="在application范围内"><a href="#在application范围内" class="headerlink" title="在application范围内"></a>在application范围内</h3><blockquote>
+<ul>
+<li><p>我们知道<code>ServletContext</code>存在于整个web应用的生命周期，这个不像<code>session</code>，一旦设置的会话时间结束，那么就不存在了，这个是永远存在的，只要web程序在继续</p>
+</li>
+<li><p><code>javabean</code>对象作为属性保存在<code>application</code>对象中，属性名为<code>javabean</code>的id，属性值为javabean对象，除了可以通过javabean的<code>id</code>直接引用对象外，也可以通过javabean的<code>application.getAttribute()</code>方法取得javabean对象，</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.cnblogs.com/zfc2201/archive/2011/08/17/2143615.html" target="_blank" rel="external">http://www.cnblogs.com/zfc2201/archive/2011/08/17/2143615.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;JSP总结二-动作元素&quot;&gt;&lt;a href=&quot;#JSP总结二-动作元素&quot; class=&quot;headerlink&quot; title=&quot;JSP总结二(动作元素)&quot;&gt;&lt;/a&gt;JSP总结二(动作元素)&lt;/h1&gt;&lt;h2 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;header
+    
+    </summary>
+    
+      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
+    
+    
+      <category term="JSP" scheme="http://chenjiabing666.github.io/tags/JSP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JSP总结一(标签）</title>
+    <link href="http://chenjiabing666.github.io/2017/09/20/JSP%E6%80%BB%E7%BB%93%E4%B8%80-%E6%A0%87%E7%AD%BE%EF%BC%89/"/>
+    <id>http://chenjiabing666.github.io/2017/09/20/JSP总结一-标签）/</id>
+    <published>2017-09-20T14:51:23.000Z</published>
+    <updated>2017-09-20T14:52:17.169Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="JSP总结一-标签"><a href="#JSP总结一-标签" class="headerlink" title="JSP总结一(标签)"></a>JSP总结一(标签)</h1><h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><blockquote>
+<p><code>JSP</code>文件在部署到web服务器上的时候还是会编译成<code>Servlet</code>文件，因此JSP的生命周期和Servlet是一样的，都是有<code>_JSPInit()</code>，_<code>JSPService(</code>),<code>_JSPDestroy()</code>方法的</p>
+</blockquote>
+<h2 id="指示元素"><a href="#指示元素" class="headerlink" title="指示元素"></a>指示元素</h2><blockquote>
+<p>在<code>jsp</code>中有三个指示类型，分别为：<code>page</code>,<code>include</code>,<code>tablig</code>。</p>
+</blockquote>
+<h3 id="page"><a href="#page" class="headerlink" title="page"></a>page</h3><blockquote>
+<p><code>page</code>指示类型告知容器如何转译目前的JSP网页。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language=<span class="string">"java"</span> contentType=<span class="string">"text/html; charset=UTF-8"</span> pageEncoding=<span class="string">"UTF-8"</span> <span class="keyword">import</span>=<span class="string">"java.util.*"</span>%&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>language</code>指定解析语言，<code>contentType</code>表明为html文件，<code>pageEncoding</code>告诉容器转译及编译的时候如何处理这个这个JSP网页中的额中文编码，import是导入包的作用，如果有多个包导入，那么可以使用逗号隔开。</p>
+<p><code>errorPage</code>用于设置当JSP运行错误而产生异常的时候，该转发哪一个页面处理这个异常，可以自己定义一个异常的JSP或者html文件显示这个异常，但是这个必须和<code>isErrorPage</code>配合使用，必须在处理异常的<code>page</code>指令中协商<code>isErrorPage=&quot;true&quot;</code></p>
+<p>还有一些其他的属性，自己可以看看菜鸟教程上的内容</p>
+</blockquote>
+<h3 id="include"><a href="#include" class="headerlink" title="include"></a>include</h3><blockquote>
+<p><code>include</code>是用于静态的包含其他页面中的内容。这个还是很重要的，如果在网页中每一张页面都需要使用一样的导航栏，导入一样的css，js文件，那么可以将这些内容单独做一个jsp文件或者html文件，要使用的时候就直接包含即可。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">//file指定文件的相对路径  </span></div><div class="line">&lt;%<span class="meta">@include</span> file=<span class="string">"daoru.jsp"</span> %&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>其实上面的语句在<code>Servlet</code>语句相当于下面这句话：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">RequestDispatcher dis=request.getRequestDispatcher();</div><div class="line">dis.include(request,response);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意这句话写在页面的哪里，那么就将其中的内容导入到哪里，比如要导入<code>css</code>，<code>js</code>文件，那么直接在<code>head</code>标签中直接导入</p>
+<p>静态导入的方式在部署到服务器会自动和当前的<code>JSP</code>文件编译为一个<code>Servlet</code>文件，也就是在一个<code>Servlet</code>类中。因此在包含的JSP文件中如果定义了变量或者方法，那么在当前的JSP页面中就不能重复定义，否则将会出现变量重复的错误，代码如下：</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">//Demo1.jsp</div><div class="line">&lt;%@ page language="java" contentType="text/html; charset=UTF-8"</div><div class="line">pageEncoding="UTF-8"%&gt;</div><div class="line"></div><div class="line">&lt;%</div><div class="line">    String name="陈加兵";</div><div class="line">    int age=22;</div><div class="line">%&gt;</div><div class="line"></div><div class="line"></div><div class="line">//Demo2.jsp</div><div class="line"></div><div class="line">&lt;%@ page language="java" contentType="text/html; charset=UTF-8"</div><div class="line">pageEncoding="UTF-8"%&gt;</div><div class="line">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;</div><div class="line">&lt;title&gt;Insert title here&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">//包含Demo1.jsp文件</div><div class="line">&lt;%@ include file="Demo1.jsp" %&gt;</div><div class="line">&lt;%</div><div class="line">    //String name="chenji";     //这里不能重复定义，否则将会报错</div><div class="line">%&gt;</div><div class="line"></div><div class="line">//直接输出name的值 </div><div class="line">&lt;h1&gt;&lt;%=name%&gt;&lt;/h1&gt;    </div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意这里的<code>Demo1.jsp</code>文件中一定不能重复的出现<code>&lt;html&gt;</code>标签，因为包含的时候是全部内容都是包含到当前页面中，如果出现重复的<code>html</code>标签代码就会混乱。</p>
+</blockquote>
+<h2 id="声明元素"><a href="#声明元素" class="headerlink" title="声明元素"></a>声明元素</h2><blockquote>
+<p><code>&lt;%! &gt;</code> 这就是声明元素，主要是用来定义类成员和方法声明的。其中不可以出现循环语句等，只能出现定义语句，当然在定义方法的时候函数体中可以出现其他的语句。</p>
+<p>声明元素中的内容在编译的都将变成<code>Servlet</code>中的类的成员变量和方法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">    &lt;%!</div><div class="line">        <span class="comment">//变量</span></div><div class="line">        String name=<span class="string">"陈加兵"</span>;     </div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> age=<span class="number">20</span>;</div><div class="line"></div><div class="line">        <span class="comment">//方法</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(name+<span class="string">":"</span>+age);</div><div class="line">&#125;</div><div class="line">    %&gt;</div></pre></td></tr></table></figure>
+<h2 id="Scriptlet"><a href="#Scriptlet" class="headerlink" title="Scriptlet"></a>Scriptlet</h2><blockquote>
+<p><code>&lt;% %&gt;</code>这个是写正常的java语句的，其中将会转译成<code>_jspService()</code>方法中的内容</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;%</div><div class="line">    String name=<span class="string">"陈加兵"</span>;</div><div class="line">    request.setAttribute(<span class="string">"name"</span>,name);</div><div class="line">%&gt;</div></pre></td></tr></table></figure>
+<h2 id="表达式元素"><a href="#表达式元素" class="headerlink" title="表达式元素"></a>表达式元素</h2><blockquote>
+<p><code>&lt;%= %&gt;</code>  其中可以直接写一个表达式</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;h1&gt;&lt;%= new Date() %&gt; &lt;/h1&gt;</div><div class="line">&lt;h1&gt;&lt;%= 2+3 %&gt; &lt;/h1&gt;</div><div class="line">&lt;h1&gt;&lt;%= request.getAttribute("name") %&gt; &lt;/h1&gt;</div></pre></td></tr></table></figure>
+<h2 id="注释元素"><a href="#注释元素" class="headerlink" title="注释元素"></a>注释元素</h2><blockquote>
+<p> <code>&lt;%----%&gt;</code>这是JSP的注释，在浏览器中查看源代码的时候是看不到的<br> <code>&lt;!-- --&gt;</code> 这是html中的注释，在网页源代码中是可以看到的</p>
+</blockquote>
+<h2 id="隐含对象"><a href="#隐含对象" class="headerlink" title="隐含对象"></a>隐含对象</h2><blockquote>
+<ul>
+<li><code>request</code>    转译后对应的是<code>HttpServletRequest</code></li>
+<li><code>resposne</code>   译后对应的是<code>HttpServletResponse</code></li>
+<li><code>out</code>        译后对应的是<code>JspWriter</code>对象，其内部关系一个<code>PrintWriter</code>对象</li>
+<li><code>Config</code>    译后对应的是<code>ServletConfig</code></li>
+<li><code>session</code>    译后对应的是<code>HttpSession</code></li>
+<li><code>application</code> 译后对应的是<code>ServletContext</code></li>
+<li><code>pageContext</code>  译后对应的是<code>PageContext</code>对象 </li>
+<li>exception  译后对应的是Throwable对象</li>
+<li><code>page</code>       译后对应的是<code>this</code></li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;JSP总结一-标签&quot;&gt;&lt;a href=&quot;#JSP总结一-标签&quot; class=&quot;headerlink&quot; title=&quot;JSP总结一(标签)&quot;&gt;&lt;/a&gt;JSP总结一(标签)&lt;/h1&gt;&lt;h2 id=&quot;生命周期&quot;&gt;&lt;a href=&quot;#生命周期&quot; class=&quot;header
+    
+    </summary>
+    
+      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
+    
+    
+      <category term="JSP" scheme="http://chenjiabing666.github.io/tags/JSP/"/>
+    
+  </entry>
   
   <entry>
     <title>Servlet总结五(监听器)</title>
@@ -1665,199 +1861,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;Java-IO学习笔记总结&quot;&gt;&lt;a href=&quot;#Java-IO学习笔记总结&quot; class=&quot;headerlink&quot; title=&quot;Java IO学习笔记总结&quot;&gt;&lt;/a&gt;Java IO学习笔记总结&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; cla
-    
-    </summary>
-    
-      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="java IO编程" scheme="http://chenjiabing666.github.io/tags/java-IO%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java IO学习笔记八</title>
-    <link href="http://chenjiabing666.github.io/2017/05/26/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%85%AB/"/>
-    <id>http://chenjiabing666.github.io/2017/05/26/Java-IO学习笔记八/</id>
-    <published>2017-05-25T23:37:55.000Z</published>
-    <updated>2017-06-20T00:55:02.513Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="BufferedReader和BufferedWriter"><a href="#BufferedReader和BufferedWriter" class="headerlink" title="BufferedReader和BufferedWriter"></a>BufferedReader和BufferedWriter</h1><blockquote>
-<ul>
-<li>这两个类是高效率的提高文件的读取速度，它们为字符输入和输出提供了一个缓冲区，可以显著的调高写入和读取的速度，特别针对大量的磁盘文件读取的时候,下面着重的讲讲这两个类</li>
-</ul>
-</blockquote>
-<h2 id="BufferedReader"><a href="#BufferedReader" class="headerlink" title="BufferedReader"></a>BufferedReader</h2><blockquote>
-<ul>
-<li>从字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取,要特别注意的是这个市针对字符流而不是字节流。</li>
-<li>通常，<code>Reader</code> 所作的每个读取请求都会导致对底层字符或字节流进行相应的读取请求。因此，建议用 <code>BufferedReader</code> 包装所有其 <code>read()</code>操作可能开销很高的<code>Reader</code>（如 <code>FileReader</code> 和 <code>InputStreamReader</code>）</li>
-</ul>
-</blockquote>
-<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
-<ul>
-<li><code>BufferedReader(Reader in)</code>  创建一个使用默认大小输入缓冲区的缓冲字符输入流。</li>
-<li><code>BufferedReader(Reader in, int sz)</code>    创建一个使用指定大小输入缓冲区的缓冲字符输入流。</li>
-</ul>
-</blockquote>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<ul>
-<li>可以看出构造函数使用了Reader这个抽象类来初始化，我们前面说过这个是针对字符流的读取，因此可以使用<code>Reader</code>类的两个子类<code>FileReader</code>,<code>InputStreamReader</code>来初始化</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line">BufferedReader bufferedReader=<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(file));  <span class="comment">//使用FileReader实例化</span></div><div class="line"><span class="comment">//使用InputStreamReader来实例化</span></div><div class="line">BufferedReader bufferedReader=<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(file)));</div></pre></td></tr></table></figure>
-<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><blockquote>
-<ul>
-<li><code>close()</code></li>
-<li><code>String readLine()</code>  读取一行的数据</li>
-<li><code>int read()</code>   读取一个字符，注意这里的和字节的不一样，这里的汉字占用了一个字节，前面讲到读取字节流的时候使用byte读取汉字占用三个字节</li>
-<li><code>skip(int n)</code>   跳过n个字节</li>
-<li><code>ready()</code>  判断此流是否已准备好被读取。</li>
-</ul>
-</blockquote>
-<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<ul>
-<li>用于控制台的读取,前面已经说过<code>System.in</code>返回的是<code>InputStream</code>类型的，因此可以使用<code>InputStreamReader</code>实例化,当然这个有点多余了，我们完全可以使用<code>java.util</code>提供的<code>Scanner</code>直接进行输入</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">BufferedReader bufferedReader=<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</div><div class="line">        String str=bufferedReader.readLine();  <span class="comment">//将控制台输入的字符串读取</span></div><div class="line">        System.out.println(str);  <span class="comment">//打印出来</span></div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>用于文件的读取</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"> BufferedReader bufferedReader=<span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(file));</div><div class="line">       <span class="comment">// BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(new FileInputStream(file)));</span></div><div class="line"><span class="comment">//        bufferedReader.skip(2);    //跳过两个字节</span></div><div class="line"><span class="comment">//        </span></div><div class="line"><span class="comment">//        第一种读取的方式</span></div><div class="line">        <span class="keyword">while</span>(bufferedReader.ready())     <span class="comment">//判断是否还有字符</span></div><div class="line">        &#123;</div><div class="line">            String str=bufferedReader.readLine();   <span class="comment">//直接读取一行</span></div><div class="line">            System.out.println(str);  </div><div class="line">        &#125;</div><div class="line">        bufferedReader.close();</div><div class="line">        </div><div class="line">        <span class="comment">//第二种读取方式</span></div><div class="line">        <span class="keyword">int</span> len=bufferedReader.read();</div><div class="line">        <span class="keyword">while</span>(len!=-<span class="number">1</span>)   <span class="comment">//判断是否读到文件的末尾</span></div><div class="line">        &#123;</div><div class="line">            System.out.print((<span class="keyword">char</span>)len);  <span class="comment">//强制转化成字符</span></div><div class="line">            len=bufferedReader.read();</div><div class="line">        &#125;</div><div class="line">		</div><div class="line">		<span class="comment">//第三种方式，根据readLine读取一行，如果到达了文件的末尾返回null</span></div><div class="line">		String s;</div><div class="line">		<span class="keyword">while</span>((s=bufferedReader.readLine())!=<span class="keyword">null</span>)</div><div class="line">		&#123;</div><div class="line">			System.out.println(S);</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
-<h2 id="BufferedWriter"><a href="#BufferedWriter" class="headerlink" title="BufferedWriter"></a>BufferedWriter</h2><blockquote>
-<ul>
-<li>将文本写入字符输出流，缓冲各个字符，从而提供单个字符、数组和字符串的高效写入。</li>
-<li>通常 <code>Writer</code> 将其输出立即发送到底层字符或字节流。除非要求提示输出，否则建议用 BufferedWriter 包装所有其 write() 操作可能开销很高的 Writer（如 <code>FileWriters</code> 和 <code>OutputStreamWriters</code>）。例如</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PrintWriter out</div><div class="line">   = <span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(<span class="string">"foo.out"</span>)));</div></pre></td></tr></table></figure>
-<h3 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h3><blockquote>
-<ul>
-<li><code>BufferedWriter(Writer out)</code>   创建一个使用默认大小输出缓冲区的缓冲字符输出流。</li>
-<li><code>BufferedWriter(Writer out, int sz)</code>    创建一个使用给定大小输出缓冲区的新缓冲字符输出流。</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line">BufferedWriter bufferedWriter=<span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(file));</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>注意这里的FileWriter是Writer的子类，因此可以使用其实例化</strong></p>
-</blockquote>
-<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><blockquote>
-<ul>
-<li><code>close()</code></li>
-<li><code>flush()</code></li>
-<li><code>newLine()</code>  写入一个与平台相关的换行符</li>
-<li><code>write(int data)</code> 写入一个字符，这里的写入的不是整数</li>
-<li><code>write(String str)</code>  写入一个字符串</li>
-<li><code>write(String str,int off,int len)</code>  写入部分字符串</li>
-<li><code>write(char[] c)</code></li>
-<li><code>write(char[] c,int off,int len)</code></li>
-</ul>
-</blockquote>
-<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line">File file1=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>);</div><div class="line">File file2=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"demo.txt"</span>);</div><div class="line"><span class="keyword">if</span>(!file1.exists())</div><div class="line">&#123;</div><div class="line">    file1.mkdir();</div><div class="line">    System.out.println(<span class="string">"文件夹创建成功"</span>);</div><div class="line">&#125;</div><div class="line">BufferedWriter bufferedWriter=<span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(file));</div><div class="line">String str=<span class="string">"陈加兵"</span>;</div><div class="line"><span class="keyword">int</span> data=<span class="number">48</span>;</div><div class="line">String name=<span class="string">"chenjiabing"</span>;</div><div class="line"><span class="keyword">char</span>[] chars=name.toCharArray();</div><div class="line">bufferedWriter.write(str);   <span class="comment">//写入一个字符串，当然也可以截取这个字符串的某一段</span></div><div class="line">bufferedWriter.newLine();  <span class="comment">//写入一个平台自带的换行符，因为每一个操作系统的换行符都不一样</span></div><div class="line">bufferedWriter.write(data);   <span class="comment">//写入的并不是整数，而是这个整数所代表的字符</span></div><div class="line">bufferedWriter.newLine();</div><div class="line">bufferedWriter.write(chars,<span class="number">1</span>,<span class="number">4</span>);  <span class="comment">//写入字符数组</span></div><div class="line">bufferedWriter.flush();</div><div class="line">bufferedWriter.close()</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>拓展：</strong>通过了上面的学习，你不觉得使用这个类写入文件数据有点烦了，只能写入<code>String</code> <code>char</code>类型的数据，此时我们就想到了前面说过的打印流(<code>PrintWriter</code>)，这是一个便捷的写入文件的类，可以指定任意格式任意类型的数据，同样是输出流，我么可以将他们结合起来，构成一个更加强大的输出流，如下:</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line"><span class="comment">//用BufferedWriter实例化PrintWriter，显著提高写入的效率</span></div><div class="line">PrintWriter printWriter=<span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(file)));</div><div class="line">String name=<span class="string">"陈加兵"</span>;</div><div class="line"><span class="keyword">int</span> age=<span class="number">22</span>;</div><div class="line"><span class="keyword">float</span> grade=<span class="number">99.9f</span>;</div><div class="line">printWriter.printf(<span class="string">"姓名:%s,年龄:%s,grade:%s"</span>,name,age,grade);  <span class="comment">//格式化的写入</span></div><div class="line">printWriter.close();</div></pre></td></tr></table></figure>
-<h2 id="综合实例"><a href="#综合实例" class="headerlink" title="综合实例"></a>综合实例</h2><blockquote>
-<p>将一个文件中数据转移到另外一个文件中</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> IO;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by chenjiabing on 17-5-26.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo13</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 常用函数：</div><div class="line">     * newLine()</div><div class="line">     * write(String str)</div><div class="line">     * write(String str,int off,int len)</div><div class="line">     * write(Char[] c)</div><div class="line">     * write(Char[] c,int off,int len)</div><div class="line">     * write(int data)</div><div class="line">     * close()</div><div class="line">     * flush()</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        File file = <span class="keyword">new</span> File(<span class="string">"/tmp"</span> + File.separator + <span class="string">"test"</span> + File.separator + <span class="string">"test.txt"</span>);</div><div class="line">        File file1 = <span class="keyword">new</span> File(<span class="string">"/tmp"</span> + File.separator + <span class="string">"test"</span>);</div><div class="line">        File file2 = <span class="keyword">new</span> File(<span class="string">"/tmp"</span> + File.separator + <span class="string">"test"</span> + File.separator + <span class="string">"demo.txt"</span>);</div><div class="line">        BufferedWriter bufferedWriter = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(file2));</div><div class="line">        BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(file));</div><div class="line"></div><div class="line">        <span class="keyword">while</span> (bufferedReader.ready()) &#123;</div><div class="line">            String str = bufferedReader.readLine();  <span class="comment">//读取文件test.txt中的一行数据</span></div><div class="line">            bufferedWriter.write(str);   <span class="comment">//将这一行数据写入文件demo.txt</span></div><div class="line">            bufferedWriter.newLine();</div><div class="line">        &#125;</div><div class="line">        bufferedReader.close();</div><div class="line">        bufferedWriter.flush();</div><div class="line">        bufferedWriter.close();</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
-<ul>
-<li><a href="http://ifeve.com/java-io-char-buffered-filter/" target="_blank" rel="external">http://ifeve.com/java-io-char-buffered-filter/</a></li>
-<li><a href="http://www.cnblogs.com/lich/archive/2011/12/11/2284223.html" target="_blank" rel="external">http://www.cnblogs.com/lich/archive/2011/12/11/2284223.html</a></li>
-</ul>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;BufferedReader和BufferedWriter&quot;&gt;&lt;a href=&quot;#BufferedReader和BufferedWriter&quot; class=&quot;headerlink&quot; title=&quot;BufferedReader和BufferedWriter&quot;&gt;&lt;/a
-    
-    </summary>
-    
-      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="java IO编程" scheme="http://chenjiabing666.github.io/tags/java-IO%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java IO学习笔记七</title>
-    <link href="http://chenjiabing666.github.io/2017/05/26/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%83/"/>
-    <id>http://chenjiabing666.github.io/2017/05/26/Java-IO学习笔记七/</id>
-    <published>2017-05-25T23:37:47.000Z</published>
-    <updated>2017-06-20T00:55:23.145Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="System对IO的支持"><a href="#System对IO的支持" class="headerlink" title="System对IO的支持"></a>System对IO的支持</h1><blockquote>
-<ul>
-<li><code>System</code>是系统的类，其中的方法都是在控制台的输入和输出，但是通过重定向也是可以对文件的输入输出</li>
-<li><p><code>System</code>中定义了标准输入、标准输出和错误输出流，定义如下:</p>
-<blockquote>
-<ol>
-<li><code>static PrintStream err</code> “标准”错误输出流。</li>
-<li><code>static InputStream    in</code> “标准”输入流。</li>
-<li><code>static PrintStream    out</code>   “标准”输出流。</li>
-</ol>
-</blockquote>
-</li>
-<li><p>从上面的定义可以知道这里的返回值都是字节的输入和输出流，因此可以使用<code>PrintStream</code>接受这个返回值，然后利用其进行输出，同样的输入也是可以这样做,当然对于<code>OutputStream</code>和<code>InputStream</code>也是可以的，因为<code>PrintStream</code>是继承<code>OutputStream</code></p>
-</li>
-</ul>
-</blockquote>
-<h2 id="System-out"><a href="#System-out" class="headerlink" title="System.out"></a>System.out</h2><blockquote>
-<ul>
-<li><code>System.out</code>是一个标准的输出流，可以使用<code>PrintStream</code>和<code>OutputStream</code>接收返回值，然后使用其进行标准的输出,实例如下</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">PrintStream printStream=System.out;  <span class="comment">//使用PrintStream</span></div><div class="line"><span class="comment">//OutputStream outputStream=System.out;   //使用OutputStream</span></div><div class="line">    String name=<span class="string">"陈加兵"</span>;</div><div class="line">    <span class="keyword">int</span> age=<span class="number">22</span>;</div><div class="line">    printStream.printf(<span class="string">"姓名:%s,年龄:%s"</span>,name,age);  <span class="comment">//使用格式话的输出</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>其实我还是比较用<code>PrintStream</code>进行格式话的输出的</p>
-<ul>
-<li><code>System.out</code>的重定向输出，可以使用这个将指定的内容输出到文件中，实例如下：</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line">        System.setOut(<span class="keyword">new</span> PrintStream(<span class="keyword">new</span> PrintStream(file)));  <span class="comment">//设置重定向的文件</span></div><div class="line">    &#125;<span class="keyword">catch</span> (IOException e) </div><div class="line">    &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    System.out.println(<span class="string">"陈加兵的个人博客"</span>)；<span class="comment">//向文件输入内容</span></div></pre></td></tr></table></figure>
-<h2 id="System-in"><a href="#System-in" class="headerlink" title="System.in"></a>System.in</h2><blockquote>
-<ul>
-<li>这是一个标准输入流，可以使用<code>InputStream</code>来接受返回值，然后利用其进行输入，实例如下：</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">byte</span>[] bytes=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">       InputStream inputStream=System.in;   <span class="comment">//使用InputStream来接收这个返回值</span></div><div class="line">       <span class="keyword">try</span> &#123;</div><div class="line">           inputStream.read(bytes);  <span class="comment">//读取控制台输入的字符串</span></div><div class="line">       &#125;<span class="keyword">catch</span> (IOException e)</div><div class="line">       &#123;</div><div class="line">           e.printStackTrace();</div><div class="line">       &#125;</div><div class="line">       System.out.println(<span class="keyword">new</span> String(bytes));  <span class="comment">//输出</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>说实话这种控制台输入的方式不太好，还是使用原来的<code>Scanner</code>比较好</p>
-<ul>
-<li>System.in的重定向</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">File file = <span class="keyword">new</span> File(<span class="string">"/tmp"</span> + File.separator + <span class="string">"test"</span> + File.separator + <span class="string">"test.txt"</span>);</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    System.setIn(<span class="keyword">new</span> FileInputStream(file));  <span class="comment">//设置重定向</span></div><div class="line">    System.in.read(bytes);   <span class="comment">//读取文件中字节数据</span></div><div class="line"></div><div class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div><div class="line">System.out.println(<span class="keyword">new</span> String(bytes));   <span class="comment">//打印出文件中的内容</span></div></pre></td></tr></table></figure>
-<h2 id="System-err"><a href="#System-err" class="headerlink" title="System.err"></a>System.err</h2><blockquote>
-<ul>
-<li>这是一个标准错误输出流，在<code>IDEA</code>中输出的内容是红色的，和<code>System.out</code>输出的格式一样，只是颜色不一样，因为这里的重定向不太重要也不太常用，这里就不再详细说了，详情请看<a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/java/lang/System.html" target="_blank" rel="external">帮助文档</a></li>
-</ul>
-</blockquote>
-<h2 id="System-exit"><a href="#System-exit" class="headerlink" title="System.exit"></a>System.exit</h2><blockquote>
-<ul>
-<li><code>public static void exit(int status)</code></li>
-<li>终止当前的<code>java虚拟机</code>，参数用作状态码；根据惯例，非<code>0</code> 的状态码表示异常终止,如<code>System.exit(0)</code></li>
-</ul>
-</blockquote>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
-<ul>
-<li><a href="http://www.cnblogs.com/lich/archive/2011/12/11/2284155.html" target="_blank" rel="external">http://www.cnblogs.com/lich/archive/2011/12/11/2284155.html</a></li>
-<li><a href="http://ifeve.com/java-io-system-in-system-out-system-err/" target="_blank" rel="external">http://ifeve.com/java-io-system-in-system-out-system-err/</a></li>
-</ul>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;System对IO的支持&quot;&gt;&lt;a href=&quot;#System对IO的支持&quot; class=&quot;headerlink&quot; title=&quot;System对IO的支持&quot;&gt;&lt;/a&gt;System对IO的支持&lt;/h1&gt;&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Syste
     
     </summary>
     
