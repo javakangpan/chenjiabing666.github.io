@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-09-20T14:58:27.031Z</updated>
+  <updated>2017-09-21T12:51:05.207Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://chenjiabing666.github.io/2017/09/20/JSP%E6%80%BB%E7%BB%93%E4%BA%8C-%E5%8A%A8%E4%BD%9C%E5%85%83%E7%B4%A0/"/>
     <id>http://chenjiabing666.github.io/2017/09/20/JSP总结二-动作元素/</id>
     <published>2017-09-20T14:51:42.000Z</published>
-    <updated>2017-09-20T14:58:27.031Z</updated>
+    <updated>2017-09-21T12:51:05.207Z</updated>
     
     <content type="html"><![CDATA[<h1 id="JSP总结二-动作元素"><a href="#JSP总结二-动作元素" class="headerlink" title="JSP总结二(动作元素)"></a>JSP总结二(动作元素)</h1><h2 id=""><a href="#" class="headerlink" title=""></a><jsp:include></jsp:include></h2><blockquote>
 <p>前面介绍了一种指令元素<code>include</code>，那是一种静态包含<code>JSP</code>文件，这个标签是动态包含一个<code>JSP</code>页面，也就是被包含的<code>JSP</code>页面和原JSP将合并在一起，转译为一个<code>Servlet</code>类。这是有一定的局限性的，如变量的定义不能重复。</p>
@@ -113,6 +113,20 @@
 </li>
 </ul>
 </blockquote>
+<h3 id="重要的属性"><a href="#重要的属性" class="headerlink" title="重要的属性"></a>重要的属性</h3><blockquote>
+<p>其实<jsp:usebean>不仅仅可以对于表单中请求可以转换为对象的值，上面我们说过了存活范围，其实只要在这个请求范围内，并且将对象绑定到响应的属性上面，那么就可以在jsp文件中使用改标签接收其值。</jsp:usebean></p>
+<p>其实一般在表单提交之后，我们会使用Sevlet文件验证是否密码和用户名正确，那么就不是直接提交给jsp文件，此时就像上面说过的，不影响标签的使用，只要将JavaBean对象绑定到响应范围的属性上，便是可以实现对象的共享，代码如下：</p>
+<blockquote>
+<p>ServletDemo文件</p>
+</blockquote>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.PrintWriter;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.RequestDispatcher;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletDemo</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		<span class="comment">//创建对象，并且设置值</span></div><div class="line">			Person person=<span class="keyword">new</span> Person();</div><div class="line">			person.setUsername(<span class="string">"陈加兵"</span>);</div><div class="line">			person.setPassword(<span class="string">"123456"</span>);</div><div class="line">			</div><div class="line">			<span class="comment">//将JavaBean对象绑定到request上，相当于存活范围为request</span></div><div class="line">			<span class="comment">//注意这里的键值一定要是和对象的名称一样，否则不行</span></div><div class="line">			request.setAttribute(<span class="string">"person"</span>, person);</div><div class="line">			<span class="comment">//转发请求到jsp文件，下面我们就将在jsp文件中使用JavaBean标签接收</span></div><div class="line">			RequestDispatcher dispatcher=request.getRequestDispatcher(<span class="string">"JSP/demo1.jsp"</span>);</div><div class="line">			dispatcher.forward(request, response);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>demo1.jsp:上面文件转发过来的，接收JavaBean对象</p>
+</blockquote>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language="java" contentType="text/html; charset=UTF-8"</div><div class="line">    pageEncoding="UTF-8"%&gt;</div><div class="line">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;</div><div class="line">&lt;title&gt;Insert title here&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;%-- 使用标签接收转发过来的JavaBean对象，scope一定要设置为request,id就是传过来的对象，一定要和前面的名称一样，下面的语句相当于：</div><div class="line">	Person person=(Person)request.getAttribute("person");</div><div class="line"> --%&gt;</div><div class="line">&lt;jsp:useBean id="person" class="com.Person" scope="request"&gt;&lt;/jsp:useBean&gt;</div><div class="line"></div><div class="line">&lt;h1&gt;&lt;jsp:getProperty property="username" name="person"/&gt;&lt;/h1&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.cnblogs.com/zfc2201/archive/2011/08/17/2143615.html" target="_blank" rel="external">http://www.cnblogs.com/zfc2201/archive/2011/08/17/2143615.html</a></p>
 ]]></content>
     
