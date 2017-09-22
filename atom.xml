@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-09-21T12:51:05.207Z</updated>
+  <updated>2017-09-22T02:11:43.544Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,18 +20,18 @@
     <link href="http://chenjiabing666.github.io/2017/09/20/JSP%E6%80%BB%E7%BB%93%E4%BA%8C-%E5%8A%A8%E4%BD%9C%E5%85%83%E7%B4%A0/"/>
     <id>http://chenjiabing666.github.io/2017/09/20/JSP总结二-动作元素/</id>
     <published>2017-09-20T14:51:42.000Z</published>
-    <updated>2017-09-21T12:51:05.207Z</updated>
+    <updated>2017-09-22T02:11:43.544Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="JSP总结二-动作元素"><a href="#JSP总结二-动作元素" class="headerlink" title="JSP总结二(动作元素)"></a>JSP总结二(动作元素)</h1><h2 id=""><a href="#" class="headerlink" title=""></a><jsp:include></jsp:include></h2><blockquote>
+    <content type="html"><![CDATA[<h1 id="JSP总结二-动作元素"><a href="#JSP总结二-动作元素" class="headerlink" title="JSP总结二(动作元素)"></a>JSP总结二(动作元素)</h1><h2 id="lt-jsp-include-gt"><a href="#lt-jsp-include-gt" class="headerlink" title="&lt;jsp:include&gt;"></a><code>&lt;jsp:include&gt;</code></h2><blockquote>
 <p>前面介绍了一种指令元素<code>include</code>，那是一种静态包含<code>JSP</code>文件，这个标签是动态包含一个<code>JSP</code>页面，也就是被包含的<code>JSP</code>页面和原JSP将合并在一起，转译为一个<code>Servlet</code>类。这是有一定的局限性的，如变量的定义不能重复。</p>
 <p>动态的包含JSP文件即是被包含的JSP和原JSP分别转译为一个Servlet类，这就保证了其中的变量可以重复定义了，因为并不是在一个类中了</p>
 <p><code>&lt;jsp:include page=&quot;相对的文件路径&quot;&gt;&lt;/jsp:include&gt;</code>这种标签转译为Servlet和指令元素<code>include</code>是一样的</p>
 </blockquote>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;%--动态导入在编译的时候是两个jsp文件各自编译成一个Servlet文件，因此其中的变量是不可以共享的，在当前页面中还是可以定义导入页面定义的变量 --%&gt;</div><div class="line">&lt;jsp:include page="form.jsp"&gt;</div><div class="line">    //定义的param可以在form.jsp中使用request.getParameter(String name)取得其中的值</div><div class="line">    &lt;jsp:param value="陈加兵" name="username"/&gt;</div><div class="line">    &lt;jsp:param value="123456" name="password"/&gt;</div><div class="line">&lt;/jsp:include&gt;</div></pre></td></tr></table></figure>
-<h2 id="-1"><a href="#-1" class="headerlink" title=""></a><jsp:forward></jsp:forward></h2><blockquote>
+<h2 id="lt-jsp-forward-gt"><a href="#lt-jsp-forward-gt" class="headerlink" title="&lt;jsp:forward&gt;"></a><code>&lt;jsp:forward&gt;</code></h2><blockquote>
 <p>这是将请求转发给另外一个JSP或者Servlet文件处理，这个和<code>RequestDispatcher</code>是一样的原理，就是Servlet中转发<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//绑定属性，在login.jsp中可以获取</div><div class="line">request.setAttribute("username","陈加兵");</div><div class="line"></div><div class="line">//当前页面的请求将会交给login.jsp文件处理</div><div class="line">&lt;jsp:forward page='login.jsp'&gt;&lt;/jsp:forward&gt;</div></pre></td></tr></table></figure></p>
 </blockquote>
-<h2 id="-2"><a href="#-2" class="headerlink" title=""></a><jsp:usebean></jsp:usebean></h2><blockquote>
+<h2 id="lt-jsp-useBean-gt"><a href="#lt-jsp-useBean-gt" class="headerlink" title="&lt;jsp:useBean&gt;"></a><code>&lt;jsp:useBean&gt;</code></h2><blockquote>
 <p>这个动作元素是用来搭配<code>JavaBean</code>组件的标准标签。<br><code>JavaBean</code>必须满足下面的条件：</p>
 <blockquote>
 <ul>
@@ -132,7 +132,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;JSP总结二-动作元素&quot;&gt;&lt;a href=&quot;#JSP总结二-动作元素&quot; class=&quot;headerlink&quot; title=&quot;JSP总结二(动作元素)&quot;&gt;&lt;/a&gt;JSP总结二(动作元素)&lt;/h1&gt;&lt;h2 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;header
+      &lt;h1 id=&quot;JSP总结二-动作元素&quot;&gt;&lt;a href=&quot;#JSP总结二-动作元素&quot; class=&quot;headerlink&quot; title=&quot;JSP总结二(动作元素)&quot;&gt;&lt;/a&gt;JSP总结二(动作元素)&lt;/h1&gt;&lt;h2 id=&quot;lt-jsp-include-gt&quot;&gt;&lt;a href=
     
     </summary>
     
