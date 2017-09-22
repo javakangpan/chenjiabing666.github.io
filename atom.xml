@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-09-22T02:14:24.147Z</updated>
+  <updated>2017-09-22T06:40:42.205Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,124 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JSP总结三(JSTL核心标签库的使用)</title>
+    <link href="http://chenjiabing666.github.io/2017/09/22/JSP%E6%80%BB%E7%BB%93%E4%B8%89-JSTL%E6%A0%B8%E5%BF%83%E6%A0%87%E7%AD%BE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://chenjiabing666.github.io/2017/09/22/JSP总结三-JSTL核心标签库的使用/</id>
+    <published>2017-09-22T06:39:43.000Z</published>
+    <updated>2017-09-22T06:40:42.205Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="JSP总结三-JSTL核心标签库的使用"><a href="#JSP总结三-JSTL核心标签库的使用" class="headerlink" title="JSP总结三(JSTL核心标签库的使用)"></a>JSP总结三(JSTL核心标签库的使用)</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>其实在我们编写JSP网页的时候是不希望在JSP页面中出现Java代码的，这里我们就要使用<code>JSTL</code>的核心标签库来实现。</p>
+<p>想要使用JSTL，一定要填上这句话：<code>&lt;%@taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;</code></p>
+</blockquote>
+<h2 id="属性处理与输出标签"><a href="#属性处理与输出标签" class="headerlink" title="属性处理与输出标签"></a>属性处理与输出标签</h2><h3 id="属性处理标签"><a href="#属性处理标签" class="headerlink" title="属性处理标签"></a>属性处理标签</h3><blockquote>
+<p>在定义变量的时候，我们难免会用到Java代码，但是这里我们介绍<code>&lt;c:set&gt;</code>标签，这个能够实现变量的定义</p>
+<p><code>&lt;c:set&gt;</code>标签中的属性有 <code>var</code>(定义的变量)、<code>value</code>(变量的值)、<code>target</code>(为JavaBean对象赋值的时候使用)、<code>scope</code>(设置变量的存活范围，有<code>request</code>,<code>session</code>,<code>application</code>,<code>page</code>)、<code>property</code>(<code>JavaBean</code>的变量)</p>
+<p>使用<code>set</code>标签相当于调用存活范围内的<code>setAttribute()</code>方法来绑定属性</p>
+<ul>
+<li>定义一个普通的变量:   </li>
+</ul>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;%--x的值为10，这句话相当于String x="10" --%&gt;</div><div class="line">&lt;c:set var="x" value="10"&gt;&lt;/c:set&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>定义<code>session</code>范围的变量(当然还可以定义其他存活范围的变量，这里就不一一讲了)</li>
+</ul>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;%--seesion范围的变量代表整个会话期间都是可以共享这个变量的，相当于下面这句话：</div><div class="line">        session.setAttribute("x",100);</div><div class="line">        在另外一个JSP文件中可以使用下面的语句得到其中的值：</div><div class="line">        </div><div class="line">        session.getAttribute("x");</div><div class="line">        &lt;c:out value="$&#123;sessionScope.x&#125;"&gt;&lt;/c:out&gt;</div><div class="line">--%&gt;</div><div class="line">&lt;c:set var="x" value="100" scope="session"&gt;&lt;/c:set&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>设置<code>JavaBean</code>对象的值：</li>
+</ul>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;%--获取JavaBean的对象person,如果没有那么就是直接创建一个对象，范围为session,下面可以用到 --%&gt;</div><div class="line">&lt;jsp:useBean id="person" class="com.Person" scope="session"&gt;&lt;/jsp:useBean&gt;</div><div class="line"></div><div class="line">&lt;%-- target是对象的person，这里使用EL表达式，得到session范围内的Person对象 --%&gt;</div><div class="line">&lt;c:set target="$&#123;sessionScope.person &#125;" property="username" value="陈加兵"&gt;&lt;/c:set&gt;</div><div class="line"></div><div class="line">&lt;%-- 输出变量的username的值，这里使用的EL表达式  相当于  session.getAttribute("person").getUsername() --%&gt;</div><div class="line">&lt;c:out value="$&#123;sessionScope.person.username &#125;"&gt;&lt;/c:out&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>如果设置的值太冗长了，那么可以在标签体的中间设置</li>
+</ul>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;c:set scope="request"&gt;陈加兵&lt;/c:set&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>移除变量 使用的是<code>&lt;c:remove&gt;</code>(一定要指定存活范围)</li>
+</ul>
+</blockquote>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;%--移除session范围内的变量x  相当于  session.removeAttribute(<span class="string">"x"</span>)  </div><div class="line">    这里一定要指定范围</div><div class="line">--%&gt;</div><div class="line">&lt;c:remove var=<span class="string">"x"</span> scope=<span class="string">"session"</span>/&gt;</div></pre></td></tr></table></figure>
+<h3 id="输出标签"><a href="#输出标签" class="headerlink" title="输出标签"></a>输出标签</h3><blockquote>
+<p><code>&lt;c:out&gt;</code>相当于<code>out.println()</code>方法，是一个用来向网页中输出内容的</p>
+<p>其中的属性有<code>value</code> (输出的内容，其中可以是JEL的${}或者一个字符串) ，<code>escapeXml</code>(这个使用来控制是否将输出的内容中有<code>html</code>标签的是否用替代字符替换，默认为<code>true</code>表示用替代字符替换),<code>default</code>(如果输出的内容为<code>null</code>或者为空的时候那么就直接不显示任何内容，但是我们可以定义<code>default</code>的值来默认显示的值)</p>
+<ul>
+<li>使用<code>EL</code>表达式输出</li>
+</ul>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;%--输出request范围内的属性x   相当于 out.println(request.getAttribute("x"))--%&gt;</div><div class="line">&lt;c:out value="$&#123;requestScope.x&#125;"&gt;&lt;/c:out&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>直接使用字符串输出一个值</li>
+</ul>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;c:out value="我是陈加兵"&gt;&lt;/c:out&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>输出<code>html</code>语句</li>
+</ul>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;%--设置escapeXml为false--%&gt;</div><div class="line">&lt;c:out value="&lt;h1&gt;我是陈加兵&lt;/h1&gt;" escapeXml="false"&gt;&lt;/c:out&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>指定输出的默认的内容</li>
+</ul>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;%--如果$&#123;param.username&#125;为空，那么就输出0--%&gt;</div><div class="line">&lt;c:out value="$&#123;param.username&#125;" default="0"&gt;&lt;/c:out&gt;</div></pre></td></tr></table></figure>
+<h2 id="流程处理标签"><a href="#流程处理标签" class="headerlink" title="流程处理标签"></a>流程处理标签</h2><blockquote>
+<p>流程处理就是判断，循环语句</p>
+</blockquote>
+<h3 id="if判断语句"><a href="#if判断语句" class="headerlink" title="if判断语句"></a>if判断语句</h3><blockquote>
+<p><code>&lt;c:if&gt;</code>可以判断语句是否正确，如果正确即可执行，但是这个标签没有<code>else</code>语句，只能处理判断为正确的结果<br>其中的属性有<code>test</code>，这个是设置判断条件的，如果为<code>true</code>即可执行，反之不执行，<code>var</code>是保留判断结果的<br><code>test</code>中的判断条件既可以是<code>EL</code>表达式也可以是<code>&lt;%=%&gt;</code></p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">   &lt;c:set var="salary" value="$&#123;3000 &#125;"&gt;&lt;/c:set&gt;</div><div class="line"></div><div class="line">&lt;%-- test中写的是判断条件，如果为true那么才执行，这里写的是EL表达式，当然也是可以用&lt;%=%&gt; --%&gt;</div><div class="line">   </div><div class="line">&lt;c:if test="$&#123;salary&gt;2000 &#125;"&gt;</div><div class="line">	&lt;c:out value="这个员工的工资大于2000"&gt;&lt;/c:out&gt;</div><div class="line">&lt;/c:if&gt;</div></pre></td></tr></table></figure>
+<h3 id="高级判断"><a href="#高级判断" class="headerlink" title="高级判断"></a>高级判断</h3><blockquote>
+<p>前面的说过的<code>&lt;c:if&gt;</code>仅仅当判断为真时才执行，但是我们想要当不为真时也执行语句，这时我们要使用<code>&lt;c:choose&gt;</code>,<code>&lt;c:when&gt;</code>,<code>&lt;c:otherwise&gt;</code></p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">   &lt;%--  判断题必须在choose中 --%&gt;</div><div class="line">&lt;c:choose&gt;</div><div class="line">	&lt;%-- 如果提交的username和password都对的话，那么就登录成功  相当于if --%&gt;</div><div class="line">	&lt;c:when test='$&#123;param.username=="陈加兵" &amp;&amp; param.password=="123456"&#125;'&gt;</div><div class="line">		&lt;h1&gt;</div><div class="line">			&lt;c:out value="$&#123;param.username &#125;"&gt;&lt;/c:out&gt;</div><div class="line">			登录成功</div><div class="line">		&lt;/h1&gt;</div><div class="line">	&lt;/c:when&gt;</div><div class="line"></div><div class="line">	&lt;%--	相当于else --%&gt;</div><div class="line">	&lt;c:otherwise&gt;</div><div class="line">		&lt;h1&gt;</div><div class="line">			&lt;c:out value="$&#123;param.username &#125;"&gt;&lt;/c:out&gt;</div><div class="line">			登录失败</div><div class="line">		&lt;/h1&gt;</div><div class="line">	&lt;/c:otherwise&gt;</div><div class="line">&lt;/c:choose&gt;</div></pre></td></tr></table></figure>
+<h2 id="网页导入和重定向标签"><a href="#网页导入和重定向标签" class="headerlink" title="网页导入和重定向标签"></a>网页导入和重定向标签</h2><h3 id="网页导入标签"><a href="#网页导入标签" class="headerlink" title="网页导入标签"></a>网页导入标签</h3><blockquote>
+<p>之前学过JSP中的网页导入，一个是静态导入，一个是动态导入，详情请看上篇文章。</p>
+<p>在JSTL中也有一个标签(<code>&lt;c:import&gt;</code>)，用于动态导入网页,并且还可以使用&lt;<code>c:param</code>&gt;设置传入的参数</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">   &lt;%-- url就是要导入的网页，name是设置初始值的变量，value是设置的值。在demo1.jsp中可以使用        request.getParameter(String name)取得参数 --%&gt;</div><div class="line">&lt;c:import url="demo1.jsp"&gt;</div><div class="line">	&lt;c:param name="username" value="陈加兵"&gt;&lt;/c:param&gt;</div><div class="line">	&lt;c:param name="password" value="123456"&gt;&lt;/c:param&gt;</div><div class="line">&lt;/c:import&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>除了导入<code>web</code>应用程序中的网页，我们还可以导入非目前<code>web</code>应用程序中的网页</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;%--导入百度的首页，并且设置字符集为utf-8，注意这里一定要设置网页的字符集格式和当前的jsp格式一样，否则会出现乱码--%&gt;</div><div class="line">&lt;c:import url="http://www.baidu.com"&gt;&lt;/c:import charEncoding="utf-8"&gt;</div></pre></td></tr></table></figure>
+<h3 id="重定向标签"><a href="#重定向标签" class="headerlink" title="重定向标签"></a>重定向标签</h3><blockquote>
+<p>之前的重定向必须使用<code>HttpServletResponse</code>的<code>sendRedirect()</code>方法</p>
+<p>现在我们可以使用<code>JSTL</code>标签<code>&lt;c:redirect url&gt;</code></p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;c:redirect url="demo1.jsp"&gt;&lt;/c:rediect&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>当然我们也是可以传入参数的，使用<code>&lt;c:param name=&quot;&quot; value=&quot;&quot;&gt;</code></p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;c:redirect url="demo1.jsp"&gt;</div><div class="line">    &lt;c:param name="username" value="陈加兵"/&gt;</div><div class="line">&lt;/c:rediect&gt;</div></pre></td></tr></table></figure>
+<h2 id="错误处理标签"><a href="#错误处理标签" class="headerlink" title="错误处理标签"></a>错误处理标签</h2><blockquote>
+<p>在之前的JSP文件中，必须定义<code>errorPage</code>属性才能跳转到指定的页面或者处理错误</p>
+<p>现在我们使用<code>JSTL</code>标签<code>&lt;c:catch&gt;</code>,可以捕捉异常，如果有异常就会将异常对象保存下来</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">   &lt;%--捕捉异常，如果有了异常，那么保存在error变量中 --%&gt;</div><div class="line">&lt;c:catch var="error"&gt;</div><div class="line">	$&#123;10/0 &#125;</div><div class="line">&lt;/c:catch&gt;</div><div class="line"></div><div class="line">&lt;%-- 如果捕捉到了异常，那么error就不是null --%&gt;</div><div class="line">&lt;c:if test="$&#123;error!=null &#125;"&gt;</div><div class="line">	&lt;h1&gt;</div><div class="line">		&lt;c:out value="$&#123;error.message &#125;"&gt;&lt;/c:out&gt;</div><div class="line">	&lt;/h1&gt;</div><div class="line">&lt;/c:if&gt;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;JSP总结三-JSTL核心标签库的使用&quot;&gt;&lt;a href=&quot;#JSP总结三-JSTL核心标签库的使用&quot; class=&quot;headerlink&quot; title=&quot;JSP总结三(JSTL核心标签库的使用)&quot;&gt;&lt;/a&gt;JSP总结三(JSTL核心标签库的使用)&lt;/h1&gt;&lt;h2
+    
+    </summary>
+    
+      <category term="Java Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
+    
+    
+      <category term="JSP" scheme="http://chenjiabing666.github.io/tags/JSP/"/>
+    
+  </entry>
   
   <entry>
     <title>JSP总结二(动作元素)</title>
@@ -1807,81 +1925,6 @@
     
     
       <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java IO学习笔记总结</title>
-    <link href="http://chenjiabing666.github.io/2017/05/26/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93/"/>
-    <id>http://chenjiabing666.github.io/2017/05/26/Java-IO学习笔记总结/</id>
-    <published>2017-05-26T00:09:27.000Z</published>
-    <updated>2017-06-21T17:21:44.031Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Java-IO学习笔记总结"><a href="#Java-IO学习笔记总结" class="headerlink" title="Java IO学习笔记总结"></a>Java IO学习笔记总结</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>前面的八篇文章详细的讲述了Java IO的操作方法，文章列表如下</p>
-<ul>
-<li><a href="https://chenjiabing666.github.io/2017/05/23/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/">基本的文件操作</a></li>
-<li><a href="https://chenjiabing666.github.io/2017/05/24/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/">字符流和字节流的操作</a></li>
-<li><a href="https://chenjiabing666.github.io/2017/05/24/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89/">InputStreamReader和OutputStreamWriter操作</a></li>
-<li><a href="https://chenjiabing666.github.io/2017/05/25/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9B%9B/">内存操作流</a></li>
-<li><a href="https://chenjiabing666.github.io/2017/05/25/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%94/">管道流</a></li>
-<li><a href="https://chenjiabing666.github.io/2017/05/25/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%85%AD/">打印流</a></li>
-<li><a href="https://chenjiabing666.github.io/2017/05/26/Java-IO学习笔记七/">System对IO的支持</a></li>
-<li><a href="https://chenjiabing666.github.io/2017/05/26/Java-IO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%85%AB/">BufferedReader和BufferedWriter</a></li>
-</ul>
-</blockquote>
-<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><h3 id="字节流"><a href="#字节流" class="headerlink" title="字节流"></a>字节流</h3><blockquote>
-<p>字节流的操作都是基于<code>InputStream</code>和<code>OutputStream</code>这两个抽象类</p>
-</blockquote>
-<h4 id="InputStream"><a href="#InputStream" class="headerlink" title="InputStream"></a>InputStream</h4><blockquote>
-<p><code>InputStream</code>是<strong>字节输入流</strong>，主要的功能是从文件中读取数据,它的子类有内存操作流 <code>ByteArrayInputStream</code>，管道输入流<code>PipedInputStream</code>，和<code>FileInputStream</code></p>
-</blockquote>
-<h4 id="OutPutStream"><a href="#OutPutStream" class="headerlink" title="OutPutStream"></a>OutPutStream</h4><blockquote>
-<p><code>OutputStream</code>是字节输出流，主要功能是向文件中写入数据，它的常用的子类有<code>ByteArrayOutputStream</code>, <code>FileOutputStream</code>,  <code>PipedOutputStream</code>,<strong><code>PrintStream</code></strong></p>
-</blockquote>
-<h3 id="字符流"><a href="#字符流" class="headerlink" title="字符流"></a>字符流</h3><blockquote>
-<p>字符流的操作都是基于家<code>Writer</code>和<code>Reader</code>这两个抽象类的，一个是输出流，一个是输入流</p>
-</blockquote>
-<h4 id="Writer"><a href="#Writer" class="headerlink" title="Writer"></a>Writer</h4><blockquote>
-<p>写入字符流的操作类，常用的子类有<strong><code>PrintWriter</code></strong>,<strong><code>BufferedWriter</code></strong>,<code>OutputStreamWriter</code>(字节流和字符流之间的桥梁)</p>
-</blockquote>
-<h4 id="Reader"><a href="#Reader" class="headerlink" title="Reader"></a>Reader</h4><blockquote>
-<p>用于读取字符流的抽象类,常用的子类有<code>BufferedReader</code>，<code>InputStreamReader</code></p>
-</blockquote>
-<h2 id="最好用的"><a href="#最好用的" class="headerlink" title="最好用的"></a>最好用的</h2><blockquote>
-<ul>
-<li>其中最高效的输入和输出当然是字符流操作的<code>BufferedReader</code>和<code>BufferedWriter</code></li>
-<li>最便捷的，格式化最好的当然是<code>PrintStream</code>,<code>PrintWriter</code>这两个类都采用了格式化的输入和输出</li>
-</ul>
-</blockquote>
-<h3 id="输出流最好用的"><a href="#输出流最好用的" class="headerlink" title="输出流最好用的"></a>输出流最好用的</h3><blockquote>
-<ul>
-<li>输出流中比较好用的是<code>PrintStream</code>,<code>PrintWriter</code></li>
-<li>输出流最好用的当然是<code>BufferedWriter</code>和<code>PrintWriter</code>的结合，例子如下；</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"test"</span>+File.separator+<span class="string">"test.txt"</span>);</div><div class="line"><span class="comment">//用BufferedWriter实例化PrintWriter，显著提高写入的效率</span></div><div class="line">PrintWriter printWriter=<span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(file)));</div><div class="line">String name=<span class="string">"陈加兵"</span>;</div><div class="line"><span class="keyword">int</span> age=<span class="number">22</span>;</div><div class="line"><span class="keyword">float</span> grade=<span class="number">99.9f</span>;</div><div class="line">printWriter.printf(<span class="string">"姓名:%s,年龄:%s,grade:%s"</span>,name,age,grade);  <span class="comment">//格式化的写入</span></div><div class="line">printWriter.close();</div></pre></td></tr></table></figure>
-<h3 id="输入流最好用的"><a href="#输入流最好用的" class="headerlink" title="输入流最好用的"></a>输入流最好用的</h3><blockquote>
-<ul>
-<li>本人觉得输入流中<code>BufferedReader</code>功能已经很强大了</li>
-</ul>
-</blockquote>
-<h3 id="综合运用"><a href="#综合运用" class="headerlink" title="综合运用"></a>综合运用</h3><blockquote>
-<p><strong>有时候在写程序的时候，你得到了一个字节流，但是你想要创建的却是字符流对象，怎么办了呢？前面已经说过，字节流转换成字符流对象的桥梁是InputStreamReader和InputStreamWiter他们的作用是传入字节流对象构造字符流对象，因此可以完美的实现字节流转换成字符流，这个是非常重要的</strong></p>
-<p>下面使用转换流将System.in转换成字符流并且使用高效流读取控制台输入的数据,代码如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">// 读取键盘的输入的数据，System.in是字节流，因此要想创建高效流必须使用转换流InputStreamReader</span></div><div class="line">BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</div><div class="line">String line;</div><div class="line"><span class="comment">//从键盘读取输入的数据，直到读到bye结束</span></div><div class="line"><span class="keyword">while</span> ((line = br.readLine()) != <span class="keyword">null</span>) &#123;</div><div class="line">	<span class="keyword">if</span> (<span class="string">"bye"</span>.equals(line)) &#123;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">	System.out.println(line);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Java-IO学习笔记总结&quot;&gt;&lt;a href=&quot;#Java-IO学习笔记总结&quot; class=&quot;headerlink&quot; title=&quot;Java IO学习笔记总结&quot;&gt;&lt;/a&gt;Java IO学习笔记总结&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; cla
-    
-    </summary>
-    
-      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="java IO编程" scheme="http://chenjiabing666.github.io/tags/java-IO%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
