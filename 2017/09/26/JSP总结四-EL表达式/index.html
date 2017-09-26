@@ -5,29 +5,35 @@
   <meta charset="UTF-8">
   
   
-    <title>java干货篇之文字特效 | 爱撒谎的男孩</title>
+    <title>JSP总结四(EL表达式) | 爱撒谎的男孩</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="java干货篇文字特效立体效果的文字主要使用了Graphics类中的setFont和setColor的方法，绘制多层字然后加上平移一个坐标即可实现多重叠加的效果,让人看起来就像是立体一样,详情请见源码
-阴影效果的文字和面一样，只是平移的方式有些不同，详情请见源码
-倾斜效果的文字主要使用的时Graphics2D类的shear方法，使绘图上下文倾斜，详情见源码public abstract void">
+    <meta name="description" content="JSP总结四(EL表达式)简介
+JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用EL表达式可以替代Java语句的使用
+
+隐含对象与属性相关的隐含对象
+属性的隐含对象有PageScope,requestScope,sessionScope,applicationScope分别对应的是JSP中的PageContext,request,session,application，因">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java干货篇之文字特效">
-<meta property="og:url" content="http://chenjiabing666.github.io/2017/04/09/java干货篇之文字特效/index.html">
+<meta property="og:title" content="JSP总结四(EL表达式)">
+<meta property="og:url" content="http://chenjiabing666.github.io/2017/09/26/JSP总结四-EL表达式/index.html">
 <meta property="og:site_name" content="爱撒谎的男孩">
-<meta property="og:description" content="java干货篇文字特效立体效果的文字主要使用了Graphics类中的setFont和setColor的方法，绘制多层字然后加上平移一个坐标即可实现多重叠加的效果,让人看起来就像是立体一样,详情请见源码
-阴影效果的文字和面一样，只是平移的方式有些不同，详情请见源码
-倾斜效果的文字主要使用的时Graphics2D类的shear方法，使绘图上下文倾斜，详情见源码public abstract void">
-<meta property="og:updated_time" content="2017-04-09T08:15:55.282Z">
+<meta property="og:description" content="JSP总结四(EL表达式)简介
+JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用EL表达式可以替代Java语句的使用
+
+隐含对象与属性相关的隐含对象
+属性的隐含对象有PageScope,requestScope,sessionScope,applicationScope分别对应的是JSP中的PageContext,request,session,application，因">
+<meta property="og:updated_time" content="2017-09-26T12:07:56.213Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java干货篇之文字特效">
-<meta name="twitter:description" content="java干货篇文字特效立体效果的文字主要使用了Graphics类中的setFont和setColor的方法，绘制多层字然后加上平移一个坐标即可实现多重叠加的效果,让人看起来就像是立体一样,详情请见源码
-阴影效果的文字和面一样，只是平移的方式有些不同，详情请见源码
-倾斜效果的文字主要使用的时Graphics2D类的shear方法，使绘图上下文倾斜，详情见源码public abstract void">
+<meta name="twitter:title" content="JSP总结四(EL表达式)">
+<meta name="twitter:description" content="JSP总结四(EL表达式)简介
+JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用EL表达式可以替代Java语句的使用
+
+隐含对象与属性相关的隐含对象
+属性的隐含对象有PageScope,requestScope,sessionScope,applicationScope分别对应的是JSP中的PageContext,request,session,application，因">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -87,14 +93,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/09/java干货篇之文字特效/" title="java干货篇之文字特效" itemprop="url">java干货篇之文字特效</a>
+      <a href="/2017/09/26/JSP总结四-EL表达式/" title="JSP总结四(EL表达式)" itemprop="url">JSP总结四(EL表达式)</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2017-04-09T08:15:16.000Z" itemprop="datePublished"> 发表于 2017-04-09</time>
+    <time datetime="2017-09-26T12:07:16.000Z" itemprop="datePublished"> 发表于 2017-09-26</time>
     
   </p>
 </header>
@@ -103,52 +109,66 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#java干货篇文字特效"><span class="toc-number">1.</span> <span class="toc-text">java干货篇文字特效</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#立体效果的文字"><span class="toc-number">1.1.</span> <span class="toc-text">立体效果的文字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阴影效果的文字"><span class="toc-number">1.2.</span> <span class="toc-text">阴影效果的文字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#倾斜效果的文字"><span class="toc-number">1.3.</span> <span class="toc-text">倾斜效果的文字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#渐变效果的文字"><span class="toc-number">1.4.</span> <span class="toc-text">渐变效果的文字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#会变色的文字"><span class="toc-number">1.5.</span> <span class="toc-text">会变色的文字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#水印文字特效-源码"><span class="toc-number">1.6.</span> <span class="toc-text">水印文字特效(源码)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态绘制文本-源码"><span class="toc-number">1.7.</span> <span class="toc-text">动态绘制文本(源码)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.8.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP总结四-EL表达式"><span class="toc-number">1.</span> <span class="toc-text">JSP总结四(EL表达式)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐含对象"><span class="toc-number">1.2.</span> <span class="toc-text">隐含对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#与属性相关的隐含对象"><span class="toc-number">1.2.1.</span> <span class="toc-text">与属性相关的隐含对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与请求参数相关的隐含对象-param-paramValues"><span class="toc-number">1.2.2.</span> <span class="toc-text">与请求参数相关的隐含对象(param,paramValues)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与标头-Header-相关的隐含对象"><span class="toc-number">1.2.3.</span> <span class="toc-text">与标头(Header)相关的隐含对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie隐含对象"><span class="toc-number">1.2.4.</span> <span class="toc-text">cookie隐含对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始参数隐含对象"><span class="toc-number">1.2.5.</span> <span class="toc-text">初始参数隐含对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EL运算符"><span class="toc-number">1.3.</span> <span class="toc-text">EL运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#算术运算符"><span class="toc-number">1.3.1.</span> <span class="toc-text">算术运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑运算符"><span class="toc-number">1.3.2.</span> <span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系运算符"><span class="toc-number">1.3.3.</span> <span class="toc-text">关系运算符</span></a></li></ol></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="java干货篇文字特效"><a href="#java干货篇文字特效" class="headerlink" title="java干货篇文字特效"></a>java干货篇文字特效</h1><h2 id="立体效果的文字"><a href="#立体效果的文字" class="headerlink" title="立体效果的文字"></a>立体效果的文字</h2><p><strong>主要使用了Graphics类中的setFont和setColor的方法，绘制多层字然后加上平移一个坐标即可实现多重叠加的效果,让人看起来就像是立体一样,详情请见<a href="https://github.com/chenjiabing666/java_provide/tree/master/039" target="_blank" rel="external">源码</a></strong></p>
-<h2 id="阴影效果的文字"><a href="#阴影效果的文字" class="headerlink" title="阴影效果的文字"></a>阴影效果的文字</h2><p><strong>和面一样，只是平移的方式有些不同，详情请见<a href="https://github.com/chenjiabing666/java_provide/tree/master/040" target="_blank" rel="external">源码</a></strong></p>
-<h2 id="倾斜效果的文字"><a href="#倾斜效果的文字" class="headerlink" title="倾斜效果的文字"></a>倾斜效果的文字</h2><p><strong>主要使用的时Graphics2D类的shear方法，使绘图上下文倾斜，详情见<a href="https://github.com/chenjiabing666/java_provide/tree/master/041" target="_blank" rel="external">源码</a></strong><br><strong><code>public abstract void shear(double shx,double shy)</code>其中shx表示在正x轴方向移动坐标的乘数，可以作为其y坐标的函数</strong></p>
-<h2 id="渐变效果的文字"><a href="#渐变效果的文字" class="headerlink" title="渐变效果的文字"></a>渐变效果的文字</h2><p><strong>主要使用了Graphics2D中的setPaint的方法,详情请见<a href="https://github.com/chenjiabing666/java_provide/tree/master/042" target="_blank" rel="external">源码</a></strong><br><strong><code>public abstract void setPaint(Paint paint)</code>paint封装了渐变颜色的Paint对象</strong><br><strong>其中Paint对象的创建是由<a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/java/awt/GradientPaint.html" target="_blank" rel="external">GradientPaint</a>初始化的,其中的构造函数如下：<code>GradientPaint(float x1, float y1, Color color1, float x2, float y2, Color color2)</code></strong></p>
-<h2 id="会变色的文字"><a href="#会变色的文字" class="headerlink" title="会变色的文字"></a>会变色的文字</h2><p><strong>这个主要使用了多线程的方式实现的，用多线程改变Color方法中的RGB的值,用Random在指定范围内任意取值然后组成了不同的颜色，详情请见<a href="https://github.com/chenjiabing666/java_provide/tree/master/043" target="_blank" rel="external">源码</a></strong></p>
-<h2 id="水印文字特效-源码"><a href="#水印文字特效-源码" class="headerlink" title="水印文字特效(源码)"></a>水印文字特效(<a href="https://github.com/chenjiabing666/java_provide/tree/master/044" target="_blank" rel="external">源码</a>)</h2><p><strong>水印文字主要通过改变了文字的透明度实现的，将文字绘制在图片上，然后改变图片的透明度，主要使用了Graphaics2D中的setComposite方法，定义如下：</strong><br><strong><code>public abstract void setComposite(Composite comp)</code>，其中Comp是<a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/java/awt/AlphaComposite.html" target="_blank" rel="external">AlphaComposite</a>对象，可以使用以下两种方式创建</strong></p>
-<blockquote>
-<ul>
-<li><code>AlphaComposite alpha=AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.3f)</code>获得一个SRC_OVER规则的对象</li>
-<li><code>AlphaComposite alpha=AlphaComposite.SC_OVER.driver(0.3f)</code>同上</li>
-</ul>
+		<h1 id="JSP总结四-EL表达式"><a href="#JSP总结四-EL表达式" class="headerlink" title="JSP总结四(EL表达式)"></a>JSP总结四(EL表达式)</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>JSP页面尽量不要使用<code>scriptlet</code>编写<code>java</code>代码，因此我们可以使用<code>EL</code>表达式可以替代<code>Java</code>语句的使用</p>
 </blockquote>
-<h2 id="动态绘制文本-源码"><a href="#动态绘制文本-源码" class="headerlink" title="动态绘制文本(源码)"></a>动态绘制文本(<a href="https://github.com/chenjiabing666/java_provide/tree/master/046" target="_blank" rel="external">源码</a>)</h2><p><strong>主要使用BufferedReader缓冲流从指定文件中读取一个字符，然后使用线程一个一个的绘制在画板上，中间sleep了400ms，这样就能展示出动态的效果，还使用了System类的getProperty方法获得项目的路径,以下提供了两种方法读取文件，更多的读取方法请看我的<a href="https://chenjiabing666.github.io/2017/03/25/java%E4%B8%AD%E7%9A%84IO%E6%93%8D%E4%BD%9C/">博客文章</a></strong></p>
-<blockquote>
-<ul>
-<li><code>BufferedReader read=new BufferedReader(new FileReader(pathname))</code></li>
-<li><code>BufferedReader read=new BufferedReader(new InputStreamReader(in))</code></li>
-</ul>
+<h2 id="隐含对象"><a href="#隐含对象" class="headerlink" title="隐含对象"></a>隐含对象</h2><h3 id="与属性相关的隐含对象"><a href="#与属性相关的隐含对象" class="headerlink" title="与属性相关的隐含对象"></a>与属性相关的隐含对象</h3><blockquote>
+<p>属性的隐含对象有<code>PageScope</code>,<code>requestScop</code>e,<code>sessionScope</code>,<code>applicationScope</code>分别对应的是<code>JSP</code>中的<code>PageContext</code>,<code>request</code>,<code>session</code>,<code>application</code>，因此可以取得<code>JSP</code>对象使用<code>setAttribute()</code>设置的属性，如果没有使用EL隐含对象获取属性的值，那么默认是从<code>PageScope</code>开始寻找</p>
 </blockquote>
-<p><strong>由于都是比较简单的代码，这里不再贴出来le，有想要看的朋友，请点击上面的源码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;%</div><div class="line">    request.setAttribute(<span class="string">"login"</span>,<span class="string">'true'</span>);   <span class="comment">//绑定request对象的属性</span></div><div class="line">    session.setAttribute(<span class="string">"login"</span>,<span class="string">'true'</span>);   <span class="comment">//绑定session对象的属性</span></div><div class="line">    application.setAttribute(<span class="string">"login"</span>,<span class="string">"true"</span>);  <span class="comment">//设置application对象的属性</span></div><div class="line">%&gt;</div><div class="line"></div><div class="line">&lt;%--获取request绑定的属性值  相当于request.getAttribute(<span class="string">"login"</span>);--%&gt;</div><div class="line">&lt;h1&gt;$&#123;requestScope.login&#125;&lt;h1&gt;</div><div class="line"></div><div class="line">&lt;%--获取session绑定的属性值--%&gt;</div><div class="line">&lt;h1&gt;$&#123;sessionScope.login&#125;&lt;h1&gt;</div></pre></td></tr></table></figure>
+<h3 id="与请求参数相关的隐含对象-param-paramValues"><a href="#与请求参数相关的隐含对象-param-paramValues" class="headerlink" title="与请求参数相关的隐含对象(param,paramValues)"></a>与请求参数相关的隐含对象(param,paramValues)</h3><blockquote>
+<p>与请求参数相关的EL隐含对象有<code>param</code>,<code>paramValues</code>。我们可以使用EL表达式可以获取表单提交的请求参数。</p>
+<p>下面我们使用表单提交，测试一下</p>
+<blockquote>
+<p>JSP代码(表单提交)</p>
+</blockquote>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;form action="demo1.jsp" method="get"&gt;</div><div class="line">    姓名:&lt;input type="text" name="username"&gt;</div><div class="line">    密码:&lt;input type="password" name="password"&gt;</div><div class="line">    &lt;input type="submit" value="提交"&gt;</div><div class="line">    </div><div class="line">    爱好:</div><div class="line">    打棒球：&lt;input type="checkbox" name="hobbies"&gt;</div><div class="line">    打羽毛球：&lt;input type="checkbox" name="hobbies"&gt;</div><div class="line">    </div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
 <blockquote>
 <blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
+<p>demo1.jsp 文件（接收请求参数）</p>
 </blockquote>
 </blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;%--获取提交的请求参数username，password </div><div class="line">    相当于使用如下代码:</div><div class="line">        request.getParameter("username");</div><div class="line">        request.getParameter("password");</div><div class="line">--%&gt;</div><div class="line">&lt;h1&gt;$&#123;param.username&#125;&lt;/h1&gt;</div><div class="line">&lt;h1&gt;$&#123;param.password&#125;&lt;/h1&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;%--获取多选框的值  相当于使用下面的代码:</div><div class="line">    request.getParameterValues("hobbies")[0]</div><div class="line">--%&gt;</div><div class="line">&lt;h1&gt;$&#123;paramValues.hobbies[0]&#125;&lt;/h1&gt;</div><div class="line">&lt;h1&gt;$&#123;paramValues.hobbies[1]&#125;&lt;/h1&gt;</div></pre></td></tr></table></figure>
+<h3 id="与标头-Header-相关的隐含对象"><a href="#与标头-Header-相关的隐含对象" class="headerlink" title="与标头(Header)相关的隐含对象"></a>与标头(Header)相关的隐含对象</h3><blockquote>
+<p>如果想要取得用户请求的表头数据，那么使用<code>header</code>或者<code>headerValues</code>隐含对象。例如使用<code>${header[&quot;User-Agent&quot;]}</code> 这个相当于使用<code>&lt;%=request.getHeader(&quot;User-Agent&quot;)%&gt;</code>。 <code>HeaderValues</code>对象相当于使用<code>request.getHeaders()</code>  </p>
 </blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-  
+<h3 id="cookie隐含对象"><a href="#cookie隐含对象" class="headerlink" title="cookie隐含对象"></a>cookie隐含对象</h3><blockquote>
+<p><code>cookie</code>的隐含对象可以取得用户设置的<code>Cookie</code>设置的值。如果在<code>Cookie</code>中设置了<code>username</code>属性，那么可以使用<code>${cookie.username}</code></p>
+</blockquote>
+<h3 id="初始参数隐含对象"><a href="#初始参数隐含对象" class="headerlink" title="初始参数隐含对象"></a>初始参数隐含对象</h3><blockquote>
+<p>隐含对象<code>initParam</code>可以用来取得<code>web.xml</code>中设置的<code>ServletContext</code>初始参数，也就是在<code>&lt;context-param&gt;</code>中设置的初始参数。例如<code>${initParam.initcount}</code>的作用，相当于<code>&lt;%=ServletContext.getInitParameter(&quot;initCount&quot;)%&gt;</code></p>
+</blockquote>
+<h2 id="EL运算符"><a href="#EL运算符" class="headerlink" title="EL运算符"></a>EL运算符</h2><blockquote>
+<p>使用EL运算符直接实现一些算术运算符，逻辑运算符，就如同一般常见的程序语言中的运算</p>
+</blockquote>
+<h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><blockquote>
+<p>可以直接使用加减乘除 <code>${1+2}</code>,<code>${5/2}</code>,<code>${5*3}</code></p>
+</blockquote>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><blockquote>
+<p><code>${true and false}=false</code>,<code>${true and true}=true</code>,<code>${true or false}=true</code></p>
+</blockquote>
+<h3 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h3><blockquote>
+<p>可以直接在EL表达式比较大小，返回的也是<code>false</code>和<code>true</code>，可以用来判断，如下：<br><code>${1&lt;2}=false</code> ,<code>${(10*10)&gt;200}=true</code></p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;c:if text="$&#123;6&gt;5&#125;"&gt;</div><div class="line">    &lt;c:out value="可以直接使用EL表达式进行比较"&gt;&lt;/c:out&gt;</div><div class="line">&lt;/c:if&gt;</div></pre></td></tr></table></figure>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/java学习/">java学习</a>
+  <a class="article-category-link" href="/categories/Java-Web/">Java Web</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/java图形与文本处理/">java图形与文本处理</a>
+  <span></span> <a href="/tags/JSP/">JSP</a>
   </div>
 
 </div>
@@ -157,7 +177,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2017/04/09/java干货篇之文字特效/" data-title="java干货篇之文字特效 | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2017/09/26/JSP总结四-EL表达式/" data-title="JSP总结四(EL表达式) | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -170,19 +190,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/04/09/SQL干货篇二/" title="SQL干货篇二">
-  <strong>上一篇：</strong><br/>
-  <span>
-  SQL干货篇二</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/04/08/Swing干货系列之JTextField/"  title="swing干货系列之JTextField">
+<a href="/2017/09/22/JSP总结三-JSTL核心标签库的使用/"  title="JSP总结三(JSTL核心标签库的使用)">
  <strong>下一篇：</strong><br/> 
- <span>swing干货系列之JTextField
+ <span>JSP总结三(JSTL核心标签库的使用)
 </span>
 </a>
 </div>
@@ -203,7 +215,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#java干货篇文字特效"><span class="toc-number">1.</span> <span class="toc-text">java干货篇文字特效</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#立体效果的文字"><span class="toc-number">1.1.</span> <span class="toc-text">立体效果的文字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阴影效果的文字"><span class="toc-number">1.2.</span> <span class="toc-text">阴影效果的文字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#倾斜效果的文字"><span class="toc-number">1.3.</span> <span class="toc-text">倾斜效果的文字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#渐变效果的文字"><span class="toc-number">1.4.</span> <span class="toc-text">渐变效果的文字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#会变色的文字"><span class="toc-number">1.5.</span> <span class="toc-text">会变色的文字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#水印文字特效-源码"><span class="toc-number">1.6.</span> <span class="toc-text">水印文字特效(源码)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态绘制文本-源码"><span class="toc-number">1.7.</span> <span class="toc-text">动态绘制文本(源码)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.8.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP总结四-EL表达式"><span class="toc-number">1.</span> <span class="toc-text">JSP总结四(EL表达式)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐含对象"><span class="toc-number">1.2.</span> <span class="toc-text">隐含对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#与属性相关的隐含对象"><span class="toc-number">1.2.1.</span> <span class="toc-text">与属性相关的隐含对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与请求参数相关的隐含对象-param-paramValues"><span class="toc-number">1.2.2.</span> <span class="toc-text">与请求参数相关的隐含对象(param,paramValues)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与标头-Header-相关的隐含对象"><span class="toc-number">1.2.3.</span> <span class="toc-text">与标头(Header)相关的隐含对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie隐含对象"><span class="toc-number">1.2.4.</span> <span class="toc-text">cookie隐含对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始参数隐含对象"><span class="toc-number">1.2.5.</span> <span class="toc-text">初始参数隐含对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EL运算符"><span class="toc-number">1.3.</span> <span class="toc-text">EL运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#算术运算符"><span class="toc-number">1.3.1.</span> <span class="toc-text">算术运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑运算符"><span class="toc-number">1.3.2.</span> <span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系运算符"><span class="toc-number">1.3.3.</span> <span class="toc-text">关系运算符</span></a></li></ol></li></ol></li></ol>
  
   </div>
 
