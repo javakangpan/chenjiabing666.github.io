@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2017-09-26T12:07:56.213Z</updated>
+  <updated>2017-09-27T06:04:35.353Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -16,11 +16,181 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Excel表格的写入读取</title>
+    <link href="http://chenjiabing666.github.io/2017/09/27/Excel%E8%A1%A8%E6%A0%BC%E7%9A%84%E5%86%99%E5%85%A5%E8%AF%BB%E5%8F%96/"/>
+    <id>http://chenjiabing666.github.io/2017/09/27/Excel表格的写入读取/</id>
+    <published>2017-09-27T06:03:06.000Z</published>
+    <updated>2017-09-27T06:04:35.353Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Excel的读取和写入"><a href="#Excel的读取和写入" class="headerlink" title="Excel的读取和写入"></a>Excel的读取和写入</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><blockquote>
+<p>首先需要导入jar包，请点击<a href="http://download.csdn.net/download/qq_34162294/9997646" target="_blank" rel="external">这里下载</a></p>
+</blockquote>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>我们知道<code>Excel</code>表格在<code>2007</code>之后就不一样了，后缀名变为<code>xlsx</code>，之前的后缀名为<code>xls</code>,因此读取和写入的操作就对应着不同的方式，但是只是读取和写入的类不同了，思想还是一样的。</p>
+<p>我们要知道一个Excel文件(工作簿)包含三部分，分别是工作表(<code>sheet</code>),行(<code>row</code>),列(<code>cell</code>)</p>
+</blockquote>
+<h2 id="工作簿"><a href="#工作簿" class="headerlink" title="工作簿"></a>工作簿</h2><blockquote>
+<p>工作簿对应的类是 <code>XSSFWorkbook</code>(2007之后),在2007之前对应的类是<code>HSSFWorkbook</code></p>
+</blockquote>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><blockquote>
+<p><code>new XSSFWorkbook()</code>   创建一个工作簿用于写入文件</p>
+<p><code>new XSSFWorkbook(java.io.InputStream inputstream)</code>  创建一个工作簿，用于读取文件</p>
+</blockquote>
+<h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
+<ul>
+<li><code>XSSFFont createFont()</code>   返回一个<code>XSSFont</code>类的对象，主要用于设置字体用的</li>
+<li><code>XSSFSheet createSheet()</code>   创建一个工作表</li>
+<li><code>XSSFSheet    createSheet(String name)</code>   创建一个工作表并且指定姓名</li>
+<li><code>XSSFCellStyle    createCellStyle()</code>   创建一个单元格风格类的一个对象，便于设置单元格的属性</li>
+<li><code>write(OutputStream out)</code>    用于将文件写入到文件中</li>
+<li><code>close()</code>  </li>
+<li><code>setSheetName(int sheetIx,String name)</code>  为指定索引的工作表设置名称</li>
+<li><code>XSSFSheet getSheetAt(int index)</code>   获取指定索引的工作表对象，这个是用来读取文件的时候用的</li>
+</ul>
+</blockquote>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><h4 id="读取文件的例子"><a href="#读取文件的例子" class="headerlink" title="读取文件的例子"></a>读取文件的例子</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  File file = <span class="keyword">new</span> File(<span class="string">"F:\\demo1.xlsx"</span>);</div><div class="line"><span class="comment">//创建输入流</span></div><div class="line">FileInputStream inputStream = <span class="keyword">new</span> FileInputStream(file);</div><div class="line"><span class="comment">//创建工作簿读取</span></div><div class="line">XSSFWorkbook workbook = <span class="keyword">new</span> XSSFWorkbook(inputStream);</div></pre></td></tr></table></figure>
+<h4 id="写入文件的例子"><a href="#写入文件的例子" class="headerlink" title="写入文件的例子"></a>写入文件的例子</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">XSSFWorkbook book=<span class="keyword">new</span> XSSFWorkbook();  <span class="comment">//创建工作簿</span></div><div class="line"></div><div class="line">.....省略写入的内容</div><div class="line"></div><div class="line">FileOutputStream out=<span class="keyword">new</span> FileOutputStream(<span class="string">"D:\\demo1.xlsx"</span>);  <span class="comment">//创建输出流</span></div><div class="line"></div><div class="line">book.write(out);     <span class="comment">//写入到指定的文件</span></div><div class="line"></div><div class="line">book.close(); <span class="comment">// 关闭</span></div><div class="line">out.close();</div></pre></td></tr></table></figure>
+<h2 id="工作表-sheet"><a href="#工作表-sheet" class="headerlink" title="工作表(sheet)"></a>工作表(sheet)</h2><blockquote>
+<p>工作表对应的类为<code>XSSFSheet</code>,2007之前对应的是HSSFSheet<br>一般工作表都是在工作簿基础上创建的，因此构造函数也用不到，所以这里就不多说了</p>
+</blockquote>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><blockquote>
+<ul>
+<li><p><code>int    addMergedRegion(CellRangeAddress region)</code>  合并单元格</p>
+</li>
+<li><p><code>XSSFRow    createRow(int rownum)</code>   创建一个行   rownum表示创建第几行，这是一个行的索引(0开始)  便于写入</p>
+</li>
+<li><p><code>XSSFRow getRow(int index)</code>  获取指定索引的那一行，便于读取</p>
+</li>
+<li><p><code>int getLastRowNum()</code>     获取文件中最后一行的索引，这个通常在读取的时候用到</p>
+</li>
+<li><p><code>int getFirsetRowNum()</code>   获取文件第一行的索引</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h3><h4 id="合并单元格"><a href="#合并单元格" class="headerlink" title="合并单元格"></a>合并单元格</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建工作簿对象</span></div><div class="line">		XSSFWorkbook workbook = <span class="keyword">new</span> HSSFWorkbook();</div><div class="line">        XSSFSheet sheet = workbook.createSheet(<span class="string">"第一张表"</span>);   <span class="comment">//创建工作表对象</span></div><div class="line"></div><div class="line">        <span class="comment">//合并单元格    CellRangeAddress cell=new CellRangeAddress(int firstRow, int lastRow, int firstCol, int lastCol) </span></div><div class="line">        <span class="comment">//这里表示合并第一行的1-10列</span></div><div class="line">        sheet.addMergedRegion(<span class="keyword">new</span> CellRangeAddress(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>));</div></pre></td></tr></table></figure>
+<h4 id="创建一行"><a href="#创建一行" class="headerlink" title="创建一行"></a>创建一行</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">XSSFWorkbook workbook = <span class="keyword">new</span> HSSFWorkbook();</div><div class="line">XSSFSheet sheet = workbook.createSheet(<span class="string">"第一张表"</span>);   <span class="comment">//创建工作表对象</span></div><div class="line">XSSFRow row=sheet.createRow(<span class="number">0</span>);   <span class="comment">//创建第一行</span></div></pre></td></tr></table></figure>
+<h2 id="行"><a href="#行" class="headerlink" title="行"></a>行</h2><blockquote>
+<p>行对应的类为<code>XSFFRow</code>,2007之前对应的是HSSFRow</p>
+</blockquote>
+<h3 id="常用的方法-1"><a href="#常用的方法-1" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
+<ul>
+<li><p><code>XSSFCell    createCell(int columnIndex)</code>  创建一列  columnIndex表示列的索引(0开始)</p>
+</li>
+<li><p><code>short    getFirstCellNum()</code>   返回文件中第一个列的索引，便于以后读取</p>
+</li>
+<li><p><code>short    getLastCellNum()</code>   返回全部的列数(不是索引)，这个和Sheet中getRowNum()方法不同，便于以后读取文件</p>
+</li>
+<li><p><code>XSSFCell    getCell(int cellnum)</code>    获取指定索引的那一列，便于以后的读取</p>
+</li>
+<li><p><code>XSSCellStyle getCellStyle()</code>   获取单元格风格的对象</p>
+</li>
+<li><p><code>void setCellStyle(XSSFCellStyle style)</code>  将设置的风格样式添加到单元格中，否则将不会起作用</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="列"><a href="#列" class="headerlink" title="列"></a>列</h2><blockquote>
+<p>列对应的类为<code>XSSFCell</code>,2007之前对应的是HSSFCell</p>
+</blockquote>
+<h3 id="常用的单元格类型"><a href="#常用的单元格类型" class="headerlink" title="常用的单元格类型"></a>常用的单元格类型</h3><blockquote>
+<p>常用的单元格的类型有字符串，数字，布尔值，空值，可以使用<code>XSSFCell</code>的<code>int getCellType()</code> 方法获取类型</p>
+<ul>
+<li><code>CELL_TYPE_BLANK</code> 空值</li>
+<li><code>CELL_TYPE_STRING</code>  字符串</li>
+<li><code>CELL_TYPE_NUMERIC</code>   数字(浮点值，整型)</li>
+<li><code>CELL_TYPE_BOOLEAN</code> 布尔值(True,FALSE)</li>
+</ul>
+</blockquote>
+<h3 id="常用的方法-2"><a href="#常用的方法-2" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
+<ul>
+<li><p><code>int getCellType()</code>获取单元格类型  可以和常用的单元格类型进行比较，然后使用不同的读取方法读取</p>
+</li>
+<li><p><code>XSSFCellStyle    getCellStyle()</code>   获取单元格风格对象，便于后面设置单元格的风格</p>
+</li>
+<li><p><code>setCellValue(Object value)</code>  设置单元格的内容，可以是任意类型的</p>
+</li>
+<li><p><code>java.util.Date    getDateCellValue()</code>   读取单元格的日期内容</p>
+</li>
+<li><p><code>String    getStringCellValue()</code>   读取单元格中的字符串内容</p>
+</li>
+<li><p><code>double    getNumericCellValue()</code>    读取单元格中的数字类型的内容</p>
+</li>
+<li><p><code>boolean    getBooleanCellValue()</code>   获取单元格中的布尔类型的内容</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="设置单元格样式"><a href="#设置单元格样式" class="headerlink" title="设置单元格样式"></a>设置单元格样式</h2><blockquote>
+<p>对应的类为<code>XSSFCellStyle</code></p>
+</blockquote>
+<h3 id="常用的方法-3"><a href="#常用的方法-3" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
+<ul>
+<li><p><code>void    setAlignment(HorizontalAlignment align)</code>   设置水平对齐方式 </p>
+</li>
+<li><p><code>void    setVerticalAlignment(VerticalAlignment align)</code>   设置垂直的对齐方式</p>
+</li>
+<li><p><code>void    setTopBorderColor(XSSFColor color)</code>   设置上边框的颜色(还有Left,right..)</p>
+</li>
+<li><p><code>void    setFont(Font font)</code>   设置字体  这里的Font是org.apache.poi.ss.usermodel.Font</p>
+</li>
+<li><p><code>void    setBorderTop(BorderStyle border)</code>   设置上边框的样式，在BorderStyle类中有很多的样式</p>
+</li>
+<li><p><code>void    setRotation(short rotation)</code> 设置文字的旋转度数</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="单元格字体的设置"><a href="#单元格字体的设置" class="headerlink" title="单元格字体的设置"></a>单元格字体的设置</h2><blockquote>
+<p>对应的类为<code>XSSFFont</code></p>
+</blockquote>
+<h3 id="常用的方法-4"><a href="#常用的方法-4" class="headerlink" title="常用的方法:"></a>常用的方法:</h3><blockquote>
+<ul>
+<li><p><code>void    setBold(boolean bold)</code>  是否设置加粗</p>
+</li>
+<li><p><code>void    setItalic(boolean italic)</code>   设置是否倾斜</p>
+</li>
+<li><p><code>void    setUnderline(FontUnderline underline)</code> 设置下划线</p>
+</li>
+<li><p><code>void    setStrikeout(boolean strikeout)</code>   设置是否带有删除线</p>
+</li>
+<li><p><code>void    setColor(XSSFColor color)</code>   设置字体的颜色,只需要调用XSSFColor静态颜色变量即可</p>
+</li>
+<li><p><code>void    setFontHeight(double height)</code>   设置字体高度</p>
+</li>
+<li><p><code>void    setFontHeightInPoints(short height)</code> 设置字号</p>
+</li>
+<li><p><code>void    setFontName(java.lang.String name)</code>   设置字体样式(黑体，楷体…)</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.awt.Color;</div><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.io.FileOutputStream;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.poi.hssf.util.HSSFColor;</div><div class="line"><span class="keyword">import</span> org.apache.poi.ss.usermodel.FontUnderline;</div><div class="line"><span class="keyword">import</span> org.apache.poi.ss.usermodel.HorizontalAlignment;</div><div class="line"><span class="keyword">import</span> org.apache.poi.ss.usermodel.VerticalAlignment;</div><div class="line"><span class="keyword">import</span> org.apache.poi.ss.util.CellRangeAddress;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFCell;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFCellStyle;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFColor;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFFont;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFRow;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFSheet;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFWorkbook;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDemo</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">		XSSFWorkbook workbook = <span class="keyword">new</span> XSSFWorkbook(); <span class="comment">// 创建工作簿</span></div><div class="line">		XSSFSheet sheet = workbook.createSheet(<span class="string">"第一个工作表"</span>); <span class="comment">// 创建一个工作表</span></div><div class="line">		XSSFCellStyle style = workbook.createCellStyle(); <span class="comment">// 创建单元格风格对象</span></div><div class="line">		sheet.addMergedRegion(<span class="keyword">new</span> CellRangeAddress(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>)); <span class="comment">// 合并第一行的单元格</span></div><div class="line">		style.setAlignment(HorizontalAlignment.CENTER); <span class="comment">// 设置水平居中</span></div><div class="line">		style.setVerticalAlignment(VerticalAlignment.CENTER); <span class="comment">// 设置垂直居中</span></div><div class="line"></div><div class="line">		XSSFFont font = workbook.createFont(); <span class="comment">// 创建字体的对象</span></div><div class="line">		font.setFontName(<span class="string">"黑体"</span>); <span class="comment">// 设置字体的样式为黑体</span></div><div class="line">		font.setFontHeightInPoints((<span class="keyword">short</span>) <span class="number">20</span>); <span class="comment">// 设置字体的大小</span></div><div class="line">		font.setBold(<span class="keyword">true</span>); <span class="comment">// 设置粗体</span></div><div class="line">		font.setItalic(<span class="keyword">true</span>); <span class="comment">// 设置倾斜</span></div><div class="line">		font.setColor(HSSFColor.RED.index); <span class="comment">// 设置字体的颜色</span></div><div class="line">		font.setUnderline(FontUnderline.SINGLE); <span class="comment">// 设置下划线</span></div><div class="line">		font.setStrikeout(<span class="keyword">false</span>); <span class="comment">// 设置不带下划线</span></div><div class="line"></div><div class="line">		style.setFont(font); <span class="comment">// 将设置的字体添加到单元格样式中，显示出来</span></div><div class="line"></div><div class="line">		XSSFRow row1 = sheet.createRow(<span class="number">0</span>); <span class="comment">// 创建第一个行</span></div><div class="line">		XSSFCell cell1 = row1.createCell(<span class="number">0</span>); <span class="comment">// 创建第一行的第一列</span></div><div class="line">		cell1.setCellStyle(style); <span class="comment">// 将上面定义的风格设置到这个单元格中，这个是必须有的，否则根本不起作用</span></div><div class="line">		cell1.setCellValue(<span class="string">"员工信息表"</span>); <span class="comment">// 设置单元格的内容</span></div><div class="line"></div><div class="line">		<span class="comment">// 设置第二行的前三列的值</span></div><div class="line">		XSSFRow row2 = sheet.createRow(<span class="number">1</span>);</div><div class="line">		row2.createCell(<span class="number">0</span>).setCellValue(<span class="string">"姓名"</span>);</div><div class="line">		row2.createCell(<span class="number">1</span>).setCellValue(<span class="string">"性别"</span>);</div><div class="line">		row2.createCell(<span class="number">2</span>).setCellValue(<span class="string">"年龄"</span>);</div><div class="line"></div><div class="line">		<span class="comment">// 设置第三行的前三列</span></div><div class="line">		XSSFRow row3 = sheet.createRow(<span class="number">2</span>);</div><div class="line">		row3.createCell(<span class="number">0</span>).setCellValue(<span class="string">"陈加兵"</span>);</div><div class="line">		row3.createCell(<span class="number">1</span>).setCellValue(<span class="string">"男"</span>);</div><div class="line">		row3.createCell(<span class="number">2</span>).setCellValue(<span class="number">22</span>); <span class="comment">// 设置数字</span></div><div class="line"></div><div class="line">		<span class="comment">// 设置第四行的前三列</span></div><div class="line">		XSSFRow row4 = sheet.createRow(<span class="number">3</span>);</div><div class="line">		row4.createCell(<span class="number">0</span>).setCellValue(<span class="string">"郑元梅"</span>);</div><div class="line">		row4.createCell(<span class="number">1</span>).setCellValue(<span class="string">"女"</span>);</div><div class="line">		row4.createCell(<span class="number">2</span>).setCellValue(<span class="number">22</span>); <span class="comment">// 设置数字</span></div><div class="line"></div><div class="line">		<span class="comment">// 创建输出流对象</span></div><div class="line">		FileOutputStream stream = <span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(</div><div class="line">				<span class="string">"F:\\demo2.xlsx"</span>));</div><div class="line">		workbook.write(stream); <span class="comment">// 写入文件</span></div><div class="line">		workbook.close(); <span class="comment">// 关闭</span></div><div class="line">		stream.close();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="写入文件-1"><a href="#写入文件-1" class="headerlink" title="写入文件"></a>写入文件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.io.FileInputStream;</div><div class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFCell;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFRow;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFSheet;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFWorkbook;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDemo1</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">		File file = <span class="keyword">new</span> File(<span class="string">"F:\\demo2.xlsx"</span>);</div><div class="line">		FileInputStream inputStream = <span class="keyword">new</span> FileInputStream(file); <span class="comment">// 创建输入流</span></div><div class="line">		XSSFWorkbook workbook = <span class="keyword">new</span> XSSFWorkbook(inputStream); <span class="comment">// 创建读取工作簿的对象</span></div><div class="line">		XSSFSheet sheet = workbook.getSheetAt(<span class="number">0</span>); <span class="comment">// 获取第一个工作表的对象</span></div><div class="line"></div><div class="line">		<span class="comment">// 第一次循环取得所有的行的对象 getLastRowNum()是得到最后一行的索引</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= sheet.getLastRowNum(); i++) &#123;</div><div class="line">			XSSFRow row = sheet.getRow(i); <span class="comment">// 获取每一行的对象</span></div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; row.getLastCellNum(); j++) &#123;</div><div class="line">				XSSFCell cell = row.getCell(j); <span class="comment">// 获取每一行的每一列</span></div><div class="line">				<span class="keyword">int</span> type = cell.getCellType(); <span class="comment">// 获取每一个单元格对应的类型</span></div><div class="line">				<span class="keyword">switch</span> (type) &#123;</div><div class="line">				<span class="keyword">case</span> XSSFCell.CELL_TYPE_BOOLEAN:   <span class="comment">//如果是布尔类型</span></div><div class="line">					<span class="keyword">boolean</span> b=cell.getBooleanCellValue();</div><div class="line">					System.out.print(b + <span class="string">"    "</span>);</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				<span class="keyword">case</span> XSSFCell.CELL_TYPE_NUMERIC:  <span class="comment">//如果是数字类型</span></div><div class="line">					<span class="keyword">double</span> d=cell.getNumericCellValue();   <span class="comment">//获取值</span></div><div class="line">					System.out.print( d+ <span class="string">"    "</span>);</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				<span class="keyword">case</span> XSSFCell.CELL_TYPE_STRING:  <span class="comment">//如果是字符串类型的</span></div><div class="line">					String s=cell.getStringCellValue();</div><div class="line">					System.out.print( s+ <span class="string">"   "</span>);   </div><div class="line">				<span class="keyword">case</span> XSSFCell.CELL_TYPE_BLANK:   <span class="comment">//如果是空值</span></div><div class="line">					System.out.print(<span class="string">"      "</span>);</div><div class="line">				<span class="keyword">default</span>:</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			System.out.println();</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		workbook.close();  <span class="comment">//关闭</span></div><div class="line">		inputStream.close();</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<ul>
+<li><p><a href="http://tool.oschina.net/apidocs/apidoc?api=apache-POI" target="_blank" rel="external">POI文档</a></p>
+</li>
+<li><p><a href="http://lsieun.blog.51cto.com/9210464/1836601" target="_blank" rel="external">http://lsieun.blog.51cto.com/9210464/1836601</a></p>
+</li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Excel的读取和写入&quot;&gt;&lt;a href=&quot;#Excel的读取和写入&quot; class=&quot;headerlink&quot; title=&quot;Excel的读取和写入&quot;&gt;&lt;/a&gt;Excel的读取和写入&lt;/h1&gt;&lt;h2 id=&quot;准备&quot;&gt;&lt;a href=&quot;#准备&quot; class=&quot;head
+    
+    </summary>
+    
+      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
+    
+    
+      <category term="POI(Excel)" scheme="http://chenjiabing666.github.io/tags/POI-Excel/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JSP总结四(EL表达式)</title>
     <link href="http://chenjiabing666.github.io/2017/09/26/JSP%E6%80%BB%E7%BB%93%E5%9B%9B-EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     <id>http://chenjiabing666.github.io/2017/09/26/JSP总结四-EL表达式/</id>
     <published>2017-09-26T12:07:16.000Z</published>
-    <updated>2017-09-26T12:07:56.213Z</updated>
+    <updated>2017-09-27T06:03:48.775Z</updated>
     
     <content type="html"><![CDATA[<h1 id="JSP总结四-EL表达式"><a href="#JSP总结四-EL表达式" class="headerlink" title="JSP总结四(EL表达式)"></a>JSP总结四(EL表达式)</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
 <p>JSP页面尽量不要使用<code>scriptlet</code>编写<code>java</code>代码，因此我们可以使用<code>EL</code>表达式可以替代<code>Java</code>语句的使用</p>
@@ -72,7 +242,7 @@
     
     </summary>
     
-      <category term="Java Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
+      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
     
     
       <category term="JSP" scheme="http://chenjiabing666.github.io/tags/JSP/"/>
@@ -84,7 +254,7 @@
     <link href="http://chenjiabing666.github.io/2017/09/22/JSP%E6%80%BB%E7%BB%93%E4%B8%89-JSTL%E6%A0%B8%E5%BF%83%E6%A0%87%E7%AD%BE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://chenjiabing666.github.io/2017/09/22/JSP总结三-JSTL核心标签库的使用/</id>
     <published>2017-09-22T06:39:43.000Z</published>
-    <updated>2017-09-22T06:40:42.205Z</updated>
+    <updated>2017-09-27T06:03:55.126Z</updated>
     
     <content type="html"><![CDATA[<h1 id="JSP总结三-JSTL核心标签库的使用"><a href="#JSP总结三-JSTL核心标签库的使用" class="headerlink" title="JSP总结三(JSTL核心标签库的使用)"></a>JSP总结三(JSTL核心标签库的使用)</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
 <p>其实在我们编写JSP网页的时候是不希望在JSP页面中出现Java代码的，这里我们就要使用<code>JSTL</code>的核心标签库来实现。</p>
@@ -190,7 +360,7 @@
     
     </summary>
     
-      <category term="Java Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
+      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
     
     
       <category term="JSP" scheme="http://chenjiabing666.github.io/tags/JSP/"/>
@@ -1692,134 +1862,6 @@
     
       &lt;h1 id=&quot;Java正则表达式&quot;&gt;&lt;a href=&quot;#Java正则表达式&quot; class=&quot;headerlink&quot; title=&quot;Java正则表达式&quot;&gt;&lt;/a&gt;Java正则表达式&lt;/h1&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;java.util.regex&lt;/code&gt;是
-    
-    </summary>
-    
-      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java日期格式化</title>
-    <link href="http://chenjiabing666.github.io/2017/06/15/Java%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96/"/>
-    <id>http://chenjiabing666.github.io/2017/06/15/Java日期格式化/</id>
-    <published>2017-06-15T04:22:39.000Z</published>
-    <updated>2017-06-15T11:08:40.548Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="日期格式化"><a href="#日期格式化" class="headerlink" title="日期格式化"></a>日期格式化</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<ul>
-<li>更多文章请看本人博客<a href="https://chenjiabing666.github.io/">https://chenjiabing666.github.io/</a></li>
-<li>版权所有，如需转载请注明来源</li>
-</ul>
-</blockquote>
-<h2 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h2><blockquote>
-<p><code>Date</code>类表示特定的瞬间精确到毫秒，不过从API可以看出很多的方法已经废弃了，这个类已经在过多使用了，不过还是需要了解一下的，为了后面的学习做铺垫</p>
-</blockquote>
-<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><blockquote>
-<ul>
-<li><code>new Date()</code></li>
-</ul>
-</blockquote>
-<h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
-<ul>
-<li><code>long getTime()</code> 返回计算机上面的时间，返回的是毫秒</li>
-<li><code>setTime(long s)</code> 用给定的毫秒值s设置时间</li>
-</ul>
-</blockquote>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Date date=<span class="keyword">new</span> Date();</div><div class="line">System.out.println(date.getTime());</div></pre></td></tr></table></figure>
-<h2 id="SimpleDateFormat"><a href="#SimpleDateFormat" class="headerlink" title="SimpleDateFormat"></a>SimpleDateFormat</h2><blockquote>
-<ul>
-<li>这个类是一个简单的格式化日期的类，继承与<code>DateFormat</code>,相对于父类来说使用简单</li>
-</ul>
-</blockquote>
-<h3 id="构造方法-1"><a href="#构造方法-1" class="headerlink" title="构造方法"></a>构造方法</h3><blockquote>
-<ul>
-<li><code>new SimpleDateFormat()</code>  使用默认的格式化模板创建对象</li>
-<li><code>new SimpleDateFormat(String pattern)</code>   使用指定的格式化模板创建对象</li>
-</ul>
-</blockquote>
-<h3 id="常用的方法-1"><a href="#常用的方法-1" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
-<ul>
-<li><code>String format(Date date)</code>   将给定的日期格式化指定的模板的样式,比如<code>2017-01-29 23:22:11</code></li>
-<li><code>applyPattern(String pattern)</code> 将给定的格式应用于此日期的格式，相当于直接使用new Date(String pattern)</li>
-<li><code>Date parse(String d)</code>  将给定的格式化的日期格式字符串转换成<code>Date</code>对象，需要注意的是转化的时候定义的模板一定要和字符串的日期格式的模板一样，否则将会解析不正确的形式</li>
-</ul>
-</blockquote>
-<h3 id="常用的日期格式化的模板"><a href="#常用的日期格式化的模板" class="headerlink" title="常用的日期格式化的模板"></a>常用的日期格式化的模板</h3><blockquote>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F.bmp" alt="日期格式化的格式"></p>
-</blockquote>
-<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><blockquote>
-<ul>
-<li>使用默认的模板格式化日期</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SimpleDateFormat dateFormat=<span class="keyword">new</span> SimpleDateFormat();   <span class="comment">//默认的格式</span></div><div class="line">String formateString=dateFormat.format(date);   <span class="comment">//格式化当前的日期</span></div><div class="line">System.out.println(formateString);</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>使用指定的模板格式化日期</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String model=<span class="string">"yyyy-MM-dd-FF  HH:mm:ss"</span>;  <span class="comment">//指定格式化的模板</span></div><div class="line">SimpleDateFormat dateFormat2=<span class="keyword">new</span> SimpleDateFormat(model);</div><div class="line">System.out.println(dateFormat2.format(date));</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>将格式化的日期转换成<code>Date</code>类型的，使用的<code>parse(String s)</code>，需要注意的是，下面定义的模板一定要和给定的格式化后的日期格式一样，否则转换后Date类型的毫秒值可能不正确</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">      String d = <span class="string">"2017-06-12 22:34:19"</span>;   <span class="comment">//给出格式化后的日期</span></div><div class="line">String pattern = <span class="string">"yyyy-MM-dd HH:mm:ss"</span>;  <span class="comment">//按照上面的日期格式定义模板，这个一定要完全和上面的一样，否则转换不正确</span></div><div class="line">SimpleDateFormat dateFormat = <span class="keyword">new</span> SimpleDateFormat(pattern);</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">	Date date = dateFormat.parse(d);   <span class="comment">//解析成Date类型</span></div><div class="line">	System.out.println(dateFormat.format(date));</div><div class="line">&#125; <span class="keyword">catch</span> (ParseException e) &#123;</div><div class="line">	System.err.println(<span class="string">"解析错误"</span>);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>综合使用：计算时间差</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Scanner scanner=<span class="keyword">new</span> Scanner(System.in);</div><div class="line">System.out.println(<span class="string">"请输入年-月-日"</span>);</div><div class="line">String startTime=scanner.next();</div><div class="line">System.out.println(<span class="string">"请输入结束时间(年-月-日)"</span>);</div><div class="line">String endTime=scanner.next();</div><div class="line">String moudle=<span class="string">"yyyy-MM-dd"</span>;   <span class="comment">//定义时间模板</span></div><div class="line"><span class="comment">//创建指定模板的解析</span></div><div class="line">SimpleDateFormat dateFormat=<span class="keyword">new</span> SimpleDateFormat(moudle);</div><div class="line">Date startDate=dateFormat.parse(startTime);<span class="comment">//解析开始时间</span></div><div class="line">Date endDate =dateFormat.parse(endTime);<span class="comment">//解析结束时间</span></div><div class="line"><span class="keyword">long</span> time=startDate.getTime()-endDate.getTime();  <span class="comment">//返回两个时间的差，毫秒</span></div><div class="line"><span class="keyword">int</span> day=(<span class="keyword">int</span>)(time/<span class="number">1000</span>/<span class="number">60</span>/<span class="number">60</span>/<span class="number">24</span>);  <span class="comment">//转化为天数，1秒等于1000毫秒，一分钟等于60秒，一小时等于60分钟，一天等于24小时</span></div><div class="line">System.out.println(day);</div></pre></td></tr></table></figure>
-<h2 id="Calendar"><a href="#Calendar" class="headerlink" title="Calendar"></a>Calendar</h2><blockquote>
-<p>Calendar 类是一个抽象类，它为特定瞬间与一组诸如 YEAR、MONTH、DAY_OF_MONTH、HOUR 等 日历字段之间的转换提供了一些方法，并为操作日历字段（例如获得下星期的日期）提供了一些方法。瞬间可用毫秒值来表示，它是距历元（即格林威治标准时间 1970 年 1 月 1 日的 00:00:00.000，格里高利历）的偏移量。 </p>
-</blockquote>
-<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><blockquote>
-<ul>
-<li><code>Calendar.getInstance()</code></li>
-</ul>
-</blockquote>
-<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><blockquote>
-<ul>
-<li><code>int get(int field)</code>  返回当前对象的一些日期信息</li>
-<li><code>Date getTime()</code>  获得当前日期的<code>Date</code>对象</li>
-<li><code>add(int field,int amount)</code>  根据日历的规则，为给定的日历字段添加或减去指定的时间量。例如，要从当前日历时间减去 5 天，可以通过调用以下方法做到这一点：<code>add(Calendar.DAY_OF_MONTH, -5)</code>。 </li>
-<li><code>setTime(Date date)</code>  使用给定的<code>Date</code>对象，设置<code>Calendar</code>时间</li>
-</ul>
-</blockquote>
-<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><blockquote>
-<ul>
-<li><code>get</code>方法获取一些字段的值</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">      Calendar calendar = Calendar.getInstance(); <span class="comment">// 创建对象</span></div><div class="line">System.out.println(calendar.get(Calendar.YEAR));<span class="comment">// 获取年份</span></div><div class="line">System.out.println(calendar.get(Calendar.MONTH) + <span class="number">1</span>);<span class="comment">// 月，从0开始，即是输出5表示6月</span></div><div class="line">System.out.println(calendar.get(Calendar.DATE));<span class="comment">// 获取一个月中的第几天</span></div><div class="line">System.out.println(calendar.get(Calendar.HOUR)); <span class="comment">// 小时</span></div><div class="line">System.out.println(calendar.get(Calendar.MINUTE)); <span class="comment">// 分钟</span></div><div class="line">System.out.println(calendar.get(Calendar.SECOND)); <span class="comment">// 秒</span></div><div class="line">System.out.println(calendar.get(Calendar.AM_PM)); <span class="comment">// 获得是上午还是下午AM=0,PM=1</span></div><div class="line">System.out.println(calendar.get(Calendar.DAY_OF_MONTH)); <span class="comment">// 一个月中的第几天</span></div><div class="line">System.out.println(calendar.get(Calendar.DAY_OF_WEEK)); <span class="comment">// 一周中的第几天，星期日是第一天</span></div><div class="line">System.out.println(calendar.get(Calendar.DAY_OF_YEAR));<span class="comment">// 一年中的第几天</span></div><div class="line">System.out.println(calendar.get(Calendar.HOUR_OF_DAY)); <span class="comment">// 一天中的第几小时</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> (calendar.get(Calendar.AM_PM) == Calendar.AM) &#123;</div><div class="line">	System.out.println(<span class="string">"现在是上午"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (calendar.get(Calendar.MONTH) + <span class="number">1</span> == Calendar.JULY) &#123;</div><div class="line">	System.out.println(<span class="string">"现在是6月"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><code>Date getTime()</code>方法的使用</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Calendar calendar=Calendar.getInstance();</div><div class="line">Date date=calendar.getTime();   <span class="comment">//获得Date对象</span></div><div class="line">String pattern=<span class="string">"yyyy-MM-dd  HH:mm:ss"</span>;</div><div class="line">SimpleDateFormat dateFormat=<span class="keyword">new</span> SimpleDateFormat(pattern);</div><div class="line">System.out.println(dateFormat.format(date));</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><code>add(int field,int amount)</code>方法的使用</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">      Calendar calendar=Calendar.getInstance();</div><div class="line">calendar.add(Calendar.DATE, -<span class="number">2</span>);</div><div class="line">System.out.println(calendar.get(Calendar.DATE));</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>综合实例：计算出当前的准确日期</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">      Calendar calendar = Calendar.getInstance();</div><div class="line"><span class="keyword">int</span> year = calendar.get(Calendar.YEAR);</div><div class="line"><span class="keyword">int</span> month = calendar.get(calendar.MONTH) + <span class="number">1</span>; <span class="comment">// 从0开始算，因此加1</span></div><div class="line"><span class="keyword">int</span> date = calendar.get(Calendar.DATE);</div><div class="line"><span class="keyword">int</span> week = calendar.get(Calendar.WEEK_OF_MONTH) + <span class="number">1</span>; <span class="comment">// 从周日开始算，因此加1</span></div><div class="line"><span class="keyword">int</span> hour = calendar.get(Calendar.HOUR);</div><div class="line"><span class="keyword">int</span> minute = calendar.get(Calendar.MINUTE);</div><div class="line"><span class="keyword">int</span> seconds = calendar.get(Calendar.SECOND);</div><div class="line"><span class="keyword">if</span> (calendar.get(Calendar.AM_PM) == Calendar.AM) &#123;</div><div class="line"></div><div class="line">	System.out.println(<span class="string">"现在是"</span> + year + <span class="string">"年"</span> + month + <span class="string">"月"</span> + date + <span class="string">"号"</span></div><div class="line">			+ <span class="string">"星期"</span> + week + <span class="string">"上午"</span> + hour + <span class="string">"点"</span> + minute + <span class="string">"分"</span> + seconds</div><div class="line">			+ <span class="string">"秒"</span>);</div><div class="line"></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	System.out.println(<span class="string">"现在是"</span> + year + <span class="string">"年"</span> + month + <span class="string">"月"</span> + date + <span class="string">"号"</span></div><div class="line">			+ <span class="string">"星期"</span> + week + <span class="string">"下午"</span> + hour + <span class="string">"点"</span> + minute + <span class="string">"分"</span> + seconds</div><div class="line">			+ <span class="string">"秒"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;日期格式化&quot;&gt;&lt;a href=&quot;#日期格式化&quot; class=&quot;headerlink&quot; title=&quot;日期格式化&quot;&gt;&lt;/a&gt;日期格式化&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前
     
     </summary>
     
