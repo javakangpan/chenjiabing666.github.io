@@ -26,7 +26,7 @@
 想要使用JSTL，一定要填上这句话：&amp;lt;%@taglib prefix=&amp;quot;c&amp;quot; uri=&amp;quot;http://java.sun.com/jsp/jstl/core&amp;quot;%&amp;gt;
 
 属性处理与输出标签属">
-<meta property="og:updated_time" content="2017-09-27T06:03:55.126Z">
+<meta property="og:updated_time" content="2017-10-01T07:58:08.596Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSP总结三(JSTL核心标签库的使用)">
 <meta name="twitter:description" content="JSP总结三(JSTL核心标签库的使用)简介
@@ -109,7 +109,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP总结三-JSTL核心标签库的使用"><span class="toc-number">1.</span> <span class="toc-text">JSP总结三(JSTL核心标签库的使用)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性处理与输出标签"><span class="toc-number">1.2.</span> <span class="toc-text">属性处理与输出标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性处理标签"><span class="toc-number">1.2.1.</span> <span class="toc-text">属性处理标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输出标签"><span class="toc-number">1.2.2.</span> <span class="toc-text">输出标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程处理标签"><span class="toc-number">1.3.</span> <span class="toc-text">流程处理标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if判断语句"><span class="toc-number">1.3.1.</span> <span class="toc-text">if判断语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高级判断"><span class="toc-number">1.3.2.</span> <span class="toc-text">高级判断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网页导入和重定向标签"><span class="toc-number">1.4.</span> <span class="toc-text">网页导入和重定向标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#网页导入标签"><span class="toc-number">1.4.1.</span> <span class="toc-text">网页导入标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向标签"><span class="toc-number">1.4.2.</span> <span class="toc-text">重定向标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#错误处理标签"><span class="toc-number">1.5.</span> <span class="toc-text">错误处理标签</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP总结三-JSTL核心标签库的使用"><span class="toc-number">1.</span> <span class="toc-text">JSP总结三(JSTL核心标签库的使用)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性处理与输出标签"><span class="toc-number">1.2.</span> <span class="toc-text">属性处理与输出标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性处理标签"><span class="toc-number">1.2.1.</span> <span class="toc-text">属性处理标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输出标签"><span class="toc-number">1.2.2.</span> <span class="toc-text">输出标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程处理标签"><span class="toc-number">1.3.</span> <span class="toc-text">流程处理标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if判断语句"><span class="toc-number">1.3.1.</span> <span class="toc-text">if判断语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高级判断"><span class="toc-number">1.3.2.</span> <span class="toc-text">高级判断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网页导入和重定向标签"><span class="toc-number">1.4.</span> <span class="toc-text">网页导入和重定向标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#网页导入标签"><span class="toc-number">1.4.1.</span> <span class="toc-text">网页导入标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向标签"><span class="toc-number">1.4.2.</span> <span class="toc-text">重定向标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#错误处理标签"><span class="toc-number">1.5.</span> <span class="toc-text">错误处理标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#迭代标签"><span class="toc-number">1.6.</span> <span class="toc-text">迭代标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#forEach"><span class="toc-number">1.6.1.</span> <span class="toc-text">forEach</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#属性"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#forTokens"><span class="toc-number">1.6.2.</span> <span class="toc-text">forTokens</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#属性-1"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-1"><span class="toc-number">1.6.2.2.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li></ol></li></ol>
 		
 		</div>
 		
@@ -209,7 +209,39 @@
 <p>在之前的JSP文件中，必须定义<code>errorPage</code>属性才能跳转到指定的页面或者处理错误</p>
 <p>现在我们使用<code>JSTL</code>标签<code>&lt;c:catch&gt;</code>,可以捕捉异常，如果有异常就会将异常对象保存下来</p>
 </blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">   &lt;%--捕捉异常，如果有了异常，那么保存在error变量中 --%&gt;</div><div class="line">&lt;c:catch var="error"&gt;</div><div class="line">	$&#123;10/0 &#125;</div><div class="line">&lt;/c:catch&gt;</div><div class="line"></div><div class="line">&lt;%-- 如果捕捉到了异常，那么error就不是null --%&gt;</div><div class="line">&lt;c:if test="$&#123;error!=null &#125;"&gt;</div><div class="line">	&lt;h1&gt;</div><div class="line">		&lt;c:out value="$&#123;error.message &#125;"&gt;&lt;/c:out&gt;</div><div class="line">	&lt;/h1&gt;</div><div class="line">&lt;/c:if&gt;</div></pre></td></tr></table></figure>  
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">   &lt;%--捕捉异常，如果有了异常，那么保存在error变量中 --%&gt;</div><div class="line">&lt;c:catch var="error"&gt;</div><div class="line">	$&#123;10/0 &#125;</div><div class="line">&lt;/c:catch&gt;</div><div class="line"></div><div class="line">&lt;%-- 如果捕捉到了异常，那么error就不是null --%&gt;</div><div class="line">&lt;c:if test="$&#123;error!=null &#125;"&gt;</div><div class="line">	&lt;h1&gt;</div><div class="line">		&lt;c:out value="$&#123;error.message &#125;"&gt;&lt;/c:out&gt;</div><div class="line">	&lt;/h1&gt;</div><div class="line">&lt;/c:if&gt;</div></pre></td></tr></table></figure>
+<h2 id="迭代标签"><a href="#迭代标签" class="headerlink" title="迭代标签"></a>迭代标签</h2><blockquote>
+<p>迭代标签用于数组，集合，列表的输出。</p>
+</blockquote>
+<h3 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h3><blockquote>
+<p>forEach既可以循环也可以迭代</p>
+</blockquote>
+<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><blockquote>
+<ul>
+<li><code>var</code> 变量，用于输出</li>
+<li><code>items</code>   将要迭代的对象</li>
+<li><code>valueStatus</code>   迭代的状态</li>
+<li><code>begin</code>   如果指定了bengin，就在items下标为begin的位置进行迭代</li>
+<li><code>end</code>     如果指定了end，那么就在items下表为end的位置结束迭代</li>
+<li><code>step</code>    指定迭代的步长，默认的是1</li>
+</ul>
+</blockquote>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">      &lt;!-- 循环输出[0,8]之中的所有的整数 --&gt;</div><div class="line">		&lt;c:forEach var="item" begin="0" end="8"&gt;</div><div class="line">			&lt;c:out value="$&#123;item&#125;"&gt;&lt;/c:out&gt;</div><div class="line">		&lt;/c:forEach&gt;</div><div class="line">		&lt;br&gt;</div><div class="line">		</div><div class="line">		&lt;!-- 循环输出[0,8]之中的所有的整数 ,指定步长为2--&gt;</div><div class="line">		&lt;c:forEach var="item" begin="0" end="8" step="2"&gt;</div><div class="line">			&lt;c:out value="$&#123;item&#125;"&gt;&lt;/c:out&gt;</div><div class="line">		&lt;/c:forEach&gt;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&lt;%</div><div class="line">	List list=new ArrayList();</div><div class="line"> 	for(int i=0;i&lt;3;i++)&#123;</div><div class="line"> 		list.add(i);</div><div class="line"> 	&#125;</div><div class="line">	request.setAttribute("items", list);</div><div class="line"></div><div class="line">%&gt;</div><div class="line"></div><div class="line">&lt;!-- item是创建的变量用来存储迭代中的值，items是迭代的对象，其中的值使用EL表达式给出 --&gt;</div><div class="line">&lt;c:forEach var="item" items="$&#123;requestScope.items &#125;"&gt;</div><div class="line">	&lt;c:out value="$&#123;item &#125;"&gt;&lt;/c:out&gt;</div><div class="line">&lt;/c:forEach&gt;</div></pre></td></tr></table></figure>
+<h3 id="forTokens"><a href="#forTokens" class="headerlink" title="forTokens"></a>forTokens</h3><blockquote>
+<p>用于将一个字符串按照定义的符号分隔出来。</p>
+</blockquote>
+<h4 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h4><blockquote>
+<ul>
+<li><code>var</code> 变量，用于输出</li>
+<li><code>items</code>  将要迭代的string对象</li>
+<li><code>delims</code>   指定分隔字符串的分隔符，可以定义多个分隔符</li>
+<li><code>varStatus</code>   迭代的状态</li>
+<li><code>begin</code>     </li>
+<li><code>end</code></li>
+<li><code>step</code></li>
+</ul>
+</blockquote>
+<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;%</div><div class="line">	String str="c,v,d,s,a|v,d";</div><div class="line">	request.setAttribute("str",str);</div><div class="line">%&gt;</div><div class="line"></div><div class="line">&lt;c:forTokens var="item" items="$&#123;requestScope.str &#125;" delims=",|"&gt;</div><div class="line">	&lt;c:out value="$&#123;item &#125;"&gt;&lt;/c:out&gt;</div><div class="line">&lt;/c:forTokens&gt;</div></pre></td></tr></table></figure>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -277,7 +309,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP总结三-JSTL核心标签库的使用"><span class="toc-number">1.</span> <span class="toc-text">JSP总结三(JSTL核心标签库的使用)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性处理与输出标签"><span class="toc-number">1.2.</span> <span class="toc-text">属性处理与输出标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性处理标签"><span class="toc-number">1.2.1.</span> <span class="toc-text">属性处理标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输出标签"><span class="toc-number">1.2.2.</span> <span class="toc-text">输出标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程处理标签"><span class="toc-number">1.3.</span> <span class="toc-text">流程处理标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if判断语句"><span class="toc-number">1.3.1.</span> <span class="toc-text">if判断语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高级判断"><span class="toc-number">1.3.2.</span> <span class="toc-text">高级判断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网页导入和重定向标签"><span class="toc-number">1.4.</span> <span class="toc-text">网页导入和重定向标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#网页导入标签"><span class="toc-number">1.4.1.</span> <span class="toc-text">网页导入标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向标签"><span class="toc-number">1.4.2.</span> <span class="toc-text">重定向标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#错误处理标签"><span class="toc-number">1.5.</span> <span class="toc-text">错误处理标签</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP总结三-JSTL核心标签库的使用"><span class="toc-number">1.</span> <span class="toc-text">JSP总结三(JSTL核心标签库的使用)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性处理与输出标签"><span class="toc-number">1.2.</span> <span class="toc-text">属性处理与输出标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性处理标签"><span class="toc-number">1.2.1.</span> <span class="toc-text">属性处理标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输出标签"><span class="toc-number">1.2.2.</span> <span class="toc-text">输出标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程处理标签"><span class="toc-number">1.3.</span> <span class="toc-text">流程处理标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if判断语句"><span class="toc-number">1.3.1.</span> <span class="toc-text">if判断语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高级判断"><span class="toc-number">1.3.2.</span> <span class="toc-text">高级判断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网页导入和重定向标签"><span class="toc-number">1.4.</span> <span class="toc-text">网页导入和重定向标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#网页导入标签"><span class="toc-number">1.4.1.</span> <span class="toc-text">网页导入标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向标签"><span class="toc-number">1.4.2.</span> <span class="toc-text">重定向标签</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#错误处理标签"><span class="toc-number">1.5.</span> <span class="toc-text">错误处理标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#迭代标签"><span class="toc-number">1.6.</span> <span class="toc-text">迭代标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#forEach"><span class="toc-number">1.6.1.</span> <span class="toc-text">forEach</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#属性"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#forTokens"><span class="toc-number">1.6.2.</span> <span class="toc-text">forTokens</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#属性-1"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-1"><span class="toc-number">1.6.2.2.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li></ol></li></ol>
  
   </div>
 
@@ -348,11 +380,11 @@
 			
 		
 			
-				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>6</sup></a></li>
+				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
+				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>6</sup></a></li>
 			
 		
 			
@@ -364,11 +396,11 @@
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
+				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
 			
 		
 			
@@ -400,6 +432,10 @@
 			
 		
 			
+				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 			
 		
@@ -409,10 +445,6 @@
 		
 			
 				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
 			
 		
 			
