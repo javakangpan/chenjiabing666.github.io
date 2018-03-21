@@ -26,7 +26,8 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 实例
 
 12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex CHAR(2),Sage SMALL">
-<meta property="og:updated_time" content="2017-04-06T14:47:15.114Z">
+<meta property="og:image" content="http://chenjiabing666.github.io/th.jpg">
+<meta property="og:updated_time" content="2018-03-21T03:33:47.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL干货篇一">
 <meta name="twitter:description" content="SQL系列之基本操作新建表
@@ -34,6 +35,7 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 实例
 
 12345CREATE TABLE student(Sno CHAR(9) PRIMARY KEY,Sname CHAR(20) UNIQUE,Ssex CHAR(2),Sage SMALL">
+<meta name="twitter:image" content="http://chenjiabing666.github.io/th.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -109,7 +111,7 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL系列之基本操作"><span class="toc-number">1.</span> <span class="toc-text">SQL系列之基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#新建表"><span class="toc-number">1.1.</span> <span class="toc-text">新建表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表"><span class="toc-number">1.2.</span> <span class="toc-text">删除表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改表"><span class="toc-number">1.3.</span> <span class="toc-text">修改表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加列"><span class="toc-number">1.3.1.</span> <span class="toc-text">添加列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除列"><span class="toc-number">1.3.2.</span> <span class="toc-text">删除列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改列"><span class="toc-number">1.3.3.</span> <span class="toc-text">修改列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重命名表"><span class="toc-number">1.3.4.</span> <span class="toc-text">重命名表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入数据"><span class="toc-number">1.4.</span> <span class="toc-text">插入数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新数据"><span class="toc-number">1.5.</span> <span class="toc-text">更新数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表中的数据"><span class="toc-number">1.6.</span> <span class="toc-text">删除表中的数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.7.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL系列之基本操作"><span class="toc-number">1.</span> <span class="toc-text">SQL系列之基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#新建表"><span class="toc-number">1.1.</span> <span class="toc-text">新建表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表"><span class="toc-number">1.2.</span> <span class="toc-text">删除表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改表"><span class="toc-number">1.3.</span> <span class="toc-text">修改表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加列"><span class="toc-number">1.3.1.</span> <span class="toc-text">添加列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除列"><span class="toc-number">1.3.2.</span> <span class="toc-text">删除列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改列"><span class="toc-number">1.3.3.</span> <span class="toc-text">修改列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重命名表"><span class="toc-number">1.3.4.</span> <span class="toc-text">重命名表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入数据"><span class="toc-number">1.4.</span> <span class="toc-text">插入数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新数据"><span class="toc-number">1.5.</span> <span class="toc-text">更新数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表中的数据"><span class="toc-number">1.6.</span> <span class="toc-text">删除表中的数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#图案"><span class="toc-number">1.6.1.</span> <span class="toc-text">图案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.7.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -175,6 +177,11 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 <ul>
 <li>delete from student where Sno=’121314125’;                //删除Sno为121314125的那一行数据</li>
 </ul>
+</blockquote>
+</blockquote>
+<h3 id="图案"><a href="#图案" class="headerlink" title="图案"></a>图案</h3><p><img src="th.jpg" alt=""></p>
+<blockquote>
+<blockquote>
 <h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
 <p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
 </blockquote>
@@ -249,7 +256,7 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL系列之基本操作"><span class="toc-number">1.</span> <span class="toc-text">SQL系列之基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#新建表"><span class="toc-number">1.1.</span> <span class="toc-text">新建表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表"><span class="toc-number">1.2.</span> <span class="toc-text">删除表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改表"><span class="toc-number">1.3.</span> <span class="toc-text">修改表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加列"><span class="toc-number">1.3.1.</span> <span class="toc-text">添加列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除列"><span class="toc-number">1.3.2.</span> <span class="toc-text">删除列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改列"><span class="toc-number">1.3.3.</span> <span class="toc-text">修改列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重命名表"><span class="toc-number">1.3.4.</span> <span class="toc-text">重命名表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入数据"><span class="toc-number">1.4.</span> <span class="toc-text">插入数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新数据"><span class="toc-number">1.5.</span> <span class="toc-text">更新数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表中的数据"><span class="toc-number">1.6.</span> <span class="toc-text">删除表中的数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.7.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL系列之基本操作"><span class="toc-number">1.</span> <span class="toc-text">SQL系列之基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#新建表"><span class="toc-number">1.1.</span> <span class="toc-text">新建表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表"><span class="toc-number">1.2.</span> <span class="toc-text">删除表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改表"><span class="toc-number">1.3.</span> <span class="toc-text">修改表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加列"><span class="toc-number">1.3.1.</span> <span class="toc-text">添加列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除列"><span class="toc-number">1.3.2.</span> <span class="toc-text">删除列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改列"><span class="toc-number">1.3.3.</span> <span class="toc-text">修改列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重命名表"><span class="toc-number">1.3.4.</span> <span class="toc-text">重命名表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入数据"><span class="toc-number">1.4.</span> <span class="toc-text">插入数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新数据"><span class="toc-number">1.5.</span> <span class="toc-text">更新数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除表中的数据"><span class="toc-number">1.6.</span> <span class="toc-text">删除表中的数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#图案"><span class="toc-number">1.6.1.</span> <span class="toc-text">图案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.7.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -348,15 +355,15 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/SQL/" title="SQL">SQL<sup>3</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 			
@@ -372,11 +379,15 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 			
 		
 			
-				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 			
 		
 			
@@ -385,10 +396,6 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 		
 			
 				<li><a href="/tags/POI-Excel/" title="POI(Excel)">POI(Excel)<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 			
 		
 		</ul>
