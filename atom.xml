@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-03-22T09:30:14.637Z</updated>
+  <updated>2018-03-24T01:11:27.713Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,292 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL操作三</title>
+    <link href="http://chenjiabing666.github.io/2018/03/24/SQL%E6%93%8D%E4%BD%9C%E4%B8%89/"/>
+    <id>http://chenjiabing666.github.io/2018/03/24/SQL操作三/</id>
+    <published>2018-03-24T01:10:58.000Z</published>
+    <updated>2018-03-24T01:11:27.713Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Day03"><a href="#Day03" class="headerlink" title="Day03"></a>Day03</h1><h2 id="查询null"><a href="#查询null" class="headerlink" title="查询null"></a>查询null</h2><ul>
+<li><p>查询列值为null  (is null)</p>
+<ul>
+<li><code>select * from emp where mgr is null;</code> 查询上级领导为空的员工</li>
+</ul>
+</li>
+<li><p>查询列值不为null  (is not null)</p>
+<ul>
+<li><code>select * from emp where mgr is not null and comm&gt;0;</code> </li>
+</ul>
+</li>
+</ul>
+<h2 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h2><blockquote>
+<p>如果表中的字段名称太长或者不是很容易直接看懂，那么我们可以使用别名，使用的方式有三种：</p>
+<ul>
+<li><code>select ename &quot;姓名&quot; from emp;</code></li>
+<li><code>select ename as &quot;姓名&quot; from emp;</code></li>
+<li><code>select ename 姓名 from emp;</code></li>
+</ul>
+</blockquote>
+<h2 id="去除重复的值-distinct"><a href="#去除重复的值-distinct" class="headerlink" title="去除重复的值(distinct)"></a>去除重复的值(distinct)</h2><blockquote>
+<p><code>select distinct job from emp;</code></p>
+</blockquote>
+<h2 id="where"><a href="#where" class="headerlink" title="where"></a>where</h2><blockquote>
+<p>条件语句支持的运算符： &gt;  &lt;  =   !=  &gt;=  &lt;=  !=(&lt;&gt;)</p>
+</blockquote>
+<h2 id="and-和-or"><a href="#and-和-or" class="headerlink" title="and 和 or"></a>and 和 or</h2><blockquote>
+<p>and 并且  多个条件属于与的关系<br>or 或者   </p>
+<ul>
+<li><code>select * from user where id=1 or id=2;</code>  查询id=1的数据或者id=2的数据 ,如果这两个都存在，那么将会全部返回</li>
+</ul>
+</blockquote>
+<h2 id="like"><a href="#like" class="headerlink" title="like"></a>like</h2><ul>
+<li><code>_</code> 代表单个未知字符<ul>
+<li>第二个字母为a :  <code>_a%</code></li>
+<li>倒数第三个字母为a  ：<code>%a__</code></li>
+</ul>
+</li>
+<li><p><code>%</code> 代表多个未知字符</p>
+<ul>
+<li>以a开头的 : <code>a%</code></li>
+<li>以a结尾的  ：<code>%a</code></li>
+<li>包含a :<code>%a%</code></li>
+</ul>
+</li>
+<li><p><code>select * from user where name like &#39;_加%&#39;;</code> </p>
+</li>
+<li><code>select * from user where name like &#39;_加_&#39;;</code>  此时匹配的名字是三个字符，比如 陈加兵</li>
+</ul>
+<h3 id="not-like-不包含"><a href="#not-like-不包含" class="headerlink" title="not like  (不包含)"></a>not like  (不包含)</h3><blockquote>
+<p><code>select * from user where name not like &#39;_加%&#39;;</code></p>
+</blockquote>
+<h2 id="between-…-and-在-之间"><a href="#between-…-and-在-之间" class="headerlink" title="between … and  (在..之间)"></a>between … and  (在..之间)</h2><blockquote>
+<p>在两个数之间<br><code>select * from t_item where price between 10 and 100;</code>   查询价格在10 到 100之间的数据</p>
+</blockquote>
+<h2 id="in-查询的值为多个"><a href="#in-查询的值为多个" class="headerlink" title="in  (查询的值为多个)"></a>in  (查询的值为多个)</h2><blockquote>
+<p>查询某个字段的值为多个值的时候使用in<br><code>select * from t_item where price in(100,200,233);</code> </p>
+</blockquote>
+<h2 id="order-by"><a href="#order-by" class="headerlink" title="order by"></a>order by</h2><ul>
+<li><p>升序（默认 asc）<br>  -<code>select price from t_item  order by price</code></p>
+<ul>
+<li>order by 写在后面，如果有where条件，那么要写在where条件的后面</li>
+<li><code>select price from t_item where price&lt;100 order by price;</code></li>
+</ul>
+</li>
+<li><p>降序（desc）</p>
+<ul>
+<li><code>select price from t_item  order by price desc</code></li>
+</ul>
+</li>
+<li><p>如果需要多个字段进行排序，则在by的后面写多个字段</p>
+<ul>
+<li><code>select  category_id,price from t_item  order by category_id,price desc;</code> 按照分类id升序，价格降序</li>
+</ul>
+</li>
+<li><p>查询带燃字的商品，按照价格降序排列</p>
+<ul>
+<li><code>select title,price from t_item where title like &quot;%燃%&quot; order by price;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="分页-limit-子句"><a href="#分页-limit-子句" class="headerlink" title="分页 limit 子句"></a>分页 limit 子句</h2><ul>
+<li><code>limit n,m</code>  ： n表示跳过的条数，m表示每页显示的条数</li>
+<li><p>写在排序（order by 字句）的后面，如果没有排序写在where后面</p>
+<ul>
+<li><code>limit 0,5</code>  查询第一页，每页显示5条</li>
+<li><code>limit 10,5</code>  查询第三页，每页显示5条</li>
+<li><code>limit 12,3</code>  查询第五页 每页3条</li>
+</ul>
+</li>
+<li><p><code>select price from t_item order by price limit 10,10;</code>  按照价格升序排列，显示第二页，每页10条</p>
+</li>
+<li><p><code>select price from t_item where price &lt;100 limit 0,10;</code>  查询价格小于100的记录，显示第一页，每页10条</p>
+</li>
+</ul>
+<h2 id="concat-函数"><a href="#concat-函数" class="headerlink" title="concat() 函数"></a>concat() 函数</h2><blockquote>
+<p>concat()函数可以实现多个字符串的拼接</p>
+</blockquote>
+<ul>
+<li><p>在终端直接输入 <code>select concat(&#39;a&#39;,&#39;b&#39;);</code> </p>
+</li>
+<li><p><code>select concat(price,&quot;元&quot;) from t_item limit 0,3;</code> 查询商品，并且将查询到的价格和元这个单位拼接。相当于显示的是价格只是每个价格后面添加了单位 比如： 23元</p>
+</li>
+<li><p>将标题和单价拼到一起进行展现</p>
+<ul>
+<li><code>select concat(price,&quot;元&quot;,title) from t_item limit 0,5;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="数值运算"><a href="#数值运算" class="headerlink" title="数值运算"></a>数值运算</h2><blockquote>
+<p>支持加减乘除，取余(%)等效mod(n,m)</p>
+</blockquote>
+<ul>
+<li><p>查询商品并在结果中显示商品的总价值</p>
+<ul>
+<li><p><code>select price,num ,price*num &#39;总价&#39; from t_item;</code>  </p>
+</li>
+<li><p>直接做运算即可，可以使用别名解释字段的含义</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="日期相关函数"><a href="#日期相关函数" class="headerlink" title="日期相关函数"></a>日期相关函数</h2><ul>
+<li><p>获取当前时间+时间</p>
+<ul>
+<li>now()</li>
+<li>在终端输入<code>select now();</code></li>
+</ul>
+</li>
+<li><p>获取当前日期</p>
+<ul>
+<li>curdate()</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>获取当前时间</p>
+<ul>
+<li>curtime()</li>
+</ul>
+</li>
+<li><p>测试</p>
+<ul>
+<li><code>select now(),curdate(),curtime();</code></li>
+</ul>
+</li>
+<li><p>从日期和时间中获取日期</p>
+<ul>
+<li>date(now())</li>
+</ul>
+</li>
+<li><p>从日期和时间中获取时间</p>
+<ul>
+<li>time(now())</li>
+</ul>
+</li>
+<li><p>extract() 提取年月日时分秒的函数</p>
+<ul>
+<li><code>select extract(year from now());</code></li>
+<li><code>select extract(month from now());</code></li>
+<li><code>select extract(day from now());</code></li>
+<li><code>select extract(hour from now());</code></li>
+<li><code>select extract(minute from now());</code></li>
+<li><code>select extract(second from now());</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="DATE-FORMATE-函数-日期格式化"><a href="#DATE-FORMATE-函数-日期格式化" class="headerlink" title="DATE_FORMATE() 函数  日期格式化"></a>DATE_FORMATE() 函数  日期格式化</h2><ul>
+<li><p>format</p>
+<ul>
+<li>%Y 4位年 2018</li>
+<li>%y 2位   18</li>
+<li>%m 月   05</li>
+<li>%c 月   5</li>
+<li>%d 日   </li>
+<li>%H  24小时制</li>
+<li>%i  分</li>
+<li>%s 秒</li>
+</ul>
+</li>
+<li><p>测试</p>
+<ul>
+<li><code>select date_format(now(),&#39;%Y年%m月%d日 %h时%i分%s秒&#39;);</code>  输出  2018年03月23日 03时44分51秒</li>
+</ul>
+</li>
+<li><p>查询商品 并显示商品上传日期</p>
+<ul>
+<li><code>select title,date_format(created_time,&#39;%Y年%m月%d日 %h时%i分%s秒&#39;) from t_item;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="str-to-date-把字符串转成日期格式"><a href="#str-to-date-把字符串转成日期格式" class="headerlink" title="str_to_date  把字符串转成日期格式"></a>str_to_date  把字符串转成日期格式</h2><ul>
+<li>将’2018年10月22日’ 转换成日期<ul>
+<li><code>select str_to_date(&quot;2018年10月23日&quot;,&#39;%Y年%m月%d日&#39;);</code></li>
+<li>第一个参数是即将要转换的字符串日期，第二个参数是这个字符串日期的格式，用来解析这个字符串。</li>
+<li>输出：  2018-10-23</li>
+</ul>
+</li>
+</ul>
+<h2 id="IFNULL-函数"><a href="#IFNULL-函数" class="headerlink" title="IFNULL()  函数"></a>IFNULL()  函数</h2><ul>
+<li><p>age=ifnull(a,b) 如果a是null，age=b，如果不是null，age=a;</p>
+</li>
+<li><p>把奖金是null 设置成0</p>
+<ul>
+<li><code>update emp set comm=ifnull(comm,0);</code>  如果奖金comm是null，那么comm=0，如果不是空 comm=comm，还是原来的值</li>
+</ul>
+</li>
+</ul>
+<h2 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h2><ul>
+<li><p>对多行数据进行合并统计</p>
+<ul>
+<li>sum() 求和<ul>
+<li><code>select sum(num) from t_item where price&lt;100;</code></li>
+</ul>
+</li>
+<li>avg() ： 求平均值<ul>
+<li><code>select avg(price) from t_item;</code></li>
+</ul>
+</li>
+<li>count() 计算数量<ul>
+<li><code>select count(</code>*<code>) from t_item where price&lt;100;</code></li>
+</ul>
+</li>
+<li>max() 最大值<ul>
+<li><code>select max(price) from t_item;</code></li>
+</ul>
+</li>
+<li>min() 最小值<ul>
+<li><code>select min(price) from t_item;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>测试</p>
+<ul>
+<li>查询DELL的平均单价<ul>
+<li><code>select avg(price) &quot;平均单价&quot; from t_item where title like &quot;%DELL%&quot;;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="字符串的函数"><a href="#字符串的函数" class="headerlink" title="字符串的函数"></a>字符串的函数</h3><ul>
+<li>char_length(str)</li>
+<li>instr(str,substr) </li>
+<li>locate(substr,str)  </li>
+<li>insert(str,start,end,newStr)</li>
+<li>lower(str)</li>
+<li>upper(str)</li>
+<li>left(str,count)</li>
+<li>right(str,count)</li>
+<li>trim(str)</li>
+<li>substring(str,index)</li>
+<li>substring(str,index,length);</li>
+<li>repeat(str,count)</li>
+<li>replace(str,old,new)</li>
+<li>reverse()</li>
+</ul>
+<h3 id="数学相关函数"><a href="#数学相关函数" class="headerlink" title="数学相关函数"></a>数学相关函数</h3><ul>
+<li>floor(num)</li>
+<li>round(num)</li>
+<li>round(num,m)</li>
+<li>truncate(num,m) </li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Day03&quot;&gt;&lt;a href=&quot;#Day03&quot; class=&quot;headerlink&quot; title=&quot;Day03&quot;&gt;&lt;/a&gt;Day03&lt;/h1&gt;&lt;h2 id=&quot;查询null&quot;&gt;&lt;a href=&quot;#查询null&quot; class=&quot;headerlink&quot; title=&quot;查
+    
+    </summary>
+    
+      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
+    
+    
+      <category term="SQL" scheme="http://chenjiabing666.github.io/tags/SQL/"/>
+    
+  </entry>
   
   <entry>
     <title>SQL操作二</title>
@@ -1895,95 +2181,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;synchronized&quot;&gt;&lt;a href=&quot;#synchronized&quot; class=&quot;headerlink&quot; title=&quot;synchronized&quot;&gt;&lt;/a&gt;synchronized&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;
-    
-    </summary>
-    
-      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="java并发编程" scheme="http://chenjiabing666.github.io/tags/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Thread初探</title>
-    <link href="http://chenjiabing666.github.io/2017/06/20/Thread%E5%88%9D%E6%8E%A2/"/>
-    <id>http://chenjiabing666.github.io/2017/06/20/Thread初探/</id>
-    <published>2017-06-20T00:54:01.000Z</published>
-    <updated>2017-06-20T00:54:35.270Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Thread初探"><a href="#Thread初探" class="headerlink" title="Thread初探"></a>Thread初探</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>以前大家写的都是单线程的程序，全是在main函数中调用方法，可以清楚的看到它的效率是特别低的，就像python中使用单线程取爬一个网站，可以说能让你等的吐血，因为数据量实在太大了，今天我们就来看看java的并发编程多线程的学习</p>
-</blockquote>
-<h2 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h2><blockquote>
-<p>创建一个线程可以有多种方法，比如继承Thread类，实现Runnable接口……下面我们来详细的看看创建的方法</p>
-</blockquote>
-<h3 id="继承Thread"><a href="#继承Thread" class="headerlink" title="继承Thread"></a>继承Thread</h3><blockquote>
-<p>为什么继承<code>Thread</code>可以直接调用<code>start()</code>方法启动线程呢，因为<code>start()</code>本身就是Thread的方法，也就是继承了Thread的start()方法，因此这个类的对象可以调用start()启动线程</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//继承Thread</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;    </div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			System.out.println(<span class="keyword">this</span>.getName()+<span class="string">"正在跑"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">    &#123;</div><div class="line">        Mythread t1=<span class="keyword">new</span> MyThread();   <span class="comment">//创建对象</span></div><div class="line">        t1.start();     <span class="comment">//启动线程</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>注意:</strong>  继承<code>Thread</code>类的创建方法一个对象只能创建一个线程，并不能多个线程共用一个对象，只能一个线程对应一个对象，因此我们来看看实现<code>Runnable</code>接口的类来实现多个线程共享同一个对象</p>
-</blockquote>
-<h3 id="实现Runnable接口"><a href="#实现Runnable接口" class="headerlink" title="实现Runnable接口"></a>实现Runnable接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//实现Runnable接口</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;  </div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</div><div class="line">		&#123;</div><div class="line">			System.out.println(Thread.currentThread().getName()+<span class="string">"正在跑"</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//测试类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">    &#123;</div><div class="line">        Demo d=<span class="keyword">new</span> Demo();  <span class="comment">//创建对象</span></div><div class="line">        Thread thread1=<span class="keyword">new</span> Thread(d); <span class="comment">//为对象创建一个线程</span></div><div class="line">        Thread thread2=<span class="keyword">new</span> Thread(d);   <span class="comment">//创建另外一个线程</span></div><div class="line">        </div><div class="line">        <span class="comment">//同时启动两个线程</span></div><div class="line">        thread1.start();</div><div class="line">        thread2.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>从上面可以清楚的看到实现<code>Runnable</code>接口的类一个对象可以供多个线程共享，并不像继承Thread类只为一个线程使用</p>
-</blockquote>
-<h3 id="简便的创建方法"><a href="#简便的创建方法" class="headerlink" title="简便的创建方法"></a>简便的创建方法</h3><blockquote>
-<p>直接在<code>main</code>方法中创建，如果创建的普通类的对象在外面，那么必须是final修饰，可以实现多个线程同时共享一个对象，这个和实现<code>Runnable</code>接口一样，这时候就要控制同步条件了，如果在run方法中定义对象，那么，就是一个线程对应一个对象,这个就和继承Thread类一样的效果。所以可以根据条件自由选择</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//普通的一个类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Simple</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</div><div class="line">		&#123;</div><div class="line">			System.out.println(Thread.currentThread().getName()+<span class="string">"正在跑"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//线程测试类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="comment">//如果在外面必须使用final，当然也可以直写在run方法中,不过写在外面可以实现多个线程共享一个对象</span></div><div class="line">		<span class="comment">//写在run方法中当前对象只能为一个线程使用，和继承Thread类一样的效果</span></div><div class="line">		<span class="keyword">final</span> Simple simple=<span class="keyword">new</span> Simple(); </div><div class="line">		</div><div class="line">		</div><div class="line">		<span class="comment">//下面创建使用同一个对象创建同两个线程，实现多个线程共享一个对象，和实现Runnable接口一样的效果</span></div><div class="line">		Thread t1=<span class="keyword">new</span> Thread()&#123;</div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				simple.display();</div><div class="line">			&#125;;</div><div class="line">		&#125;;</div><div class="line">		</div><div class="line">		Thread t2=<span class="keyword">new</span> Thread()&#123;</div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				simple.display();</div><div class="line">			&#125;;</div><div class="line">		&#125;;</div><div class="line">		</div><div class="line">		<span class="comment">//启动这两个线程</span></div><div class="line">		t1.start();   </div><div class="line">		t2.start();</div><div class="line">    &#125;&#125;</div></pre></td></tr></table></figure>
-<h2 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h2><blockquote>
-<ul>
-<li><p><code>static void sleep(long mils)</code> 使正在运行的线程休眠mils毫秒，但是这里需要注意的是如果线程加了锁，那么使线程休眠并不会释放锁</p>
-</li>
-<li><p><code>String getName()</code>   得到线程的名称，上面的程序中已经使用了这个方法</p>
-</li>
-<li><p><code>void setName(String name)</code>  设置正在运行的线程的名字为name</p>
-</li>
-<li><p><code>start()</code>  启动线程，线程的创建并不意味着线程的启动，只有调用start()方法线程才是真正的开始运行</p>
-</li>
-<li><p><code>long getId()</code>  返回线程的标识符</p>
-</li>
-<li><p><code>run()</code>  线程执行的代码都放在run()方法中，在run方法中的调用是有序的，都是按照程序运行的顺序开始执行</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><blockquote>
-<p>下面使用上面的方法创建一个实例</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//线程的类，继承Thread</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; <span class="comment">// 重载run方法，并且在其中写线程执行的代码块</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			<span class="comment">// 获取线程的id和name</span></div><div class="line">			System.out.println(<span class="string">"Thread-Name:   "</span> + <span class="keyword">this</span>.getName()</div><div class="line">					+ <span class="string">"   Thread-id:    "</span> + <span class="keyword">this</span>.getId());</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="keyword">this</span>.sleep(<span class="number">1000</span>); <span class="comment">// 线程休眠1秒</span></div><div class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//线程测试的类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		MyThread1 t1 = <span class="keyword">new</span> MyThread1(); <span class="comment">// 创建线程</span></div><div class="line">		t1.setName(<span class="string">"第一个线程"</span>); <span class="comment">// 设置线程的名字</span></div><div class="line"></div><div class="line">		MyThread1 t2 = <span class="keyword">new</span> MyThread1();</div><div class="line">		t2.setName(<span class="string">"第二个线程"</span>);</div><div class="line"></div><div class="line">		t1.start(); <span class="comment">// 启动线程，开始运行</span></div><div class="line">		t2.start();</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><code>void join()</code>  等待该线程终止才能运行其他的线程</li>
-<li><code>void join(long mils)</code>  等待该线程的时间为mils毫秒，一旦过了这个时间其他线程正常执行</li>
-</ul>
-</blockquote>
-<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//线程类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; <span class="comment">// 重载run方法，并且在其中写线程执行的代码块</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			<span class="comment">// 获取线程的id和name</span></div><div class="line">			System.out.println(<span class="string">"Thread-Name:   "</span> + <span class="keyword">this</span>.getName()</div><div class="line">					+ <span class="string">"   Thread-id:    "</span> + <span class="keyword">this</span>.getId());</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="keyword">this</span>.sleep(<span class="number">1000</span>); <span class="comment">// 线程休眠1秒</span></div><div class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//测试类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		MyThread1 t1 = <span class="keyword">new</span> MyThread1(); <span class="comment">// 创建线程</span></div><div class="line">		t1.setName(<span class="string">"第一个线程"</span>); <span class="comment">// 设置线程的名字</span></div><div class="line"></div><div class="line">		t1.start(); <span class="comment">// 启动线程，开始运行</span></div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			t1.join();   <span class="comment">//阻塞其他线程，只有当这个线程运行完之后才开始运行其他的线程</span></div><div class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			System.out.println(<span class="string">"主线程正在运行"</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//输出结果</span></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line">主线程正在运行</div><div class="line"> */</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><code>getPriority()</code>  得到当前线程优先级</li>
-<li><code>setPriority(int num)</code> 更改线程的优先级(0-10)默认的是5，优先级越高获得cpu资源的几率就会越高</li>
-</ul>
-</blockquote>
-<h3 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//线程类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; <span class="comment">// 重载run方法，并且在其中写线程执行的代码块</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			<span class="comment">// 获取线程的id和name</span></div><div class="line">			System.out.println(<span class="string">"Thread-Name:   "</span> + <span class="keyword">this</span>.getName()</div><div class="line">					+ <span class="string">"   Thread-id:    "</span> + <span class="keyword">this</span>.getId());</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="keyword">this</span>.sleep(<span class="number">1000</span>); <span class="comment">// 线程休眠1秒</span></div><div class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//测试类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		MyThread1 t1 = <span class="keyword">new</span> MyThread1(); <span class="comment">// 创建线程</span></div><div class="line">		t1.setName(<span class="string">"第一个线程"</span>); <span class="comment">// 设置线程的名字</span></div><div class="line"></div><div class="line">		MyThread1 t2 = <span class="keyword">new</span> MyThread1();</div><div class="line">		t2.setName(<span class="string">"第二个线程"</span>);</div><div class="line"></div><div class="line">		t2.setPriority(<span class="number">8</span>);   <span class="comment">//设置第二个线程的优先级为8，第一个线程的优先级为5(是默认的)</span></div><div class="line"></div><div class="line">		t1.start();</div><div class="line">		t2.start();</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 从上面的运行结果可以看出大部分的第二个线程都是在第一个线程之前开始执行的，也就是说优先级越高获得cpu执行的几率就越大</div><div class="line"> * /</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><code>setDaemon(boolean)</code> 是否设置为守护线程，如果设置为守护线程，那么主线程销毁守护线程也会随之销毁</li>
-<li><code>isDaemon()</code>  判断是否为守护线程</li>
-</ul>
-</blockquote>
-<h3 id="使用-3"><a href="#使用-3" class="headerlink" title="使用"></a>使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//测试类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; <span class="comment">// 重载run方法，并且在其中写线程执行的代码块</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">			<span class="comment">// 获取线程的id和name</span></div><div class="line">			System.out.println(<span class="string">"Thread-Name:   "</span> + <span class="keyword">this</span>.getName()</div><div class="line">					+ <span class="string">"   Thread-id:    "</span> + <span class="keyword">this</span>.getId());</div><div class="line"></div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				Thread.sleep(<span class="number">1000</span>);  <span class="comment">//休眠一秒，方便主线程运行结束</span></div><div class="line">			&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		MyThread1 t1 = <span class="keyword">new</span> MyThread1(); <span class="comment">// 创建线程</span></div><div class="line">		t1.setName(<span class="string">"第一个线程"</span>); <span class="comment">// 设置线程的名字</span></div><div class="line">		t1.setDaemon(<span class="keyword">true</span>);</div><div class="line">		t1.start();</div><div class="line"></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1</span>; i++) &#123;</div><div class="line">			System.out.println(i);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//结果：</span></div><div class="line"><span class="comment">/*</span></div><div class="line"> 0</div><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">Thread-Name:   第一个线程   Thread-id:    9</div><div class="line">*/</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 从上面的结果可以看出，一旦主线程结束，那么守护线程就会自动的结束</div><div class="line"> * /</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
-<ul>
-<li><a href="http://www.cnblogs.com/dolphin0520/p/3920357.html" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3920357.html</a></li>
-</ul>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Thread初探&quot;&gt;&lt;a href=&quot;#Thread初探&quot; class=&quot;headerlink&quot; title=&quot;Thread初探&quot;&gt;&lt;/a&gt;Thread初探&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; titl
     
     </summary>
     
