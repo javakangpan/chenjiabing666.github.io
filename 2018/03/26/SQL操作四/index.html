@@ -18,7 +18,7 @@
 <meta property="og:url" content="http://chenjiabing666.github.io/2018/03/26/SQL操作四/index.html">
 <meta property="og:site_name" content="爱撒谎的男孩">
 <meta property="og:description" content="Day 04创建数据库和表商城建表语句1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495">
-<meta property="og:updated_time" content="2018-03-26T11:16:28.766Z">
+<meta property="og:updated_time" content="2018-03-27T06:52:07.337Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL操作四">
 <meta name="twitter:description" content="Day 04创建数据库和表商城建表语句1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495">
@@ -97,7 +97,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Day-04"><span class="toc-number">1.</span> <span class="toc-text">Day 04</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建数据库和表"><span class="toc-number">1.1.</span> <span class="toc-text">创建数据库和表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#商城建表语句"><span class="toc-number">1.1.1.</span> <span class="toc-text">商城建表语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#员工建表语句"><span class="toc-number">1.1.2.</span> <span class="toc-text">员工建表语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#group-by"><span class="toc-number">1.2.</span> <span class="toc-text">group by</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#having子句"><span class="toc-number">1.3.</span> <span class="toc-text">having子句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#子查询"><span class="toc-number">1.4.</span> <span class="toc-text">子查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mysql子查询"><span class="toc-number">1.4.1.</span> <span class="toc-text">Mysql子查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.4.2.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关联查询"><span class="toc-number">1.5.</span> <span class="toc-text">关联查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#笛卡尔积"><span class="toc-number">1.5.1.</span> <span class="toc-text">笛卡尔积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#等值连接-内连接"><span class="toc-number">1.5.2.</span> <span class="toc-text">等值连接/内连接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#等值连接"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">等值连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内连接"><span class="toc-number">1.5.3.</span> <span class="toc-text">内连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结-1"><span class="toc-number">1.5.4.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#左外连接"><span class="toc-number">1.6.</span> <span class="toc-text">左外连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#右外连接"><span class="toc-number">1.7.</span> <span class="toc-text">右外连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例"><span class="toc-number">1.8.</span> <span class="toc-text">案例</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Day-04"><span class="toc-number">1.</span> <span class="toc-text">Day 04</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建数据库和表"><span class="toc-number">1.1.</span> <span class="toc-text">创建数据库和表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#商城建表语句"><span class="toc-number">1.1.1.</span> <span class="toc-text">商城建表语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#员工建表语句"><span class="toc-number">1.1.2.</span> <span class="toc-text">员工建表语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#group-by"><span class="toc-number">1.2.</span> <span class="toc-text">group by</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#having子句"><span class="toc-number">1.3.</span> <span class="toc-text">having子句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#子查询"><span class="toc-number">1.4.</span> <span class="toc-text">子查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mysql子查询"><span class="toc-number">1.4.1.</span> <span class="toc-text">Mysql子查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.4.2.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关联查询"><span class="toc-number">1.5.</span> <span class="toc-text">关联查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#笛卡尔积"><span class="toc-number">1.5.1.</span> <span class="toc-text">笛卡尔积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#等值连接-内连接"><span class="toc-number">1.5.2.</span> <span class="toc-text">等值连接/内连接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#等值连接"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">等值连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内连接"><span class="toc-number">1.5.3.</span> <span class="toc-text">内连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结-1"><span class="toc-number">1.5.4.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#左外连接"><span class="toc-number">1.6.</span> <span class="toc-text">左外连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#右外连接"><span class="toc-number">1.7.</span> <span class="toc-text">右外连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例"><span class="toc-number">1.8.</span> <span class="toc-text">案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结-2"><span class="toc-number">1.9.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -403,7 +403,119 @@
 <li><code>select t.title,c.name  from t_item_category c right join t_item t  on c.id=t.category_id;</code>  右外连接</li>
 </ul>
 </li>
+<li><p>每个部门的人数,根据人数排序</p>
+<ul>
+<li><code>select deptno count(*) c from emp group by deptno order by c;</code></li>
 </ul>
+</li>
+<li><p>每个部门中，每个主管的手下人数</p>
+<ul>
+<li><code>select deptno,mgr,count(*) from emp group by deptno,mgr;</code></li>
+</ul>
+</li>
+<li><p>每种工作的平均工资</p>
+<ul>
+<li><code>select  job,avg(sal) avg from emp group by job;</code></li>
+</ul>
+</li>
+<li><p>每年的入职人数</p>
+<ul>
+<li><code>select extract(year from hiredate) year, count(*) from emp group by year;</code></li>
+</ul>
+</li>
+<li><p>少于等于3个人的部门</p>
+<ul>
+<li><code>select deptno, count(*) c from emp group by deptno having c&lt;=3;</code></li>
+</ul>
+</li>
+<li><p>拿最低工资的员工信息</p>
+<ul>
+<li><code>select * from emp having sal=min(sal);</code>  (不推荐)</li>
+<li><code>select * from emp having sal=(select min(sal) from emp);</code></li>
+</ul>
+</li>
+<li><p>只有一个下属的主管信息</p>
+<ul>
+<li><code>select e.* from emp e join (select count(*) c ,mgr from emp group by mgr having c=1)newtable on newtable.mgr=e.empno;</code></li>
+</ul>
+</li>
+<li><p>平均工资最高的部门编号</p>
+<ul>
+<li><code>select deptno from emp group by deptno order by avg(sal) desc limit 0,1</code></li>
+</ul>
+</li>
+<li><p>下属人数最多的人，查询其个人信息</p>
+<ul>
+<li>先分组查询出所有的主管的信息，然后根据人数降序排列，最后取出第一条就是数据就是下属人数最多的主管</li>
+<li><code>select * from emp group by mgr order by count(*) desc limit 0,1;</code></li>
+</ul>
+</li>
+<li><p>拿最低工资的人的信息</p>
+<ul>
+<li><code>select * from emp where sal=(select min(sal) from emp);</code></li>
+</ul>
+</li>
+<li><p>最后入职的员工信息</p>
+<ul>
+<li><code>select * from emp where hiredate=(select max(hiredate) from emp);</code></li>
+</ul>
+</li>
+<li><p>工资多于平均工资的员工信息</p>
+<ul>
+<li><code>select * from emp where sal&gt;(select avg(sal) from emp);</code></li>
+</ul>
+</li>
+<li><p>查询员工信息，部门名称</p>
+<ul>
+<li><code>select e.*,d.dname from emp e join dept d on e.deptno=d.deptno;</code></li>
+</ul>
+</li>
+<li><p>员工信息，部门名称，所在城市</p>
+<ul>
+<li><code>select e.*,d.dname,d.loc from emp e join dept d on e.deptno=d.deptno;</code></li>
+</ul>
+</li>
+<li><p>DALLAS 市所有的员工信息</p>
+<ul>
+<li><code>select e.* from emp e join dept d on e.deptno=d.deptno where d.loc=&#39;DALLAS&#39;;</code></li>
+</ul>
+</li>
+<li><p>按城市分组，计算每个城市的员工数量</p>
+<ul>
+<li><code>select loc ,count(*) from (select e.*,d.dname,d.loc from emp e join dept d on e.deptno=d.deptno) newtable group by newtable.loc;</code></li>
+<li><code>select d.loc,count(*) from emp e join dept d on e.deptno=d.deptno group by loc;</code></li>
+</ul>
+</li>
+<li><p>查询员工信息和他的主管姓名</p>
+<ul>
+<li>员工信息和主管姓名在同一张表中，我们可以抽离出主管编号mgr和ename组成一张新表，那么我们就可以使用关联查询了</li>
+<li><p><code>select e.*,n.ename &#39;主管名字&#39; from emp e join (select mgr,ename from emp) n on e.empno=n.mgr;</code></p>
+</li>
+<li><p>或者我们可以不抽离字段，而是直接整个当做一张新表</p>
+</li>
+<li><code>select e.*,n.ename mgrname from emp e join emp n on e.empno=n.mgr;</code></li>
+</ul>
+</li>
+<li><p>员工信息，员工主管名字，部门名</p>
+<ul>
+<li><strong>直接join（可以连接多张表）,直接在后面join即可</strong></li>
+<li><p><code>select e.*,n.ename mgrname,dname from emp e join emp n on e.empno=n.mgr join dept d on e.deptno=d.deptno;</code></p>
+</li>
+<li><p>把上面的查询结果当成一张新表，和dept内连接即可</p>
+</li>
+<li><code>select new.*,d.dname from (select e.*,n.ename mgrname from emp e join emp n on e.empno=n.mgr) new join dept d on new.deptno=d.deptno;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p>如果涉及到两张表，甚至多张表，想要查询某张表的所有信息，此时就需要使用左/右外连接，因为如果某条数据没有关联关系，那么使用等值连接或者内连接将会缺失没有关联关系的数据。</p>
+<p>如果涉及到多张表的时候，使用内连接可以连接多张表，直接在后面添加join即可，比如</p>
+<blockquote>
+<p><code>select e.*,n.ename mgrname,dname from emp e join emp n on e.empno=n.mgr join dept d on e.deptno=d.deptno;</code></p>
+</blockquote>
+<p>分组(group by)是对前面查询到的结果进行分组，因此在where条件语句后，也是在内连接之后，因为必须查询到完整的一张表才能进行分组</p>
+<p>推荐使用内连接，不使用等值连接</p>
+</blockquote>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -464,7 +576,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Day-04"><span class="toc-number">1.</span> <span class="toc-text">Day 04</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建数据库和表"><span class="toc-number">1.1.</span> <span class="toc-text">创建数据库和表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#商城建表语句"><span class="toc-number">1.1.1.</span> <span class="toc-text">商城建表语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#员工建表语句"><span class="toc-number">1.1.2.</span> <span class="toc-text">员工建表语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#group-by"><span class="toc-number">1.2.</span> <span class="toc-text">group by</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#having子句"><span class="toc-number">1.3.</span> <span class="toc-text">having子句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#子查询"><span class="toc-number">1.4.</span> <span class="toc-text">子查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mysql子查询"><span class="toc-number">1.4.1.</span> <span class="toc-text">Mysql子查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.4.2.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关联查询"><span class="toc-number">1.5.</span> <span class="toc-text">关联查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#笛卡尔积"><span class="toc-number">1.5.1.</span> <span class="toc-text">笛卡尔积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#等值连接-内连接"><span class="toc-number">1.5.2.</span> <span class="toc-text">等值连接/内连接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#等值连接"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">等值连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内连接"><span class="toc-number">1.5.3.</span> <span class="toc-text">内连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结-1"><span class="toc-number">1.5.4.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#左外连接"><span class="toc-number">1.6.</span> <span class="toc-text">左外连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#右外连接"><span class="toc-number">1.7.</span> <span class="toc-text">右外连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例"><span class="toc-number">1.8.</span> <span class="toc-text">案例</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Day-04"><span class="toc-number">1.</span> <span class="toc-text">Day 04</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建数据库和表"><span class="toc-number">1.1.</span> <span class="toc-text">创建数据库和表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#商城建表语句"><span class="toc-number">1.1.1.</span> <span class="toc-text">商城建表语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#员工建表语句"><span class="toc-number">1.1.2.</span> <span class="toc-text">员工建表语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#group-by"><span class="toc-number">1.2.</span> <span class="toc-text">group by</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#having子句"><span class="toc-number">1.3.</span> <span class="toc-text">having子句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#子查询"><span class="toc-number">1.4.</span> <span class="toc-text">子查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mysql子查询"><span class="toc-number">1.4.1.</span> <span class="toc-text">Mysql子查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.4.2.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关联查询"><span class="toc-number">1.5.</span> <span class="toc-text">关联查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#笛卡尔积"><span class="toc-number">1.5.1.</span> <span class="toc-text">笛卡尔积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#等值连接-内连接"><span class="toc-number">1.5.2.</span> <span class="toc-text">等值连接/内连接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#等值连接"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">等值连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内连接"><span class="toc-number">1.5.3.</span> <span class="toc-text">内连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结-1"><span class="toc-number">1.5.4.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#左外连接"><span class="toc-number">1.6.</span> <span class="toc-text">左外连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#右外连接"><span class="toc-number">1.7.</span> <span class="toc-text">右外连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例"><span class="toc-number">1.8.</span> <span class="toc-text">案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结-2"><span class="toc-number">1.9.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
  
   </div>
 
@@ -514,7 +626,7 @@
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>10</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>7</sup></a></li>
 		  
 		
 		</ul>
@@ -535,10 +647,6 @@
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>7</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
 			
 		
@@ -551,7 +659,11 @@
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
@@ -559,7 +671,7 @@
 			
 		
 			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
 			
 		
 			
