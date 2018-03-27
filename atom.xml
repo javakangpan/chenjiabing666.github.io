@@ -795,7 +795,7 @@
     <link href="http://chenjiabing666.github.io/2018/03/21/SQL%E6%93%8D%E4%BD%9C%E4%B8%80/"/>
     <id>http://chenjiabing666.github.io/2018/03/21/SQL操作一/</id>
     <published>2018-03-21T08:57:43.000Z</published>
-    <updated>2018-03-21T08:58:30.562Z</updated>
+    <updated>2018-03-27T01:11:59.681Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Day01-基本的语句"><a href="#Day01-基本的语句" class="headerlink" title="Day01-基本的语句"></a>Day01-基本的语句</h1><h2 id="数据库简介"><a href="#数据库简介" class="headerlink" title="数据库简介"></a>数据库简介</h2><blockquote>
 <p>因为传统的文本形式存储数据存在很多的弊端：</p>
@@ -953,7 +953,7 @@
 </ul>
 <h3 id="查询语句"><a href="#查询语句" class="headerlink" title="查询语句"></a>查询语句</h3><ul>
 <li>查询所有字段<blockquote>
-<p>格式：select <em> from 表名<br>`select </em> from user;`</p>
+<p>格式：<code>select * from 表名</code><br>select <code>*</code> from user;</p>
 </blockquote>
 </li>
 <li>查询指定字段<blockquote>
