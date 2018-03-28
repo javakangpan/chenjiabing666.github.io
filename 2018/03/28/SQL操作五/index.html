@@ -5,35 +5,62 @@
   <meta charset="UTF-8">
   
   
-    <title>JSP总结四(EL表达式) | 爱撒谎的男孩</title>
+    <title>SQL操作五 | 爱撒谎的男孩</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="JSP总结四(EL表达式)简介
-JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用EL表达式可以替代Java语句的使用
+    <meta name="description" content="Day05关联关系自关联
+当前表的数据和当前表里面的数据有关联关系
 
-隐含对象与属性相关的隐含对象
-属性的隐含对象有PageScope,requestScope,sessionScope,applicationScope分别对应的是JSP中的PageContext,request,session,application，因">
+一对一一对多多对多
+学生和老师的关系就是多对多的关系一个学生可以被多个老师教，一个老师可以教多个学生
+
+创建表
+创建教师表 teacher(id,name)创建学生表 stu(id,name)创建第三张关系表t_s(sid,t_id)
+
+查询
+查询学生小明的所有老师
+
+通过小明查询出小明的id
+得到小明的id 在关系表中查询出对">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JSP总结四(EL表达式)">
-<meta property="og:url" content="http://chenjiabing666.github.io/2017/09/26/JSP总结四-EL表达式/index.html">
+<meta property="og:title" content="SQL操作五">
+<meta property="og:url" content="http://chenjiabing666.github.io/2018/03/28/SQL操作五/index.html">
 <meta property="og:site_name" content="爱撒谎的男孩">
-<meta property="og:description" content="JSP总结四(EL表达式)简介
-JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用EL表达式可以替代Java语句的使用
+<meta property="og:description" content="Day05关联关系自关联
+当前表的数据和当前表里面的数据有关联关系
 
-隐含对象与属性相关的隐含对象
-属性的隐含对象有PageScope,requestScope,sessionScope,applicationScope分别对应的是JSP中的PageContext,request,session,application，因">
-<meta property="og:updated_time" content="2017-09-27T06:03:48.775Z">
+一对一一对多多对多
+学生和老师的关系就是多对多的关系一个学生可以被多个老师教，一个老师可以教多个学生
+
+创建表
+创建教师表 teacher(id,name)创建学生表 stu(id,name)创建第三张关系表t_s(sid,t_id)
+
+查询
+查询学生小明的所有老师
+
+通过小明查询出小明的id
+得到小明的id 在关系表中查询出对">
+<meta property="og:updated_time" content="2018-03-28T04:17:26.290Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JSP总结四(EL表达式)">
-<meta name="twitter:description" content="JSP总结四(EL表达式)简介
-JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用EL表达式可以替代Java语句的使用
+<meta name="twitter:title" content="SQL操作五">
+<meta name="twitter:description" content="Day05关联关系自关联
+当前表的数据和当前表里面的数据有关联关系
 
-隐含对象与属性相关的隐含对象
-属性的隐含对象有PageScope,requestScope,sessionScope,applicationScope分别对应的是JSP中的PageContext,request,session,application，因">
+一对一一对多多对多
+学生和老师的关系就是多对多的关系一个学生可以被多个老师教，一个老师可以教多个学生
+
+创建表
+创建教师表 teacher(id,name)创建学生表 stu(id,name)创建第三张关系表t_s(sid,t_id)
+
+查询
+查询学生小明的所有老师
+
+通过小明查询出小明的id
+得到小明的id 在关系表中查询出对">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -93,14 +120,14 @@ JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用E
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/09/26/JSP总结四-EL表达式/" title="JSP总结四(EL表达式)" itemprop="url">JSP总结四(EL表达式)</a>
+      <a href="/2018/03/28/SQL操作五/" title="SQL操作五" itemprop="url">SQL操作五</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2017-09-26T12:07:16.000Z" itemprop="datePublished"> 发表于 2017-09-26</time>
+    <time datetime="2018-03-27T22:59:18.000Z" itemprop="datePublished"> 发表于 2018-03-28</time>
     
   </p>
 </header>
@@ -109,66 +136,89 @@ JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用E
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP总结四-EL表达式"><span class="toc-number">1.</span> <span class="toc-text">JSP总结四(EL表达式)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐含对象"><span class="toc-number">1.2.</span> <span class="toc-text">隐含对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#与属性相关的隐含对象"><span class="toc-number">1.2.1.</span> <span class="toc-text">与属性相关的隐含对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与请求参数相关的隐含对象-param-paramValues"><span class="toc-number">1.2.2.</span> <span class="toc-text">与请求参数相关的隐含对象(param,paramValues)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与标头-Header-相关的隐含对象"><span class="toc-number">1.2.3.</span> <span class="toc-text">与标头(Header)相关的隐含对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie隐含对象"><span class="toc-number">1.2.4.</span> <span class="toc-text">cookie隐含对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始参数隐含对象"><span class="toc-number">1.2.5.</span> <span class="toc-text">初始参数隐含对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EL运算符"><span class="toc-number">1.3.</span> <span class="toc-text">EL运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#算术运算符"><span class="toc-number">1.3.1.</span> <span class="toc-text">算术运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑运算符"><span class="toc-number">1.3.2.</span> <span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系运算符"><span class="toc-number">1.3.3.</span> <span class="toc-text">关系运算符</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Day05"><span class="toc-number">1.</span> <span class="toc-text">Day05</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关联关系"><span class="toc-number">1.1.</span> <span class="toc-text">关联关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自关联"><span class="toc-number">1.1.1.</span> <span class="toc-text">自关联</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一对一"><span class="toc-number">1.2.</span> <span class="toc-text">一对一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一对多"><span class="toc-number">1.3.</span> <span class="toc-text">一对多</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多对多"><span class="toc-number">1.4.</span> <span class="toc-text">多对多</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建表"><span class="toc-number">1.4.1.</span> <span class="toc-text">创建表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查询"><span class="toc-number">1.4.2.</span> <span class="toc-text">查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何让两张表建立关系"><span class="toc-number">1.5.</span> <span class="toc-text">如何让两张表建立关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#连接方式和关联关系的区别"><span class="toc-number">1.6.</span> <span class="toc-text">连接方式和关联关系的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库设计值权限管理"><span class="toc-number">1.7.</span> <span class="toc-text">数据库设计值权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是权限管理"><span class="toc-number">1.7.1.</span> <span class="toc-text">什么是权限管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#权限管理表的实现"><span class="toc-number">1.7.2.</span> <span class="toc-text">权限管理表的实现</span></a></li></ol></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="JSP总结四-EL表达式"><a href="#JSP总结四-EL表达式" class="headerlink" title="JSP总结四(EL表达式)"></a>JSP总结四(EL表达式)</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>JSP页面尽量不要使用<code>scriptlet</code>编写<code>java</code>代码，因此我们可以使用<code>EL</code>表达式可以替代<code>Java</code>语句的使用</p>
+		<h1 id="Day05"><a href="#Day05" class="headerlink" title="Day05"></a>Day05</h1><h2 id="关联关系"><a href="#关联关系" class="headerlink" title="关联关系"></a>关联关系</h2><h3 id="自关联"><a href="#自关联" class="headerlink" title="自关联"></a>自关联</h3><blockquote>
+<p>当前表的数据和当前表里面的数据有关联关系</p>
 </blockquote>
-<h2 id="隐含对象"><a href="#隐含对象" class="headerlink" title="隐含对象"></a>隐含对象</h2><h3 id="与属性相关的隐含对象"><a href="#与属性相关的隐含对象" class="headerlink" title="与属性相关的隐含对象"></a>与属性相关的隐含对象</h3><blockquote>
-<p>属性的隐含对象有<code>PageScope</code>,<code>requestScop</code>e,<code>sessionScope</code>,<code>applicationScope</code>分别对应的是<code>JSP</code>中的<code>PageContext</code>,<code>request</code>,<code>session</code>,<code>application</code>，因此可以取得<code>JSP</code>对象使用<code>setAttribute()</code>设置的属性，如果没有使用EL隐含对象获取属性的值，那么默认是从<code>PageScope</code>开始寻找</p>
+<h2 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h2><h2 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h2><h2 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h2><blockquote>
+<p>学生和老师的关系就是多对多的关系<br>一个学生可以被多个老师教，一个老师可以教多个学生</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;%</div><div class="line">    request.setAttribute(<span class="string">"login"</span>,<span class="string">'true'</span>);   <span class="comment">//绑定request对象的属性</span></div><div class="line">    session.setAttribute(<span class="string">"login"</span>,<span class="string">'true'</span>);   <span class="comment">//绑定session对象的属性</span></div><div class="line">    application.setAttribute(<span class="string">"login"</span>,<span class="string">"true"</span>);  <span class="comment">//设置application对象的属性</span></div><div class="line">%&gt;</div><div class="line"></div><div class="line">&lt;%--获取request绑定的属性值  相当于request.getAttribute(<span class="string">"login"</span>);--%&gt;</div><div class="line">&lt;h1&gt;$&#123;requestScope.login&#125;&lt;h1&gt;</div><div class="line"></div><div class="line">&lt;%--获取session绑定的属性值--%&gt;</div><div class="line">&lt;h1&gt;$&#123;sessionScope.login&#125;&lt;h1&gt;</div></pre></td></tr></table></figure>
-<h3 id="与请求参数相关的隐含对象-param-paramValues"><a href="#与请求参数相关的隐含对象-param-paramValues" class="headerlink" title="与请求参数相关的隐含对象(param,paramValues)"></a>与请求参数相关的隐含对象(param,paramValues)</h3><blockquote>
-<p>与请求参数相关的EL隐含对象有<code>param</code>,<code>paramValues</code>。我们可以使用EL表达式可以获取表单提交的请求参数。</p>
-<p>下面我们使用表单提交，测试一下</p>
-<blockquote>
-<p>JSP代码(表单提交)</p>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><blockquote>
+<p>创建教师表 teacher(id,name)<br>创建学生表 stu(id,name)<br>创建第三张关系表t_s(sid,t_id)</p>
 </blockquote>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;form action="demo1.jsp" method="get"&gt;</div><div class="line">    姓名:&lt;input type="text" name="username"&gt;</div><div class="line">    密码:&lt;input type="password" name="password"&gt;</div><div class="line">    &lt;input type="submit" value="提交"&gt;</div><div class="line">    </div><div class="line">    爱好:</div><div class="line">    打棒球：&lt;input type="checkbox" name="hobbies"&gt;</div><div class="line">    打羽毛球：&lt;input type="checkbox" name="hobbies"&gt;</div><div class="line">    </div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>demo1.jsp 文件（接收请求参数）</p>
-</blockquote>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;%--获取提交的请求参数username，password </div><div class="line">    相当于使用如下代码:</div><div class="line">        request.getParameter("username");</div><div class="line">        request.getParameter("password");</div><div class="line">--%&gt;</div><div class="line">&lt;h1&gt;$&#123;param.username&#125;&lt;/h1&gt;</div><div class="line">&lt;h1&gt;$&#123;param.password&#125;&lt;/h1&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;%--获取多选框的值  相当于使用下面的代码:</div><div class="line">    request.getParameterValues("hobbies")[0]</div><div class="line">--%&gt;</div><div class="line">&lt;h1&gt;$&#123;paramValues.hobbies[0]&#125;&lt;/h1&gt;</div><div class="line">&lt;h1&gt;$&#123;paramValues.hobbies[1]&#125;&lt;/h1&gt;</div></pre></td></tr></table></figure>
-<h3 id="与标头-Header-相关的隐含对象"><a href="#与标头-Header-相关的隐含对象" class="headerlink" title="与标头(Header)相关的隐含对象"></a>与标头(Header)相关的隐含对象</h3><blockquote>
-<p>如果想要取得用户请求的表头数据，那么使用<code>header</code>或者<code>headerValues</code>隐含对象。例如使用<code>${header[&quot;User-Agent&quot;]}</code> 这个相当于使用<code>&lt;%=request.getHeader(&quot;User-Agent&quot;)%&gt;</code>。 <code>HeaderValues</code>对象相当于使用<code>request.getHeaders()</code>  </p>
-</blockquote>
-<h3 id="cookie隐含对象"><a href="#cookie隐含对象" class="headerlink" title="cookie隐含对象"></a>cookie隐含对象</h3><blockquote>
-<p><code>cookie</code>的隐含对象可以取得用户设置的<code>Cookie</code>设置的值。如果在<code>Cookie</code>中设置了<code>username</code>属性，那么可以使用<code>${cookie.username}</code></p>
-</blockquote>
-<h3 id="初始参数隐含对象"><a href="#初始参数隐含对象" class="headerlink" title="初始参数隐含对象"></a>初始参数隐含对象</h3><blockquote>
-<p>隐含对象<code>initParam</code>可以用来取得<code>web.xml</code>中设置的<code>ServletContext</code>初始参数，也就是在<code>&lt;context-param&gt;</code>中设置的初始参数。例如<code>${initParam.initcount}</code>的作用，相当于<code>&lt;%=ServletContext.getInitParameter(&quot;initCount&quot;)%&gt;</code></p>
-</blockquote>
-<h2 id="EL运算符"><a href="#EL运算符" class="headerlink" title="EL运算符"></a>EL运算符</h2><blockquote>
-<p>使用EL运算符直接实现一些算术运算符，逻辑运算符，就如同一般常见的程序语言中的运算</p>
-</blockquote>
-<h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><blockquote>
-<p>可以直接使用加减乘除 <code>${1+2}</code>,<code>${5/2}</code>,<code>${5*3}</code></p>
-</blockquote>
-<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><blockquote>
-<p><code>${true and false}=false</code>,<code>${true and true}=true</code>,<code>${true or false}=true</code></p>
-</blockquote>
-<h3 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h3><blockquote>
-<p>可以直接在EL表达式比较大小，返回的也是<code>false</code>和<code>true</code>，可以用来判断，如下：<br><code>${1&lt;2}=false</code> ,<code>${(10*10)&gt;200}=true</code></p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;c:if text="$&#123;6&gt;5&#125;"&gt;</div><div class="line">    &lt;c:out value="可以直接使用EL表达式进行比较"&gt;&lt;/c:out&gt;</div><div class="line">&lt;/c:if&gt;</div></pre></td></tr></table></figure>  
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><ul>
+<li><p>查询学生小明的所有老师</p>
+<ul>
+<li>通过小明查询出小明的id</li>
+<li>得到小明的id 在关系表中查询出对应的老师的id</li>
+<li>通过关系表中的老师的id再和教师表关联查询查出所有的老师</li>
+<li><code>select name from teacher where id in ( select t_s.tid from stu join t_s on stu.id=t_s.sid where stu.name=&#39;小明&#39;);</code>  子查询方式，但是子查询中使用了内连接，也可以使用等值连接</li>
+<li><code>select t_s.tid from stu join t_s on stu.id=t_s.sid  join teacher t on t.id=tid where stu.name=&#39;小明&#39;;</code> 使用内连接的方式查询，多个join连接，where条件语句应该放在最后一个join的on的后面</li>
+</ul>
+</li>
+<li><p>查询所有老师对应的所有学生0</p>
+<ul>
+<li><code>select t.name t_name,stu.name s_name from stu join t_s on stu.id=t_s.sid  join teacher t on t.id=tid;</code></li>
+</ul>
+</li>
+<li><p>查询唐僧的所有学生</p>
+<ul>
+<li><code>select t.name t_name,stu.name s_name from stu join t_s on stu.id=t_s.sid  join teacher t on t.id=tid where t.name=&#39;唐僧&#39;;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="如何让两张表建立关系"><a href="#如何让两张表建立关系" class="headerlink" title="如何让两张表建立关系"></a>如何让两张表建立关系</h2><ul>
+<li><p>自关联</p>
+<ul>
+<li>自关联是在一张表中，这张表中要有一个字段记录上级的主键</li>
+</ul>
+</li>
+<li><p>一对一： </p>
+<ul>
+<li>需要在从表中有个字段表示主表的主键值   （外键）</li>
+</ul>
+</li>
+<li><p>一对多</p>
+<ul>
+<li>部门和员工为例，需要在多的一端通过字段记录另外一张的表的主键 （外键）</li>
+</ul>
+</li>
+<li><p>多对多</p>
+<ul>
+<li>需要准备一张关系表，表中保存两张表的主键值（第三张表） （外键）</li>
+</ul>
+</li>
+</ul>
+<h2 id="连接方式和关联关系的区别"><a href="#连接方式和关联关系的区别" class="headerlink" title="连接方式和关联关系的区别"></a>连接方式和关联关系的区别</h2><ul>
+<li>连接方式： 包括内连接，等值连接，左/右外连接 是指查询两张表时使用的查询方式</li>
+<li>关联关系： 一对一，一对多，多对多  是指两张表之间存在的逻辑关系</li>
+</ul>
+<h2 id="数据库设计值权限管理"><a href="#数据库设计值权限管理" class="headerlink" title="数据库设计值权限管理"></a>数据库设计值权限管理</h2><h3 id="什么是权限管理"><a href="#什么是权限管理" class="headerlink" title="什么是权限管理"></a>什么是权限管理</h3><ul>
+<li>不同用户登录网站后可能会有不同的权限，实现此功能的过程称为权限管理</li>
+</ul>
+<h3 id="权限管理表的实现"><a href="#权限管理表的实现" class="headerlink" title="权限管理表的实现"></a>权限管理表的实现</h3><ul>
+<li>总共需要5张表<ul>
+<li>用户表 角色表  权限表  用户和角色关系表   角色和权限的关系表</li>
+</ul>
+</li>
+</ul>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Java-Web/">Java-Web</a>
+  <a class="article-category-link" href="/categories/数据库干货篇/">数据库干货篇</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/JSP/">JSP</a>
+  <span></span> <a href="/tags/SQL/">SQL</a>
   </div>
 
 </div>
@@ -177,7 +227,7 @@ JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用E
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2017/09/26/JSP总结四-EL表达式/" data-title="JSP总结四(EL表达式) | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2018/03/28/SQL操作五/" data-title="SQL操作五 | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -191,18 +241,18 @@ JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用E
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/09/27/Excel表格的写入读取/" title="Excel表格的写入读取">
+ <a href="/2018/03/28/SQL操作六/" title="SQL操作六">
   <strong>上一篇：</strong><br/>
   <span>
-  Excel表格的写入读取</span>
+  SQL操作六</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/09/22/JSP总结三-JSTL核心标签库的使用/"  title="JSP总结三(JSTL核心标签库的使用)">
+<a href="/2018/03/26/SQL操作四/"  title="SQL操作四">
  <strong>下一篇：</strong><br/> 
- <span>JSP总结三(JSTL核心标签库的使用)
+ <span>SQL操作四
 </span>
 </a>
 </div>
@@ -223,7 +273,7 @@ JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用E
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JSP总结四-EL表达式"><span class="toc-number">1.</span> <span class="toc-text">JSP总结四(EL表达式)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐含对象"><span class="toc-number">1.2.</span> <span class="toc-text">隐含对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#与属性相关的隐含对象"><span class="toc-number">1.2.1.</span> <span class="toc-text">与属性相关的隐含对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与请求参数相关的隐含对象-param-paramValues"><span class="toc-number">1.2.2.</span> <span class="toc-text">与请求参数相关的隐含对象(param,paramValues)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与标头-Header-相关的隐含对象"><span class="toc-number">1.2.3.</span> <span class="toc-text">与标头(Header)相关的隐含对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie隐含对象"><span class="toc-number">1.2.4.</span> <span class="toc-text">cookie隐含对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始参数隐含对象"><span class="toc-number">1.2.5.</span> <span class="toc-text">初始参数隐含对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EL运算符"><span class="toc-number">1.3.</span> <span class="toc-text">EL运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#算术运算符"><span class="toc-number">1.3.1.</span> <span class="toc-text">算术运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑运算符"><span class="toc-number">1.3.2.</span> <span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系运算符"><span class="toc-number">1.3.3.</span> <span class="toc-text">关系运算符</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Day05"><span class="toc-number">1.</span> <span class="toc-text">Day05</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关联关系"><span class="toc-number">1.1.</span> <span class="toc-text">关联关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自关联"><span class="toc-number">1.1.1.</span> <span class="toc-text">自关联</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一对一"><span class="toc-number">1.2.</span> <span class="toc-text">一对一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一对多"><span class="toc-number">1.3.</span> <span class="toc-text">一对多</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多对多"><span class="toc-number">1.4.</span> <span class="toc-text">多对多</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建表"><span class="toc-number">1.4.1.</span> <span class="toc-text">创建表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查询"><span class="toc-number">1.4.2.</span> <span class="toc-text">查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何让两张表建立关系"><span class="toc-number">1.5.</span> <span class="toc-text">如何让两张表建立关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#连接方式和关联关系的区别"><span class="toc-number">1.6.</span> <span class="toc-text">连接方式和关联关系的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库设计值权限管理"><span class="toc-number">1.7.</span> <span class="toc-text">数据库设计值权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是权限管理"><span class="toc-number">1.7.1.</span> <span class="toc-text">什么是权限管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#权限管理表的实现"><span class="toc-number">1.7.2.</span> <span class="toc-text">权限管理表的实现</span></a></li></ol></li></ol></li></ol>
  
   </div>
 
