@@ -2,16 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://chenjiabing666.github.io/2018/03/30/Struts2Action%E7%B1%BB%E5%AE%9E%E7%8E%B0/</loc>
+    <loc>http://chenjiabing666.github.io/2018/03/31/Struts%E4%B9%8B%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0/</loc>
     
-    <lastmod>2018-03-30T05:00:20.693Z</lastmod>
+    <lastmod>2018-03-30T23:27:11.027Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/03/31/Struts%E4%B9%8BAction%E7%B1%BB%E8%AE%BF%E9%97%AEServlet-API/</loc>
+    
+    <lastmod>2018-03-30T23:25:53.026Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/03/31/Struts2%E4%B9%8B%E5%8A%A8%E6%80%81%E8%B0%83%E7%94%A8/</loc>
+    
+    <lastmod>2018-03-30T23:23:29.799Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/03/31/struts%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3-result%E9%85%8D%E7%BD%AE/</loc>
+    
+    <lastmod>2018-03-30T23:22:32.964Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/03/31/struts%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3-action%E9%85%8D%E7%BD%AE/</loc>
+    
+    <lastmod>2018-03-30T23:21:46.379Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://chenjiabing666.github.io/2018/03/30/Struts2%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</loc>
     
-    <lastmod>2018-03-30T04:59:47.237Z</lastmod>
+    <lastmod>2018-03-30T23:20:28.193Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/03/30/Struts2Action%E7%B1%BB%E5%AE%9E%E7%8E%B0/</loc>
+    
+    <lastmod>2018-03-30T05:00:20.693Z</lastmod>
     
   </url>
   

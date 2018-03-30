@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-03-30T05:00:20.693Z</updated>
+  <updated>2018-03-30T23:27:11.027Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,476 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Struts之获取请求参数</title>
+    <link href="http://chenjiabing666.github.io/2018/03/31/Struts%E4%B9%8B%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0/"/>
+    <id>http://chenjiabing666.github.io/2018/03/31/Struts之获取请求参数/</id>
+    <published>2018-03-30T23:26:35.000Z</published>
+    <updated>2018-03-30T23:27:11.027Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="获取请求参数"><a href="#获取请求参数" class="headerlink" title="获取请求参数"></a>获取请求参数</h1><ul>
+<li>在Servlet中可以调用HttpServletRequest的getParameter()的方法接收传递过来的请求参数，但是在struts2中对这种方式进行了三种封装</li>
+<li>我们一般发出请求都是通过表单传递的，但是在服务端如果获取表单传递过来的值，其中有三种不同的方式</li>
+</ul>
+<h2 id="属性驱动"><a href="#属性驱动" class="headerlink" title="属性驱动"></a>属性驱动</h2><ul>
+<li><p>属性驱动就是将一个Action类作为一个POJO类，在类中定义表单的请求参数的<code>name</code>属性，但是还要为这些成员变量设置get，set方法。因为在获取请求参数的时候自动调用的是set方法，获取参数的时候调用的是get方法。</p>
+</li>
+<li><p>当表单提交的时候，实际上是提交了表单元素的值，之后会给ACtion类中的属性设置值(set)，因此这里的属性需要添加set方法</p>
+</li>
+<li><p>当表单请求成功的时候，实际上是先经过Action类，然后跳转到指定的视图，这个过程都是转发(ddispatcher)，因此会保留request域中的键值对，此时在success.jsp页面中使用EL表达式取值即可(get方法),取值使用的是属性的get方法，因此需要添加get方法</p>
+</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>SimpleAction类，其中定义了属性<ul>
+<li><strong>为每一个属性都需要添加get，set方法</strong></li>
+<li><strong>表单提交之后会自动调用属性的set方法为其赋值</strong></li>
+<li><strong>跳转到指定视图之后，使用EL表达式取值时会调用属性的get方法</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleAction</span> <span class="keyword">implements</span> <span class="title">Action</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;  <span class="comment">//姓名</span></div><div class="line">	<span class="keyword">private</span> String password;  <span class="comment">//密码</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> password;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.password = password;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(name+<span class="string">"----"</span>+password);</div><div class="line">		<span class="keyword">return</span> SUCCESS;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>struts.xml 配置Action</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"simple"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.controller.SimpleAction"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/jsp/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"input"</span>&gt;</span>/jsp/input.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">action</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>index.jsp 提价表单<ul>
+<li><strong>input中的属性<code>name</code>对应的是SimpleAction的属性名</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">&lt;%</div><div class="line">String path = request.getContextPath();</div><div class="line">String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";</div><div class="line">%&gt;</div><div class="line">&lt;form action="&lt;%=basePath %&gt;simple" method="post"&gt;</div><div class="line">	name:&lt;input type="text" name="name"&gt;</div><div class="line">	password:&lt;input type="text" name="password"&gt;</div><div class="line">	&lt;input type="submit" value="提交"&gt;</div><div class="line">&lt;/form&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>success.jsp 表单提交成功之后跳转的视图</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">	&lt;h1&gt;success&lt;/h1&gt;</div><div class="line">	&lt;h1&gt;$&#123;name &#125;&lt;/h1&gt;</div><div class="line">	&lt;h1&gt;$&#123;password &#125;&lt;/h1&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
+<h2 id="域驱动"><a href="#域驱动" class="headerlink" title="域驱动"></a>域驱动</h2><ul>
+<li><p>域驱动是将表单中name属性抽象出一个JavaBean类成为一个modle，并不是Action类成为modle了，只需要在Action类引用JavaBean的对象即可(作为成员变量，get，set，方法都有)</p>
+</li>
+<li><p>既然Action类中的成员变量已经是JavaBean的对象了，那么表单的中name属性的设置就要使用OGNL形式的取该对象中的属性了，而不是像属性驱动一样直接设置的属性</p>
+</li>
+</ul>
+<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>JavaBean实体类<ul>
+<li><strong>必须为每一个属性设置get，set方法</strong></li>
+<li><strong>必须有无参构造</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * POJO类，model 其中必须为每一个属性设置get，set方法</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name; <span class="comment">// 姓名</span></div><div class="line">	<span class="keyword">private</span> String password; <span class="comment">// 密码</span></div><div class="line"></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> password;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.password = password;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Action类<ul>
+<li><strong>JavaBean对象作为其成员变量，必须为这个成员变量设置get,set方法</strong></li>
+<li><strong>必须有一个无参构造</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleAction</span> <span class="keyword">implements</span> <span class="title">Action</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> User user; <span class="comment">// POJO类对象，必须有set，get方法，和无参构造方法</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> user;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUser</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.user = user;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(user.getName() + <span class="string">"---&gt;"</span> + user.getPassword());</div><div class="line">		<span class="keyword">return</span> SUCCESS;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>struts.xml配置同上</li>
+</ul>
+<ul>
+<li>index.jsp 表单提交<ul>
+<li>input中的name属性使用OGNL表达式来设置其值</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;%</div><div class="line">String path = request.getContextPath();</div><div class="line">String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";</div><div class="line">%&gt;</div><div class="line">&lt;form action="&lt;%=basePath %&gt;simple" method="post"&gt;</div><div class="line">	name:&lt;input type="text" name="user.name"&gt;</div><div class="line">	password:&lt;input type="text" name="user.password"&gt;</div><div class="line">	&lt;input type="submit" value="提交"&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>success.jsp页面<ul>
+<li>此时使用EL表达式取值，也是使用OGNL形式的取值方式</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">	&lt;h1&gt;success&lt;/h1&gt;</div><div class="line">	&lt;h1&gt;$&#123;requestScope.user.name &#125;&lt;/h1&gt;</div><div class="line">	&lt;h1&gt;$&#123;requestScope.user.password &#125;&lt;/h1&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
+<h2 id="模型驱动"><a href="#模型驱动" class="headerlink" title="模型驱动"></a>模型驱动</h2><ul>
+<li><p>模型驱动和域驱动比较相似，都是用一个JavaBean类作为model，但是模型驱动必须实现ModelDriven&lt;&gt;这个接口,这个可以指定一个泛型，其中泛型类为JavaBean的类，必须实现的方法是getmodel()方法</p>
+</li>
+<li><p><code>Type getModel(){}</code>  返回一个Type对象，这个对象是在实现接口的时候定义泛型类(JavaBean类)</p>
+</li>
+<li><p>使用模型驱动，那么表单中的name属性值就不需要使用OGNL表达式了，而是直接使用属性字段即可，这个和属性驱动一样的</p>
+</li>
+</ul>
+<ul>
+<li><p>JavaBean类，这个和上面的一样</p>
+</li>
+<li><p>Action类，实现了ModelDriver<javabean> 接口</javabean></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//实现ModelDriven接口&lt;&gt;指定的泛型为JavaBean类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleAction</span> <span class="keyword">implements</span> <span class="title">Action</span>,<span class="title">ModelDriven</span>&lt;<span class="title">User</span>&gt; </span>&#123;</div><div class="line">	<span class="keyword">private</span> User user; <span class="comment">// POJO类对象，必须有set，get方法，和无参构造方法</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> user;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUser</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.user = user;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(user.getName() + <span class="string">"---&gt;"</span> + user.getPassword());</div><div class="line">		<span class="keyword">return</span> SUCCESS;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">getModel</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"调用了getModel方法"</span>);</div><div class="line">		<span class="comment">// 如果对象为空，就创建一个对象，然后返回</span></div><div class="line">		<span class="keyword">if</span> (user == <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">this</span>.user = <span class="keyword">new</span> User();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> user;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>struts.xml 同上</li>
+</ul>
+<ul>
+<li>index.jsp  表单提交<ul>
+<li><strong>这里name属性值直接使用JavaBean属性即可，必须字段一样</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;form action="&lt;%=basePath %&gt;simple" method="post"&gt;</div><div class="line">	name:&lt;input type="text" name="name"&gt;</div><div class="line">	password:&lt;input type="text" name="password"&gt;</div><div class="line">	&lt;input type="submit" value="提交"&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>success.jsp<ul>
+<li>取值仍然使用的是OGNL形式的取值方式</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;h1&gt;success&lt;/h1&gt;</div><div class="line">&lt;h1&gt;$&#123;requestScope.user.name &#125;&lt;/h1&gt;</div><div class="line">&lt;h1&gt;$&#123;requestScope.user.password &#125;&lt;/h1&gt;</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>根据我的经验，在框架整合的基础上，我们必须使得单独的实体类对应一张表，那么此时就需要使得Action类和JavaBean分离，因此我推荐使用第二种方式，第三种方式还需要实现接口，对类的污染比较严重</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;获取请求参数&quot;&gt;&lt;a href=&quot;#获取请求参数&quot; class=&quot;headerlink&quot; title=&quot;获取请求参数&quot;&gt;&lt;/a&gt;获取请求参数&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;在Servlet中可以调用HttpServletRequest的getParameter()的方
+    
+    </summary>
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/categories/Struts2/"/>
+    
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/tags/Struts2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Struts之Action类访问Servlet_API</title>
+    <link href="http://chenjiabing666.github.io/2018/03/31/Struts%E4%B9%8BAction%E7%B1%BB%E8%AE%BF%E9%97%AEServlet-API/"/>
+    <id>http://chenjiabing666.github.io/2018/03/31/Struts之Action类访问Servlet-API/</id>
+    <published>2018-03-30T23:25:22.000Z</published>
+    <updated>2018-03-30T23:25:53.026Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Action类访问Servlet-API"><a href="#Action类访问Servlet-API" class="headerlink" title="Action类访问Servlet API"></a>Action类访问Servlet API</h1><ul>
+<li>Struts2并未直接和Servlet API耦合，这是Struts2的一个改良之处。但是对于web应用控制器而言，不访问Servlet API是不可能，因此下面我们介绍三种方式访问Servlet API</li>
+</ul>
+<h2 id="ActionContext"><a href="#ActionContext" class="headerlink" title="ActionContext"></a>ActionContext</h2><ul>
+<li>使用这个可以获取Servlet中<code>HttpServletRequest</code>,<code>HttpSession</code>,<code>ServletContext</code></li>
+</ul>
+<h3 id="其中的方法"><a href="#其中的方法" class="headerlink" title="其中的方法"></a>其中的方法</h3><ul>
+<li><p><code>static ActionContext getContext()</code>返回一个实例化ActionContext对象，用于调用下面的方法</p>
+</li>
+<li><p><code>Object get(key)</code>  返回ActionContext中存放的键值对的值  其实这里获取的是Servlet中<code>HttpServletRequest</code>对象的属性</p>
+</li>
+<li><p><code>Object put(key,value)</code> 向ActionContext中存放键值对,同样该方法用于存放<code>HttpServletRequest</code>的属性</p>
+</li>
+<li><p><code>Map getSession()</code><br>返回一个Map对象，不过这个模拟了<code>HttpSession</code>的用法，只不过现在向其中存放键值对使用put,获取属性用get</p>
+</li>
+<li><p><code>Map getApplication()</code><br>返回一个Map对象，不过这个模拟了Servlet中的<code>ServletContext</code>对象的方法。只不过存放和获取属性的方法用的分别是put和get</p>
+</li>
+<li><p><code>Map getParameters()</code><br>获取所有的请求参数，类似调用HttpServletRequest对象的getParameterMap()方法</p>
+</li>
+<li><p><code>Map setSession(Map session)</code><br>直接传入一个Map实例，将其中的kay-value转换成session的属性名和属性值</p>
+</li>
+<li><p><code>Map setApplication(Map application)</code><br>直接传入一个Map实例，将Map实例中的key-value转换成属性名，属性值</p>
+</li>
+</ul>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<li><p>如果想要使用这个类，当然需要实例化的对象，其中提供了一个获取对象的静态方法，就是上面方法中的第一个</p>
+</li>
+<li><p>我们在Action方法中使用这个设置request域，session域中的属性</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleAction</span> <span class="keyword">implements</span> <span class="title">Action</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String  <span class="title">execute</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">		ActionContext actionContext=ActionContext.getContext();  <span class="comment">//获取实例化对象</span></div><div class="line">		<span class="comment">//向request域中存放键值对</span></div><div class="line">		actionContext.put(<span class="string">"name"</span>, <span class="string">"jack"</span>);</div><div class="line">		<span class="comment">//获取request域中的name值</span></div><div class="line">		System.out.println(actionContext.get(<span class="string">"name"</span>));</div><div class="line"></div><div class="line">		<span class="comment">//向session中存放键值对</span></div><div class="line">		actionContext.getSession().put(<span class="string">"password"</span>, <span class="string">"123456"</span>);</div><div class="line"></div><div class="line">		<span class="comment">//向application中存放键值对</span></div><div class="line">		actionContext.getApplication().put(<span class="string">"a"</span>, <span class="string">"b"</span>);</div><div class="line"></div><div class="line">		<span class="keyword">return</span> SUCCESS;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>success.jsp 使用EL表达式获取</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;h1&gt;success&lt;/h1&gt;</div><div class="line">&lt;h1&gt;request域中的name:$&#123;requestScope.name&#125;&lt;/h1&gt;</div><div class="line">&lt;h1&gt;session域中的password: $&#123;sessionScope.password &#125;&lt;/h1&gt;</div><div class="line">&lt;h1&gt;application域中的a: $&#123;a &#125;&lt;/h1&gt;</div></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>虽说现在可以向各种域中添加属性获取属性，但是我们不可以移除属性，所以说这种方法不如直接使用Servlet API功能更加强大</li>
+</ul>
+<h2 id="实现接口访问Servlet-API"><a href="#实现接口访问Servlet-API" class="headerlink" title="实现接口访问Servlet API"></a>实现接口访问Servlet API</h2><ul>
+<li>实现接口访问对一个Action类的污染实在太严重了，这个是不推荐使用的，可以了解一下</li>
+</ul>
+<h3 id="可以实现的接口"><a href="#可以实现的接口" class="headerlink" title="可以实现的接口"></a>可以实现的接口</h3><ul>
+<li><p><code>ServletContextAware</code><br>实现该接口的Action可以直接访问用户请求的ServletContext实例</p>
+</li>
+<li><p><code>ServletRequestAware</code><br>实现该接口的Action可以直接访问用户请求的HttpServletRequest实例</p>
+</li>
+<li><p><code>ServletResponseAware</code><br>实现该接口的Action可以直接访问请求的HttpServletResponse实例</p>
+</li>
+</ul>
+<h2 id="ServletActionContext（推荐）"><a href="#ServletActionContext（推荐）" class="headerlink" title="ServletActionContext（推荐）"></a>ServletActionContext（推荐）</h2><ul>
+<li>使用这个类可以直接获取<code>HttpServletRequest</code>，<code>HttpServletResponse</code>等对象，其功能比第一种更加强大，因此推荐使用这种方式获取Servlet API</li>
+</ul>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<li><p><code>PageContext getPageContext()</code><br>取得web应用的PageContext对象</p>
+</li>
+<li><p>HttpServletRequest getRequest()<br>获取HttpServletRequest对象</p>
+</li>
+<li><p><code>HttpServletResponse getResponse()</code><br>获取HttpServletResponse对象</p>
+</li>
+<li><p><code>ServletContext  getServletContext()</code><br>获取ServletContext对象</p>
+</li>
+</ul>
+<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><ul>
+<li>我们在Action类中使用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleAction</span> <span class="keyword">implements</span> <span class="title">Action</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String  <span class="title">execute</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">		<span class="comment">//获取Request域的对象</span></div><div class="line">		HttpServletRequest request=ServletActionContext.getRequest();</div><div class="line">		request.setAttribute(<span class="string">"name"</span>, <span class="string">"jack"</span>);</div><div class="line"></div><div class="line">		<span class="comment">//获取Session域的对象</span></div><div class="line">		HttpSession session=request.getSession();</div><div class="line">		session.setAttribute(<span class="string">"password"</span>, <span class="string">"123456"</span>);</div><div class="line"></div><div class="line">		<span class="comment">//获取Response的对象</span></div><div class="line">		HttpServletResponse response=ServletActionContext.getResponse();</div><div class="line"></div><div class="line">		<span class="keyword">return</span> SUCCESS;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>直接获取Servlet API中的对象，可以使用的功能更加强大，因此推荐使用</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Action类访问Servlet-API&quot;&gt;&lt;a href=&quot;#Action类访问Servlet-API&quot; class=&quot;headerlink&quot; title=&quot;Action类访问Servlet API&quot;&gt;&lt;/a&gt;Action类访问Servlet API&lt;/h1&gt;&lt;
+    
+    </summary>
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/categories/Struts2/"/>
+    
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/tags/Struts2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Struts2之动态调用</title>
+    <link href="http://chenjiabing666.github.io/2018/03/31/Struts2%E4%B9%8B%E5%8A%A8%E6%80%81%E8%B0%83%E7%94%A8/"/>
+    <id>http://chenjiabing666.github.io/2018/03/31/Struts2之动态调用/</id>
+    <published>2018-03-30T23:22:58.000Z</published>
+    <updated>2018-03-30T23:23:29.799Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="动态调用"><a href="#动态调用" class="headerlink" title="动态调用"></a>动态调用</h1><h2 id="什么是动态调用"><a href="#什么是动态调用" class="headerlink" title="什么是动态调用"></a>什么是动态调用</h2><ul>
+<li>动态调用就是一个Action类对应着多个请求，比如一个Action类中包含许多的方法，实现动态调用就是让这些方法都配上不同的URL请求映射，这个就是动态调用</li>
+</ul>
+<h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2><ul>
+<li>我们知道如果一个Action类只是对应着一个URL请求，那么我们要写很多Action类，但是如果我们使用了动态调用，那么就可以减少很多的重复工作</li>
+</ul>
+<h2 id="method实现动态调用"><a href="#method实现动态调用" class="headerlink" title="method实现动态调用"></a>method实现动态调用</h2><p>-在struts核心配置文件详解(action)中已经详细讲解了method的用法，使用这个方式可以指定Action类中的不同的方法映射请求，那么就完成了动态调用</p>
+<h2 id="action名-方法名"><a href="#action名-方法名" class="headerlink" title="action名!方法名"></a>action名!方法名</h2><ul>
+<li>这种方式不推荐使用，要想使用的话还要开启开关，如下<ul>
+<li><code>&lt;constant name=&quot;struts.enable.DynamicMethodInvocation&quot; value=&quot;true&quot; /&gt;</code>将这个常量设置<code>true</code>才能使用</li>
+</ul>
+</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>创建SimpleAction的类<ul>
+<li>这个Action类中有一个login方法，我们的动态调用这个login方法，使用<code>action名!方法名</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleAction</span> <span class="keyword">implements</span> <span class="title">Action</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String  <span class="title">execute</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> SUCCESS;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//实现登录的action</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"这个是login方法......"</span>);</div><div class="line">		<span class="keyword">return</span> INPUT;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>struts.xml</code>中的配置(在src目录下)<ul>
+<li>开启开关</li>
+<li>配置SimpleAction这Action类</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">struts</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 开启开关，否则不能使用!的方式 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">constant</span> <span class="attr">name</span>=<span class="string">"struts.enable.DynamicMethodInvocation"</span> <span class="attr">value</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">constant</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"test"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 定义这个包下的默认处理类 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">default-class-ref</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.controller.SimpleAction"</span>&gt;</span><span class="tag">&lt;/<span class="name">default-class-ref</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!-- 这个是SimpleAction的类 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"simple"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/jsp/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"input"</span>&gt;</span>/jsp/input.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;/<span class="name">package</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">struts</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="输入地址"><a href="#输入地址" class="headerlink" title="输入地址"></a>输入地址</h3><ul>
+<li><p>假设项目的名称为web1，那么在地址栏中输入的url为：<code>http://localhost:8080/web1/simple!login</code>,注意这个感叹号一定是英文的</p>
+</li>
+<li><p>输入成功之后我们看到可以正确跳转，那么就成功了</p>
+</li>
+</ul>
+<h2 id="通配符的方式"><a href="#通配符的方式" class="headerlink" title="通配符的方式"></a>通配符的方式</h2><ul>
+<li><p>使用这种方式首先需要关闭上面开启的开关，当然如果你没有开启，那么就不用配置，因为其中默认就是关闭的</p>
+<ul>
+<li><code>&lt;constant name=&quot;struts.enable.DynamicMethodInvocation&quot; value=&quot;false&quot; /&gt;</code></li>
+<li>这种方式是官网推荐使用</li>
+</ul>
+</li>
+<li><p>在Servelt设置url的时候也使用过通配符，一般都是使用*来替代的。现在使用通配符也是一样的道理，也是可以使用动态调用的。</p>
+</li>
+<li><p>这种方式是和method方式配合使用的，在我看来就是<code>method</code>方式，只不过通过通配符传参而已</p>
+</li>
+</ul>
+<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>我们还是使用上面的SimpleAction类，仍然是调用其中的login方法，不过struts.xml此时的配置文件改变了</li>
+</ul>
+<ul>
+<li>struts.xml<ul>
+<li>关闭开关(默认是关闭的)</li>
+<li>定义SimpleAction类的action</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">struts</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 设置为false，关闭开关，默认是关闭的，因此可以不设置  --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">constant</span> <span class="attr">name</span>=<span class="string">"struts.enable.DynamicMethodInvocation"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"test"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 定义action，其中name属性使用一个*的通配符，method=&#123;1&#125;，这个1就是用来接收第一个通配符*的内容</span></div><div class="line">			假设此时输入的Simple_regist ,那么此时&#123;1&#125;=regist</div><div class="line">		--&gt;</div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"simple_*"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.controller.SimpleAction"</span> <span class="attr">method</span>=<span class="string">"&#123;1&#125;"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/jsp/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"input"</span>&gt;</span>/jsp/input.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">package</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">struts</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>此时如果我们的项目名称为让web1，那么输入的url为<code>http://localhost:8080/Struts2/simple_login.action</code>,那么就会调用SimpleAction中的login方法执行</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>推荐使用method和通配符的方式实现动态调用</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;动态调用&quot;&gt;&lt;a href=&quot;#动态调用&quot; class=&quot;headerlink&quot; title=&quot;动态调用&quot;&gt;&lt;/a&gt;动态调用&lt;/h1&gt;&lt;h2 id=&quot;什么是动态调用&quot;&gt;&lt;a href=&quot;#什么是动态调用&quot; class=&quot;headerlink&quot; title=&quot;什么是
+    
+    </summary>
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/categories/Struts2/"/>
+    
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/tags/Struts2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>struts核心配置文件详解(result配置)</title>
+    <link href="http://chenjiabing666.github.io/2018/03/31/struts%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3-result%E9%85%8D%E7%BD%AE/"/>
+    <id>http://chenjiabing666.github.io/2018/03/31/struts核心配置文件详解-result配置/</id>
+    <published>2018-03-30T23:22:03.000Z</published>
+    <updated>2018-03-30T23:22:32.964Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="struts核心配置文件详解-result配置"><a href="#struts核心配置文件详解-result配置" class="headerlink" title="struts核心配置文件详解(result配置)"></a>struts核心配置文件详解(result配置)</h1><h2 id="配置处理结果-result"><a href="#配置处理结果-result" class="headerlink" title="配置处理结果(result)"></a>配置处理结果(result)</h2><ul>
+<li>我们在包中定义的<code>&lt;result name=&quot;&quot; type=&quot;&quot;&gt;value&lt;/result&gt;</code>,这个是用来根据action方法返回的字符串，跳转到指定的视图或者其他的action。<ul>
+<li>name指定的是action方法返回的结果。</li>
+<li>type 指定的是跳转的类型，默认的是dispatcher，相当于Servlet中的RequestDispatcher,地址栏中的url不会改变</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>如果一个action方法中可能返回的值是多个，比如如果测试成功返回success，测试失败返回input，出现异常返回error，那么此时就需要用到多个<code>&lt;result&gt;</code>标签来定义这些返回值跳转的视图</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"login"</span> <span class="attr">class</span>=<span class="string">"com.controller.LoginAction"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/JSP/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"login"</span>&gt;</span>/JSP/login.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">action</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><ol>
+<li><p>dispatcher</p>
+<ul>
+<li><p>表示采用的跳转方式为转发，这个和Servlet中的RequestDispathcher是一个原理，地址栏的url是不会改变的</p>
+</li>
+<li><p>dispatcher 结果类型是在Action与JSP页面之中的一种默认的跳转发方式，相当于之间的Servlet中的转发(RequestDispatcher)</p>
+</li>
+</ul>
+</li>
+<li><p>redirect</p>
+<ul>
+<li><p>用于跳转到其他的页面，但是这个地址栏的url是改变的</p>
+</li>
+<li><p>这个结果类型主要用于重定向到指定的视图资源，这个和dispatcher比较相似，但是这个地址改变了。相当于Servlet中的sendirect()这个方法。</p>
+</li>
+</ul>
+</li>
+<li><p>chain</p>
+<ul>
+<li><p>Action链式处理结果类型</p>
+</li>
+<li><p>很多时候，当一个Action处理完之后并不想转发到视图资源，而是想要跳转到指定的Action继续未完成的处理，这时就需要使用chain，使得两个Action成为链式处理。</p>
+</li>
+<li><p>范例如下： 其中<result>中的value要写成指定的<action>标签中的name值，如果不是一个包中的，还要引入另外一个包中的action，看上面的内容</action></result></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"Login"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"regist"</span> <span class="attr">class</span>=<span class="string">"com.action.regist"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span> <span class="attr">type</span>=<span class="string">"chain"</span>&gt;</span>login<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"login"</span> <span class="attr">class</span>=<span class="string">"com.action.LoginAction"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/JSP/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"login"</span>&gt;</span>/JSP/login.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">package</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>freemaker</p>
+<ul>
+<li>用于与FreeMaker整合的结果类型</li>
+</ul>
+</li>
+<li><p>httpheader</p>
+<ul>
+<li>用于控制特殊的HTTP行为的结果类型</li>
+</ul>
+</li>
+<li><p>redirectAction</p>
+<ul>
+<li><p>用于直接跳转到其他Action的结果类型</p>
+</li>
+<li><p>上面说个redirect是用于重定向到指定的视图资源的，那么这个是用于重定向到指定的Action类的，这个和chain类型非常相似，不过一个是重定向，一个是转发，当然其中的request中的内容会丢失。</p>
+</li>
+</ul>
+</li>
+<li><p>stream</p>
+<ul>
+<li>用于浏览器返回一个InputStream的结果类型（一般用于下载）</li>
+</ul>
+</li>
+<li><p>velocity</p>
+<ul>
+<li>用于与Velocity整合的结果类型</li>
+</ul>
+</li>
+<li><p>xslt</p>
+<ul>
+<li>用于与XML/XSTL整合的结果类型</li>
+</ul>
+</li>
+<li><p>plainText</p>
+<ul>
+<li>用于显示某个页面的原始代码的结果类型</li>
+</ul>
+</li>
+</ol>
+<h3 id="局部结果"><a href="#局部结果" class="headerlink" title="局部结果"></a>局部结果</h3><ul>
+<li>配置局部结果就是在作为<action>的子标签配置，就是上面的配置方式，但是这种局部配置只针对自己的父标签的action起作用。如下：</action></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- name指定了包的名称，extends指定继承的类，namespace指定url路径，这里使用/表示在根路径下就可以直接访问 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"Login"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"login"</span> <span class="attr">class</span>=<span class="string">"com.controller.LoginAction"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/JSP/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"login"</span>&gt;</span>/JSP/login.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">package</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="配置全局结果"><a href="#配置全局结果" class="headerlink" title="配置全局结果"></a>配置全局结果</h3><ul>
+<li>当我们需要一个视图可能这个package中action都需要，如果一个action中定义一个这样的result难免有些多余，现在我们使用<global-results>只需要在<package>元素内定义一次即可，一旦有返回值满足即可调用这个视图。比如我们定义一个错误处理的界面，因为这个处理视图是一样的，只需要配置全局result即可。</package></global-results></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">”Login”</span> <span class="attr">extends</span>=<span class="string">”struts-default”</span> <span class="attr">namespace</span>=<span class="string">”/user”</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">global-results</span> &gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">!—只要执行action的类返回error就会跳转到error.jsp--!</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">”error”</span>&gt;</span>error.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">global-results</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">”login”class</span>=<span class="string">”com.action.LoginAction”</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">”success”</span>&gt;</span>success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">package</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li><p>根据上面的配置，如果此时login这个action返回的字符串为error，那么此时的全局配置结果就起作用了，就会跳转到error.jsp页面</p>
+</li>
+<li><p>但是我们一个action处理错误的页面和特殊，虽然返回的是error，但是我就想跳转到其他的页面，那么可以在这个action的标签下重新定义一个结果，此时的局部结果就会覆盖全局结果</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;struts核心配置文件详解-result配置&quot;&gt;&lt;a href=&quot;#struts核心配置文件详解-result配置&quot; class=&quot;headerlink&quot; title=&quot;struts核心配置文件详解(result配置)&quot;&gt;&lt;/a&gt;struts核心配置文件详解(r
+    
+    </summary>
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/categories/Struts2/"/>
+    
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/tags/Struts2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>struts核心配置文件详解(action配置)</title>
+    <link href="http://chenjiabing666.github.io/2018/03/31/struts%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3-action%E9%85%8D%E7%BD%AE/"/>
+    <id>http://chenjiabing666.github.io/2018/03/31/struts核心配置文件详解-action配置/</id>
+    <published>2018-03-30T23:21:10.000Z</published>
+    <updated>2018-03-30T23:21:46.379Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="struts核心配置文件详解-action配置"><a href="#struts核心配置文件详解-action配置" class="headerlink" title="struts核心配置文件详解(action配置)"></a>struts核心配置文件详解(action配置)</h1><h2 id="配置action"><a href="#配置action" class="headerlink" title="配置action"></a>配置action</h2><ul>
+<li>前面我们已经说过Action类的三个实现方式，现在我们该说说Action类在struts.xml中的配置问题了</li>
+</ul>
+<h2 id="指定特定的方法执行-method"><a href="#指定特定的方法执行-method" class="headerlink" title="指定特定的方法执行(method)"></a>指定特定的方法执行(method)</h2><ul>
+<li><p>我们知道ActionSupport类实际上相当与一个POJO类，这个和springmvc不同，struts2中的控制层Action类没有和实体类分离，其中可以有很多的方法，我们知道struts2默认调用的<code>execute</code>方法，但是如果我们想要指定其他的方法来处理请求呢，这时我们就需要使用<code>method</code>这个属性了</p>
+</li>
+<li><p>method: 是<code>&lt;action name=&quot;&quot; class=&quot;&quot; method=&quot;&quot;&gt;</code>标签中的属性,指定的是Action类中的方法名，如果不使用这属性，那么默认的值是<code>execute</code></p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--  使用method指定 SimpleAction中的login方法执行这个login.action这个URL --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"login"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.controller.SimpleAction"</span> <span class="attr">method</span>=<span class="string">"login"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/jsp/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"input"</span>&gt;</span>/jsp/input.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">action</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="配置默认的处理类"><a href="#配置默认的处理类" class="headerlink" title="配置默认的处理类"></a>配置默认的处理类</h2><ul>
+<li><p>上面我们讲解了method的使用方式，但是现在有一个问题，如果一个Action类中有多个处理方法，那么每次定义action都需要在其中指定相同的class属性，如果我们把这个class抽离出来，不用每一个action都写class属性。</p>
+</li>
+<li><p>只需要在<package>标签内部加上<code>&lt;default-class-ref class=&quot;&quot;&gt;</code>即可，那么这个<package>包下的所有的action没有设置class的是属性的都是使用的这个默认的处理类。</package></package></p>
+</li>
+<li><p>但是如果<code>&lt;action&gt;</code>标签中指定了<code>class</code>属性，那么会覆盖这个默认的处理类</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"test"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!-- 定义这个包下的默认处理类 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">default-class-ref</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.controller.SimpleAction"</span>&gt;</span><span class="tag">&lt;/<span class="name">default-class-ref</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!--  这个action使用的是另外一个处理类，此时的默认处理类对这个action没有作用，被覆盖掉--&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"testaction"</span></span></div><div class="line">		<span class="attr">class</span>=<span class="string">"com.jsnu.struts2.controller.TestAction"</span> &gt;</div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/jsp/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!-- 这个action没有指定class属性，那么就会使用默认处理类的exit方法 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"simpleAction"</span> <span class="attr">method</span>=<span class="string">"exit"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/jsp/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!--  使用method指定 SimpleAction中的login方法执行这个login.action这个URL，同样的没有指定class，使用默认处理类中的login方法 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"login"</span>  <span class="attr">method</span>=<span class="string">"login"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/jsp/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"input"</span>&gt;</span>/jsp/input.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">package</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="配置默认的处理action"><a href="#配置默认的处理action" class="headerlink" title="配置默认的处理action"></a>配置默认的处理action</h2><p>-如果用户输入的的URL地址在这个<code>&lt;package&gt;</code>下，即是namespace符合，但是在其中没有相应的action的做出响应，可能是地址输错了，此时的我们需要使其跳转到error.jsp页面，给用户一个提示。那么我们这个时候就需要使用默认的action。</p>
+<ul>
+<li>默认的action的作用就是在用户输入地址没有响应，但是符合<code>&lt;package&gt;</code>下的一个<code>namespace</code>，那么可能是用户输错了，那么我们为了提高友好性，此时需要跳转到error.jsp页面，此时就需要一个默认的action类映射了</li>
+</ul>
+<p>-直接在<code>&lt;package&gt;</code> 定义即可，其中的<code>name</code>属性指定的package下的已经存在的action的名称</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"test"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!-- 指定默认的action，如果在namespace路径下的找不到指定的action来映射请求，那么就会使用package下的默认的action来做出响应</span></div><div class="line">			name： 指定这个package下的action的名字，相当于已经定义好的action</div><div class="line">		--&gt;</div><div class="line">		<span class="tag">&lt;<span class="name">default-action-ref</span> <span class="attr">name</span>=<span class="string">"login"</span>&gt;</span><span class="tag">&lt;/<span class="name">default-action-ref</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!-- 定义这个包下的默认处理类 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">default-class-ref</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.controller.SimpleAction"</span>&gt;</span><span class="tag">&lt;/<span class="name">default-class-ref</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">		<span class="comment">&lt;!--  使用method指定 SimpleAction中的login方法执行这个login.action这个URL，同样的没有指定class，使用默认处理类中的login方法 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"login"</span>  <span class="attr">method</span>=<span class="string">"login"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/jsp/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"input"</span>&gt;</span>/jsp/input.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">package</span>&gt;</span></div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;struts核心配置文件详解-action配置&quot;&gt;&lt;a href=&quot;#struts核心配置文件详解-action配置&quot; class=&quot;headerlink&quot; title=&quot;struts核心配置文件详解(action配置)&quot;&gt;&lt;/a&gt;struts核心配置文件详解(a
+    
+    </summary>
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/categories/Struts2/"/>
+    
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/tags/Struts2/"/>
+    
+  </entry>
   
   <entry>
     <title>Struts2Action类实现</title>
@@ -85,11 +555,11 @@
   </entry>
   
   <entry>
-    <title>Struts2核心配置文件</title>
+    <title>Struts2核心配置文件(package)</title>
     <link href="http://chenjiabing666.github.io/2018/03/30/Struts2%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/"/>
     <id>http://chenjiabing666.github.io/2018/03/30/Struts2核心配置文件/</id>
     <published>2018-03-30T04:57:35.000Z</published>
-    <updated>2018-03-30T04:59:47.237Z</updated>
+    <updated>2018-03-30T23:20:28.193Z</updated>
     
     <content type="html"><![CDATA[<h1 id="struts核心配置文件详解"><a href="#struts核心配置文件详解" class="headerlink" title="struts核心配置文件详解"></a>struts核心配置文件详解</h1><h2 id="包-package"><a href="#包-package" class="headerlink" title="包(package)"></a>包(package)</h2><ul>
 <li><p>在核心配置文件中需要配置<code>&lt;package&gt;</code></p>
@@ -2578,359 +3048,6 @@
     
     
       <category term="JSP" scheme="http://chenjiabing666.github.io/tags/JSP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JSP总结一(标签）</title>
-    <link href="http://chenjiabing666.github.io/2017/09/20/JSP%E6%80%BB%E7%BB%93%E4%B8%80-%E6%A0%87%E7%AD%BE%EF%BC%89/"/>
-    <id>http://chenjiabing666.github.io/2017/09/20/JSP总结一-标签）/</id>
-    <published>2017-09-20T14:51:23.000Z</published>
-    <updated>2017-09-20T14:58:57.321Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="JSP总结一-标签"><a href="#JSP总结一-标签" class="headerlink" title="JSP总结一(标签)"></a>JSP总结一(标签)</h1><h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><blockquote>
-<p><code>JSP</code>文件在部署到web服务器上的时候还是会编译成<code>Servlet</code>文件，因此JSP的生命周期和Servlet是一样的，都是有<code>_JSPInit()</code>，_<code>JSPService(</code>),<code>_JSPDestroy()</code>方法的</p>
-</blockquote>
-<h2 id="指示元素"><a href="#指示元素" class="headerlink" title="指示元素"></a>指示元素</h2><blockquote>
-<p>在<code>jsp</code>中有三个指示类型，分别为：<code>page</code>,<code>include</code>,<code>tablig</code>。</p>
-</blockquote>
-<h3 id="page"><a href="#page" class="headerlink" title="page"></a>page</h3><blockquote>
-<p><code>page</code>指示类型告知容器如何转译目前的JSP网页。</p>
-</blockquote>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language=<span class="string">"java"</span> contentType=<span class="string">"text/html; charset=UTF-8"</span> pageEncoding=<span class="string">"UTF-8"</span> <span class="keyword">import</span>=<span class="string">"java.util.*"</span>%&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><code>language</code>指定解析语言，<code>contentType</code>表明为html文件，<code>pageEncoding</code>告诉容器转译及编译的时候如何处理这个这个JSP网页中的额中文编码，import是导入包的作用，如果有多个包导入，那么可以使用逗号隔开。</p>
-<p><code>errorPage</code>用于设置当JSP运行错误而产生异常的时候，该转发哪一个页面处理这个异常，可以自己定义一个异常的JSP或者html文件显示这个异常，但是这个必须和<code>isErrorPage</code>配合使用，必须在处理异常的<code>page</code>指令中协商<code>isErrorPage=&quot;true&quot;</code></p>
-<p>还有一些其他的属性，自己可以看看菜鸟教程上的内容</p>
-</blockquote>
-<h3 id="include"><a href="#include" class="headerlink" title="include"></a>include</h3><blockquote>
-<p><code>include</code>是用于静态的包含其他页面中的内容。这个还是很重要的，如果在网页中每一张页面都需要使用一样的导航栏，导入一样的css，js文件，那么可以将这些内容单独做一个jsp文件或者html文件，要使用的时候就直接包含即可。</p>
-</blockquote>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">//file指定文件的相对路径  </span></div><div class="line">&lt;%<span class="meta">@include</span> file=<span class="string">"daoru.jsp"</span> %&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>其实上面的语句在<code>Servlet</code>语句相当于下面这句话：</p>
-</blockquote>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">RequestDispatcher dis=request.getRequestDispatcher();</div><div class="line">dis.include(request,response);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>注意这句话写在页面的哪里，那么就将其中的内容导入到哪里，比如要导入<code>css</code>，<code>js</code>文件，那么直接在<code>head</code>标签中直接导入</p>
-<p>静态导入的方式在部署到服务器会自动和当前的<code>JSP</code>文件编译为一个<code>Servlet</code>文件，也就是在一个<code>Servlet</code>类中。因此在包含的JSP文件中如果定义了变量或者方法，那么在当前的JSP页面中就不能重复定义，否则将会出现变量重复的错误，代码如下：</p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">//Demo1.jsp</div><div class="line">&lt;%@ page language="java" contentType="text/html; charset=UTF-8"</div><div class="line">pageEncoding="UTF-8"%&gt;</div><div class="line"></div><div class="line">&lt;%</div><div class="line">    String name="陈加兵";</div><div class="line">    int age=22;</div><div class="line">%&gt;</div><div class="line"></div><div class="line"></div><div class="line">//Demo2.jsp</div><div class="line"></div><div class="line">&lt;%@ page language="java" contentType="text/html; charset=UTF-8"</div><div class="line">pageEncoding="UTF-8"%&gt;</div><div class="line">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;</div><div class="line">&lt;title&gt;Insert title here&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">//包含Demo1.jsp文件</div><div class="line">&lt;%@ include file="Demo1.jsp" %&gt;</div><div class="line">&lt;%</div><div class="line">    //String name="chenji";     //这里不能重复定义，否则将会报错</div><div class="line">%&gt;</div><div class="line"></div><div class="line">//直接输出name的值 </div><div class="line">&lt;h1&gt;&lt;%=name%&gt;&lt;/h1&gt;    </div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>注意这里的<code>Demo1.jsp</code>文件中一定不能重复的出现<code>&lt;html&gt;</code>标签，因为包含的时候是全部内容都是包含到当前页面中，如果出现重复的<code>html</code>标签代码就会混乱。</p>
-</blockquote>
-<h2 id="声明元素"><a href="#声明元素" class="headerlink" title="声明元素"></a>声明元素</h2><blockquote>
-<p><code>&lt;%! &gt;</code> 这就是声明元素，主要是用来定义类成员和方法声明的。其中不可以出现循环语句等，只能出现定义语句，当然在定义方法的时候函数体中可以出现其他的语句。</p>
-<p>声明元素中的内容在编译的都将变成<code>Servlet</code>中的类的成员变量和方法</p>
-</blockquote>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">    &lt;%!</div><div class="line">        <span class="comment">//变量</span></div><div class="line">        String name=<span class="string">"陈加兵"</span>;     </div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> age=<span class="number">20</span>;</div><div class="line"></div><div class="line">        <span class="comment">//方法</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(name+<span class="string">":"</span>+age);</div><div class="line">&#125;</div><div class="line">    %&gt;</div></pre></td></tr></table></figure>
-<h2 id="Scriptlet"><a href="#Scriptlet" class="headerlink" title="Scriptlet"></a>Scriptlet</h2><blockquote>
-<p><code>&lt;% %&gt;</code>这个是写正常的java语句的，其中将会转译成<code>_jspService()</code>方法中的内容</p>
-</blockquote>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;%</div><div class="line">    String name=<span class="string">"陈加兵"</span>;</div><div class="line">    request.setAttribute(<span class="string">"name"</span>,name);</div><div class="line">%&gt;</div></pre></td></tr></table></figure>
-<h2 id="表达式元素"><a href="#表达式元素" class="headerlink" title="表达式元素"></a>表达式元素</h2><blockquote>
-<p><code>&lt;%= %&gt;</code>  其中可以直接写一个表达式</p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;h1&gt;&lt;%= new Date() %&gt; &lt;/h1&gt;</div><div class="line">&lt;h1&gt;&lt;%= 2+3 %&gt; &lt;/h1&gt;</div><div class="line">&lt;h1&gt;&lt;%= request.getAttribute("name") %&gt; &lt;/h1&gt;</div></pre></td></tr></table></figure>
-<h2 id="注释元素"><a href="#注释元素" class="headerlink" title="注释元素"></a>注释元素</h2><blockquote>
-<p> <code>&lt;%----%&gt;</code>这是JSP的注释，在浏览器中查看源代码的时候是看不到的<br> <code>&lt;!-- --&gt;</code> 这是html中的注释，在网页源代码中是可以看到的</p>
-</blockquote>
-<h2 id="隐含对象"><a href="#隐含对象" class="headerlink" title="隐含对象"></a>隐含对象</h2><blockquote>
-<ul>
-<li><code>request</code>    转译后对应的是<code>HttpServletRequest</code></li>
-<li><code>resposne</code>   译后对应的是<code>HttpServletResponse</code></li>
-<li><code>out</code>        译后对应的是<code>JspWriter</code>对象，其内部关系一个<code>PrintWriter</code>对象</li>
-<li><code>Config</code>    译后对应的是<code>ServletConfig</code></li>
-<li><code>session</code>    译后对应的是<code>HttpSession</code></li>
-<li><code>application</code> 译后对应的是<code>ServletContext</code></li>
-<li><code>pageContext</code>  译后对应的是<code>PageContext</code>对象 </li>
-<li>exception  译后对应的是Throwable对象</li>
-<li><code>page</code>       译后对应的是<code>this</code></li>
-</ul>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;JSP总结一-标签&quot;&gt;&lt;a href=&quot;#JSP总结一-标签&quot; class=&quot;headerlink&quot; title=&quot;JSP总结一(标签)&quot;&gt;&lt;/a&gt;JSP总结一(标签)&lt;/h1&gt;&lt;h2 id=&quot;生命周期&quot;&gt;&lt;a href=&quot;#生命周期&quot; class=&quot;header
-    
-    </summary>
-    
-      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
-    
-    
-      <category term="JSP" scheme="http://chenjiabing666.github.io/tags/JSP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Servlet总结五(监听器)</title>
-    <link href="http://chenjiabing666.github.io/2017/09/19/Servlet%E6%80%BB%E7%BB%93%E4%BA%94-%E7%9B%91%E5%90%AC%E5%99%A8/"/>
-    <id>http://chenjiabing666.github.io/2017/09/19/Servlet总结五-监听器/</id>
-    <published>2017-09-19T02:37:23.000Z</published>
-    <updated>2017-09-19T02:38:53.047Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Servlet总结五-监听器"><a href="#Servlet总结五-监听器" class="headerlink" title="Servlet总结五(监听器)"></a>Servlet总结五(监听器)</h1><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><blockquote>
-<p>监听器按其功能可以分为三种，分别是生命周期监听器(<code>ServletContextListener</code>,<code>ServletRequestListener</code>,<code>HttpSessionListener</code>)，属性监听器(<code>ServletRequestAttributeListener</code>,<code>HttpSessionAttributeListener</code>,<code>ServletContextAttributeListener</code>)，会话属性监听器(<code>HttpSessionBindingListener</code>,<code>HttpSessionActivationListener</code>)。下面我们将会详细的介绍这三种监听器。</p>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/listener.jpg" alt="分类图"></p>
-<h2 id="生命周期监听器"><a href="#生命周期监听器" class="headerlink" title="生命周期监听器"></a>生命周期监听器</h2><p>生命周期就是从创建到销毁，因此顾名思义，就是在对象创建的时候会触发，销毁的时候也会触发</p>
-</blockquote>
-<h3 id="ServletContextListener"><a href="#ServletContextListener" class="headerlink" title="ServletContextListener"></a>ServletContextListener</h3><blockquote>
-<p>前面我们说过<code>ServletContext</code>是上下文的，是应用程序共享的，当应用程序启动就会生成的。在应用程序初始化或者结束前，会分别调用<code>contextInitialized()</code>和<code>contextDestroyed()</code>方法，通过传入的<code>ServletContextEvent</code>取得<code>ServletContext</code>对象。</p>
-</blockquote>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<p>下面读取设置的初始化参数，并且在监听器中将其绑定为属性实现全文共享</p>
-<blockquote>
-<ul>
-<li><code>web.xml</code>的文件，主要是设置初始化属性值，前面已经讲过</li>
-</ul>
-</blockquote>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 设置ServletContext初始参数 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">context-param</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>username<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>陈加兵<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">context-param</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>password<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 设置ServletContext初始参数 --&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 设置监听器，ServletContextListener --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">listener</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>com.ServletContextListenerDemo<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">listener</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 设置监听器，ServletContextListener --&gt;</span></div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>下面是实现监听器的功能</p>
-</blockquote>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Enumeration;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.ServletContext;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletContextEvent;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletContextListener;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletContextListenerDemo</span> <span class="keyword">implements</span> <span class="title">ServletContextListener</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">// ServletContext销毁的时候触发</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextDestroyed</span><span class="params">(ServletContextEvent arg0)</span> </span>&#123;</div><div class="line">        <span class="comment">//当销毁的时候就移除其中绑定的属性</span></div><div class="line">		ServletContext context = arg0.getServletContext();</div><div class="line">		<span class="comment">// 获取所有属性的名称</span></div><div class="line">		Enumeration enumeration = context.getAttributeNames();</div><div class="line">		<span class="keyword">while</span> (enumeration.hasMoreElements()) &#123;</div><div class="line">			String name = (String) enumeration.nextElement();</div><div class="line">			<span class="comment">// 移除绑定的属性</span></div><div class="line">			context.removeAttribute(name);</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// ServletContext生成的时候触发，一般当web程序应用的时候就会初始化ServletContext参数</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextInitialized</span><span class="params">(ServletContextEvent arg0)</span> </span>&#123;</div><div class="line">		<span class="comment">//获取ServletContext对象</span></div><div class="line">		ServletContext context = arg0.getServletContext();</div><div class="line">		<span class="comment">// 读取参数</span></div><div class="line">		String name = context.getInitParameter(<span class="string">"username"</span>);</div><div class="line">		String password = context.getInitParameter(<span class="string">"password"</span>);</div><div class="line">		<span class="comment">// 绑定属性，用于全文共享</span></div><div class="line">		context.setAttribute(<span class="string">"username"</span>, name);</div><div class="line">		context.setAttribute(<span class="string">"password"</span>, password);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="ServletRequestListener"><a href="#ServletRequestListener" class="headerlink" title="ServletRequestListener"></a>ServletRequestListener</h3><blockquote>
-<p>这是在对象<code>ServletRequest</code>对象生成或结束时，会触发的监听器。当生成的时候会触发<code>requestInitialized()</code>,结束时会触发<code>requestDestroyed()</code>方法。<br>ServletRequest对象生成一般在浏览器发出请求，或者转发重定向。注意这个触发是在Servlet的doGet()或者doPost()之前。</p>
-</blockquote>
-<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<p><code>ServletRequestListener</code>文件:在<code>ServletRequest</code>对象生成时绑定属性</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.ServletRequestEvent;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletRequestListener;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletRequestListenerDemo</span> <span class="keyword">implements</span> <span class="title">ServletRequestListener</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">//在ServletRequest对象结束时触发</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestDestroyed</span><span class="params">(ServletRequestEvent arg0)</span> </span>&#123;</div><div class="line">		HttpServletRequest request=(HttpServletRequest)arg0.getServletRequest();</div><div class="line">	</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//在ServletRequest对象生成时触发(比如浏览器请求)</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestInitialized</span><span class="params">(ServletRequestEvent arg0)</span> </span>&#123;</div><div class="line">		<span class="comment">//强制转换成其子类</span></div><div class="line">		HttpServletRequest request=(HttpServletRequest) arg0.getServletRequest();</div><div class="line">		<span class="comment">//绑定属性，这里的request和触发其的Servlet中的是一样的，因此可以实现共享</span></div><div class="line">		<span class="comment">//就好像forward,include一样</span></div><div class="line">		request.setAttribute(<span class="string">"login"</span>, <span class="string">"atuo"</span>);   <span class="comment">//绑定属性</span></div><div class="line">		</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><code>Servlet</code>文件：取得绑定的值</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		PrintWriter pWriter=response.getWriter();</div><div class="line">		pWriter.println(request.getAttribute(<span class="string">"login"</span>));   <span class="comment">//取得上面监听器绑定的值</span></div><div class="line">		</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><code>web.xml</code>文件</p>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 设置监听器，ServletRequestListener --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">listener</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>com.ServletRequestListenerDemo<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">listener</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 设置监听器，ServletRequestListener --&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="HttpSessionListener"><a href="#HttpSessionListener" class="headerlink" title="HttpSessionListener"></a>HttpSessionListener</h3><blockquote>
-<p>在<code>HttpSession</code>对象初始化后或者结束时，会分别调用<code>sessionCreated()</code>和<code>sessionDestroyed()</code>方法，你可以通过传入的<code>HttpSessionEvent</code>来取得<code>HttpSession</code>，以针对会话对象做出响应的创建或者结束处理操作</p>
-</blockquote>
-<h4 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h4><blockquote>
-<p><code>Servlet</code>文件：用来验证登录是否正确，如果正确就创建<code>HttpSession</code>对象，并且绑定属性用来实现自动登录</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.PrintWriter;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpSession;</div><div class="line"><span class="keyword">import</span> javax.xml.registry.infomodel.User;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletDemo3</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		String name=request.getParameter(<span class="string">"username"</span>);</div><div class="line">		String password=request.getParameter(<span class="string">"password"</span>);</div><div class="line">		<span class="keyword">if</span> (<span class="string">"chenjiabing"</span>.equals(name)&amp;&amp;<span class="string">"123456"</span>.equals(password)) &#123;</div><div class="line">			<span class="comment">//用户名和密码正确创建对象</span></div><div class="line">			HttpSession session=request.getSession();</div><div class="line">			session.setAttribute(<span class="string">"login"</span>, <span class="string">"auto"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">			</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> ServletException </span>&#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><code>HttpSessionListenerDemo</code>文件：用来记录登录的人数</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpSession;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpSessionEvent;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpSessionListener;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.omg.CORBA.Request;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletHttpSessionListenerDemo</span> <span class="keyword">implements</span> <span class="title">HttpSessionListener</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> count=<span class="number">0</span>;</div><div class="line">	<span class="comment">//HttpSession创建时触发</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sessionCreated</span><span class="params">(HttpSessionEvent arg0)</span> </span>&#123;</div><div class="line">		count++;    <span class="comment">//人数++</span></div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//HttpSession销毁时触发</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sessionDestroyed</span><span class="params">(HttpSessionEvent arg0)</span> </span>&#123;</div><div class="line">		<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">		count--;   <span class="comment">//人数--</span></div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="属性操作监听器"><a href="#属性操作监听器" class="headerlink" title="属性操作监听器"></a>属性操作监听器</h2><blockquote>
-<p>顾名思义，属性操作监听器就是当绑定属性或者移除绑定属性的时候会触发，共有三个监听器，分别为：<code>ServletContextAttributeListener</code>,<code>ServletRequestAttributeListener</code>,<code>HttpSessionAtrributeListener</code>。相同的是它们都有共同需要实现的方法，分别为：<code>attributeAdded</code>(绑定属性的时候触发),<code>attributeRemoved</code>(属性移除的时候触发),<code>attributeReplace</code>(属性被替换的时候触发)</p>
-<p>由于这三个监听器实现的方法都是一样的，下面就演示一个即可，其他的都是相同的</p>
-</blockquote>
-<h3 id="HttpSessionAttributeListener"><a href="#HttpSessionAttributeListener" class="headerlink" title="HttpSessionAttributeListener"></a>HttpSessionAttributeListener</h3><blockquote>
-<p>这是监听<code>HttpSession</code>对象属性的，主要有（添加，移除，替换）,当然这个也是要在<code>web.xml</code>设置的</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpSession;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpSessionBindingEvent;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpSessionAttributeListener</span> <span class="keyword">implements</span> <span class="title">javax</span>.<span class="title">servlet</span>.<span class="title">http</span>.<span class="title">HttpSessionAttributeListener</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">/*HttpSessionBindingEvent方法</span></div><div class="line">	 * String getName()  返回最近改变的属性的名称</div><div class="line">	 * Object getValue()   返回已添加、移除或替换的属性的值。如果添加（或绑定）了属性，则这是该属性的值。如果移除（或取消绑定）了属性，则这是被移除属性的值。如果替换了属性，则这是属性原来的值。</div><div class="line">	 * getSession()   获取HttpSession对象 </div><div class="line">	 */</div><div class="line">	</div><div class="line">	<span class="comment">//添加新的属性时触发，每绑定一个属性就触发一次</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">attributeAdded</span><span class="params">(HttpSessionBindingEvent arg0)</span> </span>&#123;</div><div class="line">		<span class="comment">//获取HttpSession对象</span></div><div class="line">		HttpSession session=arg0.getSession();</div><div class="line">		String name=arg0.getName();    <span class="comment">//获取添加的属性名称</span></div><div class="line">		String attribute=(String) arg0.getValue();   <span class="comment">//获取添加的属性的值</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//移除属性的时候触发  ，每移除一次就会触发一次</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">attributeRemoved</span><span class="params">(HttpSessionBindingEvent arg0)</span> </span>&#123;</div><div class="line">		String value=(String) arg0.getValue();</div><div class="line">		System.out.println(<span class="string">"被移除的属性的值为："</span>+value);</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//属性值被替换的时候触发，直接重新设置属性值就是替换</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">attributeReplaced</span><span class="params">(HttpSessionBindingEvent arg0)</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"被替换的属性的值："</span>+arg0.getValue());</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="会话属性监听器"><a href="#会话属性监听器" class="headerlink" title="会话属性监听器"></a>会话属性监听器</h2><blockquote>
-<p>先前介绍的几个监听器都是要在<code>web.xml</code>中使用<code>&lt;listener&gt;</code>定义的，这个会话属性监听器是不要在<code>web.xml</code>设置的</p>
-<p>这里介绍的监听器分别为：<code>HttpSessionBindingListener</code>,<code>HttpSessionActivationListener</code></p>
-</blockquote>
-<h3 id="HttpSessionBindingListener"><a href="#HttpSessionBindingListener" class="headerlink" title="HttpSessionBindingListener"></a>HttpSessionBindingListener</h3><blockquote>
-<p>当实现<code>HttpSessionBindingListener</code>接口的类的对象被移除或者绑定到<code>HttpSession</code>成为属性的时候就会触发</p>
-<p>下面是实现<code>HttpSessionBindingListener</code>接口的类</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpSession;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpSessionBindingEvent;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpSessionBindingListenerDemo</span> <span class="keyword">implements</span> <span class="title">javax</span>.<span class="title">servlet</span>.<span class="title">http</span>.<span class="title">HttpSessionBindingListener</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> String name;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span>  age;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">HttpSessionBindingListenerDemo</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">		<span class="keyword">this</span>.name=<span class="string">"陈加兵"</span>;</div><div class="line">		<span class="keyword">this</span>.age=<span class="number">22</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//当这个类的对象绑定成为HttpSession的属性的时候将会触发</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">valueBound</span><span class="params">(HttpSessionBindingEvent arg0)</span> </span>&#123;</div><div class="line">		<span class="comment">//获取绑定的属性的对象</span></div><div class="line">		HttpSessionBindingListenerDemo listenerDemo=(HttpSessionBindingListenerDemo)arg0.getValue();</div><div class="line">		<span class="comment">//获取对象的值</span></div><div class="line">		System.out.println(listenerDemo.name);</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//当这个类的对象被移除的时候就会触发</span></div><div class="line">	<span class="comment">//getValue()  getName()</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">valueUnbound</span><span class="params">(HttpSessionBindingEvent arg0)</span> </span>&#123;</div><div class="line">		</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>下面是<code>Servlet</code>文件：</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.PrintWriter;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpSession;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletDemo1</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">        <span class="comment">//获取对象</span></div><div class="line">		HttpSession session=request.getSession(); </div><div class="line">        <span class="comment">//对象</span></div><div class="line">		HttpSessionBindingListenerDemo listener=<span class="keyword">new</span> HttpSessionBindingListenerDemo();</div><div class="line">		<span class="comment">//绑定对象</span></div><div class="line">		session.setAttribute(<span class="string">"listener"</span>, listener);</div><div class="line">		</div><div class="line">		</div><div class="line">			</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line"></div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> <span class="keyword">throws</span> ServletException </span>&#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Servlet总结五-监听器&quot;&gt;&lt;a href=&quot;#Servlet总结五-监听器&quot; class=&quot;headerlink&quot; title=&quot;Servlet总结五(监听器)&quot;&gt;&lt;/a&gt;Servlet总结五(监听器)&lt;/h1&gt;&lt;h2 id=&quot;分类&quot;&gt;&lt;a href=&quot;#分
-    
-    </summary>
-    
-      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
-    
-    
-      <category term="Servlet" scheme="http://chenjiabing666.github.io/tags/Servlet/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Servlet总结四(过滤器)</title>
-    <link href="http://chenjiabing666.github.io/2017/09/17/Servlet%E6%80%BB%E7%BB%93%E5%9B%9B-%E8%BF%87%E6%BB%A4%E5%99%A8/"/>
-    <id>http://chenjiabing666.github.io/2017/09/17/Servlet总结四-过滤器/</id>
-    <published>2017-09-17T13:44:07.000Z</published>
-    <updated>2017-09-17T14:03:28.234Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Servlet总结四-过滤器的使用"><a href="#Servlet总结四-过滤器的使用" class="headerlink" title="Servlet总结四(过滤器的使用)"></a>Servlet总结四(过滤器的使用)</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>在容器调用Servlet的<code>service()</code>的方法钱，Servlet其实并不会知道有请求的到来，而在<code>service()</code>方法执行后，容器真正对浏览器进行HTTP响应之前，浏览器也不知道Servlet真正响应是什么。过滤器(<code>Filter</code>)正如其名称所示，它介于Servlet之前，可拦截浏览器对Servlet的请求，也可以改变Servlet对浏览器的响应。</p>
-<p>其实说白了，过滤器就是应用程序的一个额外的组件，为了方便使用并且不改变Servlet源代码，比如用户验证，字符替换，压缩这类的需求，你可能只是暂时的需要这类需求，但是过一段时间又不需要了，如果直接在Servlet中改动源码，那么就太麻烦了。因此此时就需要设置一个独立的组件，在使用的时候直接引用，不需要的时候直接删除即可，这就是过滤器的必要。</p>
-</blockquote>
-<h2 id="过滤器的实现"><a href="#过滤器的实现" class="headerlink" title="过滤器的实现"></a>过滤器的实现</h2><blockquote>
-<p>想要实现过滤器，那么需要实现<code>Filter</code>接口，这个接口中有三个必须实现的方法，分别为<code>init()</code>,<code>doFilter()</code>,<code>destroy()</code>。</p>
-<p><code>init(FilterConfig config)</code>   这是一个初始化方法，其中的参数可以获取定义的初始值，这个在后面会详细说</p>
-<p><code>destroy()</code>  这个是销毁方法</p>
-<p><code>doFilter(HttpServletRequest request,HttpServletResponse response,FilterChain chain)</code>  这是主要的方法，用来执行过滤的作用。当请求来到了web容器中，容器发现了调用Servlet的<code>service()</code>方法之前可以应用某过滤器的时候就会调用该过滤器的<code>doFilter()</code>方法。就是在doFilter()方法中进行了service()方法的前置处理，而后根据是否调用<code>FilterChain</code>中的<code>doFilter()</code>决定是否执行下一个过滤器，如果没有那么就执行第一个过滤器。</p>
-<p>如果执行了<code>FilterChain的doFilter()</code>方法，那么就会执行下一个过滤器，如果没有就调用指定的Servlet的<code>service()</code>方法。</p>
-</blockquote>
-<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><blockquote>
-<ul>
-<li>Servlet的响应分为前置处理和后置处理。前置处理就是在调用<code>service()</code>方法之前进行的处理，就是Servlet还没有接受到请求的时候，后置处理就是在Servlet执行过service()方法之后，就是Servlet已经处理完请求之后。因此<code>FilterChain</code>的<code>doFilter()</code>方法就将过滤器处理分为了前置处理和后置处理，在调用<code>FilterChain</code>的<code>doFilter()</code>方法之前的都是对Servlet的前置处理，也就是说这时候Servlet并不知道此时有请求过来，而在其之后的都是对Servlet的后置处理。</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">doFilter(HttpServletRequest request,HttpServletResponse response,FilterChain chain)</div><div class="line">&#123;       </div><div class="line">        <span class="comment">//service()的前置处理</span></div><div class="line">        chain.doFilter(request,response);</div><div class="line">        <span class="comment">//service()的后置处理</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><p>在<code>FilterChain</code>执行后会一堆栈顺序返回，就是说如果有多个<code>Filter</code>，那么就先按照顺序执行<code>chain.doFilter(request,response)</code>之前的代码，即是先前置处理，然后入栈，这样一直到执行到最后一个<code>Filter</code>，之后就从栈顶开始执行<code>chain.doFilter()</code>的方法之后的代码，即是后置处理。总的来说就是先执行前置处理，然后入栈，待全部执行完毕之后再从栈顶开始后置处理的代码。</p>
-</li>
-<li><p>在<code>Filter</code>的<code>doFilter</code>的方法中的<code>request</code>，<code>response</code>和Servlet的<code>doGet()</code>和<code>doPost()</code>方法中的是一样的，即是可以设置属性，可以得到表单提交的值，总之是一样的。</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="简单的例子"><a href="#简单的例子" class="headerlink" title="简单的例子"></a>简单的例子</h3><blockquote>
-<ul>
-<li>下面实现一个过滤器用来验证提交请求的用户名和密码是否正确</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.Filter;</div><div class="line"><span class="keyword">import</span> javax.servlet.FilterChain;</div><div class="line"><span class="keyword">import</span> javax.servlet.FilterConfig;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletResponse;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequestWrapper;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterDemo1</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response,</span></span></div><div class="line">			FilterChain chain) <span class="keyword">throws</span> IOException, ServletException &#123;</div><div class="line">		<span class="comment">// 根据request获取表单的用户名和密码</span></div><div class="line">		String username = request.getParameter(<span class="string">"username"</span>);</div><div class="line">		String password = request.getParameter(<span class="string">"password"</span>);</div><div class="line">		<span class="comment">// 如果用户名和密码正确</span></div><div class="line">		<span class="keyword">if</span> (<span class="string">"陈加兵"</span>.equals(username) &amp;&amp; <span class="string">"123456"</span>.equals(<span class="string">"password"</span>)) &#123;</div><div class="line">			System.out.println(<span class="string">"用户名或者密码错误，请重新输入"</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//继续执行下一个过滤器，如果有就执行</span></div><div class="line">		chain.doFilter(request, response);</div><div class="line">		<span class="comment">//当所有过滤器的前置处理都执行完毕才执行这个语句</span></div><div class="line">		System.out.println(<span class="string">"Servlet已经执行完毕"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="过滤器的设置"><a href="#过滤器的设置" class="headerlink" title="过滤器的设置"></a>过滤器的设置</h3><blockquote>
-<ul>
-<li>在<code>web.xml</code>中设置过滤器，设置的方式如下：</li>
-</ul>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/javaee"</span> <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"</span> <span class="attr">id</span>=<span class="string">"WebApp_ID"</span> <span class="attr">version</span>=<span class="string">"2.5"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">display-name</span>&gt;</span>web2<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">welcome-file-list</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.html<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.htm<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.jsp<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.html<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.htm<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>default.jsp<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">welcome-file-list</span>&gt;</span></div><div class="line">    </div><div class="line"></div><div class="line">    </div><div class="line"><span class="comment">&lt;!-- 定义FilterDemo1的过滤器 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--设置过滤器文件的名字--&gt;</span></div><div class="line">  		<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>FilterDemo1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--设置过滤器类所在的路径，具体到包名--&gt;</span></div><div class="line">  		<span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>com.FilterDemo1<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></div><div class="line">    </div><div class="line">  	<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>FilterDemo3<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--设置作用的url，即是Demo9这个Servlet应用这个过滤器--&gt;</span></div><div class="line">  	<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/Demo9<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span>   </div><div class="line"><span class="comment">&lt;!-- &lt;servlet-name&gt;Demo9&lt;/servlet-name&gt; 这个标签和上面的&lt;url-pattern&gt;是一个效果，直接指明应用的Servlet的名称 --&gt;</span></div><div class="line">    <span class="comment">&lt;!--Demo1也应用这个过滤器--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>Demo1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span>   </div><div class="line"> <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 定义FilterDemo1的过滤器 --&gt;</span></div><div class="line">    </div><div class="line">    </div><div class="line">    </div><div class="line"><span class="comment">&lt;!-- 定义FilterDemo2的过滤器 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">filter</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>FilterDemo2<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>com.FilterDemo2<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">filte</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>FilterDemo2<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--     Demo1这个Servlet文件也应用FilterDemo2这个过滤器，那么当请求Demo的时候要按照定义的先后顺序先执行FilterDemo1这个过滤器 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/Demo1<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span>    </div><div class="line">    <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div><div class="line">    </div><div class="line"><span class="comment">&lt;!-- 定义FilterDemo2的过滤器 --&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">    </div><div class="line">    </div><div class="line">    </div><div class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></div></pre></td></tr></table></figure>
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><blockquote>
-<ul>
-<li>可以在同一个<code>&lt;filter-mapping&gt;</code>中定义多个Servlet文件，表示多个Servlet都应用于这个过滤器</li>
-<li>一个Servlet文件可以同时应用多个过滤器，但是执行的顺序要按照定义的先后顺序执行</li>
-</ul>
-</blockquote>
-<h3 id="初始参数的设置和获取"><a href="#初始参数的设置和获取" class="headerlink" title="初始参数的设置和获取"></a>初始参数的设置和获取</h3><h4 id="设置初始值"><a href="#设置初始值" class="headerlink" title="设置初始值"></a>设置初始值</h4><blockquote>
-<p>这个和<code>ServletConfig</code>一样的都存在初始参数，当然定义的方式也是不尽相同，都是在<code>web.xml</code>中定义的，如下：</p>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></div><div class="line">  		<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>FilterDemo3<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">  		<span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>com.FilterDemo3<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></div><div class="line">  		<span class="comment">&lt;!--直接在filter下可以设置初始参数，当然我们可以在过滤器中获取参数--&gt;</span></div><div class="line">  		<span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">  			<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>username<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">  			<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>陈加兵<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">  		<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line">    </div><div class="line">        <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">  			<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>password<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">  			<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">  		<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line">  		</div><div class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></div></pre></td></tr></table></figure>
-<h4 id="获取初始参数的值"><a href="#获取初始参数的值" class="headerlink" title="获取初始参数的值"></a>获取初始参数的值</h4><blockquote>
-<p>直接利用其中的<code>init(FilteConfig config)</code> 获取初始化参数</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.Filter;</div><div class="line"><span class="keyword">import</span> javax.servlet.FilterChain;</div><div class="line"><span class="keyword">import</span> javax.servlet.FilterConfig;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletResponse;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequestWrapper;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterDemo1</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> String username;</div><div class="line">	<span class="keyword">public</span> String password;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response,</span></span></div><div class="line">			FilterChain chain) <span class="keyword">throws</span> IOException, ServletException &#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//直接在init方法中利用FilterConfig的方法获取参数的值</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</div><div class="line">		<span class="comment">//获取初始值</span></div><div class="line">		username=config.getInitParameter(<span class="string">"username"</span>);</div><div class="line">		password=config.getInitParameter(<span class="string">"password"</span>);</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="设置触发的时机"><a href="#设置触发的时机" class="headerlink" title="设置触发的时机"></a>设置触发的时机</h3><blockquote>
-<p>当我们直接请求Servlet文件的url或者表单提交的时候使用的都是浏览器默认发出的请求，这个是可以触发过滤器的。但是如果是那些重定向(<code>sendirect</code>)或者转发包含(<code>forward</code>,<code>include</code>)就不会默认触发，因此我们需要在<code>web.xml</code>设置触发的时机，定义如下:</p>
-</blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>FilterDemo1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/Demo1<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span>REQUEST<span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span>      <span class="comment">&lt;!--默认的--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span>FORWARD<span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span>       <span class="comment">&lt;!--forward--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span>INCLUDE<span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span>        <span class="comment">&lt;!--include--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span>ERROR<span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span>        <span class="comment">&lt;!--error --&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Servlet总结四-过滤器的使用&quot;&gt;&lt;a href=&quot;#Servlet总结四-过滤器的使用&quot; class=&quot;headerlink&quot; title=&quot;Servlet总结四(过滤器的使用)&quot;&gt;&lt;/a&gt;Servlet总结四(过滤器的使用)&lt;/h1&gt;&lt;h2 id=&quot;简介&quot;
-    
-    </summary>
-    
-      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
-    
-    
-      <category term="Servlet" scheme="http://chenjiabing666.github.io/tags/Servlet/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Servlet总结三(HttpSession会话管理)</title>
-    <link href="http://chenjiabing666.github.io/2017/09/16/Servlet%E6%80%BB%E7%BB%93%E4%B8%89-HttpSession%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86/"/>
-    <id>http://chenjiabing666.github.io/2017/09/16/Servlet总结三-HttpSession会话管理/</id>
-    <published>2017-09-15T16:12:10.000Z</published>
-    <updated>2017-09-17T14:03:27.218Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Servlet总结三-HttpSession会话管理"><a href="#Servlet总结三-HttpSession会话管理" class="headerlink" title="Servlet总结三(HttpSession会话管理)"></a>Servlet总结三(HttpSession会话管理)</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p><code>HttpSession</code>是提供一种方式，跨多个页面请求或对 Web 站点的多次访问标识用户并存储有关该用户的信息。<br>简单的来说就是能够实现全局的共享数据，可以跨多个页面请求，当然在<code>Servlet</code>中可以在同一个项目中的不同的Servlet中共享数据</p>
-</blockquote>
-<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><blockquote>
-<ul>
-<li><code>void setAttribute(String name, Object value)</code>  绑定对象到此会话上</li>
-<li><code>public void removeAttribute(String name)</code>  移除绑定的对象</li>
-<li><code>Object getAttribute(String name)</code>   根据指定的属性名称获取指定的值(需要强转)</li>
-<li><code>Enumeration getAttributeNames()</code>    返回一个所有属性的枚举对象,可以通过Enumeration得到其中的值</li>
-<li><code>public int getMaxInactiveInterval()</code>  返回 servlet 容器在客户端访问之间将使此会话保持打开状态的最大时间间隔，以秒为单位（根据测试，这个默认的值为1800秒，如果在这个默认的时间之内没有响应，那么会话将会中断）</li>
-<li><code>public void setMaxInactiveInterval(int interval)</code>   指定在 servlet 容器使此会话失效之前客户端请求之间的时间间隔，以秒为单位。负数时间指示会话永远不会超时。 </li>
-</ul>
-</blockquote>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><blockquote>
-<p>我们可以通过<code>HttpServletRequest</code>的方法<code>getSession()</code> 获取对象，下面我们来使用其中的函数</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">//Demo1中的doGet方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request,HttpServletResponse response)</span></span>&#123;</div><div class="line">        request.setCharacterEncoding(<span class="string">"UTF-8"</span>);</div><div class="line">		response.setContentType(<span class="string">"text/html;charset=UTF-8"</span>);</div><div class="line">        <span class="comment">//获取对象</span></div><div class="line">		HttpSession session=request.getSession();</div><div class="line">		<span class="comment">//设置属性login的值为auto</span></div><div class="line">		session.setAttribute(<span class="string">"login"</span>, <span class="string">"auto"</span>);                                                                   </div><div class="line">        &#125;</div><div class="line"></div><div class="line">    <span class="comment">//Demo2中的doGet方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request,HttpServletResponse response)</span></span>&#123;</div><div class="line">        <span class="comment">//获取对象</span></div><div class="line">		HttpSession session=request.getSession();</div><div class="line">        <span class="comment">//获取其中的login的值</span></div><div class="line">        String login=session.getAttribute(<span class="string">"login"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="简单的例子"><a href="#简单的例子" class="headerlink" title="简单的例子"></a>简单的例子</h2><blockquote>
-<p>下面是一个简单的例子实现自动登录,在填入用户名和密码正确之后，并且勾选其中的自动登录选项，那么登录过一次后在一天之内，如果直接登录首页将会直接跳转到用户界面，实现自动登录的功能</p>
-<ul>
-<li><code>index.jsp</code>文件中实现的是简单的表单登录，并没有加上一些css，js,仅仅是一个例子</li>
-</ul>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">language</span>=<span class="string">"java"</span> <span class="attr">import</span>=<span class="string">"java.util.*"</span> <span class="attr">pageEncoding</span>=<span class="string">"UTF-8"</span>%&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%</span></span></div><div class="line">	<span class="attr">String</span> <span class="attr">path</span> = <span class="string">request.getContextPath();</span></div><div class="line">	<span class="attr">String</span> <span class="attr">basePath</span> = <span class="string">request.getScheme()</span> + "<span class="attr">:</span>//"</div><div class="line">			+ <span class="attr">request.getServerName</span>() + "<span class="attr">:</span>" + <span class="attr">request.getServerPort</span>()</div><div class="line">			+ <span class="attr">path</span> + "/";</div><div class="line">%&gt;</div><div class="line"></div><div class="line"><span class="meta">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">base</span> <span class="attr">href</span>=<span class="string">"&lt;%=basePath%&gt;"</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>My JSP 'index.jsp' starting page<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"pragma"</span> <span class="attr">content</span>=<span class="string">"no-cache"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"cache-control"</span> <span class="attr">content</span>=<span class="string">"no-cache"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"expires"</span> <span class="attr">content</span>=<span class="string">"0"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"keywords"</span> <span class="attr">content</span>=<span class="string">"keyword1,keyword2,keyword3"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"This is my page"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--</span></div><div class="line">	&lt;link rel="stylesheet" type="text/css" href="styles.css"&gt;</div><div class="line">	--&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"Demo3"</span> <span class="attr">method</span>=<span class="string">"get"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">label</span>&gt;</span>username:<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">br</span>&gt;</span> <span class="tag">&lt;<span class="name">label</span>&gt;</span>password:<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span></span></div><div class="line">			<span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;<span class="tag">&lt;/<span class="name">br</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">label</span>&gt;</span>自动登录：<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"login"</span> <span class="attr">value</span>=<span class="string">"auto"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><code>Demo3.java</code>是用户的首页，实现检测自动登录，没有加一些页面在上面，但是其实是用户的首页</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.BufferedReader;</div><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</div><div class="line"><span class="keyword">import</span> java.io.FileReader;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"><span class="keyword">import</span> java.io.InputStreamReader;</div><div class="line"><span class="keyword">import</span> java.io.PrintWriter;</div><div class="line"><span class="keyword">import</span> java.io.Reader;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.RequestDispatcher;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletContext;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.Cookie;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpSession;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo3</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		request.setCharacterEncoding(<span class="string">"UTF-8"</span>);</div><div class="line">		response.setContentType(<span class="string">"text/html;charset=UTF-8"</span>);</div><div class="line">		<span class="comment">// 获取HttpSession对象</span></div><div class="line">		HttpSession session = request.getSession();</div><div class="line">		<span class="comment">// 设置一天的访问时间间隔，如果超过这个时间，那么中断</span></div><div class="line">		session.setMaxInactiveInterval(<span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>);</div><div class="line">		<span class="comment">// 获取转发对象，页面跳转</span></div><div class="line">		RequestDispatcher dispatcher = request</div><div class="line">				.getRequestDispatcher(<span class="string">"HTML/user.html"</span>);</div><div class="line">		<span class="comment">// 获取表单的数据</span></div><div class="line">		String username = request.getParameter(<span class="string">"username"</span>);</div><div class="line">		String password = request.getParameter(<span class="string">"password"</span>);</div><div class="line">		String login = request.getParameter(<span class="string">"login"</span>);</div><div class="line"></div><div class="line">		<span class="comment">// 获取HttpSession中设置的属性名为login的值，如果为null，表示没有设置</span></div><div class="line">		String value = (String) session.getAttribute(<span class="string">"login"</span>);</div><div class="line"></div><div class="line">		<span class="comment">// 如果不为空，表示已经登录过一次了，并且允许自动登录，直接跳转到用户界面即可</span></div><div class="line">		<span class="keyword">if</span> (value != <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="comment">// 直接跳转到用户界面</span></div><div class="line">			dispatcher.forward(request, response);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="comment">// 如果用户名和密码正确</span></div><div class="line">			<span class="keyword">if</span> (<span class="string">"chenjiabing"</span>.equals(username) &amp;&amp; <span class="string">"123456"</span>.equals(password)) &#123;</div><div class="line">				<span class="comment">// 并且设置了自动登录</span></div><div class="line">				<span class="keyword">if</span> (<span class="string">"auto"</span>.equals(login)) &#123;</div><div class="line">					<span class="comment">// 设置session的值</span></div><div class="line">					session.setAttribute(<span class="string">"login"</span>, <span class="string">"auto"</span>);</div><div class="line">				&#125;</div><div class="line">				response.sendRedirect(<span class="string">"HTML/user.html"</span>);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		doGet(request, response);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>说明:</strong> <code>user.html</code>是用户的主页，这里没有给出，可以自己设计</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Servlet总结三-HttpSession会话管理&quot;&gt;&lt;a href=&quot;#Servlet总结三-HttpSession会话管理&quot; class=&quot;headerlink&quot; title=&quot;Servlet总结三(HttpSession会话管理)&quot;&gt;&lt;/a&gt;Servlet
-    
-    </summary>
-    
-      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
-    
-    
-      <category term="Servlet" scheme="http://chenjiabing666.github.io/tags/Servlet/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Servlet总结二(文件路径获取）</title>
-    <link href="http://chenjiabing666.github.io/2017/09/15/Servlet%E6%80%BB%E7%BB%93%E4%BA%8C(%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E8%8E%B7%E5%8F%96)/"/>
-    <id>http://chenjiabing666.github.io/2017/09/15/Servlet总结二(文件路径获取)/</id>
-    <published>2017-09-15T08:25:28.000Z</published>
-    <updated>2017-09-17T14:03:25.978Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Servlet总结二（文件路径）"><a href="#Servlet总结二（文件路径）" class="headerlink" title="Servlet总结二（文件路径）"></a>Servlet总结二（文件路径）</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>前面我们说过<code>ServletContext</code>表示的是web容器中的上下文，下面我们也是用到<code>ServletContext</code>中的方法读取文件</p>
-</blockquote>
-<h2 id="读取WebRoot文件下的文件"><a href="#读取WebRoot文件下的文件" class="headerlink" title="读取WebRoot文件下的文件"></a>读取WebRoot文件下的文件</h2><blockquote>
-<p>我们知道当我们将项目部署到<code>Tomcat</code>服务器中时，项目中的文件路径其实就是在Tomcat中的文件路径，所有的项目都是存储在webapps下的，我们可以看到webaapps下有两个文件夹<code>(WEB-INF,META-INF)</code>，这两个其实就是项目中<code>webRoot</code>下的两个文件夹。</p>
-<ul>
-<li><code>public String getRealPath(String path)</code>   为给定虚拟路径返回包含实际路径的String</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//获取ServletContext的对象</span></div><div class="line">ServletContext context = <span class="keyword">this</span>.getServletContext();</div><div class="line"><span class="comment">//context.getRealPath("/")获取项目的根目录的绝对路径(webRoot的绝对路径)</span></div><div class="line"><span class="comment">//得到了webRoot的绝对路径，下面只要再接着写其他文件的路径即可</span></div><div class="line">File file = <span class="keyword">new</span> File(context.getRealPath(<span class="string">"/"</span>)</div><div class="line">		+ <span class="string">"\\WEB-INF\\lib\\file.txt"</span>);</div><div class="line"><span class="keyword">if</span> (file.exists()) &#123;</div><div class="line">	System.out.println(<span class="string">"文件存在"</span>);</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	System.out.println(<span class="string">"文件不存在，现在我们创建一个"</span>);</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		file.createNewFile();<span class="comment">// 创建一个新的文件</span></div><div class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><code>InputStream getResourceAsStream(String path)</code>   根据传入的路径文件，返回一个<code>InputStream</code>对象</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">      <span class="comment">// 第一个"/"是表示webRoot的根目录，通过这个函数可以不用指定绝对路径就可以构造一个输入字节流</span></div><div class="line">InputStream stream = context</div><div class="line">		.getResourceAsStream(<span class="string">"/WEB-INF/lib/file.txt"</span>);</div><div class="line"><span class="comment">// 通过InputStreamReader将字节流转换为字符流，然后创建缓冲字符流读取文件</span></div><div class="line">BufferedReader reader = <span class="keyword">new</span> BufferedReader(</div><div class="line">		<span class="keyword">new</span> InputStreamReader(stream));</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">	System.out.println(reader.readLine());</div><div class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">	System.out.println(<span class="string">"文件没有成功读取"</span>);</div><div class="line">	e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>注意：</strong>这个函数中的path传入的第一个<code>&quot;/&quot;</code>就表示根目录，在<code>eclipse</code>项目中表示webRoot的绝对路径，在<code>Tomcat</code>下的webapps表示项目名称的绝对路径，因此在下面的WEB-INF,META-INF文件夹下的文件只需要在后面继续添加即可</p>
-</blockquote>
-<h2 id="读取src下的class文件"><a href="#读取src下的class文件" class="headerlink" title="读取src下的class文件"></a>读取src下的class文件</h2><blockquote>
-<p>前面我们获取的<code>webRoot</code>下的文件路径，但是如果我们想要获取<code>src</code>下的文件，那么我们要如何获取呢。</p>
-<p>我们仔细看看<code>Tomcat</code>下的文件，可以发现在每一个WEB-INF下都有一个<code>classes</code>，这个就是相当于Tomcat下的src，因此我们利用上面得到的路径稍加修改就可以轻易的得到其中的文件路径</p>
-<p>下面我们读取<code>src</code>文件夹下的<code>file.txt</code>中的内容，代码如下:</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">      <span class="comment">// 获取ServletContext对象</span></div><div class="line">ServletContext context = <span class="keyword">this</span>.getServletContext();</div><div class="line"><span class="comment">// 这个是获取项目下的src文件夹下的file.txt文件</span></div><div class="line">File file = <span class="keyword">new</span> File(context.getRealPath(<span class="string">"/"</span>)</div><div class="line">		+ <span class="string">"\\WEB-INF\\classes\\file.txt"</span>);</div><div class="line">BufferedReader reader = <span class="keyword">null</span>;</div><div class="line"><span class="keyword">if</span> (file.exists()) &#123;</div><div class="line">	System.out.println(<span class="string">"文件存在，现在可以读取"</span>);</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		<span class="comment">// 创建缓冲流对象，实现读取文件</span></div><div class="line">		reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(file));</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="comment">// 输出第一行内容</span></div><div class="line">			System.out.println(reader.readLine());</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</div><div class="line">		System.out.println(<span class="string">"文件不存在"</span>);</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		<span class="keyword">if</span> (reader != <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				reader.close(); <span class="comment">// 如果reader不是空，就关闭</span></div><div class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">				System.out.println(<span class="string">"文件关闭失败"</span>);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	System.out.println(<span class="string">"文件不存在，现在开始创建一个"</span>);</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		file.createNewFile();<span class="comment">// 创建一个</span></div><div class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">		System.out.println(<span class="string">"没有创建成功"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Servlet总结二（文件路径）&quot;&gt;&lt;a href=&quot;#Servlet总结二（文件路径）&quot; class=&quot;headerlink&quot; title=&quot;Servlet总结二（文件路径）&quot;&gt;&lt;/a&gt;Servlet总结二（文件路径）&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a hr
-    
-    </summary>
-    
-      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
-    
-    
-      <category term="Servlet" scheme="http://chenjiabing666.github.io/tags/Servlet/"/>
     
   </entry>
   
