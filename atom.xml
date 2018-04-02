@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-03-30T23:27:11.027Z</updated>
+  <updated>2018-04-02T03:08:18.065Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,547 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Struts之OGNL使用</title>
+    <link href="http://chenjiabing666.github.io/2018/04/02/Struts%E4%B9%8BOGNL%E4%BD%BF%E7%94%A8/"/>
+    <id>http://chenjiabing666.github.io/2018/04/02/Struts之OGNL使用/</id>
+    <published>2018-04-02T03:07:39.000Z</published>
+    <updated>2018-04-02T03:08:18.065Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="OGNL的使用"><a href="#OGNL的使用" class="headerlink" title="OGNL的使用"></a>OGNL的使用</h1><h2 id="OGNL简介"><a href="#OGNL简介" class="headerlink" title="OGNL简介"></a>OGNL简介</h2><ul>
+<li>OGNI是一种对象图导航语言(object graphics navigation language) ,这也是一种表达式语言，这个和EL表达式一样，但是EL表达式只能在JSTL标签库中使用，这个OGNL只能在struts标签库中使用。</li>
+</ul>
+<h2 id="值栈（valueStack"><a href="#值栈（valueStack" class="headerlink" title="值栈（valueStack)"></a>值栈（valueStack)</h2><ul>
+<li><p>值栈就是存储Action的信息，包括其中定义的成员变量和其他的一些自己的属性，比如error,fieldError,如果想要让action中属性在值栈中显示或者获取，一定要为这些属性设置get,set方法</p>
+</li>
+<li><p>值栈是存储的action的栈，同时可以存储多个action，先执行的先进栈</p>
+</li>
+<li><p>值栈中的元素是根元素，访问值栈中的元素不需要使用<code>#</code>(#是访问非根元素的值，比如<code>#session.username</code>)</p>
+</li>
+<li><p>在jsp页面可以使用struts标签库<code>&lt;s:debug/&gt;</code>,查看值栈中的内容</p>
+</li>
+</ul>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><ul>
+<li><p>我们新建一个Action类，用表单传递数据请求action，最后action跳转到success.jsp页面，我们在success.jsp使用<code>&lt;s:debug&gt;</code>查看此时值栈中的数据</p>
+<ul>
+<li>其中的属性必须要有get，set方法</li>
+</ul>
+</li>
+<li><p>LoginAction</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//实现ModelDriven接口&lt;&gt;指定的泛型为JavaBean类</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginAction</span> <span class="keyword">extends</span> <span class="title">ActionSupport</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> User user;</div><div class="line">	<span class="keyword">private</span> String tips;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getTips</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> tips;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTips</span><span class="params">(String tips)</span></span>&#123;</div><div class="line">		<span class="keyword">this</span>.tips=tips;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> user;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUser</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.user = user;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"执行execute方法"</span>);</div><div class="line">		System.out.println(<span class="keyword">this</span>.getUser().getName()+<span class="string">"------"</span>+<span class="keyword">this</span>.getUser().getPassword());</div><div class="line">		<span class="keyword">return</span> SUCCESS;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>success.jsp页面</p>
+<ul>
+<li>其中要引用struts2的标签库</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">language</span>=<span class="string">"java"</span> <span class="attr">contentType</span>=<span class="string">"text/html; charset=UTF-8"</span></span></div><div class="line">    <span class="attr">pageEncoding</span>=<span class="string">"UTF-8"</span>%&gt;</div><div class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">taglib</span> <span class="attr">prefix</span>=<span class="string">"s"</span> <span class="attr">uri</span>=<span class="string">"/struts-tags"</span> %&gt;</span></div><div class="line"><span class="meta">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=UTF-8"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Insert title here<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">s:debug</span>&gt;</span><span class="tag">&lt;/<span class="name">s:debug</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>此时我们可以看到在值栈中有个user属性，并且有LoginAction</li>
+</ul>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/valueStack.png" alt="valueStack"></p>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><ul>
+<li>我们现在先接触一下<code>&lt;s:property value=&quot;&quot;&gt;</code>标签，struts2中的标签在后面再详细讲解，这个标签的意思是输出属性的值<ul>
+<li>这个标签中的value属性填写的是OGNL表达式，如果我们要输出一个常量，那么我们必须使用单引号</li>
+<li>引用struts2中的标签库<code>&lt;%@ taglib prefix=&quot;s&quot; uri=&quot;/struts-tags&quot; %&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="字符常量"><a href="#字符常量" class="headerlink" title="字符常量"></a>字符常量</h3><ul>
+<li><p>如果我们仍然使用上面的实例，但是我们要在success.jsp页面中使用OGNL使用显示表单传递过来的值，其中我们还输出自己的一个常量字符串</p>
+</li>
+<li><p>success.jsp</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">language</span>=<span class="string">"java"</span> <span class="attr">contentType</span>=<span class="string">"text/html; charset=UTF-8"</span></span></div><div class="line">    <span class="attr">pageEncoding</span>=<span class="string">"UTF-8"</span>%&gt;</div><div class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">taglib</span> <span class="attr">prefix</span>=<span class="string">"s"</span> <span class="attr">uri</span>=<span class="string">"/struts-tags"</span> %&gt;</span></div><div class="line"><span class="meta">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=UTF-8"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Insert title here<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">s:property</span> <span class="attr">value</span>=<span class="string">"user.name"</span> <span class="attr">default</span>=<span class="string">"如果为null，输出这个字段"</span>/&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">s:property</span> <span class="attr">value</span>=<span class="string">"user.password"</span> <span class="attr">default</span>=<span class="string">"如果为null，输出这个字段"</span> /&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>输出一个字符串常量: <span class="tag">&lt;<span class="name">s:property</span> <span class="attr">value</span>=<span class="string">"'jack'"</span>/&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">s:debug</span>&gt;</span><span class="tag">&lt;/<span class="name">s:debug</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="数值常量"><a href="#数值常量" class="headerlink" title="数值常量"></a>数值常量</h3><ul>
+<li><p>int  1,2,3</p>
+</li>
+<li><p>double   1.24d或者1.24</p>
+</li>
+<li><p>float  1.23f</p>
+</li>
+<li><p>long  122l 最后一个是字母l</p>
+</li>
+<li><p>BigDecimal  123b</p>
+</li>
+<li><p>BigInteger  123h</p>
+</li>
+<li><p>在其中直接输出即可:<code>&lt;s:property value=&quot;1&quot;/&gt;</code></p>
+</li>
+</ul>
+<h3 id="布尔常量"><a href="#布尔常量" class="headerlink" title="布尔常量"></a>布尔常量</h3><ul>
+<li>直接输出即可 <code>&lt;s:property value=&quot;true&quot;/&gt;</code></li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>当需要输出一个字符串常量的时候，一定要使用单引号，否则就会默认的将其作为OGNL表达式，输出的就为空</li>
+</ul>
+<h2 id="集合list"><a href="#集合list" class="headerlink" title="集合list"></a>集合list</h2><ul>
+<li>OGNL中的list相当于数组，其中存放的可以是任意类型的数据</li>
+<li>读取的时候直接使用数组的形式读取即可，使用索引读取即可</li>
+<li>我们的创建形式是使用<code>&lt;s:set&gt;</code>标签，因此这个变量不是值栈中的，需要使用<code>#</code></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 创建list --&gt;</div><div class="line">&lt;s:set var="list" value="&#123;1,2,3,'jack',true&#125;"&gt;&lt;/s:set&gt;</div><div class="line">&lt;s:property value="#list[0]"/&gt;&lt;br&gt;</div><div class="line">&lt;s:property value="#list[4]"/&gt;</div></pre></td></tr></table></figure>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><ul>
+<li>使用<code>#{}</code>的形式创建，其中存放的是键值对(key-value)的形式</li>
+<li>读取的方式有两种<ul>
+<li>map[‘key’]</li>
+<li>map.key</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;s:set var="map" value="#&#123;'name':'jack','age':22&#125;"&gt;&lt;/s:set&gt;</div><div class="line">&lt;s:property value="#map['name']"/&gt;</div><div class="line">&lt;s:property value="#map.age"/&gt;</div></pre></td></tr></table></figure>
+<h2 id="访问action中的属性值"><a href="#访问action中的属性值" class="headerlink" title="访问action中的属性值"></a>访问action中的属性值</h2><ul>
+<li>action都是存放在值栈中，我们可以使用OGNL读取值栈中的数据</li>
+<li><p>使用上面的LoginAction类，我们通过表单提交到这个LoginAction中，跳转到success.jsp页面中，那么我们就可以在success.jsp页面中访问LoginAction属性的值(前提是属性必须有get，set方法)</p>
+</li>
+<li><p>LoginAction中的属性是一个User对象，那么我们既可以获取这个User对象，之后在获取User对象中的数据了，这个相当于链式操作，前提还是有get，set方法</p>
+</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 这里的user一定要和LoginAction中的成员变量User的对象字段相同 --&gt;</div><div class="line">User对象中的name属性：&lt;s:property value=<span class="string">"user.name"</span>/&gt;</div><div class="line">User对象中的age属性：&lt;s:property value=<span class="string">"user.age"</span>/&gt;</div></pre></td></tr></table></figure>
+<h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><h3 id=""><a href="#" class="headerlink" title="#"></a><code>#</code></h3><ul>
+<li><p>值栈中的的属性称为是根属性，<code>#</code>访问的是非根属性，就不是值栈中的值，比如#session.username　相当于调用<code>ActionContext.getContext.getSession.getAttribute(&quot;username&quot;)</code></p>
+</li>
+<li><p>创建Map</p>
+</li>
+<li><p>过滤和投影</p>
+</li>
+</ul>
+<h3 id="符号"><a href="#符号" class="headerlink" title="$符号"></a>$符号</h3><ul>
+<li>在国际化文件中使用OGNL表达式，例如年龄必须在${min}到${max}之间</li>
+<li>在Struts配置文件中使用OGNL表达式，例如两个Action之间进行跳转，并且附带参数</li>
+</ul>
+<h3 id="符号-1"><a href="#符号-1" class="headerlink" title="% 符号"></a>% 符号</h3><ul>
+<li>当标签的属性为字符串类型时，计算OGNL表达式的值。</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;s:url value=<span class="string">"#map.name"</span>/&gt;</div><div class="line">&lt;br&gt;</div><div class="line">&lt;s:url value=<span class="string">"%&#123;#map.name&#125;"</span>/&gt;</div></pre></td></tr></table></figure>
+<h3 id="大括号"><a href="#大括号" class="headerlink" title="大括号 {}"></a>大括号 {}</h3><ul>
+<li><p>用来创建一个Map，其中存放的是键值对</p>
+</li>
+<li><p>创建一个list集合</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;s:set var="map" value="#&#123;'name':'jack','age':22&#125;"&gt;&lt;/s:set&gt;</div><div class="line">&lt;s:property value="#map['name']"/&gt;</div></pre></td></tr></table></figure>
+<h3 id="in-not-in"><a href="#in-not-in" class="headerlink" title="in ,not in"></a>in ,not in</h3><ul>
+<li><p>判断某一个值是否存在一个集合中，返回的是布尔值</p>
+</li>
+<li><p>不过经过自己测试，只有数字类型的可以判断出来，字符串不能判断出来，如果哪位能够测出来，和我说说原因</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 创建一个集合list --&gt;</div><div class="line">	&lt;s:set var="list" value="&#123;1,2,3,'jack','Tom'&#125;"&gt;&lt;/s:set&gt;</div><div class="line">	&lt;s:property value="1 in #list"/&gt;&lt;br&gt;</div><div class="line">	&lt;s:property value="1 not in #list"/&gt;&lt;br&gt;</div><div class="line">	&lt;!-- 没有结果 --&gt;</div><div class="line">	&lt;s:property value=" 'jack' in #list"/&gt;&lt;br&gt;</div></pre></td></tr></table></figure>
+<h3 id="-1"><a href="#-1" class="headerlink" title="+"></a>+</h3><ul>
+<li>这个和java是一样的，如果两个整数相加就执行整数相加，如果字符串相加就拼接</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;s:property value=&quot;2+3&quot;/&gt;</div><div class="line">&lt;s:property value=&quot;&apos;ce&apos;+22&quot;/&gt;</div></pre></td></tr></table></figure>
+<h2 id="集合的伪属性"><a href="#集合的伪属性" class="headerlink" title="集合的伪属性"></a>集合的伪属性</h2><blockquote>
+<p>集合的伪属性是用来代替java集合API的方法的属性，比如迭代器的使用</p>
+</blockquote>
+<ul>
+<li><p>List</p>
+<ul>
+<li>list.iterator</li>
+<li>list.size</li>
+</ul>
+</li>
+<li><p>Set</p>
+<ul>
+<li>set.iterator</li>
+<li>set.isEmpty</li>
+</ul>
+</li>
+<li><p>Map</p>
+<ul>
+<li>map.keys （map.keySet）</li>
+<li>map.values  (map.values)</li>
+</ul>
+</li>
+<li><p>Iterator</p>
+<ul>
+<li>Iterator.next</li>
+<li>Iterator.hasNext</li>
+</ul>
+</li>
+<li><p>Enumeration</p>
+<ul>
+<li>enum.next</li>
+<li>enum.hasNext</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;%--创建列表 --%&gt;</div><div class="line">&lt;s:set var="list" value="&#123;1,'陈加兵'&#125;"&gt;&lt;/s:set&gt;</div><div class="line"></div><div class="line">&lt;%-- 创建Map --%&gt;</div><div class="line">&lt;s:set var="map" value="#&#123;'one':'陈加兵','tow':'郑元梅'&#125;"&gt;&lt;/s:set&gt;</div><div class="line"></div><div class="line">&lt;%-- 创建数组 --%&gt;</div><div class="line">&lt;s:set var="number" value="new String[]&#123;'aaa','bbb','ccc']"&gt;&lt;/s:set&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;%--  获取list的迭代器对象 --%&gt;</div><div class="line">&lt;s:set var="iter" value="#list.iterator"&gt;&lt;/s:set&gt;</div><div class="line">list的大小:&lt;s:property value="#list.size"/&gt;</div><div class="line">&lt;s:if test="#iter.hasNext"&gt;</div><div class="line">	list中的第一个元素的值:&lt;s:property value="#iter.next"/&gt;</div><div class="line">&lt;/s:if&gt;</div><div class="line">&lt;hr&gt;</div><div class="line"></div><div class="line">&lt;%-- #map.keys返回的是set类型，然后使用迭代器输出即可 --%&gt;</div><div class="line">&lt;s:property value="#map.keys.iterator.next" default="NULL"/&gt;</div><div class="line">&lt;s:property value="#map.values"/&gt;</div></pre></td></tr></table></figure>
+<h2 id="投影"><a href="#投影" class="headerlink" title="投影"></a>投影</h2><ul>
+<li><p>在OGNL中，投影是对一个集合中对每一个元素调用相同的方法，或者抽取相同的属性，并将一个结果保存为一个新的集合。</p>
+</li>
+<li><p>下面的例子是将集合list中的元素转换成字符串</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;%--创建列表 --%&gt;</div><div class="line">&lt;s:set var="list" value="&#123;1,'陈加兵'&#125;"&gt;&lt;/s:set&gt;</div><div class="line">&lt;%-- 这个&#123;#&#125;首先会取list中的每一个元素然后赋值给tihs，接着调用toString方法转换为字符串 --%&gt;</div><div class="line">&lt;s:property value="#list.&#123;#this.toString()&#125;"/&gt;</div></pre></td></tr></table></figure>
+<h2 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h2><ul>
+<li>在OGNL中使用表达式从集合中选择某一些元素，并将这些元素保存到新的集合中</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;%--创建列表 --%&gt;</div><div class="line">&lt;s:set var="list" value="&#123;1,2,3&#125;"&gt;&lt;/s:set&gt;</div><div class="line"></div><div class="line">&lt;%-- 选取大于2的元素组成一个新的集合 --%&gt;</div><div class="line">&lt;s:property value="#list.&#123;?#this&gt;2&#125;"/&gt;</div></pre></td></tr></table></figure>
+<h2 id="N-语法"><a href="#N-语法" class="headerlink" title="[N]语法"></a>[N]语法</h2><ul>
+<li><p>我们知道一次请求值栈中可以存放两个或者多个action(只需要设置result跳转类型为chain即可完成在action之间的跳转)，那么我们一般取值栈中的值默认是获取栈顶的action，但是如果有多个action呢，此时我们需要获取其他action中的数据，这下就要用到<code>[N]</code>语法了</p>
+</li>
+<li><p><code>[N].propertyName</code>可以用来指定从值栈中的从上向下数位置N的action的属性值，N从事0开始的。</p>
+</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>假设我们有两个Action，一个是SimpleAction，一个是LoginAction(上面的，有一个属性为user)，我们在在配置的时候，发出请求给SimpleAction，之后跳转到LoginAction(result的type类型为chain即可），之后跳转到success.jsp，那么此时的值栈中的action就有两个了，栈顶的是SimpleAction，第二个是LoginAction。<ul>
+<li>我们想要获取LoginAction属性user的值，在值栈中的位置是第二个，那么此时使用<code>[1].propertName</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">User对象中的name:&lt;s:property value=<span class="string">"[1].user.name"</span>/&gt;</div><div class="line">User对象中的age：&lt;s:property value=<span class="string">"[1].user.age"</span>/&gt;</div></pre></td></tr></table></figure>
+<h2 id="top-语法"><a href="#top-语法" class="headerlink" title="top 语法"></a>top 语法</h2><ul>
+<li>我们知道[N]语法中，如果想要访问栈顶的action属性使用<code>[0].propertyName</code>，我们也可以使用top，直接<code>top.propertyName</code>即可</li>
+</ul>
+<h2 id="Struts2的命名对象"><a href="#Struts2的命名对象" class="headerlink" title="Struts2的命名对象"></a>Struts2的命名对象</h2><ul>
+<li><p>这些对象都不是值栈中的数据，因此需要使用<code>#</code>来获取</p>
+</li>
+<li><p><code>parameters</code><br>用来访问请求参数，比如<code>#parameters.name</code>, <code># parameters [‘name’]</code>相当与<code>request.getParameters(“name”)</code></p>
+</li>
+<li><p><code>request</code><br>用来访问request的属性，比如<code>#request.name</code>或者<code># request [‘name’]</code>  相当于request,getAttrubute(“name”)</p>
+</li>
+<li><p><code>session</code><br>用来访问session属性，例如 <code>#session.name</code>或者<code>#session[‘name’]</code>相当于 session.getAttribute(“name”)</p>
+</li>
+<li><p><code>application</code><br>用来访问application属性，比如:<code>#application.name</code>相当于application.getAttribute(“name”)</p>
+</li>
+<li><p><code>attr</code><br>用来访问PageContext，如果PageContext不可用，则一次搜索request,session,application对象</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;%</div><div class="line">	//设置属性</div><div class="line">	request.setAttribute("login","true");</div><div class="line">	session.setAttribute("regist", "false");</div><div class="line">	application.setAttribute("auto", "true");</div><div class="line">%&gt;</div><div class="line"></div><div class="line">获取的请求参数中的name的值:&lt;s:property value="#parameters.name"/&gt;&lt;br&gt;</div><div class="line">获取request中的login属性:&lt;s:property value="#request.login"/&gt;&lt;br&gt;</div><div class="line">获取session中的regist属性:&lt;s:property value="#session.regist"/&gt;&lt;br&gt;</div><div class="line">获取application中的auto属性:&lt;s:property value="#application.auto"/&gt;</div><div class="line">&lt;s:debug&gt;&lt;/s:debug&gt;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;OGNL的使用&quot;&gt;&lt;a href=&quot;#OGNL的使用&quot; class=&quot;headerlink&quot; title=&quot;OGNL的使用&quot;&gt;&lt;/a&gt;OGNL的使用&lt;/h1&gt;&lt;h2 id=&quot;OGNL简介&quot;&gt;&lt;a href=&quot;#OGNL简介&quot; class=&quot;headerlink&quot; 
+    
+    </summary>
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/categories/Struts2/"/>
+    
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/tags/Struts2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Struts之配置拦截器</title>
+    <link href="http://chenjiabing666.github.io/2018/04/02/Struts%E4%B9%8B%E9%85%8D%E7%BD%AE%E6%8B%A6%E6%88%AA%E5%99%A8/"/>
+    <id>http://chenjiabing666.github.io/2018/04/02/Struts之配置拦截器/</id>
+    <published>2018-04-02T03:06:24.000Z</published>
+    <updated>2018-04-02T03:07:10.968Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="struts2之配置拦截器"><a href="#struts2之配置拦截器" class="headerlink" title="struts2之配置拦截器"></a>struts2之配置拦截器</h1><h2 id="什么是拦截器"><a href="#什么是拦截器" class="headerlink" title="什么是拦截器"></a>什么是拦截器</h2><ul>
+<li><p>java里的拦截器是动态拦截Action调用的对象。它提供了一种机制可以使开发者可以定义在一个action执行的前后执行的代码，也可以在一个action执行前阻止其执行，同时也提供了一种可以提取action中可重用部分的方式。在AOP（Aspect-Oriented Programming）中拦截器用于在某个方法或字段被访问之前，进行拦截然后在之前或之后加入某些操作。</p>
+</li>
+<li><p>拦截器是可插拔式的，一旦出现了问题，可以不用改变软件的很多代码就可以实现修复，给维护工作带来方便，其实过滤器也是这样的。</p>
+</li>
+<li><p>Struts2其实就实现了很多的拦截器，可以在struts-default.xml中看到定义很多的拦截器，其中向类型转换，文件上传都是通过拦截器实现的。</p>
+</li>
+<li><p>Struts2拦截器实现原理与Servlet过滤器实现原理类似，它以链式执行，对真正要执行的方法（execute（））进行拦截。首先执行Action配置的拦截器，在Action和Result执行之后，拦截器会再次执行（与先前调用的顺序相反），在此链式执行的过程中，每一个拦截器都可以直接返回，从而终止余下的拦截器、Action及Result的执行。</p>
+</li>
+</ul>
+<h2 id="拦截器的作用"><a href="#拦截器的作用" class="headerlink" title="拦截器的作用"></a>拦截器的作用</h2><ul>
+<li>拦截器适合封一些通用处理，便于重复利用，比如日志的记录，访问权限的检查，事务处理等，拦截器通过配置方式调用，因此使用方法比较灵活，便于维护和扩展</li>
+</ul>
+<h2 id="拦截器的配置元素"><a href="#拦截器的配置元素" class="headerlink" title="拦截器的配置元素"></a>拦截器的配置元素</h2><ul>
+<li><p><code>&lt;interceptors&gt;</code><br>用来定义拦截器，所有的拦截器和拦截器栈都是在此元素中定义的，可以包含子元素<interceptor>,<interceptor-stack></interceptor-stack></interceptor></p>
+</li>
+<li><p><code>&lt;Interceptor&gt;</code><br>用来定义拦截器，需要指定两个属性，name属性指定了拦截器的名字，class指定了拦截器的实现的类。这个是在<interceptors>下定义的</interceptors></p>
+</li>
+<li><p><code>&lt;interceptor-stack&gt;</code><br>用来定义拦截器栈，其中的name属性指定了拦截器栈的名称。另外在此元素下可以指定<interceptor-ref>引入其他的拦截器或者拦截器栈</interceptor-ref></p>
+</li>
+<li><p><code>&lt;interceptor-ref&gt;</code><br>用来引用其他的拦截器或者拦截器栈，name属性指定了拦截器或者拦截栈的名称</p>
+</li>
+<li><p><code>&lt;param&gt;</code><br>用来为拦截器指定参数，可以作为<interceptor>或者<interceptor-ref>的子元素。并且可以定义多个。其中的name属性指定了参数的名称</interceptor-ref></interceptor></p>
+</li>
+<li><p><code>&lt;default-interceptor-ref&gt;</code><br>将某一个拦截器定义为默认拦截器</p>
+</li>
+</ul>
+<h2 id="内建的拦截器"><a href="#内建的拦截器" class="headerlink" title="内建的拦截器"></a>内建的拦截器</h2><ul>
+<li><p>struts2中提供了许多内建的拦截器，在struts-core.jar中，我们只需要在struts.xml中引用这个内建的拦截器即可</p>
+</li>
+<li><p>比如我们在实现文件上传的时候，使用的就是内建的拦截器</p>
+</li>
+<li><p>内建的拦截器使用的很少，通常我们都是使用自定义的拦截器，比如验证访问权限的拦截器</p>
+</li>
+</ul>
+<h2 id="自定义拦截器"><a href="#自定义拦截器" class="headerlink" title="自定义拦截器"></a>自定义拦截器</h2><ul>
+<li>实现自定义的拦截器有两种方法，一种是实现接口，一种是继承</li>
+</ul>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><ul>
+<li>我们需要将表单传递过来的数据转换成大写的，再传递给action</li>
+</ul>
+<h3 id="实现接口-com-opensymphony-xwork2-interceptor-Interceptor"><a href="#实现接口-com-opensymphony-xwork2-interceptor-Interceptor" class="headerlink" title="实现接口(com.opensymphony.xwork2.interceptor.Interceptor)"></a>实现接口(com.opensymphony.xwork2.interceptor.Interceptor)</h3><h4 id="接口中的方法"><a href="#接口中的方法" class="headerlink" title="接口中的方法"></a>接口中的方法</h4><ul>
+<li><p><code>void init()</code><br>初始化拦截器执行的方法</p>
+</li>
+<li><p><code>String intercept(ActionInvocation invocation) throws Exception</code><br>实现拦截器逻辑的主要方法。</p>
+<ul>
+<li><p><code>ActionInvocation</code>包含了Action的引用，因此使用这个对象可以对Action进行相应的操作，比如可以获取和设置Action类的成员变量</p>
+</li>
+<li><p><code>ActionInvocation</code>包含了Action的引用，可以调用其中的<code>invoke()</code>方法继续调用下一个拦截器，如果后面没有拦截器了，那么就会执行Action中对应的映射方法，如果有，那么就会继续执行下一个拦截器，直到执行完全部的拦截器才会执行对应的映射方法</p>
+</li>
+<li><p>invoke()方法将拦截器的作用分成了两个部分，在调用invoke()之前的实在Action方法执行之前的逻辑，在之后的代码是在Action执行result，跳转到指定视图之后执行的逻辑</p>
+</li>
+<li><p>这个方法返回的是一个字符串，对应的也是结果视图，如果在其中没有调用invoke()方法，那么返回的字符串就作为Action跳转的视图，因此在<result>一定要定义这个对应的视图。如果调用了invoke()方法，那么返回的字符串就会失效，就会以Action中方法返回的字符串为主</result></p>
+</li>
+</ul>
+</li>
+<li><p><code>void destroy()</code> 销毁拦截器开启的资源</p>
+</li>
+</ul>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><ul>
+<li>拦截器类<ul>
+<li>这里并没有在init和destroy方法中写什么逻辑，可以根据实际情况来定义其中的逻辑</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> com.jsnu.struts2.controller.SimpleAction;</div><div class="line"><span class="keyword">import</span> com.opensymphony.xwork2.ActionInvocation;</div><div class="line"><span class="keyword">import</span> com.opensymphony.xwork2.interceptor.Interceptor;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestInterceptor</span> <span class="keyword">implements</span> <span class="title">Interceptor</span></span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">// TODO Auto-generated method stub</span></div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">// TODO Auto-generated method stub</span></div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">intercept</span><span class="params">(ActionInvocation invocation)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		Object object=invocation.getAction();  <span class="comment">//获取当前调用拦截器的Action类的对象</span></div><div class="line">		<span class="comment">//如果不为null，就可以获取其中的属性，否则空指针</span></div><div class="line">		<span class="keyword">if</span> (object!=<span class="keyword">null</span>) &#123;</div><div class="line">			SimpleAction simpleAction=(SimpleAction)object;</div><div class="line">			<span class="comment">//将User属性全部转换成大写字母</span></div><div class="line">			simpleAction.getUser().setName(simpleAction.getUser().getName().toUpperCase());</div><div class="line">			simpleAction.getUser().setPassword(simpleAction.getUser().getPassword().toUpperCase());</div><div class="line">			String result=invocation.invoke();   <span class="comment">//调用下一个拦截器</span></div><div class="line">			System.out.println(<span class="string">"成功跳转视图后执行的逻辑"</span>);</div><div class="line">			<span class="keyword">return</span> result;</div><div class="line">		&#125;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="继承AbstractInterceptor（推荐）"><a href="#继承AbstractInterceptor（推荐）" class="headerlink" title="继承AbstractInterceptor（推荐）"></a>继承AbstractInterceptor（推荐）</h3><ul>
+<li>继承<code>AbstractInterceptor</code>抽象类，里面只有一个抽象方法<code>String intercept(ActionInvocation invocation)</code>，只需要实现这个方法即可，如果你需要初始化和销毁，那么也可以覆盖其中的init()和destroy()方法</li>
+<li><p>继承抽象类的方式比实现接口对一个类的更加简洁，对这个类的污染更加小</p>
+</li>
+<li><p>其中的方法逻辑还是和上面的一样</p>
+</li>
+<li><p>还是完成上面的需求，把传递的请求参数转换成大写字母</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> com.jsnu.struts2.controller.SimpleAction;</div><div class="line"><span class="keyword">import</span> com.opensymphony.xwork2.ActionInvocation;</div><div class="line"><span class="keyword">import</span> com.opensymphony.xwork2.interceptor.AbstractInterceptor;</div><div class="line"><span class="comment">//继承类AbstractInterceptor</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractInterceptorTest</span> <span class="keyword">extends</span> <span class="title">AbstractInterceptor</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">intercept</span><span class="params">(ActionInvocation invocation)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		Object object = invocation.getAction(); <span class="comment">// 获取当前调用拦截器的Action类的对象</span></div><div class="line">		<span class="comment">// 如果不为null，就可以获取其中的属性，否则空指针</span></div><div class="line">		<span class="keyword">if</span> (object != <span class="keyword">null</span>) &#123;</div><div class="line">			SimpleAction simpleAction = (SimpleAction) object;</div><div class="line">			<span class="comment">// 将User属性全部转换成大写字母</span></div><div class="line">			simpleAction.getUser().setName(</div><div class="line">					simpleAction.getUser().getName().toUpperCase());</div><div class="line">			simpleAction.getUser().setPassword(</div><div class="line">					simpleAction.getUser().getPassword().toUpperCase());</div><div class="line">			String result = invocation.invoke(); <span class="comment">// 调用下一个拦截器</span></div><div class="line">			System.out.println(<span class="string">"成功跳转视图后执行的逻辑"</span>);</div><div class="line">			<span class="keyword">return</span> result;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="配置拦截器"><a href="#配置拦截器" class="headerlink" title="配置拦截器"></a>配置拦截器</h2><ul>
+<li><p>因为struts2的很多功能都要依赖内建的拦截器，比如表单传值。这一系列的拦截器都定义在一个拦截器栈中，如果在一个<action>中引用了拦截器，那么这拦截器就会被覆盖，因此一定要在自定义的拦截器<strong>之前</strong>定义默认的拦截器栈<code>&lt;interceptor-ref name=&quot;defaultStack&quot;&gt;&lt;/interceptor-ref&gt;</code></action></p>
+</li>
+<li><p>配置拦截器只需要在<package>下定义拦截器即可，如果哪个action想要引用拦截器，使用<code>&lt;interceptor-ref &gt;</code>引用已经定义好的拦截器即可</package></p>
+</li>
+<li><p><strong>一个action中可以引用多个拦截器，在上面配置的拦截器先执行，因此默认的拦截器栈一定要在最上面</strong></p>
+</li>
+</ul>
+<ul>
+<li>在struts.xml中配置上面我们自定义的拦截器</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"test"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!--  定义拦截器 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">interceptors</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 实现接口的拦截器 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor</span> <span class="attr">name</span>=<span class="string">"testInterceptor"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.Interceptor.TestInterceptor"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="comment">&lt;!-- 继承类的 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor</span> <span class="attr">name</span>=<span class="string">"abstractInterceptorTest"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.Interceptor.AbstractInterceptorTest"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">interceptors</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"simple"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.controller.SimpleAction"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/jsp/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"input"</span>&gt;</span>/jsp/input.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="comment">&lt;!-- 在使用了自定的拦截器之后，那么系统默认的拦截器栈将会失去作用，因此这里需要重新指定拦截器栈--&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"defaultStack"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="comment">&lt;!-- 引用自定义的拦截器，在上面要定义	 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"abstractInterceptorTest"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"testInterceptor"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">package</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="配置拦截器栈"><a href="#配置拦截器栈" class="headerlink" title="配置拦截器栈"></a>配置拦截器栈</h2><ul>
+<li><p>如果一个action中的需要用到的拦截器很多，或者同时引用几个相同的拦截器的action很多，那么我们此时在action一个一个的引用拦截器效率太低，此时我们就需要将这些拦截器定义在一个拦截器栈中，直接在action中引用了拦截器栈即可。</p>
+</li>
+<li><p>直接使用<interceptors>标签中使用<interceptor-stack name="">定义即可</interceptor-stack></interceptors></p>
+</li>
+<li><p>拦截器栈中的拦截器一定要在上面定义过的，否则将会引用出错</p>
+</li>
+<li><p>拦截器栈中的拦截器引用是有顺序的，在上面的拦截器最先执行</p>
+</li>
+<li><p>我们把上面自定义的两个拦截器放在拦截器栈中,并在action中引用拦截器栈，注意此时的默认的<code>default-stack</code>还是要放在最上面</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"test"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!--  定义拦截器 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">interceptors</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 实现接口的拦截器 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor</span> <span class="attr">name</span>=<span class="string">"testInterceptor"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.Interceptor.TestInterceptor"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="comment">&lt;!-- 继承类的 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor</span> <span class="attr">name</span>=<span class="string">"abstractInterceptorTest"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.Interceptor.AbstractInterceptorTest"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="comment">&lt;!-- 自定拦截器栈，其中引用了上面的两个拦截器 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor-stack</span> <span class="attr">name</span>=<span class="string">"myStack"</span>&gt;</span></div><div class="line">				<span class="comment">&lt;!-- 引用自定义的拦截器，在上面要定义 --&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"abstractInterceptorTest"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"testInterceptor"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">interceptor-stack</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">interceptors</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"simple"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.controller.SimpleAction"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/jsp/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"input"</span>&gt;</span>/jsp/input.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="comment">&lt;!-- 在使用了自定的拦截器之后，那么系统默认的拦截器栈将会失去作用，因此这里需要重新指定拦截器栈--&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"defaultStack"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"myStack"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">package</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><ul>
+<li>拦截器中还可以包含其他的拦截器栈，那么此时我们就可以将struts2中内建的拦截器放在自己的拦截器栈顶，那么就不用在每个action中引用了，直接引用这个拦截器栈即可</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"test"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!--  定义拦截器 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">interceptors</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 实现接口的拦截器 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor</span> <span class="attr">name</span>=<span class="string">"testInterceptor"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.Interceptor.TestInterceptor"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="comment">&lt;!-- 继承类的 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor</span> <span class="attr">name</span>=<span class="string">"abstractInterceptorTest"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.Interceptor.AbstractInterceptorTest"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="comment">&lt;!-- 自定拦截器栈，其中引用了上面的两个拦截器 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor-stack</span> <span class="attr">name</span>=<span class="string">"myStack"</span>&gt;</span></div><div class="line">				<span class="comment">&lt;!-- 在使用了自定的拦截器之后，那么系统默认的拦截器栈将会失去作用，因此这里需要重新指定拦截器栈--&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"defaultStack"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line"></div><div class="line">				<span class="comment">&lt;!-- 引用自定义的拦截器，在上面要定义 --&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"abstractInterceptorTest"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"testInterceptor"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">interceptor-stack</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">interceptors</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"simple"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.controller.SimpleAction"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/jsp/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"input"</span>&gt;</span>/jsp/input.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"myStack"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">package</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="自定义默认的拦截器栈"><a href="#自定义默认的拦截器栈" class="headerlink" title="自定义默认的拦截器栈"></a>自定义默认的拦截器栈</h2><ul>
+<li><p>在一个包中定义一个默认的拦截器栈后(使用<default-interceptor-ref>定义)，那么当<action>下没有显式的配置拦截器的时候，那么此时就会默认使用自定义的默认的拦截器或者默认的拦截器栈。</action></default-interceptor-ref></p>
+</li>
+<li><p>一个包中只能定义一个默认的拦截器，如果想要定义多个拦截器可以使用拦截器栈，定义一个默认的拦截器栈即可解决。</p>
+</li>
+<li><p>在定义了默认的拦截器之后一定要在每一个action都定义系统默认的拦截器栈defaultStack,前面已经说过如果action定义了拦截器(这里虽然不是显式的定义，但是实际上是定义了),那么就会失去defaultStack的作用，其实我们需要很多defaultStack的功能，因此还是要定义的。</p>
+</li>
+<li><p>比如登录检查的拦截器，这个是每一个action都需要用到的，那么我们可以设置一个默认的拦截器栈，栈顶引用的是struts2内建的默认的拦截器栈</p>
+</li>
+<li><p>使用<default-interceptor-ref name=""></default-interceptor-ref> 即可定义</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">struts</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"test"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!--  定义拦截器 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">interceptors</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 实现接口的拦截器 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor</span> <span class="attr">name</span>=<span class="string">"testInterceptor"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.Interceptor.TestInterceptor"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="comment">&lt;!-- 继承类的 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor</span> <span class="attr">name</span>=<span class="string">"abstractInterceptorTest"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.Interceptor.AbstractInterceptorTest"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="comment">&lt;!-- 自定拦截器栈，其中引用了上面的两个拦截器 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor-stack</span> <span class="attr">name</span>=<span class="string">"myStack"</span>&gt;</span></div><div class="line">				<span class="comment">&lt;!-- 在使用了自定的拦截器之后，那么系统默认的拦截器栈将会失去作用，因此这里需要重新指定拦截器栈--&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"defaultStack"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line">				<span class="comment">&lt;!-- 引用自定义的拦截器，在上面要定义 --&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"abstractInterceptorTest"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"testInterceptor"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">interceptor-stack</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">interceptors</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!-- 定义默认的拦截器栈，其中引用了上面定义的拦截器栈 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">default-interceptor-ref</span> <span class="attr">name</span>=<span class="string">"myStack"</span>&gt;</span><span class="tag">&lt;/<span class="name">default-interceptor-ref</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"simple"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.controller.SimpleAction"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/jsp/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"input"</span>&gt;</span>/jsp/input.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">package</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">struts</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="配置拦截方法的拦截器"><a href="#配置拦截方法的拦截器" class="headerlink" title="配置拦截方法的拦截器"></a>配置拦截方法的拦截器</h2><ul>
+<li><p>一般我们的Action类中有很多的方法，但是我们在使用动态调用的时候会调用其中不同的方法，如果不想Action类中的某个方法不被拦截，此时就需要使用拦截方法的拦截器</p>
+</li>
+<li><p>其中可以设置拦截的方法，也可以设置不拦截的方法</p>
+</li>
+</ul>
+<h3 id="自定义拦截器类"><a href="#自定义拦截器类" class="headerlink" title="自定义拦截器类"></a>自定义拦截器类</h3><ul>
+<li>继承MethodFilterInterceptor</li>
+<li>其中的方法doIntercept是在执行其中指定方法之前执行，和前面的逻辑一样，也有invoke方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> com.opensymphony.xwork2.ActionInvocation;</div><div class="line"><span class="keyword">import</span> com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleActionInteceptor</span> <span class="keyword">extends</span> <span class="title">MethodFilterInterceptor</span></span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> String <span class="title">doIntercept</span><span class="params">(ActionInvocation invocation)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		System.out.println(<span class="string">"拦截方法的拦截器起了作用"</span>);</div><div class="line">		String result=invocation.invoke();</div><div class="line">		System.out.println(<span class="string">"执行之后"</span>);</div><div class="line">		<span class="keyword">return</span> result;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="struts中配置"><a href="#struts中配置" class="headerlink" title="struts中配置"></a>struts中配置</h3><ul>
+<li><code>&lt;param name=&quot;excludeMethods&quot;&gt;login&lt;/param&gt;</code> 用来定义不拦截的方法</li>
+<li><p><code>&lt;param name=&quot;includeMethods&quot;&gt;regist&lt;/param&gt;</code> 用来定义拦截的方法，如果有多个使用逗号隔开</p>
+</li>
+<li><p>这里使用的是动态调用的<code>method</code>的，但是我们也可以使用 <code>action!方法名</code></p>
+</li>
+<li><p><strong>假设我们的项目名称为web1，并且把method=“”去掉，那么我们开启<code>action!方法名</code>进行调用，具体方法前面有介绍，开启之后，我们在地址栏输入  <code>http://localhost:8080/web1/simple.regist</code>,将会成功被拦截器拦截器，但是我们输入<code>http://localhost:8080/web1/simple.login</code>，拦截器不起作用</strong></p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"test"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!--  定义拦截器 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">interceptors</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 配置拦截方法的拦截器 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor</span> <span class="attr">name</span>=<span class="string">"simpleMethod"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.Interceptor.SimpleActionInteceptor"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">interceptors</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"simple"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.controller.SimpleAction"</span> <span class="attr">method</span>=<span class="string">"regist"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/jsp/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"input"</span>&gt;</span>/jsp/input.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 在使用了自定的拦截器之后，那么系统默认的拦截器栈将会失去作用，因此这里需要重新指定拦截器栈--&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"defaultStack"</span>&gt;</span><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"simpleMethod"</span>&gt;</span></div><div class="line">				<span class="comment">&lt;!-- 定义不拦截login方法 --&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"excludeMethods"</span>&gt;</span>login<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line">				<span class="comment">&lt;!-- 定义需要拦截器的方法 --&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"includeMethods"</span>&gt;</span>regist<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">package</span>&gt;</span></div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;struts2之配置拦截器&quot;&gt;&lt;a href=&quot;#struts2之配置拦截器&quot; class=&quot;headerlink&quot; title=&quot;struts2之配置拦截器&quot;&gt;&lt;/a&gt;struts2之配置拦截器&lt;/h1&gt;&lt;h2 id=&quot;什么是拦截器&quot;&gt;&lt;a href=&quot;#什么是
+    
+    </summary>
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/categories/Struts2/"/>
+    
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/tags/Struts2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JDBC干货三</title>
+    <link href="http://chenjiabing666.github.io/2018/04/02/JDBC%E5%B9%B2%E8%B4%A7%E4%B8%89/"/>
+    <id>http://chenjiabing666.github.io/2018/04/02/JDBC干货三/</id>
+    <published>2018-04-02T03:04:31.000Z</published>
+    <updated>2018-04-02T03:05:10.091Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="JDBC干货三"><a href="#JDBC干货三" class="headerlink" title="JDBC干货三"></a>JDBC干货三</h1><h2 id="生成get-set方法的快捷键"><a href="#生成get-set方法的快捷键" class="headerlink" title="生成get,set方法的快捷键"></a>生成get,set方法的快捷键</h2><ol>
+<li>alt+shift+s</li>
+<li>r</li>
+<li>alt+a  a松手 alt不松手  按o   最后回车</li>
+</ol>
+<h2 id="eclipse中生成toString方法的快捷键"><a href="#eclipse中生成toString方法的快捷键" class="headerlink" title="eclipse中生成toString方法的快捷键"></a>eclipse中生成toString方法的快捷键</h2><ul>
+<li>alt+shift+o   回车</li>
+</ul>
+<h2 id="数据库操作和对象的关系"><a href="#数据库操作和对象的关系" class="headerlink" title="数据库操作和对象的关系"></a>数据库操作和对象的关系</h2><ul>
+<li><p>因为数据库中查询的数据比较零散，需要通过对象的形式把数据封装起来</p>
+</li>
+<li><p>这种封装数据的对象通常称为<code>javaBean</code></p>
+</li>
+<li><p>以后项目开发，基本上有什么表在代码中就会创建相应的对象，表中有什么字段，对象中就有什么属性</p>
+</li>
+</ul>
+<h2 id="JavaBean"><a href="#JavaBean" class="headerlink" title="JavaBean"></a>JavaBean</h2><ul>
+<li>俗称简单的java对象</li>
+</ul>
+<p>-具备如下的三个特点</p>
+<pre><code>- 私有属性
+- 无参构造
+- 为属性提供get，set方法
+</code></pre><h2 id="Statement和PreparedStatement应用场景"><a href="#Statement和PreparedStatement应用场景" class="headerlink" title="Statement和PreparedStatement应用场景"></a>Statement和PreparedStatement应用场景</h2><ul>
+<li>通常DDL使用Statement</li>
+<li><p>通常DML 和DQL使用PreparedStatement</p>
+</li>
+<li><p>只有需要传入参数的就要使用PreparedStatent</p>
+</li>
+</ul>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ul>
+<li><p>我们将数据库中的表和JavaBean相对应实现了crud操作</p>
+</li>
+<li><p>使用了PreparedStatement对象操作数据库</p>
+</li>
+</ul>
+<h3 id="JavaBean对象"><a href="#JavaBean对象" class="headerlink" title="JavaBean对象"></a>JavaBean对象</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Item</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line">	<span class="keyword">private</span> String title;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> price;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> num;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> id;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.id = id;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getTitle</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> title;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTitle</span><span class="params">(String title)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.title = title;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPrice</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> price;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPrice</span><span class="params">(<span class="keyword">int</span> price)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.price = price;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNum</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> num;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNum</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.num = num;</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">"Item [id="</span> + id + <span class="string">", title="</span> + title + <span class="string">", price="</span> + price</div><div class="line">				+ <span class="string">", num="</span> + num + <span class="string">"]"</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="crud操作"><a href="#crud操作" class="headerlink" title="crud操作"></a>crud操作</h3><ul>
+<li>传入的参数全部都是JavaBean对象</li>
+<li><strong>其中的sql语句不能有中的占位符部分不能有空格，否则可能会出现错误</strong></li>
+<li>这里使用的是前一篇讲的数据库工具类终结版（使用了DBCP连接池),详情请看前一篇的文章</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 插入数据，传入JavaBean对象作为参数</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(Item item)</span> </span>&#123;</div><div class="line">		Connection connection = <span class="keyword">null</span>;</div><div class="line">		PreparedStatement statement = <span class="keyword">null</span>; <span class="comment">// 创建预处理对象</span></div><div class="line">		ResultSet resultSet = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			connection = DBUtils.getConnection(); <span class="comment">// 获取连接</span></div><div class="line">			String sql = <span class="string">"insert into t_item(id,title,price,num) values(?,?,?,?)"</span>;</div><div class="line">			statement = connection.prepareStatement(sql);</div><div class="line">			statement.setInt(<span class="number">1</span>, item.getId());</div><div class="line">			statement.setString(<span class="number">2</span>, item.getTitle()); <span class="comment">// 为预处理对象中的占位符赋值</span></div><div class="line">			statement.setInt(<span class="number">3</span>, item.getPrice());</div><div class="line">			statement.setInt(<span class="number">4</span>, item.getNum());</div><div class="line">			<span class="keyword">int</span> row = statement.executeUpdate();</div><div class="line">			System.out.println(row);</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			DBUtils.close(connection, statement, resultSet); <span class="comment">// 关闭资源</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 查询数据，封装在JavaBean中</span></div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;Item&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</div><div class="line">		ArrayList&lt;Item&gt; items = <span class="keyword">new</span> ArrayList&lt;Item&gt;();</div><div class="line">		Connection connection = <span class="keyword">null</span>;</div><div class="line">		PreparedStatement statement = <span class="keyword">null</span>; <span class="comment">// 创建预处理对象</span></div><div class="line">		ResultSet resultSet = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			connection = DBUtils.getConnection(); <span class="comment">// 获取连接</span></div><div class="line">			String sql = <span class="string">"select * from t_item where price&gt;100"</span>;</div><div class="line">			statement = connection.prepareStatement(sql);</div><div class="line">			resultSet = statement.executeQuery();</div><div class="line">			<span class="keyword">while</span> (resultSet.next()) &#123;</div><div class="line">				String title = resultSet.getString(<span class="string">"title"</span>);</div><div class="line">				<span class="keyword">int</span> price = resultSet.getInt(<span class="string">"price"</span>);</div><div class="line">				<span class="keyword">int</span> num = resultSet.getInt(<span class="string">"num"</span>);</div><div class="line"></div><div class="line">				Item item = <span class="keyword">new</span> Item();</div><div class="line">				item.setNum(num);</div><div class="line">				item.setPrice(price);</div><div class="line">				item.setTitle(title);</div><div class="line">				items.add(item);</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			DBUtils.close(connection, statement, resultSet); <span class="comment">// 关闭资源</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> items;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//更新操作，传入JavaBean对象，只需要将要更新的条件封装进去即可</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(Item item)</span> </span>&#123;</div><div class="line">		Connection connection = <span class="keyword">null</span>;</div><div class="line">		PreparedStatement statement = <span class="keyword">null</span>; <span class="comment">// 创建预处理对象</span></div><div class="line">		ResultSet resultSet = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			connection = DBUtils.getConnection(); <span class="comment">// 获取连接</span></div><div class="line">			String sql = <span class="string">"update  t_item set title=?,num=?,price=? where id=?"</span>;</div><div class="line">			statement = connection.prepareStatement(sql);</div><div class="line">			<span class="comment">//设置其中的占位符的值</span></div><div class="line">			statement.setString(<span class="number">1</span>, item.getTitle());</div><div class="line">			statement.setInt(<span class="number">2</span>, item.getNum());</div><div class="line">			statement.setInt(<span class="number">3</span>, item.getPrice());</div><div class="line">			statement.setInt(<span class="number">4</span>, item.getId());</div><div class="line">			<span class="keyword">int</span> row = statement.executeUpdate();</div><div class="line">			System.out.println(row);</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			DBUtils.close(connection, statement, resultSet); <span class="comment">// 关闭资源</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 删除的数据，其中参数传入的还是JavaBean对象</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(Item item)</span> </span>&#123;</div><div class="line">		Connection connection = <span class="keyword">null</span>;</div><div class="line">		PreparedStatement statement = <span class="keyword">null</span>; <span class="comment">// 创建预处理对象</span></div><div class="line">		ResultSet resultSet = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			connection = DBUtils.getConnection(); <span class="comment">// 获取连接</span></div><div class="line">			String sql = <span class="string">"delete from t_item where id=?"</span>;</div><div class="line">			statement = connection.prepareStatement(sql);</div><div class="line">			statement.setInt(<span class="number">1</span>, item.getId());</div><div class="line">			<span class="keyword">int</span> row = statement.executeUpdate();</div><div class="line">			System.out.println(row);</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			DBUtils.close(connection, statement, resultSet); <span class="comment">// 关闭资源</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h2 id="批量操作"><a href="#批量操作" class="headerlink" title="批量操作"></a>批量操作</h2><ul>
+<li>因为类似的sql语句执行，每一个次都需要和数据库服务器进行数据交互，多次交互会浪费资源，并且耗时，可以使用批量</li>
+</ul>
+<h3 id="Statement执行批量操作"><a href="#Statement执行批量操作" class="headerlink" title="Statement执行批量操作"></a>Statement执行批量操作</h3><ul>
+<li><p><strong>需要写多个重复的sql语句，只是其中的想用批量的内容不同，比较繁琐</strong><br>-最后将这些sql语句中添加到批量操作中</p>
+<ul>
+<li><code>statement.addBatch(sql);</code></li>
+</ul>
+</li>
+<li><p>添加到批量操作之后，就开始执行批量方法了</p>
+<ul>
+<li><code>statement.executeBatch();</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testStatement</span><span class="params">()</span> </span>&#123;</div><div class="line">	Connection connection = <span class="keyword">null</span>;</div><div class="line">	Statement statement = <span class="keyword">null</span>;</div><div class="line">	ResultSet resultSet = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		connection = DBUtils.getConnection(); <span class="comment">// 获取连接</span></div><div class="line">		statement = connection.createStatement(); <span class="comment">// 创建Statement语句对象</span></div><div class="line">		String sql1 = <span class="string">"insert into t_item(id,title) values(100,'asaa')"</span>;</div><div class="line">		String sql2 = <span class="string">"insert into t_item(id,title) values(101,'asaa')"</span>;</div><div class="line">		String sql3 = <span class="string">"insert into t_item(id,title) values(102,'asaa')"</span>;</div><div class="line"></div><div class="line">		<span class="comment">// 添加批量操作</span></div><div class="line">		statement.addBatch(sql1);</div><div class="line">		statement.addBatch(sql2);</div><div class="line">		statement.addBatch(sql3);</div><div class="line">		<span class="comment">// 执行批量操作</span></div><div class="line">		statement.executeBatch();</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		DBUtils.close(connection, statement, resultSet); <span class="comment">// 关闭资源</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="PreparedStatement"><a href="#PreparedStatement" class="headerlink" title="PreparedStatement"></a>PreparedStatement</h3><ul>
+<li><strong>只需要写一个条sql语句，其中要批量的内容使用占位符即可</strong></li>
+<li><p>设置占位符的内容，将其添加到批量中，再重新设置，这样的好处就是减少了重复的sql语句了</p>
+<ul>
+<li><code>statement.addBatch()</code></li>
+</ul>
+</li>
+<li><p>最后直接执行批量操作即可</p>
+<ul>
+<li><code>statement.executeBatch();</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPreparedStatement</span><span class="params">()</span> </span>&#123;</div><div class="line">	Connection connection = <span class="keyword">null</span>;</div><div class="line">	PreparedStatement statement = <span class="keyword">null</span>;</div><div class="line">	ResultSet resultSet = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		connection = DBUtils.getConnection(); <span class="comment">// 获取连接</span></div><div class="line">		String sql = <span class="string">"insert into t_item(id,title) values(?,?)"</span>;</div><div class="line"></div><div class="line">		statement = connection.prepareStatement(sql);</div><div class="line">		statement.setInt(<span class="number">1</span>, <span class="number">200</span>);</div><div class="line">		statement.setString(<span class="number">2</span>, <span class="string">"联想电脑"</span>);</div><div class="line">		statement.addBatch(); <span class="comment">// 添加上面的数据到Batch中</span></div><div class="line"></div><div class="line">		statement.setInt(<span class="number">1</span>, <span class="number">201</span>);</div><div class="line">		statement.setString(<span class="number">2</span>, <span class="string">"华硕笔记本"</span>);</div><div class="line">		statement.addBatch(); <span class="comment">// 添加上面的数据到Batch中</span></div><div class="line"></div><div class="line">		statement.setInt(<span class="number">1</span>, <span class="number">202</span>);</div><div class="line">		statement.setString(<span class="number">2</span>, <span class="string">"海尔洗衣机"</span>);</div><div class="line">		statement.addBatch(); <span class="comment">// 添加上面的数据到Batch中</span></div><div class="line"></div><div class="line">		statement.executeBatch(); <span class="comment">// 执行批量操作</span></div><div class="line"></div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		DBUtils.close(connection, statement, resultSet); <span class="comment">// 关闭资源</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="批量插入数据"><a href="#批量插入数据" class="headerlink" title="批量插入数据"></a>批量插入数据</h4><ul>
+<li><p>注意：addBatch()其中的数量是有限的，如果存放的批量操作太多，那么会造成内存溢出，因此我们应该当其中批量操作的数量达到一定值的时候先执行一次，然后清除执行完的操作即可(<code>clearBatch()</code>)</p>
+</li>
+<li><p>批量操作的时候如果批量操作的数量太多的话，肯定会造成内存溢出，这个时候最好的办法就是当数量达到一定数量时候就执行，然后将其中的已经执行完成的清除即可</p>
+</li>
+<li><p>下面是向表中插入有100条数据，我们每20条插入一次，这样就可以避免内存的溢出</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</div><div class="line">	Connection connection = <span class="keyword">null</span>;</div><div class="line">	PreparedStatement statement = <span class="keyword">null</span>;</div><div class="line">	ResultSet resultSet = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		connection = DBUtils.getConnection(); <span class="comment">// 获取连接</span></div><div class="line">		String sql = <span class="string">"insert into t_v(name) values(?)"</span>;</div><div class="line">		statement=connection.prepareStatement(sql);</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)&#123;</div><div class="line">			statement.setString(<span class="number">1</span>, <span class="string">"name"</span>+(i+<span class="number">1</span>));</div><div class="line">			statement.addBatch();</div><div class="line">			<span class="comment">//为了避免内存溢出，当批量操作数量达到一定值时先执行一次，在向其中添加</span></div><div class="line">			<span class="comment">//每二十次添加一次</span></div><div class="line">			<span class="keyword">if</span> (i%<span class="number">20</span>==<span class="number">0</span>) &#123;</div><div class="line">				statement.executeBatch();   <span class="comment">//执行批量操作</span></div><div class="line">				statement.clearBatch();  <span class="comment">//清除已经执行过的</span></div><div class="line">			&#125;</div><div class="line">			statement.executeBatch();   <span class="comment">//为了避免有剩余的，把剩下的执行掉</span></div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		DBUtils.close(connection, statement, resultSet); <span class="comment">// 关闭资源</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h4><ul>
+<li>要求： 在控制台输入页数(n)，和每页显示的数量(m)</li>
+<li><p>分析： 我们知道sql语句中的<code>limit ?,?</code>，第一个参数表示的是跳过的条数，第二个参数是每页显示的条数，那么此时我们限定显示第n页，每页显示m条，那么此时的跳过的条数就是<code>(n-1)*m</code>,因此此时的查询语句就是:     <code>select * from table_name limit (n-1)*m,m;</code></p>
+</li>
+<li><p>代码如下：</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testLimit</span><span class="params">()</span></span>&#123;</div><div class="line">	Connection connection = <span class="keyword">null</span>;</div><div class="line">	PreparedStatement statement = <span class="keyword">null</span>;</div><div class="line">	ResultSet resultSet = <span class="keyword">null</span>;</div><div class="line">	Scanner scanner=<span class="keyword">new</span> Scanner(System.in);   <span class="comment">//控制台输入</span></div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		connection = DBUtils.getConnection(); <span class="comment">// 获取连接</span></div><div class="line">		String sql = <span class="string">"select * from t_v limit ?,?"</span>;</div><div class="line">		statement=connection.prepareStatement(sql);</div><div class="line"></div><div class="line">		<span class="comment">// n页，每页m条    limit (n-1)*m m</span></div><div class="line">		System.out.println(<span class="string">"第几页："</span>);</div><div class="line">		<span class="keyword">int</span> n=Integer.parseInt(scanner.nextLine());   <span class="comment">//页数,控制台读取的是字符串，因此这里需要转换</span></div><div class="line">		System.out.println(<span class="string">"每页的条数"</span>);</div><div class="line">		<span class="keyword">int</span> m=Integer.parseInt(scanner.nextLine());   <span class="comment">//每页显示的条数</span></div><div class="line"></div><div class="line">		<span class="comment">//设置占位符</span></div><div class="line">		statement.setInt(<span class="number">1</span>, (n-<span class="number">1</span>)*m);</div><div class="line">		statement.setInt(<span class="number">2</span>, m);</div><div class="line">		<span class="comment">//查询，获取结构集</span></div><div class="line">		resultSet=statement.executeQuery();</div><div class="line">		<span class="comment">//遍历结果集</span></div><div class="line">		<span class="keyword">while</span>(resultSet.next())&#123;</div><div class="line">			<span class="keyword">int</span> id=resultSet.getInt(<span class="string">"id"</span>);   <span class="comment">//获取id</span></div><div class="line">			String name=resultSet.getString(<span class="string">"name"</span>);  <span class="comment">//获取name</span></div><div class="line">			System.out.println(id+<span class="string">"-----"</span>+name+<span class="string">"\t"</span>);   <span class="comment">//制表符输出值</span></div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		DBUtils.close(connection, statement, resultSet); <span class="comment">// 关闭资源</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h3><ul>
+<li>原子性</li>
+<li>一致性</li>
+<li>隔离性</li>
+<li>持久性</li>
+</ul>
+<h3 id="jdbc操作事务"><a href="#jdbc操作事务" class="headerlink" title="jdbc操作事务"></a>jdbc操作事务</h3><ul>
+<li><code>connection.setAutoCommit(false)</code>   关闭自动提交  如果不关闭自动提交，那么会每执行一行都会提交一次</li>
+<li><code>connection.commit()</code>  提交</li>
+<li><code>connection.rollback()</code>  回滚</li>
+</ul>
+<ul>
+<li>转账的实现过程<ul>
+<li>创建表：<code>create table user(id int,name,varchar(10),money int);</code></li>
+<li>插入数据：<code>insert into user values(1,&#39;超人&#39;,200),(2,&#39;蝙蝠侠&#39;,10000);</code></li>
+<li>关闭自动提交 <code>connection.setAutoCommit(false)</code></li>
+<li>修改超人的钱(money+3000)</li>
+<li>修改蝙蝠侠的钱(money-3000)</li>
+<li>查询蝙蝠侠的钱是否大于0，如果小于0，则抛出运行时异常，大于0 提交(commit)</li>
+<li>在catch异常的地方把SQLException改成Exception，并且在catch里面回滚</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testTransaction</span><span class="params">()</span> </span>&#123;</div><div class="line">	Connection connection = <span class="keyword">null</span>;</div><div class="line">	PreparedStatement statement = <span class="keyword">null</span>;</div><div class="line">	ResultSet resultSet = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		connection = DBUtils.getConnection(); <span class="comment">// 获取连接</span></div><div class="line">		connection.setAutoCommit(<span class="keyword">false</span>); <span class="comment">// 关闭自动提交</span></div><div class="line">		String sql = <span class="string">"update user set money=money+? where id=?"</span>; <span class="comment">// 修改蝙蝠侠和超人钱的sql语句</span></div><div class="line">		String sql_select = <span class="string">"select money from user where id=?"</span>; <span class="comment">// 查询钱</span></div><div class="line"></div><div class="line">		<span class="comment">// 创建更新的预编译对象</span></div><div class="line">		statement = connection.prepareStatement(sql);</div><div class="line"></div><div class="line">		<span class="comment">// 超人+3000</span></div><div class="line">		statement.setInt(<span class="number">1</span>, <span class="number">3000</span>);</div><div class="line">		statement.setInt(<span class="number">2</span>, <span class="number">1</span>);</div><div class="line">		<span class="keyword">int</span> row1 = statement.executeUpdate(); <span class="comment">// 执行更新语句</span></div><div class="line"></div><div class="line">		<span class="comment">// 蝙蝠侠-3000</span></div><div class="line">		statement.setInt(<span class="number">1</span>, -<span class="number">3000</span>);</div><div class="line">		statement.setInt(<span class="number">2</span>, <span class="number">2</span>);</div><div class="line">		<span class="keyword">int</span> row2 = statement.executeUpdate(); <span class="comment">// 执行更新语句</span></div><div class="line"></div><div class="line">		<span class="comment">// 预编译查询sql语句</span></div><div class="line">		statement = connection.prepareStatement(sql_select);</div><div class="line"></div><div class="line">		statement.setInt(<span class="number">1</span>, <span class="number">2</span>);</div><div class="line"></div><div class="line">		resultSet = statement.executeQuery(); <span class="comment">// 执行查询语句</span></div><div class="line">		<span class="keyword">while</span> (resultSet.next()) &#123;</div><div class="line">			<span class="keyword">int</span> money = resultSet.getInt(<span class="string">"money"</span>); <span class="comment">// 获取蝙蝠侠的此时的钱</span></div><div class="line">			<span class="comment">// 如果&lt;0 抛出运行异常</span></div><div class="line">			<span class="keyword">if</span> (money &lt; <span class="number">0</span>) &#123;</div><div class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(); <span class="comment">// 手动抛出异常</span></div><div class="line">			&#125; <span class="keyword">else</span> &#123; <span class="comment">// 如果 &gt;0 可以成功提交</span></div><div class="line">				connection.commit(); <span class="comment">// 提交</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			connection.rollback(); <span class="comment">// 回滚，如果运行出错，那么就回滚到起始点，数据库中就不会生效</span></div><div class="line">		&#125; <span class="keyword">catch</span> (SQLException e1) &#123;</div><div class="line">			e1.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		DBUtils.close(connection, statement, resultSet); <span class="comment">// 关闭资源</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="获取自增主键的值"><a href="#获取自增主键的值" class="headerlink" title="获取自增主键的值"></a>获取自增主键的值</h2><ul>
+<li>为什么获取： 因为某些插入的数据，插入完之后，需要用到数据的主键作为下一条数据外键</li>
+</ul>
+<h3 id="准备sql"><a href="#准备sql" class="headerlink" title="准备sql"></a>准备sql</h3><ul>
+<li>create table t_d(id int primary key auto_increment,name varchar(10));</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAuto</span><span class="params">()</span> </span>&#123;</div><div class="line">	Connection connection = <span class="keyword">null</span>;</div><div class="line">	Statement statement = <span class="keyword">null</span>;</div><div class="line">	ResultSet resultSet = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		connection = DBUtils.getConnection(); <span class="comment">// 获取连接</span></div><div class="line">		String sql=<span class="string">"insert into t_d values(null,'神仙')"</span>;</div><div class="line">		statement=connection.createStatement();</div><div class="line">		<span class="comment">//执行sql，并且标记此时执行需要获取生成的key值</span></div><div class="line">		statement.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);</div><div class="line">		<span class="comment">//得到生成的key值</span></div><div class="line">		resultSet=statement.getGeneratedKeys();</div><div class="line">		<span class="keyword">while</span>(resultSet.next())&#123;</div><div class="line">			<span class="keyword">int</span> id=resultSet.getInt(<span class="number">1</span>);   <span class="comment">//获取第一个值，不能写getInt("id") 因为这里不是查询得到的数据，字段名并不是id</span></div><div class="line">			System.out.println(<span class="string">"自增主键的值为:"</span>+id);</div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		DBUtils.close(connection, statement, resultSet); <span class="comment">// 关闭资源</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="获取元数据"><a href="#获取元数据" class="headerlink" title="获取元数据"></a>获取元数据</h2><ul>
+<li>数据库元数据： 数据库厂商信息（mysql,oracle) 数据库连接信息，都称为数据库的元数据</li>
+<li>表元数据</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testMetaData</span><span class="params">()</span> </span>&#123;</div><div class="line">	Connection connection = <span class="keyword">null</span>;</div><div class="line">	Statement statement = <span class="keyword">null</span>;</div><div class="line">	ResultSet resultSet = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		connection = DBUtils.getConnection(); <span class="comment">// 获取连接</span></div><div class="line">		statement=connection.createStatement();</div><div class="line">		<span class="comment">//得到数据库元数据</span></div><div class="line">		DatabaseMetaData data=connection.getMetaData();</div><div class="line">		System.out.println(data.getDriverName());  <span class="comment">//数据库驱动名字</span></div><div class="line">		System.out.println(data.getDriverVersion());  <span class="comment">//驱动版本</span></div><div class="line">		System.out.println(data.getUserName());  <span class="comment">//用户名</span></div><div class="line">		System.out.println(data.getURL());  <span class="comment">//连接地址</span></div><div class="line">		System.out.println(data.getDatabaseProductName());  <span class="comment">//数据库厂商的名称</span></div><div class="line"></div><div class="line">		String sql=<span class="string">"select * from t_d"</span>;</div><div class="line">		resultSet=statement.executeQuery(sql);</div><div class="line">		<span class="comment">//从结果集中获取表的元数据</span></div><div class="line">		ResultSetMetaData sqldata=resultSet.getMetaData();</div><div class="line">		<span class="keyword">int</span> columcount=sqldata.getColumnCount();  <span class="comment">//获取表字段的数量</span></div><div class="line"></div><div class="line">		<span class="comment">//获取表中每个字段的名称</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;columcount;i++)&#123;</div><div class="line">			String name=sqldata.getColumnName(i+<span class="number">1</span>);</div><div class="line">			System.out.println(<span class="string">"字段名："</span>+name+<span class="string">"\t"</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		DBUtils.close(connection, statement, resultSet); <span class="comment">// 关闭资源</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="乱码问题"><a href="#乱码问题" class="headerlink" title="乱码问题"></a>乱码问题</h2><ul>
+<li>在JDBC连接数据的url后面添加如下参数：<ul>
+<li>jdbc:mysql://localhost:3306/test?UseUnicode=true&amp;characterEncoding=UTF-8</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;JDBC干货三&quot;&gt;&lt;a href=&quot;#JDBC干货三&quot; class=&quot;headerlink&quot; title=&quot;JDBC干货三&quot;&gt;&lt;/a&gt;JDBC干货三&lt;/h1&gt;&lt;h2 id=&quot;生成get-set方法的快捷键&quot;&gt;&lt;a href=&quot;#生成get-set方法的快捷键&quot; c
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="JDBC" scheme="http://chenjiabing666.github.io/tags/JDBC/"/>
+    
+  </entry>
   
   <entry>
     <title>Struts之获取请求参数</title>
@@ -2706,348 +3247,6 @@
     
     
       <category term="POI(Excel)" scheme="http://chenjiabing666.github.io/tags/POI-Excel/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JSP总结四(EL表达式)</title>
-    <link href="http://chenjiabing666.github.io/2017/09/26/JSP%E6%80%BB%E7%BB%93%E5%9B%9B-EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    <id>http://chenjiabing666.github.io/2017/09/26/JSP总结四-EL表达式/</id>
-    <published>2017-09-26T12:07:16.000Z</published>
-    <updated>2017-09-27T06:03:48.775Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="JSP总结四-EL表达式"><a href="#JSP总结四-EL表达式" class="headerlink" title="JSP总结四(EL表达式)"></a>JSP总结四(EL表达式)</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>JSP页面尽量不要使用<code>scriptlet</code>编写<code>java</code>代码，因此我们可以使用<code>EL</code>表达式可以替代<code>Java</code>语句的使用</p>
-</blockquote>
-<h2 id="隐含对象"><a href="#隐含对象" class="headerlink" title="隐含对象"></a>隐含对象</h2><h3 id="与属性相关的隐含对象"><a href="#与属性相关的隐含对象" class="headerlink" title="与属性相关的隐含对象"></a>与属性相关的隐含对象</h3><blockquote>
-<p>属性的隐含对象有<code>PageScope</code>,<code>requestScop</code>e,<code>sessionScope</code>,<code>applicationScope</code>分别对应的是<code>JSP</code>中的<code>PageContext</code>,<code>request</code>,<code>session</code>,<code>application</code>，因此可以取得<code>JSP</code>对象使用<code>setAttribute()</code>设置的属性，如果没有使用EL隐含对象获取属性的值，那么默认是从<code>PageScope</code>开始寻找</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;%</div><div class="line">    request.setAttribute(<span class="string">"login"</span>,<span class="string">'true'</span>);   <span class="comment">//绑定request对象的属性</span></div><div class="line">    session.setAttribute(<span class="string">"login"</span>,<span class="string">'true'</span>);   <span class="comment">//绑定session对象的属性</span></div><div class="line">    application.setAttribute(<span class="string">"login"</span>,<span class="string">"true"</span>);  <span class="comment">//设置application对象的属性</span></div><div class="line">%&gt;</div><div class="line"></div><div class="line">&lt;%--获取request绑定的属性值  相当于request.getAttribute(<span class="string">"login"</span>);--%&gt;</div><div class="line">&lt;h1&gt;$&#123;requestScope.login&#125;&lt;h1&gt;</div><div class="line"></div><div class="line">&lt;%--获取session绑定的属性值--%&gt;</div><div class="line">&lt;h1&gt;$&#123;sessionScope.login&#125;&lt;h1&gt;</div></pre></td></tr></table></figure>
-<h3 id="与请求参数相关的隐含对象-param-paramValues"><a href="#与请求参数相关的隐含对象-param-paramValues" class="headerlink" title="与请求参数相关的隐含对象(param,paramValues)"></a>与请求参数相关的隐含对象(param,paramValues)</h3><blockquote>
-<p>与请求参数相关的EL隐含对象有<code>param</code>,<code>paramValues</code>。我们可以使用EL表达式可以获取表单提交的请求参数。</p>
-<p>下面我们使用表单提交，测试一下</p>
-<blockquote>
-<p>JSP代码(表单提交)</p>
-</blockquote>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;form action="demo1.jsp" method="get"&gt;</div><div class="line">    姓名:&lt;input type="text" name="username"&gt;</div><div class="line">    密码:&lt;input type="password" name="password"&gt;</div><div class="line">    &lt;input type="submit" value="提交"&gt;</div><div class="line">    </div><div class="line">    爱好:</div><div class="line">    打棒球：&lt;input type="checkbox" name="hobbies"&gt;</div><div class="line">    打羽毛球：&lt;input type="checkbox" name="hobbies"&gt;</div><div class="line">    </div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>demo1.jsp 文件（接收请求参数）</p>
-</blockquote>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;%--获取提交的请求参数username，password </div><div class="line">    相当于使用如下代码:</div><div class="line">        request.getParameter("username");</div><div class="line">        request.getParameter("password");</div><div class="line">--%&gt;</div><div class="line">&lt;h1&gt;$&#123;param.username&#125;&lt;/h1&gt;</div><div class="line">&lt;h1&gt;$&#123;param.password&#125;&lt;/h1&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;%--获取多选框的值  相当于使用下面的代码:</div><div class="line">    request.getParameterValues("hobbies")[0]</div><div class="line">--%&gt;</div><div class="line">&lt;h1&gt;$&#123;paramValues.hobbies[0]&#125;&lt;/h1&gt;</div><div class="line">&lt;h1&gt;$&#123;paramValues.hobbies[1]&#125;&lt;/h1&gt;</div></pre></td></tr></table></figure>
-<h3 id="与标头-Header-相关的隐含对象"><a href="#与标头-Header-相关的隐含对象" class="headerlink" title="与标头(Header)相关的隐含对象"></a>与标头(Header)相关的隐含对象</h3><blockquote>
-<p>如果想要取得用户请求的表头数据，那么使用<code>header</code>或者<code>headerValues</code>隐含对象。例如使用<code>${header[&quot;User-Agent&quot;]}</code> 这个相当于使用<code>&lt;%=request.getHeader(&quot;User-Agent&quot;)%&gt;</code>。 <code>HeaderValues</code>对象相当于使用<code>request.getHeaders()</code>  </p>
-</blockquote>
-<h3 id="cookie隐含对象"><a href="#cookie隐含对象" class="headerlink" title="cookie隐含对象"></a>cookie隐含对象</h3><blockquote>
-<p><code>cookie</code>的隐含对象可以取得用户设置的<code>Cookie</code>设置的值。如果在<code>Cookie</code>中设置了<code>username</code>属性，那么可以使用<code>${cookie.username}</code></p>
-</blockquote>
-<h3 id="初始参数隐含对象"><a href="#初始参数隐含对象" class="headerlink" title="初始参数隐含对象"></a>初始参数隐含对象</h3><blockquote>
-<p>隐含对象<code>initParam</code>可以用来取得<code>web.xml</code>中设置的<code>ServletContext</code>初始参数，也就是在<code>&lt;context-param&gt;</code>中设置的初始参数。例如<code>${initParam.initcount}</code>的作用，相当于<code>&lt;%=ServletContext.getInitParameter(&quot;initCount&quot;)%&gt;</code></p>
-</blockquote>
-<h2 id="EL运算符"><a href="#EL运算符" class="headerlink" title="EL运算符"></a>EL运算符</h2><blockquote>
-<p>使用EL运算符直接实现一些算术运算符，逻辑运算符，就如同一般常见的程序语言中的运算</p>
-</blockquote>
-<h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><blockquote>
-<p>可以直接使用加减乘除 <code>${1+2}</code>,<code>${5/2}</code>,<code>${5*3}</code></p>
-</blockquote>
-<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><blockquote>
-<p><code>${true and false}=false</code>,<code>${true and true}=true</code>,<code>${true or false}=true</code></p>
-</blockquote>
-<h3 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h3><blockquote>
-<p>可以直接在EL表达式比较大小，返回的也是<code>false</code>和<code>true</code>，可以用来判断，如下：<br><code>${1&lt;2}=false</code> ,<code>${(10*10)&gt;200}=true</code></p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;c:if text="$&#123;6&gt;5&#125;"&gt;</div><div class="line">    &lt;c:out value="可以直接使用EL表达式进行比较"&gt;&lt;/c:out&gt;</div><div class="line">&lt;/c:if&gt;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;JSP总结四-EL表达式&quot;&gt;&lt;a href=&quot;#JSP总结四-EL表达式&quot; class=&quot;headerlink&quot; title=&quot;JSP总结四(EL表达式)&quot;&gt;&lt;/a&gt;JSP总结四(EL表达式)&lt;/h1&gt;&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class
-    
-    </summary>
-    
-      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
-    
-    
-      <category term="JSP" scheme="http://chenjiabing666.github.io/tags/JSP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JSP总结三(JSTL核心标签库的使用)</title>
-    <link href="http://chenjiabing666.github.io/2017/09/22/JSP%E6%80%BB%E7%BB%93%E4%B8%89-JSTL%E6%A0%B8%E5%BF%83%E6%A0%87%E7%AD%BE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>http://chenjiabing666.github.io/2017/09/22/JSP总结三-JSTL核心标签库的使用/</id>
-    <published>2017-09-22T06:39:43.000Z</published>
-    <updated>2017-10-01T07:58:08.596Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="JSP总结三-JSTL核心标签库的使用"><a href="#JSP总结三-JSTL核心标签库的使用" class="headerlink" title="JSP总结三(JSTL核心标签库的使用)"></a>JSP总结三(JSTL核心标签库的使用)</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>其实在我们编写JSP网页的时候是不希望在JSP页面中出现Java代码的，这里我们就要使用<code>JSTL</code>的核心标签库来实现。</p>
-<p>想要使用JSTL，一定要填上这句话：<code>&lt;%@taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot;%&gt;</code></p>
-</blockquote>
-<h2 id="属性处理与输出标签"><a href="#属性处理与输出标签" class="headerlink" title="属性处理与输出标签"></a>属性处理与输出标签</h2><h3 id="属性处理标签"><a href="#属性处理标签" class="headerlink" title="属性处理标签"></a>属性处理标签</h3><blockquote>
-<p>在定义变量的时候，我们难免会用到Java代码，但是这里我们介绍<code>&lt;c:set&gt;</code>标签，这个能够实现变量的定义</p>
-<p><code>&lt;c:set&gt;</code>标签中的属性有 <code>var</code>(定义的变量)、<code>value</code>(变量的值)、<code>target</code>(为JavaBean对象赋值的时候使用)、<code>scope</code>(设置变量的存活范围，有<code>request</code>,<code>session</code>,<code>application</code>,<code>page</code>)、<code>property</code>(<code>JavaBean</code>的变量)</p>
-<p>使用<code>set</code>标签相当于调用存活范围内的<code>setAttribute()</code>方法来绑定属性</p>
-<ul>
-<li>定义一个普通的变量:   </li>
-</ul>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;%--x的值为10，这句话相当于String x="10" --%&gt;</div><div class="line">&lt;c:set var="x" value="10"&gt;&lt;/c:set&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>定义<code>session</code>范围的变量(当然还可以定义其他存活范围的变量，这里就不一一讲了)</li>
-</ul>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;%--seesion范围的变量代表整个会话期间都是可以共享这个变量的，相当于下面这句话：</div><div class="line">        session.setAttribute("x",100);</div><div class="line">        在另外一个JSP文件中可以使用下面的语句得到其中的值：</div><div class="line">        </div><div class="line">        session.getAttribute("x");</div><div class="line">        &lt;c:out value="$&#123;sessionScope.x&#125;"&gt;&lt;/c:out&gt;</div><div class="line">--%&gt;</div><div class="line">&lt;c:set var="x" value="100" scope="session"&gt;&lt;/c:set&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>设置<code>JavaBean</code>对象的值：</li>
-</ul>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;%--获取JavaBean的对象person,如果没有那么就是直接创建一个对象，范围为session,下面可以用到 --%&gt;</div><div class="line">&lt;jsp:useBean id="person" class="com.Person" scope="session"&gt;&lt;/jsp:useBean&gt;</div><div class="line"></div><div class="line">&lt;%-- target是对象的person，这里使用EL表达式，得到session范围内的Person对象 --%&gt;</div><div class="line">&lt;c:set target="$&#123;sessionScope.person &#125;" property="username" value="陈加兵"&gt;&lt;/c:set&gt;</div><div class="line"></div><div class="line">&lt;%-- 输出变量的username的值，这里使用的EL表达式  相当于  session.getAttribute("person").getUsername() --%&gt;</div><div class="line">&lt;c:out value="$&#123;sessionScope.person.username &#125;"&gt;&lt;/c:out&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>如果设置的值太冗长了，那么可以在标签体的中间设置</li>
-</ul>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;c:set scope="request"&gt;陈加兵&lt;/c:set&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>移除变量 使用的是<code>&lt;c:remove&gt;</code>(一定要指定存活范围)</li>
-</ul>
-</blockquote>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;%--移除session范围内的变量x  相当于  session.removeAttribute(<span class="string">"x"</span>)  </div><div class="line">    这里一定要指定范围</div><div class="line">--%&gt;</div><div class="line">&lt;c:remove var=<span class="string">"x"</span> scope=<span class="string">"session"</span>/&gt;</div></pre></td></tr></table></figure>
-<h3 id="输出标签"><a href="#输出标签" class="headerlink" title="输出标签"></a>输出标签</h3><blockquote>
-<p><code>&lt;c:out&gt;</code>相当于<code>out.println()</code>方法，是一个用来向网页中输出内容的</p>
-<p>其中的属性有<code>value</code> (输出的内容，其中可以是JEL的${}或者一个字符串) ，<code>escapeXml</code>(这个使用来控制是否将输出的内容中有<code>html</code>标签的是否用替代字符替换，默认为<code>true</code>表示用替代字符替换),<code>default</code>(如果输出的内容为<code>null</code>或者为空的时候那么就直接不显示任何内容，但是我们可以定义<code>default</code>的值来默认显示的值)</p>
-<ul>
-<li>使用<code>EL</code>表达式输出</li>
-</ul>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;%--输出request范围内的属性x   相当于 out.println(request.getAttribute("x"))--%&gt;</div><div class="line">&lt;c:out value="$&#123;requestScope.x&#125;"&gt;&lt;/c:out&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>直接使用字符串输出一个值</li>
-</ul>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;c:out value="我是陈加兵"&gt;&lt;/c:out&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>输出<code>html</code>语句</li>
-</ul>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;%--设置escapeXml为false--%&gt;</div><div class="line">&lt;c:out value="&lt;h1&gt;我是陈加兵&lt;/h1&gt;" escapeXml="false"&gt;&lt;/c:out&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>指定输出的默认的内容</li>
-</ul>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;%--如果$&#123;param.username&#125;为空，那么就输出0--%&gt;</div><div class="line">&lt;c:out value="$&#123;param.username&#125;" default="0"&gt;&lt;/c:out&gt;</div></pre></td></tr></table></figure>
-<h2 id="流程处理标签"><a href="#流程处理标签" class="headerlink" title="流程处理标签"></a>流程处理标签</h2><blockquote>
-<p>流程处理就是判断，循环语句</p>
-</blockquote>
-<h3 id="if判断语句"><a href="#if判断语句" class="headerlink" title="if判断语句"></a>if判断语句</h3><blockquote>
-<p><code>&lt;c:if&gt;</code>可以判断语句是否正确，如果正确即可执行，但是这个标签没有<code>else</code>语句，只能处理判断为正确的结果<br>其中的属性有<code>test</code>，这个是设置判断条件的，如果为<code>true</code>即可执行，反之不执行，<code>var</code>是保留判断结果的<br><code>test</code>中的判断条件既可以是<code>EL</code>表达式也可以是<code>&lt;%=%&gt;</code></p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">   &lt;c:set var="salary" value="$&#123;3000 &#125;"&gt;&lt;/c:set&gt;</div><div class="line"></div><div class="line">&lt;%-- test中写的是判断条件，如果为true那么才执行，这里写的是EL表达式，当然也是可以用&lt;%=%&gt; --%&gt;</div><div class="line">   </div><div class="line">&lt;c:if test="$&#123;salary&gt;2000 &#125;"&gt;</div><div class="line">	&lt;c:out value="这个员工的工资大于2000"&gt;&lt;/c:out&gt;</div><div class="line">&lt;/c:if&gt;</div></pre></td></tr></table></figure>
-<h3 id="高级判断"><a href="#高级判断" class="headerlink" title="高级判断"></a>高级判断</h3><blockquote>
-<p>前面的说过的<code>&lt;c:if&gt;</code>仅仅当判断为真时才执行，但是我们想要当不为真时也执行语句，这时我们要使用<code>&lt;c:choose&gt;</code>,<code>&lt;c:when&gt;</code>,<code>&lt;c:otherwise&gt;</code></p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">   &lt;%--  判断题必须在choose中 --%&gt;</div><div class="line">&lt;c:choose&gt;</div><div class="line">	&lt;%-- 如果提交的username和password都对的话，那么就登录成功  相当于if --%&gt;</div><div class="line">	&lt;c:when test='$&#123;param.username=="陈加兵" &amp;&amp; param.password=="123456"&#125;'&gt;</div><div class="line">		&lt;h1&gt;</div><div class="line">			&lt;c:out value="$&#123;param.username &#125;"&gt;&lt;/c:out&gt;</div><div class="line">			登录成功</div><div class="line">		&lt;/h1&gt;</div><div class="line">	&lt;/c:when&gt;</div><div class="line"></div><div class="line">	&lt;%--	相当于else --%&gt;</div><div class="line">	&lt;c:otherwise&gt;</div><div class="line">		&lt;h1&gt;</div><div class="line">			&lt;c:out value="$&#123;param.username &#125;"&gt;&lt;/c:out&gt;</div><div class="line">			登录失败</div><div class="line">		&lt;/h1&gt;</div><div class="line">	&lt;/c:otherwise&gt;</div><div class="line">&lt;/c:choose&gt;</div></pre></td></tr></table></figure>
-<h2 id="网页导入和重定向标签"><a href="#网页导入和重定向标签" class="headerlink" title="网页导入和重定向标签"></a>网页导入和重定向标签</h2><h3 id="网页导入标签"><a href="#网页导入标签" class="headerlink" title="网页导入标签"></a>网页导入标签</h3><blockquote>
-<p>之前学过JSP中的网页导入，一个是静态导入，一个是动态导入，详情请看上篇文章。</p>
-<p>在JSTL中也有一个标签(<code>&lt;c:import&gt;</code>)，用于动态导入网页,并且还可以使用&lt;<code>c:param</code>&gt;设置传入的参数</p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">   &lt;%-- url就是要导入的网页，name是设置初始值的变量，value是设置的值。在demo1.jsp中可以使用        request.getParameter(String name)取得参数 --%&gt;</div><div class="line">&lt;c:import url="demo1.jsp"&gt;</div><div class="line">	&lt;c:param name="username" value="陈加兵"&gt;&lt;/c:param&gt;</div><div class="line">	&lt;c:param name="password" value="123456"&gt;&lt;/c:param&gt;</div><div class="line">&lt;/c:import&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>除了导入<code>web</code>应用程序中的网页，我们还可以导入非目前<code>web</code>应用程序中的网页</p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;%--导入百度的首页，并且设置字符集为utf-8，注意这里一定要设置网页的字符集格式和当前的jsp格式一样，否则会出现乱码--%&gt;</div><div class="line">&lt;c:import url="http://www.baidu.com"&gt;&lt;/c:import charEncoding="utf-8"&gt;</div></pre></td></tr></table></figure>
-<h3 id="重定向标签"><a href="#重定向标签" class="headerlink" title="重定向标签"></a>重定向标签</h3><blockquote>
-<p>之前的重定向必须使用<code>HttpServletResponse</code>的<code>sendRedirect()</code>方法</p>
-<p>现在我们可以使用<code>JSTL</code>标签<code>&lt;c:redirect url&gt;</code></p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;c:redirect url="demo1.jsp"&gt;&lt;/c:rediect&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>当然我们也是可以传入参数的，使用<code>&lt;c:param name=&quot;&quot; value=&quot;&quot;&gt;</code></p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;c:redirect url="demo1.jsp"&gt;</div><div class="line">    &lt;c:param name="username" value="陈加兵"/&gt;</div><div class="line">&lt;/c:rediect&gt;</div></pre></td></tr></table></figure>
-<h2 id="错误处理标签"><a href="#错误处理标签" class="headerlink" title="错误处理标签"></a>错误处理标签</h2><blockquote>
-<p>在之前的JSP文件中，必须定义<code>errorPage</code>属性才能跳转到指定的页面或者处理错误</p>
-<p>现在我们使用<code>JSTL</code>标签<code>&lt;c:catch&gt;</code>,可以捕捉异常，如果有异常就会将异常对象保存下来</p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">   &lt;%--捕捉异常，如果有了异常，那么保存在error变量中 --%&gt;</div><div class="line">&lt;c:catch var="error"&gt;</div><div class="line">	$&#123;10/0 &#125;</div><div class="line">&lt;/c:catch&gt;</div><div class="line"></div><div class="line">&lt;%-- 如果捕捉到了异常，那么error就不是null --%&gt;</div><div class="line">&lt;c:if test="$&#123;error!=null &#125;"&gt;</div><div class="line">	&lt;h1&gt;</div><div class="line">		&lt;c:out value="$&#123;error.message &#125;"&gt;&lt;/c:out&gt;</div><div class="line">	&lt;/h1&gt;</div><div class="line">&lt;/c:if&gt;</div></pre></td></tr></table></figure>
-<h2 id="迭代标签"><a href="#迭代标签" class="headerlink" title="迭代标签"></a>迭代标签</h2><blockquote>
-<p>迭代标签用于数组，集合，列表的输出。</p>
-</blockquote>
-<h3 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h3><blockquote>
-<p>forEach既可以循环也可以迭代</p>
-</blockquote>
-<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><blockquote>
-<ul>
-<li><code>var</code> 变量，用于输出</li>
-<li><code>items</code>   将要迭代的对象</li>
-<li><code>valueStatus</code>   迭代的状态</li>
-<li><code>begin</code>   如果指定了bengin，就在items下标为begin的位置进行迭代</li>
-<li><code>end</code>     如果指定了end，那么就在items下表为end的位置结束迭代</li>
-<li><code>step</code>    指定迭代的步长，默认的是1</li>
-</ul>
-</blockquote>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">      &lt;!-- 循环输出[0,8]之中的所有的整数 --&gt;</div><div class="line">		&lt;c:forEach var="item" begin="0" end="8"&gt;</div><div class="line">			&lt;c:out value="$&#123;item&#125;"&gt;&lt;/c:out&gt;</div><div class="line">		&lt;/c:forEach&gt;</div><div class="line">		&lt;br&gt;</div><div class="line">		</div><div class="line">		&lt;!-- 循环输出[0,8]之中的所有的整数 ,指定步长为2--&gt;</div><div class="line">		&lt;c:forEach var="item" begin="0" end="8" step="2"&gt;</div><div class="line">			&lt;c:out value="$&#123;item&#125;"&gt;&lt;/c:out&gt;</div><div class="line">		&lt;/c:forEach&gt;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&lt;%</div><div class="line">	List list=new ArrayList();</div><div class="line"> 	for(int i=0;i&lt;3;i++)&#123;</div><div class="line"> 		list.add(i);</div><div class="line"> 	&#125;</div><div class="line">	request.setAttribute("items", list);</div><div class="line"></div><div class="line">%&gt;</div><div class="line"></div><div class="line">&lt;!-- item是创建的变量用来存储迭代中的值，items是迭代的对象，其中的值使用EL表达式给出 --&gt;</div><div class="line">&lt;c:forEach var="item" items="$&#123;requestScope.items &#125;"&gt;</div><div class="line">	&lt;c:out value="$&#123;item &#125;"&gt;&lt;/c:out&gt;</div><div class="line">&lt;/c:forEach&gt;</div></pre></td></tr></table></figure>
-<h3 id="forTokens"><a href="#forTokens" class="headerlink" title="forTokens"></a>forTokens</h3><blockquote>
-<p>用于将一个字符串按照定义的符号分隔出来。</p>
-</blockquote>
-<h4 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h4><blockquote>
-<ul>
-<li><code>var</code> 变量，用于输出</li>
-<li><code>items</code>  将要迭代的string对象</li>
-<li><code>delims</code>   指定分隔字符串的分隔符，可以定义多个分隔符</li>
-<li><code>varStatus</code>   迭代的状态</li>
-<li><code>begin</code>     </li>
-<li><code>end</code></li>
-<li><code>step</code></li>
-</ul>
-</blockquote>
-<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;%</div><div class="line">	String str="c,v,d,s,a|v,d";</div><div class="line">	request.setAttribute("str",str);</div><div class="line">%&gt;</div><div class="line"></div><div class="line">&lt;c:forTokens var="item" items="$&#123;requestScope.str &#125;" delims=",|"&gt;</div><div class="line">	&lt;c:out value="$&#123;item &#125;"&gt;&lt;/c:out&gt;</div><div class="line">&lt;/c:forTokens&gt;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;JSP总结三-JSTL核心标签库的使用&quot;&gt;&lt;a href=&quot;#JSP总结三-JSTL核心标签库的使用&quot; class=&quot;headerlink&quot; title=&quot;JSP总结三(JSTL核心标签库的使用)&quot;&gt;&lt;/a&gt;JSP总结三(JSTL核心标签库的使用)&lt;/h1&gt;&lt;h2
-    
-    </summary>
-    
-      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
-    
-    
-      <category term="JSP" scheme="http://chenjiabing666.github.io/tags/JSP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JSP总结二(动作元素)</title>
-    <link href="http://chenjiabing666.github.io/2017/09/20/JSP%E6%80%BB%E7%BB%93%E4%BA%8C-%E5%8A%A8%E4%BD%9C%E5%85%83%E7%B4%A0/"/>
-    <id>http://chenjiabing666.github.io/2017/09/20/JSP总结二-动作元素/</id>
-    <published>2017-09-20T14:51:42.000Z</published>
-    <updated>2017-09-22T02:14:24.147Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="JSP总结二-动作元素"><a href="#JSP总结二-动作元素" class="headerlink" title="JSP总结二(动作元素)"></a>JSP总结二(动作元素)</h1><h2 id="lt-jsp-include-gt"><a href="#lt-jsp-include-gt" class="headerlink" title="&lt;jsp:include&gt;"></a><code>&lt;jsp:include&gt;</code></h2><blockquote>
-<p>前面介绍了一种指令元素<code>include</code>，那是一种静态包含<code>JSP</code>文件，这个标签是动态包含一个<code>JSP</code>页面，也就是被包含的<code>JSP</code>页面和原JSP将合并在一起，转译为一个<code>Servlet</code>类。这是有一定的局限性的，如变量的定义不能重复。</p>
-<p>动态的包含JSP文件即是被包含的JSP和原JSP分别转译为一个Servlet类，这就保证了其中的变量可以重复定义了，因为并不是在一个类中了</p>
-<p><code>&lt;jsp:include page=&quot;相对的文件路径&quot;&gt;&lt;/jsp:include&gt;</code>这种标签转译为Servlet和指令元素<code>include</code>是一样的</p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;%--动态导入在编译的时候是两个jsp文件各自编译成一个Servlet文件，因此其中的变量是不可以共享的，在当前页面中还是可以定义导入页面定义的变量 --%&gt;</div><div class="line">&lt;jsp:include page="form.jsp"&gt;</div><div class="line">    //定义的param可以在form.jsp中使用request.getParameter(String name)取得其中的值</div><div class="line">    &lt;jsp:param value="陈加兵" name="username"/&gt;</div><div class="line">    &lt;jsp:param value="123456" name="password"/&gt;</div><div class="line">&lt;/jsp:include&gt;</div></pre></td></tr></table></figure>
-<h2 id="lt-jsp-forward-gt"><a href="#lt-jsp-forward-gt" class="headerlink" title="&lt;jsp:forward&gt;"></a><code>&lt;jsp:forward&gt;</code></h2><blockquote>
-<p>这是将请求转发给另外一个JSP或者Servlet文件处理，这个和<code>RequestDispatcher</code>是一样的原理，就是Servlet中转发<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//绑定属性，在login.jsp中可以获取</div><div class="line">request.setAttribute("username","陈加兵");</div><div class="line"></div><div class="line">//当前页面的请求将会交给login.jsp文件处理</div><div class="line">&lt;jsp:forward page='login.jsp'&gt;&lt;/jsp:forward&gt;</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="lt-jsp-useBean-gt"><a href="#lt-jsp-useBean-gt" class="headerlink" title="&lt;jsp:useBean&gt;"></a><code>&lt;jsp:useBean&gt;</code></h2><blockquote>
-<p>这个动作元素是用来搭配<code>JavaBean</code>组件的标准标签。<br><code>JavaBean</code>必须满足下面的条件：</p>
-<blockquote>
-<ul>
-<li>必须实现<code>Java.io.Serializable</code>接口</li>
-<li>没有公开的(<code>public</code>)类变量</li>
-<li>具有无参构造函数（默认的都有）</li>
-<li>具有公开的设置方法（<code>setter</code>）与取值方法（<code>getter</code>）</li>
-</ul>
-</blockquote>
-<p>下面就是一个<code>JavaBean</code>组件</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.Serializable;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//这里的变量的值一定要和表单的中的name属性的值一样，否则不能获取</span></div><div class="line">	<span class="keyword">private</span> String username;</div><div class="line">	<span class="keyword">private</span> String password;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> username;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.username = username;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> password;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.password = password;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> age;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.age = age;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> Boolean <span class="title">Checkout</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">"陈加兵"</span>.equals(username)&amp;&amp;<span class="string">"123456"</span>.equals(password);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>使用<code>JavaBean</code>的目的是减少<code>Scriptlet</code>的使用。其中搭配<code>&lt;jsp:useBean&gt;</code>来使用这个<code>JavaBean</code>,并且使用<code>&lt;jsp:setProperty&gt;</code>与<code>&lt;jsp:getProperty&gt;</code>对<code>javaBean</code>进行设值与取值</p>
-<p>注意<code>javaBean</code>一定要搭配表单使用，因为设值的值其实是隐式的调用<code>request.getParameter(String name)</code>来获取表单的值</p>
-<p>下面是一个登录的表单(注意这里的<code>input</code>中的<code>name</code>属性的值一定要和<code>JavaBean</code>组件类的成员变量的名字一样)</p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language="java" contentType="text/html; charset=UTF-8"</div><div class="line">    pageEncoding="UTF-8"%&gt;</div><div class="line">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;</div><div class="line">&lt;title&gt;Insert title here&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;!--提交给Demo1.jsp处理，下面就实现Demo1.jsp--&gt;</div><div class="line">&lt;form action="Demo1.jsp"&gt;</div><div class="line">	&lt;label&gt;姓名：&lt;/label&gt;</div><div class="line">	&lt;input type="text" name="username"&gt;</div><div class="line">	&lt;label&gt;密码：&lt;/label&gt;</div><div class="line">	&lt;input type="password" name="password"&gt;</div><div class="line">	&lt;input type="submit" value="提交"&gt;</div><div class="line">&lt;/form&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>下面我们写一个<code>JSP</code>文件设置<code>JavaBean</code></p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language="java" contentType="text/html; charset=UTF-8"</div><div class="line">	pageEncoding="UTF-8"%&gt;</div><div class="line">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;</div><div class="line">&lt;title&gt;Insert title here&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">	&lt;%--使用JavaBean person是Person创建的对象，相当于 Person person=new Person() </div><div class="line">		其中class是JavaBean的类所在的路径(在com包下的Person文件中)</div><div class="line">		id就是相当于创建的对象</div><div class="line">	--%&gt;</div><div class="line">	&lt;jsp:useBean id="person" class="com.Person"&gt;&lt;/jsp:useBean&gt;</div><div class="line">	</div><div class="line">	&lt;%--为username和password设置值,相当于下面的语句</div><div class="line">	person.setUsername(request.getParameter("username"));</div><div class="line">	person.setPassword(request.getParameter("password"));</div><div class="line">	JavaBean中的变量一定要和表单中的值一样，否则就不能对应，出现错误 </div><div class="line">	其中name就是指定上面的id，即是使用的对象，property就是指定变量</div><div class="line">	--%&gt;</div><div class="line">	</div><div class="line">	&lt;jsp:setProperty property="uesrname" name="person"/&gt;</div><div class="line">	&lt;jsp:setProperty property="password" name="person"/&gt;</div><div class="line">	</div><div class="line">	&lt;%--age是另外的变量，并没有对应着表单的name属性，因此我们可以单独的为其设置值，使用value实行即可设置，这里不必考虑类型，因为在内部会自动转换成JavaBean中的类型 --%&gt;</div><div class="line">	&lt;jsp:setProperty property="age" name="person" value="20"/&gt;</div><div class="line">	</div><div class="line">	&lt;%--获取设置的值，相当于下面的语句：</div><div class="line">		person.getUsername();</div><div class="line">		person.getPassword();</div><div class="line">		person.getAge();</div><div class="line">	 --%&gt;</div><div class="line">	&lt;h1&gt;&lt;jsp:getProperty property="username" name="person" /&gt;&lt;/h1&gt;</div><div class="line">	&lt;h1&gt;&lt;jsp:getProperty property="password" name="person" /&gt;&lt;/h1&gt;</div><div class="line">	&lt;h1&gt;&lt;jsp:getProperty property="age" name="person" /&gt;&lt;/h1&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>其实我们还可以不但可以将表单中的值赋值给变量，还可以使用<code>value</code>和<code>param</code>自己设置</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;%-- 将请求的url中的password的值赋值给username，注意这里的使用的get的请求的话，提交的时候url会有请求值的</div><div class="line">		http:<span class="comment">//localhost:8080/web2/JSP/Demo1.jsp?username=%E9%99%88%E5%8A%A0%E5%85%B5&amp;password=123456</span></div><div class="line">	 --%&gt;</div><div class="line">	&lt;jsp:setProperty property=<span class="string">"username"</span> name=<span class="string">"person"</span> param=<span class="string">"password"</span>/&gt;</div><div class="line">    </div><div class="line">    &lt;%--age是另外的变量，并没有对应着表单的name属性，因此我们可以单独的为其设置值，使用value实行即可设置，这里不必考虑类型，因为在内部会自动转换成JavaBean中的类型 --%&gt;</div><div class="line">	&lt;jsp:setProperty property=<span class="string">"age"</span> name=<span class="string">"person"</span> value=<span class="string">"20"</span>/&gt;</div></pre></td></tr></table></figure>
-<h2 id="JavaBean的存活范围"><a href="#JavaBean的存活范围" class="headerlink" title="JavaBean的存活范围"></a>JavaBean的存活范围</h2><blockquote>
-<p><code>Scope</code>属性决定了javabean对象的存在的范围。可选值有:</p>
-<blockquote>
-<ol>
-<li><code>page</code>(默认值)</li>
-<li><p><code>request</code></p>
-</li>
-<li><p><code>session</code></p>
-</li>
-<li><p><code>application</code></p>
-</li>
-</ol>
-</blockquote>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;jsp:useBean id="person" class="com.anllin.bean.Person" scope="page"&gt;&lt;/jsp:useBean&gt;</div></pre></td></tr></table></figure>
-<h3 id="在page范围"><a href="#在page范围" class="headerlink" title="在page范围"></a>在page范围</h3><blockquote>
-<p>客户每次请求访问<code>jsp</code>页面时，都会创建一个<code>javabean</code>对象。JavaBean对象的有效范围就是当前的<code>jsp</code>文件中，如果不在当前Jsp中，那么就不可以使用该<code>JavaBean</code>对象中设置的值</p>
-<p>比如使用<code>forward</code>转发给另外一个JSP文件，那么此时就会再创建一个<code>JavaBean</code>对象，原来页面的JavaBean对象并没有传过来，也就不能使用其中的值，这个和变量的共享是一个道理的，这个JavaBean对象只能在当前的Jsp文件中调用，不能实现共享</p>
-</blockquote>
-<h3 id="在request范围"><a href="#在request范围" class="headerlink" title="在request范围"></a>在request范围</h3><blockquote>
-<p>客户每次请求访问jsp页面时，都会创建新的javabean对象。有效范围为：</p>
-<blockquote>
-<ul>
-<li><p>客户请求访问的当前jsp网页。</p>
-</li>
-<li><p>和当前网页共享一个客户请求的网页，即当前jsp网页中<code>&lt;%@include %&gt;</code>指令以及<code>&lt;forward&gt;</code>标记包含的其他jsp文件,也就是转发和包含的Jsp文件也是可以共享这个<code>JavaBean</code>对象的，这个和Servlet中的<code>request</code>是一样的，一旦转发了，就可以通过<code>setAttribute()</code>设置属性，那么在转发的页面中就可以访问这个属性</p>
-</li>
-</ul>
-<ul>
-<li><p>当所有共享同一个客户请求的jsp页面执行完毕并向客户端发加响应时，javabean对象结束生命周期。</p>
-</li>
-<li><p><code>javabean</code>对象作为属性保存在<code>httpServletRequest</code>对象中，属性名javabean的<code>id</code>,属性值为<code>javabean</code>对象，因此可以通过<code>HttpRequest.getAttribute()</code>方法取得<code>javabean</code>对象</p>
-</li>
-</ul>
-</blockquote>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">    //Demo1.jsp文件  表单请求提交的JSp文件</div><div class="line">    &lt;%@ page language="java" contentType="text/html; charset=UTF-8"</div><div class="line">	pageEncoding="UTF-8"%&gt;</div><div class="line">    &lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</div><div class="line">    &lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">    &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;</div><div class="line">    &lt;title&gt;Insert title here&lt;/title&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">    </div><div class="line">    &lt;%--设置scope属性为request，这个是必须的，这里的JavaBean对象为person--%&gt;</div><div class="line">	&lt;jsp:useBean id="person" class="com.Person" scope="request"&gt;&lt;/jsp:useBean&gt;</div><div class="line">	</div><div class="line">	&lt;jsp:setProperty property="uesrname" name="person"/&gt;</div><div class="line">	&lt;jsp:setProperty property="password" name="person"/&gt;</div><div class="line">	</div><div class="line">	&lt;jsp:setProperty property="age" name="person" value="20"/&gt;</div><div class="line">&gt; </div><div class="line">e    </div><div class="line">    &lt;%--转发请求到Demo2.jsp文件中，那么就可以在Demo.jsp中共享person对象了--%&gt;</div><div class="line">    &lt;jsp:forward page="Demo2.jsp"&gt;&lt;/jsp:forward&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line"></div><div class="line"></div><div class="line">//Demo2.jsp</div><div class="line"></div><div class="line"></div><div class="line">    &lt;%@page import="com.Person"%&gt;</div><div class="line">    &lt;%@ page language="java" contentType="text/html; charset=UTF-8"</div><div class="line">        pageEncoding="UTF-8"%&gt;</div><div class="line">    &lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</div><div class="line">    &lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">    &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;</div><div class="line">    &lt;title&gt;Insert title here&lt;/title&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">    </div><div class="line">    &lt;%-- 使用JavaBean,这里的scope是必须的，一定要和Demo1.jsp一样，id也要一样 --%&gt;</div><div class="line">    &lt;jsp:useBean id="person" class="com.Person" scope="request"&gt;&lt;/jsp:useBean&gt;</div><div class="line"></div><div class="line"></div><div class="line">    &lt;%--获取username的值 --%&gt;</div><div class="line">    &lt;jsp:getProperty property="username" name="person"/&gt;</div><div class="line"></div><div class="line">    &lt;%</div><div class="line">        //使用HttpServletRequest获取对象person</div><div class="line">        Person p=(Person)request.getAttribute("person");</div><div class="line">        out.println(p.getUsername());  //获取username的值</div><div class="line">    %&gt;</div><div class="line"></div><div class="line">    &lt;/body&gt;</div><div class="line">    &lt;/html&gt;</div></pre></td></tr></table></figure>
-<h3 id="在session范围内"><a href="#在session范围内" class="headerlink" title="在session范围内"></a>在session范围内</h3><blockquote>
-<ul>
-<li><p>我们知道<code>HttpSession</code>是可以在会话期间实现数据共享的，只要是同一个项目中的<code>Jsp</code>文件都是可以共享这个JavaBean对象，但是并不是永久的，因为会话也是有时间限制的，</p>
-</li>
-<li><p><code>javabean</code>对象作为属性保存在HttpSession对象中，属性名为javabean的id,属性值为javabean对象。除了可以通过javabean的id直接引用javabean对象外，也可以通过<code>HttpSession.getAttribute（）</code>方法取得<code>javabean</code>对象</p>
-</li>
-<li><p>一定要注意在每一个<code>&lt;jsp:useBean&gt;</code>中都要写上<code>scope=&quot;session&quot;</code></p>
-</li>
-</ul>
-</blockquote>
-<h3 id="在application范围内"><a href="#在application范围内" class="headerlink" title="在application范围内"></a>在application范围内</h3><blockquote>
-<ul>
-<li><p>我们知道<code>ServletContext</code>存在于整个web应用的生命周期，这个不像<code>session</code>，一旦设置的会话时间结束，那么就不存在了，这个是永远存在的，只要web程序在继续</p>
-</li>
-<li><p><code>javabean</code>对象作为属性保存在<code>application</code>对象中，属性名为<code>javabean</code>的id，属性值为javabean对象，除了可以通过javabean的<code>id</code>直接引用对象外，也可以通过javabean的<code>application.getAttribute()</code>方法取得javabean对象</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="重要的属性"><a href="#重要的属性" class="headerlink" title="重要的属性"></a>重要的属性</h3><blockquote>
-<p>其实<jsp:usebean>不仅仅可以对于表单中请求可以转换为对象的值，上面我们说过了存活范围，其实只要在这个请求范围内，并且将对象绑定到响应的属性上面，那么就可以在jsp文件中使用改标签接收其值。</jsp:usebean></p>
-<p>其实一般在表单提交之后，我们会使用Sevlet文件验证是否密码和用户名正确，那么就不是直接提交给jsp文件，此时就像上面说过的，不影响标签的使用，只要将JavaBean对象绑定到响应范围的属性上，便是可以实现对象的共享，代码如下：</p>
-<blockquote>
-<p>ServletDemo文件</p>
-</blockquote>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.PrintWriter;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.RequestDispatcher;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletDemo</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		<span class="comment">//创建对象，并且设置值</span></div><div class="line">			Person person=<span class="keyword">new</span> Person();</div><div class="line">			person.setUsername(<span class="string">"陈加兵"</span>);</div><div class="line">			person.setPassword(<span class="string">"123456"</span>);</div><div class="line">			</div><div class="line">			<span class="comment">//将JavaBean对象绑定到request上，相当于存活范围为request</span></div><div class="line">			<span class="comment">//注意这里的键值一定要是和对象的名称一样，否则不行</span></div><div class="line">			request.setAttribute(<span class="string">"person"</span>, person);</div><div class="line">			<span class="comment">//转发请求到jsp文件，下面我们就将在jsp文件中使用JavaBean标签接收</span></div><div class="line">			RequestDispatcher dispatcher=request.getRequestDispatcher(<span class="string">"JSP/demo1.jsp"</span>);</div><div class="line">			dispatcher.forward(request, response);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>demo1.jsp:上面文件转发过来的，接收JavaBean对象</p>
-</blockquote>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language="java" contentType="text/html; charset=UTF-8"</div><div class="line">    pageEncoding="UTF-8"%&gt;</div><div class="line">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;</div><div class="line">&lt;title&gt;Insert title here&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;%-- 使用标签接收转发过来的JavaBean对象，scope一定要设置为request,id就是传过来的对象，一定要和前面的名称一样，下面的语句相当于：</div><div class="line">	Person person=(Person)request.getAttribute("person");</div><div class="line"> --%&gt;</div><div class="line">&lt;jsp:useBean id="person" class="com.Person" scope="request"&gt;&lt;/jsp:useBean&gt;</div><div class="line"></div><div class="line">&lt;h1&gt;&lt;jsp:getProperty property="username" name="person"/&gt;&lt;/h1&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.cnblogs.com/zfc2201/archive/2011/08/17/2143615.html" target="_blank" rel="external">http://www.cnblogs.com/zfc2201/archive/2011/08/17/2143615.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;JSP总结二-动作元素&quot;&gt;&lt;a href=&quot;#JSP总结二-动作元素&quot; class=&quot;headerlink&quot; title=&quot;JSP总结二(动作元素)&quot;&gt;&lt;/a&gt;JSP总结二(动作元素)&lt;/h1&gt;&lt;h2 id=&quot;lt-jsp-include-gt&quot;&gt;&lt;a href=
-    
-    </summary>
-    
-      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
-    
-    
-      <category term="JSP" scheme="http://chenjiabing666.github.io/tags/JSP/"/>
     
   </entry>
   
