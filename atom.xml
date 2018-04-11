@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-04-02T03:08:18.065Z</updated>
+  <updated>2018-04-11T16:41:37.031Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,410 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Struts2之类型转换器</title>
+    <link href="http://chenjiabing666.github.io/2018/04/12/Struts2%E4%B9%8B%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%99%A8/"/>
+    <id>http://chenjiabing666.github.io/2018/04/12/Struts2之类型转换器/</id>
+    <published>2018-04-11T16:41:07.000Z</published>
+    <updated>2018-04-11T16:41:37.031Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Struts2之类型转换器"><a href="#Struts2之类型转换器" class="headerlink" title="Struts2之类型转换器"></a>Struts2之类型转换器</h1><ul>
+<li>在我们接收表单的请求参数的时候其实默认的都是String类型，但是有时候我们需要其他的数据类型，比如int,double,float,Date。</li>
+<li>其实前面表单的传值都是字符串形式的，但是为什么我们在JavaBean中定义了不同的类型的数据，Struts还是会正确接收表单传递过来的值呢，因为使用了Struts中的内建的类型转换器</li>
+</ul>
+<h2 id="传统的类型转换器"><a href="#传统的类型转换器" class="headerlink" title="传统的类型转换器"></a>传统的类型转换器</h2><ul>
+<li>在Servlet中我们可以自己获取请求参数自己转换类型，通常使用request.getParamerter(String name) 获取请求的参数 如下:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String username= requst.getParameter(<span class="string">"username"</span>);</div><div class="line"><span class="comment">//获取年龄然后转换成了整数</span></div><div class="line"><span class="keyword">int</span> age=Integer.parseInt(requst.getParameter(<span class="string">"age"</span>));</div></pre></td></tr></table></figure>
+<h2 id="内建的类型转换器"><a href="#内建的类型转换器" class="headerlink" title="内建的类型转换器"></a>内建的类型转换器</h2><ul>
+<li>其实内建的类型转换器已经可以完成大部分的功能了，比如表单传值，其实传递的是字符串，但是我们在JavaBean中定义的却是不同类型的数据，内部原理就是用了内置的类型转换器</li>
+<li>内建类型转换器可以完成基本类型之前的转换</li>
+</ul>
+<h2 id="自定义类型转换器"><a href="#自定义类型转换器" class="headerlink" title="自定义类型转换器"></a>自定义类型转换器</h2><ul>
+<li><p>前面说的内建的类型转换器只是在普通的类型之间的转换，都是一些基本的类型可以实现自动转换，并不用自己定义类型转换器。但是我们现在需要将输出的字符串转换为复合对象，比如一个User（username，password）类，那么现在就不能使用内建的类型转换器自动转换了，现在需要自己定义类型转换器了。</p>
+</li>
+<li><p>实现类型转换器也是基于OGNL实现的，在OGNL中有一个<code>TypeConverter</code>接口，但是这个接口太复杂了，因此OGNL还提供了一个类<code>DefaultTypeConverter</code>，通过继承这个类就可以实现类型转换器了。</p>
+</li>
+<li><p>假设我们在登录界面需要在一个text中输入用户名和密码用逗号隔开，现在我们可以使用自定义的转换器。现在登录的JSP如下:</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;form action="http://localhost:8080/web3/login" method="post"&gt;</div><div class="line">	&lt;label&gt;请输入用户名和密码(逗号隔开)：&lt;/label&gt;</div><div class="line">	&lt;input type="text" name="user"&gt;</div><div class="line">	&lt;input type="submit" value="提交"&gt;</div><div class="line">	&lt;/form&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>定义的User类如下</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String username;  <span class="comment">//用户名</span></div><div class="line">	<span class="keyword">private</span> String password;  <span class="comment">//密码</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> username;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.username = username;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> password;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.password = password;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Action类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> com.opensymphony.xwork2.Action;</div><div class="line"><span class="keyword">import</span> com.user.User;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginAction</span> <span class="keyword">implements</span> <span class="title">Action</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> User user; <span class="comment">// User对象</span></div><div class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> user;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUser</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.user = user;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		<span class="keyword">return</span> SUCCESS;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>UserConverter（转换器类）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"><span class="keyword">import</span> com.user.User;</div><div class="line"><span class="keyword">import</span> ognl.DefaultTypeConverter;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserConverter</span> <span class="keyword">extends</span> <span class="title">DefaultTypeConverter</span> </span>&#123;</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * context：类型转换的上下文环境</div><div class="line">	 * value: value是需要转换的参数，随着转换的方向不同，value的参数值也是不一样的，因此需要强制转化</div><div class="line">	 * toType： 表示转换后的目标类型</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">convertValue</span><span class="params">(Map context, Object value, Class toType)</span> </span>&#123;</div><div class="line">		System.err.println(<span class="string">"调用了"</span>);</div><div class="line">		<span class="comment">// 有字符串转http://download.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html#sum换为User类</span></div><div class="line">		<span class="comment">// toType表示转向的类型</span></div><div class="line">		<span class="keyword">if</span> (toType == User.class) &#123;</div><div class="line"></div><div class="line">			String[] params = (String[]) value; <span class="comment">// 将字符串转换为数组</span></div><div class="line">			User user = <span class="keyword">new</span> User(); <span class="comment">// 创建User对象</span></div><div class="line">			<span class="comment">// 利用逗号将数组中的第一个字符串分割为两个字符串，设置成username，password</span></div><div class="line">			user.setUsername(params[<span class="number">0</span>].split(<span class="string">","</span>)[<span class="number">0</span>]);</div><div class="line">			user.setPassword(params[<span class="number">0</span>].split(<span class="string">","</span>)[<span class="number">1</span>]);</div><div class="line">			<span class="keyword">return</span> user; <span class="comment">// 最后一定要返回User对象</span></div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 如果是从复合类转换为字符串</span></div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (toType == String.class) &#123;</div><div class="line">			User user = (User) value; <span class="comment">// 将value转换为User对象</span></div><div class="line">			<span class="comment">// 最后返回一个字符串表现的形式</span></div><div class="line">			<span class="keyword">return</span> user.getUsername() + <span class="string">","</span> + user.getPassword();</div><div class="line"></div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">null</span>; <span class="comment">// 没有相互转换的条件返回null</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>从上面的代码可以看出有两类的转换:一是从字符串转换为User类，二是从User类转换为字符串，这个都是使用toType来控制的。</li>
+</ul>
+<h3 id="ConverterValue方法参数和返回值的含义"><a href="#ConverterValue方法参数和返回值的含义" class="headerlink" title="ConverterValue方法参数和返回值的含义"></a>ConverterValue方法参数和返回值的含义</h3><ul>
+<li><p>context： 是类型转换环境的上下文</p>
+</li>
+<li><p>value ：是需要转换的类型参数。随着转换方向的不同，value参数的值也是不一样的，当把字符串类型转换为User类型时，value就是原始字符串。当需要把User类型向字符串类型转换时，value是User的实例。当然无论向哪一个方向转换，value都是需要强制转换的。</p>
+</li>
+<li><p>toType: 是转换后的目标类型。</p>
+</li>
+<li><p>为什么自己当向User类转换的时候，value要转换为一个字符数组呢？</p>
+<ul>
+<li>因为这里对应的是一个文本，如果我们对应的是一个多选框，那么此时就是一个数组了，因此这里强制转换为数组是一个通用的写法</li>
+</ul>
+</li>
+</ul>
+<h3 id="局部转换器"><a href="#局部转换器" class="headerlink" title="局部转换器"></a>局部转换器</h3><ul>
+<li><p>转换器分为局部转换器和全局转换器，局部转换器是针对指定的Action类，但是全局转换器是针对的是该项目中所有需要转换的Action类。</p>
+</li>
+<li><p>前面已经实现了Action类，现在我们只需要定义一个ActionName-conversion.properties文件和Action放在一个目录下即可，其中的ActionName是Action的类名，比如上面的Action类是LoginAction，那么这里的文件就是LoginAction-conversion,.properties。其中的内容如下：</p>
+<ul>
+<li>user是Action中定义User对象，com.converter.UserConverter是对应的转换的类，一定要定义到包名。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">user=com.converter.UserConverter</div></pre></td></tr></table></figure>
+<h3 id="全局转换器"><a href="#全局转换器" class="headerlink" title="全局转换器"></a>全局转换器</h3><ul>
+<li>全局转换器是作用于全部需要转换的Action的，只需要定义一个xwork-conversion. Properties。这个的名字就不需要改变了，放在src目录下即可，这样才可以作用到全局中。内容如下:</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">com.user.User=com.converter.UserConverter</div><div class="line">com.date.Date=com.converter.Date</div></pre></td></tr></table></figure>
+<ul>
+<li><p>其中的内容是一键值对存在的，com.user.User对应的是定义的JavaBean类，这里不再是action类中的定义的User对象了，是需要转换对象的类，com.converter.UserConverter这个是定义转换器的类。</p>
+</li>
+<li><p>从上面我们可以看出来定义两个转换器，最后一个是将字符串转换为日期类型的转换器。其实其中可以定多个类型转换器，并且只要是一键值对的形式写出即可。</p>
+</li>
+</ul>
+<h2 id="基于Struts2的类型转换器"><a href="#基于Struts2的类型转换器" class="headerlink" title="基于Struts2的类型转换器"></a>基于Struts2的类型转换器</h2><ul>
+<li><p>上面的类型转换器都是基于OGNL的DefaultTypeConverter类实现的，基于该类实现转换时都要实现ConverterValue()方法，无论是从字符串转换为复合类型还是从复合类型转换为字符串都是在这个方法中实现。</p>
+</li>
+<li><p>为了简化类型转换器的实现，Struts2提供了一个StrutsTypeConverter抽象类，这个抽象类是DefaultTypeConverter的子类。其中重要的方法如下:</p>
+<ul>
+<li>public Object convertFromString(Map context, String[] values, Class toClass)将字符串转换为复合类型个方法。</li>
+<li>context是上下文环境，value是字符串数组，toClass是要转换的类型</li>
+<li>public String convertToString(Map context, Object values) 将复合类型转换为字符串</li>
+<li>values是复合类对象，context是上下文环境</li>
+<li>public Object convertValue(Map context, Object values, Class toClass)<br>实现DefaultTypeConverter方法，其中的变量还是上面的意思</li>
+</ul>
+</li>
+<li><p>下面实现上面的登录转换，如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"><span class="keyword">import</span> org.apache.struts2.util.StrutsTypeConverter;</div><div class="line"><span class="keyword">import</span> com.user.User;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserConverterStruts</span> <span class="keyword">extends</span> <span class="title">StrutsTypeConverter</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">protected</span> Object <span class="title">performFallbackConversion</span><span class="params">(Map context, Object o,</span></span></div><div class="line">			Class toClass) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">super</span>.performFallbackConversion(context, o, toClass);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 将字符串转换为复合类型的方法</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">convertFromString</span><span class="params">(Map context, String[] values, Class toClass)</span> </span>&#123;</div><div class="line">		User user = <span class="keyword">new</span> User();   <span class="comment">//创建User对象</span></div><div class="line">		String[] userValues = values[<span class="number">0</span>].split(<span class="string">","</span>); <span class="comment">// 将字符串数组中的第一个字符串分隔开</span></div><div class="line">		user.setUsername(userValues[<span class="number">0</span>]);</div><div class="line">		user.setPassword(userValues[<span class="number">1</span>]);</div><div class="line">		<span class="keyword">return</span> user;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 将复合类型转换为字符串</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">convertToString</span><span class="params">(Map context, Object values)</span> </span>&#123;</div><div class="line">		User user = (User) values;   <span class="comment">//强制转换成User类型的</span></div><div class="line">		String username = user.getUsername(); <span class="comment">//获取username和password</span></div><div class="line">		String password = user.getPassword();</div><div class="line">		<span class="keyword">return</span> <span class="string">"&lt;"</span> + username + <span class="string">","</span> + password + <span class="string">"&gt;"</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>有了上面的转换器，那么局部转换器和全局转换器的配置还是和上面的一样，这里就不在赘述了。</p>
+</li>
+</ul>
+<h2 id="数组属性的类型转换器"><a href="#数组属性的类型转换器" class="headerlink" title="数组属性的类型转换器"></a>数组属性的类型转换器</h2><ul>
+<li>数组类型的转换器是用于提交的参数为数组的类型的，也就是同时Action中有一个属性为数组。</li>
+<li>现在我们要同时输入两个用户的信息，jsp如下:</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;form action="http://localhost:8080/web3/login" method="post"&gt;</div><div class="line">&lt;label&gt;请输入用户名和密码(逗号隔开)：&lt;/label&gt;</div><div class="line">&lt;input type="text" name="users"&gt;</div><div class="line">&lt;input type="text" name="users"&gt;</div><div class="line">&lt;input type="submit" value="提交"&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>从上面的代码我们可以看出这里text中有两个name属性相同的表单，这个同时提交上去就是一个数组。</p>
+</li>
+<li><p>Action类：(定义一个User数组):</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> com.opensymphony.xwork2.Action;</div><div class="line"><span class="keyword">import</span> com.user.User;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginSAction</span> <span class="keyword">implements</span> <span class="title">Action</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> User[] users;  <span class="comment">//定义数组类型User</span></div><div class="line"></div><div class="line">	<span class="keyword">public</span> User[] getUsers() &#123;</div><div class="line">		<span class="keyword">return</span> users;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsers</span><span class="params">(User[] users)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.users = users;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line"></div><div class="line">		System.out.println(getUsers()[<span class="number">0</span>].getUsername());</div><div class="line">		<span class="keyword">return</span> SUCCESS;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>数组转换器:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"><span class="keyword">import</span> org.apache.struts2.util.StrutsTypeConverter;</div><div class="line"><span class="keyword">import</span> com.user.User;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UsersConverterStruts</span> <span class="keyword">extends</span> <span class="title">StrutsTypeConverter</span> </span>&#123;</div><div class="line">	<span class="comment">// 将字符串转换复合类型</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">convertFromString</span><span class="params">(Map context, String[] values, Class toClass)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (values.length &gt; <span class="number">1</span>) &#123;</div><div class="line">			User[] results= <span class="keyword">new</span> User[values.length]; <span class="comment">// 创建对象，这里是创建和字符串数组一样的长度</span></div><div class="line">			<span class="comment">// 遍历所有的字符串数组，然后将其填入每一个User对象中</span></div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; values.length; i++) &#123;</div><div class="line">				User user=<span class="keyword">new</span> User();  <span class="comment">//创建user对象</span></div><div class="line">				String[] uservalues = values[i].split(<span class="string">","</span>);</div><div class="line">				user.setUsername(uservalues[<span class="number">0</span>]); <span class="comment">// 将其设置为User的属性</span></div><div class="line">				user.setPassword(uservalues[<span class="number">1</span>]);</div><div class="line">				results[i]=user;   <span class="comment">//将实例化的user对象，填入数组</span></div><div class="line">			&#125;</div><div class="line">			<span class="keyword">return</span> results;</div><div class="line">		&#125; <span class="keyword">else</span> &#123; <span class="comment">// 这里表示数组中只有一个字符串</span></div><div class="line">			User user = <span class="keyword">new</span> User(); <span class="comment">// 创建对象</span></div><div class="line">			String[] uservalues = values[<span class="number">0</span>].split(<span class="string">","</span>);</div><div class="line">			user.setUsername(uservalues[<span class="number">0</span>]);</div><div class="line">			user.setPassword(uservalues[<span class="number">1</span>]);</div><div class="line">			<span class="keyword">return</span> user;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 将复合类型转换为字符串</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">convertToString</span><span class="params">(Map context, Object values)</span> </span>&#123;</div><div class="line">		<span class="comment">// 只是一个单个的User类型的</span></div><div class="line">		<span class="keyword">if</span> (values <span class="keyword">instanceof</span> User) &#123;</div><div class="line">			User user = (User) values;</div><div class="line">			String username = user.getUsername();</div><div class="line">			String password = user.getPassword();</div><div class="line">			<span class="keyword">return</span> <span class="string">"&lt;"</span> + username + <span class="string">","</span> + password + <span class="string">"&gt;"</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// User数组</span></div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (values <span class="keyword">instanceof</span> User[]) &#123;</div><div class="line">			User[] users = (User[]) values;  <span class="comment">//转换为User数组</span></div><div class="line">			String results = <span class="string">"["</span>;</div><div class="line">			<span class="keyword">for</span> (User user : users) &#123;</div><div class="line">				String username = user.getUsername();</div><div class="line">				String password = user.getPassword();</div><div class="line">				results += <span class="string">"&lt;"</span> + username + <span class="string">","</span> + password + <span class="string">"&gt;"</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">return</span> results + <span class="string">"]"</span>;   <span class="comment">//返回全部的字符串</span></div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Struts2之类型转换器&quot;&gt;&lt;a href=&quot;#Struts2之类型转换器&quot; class=&quot;headerlink&quot; title=&quot;Struts2之类型转换器&quot;&gt;&lt;/a&gt;Struts2之类型转换器&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;在我们接收表单的请求参数的时候其实默认的
+    
+    </summary>
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/categories/Struts2/"/>
+    
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/tags/Struts2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Struts之标签库</title>
+    <link href="http://chenjiabing666.github.io/2018/04/12/Struts%E4%B9%8B%E6%A0%87%E7%AD%BE%E5%BA%93/"/>
+    <id>http://chenjiabing666.github.io/2018/04/12/Struts之标签库/</id>
+    <published>2018-04-11T16:40:06.000Z</published>
+    <updated>2018-04-11T16:40:46.361Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Struts标签库"><a href="#Struts标签库" class="headerlink" title="Struts标签库"></a>Struts标签库</h1><ul>
+<li><p>如果想要在jsp页面使用struts2的标签，需要引入标签库</p>
+<ul>
+<li><code>&lt;%@ taglib uri=&quot;/struts-tags&quot;  prefix=&quot;s&quot;%&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="数据标签"><a href="#数据标签" class="headerlink" title="数据标签"></a>数据标签</h2><ul>
+<li>作用: 用于数据的存储和处理</li>
+</ul>
+<h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><ul>
+<li><p>action标签是用来在JSP页面中调用Action某个Action类的，该标签有如下的几个属性；</p>
+</li>
+<li><p>Id<br>该属性用来指定Action的引用id</p>
+</li>
+<li><p>name<br>该属性是用来指定Action类的映射地址</p>
+</li>
+<li><p>namespace<br>该属性用来指定Action类所在namespace</p>
+</li>
+<li><p>executeResult<br>该属性用来指定是否将Action类的处理结果也跳转的那个视图内容包含到本页面中，默认值为false，不包含</p>
+</li>
+<li><p>ignoreContextParams<br>该属性用来指定是够将请求的参数传入到Action中，默认为false，即是传入</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>调用第一个action<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 调用登录的Action类，name指定&lt;action&gt;标签的name属性值，executeResult为true指示包含Action响应的内容</span></div><div class="line">		namespace指定Action类所在包指定的namespace</div><div class="line">--&gt;</div><div class="line"><span class="tag">&lt;<span class="name">s:action</span> <span class="attr">name</span>=<span class="string">"login"</span> <span class="attr">executeResult</span>=<span class="string">"true"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span><span class="tag">&lt;/<span class="name">s:action</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>调用第二个action<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 调用第二个Action，表示注册页面，ignoreContextParams为true表示不传入参数，那么其中的password和username就不能接收参数了，因此输出为NULL --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">s:action</span> <span class="attr">name</span>=<span class="string">"regist"</span> <span class="attr">executeResult</span>=<span class="string">"true"</span> <span class="attr">namespace</span>=<span class="string">"/"</span> <span class="attr">ignoreContextParams</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">s:action</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="bean"><a href="#bean" class="headerlink" title="bean"></a>bean</h3><ul>
+<li><p>bean标签用来创建一个JavaBean实例，和action标签差不多，就是在jsp页面中调用JavaBean对象，创建一个对象,不过这个对象是存在Stack Context中的，不是值栈中的。</p>
+</li>
+<li><p>id<br>用来表示创建的JavaBean类的实例，这个是用来在Stack Context中查看状态的,使用标签<s:debug></s:debug></p>
+</li>
+<li><p>name<br>用来指定JavaBean，指定JavaBean类所在的路径</p>
+</li>
+<li><p>var<br>这个是id一样的功能，其实可以代替id</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;s:bean name="com.user.User" id="myBean" &gt;</div><div class="line">		&lt;!-- 使用param标签为其赋值 --&gt;</div><div class="line">		&lt;s:param name="username" value="'陈加兵'"&gt;&lt;/s:param&gt;</div><div class="line">		&lt;s:param name="age" value="22"&gt;&lt;/s:param&gt;</div><div class="line"></div><div class="line">		姓名: &lt;s:property value="username"/&gt;&lt;br&gt;</div><div class="line">		年龄:&lt;s:property value="age"/&gt;</div><div class="line">&lt;/s:bean&gt;</div></pre></td></tr></table></figure>
+<h3 id="date"><a href="#date" class="headerlink" title="date"></a>date</h3><ul>
+<li><p>date标签用于格式化一个日期，除了格式化输出当前的日期，也可以计算指定的日期和当前日期时刻之间的时差</p>
+</li>
+<li><p>format<br>可选属性，用于指定格式化的格式，如yyyy/MM/dd-HH:mm:ss</p>
+</li>
+<li><p>name<br>必填的值，该属性指定格式化日期的值，比如Date对象</p>
+</li>
+<li><p>nice<br>可选属性，如果为true那么将会输出指定日期和当前日期的时差，默认为false</p>
+</li>
+<li><p>timezone<br>可选属性，指定格式化所用的时区</p>
+</li>
+<li><p>var<br>可选属性，如果指定了该属性，该时间对象将放入值栈中，可以使用id代替，但是推荐使用var</p>
+</li>
+</ul>
+<ul>
+<li><strong>如果同时指定了nice=true，和format那么format将会失效</strong></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 创建一个日期对象now，表示当前的时间 --&gt;</div><div class="line">	&lt;s:set var="now" value="new java.util.Date()"&gt;&lt;/s:set&gt;</div><div class="line">	&lt;!--  格式化当前的日期--&gt;</div><div class="line">	&lt;s:date name="#now" format="dd/MM/yyyy HH:mm:ss"/&gt;&lt;br&gt;</div></pre></td></tr></table></figure>
+<h3 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h3><ul>
+<li>该标签是辅助标签，用来生成一个超链接，便于查看值栈，和Stack Context中的信息。</li>
+</ul>
+<h3 id="i18n"><a href="#i18n" class="headerlink" title="i18n"></a>i18n</h3><ul>
+<li>主要用于在视图上加载国际资源，使用该标签时需要指定一个name属性，该name属性为需要加载的国际化资源文件的basename</li>
+</ul>
+<h3 id="include"><a href="#include" class="headerlink" title="include"></a>include</h3><ul>
+<li><p>将指定的jsp文件或者Servlet文件包含在当前的jsp页面，这个相当于<jsp:include>标签。</jsp:include></p>
+</li>
+<li><p>value<br>指定被包含的jsp或者Servlet文件路径</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;s:include value="success.jsp"&gt;&lt;/s:include&gt;</div></pre></td></tr></table></figure>
+<h3 id="param"><a href="#param" class="headerlink" title="param"></a>param</h3><ul>
+<li>param标签主要是为其他的标签提供参数的</li>
+<li><p>注意value的值是使用的OGNL表达式，一定要注意，如果指定字符串要加单引号或者双引号</p>
+</li>
+<li><p>name<br>指定要赋值的变量名</p>
+</li>
+<li><p>value<br>指定变量的值</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;s:bean name="com.user.User" id="myBean" &gt;</div><div class="line">		&lt;!-- 使用param标签为其赋值 --&gt;</div><div class="line">		&lt;s:param name="username" value="'陈加兵'"&gt;&lt;/s:param&gt;</div><div class="line">		&lt;s:param name="age" value="22"&gt;&lt;/s:param&gt;</div><div class="line">&lt;/s:bean&gt;</div></pre></td></tr></table></figure>
+<h3 id="push"><a href="#push" class="headerlink" title="push"></a>push</h3><ul>
+<li>push标签用于将某个值放到ValueStack(值栈)中，从而更简单的访问该值，其实不将其防放置在值栈中也是可以访问，使用#即可。只有一个属性value就是需要放在栈顶的值</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;s:bean name="com.user.User" id="myBean"&gt;</div><div class="line">		&lt;s:param name="username" value="'陈加兵'"&gt;&lt;/s:param&gt;</div><div class="line">		&lt;s:param name="age" value="22"&gt;&lt;/s:param&gt;</div><div class="line">&lt;/s:bean&gt;</div><div class="line"></div><div class="line">&lt;%-- 只有在push标签内是，被放到值栈中的对象才存在，一旦出了push标签那么就不存在了 --%&gt;</div><div class="line">	&lt;s:push value="#myBean"&gt;</div><div class="line">		&lt;s:property value="username"/&gt;</div><div class="line">		&lt;s:property value="age"/&gt;</div><div class="line">		&lt;!-- 这个可以看出值栈中有值 --&gt;</div><div class="line">		&lt;s:debug&gt;&lt;/s:debug&gt;</div><div class="line">	&lt;/s:push&gt;</div><div class="line">	&lt;!-- 这个没有myBean对象 --&gt;</div><div class="line">	&lt;s:debug&gt;&lt;/s:debug&gt;</div></pre></td></tr></table></figure>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><ul>
+<li><p>set标签是用来将某一个值放入指定的范围，当然也是相当于创建一个新的变量</p>
+</li>
+<li><p>id<br>该属性用来指定该元素的引用ID（废弃）</p>
+</li>
+<li><p>var<br>该属性用来指定创建的新变量的名称</p>
+</li>
+<li><p>value<br>用来指定变量的值，这个是使用的OGNL表达式</p>
+</li>
+<li><p>scope<br>该属性用来指定新变量的放置范围，可选值有page,request,session,application和action，如果没有指定该属性，则默认放在Stack Context中</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;s:set var="x" value="'陈加兵'"&gt;&lt;/s:set&gt;</div><div class="line">&lt;s:property value="#x"/&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>获取指定范围的值,其实相当于在指定的范围内绑定属性值，可以实现数据共享：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;s:set var="x" value="'陈加兵'" scope="session"&gt;&lt;/s:set&gt;</div><div class="line">&lt;s:property value="#session.x"/&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>其实set的真正的作用是变量放置在指定的范围内，如果一个属性的访问的太繁琐了，比如访问user.name,但是这个值需要频繁的使用，这时就创建一变量存放这个值，并且设定范围:</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;s:set var="x" value="user.name"&gt;&lt;/s:set&gt;</div><div class="line">&lt;s:property value="#x"/&gt;</div></pre></td></tr></table></figure>
+<h3 id="url"><a href="#url" class="headerlink" title="url"></a>url</h3><ul>
+<li><p>url标签用于在页面生成一个url地址，该标签的属性如下:</p>
+</li>
+<li><p>id<br>指定该元素的引用id，如果指定了该属性，那么在Stack Context中就会有这个id，那么就可以使用#来获取它的值</p>
+</li>
+<li><p>value<br>该属性用来指定生成URL地址，如果不指定该属性，那么action属性指定的Action作为URL地址</p>
+</li>
+<li><p>action<br>该属性用来指定生成URL地址值的action，如果不指定该属性，那么使用value属性值作为URL地址值</p>
+</li>
+<li><p>method<br>该属性用来指定使用action的方法</p>
+</li>
+<li><p>encode<br>该属性用来指定是否需要encode请求参数，默认值为true</p>
+</li>
+<li><p>includeParams<br>该属性用来指定是否包含请求参数，可选值为：none,get,和all默认的为none</p>
+</li>
+<li><p>includeContext<br>该属性指定是否需要当前上下文包含在url地址中</p>
+</li>
+<li><p>anchor<br>该属性指定URL的锚点</p>
+</li>
+<li><p>Scheme<br>该属性用来指定URL使用的协议(HTTP或者HTTPS)</p>
+</li>
+<li><p>namespace<br>该属性用来指定命名空间，使用action的时候指定</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;s:url value="success.jsp" includeParams="get" id="myUrl"&gt;</div><div class="line">	&lt;s:param name="username" value="'陈加兵'"&gt;&lt;/s:param&gt;</div><div class="line">&lt;/s:url&gt;</div><div class="line">&lt;hr&gt;</div><div class="line">&lt;s:url action="login"&gt;&lt;/s:url&gt;</div><div class="line">&lt;hr&gt;</div><div class="line"></div><div class="line">&lt;s:url action="login" namespace="/user" includeParams="get"&gt;</div><div class="line">	&lt;s:param name="username" value="'陈加兵'"&gt;&lt;/s:param&gt;</div><div class="line">&lt;/s:url&gt;</div><div class="line"></div><div class="line">&lt;hr&gt;</div><div class="line">&lt;!-- 获取值 --&gt;</div><div class="line">&lt;s:property value="#myUrl"/&gt;</div></pre></td></tr></table></figure>
+<h3 id="property"><a href="#property" class="headerlink" title="property"></a>property</h3><ul>
+<li><p>property标签是用来在页面中输出指定值，该标签有如下属性:</p>
+</li>
+<li><p>id<br>指定该元素的标识（废弃）</p>
+</li>
+<li><p>value<br>指定需要输出的特定的值，注意这里使用的OGNL表达式，如果没有指定value属性，那么将会输出值栈中的栈顶的值</p>
+</li>
+<li><p>escape<br>指定是否转义输出内容中HTML，其默认值为true</p>
+</li>
+<li><p>default<br>指定一个默认的输出值，如果value中的值为空，那么就会默认输出这个值</p>
+</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 转义标签h1，输出内容 --&gt;</div><div class="line">&lt;s:property value=<span class="string">"'&lt;h1&gt;陈加兵&lt;/h1&gt;'"</span> escape=<span class="string">"false"</span>/&gt;</div><div class="line">&lt;!-- 输出Stack Context中的内容，并且指定了默认值 --&gt;</div><div class="line">&lt;s:property value=<span class="string">"#username"</span>  <span class="keyword">default</span>=<span class="string">"输出一个默认值"</span>/&gt;</div><div class="line">&lt;!-- 输出栈顶的值 --&gt;</div><div class="line">&lt;s:property/&gt;</div></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>数据标签最重要的就是<code>set</code>,<code>property</code>,<code>debug</code>,<code>i18n</code>这些标签，其他的了解写即可</li>
+</ul>
+<h2 id="控制标签"><a href="#控制标签" class="headerlink" title="控制标签"></a>控制标签</h2><ul>
+<li>控制标签主要用于条件和循环等流程控制</li>
+</ul>
+<h3 id="if-elseif-else"><a href="#if-elseif-else" class="headerlink" title="if/elseif/else"></a>if/elseif/else</h3><ul>
+<li>其中elseif允许出现多次</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;s:set var="age" value="22"&gt;&lt;/s:set&gt;</div><div class="line">&lt;s:if test="#age&gt;10"&gt;</div><div class="line">	&lt;s:property value="#age+'大于10'" /&gt;</div><div class="line">&lt;/s:if&gt;</div><div class="line">&lt;s:elseif test="#age&gt;20"&gt;</div><div class="line">	&lt;s:property value="#age+'大于20'" /&gt;</div><div class="line">&lt;/s:elseif&gt;</div><div class="line">&lt;s:else&gt;</div><div class="line">	&lt;s:property value="#age+'在10与20之间'" /&gt;</div><div class="line">&lt;/s:else&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>并且和或的关系(&amp;&amp;,||)</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;%-- 新建一个集合list --%&gt;</div><div class="line">&lt;s:set var="list" value="&#123;'陈加兵','郑元梅',22,33&#125;"&gt;&lt;/s:set&gt;</div><div class="line">&lt;%-- 指定begin,end获取前3个元素--%&gt;</div><div class="line">&lt;s:iterator value="#list" var="item" status="iter"&gt;</div><div class="line">	&lt;s:if test="#iter.isOdd()&amp;&amp;#iter.getIndex()&gt;0"&gt;</div><div class="line">		&lt;s:property value="#item+'---'+#iter.getIndex()"/&gt;</div><div class="line">		&lt;br&gt;</div><div class="line">	&lt;/s:if&gt;</div><div class="line">&lt;/s:iterator&gt;</div></pre></td></tr></table></figure>
+<h3 id="iterator"><a href="#iterator" class="headerlink" title="iterator"></a>iterator</h3><ul>
+<li><p>iterator标签主要用于对集合进行迭代，这里的集合包含list，Set和数组，也可以对Map集合进行迭代输出。</p>
+</li>
+<li><p>value<br>可选属性，该属性指定迭代的集合，如果没有指定value属性，那么就会迭代ValuStack栈顶的集合。</p>
+</li>
+<li><p>var<br>可选属性，该属性指定的是迭代的集合中的每一个元素，放在Stack Context中·</p>
+</li>
+<li><p>status<br>可选属性，该属性指定迭代对象的IteratorStatus实例存放在Stack Context中，通过这个属性可以判断当前迭代元素的属性。例如是否为最后一个，以及当前元素的索引</p>
+</li>
+<li><p>begin<br>可选属性，指定从迭代对象第几个元素开始迭代</p>
+</li>
+<li><p>end<br>可选属性，指定迭代到对象的第几个元素结束</p>
+</li>
+<li><p>step<br>可选属性，指定步长</p>
+</li>
+</ul>
+<ul>
+<li>如果迭代元素指定了status，那么就可以调用如下的属性查看迭代元素的当前的属性，可以调用如下的几个方法查看：<ul>
+<li>int getCount()   返回当前迭代了几个元素</li>
+<li>int getIndex()   返回当前迭代元素的索引</li>
+<li>boolean isEven() 当前迭代元素的索引是否为偶数</li>
+<li>boolean isFirst() 当前迭代元素是否为第一个元素</li>
+<li>boolean isLast()  当前迭代元素是否为最后一个元素</li>
+<li>boolean isOdd()  判断当前的迭代元素的索引是否为奇数</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>此标签每次进行迭代的时候就会把元素放在值栈的顶部，那么我们都知道<s:property>如果不指定value属性，那么默认的就是从栈顶取元素：</s:property></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;%-- 新建一个集合list --%&gt;</div><div class="line">	&lt;s:set var="list" value="&#123;'陈加兵','郑元梅',22,33&#125;"&gt;&lt;/s:set&gt;</div><div class="line"></div><div class="line">	&lt;%--指定了value属性，但是其他属性都没有，那么直接可以从栈顶取数据 --%&gt;</div><div class="line">	&lt;s:iterator value="#"&gt;</div><div class="line">		&lt;s:property/&gt;</div><div class="line">	&lt;/s:iterator&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>指定var属性来获取迭代对象的值:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;%-- 新建一个集合list --%&gt;</div><div class="line">	&lt;s:set var="list" value="&#123;'陈加兵','郑元梅',22,33&#125;"&gt;&lt;/s:set&gt;</div><div class="line">&lt;%-- 指定var表示当前迭代对象的每一个元素--%&gt;</div><div class="line">	&lt;s:iterator value="#list" var="item"&gt;</div><div class="line">		&lt;%-- 因为var元素是放在Stack Context中，因此可以使用#取值 --%&gt;</div><div class="line">		&lt;s:property value="#item" /&gt;</div><div class="line">	&lt;/s:iterator&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>指定begin，end来获取指定范围的值。</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;%-- 新建一个集合list --%&gt;</div><div class="line">	&lt;s:set var="list" value="&#123;'陈加兵','郑元梅',22,33&#125;"&gt;&lt;/s:set&gt;</div><div class="line"></div><div class="line">	&lt;%-- 指定begin,end获取前3个元素--%&gt;</div><div class="line">	&lt;s:iterator value="#list" var="item" begin="0" end="2"&gt;</div><div class="line">	&lt;%-- 因为var元素是放在Stack Context中，因此可以使用#取值 --%&gt;</div><div class="line">		&lt;s:property value="#item" /&gt;</div><div class="line">	&lt;/s:iterator&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>指定status获取每一个迭代元素的当前状态:</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;%-- 新建一个集合list --%&gt;</div><div class="line">	&lt;s:set var="list" value="&#123;'陈加兵','郑元梅',22,33&#125;"&gt;&lt;/s:set&gt;</div><div class="line"></div><div class="line">	&lt;%-- 指定begin,end获取前3个元素--%&gt;</div><div class="line">	&lt;s:iterator value="#list" var="item" status="iter"&gt;</div><div class="line">		&lt;s:if test="#iter.isOdd()&amp;&amp;#iter.getIndex()&gt;0"&gt;</div><div class="line">			&lt;s:property value="#item+'---'+#iter.getIndex()"/&gt;</div><div class="line">			&lt;br&gt;</div><div class="line">		&lt;/s:if&gt;</div><div class="line">	&lt;/s:iterator&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>迭代Map</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;s:set var="map" value="#&#123;'age':22,'username':'陈加兵' &#125;"&gt;&lt;/s:set&gt;</div><div class="line">&lt;s:iterator value="#map" var="item"&gt;</div><div class="line">	获取集合中的key:&lt;s:property value="#item.key"/&gt;</div><div class="line">	获取集合中的值：&lt;s:property value="#item.value"/&gt;</div><div class="line">&lt;/s:iterator&gt;</div></pre></td></tr></table></figure>
+<h3 id="append"><a href="#append" class="headerlink" title="append"></a>append</h3><ul>
+<li><p>append标签用于将多个集合拼接起来形成一个新的集合。</p>
+</li>
+<li><p>var<br>拼接之后形成的新的集合，放在Stack Context中</p>
+</li>
+<li><p>id<br>这个和var是一样的，两个可以互换使用的，不过推荐使用var</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;%-- 新建一个集合list --%&gt;</div><div class="line">&lt;s:set var="list1" value="&#123;'陈加兵','郑元梅',22,33&#125;"&gt;&lt;/s:set&gt;</div><div class="line">&lt;s:set var="list2" value="&#123;44,55,6,99&#125;"&gt;&lt;/s:set&gt;</div><div class="line"></div><div class="line">&lt;s:append var="list3"&gt;</div><div class="line">	&lt;%-- 使用param标签指定要拼接的集合 --%&gt;</div><div class="line">	&lt;s:param value="#list1"&gt;&lt;/s:param&gt;</div><div class="line">	&lt;s:param value="#list2"&gt;&lt;/s:param&gt;</div><div class="line">&lt;/s:append&gt;</div><div class="line"></div><div class="line">&lt;s:iterator value="#list3" var="item"&gt;</div><div class="line">	&lt;s:property value="#item"/&gt;</div><div class="line">&lt;/s:iterator&gt;</div></pre></td></tr></table></figure>
+<h3 id="generator"><a href="#generator" class="headerlink" title="generator"></a>generator</h3><ul>
+<li><p>使用这个标签可以将字符串按照指定的分隔符分割成多个子串，临时生成的子串可以使用<s:iterator>标签迭代输出。可以这样理解：这个标签使用指定的的分隔符将字符串分割，然后这些字符串组成一个集合。</s:iterator></p>
+</li>
+<li><p>val<br>必选属性，该属性指定被解析的字符串</p>
+</li>
+<li><p>var<br>可选属性，如果指定了该属性，那么生成的Iterator对象将会以这个名称放在Stack Context中，就可以访问这个集合了。</p>
+</li>
+<li><p>count<br>可选属性，该属性指定生成集合中元素的个数</p>
+</li>
+<li><p>separator<br>必选属性，这个属性指定分隔符</p>
+</li>
+<li><p>converter<br>可选属性，该属性指定一个转换器，该转换器负责将集合中的每一个字符串转换成对象，通过该转换器可以将一个字符串解析成对象集合。该属性值必须是org.apache.struts2.util.IteratorGenerator.Convertere</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;%--分隔符为',',并且选取其中的前两个元素 --%&gt;</div><div class="line">	&lt;s:generator separator="," val="'陈加兵,郑元梅,chenjiabing'" var="x" count="2"&gt;&lt;/s:generator&gt;</div><div class="line"></div><div class="line">	&lt;s:iterator value="#x" var="item"&gt;</div><div class="line">		&lt;s:property value="#item" /&gt;</div><div class="line">	&lt;/s:iterator&gt;</div></pre></td></tr></table></figure>
+<h3 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h3><ul>
+<li>merge这个标签和append的功能是一样的，都是将两个集合拼接在一起，但是append是将一个集合拼接在另外一个集合的末尾，但是merge是将后面一个集合的对应索引的元素添加到前面一个集合的索引所在的位置，也就是后面集合的第一个元素变成了新集合的第二个元素了。</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;s:set var="list1" value="&#123;'陈加兵','郑元梅'&#125;"&gt;&lt;/s:set&gt;</div><div class="line">	&lt;s:set var="list2" value="&#123;1,2&#125;"&gt;&lt;/s:set&gt;</div><div class="line"></div><div class="line">	&lt;s:merge var="list3"&gt;</div><div class="line">		&lt;s:param value="#list1"&gt;&lt;/s:param&gt;</div><div class="line">		&lt;s:param value="#list2"&gt;&lt;/s:param&gt;</div><div class="line">	&lt;/s:merge&gt;</div><div class="line"></div><div class="line"></div><div class="line">	&lt;s:iterator var="item" value="#list3"&gt;</div><div class="line">		&lt;s:property value="#item"/&gt;</div><div class="line">	&lt;/s:iterator&gt;</div></pre></td></tr></table></figure>
+<h3 id="subset"><a href="#subset" class="headerlink" title="subset"></a>subset</h3><ul>
+<li><p>subset标签用于取得集合的子集，形成新的集合。</p>
+</li>
+<li><p>count<br>可选属性，指定选取集合的子集的个数，如果不指定该属性，那么默认的就是截取全部的元素</p>
+</li>
+<li><p>source<br>可选属性，该属性指定源集合，如果没有指定，那么默认是从栈顶取集合</p>
+</li>
+<li><p>start<br>可选属性，该属性指定子集从源集合的第几个元素开始截取，默认从第一个开始(即start=0)</p>
+</li>
+<li><p>decider<br>可选属性，该属性有开发真决定是否选中该元素</p>
+</li>
+<li><p>var<br>可选属性，如果指定了该属性，那么生成Iterator对象设置成为Page范围内的属性，可以使用#attr.name获取其值，也可以替换成id，但是推荐使用var</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 创建一个集合 --&gt;</div><div class="line">	&lt;s:set var="list1" value="&#123;'陈加兵','郑元梅',1,2,3&#125;"&gt;&lt;/s:set&gt;</div><div class="line"></div><div class="line">	&lt;!--  指定变量为x，存储在page中，源集合为list1，截取其中的两个元素，从第二个元素开始截取 --&gt;</div><div class="line">	&lt;s:subset var="x" source="#list1" count="2" start="1"&gt;&lt;/s:subset&gt;</div><div class="line"></div><div class="line">	&lt;!-- 由于x存储在Page中，因此使用#attr.x来获取 --&gt;</div><div class="line">	&lt;s:iterator value="#attr.x" var="item"&gt;</div><div class="line">		&lt;s:property value="#item" /&gt;</div><div class="line">	&lt;/s:iterator&gt;</div></pre></td></tr></table></figure>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h3><ul>
+<li><p>主要用于对集合进行排序</p>
+</li>
+<li><p>comparator<br>必填属性，该属性指定进行排序的实例，必须实现java.util.Comparator接口</p>
+</li>
+<li><p>source<br>可选属性，这是一个源集合，如果没有指定，那么就拿栈顶的集合进行排序</p>
+</li>
+<li><p>var<br>可选属性，如果指定了属性，那么生成的Iterator对象设置成Page范围的属性，该属性也可替换成id</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;s:set var="list" value="&#123;'陈加兵','123459999+','4442555'&#125;"&gt;&lt;/s:set&gt;</div><div class="line">	&lt;!-- 创建一个实例 --&gt;</div><div class="line">	&lt;s:bean name="com.compare.Compare" id="compare"&gt;&lt;/s:bean&gt;</div><div class="line">	&lt;!-- 排序 --&gt;</div><div class="line">	&lt;s:sort comparator="#compare" source="#list" var="x"&gt;&lt;/s:sort&gt;</div><div class="line"></div><div class="line">	&lt;!-- 迭代输出 --&gt;</div><div class="line">	&lt;s:iterator var="item" value="#attr.x"&gt;</div><div class="line">		&lt;s:property value="#item" /&gt;</div><div class="line">	&lt;/s:iterator&gt;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Struts标签库&quot;&gt;&lt;a href=&quot;#Struts标签库&quot; class=&quot;headerlink&quot; title=&quot;Struts标签库&quot;&gt;&lt;/a&gt;Struts标签库&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;如果想要在jsp页面使用struts2的标签，需要引入标签库&lt;/p
+    
+    </summary>
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/categories/Struts2/"/>
+    
+    
+      <category term="Struts2" scheme="http://chenjiabing666.github.io/tags/Struts2/"/>
+    
+  </entry>
   
   <entry>
     <title>Struts之OGNL使用</title>
@@ -2864,389 +3268,6 @@
     
     
       <category term="SQL" scheme="http://chenjiabing666.github.io/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SQL操作一</title>
-    <link href="http://chenjiabing666.github.io/2018/03/21/SQL%E6%93%8D%E4%BD%9C%E4%B8%80/"/>
-    <id>http://chenjiabing666.github.io/2018/03/21/SQL操作一/</id>
-    <published>2018-03-21T08:57:43.000Z</published>
-    <updated>2018-03-27T01:11:59.681Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Day01-基本的语句"><a href="#Day01-基本的语句" class="headerlink" title="Day01-基本的语句"></a>Day01-基本的语句</h1><h2 id="数据库简介"><a href="#数据库简介" class="headerlink" title="数据库简介"></a>数据库简介</h2><blockquote>
-<p>因为传统的文本形式存储数据存在很多的弊端：</p>
-<ol>
-<li>执行效率低</li>
-<li>占用内存</li>
-</ol>
-</blockquote>
-<h2 id="什么是DB"><a href="#什么是DB" class="headerlink" title="什么是DB"></a>什么是DB</h2><blockquote>
-<p><code>Database</code> ： 数据库<br>数据库本质是文件集（多个文件）<br>会按照特定存储规范进行数据增删改查</p>
-</blockquote>
-<h2 id="什么是DBMS"><a href="#什么是DBMS" class="headerlink" title="什么是DBMS"></a>什么是DBMS</h2><blockquote>
-<p><code>DateBaseManagementSystem</code> : 数据库管理系统，本质就是管理数据库文件的软件</p>
-<ol>
-<li><code>Oracle</code></li>
-<li><code>Mysql</code></li>
-<li><code>DB2</code></li>
-<li><code>Sqlite</code></li>
-<li><code>SqlServer</code></li>
-</ol>
-</blockquote>
-<h2 id="数据库分类"><a href="#数据库分类" class="headerlink" title="数据库分类"></a>数据库分类</h2><blockquote>
-<p>关系型数据库</p>
-<blockquote>
-<ol>
-<li>是经过数学理论验证过，可以保存现实生活中任何关系的数据库（其中的高级映射，比如一对多，多对一，一对一都是关系）</li>
-<li>关系数据库是以表为单位进行存储的</li>
-<li><code>Oracle</code> <code>mysql</code> <code>DB2</code> <code>sqlite</code> <code>sqlserver</code>都是关系型数据库</li>
-</ol>
-</blockquote>
-<p>非关系型数据库</p>
-<blockquote>
-<ol>
-<li><code>Redis</code>数据库是非关系型数据库</li>
-<li>以<code>key-value</code>形式进行存储</li>
-</ol>
-</blockquote>
-</blockquote>
-<h2 id="主流关系型数据库介绍"><a href="#主流关系型数据库介绍" class="headerlink" title="主流关系型数据库介绍"></a>主流关系型数据库介绍</h2><blockquote>
-<p><code>Mysql</code> ： 开源 卖服务赚钱 被sun公司收购 sun被oracle收购</p>
-<blockquote>
-<p>5.5版本因为oracle技术大牛对其进行升级，性能大幅提升，Mysql 从6.0开始收费，导致原来的mysql工程师跳槽创建了<code>MariaDB</code>,MariaDB内部实际上就是mysql，创建者的女儿叫Maria</p>
-</blockquote>
-<p><code>Oracle</code></p>
-<blockquote>
-<ol>
-<li>闭源  卖产品</li>
-<li>支持windows，Linux</li>
-</ol>
-</blockquote>
-<p><code>DB2</code></p>
-<blockquote>
-<ol>
-<li>闭源 大型数据库 通常是国字头的企业在用</li>
-</ol>
-</blockquote>
-<p><code>sqlite</code></p>
-<blockquote>
-<ol>
-<li>轻量级数据库，大小几十k，应用于移动或者嵌入式设备</li>
-</ol>
-</blockquote>
-<p><code>SQLServer</code></p>
-<blockquote>
-<ol>
-<li>微软公司 闭源 主要.net开发的网站中</li>
-</ol>
-</blockquote>
-</blockquote>
-<h2 id="mysql安装"><a href="#mysql安装" class="headerlink" title="mysql安装"></a>mysql安装</h2><blockquote>
-<p>端口号<code>3306</code><br>编码格式 <code>utf8</code></p>
-</blockquote>
-<h2 id="数据库相关SQL"><a href="#数据库相关SQL" class="headerlink" title="数据库相关SQL"></a>数据库相关SQL</h2><h3 id="什么是SQL"><a href="#什么是SQL" class="headerlink" title="什么是SQL"></a>什么是SQL</h3><blockquote>
-<p><code>Strctured Query Language</code> ： 结构化查询语言<br>通过sql语言和DBMS（数据库管理软件）进行交互</p>
-</blockquote>
-<h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><blockquote>
-<p>终端中输入： <code>mysql -u root -p</code><br>输入密码即可,没有密码直接回车即可</p>
-</blockquote>
-<h3 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h3><blockquote>
-<p><code>create database d_name ;</code> 创建数据库d_name<br><code>drop database d_name;</code> 删除数据库d_name<br><code>show databases;</code>  显示所有的数据库<br><code>show create database d_name;</code> 查看单个数据库<br><code>use d_name;</code> 使用当前的数据库d_name<br><code>create database db_name character set utf8;</code>创建数据库指定字符集</p>
-</blockquote>
-<h2 id="表相关SQL"><a href="#表相关SQL" class="headerlink" title="表相关SQL"></a>表相关SQL</h2><h3 id="什么是表"><a href="#什么是表" class="headerlink" title="什么是表"></a>什么是表</h3><blockquote>
-<p>表是数据库中存放数据的单元，任何数据都是存放到表中<br>类似java中的Class，表中的字段对应class的属性</p>
-</blockquote>
-<h3 id="数据库表的引擎"><a href="#数据库表的引擎" class="headerlink" title="数据库表的引擎"></a>数据库表的引擎</h3><blockquote>
-<p><code>innoDB</code> : 支持数据库的高级操作，包括事务 主键 外键等<br><code>myisam</code> : 只具备基本的数据库储功能</p>
-</blockquote>
-<h3 id="创建表时指定引擎和字符集"><a href="#创建表时指定引擎和字符集" class="headerlink" title="创建表时指定引擎和字符集"></a>创建表时指定引擎和字符集</h3><blockquote>
-<p>格式 ：<code>create table t_name(字段名 字段类型,....) engine=myisam charset=utf8;</code></p>
-</blockquote>
-<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><blockquote>
-<p>格式: <code>create table 表名(字段名 类型,字段名 类型,......);</code><br>例子： <code>create table name(id int,name char(10),age int);</code><br>执行原理： 当在中断输入建表语句 终端会把写好的sql发送给DBMS，然后解析到create table时，识别出要创建一个表。</p>
-</blockquote>
-<h3 id="查询所有表"><a href="#查询所有表" class="headerlink" title="查询所有表"></a>查询所有表</h3><blockquote>
-<p><code>show tables ;</code></p>
-</blockquote>
-<h3 id="查询单个表"><a href="#查询单个表" class="headerlink" title="查询单个表"></a>查询单个表</h3><blockquote>
-<p><code>show create table tale_name;</code><br>使用上面的语句会出现创建表的语句和字符编码</p>
-</blockquote>
-<h3 id="查看表的字段属性"><a href="#查看表的字段属性" class="headerlink" title="查看表的字段属性"></a>查看表的字段属性</h3><blockquote>
-<p><code>desc table_name ;</code></p>
-</blockquote>
-<h2 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h2><h3 id="修改表的名称"><a href="#修改表的名称" class="headerlink" title="修改表的名称"></a>修改表的名称</h3><blockquote>
-<p>格式 : rename table 原名 to 新名<br><code>rename table user to t_user;</code></p>
-</blockquote>
-<h3 id="修改表的属性（引擎和字符集）"><a href="#修改表的属性（引擎和字符集）" class="headerlink" title="修改表的属性（引擎和字符集）"></a>修改表的属性（引擎和字符集）</h3><blockquote>
-<p>格式 ：alter table 表名 engine-innoDB charset=utf8;<br><code>alter table t  engine=InnoDB charset=GBK;</code></p>
-</blockquote>
-<h3 id="添加表字段"><a href="#添加表字段" class="headerlink" title="添加表字段"></a>添加表字段</h3><ul>
-<li>在最后添加<blockquote>
-<p>格式 ： alter table 表名 add 字段名 字段类型;<br><code>alter table t add age int;</code></p>
-</blockquote>
-</li>
-<li>在最前添加<blockquote>
-<p>格式： alter table 表名 add 字段名 字段类型 first;<br><code>alter table t add newage int first;</code></p>
-</blockquote>
-</li>
-<li>在某个字段后面添加<blockquote>
-<p>格式： alter table 表名 add 字段名 字段类型 after 字段名;<br><code>alter table t add birthday varchar(10) after id;</code></p>
-</blockquote>
-</li>
-</ul>
-<h3 id="修改字段名和类型"><a href="#修改字段名和类型" class="headerlink" title="修改字段名和类型"></a>修改字段名和类型</h3><blockquote>
-<p>alter table 表名 change 原字段名 新字段名 新的字段类型 ;<br><code>alter table t change birthday bth Date;</code></p>
-</blockquote>
-<h3 id="修改字段类型和位置"><a href="#修改字段类型和位置" class="headerlink" title="修改字段类型和位置"></a>修改字段类型和位置</h3><blockquote>
-<p>alter table 表名 modify 字段名 类型 位置（first/after 字段名）;<br><code>alter table t modify name int after age;</code>  将name移到age的后面，并且修改了name字段的类型为int<br> <code>alter table t modify name  varchar(10) first;</code>  将字段name移到最前面</p>
-</blockquote>
-<h3 id="删除字段"><a href="#删除字段" class="headerlink" title="删除字段"></a>删除字段</h3><blockquote>
-<p>alter table 表名 drop 字段名;<br><code>alter table t drop bth;</code> 将t表中的bth字段删除</p>
-</blockquote>
-<h2 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h2><blockquote>
-<p>格式 ： drop table 表名 ;</p>
-</blockquote>
-<h2 id="数据相关的SQL-CRUD"><a href="#数据相关的SQL-CRUD" class="headerlink" title="数据相关的SQL(CRUD)"></a>数据相关的SQL(CRUD)</h2><h3 id="插入语句"><a href="#插入语句" class="headerlink" title="插入语句"></a>插入语句</h3><ul>
-<li>全表插入<blockquote>
-<p>格式 insert into 表名 values(value1,value2,…)<br>格式要求: values里面的值的<em>数量</em>和<em>顺序</em>必须要和表的字段一致<br><code>insert into user values(1,&#39;jack&#39;,22);</code></p>
-</blockquote>
-</li>
-<li><p>指定字段插入</p>
-<blockquote>
-<p>格式： insert into 表名(字段1,字段2,..) values(value1，value2,….)<br><code>insert into user(id,name,age) values(1,&#39;jack&#39;,22);</code><br>格式要求： values中的值必须和前面格式的字段一致。</p>
-</blockquote>
-</li>
-<li><p>插入多组数据</p>
-<blockquote>
-<p>格式： insert into values(第一组数据),(第二组数据)….<br><code>insert into user values(1,&quot;孙悟空&quot;,22),(2,&quot;唐僧&quot;,44);</code></p>
-</blockquote>
-</li>
-<li><p>指定字段插入多组数据</p>
-<blockquote>
-<p><code>insert into user(age) values(22),(33);</code></p>
-</blockquote>
-</li>
-</ul>
-<h3 id="查询语句"><a href="#查询语句" class="headerlink" title="查询语句"></a>查询语句</h3><ul>
-<li>查询所有字段<blockquote>
-<p>格式：<code>select * from 表名</code><br>select <code>*</code> from user;</p>
-</blockquote>
-</li>
-<li>查询指定字段<blockquote>
-<p>格式：select 字段1,字段2 from 表名<br><code>select name.age from user;</code></p>
-</blockquote>
-</li>
-</ul>
-<h3 id="更新语句"><a href="#更新语句" class="headerlink" title="更新语句"></a>更新语句</h3><ul>
-<li><p>更新表中所有的字段</p>
-<blockquote>
-<p>格式： update 表名 set 字段名 = 新的值;<br><code>update user set age=22;</code></p>
-</blockquote>
-</li>
-<li><p>改变指定条件的字段</p>
-<blockquote>
-<p>格式： update 表名 set 字段名 = 新的值 where 条件;<br><code>update user set age=22 where id=1;</code> 修改id=1的那一行数据的age</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="删除语句"><a href="#删除语句" class="headerlink" title="删除语句"></a>删除语句</h3><ul>
-<li><p>指定条件删除</p>
-<blockquote>
-<p>格式： delete from 表名 where 条件 ;<br><code>delet from user where id=2;</code>  删除id=2的那一行数据</p>
-</blockquote>
-</li>
-<li><p>不指定条件删除，那么将会删除整张表数据</p>
-<blockquote>
-<p><code>delete from user;</code></p>
-</blockquote>
-</li>
-</ul>
-<h3 id="TRUNCATE语句"><a href="#TRUNCATE语句" class="headerlink" title="TRUNCATE语句"></a>TRUNCATE语句</h3><blockquote>
-<p><code>trucate table 表名;</code> 先删除表，然后再创建一样的空表（表的名字相同，字段不变，主要的功能就是清空表中的数据）</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Day01-基本的语句&quot;&gt;&lt;a href=&quot;#Day01-基本的语句&quot; class=&quot;headerlink&quot; title=&quot;Day01-基本的语句&quot;&gt;&lt;/a&gt;Day01-基本的语句&lt;/h1&gt;&lt;h2 id=&quot;数据库简介&quot;&gt;&lt;a href=&quot;#数据库简介&quot; class
-    
-    </summary>
-    
-      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
-    
-    
-      <category term="SQL" scheme="http://chenjiabing666.github.io/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Excel表格的写入读取</title>
-    <link href="http://chenjiabing666.github.io/2017/09/27/Excel%E8%A1%A8%E6%A0%BC%E7%9A%84%E5%86%99%E5%85%A5%E8%AF%BB%E5%8F%96/"/>
-    <id>http://chenjiabing666.github.io/2017/09/27/Excel表格的写入读取/</id>
-    <published>2017-09-27T06:03:06.000Z</published>
-    <updated>2017-09-27T06:04:35.353Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Excel的读取和写入"><a href="#Excel的读取和写入" class="headerlink" title="Excel的读取和写入"></a>Excel的读取和写入</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><blockquote>
-<p>首先需要导入jar包，请点击<a href="http://download.csdn.net/download/qq_34162294/9997646" target="_blank" rel="external">这里下载</a></p>
-</blockquote>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>我们知道<code>Excel</code>表格在<code>2007</code>之后就不一样了，后缀名变为<code>xlsx</code>，之前的后缀名为<code>xls</code>,因此读取和写入的操作就对应着不同的方式，但是只是读取和写入的类不同了，思想还是一样的。</p>
-<p>我们要知道一个Excel文件(工作簿)包含三部分，分别是工作表(<code>sheet</code>),行(<code>row</code>),列(<code>cell</code>)</p>
-</blockquote>
-<h2 id="工作簿"><a href="#工作簿" class="headerlink" title="工作簿"></a>工作簿</h2><blockquote>
-<p>工作簿对应的类是 <code>XSSFWorkbook</code>(2007之后),在2007之前对应的类是<code>HSSFWorkbook</code></p>
-</blockquote>
-<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><blockquote>
-<p><code>new XSSFWorkbook()</code>   创建一个工作簿用于写入文件</p>
-<p><code>new XSSFWorkbook(java.io.InputStream inputstream)</code>  创建一个工作簿，用于读取文件</p>
-</blockquote>
-<h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
-<ul>
-<li><code>XSSFFont createFont()</code>   返回一个<code>XSSFont</code>类的对象，主要用于设置字体用的</li>
-<li><code>XSSFSheet createSheet()</code>   创建一个工作表</li>
-<li><code>XSSFSheet    createSheet(String name)</code>   创建一个工作表并且指定姓名</li>
-<li><code>XSSFCellStyle    createCellStyle()</code>   创建一个单元格风格类的一个对象，便于设置单元格的属性</li>
-<li><code>write(OutputStream out)</code>    用于将文件写入到文件中</li>
-<li><code>close()</code>  </li>
-<li><code>setSheetName(int sheetIx,String name)</code>  为指定索引的工作表设置名称</li>
-<li><code>XSSFSheet getSheetAt(int index)</code>   获取指定索引的工作表对象，这个是用来读取文件的时候用的</li>
-</ul>
-</blockquote>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><h4 id="读取文件的例子"><a href="#读取文件的例子" class="headerlink" title="读取文件的例子"></a>读取文件的例子</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  File file = <span class="keyword">new</span> File(<span class="string">"F:\\demo1.xlsx"</span>);</div><div class="line"><span class="comment">//创建输入流</span></div><div class="line">FileInputStream inputStream = <span class="keyword">new</span> FileInputStream(file);</div><div class="line"><span class="comment">//创建工作簿读取</span></div><div class="line">XSSFWorkbook workbook = <span class="keyword">new</span> XSSFWorkbook(inputStream);</div></pre></td></tr></table></figure>
-<h4 id="写入文件的例子"><a href="#写入文件的例子" class="headerlink" title="写入文件的例子"></a>写入文件的例子</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">XSSFWorkbook book=<span class="keyword">new</span> XSSFWorkbook();  <span class="comment">//创建工作簿</span></div><div class="line"></div><div class="line">.....省略写入的内容</div><div class="line"></div><div class="line">FileOutputStream out=<span class="keyword">new</span> FileOutputStream(<span class="string">"D:\\demo1.xlsx"</span>);  <span class="comment">//创建输出流</span></div><div class="line"></div><div class="line">book.write(out);     <span class="comment">//写入到指定的文件</span></div><div class="line"></div><div class="line">book.close(); <span class="comment">// 关闭</span></div><div class="line">out.close();</div></pre></td></tr></table></figure>
-<h2 id="工作表-sheet"><a href="#工作表-sheet" class="headerlink" title="工作表(sheet)"></a>工作表(sheet)</h2><blockquote>
-<p>工作表对应的类为<code>XSSFSheet</code>,2007之前对应的是HSSFSheet<br>一般工作表都是在工作簿基础上创建的，因此构造函数也用不到，所以这里就不多说了</p>
-</blockquote>
-<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><blockquote>
-<ul>
-<li><p><code>int    addMergedRegion(CellRangeAddress region)</code>  合并单元格</p>
-</li>
-<li><p><code>XSSFRow    createRow(int rownum)</code>   创建一个行   rownum表示创建第几行，这是一个行的索引(0开始)  便于写入</p>
-</li>
-<li><p><code>XSSFRow getRow(int index)</code>  获取指定索引的那一行，便于读取</p>
-</li>
-<li><p><code>int getLastRowNum()</code>     获取文件中最后一行的索引，这个通常在读取的时候用到</p>
-</li>
-<li><p><code>int getFirsetRowNum()</code>   获取文件第一行的索引</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h3><h4 id="合并单元格"><a href="#合并单元格" class="headerlink" title="合并单元格"></a>合并单元格</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建工作簿对象</span></div><div class="line">		XSSFWorkbook workbook = <span class="keyword">new</span> HSSFWorkbook();</div><div class="line">        XSSFSheet sheet = workbook.createSheet(<span class="string">"第一张表"</span>);   <span class="comment">//创建工作表对象</span></div><div class="line"></div><div class="line">        <span class="comment">//合并单元格    CellRangeAddress cell=new CellRangeAddress(int firstRow, int lastRow, int firstCol, int lastCol) </span></div><div class="line">        <span class="comment">//这里表示合并第一行的1-10列</span></div><div class="line">        sheet.addMergedRegion(<span class="keyword">new</span> CellRangeAddress(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>));</div></pre></td></tr></table></figure>
-<h4 id="创建一行"><a href="#创建一行" class="headerlink" title="创建一行"></a>创建一行</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">XSSFWorkbook workbook = <span class="keyword">new</span> HSSFWorkbook();</div><div class="line">XSSFSheet sheet = workbook.createSheet(<span class="string">"第一张表"</span>);   <span class="comment">//创建工作表对象</span></div><div class="line">XSSFRow row=sheet.createRow(<span class="number">0</span>);   <span class="comment">//创建第一行</span></div></pre></td></tr></table></figure>
-<h2 id="行"><a href="#行" class="headerlink" title="行"></a>行</h2><blockquote>
-<p>行对应的类为<code>XSFFRow</code>,2007之前对应的是HSSFRow</p>
-</blockquote>
-<h3 id="常用的方法-1"><a href="#常用的方法-1" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
-<ul>
-<li><p><code>XSSFCell    createCell(int columnIndex)</code>  创建一列  columnIndex表示列的索引(0开始)</p>
-</li>
-<li><p><code>short    getFirstCellNum()</code>   返回文件中第一个列的索引，便于以后读取</p>
-</li>
-<li><p><code>short    getLastCellNum()</code>   返回全部的列数(不是索引)，这个和Sheet中getRowNum()方法不同，便于以后读取文件</p>
-</li>
-<li><p><code>XSSFCell    getCell(int cellnum)</code>    获取指定索引的那一列，便于以后的读取</p>
-</li>
-<li><p><code>XSSCellStyle getCellStyle()</code>   获取单元格风格的对象</p>
-</li>
-<li><p><code>void setCellStyle(XSSFCellStyle style)</code>  将设置的风格样式添加到单元格中，否则将不会起作用</p>
-</li>
-</ul>
-</blockquote>
-<h2 id="列"><a href="#列" class="headerlink" title="列"></a>列</h2><blockquote>
-<p>列对应的类为<code>XSSFCell</code>,2007之前对应的是HSSFCell</p>
-</blockquote>
-<h3 id="常用的单元格类型"><a href="#常用的单元格类型" class="headerlink" title="常用的单元格类型"></a>常用的单元格类型</h3><blockquote>
-<p>常用的单元格的类型有字符串，数字，布尔值，空值，可以使用<code>XSSFCell</code>的<code>int getCellType()</code> 方法获取类型</p>
-<ul>
-<li><code>CELL_TYPE_BLANK</code> 空值</li>
-<li><code>CELL_TYPE_STRING</code>  字符串</li>
-<li><code>CELL_TYPE_NUMERIC</code>   数字(浮点值，整型)</li>
-<li><code>CELL_TYPE_BOOLEAN</code> 布尔值(True,FALSE)</li>
-</ul>
-</blockquote>
-<h3 id="常用的方法-2"><a href="#常用的方法-2" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
-<ul>
-<li><p><code>int getCellType()</code>获取单元格类型  可以和常用的单元格类型进行比较，然后使用不同的读取方法读取</p>
-</li>
-<li><p><code>XSSFCellStyle    getCellStyle()</code>   获取单元格风格对象，便于后面设置单元格的风格</p>
-</li>
-<li><p><code>setCellValue(Object value)</code>  设置单元格的内容，可以是任意类型的</p>
-</li>
-<li><p><code>java.util.Date    getDateCellValue()</code>   读取单元格的日期内容</p>
-</li>
-<li><p><code>String    getStringCellValue()</code>   读取单元格中的字符串内容</p>
-</li>
-<li><p><code>double    getNumericCellValue()</code>    读取单元格中的数字类型的内容</p>
-</li>
-<li><p><code>boolean    getBooleanCellValue()</code>   获取单元格中的布尔类型的内容</p>
-</li>
-</ul>
-</blockquote>
-<h2 id="设置单元格样式"><a href="#设置单元格样式" class="headerlink" title="设置单元格样式"></a>设置单元格样式</h2><blockquote>
-<p>对应的类为<code>XSSFCellStyle</code></p>
-</blockquote>
-<h3 id="常用的方法-3"><a href="#常用的方法-3" class="headerlink" title="常用的方法"></a>常用的方法</h3><blockquote>
-<ul>
-<li><p><code>void    setAlignment(HorizontalAlignment align)</code>   设置水平对齐方式 </p>
-</li>
-<li><p><code>void    setVerticalAlignment(VerticalAlignment align)</code>   设置垂直的对齐方式</p>
-</li>
-<li><p><code>void    setTopBorderColor(XSSFColor color)</code>   设置上边框的颜色(还有Left,right..)</p>
-</li>
-<li><p><code>void    setFont(Font font)</code>   设置字体  这里的Font是org.apache.poi.ss.usermodel.Font</p>
-</li>
-<li><p><code>void    setBorderTop(BorderStyle border)</code>   设置上边框的样式，在BorderStyle类中有很多的样式</p>
-</li>
-<li><p><code>void    setRotation(short rotation)</code> 设置文字的旋转度数</p>
-</li>
-</ul>
-</blockquote>
-<h2 id="单元格字体的设置"><a href="#单元格字体的设置" class="headerlink" title="单元格字体的设置"></a>单元格字体的设置</h2><blockquote>
-<p>对应的类为<code>XSSFFont</code></p>
-</blockquote>
-<h3 id="常用的方法-4"><a href="#常用的方法-4" class="headerlink" title="常用的方法:"></a>常用的方法:</h3><blockquote>
-<ul>
-<li><p><code>void    setBold(boolean bold)</code>  是否设置加粗</p>
-</li>
-<li><p><code>void    setItalic(boolean italic)</code>   设置是否倾斜</p>
-</li>
-<li><p><code>void    setUnderline(FontUnderline underline)</code> 设置下划线</p>
-</li>
-<li><p><code>void    setStrikeout(boolean strikeout)</code>   设置是否带有删除线</p>
-</li>
-<li><p><code>void    setColor(XSSFColor color)</code>   设置字体的颜色,只需要调用XSSFColor静态颜色变量即可</p>
-</li>
-<li><p><code>void    setFontHeight(double height)</code>   设置字体高度</p>
-</li>
-<li><p><code>void    setFontHeightInPoints(short height)</code> 设置字号</p>
-</li>
-<li><p><code>void    setFontName(java.lang.String name)</code>   设置字体样式(黑体，楷体…)</p>
-</li>
-</ul>
-</blockquote>
-<h2 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.awt.Color;</div><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.io.FileOutputStream;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.poi.hssf.util.HSSFColor;</div><div class="line"><span class="keyword">import</span> org.apache.poi.ss.usermodel.FontUnderline;</div><div class="line"><span class="keyword">import</span> org.apache.poi.ss.usermodel.HorizontalAlignment;</div><div class="line"><span class="keyword">import</span> org.apache.poi.ss.usermodel.VerticalAlignment;</div><div class="line"><span class="keyword">import</span> org.apache.poi.ss.util.CellRangeAddress;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFCell;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFCellStyle;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFColor;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFFont;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFRow;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFSheet;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFWorkbook;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDemo</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">		XSSFWorkbook workbook = <span class="keyword">new</span> XSSFWorkbook(); <span class="comment">// 创建工作簿</span></div><div class="line">		XSSFSheet sheet = workbook.createSheet(<span class="string">"第一个工作表"</span>); <span class="comment">// 创建一个工作表</span></div><div class="line">		XSSFCellStyle style = workbook.createCellStyle(); <span class="comment">// 创建单元格风格对象</span></div><div class="line">		sheet.addMergedRegion(<span class="keyword">new</span> CellRangeAddress(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">10</span>)); <span class="comment">// 合并第一行的单元格</span></div><div class="line">		style.setAlignment(HorizontalAlignment.CENTER); <span class="comment">// 设置水平居中</span></div><div class="line">		style.setVerticalAlignment(VerticalAlignment.CENTER); <span class="comment">// 设置垂直居中</span></div><div class="line"></div><div class="line">		XSSFFont font = workbook.createFont(); <span class="comment">// 创建字体的对象</span></div><div class="line">		font.setFontName(<span class="string">"黑体"</span>); <span class="comment">// 设置字体的样式为黑体</span></div><div class="line">		font.setFontHeightInPoints((<span class="keyword">short</span>) <span class="number">20</span>); <span class="comment">// 设置字体的大小</span></div><div class="line">		font.setBold(<span class="keyword">true</span>); <span class="comment">// 设置粗体</span></div><div class="line">		font.setItalic(<span class="keyword">true</span>); <span class="comment">// 设置倾斜</span></div><div class="line">		font.setColor(HSSFColor.RED.index); <span class="comment">// 设置字体的颜色</span></div><div class="line">		font.setUnderline(FontUnderline.SINGLE); <span class="comment">// 设置下划线</span></div><div class="line">		font.setStrikeout(<span class="keyword">false</span>); <span class="comment">// 设置不带下划线</span></div><div class="line"></div><div class="line">		style.setFont(font); <span class="comment">// 将设置的字体添加到单元格样式中，显示出来</span></div><div class="line"></div><div class="line">		XSSFRow row1 = sheet.createRow(<span class="number">0</span>); <span class="comment">// 创建第一个行</span></div><div class="line">		XSSFCell cell1 = row1.createCell(<span class="number">0</span>); <span class="comment">// 创建第一行的第一列</span></div><div class="line">		cell1.setCellStyle(style); <span class="comment">// 将上面定义的风格设置到这个单元格中，这个是必须有的，否则根本不起作用</span></div><div class="line">		cell1.setCellValue(<span class="string">"员工信息表"</span>); <span class="comment">// 设置单元格的内容</span></div><div class="line"></div><div class="line">		<span class="comment">// 设置第二行的前三列的值</span></div><div class="line">		XSSFRow row2 = sheet.createRow(<span class="number">1</span>);</div><div class="line">		row2.createCell(<span class="number">0</span>).setCellValue(<span class="string">"姓名"</span>);</div><div class="line">		row2.createCell(<span class="number">1</span>).setCellValue(<span class="string">"性别"</span>);</div><div class="line">		row2.createCell(<span class="number">2</span>).setCellValue(<span class="string">"年龄"</span>);</div><div class="line"></div><div class="line">		<span class="comment">// 设置第三行的前三列</span></div><div class="line">		XSSFRow row3 = sheet.createRow(<span class="number">2</span>);</div><div class="line">		row3.createCell(<span class="number">0</span>).setCellValue(<span class="string">"陈加兵"</span>);</div><div class="line">		row3.createCell(<span class="number">1</span>).setCellValue(<span class="string">"男"</span>);</div><div class="line">		row3.createCell(<span class="number">2</span>).setCellValue(<span class="number">22</span>); <span class="comment">// 设置数字</span></div><div class="line"></div><div class="line">		<span class="comment">// 设置第四行的前三列</span></div><div class="line">		XSSFRow row4 = sheet.createRow(<span class="number">3</span>);</div><div class="line">		row4.createCell(<span class="number">0</span>).setCellValue(<span class="string">"郑元梅"</span>);</div><div class="line">		row4.createCell(<span class="number">1</span>).setCellValue(<span class="string">"女"</span>);</div><div class="line">		row4.createCell(<span class="number">2</span>).setCellValue(<span class="number">22</span>); <span class="comment">// 设置数字</span></div><div class="line"></div><div class="line">		<span class="comment">// 创建输出流对象</span></div><div class="line">		FileOutputStream stream = <span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(</div><div class="line">				<span class="string">"F:\\demo2.xlsx"</span>));</div><div class="line">		workbook.write(stream); <span class="comment">// 写入文件</span></div><div class="line">		workbook.close(); <span class="comment">// 关闭</span></div><div class="line">		stream.close();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="写入文件-1"><a href="#写入文件-1" class="headerlink" title="写入文件"></a>写入文件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.io.FileInputStream;</div><div class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFCell;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFRow;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFSheet;</div><div class="line"><span class="keyword">import</span> org.apache.poi.xssf.usermodel.XSSFWorkbook;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDemo1</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">		File file = <span class="keyword">new</span> File(<span class="string">"F:\\demo2.xlsx"</span>);</div><div class="line">		FileInputStream inputStream = <span class="keyword">new</span> FileInputStream(file); <span class="comment">// 创建输入流</span></div><div class="line">		XSSFWorkbook workbook = <span class="keyword">new</span> XSSFWorkbook(inputStream); <span class="comment">// 创建读取工作簿的对象</span></div><div class="line">		XSSFSheet sheet = workbook.getSheetAt(<span class="number">0</span>); <span class="comment">// 获取第一个工作表的对象</span></div><div class="line"></div><div class="line">		<span class="comment">// 第一次循环取得所有的行的对象 getLastRowNum()是得到最后一行的索引</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= sheet.getLastRowNum(); i++) &#123;</div><div class="line">			XSSFRow row = sheet.getRow(i); <span class="comment">// 获取每一行的对象</span></div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; row.getLastCellNum(); j++) &#123;</div><div class="line">				XSSFCell cell = row.getCell(j); <span class="comment">// 获取每一行的每一列</span></div><div class="line">				<span class="keyword">int</span> type = cell.getCellType(); <span class="comment">// 获取每一个单元格对应的类型</span></div><div class="line">				<span class="keyword">switch</span> (type) &#123;</div><div class="line">				<span class="keyword">case</span> XSSFCell.CELL_TYPE_BOOLEAN:   <span class="comment">//如果是布尔类型</span></div><div class="line">					<span class="keyword">boolean</span> b=cell.getBooleanCellValue();</div><div class="line">					System.out.print(b + <span class="string">"    "</span>);</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				<span class="keyword">case</span> XSSFCell.CELL_TYPE_NUMERIC:  <span class="comment">//如果是数字类型</span></div><div class="line">					<span class="keyword">double</span> d=cell.getNumericCellValue();   <span class="comment">//获取值</span></div><div class="line">					System.out.print( d+ <span class="string">"    "</span>);</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				<span class="keyword">case</span> XSSFCell.CELL_TYPE_STRING:  <span class="comment">//如果是字符串类型的</span></div><div class="line">					String s=cell.getStringCellValue();</div><div class="line">					System.out.print( s+ <span class="string">"   "</span>);   </div><div class="line">				<span class="keyword">case</span> XSSFCell.CELL_TYPE_BLANK:   <span class="comment">//如果是空值</span></div><div class="line">					System.out.print(<span class="string">"      "</span>);</div><div class="line">				<span class="keyword">default</span>:</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			System.out.println();</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		workbook.close();  <span class="comment">//关闭</span></div><div class="line">		inputStream.close();</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
-<ul>
-<li><p><a href="http://tool.oschina.net/apidocs/apidoc?api=apache-POI" target="_blank" rel="external">POI文档</a></p>
-</li>
-<li><p><a href="http://lsieun.blog.51cto.com/9210464/1836601" target="_blank" rel="external">http://lsieun.blog.51cto.com/9210464/1836601</a></p>
-</li>
-</ul>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Excel的读取和写入&quot;&gt;&lt;a href=&quot;#Excel的读取和写入&quot; class=&quot;headerlink&quot; title=&quot;Excel的读取和写入&quot;&gt;&lt;/a&gt;Excel的读取和写入&lt;/h1&gt;&lt;h2 id=&quot;准备&quot;&gt;&lt;a href=&quot;#准备&quot; class=&quot;head
-    
-    </summary>
-    
-      <category term="Java-Web" scheme="http://chenjiabing666.github.io/categories/Java-Web/"/>
-    
-    
-      <category term="POI(Excel)" scheme="http://chenjiabing666.github.io/tags/POI-Excel/"/>
     
   </entry>
   
