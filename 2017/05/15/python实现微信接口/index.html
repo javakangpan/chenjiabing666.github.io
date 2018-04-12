@@ -537,6 +537,13 @@ itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但�
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#python实现微信接口-itchat"><span class="toc-number">1.</span> <span class="toc-text">python实现微信接口(itchat)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#登录"><span class="toc-number">1.2.</span> <span class="toc-text">登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#退出及登录完成后调用的特定的方法"><span class="toc-number">1.3.</span> <span class="toc-text">退出及登录完成后调用的特定的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回复消息"><span class="toc-number">1.4.</span> <span class="toc-text">回复消息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#send"><span class="toc-number">1.4.1.</span> <span class="toc-text">send</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#send-msg"><span class="toc-number">1.4.2.</span> <span class="toc-text">send_msg</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#send-file"><span class="toc-number">1.4.3.</span> <span class="toc-text">send_file</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#send-image"><span class="toc-number">1.4.4.</span> <span class="toc-text">send_image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#send-video"><span class="toc-number">1.4.5.</span> <span class="toc-text">send_video</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注册消息方法"><span class="toc-number">1.5.</span> <span class="toc-text">注册消息方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注册方法"><span class="toc-number">1.5.1.</span> <span class="toc-text">注册方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附件的下载与发送"><span class="toc-number">1.5.2.</span> <span class="toc-text">附件的下载与发送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#群消息"><span class="toc-number">1.5.3.</span> <span class="toc-text">群消息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注册消息的优先级"><span class="toc-number">1.6.</span> <span class="toc-text">注册消息的优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消息内容"><span class="toc-number">1.7.</span> <span class="toc-text">消息内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一般消息"><span class="toc-number">1.7.1.</span> <span class="toc-text">一般消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化消息"><span class="toc-number">1.7.2.</span> <span class="toc-text">初始化消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文本消息"><span class="toc-number">1.7.3.</span> <span class="toc-text">文本消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图片消息"><span class="toc-number">1.7.4.</span> <span class="toc-text">图片消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#视频消息"><span class="toc-number">1.7.5.</span> <span class="toc-text">视频消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#地理位置消息"><span class="toc-number">1.7.6.</span> <span class="toc-text">地理位置消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#名片消息"><span class="toc-number">1.7.7.</span> <span class="toc-text">名片消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#语音消息"><span class="toc-number">1.7.8.</span> <span class="toc-text">语音消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动画表情"><span class="toc-number">1.7.9.</span> <span class="toc-text">动画表情</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#普通链接或应用分享消息"><span class="toc-number">1.7.10.</span> <span class="toc-text">普通链接或应用分享消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#音乐链接消息"><span class="toc-number">1.7.11.</span> <span class="toc-text">音乐链接消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#群消息-1"><span class="toc-number">1.7.12.</span> <span class="toc-text">群消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#红包消息"><span class="toc-number">1.7.13.</span> <span class="toc-text">红包消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统消息"><span class="toc-number">1.7.14.</span> <span class="toc-text">系统消息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#账号类型"><span class="toc-number">1.8.</span> <span class="toc-text">账号类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#好友"><span class="toc-number">1.8.1.</span> <span class="toc-text">好友</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#get-friends"><span class="toc-number">1.8.1.1.</span> <span class="toc-text">get_friends</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#search-friends"><span class="toc-number">1.8.1.2.</span> <span class="toc-text">search_friends</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#update-friend"><span class="toc-number">1.8.1.3.</span> <span class="toc-text">update_friend</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公众号"><span class="toc-number">1.8.2.</span> <span class="toc-text">公众号</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#get-mps"><span class="toc-number">1.8.2.1.</span> <span class="toc-text">get_mps</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#search-mps"><span class="toc-number">1.8.2.2.</span> <span class="toc-text">search_mps</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#群聊"><span class="toc-number">1.8.3.</span> <span class="toc-text">群聊</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法汇总"><span class="toc-number">1.9.</span> <span class="toc-text">方法汇总</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">1.10.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码"><span class="toc-number">1.10.1.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.11.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
+ 
+  </div>
+
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
 <aside class="clearfix">
@@ -616,15 +623,15 @@ itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但�
 			
 		
 			
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>6</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
 			
 		
 			
@@ -640,11 +647,11 @@ itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但�
 			
 		
 			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
 			
 		
 			
@@ -656,11 +663,11 @@ itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但�
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 			
@@ -680,7 +687,7 @@ itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但�
 			
 		
 			
-				<li><a href="/tags/POI-Excel/" title="POI(Excel)">POI(Excel)<sup>1</sup></a></li>
+				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -822,6 +829,8 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });

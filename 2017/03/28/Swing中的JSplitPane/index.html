@@ -223,6 +223,13 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Swing中的JSplitPane-分割面板"><span class="toc-number">1.</span> <span class="toc-text">Swing中的JSplitPane(分割面板)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数"><span class="toc-number">1.2.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用方法"><span class="toc-number">1.3.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#开始撸代码"><span class="toc-number">2.</span> <span class="toc-text">开始撸代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类-PropertyChangeEvent"><span class="toc-number">2.0.1.</span> <span class="toc-text">类 PropertyChangeEvent</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">2.1.</span> <span class="toc-text">参考文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">2.2.</span> <span class="toc-text">作者说</span></a></li></ol></li></ol>
+ 
+  </div>
+
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
 <aside class="clearfix">
@@ -302,15 +309,15 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 			
 		
 			
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>6</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
 			
 		
 			
@@ -326,11 +333,11 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 			
 		
 			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
 			
 		
 			
@@ -342,11 +349,11 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 			
@@ -366,7 +373,7 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 			
 		
 			
-				<li><a href="/tags/POI-Excel/" title="POI(Excel)">POI(Excel)<sup>1</sup></a></li>
+				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -508,6 +515,8 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
