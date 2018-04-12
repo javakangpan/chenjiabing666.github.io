@@ -291,13 +291,6 @@ while(file.ready())   //用来判断是否还有字符可读
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#java中IO操作"><span class="toc-number">1.</span> <span class="toc-text">java中IO操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#读取文件中的内容"><span class="toc-number">1.1.</span> <span class="toc-text">读取文件中的内容</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用Scanner读取文本中的内容"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">使用Scanner读取文本中的内容</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用FileReader读取"><span class="toc-number">1.1.1.</span> <span class="toc-text">使用FileReader读取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用BufferedReader的类实现高效的读取文件"><span class="toc-number">1.1.2.</span> <span class="toc-text">使用BufferedReader的类实现高效的读取文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件的写入"><span class="toc-number">1.2.</span> <span class="toc-text">文件的写入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用FileWriter写入文件"><span class="toc-number">1.2.1.</span> <span class="toc-text">用FileWriter写入文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用PrintStream写入文件"><span class="toc-number">1.2.2.</span> <span class="toc-text">用PrintStream写入文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#这里是用BufferedWriter类写入文件-一个高效的写入方式"><span class="toc-number">1.3.</span> <span class="toc-text">这里是用BufferedWriter类写入文件(一个高效的写入方式)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单介绍"><span class="toc-number">1.3.1.</span> <span class="toc-text">简单介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子"><span class="toc-number">1.3.2.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他的方法"><span class="toc-number">1.3.3.</span> <span class="toc-text">其他的方法</span></a></li></ol></li></ol></li></ol>
- 
-  </div>
-
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
 <aside class="clearfix">
@@ -393,11 +386,7 @@ while(file.ready())   //用来判断是否还有字符可读
 			
 		
 			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
 			
 		
 			
@@ -405,11 +394,11 @@ while(file.ready())   //用来判断是否还有字符可读
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
+				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
@@ -421,6 +410,10 @@ while(file.ready())   //用来判断是否还有字符可读
 			
 		
 			
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
@@ -429,15 +422,15 @@ while(file.ready())   //用来判断是否还有字符可读
 			
 		
 			
+				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
 			
 		
 			
@@ -467,6 +460,12 @@ while(file.ready())   //用来判断是否还有字符可读
           <li>
             
             	<a href="http://www.cnblogs.com/Chenjiabing/" target="_blank" title="本人博客园">本人博客园</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://blog.csdn.net/qq_34162294" target="_blank" title="本人CSDN">本人CSDN</a>
             
           </li>
         
@@ -577,8 +576,6 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
