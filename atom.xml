@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-04-12T03:30:12.456Z</updated>
+  <updated>2018-04-16T05:56:55.733Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,498 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式之适配器模式</title>
+    <link href="http://chenjiabing666.github.io/2018/04/16/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://chenjiabing666.github.io/2018/04/16/设计模式之适配器模式/</id>
+    <published>2018-04-16T05:56:28.000Z</published>
+    <updated>2018-04-16T05:56:55.733Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="结构型模式之适配器模式"><a href="#结构型模式之适配器模式" class="headerlink" title="结构型模式之适配器模式"></a>结构型模式之适配器模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+<li>适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。</li>
+</ul>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/adapeter1.png" alt="适配器模式"></p>
+<ul>
+<li>Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一个抽象类或接口，也可以是具体类。</li>
+<li>Adapter（适配器类）：适配器可以调用另一个接口，作为一个转换器，对Adaptee和Target进行适配，适配器类是适配器模式的核心，在对象适配器中，它通过继承Target并关联一个Adaptee对象使二者产生联系。</li>
+<li><p>Adaptee（适配者类）：适配者即被适配的角色，它定义了一个已经存在的接口，这个接口需要适配，适配者类一般是一个具体类，包含了客户希望使用的业务方法，在某些情况下可能没有适配者类的源代码。</p>
+</li>
+<li><p>根据对象适配器模式结构图，在对象适配器中，客户端需要调用request()方法，而适配者类Adaptee没有该方法，但是它所提供的specificRequest()方法却是客户端所需要的。为了使客户端能够使用适配者类，需要提供一个包装类Adapter，即适配器类。这个包装类包装了一个适配者的实例，从而将客户端与适配者衔接起来，在适配器的request()方法中调用适配者的specificRequest()方法。因为适配器类与适配者类是关联关系（也可称之为委派关系），所以这种适配器模式称为对象适配器模式</p>
+</li>
+</ul>
+<h2 id="类适配器"><a href="#类适配器" class="headerlink" title="类适配器"></a>类适配器</h2><ul>
+<li><p>类适配器是继承适配者类实现的，其中对象适配器是使用组合的方式实现的，就是适配者类作为适配器类的成员变量而实现的</p>
+</li>
+<li><p>一般目标抽象类是一个接口，适配者类一般是一个具体的实现类，有时候甚至不知道其中的源代码，因此需要适配器类将适配者类转换成适合用户的目标类</p>
+</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><ul>
+<li>我们知道笔记本充电的电压是5v，但是我们的高压电是220v，那么我们此时就需要一个适配器将这个220v电压转换成为5v的电压给笔记本充电<ul>
+<li>这里的220v电压就是适配者类，即是需要转换的类</li>
+<li>5v电压是目标抽象类，由适配器将220v转换而来</li>
+<li>这里的适配器类的主要功能就是将220v电压转换成5v电压</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>目标接口(5v电压)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 接口为5v电压的接口  ，  这个目标抽象类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Power5</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">getPower5</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>220v电压的类（这里是一个具体的类，适配者类）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Power220</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getPower220</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"正在输出220v电压....."</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>适配器类（将220v电压转换成5v）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 适配器类，主要的目的就是将220v电压转换为5v的电压供笔记本充电</div><div class="line"> * 其中Power5是目标抽象接口，是最终需要的接口，Power220是一个适配者类，是已经存在的，只需要适配器转换即可</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AdapterPower5</span> <span class="keyword">extends</span> <span class="title">Power220</span> <span class="keyword">implements</span> <span class="title">Power5</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 重载Power5中的方法，获取需要的5v电压</div><div class="line">	 * 过程： 先获取220v电压，然后进行转换即可</div><div class="line">	 * 	 */</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getPower5</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>.getPower220();   <span class="comment">//首先获取220v电压</span></div><div class="line">		<span class="keyword">this</span>.transform();   <span class="comment">//将220v电压转换成5v的电压</span></div><div class="line">		System.out.println(<span class="string">"获取5v电压......."</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 将220v电压转换成5v电压的方法</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transform</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"现在将220v电压转换成5v电压......."</span>);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>笔记本充电的类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 笔记本类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoteBook</span> </span>&#123;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 笔记本充电的方法</div><div class="line">	 * <span class="doctag">@param</span> power5   电压为5v的对象</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">PowerOn</span><span class="params">(Power5 power5)</span></span>&#123;</div><div class="line">		power5.getPower5();   <span class="comment">//获取5v电压</span></div><div class="line">		System.out.println(<span class="string">"笔记本获取了5v的电压，正在开始充电......"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>测试类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		NoteBook noteBook=<span class="keyword">new</span> NoteBook();   <span class="comment">//创建笔记本的类</span></div><div class="line">		noteBook.PowerOn(<span class="keyword">new</span> AdapterPower5());   <span class="comment">//调用笔记本充电的类</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="对象适配器"><a href="#对象适配器" class="headerlink" title="对象适配器"></a>对象适配器</h2><ul>
+<li>对象适配器是将适配者类作为适配器类的成员变量并不是继承，这个是一种组合方式</li>
+<li>这种方式使用的更加普遍</li>
+</ul>
+<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><ul>
+<li><p>这里的实例还是前面的例子</p>
+</li>
+<li><p>这里唯一不同的就是适配器类，不是继承适配者类，而是使用组合的方式</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 适配器类，这个是对象适配器，适配者类是作为成员变量存在，是组合关系</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">implements</span> <span class="title">Power5</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> Power220 power;   <span class="comment">//220v电压类的对象，作为成员变量</span></div><div class="line"></div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 构造方法，主要是为类初始化Power220v的对象</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Adapter</span><span class="params">(Power220 power)</span></span>&#123;</div><div class="line">		<span class="keyword">this</span>.power=power;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getPower5</span><span class="params">()</span> </span>&#123;</div><div class="line">		power.getPower220();   <span class="comment">//获取220v电压</span></div><div class="line">		transform();   <span class="comment">//转换电压</span></div><div class="line">		System.out.println(<span class="string">"正在输出5v电压......."</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transform</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"将220v电压转换成5v的电压......"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>类适配器是使用类继承的方式，适配器类继承适配者类(不提倡使用)</p>
+</li>
+<li><p>对象适配器使用的是一种组合的方式，将适配者类作为其中的成员变量，那么也是可以实现（提倡使用）</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;结构型模式之适配器模式&quot;&gt;&lt;a href=&quot;#结构型模式之适配器模式&quot; class=&quot;headerlink&quot; title=&quot;结构型模式之适配器模式&quot;&gt;&lt;/a&gt;结构型模式之适配器模式&lt;/h1&gt;&lt;h2 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;head
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://chenjiabing666.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="http://chenjiabing666.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式之桥接模式</title>
+    <link href="http://chenjiabing666.github.io/2018/04/16/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://chenjiabing666.github.io/2018/04/16/设计模式之桥接模式/</id>
+    <published>2018-04-16T05:55:29.000Z</published>
+    <updated>2018-04-16T05:57:07.300Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="结构型模式之桥接模式"><a href="#结构型模式之桥接模式" class="headerlink" title="结构型模式之桥接模式"></a>结构型模式之桥接模式</h1><ul>
+<li><p>桥接模式是一种很实用的结构型设计模式，如果软件系统中某个类存在两个独立变化的维度，通过该模式可以将这两个维度分离出来，使两者可以独立扩展，让系统更加符合“单一职责原则”。与多层继承方案不同，它将两个独立变化的维度设计为两个独立的继承等级结构，并且在抽象层建立一个抽象关联，该关联关系类似一条连接两个独立继承结构的桥，故名桥接模式。</p>
+</li>
+<li><p>桥接模式用一种巧妙的方式处理多层继承存在的问题，用抽象关联取代了传统的多层继承，将类之间的静态继承关系转换为动态的对象组合关系，使得系统更加灵活，并易于扩展，同时有效控制了系统中类的个数。桥接定义如下：</p>
+</li>
+<li><p>桥接模式(Bridge Pattern)：将抽象部分与它的实现部分分离，使它们都可以独立地变化。它是一种对象结构型模式，又称为柄体(Handle and Body)模式或接口(Interface)模式。</p>
+</li>
+</ul>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/bridge1.png" alt="桥接模式"></p>
+<ul>
+<li><p>在桥接模式结构图中包含如下几个角色：</p>
+<ul>
+<li>Abstraction（抽象类）：用于定义抽象类的接口，它一般是抽象类而不是接口，其中定义了一个Implementor（实现类接口）类型的对象并可以维护该对象，它与Implementor之间具有关联关系，它既可以包含抽象业务方法，也可以包含具体业务方法。</li>
+<li>RefinedAbstraction（扩充抽象类）：扩充由Abstraction定义的接口，通常情况下它不再是抽象类而是具体类，它实现了在Abstraction中声明的抽象业务方法，在RefinedAbstraction中可以调用在Implementor中定义的业务方法。</li>
+<li>Implementor（实现类接口）：定义实现类的接口，这个接口不一定要与Abstraction的接口完全一致，事实上这两个接口可以完全不同，一般而言，Implementor接口仅提供基本操作，而Abstraction定义的接口可能会做更多更复杂的操作。Implementor接口对这些基本操作进行了声明，而具体实现交给其子类。通过关联关系，在Abstraction中不仅拥有自己的方法，还可以调用到Implementor中定义的方法，使用关联关系来替代继承关系。</li>
+<li>ConcreteImplementor（具体实现类）：具体实现Implementor接口，在不同的ConcreteImplementor中提供基本操作的不同实现，在程序运行时，ConcreteImplementor对象将替换其父类对象，提供给抽象类具体的业务操作方法。</li>
+</ul>
+</li>
+</ul>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p><img src="http://ono60m7tl.bkt.clouddn.com/bridge2.png" alt="实例"></p>
+<ul>
+<li><p>从上面的这个实例我们可以看出，如果使用多层继承的话，那么我们可以定义是三个抽象类（台式机，笔记本，平板电脑），在这个三个抽象类的下面每个都有三个不同品牌的具体实现类，那么总共要有3x3=9个具体的实现类。不仅仅是类的数量多，在扩展性能上也是成倍的增加，如果想要添加一个品牌，那么需要添加三个类，这个是极其浪费的。</p>
+</li>
+<li><p>针对上面的缺点，我们可以使用桥接模式，将电脑分类，品牌分类分成两个维度，如下图：<br><img src="http://ono60m7tl.bkt.clouddn.com/bridge3.png" alt=""></p>
+</li>
+<li><p>其中Computer是一个抽象类，不是接口，其中Brand（品牌）是其中的成员变量，我们就完成了一个电脑具有不同品牌，那么如果我们想添加一个品牌，就只是添加一个具体的实现类即可，就不需要添加三个了。</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;结构型模式之桥接模式&quot;&gt;&lt;a href=&quot;#结构型模式之桥接模式&quot; class=&quot;headerlink&quot; title=&quot;结构型模式之桥接模式&quot;&gt;&lt;/a&gt;结构型模式之桥接模式&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;桥接模式是一种很实用的结构型设计模式，如果软件系统中某个类
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://chenjiabing666.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="http://chenjiabing666.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式之原型模式</title>
+    <link href="http://chenjiabing666.github.io/2018/04/16/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://chenjiabing666.github.io/2018/04/16/设计模式之原型模式/</id>
+    <published>2018-04-16T05:53:04.000Z</published>
+    <updated>2018-04-16T05:54:03.412Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="创建型模式之原型模式"><a href="#创建型模式之原型模式" class="headerlink" title="创建型模式之原型模式"></a>创建型模式之原型模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+<li><p>原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。</p>
+</li>
+<li><p>这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要    在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数据库，以此来减少数据库调用。</p>
+</li>
+<li><p>原型模式可以分为浅克隆和深度克隆</p>
+</li>
+</ul>
+<h2 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h2><p><img src="http://ono60m7tl.bkt.clouddn.com/property1.png" alt="角色"></p>
+<h2 id="java语言中实现克隆的两种方式"><a href="#java语言中实现克隆的两种方式" class="headerlink" title="java语言中实现克隆的两种方式"></a>java语言中实现克隆的两种方式</h2><ol>
+<li><p>直接创建一个对象，然后设置成员变量的值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Obj obj=<span class="keyword">new</span> Obj(); <span class="comment">//创建一个新的对象</span></div><div class="line">obj.setName(<span class="keyword">this</span>.name);   <span class="comment">//设置其中变量的值</span></div><div class="line">obj.setAge(<span class="keyword">this</span>.age);</div></pre></td></tr></table></figure>
+</li>
+<li><p>实现cloneable接口</p>
+</li>
+</ol>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/property2.png" alt=""></p>
+<h2 id="浅克隆"><a href="#浅克隆" class="headerlink" title="浅克隆"></a>浅克隆</h2><ul>
+<li><p>如果克隆的对象的成员变量是值类型的，比如int，double那么使用浅克隆就可以实现克隆完整的原型对象，但是如果其中的成员变量有引用类型的，那么这个引用类型的克隆过去的其实是地址，克隆对象的这个引用类型变量改变了，那么原来变量的值也是会改变的。</p>
+</li>
+<li><p>简单的说，浅克隆只能复制值类型的，对于引用类型的数据只能复制地址</p>
+</li>
+</ul>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/property3.png" alt="浅克隆"></p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><ul>
+<li>一个公司出版周报，那么这个周报的格式一般是相同的，只是将其中的内容稍作修改即可。但是一开始没有这个原型，员工每周都需要重新手写这个周报，现在有了这个周报的原型，只需要在这个clone这个原型，然后在其基础上修改即可。</li>
+</ul>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/property4.png" alt="周报"></p>
+<ul>
+<li>其中的Cloneable就是抽象原型类</li>
+</ul>
+<ul>
+<li>附件类（这个是一个引用类型的对象，验证浅克隆只是复制其中的地址，如果两个对象中的任何一个改变了这个变量的值，那么另外一个也会随之改变）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 附件类，这个是周报的附件</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Attachment</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name; <span class="comment">// 名称</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Attachment</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>周报的类（其中实现了Cloneable接口）<ul>
+<li>其中的clone()方法返回的就是一个克隆的对象，因此我们调用这个方法克隆一个新的对象</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 这个是周报类，这个类是实现接口Prototype这个接口的</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeeklyLog</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name; <span class="comment">// 姓名</span></div><div class="line">	<span class="keyword">private</span> String date; <span class="comment">// 日期</span></div><div class="line">	<span class="keyword">private</span> String content; <span class="comment">// 内容</span></div><div class="line">	<span class="keyword">private</span> Attachment attachment;  <span class="comment">//附件，是一个引用对象，这个只能实现浅克隆</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">WeeklyLog</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 构造方法</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">WeeklyLog</span><span class="params">(String name, String date, String content)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">		<span class="keyword">this</span>.date = date;</div><div class="line">		<span class="keyword">this</span>.content = content;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 提供一个clone方法，返回的是一个clone对象</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> WeeklyLog <span class="title">clone</span><span class="params">()</span> </span>&#123;</div><div class="line">		Object object = <span class="keyword">null</span>; <span class="comment">// 创建一个Object对象</span></div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			object = <span class="keyword">super</span>.clone(); <span class="comment">// 直接调用clone方法，复制对象</span></div><div class="line">			<span class="keyword">return</span> (WeeklyLog) object; <span class="comment">// 返回即可</span></div><div class="line">		&#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</div><div class="line">			System.out.println(<span class="string">"这个对象不能复制....."</span>);</div><div class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>测试类<ul>
+<li>测试浅克隆的值类型是是否完成复制了</li>
+<li>测试引用类型的值能否完成克隆，还是只是复制了一个引用地址</li>
+<li>从结果来看，对象是完成复制了，因为判断两个对象的地址是不一样的，但是其中的引用类型的成员变量没有完成复制，只是复制了一个地址</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</div><div class="line"></div><div class="line">		WeeklyLog p1 = <span class="keyword">new</span> WeeklyLog(<span class="string">"陈加兵"</span>, <span class="string">"第一周"</span>, <span class="string">"获得劳动模范的称号..."</span>); <span class="comment">// 创建一个对象</span></div><div class="line">		Attachment attachment = <span class="keyword">new</span> Attachment(<span class="string">"消息"</span>);</div><div class="line">		p1.setAttachment(attachment); <span class="comment">// 添加附件</span></div><div class="line">		WeeklyLog p2 = p1.clone();</div><div class="line">		System.out.println(p1 == p2); <span class="comment">// 判断是否正确</span></div><div class="line">		p2.setName(<span class="string">"Jack"</span>); <span class="comment">// 修改P2对象的内容</span></div><div class="line">		p2.setDate(<span class="string">"第二周"</span>);</div><div class="line">		p2.setContent(<span class="string">"工作认真....."</span>);</div><div class="line">		System.out.println(p2.getName());</div><div class="line">		<span class="comment">// 返回true，可以知道这两个附件的地址是一样的</span></div><div class="line">		System.out.println(p1.getAttachment() == p2.getAttachment());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>浅克隆对于值类型的数据可以复制成功，但是对于引用卡类型的数据只能复制一个地址，如果一个对象中的引用类型的变量的值改变了，那么另外一个也会随之改变</li>
+</ul>
+<h2 id="深度克隆"><a href="#深度克隆" class="headerlink" title="深度克隆"></a>深度克隆</h2><ul>
+<li>浅克隆只能完成复制值类型，深度克隆可以完成复制引用类型和值类型</li>
+</ul>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/property5.png" alt="深度克隆"></p>
+<h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><ol>
+<li>引用类型的变量类实现序列化(实现Serializabl接口）</li>
+<li>需要克隆的类实现序列化(实现Serializable接口)</li>
+</ol>
+<h3 id="为什么实现序列化"><a href="#为什么实现序列化" class="headerlink" title="为什么实现序列化"></a>为什么实现序列化</h3><ul>
+<li>因为深度克隆的实现的原理是使用输入和输出流，如果想要将一个对象使用输入和输出流克隆，必须序列化。</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li><p>附件类(引用类型的成员变量，实现序列化)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 附件类，这个是周报的附件</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Attachment</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">799959163401886355L</span>;</div><div class="line">	<span class="keyword">private</span> String name; <span class="comment">// 名称</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Attachment</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>周报类（需要克隆的类，因为其中有引用类型的成员变量，因此需要实现序列化)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 这个是周报类，这个类是实现接口Prototype这个接口的</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeeklyLog</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">8782492113927035907L</span>;</div><div class="line">	<span class="keyword">private</span> String name; <span class="comment">// 姓名</span></div><div class="line">	<span class="keyword">private</span> String date; <span class="comment">// 日期</span></div><div class="line">	<span class="keyword">private</span> String content; <span class="comment">// 内容</span></div><div class="line">	<span class="keyword">private</span> Attachment attachment; <span class="comment">// 附件，是一个引用对象，这个只能实现浅克隆</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">WeeklyLog</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 构造方法</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">WeeklyLog</span><span class="params">(String name, String date, String content)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">		<span class="keyword">this</span>.date = date;</div><div class="line">		<span class="keyword">this</span>.content = content;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 提供一个clone方法，返回的是一个clone对象</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> WeeklyLog <span class="title">clone</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">// 将对象写入到对象流中</span></div><div class="line">		ByteArrayOutputStream arrayOutputStream = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			ObjectOutputStream objectOutputStream = <span class="keyword">new</span> ObjectOutputStream(</div><div class="line">					arrayOutputStream); <span class="comment">// 创建对象输出流</span></div><div class="line">			objectOutputStream.writeObject(<span class="keyword">this</span>); <span class="comment">// 将这个类的对象写入到输出流中</span></div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">// 将对象从流中读出</span></div><div class="line">		ByteArrayInputStream arrayInputStream = <span class="keyword">new</span> ByteArrayInputStream(</div><div class="line">				arrayOutputStream.toByteArray());</div><div class="line">		WeeklyLog weeklyLog;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			ObjectInputStream objectInputStream = <span class="keyword">new</span> ObjectInputStream(</div><div class="line">					arrayInputStream);<span class="comment">// 新建对象输入流</span></div><div class="line">			weeklyLog = (WeeklyLog) objectInputStream.readObject(); <span class="comment">// 读取对象从流中</span></div><div class="line">			<span class="keyword">return</span> weeklyLog;</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException | ClassNotFoundException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>测试类</p>
+<ul>
+<li>从中可以看出其中的附件地址是不同的，如果一个对象的附件变量改变了，那么另外一个将保持不变，因此实现了深度克隆，是两个完全不同的对象</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</div><div class="line"></div><div class="line">		WeeklyLog p1 = <span class="keyword">new</span> WeeklyLog(<span class="string">"陈加兵"</span>, <span class="string">"第一周"</span>, <span class="string">"获得劳动模范的称号..."</span>); <span class="comment">// 创建一个对象</span></div><div class="line">		Attachment attachment = <span class="keyword">new</span> Attachment(<span class="string">"消息"</span>);</div><div class="line">		p1.setAttachment(attachment); <span class="comment">// 添加附件</span></div><div class="line">		WeeklyLog p2 = p1.clone();</div><div class="line">		System.out.println(p1 == p2); <span class="comment">// 判断是否正确</span></div><div class="line">		p2.setName(<span class="string">"Jack"</span>); <span class="comment">// 修改P2对象的内容</span></div><div class="line">		p2.setDate(<span class="string">"第二周"</span>);</div><div class="line">		p2.setContent(<span class="string">"工作认真....."</span>);</div><div class="line">		System.out.println(p2.getName());</div><div class="line">		<span class="comment">//返回false，可以看出这个是不同的地址，因此完成了深克隆</span></div><div class="line">		System.out.println(p1.getAttachment() == p2.getAttachment());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>因为深度克隆使用的是将对象写入输入和输出流中的，因此需要实现序列化，否则将不能完成</li>
+</ul>
+<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>浅克隆只能克隆对象中的值类型，不能克隆有引用类型成员变量的对象</p>
+</li>
+<li><p>使用深度克隆：</p>
+<ul>
+<li>引用类型的成员变量的类必须实现序列化</li>
+<li>需要克隆的类必须实现序列化</li>
+</ul>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;创建型模式之原型模式&quot;&gt;&lt;a href=&quot;#创建型模式之原型模式&quot; class=&quot;headerlink&quot; title=&quot;创建型模式之原型模式&quot;&gt;&lt;/a&gt;创建型模式之原型模式&lt;/h1&gt;&lt;h2 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerli
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://chenjiabing666.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="http://chenjiabing666.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式之建造模式</title>
+    <link href="http://chenjiabing666.github.io/2018/04/16/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%BB%BA%E9%80%A0%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://chenjiabing666.github.io/2018/04/16/设计模式之建造模式/</id>
+    <published>2018-04-16T05:52:36.000Z</published>
+    <updated>2018-04-16T05:55:12.834Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="创建型模式之建造者模式"><a href="#创建型模式之建造者模式" class="headerlink" title="创建型模式之建造者模式"></a>创建型模式之建造者模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+<li><p>建造者模式(Builder Pattern)：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。建造者模式是一种对象创建型模式。</p>
+</li>
+<li><p>简单说，建造者的功能就是先构造复杂对象的每一个部件，指挥者的功能就是将这些部件以一定的步骤组装起来，形成一个具有一定功能的产品或者对象。当然这个步骤是透明的对于客户端。</p>
+</li>
+<li><p>建造者模式一步一步创建一个复杂的对象，它允许用户只通过指定复杂对象的类型和内容就可以构建它们，用户不需要知道内部的具体构建细节。建造者模式结构如图8-2所示：</p>
+</li>
+</ul>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/BuilderPattern.png" alt="建造者模式"></p>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/builder2.png" alt=""></p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ul>
+<li><p>下面是一个组装汽车的例子，其中汽车由发动机和轮胎组成，那么我们只需要组装轮胎，发动机即可组装完成一个汽车。</p>
+</li>
+<li><p>汽车包括轮胎，引擎，我们通常在组装汽车的时候一般都是一步一步的组装，比如先装引擎，后装轮胎。使用建造者模式就是将建造汽车的这个过程抽离成几个不同的过程，比如建造引擎和建造轮胎就是两个过程。</p>
+</li>
+<li><p>轮胎的JavaBean</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 轮胎</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tyre</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Tyre</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>引擎的JavaBean</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 引擎</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Engine</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Engine</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>汽车的JavaBean(汽车包含轮胎和引擎，因此使用聚合的关系)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 汽车的类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> Tyre tyre; <span class="comment">// 轮胎</span></div><div class="line">	<span class="keyword">private</span> Engine engine;  <span class="comment">// 引擎</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> Tyre <span class="title">getTyre</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> tyre;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTyre</span><span class="params">(Tyre tyre)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.tyre = tyre;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> Engine <span class="title">getEngine</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> engine;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEngine</span><span class="params">(Engine engine)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.engine = engine;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>抽象建造者(实际上是一个接口，其中定义了建造轮胎和引擎的方法)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Builder</span> </span>&#123;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 构造引擎的方法</div><div class="line">	 */</div><div class="line">	<span class="function">Engine <span class="title">buliderEngine</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 构造轮胎的方法</div><div class="line">	 */</div><div class="line">	<span class="function">Tyre <span class="title">builderTyre</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>具体的建造者(实现了抽象建造者，实现建造轮胎和引擎的详细过程)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 具体的建造者，主要是构造汽车的部件</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BuilderCar</span> <span class="keyword">implements</span> <span class="title">Builder</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Engine <span class="title">buliderEngine</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"构造汽车发动机"</span>);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Engine(<span class="string">"傻逼牌发动机"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Tyre <span class="title">builderTyre</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"构造汽车轮胎"</span>);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Tyre(<span class="string">"傻逼牌轮胎"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>抽象指挥者(定义了一个构造汽车的方法)，指挥者的作用就是按照一定步骤将构造者建造的部件组装起来</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 	指挥者的接口，用来按照顺序组装汽车</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Director</span> </span>&#123;</div><div class="line">	<span class="function">Car <span class="title">CreateCar</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>具体的指挥者(实现了指挥者接口)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 指挥者的实现类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DirectorCar</span> <span class="keyword">implements</span> <span class="title">Director</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> Builder builder; <span class="comment">// 建造者的对象</span></div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 构造方法，主要用来初始化建造者对象</div><div class="line">	 *</div><div class="line">	 * <span class="doctag">@param</span> builder  Builder的对象</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">DirectorCar</span><span class="params">(Builder builder)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.builder = builder;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Car <span class="title">CreateCar</span><span class="params">()</span> </span>&#123;</div><div class="line">		Car car = <span class="keyword">new</span> Car(); <span class="comment">// 创建汽车对象</span></div><div class="line">		Engine engine = builder.buliderEngine(); <span class="comment">// 构建发动机</span></div><div class="line">		Tyre tyre = builder.builderTyre(); <span class="comment">// 构造轮胎</span></div><div class="line">		car.setEngine(engine); <span class="comment">// 设置属性</span></div><div class="line">		car.setTyre(tyre); <span class="comment">// 设置属性</span></div><div class="line">		<span class="keyword">return</span> car; <span class="comment">// 返回构造好的汽车</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Director director = <span class="keyword">new</span> DirectorCar(<span class="keyword">new</span> BuilderCar()); <span class="comment">// 创建指挥者的对象</span></div><div class="line">		Car car = director.CreateCar(); <span class="comment">// 获取组装完成的</span></div><div class="line">		System.out.println(car.getEngine().getName()); <span class="comment">// 输出引擎的名字</span></div><div class="line">		System.out.println(car.getTyre().getName()); <span class="comment">// 输出轮胎的名字</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><ul>
+<li><p>基本部件不变，但是其中的组合经常变化的情况</p>
+<ul>
+<li>比如你去肯德基点餐，汉堡，可乐，鸡翅这些食物是不变的，但是套餐的组合是经常变化的，建造者模式的指挥者就是将这些部件按照一定步骤将其组合起来的。</li>
+<li>java中StringBuilder</li>
+</ul>
+</li>
+<li><p>需要生成的对象具有复杂的内部结构</p>
+<ul>
+<li>复杂的内部结构，我们可以使用建造者模式将其分离，先将其中的各个小的部件组装成功，然后由指挥者按照一定的步骤将其组装成一个复杂的对象</li>
+</ul>
+</li>
+<li>需要生成的对象内部属性本身相互依赖。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;创建型模式之建造者模式&quot;&gt;&lt;a href=&quot;#创建型模式之建造者模式&quot; class=&quot;headerlink&quot; title=&quot;创建型模式之建造者模式&quot;&gt;&lt;/a&gt;创建型模式之建造者模式&lt;/h1&gt;&lt;h2 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;head
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://chenjiabing666.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="http://chenjiabing666.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式之代理模式</title>
+    <link href="http://chenjiabing666.github.io/2018/04/16/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://chenjiabing666.github.io/2018/04/16/设计模式之代理模式/</id>
+    <published>2018-04-16T05:52:12.000Z</published>
+    <updated>2018-04-16T05:54:41.276Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="结构型模式之代理模式-静态代理"><a href="#结构型模式之代理模式-静态代理" class="headerlink" title="结构型模式之代理模式(静态代理)"></a>结构型模式之代理模式(静态代理)</h1><ul>
+<li><p>由于某些原因，客户端不想或不能直接访问一个对象，此时可以通过一个称之为“代理”的第三者来实现间接访问，该方案对应的设计模式被称为代理模式。</p>
+</li>
+<li><p>代理其实是实现简介访问的媒介，当然在代理类中还可以在执行代理操作之前，之后，之中，环绕等执行相关动作。<strong>Spring 中面向切面编程</strong>就是这个原理</p>
+</li>
+<li><p>代理模式是一种应用很广泛的结构型设计模式，而且变化形式非常多，常见的代理形式包括远程代理、保护代理、虚拟代理、缓冲代理、智能引用代理等，后面将学习这些不同的代理形式</p>
+</li>
+<li><p>当使用代理类的时候， 真实类中的信息对用户来说是透明的(不可见的)</p>
+</li>
+<li><p><strong>主要就是用于对象的间接访问提供了一个方案，可以对对象的访问进行控制</strong></p>
+</li>
+</ul>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><img src="http://ono60m7tl.bkt.clouddn.com/proxypattern1.png" alt="代理模式"></p>
+<ol>
+<li>Subject（抽象主题角色）：它声明了真实主题和代理主题的共同接口，这样一来在任何使用真实主题的地方都可以使用代理主题，客户端通常需要针对抽象主题角色进行编程。</li>
+<li>Proxy（代理主题角色）：它包含了对真实主题的引用，从而可以在任何时候操作真实主题对象；在代理主题角色中提供一个与真实主题角色相同的接口，以便在任何时候都可以替代真实主题；代理主题角色还可以控制对真实主题的使用，负责在需要的时候创建和删除真实主题对象，并对真实主题对象的使用加以约束。通常，在代理主题角色中，客户端在调用所引用的真实主题操作之前或之后还需要执行其他操作，而不仅仅是单纯调用真实主题对象中的操作。</li>
+<li>RealSubject（真实主题角色）：它定义了代理角色所代表的真实对象，在真实主题角色中实现了真实的业务操作，客户端可以通过代理主题角色间接调用真实主题角色中定义的操作。</li>
+</ol>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="第一个例子"><a href="#第一个例子" class="headerlink" title="第一个例子"></a>第一个例子</h3><ul>
+<li>需求： 我们知道mac笔记本是在美国生产的，那么如果中国供销商想要卖mac笔记本，那么必须从美国供销商那里先进货，然后中国的顾客才可以在中国供销商买mac。这里的中国供销商就相当于代理，美国供销商就相当于真实主题角色</li>
+</ul>
+<ul>
+<li>Mac笔记本抽象接口(相当于其中的抽象主题)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 苹果笔记本的接口，其中有一个方法实现了买笔记本的动作</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MacBook</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buy</span><span class="params">()</span></span>;   <span class="comment">//购买笔记本的行为</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>美国供销商(相当于这里RealSubject)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 美国的笔记本，实现了MacBook接口，表示在美国买笔记本</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">USAMac</span> <span class="keyword">implements</span> <span class="title">MacBook</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buy</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"在美国买笔记本"</span>);</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>中国供销商(相当于这里的代理角色)</p>
+<ul>
+<li>我们可以看到我们在使用代理模式的时候可以在之前和之后进行操作<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 中国的笔记本，实现了MacBook  表示在中国买笔记本</div><div class="line"> * 但是中国想要买到苹果笔记本，那么还是需要先从美国进货，因此中国只是一个中间的代理作用而已</div><div class="line"> * 当然代理的最大作用就是在代理之前、之后、之中执行相关的操作，这就是面向切面编程的原理</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChinaMac</span> <span class="keyword">implements</span> <span class="title">MacBook</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> MacBook mcBook=<span class="keyword">new</span> USAMac();   <span class="comment">//创建USAMac的对象</span></div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 在购买之前执行的操作</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preBuy</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"购买之前执行的操作"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 在购买之后执行的操作</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterBuy</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"购买之后执行的操作"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buy</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.preBuy();   <span class="comment">//之前执行的操作</span></div><div class="line">		mcBook.buy();  <span class="comment">//在美国买笔记本</span></div><div class="line">		System.out.println(<span class="string">"在中国买笔记本"</span>);</div><div class="line">		<span class="keyword">this</span>.afterBuy();   <span class="comment">//之后执行的操作</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>测试类</p>
+<ul>
+<li>我们在使用的时候直接使用代理类即可，我们根本不知道在真实类的使用，完全是代理类为我们提供了</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		MacBook macBook=<span class="keyword">new</span> ChinaMac();   <span class="comment">//创建ChinaMac对象，在中国买笔记本</span></div><div class="line">		macBook.buy();    <span class="comment">//直接在中国买笔记本</span></div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="第二个例子"><a href="#第二个例子" class="headerlink" title="第二个例子"></a>第二个例子</h3><ul>
+<li><p>我们登录一个网站的服务器端的验证步骤：</p>
+<ul>
+<li>读取用户名和密码</li>
+<li>验证用户名和密码</li>
+<li>记录到日志中</li>
+</ul>
+</li>
+<li><p>这里的验证密码和记录到日志中可以在代理类中实现，在用户执行操作之前需要读取用户名和密码，并且验证，在操作之后需要将用户的一些操作记录到日志中。其实这里的真实用户需要做的只是执行自己的操作，而验证和记录都是交给代理类实现的。</p>
+</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>用户接口(User)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 用户的抽象类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">User</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DoAction</span><span class="params">()</span></span>;   <span class="comment">//执行动作</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>真实的用户类（实现了用户接口）<ul>
+<li>主要的做的就是执行自己的操作</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RealUser</span> <span class="keyword">implements</span> <span class="title">User</span> </span>&#123;</div><div class="line">	<span class="keyword">public</span> String name;</div><div class="line">	<span class="keyword">public</span> String password;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">RealUser</span><span class="params">(String name, String password)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">		<span class="keyword">this</span>.password = password;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">RealUser</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 执行一些操作</div><div class="line">	 */</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DoAction</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"开始执行操作......"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>代理类(实现了User接口)<ul>
+<li>在执行操作之前验证密码和用户名是否正确</li>
+<li>在执行操作之后记录到日志中</li>
+<li>实际上这里就是面向切面编程</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxUser</span> <span class="keyword">implements</span> <span class="title">User</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> RealUser user; <span class="comment">// 真实用户的对象</span></div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 创建对象</div><div class="line">	 * <span class="doctag">@param</span> name  姓名</div><div class="line">	 * <span class="doctag">@param</span> password   密码</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ProxUser</span><span class="params">(String name, String password)</span> </span>&#123;</div><div class="line">		user = <span class="keyword">new</span> RealUser(name, password);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DoAction</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">//验证用户名和密码</span></div><div class="line">		<span class="keyword">if</span> (Validate()) &#123;</div><div class="line">			user.DoAction();   <span class="comment">//调用真实用户的DoAction方法执行相关操作</span></div><div class="line">			logger();   <span class="comment">//调用日志记录信息</span></div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			System.out.println(<span class="string">"请重新登录......."</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 验证用户的用户名和密码</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> Boolean <span class="title">Validate</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (<span class="string">"陈加兵"</span>.equals(user.name) &amp;&amp; <span class="string">"123456"</span>.equals(user.password)) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 添加日志记录信息</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">logger</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(user.name + <span class="string">"登录成功......"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>测试类<ul>
+<li>实际上执行了验证用户名和密码，记录日志的操作，但是对于客户端来说只能看到自己执行的操作</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		ProxUser proxUser=<span class="keyword">new</span> ProxUser(<span class="string">"陈加兵"</span>, <span class="string">"123456"</span>);   <span class="comment">//创建代理对象</span></div><div class="line">		proxUser.DoAction();   <span class="comment">//执行操作，实际执行了验证信息，doaction(),日志记录这个三个动作</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>如果增加一个接口就需要增加一个代理类，如果是要增加很多，那么就要增加很多代理类，代码将会重复</li>
+</ul>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ul>
+<li>下面我们将会讲解到动态代理，仅仅需要一个代理类即可</li>
+</ul>
+<h1 id="结构型模式之动态代理模式"><a href="#结构型模式之动态代理模式" class="headerlink" title="结构型模式之动态代理模式"></a>结构型模式之动态代理模式</h1><ul>
+<li><p>前面我们说的代理模式其实是属于静态代理模式，就是说在程序执行之前已经写好了代理类，但是缺点也是说过，必须为每个接口都实现一个代理类，如果有多个接口需要代理，那么代码肯定是要重复的，因此就需要动态代理了。</p>
+</li>
+<li><p>动态代理可以实现多个接口共用一个代理类，只需要改变初始化的参数即可，可以省去很多的重复的代码。</p>
+</li>
+<li><p>JDK的动态代理需要一个类一个接口，分别为Proxy和InvocationHandler</p>
+</li>
+<li><p>主要原理就是利用了反射的原理</p>
+</li>
+</ul>
+<h2 id="InvocationHandler"><a href="#InvocationHandler" class="headerlink" title="InvocationHandler"></a>InvocationHandler</h2><ul>
+<li>这个是代理类必须实现的接口，其中有一个方法<code>public Object invoke(Object proxy,Method method,Object[] args)</code><ul>
+<li><code>Object proxy</code>：指被代理的对象。 </li>
+<li><code>Method method</code>：要调用的方法 </li>
+<li><code>Object[] args</code>：方法调用时所需要的参数 </li>
+</ul>
+</li>
+</ul>
+<h2 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h2><ul>
+<li>Proxy类是专门完成代理的操作类，可以通过此类为一个或多个接口动态地生成实现类，此类提供了如下的操作方法：<br><code>public static Object newProxyInstance(ClassLoader loader, Class&lt;?&gt;[] interfaces, InvocationHandler h)</code><ul>
+<li><code>ClassLoader loader</code>：类加载器 </li>
+<li><code>Class&lt;?&gt;[] interfaces</code>：得到全部的接口 </li>
+<li><code>InvocationHandler h</code>：得到InvocationHandler接口的子类实例 </li>
+</ul>
+</li>
+</ul>
+<h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><ul>
+<li>肯德基的接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 肯德基的接口，其中一个eat方法</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IKFC</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>肯德基的实现类(RealSubject)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * IKFC的实现类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">KFC</span> <span class="keyword">implements</span> <span class="title">IKFC</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"我在肯德基吃了饭......"</span>);</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>苹果笔记本的接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 苹果笔记本的接口</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MacBook</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buy</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>美国供销商的类(RealSubject)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 美国笔记本的类，实现了MacBook接口</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">USAMacBook</span> <span class="keyword">implements</span> <span class="title">MacBook</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buy</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"在美国买了一个苹果电脑......"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>动态代理的类（实现了InvocationHandler接口）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</div><div class="line"><span class="keyword">import</span> java.lang.reflect.Method;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 这个是代理类，实现了InvocationHandler接口</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> Object Realobject;   <span class="comment">//被代理的对象</span></div><div class="line"></div><div class="line">	<span class="comment">//构造方法，用来初始化被代理的对象</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ProxyHandler</span><span class="params">(Object obj)</span></span>&#123;</div><div class="line">		<span class="keyword">this</span>.Realobject=obj;   <span class="comment">//初始化真实类的对象</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * <span class="doctag">@param</span> proxy  表示被代理的对象的，就是真实类的对象</div><div class="line">	 * <span class="doctag">@param</span> method 表示要调用真实类的方法</div><div class="line">	 * <span class="doctag">@param</span> args  表示方法调用的时候所需要的参数</div><div class="line">	 * <span class="doctag">@return</span>   方法调用之后的返回值</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span></span></div><div class="line">			<span class="keyword">throws</span> Throwable &#123;</div><div class="line">		prefunction();   <span class="comment">//执行之前调用的方法</span></div><div class="line">		Object res=method.invoke(Realobject, args);    <span class="comment">//Method类中的执行方法的函数，在反射中常用</span></div><div class="line">		afterFunction();   <span class="comment">//执行之后调用的方法</span></div><div class="line">		<span class="keyword">return</span> res;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 执行方法之前调用的方法</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">prefunction</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"执行方法之前......"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 执行方法之后调用的方法</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterFunction</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"执行方法之后......"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>测试类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</div><div class="line"><span class="keyword">import</span> com.sun.org.apache.bcel.internal.generic.NEW;</div><div class="line"><span class="keyword">import</span> com.sun.org.apache.bcel.internal.util.Class2HTML;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">		Class[] cls1=&#123;IKFC.class&#125;;   <span class="comment">//第一个代理的所有接口数组，直接用接口的反射即可</span></div><div class="line"></div><div class="line">		Class[] cls2=USAMacBook.class.getInterfaces(); <span class="comment">//直接具体的实现类的反射调用getInterfaces即可返回所有的接口数组</span></div><div class="line"></div><div class="line">		<span class="comment">// 返回KFC的代理对象</span></div><div class="line">		IKFC kfc = (IKFC) Proxy.newProxyInstance(Client.class.getClassLoader(),</div><div class="line">				cls1, <span class="keyword">new</span> ProxyHandler(<span class="keyword">new</span> KFC()));</div><div class="line">		kfc.eat();   <span class="comment">//执行方法</span></div><div class="line"></div><div class="line">		MacBook macBook = (MacBook) Proxy.newProxyInstance(Client.class.getClassLoader(),</div><div class="line">				cls2, <span class="keyword">new</span> ProxyHandler(</div><div class="line">						<span class="keyword">new</span> USAMacBook()));</div><div class="line"></div><div class="line">		macBook.buy();   <span class="comment">//执行方法</span></div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>动态代理的好处<ul>
+<li>即使有多个接口，也仅仅只有一个动态代理类</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;结构型模式之代理模式-静态代理&quot;&gt;&lt;a href=&quot;#结构型模式之代理模式-静态代理&quot; class=&quot;headerlink&quot; title=&quot;结构型模式之代理模式(静态代理)&quot;&gt;&lt;/a&gt;结构型模式之代理模式(静态代理)&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;由于某些原因，
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://chenjiabing666.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="http://chenjiabing666.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式之工厂模式</title>
@@ -2016,727 +2508,6 @@
     
     
       <category term="Struts2" scheme="http://chenjiabing666.github.io/tags/Struts2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Struts2入门</title>
-    <link href="http://chenjiabing666.github.io/2018/03/30/Struts2%E5%85%A5%E9%97%A8/"/>
-    <id>http://chenjiabing666.github.io/2018/03/30/Struts2入门/</id>
-    <published>2018-03-30T04:57:22.000Z</published>
-    <updated>2018-03-30T04:59:07.692Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="入门操作"><a href="#入门操作" class="headerlink" title="入门操作"></a>入门操作</h1><p>##导入jar 包</p>
-<ul>
-<li>到官网下载相应的jar包</li>
-<li>导入前阶段必须的jar包</li>
-</ul>
-<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><ul>
-<li>在eclipse中创建一个web项目</li>
-<li>在webContent下WEB-INF/lib下导入需要的jar包即可</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/jar%E5%8C%85_struts.png" alt="jar包示意图"></p>
-<h2 id="配置核心过滤器-StrutsPrepareAndExecuteFilter-（web-xml"><a href="#配置核心过滤器-StrutsPrepareAndExecuteFilter-（web-xml" class="headerlink" title="配置核心过滤器 StrutsPrepareAndExecuteFilter  （web.xml)"></a>配置核心过滤器 StrutsPrepareAndExecuteFilter  （web.xml)</h2><ul>
-<li><p>核心过滤器相当于springmvc中的前端控制器的功能，都是用来分发请求的</p>
-</li>
-<li><p>这里的核心过滤器默认分发的请求是以<code>.action</code>结尾的请求，因此我们可以使用这个默认的，但是我们也可以自己配置自己的，下面我配置的是所有的请求都分发</p>
-</li>
-<li><p>在<code>web.xml</code>中配置</p>
-</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--  配置struts2的核心过滤器 --&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">filter</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>struts2<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>struts2<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">   <span class="comment">&lt;!-- struts2中默认的访问路径是以.action结尾的路径才会分发，</span></div><div class="line">   因此我们这里需要设置即使不是.action结尾的也能分发请求给对应的action --&gt;</div><div class="line">   <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="创建action类"><a href="#创建action类" class="headerlink" title="创建action类"></a>创建action类</h2><ul>
-<li>定义action类有两种方法，一种是实现<code>Action</code>接口，一种是继承<code>ActionSupport</code>,这个在第二章会详细讲解</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> com.opensymphony.xwork2.Action;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * action类： 这里实现的Action接口</div><div class="line"> * <span class="doctag">@author</span> chenjiabing</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestAction</span> <span class="keyword">implements</span> <span class="title">Action</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">execute</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		System.out.println(<span class="string">"cchjemko"</span>);</div><div class="line">		<span class="keyword">return</span> SUCCESS;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="创建核心配置文件"><a href="#创建核心配置文件" class="headerlink" title="创建核心配置文件"></a>创建核心配置文件</h2><ul>
-<li><p>文件名为： <code>struts.xml</code></p>
-</li>
-<li><p>存放的路径： 在<code>src</code>目录下，或者自己创建的源文件夹的根目录下</p>
-</li>
-<li><p>struts.xml 内容</p>
-</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd"&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">struts</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!--定义package ，name是这个package的名字，唯一标识</span></div><div class="line">		extends: 该属性是一个选择属性，表示继承其他的包，但是我们一般都会继承struts-default</div><div class="line">		namespace：该属性是一个可选属性，指定该包的命名空间，默认的是“/”,以为一个配置文件中可能有相同名字的action，如果配置不同的namespace，那么就可以配置相同的action的名字，这个和调用执行请求的url息息相关</div><div class="line">	--&gt;</div><div class="line">	<span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"test"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 配置测试的action类，其中name是调用的别名，class是Action类的全路径 类名+包名--&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"testaction"</span> <span class="attr">class</span>=<span class="string">"com.jsnu.struts2.controller.TestAction"</span> &gt;</span></div><div class="line">		<span class="comment">&lt;!--name是Action类中返回的值，/jsp/success.jsp是对应的跳转视图，这里如果返回success，那么跳转到/jsp/success.jsp这个视图--&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>/jsp/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">package</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">struts</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h2><ul>
-<li><p>前面的核心配置文件中定义了跳转的视图为 /jsp/success.jsp</p>
-</li>
-<li><p>在<code>webContent</code>下创建一个jsp文件夹，在其中创建一个<code>success.jsp</code>文件</p>
-</li>
-</ul>
-<h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><ul>
-<li><p>开启tomcat，在浏览器张输入：<code>http://localhost:8080/Struts2/testaction.action</code></p>
-</li>
-<li><p>执行成功之后，我们将会看到调用上面的链接，页面就会跳转到success.jsp页面</p>
-</li>
-<li><p>但是我们看到地址依然没有改变，因为struts默认的跳转是以转发的方式，不是重定向，后面我们会讲到怎样设置跳转方式</p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;入门操作&quot;&gt;&lt;a href=&quot;#入门操作&quot; class=&quot;headerlink&quot; title=&quot;入门操作&quot;&gt;&lt;/a&gt;入门操作&lt;/h1&gt;&lt;p&gt;##导入jar 包&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;到官网下载相应的jar包&lt;/li&gt;
-&lt;li&gt;导入前阶段必须的jar包&lt;/li&gt;
-    
-    </summary>
-    
-      <category term="Struts2" scheme="http://chenjiabing666.github.io/categories/Struts2/"/>
-    
-    
-      <category term="Struts2" scheme="http://chenjiabing666.github.io/tags/Struts2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JDBC干货二</title>
-    <link href="http://chenjiabing666.github.io/2018/03/30/JDBC%E5%B9%B2%E8%B4%A7%E4%BA%8C/"/>
-    <id>http://chenjiabing666.github.io/2018/03/30/JDBC干货二/</id>
-    <published>2018-03-30T04:54:52.000Z</published>
-    <updated>2018-03-30T04:56:30.521Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Day02"><a href="#Day02" class="headerlink" title="Day02"></a>Day02</h1><h2 id="Properties属性配置对象"><a href="#Properties属性配置对象" class="headerlink" title="Properties属性配置对象"></a>Properties属性配置对象</h2><h3 id="什么是properties"><a href="#什么是properties" class="headerlink" title="什么是properties"></a>什么是properties</h3><ul>
-<li>程序猿可以把工程中出现的某些数据以配置文件的形式保存起来，就是处理 <code>*.properties</code>文件的对象，在properties文件中是以键值对形式保存的数据</li>
-</ul>
-<h3 id="把数据库中的信息存放到该文件中"><a href="#把数据库中的信息存放到该文件中" class="headerlink" title="把数据库中的信息存放到该文件中"></a>把数据库中的信息存放到该文件中</h3><ul>
-<li>其中存放的是driver ,url , username,password</li>
-</ul>
-<h3 id="为什么要保存到该配置文件中"><a href="#为什么要保存到该配置文件中" class="headerlink" title="为什么要保存到该配置文件中"></a>为什么要保存到该配置文件中</h3><ul>
-<li>因为以后的工作中有更换数据库的需求，此时如果写在java类中修改比较麻烦，所以需要把这些数据保存到配置文件中</li>
-</ul>
-<h3 id="存放数据"><a href="#存放数据" class="headerlink" title="存放数据"></a>存放数据</h3><ul>
-<li>在src的目录下创建一个<code>jdbc.properties</code>配置文件</li>
-<li>将数据库的信息保存到其中(键值对的形式)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">driver=com.mysql.jdbc.Driver</div><div class="line">url=jdbc:mysql://localhost:3306/jdbc</div><div class="line">username=root</div><div class="line">password=root</div></pre></td></tr></table></figure>
-<h3 id="存放数据注意事项"><a href="#存放数据注意事项" class="headerlink" title="存放数据注意事项"></a>存放数据注意事项</h3><ul>
-<li>数据是以键值的形式存放的（key-value）</li>
-<li>value的值不能带有引号，并且后面不能有空格</li>
-</ul>
-<h3 id="读取Properties配置文件中的信息"><a href="#读取Properties配置文件中的信息" class="headerlink" title="读取Properties配置文件中的信息"></a>读取Properties配置文件中的信息</h3><ul>
-<li>既然我们将数据库中的配置信息存放到配置文件中，我们当然需要将其读取到java代码中使用</li>
-<li>前提：这个配置文件在src目录下</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPro</span><span class="params">()</span></span>&#123;</div><div class="line">	Properties properties=<span class="keyword">new</span> Properties();  <span class="comment">//创建Properties对象</span></div><div class="line">	<span class="comment">//使用类加载器生成输入流（读取）  前提是该配置文件必须在src目录下</span></div><div class="line">	InputStream ips=TestProperties.class.getClassLoader().getResourceAsStream(<span class="string">"jdbc.properties"</span>);</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		properties.load(ips);</div><div class="line">		String s1=properties.getProperty(<span class="string">"url"</span>);   <span class="comment">//直接读取，以键值</span></div><div class="line">		System.out.println(s1);</div><div class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="定义此时的工具类"><a href="#定义此时的工具类" class="headerlink" title="定义此时的工具类"></a>定义此时的工具类</h2><ul>
-<li><p>我们引用了配置文件，那么我们的工具类就需要改变了，在工具类需要读取配置文件中数据库信息</p>
-</li>
-<li><p>我们知道数据库的配置信息是不变的，因此我们不需要每次连接都加载一次，所以我们可以将读取数据库配置信息的代码放在静态语句块中，那么只有当类加载的时候才会加载一次</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"><span class="keyword">import</span> java.sql.Connection;</div><div class="line"><span class="keyword">import</span> java.sql.DriverManager;</div><div class="line"><span class="keyword">import</span> java.sql.ResultSet;</div><div class="line"><span class="keyword">import</span> java.sql.SQLException;</div><div class="line"><span class="keyword">import</span> java.sql.Statement;</div><div class="line"><span class="keyword">import</span> java.util.Properties;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 数据库封装类</div><div class="line"> * <span class="doctag">@author</span> chenjiabing</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DBUtils</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String driver;   <span class="comment">//驱动</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String url;  <span class="comment">//url</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String username;  <span class="comment">//用户名</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String password;  <span class="comment">//密码</span></div><div class="line"></div><div class="line">	<span class="comment">//静态语句块,只在使用类加载的时候加载一次，因为其中的数据不用每次都加载，所以只需要加载一次</span></div><div class="line">	<span class="keyword">static</span>&#123;</div><div class="line">		Properties properties=<span class="keyword">new</span> Properties();  <span class="comment">//创建对象</span></div><div class="line">		<span class="comment">//使用类加载器读取文件输入流</span></div><div class="line">		InputStream ips=DBUtils.class.getClassLoader().getResourceAsStream(<span class="string">"jdbc.properties"</span>);</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			properties.load(ips);</div><div class="line">			<span class="comment">//读取属性值</span></div><div class="line">			driver=properties.getProperty(<span class="string">"driver"</span>);</div><div class="line">			url=properties.getProperty(<span class="string">"url"</span>);</div><div class="line">			username=properties.getProperty(<span class="string">"username"</span>);</div><div class="line">			password=properties.getProperty(<span class="string">"password"</span>);</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 获取连接对象</div><div class="line">	 * <span class="doctag">@param</span> user  数据库用户名</div><div class="line">	 * <span class="doctag">@param</span> password 密码</div><div class="line">	 * <span class="doctag">@param</span> database : 数据库名称</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>); <span class="comment">// 注册驱动</span></div><div class="line">		<span class="comment">// 链接数据库</span></div><div class="line">		Connection connection = DriverManager.getConnection(</div><div class="line">				url, username, password);</div><div class="line">		<span class="keyword">return</span> connection;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 关闭数据库资源</div><div class="line">	 * <span class="doctag">@param</span> connection 连接对象</div><div class="line">	 * <span class="doctag">@param</span> statement Statement对象</div><div class="line">	 * <span class="doctag">@param</span> resultSet 结果集</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(Connection connection, Statement statement,</span></span></div><div class="line">			ResultSet resultSet) &#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">if</span> (resultSet != <span class="keyword">null</span>) &#123;</div><div class="line">				resultSet.close();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="keyword">if</span> (statement != <span class="keyword">null</span>) &#123;</div><div class="line">				statement.close();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="keyword">if</span> (connection != <span class="keyword">null</span>) &#123;</div><div class="line">				connection.close();</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception exception) &#123;</div><div class="line">			exception.printStackTrace();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h2><h3 id="什么是数据库连接池-DBCP-DatabaseConnection-Pool"><a href="#什么是数据库连接池-DBCP-DatabaseConnection-Pool" class="headerlink" title="什么是数据库连接池(DBCP DatabaseConnection Pool)"></a>什么是数据库连接池(DBCP DatabaseConnection Pool)</h3><ul>
-<li>一套管理数据库连接的api</li>
-</ul>
-<h3 id="为什么用"><a href="#为什么用" class="headerlink" title="为什么用"></a>为什么用</h3><ul>
-<li>如果没有数据库连接池的话，每次和数据库进行交互都需要建立连接和关闭连接，如果有1万次交互就有一万次建立和关闭连接，频繁开关连接非常消耗资源。使用数据库连接池，可以设置一个初始连接数量，如果有连接需求会和连接池要，连接池中有空闲连接则用空闲的，如果没有此时会检测是否是最大数量，如果是则等待，如果不是则创建新的连接，每个连接使用完之后会归还到连接池中。等待连接池的，如果有归还的连接会直接得到此连接进行操作</li>
-</ul>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><ul>
-<li>使用数据库连接池，可以设置一个初始连接数量，如果有连接需求会和连接池要，连接池中有空闲连接则用空闲的，如果没有此时会检测是否是最大数量，如果是则等待，如果不是则创建新的连接，每个连接使用完之后会归还到连接池中。等待连接池的，如果有归还的连接会直接得到此</li>
-</ul>
-<h3 id="如何使用数据库连接池"><a href="#如何使用数据库连接池" class="headerlink" title="如何使用数据库连接池"></a>如何使用数据库连接池</h3><ol>
-<li><p>下载jar包</p>
-<ul>
-<li>去maven私服中，找到dbcp-1.4版本的</li>
-<li><p>添加依赖</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-dbcp<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-dbcp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>初次使用（连接数据库）</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建数据源对象</span></div><div class="line">		BasicDataSource dataSource=<span class="keyword">new</span> BasicDataSource();</div><div class="line"></div><div class="line">		<span class="comment">//设置连接信息  driver url username password</span></div><div class="line">		dataSource.setDriverClassName(<span class="string">"com.mysql.jdbc.Driver"</span>);</div><div class="line">		dataSource.setUrl(<span class="string">"jdbc:mysql://localhost:3306/jdbc"</span>);</div><div class="line">		dataSource.setUsername(<span class="string">"root"</span>);</div><div class="line">		dataSource.setPassword(<span class="string">"root"</span>);</div><div class="line"></div><div class="line">		<span class="comment">//设置连接池策略信息</span></div><div class="line">		dataSource.setInitialSize(<span class="number">3</span>);  <span class="comment">//设置初始连接数量</span></div><div class="line">		dataSource.setMaxActive(<span class="number">5</span>);  <span class="comment">//设置最大连接数量</span></div><div class="line"></div><div class="line">		<span class="comment">//获取连接</span></div><div class="line">		Connection connection=dataSource.getConnection();</div><div class="line"></div><div class="line">		System.out.println(connection);</div></pre></td></tr></table></figure>
-<h2 id="JDBC工具类终极版"><a href="#JDBC工具类终极版" class="headerlink" title="JDBC工具类终极版"></a>JDBC工具类终极版</h2><ul>
-<li>使用数据库连接池</li>
-<li>使用了properties配置文件的形式存储数据库配置信息</li>
-</ul>
-<h3 id="jdbc-properties-key-value-键值对形式存储"><a href="#jdbc-properties-key-value-键值对形式存储" class="headerlink" title="jdbc.properties(key-value  键值对形式存储)"></a>jdbc.properties(key-value  键值对形式存储)</h3><ul>
-<li>value最后不能有空格</li>
-<li>value的值不能用引号</li>
-<li>因为使用的是类加载器加载的，因此这个文件的位置应该在src目录下</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">driver=com.mysql.jdbc.Driver</div><div class="line">url=jdbc:mysql://localhost:3306/jdbc</div><div class="line">username=root</div><div class="line">password=root</div><div class="line">initSize=3</div><div class="line">maxSize=5</div></pre></td></tr></table></figure>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
-<li><p>数据库的配置信息不是经常改变的，因此不用每次使用都重新加载，只需要加载一次(静态语句块)</p>
-</li>
-<li><p>数据源和数据库连接池的配置信息(初始连接数量，最大连接数量) 只需要加载一次（静态语句块)</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"><span class="keyword">import</span> java.sql.Connection;</div><div class="line"><span class="keyword">import</span> java.sql.DriverManager;</div><div class="line"><span class="keyword">import</span> java.sql.ResultSet;</div><div class="line"><span class="keyword">import</span> java.sql.SQLException;</div><div class="line"><span class="keyword">import</span> java.sql.Statement;</div><div class="line"><span class="keyword">import</span> java.util.Properties;</div><div class="line"><span class="keyword">import</span> org.apache.commons.dbcp.BasicDataSource;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 数据库封装类 ： 终极版</div><div class="line"> * <span class="doctag">@author</span> chenjiabing</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DBUtils</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String driver;   <span class="comment">//驱动</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String url;  <span class="comment">//url</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String username;  <span class="comment">//用户名</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String password;  <span class="comment">//密码</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String maxSize;  <span class="comment">//最大连接数量</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String initSize;  <span class="comment">//初始化连接数量</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> BasicDataSource dataSource;  <span class="comment">//数据源</span></div><div class="line"></div><div class="line"></div><div class="line">	<span class="comment">//静态语句块,只在使用类加载的时候加载一次，因为其中的数据是不会经常改变的，所以只需要加载一次</span></div><div class="line">	<span class="keyword">static</span>&#123;</div><div class="line">		Properties properties=<span class="keyword">new</span> Properties();  <span class="comment">//创建对象</span></div><div class="line">		<span class="comment">//使用类加载器读取文件输入流</span></div><div class="line">		InputStream ips=DBUtils.class.getClassLoader().getResourceAsStream(<span class="string">"jdbc.properties"</span>);</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			properties.load(ips);</div><div class="line">			<span class="comment">//读取属性值</span></div><div class="line">			driver=properties.getProperty(<span class="string">"driver"</span>);</div><div class="line">			url=properties.getProperty(<span class="string">"url"</span>);</div><div class="line">			username=properties.getProperty(<span class="string">"username"</span>);</div><div class="line">			password=properties.getProperty(<span class="string">"password"</span>);</div><div class="line">			initSize=properties.getProperty(<span class="string">"initSize"</span>);</div><div class="line">			maxSize=properties.getProperty(<span class="string">"maxSize"</span>);</div><div class="line"></div><div class="line">			dataSource=<span class="keyword">new</span> BasicDataSource();   <span class="comment">//获取数据源</span></div><div class="line">			<span class="comment">//设置数据源的属性-----数据库的配置信息</span></div><div class="line">			dataSource.setDriverClassName(driver);</div><div class="line">			dataSource.setUrl(url);</div><div class="line">			dataSource.setUsername(username);</div><div class="line">			dataSource.setPassword(password);</div><div class="line">			dataSource.setInitialSize(Integer.parseInt(initSize));</div><div class="line">			dataSource.setMaxActive(Integer.parseInt(maxSize));</div><div class="line"></div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			System.out.println(<span class="string">"配置文件jdbc.properties读取失败！！！"</span>);</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 获取数据库连接</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 * <span class="doctag">@throws</span> Exception</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		Connection connection=dataSource.getConnection();</div><div class="line">		<span class="keyword">return</span> connection;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 关闭数据库资源</div><div class="line">	 * <span class="doctag">@param</span> connection 连接对象</div><div class="line">	 * <span class="doctag">@param</span> statement Statement对象</div><div class="line">	 * <span class="doctag">@param</span> resultSet 结果集</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(Connection connection, Statement statement,</span></span></div><div class="line">			ResultSet resultSet) &#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">if</span> (resultSet != <span class="keyword">null</span>) &#123;</div><div class="line">				resultSet.close();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="keyword">if</span> (statement != <span class="keyword">null</span>) &#123;</div><div class="line">				statement.close();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="keyword">if</span> (connection != <span class="keyword">null</span>) &#123;</div><div class="line">				connection.close();</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception exception) &#123;</div><div class="line">			exception.printStackTrace();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.Connection;</div><div class="line"><span class="keyword">import</span> java.sql.ResultSet;</div><div class="line"><span class="keyword">import</span> java.sql.Statement;</div><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"><span class="keyword">import</span> com.jsnu.db.DBUtils;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDBUtils</span> </span>&#123;</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</div><div class="line">		Connection connection = <span class="keyword">null</span>;</div><div class="line">		Statement statement = <span class="keyword">null</span>;</div><div class="line">		ResultSet resultSet = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			connection = DBUtils.getConnection();  <span class="comment">//获取连接</span></div><div class="line"></div><div class="line">			statement = connection.createStatement();  <span class="comment">//创建Statement语句对象</span></div><div class="line"></div><div class="line">			String select_sql = <span class="string">"select * from t"</span>;</div><div class="line"></div><div class="line">			resultSet = statement.executeQuery(select_sql);  <span class="comment">//执行查询方法</span></div><div class="line"></div><div class="line">			<span class="keyword">while</span> (resultSet.next()) &#123;</div><div class="line">				<span class="keyword">int</span> id = resultSet.getInt(<span class="string">"id"</span>);   <span class="comment">//获取属性</span></div><div class="line">				String name = resultSet.getString(<span class="string">"name"</span>);</div><div class="line">				<span class="keyword">int</span> age = resultSet.getInt(<span class="string">"age"</span>);</div><div class="line">				System.out.println(id + <span class="string">"---"</span> + age + <span class="string">" ----"</span> + name);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			DBUtils.close(connection, statement, resultSet);  <span class="comment">//关闭资源</span></div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="测试等待"><a href="#测试等待" class="headerlink" title="测试等待"></a>测试等待</h3><ul>
-<li><p>我们知道连接池有最大的连接限制，只要连接的数量需求超过最大值，那么我们就需要等待，直到连接池中有空闲的连接。</p>
-</li>
-<li><p>上面我们设置的最大连接数量为5，此时我们利用多线程来测试等待的过程</p>
-</li>
-<li><p>connection.close 就是归还连接，因为连接关闭了</p>
-</li>
-<li><p>线程类：</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDButils2</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			Connection connection=DBUtils.getConnection();</div><div class="line">			System.out.println(connection);  <span class="comment">//获取连接</span></div><div class="line">			System.out.println(<span class="keyword">this</span>.getName()+ <span class="string">"： 正在运行"</span>);</div><div class="line">			Thread.sleep(<span class="number">5000</span>);   <span class="comment">//睡眠5s</span></div><div class="line">			connection.close();  <span class="comment">//关闭连接，相当于释放连接，归还到连接池中</span></div><div class="line">			System.out.println(<span class="keyword">this</span>.getName()+<span class="string">":连接已经归还"</span>);</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>main方法中测试<ul>
-<li>在main方法中创建了六个线程，那么最大的连接数量是5，此时肯定有一个线程在等待获取连接，直到前面的线程归还连接才会执行</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">6</span>;i++)&#123;</div><div class="line">			TestDButils2 testDButils2=<span class="keyword">new</span> TestDButils2();</div><div class="line">			testDButils2.start();   <span class="comment">//线程启动</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<h2 id="PrepareStatement"><a href="#PrepareStatement" class="headerlink" title="PrepareStatement"></a>PrepareStatement</h2><h3 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h3><ul>
-<li>代码结构更加清晰，比拼接字符串出错概率要低</li>
-<li><p>执行效率要比Statement高（效果不是太明显）因为使Statement每次执行sql都需要把sql编译成执行计划，而PrepareStatement只需要创建时转化一次，之后只需要修改里面的值即可，所以效率会高</p>
-</li>
-<li><p>有预编译可避免sql注入，预编译的时候把sql语句的逻辑已经定死，不能再向其中添加新的逻辑</p>
-</li>
-</ul>
-<h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><ul>
-<li>创建用户表<ul>
-<li>drop table user if exists;   //有则先删除</li>
-<li>create table user(id int primary key auto_increment,username varchar(10),password varchar(20));</li>
-<li>insert into user(username,password) values(‘libai’,’admin’),(‘zhaosi’,’123456’);</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>用户登录<ul>
-<li>根据用户名和密码查询人数，如果 &gt;0 表示有这个人，如果 &lt;0 登录失败</li>
-<li>select count(*) from user where username=”libai” and password=”admin”;</li>
-<li>我们只需要使用<code>select count(*) from user where username=&#39;xds&#39; and password=&#39;&#39; or &#39;1&#39;=&#39;1&#39;</code> 那么会直接登录成功，无论用户名和密码是多少。这种是使用Statement才会生效，因为其中的sql是拼接的。我们只需要输入密码为  <code>&#39; or &#39;1&#39;=1</code>即可sql注入</li>
-</ul>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Day02&quot;&gt;&lt;a href=&quot;#Day02&quot; class=&quot;headerlink&quot; title=&quot;Day02&quot;&gt;&lt;/a&gt;Day02&lt;/h1&gt;&lt;h2 id=&quot;Properties属性配置对象&quot;&gt;&lt;a href=&quot;#Properties属性配置对象&quot; class=&quot;
-    
-    </summary>
-    
-      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="JDBC" scheme="http://chenjiabing666.github.io/tags/JDBC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JDBC干货一</title>
-    <link href="http://chenjiabing666.github.io/2018/03/30/JDBC%E5%B9%B2%E8%B4%A7%E4%B8%80/"/>
-    <id>http://chenjiabing666.github.io/2018/03/30/JDBC干货一/</id>
-    <published>2018-03-30T04:54:41.000Z</published>
-    <updated>2018-03-30T04:55:34.308Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h1><h2 id="什么是JDBC"><a href="#什么是JDBC" class="headerlink" title="什么是JDBC"></a>什么是JDBC</h2><ul>
-<li>Java Database Connectivity</li>
-<li>JDBC是java中一套和数据库进行交互的API(应用程序编程接口)</li>
-</ul>
-<h2 id="为什么使用JDBC"><a href="#为什么使用JDBC" class="headerlink" title="为什么使用JDBC"></a>为什么使用JDBC</h2><ul>
-<li>因为java程序猿需要连接各种数据库（oracle，mysql，db2等）为了避免java程序猿每一种数据库都需要学习一遍，sun公司提出一个JDBC接口，各个数据库厂商去针对此接口写实现类（数据库驱动），这样的话java程序猿连接数据库只需要掌握JDBC接口的调用就可以操作各种数据库</li>
-</ul>
-<h2 id="eclipse配置maven"><a href="#eclipse配置maven" class="headerlink" title="eclipse配置maven"></a>eclipse配置maven</h2><ol>
-<li>本机安装maven</li>
-<li><p>修改远程仓库地址</p>
-<ul>
-<li>maven的配置文件settings中修改   <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">        &lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">settings</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/SETTINGS/1.0.0"</span></span></div><div class="line">	    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">	    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"</span>&gt;</div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">pluginGroups</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">pluginGroups</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">proxies</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">proxies</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">servers</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">servers</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">mirror</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>Tedu Maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!--&lt;url&gt;http://maven.tedu.cn/nexus/content/groups/public&lt;/url&gt;--&gt;</span></div><div class="line">			 <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span> </div><div class="line">		<span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">profiles</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">activeProfiles</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">activeProfiles</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>在eclispe中配置  </p>
-<ul>
-<li>window —- &gt; perferences —- &gt; Maven — &gt; User Settings  —- &gt; 在Global Settings中选择你的maven配置文件settings即可</li>
-<li>OK</li>
-</ul>
-</li>
-<li><p>新建项目</p>
-<ul>
-<li>New — &gt; Maven Project  — &gt; Create Simple Project </li>
-<li>第一次创建可能需要很长的时间</li>
-</ul>
-</li>
-<li><p>在pom.xml中写上依赖</p>
-</li>
-</ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">    <span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.tedu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>JDBCMaven<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.44<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.7.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="如何使用JDBC"><a href="#如何使用JDBC" class="headerlink" title="如何使用JDBC"></a>如何使用JDBC</h2><ul>
-<li>创建maven工程</li>
-<li>下载mysql相关jar包</li>
-<li>登录阿里私服： maven.aliyun.cn</li>
-</ul>
-<h2 id="执行方法-Statement"><a href="#执行方法-Statement" class="headerlink" title="执行方法(Statement)"></a>执行方法(Statement)</h2><ul>
-<li><code>execute(sql)</code>  执行DDL  create alter</li>
-<li><code>executeUpdate(sql)</code> 执行DML insert  update  delete</li>
-<li><code>executeQuery(sql)</code>  执行select语句</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">      Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);   <span class="comment">//注册驱动</span></div><div class="line"><span class="comment">//链接数据库</span></div><div class="line">Connection connection=DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/jdbc"</span>, <span class="string">"root"</span>, <span class="string">"root"</span>);</div><div class="line"><span class="comment">//创建Statement，执行sql语句的对象</span></div><div class="line">Statement statement =connection.createStatement();</div><div class="line"></div><div class="line">String sql_create=<span class="string">"create table if not exists t(id int primary key auto_increment,age int ,name varchar(10))"</span>;</div><div class="line"></div><div class="line">String sql_insert=<span class="string">"insert into t(age,name) values(22,'jack'),(33,'tom')"</span>;</div><div class="line"></div><div class="line">String sql_sselect=<span class="string">"select * from t"</span>;</div><div class="line"><span class="comment">//执行create 语句</span></div><div class="line">Boolean flag=statement.execute(sql_create);</div><div class="line">System.out.println(flag);</div><div class="line"><span class="comment">//执行insert语句</span></div><div class="line"><span class="keyword">int</span> row=statement.executeUpdate(sql_insert);</div><div class="line">System.out.println(row);</div><div class="line"><span class="comment">//执行select</span></div><div class="line">ResultSet resultSet=statement.executeQuery(sql_sselect);</div><div class="line"><span class="keyword">while</span>(resultSet.next())&#123;</div><div class="line">	<span class="keyword">int</span> id=resultSet.getInt(<span class="string">"id"</span>);</div><div class="line">	<span class="keyword">int</span> age=resultSet.getInt(<span class="string">"age"</span>);</div><div class="line">	String name = resultSet.getString(<span class="string">"name"</span>);</div><div class="line">	System.out.println(id+<span class="string">"----"</span>+age+<span class="string">"----"</span>+name);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="ResultSet-查询得到结果集"><a href="#ResultSet-查询得到结果集" class="headerlink" title="ResultSet(查询得到结果集)"></a>ResultSet(查询得到结果集)</h2><ul>
-<li><p>代表查询语句得到的结果集(executeQuery)</p>
-</li>
-<li><p>见到resultSet 就用while</p>
-</li>
-<li><p>next() 移动游标  有下一条返回true，没有返回false</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">      Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);  <span class="comment">//加载驱动</span></div><div class="line">      </div><div class="line">      <span class="comment">// 链接数据库</span></div><div class="line">Connection connection=DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/jdbc"</span>, <span class="string">"root"</span>, <span class="string">"root"</span>);</div><div class="line">Statement statement =connection.createStatement();   <span class="comment">//获取执行sql语句对象</span></div><div class="line">      String sql_sselect=<span class="string">"select * from t"</span>;   <span class="comment">//创建sql语句</span></div><div class="line">      ResultSet resultSet=statement.executeQuery(sql_sselect);  <span class="comment">//获取结果集</span></div><div class="line"></div><div class="line"><span class="keyword">while</span>(resultSet.next())&#123;</div><div class="line">	<span class="keyword">int</span> id=resultSet.getInt(<span class="string">"id"</span>);</div><div class="line">	<span class="keyword">int</span> age=resultSet.getInt(<span class="string">"age"</span>);</div><div class="line">	String name = resultSet.getString(<span class="string">"name"</span>);</div><div class="line">	System.out.println(id+<span class="string">"----"</span>+age+<span class="string">"----"</span>+name);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="关闭资源-close"><a href="#关闭资源-close" class="headerlink" title="关闭资源(close)"></a>关闭资源(close)</h2><ul>
-<li><p>关闭Connection</p>
-<ul>
-<li>如果sql执行完，继续持有连接没有意义，会造成服务器压力过大，所以需要关闭</li>
-</ul>
-</li>
-<li><p>关闭Statement</p>
-<ul>
-<li>会占用内存的资源，所以用完就关闭</li>
-</ul>
-</li>
-<li><p>关闭ResultSet</p>
-<ul>
-<li>因为ResultSet对象中包含查询结果的数据，会占用内存空间</li>
-</ul>
-</li>
-</ul>
-<h2 id="关闭顺序"><a href="#关闭顺序" class="headerlink" title="关闭顺序"></a>关闭顺序</h2><ul>
-<li>ResultSet , Statement , Connection</li>
-</ul>
-<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testException</span><span class="params">()</span> </span>&#123;</div><div class="line">		Connection connection = <span class="keyword">null</span>;  <span class="comment">//申明Connection为null</span></div><div class="line">		Statement statement = <span class="keyword">null</span>;   <span class="comment">// 申明 Statement为null</span></div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>); <span class="comment">// 注册驱动</span></div><div class="line">			<span class="comment">// 链接数据库</span></div><div class="line">			connection = DriverManager.getConnection(</div><div class="line">					<span class="string">"jdbc:mysql://localhost:3306/jdbc"</span>, <span class="string">"root"</span>, <span class="string">"root"</span>);</div><div class="line">			<span class="comment">// 创建Statement，执行sql语句的对象</span></div><div class="line">			statement = connection.createStatement();</div><div class="line">			String sql_insert = <span class="string">"insert into t(age,name) values(22,'marry'),(33,'Alice')"</span>;</div><div class="line">			<span class="keyword">int</span> row=statement.executeUpdate(sql_insert);</div><div class="line">			System.out.println(row);</div><div class="line"></div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			System.out.println(<span class="string">"出异常"</span>);</div><div class="line">			e.printStackTrace();</div><div class="line"></div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			<span class="keyword">if</span> (statement != <span class="keyword">null</span>) &#123;</div><div class="line">				<span class="keyword">try</span> &#123;</div><div class="line">					statement.close();</div><div class="line">				&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">					e.printStackTrace();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> (connection != <span class="keyword">null</span>) &#123;</div><div class="line">				<span class="keyword">try</span> &#123;</div><div class="line">					connection.close();</div><div class="line">				&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">					e.printStackTrace();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<h2 id="JDBC封装"><a href="#JDBC封装" class="headerlink" title="JDBC封装"></a>JDBC封装</h2><ul>
-<li>目的：把频繁出现的代码封装起来，起到代码复用的作用，从而提高开发效率</li>
-</ul>
-<ol>
-<li>创建DBUtils类(数据库工具类)<ol>
-<li>封装建立数据连接</li>
-<li>封装关闭资源</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.sql.Connection;</div><div class="line"><span class="keyword">import</span> java.sql.DriverManager;</div><div class="line"><span class="keyword">import</span> java.sql.ResultSet;</div><div class="line"><span class="keyword">import</span> java.sql.SQLException;</div><div class="line"><span class="keyword">import</span> java.sql.Statement;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 数据库封装类</div><div class="line"> * <span class="doctag">@author</span> chenjiabing</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DBUtils</span> </span>&#123;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 获取连接对象</div><div class="line">	 * <span class="doctag">@param</span> user  数据库用户名</div><div class="line">	 * <span class="doctag">@param</span> password 密码</div><div class="line">	 * <span class="doctag">@param</span> database : 数据库名称</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">(String user, String password,</span></span></div><div class="line">			String database) <span class="keyword">throws</span> Exception &#123;</div><div class="line">		Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>); <span class="comment">// 注册驱动</span></div><div class="line">		<span class="comment">// 链接数据库</span></div><div class="line">		Connection connection = DriverManager.getConnection(</div><div class="line">				<span class="string">"jdbc:mysql://localhost:3306/"</span> + database, user, password);</div><div class="line">		<span class="keyword">return</span> connection;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 关闭数据库资源</div><div class="line">	 * <span class="doctag">@param</span> connection 连接对象</div><div class="line">	 * <span class="doctag">@param</span> statement Statement对象</div><div class="line">	 * <span class="doctag">@param</span> resultSet 结果集</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(Connection connection, Statement statement,</span></span></div><div class="line">			ResultSet resultSet) &#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">if</span> (resultSet != <span class="keyword">null</span>) &#123;</div><div class="line">				resultSet.close();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="keyword">if</span> (statement != <span class="keyword">null</span>) &#123;</div><div class="line">				statement.close();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="keyword">if</span> (connection != <span class="keyword">null</span>) &#123;</div><div class="line">				connection.close();</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception exception) &#123;</div><div class="line">			exception.printStackTrace();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>测试</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">   <span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUntils</span><span class="params">()</span></span>&#123;</div><div class="line">	Connection connection=<span class="keyword">null</span>;</div><div class="line">	Statement statement=<span class="keyword">null</span>;</div><div class="line">	ResultSet resultSet=<span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		 connection=DBUtils.getConnection(<span class="string">"root"</span>, <span class="string">"root"</span>, <span class="string">"jdbc"</span>);  <span class="comment">//获取连接</span></div><div class="line">		 statement=connection.createStatement();</div><div class="line">		 <span class="comment">//插入数据</span></div><div class="line">		 <span class="keyword">int</span> row = statement.executeUpdate(<span class="string">"insert into t(age,name) values(22,'陈加兵'),(33,'Jackson')"</span>);</div><div class="line">		 System.out.println(row);</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;<span class="keyword">finally</span>&#123;</div><div class="line">		DBUtils.close(connection, statement, resultSet);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;JDBC&quot;&gt;&lt;a href=&quot;#JDBC&quot; class=&quot;headerlink&quot; title=&quot;JDBC&quot;&gt;&lt;/a&gt;JDBC&lt;/h1&gt;&lt;h2 id=&quot;什么是JDBC&quot;&gt;&lt;a href=&quot;#什么是JDBC&quot; class=&quot;headerlink&quot; title=&quot;什么是
-    
-    </summary>
-    
-      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="JDBC" scheme="http://chenjiabing666.github.io/tags/JDBC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SQL操作六</title>
-    <link href="http://chenjiabing666.github.io/2018/03/28/SQL%E6%93%8D%E4%BD%9C%E5%85%AD/"/>
-    <id>http://chenjiabing666.github.io/2018/03/28/SQL操作六/</id>
-    <published>2018-03-28T04:17:56.000Z</published>
-    <updated>2018-03-28T04:18:41.899Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Day06"><a href="#Day06" class="headerlink" title="Day06"></a>Day06</h1><h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><h3 id="视图概述"><a href="#视图概述" class="headerlink" title="视图概述"></a>视图概述</h3><ul>
-<li><p><strong>什么是视图</strong>： 在数据库中存在多种对象，表和视图都是数据库中的对象，创建视图时视图名称不能和表名相同，实际上，视图就代表一个sql查询语句，也可以理解成视图是一张虚拟的表，但是虚拟表中的数据会<em>随着原表数据的改变而改变</em></p>
-</li>
-<li><p><strong>为什么使用视图</strong>： </p>
-<ul>
-<li>因为有些数据的查询需要书写大量的sql语句，每次书写比较麻烦，使用视图可起到重用sql语句的作用</li>
-<li>可以通过视图隐藏敏感信息，比如隐藏员工工资的字段，那么我们可以创建一个视图，其中不包含工资这个字段</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p><strong>创建视图的格式</strong>： create view 视图名 as  子查询</p>
-<ul>
-<li><code>create view view_emp_10 as(select * from emp where deptno=10);</code>  创建一个视图view_emp_10  （简单视图）</li>
-<li>create view view_dep_20 as(select * from EMP where deptno=20 and sal&lt;3000 ); 创建emp表部门是20，工资小于3000的视图</li>
-<li>create view view_emp_sum_max(select max(sal),sum(sal),min(sal) from EMP);  复杂视图，只能查看，不能删除修改插入</li>
-</ul>
-</li>
-<li><p><strong>如何查看视图</strong>： 查询的方式和表的查询方式一样(select)</p>
-</li>
-</ul>
-<h3 id="视图分类"><a href="#视图分类" class="headerlink" title="视图分类"></a>视图分类</h3><ul>
-<li>简单视图 ： 创建视图的子查询中 不包含去重，函数，聚合，关联查询的视图成为简单视图<ul>
-<li>简单视图可以实现增删改查</li>
-</ul>
-</li>
-<li>复杂视图 ： 和简单视图相反   <ul>
-<li>复杂视图是能查询</li>
-</ul>
-</li>
-</ul>
-<h3 id="视图数据污染"><a href="#视图数据污染" class="headerlink" title="视图数据污染"></a>视图数据污染</h3><ul>
-<li><strong>什么是数据污染</strong>： 在视图中插入一条数据，在视图中不显示，但是在原表中显示的数据，称为数据污染</li>
-</ul>
-<ul>
-<li>在视图中只要进行insert操作时才会造成数据污染，因为update和delete只能操作视图中存在的数据</li>
-</ul>
-<ul>
-<li>如果一旦执行插入语句，但是插入的数据不符合创建视图时的子查询条件，那么就会插入视图中失败，但是会插入到原表中，这个是我们不需要的，这个就叫做视图数据污染。</li>
-</ul>
-<h3 id="往视图中插入数据，删除数据，修改数据"><a href="#往视图中插入数据，删除数据，修改数据" class="headerlink" title="往视图中插入数据，删除数据，修改数据"></a>往视图中插入数据，删除数据，修改数据</h3><ul>
-<li><p>简单视图： </p>
-<ul>
-<li><strong>删除数据</strong>：  如果将视图中的数据删除了，那么原表中的数据也会删除掉</li>
-<li><p><strong>插入数据</strong>：  如果插入的数据符合创建视图的子查询的条件，那么就会将数据插入进视图和原表中，如果不符合创建视图时的子查询的条件，那么数据只会插入到原表中，不会插入进视图。</p>
-<ul>
-<li>比如上面创建的view_emp_10视图，子查询条件为deptno=10,如果插入视图的数据的的deptno字段为10，那么就会显示在视图和表中，如果不为10，那么只会显示在表中。</li>
-</ul>
-</li>
-<li><p><strong>更新数据</strong>： 如果更新后的数据不符合创建视图时子查询的条件的话，那么这些数据就会移除视图，但是原表中还会显示，只是不在视图中显示。 如果满足子查询的条件，那么就会成功更新在视图中，原表和视图的数据都会更新并且都会显示</p>
-<ul>
-<li>比如上面创建的view_emp_10的视图，如果我们将视图中的一条数据的deptno改为11，那么这条数据将不会显示在视图中，只会显示在原表中。</li>
-</ul>
-</li>
-<li><p><strong>总结</strong>：</p>
-<ul>
-<li>更新和删除都是对视图中已经存在的数据进行操作，如果存在就会直接删除和更新，并且原表中的数据也会同时被删除和更新，但是如果执行更新操作，更新后的条件不符合创建视图时子查询的条件，那么这些数据将不会显示在视图中，但是在表中还是存在的</li>
-<li>插入数据有可能会造成数据污染</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="避免视图数据污染-with-check-option"><a href="#避免视图数据污染-with-check-option" class="headerlink" title="避免视图数据污染(with check option)"></a>避免视图数据污染(with check option)</h3><ul>
-<li>我们在创建的视图的时候加上<code>with check option</code> 即可<ul>
-<li><code>create view v_emp_30 as(select * from EMP where deptno=30) with check option;</code></li>
-<li>现在我们在往v_emp_30的视图中插入数据，其中字段deptno不等于30，那么就会报错，因为不符合创建视图时的子查询条件</li>
-<li>但是如果我们没有使用<code>with check option</code>，那么我们就会插入成功，虽然不会在视图中显示，但是插入到原表中了，造成了视图数据污染</li>
-</ul>
-</li>
-</ul>
-<h3 id="修改视图"><a href="#修改视图" class="headerlink" title="修改视图"></a>修改视图</h3><ul>
-<li><p>我们创建一个视图</p>
-<ul>
-<li><code>create view view_emp_10 as(select * from emp where deptno=10);</code></li>
-</ul>
-</li>
-<li><p>现在我们需要为子查询加上一个条件 工资大于3000的，即是 创建一张视图，里面数据是部门号为10，工资大于3000的全部员工信息，那么我们就需要在原有的view_emp_10的基础上修改</p>
-<ul>
-<li><code>create  or replace view view_emp_10 as(select * from EMP where deptno=10 and sal&gt;3000);</code>直接在create后面加上<code>or replace</code>即可，有就替换</li>
-</ul>
-</li>
-</ul>
-<h3 id="删除视图"><a href="#删除视图" class="headerlink" title="删除视图"></a>删除视图</h3><ul>
-<li>格式 ：drop view 视图名称  </li>
-<li><p>drop view_emp_10;  删除视图view_emp_10，如果存在就删除，不存在就报错</p>
-</li>
-<li><p>加上关键字  <code>if exists</code> 如果存在就删除，不存在也不报错</p>
-<ul>
-<li><code>drop view if exists view_emp_10;</code></li>
-</ul>
-</li>
-<li><p><strong>如果创建视图的时候对视图中的字段使用了别名，那么以后对视图的操作只能使用别名来操作</strong></p>
-<ul>
-<li><code>create view view_1 as(select ename name from emp where deptno=10);</code>  这里面的子查询将字段ename起了别名，那么我们在以后操作的时候只能使用别名对这个字段操作</li>
-</ul>
-</li>
-</ul>
-<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><ul>
-<li><p>创建视图显示每个部门对应的员工的名字</p>
-<ul>
-<li>`create view view_emp_dept as(select d.dname,e.ename from EMP e join Dept d on d.deptno=e.deptno);</li>
-</ul>
-</li>
-<li><p>修改上面的视图在上面题的前提下只显示工资在3000以内的</p>
-<ul>
-<li><code>create or replace  view view_emp_dept as(select d.dname,e.ename from EMP e join Dept d on d.deptno=e.deptno where e.sal&lt;3000);</code></li>
-</ul>
-</li>
-<li><p>删除上面的视图</p>
-<ul>
-<li><code>drop view if exists v_emp_dept;</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="索引原理"><a href="#索引原理" class="headerlink" title="索引原理"></a>索引原理</h2><h3 id="索引概述"><a href="#索引概述" class="headerlink" title="索引概述"></a>索引概述</h3><ul>
-<li><p><strong>什么是索引</strong>： </p>
-<ul>
-<li>索引是用来提高查询速度的技术，类似于一个目录，查询数据时会从索引中对数据进行定位，然后直接找到数据所在的位置</li>
-</ul>
-</li>
-<li><p><strong>为什么使用索引</strong> ： </p>
-<ul>
-<li>因为不使用索引的话，查询数据会按照磁盘块一块一块的去查，如果数据量很大，效率很低</li>
-</ul>
-</li>
-<li><p>索引分为聚集索引和非聚集索引</p>
-<ul>
-<li>在mysql中数据库会为主键自动创建聚集索引，聚集索引中数据是有序保存</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>索引内部实现原理 ：</p>
-<ul>
-<li>B+tree </li>
-</ul>
-</li>
-<li><p>数据库中创建索引的过程是数据库内部自己控制，然后使用索引的过程也是数据库自己操作的，不需要程序猿干涉</p>
-</li>
-</ul>
-<h3 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h3><ul>
-<li><p>格式： <code>create index 索引名 on 表名(字段名([长度]));</code></p>
-</li>
-<li><p>创建索引之前先查询title=’100’的数据，看看查询时间</p>
-<ul>
-<li>select * from item2 where title=’100’;</li>
-</ul>
-</li>
-<li><p>创建title索引</p>
-<ul>
-<li>create index index_title on item2(title);</li>
-</ul>
-</li>
-<li><p>再次查询，查看时间 </p>
-<ul>
-<li>select * from item2 where title=’100’;</li>
-</ul>
-</li>
-</ul>
-<h3 id="查看索引"><a href="#查看索引" class="headerlink" title="查看索引"></a>查看索引</h3><ul>
-<li>格式: <code>show index from 表名</code></li>
-<li>其中包含主键的索引，这个是自动创建的</li>
-</ul>
-<h3 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h3><ul>
-<li>格式：<code>drop index 索引名 on 表名</code></li>
-<li>drop index index_title on item2;</li>
-</ul>
-<h3 id="索引是越多越好吗？有索引就一定好吗？"><a href="#索引是越多越好吗？有索引就一定好吗？" class="headerlink" title="索引是越多越好吗？有索引就一定好吗？"></a>索引是越多越好吗？有索引就一定好吗？</h3><ul>
-<li>因为索引会占用磁盘空间，所以创建索引需谨慎，只创建查询需求的索引</li>
-<li>索引要建立在大量的数据的表中，如果数据量不够大，可能会降低查询效率</li>
-</ul>
-<h3 id="复合索引"><a href="#复合索引" class="headerlink" title="复合索引"></a>复合索引</h3><ul>
-<li><p>创建索引的时候指定多个字段，此时如果查询数据正好过滤条件为这多个字段的话，可以降低磁盘块的访问，从而提高查询效率</p>
-</li>
-<li><p>创建复合索引: create index index_title_price on item2(title,price);</p>
-</li>
-<li><p>执行查询语句</p>
-<ul>
-<li><code>select * from item2 where title=&#39;100&#39; and price &lt;100000;</code> 可以看出查询效率很高</li>
-</ul>
-</li>
-</ul>
-<h3 id="创建表的时候直接创建索引"><a href="#创建表的时候直接创建索引" class="headerlink" title="创建表的时候直接创建索引"></a>创建表的时候直接创建索引</h3><ul>
-<li><code>create table t_index(id int,age int ,index index index_age(age));</code></li>
-<li>直接在字段后面写入  <code>index 名字(字段)</code></li>
-</ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>索引会占磁盘空间，不是越多越好</li>
-<li>数据量小的表不要创建索引</li>
-<li>对于经常出现在<code>where</code> ，<code>order by</code>，<code>distinct</code> 后面的字段创建索引 ，效果更好</li>
-<li>不要在频繁修改的表中创建索引</li>
-</ul>
-<h2 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h2><ul>
-<li>什么是约束： 约束就是对表字段的数据进行限制的规则</li>
-</ul>
-<h3 id="唯一约束-unique"><a href="#唯一约束-unique" class="headerlink" title="唯一约束 unique"></a>唯一约束 unique</h3><ul>
-<li>添加唯一约束的字段，这个字段的值不能重复,否则报错</li>
-<li><code>crate table t(id int ,age int unique);</code></li>
-</ul>
-<h3 id="主键约束-primary-key"><a href="#主键约束-primary-key" class="headerlink" title="主键约束 (primary key)"></a>主键约束 (primary key)</h3><ul>
-<li><p>创建表时添加主键约束</p>
-<ul>
-<li><code>create table t(id int primary key auto_increment,age int);</code></li>
-</ul>
-</li>
-<li><p>创建表之后添加主键 (primary key(字段名) )</p>
-<ul>
-<li><code>alter table t add primary key(id);</code></li>
-</ul>
-</li>
-<li><p>删除主键约束</p>
-<ul>
-<li>格式： alter table 表名 drop primary key </li>
-<li><code>alter table t drop primary key;</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="自增约束-auto-increment"><a href="#自增约束-auto-increment" class="headerlink" title="自增约束(auto_increment)"></a>自增约束(auto_increment)</h3><ul>
-<li>当字段赋的值为null时，字段会自动增长</li>
-<li>如果删除了某条数据，自增数值不会减少</li>
-<li><p>自增的基础是根据字段的最大值来自增的</p>
-</li>
-<li><p><code>create table t(id int primary key auto_increment,age int);</code></p>
-</li>
-<li><p>如果使用delete清空表(<code>delete from t</code>) ,那么自增的值不会从头开始</p>
-</li>
-<li><p>如果使用<code>truncate table t</code> 的方式清空表，那么自增的值会从头开始，则从1开始</p>
-</li>
-</ul>
-<h3 id="外键约束（foreign-key）"><a href="#外键约束（foreign-key）" class="headerlink" title="外键约束（foreign key）"></a>外键约束（foreign key）</h3><ul>
-<li>外键约束是保证一个表或者两个表之间数据一致性和完整性的约束</li>
-<li>工作中除非特殊情况，一般不使用外键约束，通过代码逻辑进行限制，避免测试时不必要的麻烦</li>
-<li>外键的值通常是另外一张表的主键</li>
-<li>外键可以重复，可以为null，但不能是另外一张表中不存在的数据<br>-</li>
-<li>使用外键约束的<strong>条件</strong>：<ol>
-<li>必须保证两张表使用相同的引擎(engine)</li>
-<li>引擎必须是innodb,myisam不支持外键约束</li>
-</ol>
-</li>
-<li><p>外键和关联字段必须是相同的数据类型，比如一张表的主键id的外键，那么这个外键一定要是int类型</p>
-</li>
-<li><p><strong>外键所对应的关联字段如果不是主键，会自动为该字段创建索引</strong></p>
-</li>
-</ul>
-<h4 id="创建外键约束"><a href="#创建外键约束" class="headerlink" title="创建外键约束"></a>创建外键约束</h4><ul>
-<li><p>格式 ：</p>
-<ul>
-<li><code>create table t(id int primary key auto_increment,deptid int,constraint 约束名 foregin key(deptid) references 关联的表名(关联表的字段名))</code></li>
-</ul>
-</li>
-<li><p>创建两张表 t_emp 和 t_dept</p>
-<ul>
-<li>先创建部门表  <code>create table t_dept(id int primary key auto_increment,name varchar(10));</code></li>
-<li>创建t_emp  <code>create table t_emp(id int primary key auto_increment,name varchar(10),deptid int,constraint fk_dept foreign key(deptid) references t_dept(id));</code></li>
-</ul>
-</li>
-<li><p>测试：</p>
-<ul>
-<li>如果插入数据到t_emp中的时候，其中的deptid的值在t_dept中的id不存在的话，那么插入失败，因为两个是外键关联的</li>
-<li>如果想要删除t_dept的数据，但是在t_emp中的还有关联的数据(即是deptid)，那么删除失败，只有将t_emp中关联的数据字段deptid设置为null，此时在删除才会成功</li>
-</ul>
-</li>
-</ul>
-<h4 id="外键总结"><a href="#外键总结" class="headerlink" title="外键总结"></a>外键总结</h4><ul>
-<li>保证一个表或两个表之间的数据一致性和完整性，工作不怎用，外键的值是关联表的主键，值可以是null可以重复，不能是不存在的数据，使用外键必须两张表使用innodb引擎，数据类型要一致，会自动添加索引</li>
-</ul>
-<h3 id="非空约束-not-null"><a href="#非空约束-not-null" class="headerlink" title="非空约束(not null)"></a>非空约束(not null)</h3><ul>
-<li>该字段的值不能为null，否则报错</li>
-</ul>
-<h3 id="默认约束-default"><a href="#默认约束-default" class="headerlink" title="默认约束(default)"></a>默认约束(default)</h3><ul>
-<li>给字段设置默认值</li>
-<li><code>create table t(id int primary key auto_increment,age int not null default 0);</code>  设置字段age设置默认值为0 ，如果插入数据的时候没有插入age的值，那么默认赋值为0</li>
-</ul>
-<h3 id="check-约束"><a href="#check-约束" class="headerlink" title="check 约束"></a>check 约束</h3><ul>
-<li>在mysql中不生效，但是语法不报错</li>
-<li><code>create table t_check(id int,age int,check(age&gt;10));</code></li>
-</ul>
-<h3 id="什么是事务"><a href="#什么是事务" class="headerlink" title="什么是事务"></a>什么是事务</h3><ul>
-<li>事务是数据库执行sql语句的工作单元或者最小单元，写在事务里面的sql要么同时成功，要么同时失败</li>
-</ul>
-<h3 id="事务的ACID性质-重要，面试常考"><a href="#事务的ACID性质-重要，面试常考" class="headerlink" title="事务的ACID性质(重要，面试常考)"></a>事务的ACID性质(重要，面试常考)</h3><ul>
-<li>Automicity ： 原子性 ： 最小，不能拆分</li>
-<li>Consistency： 一致性  ： 要么同时成功，要么同时失败</li>
-<li>Isolation：   隔离性  ： 事务和事务之间互不影响</li>
-<li>Durablity ：  持久性 ： 事务执行完之后数据持久保存到数据库中</li>
-</ul>
-<h3 id="MySQL事务"><a href="#MySQL事务" class="headerlink" title="MySQL事务"></a>MySQL事务</h3><ul>
-<li>show variables lile “%autocommit%”</li>
-<li>set autocommit=0/1</li>
-<li>开启 begin</li>
-<li>commit  </li>
-<li>rollback</li>
-<li>savepoint  s1</li>
-<li>rollback to s1</li>
-</ul>
-<h3 id="事务案例"><a href="#事务案例" class="headerlink" title="事务案例"></a>事务案例</h3><ul>
-<li>转账</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Day06&quot;&gt;&lt;a href=&quot;#Day06&quot; class=&quot;headerlink&quot; title=&quot;Day06&quot;&gt;&lt;/a&gt;Day06&lt;/h1&gt;&lt;h2 id=&quot;视图&quot;&gt;&lt;a href=&quot;#视图&quot; class=&quot;headerlink&quot; title=&quot;视图&quot;&gt;&lt;/a&gt;视
-    
-    </summary>
-    
-      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
-    
-    
-      <category term="SQL" scheme="http://chenjiabing666.github.io/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SQL操作五</title>
-    <link href="http://chenjiabing666.github.io/2018/03/28/SQL%E6%93%8D%E4%BD%9C%E4%BA%94/"/>
-    <id>http://chenjiabing666.github.io/2018/03/28/SQL操作五/</id>
-    <published>2018-03-27T22:59:18.000Z</published>
-    <updated>2018-03-28T04:17:26.290Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Day05"><a href="#Day05" class="headerlink" title="Day05"></a>Day05</h1><h2 id="关联关系"><a href="#关联关系" class="headerlink" title="关联关系"></a>关联关系</h2><h3 id="自关联"><a href="#自关联" class="headerlink" title="自关联"></a>自关联</h3><blockquote>
-<p>当前表的数据和当前表里面的数据有关联关系</p>
-</blockquote>
-<h2 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h2><h2 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h2><h2 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h2><blockquote>
-<p>学生和老师的关系就是多对多的关系<br>一个学生可以被多个老师教，一个老师可以教多个学生</p>
-</blockquote>
-<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><blockquote>
-<p>创建教师表 teacher(id,name)<br>创建学生表 stu(id,name)<br>创建第三张关系表t_s(sid,t_id)</p>
-</blockquote>
-<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><ul>
-<li><p>查询学生小明的所有老师</p>
-<ul>
-<li>通过小明查询出小明的id</li>
-<li>得到小明的id 在关系表中查询出对应的老师的id</li>
-<li>通过关系表中的老师的id再和教师表关联查询查出所有的老师</li>
-<li><code>select name from teacher where id in ( select t_s.tid from stu join t_s on stu.id=t_s.sid where stu.name=&#39;小明&#39;);</code>  子查询方式，但是子查询中使用了内连接，也可以使用等值连接</li>
-<li><code>select t_s.tid from stu join t_s on stu.id=t_s.sid  join teacher t on t.id=tid where stu.name=&#39;小明&#39;;</code> 使用内连接的方式查询，多个join连接，where条件语句应该放在最后一个join的on的后面</li>
-</ul>
-</li>
-<li><p>查询所有老师对应的所有学生0</p>
-<ul>
-<li><code>select t.name t_name,stu.name s_name from stu join t_s on stu.id=t_s.sid  join teacher t on t.id=tid;</code></li>
-</ul>
-</li>
-<li><p>查询唐僧的所有学生</p>
-<ul>
-<li><code>select t.name t_name,stu.name s_name from stu join t_s on stu.id=t_s.sid  join teacher t on t.id=tid where t.name=&#39;唐僧&#39;;</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="如何让两张表建立关系"><a href="#如何让两张表建立关系" class="headerlink" title="如何让两张表建立关系"></a>如何让两张表建立关系</h2><ul>
-<li><p>自关联</p>
-<ul>
-<li>自关联是在一张表中，这张表中要有一个字段记录上级的主键</li>
-</ul>
-</li>
-<li><p>一对一： </p>
-<ul>
-<li>需要在从表中有个字段表示主表的主键值   （外键）</li>
-</ul>
-</li>
-<li><p>一对多</p>
-<ul>
-<li>部门和员工为例，需要在多的一端通过字段记录另外一张的表的主键 （外键）</li>
-</ul>
-</li>
-<li><p>多对多</p>
-<ul>
-<li>需要准备一张关系表，表中保存两张表的主键值（第三张表） （外键）</li>
-</ul>
-</li>
-</ul>
-<h2 id="连接方式和关联关系的区别"><a href="#连接方式和关联关系的区别" class="headerlink" title="连接方式和关联关系的区别"></a>连接方式和关联关系的区别</h2><ul>
-<li>连接方式： 包括内连接，等值连接，左/右外连接 是指查询两张表时使用的查询方式</li>
-<li>关联关系： 一对一，一对多，多对多  是指两张表之间存在的逻辑关系</li>
-</ul>
-<h2 id="数据库设计值权限管理"><a href="#数据库设计值权限管理" class="headerlink" title="数据库设计值权限管理"></a>数据库设计值权限管理</h2><h3 id="什么是权限管理"><a href="#什么是权限管理" class="headerlink" title="什么是权限管理"></a>什么是权限管理</h3><ul>
-<li>不同用户登录网站后可能会有不同的权限，实现此功能的过程称为权限管理</li>
-</ul>
-<h3 id="权限管理表的实现"><a href="#权限管理表的实现" class="headerlink" title="权限管理表的实现"></a>权限管理表的实现</h3><ul>
-<li>总共需要5张表<ul>
-<li>用户表 角色表  权限表  用户和角色关系表   角色和权限的关系表</li>
-</ul>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Day05&quot;&gt;&lt;a href=&quot;#Day05&quot; class=&quot;headerlink&quot; title=&quot;Day05&quot;&gt;&lt;/a&gt;Day05&lt;/h1&gt;&lt;h2 id=&quot;关联关系&quot;&gt;&lt;a href=&quot;#关联关系&quot; class=&quot;headerlink&quot; title=&quot;关联关系&quot;
-    
-    </summary>
-    
-      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
-    
-    
-      <category term="SQL" scheme="http://chenjiabing666.github.io/tags/SQL/"/>
     
   </entry>
   
