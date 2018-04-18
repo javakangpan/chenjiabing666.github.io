@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-04-18T00:00:37.539Z</updated>
+  <updated>2018-04-18T00:03:35.435Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://chenjiabing666.github.io/2018/04/16/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/"/>
     <id>http://chenjiabing666.github.io/2018/04/16/设计模式之适配器模式/</id>
     <published>2018-04-16T05:56:28.000Z</published>
-    <updated>2018-04-18T00:00:37.539Z</updated>
+    <updated>2018-04-18T00:03:35.435Z</updated>
     
     <content type="html"><![CDATA[<h1 id="结构型模式之适配器模式"><a href="#结构型模式之适配器模式" class="headerlink" title="结构型模式之适配器模式"></a>结构型模式之适配器模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
 <li>适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。</li>
@@ -85,16 +85,10 @@
 <li><p>对象适配器使用的是一种组合的方式，将适配者类作为其中的成员变量，那么也是可以实现（提倡使用）</p>
 </li>
 </ul>
-<h2 id="麻烦支持下博主的广告事业，点击下即可"><a href="#麻烦支持下博主的广告事业，点击下即可" class="headerlink" title="麻烦支持下博主的广告事业，点击下即可"></a>麻烦支持下博主的广告事业，点击下即可</h2><ul>
-<li><p><a href="http://click.linktech.cn/?m=huaweivmall&a=A100234624&l=02300&l_cd1=0&l_cd2=0&u_id=chenjiabing" target="_blank"><img src="http://banner.linktech.cn/MC/huaweivmallwap/20171206/450x220.jpg" width="450" height="220" border="0"></a><img src="http://track.linktech.cn/?m=huaweivmall&a=A100234624&l=02300&l_cd1=0&l_cd2=0" width="1" height="1" border="0" style="display:none"></p>
-</li>
-<li><p><a href="http://click.linktech.cn/?m=huaweivmall&a=A100234624&l=02303&l_cd1=0&l_cd2=0&u_id=chenjiabing" target="_blank"><img src="http://banner.linktech.cn/MC/huaweivmall/20171225/640x240.jpg" width="450" height="240" border="0"></a><img src="http://track.linktech.cn/?m=huaweivmall&a=A100234624&l=02303&l_cd1=0&l_cd2=0" width="1" height="1" border="0" style="display:none"></p>
-</li>
-<li><p><a href="http://click.linktech.cn/?m=huaweivmall&a=A100234624&l=02302&l_cd1=0&l_cd2=0&u_id=chenjiabing" target="_blank"><img src="http://banner.linktech.cn/MC/huaweivmallwap/20171219/450x220.jpg" width="450" height="220" border="0"></a><img src="http://track.linktech.cn/?m=huaweivmall&a=A100234624&l=02302&l_cd1=0&l_cd2=0" width="1" height="1" border="0" style="display:none"></p>
-</li>
-<li><p><a href="http://click.linktech.cn/?m=huaweivmall&a=A100234624&l=02300&l_cd1=0&l_cd2=0&u_id=chenjiabing" target="_blank"><img src="http://banner.linktech.cn/MC/huaweivmallwap/20171206/450x220.jpg" width="450" height="220" border="0"></a><img src="http://track.linktech.cn/?m=huaweivmall&a=A100234624&l=02300&l_cd1=0&l_cd2=0" width="1" height="1" border="0" style="display:none"></p>
-</li>
-</ul>
+<h2 id="麻烦支持下博主的广告事业，点击下即可"><a href="#麻烦支持下博主的广告事业，点击下即可" class="headerlink" title="麻烦支持下博主的广告事业，点击下即可"></a>麻烦支持下博主的广告事业，点击下即可</h2><p><a href="http://click.linktech.cn/?m=huaweivmall&a=A100234624&l=02300&l_cd1=0&l_cd2=0&u_id=chenjiabing" target="_blank"><img src="http://banner.linktech.cn/MC/huaweivmallwap/20171206/450x220.jpg" width="450" height="220" border="0"></a><img src="http://track.linktech.cn/?m=huaweivmall&a=A100234624&l=02300&l_cd1=0&l_cd2=0" width="1" height="1" border="0" style="display:none"></p>
+<p><a href="http://click.linktech.cn/?m=huaweivmall&a=A100234624&l=02303&l_cd1=0&l_cd2=0&u_id=chenjiabing" target="_blank"><img src="http://banner.linktech.cn/MC/huaweivmall/20171225/640x240.jpg" width="450" height="240" border="0"></a><img src="http://track.linktech.cn/?m=huaweivmall&a=A100234624&l=02303&l_cd1=0&l_cd2=0" width="1" height="1" border="0" style="display:none"></p>
+<p><a href="http://click.linktech.cn/?m=huaweivmall&a=A100234624&l=02302&l_cd1=0&l_cd2=0&u_id=chenjiabing" target="_blank"><img src="http://banner.linktech.cn/MC/huaweivmallwap/20171219/450x220.jpg" width="450" height="220" border="0"></a><img src="http://track.linktech.cn/?m=huaweivmall&a=A100234624&l=02302&l_cd1=0&l_cd2=0" width="1" height="1" border="0" style="display:none"></p>
+<p><a href="http://click.linktech.cn/?m=huaweivmall&a=A100234624&l=02300&l_cd1=0&l_cd2=0&u_id=chenjiabing" target="_blank"><img src="http://banner.linktech.cn/MC/huaweivmallwap/20171206/450x220.jpg" width="450" height="220" border="0"></a><img src="http://track.linktech.cn/?m=huaweivmall&a=A100234624&l=02300&l_cd1=0&l_cd2=0" width="1" height="1" border="0" style="display:none"></p>
 ]]></content>
     
     <summary type="html">
