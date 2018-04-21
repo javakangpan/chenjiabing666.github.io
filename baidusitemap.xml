@@ -4,6 +4,206 @@
 
     
   <url>
+    <loc>http://chenjiabing666.github.io/2018/04/22/Hibernate%E4%B9%8B%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/</loc>
+    <lastmod>2018-04-21T20:23:59.262Z</lastmod>
+    <data>
+        <display>
+        <title>Hibernate之一级缓存</title>
+        <pubTime>2018-04-21T20:23:26.000Z</pubTime>
+        
+        <tag>Hibernate</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hibernate" url="http://chenjiabing666.github.io/categories/Hibernate/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/04/22/Hibernate%E4%B8%AD%E7%9A%84%E4%B8%89%E7%A7%8D%E7%8A%B6%E6%80%81/</loc>
+    <lastmod>2018-04-21T20:23:09.446Z</lastmod>
+    <data>
+        <display>
+        <title>Hibernate中的三种状态</title>
+        <pubTime>2018-04-21T20:22:50.000Z</pubTime>
+        
+        <tag>Hibernate</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hibernate" url="http://chenjiabing666.github.io/categories/Hibernate/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/04/22/Hibernate%E4%B9%8B%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/</loc>
+    <lastmod>2018-04-21T20:22:33.974Z</lastmod>
+    <data>
+        <display>
+        <title>Hibernate之延迟加载</title>
+        <pubTime>2018-04-21T20:22:12.000Z</pubTime>
+        
+        <tag>Hibernate</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hibernate" url="http://chenjiabing666.github.io/categories/Hibernate/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/04/22/Hibernate%E6%B3%A8%E8%A7%A3%E4%B9%8B%E5%9F%BA%E6%9C%AC%E6%B3%A8%E8%A7%A3%E7%9A%84%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2018-04-21T20:21:33.998Z</lastmod>
+    <data>
+        <display>
+        <title>Hibernate注解之基本注解的注解使用</title>
+        <pubTime>2018-04-21T20:21:08.000Z</pubTime>
+        
+        <tag>Hibernate</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hibernate" url="http://chenjiabing666.github.io/categories/Hibernate/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/04/22/Hibernate%E4%BD%BF%E7%94%A8%E6%97%A5%E5%BF%97-log4j/</loc>
+    <lastmod>2018-04-21T20:20:50.174Z</lastmod>
+    <data>
+        <display>
+        <title>Hibernate使用日志(log4j)</title>
+        <pubTime>2018-04-21T20:20:20.000Z</pubTime>
+        
+        <tag>Hibernate</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hibernate" url="http://chenjiabing666.github.io/categories/Hibernate/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/04/22/Hibernate%E5%B8%B8%E7%94%A8API/</loc>
+    <lastmod>2018-04-21T20:19:59.897Z</lastmod>
+    <data>
+        <display>
+        <title>Hibernate常用API</title>
+        <pubTime>2018-04-21T20:19:37.000Z</pubTime>
+        
+        <tag>Hibernate</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hibernate" url="http://chenjiabing666.github.io/categories/Hibernate/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/04/22/Hibernate%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2018-04-21T20:19:07.574Z</lastmod>
+    <data>
+        <display>
+        <title>Hibernate的基本配置</title>
+        <pubTime>2018-04-21T20:18:40.000Z</pubTime>
+        
+        <tag>Hibernate</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hibernate" url="http://chenjiabing666.github.io/categories/Hibernate/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/04/22/Hibernate%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/</loc>
+    <lastmod>2018-04-21T20:18:22.966Z</lastmod>
+    <data>
+        <display>
+        <title>Hibernate第一个程序</title>
+        <pubTime>2018-04-21T20:18:04.000Z</pubTime>
+        
+        <tag>Hibernate</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hibernate" url="http://chenjiabing666.github.io/categories/Hibernate/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/04/22/Hibernate%E7%AE%80%E4%BB%8B/</loc>
+    <lastmod>2018-04-21T20:17:40.774Z</lastmod>
+    <data>
+        <display>
+        <title>Hibernate简介</title>
+        <pubTime>2018-04-21T20:16:59.000Z</pubTime>
+        
+        <tag>Hibernate</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hibernate" url="http://chenjiabing666.github.io/categories/Hibernate/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/04/22/%E8%87%AA%E5%B7%B1%E5%86%99springmvc%E6%A1%86%E6%9E%B6/</loc>
+    <lastmod>2018-04-21T20:16:17.846Z</lastmod>
+    <data>
+        <display>
+        <title>自己写springmvc框架</title>
+        <pubTime>2018-04-21T20:15:32.000Z</pubTime>
+        
+        <tag>Servlet</tag>
+         
+         
+           
+             
+              <breadCrumb title="Servlet" url="http://chenjiabing666.github.io/categories/Servlet/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://chenjiabing666.github.io/2018/04/16/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2018-04-18T00:07:52.836Z</lastmod>
     <data>

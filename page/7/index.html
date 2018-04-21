@@ -79,22 +79,22 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/15/python实现微信接口/" title="python实现微信接口" itemprop="url">
+    <a href="/2017/06/14/Java反射机制/" title="Java反射机制" itemprop="url">
   
-    <h1 itemprop="name">python实现微信接口</h1>
+    <h1 itemprop="name">Java反射机制</h1>
     
      
-           <p itemprop="description" >python实现微信接口(itchat)安装
+           <p itemprop="description" >Java反射机制前言
 
-sudo pip install itchat
+网页版的jdk的API
+离线版API
 
 
-登录
-
-itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但是这种登录的方式确实短时间的登录，并不会保留登录的状态，也就是下次登录时还是需要扫描二维码，</p>
+什么是反射机制
+反射是java语言的一个特性，它允程序在运行时（注意不是编译的时候）来进行自我检查并且对内部的成员进行操作。例如它允许一个java的类获取他所有的成员变量和方法并且显示出来。这个能特定我们不常看到，</p>
         
     
-    <time datetime="2017-05-14T19:44:21.000Z" itemprop="datePublished">2017-05-15</time>
+    <time datetime="2017-06-14T07:53:54.000Z" itemprop="datePublished">2017-06-14</time>
   </a>
 </section>
 
@@ -106,21 +106,25 @@ itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/13/python发送邮件/" title="python发送邮件" itemprop="url">
+    <a href="/2017/05/26/Java-IO学习笔记总结/" title="Java IO学习笔记总结" itemprop="url">
   
-    <h1 itemprop="name">python发送邮件</h1>
+    <h1 itemprop="name">Java IO学习笔记总结</h1>
     
      
-           <p itemprop="description" >python发送邮件准备
-python中发送邮件主要用的是smtplib和email两个模块，下面主要对这两个模块进行讲解
-在讲解之前需要准备至少两个测试的邮箱，其中要在邮箱的设置中开启smtplib协议才可以进行发送和接受
+           <p itemprop="description" >Java IO学习笔记总结前言
+前面的八篇文章详细的讲述了Java IO的操作方法，文章列表如下
 
-smtplib
-
-smtplib.SMTP( [ho</p>
+基本的文件操作
+字符流和字节流的操作
+InputStreamReader和OutputStreamWriter操作
+内存操作流
+管道流
+打印流
+System对IO的支持
+Buffe</p>
         
     
-    <time datetime="2017-05-12T23:17:41.000Z" itemprop="datePublished">2017-05-13</time>
+    <time datetime="2017-05-26T00:09:27.000Z" itemprop="datePublished">2017-05-26</time>
   </a>
 </section>
 
@@ -132,20 +136,22 @@ smtplib.SMTP( [ho</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/13/python制作电子书/" title="python制作电子书" itemprop="url">
+    <a href="/2017/05/26/Java-IO学习笔记八/" title="Java IO学习笔记八" itemprop="url">
   
-    <h1 itemprop="name">python制作电子书</h1>
+    <h1 itemprop="name">Java IO学习笔记八</h1>
     
      
-           <p itemprop="description" >python制作pdf电子书准备
-制作电子书使用的是python的pdfkit这个库，pdfkit是 wkhtmltopdf 的Python封装包，因此在安装这个之前要安装wkhtmltopdf
+           <p itemprop="description" >BufferedReader和BufferedWriter
 
-安装wkhtmltopdf
+这两个类是高效率的提高文件的读取速度，它们为字符输入和输出提供了一个缓冲区，可以显著的调高写入和读取的速度，特别针对大量的磁盘文件读取的时候,下面着重的讲讲这两个类
 
-sudo apt-get install wkhtm</p>
+
+BufferedReader
+
+从字符输入流中读</p>
         
     
-    <time datetime="2017-05-12T23:15:20.000Z" itemprop="datePublished">2017-05-13</time>
+    <time datetime="2017-05-25T23:37:55.000Z" itemprop="datePublished">2017-05-26</time>
   </a>
 </section>
 
@@ -157,16 +163,22 @@ sudo apt-get install wkhtm</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/10/回溯算法/" title="回溯算法" itemprop="url">
+    <a href="/2017/05/26/Java-IO学习笔记七/" title="Java IO学习笔记七" itemprop="url">
   
-    <h1 itemprop="name">回溯算法</h1>
+    <h1 itemprop="name">Java IO学习笔记七</h1>
     
      
-           <p itemprop="description" >回溯算法主要思想
-回溯算法的基本思想是：从一条路往前走，能进则进，不能进则退回来，换一条路再试。八皇后问题就是回溯算法的典型，第一步按照顺序放一个皇后，然后第二步符合要求放第2个皇后，如果没有位置符合要求，那么就要改变第一个皇后的位置，重新放第2个皇后的位置，直到找到符合条件的位</p>
+           <p itemprop="description" >System对IO的支持
+
+System是系统的类，其中的方法都是在控制台的输入和输出，但是通过重定向也是可以对文件的输入输出
+System中定义了标准输入、标准输出和错误输出流，定义如下:
+
+
+static PrintStream err “标准”错误输出流。
+static I</p>
         
     
-    <time datetime="2017-05-09T20:18:44.000Z" itemprop="datePublished">2017-05-10</time>
+    <time datetime="2017-05-25T23:37:47.000Z" itemprop="datePublished">2017-05-26</time>
   </a>
 </section>
 
@@ -178,19 +190,17 @@ sudo apt-get install wkhtm</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/09/跳跃链表/" title="跳跃链表" itemprop="url">
+    <a href="/2017/05/25/Java-IO学习笔记六/" title="Java IO学习笔记六" itemprop="url">
   
-    <h1 itemprop="name">跳跃链表</h1>
+    <h1 itemprop="name">Java IO学习笔记六</h1>
     
      
-           <p itemprop="description" >数据结构之跳跃链表简介
-总的来说跳跃链表最大的好处就是提高了检索了的速率，可以说说是大幅度的提高，相对于单链表来说是一种高效率的检索结构
+           <p itemprop="description" >打印流
 
-原理
-跳跃表的结构是：假如底层有10个节点， 那么底层的上一层理论上就有5个节点，再上一层理论上就有2个或3个节点，再上一层理论上就有1个节</p>
+在整个IO包中，打印流是输出信息最方便的类，主要包含字节打印流（PrintStream）和字符打印流（PrintWrite）。打印流提供了非常方便的打印功能，可以打印任何的数据类型，例如：小数、整数、字符串等等，相对于前面学习的几个文件的操作来说，这里的打印流是最简便的</p>
         
     
-    <time datetime="2017-05-08T20:38:50.000Z" itemprop="datePublished">2017-05-09</time>
+    <time datetime="2017-05-25T07:33:09.000Z" itemprop="datePublished">2017-05-25</time>
   </a>
 </section>
 
@@ -202,18 +212,17 @@ sudo apt-get install wkhtm</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/07/git常用命令/" title="git常用命令" itemprop="url">
+    <a href="/2017/05/25/Java-IO学习笔记五/" title="Java IO学习笔记五" itemprop="url">
   
-    <h1 itemprop="name">git常用命令</h1>
+    <h1 itemprop="name">Java IO学习笔记五</h1>
     
      
-           <p itemprop="description" >git常用操作第一次连接远程仓库的配置配置user.name 和user.email
+           <p itemprop="description" >管道流
 
-git config --global user.name &amp;quot;name&amp;quot;    设置你的用户名
-git config --global user.email &amp;quot;e</p>
+管道流的主要作用是可以进行两个线程间的通讯，分为管道输出流(PipedOutputStream)、管道输入流（PipedInputStream），如果想要进行管道输出，则必须要把输出流连在输入流之上，在PipedOutputStream类上有如下的一个方法用于连接管道：</p>
         
     
-    <time datetime="2017-05-06T20:11:50.000Z" itemprop="datePublished">2017-05-07</time>
+    <time datetime="2017-05-25T07:33:00.000Z" itemprop="datePublished">2017-05-25</time>
   </a>
 </section>
 
@@ -225,17 +234,16 @@ git config --global user.email &amp;quot;e</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/07/scrapy爬取淘宝女郎/" title="scrapy爬取淘宝女郎" itemprop="url">
+    <a href="/2017/05/25/Java-IO学习笔记四/" title="Java IO学习笔记四" itemprop="url">
   
-    <h1 itemprop="name">scrapy爬取淘宝女郎</h1>
+    <h1 itemprop="name">Java IO学习笔记四</h1>
     
      
-           <p itemprop="description" >scrapy抓取淘宝女郎准备工作
-
-首先在淘宝女郎的首页这里查看，当然想要爬取更多的话，当然这里要查看翻页的url,不过这操蛋的地方就是这里的翻页是使用javascript加载的，这个就有点尴尬了，找了好久没有找到，这里如果有朋友知道怎样翻页的话，麻烦告诉我一声，谢谢了…，不过就</p>
+           <p itemprop="description" >内存操作流
+之前的所有的流操作都是针对文件的，但是有时候只是想要实现数据间转换，此时如果我们想要创建一个文件然后再删除文件，那样显得有点麻烦，因此此时的内存操作流就显得很适合这类的操作，因为它只是在内存中存储，并不会真正的创建文件，内存操作流涉及的两个类是ByteArrayInp</p>
         
     
-    <time datetime="2017-05-06T20:03:54.000Z" itemprop="datePublished">2017-05-07</time>
+    <time datetime="2017-05-25T07:32:49.000Z" itemprop="datePublished">2017-05-25</time>
   </a>
 </section>
 
@@ -247,19 +255,21 @@ git config --global user.email &amp;quot;e</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/01/MongoDB干货篇之更新数据/" title="MongoDB干货篇之更新数据" itemprop="url">
+    <a href="/2017/05/24/Java-IO学习笔记三/" title="Java IO学习笔记三" itemprop="url">
   
-    <h1 itemprop="name">MongoDB干货篇之更新数据</h1>
+    <h1 itemprop="name">Java IO学习笔记三</h1>
     
      
-           <p itemprop="description" >MongoDB干货篇之数据更新常用的函数
+           <p itemprop="description" >Java IO学习笔记三
 
-update(&amp;lt;query&amp;gt;,&amp;lt;update&amp;gt;,&amp;lt;upsert&amp;gt;,&amp;lt;multi&amp;gt;),其中&amp;lt;query&amp;gt;表示筛选的条件，&amp;lt;update&amp;gt;是要更新的数据
+在整个IO包中，实际上就是分为字节流和字符流，但是除了这两个流之外，还存在了一组字节流-字符流的转换类。
 
-update</p>
+OutputStreamWriter：是Writer的子类，将输出的字符流变为字节流，即：将一个字符流的输出对象变成字节流的输出对象。
+
+Inp</p>
         
     
-    <time datetime="2017-05-01T00:13:32.000Z" itemprop="datePublished">2017-05-01</time>
+    <time datetime="2017-05-24T06:48:34.000Z" itemprop="datePublished">2017-05-24</time>
   </a>
 </section>
 
@@ -271,16 +281,23 @@ update</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/30/MongoDB干货篇之查询数据/" title="MongoDB干货篇之查询数据" itemprop="url">
+    <a href="/2017/05/24/Java-IO学习笔记二/" title="Java IO学习笔记二" itemprop="url">
   
-    <h1 itemprop="name">MongoDB干货篇之查询数据</h1>
+    <h1 itemprop="name">Java IO学习笔记二</h1>
     
      
-           <p itemprop="description" >MongoDB干货篇之查询准备工作
-在开始之前我们应该先准备数据方便演示，这里我插入的了几条数据，数据如下：12345678910111213141516171819202122232425262728293031323334db.user.insertMany([&amp;#123;n</p>
+           <p itemprop="description" >Java IO学习笔记二流的概念
+
+在程序中所有的数据都是以流的方式进行传输或保存的，程序需要数据的时候要使用输入流读取数据，而当程序需要将一些数据保存起来的时候，就要使用输出流完成。
+程序中的输入输出都是以流的形式保存的，流中保存的实际上全都是字节文件。
+
+
+字节流和字符流
+
+</p>
         
     
-    <time datetime="2017-04-30T06:53:00.000Z" itemprop="datePublished">2017-04-30</time>
+    <time datetime="2017-05-24T06:46:06.000Z" itemprop="datePublished">2017-05-24</time>
   </a>
 </section>
 
@@ -292,16 +309,20 @@ update</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/29/python爬虫之BeautifulSoup/" title="python爬虫之BeautifulSoup" itemprop="url">
+    <a href="/2017/05/23/Java-IO学习笔记一/" title="Java IO学习笔记一" itemprop="url">
   
-    <h1 itemprop="name">python爬虫之BeautifulSoup</h1>
+    <h1 itemprop="name">Java IO学习笔记一</h1>
     
      
-           <p itemprop="description" >python爬虫之BeautifulSoup简介
-Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜索、修改分析树等功能。它是一个工具箱，通过解析文档为用户提供需要抓取的数据，因为简单，所以不需要多少代码就可以写出一个完整的应用程序。Beautifu</p>
+           <p itemprop="description" >Java IO学习笔记一File
+File是文件和目录路径名的抽象表示形式，总的来说就是java创建删除文件目录的一个类库，但是作用不仅仅于此，详细见官方文档
+
+构造函数
+
+File(File parent, String child) 根据 parent 抽象路径名和 chil</p>
         
     
-    <time datetime="2017-04-29T02:06:56.000Z" itemprop="datePublished">2017-04-29</time>
+    <time datetime="2017-05-23T07:23:50.000Z" itemprop="datePublished">2017-05-23</time>
   </a>
 </section>
 
@@ -312,7 +333,7 @@ Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/6/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/">Next<span></span></a>
   </nav>
 
 </div>
@@ -336,6 +357,10 @@ Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜
 		  
 		
 		  
+			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>9</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/JQuery学习/" title="JQuery学习">JQuery学习<sup>3</sup></a></li>
 		  
 		
@@ -349,6 +374,10 @@ Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜
 		
 		  
 			<li><a href="/categories/Scrapy学习/" title="Scrapy学习">Scrapy学习<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Servlet/" title="Servlet">Servlet<sup>1</sup></a></li>
 		  
 		
 		  
@@ -393,6 +422,10 @@ Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜
 			
 		
 			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>9</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
@@ -401,11 +434,11 @@ Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜
 			
 		
 			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
+				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>7</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>6</sup></a></li>
+				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
 			
 		
 			
@@ -437,11 +470,11 @@ Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
+				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 			
@@ -449,19 +482,15 @@ Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜
 			
 		
 			
+				<li><a href="/tags/POI-Excel/" title="POI(Excel)">POI(Excel)<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/python数据分析/" title="python数据分析">python数据分析<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
 			
 		
 		</ul>

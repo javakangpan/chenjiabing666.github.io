@@ -79,19 +79,25 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/09/26/JSP总结四-EL表达式/" title="JSP总结四(EL表达式)" itemprop="url">
+    <a href="/2018/03/30/Struts2入门/" title="Struts2入门" itemprop="url">
   
-    <h1 itemprop="name">JSP总结四(EL表达式)</h1>
+    <h1 itemprop="name">Struts2入门</h1>
     
      
-           <p itemprop="description" >JSP总结四(EL表达式)简介
-JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用EL表达式可以替代Java语句的使用
+           <p itemprop="description" >入门操作##导入jar 包
 
-隐含对象与属性相关的隐含对象
-属性的隐含对象有PageScope,requestScope,sessionScope,applicat</p>
+到官网下载相应的jar包
+导入前阶段必须的jar包
+
+创建项目
+在eclipse中创建一个web项目
+在webContent下WEB-INF/lib下导入需要的jar包即可
+
+
+配置核心过滤器 StrutsPrepareAndExecuteFilte</p>
         
     
-    <time datetime="2017-09-26T12:07:16.000Z" itemprop="datePublished">2017-09-26</time>
+    <time datetime="2018-03-30T04:57:22.000Z" itemprop="datePublished">2018-03-30</time>
   </a>
 </section>
 
@@ -103,17 +109,19 @@ JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用E
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/09/22/JSP总结三-JSTL核心标签库的使用/" title="JSP总结三(JSTL核心标签库的使用)" itemprop="url">
+    <a href="/2018/03/30/JDBC干货二/" title="JDBC干货二" itemprop="url">
   
-    <h1 itemprop="name">JSP总结三(JSTL核心标签库的使用)</h1>
+    <h1 itemprop="name">JDBC干货二</h1>
     
      
-           <p itemprop="description" >JSP总结三(JSTL核心标签库的使用)简介
-其实在我们编写JSP网页的时候是不希望在JSP页面中出现Java代码的，这里我们就要使用JSTL的核心标签库来实现。
-想要使用JSTL，一定要填上这句话：&amp;lt;%@taglib prefix=&amp;quot;c&amp;quot; uri=&amp;q</p>
+           <p itemprop="description" >Day02Properties属性配置对象什么是properties
+程序猿可以把工程中出现的某些数据以配置文件的形式保存起来，就是处理 *.properties文件的对象，在properties文件中是以键值对形式保存的数据
+
+把数据库中的信息存放到该文件中
+其中存放的是dri</p>
         
     
-    <time datetime="2017-09-22T06:39:43.000Z" itemprop="datePublished">2017-09-22</time>
+    <time datetime="2018-03-30T04:54:52.000Z" itemprop="datePublished">2018-03-30</time>
   </a>
 </section>
 
@@ -125,16 +133,20 @@ JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用E
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/09/20/JSP总结二-动作元素/" title="JSP总结二(动作元素)" itemprop="url">
+    <a href="/2018/03/30/JDBC干货一/" title="JDBC干货一" itemprop="url">
   
-    <h1 itemprop="name">JSP总结二(动作元素)</h1>
+    <h1 itemprop="name">JDBC干货一</h1>
     
      
-           <p itemprop="description" >JSP总结二(动作元素)&amp;lt;jsp:include&amp;gt;
-前面介绍了一种指令元素include，那是一种静态包含JSP文件，这个标签是动态包含一个JSP页面，也就是被包含的JSP页面和原JSP将合并在一起，转译为一个Servlet类。这是有一定的局限性的，如变量的定义不能重</p>
+           <p itemprop="description" >JDBC什么是JDBC
+Java Database Connectivity
+JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
+
+为什么使用JDBC
+因为java程序猿需要连接各种数据库（oracle，mysql，db2等）为了避免java程序猿每一种数据库都</p>
         
     
-    <time datetime="2017-09-20T14:51:42.000Z" itemprop="datePublished">2017-09-20</time>
+    <time datetime="2018-03-30T04:54:41.000Z" itemprop="datePublished">2018-03-30</time>
   </a>
 </section>
 
@@ -146,19 +158,20 @@ JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用E
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/09/20/JSP总结一-标签）/" title="JSP总结一(标签）" itemprop="url">
+    <a href="/2018/03/28/SQL操作六/" title="SQL操作六" itemprop="url">
   
-    <h1 itemprop="name">JSP总结一(标签）</h1>
+    <h1 itemprop="name">SQL操作六</h1>
     
      
-           <p itemprop="description" >JSP总结一(标签)生命周期
-JSP文件在部署到web服务器上的时候还是会编译成Servlet文件，因此JSP的生命周期和Servlet是一样的，都是有_JSPInit()，_JSPService(),_JSPDestroy()方法的
+           <p itemprop="description" >Day06视图视图概述
+什么是视图： 在数据库中存在多种对象，表和视图都是数据库中的对象，创建视图时视图名称不能和表名相同，实际上，视图就代表一个sql查询语句，也可以理解成视图是一张虚拟的表，但是虚拟表中的数据会随着原表数据的改变而改变
 
-指示元素
-在jsp中有三个指示类型，分别为</p>
+为什么使用视图： 
+
+因为有些数据的查</p>
         
     
-    <time datetime="2017-09-20T14:51:23.000Z" itemprop="datePublished">2017-09-20</time>
+    <time datetime="2018-03-28T04:17:56.000Z" itemprop="datePublished">2018-03-28</time>
   </a>
 </section>
 
@@ -170,16 +183,22 @@ JSP文件在部署到web服务器上的时候还是会编译成Servlet文件，�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/09/19/Servlet总结五-监听器/" title="Servlet总结五(监听器)" itemprop="url">
+    <a href="/2018/03/28/SQL操作五/" title="SQL操作五" itemprop="url">
   
-    <h1 itemprop="name">Servlet总结五(监听器)</h1>
+    <h1 itemprop="name">SQL操作五</h1>
     
      
-           <p itemprop="description" >Servlet总结五(监听器)分类
-监听器按其功能可以分为三种，分别是生命周期监听器(ServletContextListener,ServletRequestListener,HttpSessionListener)，属性监听器(ServletRequestAttributeL</p>
+           <p itemprop="description" >Day05关联关系自关联
+当前表的数据和当前表里面的数据有关联关系
+
+一对一一对多多对多
+学生和老师的关系就是多对多的关系一个学生可以被多个老师教，一个老师可以教多个学生
+
+创建表
+创建教师表 teacher(id,name)创建学生表 stu(id,name)创建第三张关系表t</p>
         
     
-    <time datetime="2017-09-19T02:37:23.000Z" itemprop="datePublished">2017-09-19</time>
+    <time datetime="2018-03-27T22:59:18.000Z" itemprop="datePublished">2018-03-28</time>
   </a>
 </section>
 
@@ -191,16 +210,15 @@ JSP文件在部署到web服务器上的时候还是会编译成Servlet文件，�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/09/17/Servlet总结四-过滤器/" title="Servlet总结四(过滤器)" itemprop="url">
+    <a href="/2018/03/26/SQL操作四/" title="SQL操作四" itemprop="url">
   
-    <h1 itemprop="name">Servlet总结四(过滤器)</h1>
+    <h1 itemprop="name">SQL操作四</h1>
     
      
-           <p itemprop="description" >Servlet总结四(过滤器的使用)简介
-在容器调用Servlet的service()的方法钱，Servlet其实并不会知道有请求的到来，而在service()方法执行后，容器真正对浏览器进行HTTP响应之前，浏览器也不知道Servlet真正响应是什么。过滤器(Filter)正如</p>
+           <p itemprop="description" >Day 04创建数据库和表商城建表语句1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465</p>
         
     
-    <time datetime="2017-09-17T13:44:07.000Z" itemprop="datePublished">2017-09-17</time>
+    <time datetime="2018-03-26T11:14:40.000Z" itemprop="datePublished">2018-03-26</time>
   </a>
 </section>
 
@@ -212,16 +230,23 @@ JSP文件在部署到web服务器上的时候还是会编译成Servlet文件，�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/09/16/Servlet总结三-HttpSession会话管理/" title="Servlet总结三(HttpSession会话管理)" itemprop="url">
+    <a href="/2018/03/24/SQL操作三/" title="SQL操作三" itemprop="url">
   
-    <h1 itemprop="name">Servlet总结三(HttpSession会话管理)</h1>
+    <h1 itemprop="name">SQL操作三</h1>
     
      
-           <p itemprop="description" >Servlet总结三(HttpSession会话管理)简介
-HttpSession是提供一种方式，跨多个页面请求或对 Web 站点的多次访问标识用户并存储有关该用户的信息。简单的来说就是能够实现全局的共享数据，可以跨多个页面请求，当然在Servlet中可以在同一个项目中的不同的S</p>
+           <p itemprop="description" >Day03查询null
+查询列值为null  (is null)
+
+select * from emp where mgr is null; 查询上级领导为空的员工
+
+
+查询列值不为null  (is not null)
+
+select * from emp where mgr </p>
         
     
-    <time datetime="2017-09-15T16:12:10.000Z" itemprop="datePublished">2017-09-16</time>
+    <time datetime="2018-03-24T01:10:58.000Z" itemprop="datePublished">2018-03-24</time>
   </a>
 </section>
 
@@ -233,19 +258,19 @@ HttpSession是提供一种方式，跨多个页面请求或对 Web 站点的多�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/09/15/Servlet总结二(文件路径获取)/" title="Servlet总结二(文件路径获取）" itemprop="url">
+    <a href="/2018/03/22/SQL操作二/" title="SQL操作二" itemprop="url">
   
-    <h1 itemprop="name">Servlet总结二(文件路径获取）</h1>
+    <h1 itemprop="name">SQL操作二</h1>
     
      
-           <p itemprop="description" >Servlet总结二（文件路径）前言
-前面我们说过ServletContext表示的是web容器中的上下文，下面我们也是用到ServletContext中的方法读取文件
+           <p itemprop="description" >Day02乱码问题
+1.数据库字符集 要设置成utf8
 
-读取WebRoot文件下的文件
-我们知道当我们将项目部署到Tomcat服务器中时，项目中的文件路径其实就是在</p>
+表的字符集 设置为utf8
+windows系统的命令行里，有些版本是gbk的编码格式，可以通过set names gbk；的方式把mysql接收到数据是的解码格式设置为gbk，这个位置的gbk和数据库还有表的utf8没有关</p>
         
     
-    <time datetime="2017-09-15T08:25:28.000Z" itemprop="datePublished">2017-09-15</time>
+    <time datetime="2018-03-22T09:28:54.000Z" itemprop="datePublished">2018-03-22</time>
   </a>
 </section>
 
@@ -257,18 +282,26 @@ HttpSession是提供一种方式，跨多个页面请求或对 Web 站点的多�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/09/14/Eclipse配置Tomcat/" title="Eclipse配置Tomcat" itemprop="url">
+    <a href="/2018/03/21/SQL操作一/" title="SQL操作一" itemprop="url">
   
-    <h1 itemprop="name">Eclipse配置Tomcat</h1>
+    <h1 itemprop="name">SQL操作一</h1>
     
      
-           <p itemprop="description" >Eclipse配置tomcatEclipse创建server
+           <p itemprop="description" >Day01-基本的语句数据库简介
+因为传统的文本形式存储数据存在很多的弊端：
 
-首先下载eclipse for javaEE developer 
-打开控制台，然后到server后右击空白处-&amp;gt;New-&amp;gt;Server-&amp;gt;Apach-&amp;gt;Tomact 7.0 -&amp;gt;Nex</p>
+执行效率低
+占用内存
+
+
+什么是DB
+Database ： 数据库数据库本质是文件集（多个文件）会按照特定存储规范进行数据增删改查
+
+什么是DBMS
+DateBaseManagementSystem </p>
         
     
-    <time datetime="2017-09-14T14:28:10.000Z" itemprop="datePublished">2017-09-14</time>
+    <time datetime="2018-03-21T08:57:43.000Z" itemprop="datePublished">2018-03-21</time>
   </a>
 </section>
 
@@ -280,22 +313,20 @@ HttpSession是提供一种方式，跨多个页面请求或对 Web 站点的多�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/09/14/Servlet总结一/" title="Servlet总结一" itemprop="url">
+    <a href="/2017/09/27/Excel表格的写入读取/" title="Excel表格的写入读取" itemprop="url">
   
-    <h1 itemprop="name">Servlet总结一</h1>
+    <h1 itemprop="name">Excel表格的写入读取</h1>
     
      
-           <p itemprop="description" >Servlet总结一HttpServlet
-想要实现一个servlet必须继承这个类，其实一个servlet就是一个java文件，但是这个类必须是继承HttpServlet。
+           <p itemprop="description" >Excel的读取和写入准备
+首先需要导入jar包，请点击这里下载
 
-生命周期
-servlet的生命周期是从创建到毁灭的一个过程，具体的过程如下：
-
-
-Servlet 通过</p>
+简介
+我们知道Excel表格在2007之后就不一样了，后缀名变为xlsx，之前的后缀名为xls,因此读取和写入的操作就对应着不同的方式，但是只是读取和写入的类不同了，思想还是一样的。
+我们要知道一个Excel文件</p>
         
     
-    <time datetime="2017-09-14T14:24:50.000Z" itemprop="datePublished">2017-09-14</time>
+    <time datetime="2017-09-27T06:03:06.000Z" itemprop="datePublished">2017-09-27</time>
   </a>
 </section>
 
@@ -306,7 +337,7 @@ Servlet 通过</p>
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
   </nav>
 
 </div>
@@ -330,6 +361,10 @@ Servlet 通过</p>
 		  
 		
 		  
+			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>9</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/JQuery学习/" title="JQuery学习">JQuery学习<sup>3</sup></a></li>
 		  
 		
@@ -343,6 +378,10 @@ Servlet 通过</p>
 		
 		  
 			<li><a href="/categories/Scrapy学习/" title="Scrapy学习">Scrapy学习<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Servlet/" title="Servlet">Servlet<sup>1</sup></a></li>
 		  
 		
 		  
@@ -387,6 +426,10 @@ Servlet 通过</p>
 			
 		
 			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>9</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
@@ -395,11 +438,11 @@ Servlet 通过</p>
 			
 		
 			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
+				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>7</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>6</sup></a></li>
+				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
 			
 		
 			
@@ -431,11 +474,11 @@ Servlet 通过</p>
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
+				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 			
@@ -443,19 +486,15 @@ Servlet 通过</p>
 			
 		
 			
+				<li><a href="/tags/POI-Excel/" title="POI(Excel)">POI(Excel)<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/python数据分析/" title="python数据分析">python数据分析<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
 			
 		
 		</ul>
