@@ -91,10 +91,9 @@
     <link href="http://chenjiabing666.github.io/2018/04/24/Spring%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E7%BB%84%E4%BB%B6%E6%89%AB%E6%8F%8F/"/>
     <id>http://chenjiabing666.github.io/2018/04/24/Spring注解的使用和组件扫描/</id>
     <published>2018-04-24T03:13:38.000Z</published>
-    <updated>2018-04-24T03:14:00.389Z</updated>
+    <updated>2018-04-24T03:24:04.678Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Spring注解的使用和组件扫描"><a href="#Spring注解的使用和组件扫描" class="headerlink" title="Spring注解的使用和组件扫描"></a>Spring注解的使用和组件扫描</h1><p>##【非常重要】 组件扫描(Component-Scan)</p>
-<ul>
+    <content type="html"><![CDATA[<h1 id="Spring注解的使用和组件扫描"><a href="#Spring注解的使用和组件扫描" class="headerlink" title="Spring注解的使用和组件扫描"></a>Spring注解的使用和组件扫描</h1><h2 id="【非常重要】-组件扫描-Component-Scan"><a href="#【非常重要】-组件扫描-Component-Scan" class="headerlink" title="【非常重要】 组件扫描(Component-Scan)"></a>【非常重要】 组件扫描(Component-Scan)</h2><ul>
 <li><p>通过配置组件扫描，可以使得spring自动扫描package，而不必在spring的配置文件中逐一声明各个<code>&lt;bean&gt;</code></p>
 </li>
 <li><p>在配置组件扫描时，指定的包是“根包”，即例如指定了<code>cn.tedu.spring</code>,spring不只会扫描这个包，还会扫描它的各个层级子包，例如：<code>cn.tedu.spring.dao</code></p>
@@ -183,7 +182,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Spring注解的使用和组件扫描&quot;&gt;&lt;a href=&quot;#Spring注解的使用和组件扫描&quot; class=&quot;headerlink&quot; title=&quot;Spring注解的使用和组件扫描&quot;&gt;&lt;/a&gt;Spring注解的使用和组件扫描&lt;/h1&gt;&lt;p&gt;##【非常重要】 组件扫描(
+      &lt;h1 id=&quot;Spring注解的使用和组件扫描&quot;&gt;&lt;a href=&quot;#Spring注解的使用和组件扫描&quot; class=&quot;headerlink&quot; title=&quot;Spring注解的使用和组件扫描&quot;&gt;&lt;/a&gt;Spring注解的使用和组件扫描&lt;/h1&gt;&lt;h2 id=&quot;【非常重要】-组件
     
     </summary>
     

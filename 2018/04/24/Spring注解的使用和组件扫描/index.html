@@ -12,28 +12,25 @@
     
 
     
-    <meta name="description" content="Spring注解的使用和组件扫描##【非常重要】 组件扫描(Component-Scan)
-
+    <meta name="description" content="Spring注解的使用和组件扫描【非常重要】 组件扫描(Component-Scan)
 通过配置组件扫描，可以使得spring自动扫描package，而不必在spring的配置文件中逐一声明各个&amp;lt;bean&amp;gt;
 
-在配置组件扫描时，指定的包是“根包”，即例如指定了cn.tedu.spring,spring不只会扫描这个包，还会扫描它的各个层级子包，例如：cn.tedu.spring.">
+在配置组件扫描时，指定的包是“根包”，即例如指定了cn.tedu.spring,spring不只会扫描这个包，还会扫描它的各个层级子包，例如：cn.tedu.spring.dao">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring注解的使用和组件扫描">
 <meta property="og:url" content="http://chenjiabing666.github.io/2018/04/24/Spring注解的使用和组件扫描/index.html">
 <meta property="og:site_name" content="爱撒谎的男孩">
-<meta property="og:description" content="Spring注解的使用和组件扫描##【非常重要】 组件扫描(Component-Scan)
-
+<meta property="og:description" content="Spring注解的使用和组件扫描【非常重要】 组件扫描(Component-Scan)
 通过配置组件扫描，可以使得spring自动扫描package，而不必在spring的配置文件中逐一声明各个&amp;lt;bean&amp;gt;
 
-在配置组件扫描时，指定的包是“根包”，即例如指定了cn.tedu.spring,spring不只会扫描这个包，还会扫描它的各个层级子包，例如：cn.tedu.spring.">
-<meta property="og:updated_time" content="2018-04-24T03:14:00.389Z">
+在配置组件扫描时，指定的包是“根包”，即例如指定了cn.tedu.spring,spring不只会扫描这个包，还会扫描它的各个层级子包，例如：cn.tedu.spring.dao">
+<meta property="og:updated_time" content="2018-04-24T03:24:04.678Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring注解的使用和组件扫描">
-<meta name="twitter:description" content="Spring注解的使用和组件扫描##【非常重要】 组件扫描(Component-Scan)
-
+<meta name="twitter:description" content="Spring注解的使用和组件扫描【非常重要】 组件扫描(Component-Scan)
 通过配置组件扫描，可以使得spring自动扫描package，而不必在spring的配置文件中逐一声明各个&amp;lt;bean&amp;gt;
 
-在配置组件扫描时，指定的包是“根包”，即例如指定了cn.tedu.spring,spring不只会扫描这个包，还会扫描它的各个层级子包，例如：cn.tedu.spring.">
+在配置组件扫描时，指定的包是“根包”，即例如指定了cn.tedu.spring,spring不只会扫描这个包，还会扫描它的各个层级子包，例如：cn.tedu.spring.dao">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -109,12 +106,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring注解的使用和组件扫描"><span class="toc-number">1.</span> <span class="toc-text">Spring注解的使用和组件扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#注解"><span class="toc-number">1.1.</span> <span class="toc-text">注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.1.1.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用注解"><span class="toc-number">1.1.2.</span> <span class="toc-text">常用注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他注解"><span class="toc-number">1.1.3.</span> <span class="toc-text">其他注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Scope"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">@Scope</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lazy"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">@Lazy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PostConstruct"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">@PostConstruct</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PreDestroy-单例模式下才会销毁"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">@PreDestroy(单例模式下才会销毁)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注入值"><span class="toc-number">1.1.4.</span> <span class="toc-text">注入值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Autowired-（不推荐使用）"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">@Autowired （不推荐使用）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Resource-推荐使用"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">@Resource (推荐使用)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Value"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">@Value</span></a></li></ol></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring注解的使用和组件扫描"><span class="toc-number">1.</span> <span class="toc-text">Spring注解的使用和组件扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#【非常重要】-组件扫描-Component-Scan"><span class="toc-number">1.1.</span> <span class="toc-text">【非常重要】 组件扫描(Component-Scan)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解"><span class="toc-number">1.2.</span> <span class="toc-text">注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.2.1.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用注解"><span class="toc-number">1.2.2.</span> <span class="toc-text">常用注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他注解"><span class="toc-number">1.2.3.</span> <span class="toc-text">其他注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Scope"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">@Scope</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lazy"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">@Lazy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PostConstruct"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">@PostConstruct</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PreDestroy-单例模式下才会销毁"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">@PreDestroy(单例模式下才会销毁)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注入值"><span class="toc-number">1.2.4.</span> <span class="toc-text">注入值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Autowired-（不推荐使用）"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">@Autowired （不推荐使用）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Resource-推荐使用"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">@Resource (推荐使用)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Value"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">@Value</span></a></li></ol></li></ol></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="Spring注解的使用和组件扫描"><a href="#Spring注解的使用和组件扫描" class="headerlink" title="Spring注解的使用和组件扫描"></a>Spring注解的使用和组件扫描</h1><p>##【非常重要】 组件扫描(Component-Scan)</p>
-<ul>
+		<h1 id="Spring注解的使用和组件扫描"><a href="#Spring注解的使用和组件扫描" class="headerlink" title="Spring注解的使用和组件扫描"></a>Spring注解的使用和组件扫描</h1><h2 id="【非常重要】-组件扫描-Component-Scan"><a href="#【非常重要】-组件扫描-Component-Scan" class="headerlink" title="【非常重要】 组件扫描(Component-Scan)"></a>【非常重要】 组件扫描(Component-Scan)</h2><ul>
 <li><p>通过配置组件扫描，可以使得spring自动扫描package，而不必在spring的配置文件中逐一声明各个<code>&lt;bean&gt;</code></p>
 </li>
 <li><p>在配置组件扫描时，指定的包是“根包”，即例如指定了<code>cn.tedu.spring</code>,spring不只会扫描这个包，还会扫描它的各个层级子包，例如：<code>cn.tedu.spring.dao</code></p>
@@ -267,7 +263,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring注解的使用和组件扫描"><span class="toc-number">1.</span> <span class="toc-text">Spring注解的使用和组件扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#注解"><span class="toc-number">1.1.</span> <span class="toc-text">注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.1.1.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用注解"><span class="toc-number">1.1.2.</span> <span class="toc-text">常用注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他注解"><span class="toc-number">1.1.3.</span> <span class="toc-text">其他注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Scope"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">@Scope</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lazy"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">@Lazy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PostConstruct"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">@PostConstruct</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PreDestroy-单例模式下才会销毁"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">@PreDestroy(单例模式下才会销毁)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注入值"><span class="toc-number">1.1.4.</span> <span class="toc-text">注入值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Autowired-（不推荐使用）"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">@Autowired （不推荐使用）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Resource-推荐使用"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">@Resource (推荐使用)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Value"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">@Value</span></a></li></ol></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring注解的使用和组件扫描"><span class="toc-number">1.</span> <span class="toc-text">Spring注解的使用和组件扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#【非常重要】-组件扫描-Component-Scan"><span class="toc-number">1.1.</span> <span class="toc-text">【非常重要】 组件扫描(Component-Scan)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解"><span class="toc-number">1.2.</span> <span class="toc-text">注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.2.1.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用注解"><span class="toc-number">1.2.2.</span> <span class="toc-text">常用注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他注解"><span class="toc-number">1.2.3.</span> <span class="toc-text">其他注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Scope"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">@Scope</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lazy"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">@Lazy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PostConstruct"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">@PostConstruct</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PreDestroy-单例模式下才会销毁"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">@PreDestroy(单例模式下才会销毁)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注入值"><span class="toc-number">1.2.4.</span> <span class="toc-text">注入值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Autowired-（不推荐使用）"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">@Autowired （不推荐使用）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Resource-推荐使用"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">@Resource (推荐使用)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Value"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">@Value</span></a></li></ol></li></ol></li></ol></li></ol>
  
   </div>
 
@@ -366,11 +362,11 @@
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>8</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>8</sup></a></li>
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
@@ -382,19 +378,15 @@
 			
 		
 			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Spring/" title="Spring">Spring<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
+				<li><a href="/tags/java基础/" title="java基础">java基础<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
 			
 		
 			
@@ -406,11 +398,15 @@
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 			
@@ -422,11 +418,11 @@
 			
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+				<li><a href="/tags/POI-Excel/" title="POI(Excel)">POI(Excel)<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
+				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
 			
 		
 		</ul>
