@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-04-24T03:14:43.844Z</updated>
+  <updated>2018-04-26T02:01:33.038Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Springmvc之RequestMapping</title>
+    <link href="http://chenjiabing666.github.io/2018/04/26/Springmvc%E4%B9%8BRequestMapping/"/>
+    <id>http://chenjiabing666.github.io/2018/04/26/Springmvc之RequestMapping/</id>
+    <published>2018-04-26T02:00:43.000Z</published>
+    <updated>2018-04-26T02:01:33.038Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Springmvc之RequestMapping"><a href="#Springmvc之RequestMapping" class="headerlink" title="Springmvc之RequestMapping"></a>Springmvc之RequestMapping</h1><h2 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="RequestMapping"></a>RequestMapping</h2><ul>
+<li><p>标记客户的请求与哪一个类和方法对应</p>
+</li>
+<li><p>使用<code>@RequestMapping</code>同时对类和方法进行注解，相当于最终将这两处的注解路径拼接起来，比如类上使用<code>@RequestMapping(&quot;/user&quot;)</code>,在方法上使用<code>@RequestMapping(&quot;/login.do&quot;)</code>,那么拼接时访问的路径为<code>http://localhost:8080/ProjectName/user/login.do</code></p>
+</li>
+</ul>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
+<li><p><strong><code>value</code></strong> ： 默认的属性，表示映射的地址，如果只有这一个属性，那么默认可以不写value，比如<code>@RequestMapping(&quot;/login.do&quot;)</code>和<code>@RequestMapping(value=&quot;/login.do&quot;)</code>是一样的效果</p>
+</li>
+<li><p><strong><code>method</code></strong>：指定是请求的方式，我们知道请求的方式有<code>post</code>,<code>get</code>,<code>put</code>,<code>delete</code>。一般常用的是post,get，一旦我们在其中定义这个method属性，那么如果请求的方式不是这个method指定的属性值，那么就不会访问到这个方法。</p>
+<ul>
+<li><p>其实只要不指定这个<code>method</code>属性，无论是post还是get方式的都会执行这个方法，只有当其设置了<code>method</code>属性才会做限定</p>
+</li>
+<li><p>比如我们使用了 <code>@RequestMapping(value=&quot;login.do&quot;,method=RequestMethod.GET)</code>，但是我们使用表单提交的是<code>&lt;form action=&quot;&lt;%=request.getContextPath%&gt;/project/user/login.do&quot; method=&quot;post&quot;&gt;&lt;/form&gt;</code>,那么这个表单的请求就不会对应上面的注解的方法，因为表单的提交方式是<code>post</code>，但是RequestMapping定义的是<code>method</code>是<code>get</code>方式,会响应<code>405错误</code></p>
+</li>
+</ul>
+</li>
+<li><p><strong><code>params</code></strong> ： params是用来指定请求中包含的参数，其中的值是一个<strong>字符串数组</strong>的形式，并且这个还支持简答的表达式</p>
+<ol>
+<li><code>param</code>: 表示请求参数中必须包含<code>param</code>这个参数至于为其赋予的值可以随便，但是必须包含这个字段</li>
+<li><code>param!=value</code>： 表示请求参数中必须包含param这个参数，但是为其赋予的值不能等于value这个值，其他的什么值都是可以的</li>
+<li><code>!param</code> ：表示请求参数中一定不能包含这个param字段，如果包含这个字段，那么将不能映射到这个地址</li>
+<li><code>{“param1”，“param2”}</code>  ：  指定请求参数中必须包含着两个请求参数，至于为其赋什么值随便</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">	 * 请求的参数中必须不能包含name属性，age必须不能等于12，必须包含sex，address必须等于xuzhou</div><div class="line">	 */</div><div class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/testParams"</span>,params=&#123;<span class="string">"!name"</span>,<span class="string">"age!=12"</span>,<span class="string">"sex"</span>,<span class="string">"address=xuzhou"</span>&#125;)</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">testParams</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"testParams"</span>);</div><div class="line">		<span class="keyword">return</span> SUCCESS;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><strong><code>headers</code></strong> : <code>headers</code>和<code>params</code>同样是支持简单的表达式，同样是一个字符串数组，这里一样的是适用于上面的表达式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 请求的参数中必须不能包含name属性，age必须不能等于12，必须包含sex，address必须等于xuzhou</div><div class="line"> * 请求头中的Accept-Language不能等于zh-CN,zh;q=0.8</div><div class="line"> */</div><div class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/testParams"</span>,params=&#123;<span class="string">"!name"</span>,<span class="string">"age!=12"</span>,<span class="string">"sex"</span>,<span class="string">"address=xuzhou"</span>&#125;,headers=&#123;<span class="string">"Accept-Language!=zh-CN,zh;q=0.8"</span>&#125;)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testParams</span><span class="params">()</span></span>&#123;</div><div class="line">	System.out.println(<span class="string">"testParams"</span>);</div><div class="line">	<span class="keyword">return</span> SUCCESS;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="RequestMapping支持Ant风格的通配符"><a href="#RequestMapping支持Ant风格的通配符" class="headerlink" title="RequestMapping支持Ant风格的通配符"></a>RequestMapping支持Ant风格的通配符</h2><ul>
+<li>在学习struts2中的时候也是支持通配符调用的，比如<em>_</em>等。现在springmvc中也是支持通配符风格的，但是只支持Ant风格的，如下：<ul>
+<li><code>？</code>： 表示一个任意的字符 springmvc/testAnt?<code>可以使用</code>springmvc/testAnta`这个地址来访问，其中最后一个a可以替换成任意的字符</li>
+<li><code>*</code> :   表示支持多个任意的字符  <code>/spingmvc/testAnt/*</code> 可以使用<code>springmvc/testAnt/aaaaa</code>这个地址来访问，其中最后一层的路径可以使用任意的字符串替换</li>
+<li><code>**</code> :    匹配多层路径  <code>/springmvc/testAnt/**</code> 可以使用<code>/springmvc/testAnt/user/test</code>这个来访问，当然也可以是多层的路径</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">	 * 这里的* 表示支持任意多个字符，因此这里可以使用:springmvc/testAnt/user这个地址来访问，其中最后一层use可以写成任意的字符串即可</div><div class="line">	 *</div><div class="line">	 */</div><div class="line">	<span class="meta">@RequestMapping</span>(value=<span class="string">"/testAnt/*"</span>,method=RequestMethod.GET)</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">testAnt</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"testAnt"</span>);</div><div class="line">		<span class="keyword">return</span> SUCCESS;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Springmvc之RequestMapping&quot;&gt;&lt;a href=&quot;#Springmvc之RequestMapping&quot; class=&quot;headerlink&quot; title=&quot;Springmvc之RequestMapping&quot;&gt;&lt;/a&gt;Springmvc之Requ
+    
+    </summary>
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/categories/Spring/"/>
+    
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/tags/Spring/"/>
+    
+  </entry>
   
   <entry>
     <title>Springmvc入门</title>
@@ -2621,57 +2683,6 @@ dispatcher.forward(request, response);
     <summary type="html">
     
       &lt;h1 id=&quot;结构型模式之适配器模式&quot;&gt;&lt;a href=&quot;#结构型模式之适配器模式&quot; class=&quot;headerlink&quot; title=&quot;结构型模式之适配器模式&quot;&gt;&lt;/a&gt;结构型模式之适配器模式&lt;/h1&gt;&lt;h2 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;head
-    
-    </summary>
-    
-      <category term="设计模式" scheme="http://chenjiabing666.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-    
-      <category term="设计模式" scheme="http://chenjiabing666.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式之桥接模式</title>
-    <link href="http://chenjiabing666.github.io/2018/04/16/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://chenjiabing666.github.io/2018/04/16/设计模式之桥接模式/</id>
-    <published>2018-04-16T05:55:29.000Z</published>
-    <updated>2018-04-16T05:57:07.300Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="结构型模式之桥接模式"><a href="#结构型模式之桥接模式" class="headerlink" title="结构型模式之桥接模式"></a>结构型模式之桥接模式</h1><ul>
-<li><p>桥接模式是一种很实用的结构型设计模式，如果软件系统中某个类存在两个独立变化的维度，通过该模式可以将这两个维度分离出来，使两者可以独立扩展，让系统更加符合“单一职责原则”。与多层继承方案不同，它将两个独立变化的维度设计为两个独立的继承等级结构，并且在抽象层建立一个抽象关联，该关联关系类似一条连接两个独立继承结构的桥，故名桥接模式。</p>
-</li>
-<li><p>桥接模式用一种巧妙的方式处理多层继承存在的问题，用抽象关联取代了传统的多层继承，将类之间的静态继承关系转换为动态的对象组合关系，使得系统更加灵活，并易于扩展，同时有效控制了系统中类的个数。桥接定义如下：</p>
-</li>
-<li><p>桥接模式(Bridge Pattern)：将抽象部分与它的实现部分分离，使它们都可以独立地变化。它是一种对象结构型模式，又称为柄体(Handle and Body)模式或接口(Interface)模式。</p>
-</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/bridge1.png" alt="桥接模式"></p>
-<ul>
-<li><p>在桥接模式结构图中包含如下几个角色：</p>
-<ul>
-<li>Abstraction（抽象类）：用于定义抽象类的接口，它一般是抽象类而不是接口，其中定义了一个Implementor（实现类接口）类型的对象并可以维护该对象，它与Implementor之间具有关联关系，它既可以包含抽象业务方法，也可以包含具体业务方法。</li>
-<li>RefinedAbstraction（扩充抽象类）：扩充由Abstraction定义的接口，通常情况下它不再是抽象类而是具体类，它实现了在Abstraction中声明的抽象业务方法，在RefinedAbstraction中可以调用在Implementor中定义的业务方法。</li>
-<li>Implementor（实现类接口）：定义实现类的接口，这个接口不一定要与Abstraction的接口完全一致，事实上这两个接口可以完全不同，一般而言，Implementor接口仅提供基本操作，而Abstraction定义的接口可能会做更多更复杂的操作。Implementor接口对这些基本操作进行了声明，而具体实现交给其子类。通过关联关系，在Abstraction中不仅拥有自己的方法，还可以调用到Implementor中定义的方法，使用关联关系来替代继承关系。</li>
-<li>ConcreteImplementor（具体实现类）：具体实现Implementor接口，在不同的ConcreteImplementor中提供基本操作的不同实现，在程序运行时，ConcreteImplementor对象将替换其父类对象，提供给抽象类具体的业务操作方法。</li>
-</ul>
-</li>
-</ul>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p><img src="http://ono60m7tl.bkt.clouddn.com/bridge2.png" alt="实例"></p>
-<ul>
-<li><p>从上面的这个实例我们可以看出，如果使用多层继承的话，那么我们可以定义是三个抽象类（台式机，笔记本，平板电脑），在这个三个抽象类的下面每个都有三个不同品牌的具体实现类，那么总共要有3x3=9个具体的实现类。不仅仅是类的数量多，在扩展性能上也是成倍的增加，如果想要添加一个品牌，那么需要添加三个类，这个是极其浪费的。</p>
-</li>
-<li><p>针对上面的缺点，我们可以使用桥接模式，将电脑分类，品牌分类分成两个维度，如下图：<br><img src="http://ono60m7tl.bkt.clouddn.com/bridge3.png" alt=""></p>
-</li>
-<li><p>其中Computer是一个抽象类，不是接口，其中Brand（品牌）是其中的成员变量，我们就完成了一个电脑具有不同品牌，那么如果我们想添加一个品牌，就只是添加一个具体的实现类即可，就不需要添加三个了。</p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;结构型模式之桥接模式&quot;&gt;&lt;a href=&quot;#结构型模式之桥接模式&quot; class=&quot;headerlink&quot; title=&quot;结构型模式之桥接模式&quot;&gt;&lt;/a&gt;结构型模式之桥接模式&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;桥接模式是一种很实用的结构型设计模式，如果软件系统中某个类
     
     </summary>
     
