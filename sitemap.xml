@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://chenjiabing666.github.io/2018/04/26/Springmvc%E4%B9%8B%E5%90%91JSP%E9%A1%B5%E9%9D%A2%E6%8F%90%E4%BE%9B%E6%95%B0%E6%8D%AE-request%EF%BC%8Csession/</loc>
+    
+    <lastmod>2018-04-26T02:05:13.854Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/04/26/Springmvc%E4%B9%8B%E6%8E%A5%E5%8F%97%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0/</loc>
+    
+    <lastmod>2018-04-26T02:04:24.174Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://chenjiabing666.github.io/2018/04/26/Springmvc%E4%B9%8BRequestMapping/</loc>
     
     <lastmod>2018-04-26T02:01:33.038Z</lastmod>
