@@ -231,7 +231,7 @@
     <link href="http://chenjiabing666.github.io/2018/05/04/Mybatis%E9%85%8D%E7%BD%AE%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8/"/>
     <id>http://chenjiabing666.github.io/2018/05/04/Mybatis配置事务管理器/</id>
     <published>2018-05-04T09:52:03.000Z</published>
-    <updated>2018-05-04T09:52:23.983Z</updated>
+    <updated>2018-05-04T10:00:08.446Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Mybatis配置事务管理器"><a href="#Mybatis配置事务管理器" class="headerlink" title="Mybatis配置事务管理器"></a>Mybatis配置事务管理器</h1><ul>
 <li>数据库中的事务可以保证在连续执行的<strong>多条写操作(增删改)</strong>时，这多条操作要么成功，要么全部失败，以保证数据和逻辑的完整及严谨</li>
@@ -258,8 +258,7 @@
 <li>在<code>service</code>类上添加<code>@Transactional</code>注解，那么类中的整个方法都会被管理</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Service</span>  </div><div class="line"><span class="meta">@Transactional</span>   <span class="comment">//配置事务管理</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">IUserService</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> UserMapper userMapper;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>##　开启组件扫描</p>
-<ul>
+<h2 id="开启组件扫描"><a href="#开启组件扫描" class="headerlink" title="开启组件扫描"></a>开启组件扫描</h2><ul>
 <li>在<code>spring-service.xml</code>中开启组件扫描<code>service</code>即可</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 组件扫描 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"cn.tedu.spring.service"</span> /&gt;</span></div></pre></td></tr></table></figure>
