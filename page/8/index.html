@@ -79,22 +79,16 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/06/15/Java日期格式化/" title="Java日期格式化" itemprop="url">
+    <a href="/2017/09/17/Servlet总结四-过滤器/" title="Servlet总结四(过滤器)" itemprop="url">
   
-    <h1 itemprop="name">Java日期格式化</h1>
+    <h1 itemprop="name">Servlet总结四(过滤器)</h1>
     
      
-           <p itemprop="description" >日期格式化前言
-
-更多文章请看本人博客https://chenjiabing666.github.io/
-版权所有，如需转载请注明来源
-
-
-Date
-Date类表示特定的瞬间精确到毫秒，不过从API可以看出很多的方法已经废弃了，这个类已经在过多使用了，不过还是需要了解一下的，为了</p>
+           <p itemprop="description" >Servlet总结四(过滤器的使用)简介
+在容器调用Servlet的service()的方法钱，Servlet其实并不会知道有请求的到来，而在service()方法执行后，容器真正对浏览器进行HTTP响应之前，浏览器也不知道Servlet真正响应是什么。过滤器(Filter)正如</p>
         
     
-    <time datetime="2017-06-15T04:22:39.000Z" itemprop="datePublished">2017-06-15</time>
+    <time datetime="2017-09-17T13:44:07.000Z" itemprop="datePublished">2017-09-17</time>
   </a>
 </section>
 
@@ -106,22 +100,16 @@ Date类表示特定的瞬间精确到毫秒，不过从API可以看出很多的�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/06/14/Java反射机制/" title="Java反射机制" itemprop="url">
+    <a href="/2017/09/16/Servlet总结三-HttpSession会话管理/" title="Servlet总结三(HttpSession会话管理)" itemprop="url">
   
-    <h1 itemprop="name">Java反射机制</h1>
+    <h1 itemprop="name">Servlet总结三(HttpSession会话管理)</h1>
     
      
-           <p itemprop="description" >Java反射机制前言
-
-网页版的jdk的API
-离线版API
-
-
-什么是反射机制
-反射是java语言的一个特性，它允程序在运行时（注意不是编译的时候）来进行自我检查并且对内部的成员进行操作。例如它允许一个java的类获取他所有的成员变量和方法并且显示出来。这个能特定我们不常看到，</p>
+           <p itemprop="description" >Servlet总结三(HttpSession会话管理)简介
+HttpSession是提供一种方式，跨多个页面请求或对 Web 站点的多次访问标识用户并存储有关该用户的信息。简单的来说就是能够实现全局的共享数据，可以跨多个页面请求，当然在Servlet中可以在同一个项目中的不同的S</p>
         
     
-    <time datetime="2017-06-14T07:53:54.000Z" itemprop="datePublished">2017-06-14</time>
+    <time datetime="2017-09-15T16:12:10.000Z" itemprop="datePublished">2017-09-16</time>
   </a>
 </section>
 
@@ -133,25 +121,19 @@ Date类表示特定的瞬间精确到毫秒，不过从API可以看出很多的�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/26/Java-IO学习笔记总结/" title="Java IO学习笔记总结" itemprop="url">
+    <a href="/2017/09/15/Servlet总结二(文件路径获取)/" title="Servlet总结二(文件路径获取）" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记总结</h1>
+    <h1 itemprop="name">Servlet总结二(文件路径获取）</h1>
     
      
-           <p itemprop="description" >Java IO学习笔记总结前言
-前面的八篇文章详细的讲述了Java IO的操作方法，文章列表如下
+           <p itemprop="description" >Servlet总结二（文件路径）前言
+前面我们说过ServletContext表示的是web容器中的上下文，下面我们也是用到ServletContext中的方法读取文件
 
-基本的文件操作
-字符流和字节流的操作
-InputStreamReader和OutputStreamWriter操作
-内存操作流
-管道流
-打印流
-System对IO的支持
-Buffe</p>
+读取WebRoot文件下的文件
+我们知道当我们将项目部署到Tomcat服务器中时，项目中的文件路径其实就是在</p>
         
     
-    <time datetime="2017-05-26T00:09:27.000Z" itemprop="datePublished">2017-05-26</time>
+    <time datetime="2017-09-15T08:25:28.000Z" itemprop="datePublished">2017-09-15</time>
   </a>
 </section>
 
@@ -163,22 +145,18 @@ Buffe</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/26/Java-IO学习笔记八/" title="Java IO学习笔记八" itemprop="url">
+    <a href="/2017/09/14/Eclipse配置Tomcat/" title="Eclipse配置Tomcat" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记八</h1>
+    <h1 itemprop="name">Eclipse配置Tomcat</h1>
     
      
-           <p itemprop="description" >BufferedReader和BufferedWriter
+           <p itemprop="description" >Eclipse配置tomcatEclipse创建server
 
-这两个类是高效率的提高文件的读取速度，它们为字符输入和输出提供了一个缓冲区，可以显著的调高写入和读取的速度，特别针对大量的磁盘文件读取的时候,下面着重的讲讲这两个类
-
-
-BufferedReader
-
-从字符输入流中读</p>
+首先下载eclipse for javaEE developer 
+打开控制台，然后到server后右击空白处-&amp;gt;New-&amp;gt;Server-&amp;gt;Apach-&amp;gt;Tomact 7.0 -&amp;gt;Nex</p>
         
     
-    <time datetime="2017-05-25T23:37:55.000Z" itemprop="datePublished">2017-05-26</time>
+    <time datetime="2017-09-14T14:28:10.000Z" itemprop="datePublished">2017-09-14</time>
   </a>
 </section>
 
@@ -190,22 +168,22 @@ BufferedReader
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/26/Java-IO学习笔记七/" title="Java IO学习笔记七" itemprop="url">
+    <a href="/2017/09/14/Servlet总结一/" title="Servlet总结一" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记七</h1>
+    <h1 itemprop="name">Servlet总结一</h1>
     
      
-           <p itemprop="description" >System对IO的支持
+           <p itemprop="description" >Servlet总结一HttpServlet
+想要实现一个servlet必须继承这个类，其实一个servlet就是一个java文件，但是这个类必须是继承HttpServlet。
 
-System是系统的类，其中的方法都是在控制台的输入和输出，但是通过重定向也是可以对文件的输入输出
-System中定义了标准输入、标准输出和错误输出流，定义如下:
+生命周期
+servlet的生命周期是从创建到毁灭的一个过程，具体的过程如下：
 
 
-static PrintStream err “标准”错误输出流。
-static I</p>
+Servlet 通过</p>
         
     
-    <time datetime="2017-05-25T23:37:47.000Z" itemprop="datePublished">2017-05-26</time>
+    <time datetime="2017-09-14T14:24:50.000Z" itemprop="datePublished">2017-09-14</time>
   </a>
 </section>
 
@@ -217,17 +195,19 @@ static I</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/25/Java-IO学习笔记六/" title="Java IO学习笔记六" itemprop="url">
+    <a href="/2017/09/03/多线程的使用/" title="多线程的使用" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记六</h1>
+    <h1 itemprop="name">多线程的使用</h1>
     
      
-           <p itemprop="description" >打印流
+           <p itemprop="description" >多线程前言
+我看了不止一个人说多线程是鸡肋，但是就依照我个人觉得多线程在一些小型的爬虫中还是可以显著的提高速度的，相比多进程来说应该还是挺简单的
 
-在整个IO包中，打印流是输出信息最方便的类，主要包含字节打印流（PrintStream）和字符打印流（PrintWrite）。打印流提供了非常方便的打印功能，可以打印任何的数据类型，例如：小数、整数、字符串等等，相对于前面学习的几个文件的操作来说，这里的打印流是最简便的</p>
+使用多线程继承threading.Thread
+继承threading.Thread模块是一个很好的一个选择，就像java中也是可以</p>
         
     
-    <time datetime="2017-05-25T07:33:09.000Z" itemprop="datePublished">2017-05-25</time>
+    <time datetime="2017-09-03T06:30:25.000Z" itemprop="datePublished">2017-09-03</time>
   </a>
 </section>
 
@@ -239,17 +219,16 @@ static I</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/25/Java-IO学习笔记五/" title="Java IO学习笔记五" itemprop="url">
+    <a href="/2017/09/02/os模块中常用的的方法/" title="os模块中常用的的方法" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记五</h1>
+    <h1 itemprop="name">os模块中常用的的方法</h1>
     
      
-           <p itemprop="description" >管道流
-
-管道流的主要作用是可以进行两个线程间的通讯，分为管道输出流(PipedOutputStream)、管道输入流（PipedInputStream），如果想要进行管道输出，则必须要把输出流连在输入流之上，在PipedOutputStream类上有如下的一个方法用于连接管道：</p>
+           <p itemprop="description" >os模块中常用的方法常用的方法
+os.getcwd()   获取当前的路径os.listdir(path)  获取path路径下的全部文件和文件夹，就是显示全部的文件的作用os.mkdir(path)   创建一个文件夹os.rmdir(path)   删除一个文件夹os.rem</p>
         
     
-    <time datetime="2017-05-25T07:33:00.000Z" itemprop="datePublished">2017-05-25</time>
+    <time datetime="2017-09-01T23:37:27.000Z" itemprop="datePublished">2017-09-02</time>
   </a>
 </section>
 
@@ -261,16 +240,26 @@ static I</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/25/Java-IO学习笔记四/" title="Java IO学习笔记四" itemprop="url">
+    <a href="/2017/07/09/python操作MongoDB/" title="python操作MongoDB" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记四</h1>
+    <h1 itemprop="name">python操作MongoDB</h1>
     
      
-           <p itemprop="description" >内存操作流
-之前的所有的流操作都是针对文件的，但是有时候只是想要实现数据间转换，此时如果我们想要创建一个文件然后再删除文件，那样显得有点麻烦，因此此时的内存操作流就显得很适合这类的操作，因为它只是在内存中存储，并不会真正的创建文件，内存操作流涉及的两个类是ByteArrayInp</p>
+           <p itemprop="description" >python操作MongoDB前言
+下面推荐本人写的MongoDB的基本操作博文，介绍的还是比较详细的，喜欢的朋友可以去看看
+
+
+MongoDB干货篇之安装
+MongoDB干货篇之查询数据
+MongoDB干货篇之更新数据
+
+
+
+综合应用
+下面是自己写的一个简单的操作，分别对应了增</p>
         
     
-    <time datetime="2017-05-25T07:32:49.000Z" itemprop="datePublished">2017-05-25</time>
+    <time datetime="2017-07-09T04:40:33.000Z" itemprop="datePublished">2017-07-09</time>
   </a>
 </section>
 
@@ -282,21 +271,25 @@ static I</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/24/Java-IO学习笔记三/" title="Java IO学习笔记三" itemprop="url">
+    <a href="/2017/07/01/Numpy指南/" title="Numpy指南" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记三</h1>
+    <h1 itemprop="name">Numpy指南</h1>
     
      
-           <p itemprop="description" >Java IO学习笔记三
+           <p itemprop="description" >numpy指南
+numpy是一个能够处理多维数组的库，虽然python中也内置了处理数组的库，但是这个并不能满足大数据时代的需求，因此产生了可以处理多维数组的numpy
 
-在整个IO包中，实际上就是分为字节流和字符流，但是除了这两个流之外，还存在了一组字节流-字符流的转换类。
+安装
 
-OutputStreamWriter：是Writer的子类，将输出的字符流变为字节流，即：将一个字符流的输出对象变成字节流的输出对象。
+pip install numpy
 
-Inp</p>
+
+创建array
+
+array函数是一个最基本的创建方式，其中</p>
         
     
-    <time datetime="2017-05-24T06:48:34.000Z" itemprop="datePublished">2017-05-24</time>
+    <time datetime="2017-07-01T05:29:21.000Z" itemprop="datePublished">2017-07-01</time>
   </a>
 </section>
 
@@ -308,23 +301,17 @@ Inp</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/24/Java-IO学习笔记二/" title="Java IO学习笔记二" itemprop="url">
+    <a href="/2017/06/22/Lock/" title="Lock" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记二</h1>
+    <h1 itemprop="name">Lock</h1>
     
      
-           <p itemprop="description" >Java IO学习笔记二流的概念
-
-在程序中所有的数据都是以流的方式进行传输或保存的，程序需要数据的时候要使用输入流读取数据，而当程序需要将一些数据保存起来的时候，就要使用输出流完成。
-程序中的输入输出都是以流的形式保存的，流中保存的实际上全都是字节文件。
-
-
-字节流和字符流
-
-</p>
+           <p itemprop="description" >Lock
+在上一篇文章中我们讲到了如何使用关键字synchronized来实现同步访问。本文我们继续来探讨这个问题，从Java 5之后，在java.util.concurrent.locks包下提供了另外一种方式来实现同步访问，那就是Lock。
+也许有朋友会问，既然都可以通过sy</p>
         
     
-    <time datetime="2017-05-24T06:46:06.000Z" itemprop="datePublished">2017-05-24</time>
+    <time datetime="2017-06-22T07:53:32.000Z" itemprop="datePublished">2017-06-22</time>
   </a>
 </section>
 
@@ -335,7 +322,7 @@ Inp</p>
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/7/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/9/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/9/">Next<span></span></a>
   </nav>
 
 </div>
@@ -349,6 +336,10 @@ Inp</p>
 <div class="categorieslist">
 	<p class="asidetitle">分类</p>
 		<ul>
+		
+		  
+			<li><a href="/categories/Ajax/" title="Ajax">Ajax<sup>2</sup></a></li>
+		  
 		
 		  
 			<li><a href="/categories/BootStrap学习/" title="BootStrap学习">BootStrap学习<sup>1</sup></a></li>
@@ -375,6 +366,10 @@ Inp</p>
 		  
 		
 		  
+			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>6</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/Scrapy学习/" title="Scrapy学习">Scrapy学习<sup>10</sup></a></li>
 		  
 		
@@ -383,7 +378,7 @@ Inp</p>
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>8</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>11</sup></a></li>
 		  
 		
 		  
@@ -407,6 +402,10 @@ Inp</p>
 		  
 		
 		  
+			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>2</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 		  
 		
@@ -421,6 +420,10 @@ Inp</p>
 		
 			
 				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>11</sup></a></li>
 			
 		
 			
@@ -440,11 +443,11 @@ Inp</p>
 			
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>8</sup></a></li>
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>6</sup></a></li>
 			
 		
 			
@@ -464,6 +467,10 @@ Inp</p>
 			
 		
 			
+				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
 			
 		
@@ -476,10 +483,6 @@ Inp</p>
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
 			
 		
@@ -488,15 +491,11 @@ Inp</p>
 			
 		
 			
-				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>2</sup></a></li>
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>2</sup></a></li>
 			
 		
 		</ul>

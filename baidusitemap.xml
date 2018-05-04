@@ -4,6 +4,301 @@
 
     
   <url>
+    <loc>http://chenjiabing666.github.io/2018/05/04/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2018-05-04T09:55:44.548Z</lastmod>
+    <data>
+        <display>
+        <title>快速排序算法</title>
+        <pubTime>2018-05-04T09:55:26.000Z</pubTime>
+        
+        <tag>数据结构与算法</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据结构与算法" url="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/05/04/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2018-05-04T09:55:04.938Z</lastmod>
+    <data>
+        <display>
+        <title>冒泡排序算法</title>
+        <pubTime>2018-05-04T09:54:34.000Z</pubTime>
+        
+        <tag>数据结构与算法</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据结构与算法" url="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/05/04/JSON/</loc>
+    <lastmod>2018-05-04T09:54:05.554Z</lastmod>
+    <data>
+        <display>
+        <title>JSON</title>
+        <pubTime>2018-05-04T09:53:41.000Z</pubTime>
+        
+        <tag>Ajax</tag>
+         
+         
+           
+             
+              <breadCrumb title="Ajax" url="http://chenjiabing666.github.io/categories/Ajax/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/05/04/javascript%E5%AE%9E%E7%8E%B0Ajax/</loc>
+    <lastmod>2018-05-04T09:53:23.760Z</lastmod>
+    <data>
+        <display>
+        <title>javascript实现Ajax</title>
+        <pubTime>2018-05-04T09:52:53.000Z</pubTime>
+        
+        <tag>Ajax</tag>
+         
+         
+           
+             
+              <breadCrumb title="Ajax" url="http://chenjiabing666.github.io/categories/Ajax/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/05/04/Mybatis%E9%85%8D%E7%BD%AE%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8/</loc>
+    <lastmod>2018-05-04T09:52:23.983Z</lastmod>
+    <data>
+        <display>
+        <title>Mybatis配置事务管理器</title>
+        <pubTime>2018-05-04T09:52:03.000Z</pubTime>
+        
+        <tag>MyBatis</tag>
+         
+         
+           
+             
+              <breadCrumb title="MyBatis" url="http://chenjiabing666.github.io/categories/MyBatis/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/05/04/Mybatis%E4%B9%8B%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/</loc>
+    <lastmod>2018-05-04T09:51:35.550Z</lastmod>
+    <data>
+        <display>
+        <title>Mybatis之多表查询</title>
+        <pubTime>2018-05-04T09:51:10.000Z</pubTime>
+        
+        <tag>MyBatis</tag>
+         
+         
+           
+             
+              <breadCrumb title="MyBatis" url="http://chenjiabing666.github.io/categories/MyBatis/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/05/04/Mybatis%E4%B9%8BResultMap/</loc>
+    <lastmod>2018-05-04T09:50:47.711Z</lastmod>
+    <data>
+        <display>
+        <title>Mybatis之ResultMap</title>
+        <pubTime>2018-05-04T09:49:51.000Z</pubTime>
+        
+        <tag>MyBatis</tag>
+         
+         
+           
+             
+              <breadCrumb title="MyBatis" url="http://chenjiabing666.github.io/categories/MyBatis/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/05/04/%E5%8A%A8%E6%80%81sql/</loc>
+    <lastmod>2018-05-04T09:49:30.494Z</lastmod>
+    <data>
+        <display>
+        <title>MyBatis之动态sql</title>
+        <pubTime>2018-05-04T09:48:53.000Z</pubTime>
+        
+        <tag>MyBatis</tag>
+         
+         
+           
+             
+              <breadCrumb title="MyBatis" url="http://chenjiabing666.github.io/categories/MyBatis/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/05/04/Mybatis%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</loc>
+    <lastmod>2018-05-04T09:48:33.915Z</lastmod>
+    <data>
+        <display>
+        <title>Mybatis的增删改查</title>
+        <pubTime>2018-05-04T09:48:14.000Z</pubTime>
+        
+        <tag>MyBatis</tag>
+         
+         
+           
+             
+              <breadCrumb title="MyBatis" url="http://chenjiabing666.github.io/categories/MyBatis/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/05/04/MyBatis%E5%85%A5%E9%97%A8%E7%A8%8B%E5%BA%8F/</loc>
+    <lastmod>2018-05-04T09:48:00.623Z</lastmod>
+    <data>
+        <display>
+        <title>MyBatis入门程序</title>
+        <pubTime>2018-05-04T09:47:40.000Z</pubTime>
+        
+        <tag>MyBatis</tag>
+         
+         
+           
+             
+              <breadCrumb title="MyBatis" url="http://chenjiabing666.github.io/categories/MyBatis/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/05/04/Springmvc%E5%93%8D%E5%BA%94Ajax%E8%AF%B7%E6%B1%82-ResponseBody/</loc>
+    <lastmod>2018-05-04T09:47:15.325Z</lastmod>
+    <data>
+        <display>
+        <title>Springmvc响应Ajax请求(@ResponseBody)</title>
+        <pubTime>2018-05-04T09:46:35.000Z</pubTime>
+        
+        <tag>Spring</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring" url="http://chenjiabing666.github.io/categories/Spring/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/05/04/Spring%E9%85%8D%E7%BD%AEDBCP%E8%BF%9E%E6%8E%A5%E6%B1%A0/</loc>
+    <lastmod>2018-05-04T09:46:12.458Z</lastmod>
+    <data>
+        <display>
+        <title>Spring配置DBCP连接池</title>
+        <pubTime>2018-05-04T09:45:53.000Z</pubTime>
+        
+        <tag>Spring</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring" url="http://chenjiabing666.github.io/categories/Spring/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/05/04/Springmvc%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8/</loc>
+    <lastmod>2018-05-04T09:45:33.599Z</lastmod>
+    <data>
+        <display>
+        <title>Springmvc处理异常</title>
+        <pubTime>2018-05-04T09:44:41.000Z</pubTime>
+        
+        <tag>Spring</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring" url="http://chenjiabing666.github.io/categories/Spring/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/05/04/MVC%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8/</loc>
+    <lastmod>2018-05-04T09:42:42.928Z</lastmod>
+    <data>
+        <display>
+        <title>MVC处理异常</title>
+        <pubTime>2018-05-04T09:42:42.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2017/06/20/synchronized/</loc>
+    <lastmod>2018-05-04T00:53:49.370Z</lastmod>
+    <data>
+        <display>
+        <title>synchronized</title>
+        <pubTime>2017-06-20T04:18:29.000Z</pubTime>
+        
+        <tag>java并发编程</tag>
+         
+         
+           
+             
+              <breadCrumb title="java学习" url="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://chenjiabing666.github.io/2018/04/26/Springmvc%E4%B9%8B%E5%90%91JSP%E9%A1%B5%E9%9D%A2%E6%8F%90%E4%BE%9B%E6%95%B0%E6%8D%AE-request%EF%BC%8Csession/</loc>
     <lastmod>2018-04-26T02:05:13.854Z</lastmod>
     <data>
@@ -1393,26 +1688,6 @@
         <pubTime>2017-05-26T00:09:27.000Z</pubTime>
         
         <tag>java IO编程</tag>
-         
-         
-           
-             
-              <breadCrumb title="java学习" url="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://chenjiabing666.github.io/2017/06/20/synchronized/</loc>
-    <lastmod>2017-06-20T04:22:54.372Z</lastmod>
-    <data>
-        <display>
-        <title>synchronized</title>
-        <pubTime>2017-06-20T04:18:29.000Z</pubTime>
-        
-        <tag>java并发编程</tag>
          
          
            
