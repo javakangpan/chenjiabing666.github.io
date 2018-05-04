@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-05-04T10:05:33.917Z</updated>
+  <updated>2018-05-04T10:08:45.965Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://chenjiabing666.github.io/2018/05/04/Mybatis%E4%B9%8B%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/"/>
     <id>http://chenjiabing666.github.io/2018/05/04/Mybatis之增删改查/</id>
     <published>2018-05-04T10:04:29.000Z</published>
-    <updated>2018-05-04T10:05:33.917Z</updated>
+    <updated>2018-05-04T10:08:45.965Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Mybatis的增删改查"><a href="#Mybatis的增删改查" class="headerlink" title="Mybatis的增删改查"></a>Mybatis的增删改查</h1><h2 id="增加数据-lt-insert-gt"><a href="#增加数据-lt-insert-gt" class="headerlink" title="增加数据&lt;insert&gt;"></a>增加数据<code>&lt;insert&gt;</code></h2><ul>
+    <content type="html"><![CDATA[<h1 id="Mybatis的增删改查"><a href="#Mybatis的增删改查" class="headerlink" title="Mybatis的增删改查"></a>Mybatis的增删改查</h1><h2 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据"></a>增加数据</h2><ul>
 <li>在增加数据的时候，mybatis默认返回的是受影响的行数，因此不需要指定<code>ResultType</code>指定返回类型</li>
 <li>在<code>UserMapper.java</code>接口中添加方法</li>
 </ul>
@@ -53,7 +53,7 @@
 <li><strong>此时的<code>mybatis</code>执行<code>insert</code>方法之后，即是调用<code>reg(user)</code>，返回的还是<code>受影响的行数</code>，并不是此时的自增主键<code>id</code>的值。而是在调用这个方法的时候将<code>id</code>封装到指定的<code>方法参数</code>中，即是封装到<code>user</code>中了，因此只有调用者才可以获取<code>id</code>，而持久层无法获取</strong></li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testReg</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">//加载Spring的配置文件</span></div><div class="line">	AbstractApplicationContext ac</div><div class="line">		= <span class="keyword">new</span> ClassPathXmlApplicationContext(</div><div class="line">			<span class="string">"spring-mvc.xml"</span>,</div><div class="line">			<span class="string">"spring-dao.xml"</span>);</div><div class="line">	</div><div class="line">	<span class="comment">//获取UserMapper的bean，这个是spring通过扫描mapper.xml文件自动为mybatis自动创建的，首字母小写</span></div><div class="line">	UserMapper userMapper</div><div class="line">		= ac.getBean(</div><div class="line">			<span class="string">"userMapper"</span>, UserMapper.class);</div><div class="line">	</div><div class="line">	<span class="comment">//新建User对象，此时并没有设置id的值</span></div><div class="line">	User user = <span class="keyword">new</span> User();</div><div class="line">	user.setUsername(<span class="string">"Tom1"</span>);</div><div class="line">	user.setPassword(<span class="string">"123456"</span>);</div><div class="line">	</div><div class="line">	<span class="comment">//调用reg(user)，进行添加，返回的是受影响的行数，但是此时已经将id封装到参数User对象中了</span></div><div class="line">	Integer affectedRows</div><div class="line">		= userMapper.reg(user);</div><div class="line">	</div><div class="line">	System.out.println(</div><div class="line">		<span class="string">"affectedRows="</span> + affectedRows);</div><div class="line">	<span class="comment">//直接获取Uesr对象中的id值，这个是自增主键返回的值</span></div><div class="line">	System.out.println(<span class="string">"id = "</span>+user.getId());</div><div class="line">	ac.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="删除数据-lt-delete-gt"><a href="#删除数据-lt-delete-gt" class="headerlink" title="删除数据&lt;delete&gt;"></a>删除数据<code>&lt;delete&gt;</code></h2><ul>
+<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><ul>
 <li><strong>在删除数据的时候，自动会返回受影响的行数，不需要在<code>delete</code>节点中定义返回类型，只有在查询数据的时候才会定义返回类型</strong></li>
 </ul>
 <ul>
@@ -81,7 +81,7 @@
 </li>
 <li><code>mybaits</code>在处理过程中，本质上是使用了<code>Map</code>对参数进行了封装的。即是<code>@Param(&quot;&quot;)</code>注解中给出的参数值是<code>Map</code>中的<code>key</code>，调用方法时给出的参数值是Map中的<code>value</code>值，而最终在<code>XML</code>文件中使用<code>#{}</code>获取值，其实是使用Map中的<code>get(key)</code>方法获取的</li>
 </ul>
-<h2 id="修改数据-lt-update-gt"><a href="#修改数据-lt-update-gt" class="headerlink" title="修改数据&lt;update&gt;"></a>修改数据<code>&lt;update&gt;</code></h2><ul>
+<h2 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h2><ul>
 <li><p><strong>在修改数据的时候，mybatis自动返回受影响的行数，因此我们不需要定义返回类型，默认的返回数据就是受影响的行数</strong></p>
 </li>
 <li><p>在<code>UserMapper.java</code>接口中定义根据<code>id</code>修改数据的方法</p>
@@ -125,7 +125,7 @@
 <ul>
 <li>那么在<code>Controller</code>中如果要调用这个<code>ChangePasssword</code>将会通过处理异常来判断哪里是出错了，并给出友好的提示</li>
 </ul>
-<h2 id="查询数据-lt-select-gt"><a href="#查询数据-lt-select-gt" class="headerlink" title="查询数据&lt;select&gt;"></a>查询数据<code>&lt;select&gt;</code></h2><h3 id="单条数据的查询"><a href="#单条数据的查询" class="headerlink" title="单条数据的查询"></a>单条数据的查询</h3><ul>
+<h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><h3 id="单条数据的查询"><a href="#单条数据的查询" class="headerlink" title="单条数据的查询"></a>单条数据的查询</h3><ul>
 <li>根据<code>id</code>的查询返回的查询结果就是单条数据，比如：<code>select * from user where id=1</code></li>
 <li><strong>单条记录的查询在编写<code>接口方法</code>的时候，只需要返回一个<code>实体类对象</code>即可</strong></li>
 </ul>
@@ -166,7 +166,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Mybatis的增删改查&quot;&gt;&lt;a href=&quot;#Mybatis的增删改查&quot; class=&quot;headerlink&quot; title=&quot;Mybatis的增删改查&quot;&gt;&lt;/a&gt;Mybatis的增删改查&lt;/h1&gt;&lt;h2 id=&quot;增加数据-lt-insert-gt&quot;&gt;&lt;a hre
+      &lt;h1 id=&quot;Mybatis的增删改查&quot;&gt;&lt;a href=&quot;#Mybatis的增删改查&quot; class=&quot;headerlink&quot; title=&quot;Mybatis的增删改查&quot;&gt;&lt;/a&gt;Mybatis的增删改查&lt;/h1&gt;&lt;h2 id=&quot;增加数据&quot;&gt;&lt;a href=&quot;#增加数据&quot; cla
     
     </summary>
     
@@ -182,15 +182,14 @@
     <link href="http://chenjiabing666.github.io/2018/05/04/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
     <id>http://chenjiabing666.github.io/2018/05/04/快速排序算法/</id>
     <published>2018-05-04T09:55:26.000Z</published>
-    <updated>2018-05-04T09:55:44.548Z</updated>
+    <updated>2018-05-04T10:07:37.394Z</updated>
     
     <content type="html"><![CDATA[<h1 id="快速排序算法"><a href="#快速排序算法" class="headerlink" title="快速排序算法"></a>快速排序算法</h1><h2 id="思想-从小到大排序"><a href="#思想-从小到大排序" class="headerlink" title="思想(从小到大排序)"></a>思想(从小到大排序)</h2><ul>
 <li>快速排序是使用<code>分治法</code>来完成的</li>
 <li>基本思想就是先从其中选取一个<code>基准值</code>，然后从数组的两端开始移动查找，在<code>右边</code>移动查找到比<code>基准值</code>小的数据停止移动，此时在<code>左边</code>查找到比<code>基准值</code>大的数据也停止查找，<code>交换</code>这两个查找到的数据，交换完成之后两端继续移动查找，如果左边找到比基准值大的，右边找到比基准值小的数据，再次交换。直到查找到同一个数据上(相遇)或者”擦肩而过”。那么将<code>基准值</code>与<code>相遇的那个值</code>交换，此时就能够保证在基准值左边的都是比基准值小的，在其右边的都是比其大的数，此时一轮查找结束。接下来这个基准值将一个数组分成了<code>两半</code>，左边的是小的，右边是大的，那么我们再分别对左边和右边的数据进行相同的操作，直至不可拆分成新的子序列为止。</li>
 <li>快速排序的最坏运行时间是<code>O(n2)</code>，但期望的运行时间是<code>O(nlgn)</code>。</li>
 </ul>
-<p>##选取数组的第一个数为基准值</p>
-<ul>
+<h2 id="选取数组的第一个数为基准值"><a href="#选取数组的第一个数为基准值" class="headerlink" title="选取数组的第一个数为基准值"></a>选取数组的第一个数为基准值</h2><ul>
 <li>我们选取数组的<code>第一个元素</code>作为基准值</li>
 <li>此时先从数组的最右边开始查找，如果找到比基准值小的停止查找，再从最左边开始查找，直至找到比基准值大的，那么两边就交换，交换完成之后，最右边再次开始查找，找到就等待左边找到数交换，直至双方相遇。那么把相遇的那个点的数据和基准值交换即可，那么现在在基准值左边的都是小的，在右边的都是大的，此时的基准值将数组分成了两个子序列，再对子序列进行重复的操作，直到不可拆分成子序列。</li>
 </ul>
