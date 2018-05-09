@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-05-09T00:48:09.006Z</updated>
+  <updated>2018-05-09T07:04:05.984Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://chenjiabing666.github.io/2018/05/09/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E4%B9%8B%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C/"/>
     <id>http://chenjiabing666.github.io/2018/05/09/用户管理模块之用户注册/</id>
     <published>2018-05-09T00:47:43.000Z</published>
-    <updated>2018-05-09T00:48:09.006Z</updated>
+    <updated>2018-05-09T07:04:05.984Z</updated>
     
     <content type="html"><![CDATA[<h1 id="用户管理模块之用户注册"><a href="#用户管理模块之用户注册" class="headerlink" title="用户管理模块之用户注册"></a>用户管理模块之用户注册</h1><h2 id="实现的功能"><a href="#实现的功能" class="headerlink" title="实现的功能"></a>实现的功能</h2><ul>
 <li>注册<ul>
@@ -180,10 +180,11 @@
 <li>新建的异常类最好继承<code>Exception</code>，那么在调用带有抛出异常的信息的service方法会在编辑提示捕捉或者抛出，便于提示开发者完成相应的逻辑</li>
 <li><strong>数据库表中的字段是以<code>下划线</code>形式定义的，比如<code>created_user</code>,但是java中的实体类定义的字段的形式是<code>驼峰式</code>的，比如<code>createdUser</code>，那么这样的话，表中的字段和实体类类的属性就不是一一对应了，因此在查询数据的时候，需要对返回结果起和实体类字段一样的别名，否则将不能成功赋值</strong></li>
 <li>在写<code>XXMapper.xml</code>文件的时候,<code>select</code>节点是一定要有返回值类型的<code>resultType</code>或者<code>resultMap</code>的，即使是基本类型</li>
-<li><p>在<code>service</code>中，如果逻辑比较简单，比如验证邮箱，验证号码等，那么不需要抛出异常，只需要定义返回值提示<code>Controller层</code>即可</p>
-<p>​</p>
-</li>
+<li>在<code>service</code>中，如果逻辑比较简单，比如验证邮箱，验证号码等，那么不需要抛出异常，只需要定义返回值提示<code>Controller层</code>即可</li>
 </ol>
+<ul>
+<li>我的博客即将搬运同步至腾讯云+社区，邀请大家一同入驻：<a href="https://cloud.tencent.com/developer/support-plan?invite_code=35idjy1iqdk4g" target="_blank" rel="external">https://cloud.tencent.com/developer/support-plan?invite_code=35idjy1iqdk4g</a></li>
+</ul>
 ]]></content>
     
     <summary type="html">
