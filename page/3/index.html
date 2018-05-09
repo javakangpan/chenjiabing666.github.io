@@ -79,6 +79,207 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2018/05/04/Springmvc处理异常/" title="Springmvc处理异常" itemprop="url">
+  
+    <h1 itemprop="name">Springmvc处理异常</h1>
+    
+     
+           <p itemprop="description" >Spring MVC处理异常关于异常
+异常的体系结构：
+
+12345678910111213Throwable		Error			OutOfMemoryError（OOM）		Exception			RuntimeException				NullPointerException</p>
+        
+    
+    <time datetime="2018-05-04T09:44:41.000Z" itemprop="datePublished">2018-05-04</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/05/04/MVC处理异常/" title="MVC处理异常" itemprop="url">
+  
+    <h1 itemprop="name">MVC处理异常</h1>
+    
+     
+           <p itemprop="description" ></p>
+        
+    
+    <time datetime="2018-05-04T09:42:42.000Z" itemprop="datePublished">2018-05-04</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/26/Springmvc之向JSP页面提供数据-request，session/" title="Springmvc之向JSP页面提供数据(request，session)" itemprop="url">
+  
+    <h1 itemprop="name">Springmvc之向JSP页面提供数据(request，session)</h1>
+    
+     
+           <p itemprop="description" >Springmvc之向JSP页面提供数据(request，session)准备
+Springmvc默认就是转发,因此可以在request域中共享数据
+
+表单提交，注册
+
+
+123456&amp;lt;form action=&quot;&amp;lt;%=request.getContextPath()%</p>
+        
+    
+    <time datetime="2018-04-26T02:04:43.000Z" itemprop="datePublished">2018-04-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/26/Springmvc之接受请求参数/" title="Springmvc之接受请求参数" itemprop="url">
+  
+    <h1 itemprop="name">Springmvc之接受请求参数</h1>
+    
+     
+           <p itemprop="description" >Springmvc之接受请求参数准备工作
+新建一个表单提交
+请求地址： http://localhost:8080/ProjectName/user/login.do
+
+
+
+123456&amp;lt;form action=&quot;&amp;lt;%=request.getContextPath()</p>
+        
+    
+    <time datetime="2018-04-26T02:03:59.000Z" itemprop="datePublished">2018-04-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/26/Springmvc之RequestMapping/" title="Springmvc之RequestMapping" itemprop="url">
+  
+    <h1 itemprop="name">Springmvc之RequestMapping</h1>
+    
+     
+           <p itemprop="description" >Springmvc之RequestMappingRequestMapping
+标记客户的请求与哪一个类和方法对应
+
+使用@RequestMapping同时对类和方法进行注解，相当于最终将这两处的注解路径拼接起来，比如类上使用@RequestMapping(&amp;quot;/user&amp;</p>
+        
+    
+    <time datetime="2018-04-26T02:00:43.000Z" itemprop="datePublished">2018-04-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/24/Springmvc入门/" title="Springmvc入门" itemprop="url">
+  
+    <h1 itemprop="name">Springmvc入门</h1>
+    
+     
+           <p itemprop="description" >Springmvc入门作用
+解决V(View)和C(Controller)的交互问题,即解决了Controller如果接收了用户的请求，并将结果响应给用户的问题
+
+springmvc约定了一套处理用户请求的流程
+
+
+Springmvc的核心组件
+DispatcherServlet</p>
+        
+    
+    <time datetime="2018-04-24T03:14:16.000Z" itemprop="datePublished">2018-04-24</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/24/Spring注解的使用和组件扫描/" title="Spring注解的使用和组件扫描" itemprop="url">
+  
+    <h1 itemprop="name">Spring注解的使用和组件扫描</h1>
+    
+     
+           <p itemprop="description" >Spring注解的使用和组件扫描【非常重要】 组件扫描(Component-Scan)
+通过配置组件扫描，可以使得spring自动扫描package，而不必在spring的配置文件中逐一声明各个&amp;lt;bean&amp;gt;
+
+在配置组件扫描时，指定的包是“根包”，即例如指定了cn.t</p>
+        
+    
+    <time datetime="2018-04-24T03:13:38.000Z" itemprop="datePublished">2018-04-24</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/24/Spring表达式和自动装配/" title="Spring表达式和自动装配" itemprop="url">
+  
+    <h1 itemprop="name">Spring表达式和自动装配</h1>
+    
+     
+           <p itemprop="description" >Spring表达式和自动装配【重要】spring表达式作用
+通过spring表达式可以在配置Y节点时，如果Y的某些属性需要注入值，可以是已经配置的好的X类的节点中的值
+
+直接使用#{id.属性名}
+
+
+前提
+必须为每个属性都要设置set方法
+
+实现
+新建两个类
+
+Message
+</p>
+        
+    
+    <time datetime="2018-04-24T03:12:59.000Z" itemprop="datePublished">2018-04-24</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2018/04/24/Spring依赖注入/" title="Spring依赖注入" itemprop="url">
   
     <h1 itemprop="name">Spring依赖注入</h1>
@@ -126,200 +327,6 @@ Spring + springMVC + mybatis
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/24/Servlet和JSP总结/" title="Servlet和JSP总结" itemprop="url">
-  
-    <h1 itemprop="name">Servlet和JSP总结</h1>
-    
-     
-           <p itemprop="description" >Servlet和JSP总结B/S和C/S
-BS: Browser Server 浏览器和服务器
-特点： 跨平台，功能升级比较方便，加载数据慢，用户体验稍差
-
-
-
-
-CS： Client Server 客户端和服务器
-
-特点： 功能升级  需要下载新版本客户端，用户交互界面炫酷，体</p>
-        
-    
-    <time datetime="2018-04-24T03:09:29.000Z" itemprop="datePublished">2018-04-24</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/24/Hibernate关联查询/" title="Hibernate关联查询" itemprop="url">
-  
-    <h1 itemprop="name">Hibernate关联查询</h1>
-    
-     
-           <p itemprop="description" >Hibernate关联查询关联查询之延迟加载(lazy)什么是延迟加载
-前面单独讲过延迟加载就是在根据id查询获取的对象中只是有一个id的属性值，只有当使用其他属性的时候才会发出sql语句查询数据库，session.load(Class&amp;lt;T&amp;gt; cls,id)就是这个原</p>
-        
-    
-    <time datetime="2018-04-24T03:08:43.000Z" itemprop="datePublished">2018-04-24</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/24/Hibernate关联关系/" title="Hibernate关联关系" itemprop="url">
-  
-    <h1 itemprop="name">Hibernate关联关系</h1>
-    
-     
-           <p itemprop="description" >Hibernate关联关系一对一背景
-在中国一个丈夫只能有一个妻子，那么丈夫和妻子的关系就是一对一的关系
-
-准备
-创建丈夫和妻子的实体类
-
-丈夫的实体类
-
-
-1234567891011121314151617181920212223242526272829303132@Entit</p>
-        
-    
-    <time datetime="2018-04-24T03:05:56.000Z" itemprop="datePublished">2018-04-24</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/22/Hibernate之一级缓存/" title="Hibernate之一级缓存" itemprop="url">
-  
-    <h1 itemprop="name">Hibernate之一级缓存</h1>
-    
-     
-           <p itemprop="description" >Hibernate之一级缓存什么是一级缓存
-Hibernate创建每个Session对象时，都会给Session分配一块独立的缓存区，用于存放Session查询出来的对象，这个分配给Session的缓存区称之为一级缓存，也叫Session级缓存
-
-为什么使用一级缓存
-Sessio</p>
-        
-    
-    <time datetime="2018-04-21T20:23:26.000Z" itemprop="datePublished">2018-04-22</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/22/Hibernate中的三种状态/" title="Hibernate中的三种状态" itemprop="url">
-  
-    <h1 itemprop="name">Hibernate中的三种状态</h1>
-    
-     
-           <p itemprop="description" >Hibernate中的三种状态
-在Hibernate中可以将实体对象看成3种状态，分别是临时态，持久态，游离态
-
-临时态(瞬时态)特征
-临时态的对象可以被垃圾回收
-临时态的对象未经过持久化，没有和session关联(没有经过session存储和查找)
-
-转换
-新new出来的对象就</p>
-        
-    
-    <time datetime="2018-04-21T20:22:50.000Z" itemprop="datePublished">2018-04-22</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/22/Hibernate之延迟加载/" title="Hibernate之延迟加载" itemprop="url">
-  
-    <h1 itemprop="name">Hibernate之延迟加载</h1>
-    
-     
-           <p itemprop="description" >hibernate之延迟加载什么是延迟加载
-在使用某些Hibernate方法查询数据的时候，Hibernate返回的只是一个空对象(除了id外属性都为null)，并没有真正的查询数据库。而是在使用这个对象的时候才会出发查询数据，并将查询到的数据注入到这个空对象中，这种查询时机推迟</p>
-        
-    
-    <time datetime="2018-04-21T20:22:12.000Z" itemprop="datePublished">2018-04-22</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/22/Hibernate注解之基本注解的注解使用/" title="Hibernate注解之基本注解的注解使用" itemprop="url">
-  
-    <h1 itemprop="name">Hibernate注解之基本注解的注解使用</h1>
-    
-     
-           <p itemprop="description" >Hibernate注解之基本注解的注解使用使用注解须知
-我们在使用注解自动创建表的时候，系统会默认为我们创建一张表Hibernate_sequence，我们可以在Hibernate.cfg.xml文件中添加如下语句解决问题12&amp;lt;!--  配置不生成Hibernate_seq</p>
-        
-    
-    <time datetime="2018-04-21T20:21:08.000Z" itemprop="datePublished">2018-04-22</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/22/Hibernate使用日志-log4j/" title="Hibernate使用日志(log4j)" itemprop="url">
-  
-    <h1 itemprop="name">Hibernate使用日志(log4j)</h1>
-    
-     
-           <p itemprop="description" >Hibernate使用日志(log4j)添加依赖
-在pom.xml中添加如下的依赖123456789101112131415161718&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;log4j&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;g</p>
-        
-    
-    <time datetime="2018-04-21T20:20:20.000Z" itemprop="datePublished">2018-04-22</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
@@ -338,7 +345,7 @@ Sessio</p>
 		<ul>
 		
 		  
-			<li><a href="/categories/Ajax/" title="Ajax">Ajax<sup>2</sup></a></li>
+			<li><a href="/categories/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
 		  
 		
 		  
@@ -382,7 +389,7 @@ Sessio</p>
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>11</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>13</sup></a></li>
 		  
 		
 		  
@@ -402,11 +409,15 @@ Sessio</p>
 		  
 		
 		  
+			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>3</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>9</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>2</sup></a></li>
+			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>4</sup></a></li>
 		  
 		
 		  
@@ -423,11 +434,11 @@ Sessio</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>13</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>11</sup></a></li>
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
@@ -451,11 +462,15 @@ Sessio</p>
 			
 		
 			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
+				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>6</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
 			
 		
 			
@@ -467,18 +482,6 @@ Sessio</p>
 			
 		
 			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
@@ -487,11 +490,15 @@ Sessio</p>
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
+				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
+				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>3</sup></a></li>
 			
 		
 			
@@ -499,7 +506,11 @@ Sessio</p>
 			
 		
 			
-				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>2</sup></a></li>
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
 			
 		
 		</ul>
