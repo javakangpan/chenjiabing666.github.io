@@ -79,19 +79,21 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/01/MongoDB干货篇之更新数据/" title="MongoDB干货篇之更新数据" itemprop="url">
+    <a href="/2017/05/24/Java-IO学习笔记三/" title="Java IO学习笔记三" itemprop="url">
   
-    <h1 itemprop="name">MongoDB干货篇之更新数据</h1>
+    <h1 itemprop="name">Java IO学习笔记三</h1>
     
      
-           <p itemprop="description" >MongoDB干货篇之数据更新常用的函数
+           <p itemprop="description" >Java IO学习笔记三
 
-update(&amp;lt;query&amp;gt;,&amp;lt;update&amp;gt;,&amp;lt;upsert&amp;gt;,&amp;lt;multi&amp;gt;),其中&amp;lt;query&amp;gt;表示筛选的条件，&amp;lt;update&amp;gt;是要更新的数据
+在整个IO包中，实际上就是分为字节流和字符流，但是除了这两个流之外，还存在了一组字节流-字符流的转换类。
 
-update</p>
+OutputStreamWriter：是Writer的子类，将输出的字符流变为字节流，即：将一个字符流的输出对象变成字节流的输出对象。
+
+Inp</p>
         
     
-    <time datetime="2017-05-01T00:13:32.000Z" itemprop="datePublished">2017-05-01</time>
+    <time datetime="2017-05-24T06:48:34.000Z" itemprop="datePublished">2017-05-24</time>
   </a>
 </section>
 
@@ -103,16 +105,23 @@ update</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/30/MongoDB干货篇之查询数据/" title="MongoDB干货篇之查询数据" itemprop="url">
+    <a href="/2017/05/24/Java-IO学习笔记二/" title="Java IO学习笔记二" itemprop="url">
   
-    <h1 itemprop="name">MongoDB干货篇之查询数据</h1>
+    <h1 itemprop="name">Java IO学习笔记二</h1>
     
      
-           <p itemprop="description" >MongoDB干货篇之查询准备工作
-在开始之前我们应该先准备数据方便演示，这里我插入的了几条数据，数据如下：12345678910111213141516171819202122232425262728293031323334db.user.insertMany([&amp;#123;n</p>
+           <p itemprop="description" >Java IO学习笔记二流的概念
+
+在程序中所有的数据都是以流的方式进行传输或保存的，程序需要数据的时候要使用输入流读取数据，而当程序需要将一些数据保存起来的时候，就要使用输出流完成。
+程序中的输入输出都是以流的形式保存的，流中保存的实际上全都是字节文件。
+
+
+字节流和字符流
+
+</p>
         
     
-    <time datetime="2017-04-30T06:53:00.000Z" itemprop="datePublished">2017-04-30</time>
+    <time datetime="2017-05-24T06:46:06.000Z" itemprop="datePublished">2017-05-24</time>
   </a>
 </section>
 
@@ -124,16 +133,20 @@ update</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/29/python爬虫之BeautifulSoup/" title="python爬虫之BeautifulSoup" itemprop="url">
+    <a href="/2017/05/23/Java-IO学习笔记一/" title="Java IO学习笔记一" itemprop="url">
   
-    <h1 itemprop="name">python爬虫之BeautifulSoup</h1>
+    <h1 itemprop="name">Java IO学习笔记一</h1>
     
      
-           <p itemprop="description" >python爬虫之BeautifulSoup简介
-Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜索、修改分析树等功能。它是一个工具箱，通过解析文档为用户提供需要抓取的数据，因为简单，所以不需要多少代码就可以写出一个完整的应用程序。Beautifu</p>
+           <p itemprop="description" >Java IO学习笔记一File
+File是文件和目录路径名的抽象表示形式，总的来说就是java创建删除文件目录的一个类库，但是作用不仅仅于此，详细见官方文档
+
+构造函数
+
+File(File parent, String child) 根据 parent 抽象路径名和 chil</p>
         
     
-    <time datetime="2017-04-29T02:06:56.000Z" itemprop="datePublished">2017-04-29</time>
+    <time datetime="2017-05-23T07:23:50.000Z" itemprop="datePublished">2017-05-23</time>
   </a>
 </section>
 
@@ -145,21 +158,22 @@ Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/28/MongoDB干货篇之安装/" title="MongoDB干货篇之安装" itemprop="url">
+    <a href="/2017/05/15/python实现微信接口/" title="python实现微信接口" itemprop="url">
   
-    <h1 itemprop="name">MongoDB干货篇之安装</h1>
+    <h1 itemprop="name">python实现微信接口</h1>
     
      
-           <p itemprop="description" >MongoDB干货篇之安装安装
+           <p itemprop="description" >python实现微信接口(itchat)安装
 
-下载地址
+sudo pip install itchat
 
-点击安装,选择自定义，后选择安装路径，不过最好安装在根目录下(C盘)，然后点解next,这里我安装的路径是C:\MongoDB
 
-创建文件夹:在C:\MongoDB下创建一个文件夹data,然后在data文件夹下创建db,log两个子</p>
+登录
+
+itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但是这种登录的方式确实短时间的登录，并不会保留登录的状态，也就是下次登录时还是需要扫描二维码，</p>
         
     
-    <time datetime="2017-04-28T02:53:32.000Z" itemprop="datePublished">2017-04-28</time>
+    <time datetime="2017-05-14T19:44:21.000Z" itemprop="datePublished">2017-05-15</time>
   </a>
 </section>
 
@@ -171,16 +185,21 @@ Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/26/BootStrap干货篇之表单/" title="BootStrap干货篇之表单" itemprop="url">
+    <a href="/2017/05/13/python发送邮件/" title="python发送邮件" itemprop="url">
   
-    <h1 itemprop="name">BootStrap干货篇之表单</h1>
+    <h1 itemprop="name">python发送邮件</h1>
     
      
-           <p itemprop="description" >BootStrap干货篇之表单基本介绍
-单独的表单控件会被自动赋予一些全局样式。所有设置了 .form-control 类的 &amp;lt;input&amp;gt;、&amp;lt;textarea&amp;gt; 和 &amp;lt;select&amp;gt; 元素都将被默认设置宽度属性为 width: 100%;。 </p>
+           <p itemprop="description" >python发送邮件准备
+python中发送邮件主要用的是smtplib和email两个模块，下面主要对这两个模块进行讲解
+在讲解之前需要准备至少两个测试的邮箱，其中要在邮箱的设置中开启smtplib协议才可以进行发送和接受
+
+smtplib
+
+smtplib.SMTP( [ho</p>
         
     
-    <time datetime="2017-04-26T15:11:37.000Z" itemprop="datePublished">2017-04-26</time>
+    <time datetime="2017-05-12T23:17:41.000Z" itemprop="datePublished">2017-05-13</time>
   </a>
 </section>
 
@@ -192,19 +211,20 @@ Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/24/Scrapyd部署爬虫/" title="Scrapyd部署爬虫" itemprop="url">
+    <a href="/2017/05/13/python制作电子书/" title="python制作电子书" itemprop="url">
   
-    <h1 itemprop="name">Scrapyd部署爬虫</h1>
+    <h1 itemprop="name">python制作电子书</h1>
     
      
-           <p itemprop="description" >Scrapyd部署爬虫准备工作
+           <p itemprop="description" >python制作pdf电子书准备
+制作电子书使用的是python的pdfkit这个库，pdfkit是 wkhtmltopdf 的Python封装包，因此在安装这个之前要安装wkhtmltopdf
 
-安装scrapyd: pip install scrapyd
-安装scrapyd-client : pip install scrapyd-client
-安装curl:[安装地址](http://ono60m7tl.bkt.clouddn.com</p>
+安装wkhtmltopdf
+
+sudo apt-get install wkhtm</p>
         
     
-    <time datetime="2017-04-24T02:58:07.000Z" itemprop="datePublished">2017-04-24</time>
+    <time datetime="2017-05-12T23:15:20.000Z" itemprop="datePublished">2017-05-13</time>
   </a>
 </section>
 
@@ -216,20 +236,16 @@ Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/23/scrapy大战京东商城/" title="scrapy大战京东商城" itemprop="url">
+    <a href="/2017/05/10/回溯算法/" title="回溯算法" itemprop="url">
   
-    <h1 itemprop="name">scrapy大战京东商城</h1>
+    <h1 itemprop="name">回溯算法</h1>
     
      
-           <p itemprop="description" >SCrapy爬虫大战京东商城引言
-上一篇已经讲过怎样获取链接，怎样获得参数了，详情请看python爬取京东商城普通篇
-
-代码详解
-
-首先应该构造请求，这里使用scrapy.Request,这个方法默认调用的是start_urls构造请求，如果要改变默认的请求，那么必须重载该方法，</p>
+           <p itemprop="description" >回溯算法主要思想
+回溯算法的基本思想是：从一条路往前走，能进则进，不能进则退回来，换一条路再试。八皇后问题就是回溯算法的典型，第一步按照顺序放一个皇后，然后第二步符合要求放第2个皇后，如果没有位置符合要求，那么就要改变第一个皇后的位置，重新放第2个皇后的位置，直到找到符合条件的位</p>
         
     
-    <time datetime="2017-04-23T14:12:30.000Z" itemprop="datePublished">2017-04-23</time>
+    <time datetime="2017-05-09T20:18:44.000Z" itemprop="datePublished">2017-05-10</time>
   </a>
 </section>
 
@@ -241,26 +257,19 @@ Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/23/python爬虫大战京东商城/" title="python爬虫大战京东商城" itemprop="url">
+    <a href="/2017/05/09/跳跃链表/" title="跳跃链表" itemprop="url">
   
-    <h1 itemprop="name">python爬虫大战京东商城</h1>
+    <h1 itemprop="name">跳跃链表</h1>
     
      
-           <p itemprop="description" >python大规模爬取京东主要工具
+           <p itemprop="description" >数据结构之跳跃链表简介
+总的来说跳跃链表最大的好处就是提高了检索了的速率，可以说说是大幅度的提高，相对于单链表来说是一种高效率的检索结构
 
-scrapy
-BeautifulSoup
-requests
-
-
-分析步骤
-
-打开京东首页，输入裤子将会看到页面跳转到了这里，这就是我们要分析的起点
-
-我们可以看到这个页面并不是完全的，当我们往下拉的时候将会看到图片在不停的加载，这就是ajax</p>
+原理
+跳跃表的结构是：假如底层有10个节点， 那么底层的上一层理论上就有5个节点，再上一层理论上就有2个或3个节点，再上一层理论上就有1个节</p>
         
     
-    <time datetime="2017-04-23T10:34:48.000Z" itemprop="datePublished">2017-04-23</time>
+    <time datetime="2017-05-08T20:38:50.000Z" itemprop="datePublished">2017-05-09</time>
   </a>
 </section>
 
@@ -272,22 +281,18 @@ requests
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/22/JQuery干货篇之处理元素/" title="JQuery干货篇之处理元素" itemprop="url">
+    <a href="/2017/05/07/git常用命令/" title="git常用命令" itemprop="url">
   
-    <h1 itemprop="name">JQuery干货篇之处理元素</h1>
+    <h1 itemprop="name">git常用命令</h1>
     
      
-           <p itemprop="description" >JQuery干货篇之处理元素
-注意这里用的还是我前两篇用的例子，详情请看我的博客
-attrattr() 方法设置或返回被选元素的属性值。
-语法：
+           <p itemprop="description" >git常用操作第一次连接远程仓库的配置配置user.name 和user.email
 
-
-$(selector).attr(attribute) 返回被选元素的属性值。
-$(selector).attr(attribut</p>
+git config --global user.name &amp;quot;name&amp;quot;    设置你的用户名
+git config --global user.email &amp;quot;e</p>
         
     
-    <time datetime="2017-04-22T13:45:23.000Z" itemprop="datePublished">2017-04-22</time>
+    <time datetime="2017-05-06T20:11:50.000Z" itemprop="datePublished">2017-05-07</time>
   </a>
 </section>
 
@@ -299,19 +304,17 @@ $(selector).attr(attribut</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/21/JQuery干货篇之操控DOM/" title="JQuery干货篇之操控DOM" itemprop="url">
+    <a href="/2017/05/07/scrapy爬取淘宝女郎/" title="scrapy爬取淘宝女郎" itemprop="url">
   
-    <h1 itemprop="name">JQuery干货篇之操控DOM</h1>
+    <h1 itemprop="name">scrapy爬取淘宝女郎</h1>
     
      
-           <p itemprop="description" >JQuery干货篇之插入元素本次使用的html,css还是我上一篇的源代码，详情请看上一篇文章
-分类
-插入子元素：append,prepend ,appendTo,prependTo
-封装包裹元素：wrap,wrapAll,wrapInner
-插入兄弟元素：after,befor</p>
+           <p itemprop="description" >scrapy抓取淘宝女郎准备工作
+
+首先在淘宝女郎的首页这里查看，当然想要爬取更多的话，当然这里要查看翻页的url,不过这操蛋的地方就是这里的翻页是使用javascript加载的，这个就有点尴尬了，找了好久没有找到，这里如果有朋友知道怎样翻页的话，麻烦告诉我一声，谢谢了…，不过就</p>
         
     
-    <time datetime="2017-04-21T09:53:16.000Z" itemprop="datePublished">2017-04-21</time>
+    <time datetime="2017-05-06T20:03:54.000Z" itemprop="datePublished">2017-05-07</time>
   </a>
 </section>
 
@@ -322,7 +325,7 @@ $(selector).attr(attribut</p>
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/11/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/13/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/13/">Next<span></span></a>
   </nav>
 
 </div>
@@ -366,11 +369,7 @@ $(selector).attr(attribut</p>
 		  
 		
 		  
-			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Mybatis/" title="Mybatis">Mybatis<sup>1</sup></a></li>
+			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 		  
 		
 		  
@@ -382,7 +381,7 @@ $(selector).attr(attribut</p>
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>13</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>18</sup></a></li>
 		  
 		
 		  
@@ -402,7 +401,7 @@ $(selector).attr(attribut</p>
 		  
 		
 		  
-			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>3</sup></a></li>
+			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
 		  
 		
 		  
@@ -427,7 +426,7 @@ $(selector).attr(attribut</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>13</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>18</sup></a></li>
 			
 		
 			
@@ -455,6 +454,14 @@ $(selector).attr(attribut</p>
 			
 		
 			
+				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>6</sup></a></li>
 			
 		
@@ -467,19 +474,7 @@ $(selector).attr(attribut</p>
 			
 		
 			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/java基础/" title="java基础">java基础<sup>5</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
 			
 		
 			
@@ -491,11 +486,15 @@ $(selector).attr(attribut</p>
 			
 		
 			
-				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
+				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 			
@@ -503,7 +502,7 @@ $(selector).attr(attribut</p>
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>3</sup></a></li>
+				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
 			
 		
 		</ul>

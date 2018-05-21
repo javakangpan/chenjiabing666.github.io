@@ -24,7 +24,7 @@
 可变参数在设计方法时，使用数据类型...来声明参数类型，例如：public static void function(int... numbers)在实现方法体时，可变参数是作为数组来处理
 
 12345678910111213141516public class Test &amp;#123;		public static void main(String">
-<meta property="og:updated_time" content="2018-05-09T00:41:15.298Z">
+<meta property="og:updated_time" content="2018-05-18T08:52:43.689Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Springmvc中的转发重定向和拦截器">
 <meta name="twitter:description" content="Springmvc中的转发重定向和拦截器可变参数
@@ -121,8 +121,7 @@
 <li>在控制器内部处理请求的方法中，默认返回字符串时的处理方式是<code>转发</code>，转发的值是<code>view</code>组件的名称，比如<code>return &quot;login&quot;</code>，实质上会根据视图解析器(<code>ViewResolver</code>)得到最终负责显示的页面，而通过<code>return redirect:路径</code>这样的语法表示重定向，在<code>redirect:</code>右侧的内容是路径，这个路径通常使用相对的路径，是以当前客户端的地址栏中的路径为标准进行参考，例如当前的地址为：<code>http://localhost:8080/Project/user/reg.do</code>，然后<code>return &quot;redirect:login.do&quot;</code>,则会重定向到<code>http://localhost:8080/Project/user/login.do</code>,如果<code>return &quot;redirect:/main/index.do&quot;</code>或者<code>return &quot;redirect:../main/index.do&quot;</code>，则会重定向到<code>http://localhost:8080/Project/main/index.do</code></li>
 </ul>
 <h3 id="forward"><a href="#forward" class="headerlink" title="forward:"></a><code>forward:</code></h3><ul>
-<li>默认的方式，但是也是可以使用<code>return &quot;forward:login&quot;</code></li>
-<li>返回的一定是一个<code>view</code>,经过视图解析器之后会转发到指定的视图</li>
+<li>不添加任何字段，那么spring中默认的是转发，比如<code>return login</code>,那么这个会经过视图解析器进行解析，跳转到指定的视图。但是如果添加了<code>forward</code>，那么就不经过视图解析器，而是直接进行跳转，我们一般都是转发到<code>controller</code>中的方法，比如<code>return forward:../user/showLogin.do</code></li>
 </ul>
 <h3 id="redirect"><a href="#redirect" class="headerlink" title="redirect:"></a><code>redirect:</code></h3><ul>
 <li>重定向 ： <code>return &quot;redirect:login.do&quot;</code></li>
@@ -301,11 +300,7 @@
 		  
 		
 		  
-			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Mybatis/" title="Mybatis">Mybatis<sup>1</sup></a></li>
+			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 		  
 		
 		  
@@ -317,7 +312,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>13</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>18</sup></a></li>
 		  
 		
 		  
@@ -337,7 +332,7 @@
 		  
 		
 		  
-			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>3</sup></a></li>
+			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
 		  
 		
 		  
@@ -362,7 +357,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>13</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>18</sup></a></li>
 			
 		
 			
@@ -390,6 +385,14 @@
 			
 		
 			
+				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>6</sup></a></li>
 			
 		
@@ -402,19 +405,7 @@
 			
 		
 			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/java基础/" title="java基础">java基础<sup>5</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
 			
 		
 			
@@ -426,11 +417,15 @@
 			
 		
 			
-				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
+				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 			
@@ -438,7 +433,7 @@
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>3</sup></a></li>
+				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
 			
 		
 		</ul>

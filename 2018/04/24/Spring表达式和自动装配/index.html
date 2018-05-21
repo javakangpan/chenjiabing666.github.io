@@ -48,7 +48,7 @@ Message
 
 
 1234567891011121314151617181920212223242526272829303132333">
-<meta property="og:updated_time" content="2018-04-24T03:13:14.981Z">
+<meta property="og:updated_time" content="2018-05-21T03:32:57.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring表达式和自动装配">
 <meta name="twitter:description" content="Spring表达式和自动装配【重要】spring表达式作用
@@ -142,7 +142,7 @@ Message
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring表达式和自动装配"><span class="toc-number">1.</span> <span class="toc-text">Spring表达式和自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#【重要】spring表达式"><span class="toc-number">1.1.</span> <span class="toc-text">【重要】spring表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用"><span class="toc-number">1.1.1.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.1.2.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">1.1.3.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取不是集合类型的值"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">获取不是集合类型的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用数组集合或者List的值"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">引用数组集合或者List的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ValueBean的name属性设置为Person中的Address对象的city值"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">ValueBean的name属性设置为Person中的Address对象的city值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用Map集合中的某个value"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">引用Map集合中的某个value</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】spring表达式支持方法的调用"><span class="toc-number">1.2.</span> <span class="toc-text">【了解】spring表达式支持方法的调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】-自动装装配-autowire"><span class="toc-number">1.3.</span> <span class="toc-text">【了解】 自动装装配(autowire)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.3.1.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring表达式和自动装配"><span class="toc-number">1.</span> <span class="toc-text">Spring表达式和自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#【重要】spring表达式"><span class="toc-number">1.1.</span> <span class="toc-text">【重要】spring表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用"><span class="toc-number">1.1.1.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.1.2.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">1.1.3.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取不是集合类型的值"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">获取不是集合类型的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用数组集合或者List的值"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">引用数组集合或者List的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ValueBean的name属性设置为Person中的Address对象的city值"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">ValueBean的name属性设置为Person中的Address对象的city值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用Map集合中的某个value"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">引用Map集合中的某个value</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】spring表达式支持方法的调用"><span class="toc-number">1.2.</span> <span class="toc-text">【了解】spring表达式支持方法的调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】-自动装装配-autowire"><span class="toc-number">1.3.</span> <span class="toc-text">【了解】 自动装装配(autowire)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.3.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Value"><span class="toc-number">1.4.</span> <span class="toc-text">@Value()</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -206,6 +206,13 @@ Message
 <li>spring 的配置文件</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userDao"</span> <span class="attr">class</span>=<span class="string">"cn.tedu.spring.UserDao"</span>/&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--这里不需要配置property节点来ref上面定义的bean，只需要使用自动装配即可--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"cn.tedu.spring.UserService"</span> <span class="attr">autowire</span>=<span class="string">"byName"</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="Value"><a href="#Value" class="headerlink" title="@Value()"></a>@Value()</h2><ul>
+<li>使用这个注解为成员变量赋值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">Class <span class="title">Person</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="meta">@Value</span>(<span class="string">"陈加兵"</span>)  <span class="comment">//直接为其赋值</span></div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>可以使用这个注解读配置文件中的值并未成员变量赋值： <code>@Value(#{dbConfig.url})</code>，这个是读取<code>spring-dao.xml</code>中的<utils id="dbConfig" ,location="">中的key为<code>url</code>的值</utils></li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -274,7 +281,7 @@ Message
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring表达式和自动装配"><span class="toc-number">1.</span> <span class="toc-text">Spring表达式和自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#【重要】spring表达式"><span class="toc-number">1.1.</span> <span class="toc-text">【重要】spring表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用"><span class="toc-number">1.1.1.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.1.2.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">1.1.3.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取不是集合类型的值"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">获取不是集合类型的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用数组集合或者List的值"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">引用数组集合或者List的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ValueBean的name属性设置为Person中的Address对象的city值"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">ValueBean的name属性设置为Person中的Address对象的city值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用Map集合中的某个value"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">引用Map集合中的某个value</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】spring表达式支持方法的调用"><span class="toc-number">1.2.</span> <span class="toc-text">【了解】spring表达式支持方法的调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】-自动装装配-autowire"><span class="toc-number">1.3.</span> <span class="toc-text">【了解】 自动装装配(autowire)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.3.1.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring表达式和自动装配"><span class="toc-number">1.</span> <span class="toc-text">Spring表达式和自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#【重要】spring表达式"><span class="toc-number">1.1.</span> <span class="toc-text">【重要】spring表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用"><span class="toc-number">1.1.1.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.1.2.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">1.1.3.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取不是集合类型的值"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">获取不是集合类型的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用数组集合或者List的值"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">引用数组集合或者List的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ValueBean的name属性设置为Person中的Address对象的city值"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">ValueBean的name属性设置为Person中的Address对象的city值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用Map集合中的某个value"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">引用Map集合中的某个value</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】spring表达式支持方法的调用"><span class="toc-number">1.2.</span> <span class="toc-text">【了解】spring表达式支持方法的调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】-自动装装配-autowire"><span class="toc-number">1.3.</span> <span class="toc-text">【了解】 自动装装配(autowire)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.3.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Value"><span class="toc-number">1.4.</span> <span class="toc-text">@Value()</span></a></li></ol></li></ol>
  
   </div>
 
@@ -316,11 +323,7 @@ Message
 		  
 		
 		  
-			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Mybatis/" title="Mybatis">Mybatis<sup>1</sup></a></li>
+			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 		  
 		
 		  
@@ -332,7 +335,7 @@ Message
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>13</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>18</sup></a></li>
 		  
 		
 		  
@@ -352,7 +355,7 @@ Message
 		  
 		
 		  
-			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>3</sup></a></li>
+			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
 		  
 		
 		  
@@ -377,7 +380,7 @@ Message
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>13</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>18</sup></a></li>
 			
 		
 			
@@ -405,6 +408,14 @@ Message
 			
 		
 			
+				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>6</sup></a></li>
 			
 		
@@ -417,19 +428,7 @@ Message
 			
 		
 			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/java基础/" title="java基础">java基础<sup>5</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
 			
 		
 			
@@ -441,11 +440,15 @@ Message
 			
 		
 			
-				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
+				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 			
@@ -453,7 +456,7 @@ Message
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>3</sup></a></li>
+				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
 			
 		
 		</ul>

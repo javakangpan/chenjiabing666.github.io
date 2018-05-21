@@ -79,28 +79,19 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/用户管理模块之用户注册/" title="用户管理模块之用户注册" itemprop="url">
+    <a href="/2018/05/21/购物车模块/" title="购物车模块" itemprop="url">
   
-    <h1 itemprop="name">用户管理模块之用户注册</h1>
+    <h1 itemprop="name">购物车模块</h1>
     
      
-           <p itemprop="description" >用户管理模块之用户注册实现的功能
-注册
-验证用户名是否已经存在
-验证邮箱
-验证电话号码
+           <p itemprop="description" >购物车模块##　建表
 
+创建购物车的表
 
-登录
-个人信息修改
-
-创建数据库和表
-创建数据库和表
-需要注意的是：一些字段不能为空，但是我们在设计表的时候不需要设计，只需要在前端设计表单的时候检查字段是否为空即可。
-字段修改的人，修改</p>
+123456789create table t_cart(id int primary key auto_increment,　　//主键                   	goods_id varchar(200),　　　//商品的</p>
         
     
-    <time datetime="2018-05-09T00:47:43.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-21T10:27:35.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -112,23 +103,25 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/搭建工程/" title="搭建工程" itemprop="url">
+    <a href="/2018/05/21/用户管理模块之个人信息修改/" title="用户管理模块之个人信息修改" itemprop="url">
   
-    <h1 itemprop="name">搭建工程</h1>
+    <h1 itemprop="name">用户管理模块之个人信息修改</h1>
     
      
-           <p itemprop="description" >搭建工程框架
-Spring + SpringMVC + Mybatis  ———–  SSM
+           <p itemprop="description" >用户管理模块之个人信息修改功能
+修改用户名
+修改性别
+修改邮箱
+修改密码
+修改头像
 
-创建工程步骤
-创建Maven工程
-添加web.xml和tomcat运行环境
-创建包的结构
-实体类的包：cn.tedu.store.bean
-控制器层：cn.tedu.store.con</p>
+在UserMapper中定义方法和UserMapper.xml中定义定义接口方法
+定义接口方法
+
+12345/** * 更新用户信息 * @param user  User对象 */void u</p>
         
     
-    <time datetime="2018-05-09T00:46:52.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-21T10:26:45.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -140,45 +133,26 @@ Spring + SpringMVC + Mybatis  ———–  SSM
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/商城网站之模块设计/" title="商城网站之模块设计" itemprop="url">
+    <a href="/2018/05/21/地址管理之省市区三级联动菜单/" title="地址管理之省市区三级联动菜单" itemprop="url">
   
-    <h1 itemprop="name">商城网站之模块设计</h1>
+    <h1 itemprop="name">地址管理之省市区三级联动菜单</h1>
     
      
-           <p itemprop="description" >SSM - 商城模块用户管理
-注册
-登录
-个人信息修改
+           <p itemprop="description" >地址管理之省市区三级联动菜单
+导入省市区的数据
+下载sql语句的文件
+在数据库中执行：source 文件路径即可导入
+导入成功之后，在数据库中会出现三张表，分别代表省,市,区
 
-地址管理
-添加收货地址
-查询所有的收货地址
-修改
-删除
+创建实体类
+get，set方法
+hashCode和equals方法
+实现序列化接口，生成安全码
 
-商品
-商品分类
-商品展示
-商品详情
-
-购物车
-将商品添加到购物车
-购物车管理
-
-订单
-显示订单
-付款
-
-项目开发流程
-需求分析
-概要设计
-详细设计
-编码
-测试
-交付</p>
+Pr</p>
         
     
-    <time datetime="2018-05-09T00:46:07.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-21T10:26:00.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -190,21 +164,25 @@ Spring + SpringMVC + Mybatis  ———–  SSM
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/选择排序/" title="选择排序" itemprop="url">
+    <a href="/2018/05/21/用户管理模块之用户登录/" title="用户管理模块之用户登录" itemprop="url">
   
-    <h1 itemprop="name">选择排序</h1>
+    <h1 itemprop="name">用户管理模块之用户登录</h1>
     
      
-           <p itemprop="description" >选择排序思想(从小到大)
-每一趟从待排序的记录中选出最小的元素，顺序放在已排好序的序列最后，直到全部记录排序完毕
+           <p itemprop="description" >用户管理模块之用户登录开发顺序
+持久层
+业务层
+控制层
+页面
 
-分析
-假设数组中有个n元素
-第一趟：在整个数组中选择出最小的元素，和数组中的第一个元素交换位置，那么此时的第一个元素就是最小的
-第二趟： 从第二个元素开始再次查找剩</p>
+在cn.tedu.store.mapper中新建UserMapper.java接口
+由于在用户管理模块之用户注册已经创建了，所以不用新建了
+
+功能
+验证用户名是否存在，其中返回的是用户对象，这个在前面的注册已经定义过</p>
         
     
-    <time datetime="2018-05-09T00:44:07.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-21T10:24:56.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -216,23 +194,18 @@ Spring + SpringMVC + Mybatis  ———–  SSM
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/插入排序算法/" title="插入排序算法" itemprop="url">
+    <a href="/2018/05/21/Spring之AOP之底层实现/" title="Spring之AOP之底层实现" itemprop="url">
   
-    <h1 itemprop="name">插入排序算法</h1>
+    <h1 itemprop="name">Spring之AOP之底层实现</h1>
     
      
-           <p itemprop="description" >插入排序算法思想
-我们以从小到大的排序进行讲解
+           <p itemprop="description" >Spring之AOP之底层实现静态代理实现
+定义IStudnetService接口
 
-
-插入排序就是将一个元素插入到一个已经是有序的序列中， 通过遍历比较这个待插入元素和有序的序列元素之间的大小，来比较需要插入的位置，使其仍然是一个有序的数组。
-数组插入的算法：向后移动元素给待插入的数据位置
-
-详解
-第一趟：假设我</p>
+12345678/** * IStudentService的接口 * @author chenjiabing */public interface IStudentService &amp;#123;	</p>
         
     
-    <time datetime="2018-05-09T00:43:57.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-21T10:22:48.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -244,21 +217,29 @@ Spring + SpringMVC + Mybatis  ———–  SSM
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/JQuery实现AJAX异步提交/" title="JQuery实现AJAX异步提交" itemprop="url">
+    <a href="/2018/05/21/Spring之AOP/" title="Spring之AOP" itemprop="url">
   
-    <h1 itemprop="name">JQuery实现AJAX异步提交</h1>
+    <h1 itemprop="name">Spring之AOP</h1>
     
      
-           <p itemprop="description" >JQuery实现AJAX异步提交准备
-点击下载JQurery的文件
+           <p itemprop="description" >Spring之AOPSpring框架两大核心内容IOC （ＤＩ）
+ＩＯＣ：控制反转
+
+将创建和管理对象全部交给框架完成
 
 
-添加JQuery的文件： &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;文件路径&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+DI : 依赖注入
 
-$.ajax</p>
+为成员变量赋值
+其中有不同的方法赋值，但是我们推荐使用set方法注入或者注解方式
+
+
+
+AOP
+面向切面编程，是面向对象编程的重要组成</p>
         
     
-    <time datetime="2018-05-09T00:42:04.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-21T10:22:06.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -270,18 +251,19 @@ $.ajax</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/Springmvc中的转发重定向和拦截器/" title="Springmvc中的转发重定向和拦截器" itemprop="url">
+    <a href="/2018/05/21/Mybatis之使用总结/" title="Mybatis之使用总结" itemprop="url">
   
-    <h1 itemprop="name">Springmvc中的转发重定向和拦截器</h1>
+    <h1 itemprop="name">Mybatis之使用总结</h1>
     
      
-           <p itemprop="description" >Springmvc中的转发重定向和拦截器可变参数
-可变参数在设计方法时，使用数据类型...来声明参数类型，例如：public static void function(int... numbers)在实现方法体时，可变参数是作为数组来处理
+           <p itemprop="description" >Mybatis之使用总结多表连接查询
+如果需要使用多表连接查询，使用resultMap对应表与实体类的对应关系太麻烦，我们可以定义一个值对象，其中封装了多表连接查询返回的字段，我们直接使用值对象接收返回的结果即可
+比如我们在商城网站上的显示购物车的模块，使用的CartVo
 
-1234567891011121314</p>
+12</p>
         
     
-    <time datetime="2018-05-09T00:40:51.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-21T10:20:56.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -293,20 +275,23 @@ $.ajax</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/Springmvc解决中文乱码问题/" title="Springmvc解决中文乱码问题" itemprop="url">
+    <a href="/2018/05/21/Springmvc之文件上传和下载/" title="Springmvc之文件上传和下载" itemprop="url">
   
-    <h1 itemprop="name">Springmvc解决中文乱码问题</h1>
+    <h1 itemprop="name">Springmvc之文件上传和下载</h1>
     
      
-           <p itemprop="description" >Springmvc解决中文乱码问题POST
-在表单提交的时候，如果遇到中文乱码的情况，springmvc提供了一个CharacterEncodingFilter过滤器，我们只需要在web.xml文件中配置即可
+           <p itemprop="description" >Springmvc之文件上传和下载前提
+在上传和下载之前需要在对应的根目录下创建对应的文件夹，比如我们在webApp下创建upload文件夹下
 
-注意
-表单的提交方式必须是post
-在web.xml中配置Chara</p>
+##　添加依赖
+
+commons-io
+commons-fileupload
+
+123456789101112&amp;lt;!-- 添加文件</p>
         
     
-    <time datetime="2018-05-09T00:39:48.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-21T10:20:12.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -318,19 +303,20 @@ $.ajax</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/Mybatis之增删改查/" title="Mybatis之增删改查" itemprop="url">
+    <a href="/2018/05/21/Spring之密码加密/" title="Spring之密码加密" itemprop="url">
   
-    <h1 itemprop="name">Mybatis之增删改查</h1>
+    <h1 itemprop="name">Spring之密码加密</h1>
     
      
-           <p itemprop="description" >Mybatis的增删改查增加数据
-在增加数据的时候，mybatis默认返回的是受影响的行数，因此不需要指定ResultType指定返回类型
-在UserMapper.java接口中添加方法
+           <p itemprop="description" >密码加密消息摘要(数据的指纹)定义
+对不固定的消息（字符串，一段文本，一个文件），通过一种特定的算法，得到一个固定长度的文本，固定长度的文本叫做消息摘要
+比如我是程序员经过特定的算法之后，得到了消息摘要为：adaf02515dfds7885csdfcdsc
 
-1234/**	@param user User对象*/Integer reg(User </p>
+作用
+数据完整性的检</p>
         
     
-    <time datetime="2018-05-04T10:04:29.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-05-21T10:19:21.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -342,17 +328,17 @@ $.ajax</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/快速排序算法/" title="快速排序算法" itemprop="url">
+    <a href="/2018/05/21/拦截器拦截Ajax请求/" title="Springmvc拦截器拦截Ajax请求" itemprop="url">
   
-    <h1 itemprop="name">快速排序算法</h1>
+    <h1 itemprop="name">Springmvc拦截器拦截Ajax请求</h1>
     
      
-           <p itemprop="description" >快速排序算法思想(从小到大排序)
-快速排序是使用分治法来完成的
-基本思想就是先从其中选取一个基准值，然后从数组的两端开始移动查找，在右边移动查找到比基准值小的数据停止移动，此时在左边查找到比基准值大的数据也停止查找，交换这两个查找到的数据，交换完成之后两端继续移动查找，如果左边找</p>
+           <p itemprop="description" >拦截器拦截Ajax请求##　问题
+
+如果我们在拦截器中定义了拦截器的路径为/user/*这个地址,并且拦截器拦截器之后，如果没有登录，那么重定向到登录界面。但是我们在未登录的前提下使用Ajax异步请求了/user/addUser.do这个地址，出现了拦截器是拦截了，但是并没有重定</p>
         
     
-    <time datetime="2018-05-04T09:55:26.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-05-21T10:16:29.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -363,7 +349,7 @@ $.ajax</p>
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -407,11 +393,7 @@ $.ajax</p>
 		  
 		
 		  
-			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Mybatis/" title="Mybatis">Mybatis<sup>1</sup></a></li>
+			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 		  
 		
 		  
@@ -423,7 +405,7 @@ $.ajax</p>
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>13</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>18</sup></a></li>
 		  
 		
 		  
@@ -443,7 +425,7 @@ $.ajax</p>
 		  
 		
 		  
-			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>3</sup></a></li>
+			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
 		  
 		
 		  
@@ -468,7 +450,7 @@ $.ajax</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>13</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>18</sup></a></li>
 			
 		
 			
@@ -496,6 +478,14 @@ $.ajax</p>
 			
 		
 			
+				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>6</sup></a></li>
 			
 		
@@ -508,19 +498,7 @@ $.ajax</p>
 			
 		
 			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/java基础/" title="java基础">java基础<sup>5</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
 			
 		
 			
@@ -532,11 +510,15 @@ $.ajax</p>
 			
 		
 			
-				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
+				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 			
@@ -544,7 +526,7 @@ $.ajax</p>
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>3</sup></a></li>
+				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
 			
 		
 		</ul>
