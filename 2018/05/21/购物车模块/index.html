@@ -12,28 +12,25 @@
     
 
     
-    <meta name="description" content="购物车模块##　建表
-
+    <meta name="description" content="购物车模块建表
 创建购物车的表
 
-123456789create table t_cart(id int primary key auto_increment,　　//主键                   	goods_id varchar(200),　　　//商品的ｉｄ                    uid int,　　				//用户的id">
+123456789create table t_cart(id int primary key auto_increment,　　//主键                   	goods_id varchar(200),　　　//商品的ｉｄ                    uid int,　　				//用户的id                    n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="购物车模块">
 <meta property="og:url" content="http://chenjiabing666.github.io/2018/05/21/购物车模块/index.html">
 <meta property="og:site_name" content="爱撒谎的男孩">
-<meta property="og:description" content="购物车模块##　建表
-
+<meta property="og:description" content="购物车模块建表
 创建购物车的表
 
-123456789create table t_cart(id int primary key auto_increment,　　//主键                   	goods_id varchar(200),　　　//商品的ｉｄ                    uid int,　　				//用户的id">
-<meta property="og:updated_time" content="2018-05-21T10:27:55.637Z">
+123456789create table t_cart(id int primary key auto_increment,　　//主键                   	goods_id varchar(200),　　　//商品的ｉｄ                    uid int,　　				//用户的id                    n">
+<meta property="og:updated_time" content="2018-05-22T07:22:50.973Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="购物车模块">
-<meta name="twitter:description" content="购物车模块##　建表
-
+<meta name="twitter:description" content="购物车模块建表
 创建购物车的表
 
-123456789create table t_cart(id int primary key auto_increment,　　//主键                   	goods_id varchar(200),　　　//商品的ｉｄ                    uid int,　　				//用户的id">
+123456789create table t_cart(id int primary key auto_increment,　　//主键                   	goods_id varchar(200),　　　//商品的ｉｄ                    uid int,　　				//用户的id                    n">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -109,12 +106,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#购物车模块"><span class="toc-number">1.</span> <span class="toc-text">购物车模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#显示购物车"><span class="toc-number">1.1.</span> <span class="toc-text">显示购物车</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义值对象-XXXVo"><span class="toc-number">1.1.1.</span> <span class="toc-text">定义值对象(XXXVo)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#持久层"><span class="toc-number">1.1.2.</span> <span class="toc-text">持久层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CartMapper-java"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">CartMapper.java</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CartMapper-xml"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">CartMapper.xml</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量删除购物车中的商品"><span class="toc-number">1.2.</span> <span class="toc-text">批量删除购物车中的商品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#持久层-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">持久层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口中定义方法"><span class="toc-number">1.2.2.</span> <span class="toc-text">接口中定义方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件中配置"><span class="toc-number">1.2.3.</span> <span class="toc-text">配置文件中配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制器层"><span class="toc-number">1.2.4.</span> <span class="toc-text">控制器层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL存储过程"><span class="toc-number">1.3.</span> <span class="toc-text">MySQL存储过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建存储过程"><span class="toc-number">1.4.</span> <span class="toc-text">创建存储过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#删除存储过程"><span class="toc-number">1.4.1.</span> <span class="toc-text">删除存储过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用"><span class="toc-number">1.4.2.</span> <span class="toc-text">调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用存储过程删除一行数据"><span class="toc-number">1.5.</span> <span class="toc-text">使用存储过程删除一行数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#持久层-2"><span class="toc-number">1.5.1.</span> <span class="toc-text">持久层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建存储过程-1"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">创建存储过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义接口"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">定义接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写配置文件"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">写配置文件</span></a></li></ol></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#购物车模块"><span class="toc-number">1.</span> <span class="toc-text">购物车模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#建表"><span class="toc-number">1.1.</span> <span class="toc-text">建表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示购物车"><span class="toc-number">1.2.</span> <span class="toc-text">显示购物车</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义值对象-XXXVo"><span class="toc-number">1.2.1.</span> <span class="toc-text">定义值对象(XXXVo)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#持久层"><span class="toc-number">1.2.2.</span> <span class="toc-text">持久层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CartMapper-java"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">CartMapper.java</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CartMapper-xml"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">CartMapper.xml</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量删除购物车中的商品"><span class="toc-number">1.3.</span> <span class="toc-text">批量删除购物车中的商品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#持久层-1"><span class="toc-number">1.3.1.</span> <span class="toc-text">持久层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口中定义方法"><span class="toc-number">1.3.2.</span> <span class="toc-text">接口中定义方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件中配置"><span class="toc-number">1.3.3.</span> <span class="toc-text">配置文件中配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制器层"><span class="toc-number">1.3.4.</span> <span class="toc-text">控制器层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL存储过程"><span class="toc-number">1.4.</span> <span class="toc-text">MySQL存储过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建存储过程"><span class="toc-number">1.5.</span> <span class="toc-text">创建存储过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#删除存储过程"><span class="toc-number">1.5.1.</span> <span class="toc-text">删除存储过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用"><span class="toc-number">1.5.2.</span> <span class="toc-text">调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用存储过程删除一行数据"><span class="toc-number">1.6.</span> <span class="toc-text">使用存储过程删除一行数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#持久层-2"><span class="toc-number">1.6.1.</span> <span class="toc-text">持久层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建存储过程-1"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">创建存储过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义接口"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">定义接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写配置文件"><span class="toc-number">1.6.1.3.</span> <span class="toc-text">写配置文件</span></a></li></ol></li></ol></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="购物车模块"><a href="#购物车模块" class="headerlink" title="购物车模块"></a>购物车模块</h1><p>##　建表</p>
-<ul>
+		<h1 id="购物车模块"><a href="#购物车模块" class="headerlink" title="购物车模块"></a>购物车模块</h1><h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2><ul>
 <li>创建购物车的表</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> t_cart(<span class="keyword">id</span> <span class="built_in">int</span> primary <span class="keyword">key</span> auto_increment,　　//主键</div><div class="line">                   	goods_id <span class="built_in">varchar</span>(<span class="number">200</span>),　　　//商品的ｉｄ</div><div class="line">                    uid <span class="built_in">int</span>,　　				//用户的<span class="keyword">id</span></div><div class="line">                    <span class="keyword">num</span> <span class="built_in">int</span>, 				//商品的数量</div><div class="line">                    created_user <span class="built_in">varchar</span>(<span class="number">50</span>),  </div><div class="line">                    created_time datetime,</div><div class="line">                    modified_user <span class="built_in">varchar</span>(<span class="number">50</span>),</div><div class="line">                    modified_time datetime</div><div class="line">                   )<span class="keyword">default</span> <span class="keyword">charset</span>=utf8;</div></pre></td></tr></table></figure>
@@ -188,6 +184,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2018/05/27/Lucene全文检索/" title="Lucene全文检索">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Lucene全文检索</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2018/05/21/用户管理模块之个人信息修改/"  title="用户管理模块之个人信息修改">
@@ -213,7 +217,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#购物车模块"><span class="toc-number">1.</span> <span class="toc-text">购物车模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#显示购物车"><span class="toc-number">1.1.</span> <span class="toc-text">显示购物车</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义值对象-XXXVo"><span class="toc-number">1.1.1.</span> <span class="toc-text">定义值对象(XXXVo)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#持久层"><span class="toc-number">1.1.2.</span> <span class="toc-text">持久层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CartMapper-java"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">CartMapper.java</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CartMapper-xml"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">CartMapper.xml</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量删除购物车中的商品"><span class="toc-number">1.2.</span> <span class="toc-text">批量删除购物车中的商品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#持久层-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">持久层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口中定义方法"><span class="toc-number">1.2.2.</span> <span class="toc-text">接口中定义方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件中配置"><span class="toc-number">1.2.3.</span> <span class="toc-text">配置文件中配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制器层"><span class="toc-number">1.2.4.</span> <span class="toc-text">控制器层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL存储过程"><span class="toc-number">1.3.</span> <span class="toc-text">MySQL存储过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建存储过程"><span class="toc-number">1.4.</span> <span class="toc-text">创建存储过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#删除存储过程"><span class="toc-number">1.4.1.</span> <span class="toc-text">删除存储过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用"><span class="toc-number">1.4.2.</span> <span class="toc-text">调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用存储过程删除一行数据"><span class="toc-number">1.5.</span> <span class="toc-text">使用存储过程删除一行数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#持久层-2"><span class="toc-number">1.5.1.</span> <span class="toc-text">持久层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建存储过程-1"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">创建存储过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义接口"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">定义接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写配置文件"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">写配置文件</span></a></li></ol></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#购物车模块"><span class="toc-number">1.</span> <span class="toc-text">购物车模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#建表"><span class="toc-number">1.1.</span> <span class="toc-text">建表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示购物车"><span class="toc-number">1.2.</span> <span class="toc-text">显示购物车</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义值对象-XXXVo"><span class="toc-number">1.2.1.</span> <span class="toc-text">定义值对象(XXXVo)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#持久层"><span class="toc-number">1.2.2.</span> <span class="toc-text">持久层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CartMapper-java"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">CartMapper.java</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CartMapper-xml"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">CartMapper.xml</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量删除购物车中的商品"><span class="toc-number">1.3.</span> <span class="toc-text">批量删除购物车中的商品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#持久层-1"><span class="toc-number">1.3.1.</span> <span class="toc-text">持久层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口中定义方法"><span class="toc-number">1.3.2.</span> <span class="toc-text">接口中定义方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件中配置"><span class="toc-number">1.3.3.</span> <span class="toc-text">配置文件中配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制器层"><span class="toc-number">1.3.4.</span> <span class="toc-text">控制器层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL存储过程"><span class="toc-number">1.4.</span> <span class="toc-text">MySQL存储过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建存储过程"><span class="toc-number">1.5.</span> <span class="toc-text">创建存储过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#删除存储过程"><span class="toc-number">1.5.1.</span> <span class="toc-text">删除存储过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用"><span class="toc-number">1.5.2.</span> <span class="toc-text">调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用存储过程删除一行数据"><span class="toc-number">1.6.</span> <span class="toc-text">使用存储过程删除一行数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#持久层-2"><span class="toc-number">1.6.1.</span> <span class="toc-text">持久层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建存储过程-1"><span class="toc-number">1.6.1.1.</span> <span class="toc-text">创建存储过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义接口"><span class="toc-number">1.6.1.2.</span> <span class="toc-text">定义接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写配置文件"><span class="toc-number">1.6.1.3.</span> <span class="toc-text">写配置文件</span></a></li></ol></li></ol></li></ol></li></ol>
  
   </div>
 
@@ -251,7 +255,11 @@
 		  
 		
 		  
-			<li><a href="/categories/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Lucene/" title="Lucene">Lucene<sup>1</sup></a></li>
 		  
 		
 		  
@@ -267,7 +275,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>18</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>20</sup></a></li>
 		  
 		
 		  
@@ -312,7 +320,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>18</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>20</sup></a></li>
 			
 		
 			
@@ -364,7 +372,7 @@
 			
 		
 			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
 			
 		
 			
@@ -372,7 +380,7 @@
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
@@ -384,11 +392,11 @@
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
+				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 		</ul>

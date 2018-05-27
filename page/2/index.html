@@ -79,6 +79,104 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2018/05/21/Mybatis之使用总结/" title="Mybatis之使用总结" itemprop="url">
+  
+    <h1 itemprop="name">Mybatis之使用总结</h1>
+    
+     
+           <p itemprop="description" >Mybatis之使用总结多表连接查询
+如果需要使用多表连接查询，使用resultMap对应表与实体类的对应关系太麻烦，我们可以定义一个值对象，其中封装了多表连接查询返回的字段，我们直接使用值对象接收返回的结果即可
+比如我们在商城网站上的显示购物车的模块，使用的CartVo
+
+12</p>
+        
+    
+    <time datetime="2018-05-21T10:20:56.000Z" itemprop="datePublished">2018-05-21</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/05/21/Springmvc之文件上传和下载/" title="Springmvc之文件上传和下载" itemprop="url">
+  
+    <h1 itemprop="name">Springmvc之文件上传和下载</h1>
+    
+     
+           <p itemprop="description" >Springmvc之文件上传和下载前提
+在上传和下载之前需要在对应的根目录下创建对应的文件夹，比如我们在webApp下创建upload文件夹下
+
+添加依赖
+commons-io
+commons-fileupload
+
+123456789101112&amp;lt;!-- 添加文件上传的依</p>
+        
+    
+    <time datetime="2018-05-21T10:20:12.000Z" itemprop="datePublished">2018-05-21</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/05/21/Spring之密码加密/" title="Spring之密码加密" itemprop="url">
+  
+    <h1 itemprop="name">Spring之密码加密</h1>
+    
+     
+           <p itemprop="description" >密码加密消息摘要(数据的指纹)定义
+对不固定的消息（字符串，一段文本，一个文件），通过一种特定的算法，得到一个固定长度的文本，固定长度的文本叫做消息摘要
+比如我是程序员经过特定的算法之后，得到了消息摘要为：adaf02515dfds7885csdfcdsc
+
+作用
+数据完整性的检</p>
+        
+    
+    <time datetime="2018-05-21T10:19:21.000Z" itemprop="datePublished">2018-05-21</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/05/21/拦截器拦截Ajax请求/" title="Springmvc拦截器拦截Ajax请求" itemprop="url">
+  
+    <h1 itemprop="name">Springmvc拦截器拦截Ajax请求</h1>
+    
+     
+           <p itemprop="description" >拦截器拦截Ajax请求##　问题
+
+如果我们在拦截器中定义了拦截器的路径为/user/*这个地址,并且拦截器拦截器之后，如果没有登录，那么重定向到登录界面。但是我们在未登录的前提下使用Ajax异步请求了/user/addUser.do这个地址，出现了拦截器是拦截了，但是并没有重定</p>
+        
+    
+    <time datetime="2018-05-21T10:16:29.000Z" itemprop="datePublished">2018-05-21</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2018/05/09/用户管理模块之用户注册/" title="用户管理模块之用户注册" itemprop="url">
   
     <h1 itemprop="name">用户管理模块之用户注册</h1>
@@ -267,103 +365,9 @@ $.ajax</p>
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/05/09/Springmvc中的转发重定向和拦截器/" title="Springmvc中的转发重定向和拦截器" itemprop="url">
-  
-    <h1 itemprop="name">Springmvc中的转发重定向和拦截器</h1>
-    
-     
-           <p itemprop="description" >Springmvc中的转发重定向和拦截器可变参数
-可变参数在设计方法时，使用数据类型...来声明参数类型，例如：public static void function(int... numbers)在实现方法体时，可变参数是作为数组来处理
-
-1234567891011121314</p>
-        
-    
-    <time datetime="2018-05-09T00:40:51.000Z" itemprop="datePublished">2018-05-09</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/05/09/Springmvc解决中文乱码问题/" title="Springmvc解决中文乱码问题" itemprop="url">
-  
-    <h1 itemprop="name">Springmvc解决中文乱码问题</h1>
-    
-     
-           <p itemprop="description" >Springmvc解决中文乱码问题POST
-在表单提交的时候，如果遇到中文乱码的情况，springmvc提供了一个CharacterEncodingFilter过滤器，我们只需要在web.xml文件中配置即可
-
-注意
-表单的提交方式必须是post
-在web.xml中配置Chara</p>
-        
-    
-    <time datetime="2018-05-09T00:39:48.000Z" itemprop="datePublished">2018-05-09</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/05/04/Mybatis之增删改查/" title="Mybatis之增删改查" itemprop="url">
-  
-    <h1 itemprop="name">Mybatis之增删改查</h1>
-    
-     
-           <p itemprop="description" >Mybatis的增删改查增加数据
-在增加数据的时候，mybatis默认返回的是受影响的行数，因此不需要指定ResultType指定返回类型
-在UserMapper.java接口中添加方法
-
-1234/**	@param user User对象*/Integer reg(User </p>
-        
-    
-    <time datetime="2018-05-04T10:04:29.000Z" itemprop="datePublished">2018-05-04</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/05/04/快速排序算法/" title="快速排序算法" itemprop="url">
-  
-    <h1 itemprop="name">快速排序算法</h1>
-    
-     
-           <p itemprop="description" >快速排序算法思想(从小到大排序)
-快速排序是使用分治法来完成的
-基本思想就是先从其中选取一个基准值，然后从数组的两端开始移动查找，在右边移动查找到比基准值小的数据停止移动，此时在左边查找到比基准值大的数据也停止查找，交换这两个查找到的数据，交换完成之后两端继续移动查找，如果左边找</p>
-        
-    
-    <time datetime="2018-05-04T09:55:26.000Z" itemprop="datePublished">2018-05-04</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
   </nav>
 
 </div>
@@ -403,7 +407,11 @@ $.ajax</p>
 		  
 		
 		  
-			<li><a href="/categories/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Lucene/" title="Lucene">Lucene<sup>1</sup></a></li>
 		  
 		
 		  
@@ -419,7 +427,7 @@ $.ajax</p>
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>18</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>20</sup></a></li>
 		  
 		
 		  
@@ -464,7 +472,7 @@ $.ajax</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>18</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>20</sup></a></li>
 			
 		
 			
@@ -516,7 +524,7 @@ $.ajax</p>
 			
 		
 			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
 			
 		
 			
@@ -524,7 +532,7 @@ $.ajax</p>
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
@@ -536,11 +544,11 @@ $.ajax</p>
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
+				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 		</ul>
