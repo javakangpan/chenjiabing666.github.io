@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-05-27T02:20:15.011Z</updated>
+  <updated>2018-06-06T02:24:18.899Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,579 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis总结</title>
+    <link href="http://chenjiabing666.github.io/2018/06/06/Redis%E6%80%BB%E7%BB%93/"/>
+    <id>http://chenjiabing666.github.io/2018/06/06/Redis总结/</id>
+    <published>2018-06-06T02:23:50.000Z</published>
+    <updated>2018-06-06T02:24:18.899Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><ul>
+<li><a href="http://redisdoc.com/" target="_blank" rel="external">中文文档</a></li>
+</ul>
+<h2 id="数据库的分类"><a href="#数据库的分类" class="headerlink" title="数据库的分类"></a>数据库的分类</h2><ul>
+<li>关系型数据库<ul>
+<li>存储表</li>
+<li>使用<code>SQL</code></li>
+<li>也称为结构化数据库</li>
+<li>常见产品<ul>
+<li>MySQL</li>
+<li>Oracle</li>
+<li>SQL Server</li>
+<li>DB2</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>非关系型数据库<ul>
+<li>泛指不使用SQL操作的数据库</li>
+<li>文档数据库<ul>
+<li>存储文档</li>
+<li><code>MogoDB</code>，用于存储<code>JSON文档</code></li>
+</ul>
+</li>
+<li><code>Key_Value</code>数据库<ul>
+<li>核心原理就是散列表(hash)</li>
+<li>查询性能奇高，经常作为数据库的缓存使用</li>
+<li>常见产品<ul>
+<li><code>MemoryCache</code></li>
+<li><code>Redis</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="what"><a href="#what" class="headerlink" title="what"></a>what</h2><ul>
+<li>一种非关系型<code>Key_Value</code>数据库</li>
+</ul>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ol>
+<li>是内存型数据库，同时提供了磁盘持久存储功能</li>
+<li>Redis采用散列表技术，查询性能高，可以达到千万级并发，Mysql的并发是千级并发</li>
+<li>Redis经常作为关系型数据库的缓存使用</li>
+<li>Redis支持5种数据类型</li>
+</ol>
+<h2 id="Redis安装"><a href="#Redis安装" class="headerlink" title="Redis安装"></a>Redis安装</h2><h3 id="第一种-yum-安装"><a href="#第一种-yum-安装" class="headerlink" title="第一种  yum 安装"></a>第一种  yum 安装</h3><ul>
+<li><code>yum -y install redis</code></li>
+<li></li>
+</ul>
+<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><ul>
+<li><code>systemctl start  redis.service</code>  </li>
+<li><code>ps -A | grep redis</code> ： 查看redis进程</li>
+<li><code>systemctl restart  redis.service</code></li>
+<li><code>systemctl stop  redis.service</code></li>
+</ul>
+<h3 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h3><ul>
+<li><a href="https://redis.io/download" target="_blank" rel="external">下载地址</a></li>
+<li><a href="https://blog.csdn.net/lixianlin/article/details/7024893" target="_blank" rel="external">安装教程</a></li>
+</ul>
+<h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><ul>
+<li><code>export PATH=/usr/local/redis/bin:$PATH</code></li>
+<li><code>redis-server</code>   : 启动redis</li>
+</ul>
+<h2 id="启动客户端"><a href="#启动客户端" class="headerlink" title="启动客户端"></a>启动客户端</h2><ul>
+<li><code>redis-cli</code>，默认端口为<code>6379</code></li>
+</ul>
+<h2 id="Redis-提供了5中数据类型"><a href="#Redis-提供了5中数据类型" class="headerlink" title="Redis 提供了5中数据类型"></a>Redis 提供了5中数据类型</h2><ul>
+<li>Redis为每种数据类型提供的对应的一组操作命令<ul>
+<li>String </li>
+<li>Hash</li>
+<li>List</li>
+<li>Set</li>
+<li>Sorted Set</li>
+</ul>
+</li>
+<li>除了5中类型的命令，还提供了其他的命令</li>
+<li>都是指存储到数据库中的<code>value</code>的类型，<code>key</code>的类型永远都是字符串</li>
+</ul>
+<h2 id="keys"><a href="#keys" class="headerlink" title="keys *"></a>keys *</h2><ul>
+<li>获取所有的<code>key</code></li>
+</ul>
+<h2 id="String类型命令"><a href="#String类型命令" class="headerlink" title="String类型命令"></a>String类型命令</h2><ul>
+<li>可以存储字符串，也可以存储数字(字符串形式)，并且其中对数字的处理也提供了一些命令，便于我们操作数字</li>
+</ul>
+<h3 id="SET"><a href="#SET" class="headerlink" title="SET"></a>SET</h3><ul>
+<li><code>set key value</code>  : 设置key的值为value，如果已经有值了，那么就会覆盖旧值<ul>
+<li><code>set message &quot;hello world&quot;</code></li>
+</ul>
+</li>
+<li><code>set key value EX seconds</code>  设置key的值，并且过期时间为秒<ul>
+<li><code>set message &quot;beijing&quot; EX 10</code> ： 10秒之后过期</li>
+</ul>
+</li>
+</ul>
+<h3 id="get"><a href="#get" class="headerlink" title="get"></a>get</h3><ul>
+<li><code>get key</code>  : 获取指定key的值<ul>
+<li><code>get message</code> </li>
+</ul>
+</li>
+</ul>
+<h3 id="del"><a href="#del" class="headerlink" title="del"></a>del</h3><ul>
+<li><code>del key</code> : 删除指定的key</li>
+</ul>
+<h3 id="append"><a href="#append" class="headerlink" title="append"></a>append</h3><ul>
+<li><code>append key value</code> : 在指定的key后面追加值</li>
+</ul>
+<h3 id="decr"><a href="#decr" class="headerlink" title="decr"></a>decr</h3><ul>
+<li><code>decr key</code>  : 如果key中存储的是一个数字，那么这个值将会减一，如果不是数字报错<ul>
+<li><code>set a &quot;10&quot;</code>,<code>desr a</code>: 执行这两个命令之后，a的值就是<code>&quot;9&quot;</code>、</li>
+</ul>
+</li>
+</ul>
+<h3 id="decrby"><a href="#decrby" class="headerlink" title="decrby"></a>decrby</h3><ul>
+<li><code>decrby key number</code> : 减少number<ul>
+<li><code>decrby a 10</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="incr"><a href="#incr" class="headerlink" title="incr"></a>incr</h3><ul>
+<li><code>incr key</code> : 如果key中存储的是一个数据，那么值将会加一<ul>
+<li><code>incr a</code>  </li>
+</ul>
+</li>
+</ul>
+<h3 id="incrby"><a href="#incrby" class="headerlink" title="incrby"></a>incrby</h3><ul>
+<li><code>incrby key number</code> : 如果key中存储的数据是一个整型数据，那么增加<code>number</code><ul>
+<li><code>incrby a 10</code> : a对应的整型数据+10</li>
+</ul>
+</li>
+</ul>
+<h3 id="incrbyfloat"><a href="#incrbyfloat" class="headerlink" title="incrbyfloat"></a>incrbyfloat</h3><ul>
+<li><code>incrbyfloat key number</code> : 增加浮点数<ul>
+<li><code>incrbyfloat a 10.4</code>  ：增加10.4</li>
+<li><code>incrbyfloat a -10.5</code>   :  减少10.5</li>
+</ul>
+</li>
+</ul>
+<h3 id="strlen"><a href="#strlen" class="headerlink" title="strlen"></a>strlen</h3><ul>
+<li><code>str key</code> : 获取指定key的长度</li>
+</ul>
+<h3 id="mset"><a href="#mset" class="headerlink" title="mset"></a>mset</h3><ul>
+<li><code>mset a &quot;cen&quot; b &quot;ceg&quot;</code>：同时设置多个key-value</li>
+</ul>
+<h3 id="mget"><a href="#mget" class="headerlink" title="mget"></a>mget</h3><ul>
+<li><code>megt key1 key2 ..........</code>  : 同时获取多个key的值</li>
+</ul>
+<h2 id="Hash类型"><a href="#Hash类型" class="headerlink" title="Hash类型"></a>Hash类型</h2><ul>
+<li><code>key</code>是字符串的类型，其中的value是Hash类型，形式如下：</li>
+<li><img src="http://ono60m7tl.bkt.clouddn.com/types.png" alt="Hash类型"></li>
+</ul>
+<ul>
+<li>简单的理解就是每一个key中对应的值相当于Java中的对象，其中的<code>value</code>就是成员变量的字段和对应的值</li>
+</ul>
+<h3 id="hset"><a href="#hset" class="headerlink" title="hset"></a>hset</h3><ul>
+<li><p><code>hset key  field value</code> : 为指定的key设置其中的域为field的值为value</p>
+<ul>
+<li><code>hset user name &quot;chenjiabing&quot;</code> : 设置key为<code>user</code>的<code>name</code>域的值为<code>chenjiabing</code></li>
+<li><code>hset user age &quot;22&quot;</code></li>
+<li><code>hset user password &quot;123456&quot;</code></li>
+</ul>
+</li>
+<li>形象的输出就好像是javascript中的对象，如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">user=&#123;</div><div class="line">    <span class="string">"name"</span>:<span class="string">"chenjiabing"</span>,</div><div class="line">    <span class="string">"age"</span>:<span class="string">"22"</span>,</div><div class="line">    <span class="string">"password"</span>:<span class="string">"123456"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="hget"><a href="#hget" class="headerlink" title="hget"></a>hget</h3><ul>
+<li><code>hget key field</code> : 获取指定key中的域为<code>field</code>的值<ul>
+<li><code>hget user name</code> : 获取name的值</li>
+</ul>
+</li>
+</ul>
+<h3 id="hdel"><a href="#hdel" class="headerlink" title="hdel"></a>hdel</h3><ul>
+<li><code>hdel key field</code> : 删除指定的域<ul>
+<li><code>hdel user name</code>  : 删除user中的name域</li>
+</ul>
+</li>
+</ul>
+<h2 id="List-列表"><a href="#List-列表" class="headerlink" title="List 列表"></a>List 列表</h2><ul>
+<li><strong>实际上是一个<code>双向队列</code>，可以在左侧插入，左侧取出，右侧插入，右侧取出</strong></li>
+</ul>
+<h3 id="lpush"><a href="#lpush" class="headerlink" title="lpush"></a>lpush</h3><ul>
+<li><code>lpush key value .....</code> : 从左侧插入一个或者多个value<ul>
+<li><code>lpush list 1 32 3 &quot;chenjiabing&quot;</code> ： 在左侧插入4个value</li>
+</ul>
+</li>
+</ul>
+<h3 id="LPOP"><a href="#LPOP" class="headerlink" title="LPOP"></a>LPOP</h3><ul>
+<li><code>lpop key</code> ： 从左侧取出一个值，那么此时的list的长度就会减一<ul>
+<li><code>lpop list</code>  : 取出一个值</li>
+</ul>
+</li>
+</ul>
+<h3 id="rpush"><a href="#rpush" class="headerlink" title="rpush"></a>rpush</h3><ul>
+<li><code>rpush key value .....</code> : 从右侧插入一个或者多个值<ul>
+<li><code>rpush list 1 3 4</code> </li>
+</ul>
+</li>
+</ul>
+<h3 id="rpop"><a href="#rpop" class="headerlink" title="rpop"></a>rpop</h3><ul>
+<li><code>rpop key</code> : 从右侧取出一个值<ul>
+<li><code>rpop list</code> ： 从右侧取出一个值，那么长度减一</li>
+</ul>
+</li>
+</ul>
+<h3 id="LLEN"><a href="#LLEN" class="headerlink" title="LLEN"></a>LLEN</h3><ul>
+<li><code>LLEN key</code> ： 查看长度<ul>
+<li><code>LLEN list</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="BRPOP"><a href="#BRPOP" class="headerlink" title="BRPOP"></a>BRPOP</h3><ul>
+<li><code>BRPOP key timeout</code> :阻塞从右侧取值， 从右侧取出数据，如果其中的数据为空，那么等待<code>timeout秒</code>，如果其中一旦插入数据就会立即返回<ul>
+<li><code>BROP list 60</code>  : 从右侧取出list中的数据，如果list中没有数据那么等待<code>60s</code>，如果一旦其中插入了数据，会立即返回数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="BLPOP"><a href="#BLPOP" class="headerlink" title="BLPOP"></a>BLPOP</h3><ul>
+<li><code>BLPOP key timeout</code>  : 阻塞从左侧取值<ul>
+<li><code>BLPOP list 60</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="Set-集合"><a href="#Set-集合" class="headerlink" title="Set 集合"></a>Set 集合</h2><ul>
+<li>不重复</li>
+</ul>
+<h2 id="SortedSet-有序集合"><a href="#SortedSet-有序集合" class="headerlink" title="SortedSet 有序集合"></a>SortedSet 有序集合</h2><h2 id="Java-操作-Redis"><a href="#Java-操作-Redis" class="headerlink" title="Java 操作 Redis"></a>Java 操作 Redis</h2><h3 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h3><ul>
+<li>Jedis</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ul>
+<li>开启<code>6379</code>端口<ul>
+<li><code>firewall-cmd --zone=public --add-port=6379/tcp</code></li>
+</ul>
+</li>
+<li>如果显示<code>firewall not running</code><ul>
+<li><code>start firewalld.service</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>测试如下</p>
+<ul>
+<li>Jedis中的方法名和Redis中的命令是一样的</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//操作String类型的数据</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testString</span><span class="params">()</span></span>&#123;</div><div class="line">	Jedis jedis=<span class="keyword">new</span> Jedis(<span class="string">"47.104.192.157"</span>);  <span class="comment">//创建jedis对象，其中的参数是IP地址，如果是本地写localhost</span></div><div class="line">	jedis.set(<span class="string">"name"</span>, <span class="string">"chenjiabing"</span>);   <span class="comment">//添加一个String 类型的数据  key为name</span></div><div class="line">	jedis.get(<span class="string">"name"</span>);  <span class="comment">//获取key为name的值</span></div><div class="line">	jedis.del(<span class="string">"name"</span>);  <span class="comment">//删除key为name的数据</span></div><div class="line">       jedis.close();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//测试Hash类型</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testHashSet</span><span class="params">()</span></span>&#123;</div><div class="line">	Jedis jedis=<span class="keyword">new</span> Jedis(<span class="string">"localhost"</span>);</div><div class="line">	jedis.hset(<span class="string">"user"</span>, <span class="string">"name"</span>,<span class="string">"陈加兵"</span>);   <span class="comment">//添加一个key为user的Hash类型的数据</span></div><div class="line">	jedis.hset(<span class="string">"user"</span>, <span class="string">"age"</span>, <span class="string">"22"</span>);   <span class="comment">//添加age</span></div><div class="line">	jedis.hincrBy(<span class="string">"user"</span>, <span class="string">"age"</span>, <span class="number">200</span>);   <span class="comment">//年龄增加200</span></div><div class="line">	String name=jedis.hget(<span class="string">"user"</span>, <span class="string">"name"</span>); <span class="comment">//获取name的值</span></div><div class="line">	Integer age=Integer.parseInt(jedis.hget(<span class="string">"user"</span>, <span class="string">"age"</span>));  <span class="comment">//获取age的值，转换为Integer类型</span></div><div class="line">	System.out.println(name);</div><div class="line">	System.out.println(age);</div><div class="line">       jedis.close();</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//测试List类型</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testList</span><span class="params">()</span></span>&#123;</div><div class="line">	Jedis jedis=<span class="keyword">new</span> Jedis(<span class="string">"localhost"</span>);</div><div class="line">	jedis.lpush(<span class="string">"list"</span>, <span class="string">"陈加兵"</span>);  <span class="comment">//从左侧添加一个值</span></div><div class="line">	System.out.println(jedis.llen(<span class="string">"list"</span>));  <span class="comment">//获取长度</span></div><div class="line">	jedis.lpush(<span class="string">"list"</span>, <span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"TOM"</span>);  <span class="comment">//左侧存放多个值</span></div><div class="line">	System.out.println(jedis.rpop(<span class="string">"list"</span>));  <span class="comment">//从右侧取出</span></div><div class="line">       jedis.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Redis解决Session共享"><a href="#Redis解决Session共享" class="headerlink" title="Redis解决Session共享"></a>Redis解决Session共享</h2><ul>
+<li>当浏览器登录，Nginx会分发请求给应用服务器，此时的这个服务器中保存了该用户的<code>session</code>，但是可能再次请求的时候，Nginx会把请求分发给另外一个应用服务器，那么又需要重新登录一次。我们可以使用Nginx的<code>ip_hash</code>策略解决这个问题，但是我们也可以使用Redis解决</li>
+<li>我们将<code>session id</code>存放在<code>Redis</code>中，每一个应用服务器都从Redis中获取<code>Session id</code></li>
+<li><strong>需要一个远程数据库<code>Redis</code>，并且所有的应用服务器(Tomcat)共享这个远程数据库，那么Redis中的<code>sessionId</code>才能实现共享存取</strong></li>
+<li><img src="http://ono60m7tl.bkt.clouddn.com/session.png" alt=""></li>
+</ul>
+<h3 id="Session管理器"><a href="#Session管理器" class="headerlink" title="Session管理器"></a>Session管理器</h3><ul>
+<li><code>Redis Session Manage for Apache Tomcat</code></li>
+<li><a href="https://github.com/jcoleman/tomcat-redis-session-manager" target="_blank" rel="external">参考文章</a></li>
+</ul>
+<h3 id="下载jar包"><a href="#下载jar包" class="headerlink" title="下载jar包"></a>下载jar包</h3><ul>
+<li><a href="https://search.maven.org/#search%7Cga%7C1%7Ctomcat-redis-session-manager" target="_blank" rel="external"><code>tomcat-redis-session-manager-VERSION.jar</code></a></li>
+<li><a href="http://mvnrepository.com/artifact/redis.clients/jedis" target="_blank" rel="external"><code>jedis-2.5.2.jar</code></a></li>
+<li><a href="http://mvnrepository.com/artifact/org.apache.commons/commons-pool2" target="_blank" rel="external"><code>commons-pool2-2.2.jar</code></a></li>
+</ul>
+<h3 id="将下载的jar包放在每个应用服务器的Tomcat中"><a href="#将下载的jar包放在每个应用服务器的Tomcat中" class="headerlink" title="将下载的jar包放在每个应用服务器的Tomcat中"></a>将下载的jar包放在每个应用服务器的Tomcat中</h3><ul>
+<li><p><strong>不适用于<code>Tomcat8.*</code></strong></p>
+</li>
+<li><p><strong>这里是要修改每一台应用服务器上面的Tomcat内容，这样才能实现多台应用服务器中的<code>SessionId</code>共享</strong></p>
+</li>
+<li><p>将jar包放在<code>Tomcat</code>目录中的<code>lib</code>文件夹下</p>
+</li>
+<li>修改<code>Tomcat</code>目录下的<code>conf/context.xml</code>中添加如下内容</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;Valve className="com.orangefunction.tomcat.redissessions.RedisSessionHandlerValve" /&gt;</div><div class="line">&lt;Manager className="com.orangefunction.tomcat.redissessions.RedisSessionManager"</div><div class="line">         host="47.104.192.157" &lt;!-- 服务器的IP，这个是Redis数据库所在服务器的IP --&gt;</div><div class="line">         port="6379" &lt;!-- 端口 "6379" --&gt;</div><div class="line">         database="0" &lt;!-- optional: defaults to "0" --&gt;</div><div class="line">         maxInactiveInterval="60" /&gt; &lt;!-- 失效时间 "60" (in seconds) --&gt;</div></pre></td></tr></table></figure>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="http://redisdoc.com/" target="_blank" rel="external">http://redisdoc.com/</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Redis&quot;&gt;&lt;a href=&quot;#Redis&quot; class=&quot;headerlink&quot; title=&quot;Redis&quot;&gt;&lt;/a&gt;Redis&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://redisdoc.com/&quot; target=&quot;_blank&quot; rel=&quot;
+    
+    </summary>
+    
+      <category term="Redis" scheme="http://chenjiabing666.github.io/categories/Redis/"/>
+    
+    
+      <category term="Redis" scheme="http://chenjiabing666.github.io/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nginx总结</title>
+    <link href="http://chenjiabing666.github.io/2018/06/06/Nginx%E6%80%BB%E7%BB%93/"/>
+    <id>http://chenjiabing666.github.io/2018/06/06/Nginx总结/</id>
+    <published>2018-06-06T02:23:10.000Z</published>
+    <updated>2018-06-06T02:23:30.671Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><h2 id="什么是Nginx"><a href="#什么是Nginx" class="headerlink" title="什么是Nginx"></a>什么是Nginx</h2><ul>
+<li>是俄罗斯程序员开发的一款高性能的web服务器</li>
+<li>Nginx可以承受高并发，可以同时承受近百万请求</li>
+<li>利用Nginx和Tomcat(应用服务器)组合搭建反向代理服务器集群，可以解决WEB的高并发问题</li>
+</ul>
+<h2 id="WEB-服务器"><a href="#WEB-服务器" class="headerlink" title="WEB 服务器"></a>WEB 服务器</h2><ul>
+<li>凡是能够处理<code>Http</code>协议的服务器统称为web服务器</li>
+<li>Nginx </li>
+<li>Apache</li>
+<li>Tomcat</li>
+<li>JBOSS</li>
+<li>Weblogic</li>
+<li>WebSpare</li>
+</ul>
+<h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><h3 id="yum-安装"><a href="#yum-安装" class="headerlink" title="yum 安装"></a>yum 安装</h3><ul>
+<li><p><code>yum -y install nginx</code></p>
+</li>
+<li><p><code>nginx</code> 启动</p>
+</li>
+<li><p><code>nginx -s stop</code> 关闭</p>
+</li>
+</ul>
+<h4 id="启动命令"><a href="#启动命令" class="headerlink" title="启动命令"></a>启动命令</h4><ul>
+<li><code>systemctl start nginx.service</code></li>
+<li><code>systemctl stop nginx.service</code></li>
+<li><code>systemctl restart nginx.service</code></li>
+<li><code>systemctl enable nginx.service</code>  </li>
+<li><code>systemctl disable nginx.service</code></li>
+<li><code>ps -A | grep nginx</code>  : 检查</li>
+<li>启动之后在浏览器直接输入<code>http://IP地址</code>即可访问到主页，这里的端口号默认是<code>80</code></li>
+</ul>
+<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><ul>
+<li><code>/etc/nginx/nginx.conf</code></li>
+</ul>
+<h4 id="web目录"><a href="#web目录" class="headerlink" title="web目录"></a>web目录</h4><ul>
+<li><code>/usr/share/nginx/html</code></li>
+</ul>
+<h3 id="安装包安装"><a href="#安装包安装" class="headerlink" title="安装包安装"></a>安装包安装</h3><ul>
+<li><a href="http://nginx.org/download/nginx-1.14.0.tar.gz" target="_blank" rel="external">安装地址</a></li>
+</ul>
+<h2 id="Nginx-配置文件"><a href="#Nginx-配置文件" class="headerlink" title="Nginx 配置文件"></a>Nginx 配置文件</h2><ul>
+<li>位置 ： <code>/etc/nginx/nginx.conf</code>  （yum安装的路径）</li>
+<li>内容结构</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">worker_processes 1;   //worker进程，一般是电脑几核处理器就写几</div><div class="line"></div><div class="line">events&#123;</div><div class="line">	worker_connections 1024;   //一个worker进程能够承受多少线程</div><div class="line">&#125;</div><div class="line"></div><div class="line">http&#123;</div><div class="line">	http协议通用参数</div><div class="line"></div><div class="line">	server&#123;</div><div class="line">		虚拟主机参数</div><div class="line">	&#125;</div><div class="line">	server&#123;</div><div class="line">		虚拟主机参数</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>nginx -t -c /etc/nginx/nginx.conf</code>  修改完成之后执行该命令，测试配置文件，热加载(不停机)配置文件</li>
+<li><code>nginx -s reload</code> : 重新启动<code>nginx</code></li>
+</ul>
+<h2 id="虚拟主机的三种方式"><a href="#虚拟主机的三种方式" class="headerlink" title="虚拟主机的三种方式"></a>虚拟主机的三种方式</h2><ol>
+<li>基于端口的虚拟主机，80,8080，需要使用80以外的其他端口，客户端使用不方便</li>
+<li>基于IP虚拟机，一个服务器可以绑定多个IP</li>
+<li><strong>基于域名的虚拟主机，共享一个IP，共享一个80端口</strong></li>
+</ol>
+<h2 id="外网配置"><a href="#外网配置" class="headerlink" title="外网配置"></a>外网配置</h2><p>###　前提</p>
+<ul>
+<li><p>我们的服务器<code>Ｃｅｎｔｏｓ７</code> 使用<code>yum install nginx</code>安装了<code>Nginx</code>，那么这个Nginx的<code>web</code>目录就在<code>/usr/share/nginx/html</code></p>
+</li>
+<li><p>配置文件的路径为： <code>/etc/nginx/nginx.conf</code></p>
+</li>
+<li><p><strong>有自己的域名</strong></p>
+</li>
+</ul>
+<h3 id="配置开始"><a href="#配置开始" class="headerlink" title="配置开始"></a>配置开始</h3><ol>
+<li>申请自己的域名： 比如<code>chenjiabing.org</code>，并且将自己的<code>域名解析</code>绑定在服务器的<code>ip地址</code>上<ol>
+<li><strong>比如将下面需要用到的<code>t1.chenjiabing.org</code>和<code>t2.chenjiabing.org</code>解析在上面，那么我们在访问<code>t1.chenjiabing.org</code>的时候才能找到<code>ip</code>，随之找到自己的服务器，之后再根据在Nginx中配置的虚拟主机访问到对应的页面</strong></li>
+</ol>
+</li>
+<li><img src="http://ono60m7tl.bkt.clouddn.com/dns.png" alt="解析域名"></li>
+<li><strong>在<code>/etc/nginx/nginx.conf</code>的配置文件中只需要配置虚拟主机即可，这里我们配置两个虚拟主机</strong></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">   # 自己配置的虚拟主机</div><div class="line">   server&#123;</div><div class="line">        listen 80;    # nginx的端口</div><div class="line">        server_name t1.chenjiabing.org;     # 访问的地址</div><div class="line">        location / &#123;</div><div class="line">                root t1;     # 这个虚拟主机对应的web目录，这里设置的路径为/usr/share/t1</div><div class="line">                index index.html;   # 默认显示的首页</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 自己配置的虚拟主机</div><div class="line">   server&#123;</div><div class="line">        listen 80;  </div><div class="line">        server_name t2.chenjiabing.cn;    # 访问的地址</div><div class="line">        location / &#123;</div><div class="line">                # /usr/share/nginx/t2    </div><div class="line">                root t2;            # 这个虚拟主机的web目录</div><div class="line">                index index.html;  # 显示的首页</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># nginx默认的虚拟主机</div><div class="line">server &#123;</div><div class="line">        listen       80 default_server;</div><div class="line">        listen       [::]:80 default_server;</div><div class="line">        server_name  _;</div><div class="line">        root         /usr/share/nginx/html;    # 默认的web目录，其实这里可以写 html 是一样的</div><div class="line"></div><div class="line">        # Load configuration files for the default server block.</div><div class="line">        include /etc/nginx/default.d/*.conf;</div><div class="line"></div><div class="line">        location / &#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        error_page 404 /404.html;</div><div class="line">            location = /40x.html &#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        error_page 500 502 503 504 /50x.html;</div><div class="line">            location = /50x.html &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>配置上面的两个虚拟主机之后，我们需要配置对应的<code>web</code>目录，我们只需要在<code>/usr/share/nginx/</code>这个目录中新建<code>t1</code>和<code>t2</code>两个文件夹作为两个虚拟主机的<code>web</code>目录，之后，在其中创建<code>index.html</code>作为显示的主页即可</li>
+<li>测试启动<code>Nginx</code>: <code>nginx -t -c /etc/nginx/nginx.conf</code></li>
+<li><p>重新启动<code>nginx</code> ： <code>nginx  -s reload</code></p>
+</li>
+<li><p>之后在浏览器中输入<code>t1.chenjiabing.org</code>,那么浏览器就会自动访问到<code>/usr/share/nginx/t1/index.html</code>显示首页内容，同样的输入<code>http://t2.chenjiabing.org</code></p>
+</li>
+</ul>
+<h2 id="内网配置"><a href="#内网配置" class="headerlink" title="内网配置"></a>内网配置</h2><h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><ul>
+<li><p><strong>没有自己的域名，但是我们想要使用域名访问服务器上的Nginx的内容，比如，我们输入<code>t1.tedu.cn</code>就想要访问到服务器地址为：<code>47.104.192.157</code>中Nginx配置的虚拟主机</strong></p>
+</li>
+<li><p>使用的是Linux，hosts文件所在目录为<code>/etc/hosts</code></p>
+</li>
+<li><p>使用的是windows，那么hosts文件所在的目录为<code>C:\Windows\System32\Drivers\etc\hosts</code></p>
+</li>
+</ul>
+<h3 id="本地配置"><a href="#本地配置" class="headerlink" title="本地配置"></a>本地配置</h3><ul>
+<li>我们需要在<code>/etc/hosts</code>中添加对应需要的域名和服务器的<code>IP地址</code></li>
+<li><code>sudo vi /etc/hosts</code> ,输入以下内容</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">47.104.192.157 t1.tedu.cn    ## 前面是服务器的IP地址，后面是需要访问的域名，这个是没有申请的域名，可以直接写</div><div class="line"></div><div class="line">47.104.192.157 t2.tedu.cn</div></pre></td></tr></table></figure>
+<ul>
+<li>配置完成之后，使用<code>ping t1.tedu.cn</code>查看是否能够找到对应的IP地址<code>47.104.192.157</code></li>
+</ul>
+<h3 id="服务器配置虚拟主机"><a href="#服务器配置虚拟主机" class="headerlink" title="服务器配置虚拟主机"></a>服务器配置虚拟主机</h3><ul>
+<li>和上面的配置一样，不过是这次配置的域名是<code>t1.tedu.cn</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">   # 自己配置的虚拟主机</div><div class="line">   server&#123;</div><div class="line">        listen 80;    # nginx的端口</div><div class="line">        server_name t1.tedu.org;     # 访问的地址</div><div class="line">        location / &#123;</div><div class="line">                root t1;     # 这个虚拟主机对应的web目录，这里设置的路径为/usr/share/t1</div><div class="line">                index index.html;   # 默认显示的首页</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># 自己配置的虚拟主机</div><div class="line">   server&#123;</div><div class="line">        listen 80;  </div><div class="line">        server_name t2.tedu.cn;    # 访问的地址</div><div class="line">        location / &#123;</div><div class="line">                # /usr/share/nginx/t2    </div><div class="line">                root t2;            # 这个虚拟主机的web目录</div><div class="line">                index index.html;  # 显示的首页</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"># nginx默认的虚拟主机</div><div class="line">server &#123;</div><div class="line">        listen       80 default_server;</div><div class="line">        listen       [::]:80 default_server;</div><div class="line">        server_name  _;</div><div class="line">        root         /usr/share/nginx/html;    # 默认的web目录，其实这里可以写 html 是一样的</div><div class="line"></div><div class="line">        # Load configuration files for the default server block.</div><div class="line">        include /etc/nginx/default.d/*.conf;</div><div class="line"></div><div class="line">        location / &#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        error_page 404 /404.html;</div><div class="line">            location = /40x.html &#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        error_page 500 502 503 504 /50x.html;</div><div class="line">            location = /50x.html &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>同样的创建<code>t1</code>和<code>t2</code>的web目录</li>
+<li>测试加载，重启</li>
+<li><strong>在本地机器的浏览器中输入<code>t1.tedu.cn</code>即可访问到，不过这次只能在配置<code>hosts</code>的本地机器使用，如果该机器没有配置这个<code>hosts</code>文件，那么是不能访问的</strong></li>
+</ul>
+<h3 id="搜索过程"><a href="#搜索过程" class="headerlink" title="搜索过程"></a>搜索过程</h3><ol>
+<li>在本地配置过的<code>hosts</code>文件的机器的浏览器中输入<code>http://t1.tedu.cn</code>,那么浏览器会查找本地的<code>hosts</code>文件中是否存在对应的<code>IP地址</code></li>
+<li>查找到对应的IP地址之后，会向服务器发出请求，此时服务器端就会根据浏览器发出的域名在Nginx的虚拟主机中查找匹配<code>server_name</code>,然后找到响应的页面</li>
+<li><img src="http://ono60m7tl.bkt.clouddn.com/nginx.png" alt="Nginx"></li>
+</ol>
+<h2 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h2><ol>
+<li>判断域名能够解析成对应的IP</li>
+<li>判断IP地址是否能够访问</li>
+</ol>
+<h1 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h1><h2 id="what"><a href="#what" class="headerlink" title="what"></a>what</h2><ul>
+<li>基于<code>SSL</code>加密的<code>HTTP</code>通讯</li>
+<li>底层是<code>SSL</code>加密的<code>TCP</code>协议</li>
+<li>应用层还是传统的HTTP编程</li>
+<li>默认的通讯端口是 <code>443</code></li>
+<li>需要去<code>CA</code>申请证书，配置到服务器上</li>
+<li><img src="http://ono60m7tl.bkt.clouddn.com/cs.png" alt="CA证书"></li>
+</ul>
+<h2 id="配置HTTPS证书"><a href="#配置HTTPS证书" class="headerlink" title="配置HTTPS证书"></a>配置HTTPS证书</h2><h3 id="前提-1"><a href="#前提-1" class="headerlink" title="前提"></a>前提</h3><ul>
+<li>远程服务器上的Nginx使用<code>yum -y install nginx</code>安装的，那么这个路径就是确定了</li>
+<li>并且下载了证书，总共两个文件</li>
+</ul>
+<h3 id="内网配置-1"><a href="#内网配置-1" class="headerlink" title="内网配置"></a>内网配置</h3><ul>
+<li>我们在<code>aliyun.com</code>中使用<code>tom.canglaoshi.org</code>这个域名申请了HTTPS证书</li>
+<li><img src="http://ono60m7tl.bkt.clouddn.com/ca.png" alt="申请证书"></li>
+<li><p><img src="http://ono60m7tl.bkt.clouddn.com/download.png" alt="下载证书"></p>
+</li>
+<li><p>因为我们没有域名和自己的服务器IP地址绑定在一起，因此我们使用内网配置</p>
+</li>
+<li>在本地的机器的<code>/etc/hosts</code>文件中添加对应的<code>服务器的IP地址  tom.canglaoshi.org</code><ul>
+<li>这里的服务器的IP地址是远程服务器的地址，等会我们需要在远程服务器中配置Nginx</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">47.104.192.157  tom.canglaoshi.org    # 服务器IP地址  域名</div></pre></td></tr></table></figure>
+<ul>
+<li><p>在远程服务器的Ngix配置文件中<code>/etc/nginx/ngxin.conf</code>添加一个虚拟主机<code>server</code>，</p>
+<ul>
+<li>我们可在其中添加一个<code>include tom.conf;</code>这句话，那么我们再在<code>/etc/nginx</code>创建一个<code>tom.conf</code>配置文件即可，这样看的更加清除，其实就是使用了引入文件</li>
+<li><code>tom.conf</code>的内容如下，下面的路径都是使用的相对路径</li>
+<li><strong>http协议默认访问的是<code>80端口</code>，因此假如我们在浏览器中输入<code>http://tom.canglaoshi.org</code>那么将不会显示安全证书，因为<code>https</code>协议使用的是<code>443</code>端口，但是我们可以添加一个监听80端口的虚拟主机，设置<code>server_name</code>为<code>tom.canglaoshi.org</code>，同时使用<code>301</code>重定向到<code>https://tom.canglaoshi.org</code>，那么当在浏览器中输入<code>http://tom.canglaoshi.org</code>的时候就会自动跳转到<code>https://tom.canglaoshi.org</code></strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">server&#123;</div><div class="line">    liseten  80;   # 默认端口，使用的http协议</div><div class="line">    server_name tom.canglaoshi.org;</div><div class="line">    return 301 https://tom.canglaoshi.org;  # 这里定义的是重定向，如果使用http://tom.canglaoshi.org ，那么就会重定向到https://tom.canglaoshi.org</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 443;        # 端口号  必须开启,必须使用Https协议才能访问到</div><div class="line">    server_name tom.canglaoshi.org;   # 开启证书的域名，这个域名不能改变，因为我们就是使用这个域名开启证书的</div><div class="line">    ssl on;</div><div class="line">    ssl_certificate   cert/214462831460580.pem;     # 这个是开启证书的时候下载的文件，放在/etc/nginx/cert文件中</div><div class="line">    ssl_certificate_key  cert/214462831460580.key;  # 这个是开启证书的时候下载的文件，放在/etc/nginx/cert文件中</div><div class="line">    ssl_session_timeout 5m;</div><div class="line">    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</div><div class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</div><div class="line">    ssl_prefer_server_ciphers on;</div><div class="line">    location / &#123;</div><div class="line">        root tom;      # 这个是访问域名的时候显示的web目录，这需要自己在/usr/share/nginx中创建</div><div class="line">        index index.html;  # 这个是显示的首页</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>我们将开启证书的时候下载的两个文件，分别为<code>214462831460580.key</code>和<code>214462831460580.pem</code>放到<code>/etc/nginx/cert</code>文件中，当然这个<code>cert</code>文件需要我们自己创建</li>
+<li>至此就配置完成</li>
+<li>测试Nginx : <code>nginx -t -c /etc/nginx/ngxin.conf</code></li>
+<li>重启nginx ： <code>nginx -s reload</code></li>
+<li>此时在本地配置的机器的浏览器中输入<code>https://tom.canglaoshi.org</code>访问即可，我们将会看见地址栏中将会出现<code>安全</code>两个字，那么证书就配置上了<ul>
+<li>这里使用的<code>403</code>端口，必须使用<code>https</code>访问</li>
+</ul>
+</li>
+</ul>
+<h3 id="外网配置-1"><a href="#外网配置-1" class="headerlink" title="外网配置"></a>外网配置</h3><ul>
+<li>我们有自己的域名<code>chenjiabibing.org</code>和自己的服务器IP绑定在一起，那么我们可以直接在远程服务器中配置</li>
+<li>使用<code>tom.chengjiabing.org</code>这个子域名申请证书，下载两个文件</li>
+<li>不需要在本地机器配置了，直接从上面的远程服务器的步骤开始配置</li>
+</ul>
+<h1 id="Nginx反向代理集群"><a href="#Nginx反向代理集群" class="headerlink" title="Nginx反向代理集群"></a>Nginx反向代理集群</h1><h2 id="what-1"><a href="#what-1" class="headerlink" title="what"></a>what</h2><ul>
+<li>通过互联网访问远程的服务器，Nginx分发请求给各种web容器(Tomcat…..)处理就叫反向代理</li>
+<li><img src="http://ono60m7tl.bkt.clouddn.com/proxy.png" alt="反向正向集群代理"></li>
+</ul>
+<h2 id="内网模拟"><a href="#内网模拟" class="headerlink" title="内网模拟"></a>内网模拟</h2><ul>
+<li>我们需要5台电脑，一台是本地的，使用浏览器访问域名为<code>http://tts.tedu.cn</code>,一台远程服务器(IP地址:47.104.192.157)，这台远程服务器使用Nginx分发请求给另外的三台，另外的三台使用的是Tomcat处理Nginx分发的请求，IP地址为：<code>192.168.0.231</code>，<code>192.168.0.176，</code>，<code>192.168.0.174</code></li>
+<li>必须确保三台的<code>Tomcat</code>容器都是开启的状态，我们可以在本地使用<code>http://192.168.0.231:8080/</code>访问看看是否能够访问到该机器的Tomcat</li>
+<li><img src="http://ono60m7tl.bkt.clouddn.com/toms.png" alt="反向代理"></li>
+<li>因为没有申请域名，这个<code>tts.tedu.cn</code>没有和远程服务器的IP绑定，因此需要在本地机器配置<code>/etc/hosts</code>文件中配置才可以用浏览器访问<ul>
+<li>在<code>/etc/hosts</code>文件中添加<code>47.104.192.157 tts.tedu.cn</code>即可</li>
+<li>使用<code>ping tts.tedu.cn</code>查看能够成功</li>
+</ul>
+</li>
+<li>此时我们在远程服务器中配置另外三台的集群信息即可。<ul>
+<li>在<code>/etc/nginx/nginx.conf</code>添加一句<code>include tts.conf</code></li>
+<li>那么我们只需要将自己的集群配置信息文件<code>tts.conf</code>放在<code>/etc/nginx/</code>文件夹下即可</li>
+</ul>
+</li>
+<li><code>tts.conf</code>配置文件如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">upstream toms &#123;</div><div class="line">    server 192.168.0.231:8080;    # 配置三台tomcat的处理器，端口是8080，因为tomcat的默认端口</div><div class="line">    server 192.168.0.176:8080;</div><div class="line">    server 192.168.0.174:8080;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 80;     # 监听的是80端口，浏览器默认使用80，当在本地机器上输入`http://tts.tedu.cn`</div><div class="line">    server_name tts.tedu.cn;     ## 对应的域名</div><div class="line">    location / &#123;</div><div class="line">        proxy_pass http://toms;   # 这里的toms就是上面定义的集群信息</div><div class="line"></div><div class="line">        proxy_redirect     off;</div><div class="line">        proxy_set_header   Host             $host;</div><div class="line">        proxy_set_header   X-Real-IP        $remote_addr;</div><div class="line">        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;</div><div class="line">        proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;</div><div class="line">        proxy_max_temp_file_size 0;</div><div class="line">        proxy_connect_timeout      90;</div><div class="line">        proxy_send_timeout         90;</div><div class="line">        proxy_read_timeout         90;</div><div class="line">        proxy_buffer_size          4k;</div><div class="line">        proxy_buffers              4 32k;</div><div class="line">        proxy_busy_buffers_size    64k;</div><div class="line">        proxy_temp_file_write_size 64k;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>此时我们配置成功</li>
+<li>测试配置</li>
+<li>重启Nginx</li>
+<li><strong>在配置<code>/etc/hosts</code>的本地机器上输入<code>http://tts.tedu.cn</code>即可访问，我们看到Nginx是将请求均匀分发到不同的集群机器上进行处理</strong></li>
+</ul>
+<h2 id="Nginx集群的负载均衡策略"><a href="#Nginx集群的负载均衡策略" class="headerlink" title="Nginx集群的负载均衡策略"></a>Nginx集群的负载均衡策略</h2><h3 id="轮训策略"><a href="#轮训策略" class="headerlink" title="轮训策略"></a>轮训策略</h3><ul>
+<li><p>默认策略</p>
+</li>
+<li><p>可以增加权重 <code>weight</code></p>
+<ul>
+<li>对于一些应用服务器的性能可能不一样，我们需要给性能更好的应用服务器分配更多的请求处理，因此这里就涉及到权重问题</li>
+<li>直接在后面添加权重即可，如下</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">upstream toms &#123;</div><div class="line">    server 192.168.0.231:8080 weigth 10 ;    # 配置三台tomcat的处理器，端口是8080，因为tomcat的默认端口</div><div class="line">    server 192.168.0.176:8080 weight 20;</div><div class="line">    server 192.168.0.174:8080 weight 30;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>可以配合<code>Redis</code>实现session共享问题</li>
+</ul>
+<h3 id="ip-hash-ip-散列"><a href="#ip-hash-ip-散列" class="headerlink" title="ip_hash  ip 散列"></a>ip_hash  ip 散列</h3><ul>
+<li>根据用户的Ip地址映射到固定的服务器</li>
+<li><strong>如果用户登录网站，那么在当前的服务器中已经保存了<code>session</code>的信息，此时就不需要重新登录了，但是可能当再次请求的时候，Nginx又将其分发到其他的应用服务器中了，但是这个应用服务器没有当前当前用户登录的<code>session</code>信息，此时就需要重新登录，这个就是问题所在</strong></li>
+<li><img src="http://ono60m7tl.bkt.clouddn.com/iphash.png" alt="IP_Has"></li>
+</ul>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><ul>
+<li>就是根据用户的<code>IP地址</code>通过<code>散列算法</code>每次请求都保证Nginx将对应的Ip分发到同一台应用服务器</li>
+<li>ip散列可以和轮训策略结合使用</li>
+<li>直接添加一个<code>ip_hash</code>即可</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">upstream toms &#123;</div><div class="line">	ip_hash;</div><div class="line">    server 192.168.0.231:8080 weigth 10 ;    # 配置三台tomcat的处理器，端口是8080，因为tomcat的默认端口</div><div class="line">    server 192.168.0.176:8080 weight 20;</div><div class="line">    server 192.168.0.174:8080 weight 30;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="url-hash"><a href="#url-hash" class="headerlink" title="url_hash"></a>url_hash</h3><ul>
+<li>根据url映射到固定的服务器</li>
+</ul>
+<h3 id="服务器的临时下线"><a href="#服务器的临时下线" class="headerlink" title="服务器的临时下线"></a>服务器的临时下线</h3><ul>
+<li>如果服务器需要更新升级，我们需要将应用服务器临时下线维护，我们可以将其删除，或者添加一个<code>down</code>即可，比如<code>server 192.168.0.174:8080 weight 30 down</code>就表示该服务器下线了</li>
+</ul>
+<h2 id="MySQL远程连接"><a href="#MySQL远程连接" class="headerlink" title="MySQL远程连接"></a>MySQL远程连接</h2><ul>
+<li><p>前提是远程的服务器需要开启<code>3306端口</code>，这个在<code>阿里云</code>的服务器开启即可</p>
+</li>
+<li><p><code>grant all privileges on *.* to 用户名@&quot;IP地址&quot;  identified by &quot;密码&quot;</code></p>
+<ul>
+<li><code>grant all privileges on tedu_store.* to tedu@&quot;%&quot; identified by &quot;tedu&quot;;</code><ul>
+<li>连接远程数据库<code>tedu_store</code>，用户名为<code>tedu</code>,用户密码为<code>tedu</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在本地连接远程数据库<ul>
+<li><code>mysql -h IP地址 -u 用户名 -p</code><ul>
+<li><code>mysql -h 47.104.152.197 -u tedu -p</code>，之后直接输入密码即可，那么连接的就是远程数据库</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>远程数据库开启之后，我们就可以在自己的项目中配置数据库的连接<code>url</code>为远程数据库了，那么就可实现多个应用服务器共享一个数据库，实现数据的共享了，不会导致数据错乱了</strong></li>
+</ul>
+<h2 id="项目集群部署"><a href="#项目集群部署" class="headerlink" title="项目集群部署"></a>项目集群部署</h2><h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><ul>
+<li>一台Nginx服务器分发请求，部署反向集群</li>
+<li>多台应用服务器处理请求(Tomcat)</li>
+<li>一台<code>MySQL</code>数据库服务器，存储项目数据</li>
+<li>一台<code>Redis</code>服务器，实现session共享，实现Redis缓存</li>
+<li><img src="http://ono60m7tl.bkt.clouddn.com/session.png" alt="项目集群实例"></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>Nginx只是起到分发请求的作用，具体的处理是在应用服务器中，比如<code>Tomcat</code>，Nginx根据不同的策略将请求分发给不同应用服务器处理</li>
+<li>这些不同的应用服务器可以连接同一个远程数据库，那么就可以实现数据共享，不会导致数据错乱</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Nginx&quot;&gt;&lt;a href=&quot;#Nginx&quot; class=&quot;headerlink&quot; title=&quot;Nginx&quot;&gt;&lt;/a&gt;Nginx&lt;/h1&gt;&lt;h2 id=&quot;什么是Nginx&quot;&gt;&lt;a href=&quot;#什么是Nginx&quot; class=&quot;headerlink&quot; titl
+    
+    </summary>
+    
+      <category term="Nginx" scheme="http://chenjiabing666.github.io/categories/Nginx/"/>
+    
+    
+      <category term="Nginx" scheme="http://chenjiabing666.github.io/tags/Nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux使用总结</title>
@@ -1914,95 +2487,6 @@
     
     
       <category term="数据结构与算法" scheme="http://chenjiabing666.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>插入排序算法</title>
-    <link href="http://chenjiabing666.github.io/2018/05/09/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
-    <id>http://chenjiabing666.github.io/2018/05/09/插入排序算法/</id>
-    <published>2018-05-09T00:43:57.000Z</published>
-    <updated>2018-05-09T00:44:35.467Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="插入排序算法"><a href="#插入排序算法" class="headerlink" title="插入排序算法"></a>插入排序算法</h1><h2 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h2><ul>
-<li>我们以<code>从小到大</code>的排序进行讲解</li>
-</ul>
-<ul>
-<li>插入排序就是将一个元素插入到一个已经是有序的序列中， 通过遍历比较这个<code>待插入元素</code>和有序的序列元素之间的大小，来比较需要插入的位置，使其仍然是一个有序的数组。</li>
-<li><strong>数组插入的算法：向后移动元素给待插入的数据位置</strong></li>
-</ul>
-<h2 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h2><ul>
-<li><code>第一趟</code>：假设我们需要排序的数组大小为<code>n</code>，一般的思想是先假设<code>第一个元素</code>是有序的，即是已经排序好的，那么第二个元素此时就是<code>待插入的元素</code>，我们拿这个待插入的元素和第一个元素比较大小，如果小的话，那么就将其插入到第一个元素的前面，此时待插入元素就变成了第一个，如果大于的话，就不需要改变位置。那么此时这个数组的前两个元素就是有序的</li>
-<li><code>第二趟</code>： 经过第一趟的，前面两个元素已经是有序的，那么此时的第三个元素就是<code>待插入元素</code>，这个待插入元素先和第二个元素进行比较，如果大于的话，那么就不需要再和第一个元素比较了，当前位置不用改变就可以维持前面三个元素是有序的。如果是小于的话，此时的第二个元素就需要向后移动位置，因为这里可以肯定的是这个待插入元素一定是在其前面插入的，具体的位置没有确定而已。第二个元素向后移动之后，那么此时就需要和第一个元素比较，如果大于的话，那么就插在第一个和第二个元素之间成为当前数组的第二个元素即可，如果小于的话，那么就插入到第一个元素之前，同样的是第一个元素要向后移动为其腾出位置。</li>
-<li><code>第三趟</code>…………………………………<code>第n-1</code>趟</li>
-</ul>
-<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><ul>
-<li>平均时间复杂度：<code>O(n2)</code></li>
-<li>空间复杂度：<code>O(1)</code>  (用于记录需要插入的数据)</li>
-<li>稳定性：稳定</li>
-</ul>
-<h2 id="算法实现-—-java"><a href="#算法实现-—-java" class="headerlink" title="算法实现 — java"></a>算法实现 — java</h2><ul>
-<li>需要注意的是判断条件一定是<code>j&gt;=0&amp;&amp;insertNode&lt;array[j]</code>，因为如果调换顺序的话，那么会造成数组<code>下标越界</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">* 这个是从小到大的插入排序</div><div class="line">* @Param array  待排序的数组</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span>[] array)</span></span>&#123;</div><div class="line">	<span class="comment">//我们假设第一个元素已经是有序的，因此从第二个开始遍历，总共需要遍历n-1次</span></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; array.length; i++) &#123;</div><div class="line">		</div><div class="line">		<span class="keyword">int</span> insertNode=array[i];  <span class="comment">//这个就是待插入的数，需要和在之前的元素比较</span></div><div class="line">		</div><div class="line">		<span class="keyword">int</span> j=i-<span class="number">1</span>;   <span class="comment">//这个的初始值是待插入数字的前一个数字</span></div><div class="line">		</div><div class="line">		<span class="comment">//如果待插入的数字比前面的元素小并且此时的j没有到达第一个元素(j&gt;=0)</span></div><div class="line">		<span class="comment">//循环结束的条件是insertNode&gt;=array[j],那么此时的insertNode需要插入的位置就是array[j+1]这个位置了</span></div><div class="line">		<span class="comment">//需要注意的是&amp;&amp;是短路与的判断，因此需要将j&gt;=0放在前面，否则如果是insertNode&lt;array[j]&amp;&amp;j&gt;=0的形式，那么当j=-1的时候就会造成下标数组越界</span></div><div class="line">		<span class="keyword">while</span>(j&gt;=<span class="number">0</span>&amp;&amp;insertNode&lt;array[j])&#123;</div><div class="line">			array[j+<span class="number">1</span>]=array[j];  <span class="comment">//元素后移，以便插入   </span></div><div class="line">			j--;   <span class="comment">//比较的元素的下标此时需要前移，和待插入的数据进行比较</span></div><div class="line">		&#125;</div><div class="line">		array[j+<span class="number">1</span>]=insertNode;  <span class="comment">//这个位置就是待插入元素需要插入的位置</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;插入排序算法&quot;&gt;&lt;a href=&quot;#插入排序算法&quot; class=&quot;headerlink&quot; title=&quot;插入排序算法&quot;&gt;&lt;/a&gt;插入排序算法&lt;/h1&gt;&lt;h2 id=&quot;思想&quot;&gt;&lt;a href=&quot;#思想&quot; class=&quot;headerlink&quot; title=&quot;思想&quot;&gt;&lt;
-    
-    </summary>
-    
-      <category term="数据结构与算法" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="数据结构与算法" scheme="http://chenjiabing666.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JQuery实现AJAX异步提交</title>
-    <link href="http://chenjiabing666.github.io/2018/05/09/JQuery%E5%AE%9E%E7%8E%B0AJAX%E5%BC%82%E6%AD%A5%E6%8F%90%E4%BA%A4/"/>
-    <id>http://chenjiabing666.github.io/2018/05/09/JQuery实现AJAX异步提交/</id>
-    <published>2018-05-09T00:42:04.000Z</published>
-    <updated>2018-05-09T00:42:24.774Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="JQuery实现AJAX异步提交"><a href="#JQuery实现AJAX异步提交" class="headerlink" title="JQuery实现AJAX异步提交"></a>JQuery实现AJAX异步提交</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
-<li><a href="http://ono60m7tl.bkt.clouddn.com/jquery-3.2.1.min.js" target="_blank" rel="external">点击下载JQurery的文件</a></li>
-</ul>
-<ul>
-<li>添加<code>JQuery</code>的文件： <code>&lt;script type=&quot;text/javascript&quot; src=&quot;文件路径&quot;&gt;&lt;/script&gt;</code></li>
-</ul>
-<h2 id="ajax"><a href="#ajax" class="headerlink" title="$.ajax({})"></a>$.ajax({})</h2><h3 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h3><ul>
-<li>其中的<code>url</code>，<code>type</code>等    前面的<code>key</code>可以不用加<code>双引号</code>，也可以加上</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">				<span class="attr">url</span>: <span class="string">'/path/to/file'</span>,    <span class="comment">//请求的路径</span></div><div class="line">				type: <span class="string">'default GET (Other values: POST)'</span>,  <span class="comment">//请求方式，默认为get</span></div><div class="line">				dataType: <span class="string">'default: Intelligent Guess (Other values: xml, json, script, or html)'</span>,  <span class="comment">//响应的回来的数据类型，如果指定了json，那么就不需要将返回转换为JSON数据了</span></div><div class="line">				data: &#123;<span class="attr">param1</span>: <span class="string">'value1'</span>&#125;,   <span class="comment">//请求数据，无论是get还是post都是这种形式的</span></div><div class="line">    			success: <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123;&#125;    <span class="comment">//响应成功调用的方法，obj是返回的数据</span></div><div class="line">			&#125;)</div></pre></td></tr></table></figure>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><ul>
-<li>在前面博文中的<a href="https://chenjiabing666.github.io/2018/05/04/Springmvc%E5%93%8D%E5%BA%94Ajax%E8%AF%B7%E6%B1%82-ResponseBody/">Springmvc响应Ajax请求(@ResponseBody)</a>，我们使用<code>$.ajax({})</code>来发出请求获取<code>City集合</code></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//根据选择的省份获取市</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCity</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> province=$(<span class="string">"#province"</span>).val();  <span class="comment">//获取下拉菜单的值，这里返回的是省份的编号</span></div><div class="line">	<span class="keyword">var</span> url=<span class="string">"&lt;%=request.getContextPath()%&gt;/menu/getCity.do"</span>;  <span class="comment">//异步请求的url</span></div><div class="line">	<span class="keyword">var</span> d=&#123;<span class="string">"province"</span>:province&#125;;   <span class="comment">//将省份的编号传入</span></div><div class="line">	</div><div class="line">	<span class="comment">//每次都要清空之前的城市</span></div><div class="line">	$(<span class="string">"#city"</span>).html(<span class="string">"&lt;option value='-1'&gt;请选择市&lt;/option&gt;"</span>);</div><div class="line">	</div><div class="line">	<span class="comment">//如果用户点击了请选择省，那么返回的值就是-1，此时不需要发出异步请求</span></div><div class="line">	<span class="keyword">if</span>(province==<span class="number">-1</span>)&#123;</div><div class="line">		<span class="keyword">return</span>;  </div><div class="line">	&#125;</div><div class="line">       </div><div class="line">	<span class="comment">//使用Post请求发出AJAX请求，返回的是一个集合，因此转换为JSON数据的obj是一个数组</span></div><div class="line">	$.ajax(&#123;</div><div class="line">		<span class="attr">url</span>: url,    <span class="comment">//请求的路径</span></div><div class="line">		type:<span class="string">"POST"</span>,  <span class="comment">// 请求方式，默认为get</span></div><div class="line">		dataType: <span class="string">"json"</span>,  <span class="comment">//响应的回来的数据类型，如果指定了json，那么就不需要将返回转换为JSON数据了</span></div><div class="line">		data:d,   <span class="comment">//请求数据</span></div><div class="line">		success: <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123; <span class="comment">//响应成功调用的方法，obj是返回的数据</span></div><div class="line">			</div><div class="line">			<span class="comment">//如果返回的是一个空的，直接返回即可，不需要后续的操作</span></div><div class="line">			<span class="keyword">if</span>(obj.lengt==<span class="number">0</span>)&#123;</div><div class="line">				<span class="keyword">return</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="comment">//循环遍历返回的JSON数组</span></div><div class="line">			<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;obj.length;i++)&#123;</div><div class="line">				<span class="comment">//创建option，用于插入节点</span></div><div class="line">				<span class="keyword">var</span> option=<span class="string">"&lt;option value="</span> + obj[i].code + <span class="string">"&gt;"</span>+obj[i].name+<span class="string">"&lt;/option&gt;"</span>;</div><div class="line">				<span class="comment">//将option插入到下拉列表中</span></div><div class="line">				$(<span class="string">"#city"</span>).append(option);</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">		&#125;   </div><div class="line">	&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="get"><a href="#get" class="headerlink" title="$.get()"></a>$.get()</h2><ul>
-<li>只适用于<code>GET</code>的异步请求</li>
-</ul>
-<h3 id="格式-1"><a href="#格式-1" class="headerlink" title="格式"></a>格式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">	url :请求路径，其中参数必须封装在其中，比如 : http://lcoalhost:8080/web1/regist?name=chenjiabing&amp;age=1</div><div class="line">	function（data,status,xhr）：这个是回调函数</div><div class="line">								data：请求返回的数据</div><div class="line">								status : 请求的状态，其中的有success,error</div><div class="line">								xhr: 这个是XMLHttpRequest对象</div><div class="line">*/</div><div class="line">$.get(<span class="string">'url'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data,status,xhr</span>) </span>&#123;</div><div class="line">	</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    $(<span class="string">"#btn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">       <span class="keyword">var</span> url=<span class="string">"http://localhost:8080/web1/user/regist.do?username=chenjiabing&amp;password=12345"</span> ;  <span class="comment">//请求的url</span></div><div class="line">        $.get(url,<span class="function"><span class="keyword">function</span>(<span class="params">data,status</span>)</span>&#123;</div><div class="line">            <span class="comment">//如果响应成功，输出返回的数据</span></div><div class="line">            <span class="keyword">if</span>(status==<span class="string">"success"</span>) &#123;</div><div class="line">                alert(data);</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                alert(<span class="string">"响应失败"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h2 id="post"><a href="#post" class="headerlink" title="$.post"></a>$.post</h2><ul>
-<li>只适用于<code>POST</code>请求</li>
-</ul>
-<h3 id="格式-2"><a href="#格式-2" class="headerlink" title="格式"></a>格式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">	url ： 异步请求的路径，其中不用封装数据</div><div class="line">	function（data,status,xhr） :回调函数</div><div class="line">							  data： 请求返回的数据</div><div class="line">							  status：请求的状态，其中的值有success，error</div><div class="line">							  xhr: XMLHttpRequest对象</div><div class="line">*/</div><div class="line">$.post(<span class="string">'url'</span>, &#123;<span class="attr">param1</span>: <span class="string">'value1'</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">data, status, xhr</span>) </span>&#123;</div><div class="line">				<span class="comment">/*optional stuff to do after success */</span></div><div class="line">			&#125;);</div></pre></td></tr></table></figure>
-<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">    $("#btn") .click(function()&#123;</div><div class="line">       var url="http://localhost:8080/web1/user/regist.do;   //请求路径</div><div class="line">       var d=&#123;"username":"陈加兵","password":"123456"&#125;;   //发送的请求参数</div><div class="line">        $.post(url,d,function(data,status,xhr)&#123;</div><div class="line">            if(status=="success")&#123;</div><div class="line">                alert(data);</div><div class="line">            &#125;else</div><div class="line">            &#123;</div><div class="line">                alert("响应失败");</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;JQuery实现AJAX异步提交&quot;&gt;&lt;a href=&quot;#JQuery实现AJAX异步提交&quot; class=&quot;headerlink&quot; title=&quot;JQuery实现AJAX异步提交&quot;&gt;&lt;/a&gt;JQuery实现AJAX异步提交&lt;/h1&gt;&lt;h2 id=&quot;准备&quot;&gt;&lt;a hr
-    
-    </summary>
-    
-      <category term="Ajax" scheme="http://chenjiabing666.github.io/categories/Ajax/"/>
-    
-    
-      <category term="Ajax" scheme="http://chenjiabing666.github.io/tags/Ajax/"/>
     
   </entry>
   
