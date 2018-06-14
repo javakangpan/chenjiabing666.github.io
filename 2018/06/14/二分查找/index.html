@@ -5,66 +5,41 @@
   <meta charset="UTF-8">
   
   
-    <title>设计模式之常见关系 | 爱撒谎的男孩</title>
+    <title>二分查找 | 爱撒谎的男孩</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="继承和泛化
-泛华关系是一种继承关系，表示一般与特殊的关系，它指定了子类如何特化父类的所有特征和行为。
-使用三角箭头的实线表示继承，其中箭头指向的是父类
+    <meta name="description" content="二分查找算法
+对一个有序数组的查找
 
-接口与实现
-在java中一个类只能继承一个父类，但是可以实现多个接口
-使用的是带三角的虚线表示，其中箭头指向的是接口
+准备
+使用冒泡排序算法对数组排序
 
-
-依赖
-是一种使用关系，即一个类的实现需要另外一个类的协助，所以尽量不使用双向的依赖关系。
-最典型的就是import
-比如：一">
+12345678910111213//冒泡排序   , 从小到大public void bubbleSort(Integer[] array)&amp;#123;	//外层遍历n-1次	for (int i = 0; i &amp;lt; array.length-1; i++) &amp;#123;		for(int j=array.length">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式之常见关系">
-<meta property="og:url" content="http://chenjiabing666.github.io/2018/04/12/设计模式之常见关系/index.html">
+<meta property="og:title" content="二分查找">
+<meta property="og:url" content="http://chenjiabing666.github.io/2018/06/14/二分查找/index.html">
 <meta property="og:site_name" content="爱撒谎的男孩">
-<meta property="og:description" content="继承和泛化
-泛华关系是一种继承关系，表示一般与特殊的关系，它指定了子类如何特化父类的所有特征和行为。
-使用三角箭头的实线表示继承，其中箭头指向的是父类
+<meta property="og:description" content="二分查找算法
+对一个有序数组的查找
 
-接口与实现
-在java中一个类只能继承一个父类，但是可以实现多个接口
-使用的是带三角的虚线表示，其中箭头指向的是接口
+准备
+使用冒泡排序算法对数组排序
 
-
-依赖
-是一种使用关系，即一个类的实现需要另外一个类的协助，所以尽量不使用双向的依赖关系。
-最典型的就是import
-比如：一">
-<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/jicheng.png">
-<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/real.png">
-<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/dependency.png">
-<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/association.png">
-<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/aggregation.png">
-<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/composition.png">
-<meta property="og:updated_time" content="2018-04-12T03:29:07.794Z">
+12345678910111213//冒泡排序   , 从小到大public void bubbleSort(Integer[] array)&amp;#123;	//外层遍历n-1次	for (int i = 0; i &amp;lt; array.length-1; i++) &amp;#123;		for(int j=array.length">
+<meta property="og:updated_time" content="2018-06-14T04:39:28.641Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式之常见关系">
-<meta name="twitter:description" content="继承和泛化
-泛华关系是一种继承关系，表示一般与特殊的关系，它指定了子类如何特化父类的所有特征和行为。
-使用三角箭头的实线表示继承，其中箭头指向的是父类
+<meta name="twitter:title" content="二分查找">
+<meta name="twitter:description" content="二分查找算法
+对一个有序数组的查找
 
-接口与实现
-在java中一个类只能继承一个父类，但是可以实现多个接口
-使用的是带三角的虚线表示，其中箭头指向的是接口
+准备
+使用冒泡排序算法对数组排序
 
-
-依赖
-是一种使用关系，即一个类的实现需要另外一个类的协助，所以尽量不使用双向的依赖关系。
-最典型的就是import
-比如：一">
-<meta name="twitter:image" content="http://ono60m7tl.bkt.clouddn.com/jicheng.png">
+12345678910111213//冒泡排序   , 从小到大public void bubbleSort(Integer[] array)&amp;#123;	//外层遍历n-1次	for (int i = 0; i &amp;lt; array.length-1; i++) &amp;#123;		for(int j=array.length">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -124,14 +99,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/04/12/设计模式之常见关系/" title="设计模式之常见关系" itemprop="url">设计模式之常见关系</a>
+      <a href="/2018/06/14/二分查找/" title="二分查找" itemprop="url">二分查找</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2018-04-12T03:27:45.000Z" itemprop="datePublished"> 发表于 2018-04-12</time>
+    <time datetime="2018-06-14T04:38:49.000Z" itemprop="datePublished"> 发表于 2018-06-14</time>
     
   </p>
 </header>
@@ -140,46 +115,22 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#继承和泛化"><span class="toc-number">1.</span> <span class="toc-text">继承和泛化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#接口与实现"><span class="toc-number">2.</span> <span class="toc-text">接口与实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#依赖"><span class="toc-number">3.</span> <span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关联"><span class="toc-number">4.</span> <span class="toc-text">关联</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#聚合"><span class="toc-number">5.</span> <span class="toc-text">聚合</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#组合"><span class="toc-number">6.</span> <span class="toc-text">组合</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#二分查找算法"><span class="toc-number">1.</span> <span class="toc-text">二分查找算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-number">1.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非递归实现"><span class="toc-number">1.2.</span> <span class="toc-text">非递归实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#递归实现"><span class="toc-number">1.3.</span> <span class="toc-text">递归实现</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="继承和泛化"><a href="#继承和泛化" class="headerlink" title="继承和泛化"></a>继承和泛化</h1><ul>
-<li>泛华关系是一种继承关系，表示一般与特殊的关系，它指定了子类如何特化父类的所有特征和行为。</li>
-<li>使用三角箭头的实线表示继承，其中箭头指向的是父类<br><img src="http://ono60m7tl.bkt.clouddn.com/jicheng.png" alt="继承图形"></li>
+		<h1 id="二分查找算法"><a href="#二分查找算法" class="headerlink" title="二分查找算法"></a>二分查找算法</h1><ul>
+<li>对一个有序数组的查找</li>
 </ul>
-<h1 id="接口与实现"><a href="#接口与实现" class="headerlink" title="接口与实现"></a>接口与实现</h1><ul>
-<li>在java中一个类只能继承一个父类，但是可以实现多个接口</li>
-<li>使用的是带三角的虚线表示，其中箭头指向的是接口</li>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
+<li>使用冒泡排序算法对数组排序</li>
 </ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/real.png" alt="实现接口"></p>
-<h1 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h1><ul>
-<li>是一种使用关系，即一个类的实现需要另外一个类的协助，所以尽量不使用双向的依赖关系。</li>
-<li>最典型的就是import</li>
-<li>比如：一个类要定义String类型的变量，那么这个类就是依赖String这个类</li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//冒泡排序   , 从小到大</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(Integer[] array)</span></span>&#123;</div><div class="line">	<span class="comment">//外层遍历n-1次</span></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length-<span class="number">1</span>; i++) &#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=array.length-<span class="number">1</span>;j&gt;i;j--)&#123;</div><div class="line">			<span class="keyword">if</span> (array[j]&lt;array[j-<span class="number">1</span>]) &#123;</div><div class="line">				Integer t=array[j];</div><div class="line">				array[j]=array[j-<span class="number">1</span>];</div><div class="line">				array[j-<span class="number">1</span>]=t;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="非递归实现"><a href="#非递归实现" class="headerlink" title="非递归实现"></a>非递归实现</h2><ul>
+<li>传入的数组是一个从小到大的数组</li>
 </ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/dependency.png" alt="依赖"></p>
-<h1 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h1><ul>
-<li>是一种拥有的关系，它使一个类知道另外一个类的属性和方法，比如数据库中的关系，通过学生可以查找到自己课程的成绩，只需要在学生中定义一个课程的对象即可。</li>
-<li>代码体现： 成员变量</li>
-<li>带普通箭头的实心线，指向被拥有者</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/association.png" alt="关联"></p>
-<h1 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h1><ul>
-<li><p>是整体和部分的关系，且部分可以离开整体而单独的存在。车和轮胎是整体和部分的关系，但是轮胎离开车还是可以单独存在的</p>
-</li>
-<li><p>代码体现： 成员变量</p>
-</li>
-<li><p>带空心菱形的实心线，菱形指向整体</p>
-</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/aggregation.png" alt="聚合"></p>
-<h1 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h1><ul>
-<li>是整体和部分的关系，但是部分不能离开整体而单独存在</li>
-<li>代码体现：成员变量</li>
-<li>带实心菱形的实线，菱形指向整体</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/composition.png" alt="组合"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">	 * 二分查找算法</div><div class="line">	 * <span class="doctag">@param</span> array  数组，必须是从小到大有序的</div><div class="line">	 * <span class="doctag">@param</span> key  查找的关键字</div><div class="line">	 * <span class="doctag">@return</span>  如果成功查找到，那么返回索引，否则返回-1</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> Integer <span class="title">binarySearch</span><span class="params">(Integer[] array,Integer key)</span></span>&#123;</div><div class="line">		<span class="keyword">int</span> low=<span class="number">0</span>;  <span class="comment">//最前面的索引默认是0</span></div><div class="line">		<span class="keyword">int</span> high=array.length-<span class="number">1</span>;  <span class="comment">//最后面的索引默认为最后一个</span></div><div class="line">		</div><div class="line">		<span class="comment">//从小到大的数组，low&gt;high判断数组中是否有元素</span></div><div class="line">		<span class="keyword">if</span> (key&lt;array[low]||key&gt;array[high]||low&gt;high) &#123;</div><div class="line">			<span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">while</span>(low&lt;=high)&#123;</div><div class="line">			<span class="keyword">int</span> middle=(low+high)/<span class="number">2</span>;   <span class="comment">//左右索引的中间值</span></div><div class="line">			<span class="comment">//如果要查找的数据大于中间值，表示</span></div><div class="line">			<span class="keyword">if</span> (key&gt;array[middle]) &#123;</div><div class="line">				low=middle+<span class="number">1</span>;   <span class="comment">//那么查找右半部分</span></div><div class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span> (key&lt;array[middle]) &#123;   <span class="comment">//如果查找的数据小于中间值，那么查找左半部分</span></div><div class="line">				high=middle-<span class="number">1</span>;</div><div class="line">			&#125;<span class="keyword">else</span> &#123;   <span class="comment">//如果key==middle,那么直接返回middle即可</span></div><div class="line">				<span class="keyword">return</span> middle;   </div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> -<span class="number">1</span>;  <span class="comment">//没有找到，返回-1</span></div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h2 id="递归实现"><a href="#递归实现" class="headerlink" title="递归实现"></a>递归实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 递归的二分查找</div><div class="line"> * <span class="doctag">@param</span> array  从小到大的有序数组</div><div class="line"> * <span class="doctag">@param</span> key  需要查找的数	据</div><div class="line"> * <span class="doctag">@param</span> low  左边的索引  初始值为0</div><div class="line"> * <span class="doctag">@param</span> high  右边的索引  初始值为array.length-1</div><div class="line"> * <span class="doctag">@return</span>  查找成功返回索引，否则返回-1</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> Integer <span class="title">recursionBinarySearch</span><span class="params">(Integer[] array,Integer key,Integer low,Integer high)</span></span>&#123;</div><div class="line">	<span class="comment">//从小到大的数组，low&gt;high判断数组中是否有元素</span></div><div class="line">	<span class="keyword">if</span> (key&lt;array[low]||key&gt;array[high]||low&gt;high) &#123;</div><div class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">	Integer middle=(low+high)/<span class="number">2</span>;    <span class="comment">//中间索引</span></div><div class="line">	<span class="keyword">if</span> (key&gt;array[middle]) &#123;</div><div class="line">		<span class="keyword">return</span> recursionBinarySearch(array, key, middle+<span class="number">1</span>, high);</div><div class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(key&lt;array[middle])&#123;</div><div class="line">		<span class="keyword">return</span> recursionBinarySearch(array, key, low, middle-<span class="number">1</span>);</div><div class="line">	&#125;<span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> middle;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -187,13 +138,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
+  <a class="article-category-link" href="/categories/数据结构与算法/">数据结构与算法</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/设计模式/">设计模式</a>
+  <span></span> <a href="/tags/数据结构与算法/">数据结构与算法</a>
   </div>
 
 </div>
@@ -202,7 +153,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2018/04/12/设计模式之常见关系/" data-title="设计模式之常见关系 | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2018/06/14/二分查找/" data-title="二分查找 | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -215,19 +166,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/04/12/设计模式之单例模式/" title="设计模式之单例模式">
-  <strong>上一篇：</strong><br/>
-  <span>
-  设计模式之单例模式</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/04/12/Struts2之类型转换器/"  title="Struts2之类型转换器">
+<a href="/2018/06/06/Redis总结/"  title="Redis总结">
  <strong>下一篇：</strong><br/> 
- <span>Struts2之类型转换器
+ <span>Redis总结
 </span>
 </a>
 </div>
@@ -248,7 +191,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#继承和泛化"><span class="toc-number">1.</span> <span class="toc-text">继承和泛化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#接口与实现"><span class="toc-number">2.</span> <span class="toc-text">接口与实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#依赖"><span class="toc-number">3.</span> <span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关联"><span class="toc-number">4.</span> <span class="toc-text">关联</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#聚合"><span class="toc-number">5.</span> <span class="toc-text">聚合</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#组合"><span class="toc-number">6.</span> <span class="toc-text">组合</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#二分查找算法"><span class="toc-number">1.</span> <span class="toc-text">二分查找算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-number">1.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非递归实现"><span class="toc-number">1.2.</span> <span class="toc-text">非递归实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#递归实现"><span class="toc-number">1.3.</span> <span class="toc-text">递归实现</span></a></li></ol></li></ol>
  
   </div>
 
