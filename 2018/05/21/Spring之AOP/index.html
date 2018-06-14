@@ -49,7 +49,8 @@ AOP
 面向切面编程，是面向对象编程的重要组成部分，在不改变业务逻辑功能的基础上，对横切逻辑进行扩展
 aspectj框架是aop编程思想的体现，spring-aop对">
 <meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/aop%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.png">
-<meta property="og:updated_time" content="2018-05-21T10:22:25.291Z">
+<meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/2018-06-04%2019-20-31%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:updated_time" content="2018-06-07T09:56:05.862Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring之AOP">
 <meta name="twitter:description" content="Spring之AOPSpring框架两大核心内容IOC （ＤＩ）
@@ -188,11 +189,11 @@ aspectj框架是aop编程思想的体现，spring-aop对">
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 定义spring组件扫描componet --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"cn.tedu.store.aop"</span> /&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 解析切面注解 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> /&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="通知-5种"><a href="#通知-5种" class="headerlink" title="通知(5种)"></a>通知(5种)</h2><ul>
-<li><code>@Before</code>：在业务方法执行之前调用</li>
-<li><code>@After</code>：在方法之后执行</li>
-<li><code>@AfterReturning</code>：在方法之后执行，只有在业务方法没有出现异常的时候才会执行</li>
-<li><code>@AfterThrowing</code> ： 在方法之后执行，只有在业务方法出现异常的时候才会执行</li>
-<li><code>@Around</code> : 环绕通知，在业务方法执行之前和之后执行，即使在<code>@Before</code>之前执行，在<code>@After之后</code>执行，必须又返回值，这里的返回值就是业务层方法的返回值，如果不返回，那么业务层方法就获取不到返回值</li>
+<li><code>@Before</code>（前置通知）：在业务方法执行之前调用</li>
+<li><code>@After</code>（后置通知）：在方法之后执行</li>
+<li><code>@AfterReturning</code>(正常返回通知)：在方法之后执行，只有在业务方法没有出现异常的时候才会执行</li>
+<li><code>@AfterThrowing</code>(异常通知) ： 在方法之后执行，只有在业务方法出现异常的时候才会执行</li>
+<li><code>@Around</code> （环绕通知）：在业务方法执行之前和之后执行，即是在<code>@Before</code>之前执行，在<code>@After之后</code>执行，必须又返回值，这里的返回值就是业务层方法的返回值，如果不返回，那么业务层方法就获取不到返回值</li>
 </ul>
 <h2 id="连接点"><a href="#连接点" class="headerlink" title="连接点"></a>连接点</h2><ul>
 <li>业务层的所有方法，叫做连接点</li>
@@ -234,6 +235,7 @@ aspectj框架是aop编程思想的体现，spring-aop对">
 <li>基于动态代理完成</li>
 <li>Aop的实现原理是<code>jdk的动态代理</code>和<code>Cglib代理</code></li>
 <li><code>cglib代理</code>使用的是<code>继承</code>，<code>动态代理</code>使用的是<code>接口</code>，如果需要添加横切逻辑的类没有接口，那么使用的是cglib代理，如果有接口，使用的是jdk的动态代理</li>
+<li><code>JDK的动态代理</code>的原理是代理类实现目标类的接口，但是<code>Cglib代理</code>原理是继承，因此如果目标有接口那么使用的是动态代理。</li>
 <li><code>spring-aop</code>是对<code>aspectj</code>的进一步封装</li>
 <li><img src="http://ono60m7tl.bkt.clouddn.com/aop%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.png" alt="aop原理图"></li>
 </ul>
@@ -249,7 +251,10 @@ aspectj框架是aop编程思想的体现，spring-aop对">
 <li>可以在service的实现类上添加，那么所有的实现方法都会被事务管理器管理</li>
 <li>可以在某一个方法上添加，那么只有配置了注解的方法才会被事务管理器管理</li>
 <li>可以在<code>Service</code>的接口上添加注解，那么所有的接口方法都会被事务管理器管理</li>
-<li><strong>我们推荐在<code>Service</code>的接口类上添加注解,并且在只涉及到<code>查询</code>语句的方法中设置传播行为为只读<code>@Transactional(readOnly=true)</code></strong></li>
+<li><strong>我们推荐在<code>Service</code>的接口类上添加注解,并且在只涉及到<code>查询</code>语句的方法中设置传播行为为只读<code>@Transactional(readOnly=true)</code></strong><ul>
+<li><img src="http://ono60m7tl.bkt.clouddn.com/2018-06-04%2019-20-31%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="注解中的配置属性"></li>
+</ul>
+</li>
 </ul>
 <h3 id="Spring事务的传播属性"><a href="#Spring事务的传播属性" class="headerlink" title="Spring事务的传播属性"></a>Spring事务的传播属性</h3><table>
 <thead>
@@ -434,7 +439,7 @@ aspectj框架是aop编程思想的体现，spring-aop对">
 		  
 		
 		  
-			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>11</sup></a></li>
+			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 		  
 		
 		  
@@ -502,7 +507,7 @@ aspectj框架是aop编程思想的体现，spring-aop对">
 		  
 		
 		  
-			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>4</sup></a></li>
+			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>5</sup></a></li>
 		  
 		
 		  
@@ -523,11 +528,11 @@ aspectj框架是aop编程思想的体现，spring-aop对">
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>11</sup></a></li>
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
@@ -551,19 +556,19 @@ aspectj框架是aop编程思想的体现，spring-aop对">
 			
 		
 			
+				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>6</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
 			
 		
 			
@@ -575,11 +580,11 @@ aspectj框架是aop编程思想的体现，spring-aop对">
 			
 		
 			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
@@ -587,15 +592,15 @@ aspectj框架是aop编程思想的体现，spring-aop对">
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 		</ul>

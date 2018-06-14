@@ -32,7 +32,7 @@
 定义StudentServiceImpl实现方法
 
 1234567@Service">
-<meta property="og:updated_time" content="2018-05-21T10:23:11.281Z">
+<meta property="og:updated_time" content="2018-06-08T09:06:10.816Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring之AOP之底层实现">
 <meta name="twitter:description" content="Spring之AOP之底层实现静态代理实现
@@ -118,7 +118,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring之AOP之底层实现"><span class="toc-number">1.</span> <span class="toc-text">Spring之AOP之底层实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#静态代理实现"><span class="toc-number">1.1.</span> <span class="toc-text">静态代理实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态代理实现"><span class="toc-number">1.2.</span> <span class="toc-text">动态代理实现</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring之AOP之底层实现"><span class="toc-number">1.</span> <span class="toc-text">Spring之AOP之底层实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#静态代理实现"><span class="toc-number">1.1.</span> <span class="toc-text">静态代理实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态代理实现"><span class="toc-number">1.2.</span> <span class="toc-text">动态代理实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-number">1.3.</span> <span class="toc-text">参考文档</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -150,6 +150,9 @@
 <li>测试方法</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">// 加载Spring的配置文件</span></div><div class="line">	AbstractApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(</div><div class="line">			<span class="string">"spring-dao.xml"</span>, <span class="string">"spring-service.xml"</span>,<span class="string">"spring-aop.xml"</span>);</div><div class="line">	</div><div class="line">	<span class="comment">//获取动态代理类的对象</span></div><div class="line">	ProxyHandler proxyHandler=ac.getBean(<span class="string">"proxyHandler"</span>,ProxyHandler.class);</div><div class="line">	</div><div class="line">	<span class="comment">//获取代理类的对象</span></div><div class="line">	IStudentService studentService=(IStudentService) proxyHandler.getObject(<span class="keyword">new</span> StudentServiceImpl());</div><div class="line">	studentService.add();</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="http://www.cnblogs.com/CarpenterLee/p/8241042.html" target="_blank" rel="external">JDK代理和Cglib代理的实现</a></li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -218,7 +221,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring之AOP之底层实现"><span class="toc-number">1.</span> <span class="toc-text">Spring之AOP之底层实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#静态代理实现"><span class="toc-number">1.1.</span> <span class="toc-text">静态代理实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态代理实现"><span class="toc-number">1.2.</span> <span class="toc-text">动态代理实现</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring之AOP之底层实现"><span class="toc-number">1.</span> <span class="toc-text">Spring之AOP之底层实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#静态代理实现"><span class="toc-number">1.1.</span> <span class="toc-text">静态代理实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态代理实现"><span class="toc-number">1.2.</span> <span class="toc-text">动态代理实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-number">1.3.</span> <span class="toc-text">参考文档</span></a></li></ol></li></ol>
  
   </div>
 
@@ -244,7 +247,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>11</sup></a></li>
+			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 		  
 		
 		  
@@ -312,7 +315,7 @@
 		  
 		
 		  
-			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>4</sup></a></li>
+			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>5</sup></a></li>
 		  
 		
 		  
@@ -333,11 +336,11 @@
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>11</sup></a></li>
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
@@ -361,19 +364,19 @@
 			
 		
 			
+				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>6</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
 			
 		
 			
@@ -385,11 +388,11 @@
 			
 		
 			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
@@ -397,15 +400,15 @@
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 		</ul>

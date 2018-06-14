@@ -32,7 +32,7 @@
 第一趟：在整个数组中选择出最小的元素，和数组中的第一个元素交换位置，那么此时的第一个元素就是最小的
 第二趟： 从第二个元素开始再次查找剩余数组中最小的元素，和数组中的第二个元素交换位置，那么此时的第一个和第二个元素就是最小的
 第三趟： 从第三个元素开始再次">
-<meta property="og:updated_time" content="2018-05-09T00:45:04.459Z">
+<meta property="og:updated_time" content="2018-06-09T13:02:51.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="选择排序">
 <meta name="twitter:description" content="选择排序思想(从小到大)
@@ -132,7 +132,7 @@
 <li><code>第三趟</code>： 从第三个元素开始再次查找剩余数组中最小的元素，和数组中的第三个元素交换位置，那么此时的前三个就是从小到大的排序</li>
 <li><code>第四趟</code>………………………….<code>第n-1趟</code></li>
 </ul>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 思想： 从第一个开始取值和后面的元素开始比较，如果有比它小的，那么就交换元素值</div><div class="line"> * 		 外层循环从第一个元素开始，内层循环保证了从外层循环的后面一个元素开始，这样就是保证了比较</div><div class="line"> * <span class="doctag">@param</span> arrary 待排序的数组</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectSort</span><span class="params">(<span class="keyword">int</span>[] arrary)</span></span>&#123;</div><div class="line">	<span class="comment">//外层循环，从第一个元素开始直到倒数第二个元素</span></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arrary.length-<span class="number">1</span>; i++) &#123;</div><div class="line">		<span class="keyword">int</span> k=i;   <span class="comment">//这个是保存最小元素的下标，初始化是i</span></div><div class="line">		<span class="comment">//内层循环，从i+1个元素开始直到最后一个元素</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; arrary.length; j++) &#123;</div><div class="line">			<span class="comment">//如果下标为j的元素比下标为k的元素小，那么k=j</span></div><div class="line">			<span class="keyword">if</span> (arrary[j]&lt;arrary[k]) &#123;</div><div class="line">				k=j;  <span class="comment">//记录此时的最小的下标</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//如果此时的k改变了，即是不等于初始值i了，那么表示找到比初始值更小的了，则交换位置</span></div><div class="line">		<span class="keyword">if</span> (k!=i) &#123;</div><div class="line">			<span class="comment">//arrary[k]和arrary[i]交换位置，因为最小的放在前面</span></div><div class="line">			<span class="keyword">int</span> temp=arrary[i];</div><div class="line">			arrary[i]=arrary[k];</div><div class="line">			arrary[k]=temp;  </div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -178,9 +178,9 @@
 
 
 <div class="next">
-<a href="/2018/05/09/插入排序算法/"  title="插入排序算法">
+<a href="/2018/05/09/二分查找/"  title="二分查找算法">
  <strong>下一篇：</strong><br/> 
- <span>插入排序算法
+ <span>二分查找算法
 </span>
 </a>
 </div>
@@ -227,7 +227,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>11</sup></a></li>
+			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 		  
 		
 		  
@@ -295,7 +295,7 @@
 		  
 		
 		  
-			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>4</sup></a></li>
+			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>5</sup></a></li>
 		  
 		
 		  
@@ -316,11 +316,11 @@
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>11</sup></a></li>
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
@@ -344,19 +344,19 @@
 			
 		
 			
+				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>6</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
 			
 		
 			
@@ -368,11 +368,11 @@
 			
 		
 			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
@@ -380,15 +380,15 @@
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 		</ul>
