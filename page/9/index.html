@@ -79,18 +79,16 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/03/30/Struts2核心配置文件/" title="Struts2核心配置文件(package)" itemprop="url">
+    <a href="/2018/04/22/Hibernate之延迟加载/" title="Hibernate之延迟加载" itemprop="url">
   
-    <h1 itemprop="name">Struts2核心配置文件(package)</h1>
+    <h1 itemprop="name">Hibernate之延迟加载</h1>
     
      
-           <p itemprop="description" >struts核心配置文件详解包(package)
-在核心配置文件中需要配置&amp;lt;package&amp;gt;
-
-元素可以把逻辑上相关的一组Action、Result、Intercepter等元素封装起来，形成一个独立的模块，package可以继承其他的package，也可以作为父包被</p>
+           <p itemprop="description" >hibernate之延迟加载什么是延迟加载
+在使用某些Hibernate方法查询数据的时候，Hibernate返回的只是一个空对象(除了id外属性都为null)，并没有真正的查询数据库。而是在使用这个对象的时候才会出发查询数据，并将查询到的数据注入到这个空对象中，这种查询时机推迟</p>
         
     
-    <time datetime="2018-03-30T04:57:35.000Z" itemprop="datePublished">2018-03-30</time>
+    <time datetime="2018-04-21T20:22:12.000Z" itemprop="datePublished">2018-04-22</time>
   </a>
 </section>
 
@@ -102,25 +100,16 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/03/30/Struts2入门/" title="Struts2入门" itemprop="url">
+    <a href="/2018/04/22/Hibernate注解之基本注解的注解使用/" title="Hibernate注解之基本注解的注解使用" itemprop="url">
   
-    <h1 itemprop="name">Struts2入门</h1>
+    <h1 itemprop="name">Hibernate注解之基本注解的注解使用</h1>
     
      
-           <p itemprop="description" >入门操作##导入jar 包
-
-到官网下载相应的jar包
-导入前阶段必须的jar包
-
-创建项目
-在eclipse中创建一个web项目
-在webContent下WEB-INF/lib下导入需要的jar包即可
-
-
-配置核心过滤器 StrutsPrepareAndExecuteFilte</p>
+           <p itemprop="description" >Hibernate注解之基本注解的注解使用使用注解须知
+我们在使用注解自动创建表的时候，系统会默认为我们创建一张表Hibernate_sequence，我们可以在Hibernate.cfg.xml文件中添加如下语句解决问题12&amp;lt;!--  配置不生成Hibernate_seq</p>
         
     
-    <time datetime="2018-03-30T04:57:22.000Z" itemprop="datePublished">2018-03-30</time>
+    <time datetime="2018-04-21T20:21:08.000Z" itemprop="datePublished">2018-04-22</time>
   </a>
 </section>
 
@@ -132,19 +121,16 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/03/30/JDBC干货二/" title="JDBC干货二" itemprop="url">
+    <a href="/2018/04/22/Hibernate使用日志-log4j/" title="Hibernate使用日志(log4j)" itemprop="url">
   
-    <h1 itemprop="name">JDBC干货二</h1>
+    <h1 itemprop="name">Hibernate使用日志(log4j)</h1>
     
      
-           <p itemprop="description" >Day02Properties属性配置对象什么是properties
-程序猿可以把工程中出现的某些数据以配置文件的形式保存起来，就是处理 *.properties文件的对象，在properties文件中是以键值对形式保存的数据
-
-把数据库中的信息存放到该文件中
-其中存放的是dri</p>
+           <p itemprop="description" >Hibernate使用日志(log4j)添加依赖
+在pom.xml中添加如下的依赖123456789101112131415161718&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;log4j&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;g</p>
         
     
-    <time datetime="2018-03-30T04:54:52.000Z" itemprop="datePublished">2018-03-30</time>
+    <time datetime="2018-04-21T20:20:20.000Z" itemprop="datePublished">2018-04-22</time>
   </a>
 </section>
 
@@ -156,20 +142,19 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/03/30/JDBC干货一/" title="JDBC干货一" itemprop="url">
+    <a href="/2018/04/22/Hibernate常用API/" title="Hibernate常用API" itemprop="url">
   
-    <h1 itemprop="name">JDBC干货一</h1>
+    <h1 itemprop="name">Hibernate常用API</h1>
     
      
-           <p itemprop="description" >JDBC什么是JDBC
-Java Database Connectivity
-JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
+           <p itemprop="description" >Hibernate常用API
+Configuration ：负责加载核心配置文件
 
-为什么使用JDBC
-因为java程序猿需要连接各种数据库（oracle，mysql，db2等）为了避免java程序猿每一种数据库都</p>
+加载的默认名字为hibernate.cfg.xml，如果不是这个名字，那么需要指定
+SessionFactory configuration.buildSessionFactory()  创建Se</p>
         
     
-    <time datetime="2018-03-30T04:54:41.000Z" itemprop="datePublished">2018-03-30</time>
+    <time datetime="2018-04-21T20:19:37.000Z" itemprop="datePublished">2018-04-22</time>
   </a>
 </section>
 
@@ -181,20 +166,20 @@ JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/03/28/SQL操作六/" title="SQL操作六" itemprop="url">
+    <a href="/2018/04/22/Hibernate的基本配置/" title="Hibernate的基本配置" itemprop="url">
   
-    <h1 itemprop="name">SQL操作六</h1>
+    <h1 itemprop="name">Hibernate的基本配置</h1>
     
      
-           <p itemprop="description" >Day06视图视图概述
-什么是视图： 在数据库中存在多种对象，表和视图都是数据库中的对象，创建视图时视图名称不能和表名相同，实际上，视图就代表一个sql查询语句，也可以理解成视图是一张虚拟的表，但是虚拟表中的数据会随着原表数据的改变而改变
+           <p itemprop="description" >Hibernate的基本配置核心配置文件(hibernate.cfg.xml)
+名字为hibernate.cfg.xml
+放在根目录下(resource)
 
-为什么使用视图： 
-
-因为有些数据的查</p>
+必须的配置(配置数据库信息)
+hibernate.connection.driver_class加载驱动，其中的mysql</p>
         
     
-    <time datetime="2018-03-28T04:17:56.000Z" itemprop="datePublished">2018-03-28</time>
+    <time datetime="2018-04-21T20:18:40.000Z" itemprop="datePublished">2018-04-22</time>
   </a>
 </section>
 
@@ -206,22 +191,16 @@ JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/03/28/SQL操作五/" title="SQL操作五" itemprop="url">
+    <a href="/2018/04/22/Hibernate第一个程序/" title="Hibernate第一个程序" itemprop="url">
   
-    <h1 itemprop="name">SQL操作五</h1>
+    <h1 itemprop="name">Hibernate第一个程序</h1>
     
      
-           <p itemprop="description" >Day05关联关系自关联
-当前表的数据和当前表里面的数据有关联关系
-
-一对一一对多多对多
-学生和老师的关系就是多对多的关系一个学生可以被多个老师教，一个老师可以教多个学生
-
-创建表
-创建教师表 teacher(id,name)创建学生表 stu(id,name)创建第三张关系表t</p>
+           <p itemprop="description" >Hibernate第一个程序创建一个Maven项目
+在pom.xml中配置Hibernate的jar包1234567891011121314151617181920212223242526272829303132333435363738394041424344454647&amp;lt;</p>
         
     
-    <time datetime="2018-03-27T22:59:18.000Z" itemprop="datePublished">2018-03-28</time>
+    <time datetime="2018-04-21T20:18:04.000Z" itemprop="datePublished">2018-04-22</time>
   </a>
 </section>
 
@@ -233,15 +212,19 @@ JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/03/26/SQL操作四/" title="SQL操作四" itemprop="url">
+    <a href="/2018/04/22/Hibernate简介/" title="Hibernate简介" itemprop="url">
   
-    <h1 itemprop="name">SQL操作四</h1>
+    <h1 itemprop="name">Hibernate简介</h1>
     
      
-           <p itemprop="description" >Day 04创建数据库和表商城建表语句1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465</p>
+           <p itemprop="description" >hibernate简介什么是hibernate
+hibernate是数据访问层的框架，对JDBC进行了封装，是针对数据库访问提出的面向对象的解决方案
+
+Hibernate的作用
+使用Hibrenate可以直接访问对象，从hierbnate自动将此访问转换成SQL执行，从而达到间接</p>
         
     
-    <time datetime="2018-03-26T11:14:40.000Z" itemprop="datePublished">2018-03-26</time>
+    <time datetime="2018-04-21T20:16:59.000Z" itemprop="datePublished">2018-04-22</time>
   </a>
 </section>
 
@@ -253,23 +236,18 @@ JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/03/24/SQL操作三/" title="SQL操作三" itemprop="url">
+    <a href="/2018/04/22/Hibernate对象导语言HQL/" title="Hibernate对象导航语言" itemprop="url">
   
-    <h1 itemprop="name">SQL操作三</h1>
+    <h1 itemprop="name">Hibernate对象导航语言</h1>
     
      
-           <p itemprop="description" >Day03查询null
-查询列值为null  (is null)
-
-select * from emp where mgr is null; 查询上级领导为空的员工
-
-
-查询列值不为null  (is not null)
-
-select * from emp where mgr </p>
+           <p itemprop="description" >HQL - 对象导航语言简介
+HQL(Hibernate Query Language) 是面向对象的查询语言, 它和 SQL 查询语言有些相似. 在 Hibernate 提供的各种检索方式中, HQL 是使用最广的一种检索方式. 它有如下功能:
+在查询语句中设定各种查询条件；
+</p>
         
     
-    <time datetime="2018-03-24T01:10:58.000Z" itemprop="datePublished">2018-03-24</time>
+    <time datetime="2018-04-21T20:16:59.000Z" itemprop="datePublished">2018-04-22</time>
   </a>
 </section>
 
@@ -281,19 +259,35 @@ select * from emp where mgr </p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/03/22/SQL操作二/" title="SQL操作二" itemprop="url">
+    <a href="/2018/04/22/自己写springmvc框架/" title="自己写springmvc框架" itemprop="url">
   
-    <h1 itemprop="name">SQL操作二</h1>
+    <h1 itemprop="name">自己写springmvc框架</h1>
     
      
-           <p itemprop="description" >Day02乱码问题
-1.数据库字符集 要设置成utf8
+           <p itemprop="description" >简易的springmvc框架三层架构
+表示层(视图层，显示层)
 
-表的字符集 设置为utf8
-windows系统的命令行里，有些版本是gbk的编码格式，可以通过set names gbk；的方式把mysql接收到数据是的解码格式设置为gbk，这个位置的gbk和数据库还有表的utf8没有关</p>
+jsp
+servlet
+
+
+业务逻辑层
+
+service
+
+
+数据访问层(持久层)
+
+dao
+
+
+
+什么是mvc
+Model View Controller
+是一种架构思想，其核心思想将项目划分成三种不同模块，分别</p>
         
     
-    <time datetime="2018-03-22T09:28:54.000Z" itemprop="datePublished">2018-03-22</time>
+    <time datetime="2018-04-21T20:15:32.000Z" itemprop="datePublished">2018-04-22</time>
   </a>
 </section>
 
@@ -305,26 +299,20 @@ windows系统的命令行里，有些版本是gbk的编码格式，可以通过s
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/03/21/SQL操作一/" title="SQL操作一" itemprop="url">
+    <a href="/2018/04/16/设计模式之适配器模式/" title="设计模式之适配器模式" itemprop="url">
   
-    <h1 itemprop="name">SQL操作一</h1>
+    <h1 itemprop="name">设计模式之适配器模式</h1>
     
      
-           <p itemprop="description" >Day01-基本的语句数据库简介
-因为传统的文本形式存储数据存在很多的弊端：
-
-执行效率低
-占用内存
+           <p itemprop="description" >结构型模式之适配器模式定义
+适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。
 
 
-什么是DB
-Database ： 数据库数据库本质是文件集（多个文件）会按照特定存储规范进行数据增删改查
 
-什么是DBMS
-DateBaseManagementSystem </p>
+Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一</p>
         
     
-    <time datetime="2018-03-21T08:57:43.000Z" itemprop="datePublished">2018-03-21</time>
+    <time datetime="2018-04-16T05:56:28.000Z" itemprop="datePublished">2018-04-16</time>
   </a>
 </section>
 
@@ -335,7 +323,7 @@ DateBaseManagementSystem </p>
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/8/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/10/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/10/">Next<span></span></a>
   </nav>
 
 </div>
@@ -359,7 +347,11 @@ DateBaseManagementSystem </p>
 		  
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
@@ -391,7 +383,7 @@ DateBaseManagementSystem </p>
 		  
 		
 		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 		  
 		
 		  
@@ -403,7 +395,7 @@ DateBaseManagementSystem </p>
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>21</sup></a></li>
 		  
 		
 		  
@@ -412,6 +404,10 @@ DateBaseManagementSystem </p>
 		
 		  
 			<li><a href="/categories/java学习/" title="java学习">java学习<sup>30</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
 		  
 		
 		  
@@ -427,7 +423,7 @@ DateBaseManagementSystem </p>
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>9</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>14</sup></a></li>
 		  
 		
 		  
@@ -448,7 +444,15 @@ DateBaseManagementSystem </p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>21</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
@@ -456,7 +460,7 @@ DateBaseManagementSystem </p>
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
 			
 		
 			
@@ -476,6 +480,10 @@ DateBaseManagementSystem </p>
 			
 		
 			
+				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
 			
 		
@@ -484,11 +492,7 @@ DateBaseManagementSystem </p>
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 			
 		
 			
@@ -500,11 +504,7 @@ DateBaseManagementSystem </p>
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
@@ -516,15 +516,11 @@ DateBaseManagementSystem </p>
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 		</ul>

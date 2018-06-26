@@ -79,22 +79,19 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/06/15/Java日期格式化/" title="Java日期格式化" itemprop="url">
+    <a href="/2018/03/30/JDBC干货二/" title="JDBC干货二" itemprop="url">
   
-    <h1 itemprop="name">Java日期格式化</h1>
+    <h1 itemprop="name">JDBC干货二</h1>
     
      
-           <p itemprop="description" >日期格式化前言
+           <p itemprop="description" >Day02Properties属性配置对象什么是properties
+程序猿可以把工程中出现的某些数据以配置文件的形式保存起来，就是处理 *.properties文件的对象，在properties文件中是以键值对形式保存的数据
 
-更多文章请看本人博客https://chenjiabing666.github.io/
-版权所有，如需转载请注明来源
-
-
-Date
-Date类表示特定的瞬间精确到毫秒，不过从API可以看出很多的方法已经废弃了，这个类已经在过多使用了，不过还是需要了解一下的，为了</p>
+把数据库中的信息存放到该文件中
+其中存放的是dri</p>
         
     
-    <time datetime="2017-06-15T04:22:39.000Z" itemprop="datePublished">2017-06-15</time>
+    <time datetime="2018-03-30T04:54:52.000Z" itemprop="datePublished">2018-03-30</time>
   </a>
 </section>
 
@@ -106,22 +103,20 @@ Date类表示特定的瞬间精确到毫秒，不过从API可以看出很多的�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/06/14/Java反射机制/" title="Java反射机制" itemprop="url">
+    <a href="/2018/03/30/JDBC干货一/" title="JDBC干货一" itemprop="url">
   
-    <h1 itemprop="name">Java反射机制</h1>
+    <h1 itemprop="name">JDBC干货一</h1>
     
      
-           <p itemprop="description" >Java反射机制前言
+           <p itemprop="description" >JDBC什么是JDBC
+Java Database Connectivity
+JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
 
-网页版的jdk的API
-离线版API
-
-
-什么是反射机制
-反射是java语言的一个特性，它允程序在运行时（注意不是编译的时候）来进行自我检查并且对内部的成员进行操作。例如它允许一个java的类获取他所有的成员变量和方法并且显示出来。这个能特定我们不常看到，</p>
+为什么使用JDBC
+因为java程序猿需要连接各种数据库（oracle，mysql，db2等）为了避免java程序猿每一种数据库都</p>
         
     
-    <time datetime="2017-06-14T07:53:54.000Z" itemprop="datePublished">2017-06-14</time>
+    <time datetime="2018-03-30T04:54:41.000Z" itemprop="datePublished">2018-03-30</time>
   </a>
 </section>
 
@@ -133,25 +128,20 @@ Date类表示特定的瞬间精确到毫秒，不过从API可以看出很多的�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/26/Java-IO学习笔记总结/" title="Java IO学习笔记总结" itemprop="url">
+    <a href="/2018/03/28/SQL操作六/" title="SQL操作六" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记总结</h1>
+    <h1 itemprop="name">SQL操作六</h1>
     
      
-           <p itemprop="description" >Java IO学习笔记总结前言
-前面的八篇文章详细的讲述了Java IO的操作方法，文章列表如下
+           <p itemprop="description" >Day06视图视图概述
+什么是视图： 在数据库中存在多种对象，表和视图都是数据库中的对象，创建视图时视图名称不能和表名相同，实际上，视图就代表一个sql查询语句，也可以理解成视图是一张虚拟的表，但是虚拟表中的数据会随着原表数据的改变而改变
 
-基本的文件操作
-字符流和字节流的操作
-InputStreamReader和OutputStreamWriter操作
-内存操作流
-管道流
-打印流
-System对IO的支持
-Buffe</p>
+为什么使用视图： 
+
+因为有些数据的查</p>
         
     
-    <time datetime="2017-05-26T00:09:27.000Z" itemprop="datePublished">2017-05-26</time>
+    <time datetime="2018-03-28T04:17:56.000Z" itemprop="datePublished">2018-03-28</time>
   </a>
 </section>
 
@@ -163,22 +153,22 @@ Buffe</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/26/Java-IO学习笔记八/" title="Java IO学习笔记八" itemprop="url">
+    <a href="/2018/03/28/SQL操作五/" title="SQL操作五" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记八</h1>
+    <h1 itemprop="name">SQL操作五</h1>
     
      
-           <p itemprop="description" >BufferedReader和BufferedWriter
+           <p itemprop="description" >Day05关联关系自关联
+当前表的数据和当前表里面的数据有关联关系
 
-这两个类是高效率的提高文件的读取速度，它们为字符输入和输出提供了一个缓冲区，可以显著的调高写入和读取的速度，特别针对大量的磁盘文件读取的时候,下面着重的讲讲这两个类
+一对一一对多多对多
+学生和老师的关系就是多对多的关系一个学生可以被多个老师教，一个老师可以教多个学生
 
-
-BufferedReader
-
-从字符输入流中读</p>
+创建表
+创建教师表 teacher(id,name)创建学生表 stu(id,name)创建第三张关系表t</p>
         
     
-    <time datetime="2017-05-25T23:37:55.000Z" itemprop="datePublished">2017-05-26</time>
+    <time datetime="2018-03-27T22:59:18.000Z" itemprop="datePublished">2018-03-28</time>
   </a>
 </section>
 
@@ -190,22 +180,15 @@ BufferedReader
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/26/Java-IO学习笔记七/" title="Java IO学习笔记七" itemprop="url">
+    <a href="/2018/03/26/SQL操作四/" title="SQL操作四" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记七</h1>
+    <h1 itemprop="name">SQL操作四</h1>
     
      
-           <p itemprop="description" >System对IO的支持
-
-System是系统的类，其中的方法都是在控制台的输入和输出，但是通过重定向也是可以对文件的输入输出
-System中定义了标准输入、标准输出和错误输出流，定义如下:
-
-
-static PrintStream err “标准”错误输出流。
-static I</p>
+           <p itemprop="description" >Day 04创建数据库和表商城建表语句1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465</p>
         
     
-    <time datetime="2017-05-25T23:37:47.000Z" itemprop="datePublished">2017-05-26</time>
+    <time datetime="2018-03-26T11:14:40.000Z" itemprop="datePublished">2018-03-26</time>
   </a>
 </section>
 
@@ -217,17 +200,23 @@ static I</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/25/Java-IO学习笔记六/" title="Java IO学习笔记六" itemprop="url">
+    <a href="/2018/03/24/SQL操作三/" title="SQL操作三" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记六</h1>
+    <h1 itemprop="name">SQL操作三</h1>
     
      
-           <p itemprop="description" >打印流
+           <p itemprop="description" >Day03查询null
+查询列值为null  (is null)
 
-在整个IO包中，打印流是输出信息最方便的类，主要包含字节打印流（PrintStream）和字符打印流（PrintWrite）。打印流提供了非常方便的打印功能，可以打印任何的数据类型，例如：小数、整数、字符串等等，相对于前面学习的几个文件的操作来说，这里的打印流是最简便的</p>
+select * from emp where mgr is null; 查询上级领导为空的员工
+
+
+查询列值不为null  (is not null)
+
+select * from emp where mgr </p>
         
     
-    <time datetime="2017-05-25T07:33:09.000Z" itemprop="datePublished">2017-05-25</time>
+    <time datetime="2018-03-24T01:10:58.000Z" itemprop="datePublished">2018-03-24</time>
   </a>
 </section>
 
@@ -239,17 +228,19 @@ static I</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/25/Java-IO学习笔记五/" title="Java IO学习笔记五" itemprop="url">
+    <a href="/2018/03/22/SQL操作二/" title="SQL操作二" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记五</h1>
+    <h1 itemprop="name">SQL操作二</h1>
     
      
-           <p itemprop="description" >管道流
+           <p itemprop="description" >Day02乱码问题
+1.数据库字符集 要设置成utf8
 
-管道流的主要作用是可以进行两个线程间的通讯，分为管道输出流(PipedOutputStream)、管道输入流（PipedInputStream），如果想要进行管道输出，则必须要把输出流连在输入流之上，在PipedOutputStream类上有如下的一个方法用于连接管道：</p>
+表的字符集 设置为utf8
+windows系统的命令行里，有些版本是gbk的编码格式，可以通过set names gbk；的方式把mysql接收到数据是的解码格式设置为gbk，这个位置的gbk和数据库还有表的utf8没有关</p>
         
     
-    <time datetime="2017-05-25T07:33:00.000Z" itemprop="datePublished">2017-05-25</time>
+    <time datetime="2018-03-22T09:28:54.000Z" itemprop="datePublished">2018-03-22</time>
   </a>
 </section>
 
@@ -261,16 +252,26 @@ static I</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/25/Java-IO学习笔记四/" title="Java IO学习笔记四" itemprop="url">
+    <a href="/2018/03/21/SQL操作一/" title="SQL操作一" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记四</h1>
+    <h1 itemprop="name">SQL操作一</h1>
     
      
-           <p itemprop="description" >内存操作流
-之前的所有的流操作都是针对文件的，但是有时候只是想要实现数据间转换，此时如果我们想要创建一个文件然后再删除文件，那样显得有点麻烦，因此此时的内存操作流就显得很适合这类的操作，因为它只是在内存中存储，并不会真正的创建文件，内存操作流涉及的两个类是ByteArrayInp</p>
+           <p itemprop="description" >Day01-基本的语句数据库简介
+因为传统的文本形式存储数据存在很多的弊端：
+
+执行效率低
+占用内存
+
+
+什么是DB
+Database ： 数据库数据库本质是文件集（多个文件）会按照特定存储规范进行数据增删改查
+
+什么是DBMS
+DateBaseManagementSystem </p>
         
     
-    <time datetime="2017-05-25T07:32:49.000Z" itemprop="datePublished">2017-05-25</time>
+    <time datetime="2018-03-21T08:57:43.000Z" itemprop="datePublished">2018-03-21</time>
   </a>
 </section>
 
@@ -282,21 +283,20 @@ static I</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/24/Java-IO学习笔记三/" title="Java IO学习笔记三" itemprop="url">
+    <a href="/2017/09/27/Excel表格的写入读取/" title="Excel表格的写入读取" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记三</h1>
+    <h1 itemprop="name">Excel表格的写入读取</h1>
     
      
-           <p itemprop="description" >Java IO学习笔记三
+           <p itemprop="description" >Excel的读取和写入准备
+首先需要导入jar包，请点击这里下载
 
-在整个IO包中，实际上就是分为字节流和字符流，但是除了这两个流之外，还存在了一组字节流-字符流的转换类。
-
-OutputStreamWriter：是Writer的子类，将输出的字符流变为字节流，即：将一个字符流的输出对象变成字节流的输出对象。
-
-Inp</p>
+简介
+我们知道Excel表格在2007之后就不一样了，后缀名变为xlsx，之前的后缀名为xls,因此读取和写入的操作就对应着不同的方式，但是只是读取和写入的类不同了，思想还是一样的。
+我们要知道一个Excel文件</p>
         
     
-    <time datetime="2017-05-24T06:48:34.000Z" itemprop="datePublished">2017-05-24</time>
+    <time datetime="2017-09-27T06:03:06.000Z" itemprop="datePublished">2017-09-27</time>
   </a>
 </section>
 
@@ -308,23 +308,19 @@ Inp</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/24/Java-IO学习笔记二/" title="Java IO学习笔记二" itemprop="url">
+    <a href="/2017/09/26/JSP总结四-EL表达式/" title="JSP总结四(EL表达式)" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记二</h1>
+    <h1 itemprop="name">JSP总结四(EL表达式)</h1>
     
      
-           <p itemprop="description" >Java IO学习笔记二流的概念
+           <p itemprop="description" >JSP总结四(EL表达式)简介
+JSP页面尽量不要使用scriptlet编写java代码，因此我们可以使用EL表达式可以替代Java语句的使用
 
-在程序中所有的数据都是以流的方式进行传输或保存的，程序需要数据的时候要使用输入流读取数据，而当程序需要将一些数据保存起来的时候，就要使用输出流完成。
-程序中的输入输出都是以流的形式保存的，流中保存的实际上全都是字节文件。
-
-
-字节流和字符流
-
-</p>
+隐含对象与属性相关的隐含对象
+属性的隐含对象有PageScope,requestScope,sessionScope,applicat</p>
         
     
-    <time datetime="2017-05-24T06:46:06.000Z" itemprop="datePublished">2017-05-24</time>
+    <time datetime="2017-09-26T12:07:16.000Z" itemprop="datePublished">2017-09-26</time>
   </a>
 </section>
 
@@ -335,7 +331,7 @@ Inp</p>
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/11/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/13/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/13/">Next<span></span></a>
   </nav>
 
 </div>
@@ -359,7 +355,11 @@ Inp</p>
 		  
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
@@ -391,7 +391,7 @@ Inp</p>
 		  
 		
 		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 		  
 		
 		  
@@ -403,7 +403,7 @@ Inp</p>
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>21</sup></a></li>
 		  
 		
 		  
@@ -412,6 +412,10 @@ Inp</p>
 		
 		  
 			<li><a href="/categories/java学习/" title="java学习">java学习<sup>30</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
 		  
 		
 		  
@@ -427,7 +431,7 @@ Inp</p>
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>9</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>14</sup></a></li>
 		  
 		
 		  
@@ -448,7 +452,15 @@ Inp</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>21</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
@@ -456,7 +468,7 @@ Inp</p>
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
 			
 		
 			
@@ -476,6 +488,10 @@ Inp</p>
 			
 		
 			
+				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
 			
 		
@@ -484,11 +500,7 @@ Inp</p>
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 			
 		
 			
@@ -500,11 +512,7 @@ Inp</p>
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
@@ -516,15 +524,11 @@ Inp</p>
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 		</ul>

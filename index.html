@@ -79,21 +79,21 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/06/14/二分查找/" title="二分查找" itemprop="url">
+    <a href="/2018/06/26/MySQL性能优化/" title="MySQL性能优化" itemprop="url">
   
-    <h1 itemprop="name">二分查找</h1>
+    <h1 itemprop="name">MySQL性能优化</h1>
     
      
-           <p itemprop="description" >二分查找算法
-对一个有序数组的查找
+           <p itemprop="description" >MySQL性能优化查看数据库性能参数
+show status like &amp;quot;value&amp;quot; ：value是要查询的参数值，常用的值如下：
 
-准备
-使用冒泡排序算法对数组排序
 
-12345678910111213//冒泡排序   , 从小到大public void bubbleSort(Integer[] array)&amp;#123;	//外层遍历n-1次	for (int i = 0</p>
+优化查询分析查询语句
+Mysql中提供explain和describe来分析查询语句
+格式：explain select </p>
         
     
-    <time datetime="2018-06-14T04:38:49.000Z" itemprop="datePublished">2018-06-14</time>
+    <time datetime="2018-06-26T14:59:48.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -105,39 +105,18 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/06/06/Redis总结/" title="Redis总结" itemprop="url">
+    <a href="/2018/06/26/MySQL触发器/" title="MySQL触发器" itemprop="url">
   
-    <h1 itemprop="name">Redis总结</h1>
+    <h1 itemprop="name">MySQL触发器</h1>
     
      
-           <p itemprop="description" >Redis
-中文文档
+           <p itemprop="description" >MySQL触发器定义
+MySQL的触发器和存储过程一样，都是嵌入到MysQL中的一段程序，不过触发器不要调用，而是由事件触发的，这些事件包括insert，update，delete语句，如果定义了触发程序，当数据执行这些语句的时候就会激发触发器执行相应的操作。
 
-数据库的分类
-关系型数据库
-存储表
-使用SQL
-也称为结构化数据库
-常见产品
-MySQL
-Oracle
-SQL Server
-DB2
-
-
-
-
-非关系型数据库
-泛指不使用SQL操作的数据库
-文档数据库
-存储文档
-MogoDB，用于存储JSON文档
-
-
-Key</p>
+创建触发器创建一</p>
         
     
-    <time datetime="2018-06-06T02:23:50.000Z" itemprop="datePublished">2018-06-06</time>
+    <time datetime="2018-06-26T14:58:57.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -149,21 +128,22 @@ Key</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/06/06/Nginx总结/" title="Nginx总结" itemprop="url">
+    <a href="/2018/06/26/MySQL中的锁/" title="MySQL中的锁" itemprop="url">
   
-    <h1 itemprop="name">Nginx总结</h1>
+    <h1 itemprop="name">MySQL中的锁</h1>
     
      
-           <p itemprop="description" >Nginx什么是Nginx
-是俄罗斯程序员开发的一款高性能的web服务器
-Nginx可以承受高并发，可以同时承受近百万请求
-利用Nginx和Tomcat(应用服务器)组合搭建反向代理服务器集群，可以解决WEB的高并发问题
+           <p itemprop="description" >MySQL中的锁数据库引擎
+数据库的引擎分为MyISAM和InnoDB和其他的
+不同的数据库引擎默认使用的锁是不同的
+MyISAM默认使用的是表级别锁，InnoDB默认使用的是行级锁
+我们在使用的时候，一般都是使用InnoDB，支持事务，事务安全等功能
 
-WEB 服务器
-凡是能够处理Http协议的服务器统称为w</p>
+锁的分类
+表级锁：开销小</p>
         
     
-    <time datetime="2018-06-06T02:23:10.000Z" itemprop="datePublished">2018-06-06</time>
+    <time datetime="2018-06-26T14:58:12.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -175,21 +155,17 @@ WEB 服务器
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/27/Linux使用总结/" title="Linux使用总结" itemprop="url">
+    <a href="/2018/06/26/Mysql存储过程和存储函数/" title="Mysql存储过程和存储函数" itemprop="url">
   
-    <h1 itemprop="name">Linux使用总结</h1>
+    <h1 itemprop="name">Mysql存储过程和存储函数</h1>
     
      
-           <p itemprop="description" >Liunx使用命令管道连接 |
-命令管道符合为|,可以将两个命令进行连接，连接后第一个命令的输出结果作为第二个命令的输入信息
-比如   ls  /ect | more -10  分屏显示etc文件夹下的10行数据
-
-Linux文件系统结构
-/ : 根目录
-/home： 主文件夹，</p>
+           <p itemprop="description" >Mysql存储过程和存储函数存储过程的好处
+增强SQL语言的功能和灵活性：存储过程可以用控制语句编写，有很强的灵活性，可以完成复杂的判断和较复杂的运算。
+标准组件式编程：存储过程被创建后，可以在程序中被多次调用，而不必重新编写该存储过程的SQL语句。而且数据库专业人员可以随时对存</p>
         
     
-    <time datetime="2018-05-27T02:19:42.000Z" itemprop="datePublished">2018-05-27</time>
+    <time datetime="2018-06-26T14:56:37.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -201,17 +177,18 @@ Linux文件系统结构
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/27/监听器获取spring配置文件创建的对象/" title="监听器获取spring配置文件创建的对象" itemprop="url">
+    <a href="/2018/06/26/并发编程之Callable、Future、FutureTask/" title="并发编程之Callable、Future、FutureTask" itemprop="url">
   
-    <h1 itemprop="name">监听器获取spring配置文件创建的对象</h1>
+    <h1 itemprop="name">并发编程之Callable、Future、FutureTask</h1>
     
      
-           <p itemprop="description" >监听器获取spring配置文件创建的对象前提
-我们在使用监听器的时候，会用到spring配置文件创建的对象，那么我们不能像其他的类中直接使用@Resource或者@AutoWired自动注入对象，那么我们如何获取对象呢
-比如我们在缓存数据的时候，就是在容器启动的时候读取数据库中的</p>
+           <p itemprop="description" >并发编程之Callable、Future、FutureTask
+　在前面的文章中我们讲述了创建线程的2种方式，一种是直接继承Thread，另外一种就是实现Runnable接口。
+这2种方式都有一个缺陷就是：在执行完任务之后无法获取执行结果。
+如果需要获取执行结果，就必须通过共享变</p>
         
     
-    <time datetime="2018-05-27T02:18:11.000Z" itemprop="datePublished">2018-05-27</time>
+    <time datetime="2018-06-26T14:55:49.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -223,15 +200,19 @@ Linux文件系统结构
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/27/SSM整合/" title="SSM整合" itemprop="url">
+    <a href="/2018/06/26/并发编程之线程池的使用/" title="并发编程之线程池的使用" itemprop="url">
   
-    <h1 itemprop="name">SSM整合</h1>
+    <h1 itemprop="name">并发编程之线程池的使用</h1>
     
      
-           <p itemprop="description" >Spring + SpringMVC + Mybatis整合依赖123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585</p>
+           <p itemprop="description" >并发编程之线程池的使用
+转载自http://www.cnblogs.com/dolphin0520/p/3932921.html
+https://blog.csdn.net/wanghao_0206/article/details/76460877
+
+Java中的ThreadPo</p>
         
     
-    <time datetime="2018-05-27T02:16:20.000Z" itemprop="datePublished">2018-05-27</time>
+    <time datetime="2018-06-26T14:54:59.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -243,19 +224,17 @@ Linux文件系统结构
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/27/Lucene全文检索/" title="Lucene全文检索" itemprop="url">
+    <a href="/2018/06/26/Java内存模型/" title="Java内存模型" itemprop="url">
   
-    <h1 itemprop="name">Lucene全文检索</h1>
+    <h1 itemprop="name">Java内存模型</h1>
     
      
-           <p itemprop="description" >Lucene  全文检索Field域
-Field是文档中的域，包括Field名和Field值两部分，一个文档可以包括多个Field，Document只是Field的一个承载体，Field值即为要索引的内容，也是要搜索的内容。
-
-是否分词
-分词就是对文件的内容或者其他的属性进行分割</p>
+           <p itemprop="description" >Java内存模型
+Java内存模型规范了Java虚拟机与计算机内存是如何协同工作的。Java虚拟机是一个完整的计算机的一个模型，因此这个模型自然也包含一个内存模型——又称为Java内存模型。
+如果你想设计表现良好的并发程序，理解Java内存模型是非常重要的。Java内存模型规定了</p>
         
     
-    <time datetime="2018-05-27T02:13:57.000Z" itemprop="datePublished">2018-05-27</time>
+    <time datetime="2018-06-26T14:54:04.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -267,18 +246,17 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/购物车模块/" title="购物车模块" itemprop="url">
+    <a href="/2018/06/26/并发编程之线程管理/" title="并发编程之线程管理" itemprop="url">
   
-    <h1 itemprop="name">购物车模块</h1>
+    <h1 itemprop="name">并发编程之线程管理</h1>
     
      
-           <p itemprop="description" >购物车模块建表
-创建购物车的表
-
-123456789create table t_cart(id int primary key auto_increment,　　//主键                   	goods_id varchar(200),　　　//商品的ｉｄ  </p>
+           <p itemprop="description" >并发编程之线程管理线程的未捕获异常与监控
+如果线程的run方法抛出异常未被铺货（Uncaught Exception），那么随着run方法的退出，相应的线程也会提前终止。对于线程的这种异常终止，我们如何得知并做出可能的补救动作，例如重新创建并启动一个替代线程。
+Jdk中使用Unc</p>
         
     
-    <time datetime="2018-05-21T10:27:35.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:53:22.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -290,25 +268,17 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/用户管理模块之个人信息修改/" title="用户管理模块之个人信息修改" itemprop="url">
+    <a href="/2018/06/26/并发编程之信号量/" title="并发编程之信号量" itemprop="url">
   
-    <h1 itemprop="name">用户管理模块之个人信息修改</h1>
+    <h1 itemprop="name">并发编程之信号量</h1>
     
      
-           <p itemprop="description" >用户管理模块之个人信息修改功能
-修改用户名
-修改性别
-修改邮箱
-修改密码
-修改头像
-
-在UserMapper中定义方法和UserMapper.xml中定义定义接口方法
-定义接口方法
-
-12345/** * 更新用户信息 * @param user  User对象 */void u</p>
+           <p itemprop="description" >并发编程之信号量详解1、Semaphore可以控同时访问的线程个数
+2、Semaphore类位于java.util.concurrent包下，它提供了2个构造器：
+12345678 //参数permits表示许可数目，即同时可以允许多少线程进行访问public Semaphore</p>
         
     
-    <time datetime="2018-05-21T10:26:45.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:52:41.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -320,26 +290,15 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/地址管理之省市区三级联动菜单/" title="地址管理之省市区三级联动菜单" itemprop="url">
+    <a href="/2018/06/26/并发编程之阻塞队列/" title="并发编程之阻塞队列" itemprop="url">
   
-    <h1 itemprop="name">地址管理之省市区三级联动菜单</h1>
+    <h1 itemprop="name">并发编程之阻塞队列</h1>
     
      
-           <p itemprop="description" >地址管理之省市区三级联动菜单
-导入省市区的数据
-下载sql语句的文件
-在数据库中执行：source 文件路径即可导入
-导入成功之后，在数据库中会出现三张表，分别代表省,市,区
-
-创建实体类
-get，set方法
-hashCode和equals方法
-实现序列化接口，生成安全码
-
-Pr</p>
+           <p itemprop="description" >并发编程之阻塞队列1. 什么是阻塞队列阻塞队列（BlockingQueue）是 Java 5 并发新特性中的内容，阻塞队列的接口是 java.util.concurrent.BlockingQueue，它提供了两个附加操作：当队列中为空时，从队列中获取元素的操作将被阻塞；当队列满</p>
         
     
-    <time datetime="2018-05-21T10:26:00.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:51:59.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -350,7 +309,7 @@ Pr</p>
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -374,7 +333,11 @@ Pr</p>
 		  
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
@@ -406,7 +369,7 @@ Pr</p>
 		  
 		
 		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 		  
 		
 		  
@@ -418,7 +381,7 @@ Pr</p>
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>21</sup></a></li>
 		  
 		
 		  
@@ -427,6 +390,10 @@ Pr</p>
 		
 		  
 			<li><a href="/categories/java学习/" title="java学习">java学习<sup>30</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
 		  
 		
 		  
@@ -442,7 +409,7 @@ Pr</p>
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>9</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>14</sup></a></li>
 		  
 		
 		  
@@ -463,7 +430,15 @@ Pr</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>21</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
@@ -471,7 +446,7 @@ Pr</p>
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
 			
 		
 			
@@ -491,6 +466,10 @@ Pr</p>
 			
 		
 			
+				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
 			
 		
@@ -499,11 +478,7 @@ Pr</p>
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 			
 		
 			
@@ -515,11 +490,7 @@ Pr</p>
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
@@ -531,15 +502,11 @@ Pr</p>
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 		</ul>

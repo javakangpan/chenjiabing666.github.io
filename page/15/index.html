@@ -79,22 +79,25 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/13/Linux干货篇一/" title="Linux干货篇一" itemprop="url">
+    <a href="/2017/05/26/Java-IO学习笔记总结/" title="Java IO学习笔记总结" itemprop="url">
   
-    <h1 itemprop="name">Linux干货篇一</h1>
+    <h1 itemprop="name">Java IO学习笔记总结</h1>
     
      
-           <p itemprop="description" >Linux干货篇一虚拟机的安装(VMware)
+           <p itemprop="description" >Java IO学习笔记总结前言
+前面的八篇文章详细的讲述了Java IO的操作方法，文章列表如下
 
-选择文件-&amp;gt;新建虚拟机
-选择自定义
-设置安装来源，选择稍后安装
-选择安装的操作系统，选择Linux,然后选择自己安装的对应版本即可
-设置虚拟机的安装路径，自己选择
-指定磁盘容量，选择默认20G,然后选择将虚拟磁盘存储为单个文</p>
+基本的文件操作
+字符流和字节流的操作
+InputStreamReader和OutputStreamWriter操作
+内存操作流
+管道流
+打印流
+System对IO的支持
+Buffe</p>
         
     
-    <time datetime="2017-04-13T04:29:34.000Z" itemprop="datePublished">2017-04-13</time>
+    <time datetime="2017-05-26T00:09:27.000Z" itemprop="datePublished">2017-05-26</time>
   </a>
 </section>
 
@@ -106,17 +109,22 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/09/java干货篇之文字特效/" title="java干货篇之文字特效" itemprop="url">
+    <a href="/2017/05/26/Java-IO学习笔记八/" title="Java IO学习笔记八" itemprop="url">
   
-    <h1 itemprop="name">java干货篇之文字特效</h1>
+    <h1 itemprop="name">Java IO学习笔记八</h1>
     
      
-           <p itemprop="description" >java干货篇文字特效立体效果的文字主要使用了Graphics类中的setFont和setColor的方法，绘制多层字然后加上平移一个坐标即可实现多重叠加的效果,让人看起来就像是立体一样,详情请见源码
-阴影效果的文字和面一样，只是平移的方式有些不同，详情请见源码
-倾斜效果的文字主</p>
+           <p itemprop="description" >BufferedReader和BufferedWriter
+
+这两个类是高效率的提高文件的读取速度，它们为字符输入和输出提供了一个缓冲区，可以显著的调高写入和读取的速度，特别针对大量的磁盘文件读取的时候,下面着重的讲讲这两个类
+
+
+BufferedReader
+
+从字符输入流中读</p>
         
     
-    <time datetime="2017-04-09T08:15:16.000Z" itemprop="datePublished">2017-04-09</time>
+    <time datetime="2017-05-25T23:37:55.000Z" itemprop="datePublished">2017-05-26</time>
   </a>
 </section>
 
@@ -128,17 +136,22 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/08/Swing干货系列之JTextField/" title="swing干货系列之JTextField" itemprop="url">
+    <a href="/2017/05/26/Java-IO学习笔记七/" title="Java IO学习笔记七" itemprop="url">
   
-    <h1 itemprop="name">swing干货系列之JTextField</h1>
+    <h1 itemprop="name">Java IO学习笔记七</h1>
     
      
-           <p itemprop="description" >Swing系列之JTextField(单行文本框)介绍
-JTextField是一个轻量级组件，它允许编辑单行文本。
-JTextField 具有建立字符串的方法，此字符串用作针对被激发的操作事件的命令字符串。java.awt.TextField 把字段文本用作针对 ActionEv</p>
+           <p itemprop="description" >System对IO的支持
+
+System是系统的类，其中的方法都是在控制台的输入和输出，但是通过重定向也是可以对文件的输入输出
+System中定义了标准输入、标准输出和错误输出流，定义如下:
+
+
+static PrintStream err “标准”错误输出流。
+static I</p>
         
     
-    <time datetime="2017-04-08T12:32:04.000Z" itemprop="datePublished">2017-04-08</time>
+    <time datetime="2017-05-25T23:37:47.000Z" itemprop="datePublished">2017-05-26</time>
   </a>
 </section>
 
@@ -150,20 +163,17 @@ JTextField 具有建立字符串的方法，此字符串用作针对被激发的
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/08/scrapy爬取豆瓣全站/" title="scrapy爬取豆瓣全站" itemprop="url">
+    <a href="/2017/05/25/Java-IO学习笔记六/" title="Java IO学习笔记六" itemprop="url">
   
-    <h1 itemprop="name">scrapy爬取豆瓣全站</h1>
+    <h1 itemprop="name">Java IO学习笔记六</h1>
     
      
-           <p itemprop="description" >Scrapy爬取豆瓣读书全站分析网页
-首先打开豆瓣读书中的分类浏览，可以看到其中有很多的分类
+           <p itemprop="description" >打印流
 
-豆瓣应该是一个比较好爬的网站，所有的数据都不是ajax加载的，我们打开谷歌的F12或者是火狐的FireBug可以很轻松的找到每一个分类的链接
-
-这里我们使用scrapy中的一个link</p>
+在整个IO包中，打印流是输出信息最方便的类，主要包含字节打印流（PrintStream）和字符打印流（PrintWrite）。打印流提供了非常方便的打印功能，可以打印任何的数据类型，例如：小数、整数、字符串等等，相对于前面学习的几个文件的操作来说，这里的打印流是最简便的</p>
         
     
-    <time datetime="2017-04-08T06:24:26.000Z" itemprop="datePublished">2017-04-08</time>
+    <time datetime="2017-05-25T07:33:09.000Z" itemprop="datePublished">2017-05-25</time>
   </a>
 </section>
 
@@ -175,16 +185,17 @@ JTextField 具有建立字符串的方法，此字符串用作针对被激发的
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/05/java布局管理器/" title="swing布局管理器" itemprop="url">
+    <a href="/2017/05/25/Java-IO学习笔记五/" title="Java IO学习笔记五" itemprop="url">
   
-    <h1 itemprop="name">swing布局管理器</h1>
+    <h1 itemprop="name">Java IO学习笔记五</h1>
     
      
-           <p itemprop="description" >Swing系列之布局管理器流布局(FlowLayout)默认的JApplet,JPanel,JScrollPane
-流布局是相对比较简单的一种布局管理器，也是最常用的布局管理器。在流布局中放置控件时，将按照控件的添加顺序，依次将控件从左到右进行摆放，并且在一行的最后会进行自动换行</p>
+           <p itemprop="description" >管道流
+
+管道流的主要作用是可以进行两个线程间的通讯，分为管道输出流(PipedOutputStream)、管道输入流（PipedInputStream），如果想要进行管道输出，则必须要把输出流连在输入流之上，在PipedOutputStream类上有如下的一个方法用于连接管道：</p>
         
     
-    <time datetime="2017-04-05T15:06:08.000Z" itemprop="datePublished">2017-04-05</time>
+    <time datetime="2017-05-25T07:33:00.000Z" itemprop="datePublished">2017-05-25</time>
   </a>
 </section>
 
@@ -196,20 +207,16 @@ JTextField 具有建立字符串的方法，此字符串用作针对被激发的
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/04/java图像处理干货篇/" title="java图像处理干货篇一" itemprop="url">
+    <a href="/2017/05/25/Java-IO学习笔记四/" title="Java IO学习笔记四" itemprop="url">
   
-    <h1 itemprop="name">java图像处理干货篇一</h1>
+    <h1 itemprop="name">Java IO学习笔记四</h1>
     
      
-           <p itemprop="description" >java图像处理干货篇绘制图像
-绘制图像主要用到的是Graphics类中drawImage方法，当然Graphics2D中也有相应的方法
-
-主要的用法：
-
-public abstract boolean drawImage(Image img,x,y,ImageObserver </p>
+           <p itemprop="description" >内存操作流
+之前的所有的流操作都是针对文件的，但是有时候只是想要实现数据间转换，此时如果我们想要创建一个文件然后再删除文件，那样显得有点麻烦，因此此时的内存操作流就显得很适合这类的操作，因为它只是在内存中存储，并不会真正的创建文件，内存操作流涉及的两个类是ByteArrayInp</p>
         
     
-    <time datetime="2017-04-04T12:17:07.000Z" itemprop="datePublished">2017-04-04</time>
+    <time datetime="2017-05-25T07:32:49.000Z" itemprop="datePublished">2017-05-25</time>
   </a>
 </section>
 
@@ -221,15 +228,21 @@ public abstract boolean drawImage(Image img,x,y,ImageObserver </p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/01/matplotlib绘制图形基础/" title="matplotlib绘制图形基础" itemprop="url">
+    <a href="/2017/05/24/Java-IO学习笔记三/" title="Java IO学习笔记三" itemprop="url">
   
-    <h1 itemprop="name">matplotlib绘制图形基础</h1>
+    <h1 itemprop="name">Java IO学习笔记三</h1>
     
      
-           <p itemprop="description" >matplotlib绘制基本图形折线图12345678import matplotlib.pyplot as pltimport numpy as npx=np.arange(0,10,1) #创建一个0-10之间以1为间隔的numpy数组y=x+10   plt.plot(x,</p>
+           <p itemprop="description" >Java IO学习笔记三
+
+在整个IO包中，实际上就是分为字节流和字符流，但是除了这两个流之外，还存在了一组字节流-字符流的转换类。
+
+OutputStreamWriter：是Writer的子类，将输出的字符流变为字节流，即：将一个字符流的输出对象变成字节流的输出对象。
+
+Inp</p>
         
     
-    <time datetime="2017-04-01T03:46:34.000Z" itemprop="datePublished">2017-04-01</time>
+    <time datetime="2017-05-24T06:48:34.000Z" itemprop="datePublished">2017-05-24</time>
   </a>
 </section>
 
@@ -241,16 +254,23 @@ public abstract boolean drawImage(Image img,x,y,ImageObserver </p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/03/28/Swing中的JSplitPane/" title="Swing干货系列之JSplitPane(分割面板)" itemprop="url">
+    <a href="/2017/05/24/Java-IO学习笔记二/" title="Java IO学习笔记二" itemprop="url">
   
-    <h1 itemprop="name">Swing干货系列之JSplitPane(分割面板)</h1>
+    <h1 itemprop="name">Java IO学习笔记二</h1>
     
      
-           <p itemprop="description" >Swing中的JSplitPane(分割面板)引言
-JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图形化分隔以外观实现为基础，并且这两个 Component 可以由用户交互式调整大小。有关如何使用 JSplitPane 的信息，请参阅</p>
+           <p itemprop="description" >Java IO学习笔记二流的概念
+
+在程序中所有的数据都是以流的方式进行传输或保存的，程序需要数据的时候要使用输入流读取数据，而当程序需要将一些数据保存起来的时候，就要使用输出流完成。
+程序中的输入输出都是以流的形式保存的，流中保存的实际上全都是字节文件。
+
+
+字节流和字符流
+
+</p>
         
     
-    <time datetime="2017-03-28T14:49:39.000Z" itemprop="datePublished">2017-03-28</time>
+    <time datetime="2017-05-24T06:46:06.000Z" itemprop="datePublished">2017-05-24</time>
   </a>
 </section>
 
@@ -262,17 +282,20 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/03/27/Swing-干货系列之JSlider/" title="Swing干货系列之JSlider(滑块)" itemprop="url">
+    <a href="/2017/05/23/Java-IO学习笔记一/" title="Java IO学习笔记一" itemprop="url">
   
-    <h1 itemprop="name">Swing干货系列之JSlider(滑块)</h1>
+    <h1 itemprop="name">Java IO学习笔记一</h1>
     
      
-           <p itemprop="description" >Swing干货系列之JSlider(滑块)引言
-一个让用户以图形方式在有界区间内通过移动滑块来选择值的组件。
-滑块可以显示主刻度标记以及主刻度之间的次刻度标记。刻度标记之间的值的个数由 setMajorTickSpacing和 setMinorTickSpacing 来控制。刻度</p>
+           <p itemprop="description" >Java IO学习笔记一File
+File是文件和目录路径名的抽象表示形式，总的来说就是java创建删除文件目录的一个类库，但是作用不仅仅于此，详细见官方文档
+
+构造函数
+
+File(File parent, String child) 根据 parent 抽象路径名和 chil</p>
         
     
-    <time datetime="2017-03-27T13:43:22.000Z" itemprop="datePublished">2017-03-27</time>
+    <time datetime="2017-05-23T07:23:50.000Z" itemprop="datePublished">2017-05-23</time>
   </a>
 </section>
 
@@ -284,16 +307,22 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/03/26/scrapy设置请求池/" title="scrapy设置请求池" itemprop="url">
+    <a href="/2017/05/15/python实现微信接口/" title="python实现微信接口" itemprop="url">
   
-    <h1 itemprop="name">scrapy设置请求池</h1>
+    <h1 itemprop="name">python实现微信接口</h1>
     
      
-           <p itemprop="description" >scrapy设置”请求池”引言
-相信大家有时候爬虫发出请求的时候会被ban，返回的是403错误，这个就是请求头的问题，其实在python发出请求时，使用的是默认的自己的请求头，网站管理者肯定会不允许机器访问的，但是有些比较low的网站还是可以访问的，有时候网站管理者看到同一个请求</p>
+           <p itemprop="description" >python实现微信接口(itchat)安装
+
+sudo pip install itchat
+
+
+登录
+
+itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但是这种登录的方式确实短时间的登录，并不会保留登录的状态，也就是下次登录时还是需要扫描二维码，</p>
         
     
-    <time datetime="2017-03-26T06:20:10.000Z" itemprop="datePublished">2017-03-26</time>
+    <time datetime="2017-05-14T19:44:21.000Z" itemprop="datePublished">2017-05-15</time>
   </a>
 </section>
 
@@ -304,7 +333,7 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/14/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/16/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/16/">Next<span></span></a>
   </nav>
 
 </div>
@@ -328,7 +357,11 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 		  
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
@@ -360,7 +393,7 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 		  
 		
 		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 		  
 		
 		  
@@ -372,7 +405,7 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>21</sup></a></li>
 		  
 		
 		  
@@ -381,6 +414,10 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 		
 		  
 			<li><a href="/categories/java学习/" title="java学习">java学习<sup>30</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
 		  
 		
 		  
@@ -396,7 +433,7 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>9</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>14</sup></a></li>
 		  
 		
 		  
@@ -417,7 +454,15 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>21</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
@@ -425,7 +470,7 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
 			
 		
 			
@@ -445,6 +490,10 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 			
 		
 			
+				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
 			
 		
@@ -453,11 +502,7 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 			
 		
 			
@@ -469,11 +514,7 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
@@ -485,15 +526,11 @@ JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图�
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 		</ul>

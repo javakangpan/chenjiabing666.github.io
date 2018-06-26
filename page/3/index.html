@@ -79,21 +79,18 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/选择排序/" title="选择排序" itemprop="url">
+    <a href="/2018/06/26/Spring整合Redis/" title="Spring整合Redis" itemprop="url">
   
-    <h1 itemprop="name">选择排序</h1>
+    <h1 itemprop="name">Spring整合Redis</h1>
     
      
-           <p itemprop="description" >选择排序思想(从小到大)
-每一趟从待排序的记录中选出最小的元素，顺序放在已排好序的序列最后，直到全部记录排序完毕
+           <p itemprop="description" >Spring - Data - Redis添加依赖
+需要spring的版本为4.xxx
 
-分析
-假设数组中有个n元素
-第一趟：在整个数组中选择出最小的元素，和数组中的第一个元素交换位置，那么此时的第一个元素就是最小的
-第二趟： 从第二个元素开始再次查找剩</p>
+12345678910111213&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;redis.clients&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId</p>
         
     
-    <time datetime="2018-05-09T00:44:07.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-06-26T14:37:40.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -105,23 +102,15 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/插入排序算法/" title="插入排序算法" itemprop="url">
+    <a href="/2018/06/26/Redis/" title="Redis" itemprop="url">
   
-    <h1 itemprop="name">插入排序算法</h1>
+    <h1 itemprop="name">Redis</h1>
     
      
-           <p itemprop="description" >插入排序算法思想
-我们以从小到大的排序进行讲解
-
-
-插入排序就是将一个元素插入到一个已经是有序的序列中， 通过遍历比较这个待插入元素和有序的序列元素之间的大小，来比较需要插入的位置，使其仍然是一个有序的数组。
-数组插入的算法：向后移动元素给待插入的数据位置
-
-详解
-第一趟：假设我</p>
+           <p itemprop="description" ></p>
         
     
-    <time datetime="2018-05-09T00:43:57.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-06-26T14:36:28.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -133,21 +122,16 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/JQuery实现AJAX异步提交/" title="JQuery实现AJAX异步提交" itemprop="url">
+    <a href="/2018/06/26/Redis主从复制/" title="Redis主从复制" itemprop="url">
   
-    <h1 itemprop="name">JQuery实现AJAX异步提交</h1>
+    <h1 itemprop="name">Redis主从复制</h1>
     
      
-           <p itemprop="description" >JQuery实现AJAX异步提交准备
-点击下载JQurery的文件
-
-
-添加JQuery的文件： &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;文件路径&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-
-$.ajax</p>
+           <p itemprop="description" >Redis主从复制
+本章介绍Redis的一个强大功能–主从复制。一台master主机可以拥有多台slave从机。而一台slave从机又可以拥有多个slave从机。如此下去，形成强大的多级服务器集群架构（高扩展）。可以避免Redis单点故障，实现容灾恢复效果（高可用）。读写分离的架</p>
         
     
-    <time datetime="2018-05-09T00:42:04.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-06-26T14:35:44.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -159,18 +143,24 @@ $.ajax</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/Springmvc中的转发重定向和拦截器/" title="Springmvc中的转发重定向和拦截器" itemprop="url">
+    <a href="/2018/06/26/Redis的管道Pipeline/" title="Redis的管道Pipeline" itemprop="url">
   
-    <h1 itemprop="name">Springmvc中的转发重定向和拦截器</h1>
+    <h1 itemprop="name">Redis的管道Pipeline</h1>
     
      
-           <p itemprop="description" >Springmvc中的转发重定向和拦截器可变参数
-可变参数在设计方法时，使用数据类型...来声明参数类型，例如：public static void function(int... numbers)在实现方法体时，可变参数是作为数组来处理
+           <p itemprop="description" >Redis的管道(Pipeline)为什么使用管道
+其中redis的执行一条命令可以分为四个步骤
+发送命令
+命令排队
+命令执行
+返回结果
 
-1234567891011121314</p>
+
+其中1-4之间所需要的时间称为往返时间(RTT)
+Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但大部分命令</p>
         
     
-    <time datetime="2018-05-09T00:40:51.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-06-26T14:35:00.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -182,20 +172,19 @@ $.ajax</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/Springmvc解决中文乱码问题/" title="Springmvc解决中文乱码问题" itemprop="url">
+    <a href="/2018/06/26/Redis持久化/" title="Redis持久化" itemprop="url">
   
-    <h1 itemprop="name">Springmvc解决中文乱码问题</h1>
+    <h1 itemprop="name">Redis持久化</h1>
     
      
-           <p itemprop="description" >Springmvc解决中文乱码问题POST
-在表单提交的时候，如果遇到中文乱码的情况，springmvc提供了一个CharacterEncodingFilter过滤器，我们只需要在web.xml文件中配置即可
+           <p itemprop="description" >Redis持久化RDB (默认使用)
+RDB持久化是把当前进程数据生成快照保存到硬盘的过程,触发RDB持久化过程分为手动触发和自动触发。
 
-注意
-表单的提交方式必须是post
-在web.xml中配置Chara</p>
+手动触发 (bgsave)
+执行bgsave命令,Redis父进程判断当前是否存在正在执行的子进程,如RDB/AOF子进程,如果存在bgsa</p>
         
     
-    <time datetime="2018-05-09T00:39:48.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-06-26T14:34:07.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -207,19 +196,22 @@ $.ajax</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/Mybatis之增删改查/" title="Mybatis之增删改查" itemprop="url">
+    <a href="/2018/06/26/Redis客户端操作/" title="Redis客户端操作" itemprop="url">
   
-    <h1 itemprop="name">Mybatis之增删改查</h1>
+    <h1 itemprop="name">Redis客户端操作</h1>
     
      
-           <p itemprop="description" >Mybatis的增删改查增加数据
-在增加数据的时候，mybatis默认返回的是受影响的行数，因此不需要指定ResultType指定返回类型
-在UserMapper.java接口中添加方法
+           <p itemprop="description" >Redis客户端Jedis远程连接
+yum install redis  : 安装redis
+开启6379端口
+在自己的阿里云的控制台上开启防火墙6379
+firewall-cmd --zone=public --add-port=6379/tcp
 
-1234/**	@param user User对象*/Integer reg(User </p>
+
+如果显示firewall </p>
         
     
-    <time datetime="2018-05-04T10:04:29.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-06-26T14:33:32.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -231,17 +223,18 @@ $.ajax</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/快速排序算法/" title="快速排序算法" itemprop="url">
+    <a href="/2018/06/26/Redis常用命令/" title="Redis常用命令" itemprop="url">
   
-    <h1 itemprop="name">快速排序算法</h1>
+    <h1 itemprop="name">Redis常用命令</h1>
     
      
-           <p itemprop="description" >快速排序算法思想(从小到大排序)
-快速排序是使用分治法来完成的
-基本思想就是先从其中选取一个基准值，然后从数组的两端开始移动查找，在右边移动查找到比基准值小的数据停止移动，此时在左边查找到比基准值大的数据也停止查找，交换这两个查找到的数据，交换完成之后两端继续移动查找，如果左边找</p>
+           <p itemprop="description" >Redis常用命令Redis全局命令
+keys * : 查看所有的key，这个会遍历所有的键,复杂度为O(n)，因此当存在了大量的key，应该禁止使用这个命令
+dbsize ：查看键key的个数，这个是直接获取内置的键总数变量，因此复杂度为O(1)
+exists key  : 检</p>
         
     
-    <time datetime="2018-05-04T09:55:26.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-06-26T14:32:44.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -253,19 +246,16 @@ $.ajax</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/冒泡排序算法/" title="冒泡排序算法" itemprop="url">
+    <a href="/2018/06/26/Redis使用场景/" title="Redis使用场景" itemprop="url">
   
-    <h1 itemprop="name">冒泡排序算法</h1>
+    <h1 itemprop="name">Redis使用场景</h1>
     
      
-           <p itemprop="description" >冒泡排序算法原理
-比较相邻的两个数，将值较大的元素放在最前面，由于较小的数字像泡泡一样浮上来，因此取名为冒泡
-
-从后向前比较(小的数上浮)
-第一趟：从数组的最后一个元素和倒数第二个元素比较，小的上浮(交换)，之后倒数第二个和倒数第三个数字比较，小的上浮(交换)，直至第二个数字和第</p>
+           <p itemprop="description" >Redis使用场景缓存
+缓存机制几乎在所有的大型网站都有使用,合理地使用缓存不仅可以加快数据的访问速度,而且能够有效地降低后端数据源的压力。Redis提供了键值过期时间设置,并且也提供了灵活控制最大内存和内存溢出后的淘汰策略。可以这么说,一个合理的缓存设计能够为一个网站的稳定保驾</p>
         
     
-    <time datetime="2018-05-04T09:54:34.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-06-26T14:31:31.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -277,26 +267,21 @@ $.ajax</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/JSON/" title="JSON" itemprop="url">
+    <a href="/2018/06/14/二分查找/" title="二分查找" itemprop="url">
   
-    <h1 itemprop="name">JSON</h1>
+    <h1 itemprop="name">二分查找</h1>
     
      
-           <p itemprop="description" >JSON定义
-数据组织的一种方式
+           <p itemprop="description" >二分查找算法
+对一个有序数组的查找
 
-格式
-key-value形式的组织
+准备
+使用冒泡排序算法对数组排序
 
-JSON对象
-对象保存在{}中，并且以key-value的形式存储
-其中的key必须是加上双引号，不能是单引号
-
-
-{&amp;quot;key1&amp;quot;,value1,&amp;quot;key2&amp;quot;,val</p>
+12345678910111213//冒泡排序   , 从小到大public void bubbleSort(Integer[] array)&amp;#123;	//外层遍历n-1次	for (int i = 0</p>
         
     
-    <time datetime="2018-05-04T09:53:41.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-06-14T04:38:49.000Z" itemprop="datePublished">2018-06-14</time>
   </a>
 </section>
 
@@ -308,22 +293,39 @@ JSON对象
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/javascript实现Ajax/" title="javascript实现Ajax" itemprop="url">
+    <a href="/2018/06/06/Redis总结/" title="Redis总结" itemprop="url">
   
-    <h1 itemprop="name">javascript实现Ajax</h1>
+    <h1 itemprop="name">Redis总结</h1>
     
      
-           <p itemprop="description" >javascript实现Ajax定义
-异步的javascript和XML，实现异步提交功能的技术(XMLHttpRequest)
-不响应页面的前提下，服务器可以响应其中的一小部分数据到页面上
+           <p itemprop="description" >Redis
+中文文档
 
-实现的步骤创建XMLHttpRequest
-解决浏览器兼容问题
+数据库的分类
+关系型数据库
+存储表
+使用SQL
+也称为结构化数据库
+常见产品
+MySQL
+Oracle
+SQL Server
+DB2
 
-1234567891</p>
+
+
+
+非关系型数据库
+泛指不使用SQL操作的数据库
+文档数据库
+存储文档
+MogoDB，用于存储JSON文档
+
+
+Key</p>
         
     
-    <time datetime="2018-05-04T09:52:53.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-06-06T02:23:50.000Z" itemprop="datePublished">2018-06-06</time>
   </a>
 </section>
 
@@ -334,7 +336,7 @@ JSON对象
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
   </nav>
 
 </div>
@@ -358,7 +360,11 @@ JSON对象
 		  
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
@@ -390,7 +396,7 @@ JSON对象
 		  
 		
 		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 		  
 		
 		  
@@ -402,7 +408,7 @@ JSON对象
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>21</sup></a></li>
 		  
 		
 		  
@@ -411,6 +417,10 @@ JSON对象
 		
 		  
 			<li><a href="/categories/java学习/" title="java学习">java学习<sup>30</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
 		  
 		
 		  
@@ -426,7 +436,7 @@ JSON对象
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>9</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>14</sup></a></li>
 		  
 		
 		  
@@ -447,7 +457,15 @@ JSON对象
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>21</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
@@ -455,7 +473,7 @@ JSON对象
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
 			
 		
 			
@@ -475,6 +493,10 @@ JSON对象
 			
 		
 			
+				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
 			
 		
@@ -483,11 +505,7 @@ JSON对象
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 			
 		
 			
@@ -499,11 +517,7 @@ JSON对象
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
@@ -515,15 +529,11 @@ JSON对象
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 		</ul>

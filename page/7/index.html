@@ -79,35 +79,17 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/22/自己写springmvc框架/" title="自己写springmvc框架" itemprop="url">
+    <a href="/2018/05/04/Mybatis之ResultMap/" title="Mybatis之ResultMap" itemprop="url">
   
-    <h1 itemprop="name">自己写springmvc框架</h1>
+    <h1 itemprop="name">Mybatis之ResultMap</h1>
     
      
-           <p itemprop="description" >简易的springmvc框架三层架构
-表示层(视图层，显示层)
-
-jsp
-servlet
-
-
-业务逻辑层
-
-service
-
-
-数据访问层(持久层)
-
-dao
-
-
-
-什么是mvc
-Model View Controller
-是一种架构思想，其核心思想将项目划分成三种不同模块，分别</p>
+           <p itemprop="description" >Mybatis之ResultMap实体类
+通常实体类中的属性要和数据库表中的字段一致，包括类型，字段名称
+因此我们在单表查询的时候不需要使用&amp;lt;resultMap&amp;gt;指定实体类和表中的字段对应关系，但是如果我们在查询的时候使用了别名，或者属性字段和表的字段不一致，那么我们</p>
         
     
-    <time datetime="2018-04-21T20:15:32.000Z" itemprop="datePublished">2018-04-22</time>
+    <time datetime="2018-05-04T09:49:51.000Z" itemprop="datePublished">2018-05-04</time>
   </a>
 </section>
 
@@ -119,20 +101,23 @@ Model View Controller
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/16/设计模式之适配器模式/" title="设计模式之适配器模式" itemprop="url">
+    <a href="/2018/05/04/动态sql/" title="MyBatis之动态sql" itemprop="url">
   
-    <h1 itemprop="name">设计模式之适配器模式</h1>
+    <h1 itemprop="name">MyBatis之动态sql</h1>
     
      
-           <p itemprop="description" >结构型模式之适配器模式定义
-适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。
+           <p itemprop="description" >动态sqlif子句格式
+&amp;lt;if test=&amp;quot;&amp;quot;&amp;gt;
+test中填写的是判断条件
 
 
 
-Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一</p>
+实例更新密码或者年龄
+首先在UserMapper.java中添加抽象方法
+因为要一个方法兼具更新密码或者更新年龄的功能，那么我们直接使用一个实体类对象作为方法参数即</p>
         
     
-    <time datetime="2018-04-16T05:56:28.000Z" itemprop="datePublished">2018-04-16</time>
+    <time datetime="2018-05-04T09:48:53.000Z" itemprop="datePublished">2018-05-04</time>
   </a>
 </section>
 
@@ -144,16 +129,16 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/16/设计模式之桥接模式/" title="设计模式之桥接模式" itemprop="url">
+    <a href="/2018/05/04/MyBatis入门程序/" title="MyBatis入门程序" itemprop="url">
   
-    <h1 itemprop="name">设计模式之桥接模式</h1>
+    <h1 itemprop="name">MyBatis入门程序</h1>
     
      
-           <p itemprop="description" >结构型模式之桥接模式
-桥接模式是一种很实用的结构型设计模式，如果软件系统中某个类存在两个独立变化的维度，通过该模式可以将这两个维度分离出来，使两者可以独立扩展，让系统更加符合“单一职责原则”。与多层继承方案不同，它将两个独立变化的维度设计为两个独立的继承等级结构，并且在抽象层建立</p>
+           <p itemprop="description" >MyBatis入门程序设计案例实现向tedu_ums数据库的t_users数据表中插入数据。
+开发步骤1 创建项目DAY07-MyBatis-Sample，生成web.xml，在web.xml中配置（2项），添加spring-webmvc依赖，复制Spring配置文件，添加Tom</p>
         
     
-    <time datetime="2018-04-16T05:55:29.000Z" itemprop="datePublished">2018-04-16</time>
+    <time datetime="2018-05-04T09:47:40.000Z" itemprop="datePublished">2018-05-04</time>
   </a>
 </section>
 
@@ -165,18 +150,22 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/16/设计模式之原型模式/" title="设计模式之原型模式" itemprop="url">
+    <a href="/2018/05/04/Springmvc响应Ajax请求-ResponseBody/" title="Springmvc响应Ajax请求(@ResponseBody)" itemprop="url">
   
-    <h1 itemprop="name">设计模式之原型模式</h1>
+    <h1 itemprop="name">Springmvc响应Ajax请求(@ResponseBody)</h1>
     
      
-           <p itemprop="description" >创建型模式之原型模式定义
-原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。
+           <p itemprop="description" >Springmvc响应Ajax请求(@ResponseBody)创建工程
+创建maven project
+选择war包
+自动生成web.xml   
+Target Runtime 选择 Tomcat
+添加依赖pom.xml
 
-这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这</p>
+123456789101112131415161718</p>
         
     
-    <time datetime="2018-04-16T05:53:04.000Z" itemprop="datePublished">2018-04-16</time>
+    <time datetime="2018-05-04T09:46:35.000Z" itemprop="datePublished">2018-05-04</time>
   </a>
 </section>
 
@@ -188,18 +177,23 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/16/设计模式之建造模式/" title="设计模式之建造模式" itemprop="url">
+    <a href="/2018/05/04/Spring配置DBCP连接池/" title="Spring配置DBCP连接池" itemprop="url">
   
-    <h1 itemprop="name">设计模式之建造模式</h1>
+    <h1 itemprop="name">Spring配置DBCP连接池</h1>
     
      
-           <p itemprop="description" >创建型模式之建造者模式定义
-建造者模式(Builder Pattern)：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。建造者模式是一种对象创建型模式。
+           <p itemprop="description" >Spring配置DBCP连接池建立数据库配置文件jdbc.properties
+在resource文件下新建一个jdbc.properties文件，内容如下
 
-简单说，建造者的功能就是先构造复杂对象的每一个部件，指挥者的功能就是将这些部件以一定的步骤组装起</p>
+在每一个键值对的后面不可以有空格，将光标移动到后面，如果紧贴着即可
+
+​
+
+
+123456url=jdbc:mysql:</p>
         
     
-    <time datetime="2018-04-16T05:52:36.000Z" itemprop="datePublished">2018-04-16</time>
+    <time datetime="2018-05-04T09:45:53.000Z" itemprop="datePublished">2018-05-04</time>
   </a>
 </section>
 
@@ -211,18 +205,18 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/16/设计模式之代理模式/" title="设计模式之代理模式" itemprop="url">
+    <a href="/2018/05/04/Springmvc处理异常/" title="Springmvc处理异常" itemprop="url">
   
-    <h1 itemprop="name">设计模式之代理模式</h1>
+    <h1 itemprop="name">Springmvc处理异常</h1>
     
      
-           <p itemprop="description" >结构型模式之代理模式(静态代理)
-由于某些原因，客户端不想或不能直接访问一个对象，此时可以通过一个称之为“代理”的第三者来实现间接访问，该方案对应的设计模式被称为代理模式。
+           <p itemprop="description" >Spring MVC处理异常关于异常
+异常的体系结构：
 
-代理其实是实现简介访问的媒介，当然在代理类中还可以在执行代理操作之前，之后，之中，环绕等执行相关动作。S</p>
+12345678910111213Throwable		Error			OutOfMemoryError（OOM）		Exception			RuntimeException				NullPointerException</p>
         
     
-    <time datetime="2018-04-16T05:52:12.000Z" itemprop="datePublished">2018-04-16</time>
+    <time datetime="2018-05-04T09:44:41.000Z" itemprop="datePublished">2018-05-04</time>
   </a>
 </section>
 
@@ -234,21 +228,15 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/12/设计模式之工厂模式/" title="设计模式之工厂模式" itemprop="url">
+    <a href="/2018/05/04/MVC处理异常/" title="MVC处理异常" itemprop="url">
   
-    <h1 itemprop="name">设计模式之工厂模式</h1>
+    <h1 itemprop="name">MVC处理异常</h1>
     
      
-           <p itemprop="description" >创建型模式之工厂模式什么是工厂模式
-工厂模式是java中最常见的创建型模式，客户端在不知道创建逻辑的情况下，只需要在工厂中直接创建即可
-
-简单工厂模式
-简单工厂在创建对象的时候不需要知道具体的创建逻辑，客户端只需要知道该产品的一个标志即可，比如产品的名字
-必备的两个元素：
-产品的</p>
+           <p itemprop="description" ></p>
         
     
-    <time datetime="2018-04-12T03:28:21.000Z" itemprop="datePublished">2018-04-12</time>
+    <time datetime="2018-05-04T09:42:42.000Z" itemprop="datePublished">2018-05-04</time>
   </a>
 </section>
 
@@ -260,24 +248,21 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/12/设计模式之单例模式/" title="设计模式之单例模式" itemprop="url">
+    <a href="/2018/04/26/Springmvc之向JSP页面提供数据-request，session/" title="Springmvc之向JSP页面提供数据(request，session)" itemprop="url">
   
-    <h1 itemprop="name">设计模式之单例模式</h1>
+    <h1 itemprop="name">Springmvc之向JSP页面提供数据(request，session)</h1>
     
      
-           <p itemprop="description" >创建型模式之单例模式(Singleton)什么是单例模式
-该类只有一个实例
-构造方法是私有的
-有一个获取该类对象的静态方法getInstance()
+           <p itemprop="description" >Springmvc之向JSP页面提供数据(request，session)准备
+Springmvc默认就是转发,因此可以在request域中共享数据
 
-应用场景
-一个国家只有一个主席
-如果此时的限定必须是抽象出来的类只能是一个对象，这个时候就需要使用单例模式
+表单提交，注册
 
-懒汉式什么是懒汉式</p>
+
+123456&amp;lt;form action=&quot;&amp;lt;%=request.getContextPath()%</p>
         
     
-    <time datetime="2018-04-12T03:28:05.000Z" itemprop="datePublished">2018-04-12</time>
+    <time datetime="2018-04-26T02:04:43.000Z" itemprop="datePublished">2018-04-26</time>
   </a>
 </section>
 
@@ -289,24 +274,21 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/12/设计模式之常见关系/" title="设计模式之常见关系" itemprop="url">
+    <a href="/2018/04/26/Springmvc之接受请求参数/" title="Springmvc之接受请求参数" itemprop="url">
   
-    <h1 itemprop="name">设计模式之常见关系</h1>
+    <h1 itemprop="name">Springmvc之接受请求参数</h1>
     
      
-           <p itemprop="description" >继承和泛化
-泛华关系是一种继承关系，表示一般与特殊的关系，它指定了子类如何特化父类的所有特征和行为。
-使用三角箭头的实线表示继承，其中箭头指向的是父类
-
-接口与实现
-在java中一个类只能继承一个父类，但是可以实现多个接口
-使用的是带三角的虚线表示，其中箭头指向的是接口
+           <p itemprop="description" >Springmvc之接受请求参数准备工作
+新建一个表单提交
+请求地址： http://localhost:8080/ProjectName/user/login.do
 
 
-依赖</p>
+
+123456&amp;lt;form action=&quot;&amp;lt;%=request.getContextPath()</p>
         
     
-    <time datetime="2018-04-12T03:27:45.000Z" itemprop="datePublished">2018-04-12</time>
+    <time datetime="2018-04-26T02:03:59.000Z" itemprop="datePublished">2018-04-26</time>
   </a>
 </section>
 
@@ -318,17 +300,18 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/12/Struts2之类型转换器/" title="Struts2之类型转换器" itemprop="url">
+    <a href="/2018/04/26/Springmvc之RequestMapping/" title="Springmvc之RequestMapping" itemprop="url">
   
-    <h1 itemprop="name">Struts2之类型转换器</h1>
+    <h1 itemprop="name">Springmvc之RequestMapping</h1>
     
      
-           <p itemprop="description" >Struts2之类型转换器
-在我们接收表单的请求参数的时候其实默认的都是String类型，但是有时候我们需要其他的数据类型，比如int,double,float,Date。
-其实前面表单的传值都是字符串形式的，但是为什么我们在JavaBean中定义了不同的类型的数据，Struts</p>
+           <p itemprop="description" >Springmvc之RequestMappingRequestMapping
+标记客户的请求与哪一个类和方法对应
+
+使用@RequestMapping同时对类和方法进行注解，相当于最终将这两处的注解路径拼接起来，比如类上使用@RequestMapping(&amp;quot;/user&amp;</p>
         
     
-    <time datetime="2018-04-11T16:41:07.000Z" itemprop="datePublished">2018-04-12</time>
+    <time datetime="2018-04-26T02:00:43.000Z" itemprop="datePublished">2018-04-26</time>
   </a>
 </section>
 
@@ -339,7 +322,7 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/6/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/8/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/8/">Next<span></span></a>
   </nav>
 
 </div>
@@ -363,7 +346,11 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 		  
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
@@ -395,7 +382,7 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 		  
 		
 		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 		  
 		
 		  
@@ -407,7 +394,7 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>21</sup></a></li>
 		  
 		
 		  
@@ -416,6 +403,10 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 		
 		  
 			<li><a href="/categories/java学习/" title="java学习">java学习<sup>30</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
 		  
 		
 		  
@@ -431,7 +422,7 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>9</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>14</sup></a></li>
 		  
 		
 		  
@@ -452,7 +443,15 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>21</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
@@ -460,7 +459,7 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
 			
 		
 			
@@ -480,6 +479,10 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 			
 		
 			
+				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
 			
 		
@@ -488,11 +491,7 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 			
 		
 			
@@ -504,11 +503,7 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
@@ -520,15 +515,11 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 		</ul>

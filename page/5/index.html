@@ -79,21 +79,29 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/26/Springmvc之接受请求参数/" title="Springmvc之接受请求参数" itemprop="url">
+    <a href="/2018/05/21/Spring之AOP/" title="Spring之AOP" itemprop="url">
   
-    <h1 itemprop="name">Springmvc之接受请求参数</h1>
+    <h1 itemprop="name">Spring之AOP</h1>
     
      
-           <p itemprop="description" >Springmvc之接受请求参数准备工作
-新建一个表单提交
-请求地址： http://localhost:8080/ProjectName/user/login.do
+           <p itemprop="description" >Spring之AOPSpring框架两大核心内容IOC （ＤＩ）
+ＩＯＣ：控制反转
+
+将创建和管理对象全部交给框架完成
+
+
+DI : 依赖注入
+
+为成员变量赋值
+其中有不同的方法赋值，但是我们推荐使用set方法注入或者注解方式
 
 
 
-123456&amp;lt;form action=&quot;&amp;lt;%=request.getContextPath()</p>
+AOP
+面向切面编程，是面向对象编程的重要组成</p>
         
     
-    <time datetime="2018-04-26T02:03:59.000Z" itemprop="datePublished">2018-04-26</time>
+    <time datetime="2018-05-21T10:22:06.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -105,18 +113,19 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/26/Springmvc之RequestMapping/" title="Springmvc之RequestMapping" itemprop="url">
+    <a href="/2018/05/21/Mybatis之使用总结/" title="Mybatis之使用总结" itemprop="url">
   
-    <h1 itemprop="name">Springmvc之RequestMapping</h1>
+    <h1 itemprop="name">Mybatis之使用总结</h1>
     
      
-           <p itemprop="description" >Springmvc之RequestMappingRequestMapping
-标记客户的请求与哪一个类和方法对应
+           <p itemprop="description" >Mybatis之使用总结多表连接查询
+如果需要使用多表连接查询，使用resultMap对应表与实体类的对应关系太麻烦，我们可以定义一个值对象，其中封装了多表连接查询返回的字段，我们直接使用值对象接收返回的结果即可
+比如我们在商城网站上的显示购物车的模块，使用的CartVo
 
-使用@RequestMapping同时对类和方法进行注解，相当于最终将这两处的注解路径拼接起来，比如类上使用@RequestMapping(&amp;quot;/user&amp;</p>
+12</p>
         
     
-    <time datetime="2018-04-26T02:00:43.000Z" itemprop="datePublished">2018-04-26</time>
+    <time datetime="2018-05-21T10:20:56.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -128,22 +137,22 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/24/Springmvc入门/" title="Springmvc入门" itemprop="url">
+    <a href="/2018/05/21/Springmvc之文件上传和下载/" title="Springmvc之文件上传和下载" itemprop="url">
   
-    <h1 itemprop="name">Springmvc入门</h1>
+    <h1 itemprop="name">Springmvc之文件上传和下载</h1>
     
      
-           <p itemprop="description" >Springmvc入门作用
-解决V(View)和C(Controller)的交互问题,即解决了Controller如果接收了用户的请求，并将结果响应给用户的问题
+           <p itemprop="description" >Springmvc之文件上传和下载前提
+在上传和下载之前需要在对应的根目录下创建对应的文件夹，比如我们在webApp下创建upload文件夹下
 
-springmvc约定了一套处理用户请求的流程
+添加依赖
+commons-io
+commons-fileupload
 
-
-Springmvc的核心组件
-DispatcherServlet</p>
+123456789101112&amp;lt;!-- 添加文件上传的依</p>
         
     
-    <time datetime="2018-04-24T03:14:16.000Z" itemprop="datePublished">2018-04-24</time>
+    <time datetime="2018-05-21T10:20:12.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -155,101 +164,20 @@ DispatcherServlet</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/24/Spring注解的使用和组件扫描/" title="Spring注解的使用和组件扫描" itemprop="url">
+    <a href="/2018/05/21/Spring之密码加密/" title="Spring之密码加密" itemprop="url">
   
-    <h1 itemprop="name">Spring注解的使用和组件扫描</h1>
+    <h1 itemprop="name">Spring之密码加密</h1>
     
      
-           <p itemprop="description" >Spring注解的使用和组件扫描【非常重要】 组件扫描(Component-Scan)
-通过配置组件扫描，可以使得spring自动扫描package，而不必在spring的配置文件中逐一声明各个&amp;lt;bean&amp;gt;
-
-在配置组件扫描时，指定的包是“根包”，即例如指定了cn.t</p>
-        
-    
-    <time datetime="2018-04-24T03:13:38.000Z" itemprop="datePublished">2018-04-24</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/24/Spring表达式和自动装配/" title="Spring表达式和自动装配" itemprop="url">
-  
-    <h1 itemprop="name">Spring表达式和自动装配</h1>
-    
-     
-           <p itemprop="description" >Spring表达式和自动装配【重要】spring表达式作用
-通过spring表达式可以在配置Y节点时，如果Y的某些属性需要注入值，可以是已经配置的好的X类的节点中的值
-
-直接使用#{id.属性名}
-
-
-前提
-必须为每个属性都要设置set方法
-
-实现
-新建两个类
-
-Message
-</p>
-        
-    
-    <time datetime="2018-04-24T03:12:59.000Z" itemprop="datePublished">2018-04-24</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/24/Spring依赖注入/" title="Spring依赖注入" itemprop="url">
-  
-    <h1 itemprop="name">Spring依赖注入</h1>
-    
-     
-           <p itemprop="description" >Spring依赖注入【了解】Spring管理对象的生命周期(只有在单例的模式有意义，这个是默认的)
-由spring管理的对象可以有生命周期方法，这些生命周期方法是开发人员自定义的，方法名自定义，无参数
-
-由spring管理的对象的类可以有初始化和销毁这两种生命周期方法，按需设计即</p>
-        
-    
-    <time datetime="2018-04-24T03:12:24.000Z" itemprop="datePublished">2018-04-24</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/24/Spring入门/" title="Spring入门" itemprop="url">
-  
-    <h1 itemprop="name">Spring入门</h1>
-    
-     
-           <p itemprop="description" >spring_day01SSM框架
-Spring + springMVC + mybatis
+           <p itemprop="description" >密码加密消息摘要(数据的指纹)定义
+对不固定的消息（字符串，一段文本，一个文件），通过一种特定的算法，得到一个固定长度的文本，固定长度的文本叫做消息摘要
+比如我是程序员经过特定的算法之后，得到了消息摘要为：adaf02515dfds7885csdfcdsc
 
 作用
-管理对象： 当开发人员需要某一个类的对象时，不需要自行new对象，而是通过spring直接获取即可
-
-使用【掌握】通过spring获取存在无参构造方法类的对象
-创建Maven P</p>
+数据完整性的检</p>
         
     
-    <time datetime="2018-04-24T03:11:04.000Z" itemprop="datePublished">2018-04-24</time>
+    <time datetime="2018-05-21T10:19:21.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -261,24 +189,17 @@ Spring + springMVC + mybatis
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/24/Servlet和JSP总结/" title="Servlet和JSP总结" itemprop="url">
+    <a href="/2018/05/21/拦截器拦截Ajax请求/" title="Springmvc拦截器拦截Ajax请求" itemprop="url">
   
-    <h1 itemprop="name">Servlet和JSP总结</h1>
+    <h1 itemprop="name">Springmvc拦截器拦截Ajax请求</h1>
     
      
-           <p itemprop="description" >Servlet和JSP总结B/S和C/S
-BS: Browser Server 浏览器和服务器
-特点： 跨平台，功能升级比较方便，加载数据慢，用户体验稍差
+           <p itemprop="description" >拦截器拦截Ajax请求##　问题
 
-
-
-
-CS： Client Server 客户端和服务器
-
-特点： 功能升级  需要下载新版本客户端，用户交互界面炫酷，体</p>
+如果我们在拦截器中定义了拦截器的路径为/user/*这个地址,并且拦截器拦截器之后，如果没有登录，那么重定向到登录界面。但是我们在未登录的前提下使用Ajax异步请求了/user/addUser.do这个地址，出现了拦截器是拦截了，但是并没有重定</p>
         
     
-    <time datetime="2018-04-24T03:09:29.000Z" itemprop="datePublished">2018-04-24</time>
+    <time datetime="2018-05-21T10:16:29.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -290,16 +211,28 @@ CS： Client Server 客户端和服务器
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/24/Hibernate关联查询/" title="Hibernate关联查询" itemprop="url">
+    <a href="/2018/05/09/用户管理模块之用户注册/" title="用户管理模块之用户注册" itemprop="url">
   
-    <h1 itemprop="name">Hibernate关联查询</h1>
+    <h1 itemprop="name">用户管理模块之用户注册</h1>
     
      
-           <p itemprop="description" >Hibernate关联查询关联查询之延迟加载(lazy)什么是延迟加载
-前面单独讲过延迟加载就是在根据id查询获取的对象中只是有一个id的属性值，只有当使用其他属性的时候才会发出sql语句查询数据库，session.load(Class&amp;lt;T&amp;gt; cls,id)就是这个原</p>
+           <p itemprop="description" >用户管理模块之用户注册实现的功能
+注册
+验证用户名是否已经存在
+验证邮箱
+验证电话号码
+
+
+登录
+个人信息修改
+
+创建数据库和表
+创建数据库和表
+需要注意的是：一些字段不能为空，但是我们在设计表的时候不需要设计，只需要在前端设计表单的时候检查字段是否为空即可。
+字段修改的人，修改</p>
         
     
-    <time datetime="2018-04-24T03:08:43.000Z" itemprop="datePublished">2018-04-24</time>
+    <time datetime="2018-05-09T00:47:43.000Z" itemprop="datePublished">2018-05-09</time>
   </a>
 </section>
 
@@ -311,24 +244,127 @@ CS： Client Server 客户端和服务器
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/24/Hibernate关联关系/" title="Hibernate关联关系" itemprop="url">
+    <a href="/2018/05/09/搭建工程/" title="搭建工程" itemprop="url">
   
-    <h1 itemprop="name">Hibernate关联关系</h1>
+    <h1 itemprop="name">搭建工程</h1>
     
      
-           <p itemprop="description" >Hibernate关联关系一对一背景
-在中国一个丈夫只能有一个妻子，那么丈夫和妻子的关系就是一对一的关系
+           <p itemprop="description" >搭建工程框架
+Spring + SpringMVC + Mybatis  ———–  SSM
 
-准备
-创建丈夫和妻子的实体类
-
-丈夫的实体类
-
-
-1234567891011121314151617181920212223242526272829303132@Entit</p>
+创建工程步骤
+创建Maven工程
+添加web.xml和tomcat运行环境
+创建包的结构
+实体类的包：cn.tedu.store.bean
+控制器层：cn.tedu.store.con</p>
         
     
-    <time datetime="2018-04-24T03:05:56.000Z" itemprop="datePublished">2018-04-24</time>
+    <time datetime="2018-05-09T00:46:52.000Z" itemprop="datePublished">2018-05-09</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/05/09/商城网站之模块设计/" title="商城网站之模块设计" itemprop="url">
+  
+    <h1 itemprop="name">商城网站之模块设计</h1>
+    
+     
+           <p itemprop="description" >SSM - 商城模块用户管理
+注册
+登录
+个人信息修改
+
+地址管理
+添加收货地址
+查询所有的收货地址
+修改
+删除
+
+商品
+商品分类
+商品展示
+商品详情
+
+购物车
+将商品添加到购物车
+购物车管理
+
+订单
+显示订单
+付款
+
+项目开发流程
+需求分析
+概要设计
+详细设计
+编码
+测试
+交付</p>
+        
+    
+    <time datetime="2018-05-09T00:46:07.000Z" itemprop="datePublished">2018-05-09</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/05/09/选择排序/" title="选择排序" itemprop="url">
+  
+    <h1 itemprop="name">选择排序</h1>
+    
+     
+           <p itemprop="description" >选择排序思想(从小到大)
+每一趟从待排序的记录中选出最小的元素，顺序放在已排好序的序列最后，直到全部记录排序完毕
+
+分析
+假设数组中有个n元素
+第一趟：在整个数组中选择出最小的元素，和数组中的第一个元素交换位置，那么此时的第一个元素就是最小的
+第二趟： 从第二个元素开始再次查找剩</p>
+        
+    
+    <time datetime="2018-05-09T00:44:07.000Z" itemprop="datePublished">2018-05-09</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/05/09/插入排序算法/" title="插入排序算法" itemprop="url">
+  
+    <h1 itemprop="name">插入排序算法</h1>
+    
+     
+           <p itemprop="description" >插入排序算法思想
+我们以从小到大的排序进行讲解
+
+
+插入排序就是将一个元素插入到一个已经是有序的序列中， 通过遍历比较这个待插入元素和有序的序列元素之间的大小，来比较需要插入的位置，使其仍然是一个有序的数组。
+数组插入的算法：向后移动元素给待插入的数据位置
+
+详解
+第一趟：假设我</p>
+        
+    
+    <time datetime="2018-05-09T00:43:57.000Z" itemprop="datePublished">2018-05-09</time>
   </a>
 </section>
 
@@ -339,7 +375,7 @@ CS： Client Server 客户端和服务器
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
   </nav>
 
 </div>
@@ -363,7 +399,11 @@ CS： Client Server 客户端和服务器
 		  
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
@@ -395,7 +435,7 @@ CS： Client Server 客户端和服务器
 		  
 		
 		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 		  
 		
 		  
@@ -407,7 +447,7 @@ CS： Client Server 客户端和服务器
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>21</sup></a></li>
 		  
 		
 		  
@@ -416,6 +456,10 @@ CS： Client Server 客户端和服务器
 		
 		  
 			<li><a href="/categories/java学习/" title="java学习">java学习<sup>30</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
 		  
 		
 		  
@@ -431,7 +475,7 @@ CS： Client Server 客户端和服务器
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>9</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>14</sup></a></li>
 		  
 		
 		  
@@ -452,7 +496,15 @@ CS： Client Server 客户端和服务器
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>21</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
@@ -460,7 +512,7 @@ CS： Client Server 客户端和服务器
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
 			
 		
 			
@@ -480,6 +532,10 @@ CS： Client Server 客户端和服务器
 			
 		
 			
+				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
 			
 		
@@ -488,11 +544,7 @@ CS： Client Server 客户端和服务器
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 			
 		
 			
@@ -504,11 +556,7 @@ CS： Client Server 客户端和服务器
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
@@ -520,15 +568,11 @@ CS： Client Server 客户端和服务器
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 		</ul>

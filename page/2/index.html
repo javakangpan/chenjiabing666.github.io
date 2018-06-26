@@ -79,25 +79,23 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/用户管理模块之用户登录/" title="用户管理模块之用户登录" itemprop="url">
+    <a href="/2018/06/26/并发编程之死锁/" title="并发编程之死锁" itemprop="url">
   
-    <h1 itemprop="name">用户管理模块之用户登录</h1>
+    <h1 itemprop="name">并发编程之死锁</h1>
     
      
-           <p itemprop="description" >用户管理模块之用户登录开发顺序
-持久层
-业务层
-控制层
-页面
+           <p itemprop="description" >并发编程之死锁定义
+是指两个或两个以上的进程在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。
 
-在cn.tedu.store.mapper中新建UserMapper.java接口
-由于在用户管理模块之用户注册已经创建了，所以不用新建了
+产生的条件
+互斥条件：所谓互斥就是线程在某一时间内独占资源。
+每一次的资源只能被一个线程使用
 
-功能
-验证用户名是否存在，其中返回的是用户对象，这个在前面的注册已经定义过</p>
+
+请求与保持条件：一个线程因请求资源而阻塞时，对</p>
         
     
-    <time datetime="2018-05-21T10:24:56.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:50:58.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -109,18 +107,19 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Spring之AOP之底层实现/" title="Spring之AOP之底层实现" itemprop="url">
+    <a href="/2018/06/26/并发编程之线程协作/" title="并发编程之线程协作" itemprop="url">
   
-    <h1 itemprop="name">Spring之AOP之底层实现</h1>
+    <h1 itemprop="name">并发编程之线程协作</h1>
     
      
-           <p itemprop="description" >Spring之AOP之底层实现静态代理实现
-定义IStudnetService接口
+           <p itemprop="description" >并发编程之线程协作wait / notify / notifyAll
+Object.wait()/Object.notify()/Object.notifyAll()可用于实现等待和通知。
+wait()方法可以使其执行的线程被暂停，该方法用来实现等待。
 
-12345678/** * IStudentService的接口 * @author chenjiabing */public interface IStudentService &amp;#123;	</p>
+进入阻塞状态(Block</p>
         
     
-    <time datetime="2018-05-21T10:22:48.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:50:23.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -132,29 +131,22 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Spring之AOP/" title="Spring之AOP" itemprop="url">
+    <a href="/2018/06/26/并发编程之volatile/" title="并发编程之volatile" itemprop="url">
   
-    <h1 itemprop="name">Spring之AOP</h1>
+    <h1 itemprop="name">并发编程之volatile</h1>
     
      
-           <p itemprop="description" >Spring之AOPSpring框架两大核心内容IOC （ＤＩ）
-ＩＯＣ：控制反转
+           <p itemprop="description" >并发编程之volatile
+volatile称之为轻量级锁，保证了可见性和原子性。
+volatile不会引起上下文切换，因此是轻量级的
 
-将创建和管理对象全部交给框架完成
+volatile的作用
+保障可见性，有序性和Long，double类型变量读写操作的原子性
 
-
-DI : 依赖注入
-
-为成员变量赋值
-其中有不同的方法赋值，但是我们推荐使用set方法注入或者注解方式
-
-
-
-AOP
-面向切面编程，是面向对象编程的重要组成</p>
+volatile仅仅能保证对其修饰的变量的写操作</p>
         
     
-    <time datetime="2018-05-21T10:22:06.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:49:47.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -166,19 +158,18 @@ AOP
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Mybatis之使用总结/" title="Mybatis之使用总结" itemprop="url">
+    <a href="/2018/06/26/并发编程之线程同步机制的底层助手内存屏障/" title="并发编程之线程同步机制的底层助手内存屏障" itemprop="url">
   
-    <h1 itemprop="name">Mybatis之使用总结</h1>
+    <h1 itemprop="name">并发编程之线程同步机制的底层助手内存屏障</h1>
     
      
-           <p itemprop="description" >Mybatis之使用总结多表连接查询
-如果需要使用多表连接查询，使用resultMap对应表与实体类的对应关系太麻烦，我们可以定义一个值对象，其中封装了多表连接查询返回的字段，我们直接使用值对象接收返回的结果即可
-比如我们在商城网站上的显示购物车的模块，使用的CartVo
-
-12</p>
+           <p itemprop="description" >线程同步机制的底层助手 ：内存屏障前提
+我们知道锁是可以保证可见性的，线程在获取锁和释放锁的时候会分别执行两个动作来保证可见性:
+刷新处理器缓存 ：保证了持有该锁的线程能够读取到前一个线程对共享数据的更新
+冲刷处理器缓存 ：保证了持有该锁的线程对共享数据所做的更新会对后续获取该锁</p>
         
     
-    <time datetime="2018-05-21T10:20:56.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:49:10.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -190,22 +181,16 @@ AOP
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Springmvc之文件上传和下载/" title="Springmvc之文件上传和下载" itemprop="url">
+    <a href="/2018/06/26/并发编程之上下文切换/" title="并发编程之上下文切换" itemprop="url">
   
-    <h1 itemprop="name">Springmvc之文件上传和下载</h1>
+    <h1 itemprop="name">并发编程之上下文切换</h1>
     
      
-           <p itemprop="description" >Springmvc之文件上传和下载前提
-在上传和下载之前需要在对应的根目录下创建对应的文件夹，比如我们在webApp下创建upload文件夹下
-
-添加依赖
-commons-io
-commons-fileupload
-
-123456789101112&amp;lt;!-- 添加文件上传的依</p>
+           <p itemprop="description" >多线程之上下文切换定义
+在单处理器的情况下，每个线程的执行时间是根据时间片大小决定或者自身的其他原因，如果一个线程被迫或者主动暂停运行时，另外一个线程(可能是同一个进程中的线程或者其他进程中的)可以被操作系统(线程调度器)选中占用处理器开始或者继续运行。这种一个线程被暂停，即是被</p>
         
     
-    <time datetime="2018-05-21T10:20:12.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:47:28.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -217,20 +202,21 @@ commons-fileupload
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Spring之密码加密/" title="Spring之密码加密" itemprop="url">
+    <a href="/2018/06/26/并发编程之多线程状态/" title="并发编程之多线程状态" itemprop="url">
   
-    <h1 itemprop="name">Spring之密码加密</h1>
+    <h1 itemprop="name">并发编程之多线程状态</h1>
     
      
-           <p itemprop="description" >密码加密消息摘要(数据的指纹)定义
-对不固定的消息（字符串，一段文本，一个文件），通过一种特定的算法，得到一个固定长度的文本，固定长度的文本叫做消息摘要
-比如我是程序员经过特定的算法之后，得到了消息摘要为：adaf02515dfds7885csdfcdsc
+           <p itemprop="description" >多线程状态总的执行图：
 
-作用
-数据完整性的检</p>
+所有状态：
+1，创建状态(new)
+在程序中用构造方法创建了一个线程对象后，新的线程对象便处于新建状态，此时，它已经有了相应的
+内存空间和其他资源，但还处于不可运行状态。新建一个线程对象可采用Thread 类的构造方法来实现，例
+如，“Thread th</p>
         
     
-    <time datetime="2018-05-21T10:19:21.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:46:48.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -242,17 +228,18 @@ commons-fileupload
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/拦截器拦截Ajax请求/" title="Springmvc拦截器拦截Ajax请求" itemprop="url">
+    <a href="/2018/06/26/并发编程之三大性质/" title="并发编程之三大性质" itemprop="url">
   
-    <h1 itemprop="name">Springmvc拦截器拦截Ajax请求</h1>
+    <h1 itemprop="name">并发编程之三大性质</h1>
     
      
-           <p itemprop="description" >拦截器拦截Ajax请求##　问题
-
-如果我们在拦截器中定义了拦截器的路径为/user/*这个地址,并且拦截器拦截器之后，如果没有登录，那么重定向到登录界面。但是我们在未登录的前提下使用Ajax异步请求了/user/addUser.do这个地址，出现了拦截器是拦截了，但是并没有重定</p>
+           <p itemprop="description" >多线程的三大性质原子性
+对共享变量更新操作的时候，要保证执行不可分割，比如银行转账，一旦在多线程的环境下将其分割了，那么可能造成的后果可能是转账的账户钱少了，但是转到的账户的钱可能不是那么多或者根本没有转过去
+在单线程的环境下没有所谓的原子性，都是顺序执行的
+多线程的环境下对共享</p>
         
     
-    <time datetime="2018-05-21T10:16:29.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:45:20.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -264,28 +251,18 @@ commons-fileupload
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/用户管理模块之用户注册/" title="用户管理模块之用户注册" itemprop="url">
+    <a href="/2018/06/26/MongoDB使用总结/" title="MongoDB使用总结" itemprop="url">
   
-    <h1 itemprop="name">用户管理模块之用户注册</h1>
+    <h1 itemprop="name">MongoDB使用总结</h1>
     
      
-           <p itemprop="description" >用户管理模块之用户注册实现的功能
-注册
-验证用户名是否已经存在
-验证邮箱
-验证电话号码
-
-
-登录
-个人信息修改
-
-创建数据库和表
-创建数据库和表
-需要注意的是：一些字段不能为空，但是我们在设计表的时候不需要设计，只需要在前端设计表单的时候检查字段是否为空即可。
-字段修改的人，修改</p>
+           <p itemprop="description" >MongoDB使用总结数据库操作
+show dbs  : 显示所有的数据库
+use user  : 选择数据库user，如果这个数据库存在，那么就使用，不存在就新建，但是此时的数据库中根本不存在数据，因此使用show dbs不能显示该数据库
+db.dropDatabase()  </p>
         
     
-    <time datetime="2018-05-09T00:47:43.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-06-26T14:43:56.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -297,23 +274,19 @@ commons-fileupload
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/搭建工程/" title="搭建工程" itemprop="url">
+    <a href="/2018/06/26/Git使用总结/" title="Git使用总结" itemprop="url">
   
-    <h1 itemprop="name">搭建工程</h1>
+    <h1 itemprop="name">Git使用总结</h1>
     
      
-           <p itemprop="description" >搭建工程框架
-Spring + SpringMVC + Mybatis  ———–  SSM
+           <p itemprop="description" >Git使用总结开发策略
+在实际开发的时候一定要在分支上开发，修复问题，开发完成之后再合并到主分支(master)上，这样可以保证在不损坏主分支的情况下删除或者撤销内容
 
-创建工程步骤
-创建Maven工程
-添加web.xml和tomcat运行环境
-创建包的结构
-实体类的包：cn.tedu.store.bean
-控制器层：cn.tedu.store.con</p>
+解决冲突冲突产生
+假设现在有一个master分支，其中有一个提交之后的文件demo.txt，那么我们使用git</p>
         
     
-    <time datetime="2018-05-09T00:46:52.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-06-26T14:42:21.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -325,45 +298,19 @@ Spring + SpringMVC + Mybatis  ———–  SSM
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/商城网站之模块设计/" title="商城网站之模块设计" itemprop="url">
+    <a href="/2018/06/26/Dubbo使用总结/" title="Dubbo使用总结" itemprop="url">
   
-    <h1 itemprop="name">商城网站之模块设计</h1>
+    <h1 itemprop="name">Dubbo使用总结</h1>
     
      
-           <p itemprop="description" >SSM - 商城模块用户管理
-注册
-登录
-个人信息修改
+           <p itemprop="description" >Dubbo常见问题官方文档
+中文文档
 
-地址管理
-添加收货地址
-查询所有的收货地址
-修改
-删除
-
-商品
-商品分类
-商品展示
-商品详情
-
-购物车
-将商品添加到购物车
-购物车管理
-
-订单
-显示订单
-付款
-
-项目开发流程
-需求分析
-概要设计
-详细设计
-编码
-测试
-交付</p>
+启动检查
+Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 check=&amp;quot;true&amp;quot;可以通过 check=&amp;quot;false&amp;qu</p>
         
     
-    <time datetime="2018-05-09T00:46:07.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-06-26T14:41:16.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -374,7 +321,7 @@ Spring + SpringMVC + Mybatis  ———–  SSM
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
   </nav>
 
 </div>
@@ -398,7 +345,11 @@ Spring + SpringMVC + Mybatis  ———–  SSM
 		  
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
@@ -430,7 +381,7 @@ Spring + SpringMVC + Mybatis  ———–  SSM
 		  
 		
 		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>1</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 		  
 		
 		  
@@ -442,7 +393,7 @@ Spring + SpringMVC + Mybatis  ———–  SSM
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>21</sup></a></li>
 		  
 		
 		  
@@ -451,6 +402,10 @@ Spring + SpringMVC + Mybatis  ———–  SSM
 		
 		  
 			<li><a href="/categories/java学习/" title="java学习">java学习<sup>30</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
 		  
 		
 		  
@@ -466,7 +421,7 @@ Spring + SpringMVC + Mybatis  ———–  SSM
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>9</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>14</sup></a></li>
 		  
 		
 		  
@@ -487,7 +442,15 @@ Spring + SpringMVC + Mybatis  ———–  SSM
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>20</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>21</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
@@ -495,7 +458,7 @@ Spring + SpringMVC + Mybatis  ———–  SSM
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
 			
 		
 			
@@ -515,6 +478,10 @@ Spring + SpringMVC + Mybatis  ———–  SSM
 			
 		
 			
+				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
 			
 		
@@ -523,11 +490,7 @@ Spring + SpringMVC + Mybatis  ———–  SSM
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 			
 		
 			
@@ -539,11 +502,7 @@ Spring + SpringMVC + Mybatis  ———–  SSM
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
@@ -555,15 +514,11 @@ Spring + SpringMVC + Mybatis  ———–  SSM
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>3</sup></a></li>
 			
 		
 		</ul>
