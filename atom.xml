@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-06-26T15:00:10.064Z</updated>
+  <updated>2018-07-01T06:01:29.083Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -16,11 +16,252 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>二叉树</title>
+    <link href="http://chenjiabing666.github.io/2018/07/01/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    <id>http://chenjiabing666.github.io/2018/07/01/二叉树/</id>
+    <published>2018-07-01T06:00:57.000Z</published>
+    <updated>2018-07-01T06:01:29.083Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>二叉树是每个节点最多有两个子树的树结构。它有五种基本形态：二叉树可以是空集；根可以有空的左子树或右子树；或者左、右子树皆为空。</p>
+<p><img src="https://images0.cnblogs.com/i/497634/201403/270929530778327.jpg" alt=""></p>
+<h3 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h3><ol>
+<li>度：节点所拥有子节点的个数</li>
+<li>叶子节点：度为0的节点，即是没有子节点的节点</li>
+<li>分支节点：度不为0的节点</li>
+<li>根节点： 没有父节点的节点</li>
+<li>层次：根节点的层次为1，其余节点的层次等于该双亲节点的层次加1</li>
+<li>深度：树中节点的最大层次</li>
+</ol>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><ul>
+<li><strong>性质1</strong>：二叉树第i层上的结点数目最多为 <code>2^{i-1}</code> (i≥1)。</li>
+<li><strong>性质2</strong>：深度为k的二叉树至多有<strong>2{k}-1</strong>个结点(k≥1)。</li>
+<li><strong>性质3</strong>：包含n个结点的二叉树的高度至少为<strong>log2 (n+1)</strong>。 </li>
+<li><strong>性质4</strong>：在任意一棵二叉树中，若终端结点的个数为<strong>n0</strong>，度为2的结点数为<strong>n2</strong>，则<strong>n0=n2+1</strong>。</li>
+</ul>
+<h2 id="满二叉树"><a href="#满二叉树" class="headerlink" title="满二叉树"></a>满二叉树</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><ul>
+<li><strong>除了最后一层，所有分支节点的子节点个数为2</strong></li>
+</ul>
+<p><img src="https://images0.cnblogs.com/i/497634/201403/270930282184259.jpg" alt=""></p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ol>
+<li>叶子只能出现在最后一层。</li>
+<li>非叶子结点度一定是2.</li>
+<li>在同样深度的二叉树中，满二叉树的结点个数最多，叶子树最多。</li>
+</ol>
+<h2 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h2><h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><ul>
+<li>若设二叉树的深度为h，除第 h 层外，其它各层 (1~h-1) 的结点数都达到最大个数，第 h 层所有的结点都连续集中在<strong>最左边</strong>，这就是完全二叉树。</li>
+<li>完全二叉树是由满二叉树而引出来的。对于深度为K的，有n个结点的二叉树，当且仅当其每一个结点都与深度为K的满二叉树中编号从1至n的结点一一对应时称之为完全二叉树。</li>
+<li>一棵二叉树至多只有最下面的一层上的结点的度数可以小于2，并且最下层上的结点都集中在该层最左边的若干位置上，而在最后一层上，右边的若干结点缺失的二叉树，则此二叉树成为完全二叉树。</li>
+<li><img src="https://images0.cnblogs.com/i/497634/201403/270931211084932.jpg" alt=""></li>
+</ul>
+<h3 id="判断完全二叉树"><a href="#判断完全二叉树" class="headerlink" title="判断完全二叉树"></a>判断完全二叉树</h3><ul>
+<li>完全二叉树：<code>叶节点</code>只能出现在最下层和次下层，并且最下面一层的结点都集中在该层最左边的若干位置的二叉树</li>
+<li>满二叉树必然是完全二叉树，完全二叉树不一定是满二叉树</li>
+</ul>
+<h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><ul>
+<li><a href="https://baike.so.com/doc/7890124-8164219.html" target="_blank" rel="external">叶子结点</a>只可能在最大的两层上出现,对任意结点，若其右分支下的子孙最大层次为L，则其左分支下的子孙的最大层次必为L 或 L+1;</li>
+<li>满二叉树一定是完全二叉树，完全二叉树不一定是满二叉树</li>
+<li>只允许最后一层有空缺结点且空缺在右边，即叶子结点只能在层次最大的两层上出现</li>
+<li>对任一结点，如果其右子树的深度为j，则其左子树的深度必为j或j+1。 即度为1的点只有1个或0个</li>
+</ul>
+<h2 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h2><h3 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h3><ul>
+<li><p>二叉查找树（Binary Search Tree），也称有序二叉树（ordered binary tree）,排序二叉树（sorted binary tree），是指一棵空树或者具有下列性质的二叉树：</p>
+<ol>
+<li>若任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
+<li>若任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
+<li>任意节点的左、右子树也分别为二叉查找树。</li>
+<li>没有键值相等的节点（no duplicate nodes）。</li>
+</ol>
+</li>
+<li><img src="https://images0.cnblogs.com/i/497634/201403/270932052801072.jpg" alt=""></li>
+</ul>
+<h3 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">	 * 插入节点</div><div class="line">	 * <span class="doctag">@param</span> value  节点的值</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertNode</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</div><div class="line">		<span class="comment">//如果根节点为null</span></div><div class="line">		<span class="keyword">if</span> (root==<span class="keyword">null</span>) &#123;</div><div class="line">			root=<span class="keyword">new</span> Node(value,<span class="keyword">null</span>,<span class="keyword">null</span>);  <span class="comment">//创建根节点,此时没有左右子节点</span></div><div class="line">			<span class="keyword">return</span>;   <span class="comment">//返回即可，表示插入成功，这个插入的节点就是根节点</span></div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">//如果根节点已经存在，那么就需要从根节点开始比较大小</span></div><div class="line">		Node currentNode=root;  <span class="comment">//当前节点</span></div><div class="line">		Node parentNode=root;  <span class="comment">//当前节点的父节点，需要保存这个节点</span></div><div class="line">		<span class="keyword">boolean</span> isLeftChild=<span class="keyword">true</span>;  <span class="comment">//记录待插入的数是parentNode的左节点还是右节点</span></div><div class="line">		</div><div class="line">		<span class="comment">//当当前节点不为空，表示没有找到插入的位置，当currentNode节点为null的时候，那么这个就是待插入的位置</span></div><div class="line">		<span class="keyword">while</span>(currentNode!=<span class="keyword">null</span>)&#123;</div><div class="line">			parentNode=currentNode;  <span class="comment">//保存当前节点的父节点</span></div><div class="line">			<span class="comment">//如果待插入的值小于当前值，那么到当前节点的左子树中查找</span></div><div class="line">			<span class="keyword">if</span> (value&lt;currentNode.getValue()) &#123;</div><div class="line">				currentNode=currentNode.getLeftChild();  <span class="comment">//当前节点继续向下成为左子节点</span></div><div class="line">				isLeftChild=<span class="keyword">true</span>;  <span class="comment">//左节点</span></div><div class="line">				</div><div class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span> (value&gt;currentNode.getValue()) &#123;  <span class="comment">//如果待插入的数大于当前节点的值，那么到当前节点的右边查找</span></div><div class="line">				currentNode=currentNode.getRightNode();</div><div class="line">				isLeftChild=<span class="keyword">false</span>;</div><div class="line">			&#125;<span class="keyword">else</span> &#123;  <span class="comment">//value和currentNode.value相等，不允许插入</span></div><div class="line">				System.out.println(value+<span class="string">"已经存在，不允许插入"</span>);</div><div class="line">				<span class="keyword">return</span>;   <span class="comment">//直接返回，后面的数字不用插入了</span></div><div class="line">			&#125;</div><div class="line">		&#125; </div><div class="line">		</div><div class="line">		<span class="comment">//循环结束，此时的parentNode就是待插入数字的父节点</span></div><div class="line">		<span class="comment">//如果待插入的节点是左子节点</span></div><div class="line">		<span class="keyword">if</span> (isLeftChild) &#123;</div><div class="line">			Node node=<span class="keyword">new</span> Node(value, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">			parentNode.setLeftChild(node);  <span class="comment">//设置左节点</span></div><div class="line">		&#125;<span class="keyword">else</span> &#123;  <span class="comment">//是右子节点</span></div><div class="line">			Node node=<span class="keyword">new</span> Node(value, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">			parentNode.setRightNode(node);  <span class="comment">//设置右节点</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="查找指定值"><a href="#查找指定值" class="headerlink" title="查找指定值"></a>查找指定值</h3><ul>
+<li>比较需要查找的值，如果大于当前节点的值，在其右子树中查找，如果小于当前节点的值，在其左子树中查找</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 在二叉查找树中查找指定的值</div><div class="line"> * <span class="doctag">@param</span> value</div><div class="line"> * <span class="doctag">@return</span> 返回的找到的节点，如果为null表示没有找到</div><div class="line"> * 从根节点查找，比较值，如果大于，在右子树中查找，如果小于在左子树中查找</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> Node <span class="title">findValue</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</div><div class="line">	Node currentNode=<span class="keyword">this</span>.root;  <span class="comment">//从根节点开始查找</span></div><div class="line">	<span class="comment">//如果currentNode不为null并且值不相等，跳出循环的条件是：要么没有找到，返回null，要么找到了，值相等</span></div><div class="line">	<span class="keyword">while</span>(currentNode!=<span class="keyword">null</span>&amp;&amp;currentNode.value!=value)&#123;</div><div class="line">		<span class="keyword">if</span> (value&lt;currentNode.getValue()) &#123;</div><div class="line">			currentNode=currentNode.getLeftChild();</div><div class="line">		&#125;<span class="keyword">else</span> &#123;</div><div class="line">			currentNode=currentNode.getRightNode();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> currentNode;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="删除节点"><a href="#删除节点" class="headerlink" title="删除节点"></a>删除节点</h3><ul>
+<li>分为三种：<ul>
+<li>删除叶子节点</li>
+<li>删除只有一个子节点的节点</li>
+<li>删除含有两个子节点的节点</li>
+</ul>
+</li>
+</ul>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
+<li><a href="https://www.cnblogs.com/Michaelwjw/p/6384428.html" target="_blank" rel="external">https://www.cnblogs.com/Michaelwjw/p/6384428.html</a></li>
+</ul>
+<h2 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h2><h3 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h3><ul>
+<li>访问顺序： 先访问父结点，再<code>前序遍历</code>左子树，最后再<code>前面序遍历</code>右子树，即是： <strong>父节点 – 左 子树 — 右子树</strong></li>
+<li><img src="http://my.csdn.net/uploads/201203/27/1332780800_2559.jpg" alt=""></li>
+<li>图中遍历的结果是：<ol>
+<li>从根节点开始，访问1</li>
+<li>访问2，此时的2作为父节点，访问左子树</li>
+<li>访问4，此时的4作为父节点，访问左子树，没有左子树，访问右子树，也没有右子树，此时开始访问父节点4的右子树</li>
+<li>访问5，此时的5作为父节点，访问左子树</li>
+<li>访问7，此时的7作为父节点，访问左子树，没有，访问右子树</li>
+<li>访问8 ，此时的8作为父节点，访问左子树，没有，访问右子树没有，此时以1作为父节点，开始访问有节点</li>
+<li>访问3，此时的3作为父节点，访问左子树，没有，访问右子树</li>
+<li>访问6，此时的6作为父节点，左右节点都没有，访问结束</li>
+</ol>
+</li>
+<li>最后的前序遍历为：1，2，4，5，7，8，3，6。</li>
+<li>递归调用的算法如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//前序遍历对外的方法</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">PreOrder</span><span class="params">()</span></span>&#123; </div><div class="line">		PreOrder(<span class="keyword">this</span>.root);  <span class="comment">//从根节点开始访问   </span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 前序遍历</div><div class="line">	 * 递归</div><div class="line">	 * <span class="doctag">@param</span> node  父节点</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">PreOrder</span><span class="params">(Node node)</span></span>&#123;</div><div class="line">		<span class="comment">//如果节点不为null</span></div><div class="line">		<span class="keyword">if</span> (node!=<span class="keyword">null</span>) &#123;</div><div class="line">			System.out.println(node.getValue());  <span class="comment">//输出值</span></div><div class="line">			PreOrder(node.getLeftChild());  <span class="comment">//访问左子树</span></div><div class="line">			PreOrder(node.getRightNode());  <span class="comment">//访问右子树</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h3><ul>
+<li><p>先中序遍历左子树，然后再访问根结点，最后再中序遍历右子树即左—根—右</p>
+</li>
+<li><p>总的来说，把当前节点看成是根节点，如果这个根节点还存在左子树，继续向下，直到当前节点不存在左子树，那么输出当前节点即可，然后输出父节点的值，然后输出右子树的值，如此反复即可</p>
+</li>
+<li><p><img src="https://img-blog.csdn.net/20161110202932907?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+</li>
+<li><p>中序遍历的规则是【左根右】，我们从root节点A看起；</p>
+<p>此时A是根节点，遍历A的左子树；</p>
+<p>A的左子树存在，找到B，此时B看做根节点，遍历B的左子树；</p>
+<p>B的左子树不存在，返回B，根据【左根右】的遍历规则，记录B，遍历B的右子树；</p>
+<p>B的右子树存在，找到C，此时C看做根节点，遍历C的左子树；</p>
+<p>C的左子树存在，找到D，由于D是叶子节点，无左子树，记录D，无右子树，返回C，根据【左根右】的遍历规则，记录C，遍历C的右子树；</p>
+<p>C的右子树不存在，返回B，B的右子树遍历完，返回A；</p>
+<p>至此，A的左子树遍历完毕，根据【左根右】的遍历规则，记录A，遍历A的右子树；</p>
+<p>A的右子树存在，找到E，此时E看做根节点，遍历E的左子树；</p>
+<p>E的左子树不存在，返回E，根据【左根右】的遍历规则，记录E，遍历E的右子树；</p>
+<p>E的右子树存在，找到F，此时F看做根节点，遍历F的左子树；</p>
+<p>F的左子树存在，找到G，此时G看做根节点，遍历G的左子树；</p>
+<p>G的左子树存在，找到H，由于H是叶子节点，无左子树，记录H，无右子树，返回G，根据【左根右】的遍历规则，记录G，遍历G的右子树；</p>
+<p>G的右子树存在，找到K，由于K是叶子节点，无左子树，记录K，无右子树，返回G，根据【左根右】的遍历规则，记录F，遍历F的右子树；</p>
+<p>F的右子树不存在，返回F，E的右子树遍历完毕，返回A；</p>
+<p>至此，A的右子树也遍历完毕；</p>
+</li>
+</ul>
+<ul>
+<li>详细的算法如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//中序遍历对外的方法</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">InOrder</span><span class="params">()</span></span>&#123;</div><div class="line">		InOrder(<span class="keyword">this</span>.root);  <span class="comment">//传入根节点</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">InOrder</span><span class="params">(Node node)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span> (node!=<span class="keyword">null</span>) &#123;</div><div class="line">			InOrder(node.getLeftChild());   <span class="comment">//先遍历左子树</span></div><div class="line">			System.out.println(node.getValue());  </div><div class="line">			InOrder(node.getRightNode());   <span class="comment">//遍历右子树</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="后续遍历"><a href="#后续遍历" class="headerlink" title="后续遍历"></a>后续遍历</h3><ul>
+<li>先后序遍历左子树，然后再后序遍历右子树，最后再访问根结点即<strong>左—右—根。</strong></li>
+<li>总的来说，把当前节点当做根节点，只要是存在左右子树的继续向下，不输出当前节点的值，直到没有左右子树才输出，再返回，如此反复即可</li>
+<li><strong>总结： 当根据顺序访问的时候，只要当前节点没有左右节点或者左右节点已经输出过了，才可以输出当前节点的值</strong></li>
+<li><img src="http://my.csdn.net/uploads/201203/27/1332781113_9913.jpg" alt=""></li>
+</ul>
+<ul>
+<li>详细过程如下：<ol>
+<li>从根节点1开始，访问左子树2，把2当成根节点，访问左子树4，把4当成根节点，访问左子树，没有，输出4</li>
+<li>返回父节点2，把2当成根节点，此时的左子树4已经输出了，那么开始访问右子树5，把5当成根节点，访问左子树7，把7当成根节点，访问左子树，没有，但是存在右子树8，把8当成根节点，访问左子树，没有，访问右子树，没有，此时输出8</li>
+<li>返回父节点7，发现不存在左节点，右节点8已经输出了，因此输出7</li>
+<li>返回父节点5，发现左节点7已经输出了，并且没有右子树，因此输出5</li>
+<li>返回父节点2，发现左右节点都输出了，因此继续返回父4节点1</li>
+<li>把1当成根节点，发现左子树已经遍历完成，访问左子树3，把当前的3当成根节点，访问左子树，没有，访问右子树6，把6当成根节点，发现左右子树都不存在，输出6</li>
+<li>返回父节点3，发现没有左子树，并且右节点6已经输出了，因此输出3</li>
+<li>返回父节点1，输出1</li>
+</ol>
+</li>
+<li>最终的顺序为：4,8,7,5,6,3,1</li>
+</ul>
+<ul>
+<li>详细算法如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//后序遍历对外的方法</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">PostOrder</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">this</span>.PostOrder(<span class="keyword">this</span>.root);  <span class="comment">//从根节点开始</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">//后序遍历</span></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">PostOrder</span><span class="params">(Node node)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span>(node!=<span class="keyword">null</span>)&#123;</div><div class="line">			PostOrder(node.getLeftChild());  <span class="comment">//遍历左子树</span></div><div class="line">			PostOrder(node.getRightNode());  <span class="comment">//遍历右子树</span></div><div class="line">			System.out.println(node.getValue());   <span class="comment">//输出</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><ul>
+<li><a href="http://www.cnblogs.com/skywang12345/p/3245399.html" target="_blank" rel="external">http://www.cnblogs.com/skywang12345/p/3245399.html</a></li>
+</ul>
+<h2 id="参考文章-1"><a href="#参考文章-1" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="https://www.cnblogs.com/polly333/p/4740355.html#8" target="_blank" rel="external">https://www.cnblogs.com/polly333/p/4740355.html#8</a></li>
+<li><a href="https://www.cnblogs.com/Michaelwjw/p/6384428.html" target="_blank" rel="external">https://www.cnblogs.com/Michaelwjw/p/6384428.html</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;二叉树&quot;&gt;&lt;a href=&quot;#二叉树&quot; class=&quot;headerlink&quot; title=&quot;二叉树&quot;&gt;&lt;/a&gt;二叉树&lt;/h2&gt;&lt;h2 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h2&gt;&lt;p
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="http://chenjiabing666.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>堆排序</title>
+    <link href="http://chenjiabing666.github.io/2018/07/01/%E5%A0%86%E6%8E%92%E5%BA%8F/"/>
+    <id>http://chenjiabing666.github.io/2018/07/01/堆排序/</id>
+    <published>2018-07-01T06:00:09.000Z</published>
+    <updated>2018-07-01T06:00:39.536Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h1><h2 id="堆的定义"><a href="#堆的定义" class="headerlink" title="堆的定义"></a>堆的定义</h2><ul>
+<li>堆(heap)，这里所说的堆是数据结构中的堆，而不是内存模型中的堆。堆通常是一个可以被看做一棵树，它满足下列性质：</li>
+<li>[<strong>性质一</strong>] 堆中任意节点的值总是不大于(不小于)其子节点的值；</li>
+<li>[<strong>性质二</strong>] 堆总是一棵<code>完全树</code>。</li>
+<li>将任意节点不大于其子节点的堆叫做最小堆或小根堆，而将任意节点不小于其子节点的堆叫做最大堆或大根堆。常见的堆有二叉堆、左倾堆、斜堆、二项堆、斐波那契堆等等。</li>
+</ul>
+<h2 id="排序的过程"><a href="#排序的过程" class="headerlink" title="排序的过程"></a>排序的过程</h2><ol>
+<li>将数组建成最大堆或者最小堆</li>
+<li>取出堆顶的数据和数组末尾的数据交换，此时对前面的数据再次建堆，再取堆顶的数据和数组中的倒数第二个交换，…………………….</li>
+</ol>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="构造大顶堆"><a href="#构造大顶堆" class="headerlink" title="构造大顶堆"></a>构造大顶堆</h3><ul>
+<li>实现从大到小的排序</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeapSort</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 构造大顶堆</div><div class="line">	 * 1. 根节点的值一定要比子节点的值大</div><div class="line">	 * 堆的向下调整</div><div class="line">	 * <span class="doctag">@param</span> array  需要调整的数组</div><div class="line">	 * <span class="doctag">@param</span> start  调整的起始位置</div><div class="line">	 * <span class="doctag">@param</span> end    调整的终止位置</div><div class="line">	 * 索引从0开始</div><div class="line">	 * 当前节点的左节点： 2*i+1</div><div class="line">	 * 		   右节点： 2**i+2</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span>  <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">max_heap_down</span><span class="params">(<span class="keyword">int</span>[] array,<span class="keyword">int</span> start,<span class="keyword">int</span> end)</span></span>&#123;</div><div class="line">		<span class="keyword">int</span> currentIndex=start;  <span class="comment">//保存当前节点的下标</span></div><div class="line">		<span class="keyword">int</span> leftIndex=<span class="number">2</span>*currentIndex+<span class="number">1</span>;   <span class="comment">//当前节点左节点的下标</span></div><div class="line">		<span class="comment">//当当前节点的左节点的下标小于终止下标的时候，因为堆是一个完全的二叉树，因此只要没有左子树就一定没有右子树，因此只需要判断左节点的下标即可</span></div><div class="line">		<span class="comment">//只要满足这个条件就表示一定存在左右节点</span></div><div class="line">		<span class="keyword">while</span>(leftIndex&lt;end)&#123;</div><div class="line">			<span class="comment">//当左节点的值小于右节点，那么此时只需要将当前值和右节点的值比较，这里的leftIndex+1是右子节点的下标</span></div><div class="line">			<span class="comment">//如果没有执行if体内的语句，那么此时的左右节点最大的下标就是左节点的下标</span></div><div class="line">			<span class="keyword">if</span>(array[leftIndex]&lt;array[leftIndex+<span class="number">1</span>])&#123;</div><div class="line">				leftIndex++;  <span class="comment">//此时的下标编程右节点的下标</span></div><div class="line">			&#125;</div><div class="line">			<span class="comment">//如果当前节点大于等于左右子节点中的最大值，那么就不用调整了，直接跳出</span></div><div class="line">			<span class="keyword">if</span> (array[currentIndex]&gt;=array[leftIndex]) &#123;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;<span class="keyword">else</span> &#123;    <span class="comment">//如果小于，此时需要调整，将当前节点和左右子节点最大值交换</span></div><div class="line">				<span class="keyword">int</span> temp=array[currentIndex];   <span class="comment">//交换数字</span></div><div class="line">				array[currentIndex]=array[leftIndex];</div><div class="line">				array[leftIndex]=temp;</div><div class="line">				</div><div class="line">				currentIndex=leftIndex;  <span class="comment">//此时的当前节点的下标</span></div><div class="line">				leftIndex=<span class="number">2</span>*currentIndex+<span class="number">1</span>;   <span class="comment">//当前节点的左子节点也需要改变了</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 堆排序，从小到大</div><div class="line">	 * <span class="doctag">@param</span> array 待排序的数组</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heap_sort_asc</span><span class="params">(<span class="keyword">int</span>[] array)</span></span>&#123;</div><div class="line">		<span class="comment">//从索引为array.length/2-1的位置到0，开始向下调整，那么调整好的数组就是一个大顶堆</span></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=array.length/<span class="number">2</span>-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</div><div class="line">			<span class="comment">//进行向下调整</span></div><div class="line">			max_heap_down(array, i, array.length-<span class="number">1</span>);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">//从最后一个元素开始对序列进行调整，不断的调整，直到第一个元素</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = array.length-<span class="number">1</span>; i &gt;<span class="number">0</span>; i--) &#123;</div><div class="line">			<span class="comment">//此时array[0]就是最大的元素，因此和最后一个元素交换</span></div><div class="line">			<span class="keyword">int</span> temp=array[i];</div><div class="line">			array[i]=array[<span class="number">0</span>];</div><div class="line">			array[<span class="number">0</span>]=temp;</div><div class="line">			</div><div class="line">			<span class="comment">//此时最后一个元素就是最大的，因此我们对前面的元素继续构造大顶堆</span></div><div class="line">			max_heap_down(array, <span class="number">0</span>, i-<span class="number">1</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span>[] array=&#123;<span class="number">12</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">45</span>,<span class="number">1</span>,<span class="number">45</span>,<span class="number">6</span>,<span class="number">72</span>,<span class="number">4</span>&#125;;</div><div class="line">		heap_sort_asc(array);</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</div><div class="line">			System.out.println(array[i]);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="转载"><a href="#转载" class="headerlink" title="转载"></a>转载</h2><ul>
+<li>[<a href="http://www.cnblogs.com/skywang12345/p/3610187.html" target="_blank" rel="external">http://www.cnblogs.com/skywang12345/p/3610187.html</a>] (<a href="http://www.cnblogs.com/skywang12345/p/3610187.html" target="_blank" rel="external">http://www.cnblogs.com/skywang12345/p/3610187.html</a>)</li>
+<li><a href="http://www.cnblogs.com/skywang12345/p/3602162.html#a43" target="_blank" rel="external">http://www.cnblogs.com/skywang12345/p/3602162.html#a43</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;堆排序&quot;&gt;&lt;a href=&quot;#堆排序&quot; class=&quot;headerlink&quot; title=&quot;堆排序&quot;&gt;&lt;/a&gt;堆排序&lt;/h1&gt;&lt;h2 id=&quot;堆的定义&quot;&gt;&lt;a href=&quot;#堆的定义&quot; class=&quot;headerlink&quot; title=&quot;堆的定义&quot;&gt;&lt;/a&gt;堆的定
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="http://chenjiabing666.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>shell排序</title>
+    <link href="http://chenjiabing666.github.io/2018/07/01/shell%E6%8E%92%E5%BA%8F/"/>
+    <id>http://chenjiabing666.github.io/2018/07/01/shell排序/</id>
+    <published>2018-07-01T05:59:09.000Z</published>
+    <updated>2018-07-01T05:59:53.611Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Shell-排序"><a href="#Shell-排序" class="headerlink" title="Shell 排序"></a>Shell 排序</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+<li>希尔排序(Shell Sort)是插入排序的一种。也称缩小增量排序，是直接插入排序算法的一种更高效的改进版本。希尔排序是非稳定排序算法。该方法因DL．Shell于1959年提出而得名。</li>
+<li>希尔排序是把记录按下标的一定增量分组，对每组使用直接插入排序算法排序；随着增量逐渐减少，每组包含的关键词越来越多，当增量减至1时，整个文件恰被分成一组，算法便终止。</li>
+<li><strong>该方法实质上是一种分组插入方法</strong></li>
+<li>比较相隔较远距离（称为增量）的数，使得数移动时能跨过多个元素，则进行一次比[2] 较就可能消除多个元素交换。</li>
+<li>D.L.shell于1959年在以他名字命名的排序算法中实现了这一思想。算法先将要排序的一组数按某个增量d分成若干组，每组中记录的下标相差d.对每组中全部元素进行排序，然后再用一个较小的增量对它进行，在每组中再进行排序。当增量减到1时，整个要排序的数被分成一组，排序完成。</li>
+<li>一般的初次取序列的一半为增量，以后每次减半，直到增量为1。</li>
+<li><strong>给定实例的shell排序的排序过程</strong></li>
+<li>假设待排序文件有10个记录，其关键字分别是：49，38，65，97，76，13，27，49，55，04。增量序列的取值依次为：5，2，1</li>
+</ul>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShellSort</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">		<span class="keyword">int</span>[] data = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; <span class="number">5</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">7</span> &#125;;</div><div class="line">		print(data);</div><div class="line">		shellSort(data, data.length);</div><div class="line">		print(data);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">    	shell排序的实现算法，原理就是使用不同的增量进行分组，之后对每个分组进行插入排序</div><div class="line">    */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">shellSort</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> gap, i, j;</div><div class="line">		<span class="comment">//使用增量分割子序列，这里的gap就是增量，使用增量对数组进行分割</span></div><div class="line">		<span class="keyword">for</span> (gap = n / <span class="number">2</span>; gap &gt; <span class="number">0</span>; gap /= <span class="number">2</span>)</div><div class="line"></div><div class="line">		&#123;</div><div class="line">			<span class="comment">// 内层的两个循环对每一个子序列同时做直接插入排序</span></div><div class="line">			<span class="keyword">for</span> (i = gap; i &lt; n; i++)&#123;</div><div class="line">				<span class="keyword">int</span> insertNode=array[i];  <span class="comment">//待插入的数据</span></div><div class="line">				j=i-gap;   <span class="comment">//待插入数据的前一个下标</span></div><div class="line">				</div><div class="line">				<span class="comment">//循环结束的条件是insertNode&gt;=array[j],那么此时的insertNode需要插入的位置就是array[j+1]这个位置了</span></div><div class="line">				<span class="keyword">while</span>(j&gt;=<span class="number">0</span>&amp;&amp;insertNode&lt;array[j])&#123;</div><div class="line">					array[j+gap]=array[j];   <span class="comment">//元素后移</span></div><div class="line">					j=j-gap;</div><div class="line">				&#125;</div><div class="line">				array[j+gap]=insertNode;   <span class="comment">//此时的array[j+gap]就是待插入的位置</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span>[] data)</span> </span>&#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</div><div class="line">			System.out.print(data[i] + <span class="string">"\t"</span>);</div><div class="line">		&#125;</div><div class="line">		System.out.println();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Shell-排序&quot;&gt;&lt;a href=&quot;#Shell-排序&quot; class=&quot;headerlink&quot; title=&quot;Shell 排序&quot;&gt;&lt;/a&gt;Shell 排序&lt;/h1&gt;&lt;h2 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; titl
+    
+    </summary>
+    
+      <category term="数据结构与算法" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构与算法" scheme="http://chenjiabing666.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>MySQL性能优化</title>
     <link href="http://chenjiabing666.github.io/2018/06/26/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     <id>http://chenjiabing666.github.io/2018/06/26/MySQL性能优化/</id>
     <published>2018-06-26T14:59:48.000Z</published>
-    <updated>2018-06-26T15:00:10.064Z</updated>
+    <updated>2018-06-29T07:14:15.791Z</updated>
     
     <content type="html"><![CDATA[<h1 id="MySQL性能优化"><a href="#MySQL性能优化" class="headerlink" title="MySQL性能优化"></a>MySQL性能优化</h1><h2 id="查看数据库性能参数"><a href="#查看数据库性能参数" class="headerlink" title="查看数据库性能参数"></a>查看数据库性能参数</h2><ul>
 <li><code>show status like &quot;value&quot;</code> ：value是要查询的参数值，常用的值如下：</li>
@@ -56,7 +297,10 @@
 </li>
 </ul>
 <h4 id="2-使用组合索引查询"><a href="#2-使用组合索引查询" class="headerlink" title="2. 使用组合索引查询"></a>2. 使用组合索引查询</h4><ul>
-<li><strong>Mysql可以为多列创建索引，可以同时为16个字段创建索引。对于组合索引，只有查询条件中使用了这些字段的<code>第一个字段</code>时，才会使用索引查询。</strong></li>
+<li><p><strong>匹配左前缀</strong>，只要使用了组合索引中的最左边的那个索引值进行查询，那么就会使用组合索引进行查询</p>
+</li>
+<li><p><strong>Mysql可以为多列创建索引，可以同时为16个字段创建索引。对于组合索引，只有查询条件中使用了这些字段的<code>第一个字段</code>时，才会使用索引查询。</strong></p>
+</li>
 <li>我们分析查询用户信息的语句，看看对于组合索引的使用<ol>
 <li>创建组合索引<code>name_age_index</code> ：<code>create index name_age_index on user(name,age)</code></li>
 <li>使用分析查询语句：<code>explain select * from user where age=22;</code>  ：这里查询没有使用第一个字段<code>name</code>字段查询，显示<code>possible_keys</code>为<code>NULL</code>表示没有相关索引</li>
@@ -74,6 +318,109 @@
 </ul>
 </li>
 </ul>
+<h4 id="4-索引排序"><a href="#4-索引排序" class="headerlink" title="4. 索引排序"></a>4. 索引排序</h4><ul>
+<li>mysql查询只使用一个索引，<strong>因此如果<code>where子句</code>中已经使用了索引的话，那么<code>order by</code>中的列是不会使用索引的</strong>。因此数据库默认排序可以符合要求的情况下不要使用排序操作，尽量不要包含多个列的排序，如果需要最好给这些列建复合索引。</li>
+</ul>
+<h4 id="5-逻辑运算"><a href="#5-逻辑运算" class="headerlink" title="5. 逻辑运算"></a>5. 逻辑运算</h4><ul>
+<li>不使用<code>NOT IN</code> 、<code>&lt;&gt;</code>、<code>！=</code>操作，但<code>&lt;</code>,<code>&lt;=</code>，<code>=</code>，<code>&gt;</code>,<code>&gt;=</code>,<code>BETWEEN</code>,<code>IN</code>是可以用到索引的</li>
+</ul>
+<h4 id="6-使用短索引"><a href="#6-使用短索引" class="headerlink" title="6. 使用短索引"></a>6. 使用短索引</h4><ul>
+<li>对串列进行索引，如果可以就应该指定一个前缀长度。例如，如果有一个char（255）的列，如果在前10个或20个字符内，多数值是唯一的，那么就不要对整个列进行索引。短索引不仅可以提高查询速度而且可以节省磁盘空间和I/O操作。</li>
+</ul>
+<h4 id="7-如何使用索引来排序"><a href="#7-如何使用索引来排序" class="headerlink" title="7. 如何使用索引来排序"></a>7. 如何使用索引来排序</h4><p>在排序操作中如果能使用到索引来排序，那么可以极大的提高排序的速度，要使用索引来排序需要满足以下两点即可。</p>
+<ul>
+<li>1、ORDER BY子句后的列顺序要与组合索引的列顺序一致，且所有排序列的排序方向（正序/倒序）需一致</li>
+<li>2、所查询的字段值需要包含在索引列中，及满足覆盖索引</li>
+</ul>
+<p><strong>通过例子来具体分析</strong></p>
+<p>在user_test表上创建一个组合索引</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>ALTER TABLE user_test ADD INDEX index_user(user_name , city , age);</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>可以使用到索引排序的案例</p>
+<table>
+<thead>
+<tr>
+<th>1234567</th>
+<th>1、SELECT user_name, city, age FROM user_test ORDER BY user_name; 2、SELECT user_name, city, age FROM user_test ORDER BY user_name, city; 3、SELECT user_name, city, age FROM user_test ORDER BY user_name DESC, city DESC; 4、SELECT user_name, city, age FROM user_test WHERE user_name = ‘feinik’ ORDER BY city;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注：第4点比较特殊一点，如果where查询条件为索引列的第一列，且为常量条件，那么也可以使用到索引</p>
+</blockquote>
+<p>无法使用索引排序的案例</p>
+<p>1、sex不在索引列中</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>SELECT user_name, city, age FROM user_test ORDER BY user_name, sex;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>2、排序列的方向不一致</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>SELECT user_name, city, age FROM user_test ORDER BY user_name ASC, city DESC;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>3、所要查询的字段列sex没有包含在索引列中</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>SELECT user_name, city, age, sex FROM user_test ORDER BY user_name;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>4、where查询条件后的user_name为范围查询，所以无法使用到索引的其他列</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>SELECT user_name, city, age FROM user_test WHERE user_name LIKE ‘feinik%’ ORDER BY city;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="优化子查询"><a href="#优化子查询" class="headerlink" title="优化子查询"></a>优化子查询</h3><ul>
 <li>子查询就是一个<code>select</code>语句中嵌套多个<code>select</code>语句，虽然子查询使用起来方便灵活，但是执行的效率并不高。在执行子查询的时候需要为内层的查询语句结果建立一个临时表，然后外层的语句从临时表中查询数据。查询完毕之后再撤销临时表。因此子查询的速度会受到一定的影响。</li>
 <li>在Mysql中，可以使用连接<code>Join</code>查询代替子查询，连接查询不需要建立临时表，速度要比子查询要快。如果查询中使用索引的话，性能会更好</li>
@@ -1781,821 +2128,6 @@
     
     
       <category term="java并发编程" scheme="http://chenjiabing666.github.io/tags/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MongoDB使用总结</title>
-    <link href="http://chenjiabing666.github.io/2018/06/26/MongoDB%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
-    <id>http://chenjiabing666.github.io/2018/06/26/MongoDB使用总结/</id>
-    <published>2018-06-26T14:43:56.000Z</published>
-    <updated>2018-06-26T14:44:38.854Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="MongoDB使用总结"><a href="#MongoDB使用总结" class="headerlink" title="MongoDB使用总结"></a>MongoDB使用总结</h1><h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><ul>
-<li><code>show dbs</code>  : 显示所有的数据库</li>
-<li><code>use user</code>  : 选择数据库<code>user</code>，如果这个数据库存在，那么就使用，不存在就新建，但是此时的数据库中根本不存在数据，因此使用<code>show dbs</code>不能显示该数据库</li>
-<li><code>db.dropDatabase()</code>   : 删除数据库，其中的<code>db</code>表示当前数据库</li>
-</ul>
-<h2 id="集合操作-表"><a href="#集合操作-表" class="headerlink" title="集合操作(表)"></a>集合操作(表)</h2><ul>
-<li>在MongoDB中，数据库中的集合相当于SQL中的表，一个数据库中可以存在多个集合，每一个集合都是一个JSON文档形式的存储</li>
-<li><code>show tables</code>  : 显示所有的集合</li>
-<li><code>show collections</code> : 显示所有的集合</li>
-</ul>
-<h3 id="创建集合"><a href="#创建集合" class="headerlink" title="创建集合"></a>创建集合</h3><ul>
-<li><code>db.createCollection(name, options)</code></li>
-<li><a href="http://www.runoob.com/mongodb/mongodb-create-collection.html" target="_blank" rel="external">文档</a></li>
-</ul>
-<h3 id="删除集合"><a href="#删除集合" class="headerlink" title="删除集合"></a>删除集合</h3><ul>
-<li><code>db.collection.drop()</code><ul>
-<li><code>db.user.drop()</code> : 删除<code>user</code>集合</li>
-</ul>
-</li>
-</ul>
-<h2 id="文档操作"><a href="#文档操作" class="headerlink" title="文档操作"></a>文档操作</h2><ul>
-<li>一个集合中可以包含多条文档，一个文档就相当于SQL中的一条数据，这里的文档是JSON格式的文档</li>
-</ul>
-<h3 id="插入文档"><a href="#插入文档" class="headerlink" title="插入文档"></a>插入文档</h3><ul>
-<li><p><code>db.collectionName.insert(JSON)</code> </p>
-<ul>
-<li><code>db.user.insert({name:&quot;陈加兵&quot;,age:22})</code>  : 向user集合中插入一条文档，如果这个<code>user</code>集合不存在，那么就会新建一个，这个方法默认会为我们插入一个<code>_id</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h3><p>update() 方法用于更新已存在的文档。语法格式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">db.collection.update(</div><div class="line">   &lt;query&gt;,</div><div class="line">   &lt;update&gt;,</div><div class="line">   &#123;</div><div class="line">     upsert: &lt;boolean&gt;,</div><div class="line">     multi: &lt;boolean&gt;,</div><div class="line">     writeConcern: &lt;document&gt;</div><div class="line">   &#125;</div><div class="line">)</div></pre></td></tr></table></figure>
-<p><strong>参数说明：</strong></p>
-<ul>
-<li><strong>query</strong> : update的查询条件，类似sql update查询内where后面的。</li>
-<li><strong>update</strong> : update的对象和一些更新的操作符（如$,​$inc…）等，也可以理解为sql update查询内set后面的</li>
-<li><strong>upsert</strong> : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入。</li>
-<li><strong>multi</strong> : 可选，mongodb 默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新。</li>
-<li><strong>writeConcern</strong> :可选，抛出异常的级别。 </li>
-</ul>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><ul>
-<li><code>db.user.update({name:&quot;jack&quot;},{$set:{name:&quot;tom&quot;}})</code>  ：相当于sql语句中的<code>update user set name=&quot;tom&quot; where name=&quot;jack&quot;</code>,不过这里默认只是更新一条</li>
-<li><code>db.user.update({name:&quot;陈加兵&quot;},{$set:{name:&quot;郑元梅&quot;}},{multi:true})</code>    ： 更新所有的数据</li>
-<li><code>db.user.update({name:&quot;陈加兵&quot;},{$set:{name:&quot;郑元梅&quot;}},{upsert:true})</code>  : 更新数据，如果不存在就插入</li>
-<li><strong>这里的query条件也是可以使用逻辑比较的，比如<code>age&gt;12</code>，后续在讲到查询文档的时候会详细描述</strong></li>
-</ul>
-<h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><ul>
-<li>删除格式，默认是删除多条，但是我们可以设置<code>justone : true</code>或者<code>justone：1</code>即可删除一条数据</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">db.collection.remove(</div><div class="line">   &lt;query&gt;,</div><div class="line">   &#123;</div><div class="line">     justOne: &lt;boolean&gt;,</div><div class="line">     writeConcern: &lt;document&gt;</div><div class="line">   &#125;</div><div class="line">)</div></pre></td></tr></table></figure>
-<ul>
-<li><code>db.user.remove({name:&quot;陈加兵&quot;})</code>  : 删除全部<code>name=陈加兵</code>的文档</li>
-<li><code>db.user.remove({})</code> : 删除集合user中的全部文档</li>
-<li><code>db.user.remove({})</code>  : 删除全部文档，因为这里没有条件</li>
-<li><code>db.user.remove({name:&quot;陈加兵&quot;},{justone:true})</code> : 只删除一条文档</li>
-</ul>
-<h3 id="查询文档"><a href="#查询文档" class="headerlink" title="查询文档"></a>查询文档</h3><ul>
-<li><p><code>db.collection.findOne(query,projection)</code>  ： 只显示满足条件的一条文档</p>
-</li>
-<li><p>格式：<code>db.collection.find(query,projection)</code>  ： 查询满足条件的全部文档</p>
-<ul>
-<li><code>query</code> ：可选， 查询的条件，相当于where子句</li>
-<li><code>projection</code>： 可选，使用投影操作符指定返回的键。查询时返回文档中所有键值， 只需省略该参数即可（默认省略）</li>
-</ul>
-</li>
-</ul>
-<h4 id="插入数据（准备）"><a href="#插入数据（准备）" class="headerlink" title="插入数据（准备）"></a>插入数据（准备）</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">db.user.insert(&#123;name:"Jack",age:22&#125;)</div><div class="line">db.user.insert(&#123;name:"Tom",age:40&#125;)</div><div class="line">db.user.insert(&#123;name:"Mary",age:25&#125;)</div><div class="line">db.user.insert(&#123;name:"Lucy",age:22&#125;)</div></pre></td></tr></table></figure>
-<h4 id="查询全部"><a href="#查询全部" class="headerlink" title="查询全部"></a>查询全部</h4><ul>
-<li><code>db.user.find().pretty()</code> ： 这里没有指定查询条件，那么就是查询全部</li>
-</ul>
-<h4 id="指定显示字段"><a href="#指定显示字段" class="headerlink" title="指定显示字段"></a>指定显示字段</h4><ul>
-<li>默认显示全部的字段，但是我们可以指定<code>projection</code>来显示指定的字段</li>
-<li><code>inclusion模式</code>，指定返回的键，比如<code>db.user.find({},{name:1})</code>,这里只会显示<code>_id</code>和<code>name</code>这两个字段，其他的字段都是不会显示的</li>
-<li><code>exclusion模式</code>，指定不反回的键，比如<code>db.user.find({},{name:0})</code> : 这里只会显示<code>age</code>和<code>_id</code>,只有<code>name</code>不显示</li>
-<li><strong>两种模式不可以混用，比如<code>db.user.find({},{name:1,age:0})</code> ,这个是不可以的</strong></li>
-</ul>
-<h4 id="指定查询条件"><a href="#指定查询条件" class="headerlink" title="指定查询条件"></a>指定查询条件</h4><ul>
-<li><code>db.user.find({name:&quot;Jack&quot;})</code>   ： 查询<code>name=Jack</code>的全部文档内容</li>
-<li><code>db.user.find({name:&quot;Jack&quot;},{name:0})</code>  : 不显示<code>name</code>字段</li>
-</ul>
-<h4 id="AND条件"><a href="#AND条件" class="headerlink" title="AND条件"></a>AND条件</h4><ul>
-<li><code>db.user.find({name:&quot;Jack&quot;,age:22})</code>  ： 查询<code>name=Jack并且age=22</code>的文档信息</li>
-<li><code>db.user.find({$and:[{expression1},{expression2},{experssion3},......]})</code><ul>
-<li><code>db.user.find({$and:[{name:&quot;Jack&quot;},{age:22}]})</code> : 和上面一样的效果</li>
-</ul>
-</li>
-</ul>
-<h4 id="OR-条件"><a href="#OR-条件" class="headerlink" title="OR 条件"></a>OR 条件</h4><ul>
-<li><code>db.user.find({$or:[{expression1},{expression2},{expression3}......]})</code><ul>
-<li><code>db.user.find({$or:[{name:&quot;Jack&quot;},{age:25}]})</code>  : 查找<code>name=Jack或者age=25</code>的文档信息</li>
-</ul>
-</li>
-</ul>
-<h4 id="AND-和-OR-联合使用"><a href="#AND-和-OR-联合使用" class="headerlink" title="AND 和 OR 联合使用"></a>AND 和 OR 联合使用</h4><ul>
-<li><code>db.user.find({name:&quot;Jack&quot;,$or:[{_id:1},{age:22}]})</code> : 查找<code>name=Jack and (_id=1 or age=22)</code></li>
-</ul>
-<h4 id="条件操作符"><a href="#条件操作符" class="headerlink" title="条件操作符"></a>条件操作符</h4><ul>
-<li><code>(&gt;) 大于 - $gt</code></li>
-<li><code>(&lt;) 小于 - $lt</code></li>
-<li><code>(&gt;=) 大于等于 - $gte</code></li>
-<li><code>(&lt;= ) 小于等于 - $lte</code></li>
-<li><code>(!=) 不等于  - $ne</code></li>
-</ul>
-<h5 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h5><ul>
-<li><code>db.user.find({age:{$gt:22}})</code>  : 查找 <code>age&gt;22</code>的信息</li>
-<li><code>db.user.find({age:{$gte:22},name:&quot;Jack&quot;})</code>  : 查找<code>age&gt;=22 and name=Jack</code>的信息</li>
-</ul>
-<h4 id="limit"><a href="#limit" class="headerlink" title="limit"></a>limit</h4><ul>
-<li>指定显示记录的条数</li>
-<li><code>db.user.find().limit(2)</code> : 只显示两条记录</li>
-<li><code>db.user.find({name:&quot;Jack&quot;}).limit(2)</code></li>
-</ul>
-<h4 id="skip"><a href="#skip" class="headerlink" title="skip"></a>skip</h4><ul>
-<li>跳过的条数</li>
-<li><code>db.user.find().skip(10)</code> : 跳过前面的十条记录，显示后面的</li>
-</ul>
-<h4 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h4><ul>
-<li>显示第三页，每页显示10条信息，相当于SQL中的<code>select * from user limit 20,5</code><ul>
-<li><code>db.user.find().skip(20).limit(5)</code></li>
-</ul>
-</li>
-</ul>
-<h4 id="sort-排序"><a href="#sort-排序" class="headerlink" title="sort 排序"></a>sort 排序</h4><ul>
-<li>在MongoDB中使用使用<code>sort()</code>方法对数据进行排序，sort()方法可以通过参数指定排序的字段，并使用 1 和 -1 来指定排序的方式，其中<code>1</code> 为升序排列，而<code>-1</code>是用于降序排列。</li>
-<li><code>db.collection.find().sort({key:1})</code>  </li>
-<li><code>db.user.find().sort({age:-1})</code>   : 按照<code>age</code>降序排列</li>
-<li><code>db.user.find({},{name:1,age:1}).sort({age:-1,name:1})</code>  : 按照name升序，age降序排列</li>
-</ul>
-<h4 id="limit，skip，sort执行顺序"><a href="#limit，skip，sort执行顺序" class="headerlink" title="limit，skip，sort执行顺序"></a>limit，skip，sort执行顺序</h4><ul>
-<li>执行顺序为：<code>sort()</code> — &gt; <code>skip()</code>  —-&gt; <code>limit()</code>  ,这个相当于SQL中的<code>select * from name where group by  having order by limit m,n</code> 这种顺序一样</li>
-</ul>
-<h4 id="in"><a href="#in" class="headerlink" title="$in"></a>$in</h4><ul>
-<li>表示一个数据在多个数据中，类似于SQL中的<code>in</code></li>
-<li><code>db.user.find({age:{$in:[22,33,44]}})</code>  : 查找<code>age in (22,33,44)之中的任意一个</code></li>
-</ul>
-<h4 id="nin"><a href="#nin" class="headerlink" title="$nin"></a>$nin</h4><ul>
-<li>相当于SQL中的<code>not in</code></li>
-<li><code>db.user.find({age:{$nin:[22,33,44]}})</code></li>
-</ul>
-<h4 id="exists"><a href="#exists" class="headerlink" title="$exists"></a>$exists</h4><ul>
-<li>表示不存在 </li>
-<li><code>db.user.find({sex:{$exists:false}})</code>  : 查找不存在<code>sex</code>这个字段的文档</li>
-</ul>
-<h4 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h4><blockquote>
-<p><strong>$slice操作符控制查询返回的数组中元素的个数。此操作符根据参数{ field: value } 指定键名和键值选择出文档集合，并且该文档集合中指定array键将返回从指定数量的元素。如果count的值大于数组中元素的数量，该查询返回数组中的所有元素的。</strong></p>
-<p><strong>语法：db.collection.find( { field: value }, { array: {$slice: count }});</strong></p>
-<ul>
-<li><strong>下面将查询grades中的前两个数</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;name:&apos;jack&apos;&#125;,&#123;grades:&#123;$slice:2&#125;,name:1,age:1,&apos;school.name&apos;:1&#125;);</div><div class="line"></div><div class="line">//输出，可以看出这里的grades只输出了前面两个</div><div class="line"></div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;59057c16f551d8c9003d31df&quot;), &quot;name&quot; : &quot;jack&quot;, &quot;age&quot; : 22, &quot;grades&quot; : [ 22, 33 ], &quot;school&quot; : &#123; &quot;name&quot; : &quot;shida&quot; &#125; &#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>下面将输出后3个数据</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;name:&apos;jhon&apos;&#125;,&#123;grades:&#123;$slice:-3&#125;,name:1&#125;);</div><div class="line"></div><div class="line">//输出</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;59057c16f551d8c9003d31e0&quot;), &quot;name&quot; : &quot;jhon&quot;, &quot;grades&quot; : [ 22, 44, 88 ] &#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>下面介绍指定一个数组作为参数。数组参数使用[ skip , limit ] 格式，其中第一个值表示在数组中跳过的项目数,第二个值表示返回的项目数。</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;name:&apos;jack&apos;&#125;,&#123;grades:&#123;$slice:[2,2]&#125;,name:1&#125;);  //这里将会跳过前面的两个，直接得到后面的两个数据</div><div class="line"></div><div class="line"></div><div class="line">//输出</div><div class="line"></div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;59057c16f551d8c9003d31df&quot;), &quot;name&quot; : &quot;jack&quot;, &quot;grades&quot; : [ 44, 55 ] &#125;</div></pre></td></tr></table></figure>
-<h4 id="count"><a href="#count" class="headerlink" title="count"></a>count</h4><ul>
-<li>统计数量</li>
-<li><code>db.user.find().count()</code>  : 统计全部的数量</li>
-<li><code>db.user.find({name:&quot;Jack&quot;}).count()</code>  : 统计<code>name=Jack</code>的人数</li>
-</ul>
-<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ul>
-<li><p><code>db.collection.ensureIndex({key1:1})</code> : 创建索引，其中的<code>key</code>的值如果为1表示按照升序创建索引，-1表示降序创建索引</p>
-<ul>
-<li><code>db.user.ensureIndex({name:1})</code> ： 单个索引</li>
-<li><code>db.user.ensureIndex({name:1,age:-1})</code>  : 复合索引</li>
-</ul>
-</li>
-<li><code>ensureIndex()</code> 接收可选参数，可选参数列表如下：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>background</td>
-<td>Boolean</td>
-<td>建索引过程会阻塞其它数据库操作，background可指定以后台方式创建索引，即增加 “background” 可选参数。 “background” 默认值为<strong>false</strong>。</td>
-</tr>
-<tr>
-<td>unique</td>
-<td>Boolean</td>
-<td>建立的索引是否唯一。指定为true创建唯一索引。默认值为<strong>false</strong>.</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>索引的名称。如果未指定，MongoDB的通过连接索引的字段名和排序顺序生成一个索引名称。</td>
-</tr>
-<tr>
-<td>dropDups</td>
-<td>Boolean</td>
-<td>在建立唯一索引时是否删除重复记录,指定 true 创建唯一索引。默认值为 <strong>false</strong>.</td>
-</tr>
-<tr>
-<td>sparse</td>
-<td>Boolean</td>
-<td>对文档中不存在的字段数据不启用索引；这个参数需要特别注意，如果设置为true的话，在索引字段中不会查询出不包含对应字段的文档.。默认值为 <strong>false</strong>.</td>
-</tr>
-<tr>
-<td>expireAfterSeconds</td>
-<td>integer</td>
-<td>指定一个以秒为单位的数值，完成 TTL设定，设定集合的生存时间。</td>
-</tr>
-<tr>
-<td>v</td>
-<td>index version</td>
-<td>索引的版本号。默认的索引版本取决于mongod创建索引时运行的版本。</td>
-</tr>
-<tr>
-<td>weights</td>
-<td>document</td>
-<td>索引权重值，数值在 1 到 99,999 之间，表示该索引相对于其他索引字段的得分权重。</td>
-</tr>
-<tr>
-<td>default_language</td>
-<td>string</td>
-<td>对于文本索引，该参数决定了停用词及词干和词器的规则的列表。 默认为英语</td>
-</tr>
-<tr>
-<td>language_override</td>
-<td>string</td>
-<td>对于文本索引，该参数指定了包含在文档中的字段名，语言覆盖默认的language，默认值为 language.</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><code>db.user.ensureIndex({age:1},{background:true})</code>  : 在后台创建索引</li>
-</ul>
-<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><ul>
-<li><p><a href="https://blog.csdn.net/congcong68/article/details/51619882" target="_blank" rel="external">参考文章</a></p>
-</li>
-<li><p><code>db.collection.aggregate(pipeline,options)</code></p>
-<ul>
-<li><code>db.user.aggregate([{$group:{_id:null,count:{$sum:1}}}])</code> : 查询总数，相当于<code>select count(*) from user</code>,这里的聚合函数<code>$sum</code>表示求和，可以使用<code>$</code>引用集合中的字段，也可以直接使用数字，这里填写<code>1</code>就表示查询到一条记录就加一，那么最后显示的就是总数了。<ul>
-<li><strong><code>_id</code> : 表示需要分组的字段，如果为<code>null</code>表示不分组</strong></li>
-</ul>
-</li>
-<li><code>db.user.aggregate([{$group:{_id:&quot;$name&quot;,sum_age:{$sum:&quot;$age&quot;}}}])</code> : 根据字段<code>name</code>分组,对字段<code>age</code>求和，输入如下</li>
-</ul>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="attr">"_id"</span> : <span class="string">"Mary"</span>, <span class="attr">"sum_age"</span> : <span class="number">75</span> &#125;</div><div class="line">&#123; <span class="attr">"_id"</span> : <span class="string">"Jack"</span>, <span class="attr">"sum_age"</span> : <span class="number">66</span> &#125;</div><div class="line">&#123; <span class="attr">"_id"</span> : <span class="string">"zhengyunamei"</span>, <span class="attr">"sum_age"</span> : <span class="number">0</span> &#125;</div><div class="line">&#123; <span class="attr">"_id"</span> : <span class="string">"Tom"</span>, <span class="attr">"sum_age"</span> : <span class="number">120</span> &#125;</div><div class="line">&#123; <span class="attr">"_id"</span> : <span class="string">"陈加兵"</span>, <span class="attr">"sum_age"</span> : <span class="number">22</span> &#125;</div><div class="line">&#123; <span class="attr">"_id"</span> : <span class="string">"Lucy"</span>, <span class="attr">"sum_age"</span> : <span class="number">66</span> &#125;</div><div class="line">&#123; <span class="attr">"_id"</span> : <span class="string">"郑元梅"</span>, <span class="attr">"sum_age"</span> : <span class="number">22</span> &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>db.user.aggregate([{$group:{_id:null,max_age:{$max:&quot;$age&quot;}}}])</code>  : 求出年龄最大的人信息</p>
-</li>
-</ul>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="attr">"_id"</span> : <span class="literal">null</span>, <span class="attr">"max_age"</span> : <span class="number">40</span> &#125;</div></pre></td></tr></table></figure>
-<h3 id="常用的聚合"><a href="#常用的聚合" class="headerlink" title="常用的聚合"></a>常用的聚合</h3><table>
-<thead>
-<tr>
-<th>表达式</th>
-<th>描述</th>
-<th>实例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$sum</td>
-<td>计算总和。</td>
-<td>db.mycol.aggregate([{$group : {_id : “$by_user”, num_tutorial : {$sum : “$likes”}}}])</td>
-</tr>
-<tr>
-<td>$avg</td>
-<td>计算平均值</td>
-<td>db.mycol.aggregate([{$group : {_id : “$by_user”, num_tutorial : {$avg : “$likes”}}}])</td>
-</tr>
-<tr>
-<td>$min</td>
-<td>获取集合中所有文档对应值得最小值。</td>
-<td>db.mycol.aggregate([{$group : {_id : “$by_user”, num_tutorial : {$min : “$likes”}}}])</td>
-</tr>
-<tr>
-<td>$max</td>
-<td>获取集合中所有文档对应值得最大值。</td>
-<td>db.mycol.aggregate([{$group : {_id : “$by_user”, num_tutorial : {$max : “$likes”}}}])</td>
-</tr>
-<tr>
-<td>$push</td>
-<td>在结果文档中插入值到一个数组中。</td>
-<td>db.mycol.aggregate([{$group : {_id : “$by_user”, url : {$push: “$url”}}}])</td>
-</tr>
-<tr>
-<td>$addToSet</td>
-<td>在结果文档中插入值到一个数组中，但不创建副本。</td>
-<td>db.mycol.aggregate([{$group : {_id : “$by_user”, url : {$addToSet : “$url”}}}])</td>
-</tr>
-<tr>
-<td>$first</td>
-<td>根据资源文档的排序获取第一个文档数据。</td>
-<td>db.mycol.aggregate([{$group : {_id : “$by_user”, first_url : {$first : “$url”}}}])</td>
-</tr>
-<tr>
-<td>$last</td>
-<td>根据资源文档的排序获取最后一个文档数据</td>
-<td>db.mycol.aggregate([{$group : {_id : “$by_user”, last_url : {$last : “$url”}}}])</td>
-</tr>
-</tbody>
-</table>
-<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><p>管道在Unix和Linux中一般用于将当前命令的输出结果作为下一个命令的参数。</p>
-<p>MongoDB的聚合管道将MongoDB文档在一个管道处理完毕后将结果传递给下一个管道处理。管道操作是可以重复的。</p>
-<p>表达式：处理输入文档并输出。表达式是无状态的，只能用于计算当前聚合管道的文档，不能处理其它的文档。</p>
-<p>这里我们介绍一下聚合框架中常用的几个操作：</p>
-<ul>
-<li><code>$project</code>：修改输入文档的结构。可以用来重命名、增加或删除域，也可以用于创建计算结果以及嵌套文档。</li>
-<li><code>$match</code>：用于过滤数据，只输出符合条件的文档。$match使用MongoDB的标准查询操作。</li>
-<li><code>$limit</code>：用来限制MongoDB聚合管道返回的文档数。</li>
-<li><code>$skip</code>：在聚合管道中跳过指定数量的文档，并返回余下的文档。</li>
-<li><code>$unwind</code>：将文档中的某一个数组类型字段拆分成多条，每条包含数组中的一个值。</li>
-<li><code>$group</code>：将集合中的文档分组，可用于统计结果。</li>
-<li><code>$sort</code>：将输入文档排序后输出。</li>
-<li><code>$geoNear</code>：输出接近某一地理位置的有序文档。</li>
-</ul>
-<h4 id="math"><a href="#math" class="headerlink" title="$math"></a>$math</h4><ul>
-<li>这个相当于where语句，用来过滤文档的</li>
-<li><strong>这个位置是非常重要的，如果在<code>$group</code>之前就是<code>where子句</code>，如果在之后，那么相当于`having子句</strong>`</li>
-<li><code>db.user.aggregate([{$match:{name:&quot;Jack&quot;}},{$group:{_id:null,count:{$sum:1}}}])</code> ： 统计<code>name=Jack</code>的人数<ul>
-<li>这个命令相当于SQL中的<code>select count(*) from user where name=&quot;Jack&quot;</code></li>
-<li>我们可以使用<code>db.user.find({name:&quot;Jack&quot;}).count()</code>同样可以查询、</li>
-</ul>
-</li>
-<li><code>db.user.aggregate([{$match:{age:{$gt:20}}},{$group:{_id:&quot;$name&quot;,sum_age:{$sum:&quot;$age&quot;}}}])</code><ul>
-<li>相当于SQL中的<code>select _id,sum(age) as sum_age from user where age&gt;20 group by name</code></li>
-</ul>
-</li>
-<li><code>db.user.aggregate([{$group:{_id:&quot;$name&quot;,sum_age:{$sum:&quot;$age&quot;}}},{$match:{sum_age:{$gte:75}}}])</code><ul>
-<li><code>select _id,sum(age) as sum_age from user group by name having sum_age&gt;=75</code></li>
-</ul>
-</li>
-<li><code>db.user.aggregate([{$match:{name:&quot;Tom&quot;}},{$group:{_id:&quot;$name&quot;,sum_age:{$sum:&quot;$age&quot;}}},{$match:{sum_age:{$gte:75}}}])</code><ul>
-<li><code>select _id,sum(age) as sum_age from user where name=&quot;Tom&quot; group by name having sum_age&gt;=75</code></li>
-</ul>
-</li>
-</ul>
-<h4 id="limit-1"><a href="#limit-1" class="headerlink" title="$limit"></a>$limit</h4><ul>
-<li>控制显示的条数，因为使用聚合之后，不能再使用<code>limit()</code>方法来限制</li>
-<li><code>db.user.aggregate([{$group:{_id:&quot;$name&quot;,sum_age:{$sum:&quot;$age&quot;}}},{$limit:1}])</code> ： 根据姓名分组之后显示一条数据<ul>
-<li>相当于 <code>select _id,sum(age) as sum_age from user group by name limit 0,1</code></li>
-</ul>
-</li>
-<li><code>db.user.aggregate([{$match:{name:&quot;Tom&quot;}},{$group:{_id:&quot;$name&quot;,sum_age:{$sum:&quot;$age&quot;}}},{$match:{sum_age:{$gte:75}}},{$skip:0},{$limit:1}])</code><ul>
-<li><code>select _id ,sum(age) as sum_age from user where name=&quot;Tom&quot; group by name having age&gt;=75 limit 0,1</code></li>
-</ul>
-</li>
-</ul>
-<h4 id="sort"><a href="#sort" class="headerlink" title="$sort"></a>$sort</h4><ul>
-<li>排序输出</li>
-<li><code>db.collection.aggregate([{},{},{},......,{$sort:{key:1}}])</code> </li>
-<li><code>db.user.aggregate([{$match:{name:&quot;Tom&quot;}},{$group:{_id:&quot;$name&quot;,sum_age:{sum:&quot;age&quot;}}},{$match:{sum_age:{$gte:75}}},{$sort:{sum_age:1}},{$skip:0},{$limit:1}])</code><ul>
-<li><code>select _id ,sum(age) as sum_age from user where name=&quot;Tom&quot; group by name having age&gt;=75 order by sum_age asc limit 0,1</code></li>
-</ul>
-</li>
-</ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>常用的格式： <code>db.collection.aggregate([{$match:{key:value,...},{$group:{_id:value,..}},{$match:{key:value,....}},{$sort:{key:1,key2:-1}},{$skip:num},{$limit:num}])</code><ul>
-<li>对应SQL中的语句为：<code>select _id,key1,key2 from collection where group by order by limit n,m</code></li>
-</ul>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;MongoDB使用总结&quot;&gt;&lt;a href=&quot;#MongoDB使用总结&quot; class=&quot;headerlink&quot; title=&quot;MongoDB使用总结&quot;&gt;&lt;/a&gt;MongoDB使用总结&lt;/h1&gt;&lt;h2 id=&quot;数据库操作&quot;&gt;&lt;a href=&quot;#数据库操作&quot; class
-    
-    </summary>
-    
-      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
-    
-    
-      <category term="MongoDB" scheme="http://chenjiabing666.github.io/tags/MongoDB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git使用总结</title>
-    <link href="http://chenjiabing666.github.io/2018/06/26/Git%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
-    <id>http://chenjiabing666.github.io/2018/06/26/Git使用总结/</id>
-    <published>2018-06-26T14:42:21.000Z</published>
-    <updated>2018-06-26T14:42:56.385Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Git使用总结"><a href="#Git使用总结" class="headerlink" title="Git使用总结"></a>Git使用总结</h1><h2 id="开发策略"><a href="#开发策略" class="headerlink" title="开发策略"></a>开发策略</h2><ul>
-<li>在实际开发的时候一定要在分支上开发，修复问题，开发完成之后再合并到主分支(master)上，这样可以保证在不损坏主分支的情况下删除或者撤销内容</li>
-</ul>
-<h2 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h2><h3 id="冲突产生"><a href="#冲突产生" class="headerlink" title="冲突产生"></a>冲突产生</h3><ul>
-<li><p>假设现在有一个<code>master分支</code>，其中有一个提交之后的文件<code>demo.txt</code>，那么我们使用<code>git checkout -b dev</code>创建一个新的分支并且切换到这个dev分支</p>
-<ul>
-<li><code>echo chenjiabing &gt;&gt; demo.txt</code>：在文件的末尾追加一个文件</li>
-<li><code>git add file.txt</code> :  添加到暂存区</li>
-<li><code>git commit -m &quot;this is at dev</code>：提交</li>
-<li><code>git checkout master</code> : 切换到主分支</li>
-<li><code>echo 陈加兵 &gt;&gt;demo.txt</code> ： 切换到主分支，在主分支中在文件的末尾追加<code>陈加兵</code>，<strong>(这里一定要在文件末尾，因为在dev分支中修改的位置就是文件末尾)</strong></li>
-<li><code>git add demo.txt</code> : 添加到暂存区</li>
-<li><code>git commit -m &quot;this is at master&quot;</code> : 提交</li>
-<li><code>git merge dev</code> ：快速合并分支dev到master分支上，那么现在将会出现版本冲突的问题，不能合并成功。此时的<code>demo.txt</code>的文件内容为：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Git is a distributed version control system.</div><div class="line">Git is free software distributed under the GPL.</div><div class="line">Git has a mutable index called stage.</div><div class="line">Git tracks changes of files.</div><div class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</div><div class="line">陈加兵</div><div class="line">=======</div><div class="line">chenjiabing</div><div class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; dev</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="冲突解决"><a href="#冲突解决" class="headerlink" title="冲突解决"></a>冲突解决</h3><ul>
-<li><strong>此时在<code>master分支</code>中修改<code>demo.txt</code>中的内容，直到满意为止即可</strong><ul>
-<li><code>git add demo.txt</code> : 添加</li>
-<li><code>git commit -m &quot;this is finally&quot;</code> :提交</li>
-</ul>
-</li>
-</ul>
-<h2 id="分支管理策略"><a href="#分支管理策略" class="headerlink" title="分支管理策略"></a>分支管理策略</h2><ul>
-<li>通常，合并分支时，如果可能，Git会用<code>Fast forward</code>模式，但这种模式下，删除分支后，会丢掉分支信息。</li>
-<li>如果要强制禁用<code>Fast forward</code>模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。</li>
-<li><code>git merge --no-ff -m &quot;merge with no-ff&quot; dev</code></li>
-</ul>
-<h2 id="Bug分支-git-stash"><a href="#Bug分支-git-stash" class="headerlink" title="Bug分支(git stash)"></a>Bug分支(git stash)</h2><ul>
-<li><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137602359178794d966923e5c4134bc8bf98dfb03aea3000" target="_blank" rel="external">Bug分支</a></li>
-<li><code>git stash</code>  将当前的工作现场存储起来</li>
-<li><code>git stash list</code> ： 列出所有的工作现场</li>
-<li><code>git stash pop</code> :  回复当前分支的工作现场，并且还删除了stash中的内容</li>
-</ul>
-<h2 id="添加公钥到Github中"><a href="#添加公钥到Github中" class="headerlink" title="添加公钥到Github中"></a>添加公钥到Github中</h2><ul>
-<li><p>如果你没有在git中配置邮箱和用户名，那么需要先配置</p>
-<ul>
-<li><code>git config --global user.name &quot;CSDN id&quot;</code> </li>
-<li><code>git config --global user.email &quot;your email&quot;</code></li>
-</ul>
-</li>
-<li><code>cd ~/.ssh</code>： 进入主目录的<code>ssh文件夹</code>中，查看是否已经存在秘钥文件<code>id_rusa.pub</code>，如果不存在，那么需要生成秘钥</li>
-<li><code>ssh-keygen -t rsa -C &quot;your email&quot;</code>  ：   生成公钥</li>
-<li>此时在<code>~/.ssh</code>文件夹下就有了<code>id_rusa.pub</code>文件夹，那么将其中的内容全部复制到github中的SSH中</li>
-<li><strong>注意： 添加远程仓库的时候一定要使用ssh形式，否则将会要求输入密码</strong><ul>
-<li><code>git remote add git@github.com:chenjiabing666/LearnGit.git</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
-<li><code>git clone git@github.com:chenjiabing666/LearnGit.git</code> ：直接clone远程仓库到本地仓库，此时的本地仓库也有了push的权利，不过只能看到一个主分支<code>master</code> ，但是这个远程仓库还有<code>dev</code>分支和<code>Bug</code>分支<ul>
-<li><code>git checkout -b dev orgin/dev</code>  : 直接在本地创建一个分支dev并且和远程仓库的分支关联起来，那么就可以获取远程dev分支上的文件了</li>
-</ul>
-</li>
-<li><code>git remote</code> : 查看远程仓库的名称，这个只显示名称，使用<code>git clone</code>的方法关联远程仓库，默认的名字为<code>orgin</code></li>
-<li><code>git remote -v</code> : 显示远程仓库的名称和链接</li>
-<li><code>git remote add shortName url</code>   : 添加一个新的远程仓库<ul>
-<li><code>git remote add learn git@github.com:chenjiabing666/LearnGit.git</code> </li>
-</ul>
-</li>
-<li><code>git remote rename 旧名称 新名称</code>  ： 修改远程仓库的名称<ul>
-<li><code>git remote rename orgin demo</code></li>
-</ul>
-</li>
-<li><code>git remote remove 名称</code>  ： 删除远程仓库<ul>
-<li><code>git remote remvoe orgin</code> </li>
-</ul>
-</li>
-<li><code>git push 仓库名称  [分支名称]</code>  ： 将提交的文件推送到远程仓库<ul>
-<li><code>git push orgin</code>  : 将文件推送到远程仓库的主分支<code>master</code></li>
-<li>假设我们新建了一个<code>dev分支</code> 使用命令<code>git checkout -b dev</code> ,那么我们需要将这个dev分支推送到远程仓库中的<code>dev分支</code>上，使用<code>git push orgin dev</code> 。<strong>需要注意的是必须在当前的本地仓库的dev分支才能推送,并且这个本地仓库的名称要和远程仓库一样</strong></li>
-</ul>
-</li>
-<li><code>git pull</code>  : 从远程仓库中拉取本地仓库分支中没有的文件并且合并到当前分支<ul>
-<li>假设小明在<code>master分支</code>上提交了一个<code>file.txt</code>文件，但是小李的本地仓库中并没有<code>file.txt</code>这个文件，此时小李就需要从远程仓库中把这个文件拉取到自己的本地仓库的master分支上<ul>
-<li><code>git checkout master</code>  : 切换到主分支</li>
-<li><code>git pull</code> : 拉取远程仓库的最新文件</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="远程分支"><a href="#远程分支" class="headerlink" title="远程分支"></a>远程分支</h3><h4 id="推送分支"><a href="#推送分支" class="headerlink" title="推送分支"></a>推送分支</h4><ul>
-<li><code>git push 名称 分支名称</code> ： 推送分支到远程仓库中<ul>
-<li><code>git push orgin Bug</code>  : 推送本地的分支Bug推送到远程仓库中，那么仓库中默认的分支名就是<code>Bug</code></li>
-</ul>
-</li>
-<li>对于一些需要合作完成的分支需要推送到远程仓库，并不是所有的分支都需要推送到远程仓库的</li>
-</ul>
-<h4 id="抓取分支"><a href="#抓取分支" class="headerlink" title="抓取分支"></a>抓取分支</h4><ul>
-<li>在多人协作完成项目的时候，都需要向<code>主分支master</code>和<code>dev分支</code>上面推送各自的修改</li>
-<li>我们使用<code>git clone</code>一个远程仓库的时候，默认情况下只能看到<code>master</code>分支，我们可以使用<code>git branch</code>查看分支。此时我们需要在<code>dev</code>分支上面操作，那么就必须将远程仓库中的dev分支创建到本地，我们可以使用<code>git checkout -b dev orgin/dev</code> ，那么远程仓库的中的dev分支就创建到本地了，那么此时我们就可以在dev分支上面操作了<ul>
-<li><code>git push orgin dev</code> : 修改完成之后推送到远程仓库中</li>
-</ul>
-</li>
-<li>建立本地分支和远程分支的关联，使用<code>git branch --set-upstream branch-name origin/branch-name</code><ul>
-<li>如果远程仓库中有一个<code>demo分支</code>，本地也有一个<code>demo</code>分支，但是这个本地的<code>demo分支</code>并不是使用<code>git checkout -b demo orgin/demo</code>检出的，而是直接创建的，那么我们此时需要使用<code>git pull</code>拉取远程仓库中demo分支中的文件到本地的demo分支就会发现出现错误，因为没有与远程的demo分支关联，此时我们就需要使用<code>git branch --set-upstream demo orgin/demo</code></li>
-</ul>
-</li>
-</ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>因此，多人协作的工作模式通常是这样：</p>
-<ol>
-<li>首先，可以试图用<code>git push origin &lt;branch-name&gt;</code>推送自己的修改；</li>
-<li><strong>如果推送失败，则因为远程分支比你的本地更新，需要先用<code>git pull</code>试图合并；</strong></li>
-<li>如果合并有冲突，则解决冲突，并在本地提交；</li>
-<li>没有冲突或者解决掉冲突后，再用<code>git push origin &lt;branch-name&gt;</code>推送就能成功！</li>
-</ol>
-<p>如果<code>git pull</code>提示<code>no tracking information</code>，则说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream-to &lt;branch-name&gt; origin/&lt;branch-name&gt;</code>。</p>
-<h3 id="标签的使用"><a href="#标签的使用" class="headerlink" title="标签的使用"></a>标签的使用</h3><h4 id="创建标签"><a href="#创建标签" class="headerlink" title="创建标签"></a>创建标签</h4><ul>
-<li><p><code>git tag  v1.0</code>  : 在当前分支上添加一个标签</p>
-</li>
-<li><p><code>git tag -a v1.0 -m &quot;备注信息&quot;</code>  ： 添加一个标签并且备注信息</p>
-</li>
-<li><p><code>git tag</code>  : 列出当前分支上面的所有标签</p>
-</li>
-</ul>
-<h4 id="操作标签"><a href="#操作标签" class="headerlink" title="操作标签"></a>操作标签</h4><ul>
-<li><code>git tag -d v1.0</code>   : 删除指定的标签</li>
-<li><code>git push origin v1.0</code> : 推送标签到远程仓库，因为标签的创建不会自动推送到远程，必须手动推送</li>
-<li><code>git push orgin --tags</code>  : 一次性推送全部的标签</li>
-</ul>
-<h4 id="删除远程标签"><a href="#删除远程标签" class="headerlink" title="删除远程标签"></a>删除远程标签</h4><ol>
-<li>先删除本地标签 : <code>git tag -d v1.0</code></li>
-<li>使用<code>push</code>删除远程标签 ： <code>git push orgin :refs/tags/v1.0</code></li>
-</ol>
-<h2 id="添加所有文件"><a href="#添加所有文件" class="headerlink" title="添加所有文件"></a>添加所有文件</h2><ul>
-<li><code>git add -A</code></li>
-<li>之后直接提交即可 : <code>git commit -m &quot;&quot;</code></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Git使用总结&quot;&gt;&lt;a href=&quot;#Git使用总结&quot; class=&quot;headerlink&quot; title=&quot;Git使用总结&quot;&gt;&lt;/a&gt;Git使用总结&lt;/h1&gt;&lt;h2 id=&quot;开发策略&quot;&gt;&lt;a href=&quot;#开发策略&quot; class=&quot;headerlink&quot; titl
-    
-    </summary>
-    
-      <category term="Git" scheme="http://chenjiabing666.github.io/categories/Git/"/>
-    
-    
-      <category term="Git" scheme="http://chenjiabing666.github.io/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Dubbo使用总结</title>
-    <link href="http://chenjiabing666.github.io/2018/06/26/Dubbo%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
-    <id>http://chenjiabing666.github.io/2018/06/26/Dubbo使用总结/</id>
-    <published>2018-06-26T14:41:16.000Z</published>
-    <updated>2018-06-26T14:41:47.360Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Dubbo常见问题"><a href="#Dubbo常见问题" class="headerlink" title="Dubbo常见问题"></a>Dubbo常见问题</h1><h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><ul>
-<li><a href="http://dubbo.apache.org/books/dubbo-user-book/demos/preflight-check.html" target="_blank" rel="external">中文文档</a></li>
-</ul>
-<h2 id="启动检查"><a href="#启动检查" class="headerlink" title="启动检查"></a>启动检查</h2><blockquote>
-<p>Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 <code>check=&quot;true&quot;</code><br>可以通过 <code>check=&quot;false&quot;</code> 关闭检查，比如，测试时，有些服务不关心，或者出现了循环依赖，必须有一方先启动。</p>
-<p>另外，如果你的 Spring 容器是懒加载的，或者通过 API 编程延迟引用服务，请关闭 check，否则服务临时不可用时，会抛出异常，拿到 null 引用，如果 <code>check=&quot;false&quot;</code>，总是会返回引用，当服务恢复时，能自动连上</p>
-<p><strong>如果在服务提供者没有上线的情况下，我们需要提前将消费者上线，那么就可以关闭启动检查，这样当消费者启动但是不调用服务的情况下不会报错，保证正常启动</strong></p>
-</blockquote>
-<h3 id="配置方式"><a href="#配置方式" class="headerlink" title="配置方式"></a>配置方式</h3><h4 id="关闭某个服务的检查"><a href="#关闭某个服务的检查" class="headerlink" title="关闭某个服务的检查"></a>关闭某个服务的检查</h4><ol>
-<li><p><code>&lt;dubbo:reference id=&quot;helloService&quot; interface=&quot;cn.tedu.service.IHelloService&quot; check=&quot;false&quot;/&gt;</code> ：关闭某个服务的启动时检查</p>
-<ol>
-<li>这个只会关闭当前的服务器的检查，还是会检查其他的服务</li>
-<li>在没有对应服务提供者的情况下如果调用这个服务那么将会报错</li>
-<li>在消费者中配置</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDubbo</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		ClassPathXmlApplicationContext context=<span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"appliactionContext.xml"</span>);</div><div class="line">		IHelloService helloService=context.getBean(<span class="string">"helloService"</span>,IHelloService.class);</div><div class="line">        <span class="comment">//现在没有调用服务的情况下不会报错，但是如果调用了HelloService中的方法，那么将会报错</span></div><div class="line"><span class="comment">//		helloService.sayHello();</span></div><div class="line">		context.close();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>如果没有关闭检查，那么会出现如下的错误</li>
-</ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Exception in thread "main" org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'helloService': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalStateException: Failed to check the status of the service cn.tedu.service.IHelloService. No provider available for the service cn.tedu.service.IHelloService from the url zookeeper://39.105.123.197:2181/com.alibaba.dubbo.registry.RegistryService?application=dubbo-consum01&amp;dubbo=2.5.3&amp;interface=cn.tedu.service.IHelloService&amp;methods=sayHello&amp;pid=10974&amp;revision=0.0.1&amp;side=consumer&amp;timestamp=1529667926718 to the consumer 10.18.236.4 use dubbo version 2.5.3</div><div class="line">	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:175)</div><div class="line">	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:103)</div><div class="line">	at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1634)</div><div class="line">	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:254)</div><div class="line">	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)</div><div class="line">	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1086)</div><div class="line">	at TestDubbo.main(TestDubbo.java:9)</div><div class="line">Caused by: java.lang.IllegalStateException: Failed to check the status of the service cn.tedu.service.IHelloService. No provider available for the service cn.tedu.service.IHelloService from the url zookeeper://39.105.123.197:2181/com.alibaba.dubbo.registry.RegistryService?application=dubbo-consum01&amp;dubbo=2.5.3&amp;interface=cn.tedu.service.IHelloService&amp;methods=sayHello&amp;pid=10974&amp;revision=0.0.1&amp;side=consumer&amp;timestamp=1529667926718 to the consumer 10.18.236.4 use dubbo version 2.5.3</div><div class="line">	at com.alibaba.dubbo.config.ReferenceConfig.createProxy(ReferenceConfig.java:420)</div><div class="line">	at com.alibaba.dubbo.config.ReferenceConfig.init(ReferenceConfig.java:300)</div><div class="line">	at com.alibaba.dubbo.config.ReferenceConfig.get(ReferenceConfig.java:138)</div><div class="line">	at com.alibaba.dubbo.config.spring.ReferenceBean.getObject(ReferenceBean.java:65)</div><div class="line">	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:168)</div><div class="line">	... 6 more</div></pre></td></tr></table></figure>
-<h4 id="关闭所有服务的检查"><a href="#关闭所有服务的检查" class="headerlink" title="关闭所有服务的检查"></a>关闭所有服务的检查</h4><blockquote>
-<p>关闭所有服务的检查</p>
-<p>在消费者的配置文件中配置即可</p>
-<p><code>&lt;dubbo:consumer check=&quot;false&quot; /&gt;</code></p>
-</blockquote>
-<h4 id="关闭注册中心启动时检查"><a href="#关闭注册中心启动时检查" class="headerlink" title="关闭注册中心启动时检查"></a>关闭注册中心启动时检查</h4><blockquote>
-<p>注册订阅失败的时候报错</p>
-<p><code>&lt;dubbo:registry check=&quot;false&quot; /&gt;</code></p>
-</blockquote>
-<h4 id="dubbo-properties"><a href="#dubbo-properties" class="headerlink" title="dubbo.properties"></a>dubbo.properties</h4><ul>
-<li><p>在<code>src/main/resource</code>文件夹下新建<code>dubbo.properties</code></p>
-</li>
-<li><p><strong>在其中添加如下内容</strong></p>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dubbo.reference.com.foo.BarService.check=false</div><div class="line">dubbo.reference.check=false</div><div class="line">dubbo.consumer.check=false</div><div class="line">dubbo.registry.check=false</div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>只需要添加这个文件即可，会自动设置</strong></p>
-</li>
-</ul>
-<h2 id="负载均衡策略"><a href="#负载均衡策略" class="headerlink" title="负载均衡策略"></a>负载均衡策略</h2><ul>
-<li><p>这个在集群部署的时候会用到，比如多台机器提供的是同一个服务，那么当浏览器请求服务的时候到底该调用哪台机器上的服务才会更好，此时就需要用到负载均衡策略</p>
-</li>
-<li><p><a href="https://www.cnblogs.com/qingfengbuluo/p/5527930.html" target="_blank" rel="external">优秀博文</a></p>
-</li>
-</ul>
-<h2 id="多协议"><a href="#多协议" class="headerlink" title="多协议"></a>多协议</h2><ul>
-<li>在dubbo中存在8中不同的协议，这些协议的作用都是不同的，此时我们需要根据服务的功能来使用不同的协议，比如我们需要上传文件，那么就需要能够传输大文件的协议</li>
-<li>默认是dubbo协议，也是用的最多的协议</li>
-</ul>
-<h3 id="不同服务不同协议"><a href="#不同服务不同协议" class="headerlink" title="不同服务不同协议"></a>不同服务不同协议</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 多协议配置 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:protocol</span> <span class="attr">name</span>=<span class="string">"dubbo"</span> <span class="attr">port</span>=<span class="string">"20880"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:protocol</span> <span class="attr">name</span>=<span class="string">"rmi"</span> <span class="attr">port</span>=<span class="string">"1099"</span> /&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 使用dubbo协议暴露服务，直接使用protocol关键词引用上面配置的协议 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"com.alibaba.hello.api.HelloService"</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span> <span class="attr">ref</span>=<span class="string">"helloService"</span> <span class="attr">protocol</span>=<span class="string">"dubbo"</span> /&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 使用rmi协议暴露服务 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"com.alibaba.hello.api.DemoService"</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span> <span class="attr">ref</span>=<span class="string">"demoService"</span> <span class="attr">protocol</span>=<span class="string">"rmi"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="多协议暴露服务"><a href="#多协议暴露服务" class="headerlink" title="多协议暴露服务"></a>多协议暴露服务</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 多协议配置 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:protocol</span> <span class="attr">name</span>=<span class="string">"dubbo"</span> <span class="attr">port</span>=<span class="string">"20880"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:protocol</span> <span class="attr">name</span>=<span class="string">"hessian"</span> <span class="attr">port</span>=<span class="string">"8080"</span> /&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 使用多个协议暴露服务 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">id</span>=<span class="string">"helloService"</span> <span class="attr">interface</span>=<span class="string">"com.alibaba.hello.api.HelloService"</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span> <span class="attr">protocol</span>=<span class="string">"dubbo,hessian"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="多版本"><a href="#多版本" class="headerlink" title="多版本"></a>多版本</h2><ul>
-<li>当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。<br>可以按照以下的步骤进行版本迁移：<ol>
-<li>在低压力时间段，先升级一半提供者为新版本</li>
-<li>再将所有消费者升级为新版本</li>
-<li>然后将剩下的一半提供者升级为新版本</li>
-</ol>
-</li>
-<li>直接使用<code>version</code>指定版本即可</li>
-</ul>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
-<li>我们有一个<code>HelloService</code>接口，但是有两个实现类，分别为<code>HelloServiceImpl1</code>,<code>HelloServiceImpl2</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloServiceImpl1</span> <span class="keyword">implements</span> <span class="title">IHelloService</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"say helloService1"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloServiceImpl2</span> <span class="keyword">implements</span> <span class="title">IHelloService</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"say helloservice2"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>配置服务提供者，需要根据版本的不同提供服务</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 配置应用名字，用来标识每一个应用，这里的name最好和工程名字一样 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"dubbo-provider01"</span>&gt;</span><span class="tag">&lt;/<span class="name">dubbo:application</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- 使用zookeeper注册中心暴露服务 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">address</span>=<span class="string">"zookeeper://39.105.123.197:2181"</span> /&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- 配置服务的接口实现类，这样当提供服务调用的接口的时候才能找到对应的实现类 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloService1"</span> <span class="attr">class</span>=<span class="string">"cn.tedu.servivceImpl.HelloServiceImpl1"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- 配置服务的接口实现类，这样当提供服务调用的接口的时候才能找到对应的实现类 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloService2"</span> <span class="attr">class</span>=<span class="string">"cn.tedu.servivceImpl.HelloServiceImpl2"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">	</div><div class="line">    </div><div class="line">	<span class="comment">&lt;!-- 配置服务提供者,版本为1.0，使用的是helloService1实现类 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"cn.tedu.service.IHelloService"</span> <span class="attr">ref</span>=<span class="string">"helloService1"</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span><span class="tag">&lt;/<span class="name">dubbo:service</span>&gt;</span></div><div class="line">		</div><div class="line">	<span class="comment">&lt;!-- 配置服务提供者,版本为2.0，使用的是helloService2实现类 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"cn.tedu.service.IHelloService"</span> <span class="attr">ref</span>=<span class="string">"helloService2"</span> <span class="attr">version</span>=<span class="string">"2.0"</span>&gt;</span><span class="tag">&lt;/<span class="name">dubbo:service</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>配置服务消费者，需要指定版本号区分调用的服务<ul>
-<li>根据版本号区分调用哪个服务</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--调用2.0版本的服务--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"helloService2"</span> <span class="attr">interface</span>=<span class="string">"cn.tedu.service.IHelloService"</span> <span class="attr">version</span>=<span class="string">"2.0"</span>/&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--调用1.0版本的服务--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"helloService1"</span> <span class="attr">interface</span>=<span class="string">"cn.tedu.service.IHelloService"</span> <span class="attr">version</span>=<span class="string">"1.0"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="服务分组"><a href="#服务分组" class="headerlink" title="服务分组"></a>服务分组</h2><ul>
-<li>当一个接口有多种实现的时候，我们可以使用分组区分调用的服务功能</li>
-<li>假设一个支付的接口<code>PayService</code>，其中实现的类有微信支付<code>WeChatPayServiceImpl</code>和支付宝支付<code>AliPayServiceImpl</code>,那么我们可以使用分组进行区分两种服务</li>
-</ul>
-<h3 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h3><ul>
-<li>在服务提供者的配置文件中定义</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"aliPayServiceImpl"</span> <span class="attr">class</span>=<span class="string">"cn.tedu.serviceImpl.AliPayServiceImpl"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"weChatPayServiceImpl"</span> <span class="attr">class</span>=<span class="string">"cn.tedu.serviceImpl.WeChatPayServiceImpl"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--使用group区分不同的服务功能 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">group</span>=<span class="string">"alipay"</span> <span class="attr">interface</span>=<span class="string">"cn.tedu.service.PayService"</span> <span class="attr">ref</span>=<span class="string">"aliPayServiceImpl"</span> /&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">group</span>=<span class="string">"weChatPay"</span> <span class="attr">interface</span>=<span class="string">"cn.tedu.service.PayService"</span> <span class="attr">ref</span>=<span class="string">"weChatPayServiceImpl"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
-<li>在消费者的配置文件中配置即可，使用<code>group</code>指定需要引用的服务</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"alipayService"</span> <span class="attr">interface</span>=<span class="string">"cn.tedu.service.PayService"</span> <span class="attr">group</span>=<span class="string">"alipay"</span>/&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"weChatPayService"</span> <span class="attr">interface</span>=<span class="string">"cn.tedu.service.PayService"</span> <span class="attr">group</span>=<span class="string">"weChatPay"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="令牌验证"><a href="#令牌验证" class="headerlink" title="令牌验证"></a>令牌验证</h2><p>通过令牌验证在注册中心控制权限，以决定要不要下发令牌给消费者，可以防止消费者绕过注册中心访问提供者，另外通过注册中心可灵活改变授权方式，而不需修改或升级提供者</p>
-<p><img src="http://dubbo.apache.org/books/dubbo-user-book/sources/images/dubbo-token.jpg" alt="/user-guide/images/dubbo-token.jpg"></p>
-<p>可以全局设置开启令牌验证：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--随机token令牌，使用UUID生成--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dubbo:provider</span> <span class="attr">interface</span>=<span class="string">"com.foo.BarService"</span> <span class="attr">token</span>=<span class="string">"true"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<p>或</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--固定token令牌，相当于密码--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dubbo:provider</span> <span class="attr">interface</span>=<span class="string">"com.foo.BarService"</span> <span class="attr">token</span>=<span class="string">"123456"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<p>也可在服务级别设置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--随机token令牌，使用UUID生成--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"com.foo.BarService"</span> <span class="attr">token</span>=<span class="string">"true"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<p>或</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--固定token令牌，相当于密码--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"com.foo.BarService"</span> <span class="attr">token</span>=<span class="string">"123456"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<p>还可在协议级别设置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!--随机token令牌，使用UUID生成--&gt;</div><div class="line">&lt;dubbo:protocol name=&quot;dubbo&quot; token=&quot;true&quot; /&gt;</div></pre></td></tr></table></figure>
-<p>或</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;!--固定token令牌，相当于密码--&gt;</div><div class="line">&lt;dubbo:protocol name=&quot;dubbo&quot; token=&quot;123456&quot; /&gt;</div></pre></td></tr></table></figure>
-<h2 id="dubbo控制台的安装部署"><a href="#dubbo控制台的安装部署" class="headerlink" title="dubbo控制台的安装部署"></a>dubbo控制台的安装部署</h2><ul>
-<li>下载dubbo-admin.war : <strong>链接：<a href="https://pan.baidu.com/s/1ggeIIHX" target="_blank" rel="external">https://pan.baidu.com/s/1ggeIIHX</a> 密码：ck4h</strong></li>
-<li><a href="https://blog.csdn.net/enson16855/article/details/9140771" target="_blank" rel="external">优秀博文</a></li>
-</ul>
-<h2 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h2><p>如果事件处理的逻辑能迅速完成，并且不会发起新的 IO 请求，比如只是在内存中记个标识，则直接在 IO 线程上处理更快，因为减少了线程池调度。</p>
-<p>但如果事件处理逻辑较慢，或者需要发起新的 IO 请求，比如需要查询数据库，则必须派发到线程池，否则 IO 线程阻塞，将导致不能接收其它请求。</p>
-<p>如果用 IO 线程处理事件，又在事件处理过程中发起新的 IO 请求，比如在连接事件中发起登录请求，会报“可能引发死锁”异常，但不会真死锁。</p>
-<p><img src="http://dubbo.apache.org/books/dubbo-user-book/sources/images/dubbo-protocol.jpg" alt="dubbo-protocol"></p>
-<p>因此，需要通过不同的派发策略和不同的线程池配置的组合来应对不同的场景:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:protocol</span> <span class="attr">name</span>=<span class="string">"dubbo"</span> <span class="attr">dispatcher</span>=<span class="string">"all"</span> <span class="attr">threadpool</span>=<span class="string">"fixed"</span> <span class="attr">threads</span>=<span class="string">"100"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<p>Dispatcher</p>
-<ul>
-<li><code>all</code> 所有消息都派发到线程池，包括请求，响应，连接事件，断开事件，心跳等。</li>
-<li><code>direct</code> 所有消息都不派发到线程池，全部在 IO 线程上直接执行。</li>
-<li><code>message</code> 只有请求响应消息派发到线程池，其它连接断开事件，心跳等消息，直接在 IO 线程上执行。</li>
-<li><code>execution</code> 只请求消息派发到线程池，不含响应，响应和其它连接断开事件，心跳等消息，直接在 IO 线程上执行。</li>
-<li><code>connection</code> 在 IO 线程上，将连接断开事件放入队列，有序逐个执行，其它消息派发到线程池。</li>
-</ul>
-<p>ThreadPool</p>
-<ul>
-<li><code>fixed</code> 固定大小线程池，启动时建立线程，不关闭，一直持有。(缺省)</li>
-<li><code>cached</code> 缓存线程池，空闲一分钟自动删除，需要时重建。</li>
-<li><code>limited</code> 可伸缩线程池，但池中的线程数只会增长不会收缩。只增长不收缩的目的是为了避免收缩时突然来了大流量引起的性能问题。</li>
-<li><code>eager</code> 优先创建<code>Worker</code>线程池。在任务数量大于<code>corePoolSize</code>但是小于<code>maximumPoolSize</code>时，优先创建<code>Worker</code>来处理任务。当任务数量大于<code>maximumPoolSize</code>时，将任务放入阻塞队列中。阻塞队列充满时抛出<code>RejectedExecutionException</code>。(相比于<code>cached</code>:<code>cached</code>在任务数量超过<code>maximumPoolSize</code>时直接抛出异常而不是将任务放入阻塞队列)</li>
-</ul>
-<h2 id="多注册中心"><a href="#多注册中心" class="headerlink" title="多注册中心"></a>多注册中心</h2><p>Dubbo 支持同一服务向多注册中心同时注册，或者不同服务分别注册到不同的注册中心上去，甚至可以同时引用注册在不同注册中心上的同名服务。另外，注册中心是支持自定义扩展的 <a href="http://dubbo.apache.org/books/dubbo-user-book/demos/multi-registry.html#fn_1" target="_blank" rel="external">1</a>。</p>
-<h3 id="多注册中心注册"><a href="#多注册中心注册" class="headerlink" title="多注册中心注册"></a>多注册中心注册</h3><p>比如：中文站有些服务来不及在青岛部署，只在杭州部署，而青岛的其它应用需要引用此服务，就可以将服务同时注册到两个注册中心。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">    <span class="attr">xmlns:dubbo</span>=<span class="string">"http://dubbo.apache.org/schema/dubbo"</span></div><div class="line">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"world"</span>  /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 多注册中心配置 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">id</span>=<span class="string">"hangzhouRegistry"</span> <span class="attr">address</span>=<span class="string">"10.20.141.150:9090"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">id</span>=<span class="string">"qingdaoRegistry"</span> <span class="attr">address</span>=<span class="string">"10.20.141.151:9010"</span> <span class="attr">default</span>=<span class="string">"false"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 向多个注册中心注册 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"com.alibaba.hello.api.HelloService"</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span> <span class="attr">ref</span>=<span class="string">"helloService"</span> <span class="attr">registry</span>=<span class="string">"hangzhouRegistry,qingdaoRegistry"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="不同服务使用不同注册中心"><a href="#不同服务使用不同注册中心" class="headerlink" title="不同服务使用不同注册中心"></a>不同服务使用不同注册中心</h3><p>比如：CRM 有些服务是专门为国际站设计的，有些服务是专门为中文站设计的。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">    <span class="attr">xmlns:dubbo</span>=<span class="string">"http://dubbo.apache.org/schema/dubbo"</span></div><div class="line">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"world"</span>  /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 多注册中心配置 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">id</span>=<span class="string">"chinaRegistry"</span> <span class="attr">address</span>=<span class="string">"10.20.141.150:9090"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">id</span>=<span class="string">"intlRegistry"</span> <span class="attr">address</span>=<span class="string">"10.20.154.177:9010"</span> <span class="attr">default</span>=<span class="string">"false"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 向中文站注册中心注册 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"com.alibaba.hello.api.HelloService"</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span> <span class="attr">ref</span>=<span class="string">"helloService"</span> <span class="attr">registry</span>=<span class="string">"chinaRegistry"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 向国际站注册中心注册 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:service</span> <span class="attr">interface</span>=<span class="string">"com.alibaba.hello.api.DemoService"</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span> <span class="attr">ref</span>=<span class="string">"demoService"</span> <span class="attr">registry</span>=<span class="string">"intlRegistry"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="多注册中心引用"><a href="#多注册中心引用" class="headerlink" title="多注册中心引用"></a>多注册中心引用</h3><p>比如：CRM 需同时调用中文站和国际站的 PC2 服务，PC2 在中文站和国际站均有部署，接口及版本号都一样，但连的数据库不一样。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">    <span class="attr">xmlns:dubbo</span>=<span class="string">"http://dubbo.apache.org/schema/dubbo"</span></div><div class="line">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"world"</span>  /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 多注册中心配置 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">id</span>=<span class="string">"chinaRegistry"</span> <span class="attr">address</span>=<span class="string">"10.20.141.150:9090"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">id</span>=<span class="string">"intlRegistry"</span> <span class="attr">address</span>=<span class="string">"10.20.154.177:9010"</span> <span class="attr">default</span>=<span class="string">"false"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 引用中文站服务 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"chinaHelloService"</span> <span class="attr">interface</span>=<span class="string">"com.alibaba.hello.api.HelloService"</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span> <span class="attr">registry</span>=<span class="string">"chinaRegistry"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 引用国际站站服务 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"intlHelloService"</span> <span class="attr">interface</span>=<span class="string">"com.alibaba.hello.api.HelloService"</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span> <span class="attr">registry</span>=<span class="string">"intlRegistry"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>如果只是测试环境临时需要连接两个不同注册中心，使用竖号分隔多个不同注册中心地址：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">    <span class="attr">xmlns:dubbo</span>=<span class="string">"http://dubbo.apache.org/schema/dubbo"</span></div><div class="line">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:application</span> <span class="attr">name</span>=<span class="string">"world"</span>  /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 多注册中心配置，竖号分隔表示同时连接多个不同注册中心，同一注册中心的多个集群地址用逗号分隔 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:registry</span> <span class="attr">address</span>=<span class="string">"10.20.141.150:9090|10.20.154.177:9010"</span> /&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 引用服务 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"helloService"</span> <span class="attr">interface</span>=<span class="string">"com.alibaba.hello.api.HelloService"</span> <span class="attr">version</span>=<span class="string">"1.0.0"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="分组聚合"><a href="#分组聚合" class="headerlink" title="分组聚合"></a>分组聚合</h2><p>按组合并返回结果 <a href="http://dubbo.apache.org/books/dubbo-user-book/demos/group-merger.html#fn_1" target="_blank" rel="external">1</a>，比如菜单服务，接口一样，但有多种实现，用group区分，现在消费方需从每种group中调用一次返回结果，合并结果返回，这样就可以实现聚合菜单项。</p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>搜索所有分组</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">interface</span>=<span class="string">"com.xxx.MenuService"</span> <span class="attr">group</span>=<span class="string">"*"</span> <span class="attr">merger</span>=<span class="string">"true"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<p>合并指定分组</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">interface</span>=<span class="string">"com.xxx.MenuService"</span> <span class="attr">group</span>=<span class="string">"aaa,bbb"</span> <span class="attr">merger</span>=<span class="string">"true"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<p>指定方法合并结果，其它未指定的方法，将只调用一个 Group</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">interface</span>=<span class="string">"com.xxx.MenuService"</span> <span class="attr">group</span>=<span class="string">"*"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:method</span> <span class="attr">name</span>=<span class="string">"getMenuItems"</span> <span class="attr">merger</span>=<span class="string">"true"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dubbo:service</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>某个方法不合并结果，其它都合并结果</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">interface</span>=<span class="string">"com.xxx.MenuService"</span> <span class="attr">group</span>=<span class="string">"*"</span> <span class="attr">merger</span>=<span class="string">"true"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:method</span> <span class="attr">name</span>=<span class="string">"getMenuItems"</span> <span class="attr">merger</span>=<span class="string">"false"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dubbo:service</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>指定合并策略，缺省根据返回值类型自动匹配，如果同一类型有两个合并器时，需指定合并器的名称 <a href="http://dubbo.apache.org/books/dubbo-user-book/demos/group-merger.html#fn_2" target="_blank" rel="external">2</a></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">interface</span>=<span class="string">"com.xxx.MenuService"</span> <span class="attr">group</span>=<span class="string">"*"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:method</span> <span class="attr">name</span>=<span class="string">"getMenuItems"</span> <span class="attr">merger</span>=<span class="string">"mymerge"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dubbo:service</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>指定合并方法，将调用返回结果的指定方法进行合并，合并方法的参数类型必须是返回结果类型本身</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">interface</span>=<span class="string">"com.xxx.MenuService"</span> <span class="attr">group</span>=<span class="string">"*"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dubbo:method</span> <span class="attr">name</span>=<span class="string">"getMenuItems"</span> <span class="attr">merger</span>=<span class="string">".addAll"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dubbo:service</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="配置文件覆盖策略"><a href="#配置文件覆盖策略" class="headerlink" title="配置文件覆盖策略"></a>配置文件覆盖策略</h2><ul>
-<li>消费者中的相同的配置将会覆盖提供者的配置</li>
-<li><img src="https://images2015.cnblogs.com/blog/270324/201609/270324-20160910122039394-1078905366.png" alt=""></li>
-</ul>
-<h2 id="回声测试"><a href="#回声测试" class="headerlink" title="回声测试"></a>回声测试</h2><ul>
-<li>回声测试用于检测服务是否可用，回声测试按照正常请求流程执行，能够测试整个调用是否通畅，可用于监控。所有服务自动实现 <code>EchoService</code> 接口，只需将任意服务引用强制转型为 <code>EchoService</code>，即可使用。</li>
-<li>Spring 配置：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"memberService"</span> <span class="attr">interface</span>=<span class="string">"com.xxx.MemberService"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>代码：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 远程服务引用</span></div><div class="line">MemberService memberService = ctx.getBean(<span class="string">"memberService"</span>); </div><div class="line"></div><div class="line">EchoService echoService = (EchoService) memberService; <span class="comment">// 强制转型为EchoService</span></div><div class="line"></div><div class="line"><span class="comment">// 回声测试可用性</span></div><div class="line">String status = echoService.$echo(<span class="string">"OK"</span>); </div><div class="line"></div><div class="line"><span class="keyword">assert</span>(status.equals(<span class="string">"OK"</span>));</div></pre></td></tr></table></figure>
-<h2 id="上下文信息"><a href="#上下文信息" class="headerlink" title="上下文信息"></a>上下文信息</h2><ul>
-<li><code>RpcContext</code>是一个 <code>ThreadLocal</code>的临时状态记录器，当接收到 RPC 请求，或发起 RPC 请求时，RpcContext 的状态都会变化。比如：A 调 B，B 再调 C，则 B 机器上，在 B 调 C 之前，RpcContext 记录的是 A 调 B 的信息，在 B 调 C 之后，RpcContext 记录的是 B 调 C 的信息。</li>
-<li>RpcContext的状态是随时变化的，只会存储最近调用的信息</li>
-</ul>
-<h3 id="服务消费方"><a href="#服务消费方" class="headerlink" title="服务消费方"></a>服务消费方</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDubbo</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		ClassPathXmlApplicationContext context=<span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"appliactionContext.xml"</span>);</div><div class="line">		IHelloService helloService=context.getBean(<span class="string">"helloService"</span>,IHelloService.class);</div><div class="line">		<span class="comment">//执行服务，只有执行服务才会认定为消费端</span></div><div class="line">		helloService.sayHello();</div><div class="line">		<span class="comment">//测试是否是消费者</span></div><div class="line">		Boolean flag=RpcContext.getContext().isConsumerSide();</div><div class="line">		System.out.println(flag);</div><div class="line">		<span class="comment">//获取提供者的ip地址</span></div><div class="line">		String ip=RpcContext.getContext().getRemoteHost();</div><div class="line">		System.out.println(ip);</div><div class="line">		<span class="comment">//获取调用者的名称，这里的application是&lt;dubbo:application&gt;标签中的名字</span></div><div class="line">		String parameters=RpcContext.getContext().getUrl().getParameter(<span class="string">"application"</span>);</div><div class="line">		System.out.println(parameters);</div><div class="line">		context.close();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="服务提供方"><a href="#服务提供方" class="headerlink" title="服务提供方"></a>服务提供方</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XxxServiceImpl</span> <span class="keyword">implements</span> <span class="title">XxxService</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xxx</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// 本端是否为提供端，这里会返回true</span></div><div class="line">        <span class="keyword">boolean</span> isProviderSide = RpcContext.getContext().isProviderSide();</div><div class="line">        <span class="comment">// 获取调用方IP地址</span></div><div class="line">        String clientIP = RpcContext.getContext().getRemoteHost();</div><div class="line">        <span class="comment">// 获取当前服务配置信息，所有配置信息都将转换为URL的参数</span></div><div class="line">        String application = RpcContext.getContext().getUrl().getParameter(<span class="string">"application"</span>);</div><div class="line">        <span class="comment">// 注意：每发起RPC调用，上下文状态会变化</span></div><div class="line">        yyyService.yyy();</div><div class="line">        <span class="comment">// 此时本端变成消费端，这里会返回false</span></div><div class="line">        <span class="keyword">boolean</span> isProviderSide = RpcContext.getContext().isProviderSide();</div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="隐式参数"><a href="#隐式参数" class="headerlink" title="隐式参数"></a>隐式参数</h2><blockquote>
-<p>可以通过 <code>RpcContext</code> 上的 <code>setAttachment</code> 和 <code>getAttachment</code> 在服务消费方和提供方之间进行参数的隐式传递。 <a href="http://dubbo.apache.org/books/dubbo-user-book/demos/attachment.html#fn_1" target="_blank" rel="external">1</a></p>
-</blockquote>
-<p><img src="http://dubbo.apache.org/books/dubbo-user-book/sources/images/context.png" alt="/user-guide/images/context.png"></p>
-<h3 id="在服务消费方端设置隐式参数"><a href="#在服务消费方端设置隐式参数" class="headerlink" title="在服务消费方端设置隐式参数"></a>在服务消费方端设置隐式参数</h3><blockquote>
-<p><code>setAttachment</code> 设置的 KV 对，在完成下面一次远程调用会被清空，即多次远程调用要多次设置。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">RpcContext.getContext().setAttachment(<span class="string">"index"</span>, <span class="string">"1"</span>); <span class="comment">// 隐式传参，后面的远程调用都会隐式将这些参数发送到服务器端，类似cookie，用于框架集成，不建议常规业务使用</span></div><div class="line">xxxService.xxx(); <span class="comment">// 远程调用</span></div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
-<h3 id="在服务提供方端获取隐式参数"><a href="#在服务提供方端获取隐式参数" class="headerlink" title="在服务提供方端获取隐式参数"></a>在服务提供方端获取隐式参数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XxxServiceImpl</span> <span class="keyword">implements</span> <span class="title">XxxService</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xxx</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// 获取客户端隐式传入的参数，用于框架集成，不建议常规业务使用</span></div><div class="line">        String index = RpcContext.getContext().getAttachment(<span class="string">"index"</span>); </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ol>
-<li>注意：path, group, version, dubbo, token, timeout 几个 key 是保留字段，请使用其它值。<a href="http://dubbo.apache.org/books/dubbo-user-book/demos/attachment.html#reffn_1" target="_blank" rel="external"> ↩</a></li>
-</ol>
-</blockquote>
-<h2 id="异步调用"><a href="#异步调用" class="headerlink" title="异步调用"></a>异步调用</h2><p>基于 NIO 的非阻塞实现并行调用，客户端不需要启动多线程即可完成并行调用多个远程服务，相对多线程开销较小。 <a href="http://dubbo.apache.org/books/dubbo-user-book/demos/async-call.html#fn_1" target="_blank" rel="external">1</a></p>
-<p><img src="http://dubbo.apache.org/books/dubbo-user-book/sources/images/future.jpg" alt="/user-guide/images/future.jpg"></p>
-<p>在 consumer.xml 中配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"fooService"</span> <span class="attr">interface</span>=<span class="string">"com.alibaba.foo.FooService"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">dubbo:method</span> <span class="attr">name</span>=<span class="string">"findFoo"</span> <span class="attr">async</span>=<span class="string">"true"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dubbo:reference</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"barService"</span> <span class="attr">interface</span>=<span class="string">"com.alibaba.bar.BarService"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">dubbo:method</span> <span class="attr">name</span>=<span class="string">"findBar"</span> <span class="attr">async</span>=<span class="string">"true"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dubbo:reference</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>调用代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 此调用会立即返回null</span></div><div class="line">fooService.findFoo(fooId);</div><div class="line"><span class="comment">// 拿到调用的Future引用，当结果返回后，会被通知和设置到此Future</span></div><div class="line">Future&lt;Foo&gt; fooFuture = RpcContext.getContext().getFuture(); </div><div class="line"></div><div class="line"><span class="comment">// 此调用会立即返回null</span></div><div class="line">barService.findBar(barId);</div><div class="line"><span class="comment">// 拿到调用的Future引用，当结果返回后，会被通知和设置到此Future</span></div><div class="line">Future&lt;Bar&gt; barFuture = RpcContext.getContext().getFuture(); </div><div class="line"></div><div class="line"><span class="comment">// 此时findFoo和findBar的请求同时在执行，客户端不需要启动多线程来支持并行，而是借助NIO的非阻塞完成</span></div><div class="line"></div><div class="line"><span class="comment">// 如果foo已返回，直接拿到返回值，否则线程wait住，等待foo返回后，线程会被notify唤醒</span></div><div class="line">Foo foo = fooFuture.get(); </div><div class="line"><span class="comment">// 同理等待bar返回</span></div><div class="line">Bar bar = barFuture.get(); </div><div class="line"></div><div class="line"><span class="comment">// 如果foo需要5秒返回，bar需要6秒返回，实际只需等6秒，即可获取到foo和bar，进行接下来的处理。</span></div></pre></td></tr></table></figure>
-<p>你也可以设置是否等待消息发出： <a href="http://dubbo.apache.org/books/dubbo-user-book/demos/async-call.html#fn_2" target="_blank" rel="external">2</a></p>
-<ul>
-<li><code>sent=&quot;true&quot;</code> 等待消息发出，消息发送失败将抛出异常。</li>
-<li><code>sent=&quot;false&quot;</code> 不等待消息发出，将消息放入 IO 队列，即刻返回。</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:method</span> <span class="attr">name</span>=<span class="string">"findFoo"</span> <span class="attr">async</span>=<span class="string">"true"</span> <span class="attr">sent</span>=<span class="string">"true"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<p>如果你只是想异步，完全忽略返回值，可以配置 <code>return=&quot;false&quot;</code>，以减少 Future 对象的创建和管理成本：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:method</span> <span class="attr">name</span>=<span class="string">"findFoo"</span> <span class="attr">async</span>=<span class="string">"true"</span> <span class="attr">return</span>=<span class="string">"false"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<blockquote>
-<ol>
-<li><p><code>2.0.6</code> 及其以上版本支持<a href="http://dubbo.apache.org/books/dubbo-user-book/demos/async-call.html#reffn_1" target="_blank" rel="external"> ↩</a></p>
-</li>
-<li><p>异步总是不等待返回<a href="http://dubbo.apache.org/books/dubbo-user-book/demos/async-call.html#reffn_2" target="_blank" rel="external"> ↩</a></p>
-</li>
-</ol>
-</blockquote>
-<h2 id="本地存根"><a href="#本地存根" class="headerlink" title="本地存根"></a>本地存根</h2><ul>
-<li><p><strong>dubbo的本地存根的原理是：</strong>远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，那么就在服务消费者这一端提供了一个Stub类，然后当消费者调用provider方提供的dubbo服务时，客户端生成 Proxy 实例，这个Proxy实例就是我们正常调用dubbo远程服务要生成的代理实例，然后消费者这方会把 Proxy 通过构造函数传给 消费者方的Stub ，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。会通过代理类去完成这个调用，这样在Stub类中，就可以做一些额外的事，来对服务的调用过程进行优化或者容错的处理。附图：</p>
-<p><img src="https://images2017.cnblogs.com/blog/296430/201801/296430-20180109111413879-348600461.png" alt="img"></p>
-</li>
-<li><p><strong>总结：如果消费者想用在调用远程服务的同时还想在之前或者之后实现自己的部分逻辑，那么就需要在消费者端定义一个代理类，其实在消费者调用服务的时候，实际上是调用的代理类。不过其中代理类返回的数据是可以传递给服务提供者的</strong></p>
-</li>
-</ul>
-<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><p> <strong>1. 定义一个服务接口和服务实现类</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserInterface</span> </span>&#123;</div><div class="line">    </div><div class="line">    </div><div class="line">       <span class="function"><span class="keyword">public</span> User <span class="title">getUserById</span><span class="params">(Integer id)</span> </span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> <span class="keyword">implements</span> <span class="title">UserInterface</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUserById</span><span class="params">(Integer id)</span> </span>&#123;</div><div class="line">        User user  = <span class="keyword">new</span> User() ;</div><div class="line">        user.setId(id);</div><div class="line">        user.setName(<span class="string">"hu"</span>);</div><div class="line">        <span class="keyword">return</span> user;</div><div class="line">    &#125;  </div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>服务分布配置</li>
-</ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:service</span>  <span class="attr">interface</span>=<span class="string">"org.huxin.dubbo.test.user.service.UserInterface"</span> <span class="attr">ref</span>=<span class="string">"userService"</span> <span class="attr">protocol</span>=<span class="string">"dubbo"</span>    <span class="attr">retries</span>=<span class="string">"0"</span>/&gt;</span></div><div class="line">        </div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"org.huxin.dubbo.test.user.service.impl.UserService"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<p>3.服务消费者的Stub类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceStub</span> <span class="keyword">implements</span> <span class="title">UserInterface</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="comment">//必须定义这个接口，以便接收dubbo在调用远程服务生成的服务代理类</span></div><div class="line">    <span class="keyword">private</span> UserInterface userLocalService ;</div><div class="line">    </div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="comment">//这个构造函数必须要提供，dubbo框架会在消费者这一方调用这个方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserServiceStub</span><span class="params">(UserInterface userLocalService )</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.userLocalService = userLocalService  ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUserById</span><span class="params">(Integer id)</span> </span>&#123;</div><div class="line"></div><div class="line">　　　　　　　　User user = <span class="keyword">null</span> ;</div><div class="line">　　　　　　　　<span class="keyword">try</span> &#123;</div><div class="line">　　　　　　　　　　<span class="keyword">if</span> (id == <span class="number">1</span>) &#123;</div><div class="line">　　　　　　　　　　　　user = <span class="keyword">this</span>.userLocalService.getUserById(id) ;</div><div class="line">　　　　　　　　　　&#125;<span class="keyword">else</span> &#123;</div><div class="line">　　　　　　　　　　　　user = <span class="keyword">new</span> User(); </div><div class="line">　　　　　　　　　　　　user.setName(<span class="string">"系统用户"</span>);</div><div class="line">　　　　　　　　　　&#125;</div><div class="line">　　　　　　　　&#125;<span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">　　　　　　　　　　user = <span class="keyword">new</span> User(); </div><div class="line">　　　　　　　　　　user.setName(<span class="string">"异常用户"</span>);</div><div class="line">　　　　　　　　&#125;</div><div class="line"></div><div class="line">              <span class="keyword">return</span> user ;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>服务消费方的配置</li>
-</ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:reference</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">interface</span>=<span class="string">"org.huxin.dubbo.test.user.service.UserInterface"</span> </span></div><div class="line">                   <span class="attr">stub</span>=<span class="string">"org.huxin.dubbo.test.UserServiceStub"</span> <span class="attr">protocol</span>=<span class="string">"dubbo"</span>/&gt;</div></pre></td></tr></table></figure>
-<p>5.测试代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGetUserById</span><span class="params">()</span></span>&#123;</div><div class="line">        Integer id = <span class="number">2</span> ;</div><div class="line">            UserInterface  userService = context.getBean(UserInterface.class) ;</div><div class="line">        User user = userService.getUserById( id) ;</div><div class="line">        System.out.println(user.getName()); </div><div class="line">         </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>实际上调用<code>getUserById(id)</code>这个方法是代理类<code>UserServiceStub</code>的方法，返回的User对象也是这个这个方法返回的</li>
-</ul>
-<h2 id="本地伪装"><a href="#本地伪装" class="headerlink" title="本地伪装"></a>本地伪装</h2><ul>
-<li><a href="http://dubbo.apache.org/books/dubbo-user-book/demos/local-mock.html" target="_blank" rel="external">本地伪装</a></li>
-</ul>
-<h2 id="延迟暴露"><a href="#延迟暴露" class="headerlink" title="延迟暴露"></a>延迟暴露</h2><ul>
-<li><a href="http://dubbo.apache.org/books/dubbo-user-book/demos/delay-publish.html" target="_blank" rel="external">延迟暴露</a></li>
-</ul>
-<h2 id="并发控制"><a href="#并发控制" class="headerlink" title="并发控制"></a>并发控制</h2><ul>
-<li><a href="http://dubbo.apache.org/books/dubbo-user-book/demos/concurrency-control.html" target="_blank" rel="external">并发控制</a></li>
-</ul>
-<h2 id="连接控制"><a href="#连接控制" class="headerlink" title="连接控制"></a>连接控制</h2><ul>
-<li>限制连接个数</li>
-<li><a href="http://dubbo.apache.org/books/dubbo-user-book/demos/concurrency-control.html" target="_blank" rel="external">连接控制</a></li>
-</ul>
-<h2 id="延迟连接"><a href="#延迟连接" class="headerlink" title="延迟连接"></a>延迟连接</h2><ul>
-<li><a href="http://dubbo.apache.org/books/dubbo-user-book/demos/lazy-connect.html" target="_blank" rel="external">延迟连接</a></li>
-</ul>
-<h2 id="粘滞连接"><a href="#粘滞连接" class="headerlink" title="粘滞连接"></a>粘滞连接</h2><p>粘滞连接用于有状态服务，尽可能让客户端总是向同一提供者发起调用，除非该提供者挂了，再连另一台。</p>
-<p>粘滞连接将自动开启<a href="http://dubbo.apache.org/books/dubbo-user-book/demos/lazy-connect.html" target="_blank" rel="external">延迟连接</a>，以减少长连接数。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dubbo:protocol</span> <span class="attr">name</span>=<span class="string">"dubbo"</span> <span class="attr">sticky</span>=<span class="string">"true"</span> /&gt;</span></div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Dubbo常见问题&quot;&gt;&lt;a href=&quot;#Dubbo常见问题&quot; class=&quot;headerlink&quot; title=&quot;Dubbo常见问题&quot;&gt;&lt;/a&gt;Dubbo常见问题&lt;/h1&gt;&lt;h2 id=&quot;官方文档&quot;&gt;&lt;a href=&quot;#官方文档&quot; class=&quot;headerli
-    
-    </summary>
-    
-      <category term="Dubbo" scheme="http://chenjiabing666.github.io/categories/Dubbo/"/>
-    
-    
-      <category term="Dubbo" scheme="http://chenjiabing666.github.io/tags/Dubbo/"/>
     
   </entry>
   

@@ -2,9 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://chenjiabing666.github.io/2018/07/01/%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
+    
+    <lastmod>2018-07-01T06:01:29.083Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/07/01/%E5%A0%86%E6%8E%92%E5%BA%8F/</loc>
+    
+    <lastmod>2018-07-01T06:00:39.536Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/07/01/shell%E6%8E%92%E5%BA%8F/</loc>
+    
+    <lastmod>2018-07-01T05:59:53.611Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://chenjiabing666.github.io/2018/06/26/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
     
-    <lastmod>2018-06-26T15:00:10.064Z</lastmod>
+    <lastmod>2018-06-29T07:14:15.791Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/06/26/Redis%E6%8C%81%E4%B9%85%E5%8C%96/</loc>
+    
+    <lastmod>2018-06-26T15:04:43.507Z</lastmod>
     
   </url>
   
@@ -166,13 +194,6 @@
     <loc>http://chenjiabing666.github.io/2018/06/26/Redis%E7%9A%84%E7%AE%A1%E9%81%93Pipeline/</loc>
     
     <lastmod>2018-06-26T14:35:15.393Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://chenjiabing666.github.io/2018/06/26/Redis%E6%8C%81%E4%B9%85%E5%8C%96/</loc>
-    
-    <lastmod>2018-06-26T14:34:26.344Z</lastmod>
     
   </url>
   
