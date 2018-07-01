@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-07-01T06:01:29.083Z</updated>
+  <updated>2018-07-01T06:27:08.201Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,322 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>maven使用总结</title>
+    <link href="http://chenjiabing666.github.io/2018/07/01/maven%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"/>
+    <id>http://chenjiabing666.github.io/2018/07/01/maven使用总结/</id>
+    <published>2018-07-01T06:26:24.000Z</published>
+    <updated>2018-07-01T06:27:08.201Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Maven使用总结"><a href="#Maven使用总结" class="headerlink" title="Maven使用总结"></a>Maven使用总结</h1><h2 id="依赖范围"><a href="#依赖范围" class="headerlink" title="依赖范围"></a>依赖范围</h2><ul>
+<li><p>maven创建的工程的目录中包含<code>main</code>和<code>test</code>文件夹，分别表示主程序的文件夹和测试程序的文件夹</p>
+</li>
+<li><p>maven使用<code>scop</code>设置依赖范围，常用的依赖范围如下：</p>
+<ol>
+<li><p>compile ：编译依赖范围，在测试和运行都有效，这个是<strong>默认</strong>的依赖范围</p>
+<ul>
+<li>对主程序是否有效：有效</li>
+<li>对测试程序是否 有效： 有效</li>
+<li>是否参与打包：参与``</li>
+<li>是否参与部署：参与</li>
+</ul>
+</li>
+<li><p>test：测试依赖的范围</p>
+<ul>
+<li>对主程序是否有效：无效</li>
+<li>对测试程序是否 有效： 有效</li>
+<li>是否参与打包：不参与</li>
+<li>典型的例子： <code>junit</code></li>
+</ul>
+</li>
+<li><p><code>provided</code></p>
+<ul>
+<li>对主程序是否有效： 有效</li>
+<li>对测试程序是否有效：有效</li>
+<li>是否参与打包：不参与</li>
+<li>是否参与部署：不参与</li>
+<li>典型的例子：<code>servlet-api</code><ul>
+<li>主要解决在开发中需要用到的，但是在部署的时候不需要的依赖，比如<code>servlet-api</code>，在开发中没有Tomcat运行环境，因此需要这个<code>servlet-api</code>，但是一旦部署在Tomcat中，Tomcat中会提供这个<code>servlet-api</code>，如果此时在添加的话会产生依赖冲突</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>Runtime</code> ：测试和运行时需要。编译不需要。如JDBC驱动包</p>
+<ul>
+<li>对测试程序是否有效：有效</li>
+<li>对主程序是否有效：有效</li>
+<li>是否参与部署： 参与</li>
+<li>是否参与打包：参与</li>
+</ul>
+</li>
+<li><p><code>system</code>：系统依赖范围。本地依赖，不在maven中央仓库</p>
+<ul>
+<li>这个必须和<code>systemPath</code>结合使用，用来指定本地依赖的位置</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 添加服务提供者的jar接口 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.tedu.dubbo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dubbo-provider<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>$&#123;basedir&#125;/src/main/webapp/WEB-INF/lib/dubbo-provider-helloService-0.0.1.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="依赖传递"><a href="#依赖传递" class="headerlink" title="依赖传递"></a>依赖传递</h2><ul>
+<li>在开发项目的时候，我们通常需要建立多个项目，如果一个项目中需要用到另外一个项目的类或者数据，那么需要引入这个项目快照</li>
+<li>如果<code>HelloFriend</code>项目<strong>依赖</strong><code>Hello</code>这个项目，此时的<code>HelloFriend</code>的<code>pom.xml</code>文件如下：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></div><div class="line">	<span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</div><div class="line">	<span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.tedu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>HelloFriend<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    </div><div class="line">	<span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 添加Hello这个项目的依赖快照 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.tedu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Hello<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div><div class="line">    </div><div class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>此时项目<code>HelloFriend</code>中存在依赖只有<code>Hello</code>项目这个<code>jar</code>，但是如果我们在<code>Hello</code>项目的<code>pom.xml</code>文件中添加一个<code>junit</code>的依赖，这个依赖范围为设置为<code>compile</code>，如下：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">  		<span class="comment">&lt;!-- Junit --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>做了上面的操作，我们可以查看项目<code>HelloFriend</code>和<code>Hello</code>中都自动的导入了<code>Junit</code>依赖，这个就是依赖传递。</li>
+</ul>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>依赖传递只有是依赖范围为<code>compile</code>的情况下才有作用，如果我们需要一个<code>servlet-api</code>的依赖，因为<code>servlet-api</code>这个jar在部署的时候会和Tomcat冲突，因此只能设置为<code>provided</code>，但是此时就不能依赖传递了，只能在每个项目中的<code>pom.xml</code>文件中都添加了</li>
+</ul>
+<h2 id="依赖排除"><a href="#依赖排除" class="headerlink" title="依赖排除"></a>依赖排除</h2><ul>
+<li><strong><code>HelloFriend</code>项目依赖<code>Hello</code>项目，其中<code>compile</code>范围的依赖都会导入<code>HelloFriend</code>中</strong></li>
+<li><strong>使用<code>dubbo</code>默认会添加给我们添加<code>spring-framework</code>的版本为<code>2.5.6</code>，默认添加的依赖只能排除，不能在项目中再添加一个其他的版本，只有排除之后才能添加，否则会导致jar包冲突</strong></li>
+<li><code>Hello</code>项目中的依赖为：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- Junit --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 添加dubbo依赖的jar,会自动添加spring 2.5版本的依赖 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dubbo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li><p>此时<code>HelloFriend</code>的项目需要使用<code>4.3.13</code>版本的spring，那么我们有如下解决办法：</p>
+<ol>
+<li>在<code>Hello</code>项目中改变依赖，排除spring2.5版本的：<ul>
+<li><strong>一般在公司中项目的版本都是定制好的，我们不可能随意改动父项目中定义好的版本，因此这个方法明显是不行的</strong></li>
+</ul>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 使用spring4.3.13 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.13.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dubbo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">          <span class="comment">&lt;!--排除spring2.5版本--&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li>我们可以在项目<code>HelloFriend</code>排除这个spring的依赖，那么我们就可以不需要改变<code>Hello</code>项目中的依赖了，如下：<ul>
+<li><strong>这个才是正确的排除依赖的方式</strong></li>
+</ul>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- SpringMVC --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.13.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 添加Hello这个项目的依赖快照 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.tedu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Hello<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">          <span class="comment">&lt;!--排除项目中的spring2.5的依赖，这个不会影响Hello项目中的版本--&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="依赖原则"><a href="#依赖原则" class="headerlink" title="依赖原则"></a>依赖原则</h2><h3 id="依赖路径最短优先原则"><a href="#依赖路径最短优先原则" class="headerlink" title="依赖路径最短优先原则"></a>依赖路径最短优先原则</h3><ul>
+<li>假设项目<code>MakeFriend</code>依赖<code>HelloFriend</code>，并且<code>HelloFriend</code>依赖<code>Hello</code>项目。此时<code>Hello项目中</code>使用的<code>log4j 1.2.14</code>版本的，但是在<code>HelloFriend</code>版本中使用的是<code>log4j1.2.17</code>版本的，那么此时的<code>MakeFriend</code>应该选择什么版本呢？</li>
+<li><img src="http://ono60m7tl.bkt.clouddn.com/maven1.png" alt=""></li>
+</ul>
+<ul>
+<li><code>Hello</code>的依赖如下：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.14<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li><code>HelloFriend</code>依赖如下：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 添加Hello这个项目的依赖快照 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.tedu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Hello<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!--添加1.2.17版本的log4j--&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li><code>MakeFriend</code>的依赖如下：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.tedu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>HelloFriend<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li><strong>我们根据图形可以看到<code>MakeFriend</code>到<code>HelloFriend</code>的<code>log4j1.2.17</code>的路径是<code>2</code>，但是到<code>Hello</code>中的<code>log4j1.2.14</code>的路径为<code>3</code>，因此Maven会选择<code>HelloFriend</code>中的<code>log4j1.2.17</code>版本作为MakeFriend的依赖</strong></li>
+</ul>
+<h3 id="pom文件中申明顺序优先"><a href="#pom文件中申明顺序优先" class="headerlink" title="pom文件中申明顺序优先"></a>pom文件中申明顺序优先</h3><ul>
+<li><p><strong>在<code>路径</code>都是一样的情况下，那么就要看在<code>pom.xml</code>文件中申明的顺序了，先申明的就使用哪个项目中的依赖版本</strong></p>
+</li>
+<li><p>假设现在的依赖改变了，<code>MakeFriend</code>现在是直接依赖<code>Hello</code>和<code>HelloFriend</code>，如下图</p>
+</li>
+<li><img src="http://ono60m7tl.bkt.clouddn.com/maven2.png" alt=""></li>
+<li>我们可以看出此时到两个版本的依赖都是一样的路径为<code>2</code>，那么我们应该选择哪个版本呢，此时就需要看看在<code>MakeFriend</code>中的<code>pom.xml</code>文件的申明顺序<ul>
+<li>可以看出先申明的是<code>HelloFriend</code>，因此<code>MakeFriend</code>使用的是<code>log4j1.2.17</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 先申明HelloFriend,那么就要使用log4j.1.2.17版本 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span>	</div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.tedu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>HelloFriend<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">		</div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.tedu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Hello<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="覆写优先"><a href="#覆写优先" class="headerlink" title="覆写优先"></a>覆写优先</h3><p>​    </p>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><ul>
+<li>maven的生命周期有三个部分组成，分别为<code>clean生命周期</code>，<code>site生命周期</code>，<code>default生命周期</code></li>
+</ul>
+<h3 id="生命周期调用的特点"><a href="#生命周期调用的特点" class="headerlink" title="生命周期调用的特点"></a>生命周期调用的特点</h3><ul>
+<li>三大生命周期中也会包含各个阶段，并且各个阶段是有序进行的，maven为了实现构建的自动化，如果我们使用了命令调用生命周期后面的处理阶段，那么会从最前面的阶段开始执行，不用每一个阶段都执行一遍。</li>
+</ul>
+<h3 id="clean生命周期"><a href="#clean生命周期" class="headerlink" title="clean生命周期"></a>clean生命周期</h3><ul>
+<li><p>在进行真正的构建之前进行一些清理工作</p>
+</li>
+<li><p>clean生命周期包括：</p>
+<ul>
+<li><code>per-clean</code>：执行了一些需要在clean之前完成的工作</li>
+<li><code>clean</code>：移除所有上一次构建生成的文件</li>
+<li><code>post-clean</code>：执行一些需要在clean之后立刻完成的工作</li>
+</ul>
+</li>
+<li>当我们执行<code>mvn:clean</code>命令的时候只会执行<code>per-clean</code>和<code>clean</code>这两个阶段的任务，不会执行<code>post-clean</code>的工作</li>
+</ul>
+<h3 id="default生命周期"><a href="#default生命周期" class="headerlink" title="default生命周期"></a>default生命周期</h3><ul>
+<li>构建的核心部分，编译、测试、打包、部署</li>
+<li>包括如下的23个生命周期阶段：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>生命周期阶段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>validate</td>
+<td>检查工程配置是否正确，完成构建过程的所有必要信息是否能够获取到。</td>
+</tr>
+<tr>
+<td>initialize</td>
+<td>初始化构建状态，例如设置属性。</td>
+</tr>
+<tr>
+<td>generate-sources</td>
+<td>生成编译阶段需要包含的任何源码文件。</td>
+</tr>
+<tr>
+<td>process-sources</td>
+<td>处理源代码，例如，过滤任何值（filter any value）。</td>
+</tr>
+<tr>
+<td>generate-resources</td>
+<td>生成工程包中需要包含的资源文件。</td>
+</tr>
+<tr>
+<td>process-resources</td>
+<td>拷贝和处理资源文件到目的目录中，为打包阶段做准备。</td>
+</tr>
+<tr>
+<td>compile</td>
+<td>编译工程源码。</td>
+</tr>
+<tr>
+<td>process-classes</td>
+<td>处理编译生成的文件，例如 Java Class 字节码的加强和优化。</td>
+</tr>
+<tr>
+<td>generate-test-sources</td>
+<td>生成编译阶段需要包含的任何测试源代码。</td>
+</tr>
+<tr>
+<td>process-test-sources</td>
+<td>处理测试源代码，例如，过滤任何值（filter any values)。</td>
+</tr>
+<tr>
+<td>test-compile</td>
+<td>编译测试源代码到测试目的目录。</td>
+</tr>
+<tr>
+<td>process-test-classes</td>
+<td>处理测试代码文件编译后生成的文件。</td>
+</tr>
+<tr>
+<td>test</td>
+<td>使用适当的单元测试框架（例如JUnit）运行测试。</td>
+</tr>
+<tr>
+<td>prepare-package</td>
+<td>在真正打包之前，为准备打包执行任何必要的操作。</td>
+</tr>
+<tr>
+<td>package</td>
+<td>获取编译后的代码，并按照可发布的格式进行打包，例如 JAR、WAR 或者 EAR 文件。</td>
+</tr>
+<tr>
+<td>pre-integration-test</td>
+<td>在集成测试执行之前，执行所需的操作。例如，设置所需的环境变量。</td>
+</tr>
+<tr>
+<td>integration-test</td>
+<td>处理和部署必须的工程包到集成测试能够运行的环境中。</td>
+</tr>
+<tr>
+<td>post-integration-test</td>
+<td>在集成测试被执行后执行必要的操作。例如，清理环境。</td>
+</tr>
+<tr>
+<td>verify</td>
+<td>运行检查操作来验证工程包是有效的，并满足质量要求。</td>
+</tr>
+<tr>
+<td>install</td>
+<td>安装工程包到本地仓库中，该仓库可以作为本地其他工程的依赖。</td>
+</tr>
+<tr>
+<td>deploy</td>
+<td>拷贝最终的工程包到远程仓库中，以共享给其他开发人员和工程。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>当一个阶段通过 Maven 命令调用时，例如<code>mvn compile</code>，只有该阶段之前以及包括该阶段在内的所有阶段会被执行。</li>
+<li><img src="https://img-blog.csdn.net/20160114103206331" alt=""></li>
+</ul>
+<h3 id="Site生命周期"><a href="#Site生命周期" class="headerlink" title="Site生命周期"></a>Site生命周期</h3><ul>
+<li>Maven Site 插件一般用来创建新的报告文档、部署站点等。</li>
+<li>包含以下阶段<ul>
+<li><code>pre-site</code>：执行一些需要在生成站点文档之前完成的工作</li>
+<li><code>site</code>：生成项目的站点文档</li>
+<li><code>post-site</code>：执行一些需要生成站点文档之后完成的工作</li>
+<li><code>site-deploy</code>：将生成站点文档部署到特定的服务器上</li>
+</ul>
+</li>
+</ul>
+<h2 id="Maven统一管理依赖的版本号"><a href="#Maven统一管理依赖的版本号" class="headerlink" title="Maven统一管理依赖的版本号"></a>Maven统一管理依赖的版本号</h2><ul>
+<li>假设如下的依赖：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- SpringMVC --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.13.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="comment">&lt;!-- Spring-JDBC,要和spring-webmvc的版本一致 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.13.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>那么当我们需要改变spring的依赖版本号为<code>4.3.12.RELEASE</code>，那么我们只有逐个改变<code>version</code>中的值，现在是两个依赖比较好改变的，如果要有很多个的话，那么难免会改错，因此我们需要使用一种方式统一管理依赖的版本号。我们可以使用<code>&lt;properties&gt;</code>标签来管理，新的配置文件如下：<ul>
+<li><code>properties</code>中的标签体可以任意指定，如果需要引用定义的标签体中的内容，那么直接使用<code>${标签体}</code>即可</li>
+<li>此时我们要是改变版本，那么只需要改变<code>&lt;properties&gt;</code>中的版本即可</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 使用properties管理版本号 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 这里的标签体可以任意指定，后续只要使用$&#123;&#125;引用标签体即可使用其中定义的内容 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">spring-version</span>&gt;</span>4.3.13.RELEASE<span class="tag">&lt;/<span class="name">spring-version</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- SpringMVC --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- version使用$&#123;&#125; --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!-- Spring-JDBC,要和spring-webmvc的版本一致 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">        </div><div class="line">	<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><ul>
+<li>我们知道只有<code>compile</code>范围内的依赖才可以传递，但是对于<code>test</code>和<code>provided</code>中的依赖却是不可以传递的，那么必须在每个项目中都要添加依赖，此时肯定会出现每个项目中依赖版本不一致的情况，这样对于每个人的开发来说是比较困难的，因为不同版本的依赖使用的方式也不同，此时我们就需要统一管理这个版本了。</li>
+<li>下面我们以<code>junit</code>的版本控制为例</li>
+</ul>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul>
+<li>创建一个父工程<code>Hello-Parent</code>，打包的方式为<code>pom</code></li>
+<li>在<code>Hello-Parent</code>中的<code>pom.xml</code>文件中使用<code>dependencyManagement</code>管理版本，控制<code>junit</code>的版本依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.tedu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Hello-Parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></div><div class="line">    </div><div class="line">  <span class="comment">&lt;!-- 使用properties控制版本号 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">  	<span class="tag">&lt;<span class="name">junit-version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">junit-version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="comment">&lt;!-- 使用dependencyManagement管理版本 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></div><div class="line">  	</div><div class="line">  	<span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">  		<span class="comment">&lt;!-- Junit --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;junit-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">		</div><div class="line">  	<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>在子工程中使用<code>parent</code>标签指定声明对父工程的引用</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.tedu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Hello-Parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 使用relativePath指定父工程的相对位置 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">relativePath</span>&gt;</span>../Hello-Parent<span class="tag">&lt;/<span class="name">relativePath</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>将子工程坐标和父工程坐标重复的地方删除，不删除也没关系</li>
+<li>在子工程中删除<code>junit</code>的<code>version</code>标签，表明是继承自父工程的版本，不需要指定</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- Junit --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">          <span class="comment">&lt;!--此时不需要指定version了，因为父工程中已经指定了--&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li><strong>子工程全部的配置</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></div><div class="line">	<span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</div><div class="line">	<span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 这里的groupId和父工程中的重复了，因此可以删除 </span></div><div class="line">	&lt;groupId&gt;cn.tedu&lt;/groupId&gt;--&gt;</div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Hello<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 这里的version版本也和父工程的重复了，因此可以删除</span></div><div class="line">	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt; --&gt;</div><div class="line">	</div><div class="line">	<span class="tag">&lt;<span class="name">parent</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.tedu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Hello-Parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 使用relativePath指定父工程的相对位置 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">relativePath</span>&gt;</span>../Hello-Parent<span class="tag">&lt;/<span class="name">relativePath</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">parent</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- Junit --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="comment">&lt;!--不需要指定version--&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><ul>
+<li>我们在开发项目的时候都是分模块开发的，此时如果想要使用maven安装这个项目的话，那么需要一个一个的安装，但是我们可以使用聚合的方式，可以实现一次性安装。并且安装还是有先后顺序的，一定要先安装父工程，否则将会找不到依赖信息，我们使用聚合的方式就没有先后安装的障碍了，maven会为我们自动的解决</li>
+</ul>
+<h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>创建一个maven工程，打包方式为<code>pom</code>，当然也是可以直接使用父工程</li>
+<li>在pom.xml配置文件中配置<code>module</code></li>
+<li>详细的pom.xml如下：</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.tedu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Hello-Manager<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="comment">&lt;!-- 继承父工程 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">parent</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.tedu<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>Hello-Parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 使用relativePath指定父工程的相对位置 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">relativePath</span>&gt;</span>../Hello-Parent<span class="tag">&lt;/<span class="name">relativePath</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">parent</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="comment">&lt;!-- 使用聚合的方式 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">modules</span>&gt;</span></div><div class="line">  	<span class="tag">&lt;<span class="name">module</span>&gt;</span>../Hello-Parent<span class="tag">&lt;/<span class="name">module</span>&gt;</span></div><div class="line">  	<span class="tag">&lt;<span class="name">module</span>&gt;</span>../Hello<span class="tag">&lt;/<span class="name">module</span>&gt;</span></div><div class="line">  	<span class="tag">&lt;<span class="name">module</span>&gt;</span>../HelloFriend<span class="tag">&lt;/<span class="name">module</span>&gt;</span></div><div class="line">  	<span class="tag">&lt;<span class="name">module</span>&gt;</span>../MakeFriend<span class="tag">&lt;/<span class="name">module</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">modules</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Maven使用总结&quot;&gt;&lt;a href=&quot;#Maven使用总结&quot; class=&quot;headerlink&quot; title=&quot;Maven使用总结&quot;&gt;&lt;/a&gt;Maven使用总结&lt;/h1&gt;&lt;h2 id=&quot;依赖范围&quot;&gt;&lt;a href=&quot;#依赖范围&quot; class=&quot;headerli
+    
+    </summary>
+    
+      <category term="Maven" scheme="http://chenjiabing666.github.io/categories/Maven/"/>
+    
+    
+      <category term="Maven" scheme="http://chenjiabing666.github.io/tags/Maven/"/>
+    
+  </entry>
   
   <entry>
     <title>二叉树</title>
@@ -2045,82 +2361,6 @@
     
       &lt;h1 id=&quot;多线程状态&quot;&gt;&lt;a href=&quot;#多线程状态&quot; class=&quot;headerlink&quot; title=&quot;多线程状态&quot;&gt;&lt;/a&gt;多线程状态&lt;/h1&gt;&lt;p&gt;总的执行图：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://blog.java1234.com/static/us
-    
-    </summary>
-    
-      <category term="java并发编程" scheme="http://chenjiabing666.github.io/categories/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="java并发编程" scheme="http://chenjiabing666.github.io/tags/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>并发编程之三大性质</title>
-    <link href="http://chenjiabing666.github.io/2018/06/26/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B9%8B%E4%B8%89%E5%A4%A7%E6%80%A7%E8%B4%A8/"/>
-    <id>http://chenjiabing666.github.io/2018/06/26/并发编程之三大性质/</id>
-    <published>2018-06-26T14:45:20.000Z</published>
-    <updated>2018-06-26T14:46:17.332Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="多线程的三大性质"><a href="#多线程的三大性质" class="headerlink" title="多线程的三大性质"></a>多线程的三大性质</h1><h2 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h2><ul>
-<li><strong>对共享变量更新操作的时候，要保证执行不可分割，比如银行转账，一旦在多线程的环境下将其分割了，那么可能造成的后果可能是转账的账户钱少了，但是转到的账户的钱可能不是那么多或者根本没有转过去</strong></li>
-<li>在单线程的环境下没有所谓的原子性，都是顺序执行的</li>
-<li>多线程的环境下对共享变量的访问(读写)才会涉及原子性</li>
-<li>使用<code>Lock</code>和<code>sychronized</code>可以解决原子性问题</li>
-</ul>
-<h2 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h2><ul>
-<li>在多线程的环境下，一个线程的对共享变量的更新，后续的线程访问这个共享变量的时候能否立即读取这个更新后的结果</li>
-</ul>
-<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><ol>
-<li>程序中的变量可能是被分配到寄存器中，而不是主内存中。每个处理器都有寄存器，而一个处理器的寄存器不能读取另外一个处理器的寄存器的内容。因此如果两个线程运行在不同的处理器上，而共享变量被分配到寄存器上存储，那么可见性问题就出现了</li>
-<li>每一个处理器都有自己的高速缓存区，即使共享变量在主存中， 在线程执行的时候会将复制一个副本存放在高速缓存中，一个线程更新共享变量之后会更新到高速缓存中，还没有来得及更新到主存中的时候，另外的线程就开始执行了，那么此时的共享变量就不是更新之后的，出现了可见性问题</li>
-<li>处理器并不是直接与主内存直接打交道执行读写操作的，而是通过寄存器，高速缓存，写缓冲器和无效化队列等部件执行内存的读写。</li>
-</ol>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><ul>
-<li>虽然每个处理器不能直接读写不同处理器的高速缓存，但是我们可以<code>缓存一致协议</code>来读取其他处理器中的高速缓存的内容，并将读取的内容更新到自己的高速缓存。这种一个处理器从其自身处理器缓存之外的其他存储部件中读取数据并将其更新到该处理器高速缓存的过程称之为<code>缓存同步</code></li>
-<li>使用<code>voliate</code>关键字可以解决可见性问题<ul>
-<li><code>public voliate int a</code> </li>
-</ul>
-</li>
-</ul>
-<h2 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h2><blockquote>
-<p>即程序执行的顺序按照代码的先后顺序执行</p>
-</blockquote>
-<h3 id="指令重排序"><a href="#指令重排序" class="headerlink" title="指令重排序"></a>指令重排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = <span class="number">0</span>;              </div><div class="line"><span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</div><div class="line">i = <span class="number">1</span>;                <span class="comment">//语句1  </span></div><div class="line">flag = <span class="keyword">true</span>;          <span class="comment">//语句2</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p> 上面代码定义了一个int型变量，定义了一个boolean类型变量，然后分别对两个变量进行赋值操作。从代码顺序上看，语句1是在语句2前面的，那么JVM在真正执行这段代码的时候会保证语句1一定会在语句2前面执行吗？不一定，为什么呢？这里可能会发生指令重排序（Instruction Reorder）。</p>
-<p>下面解释一下什么是指令重排序，一般来说，处理器为了提高程序运行效率，可能会对输入代码进行优化，它不保证程序中各个语句的执行先后顺序同代码中的顺序一致，但是它会保证程序最终执行结果和代码顺序执行的结果是一致的。</p>
-<p>比如上面的代码中，语句1和语句2谁先执行对最终的程序结果并没有影响，那么就有可能在执行过程中，语句2先执行而语句1后执行。</p>
-<p>但是要注意，虽然处理器会对指令进行重排序，但是它会保证程序最终结果会和代码顺序执行结果相同，那么它靠什么保证的呢？再看下面一个例子：</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a = <span class="number">10</span>;    <span class="comment">//语句1</span></div><div class="line"><span class="keyword">int</span> r = <span class="number">2</span>;    <span class="comment">//语句2</span></div><div class="line">a = a + <span class="number">3</span>;    <span class="comment">//语句3</span></div><div class="line">r = a*a;     <span class="comment">//语句4</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>这段代码有4个语句，那么可能的一个执行顺序是：</p>
-</blockquote>
-<p>　　<img src="https://images0.cnblogs.com/blog/288799/201408/212305263939989.jpg" alt="img"></p>
-<p>　　</p>
-<blockquote>
-<p>那么可不可能是这个执行顺序呢： 语句2   语句1    语句4   语句3</p>
-<p>不可能，因为处理器在进行重排序时是会考虑指令之间的数据依赖性，如果一个指令Instruction 2必须用到Instruction 1的结果，那么处理器会保证Instruction 1会在Instruction 2之前执行。</p>
-<p>虽然重排序不会影响单个线程内程序执行的结果，但是多线程呢？下面看一个例子：</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//线程1:</span></div><div class="line">context = loadContext();   <span class="comment">//语句1</span></div><div class="line">inited = <span class="keyword">true</span>;             <span class="comment">//语句2</span></div><div class="line"> </div><div class="line"><span class="comment">//线程2:</span></div><div class="line"><span class="keyword">while</span>(!inited )&#123;</div><div class="line">  sleep()</div><div class="line">&#125;</div><div class="line">doSomethingwithconfig(context);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>上面代码中，由于语句1和语句2没有数据依赖性，因此可能会被重排序。假如发生了重排序，在线程1执行过程中先执行语句2，而此是线程2会以为初始化工作已经完成，那么就会跳出while循环，去执行doSomethingwithconfig(context)方法，而此时context并没有被初始化，就会导致程序出错。</p>
-<p>从上面可以看出，指令重排序不会影响单个线程的执行，但是会影响到线程并发执行的正确性。</p>
-<p>也就是说，要想并发程序正确地执行，必须要保证原子性、可见性以及有序性。只要有一个没有被保证，就有可能会导致程序运行不正确。</p>
-</blockquote>
-<h3 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h3><ul>
-<li>使用<code>voliate</code></li>
-</ul>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
-<li><a href="http://www.cnblogs.com/dolphin0520/p/3920373.html" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3920373.html</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;多线程的三大性质&quot;&gt;&lt;a href=&quot;#多线程的三大性质&quot; class=&quot;headerlink&quot; title=&quot;多线程的三大性质&quot;&gt;&lt;/a&gt;多线程的三大性质&lt;/h1&gt;&lt;h2 id=&quot;原子性&quot;&gt;&lt;a href=&quot;#原子性&quot; class=&quot;headerlink&quot; ti
     
     </summary>
     
