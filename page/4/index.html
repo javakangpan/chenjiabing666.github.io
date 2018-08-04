@@ -79,6 +79,86 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2018/06/26/Redis的管道Pipeline/" title="Redis的管道Pipeline" itemprop="url">
+  
+    <h1 itemprop="name">Redis的管道Pipeline</h1>
+    
+     
+           <p itemprop="description" >Redis的管道(Pipeline)为什么使用管道
+其中redis的执行一条命令可以分为四个步骤
+发送命令
+命令排队
+命令执行
+返回结果
+
+
+其中1-4之间所需要的时间称为往返时间(RTT)
+Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但大部分命令</p>
+        
+    
+    <time datetime="2018-06-26T14:35:00.000Z" itemprop="datePublished">2018-06-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/06/26/Redis持久化/" title="Redis持久化" itemprop="url">
+  
+    <h1 itemprop="name">Redis持久化</h1>
+    
+     
+           <p itemprop="description" >Redis持久化RDB (默认使用)
+RDB持久化是把当前进程数据生成快照保存到硬盘的过程,触发RDB持久化过程分为手动触发和自动触发。
+
+手动触发 (bgsave)
+执行bgsave命令,Redis父进程判断当前是否存在正在执行的子进程,如RDB/AOF子进程,如果存在bgsa</p>
+        
+    
+    <time datetime="2018-06-26T14:34:07.000Z" itemprop="datePublished">2018-06-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/06/26/Redis客户端操作/" title="Redis客户端操作" itemprop="url">
+  
+    <h1 itemprop="name">Redis客户端操作</h1>
+    
+     
+           <p itemprop="description" >Redis客户端Jedis远程连接
+yum install redis  : 安装redis
+开启6379端口
+在自己的阿里云的控制台上开启防火墙6379
+firewall-cmd --zone=public --add-port=6379/tcp
+
+
+如果显示firewall </p>
+        
+    
+    <time datetime="2018-06-26T14:33:32.000Z" itemprop="datePublished">2018-06-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2018/06/26/Redis常用命令/" title="Redis常用命令" itemprop="url">
   
     <h1 itemprop="name">Redis常用命令</h1>
@@ -264,76 +344,9 @@ Linux文件系统结构
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/05/27/SSM整合/" title="SSM整合" itemprop="url">
-  
-    <h1 itemprop="name">SSM整合</h1>
-    
-     
-           <p itemprop="description" >Spring + SpringMVC + Mybatis整合依赖123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585</p>
-        
-    
-    <time datetime="2018-05-27T02:16:20.000Z" itemprop="datePublished">2018-05-27</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/05/27/Lucene全文检索/" title="Lucene全文检索" itemprop="url">
-  
-    <h1 itemprop="name">Lucene全文检索</h1>
-    
-     
-           <p itemprop="description" >Lucene  全文检索Field域
-Field是文档中的域，包括Field名和Field值两部分，一个文档可以包括多个Field，Document只是Field的一个承载体，Field值即为要索引的内容，也是要搜索的内容。
-
-是否分词
-分词就是对文件的内容或者其他的属性进行分割</p>
-        
-    
-    <time datetime="2018-05-27T02:13:57.000Z" itemprop="datePublished">2018-05-27</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/05/21/购物车模块/" title="购物车模块" itemprop="url">
-  
-    <h1 itemprop="name">购物车模块</h1>
-    
-     
-           <p itemprop="description" >购物车模块建表
-创建购物车的表
-
-123456789create table t_cart(id int primary key auto_increment,　　//主键                   	goods_id varchar(200),　　　//商品的ｉｄ  </p>
-        
-    
-    <time datetime="2018-05-21T10:27:35.000Z" itemprop="datePublished">2018-05-21</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
   </nav>
 
 </div>
@@ -409,7 +422,7 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>21</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>24</sup></a></li>
 		  
 		
 		  
@@ -458,7 +471,7 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>21</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>24</sup></a></li>
 			
 		
 			
@@ -466,11 +479,15 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
 			
 		
 			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
 			
 		
 			
@@ -479,10 +496,6 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
 		
 			
 				<li><a href="/tags/scrapy/" title="scrapy">scrapy<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
 			
 		
 			
@@ -498,6 +511,10 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
 			
 		
 			
+				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 			
 		
@@ -506,19 +523,15 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
+				<li><a href="/tags/java基础/" title="java基础">java基础<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>5</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
@@ -534,7 +547,7 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 		</ul>
