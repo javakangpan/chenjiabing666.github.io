@@ -79,17 +79,18 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/25/Java-IO学习笔记六/" title="Java IO学习笔记六" itemprop="url">
+    <a href="/2017/09/14/Eclipse配置Tomcat/" title="Eclipse配置Tomcat" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记六</h1>
+    <h1 itemprop="name">Eclipse配置Tomcat</h1>
     
      
-           <p itemprop="description" >打印流
+           <p itemprop="description" >Eclipse配置tomcatEclipse创建server
 
-在整个IO包中，打印流是输出信息最方便的类，主要包含字节打印流（PrintStream）和字符打印流（PrintWrite）。打印流提供了非常方便的打印功能，可以打印任何的数据类型，例如：小数、整数、字符串等等，相对于前面学习的几个文件的操作来说，这里的打印流是最简便的</p>
+首先下载eclipse for javaEE developer 
+打开控制台，然后到server后右击空白处-&amp;gt;New-&amp;gt;Server-&amp;gt;Apach-&amp;gt;Tomact 7.0 -&amp;gt;Nex</p>
         
     
-    <time datetime="2017-05-25T07:33:09.000Z" itemprop="datePublished">2017-05-25</time>
+    <time datetime="2017-09-14T14:28:10.000Z" itemprop="datePublished">2017-09-14</time>
   </a>
 </section>
 
@@ -101,17 +102,22 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/25/Java-IO学习笔记五/" title="Java IO学习笔记五" itemprop="url">
+    <a href="/2017/09/14/Servlet总结一/" title="Servlet总结一" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记五</h1>
+    <h1 itemprop="name">Servlet总结一</h1>
     
      
-           <p itemprop="description" >管道流
+           <p itemprop="description" >Servlet总结一HttpServlet
+想要实现一个servlet必须继承这个类，其实一个servlet就是一个java文件，但是这个类必须是继承HttpServlet。
 
-管道流的主要作用是可以进行两个线程间的通讯，分为管道输出流(PipedOutputStream)、管道输入流（PipedInputStream），如果想要进行管道输出，则必须要把输出流连在输入流之上，在PipedOutputStream类上有如下的一个方法用于连接管道：</p>
+生命周期
+servlet的生命周期是从创建到毁灭的一个过程，具体的过程如下：
+
+
+Servlet 通过</p>
         
     
-    <time datetime="2017-05-25T07:33:00.000Z" itemprop="datePublished">2017-05-25</time>
+    <time datetime="2017-09-14T14:24:50.000Z" itemprop="datePublished">2017-09-14</time>
   </a>
 </section>
 
@@ -123,16 +129,19 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/25/Java-IO学习笔记四/" title="Java IO学习笔记四" itemprop="url">
+    <a href="/2017/09/03/多线程的使用/" title="多线程的使用" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记四</h1>
+    <h1 itemprop="name">多线程的使用</h1>
     
      
-           <p itemprop="description" >内存操作流
-之前的所有的流操作都是针对文件的，但是有时候只是想要实现数据间转换，此时如果我们想要创建一个文件然后再删除文件，那样显得有点麻烦，因此此时的内存操作流就显得很适合这类的操作，因为它只是在内存中存储，并不会真正的创建文件，内存操作流涉及的两个类是ByteArrayInp</p>
+           <p itemprop="description" >多线程前言
+我看了不止一个人说多线程是鸡肋，但是就依照我个人觉得多线程在一些小型的爬虫中还是可以显著的提高速度的，相比多进程来说应该还是挺简单的
+
+使用多线程继承threading.Thread
+继承threading.Thread模块是一个很好的一个选择，就像java中也是可以</p>
         
     
-    <time datetime="2017-05-25T07:32:49.000Z" itemprop="datePublished">2017-05-25</time>
+    <time datetime="2017-09-03T06:30:25.000Z" itemprop="datePublished">2017-09-03</time>
   </a>
 </section>
 
@@ -144,21 +153,16 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/24/Java-IO学习笔记三/" title="Java IO学习笔记三" itemprop="url">
+    <a href="/2017/09/02/os模块中常用的的方法/" title="os模块中常用的的方法" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记三</h1>
+    <h1 itemprop="name">os模块中常用的的方法</h1>
     
      
-           <p itemprop="description" >Java IO学习笔记三
-
-在整个IO包中，实际上就是分为字节流和字符流，但是除了这两个流之外，还存在了一组字节流-字符流的转换类。
-
-OutputStreamWriter：是Writer的子类，将输出的字符流变为字节流，即：将一个字符流的输出对象变成字节流的输出对象。
-
-Inp</p>
+           <p itemprop="description" >os模块中常用的方法常用的方法
+os.getcwd()   获取当前的路径os.listdir(path)  获取path路径下的全部文件和文件夹，就是显示全部的文件的作用os.mkdir(path)   创建一个文件夹os.rmdir(path)   删除一个文件夹os.rem</p>
         
     
-    <time datetime="2017-05-24T06:48:34.000Z" itemprop="datePublished">2017-05-24</time>
+    <time datetime="2017-09-01T23:37:27.000Z" itemprop="datePublished">2017-09-02</time>
   </a>
 </section>
 
@@ -170,147 +174,149 @@ Inp</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/24/Java-IO学习笔记二/" title="Java IO学习笔记二" itemprop="url">
+    <a href="/2017/07/09/python操作MongoDB/" title="python操作MongoDB" itemprop="url">
   
-    <h1 itemprop="name">Java IO学习笔记二</h1>
+    <h1 itemprop="name">python操作MongoDB</h1>
     
      
-           <p itemprop="description" >Java IO学习笔记二流的概念
-
-在程序中所有的数据都是以流的方式进行传输或保存的，程序需要数据的时候要使用输入流读取数据，而当程序需要将一些数据保存起来的时候，就要使用输出流完成。
-程序中的输入输出都是以流的形式保存的，流中保存的实际上全都是字节文件。
+           <p itemprop="description" >python操作MongoDB前言
+下面推荐本人写的MongoDB的基本操作博文，介绍的还是比较详细的，喜欢的朋友可以去看看
 
 
-字节流和字符流
+MongoDB干货篇之安装
+MongoDB干货篇之查询数据
+MongoDB干货篇之更新数据
+
+
+
+综合应用
+下面是自己写的一个简单的操作，分别对应了增</p>
+        
+    
+    <time datetime="2017-07-09T04:40:33.000Z" itemprop="datePublished">2017-07-09</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/07/01/Numpy指南/" title="Numpy指南" itemprop="url">
+  
+    <h1 itemprop="name">Numpy指南</h1>
+    
+     
+           <p itemprop="description" >numpy指南
+numpy是一个能够处理多维数组的库，虽然python中也内置了处理数组的库，但是这个并不能满足大数据时代的需求，因此产生了可以处理多维数组的numpy
+
+安装
+
+pip install numpy
+
+
+创建array
+
+array函数是一个最基本的创建方式，其中</p>
+        
+    
+    <time datetime="2017-07-01T05:29:21.000Z" itemprop="datePublished">2017-07-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/06/22/Lock/" title="Lock" itemprop="url">
+  
+    <h1 itemprop="name">Lock</h1>
+    
+     
+           <p itemprop="description" >Lock
+在上一篇文章中我们讲到了如何使用关键字synchronized来实现同步访问。本文我们继续来探讨这个问题，从Java 5之后，在java.util.concurrent.locks包下提供了另外一种方式来实现同步访问，那就是Lock。
+也许有朋友会问，既然都可以通过sy</p>
+        
+    
+    <time datetime="2017-06-22T07:53:32.000Z" itemprop="datePublished">2017-06-22</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/06/20/synchronized/" title="synchronized" itemprop="url">
+  
+    <h1 itemprop="name">synchronized</h1>
+    
+     
+           <p itemprop="description" >synchronized前言
+相信大家都听说过线程安全问题，在学习操作系统的时候有一个知识点是临界资源，简单的说就是一次只能让一个进程操作的资源，但是我们在使用多线程的时候是并发操作的，并不能控制同时只对一个资源的访问和修改，想要控制那么有几种操作，今天我们就来讲讲第一种方法：线</p>
+        
+    
+    <time datetime="2017-06-20T04:18:29.000Z" itemprop="datePublished">2017-06-20</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/06/20/Thread初探/" title="Thread初探" itemprop="url">
+  
+    <h1 itemprop="name">Thread初探</h1>
+    
+     
+           <p itemprop="description" >Thread初探前言
+以前大家写的都是单线程的程序，全是在main函数中调用方法，可以清楚的看到它的效率是特别低的，就像python中使用单线程取爬一个网站，可以说能让你等的吐血，因为数据量实在太大了，今天我们就来看看java的并发编程多线程的学习
+
+创建线程
+创建一个线程可以有</p>
+        
+    
+    <time datetime="2017-06-20T00:54:01.000Z" itemprop="datePublished">2017-06-20</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/06/16/Java字符串进阶/" title="Java字符串进阶" itemprop="url">
+  
+    <h1 itemprop="name">Java字符串进阶</h1>
+    
+     
+           <p itemprop="description" >Java字符串进阶前言
+最常用的对字符串操作的类有三个，分别是String,StringBuilder,StringBuffer，下面将会详细的说说这三个类……
+
+String
+String类代表字符串，这个是最基本的对字符串的类，这个也是使用比较多的类，这里就不再详细介绍了
 
 </p>
         
     
-    <time datetime="2017-05-24T06:46:06.000Z" itemprop="datePublished">2017-05-24</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/23/Java-IO学习笔记一/" title="Java IO学习笔记一" itemprop="url">
-  
-    <h1 itemprop="name">Java IO学习笔记一</h1>
-    
-     
-           <p itemprop="description" >Java IO学习笔记一File
-File是文件和目录路径名的抽象表示形式，总的来说就是java创建删除文件目录的一个类库，但是作用不仅仅于此，详细见官方文档
-
-构造函数
-
-File(File parent, String child) 根据 parent 抽象路径名和 chil</p>
-        
-    
-    <time datetime="2017-05-23T07:23:50.000Z" itemprop="datePublished">2017-05-23</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/15/python实现微信接口/" title="python实现微信接口" itemprop="url">
-  
-    <h1 itemprop="name">python实现微信接口</h1>
-    
-     
-           <p itemprop="description" >python实现微信接口(itchat)安装
-
-sudo pip install itchat
-
-
-登录
-
-itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但是这种登录的方式确实短时间的登录，并不会保留登录的状态，也就是下次登录时还是需要扫描二维码，</p>
-        
-    
-    <time datetime="2017-05-14T19:44:21.000Z" itemprop="datePublished">2017-05-15</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/13/python发送邮件/" title="python发送邮件" itemprop="url">
-  
-    <h1 itemprop="name">python发送邮件</h1>
-    
-     
-           <p itemprop="description" >python发送邮件准备
-python中发送邮件主要用的是smtplib和email两个模块，下面主要对这两个模块进行讲解
-在讲解之前需要准备至少两个测试的邮箱，其中要在邮箱的设置中开启smtplib协议才可以进行发送和接受
-
-smtplib
-
-smtplib.SMTP( [ho</p>
-        
-    
-    <time datetime="2017-05-12T23:17:41.000Z" itemprop="datePublished">2017-05-13</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/13/python制作电子书/" title="python制作电子书" itemprop="url">
-  
-    <h1 itemprop="name">python制作电子书</h1>
-    
-     
-           <p itemprop="description" >python制作pdf电子书准备
-制作电子书使用的是python的pdfkit这个库，pdfkit是 wkhtmltopdf 的Python封装包，因此在安装这个之前要安装wkhtmltopdf
-
-安装wkhtmltopdf
-
-sudo apt-get install wkhtm</p>
-        
-    
-    <time datetime="2017-05-12T23:15:20.000Z" itemprop="datePublished">2017-05-13</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/10/回溯算法/" title="回溯算法" itemprop="url">
-  
-    <h1 itemprop="name">回溯算法</h1>
-    
-     
-           <p itemprop="description" >回溯算法主要思想
-回溯算法的基本思想是：从一条路往前走，能进则进，不能进则退回来，换一条路再试。八皇后问题就是回溯算法的典型，第一步按照顺序放一个皇后，然后第二步符合要求放第2个皇后，如果没有位置符合要求，那么就要改变第一个皇后的位置，重新放第2个皇后的位置，直到找到符合条件的位</p>
-        
-    
-    <time datetime="2017-05-09T20:18:44.000Z" itemprop="datePublished">2017-05-10</time>
+    <time datetime="2017-06-16T04:53:57.000Z" itemprop="datePublished">2017-06-16</time>
   </a>
 </section>
 
@@ -321,7 +327,7 @@ sudo apt-get install wkhtm</p>
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/15/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/17/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/15/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/17/">Next<span></span></a>
   </nav>
 
 </div>
@@ -346,6 +352,10 @@ sudo apt-get install wkhtm</p>
 		
 		  
 			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
 		  
 		
 		  
@@ -381,11 +391,11 @@ sudo apt-get install wkhtm</p>
 		  
 		
 		  
-			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>7</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>8</sup></a></li>
 		  
 		
 		  
@@ -397,11 +407,19 @@ sudo apt-get install wkhtm</p>
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>24</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>25</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>2</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/docker/" title="docker">docker<sup>1</sup></a></li>
 		  
 		
 		  
@@ -422,6 +440,10 @@ sudo apt-get install wkhtm</p>
 		
 		  
 			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/学习资源/" title="学习资源">学习资源<sup>2</sup></a></li>
 		  
 		
 		  
@@ -446,7 +468,7 @@ sudo apt-get install wkhtm</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>24</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>25</sup></a></li>
 			
 		
 			
@@ -462,10 +484,6 @@ sudo apt-get install wkhtm</p>
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
 			
 		
@@ -474,15 +492,27 @@ sudo apt-get install wkhtm</p>
 			
 		
 			
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
@@ -491,10 +521,6 @@ sudo apt-get install wkhtm</p>
 		
 			
 				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 			
 		
 			
@@ -519,10 +545,6 @@ sudo apt-get install wkhtm</p>
 		
 			
 				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 		</ul>

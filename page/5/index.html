@@ -79,15 +79,18 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/27/SSM整合/" title="SSM整合" itemprop="url">
+    <a href="/2018/06/26/MongoDB使用总结/" title="MongoDB使用总结" itemprop="url">
   
-    <h1 itemprop="name">SSM整合</h1>
+    <h1 itemprop="name">MongoDB使用总结</h1>
     
      
-           <p itemprop="description" >Spring + SpringMVC + Mybatis整合依赖123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585</p>
+           <p itemprop="description" >MongoDB使用总结数据库操作
+show dbs  : 显示所有的数据库
+use user  : 选择数据库user，如果这个数据库存在，那么就使用，不存在就新建，但是此时的数据库中根本不存在数据，因此使用show dbs不能显示该数据库
+db.dropDatabase()  </p>
         
     
-    <time datetime="2018-05-27T02:16:20.000Z" itemprop="datePublished">2018-05-27</time>
+    <time datetime="2018-06-26T14:43:56.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -99,19 +102,19 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/27/Lucene全文检索/" title="Lucene全文检索" itemprop="url">
+    <a href="/2018/06/26/Git使用总结/" title="Git使用总结" itemprop="url">
   
-    <h1 itemprop="name">Lucene全文检索</h1>
+    <h1 itemprop="name">Git使用总结</h1>
     
      
-           <p itemprop="description" >Lucene  全文检索Field域
-Field是文档中的域，包括Field名和Field值两部分，一个文档可以包括多个Field，Document只是Field的一个承载体，Field值即为要索引的内容，也是要搜索的内容。
+           <p itemprop="description" >Git使用总结开发策略
+在实际开发的时候一定要在分支上开发，修复问题，开发完成之后再合并到主分支(master)上，这样可以保证在不损坏主分支的情况下删除或者撤销内容
 
-是否分词
-分词就是对文件的内容或者其他的属性进行分割</p>
+解决冲突冲突产生
+假设现在有一个master分支，其中有一个提交之后的文件demo.txt，那么我们使用git</p>
         
     
-    <time datetime="2018-05-27T02:13:57.000Z" itemprop="datePublished">2018-05-27</time>
+    <time datetime="2018-06-26T14:42:21.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -123,18 +126,19 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/购物车模块/" title="购物车模块" itemprop="url">
+    <a href="/2018/06/26/Dubbo使用总结/" title="Dubbo使用总结" itemprop="url">
   
-    <h1 itemprop="name">购物车模块</h1>
+    <h1 itemprop="name">Dubbo使用总结</h1>
     
      
-           <p itemprop="description" >购物车模块建表
-创建购物车的表
+           <p itemprop="description" >Dubbo常见问题官方文档
+中文文档
 
-123456789create table t_cart(id int primary key auto_increment,　　//主键                   	goods_id varchar(200),　　　//商品的ｉｄ  </p>
+启动检查
+Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 check=&amp;quot;true&amp;quot;可以通过 check=&amp;quot;false&amp;qu</p>
         
     
-    <time datetime="2018-05-21T10:27:35.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:41:16.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -146,25 +150,18 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/用户管理模块之个人信息修改/" title="用户管理模块之个人信息修改" itemprop="url">
+    <a href="/2018/06/26/Spring整合Redis/" title="Spring整合Redis" itemprop="url">
   
-    <h1 itemprop="name">用户管理模块之个人信息修改</h1>
+    <h1 itemprop="name">Spring整合Redis</h1>
     
      
-           <p itemprop="description" >用户管理模块之个人信息修改功能
-修改用户名
-修改性别
-修改邮箱
-修改密码
-修改头像
+           <p itemprop="description" >Spring - Data - Redis添加依赖
+需要spring的版本为4.xxx
 
-在UserMapper中定义方法和UserMapper.xml中定义定义接口方法
-定义接口方法
-
-12345/** * 更新用户信息 * @param user  User对象 */void u</p>
+12345678910111213&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;redis.clients&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId</p>
         
     
-    <time datetime="2018-05-21T10:26:45.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:37:40.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -176,26 +173,15 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/地址管理之省市区三级联动菜单/" title="地址管理之省市区三级联动菜单" itemprop="url">
+    <a href="/2018/06/26/Redis/" title="Redis" itemprop="url">
   
-    <h1 itemprop="name">地址管理之省市区三级联动菜单</h1>
+    <h1 itemprop="name">Redis</h1>
     
      
-           <p itemprop="description" >地址管理之省市区三级联动菜单
-导入省市区的数据
-下载sql语句的文件
-在数据库中执行：source 文件路径即可导入
-导入成功之后，在数据库中会出现三张表，分别代表省,市,区
-
-创建实体类
-get，set方法
-hashCode和equals方法
-实现序列化接口，生成安全码
-
-Pr</p>
+           <p itemprop="description" ></p>
         
     
-    <time datetime="2018-05-21T10:26:00.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:36:28.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -207,25 +193,16 @@ Pr</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/用户管理模块之用户登录/" title="用户管理模块之用户登录" itemprop="url">
+    <a href="/2018/06/26/Redis主从复制/" title="Redis主从复制" itemprop="url">
   
-    <h1 itemprop="name">用户管理模块之用户登录</h1>
+    <h1 itemprop="name">Redis主从复制</h1>
     
      
-           <p itemprop="description" >用户管理模块之用户登录开发顺序
-持久层
-业务层
-控制层
-页面
-
-在cn.tedu.store.mapper中新建UserMapper.java接口
-由于在用户管理模块之用户注册已经创建了，所以不用新建了
-
-功能
-验证用户名是否存在，其中返回的是用户对象，这个在前面的注册已经定义过</p>
+           <p itemprop="description" >Redis主从复制
+本章介绍Redis的一个强大功能–主从复制。一台master主机可以拥有多台slave从机。而一台slave从机又可以拥有多个slave从机。如此下去，形成强大的多级服务器集群架构（高扩展）。可以避免Redis单点故障，实现容灾恢复效果（高可用）。读写分离的架</p>
         
     
-    <time datetime="2018-05-21T10:24:56.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:35:44.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -237,18 +214,24 @@ Pr</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Spring之AOP之底层实现/" title="Spring之AOP之底层实现" itemprop="url">
+    <a href="/2018/06/26/Redis的管道Pipeline/" title="Redis的管道Pipeline" itemprop="url">
   
-    <h1 itemprop="name">Spring之AOP之底层实现</h1>
+    <h1 itemprop="name">Redis的管道Pipeline</h1>
     
      
-           <p itemprop="description" >Spring之AOP之底层实现静态代理实现
-定义IStudnetService接口
+           <p itemprop="description" >Redis的管道(Pipeline)为什么使用管道
+其中redis的执行一条命令可以分为四个步骤
+发送命令
+命令排队
+命令执行
+返回结果
 
-12345678/** * IStudentService的接口 * @author chenjiabing */public interface IStudentService &amp;#123;	</p>
+
+其中1-4之间所需要的时间称为往返时间(RTT)
+Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但大部分命令</p>
         
     
-    <time datetime="2018-05-21T10:22:48.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:35:00.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -260,29 +243,19 @@ Pr</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Spring之AOP/" title="Spring之AOP" itemprop="url">
+    <a href="/2018/06/26/Redis持久化/" title="Redis持久化" itemprop="url">
   
-    <h1 itemprop="name">Spring之AOP</h1>
+    <h1 itemprop="name">Redis持久化</h1>
     
      
-           <p itemprop="description" >Spring之AOPSpring框架两大核心内容IOC （ＤＩ）
-ＩＯＣ：控制反转
+           <p itemprop="description" >Redis持久化RDB (默认使用)
+RDB持久化是把当前进程数据生成快照保存到硬盘的过程,触发RDB持久化过程分为手动触发和自动触发。
 
-将创建和管理对象全部交给框架完成
-
-
-DI : 依赖注入
-
-为成员变量赋值
-其中有不同的方法赋值，但是我们推荐使用set方法注入或者注解方式
-
-
-
-AOP
-面向切面编程，是面向对象编程的重要组成</p>
+手动触发 (bgsave)
+执行bgsave命令,Redis父进程判断当前是否存在正在执行的子进程,如RDB/AOF子进程,如果存在bgsa</p>
         
     
-    <time datetime="2018-05-21T10:22:06.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:34:07.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -294,19 +267,22 @@ AOP
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Mybatis之使用总结/" title="Mybatis之使用总结" itemprop="url">
+    <a href="/2018/06/26/Redis客户端操作/" title="Redis客户端操作" itemprop="url">
   
-    <h1 itemprop="name">Mybatis之使用总结</h1>
+    <h1 itemprop="name">Redis客户端操作</h1>
     
      
-           <p itemprop="description" >Mybatis之使用总结多表连接查询
-如果需要使用多表连接查询，使用resultMap对应表与实体类的对应关系太麻烦，我们可以定义一个值对象，其中封装了多表连接查询返回的字段，我们直接使用值对象接收返回的结果即可
-比如我们在商城网站上的显示购物车的模块，使用的CartVo
+           <p itemprop="description" >Redis客户端Jedis远程连接
+yum install redis  : 安装redis
+开启6379端口
+在自己的阿里云的控制台上开启防火墙6379
+firewall-cmd --zone=public --add-port=6379/tcp
 
-12</p>
+
+如果显示firewall </p>
         
     
-    <time datetime="2018-05-21T10:20:56.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:33:32.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -318,22 +294,18 @@ AOP
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Springmvc之文件上传和下载/" title="Springmvc之文件上传和下载" itemprop="url">
+    <a href="/2018/06/26/Redis常用命令/" title="Redis常用命令" itemprop="url">
   
-    <h1 itemprop="name">Springmvc之文件上传和下载</h1>
+    <h1 itemprop="name">Redis常用命令</h1>
     
      
-           <p itemprop="description" >Springmvc之文件上传和下载前提
-在上传和下载之前需要在对应的根目录下创建对应的文件夹，比如我们在webApp下创建upload文件夹下
-
-添加依赖
-commons-io
-commons-fileupload
-
-123456789101112&amp;lt;!-- 添加文件上传的依</p>
+           <p itemprop="description" >Redis常用命令Redis全局命令
+keys * : 查看所有的key，这个会遍历所有的键,复杂度为O(n)，因此当存在了大量的key，应该禁止使用这个命令
+dbsize ：查看键key的个数，这个是直接获取内置的键总数变量，因此复杂度为O(1)
+exists key  : 检</p>
         
     
-    <time datetime="2018-05-21T10:20:12.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:32:44.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -344,7 +316,7 @@ commons-fileupload
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
   </nav>
 
 </div>
@@ -369,6 +341,10 @@ commons-fileupload
 		
 		  
 			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
 		  
 		
 		  
@@ -404,11 +380,11 @@ commons-fileupload
 		  
 		
 		  
-			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>7</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>8</sup></a></li>
 		  
 		
 		  
@@ -420,11 +396,19 @@ commons-fileupload
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>24</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>25</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>2</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/docker/" title="docker">docker<sup>1</sup></a></li>
 		  
 		
 		  
@@ -445,6 +429,10 @@ commons-fileupload
 		
 		  
 			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/学习资源/" title="学习资源">学习资源<sup>2</sup></a></li>
 		  
 		
 		  
@@ -469,7 +457,7 @@ commons-fileupload
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>24</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>25</sup></a></li>
 			
 		
 			
@@ -485,10 +473,6 @@ commons-fileupload
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
 			
 		
@@ -497,15 +481,27 @@ commons-fileupload
 			
 		
 			
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
@@ -514,10 +510,6 @@ commons-fileupload
 		
 			
 				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 			
 		
 			
@@ -542,10 +534,6 @@ commons-fileupload
 		
 			
 				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 		</ul>

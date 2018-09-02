@@ -79,18 +79,21 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/03/25/scrapy架构初探/" title="scrapy架构初探" itemprop="url">
+    <a href="/2017/04/16/java连接mysql初探篇/" title="java连接mysql初探篇" itemprop="url">
   
-    <h1 itemprop="name">scrapy架构初探</h1>
+    <h1 itemprop="name">java连接mysql初探篇</h1>
     
      
-           <p itemprop="description" >scrapy架构初探引言
+           <p itemprop="description" >java连接mysql基本连接
 
-Python即时网络爬虫启动的目标是一起把互联网变成大数据库。单纯的开放源代码并不是开源的全部，开源的核心是“开放的思想”，聚合最好的想法、技术、人员，所以将会参照众多领先产品，比如，Scrapy，ScrapingHub，import io等。
-本文简</p>
+加载驱动: Class.forName(com.mysql.jdbc.Driver)
+
+建立连接:Connection conn=DriverManager.getConnection(url,user,password)
+
+其中url=&amp;quo</p>
         
     
-    <time datetime="2017-03-25T05:11:58.000Z" itemprop="datePublished">2017-03-25</time>
+    <time datetime="2017-04-16T06:13:04.000Z" itemprop="datePublished">2017-04-16</time>
   </a>
 </section>
 
@@ -102,16 +105,200 @@ Python即时网络爬虫启动的目标是一起把互联网变成大数据库�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/03/25/java图形与文本处理一/" title="java图形与文本处理一" itemprop="url">
+    <a href="/2017/04/13/Linux干货篇一/" title="Linux干货篇一" itemprop="url">
   
-    <h1 itemprop="name">java图形与文本处理一</h1>
+    <h1 itemprop="name">Linux干货篇一</h1>
     
      
-           <p itemprop="description" >java绘制图形和文本&amp;lt;一&amp;gt;开篇介绍(官方文档)
-java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子类：DebugGraphics, Graphics2Dpublic abstract class </p>
+           <p itemprop="description" >Linux干货篇一虚拟机的安装(VMware)
+
+选择文件-&amp;gt;新建虚拟机
+选择自定义
+设置安装来源，选择稍后安装
+选择安装的操作系统，选择Linux,然后选择自己安装的对应版本即可
+设置虚拟机的安装路径，自己选择
+指定磁盘容量，选择默认20G,然后选择将虚拟磁盘存储为单个文</p>
         
     
-    <time datetime="2017-03-25T04:38:51.000Z" itemprop="datePublished">2017-03-25</time>
+    <time datetime="2017-04-13T04:29:34.000Z" itemprop="datePublished">2017-04-13</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/09/java干货篇之文字特效/" title="java干货篇之文字特效" itemprop="url">
+  
+    <h1 itemprop="name">java干货篇之文字特效</h1>
+    
+     
+           <p itemprop="description" >java干货篇文字特效立体效果的文字主要使用了Graphics类中的setFont和setColor的方法，绘制多层字然后加上平移一个坐标即可实现多重叠加的效果,让人看起来就像是立体一样,详情请见源码
+阴影效果的文字和面一样，只是平移的方式有些不同，详情请见源码
+倾斜效果的文字主</p>
+        
+    
+    <time datetime="2017-04-09T08:15:16.000Z" itemprop="datePublished">2017-04-09</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/08/Swing干货系列之JTextField/" title="swing干货系列之JTextField" itemprop="url">
+  
+    <h1 itemprop="name">swing干货系列之JTextField</h1>
+    
+     
+           <p itemprop="description" >Swing系列之JTextField(单行文本框)介绍
+JTextField是一个轻量级组件，它允许编辑单行文本。
+JTextField 具有建立字符串的方法，此字符串用作针对被激发的操作事件的命令字符串。java.awt.TextField 把字段文本用作针对 ActionEv</p>
+        
+    
+    <time datetime="2017-04-08T12:32:04.000Z" itemprop="datePublished">2017-04-08</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/08/scrapy爬取豆瓣全站/" title="scrapy爬取豆瓣全站" itemprop="url">
+  
+    <h1 itemprop="name">scrapy爬取豆瓣全站</h1>
+    
+     
+           <p itemprop="description" >Scrapy爬取豆瓣读书全站分析网页
+首先打开豆瓣读书中的分类浏览，可以看到其中有很多的分类
+
+豆瓣应该是一个比较好爬的网站，所有的数据都不是ajax加载的，我们打开谷歌的F12或者是火狐的FireBug可以很轻松的找到每一个分类的链接
+
+这里我们使用scrapy中的一个link</p>
+        
+    
+    <time datetime="2017-04-08T06:24:26.000Z" itemprop="datePublished">2017-04-08</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/05/java布局管理器/" title="swing布局管理器" itemprop="url">
+  
+    <h1 itemprop="name">swing布局管理器</h1>
+    
+     
+           <p itemprop="description" >Swing系列之布局管理器流布局(FlowLayout)默认的JApplet,JPanel,JScrollPane
+流布局是相对比较简单的一种布局管理器，也是最常用的布局管理器。在流布局中放置控件时，将按照控件的添加顺序，依次将控件从左到右进行摆放，并且在一行的最后会进行自动换行</p>
+        
+    
+    <time datetime="2017-04-05T15:06:08.000Z" itemprop="datePublished">2017-04-05</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/04/java图像处理干货篇/" title="java图像处理干货篇一" itemprop="url">
+  
+    <h1 itemprop="name">java图像处理干货篇一</h1>
+    
+     
+           <p itemprop="description" >java图像处理干货篇绘制图像
+绘制图像主要用到的是Graphics类中drawImage方法，当然Graphics2D中也有相应的方法
+
+主要的用法：
+
+public abstract boolean drawImage(Image img,x,y,ImageObserver </p>
+        
+    
+    <time datetime="2017-04-04T12:17:07.000Z" itemprop="datePublished">2017-04-04</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/01/matplotlib绘制图形基础/" title="matplotlib绘制图形基础" itemprop="url">
+  
+    <h1 itemprop="name">matplotlib绘制图形基础</h1>
+    
+     
+           <p itemprop="description" >matplotlib绘制基本图形折线图12345678import matplotlib.pyplot as pltimport numpy as npx=np.arange(0,10,1) #创建一个0-10之间以1为间隔的numpy数组y=x+10   plt.plot(x,</p>
+        
+    
+    <time datetime="2017-04-01T03:46:34.000Z" itemprop="datePublished">2017-04-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/03/28/Swing中的JSplitPane/" title="Swing干货系列之JSplitPane(分割面板)" itemprop="url">
+  
+    <h1 itemprop="name">Swing干货系列之JSplitPane(分割面板)</h1>
+    
+     
+           <p itemprop="description" >Swing中的JSplitPane(分割面板)引言
+JSplitPane 用于分隔两个（只能两个）Component。两个 Component 图形化分隔以外观实现为基础，并且这两个 Component 可以由用户交互式调整大小。有关如何使用 JSplitPane 的信息，请参阅</p>
+        
+    
+    <time datetime="2017-03-28T14:49:39.000Z" itemprop="datePublished">2017-03-28</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/03/27/Swing-干货系列之JSlider/" title="Swing干货系列之JSlider(滑块)" itemprop="url">
+  
+    <h1 itemprop="name">Swing干货系列之JSlider(滑块)</h1>
+    
+     
+           <p itemprop="description" >Swing干货系列之JSlider(滑块)引言
+一个让用户以图形方式在有界区间内通过移动滑块来选择值的组件。
+滑块可以显示主刻度标记以及主刻度之间的次刻度标记。刻度标记之间的值的个数由 setMajorTickSpacing和 setMinorTickSpacing 来控制。刻度</p>
+        
+    
+    <time datetime="2017-03-27T13:43:22.000Z" itemprop="datePublished">2017-03-27</time>
   </a>
 </section>
 
@@ -122,7 +309,7 @@ java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子�
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/19/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span>
+    <a class="extend prev" rel="prev" href="/page/19/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/21/">Next<span></span></a>
   </nav>
 
 </div>
@@ -147,6 +334,10 @@ java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子�
 		
 		  
 			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
 		  
 		
 		  
@@ -182,11 +373,11 @@ java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子�
 		  
 		
 		  
-			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>7</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>8</sup></a></li>
 		  
 		
 		  
@@ -198,11 +389,19 @@ java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子�
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>24</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>25</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>2</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/docker/" title="docker">docker<sup>1</sup></a></li>
 		  
 		
 		  
@@ -223,6 +422,10 @@ java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子�
 		
 		  
 			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/学习资源/" title="学习资源">学习资源<sup>2</sup></a></li>
 		  
 		
 		  
@@ -247,7 +450,7 @@ java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子�
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>24</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>25</sup></a></li>
 			
 		
 			
@@ -263,10 +466,6 @@ java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子�
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
 			
 		
@@ -275,15 +474,27 @@ java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子�
 			
 		
 			
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
@@ -292,10 +503,6 @@ java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子�
 		
 			
 				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 			
 		
 			
@@ -320,10 +527,6 @@ java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子�
 		
 			
 				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 		</ul>

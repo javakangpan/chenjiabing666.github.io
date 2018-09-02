@@ -79,24 +79,17 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/06/26/Redis的管道Pipeline/" title="Redis的管道Pipeline" itemprop="url">
+    <a href="/2018/06/26/并发编程之线程管理/" title="并发编程之线程管理" itemprop="url">
   
-    <h1 itemprop="name">Redis的管道Pipeline</h1>
+    <h1 itemprop="name">并发编程之线程管理</h1>
     
      
-           <p itemprop="description" >Redis的管道(Pipeline)为什么使用管道
-其中redis的执行一条命令可以分为四个步骤
-发送命令
-命令排队
-命令执行
-返回结果
-
-
-其中1-4之间所需要的时间称为往返时间(RTT)
-Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但大部分命令</p>
+           <p itemprop="description" >并发编程之线程管理线程的未捕获异常与监控
+如果线程的run方法抛出异常未被铺货（Uncaught Exception），那么随着run方法的退出，相应的线程也会提前终止。对于线程的这种异常终止，我们如何得知并做出可能的补救动作，例如重新创建并启动一个替代线程。
+Jdk中使用Unc</p>
         
     
-    <time datetime="2018-06-26T14:35:00.000Z" itemprop="datePublished">2018-06-26</time>
+    <time datetime="2018-06-26T14:53:22.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -108,19 +101,17 @@ Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/06/26/Redis持久化/" title="Redis持久化" itemprop="url">
+    <a href="/2018/06/26/并发编程之信号量/" title="并发编程之信号量" itemprop="url">
   
-    <h1 itemprop="name">Redis持久化</h1>
+    <h1 itemprop="name">并发编程之信号量</h1>
     
      
-           <p itemprop="description" >Redis持久化RDB (默认使用)
-RDB持久化是把当前进程数据生成快照保存到硬盘的过程,触发RDB持久化过程分为手动触发和自动触发。
-
-手动触发 (bgsave)
-执行bgsave命令,Redis父进程判断当前是否存在正在执行的子进程,如RDB/AOF子进程,如果存在bgsa</p>
+           <p itemprop="description" >并发编程之信号量详解1、Semaphore可以控同时访问的线程个数
+2、Semaphore类位于java.util.concurrent包下，它提供了2个构造器：
+12345678 //参数permits表示许可数目，即同时可以允许多少线程进行访问public Semaphore</p>
         
     
-    <time datetime="2018-06-26T14:34:07.000Z" itemprop="datePublished">2018-06-26</time>
+    <time datetime="2018-06-26T14:52:41.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -132,22 +123,15 @@ RDB持久化是把当前进程数据生成快照保存到硬盘的过程,触发R
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/06/26/Redis客户端操作/" title="Redis客户端操作" itemprop="url">
+    <a href="/2018/06/26/并发编程之阻塞队列/" title="并发编程之阻塞队列" itemprop="url">
   
-    <h1 itemprop="name">Redis客户端操作</h1>
+    <h1 itemprop="name">并发编程之阻塞队列</h1>
     
      
-           <p itemprop="description" >Redis客户端Jedis远程连接
-yum install redis  : 安装redis
-开启6379端口
-在自己的阿里云的控制台上开启防火墙6379
-firewall-cmd --zone=public --add-port=6379/tcp
-
-
-如果显示firewall </p>
+           <p itemprop="description" >并发编程之阻塞队列1. 什么是阻塞队列阻塞队列（BlockingQueue）是 Java 5 并发新特性中的内容，阻塞队列的接口是 java.util.concurrent.BlockingQueue，它提供了两个附加操作：当队列中为空时，从队列中获取元素的操作将被阻塞；当队列满</p>
         
     
-    <time datetime="2018-06-26T14:33:32.000Z" itemprop="datePublished">2018-06-26</time>
+    <time datetime="2018-06-26T14:51:59.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -159,18 +143,23 @@ firewall-cmd --zone=public --add-port=6379/tcp
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/06/26/Redis常用命令/" title="Redis常用命令" itemprop="url">
+    <a href="/2018/06/26/并发编程之死锁/" title="并发编程之死锁" itemprop="url">
   
-    <h1 itemprop="name">Redis常用命令</h1>
+    <h1 itemprop="name">并发编程之死锁</h1>
     
      
-           <p itemprop="description" >Redis常用命令Redis全局命令
-keys * : 查看所有的key，这个会遍历所有的键,复杂度为O(n)，因此当存在了大量的key，应该禁止使用这个命令
-dbsize ：查看键key的个数，这个是直接获取内置的键总数变量，因此复杂度为O(1)
-exists key  : 检</p>
+           <p itemprop="description" >并发编程之死锁定义
+是指两个或两个以上的进程在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。
+
+产生的条件
+互斥条件：所谓互斥就是线程在某一时间内独占资源。
+每一次的资源只能被一个线程使用
+
+
+请求与保持条件：一个线程因请求资源而阻塞时，对</p>
         
     
-    <time datetime="2018-06-26T14:32:44.000Z" itemprop="datePublished">2018-06-26</time>
+    <time datetime="2018-06-26T14:50:58.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -182,16 +171,19 @@ exists key  : 检</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/06/26/Redis使用场景/" title="Redis使用场景" itemprop="url">
+    <a href="/2018/06/26/并发编程之线程协作/" title="并发编程之线程协作" itemprop="url">
   
-    <h1 itemprop="name">Redis使用场景</h1>
+    <h1 itemprop="name">并发编程之线程协作</h1>
     
      
-           <p itemprop="description" >Redis使用场景缓存
-缓存机制几乎在所有的大型网站都有使用,合理地使用缓存不仅可以加快数据的访问速度,而且能够有效地降低后端数据源的压力。Redis提供了键值过期时间设置,并且也提供了灵活控制最大内存和内存溢出后的淘汰策略。可以这么说,一个合理的缓存设计能够为一个网站的稳定保驾</p>
+           <p itemprop="description" >并发编程之线程协作wait / notify / notifyAll
+Object.wait()/Object.notify()/Object.notifyAll()可用于实现等待和通知。
+wait()方法可以使其执行的线程被暂停，该方法用来实现等待。
+
+进入阻塞状态(Block</p>
         
     
-    <time datetime="2018-06-26T14:31:31.000Z" itemprop="datePublished">2018-06-26</time>
+    <time datetime="2018-06-26T14:50:23.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -203,21 +195,22 @@ exists key  : 检</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/06/14/二分查找/" title="二分查找" itemprop="url">
+    <a href="/2018/06/26/并发编程之volatile/" title="并发编程之volatile" itemprop="url">
   
-    <h1 itemprop="name">二分查找</h1>
+    <h1 itemprop="name">并发编程之volatile</h1>
     
      
-           <p itemprop="description" >二分查找算法
-对一个有序数组的查找
+           <p itemprop="description" >并发编程之volatile
+volatile称之为轻量级锁，保证了可见性和原子性。
+volatile不会引起上下文切换，因此是轻量级的
 
-准备
-使用冒泡排序算法对数组排序
+volatile的作用
+保障可见性，有序性和Long，double类型变量读写操作的原子性
 
-12345678910111213//冒泡排序   , 从小到大public void bubbleSort(Integer[] array)&amp;#123;	//外层遍历n-1次	for (int i = 0</p>
+volatile仅仅能保证对其修饰的变量的写操作</p>
         
     
-    <time datetime="2018-06-14T04:38:49.000Z" itemprop="datePublished">2018-06-14</time>
+    <time datetime="2018-06-26T14:49:47.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -229,39 +222,18 @@ exists key  : 检</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/06/06/Redis总结/" title="Redis总结" itemprop="url">
+    <a href="/2018/06/26/并发编程之线程同步机制的底层助手内存屏障/" title="并发编程之线程同步机制的底层助手内存屏障" itemprop="url">
   
-    <h1 itemprop="name">Redis总结</h1>
+    <h1 itemprop="name">并发编程之线程同步机制的底层助手内存屏障</h1>
     
      
-           <p itemprop="description" >Redis
-中文文档
-
-数据库的分类
-关系型数据库
-存储表
-使用SQL
-也称为结构化数据库
-常见产品
-MySQL
-Oracle
-SQL Server
-DB2
-
-
-
-
-非关系型数据库
-泛指不使用SQL操作的数据库
-文档数据库
-存储文档
-MogoDB，用于存储JSON文档
-
-
-Key</p>
+           <p itemprop="description" >线程同步机制的底层助手 ：内存屏障前提
+我们知道锁是可以保证可见性的，线程在获取锁和释放锁的时候会分别执行两个动作来保证可见性:
+刷新处理器缓存 ：保证了持有该锁的线程能够读取到前一个线程对共享数据的更新
+冲刷处理器缓存 ：保证了持有该锁的线程对共享数据所做的更新会对后续获取该锁</p>
         
     
-    <time datetime="2018-06-06T02:23:50.000Z" itemprop="datePublished">2018-06-06</time>
+    <time datetime="2018-06-26T14:49:10.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -273,21 +245,16 @@ Key</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/06/06/Nginx总结/" title="Nginx总结" itemprop="url">
+    <a href="/2018/06/26/并发编程之上下文切换/" title="并发编程之上下文切换" itemprop="url">
   
-    <h1 itemprop="name">Nginx总结</h1>
+    <h1 itemprop="name">并发编程之上下文切换</h1>
     
      
-           <p itemprop="description" >Nginx什么是Nginx
-是俄罗斯程序员开发的一款高性能的web服务器
-Nginx可以承受高并发，可以同时承受近百万请求
-利用Nginx和Tomcat(应用服务器)组合搭建反向代理服务器集群，可以解决WEB的高并发问题
-
-WEB 服务器
-凡是能够处理Http协议的服务器统称为w</p>
+           <p itemprop="description" >多线程之上下文切换定义
+在单处理器的情况下，每个线程的执行时间是根据时间片大小决定或者自身的其他原因，如果一个线程被迫或者主动暂停运行时，另外一个线程(可能是同一个进程中的线程或者其他进程中的)可以被操作系统(线程调度器)选中占用处理器开始或者继续运行。这种一个线程被暂停，即是被</p>
         
     
-    <time datetime="2018-06-06T02:23:10.000Z" itemprop="datePublished">2018-06-06</time>
+    <time datetime="2018-06-26T14:47:28.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -299,21 +266,21 @@ WEB 服务器
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/27/Linux使用总结/" title="Linux使用总结" itemprop="url">
+    <a href="/2018/06/26/并发编程之多线程状态/" title="并发编程之多线程状态" itemprop="url">
   
-    <h1 itemprop="name">Linux使用总结</h1>
+    <h1 itemprop="name">并发编程之多线程状态</h1>
     
      
-           <p itemprop="description" >Liunx使用命令管道连接 |
-命令管道符合为|,可以将两个命令进行连接，连接后第一个命令的输出结果作为第二个命令的输入信息
-比如   ls  /ect | more -10  分屏显示etc文件夹下的10行数据
+           <p itemprop="description" >多线程状态总的执行图：
 
-Linux文件系统结构
-/ : 根目录
-/home： 主文件夹，</p>
+所有状态：
+1，创建状态(new)
+在程序中用构造方法创建了一个线程对象后，新的线程对象便处于新建状态，此时，它已经有了相应的
+内存空间和其他资源，但还处于不可运行状态。新建一个线程对象可采用Thread 类的构造方法来实现，例
+如，“Thread th</p>
         
     
-    <time datetime="2018-05-27T02:19:42.000Z" itemprop="datePublished">2018-05-27</time>
+    <time datetime="2018-06-26T14:46:48.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -325,17 +292,18 @@ Linux文件系统结构
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/27/监听器获取spring配置文件创建的对象/" title="监听器获取spring配置文件创建的对象" itemprop="url">
+    <a href="/2018/06/26/并发编程之三大性质/" title="并发编程之三大性质" itemprop="url">
   
-    <h1 itemprop="name">监听器获取spring配置文件创建的对象</h1>
+    <h1 itemprop="name">并发编程之三大性质</h1>
     
      
-           <p itemprop="description" >监听器获取spring配置文件创建的对象前提
-我们在使用监听器的时候，会用到spring配置文件创建的对象，那么我们不能像其他的类中直接使用@Resource或者@AutoWired自动注入对象，那么我们如何获取对象呢
-比如我们在缓存数据的时候，就是在容器启动的时候读取数据库中的</p>
+           <p itemprop="description" >多线程的三大性质原子性
+对共享变量更新操作的时候，要保证执行不可分割，比如银行转账，一旦在多线程的环境下将其分割了，那么可能造成的后果可能是转账的账户钱少了，但是转到的账户的钱可能不是那么多或者根本没有转过去
+在单线程的环境下没有所谓的原子性，都是顺序执行的
+多线程的环境下对共享</p>
         
     
-    <time datetime="2018-05-27T02:18:11.000Z" itemprop="datePublished">2018-05-27</time>
+    <time datetime="2018-06-26T14:45:20.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -346,7 +314,7 @@ Linux文件系统结构
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
   </nav>
 
 </div>
@@ -371,6 +339,10 @@ Linux文件系统结构
 		
 		  
 			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
 		  
 		
 		  
@@ -406,11 +378,11 @@ Linux文件系统结构
 		  
 		
 		  
-			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>7</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>8</sup></a></li>
 		  
 		
 		  
@@ -422,11 +394,19 @@ Linux文件系统结构
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>24</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>25</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>2</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/docker/" title="docker">docker<sup>1</sup></a></li>
 		  
 		
 		  
@@ -447,6 +427,10 @@ Linux文件系统结构
 		
 		  
 			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/学习资源/" title="学习资源">学习资源<sup>2</sup></a></li>
 		  
 		
 		  
@@ -471,7 +455,7 @@ Linux文件系统结构
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>24</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>25</sup></a></li>
 			
 		
 			
@@ -487,10 +471,6 @@ Linux文件系统结构
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
 			
 		
@@ -499,15 +479,27 @@ Linux文件系统结构
 			
 		
 			
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
@@ -516,10 +508,6 @@ Linux文件系统结构
 		
 			
 				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 			
 		
 			
@@ -544,10 +532,6 @@ Linux文件系统结构
 		
 			
 				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 		</ul>

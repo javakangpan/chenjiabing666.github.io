@@ -79,20 +79,16 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Spring之密码加密/" title="Spring之密码加密" itemprop="url">
+    <a href="/2018/06/26/Redis使用场景/" title="Redis使用场景" itemprop="url">
   
-    <h1 itemprop="name">Spring之密码加密</h1>
+    <h1 itemprop="name">Redis使用场景</h1>
     
      
-           <p itemprop="description" >密码加密消息摘要(数据的指纹)定义
-对不固定的消息（字符串，一段文本，一个文件），通过一种特定的算法，得到一个固定长度的文本，固定长度的文本叫做消息摘要
-比如我是程序员经过特定的算法之后，得到了消息摘要为：adaf02515dfds7885csdfcdsc
-
-作用
-数据完整性的检</p>
+           <p itemprop="description" >Redis使用场景缓存
+缓存机制几乎在所有的大型网站都有使用,合理地使用缓存不仅可以加快数据的访问速度,而且能够有效地降低后端数据源的压力。Redis提供了键值过期时间设置,并且也提供了灵活控制最大内存和内存溢出后的淘汰策略。可以这么说,一个合理的缓存设计能够为一个网站的稳定保驾</p>
         
     
-    <time datetime="2018-05-21T10:19:21.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:31:31.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -104,17 +100,21 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/拦截器拦截Ajax请求/" title="Springmvc拦截器拦截Ajax请求" itemprop="url">
+    <a href="/2018/06/14/二分查找/" title="二分查找" itemprop="url">
   
-    <h1 itemprop="name">Springmvc拦截器拦截Ajax请求</h1>
+    <h1 itemprop="name">二分查找</h1>
     
      
-           <p itemprop="description" >拦截器拦截Ajax请求##　问题
+           <p itemprop="description" >二分查找算法
+对一个有序数组的查找
 
-如果我们在拦截器中定义了拦截器的路径为/user/*这个地址,并且拦截器拦截器之后，如果没有登录，那么重定向到登录界面。但是我们在未登录的前提下使用Ajax异步请求了/user/addUser.do这个地址，出现了拦截器是拦截了，但是并没有重定</p>
+准备
+使用冒泡排序算法对数组排序
+
+12345678910111213//冒泡排序   , 从小到大public void bubbleSort(Integer[] array)&amp;#123;	//外层遍历n-1次	for (int i = 0</p>
         
     
-    <time datetime="2018-05-21T10:16:29.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-14T04:38:49.000Z" itemprop="datePublished">2018-06-14</time>
   </a>
 </section>
 
@@ -126,28 +126,39 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/用户管理模块之用户注册/" title="用户管理模块之用户注册" itemprop="url">
+    <a href="/2018/06/06/Redis总结/" title="Redis总结" itemprop="url">
   
-    <h1 itemprop="name">用户管理模块之用户注册</h1>
+    <h1 itemprop="name">Redis总结</h1>
     
      
-           <p itemprop="description" >用户管理模块之用户注册实现的功能
-注册
-验证用户名是否已经存在
-验证邮箱
-验证电话号码
+           <p itemprop="description" >Redis
+中文文档
+
+数据库的分类
+关系型数据库
+存储表
+使用SQL
+也称为结构化数据库
+常见产品
+MySQL
+Oracle
+SQL Server
+DB2
 
 
-登录
-个人信息修改
 
-创建数据库和表
-创建数据库和表
-需要注意的是：一些字段不能为空，但是我们在设计表的时候不需要设计，只需要在前端设计表单的时候检查字段是否为空即可。
-字段修改的人，修改</p>
+
+非关系型数据库
+泛指不使用SQL操作的数据库
+文档数据库
+存储文档
+MogoDB，用于存储JSON文档
+
+
+Key</p>
         
     
-    <time datetime="2018-05-09T00:47:43.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-06-06T02:23:50.000Z" itemprop="datePublished">2018-06-06</time>
   </a>
 </section>
 
@@ -159,23 +170,21 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/搭建工程/" title="搭建工程" itemprop="url">
+    <a href="/2018/06/06/Nginx总结/" title="Nginx总结" itemprop="url">
   
-    <h1 itemprop="name">搭建工程</h1>
+    <h1 itemprop="name">Nginx总结</h1>
     
      
-           <p itemprop="description" >搭建工程框架
-Spring + SpringMVC + Mybatis  ———–  SSM
+           <p itemprop="description" >Nginx什么是Nginx
+是俄罗斯程序员开发的一款高性能的web服务器
+Nginx可以承受高并发，可以同时承受近百万请求
+利用Nginx和Tomcat(应用服务器)组合搭建反向代理服务器集群，可以解决WEB的高并发问题
 
-创建工程步骤
-创建Maven工程
-添加web.xml和tomcat运行环境
-创建包的结构
-实体类的包：cn.tedu.store.bean
-控制器层：cn.tedu.store.con</p>
+WEB 服务器
+凡是能够处理Http协议的服务器统称为w</p>
         
     
-    <time datetime="2018-05-09T00:46:52.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-06-06T02:23:10.000Z" itemprop="datePublished">2018-06-06</time>
   </a>
 </section>
 
@@ -187,45 +196,21 @@ Spring + SpringMVC + Mybatis  ———–  SSM
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/商城网站之模块设计/" title="商城网站之模块设计" itemprop="url">
+    <a href="/2018/05/27/Linux使用总结/" title="Linux使用总结" itemprop="url">
   
-    <h1 itemprop="name">商城网站之模块设计</h1>
+    <h1 itemprop="name">Linux使用总结</h1>
     
      
-           <p itemprop="description" >SSM - 商城模块用户管理
-注册
-登录
-个人信息修改
+           <p itemprop="description" >Liunx使用命令管道连接 |
+命令管道符合为|,可以将两个命令进行连接，连接后第一个命令的输出结果作为第二个命令的输入信息
+比如   ls  /ect | more -10  分屏显示etc文件夹下的10行数据
 
-地址管理
-添加收货地址
-查询所有的收货地址
-修改
-删除
-
-商品
-商品分类
-商品展示
-商品详情
-
-购物车
-将商品添加到购物车
-购物车管理
-
-订单
-显示订单
-付款
-
-项目开发流程
-需求分析
-概要设计
-详细设计
-编码
-测试
-交付</p>
+Linux文件系统结构
+/ : 根目录
+/home： 主文件夹，</p>
         
     
-    <time datetime="2018-05-09T00:46:07.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-27T02:19:42.000Z" itemprop="datePublished">2018-05-27</time>
   </a>
 </section>
 
@@ -237,21 +222,17 @@ Spring + SpringMVC + Mybatis  ———–  SSM
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/选择排序/" title="选择排序" itemprop="url">
+    <a href="/2018/05/27/监听器获取spring配置文件创建的对象/" title="监听器获取spring配置文件创建的对象" itemprop="url">
   
-    <h1 itemprop="name">选择排序</h1>
+    <h1 itemprop="name">监听器获取spring配置文件创建的对象</h1>
     
      
-           <p itemprop="description" >选择排序思想(从小到大)
-每一趟从待排序的记录中选出最小的元素，顺序放在已排好序的序列最后，直到全部记录排序完毕
-
-分析
-假设数组中有个n元素
-第一趟：在整个数组中选择出最小的元素，和数组中的第一个元素交换位置，那么此时的第一个元素就是最小的
-第二趟： 从第二个元素开始再次查找剩</p>
+           <p itemprop="description" >监听器获取spring配置文件创建的对象前提
+我们在使用监听器的时候，会用到spring配置文件创建的对象，那么我们不能像其他的类中直接使用@Resource或者@AutoWired自动注入对象，那么我们如何获取对象呢
+比如我们在缓存数据的时候，就是在容器启动的时候读取数据库中的</p>
         
     
-    <time datetime="2018-05-09T00:44:07.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-27T02:18:11.000Z" itemprop="datePublished">2018-05-27</time>
   </a>
 </section>
 
@@ -263,23 +244,15 @@ Spring + SpringMVC + Mybatis  ———–  SSM
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/插入排序算法/" title="插入排序算法" itemprop="url">
+    <a href="/2018/05/27/SSM整合/" title="SSM整合" itemprop="url">
   
-    <h1 itemprop="name">插入排序算法</h1>
+    <h1 itemprop="name">SSM整合</h1>
     
      
-           <p itemprop="description" >插入排序算法思想
-我们以从小到大的排序进行讲解
-
-
-插入排序就是将一个元素插入到一个已经是有序的序列中， 通过遍历比较这个待插入元素和有序的序列元素之间的大小，来比较需要插入的位置，使其仍然是一个有序的数组。
-数组插入的算法：向后移动元素给待插入的数据位置
-
-详解
-第一趟：假设我</p>
+           <p itemprop="description" >Spring + SpringMVC + Mybatis整合依赖123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585</p>
         
     
-    <time datetime="2018-05-09T00:43:57.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-27T02:16:20.000Z" itemprop="datePublished">2018-05-27</time>
   </a>
 </section>
 
@@ -291,21 +264,19 @@ Spring + SpringMVC + Mybatis  ———–  SSM
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/JQuery实现AJAX异步提交/" title="JQuery实现AJAX异步提交" itemprop="url">
+    <a href="/2018/05/27/Lucene全文检索/" title="Lucene全文检索" itemprop="url">
   
-    <h1 itemprop="name">JQuery实现AJAX异步提交</h1>
+    <h1 itemprop="name">Lucene全文检索</h1>
     
      
-           <p itemprop="description" >JQuery实现AJAX异步提交准备
-点击下载JQurery的文件
+           <p itemprop="description" >Lucene  全文检索Field域
+Field是文档中的域，包括Field名和Field值两部分，一个文档可以包括多个Field，Document只是Field的一个承载体，Field值即为要索引的内容，也是要搜索的内容。
 
-
-添加JQuery的文件： &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;文件路径&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-
-$.ajax</p>
+是否分词
+分词就是对文件的内容或者其他的属性进行分割</p>
         
     
-    <time datetime="2018-05-09T00:42:04.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-27T02:13:57.000Z" itemprop="datePublished">2018-05-27</time>
   </a>
 </section>
 
@@ -317,18 +288,18 @@ $.ajax</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/Springmvc中的转发重定向和拦截器/" title="Springmvc中的转发重定向和拦截器" itemprop="url">
+    <a href="/2018/05/21/购物车模块/" title="购物车模块" itemprop="url">
   
-    <h1 itemprop="name">Springmvc中的转发重定向和拦截器</h1>
+    <h1 itemprop="name">购物车模块</h1>
     
      
-           <p itemprop="description" >Springmvc中的转发重定向和拦截器可变参数
-可变参数在设计方法时，使用数据类型...来声明参数类型，例如：public static void function(int... numbers)在实现方法体时，可变参数是作为数组来处理
+           <p itemprop="description" >购物车模块建表
+创建购物车的表
 
-1234567891011121314</p>
+123456789create table t_cart(id int primary key auto_increment,　　//主键                   	goods_id varchar(200),　　　//商品的ｉｄ  </p>
         
     
-    <time datetime="2018-05-09T00:40:51.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-21T10:27:35.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -340,20 +311,25 @@ $.ajax</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/Springmvc解决中文乱码问题/" title="Springmvc解决中文乱码问题" itemprop="url">
+    <a href="/2018/05/21/用户管理模块之个人信息修改/" title="用户管理模块之个人信息修改" itemprop="url">
   
-    <h1 itemprop="name">Springmvc解决中文乱码问题</h1>
+    <h1 itemprop="name">用户管理模块之个人信息修改</h1>
     
      
-           <p itemprop="description" >Springmvc解决中文乱码问题POST
-在表单提交的时候，如果遇到中文乱码的情况，springmvc提供了一个CharacterEncodingFilter过滤器，我们只需要在web.xml文件中配置即可
+           <p itemprop="description" >用户管理模块之个人信息修改功能
+修改用户名
+修改性别
+修改邮箱
+修改密码
+修改头像
 
-注意
-表单的提交方式必须是post
-在web.xml中配置Chara</p>
+在UserMapper中定义方法和UserMapper.xml中定义定义接口方法
+定义接口方法
+
+12345/** * 更新用户信息 * @param user  User对象 */void u</p>
         
     
-    <time datetime="2018-05-09T00:39:48.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-21T10:26:45.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -364,7 +340,7 @@ $.ajax</p>
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/5/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/7/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/7/">Next<span></span></a>
   </nav>
 
 </div>
@@ -389,6 +365,10 @@ $.ajax</p>
 		
 		  
 			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
 		  
 		
 		  
@@ -424,11 +404,11 @@ $.ajax</p>
 		  
 		
 		  
-			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>7</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>8</sup></a></li>
 		  
 		
 		  
@@ -440,11 +420,19 @@ $.ajax</p>
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>24</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>25</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>2</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/docker/" title="docker">docker<sup>1</sup></a></li>
 		  
 		
 		  
@@ -465,6 +453,10 @@ $.ajax</p>
 		
 		  
 			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/学习资源/" title="学习资源">学习资源<sup>2</sup></a></li>
 		  
 		
 		  
@@ -489,7 +481,7 @@ $.ajax</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>24</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>25</sup></a></li>
 			
 		
 			
@@ -505,10 +497,6 @@ $.ajax</p>
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
 			
 		
@@ -517,15 +505,27 @@ $.ajax</p>
 			
 		
 			
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
@@ -534,10 +534,6 @@ $.ajax</p>
 		
 			
 				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 			
 		
 			
@@ -562,10 +558,6 @@ $.ajax</p>
 		
 			
 				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 		</ul>

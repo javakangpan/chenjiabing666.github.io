@@ -79,19 +79,26 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/Mybatis之增删改查/" title="Mybatis之增删改查" itemprop="url">
+    <a href="/2018/05/21/地址管理之省市区三级联动菜单/" title="地址管理之省市区三级联动菜单" itemprop="url">
   
-    <h1 itemprop="name">Mybatis之增删改查</h1>
+    <h1 itemprop="name">地址管理之省市区三级联动菜单</h1>
     
      
-           <p itemprop="description" >Mybatis的增删改查增加数据
-在增加数据的时候，mybatis默认返回的是受影响的行数，因此不需要指定ResultType指定返回类型
-在UserMapper.java接口中添加方法
+           <p itemprop="description" >地址管理之省市区三级联动菜单
+导入省市区的数据
+下载sql语句的文件
+在数据库中执行：source 文件路径即可导入
+导入成功之后，在数据库中会出现三张表，分别代表省,市,区
 
-1234/**	@param user User对象*/Integer reg(User </p>
+创建实体类
+get，set方法
+hashCode和equals方法
+实现序列化接口，生成安全码
+
+Pr</p>
         
     
-    <time datetime="2018-05-04T10:04:29.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-05-21T10:26:00.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -103,17 +110,25 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/快速排序算法/" title="快速排序算法" itemprop="url">
+    <a href="/2018/05/21/用户管理模块之用户登录/" title="用户管理模块之用户登录" itemprop="url">
   
-    <h1 itemprop="name">快速排序算法</h1>
+    <h1 itemprop="name">用户管理模块之用户登录</h1>
     
      
-           <p itemprop="description" >快速排序算法思想(从小到大排序)
-快速排序是使用分治法来完成的
-基本思想就是先从其中选取一个基准值，然后从数组的两端开始移动查找，在右边移动查找到比基准值小的数据停止移动，此时在左边查找到比基准值大的数据也停止查找，交换这两个查找到的数据，交换完成之后两端继续移动查找，如果左边找</p>
+           <p itemprop="description" >用户管理模块之用户登录开发顺序
+持久层
+业务层
+控制层
+页面
+
+在cn.tedu.store.mapper中新建UserMapper.java接口
+由于在用户管理模块之用户注册已经创建了，所以不用新建了
+
+功能
+验证用户名是否存在，其中返回的是用户对象，这个在前面的注册已经定义过</p>
         
     
-    <time datetime="2018-05-04T09:55:26.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-05-21T10:24:56.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -125,19 +140,18 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/冒泡排序算法/" title="冒泡排序算法" itemprop="url">
+    <a href="/2018/05/21/Spring之AOP之底层实现/" title="Spring之AOP之底层实现" itemprop="url">
   
-    <h1 itemprop="name">冒泡排序算法</h1>
+    <h1 itemprop="name">Spring之AOP之底层实现</h1>
     
      
-           <p itemprop="description" >冒泡排序算法原理
-比较相邻的两个数，将值较大的元素放在最前面，由于较小的数字像泡泡一样浮上来，因此取名为冒泡
+           <p itemprop="description" >Spring之AOP之底层实现静态代理实现
+定义IStudnetService接口
 
-从后向前比较(小的数上浮)
-第一趟：从数组的最后一个元素和倒数第二个元素比较，小的上浮(交换)，之后倒数第二个和倒数第三个数字比较，小的上浮(交换)，直至第二个数字和第</p>
+12345678/** * IStudentService的接口 * @author chenjiabing */public interface IStudentService &amp;#123;	</p>
         
     
-    <time datetime="2018-05-04T09:54:34.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-05-21T10:22:48.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -149,26 +163,29 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/JSON/" title="JSON" itemprop="url">
+    <a href="/2018/05/21/Spring之AOP/" title="Spring之AOP" itemprop="url">
   
-    <h1 itemprop="name">JSON</h1>
+    <h1 itemprop="name">Spring之AOP</h1>
     
      
-           <p itemprop="description" >JSON定义
-数据组织的一种方式
+           <p itemprop="description" >Spring之AOPSpring框架两大核心内容IOC （ＤＩ）
+ＩＯＣ：控制反转
 
-格式
-key-value形式的组织
-
-JSON对象
-对象保存在{}中，并且以key-value的形式存储
-其中的key必须是加上双引号，不能是单引号
+将创建和管理对象全部交给框架完成
 
 
-{&amp;quot;key1&amp;quot;,value1,&amp;quot;key2&amp;quot;,val</p>
+DI : 依赖注入
+
+为成员变量赋值
+其中有不同的方法赋值，但是我们推荐使用set方法注入或者注解方式
+
+
+
+AOP
+面向切面编程，是面向对象编程的重要组成</p>
         
     
-    <time datetime="2018-05-04T09:53:41.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-05-21T10:22:06.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -180,22 +197,19 @@ JSON对象
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/javascript实现Ajax/" title="javascript实现Ajax" itemprop="url">
+    <a href="/2018/05/21/Mybatis之使用总结/" title="Mybatis之使用总结" itemprop="url">
   
-    <h1 itemprop="name">javascript实现Ajax</h1>
+    <h1 itemprop="name">Mybatis之使用总结</h1>
     
      
-           <p itemprop="description" >javascript实现Ajax定义
-异步的javascript和XML，实现异步提交功能的技术(XMLHttpRequest)
-不响应页面的前提下，服务器可以响应其中的一小部分数据到页面上
+           <p itemprop="description" >Mybatis之使用总结多表连接查询
+如果需要使用多表连接查询，使用resultMap对应表与实体类的对应关系太麻烦，我们可以定义一个值对象，其中封装了多表连接查询返回的字段，我们直接使用值对象接收返回的结果即可
+比如我们在商城网站上的显示购物车的模块，使用的CartVo
 
-实现的步骤创建XMLHttpRequest
-解决浏览器兼容问题
-
-1234567891</p>
+12</p>
         
     
-    <time datetime="2018-05-04T09:52:53.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-05-21T10:20:56.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -207,19 +221,22 @@ JSON对象
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/Mybatis配置事务管理器/" title="Mybatis配置事务管理器" itemprop="url">
+    <a href="/2018/05/21/Springmvc之文件上传和下载/" title="Springmvc之文件上传和下载" itemprop="url">
   
-    <h1 itemprop="name">Mybatis配置事务管理器</h1>
+    <h1 itemprop="name">Springmvc之文件上传和下载</h1>
     
      
-           <p itemprop="description" >Mybatis配置事务管理器
-数据库中的事务可以保证在连续执行的多条写操作(增删改)时，这多条操作要么成功，要么全部失败，以保证数据和逻辑的完整及严谨
-在使用mybatis时，无需考虑事务如何创建，如何提交等，只需要配置好事务管理器
+           <p itemprop="description" >Springmvc之文件上传和下载前提
+在上传和下载之前需要在对应的根目录下创建对应的文件夹，比如我们在webApp下创建upload文件夹下
 
-配置事务管理器(DataSourceTran</p>
+添加依赖
+commons-io
+commons-fileupload
+
+123456789101112&amp;lt;!-- 添加文件上传的依</p>
         
     
-    <time datetime="2018-05-04T09:52:03.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-05-21T10:20:12.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -231,18 +248,20 @@ JSON对象
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/Mybatis之多表查询/" title="Mybatis之多表查询" itemprop="url">
+    <a href="/2018/05/21/Spring之密码加密/" title="Spring之密码加密" itemprop="url">
   
-    <h1 itemprop="name">Mybatis之多表查询</h1>
+    <h1 itemprop="name">Spring之密码加密</h1>
     
      
-           <p itemprop="description" >Mybatis之多表查询一对一的查询(&amp;lt;assocation&amp;gt;)创建Java类
-创建User类(用户类)
+           <p itemprop="description" >密码加密消息摘要(数据的指纹)定义
+对不固定的消息（字符串，一段文本，一个文件），通过一种特定的算法，得到一个固定长度的文本，固定长度的文本叫做消息摘要
+比如我是程序员经过特定的算法之后，得到了消息摘要为：adaf02515dfds7885csdfcdsc
 
-12345678910111213141516171819202122232425262728293031323334353637383940414243444</p>
+作用
+数据完整性的检</p>
         
     
-    <time datetime="2018-05-04T09:51:10.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-05-21T10:19:21.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -254,17 +273,17 @@ JSON对象
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/Mybatis之ResultMap/" title="Mybatis之ResultMap" itemprop="url">
+    <a href="/2018/05/21/拦截器拦截Ajax请求/" title="Springmvc拦截器拦截Ajax请求" itemprop="url">
   
-    <h1 itemprop="name">Mybatis之ResultMap</h1>
+    <h1 itemprop="name">Springmvc拦截器拦截Ajax请求</h1>
     
      
-           <p itemprop="description" >Mybatis之ResultMap实体类
-通常实体类中的属性要和数据库表中的字段一致，包括类型，字段名称
-因此我们在单表查询的时候不需要使用&amp;lt;resultMap&amp;gt;指定实体类和表中的字段对应关系，但是如果我们在查询的时候使用了别名，或者属性字段和表的字段不一致，那么我们</p>
+           <p itemprop="description" >拦截器拦截Ajax请求##　问题
+
+如果我们在拦截器中定义了拦截器的路径为/user/*这个地址,并且拦截器拦截器之后，如果没有登录，那么重定向到登录界面。但是我们在未登录的前提下使用Ajax异步请求了/user/addUser.do这个地址，出现了拦截器是拦截了，但是并没有重定</p>
         
     
-    <time datetime="2018-05-04T09:49:51.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-05-21T10:16:29.000Z" itemprop="datePublished">2018-05-21</time>
   </a>
 </section>
 
@@ -276,23 +295,28 @@ JSON对象
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/动态sql/" title="MyBatis之动态sql" itemprop="url">
+    <a href="/2018/05/09/用户管理模块之用户注册/" title="用户管理模块之用户注册" itemprop="url">
   
-    <h1 itemprop="name">MyBatis之动态sql</h1>
+    <h1 itemprop="name">用户管理模块之用户注册</h1>
     
      
-           <p itemprop="description" >动态sqlif子句格式
-&amp;lt;if test=&amp;quot;&amp;quot;&amp;gt;
-test中填写的是判断条件
+           <p itemprop="description" >用户管理模块之用户注册实现的功能
+注册
+验证用户名是否已经存在
+验证邮箱
+验证电话号码
 
 
+登录
+个人信息修改
 
-实例更新密码或者年龄
-首先在UserMapper.java中添加抽象方法
-因为要一个方法兼具更新密码或者更新年龄的功能，那么我们直接使用一个实体类对象作为方法参数即</p>
+创建数据库和表
+创建数据库和表
+需要注意的是：一些字段不能为空，但是我们在设计表的时候不需要设计，只需要在前端设计表单的时候检查字段是否为空即可。
+字段修改的人，修改</p>
         
     
-    <time datetime="2018-05-04T09:48:53.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-05-09T00:47:43.000Z" itemprop="datePublished">2018-05-09</time>
   </a>
 </section>
 
@@ -304,16 +328,23 @@ test中填写的是判断条件
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/04/MyBatis入门程序/" title="MyBatis入门程序" itemprop="url">
+    <a href="/2018/05/09/搭建工程/" title="搭建工程" itemprop="url">
   
-    <h1 itemprop="name">MyBatis入门程序</h1>
+    <h1 itemprop="name">搭建工程</h1>
     
      
-           <p itemprop="description" >MyBatis入门程序设计案例实现向tedu_ums数据库的t_users数据表中插入数据。
-开发步骤1 创建项目DAY07-MyBatis-Sample，生成web.xml，在web.xml中配置（2项），添加spring-webmvc依赖，复制Spring配置文件，添加Tom</p>
+           <p itemprop="description" >搭建工程框架
+Spring + SpringMVC + Mybatis  ———–  SSM
+
+创建工程步骤
+创建Maven工程
+添加web.xml和tomcat运行环境
+创建包的结构
+实体类的包：cn.tedu.store.bean
+控制器层：cn.tedu.store.con</p>
         
     
-    <time datetime="2018-05-04T09:47:40.000Z" itemprop="datePublished">2018-05-04</time>
+    <time datetime="2018-05-09T00:46:52.000Z" itemprop="datePublished">2018-05-09</time>
   </a>
 </section>
 
@@ -324,7 +355,7 @@ test中填写的是判断条件
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/6/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/8/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/8/">Next<span></span></a>
   </nav>
 
 </div>
@@ -349,6 +380,10 @@ test中填写的是判断条件
 		
 		  
 			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
 		  
 		
 		  
@@ -384,11 +419,11 @@ test中填写的是判断条件
 		  
 		
 		  
-			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>7</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>8</sup></a></li>
 		  
 		
 		  
@@ -400,11 +435,19 @@ test中填写的是判断条件
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>24</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>25</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>2</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/docker/" title="docker">docker<sup>1</sup></a></li>
 		  
 		
 		  
@@ -425,6 +468,10 @@ test中填写的是判断条件
 		
 		  
 			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/学习资源/" title="学习资源">学习资源<sup>2</sup></a></li>
 		  
 		
 		  
@@ -449,7 +496,7 @@ test中填写的是判断条件
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>24</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>25</sup></a></li>
 			
 		
 			
@@ -465,10 +512,6 @@ test中填写的是判断条件
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
 			
 		
@@ -477,15 +520,27 @@ test中填写的是判断条件
 			
 		
 			
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>10</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
@@ -494,10 +549,6 @@ test中填写的是判断条件
 		
 			
 				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>7</sup></a></li>
 			
 		
 			
@@ -522,10 +573,6 @@ test中填写的是判断条件
 		
 			
 				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 		</ul>
