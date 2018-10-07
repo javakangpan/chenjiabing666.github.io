@@ -79,181 +79,6 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/05/25/Java-IO学习笔记五/" title="Java IO学习笔记五" itemprop="url">
-  
-    <h1 itemprop="name">Java IO学习笔记五</h1>
-    
-     
-           <p itemprop="description" >管道流
-
-管道流的主要作用是可以进行两个线程间的通讯，分为管道输出流(PipedOutputStream)、管道输入流（PipedInputStream），如果想要进行管道输出，则必须要把输出流连在输入流之上，在PipedOutputStream类上有如下的一个方法用于连接管道：</p>
-        
-    
-    <time datetime="2017-05-25T07:33:00.000Z" itemprop="datePublished">2017-05-25</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/25/Java-IO学习笔记四/" title="Java IO学习笔记四" itemprop="url">
-  
-    <h1 itemprop="name">Java IO学习笔记四</h1>
-    
-     
-           <p itemprop="description" >内存操作流
-之前的所有的流操作都是针对文件的，但是有时候只是想要实现数据间转换，此时如果我们想要创建一个文件然后再删除文件，那样显得有点麻烦，因此此时的内存操作流就显得很适合这类的操作，因为它只是在内存中存储，并不会真正的创建文件，内存操作流涉及的两个类是ByteArrayInp</p>
-        
-    
-    <time datetime="2017-05-25T07:32:49.000Z" itemprop="datePublished">2017-05-25</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/24/Java-IO学习笔记三/" title="Java IO学习笔记三" itemprop="url">
-  
-    <h1 itemprop="name">Java IO学习笔记三</h1>
-    
-     
-           <p itemprop="description" >Java IO学习笔记三
-
-在整个IO包中，实际上就是分为字节流和字符流，但是除了这两个流之外，还存在了一组字节流-字符流的转换类。
-
-OutputStreamWriter：是Writer的子类，将输出的字符流变为字节流，即：将一个字符流的输出对象变成字节流的输出对象。
-
-Inp</p>
-        
-    
-    <time datetime="2017-05-24T06:48:34.000Z" itemprop="datePublished">2017-05-24</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/24/Java-IO学习笔记二/" title="Java IO学习笔记二" itemprop="url">
-  
-    <h1 itemprop="name">Java IO学习笔记二</h1>
-    
-     
-           <p itemprop="description" >Java IO学习笔记二流的概念
-
-在程序中所有的数据都是以流的方式进行传输或保存的，程序需要数据的时候要使用输入流读取数据，而当程序需要将一些数据保存起来的时候，就要使用输出流完成。
-程序中的输入输出都是以流的形式保存的，流中保存的实际上全都是字节文件。
-
-
-字节流和字符流
-
-</p>
-        
-    
-    <time datetime="2017-05-24T06:46:06.000Z" itemprop="datePublished">2017-05-24</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/23/Java-IO学习笔记一/" title="Java IO学习笔记一" itemprop="url">
-  
-    <h1 itemprop="name">Java IO学习笔记一</h1>
-    
-     
-           <p itemprop="description" >Java IO学习笔记一File
-File是文件和目录路径名的抽象表示形式，总的来说就是java创建删除文件目录的一个类库，但是作用不仅仅于此，详细见官方文档
-
-构造函数
-
-File(File parent, String child) 根据 parent 抽象路径名和 chil</p>
-        
-    
-    <time datetime="2017-05-23T07:23:50.000Z" itemprop="datePublished">2017-05-23</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/15/python实现微信接口/" title="python实现微信接口" itemprop="url">
-  
-    <h1 itemprop="name">python实现微信接口</h1>
-    
-     
-           <p itemprop="description" >python实现微信接口(itchat)安装
-
-sudo pip install itchat
-
-
-登录
-
-itchat.auto_login()  这种方法将会通过微信扫描二维码登录，但是这种登录的方式确实短时间的登录，并不会保留登录的状态，也就是下次登录时还是需要扫描二维码，</p>
-        
-    
-    <time datetime="2017-05-14T19:44:21.000Z" itemprop="datePublished">2017-05-15</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/05/13/python发送邮件/" title="python发送邮件" itemprop="url">
-  
-    <h1 itemprop="name">python发送邮件</h1>
-    
-     
-           <p itemprop="description" >python发送邮件准备
-python中发送邮件主要用的是smtplib和email两个模块，下面主要对这两个模块进行讲解
-在讲解之前需要准备至少两个测试的邮箱，其中要在邮箱的设置中开启smtplib协议才可以进行发送和接受
-
-smtplib
-
-smtplib.SMTP( [ho</p>
-        
-    
-    <time datetime="2017-05-12T23:17:41.000Z" itemprop="datePublished">2017-05-13</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
     <a href="/2017/05/13/python制作电子书/" title="python制作电子书" itemprop="url">
   
     <h1 itemprop="name">python制作电子书</h1>
@@ -321,9 +146,167 @@ sudo apt-get install wkhtm</p>
 
 
 
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/05/07/git常用命令/" title="git常用命令" itemprop="url">
+  
+    <h1 itemprop="name">git常用命令</h1>
+    
+     
+           <p itemprop="description" >git常用操作第一次连接远程仓库的配置配置user.name 和user.email
+
+git config --global user.name &amp;quot;name&amp;quot;    设置你的用户名
+git config --global user.email &amp;quot;e</p>
+        
+    
+    <time datetime="2017-05-06T20:11:50.000Z" itemprop="datePublished">2017-05-07</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/05/07/scrapy爬取淘宝女郎/" title="scrapy爬取淘宝女郎" itemprop="url">
+  
+    <h1 itemprop="name">scrapy爬取淘宝女郎</h1>
+    
+     
+           <p itemprop="description" >scrapy抓取淘宝女郎准备工作
+
+首先在淘宝女郎的首页这里查看，当然想要爬取更多的话，当然这里要查看翻页的url,不过这操蛋的地方就是这里的翻页是使用javascript加载的，这个就有点尴尬了，找了好久没有找到，这里如果有朋友知道怎样翻页的话，麻烦告诉我一声，谢谢了…，不过就</p>
+        
+    
+    <time datetime="2017-05-06T20:03:54.000Z" itemprop="datePublished">2017-05-07</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/05/01/MongoDB干货篇之更新数据/" title="MongoDB干货篇之更新数据" itemprop="url">
+  
+    <h1 itemprop="name">MongoDB干货篇之更新数据</h1>
+    
+     
+           <p itemprop="description" >MongoDB干货篇之数据更新常用的函数
+
+update(&amp;lt;query&amp;gt;,&amp;lt;update&amp;gt;,&amp;lt;upsert&amp;gt;,&amp;lt;multi&amp;gt;),其中&amp;lt;query&amp;gt;表示筛选的条件，&amp;lt;update&amp;gt;是要更新的数据
+
+update</p>
+        
+    
+    <time datetime="2017-05-01T00:13:32.000Z" itemprop="datePublished">2017-05-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/30/MongoDB干货篇之查询数据/" title="MongoDB干货篇之查询数据" itemprop="url">
+  
+    <h1 itemprop="name">MongoDB干货篇之查询数据</h1>
+    
+     
+           <p itemprop="description" >MongoDB干货篇之查询准备工作
+在开始之前我们应该先准备数据方便演示，这里我插入的了几条数据，数据如下：12345678910111213141516171819202122232425262728293031323334db.user.insertMany([&amp;#123;n</p>
+        
+    
+    <time datetime="2017-04-30T06:53:00.000Z" itemprop="datePublished">2017-04-30</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/29/python爬虫之BeautifulSoup/" title="python爬虫之BeautifulSoup" itemprop="url">
+  
+    <h1 itemprop="name">python爬虫之BeautifulSoup</h1>
+    
+     
+           <p itemprop="description" >python爬虫之BeautifulSoup简介
+Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜索、修改分析树等功能。它是一个工具箱，通过解析文档为用户提供需要抓取的数据，因为简单，所以不需要多少代码就可以写出一个完整的应用程序。Beautifu</p>
+        
+    
+    <time datetime="2017-04-29T02:06:56.000Z" itemprop="datePublished">2017-04-29</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/28/MongoDB干货篇之安装/" title="MongoDB干货篇之安装" itemprop="url">
+  
+    <h1 itemprop="name">MongoDB干货篇之安装</h1>
+    
+     
+           <p itemprop="description" >MongoDB干货篇之安装安装
+
+下载地址
+
+点击安装,选择自定义，后选择安装路径，不过最好安装在根目录下(C盘)，然后点解next,这里我安装的路径是C:\MongoDB
+
+创建文件夹:在C:\MongoDB下创建一个文件夹data,然后在data文件夹下创建db,log两个子</p>
+        
+    
+    <time datetime="2017-04-28T02:53:32.000Z" itemprop="datePublished">2017-04-28</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/26/BootStrap干货篇之表单/" title="BootStrap干货篇之表单" itemprop="url">
+  
+    <h1 itemprop="name">BootStrap干货篇之表单</h1>
+    
+     
+           <p itemprop="description" >BootStrap干货篇之表单基本介绍
+单独的表单控件会被自动赋予一些全局样式。所有设置了 .form-control 类的 &amp;lt;input&amp;gt;、&amp;lt;textarea&amp;gt; 和 &amp;lt;select&amp;gt; 元素都将被默认设置宽度属性为 width: 100%;。 </p>
+        
+    
+    <time datetime="2017-04-26T15:11:37.000Z" itemprop="datePublished">2017-04-26</time>
+  </a>
+</section>
+
+
+
+
+
+
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/17/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/19/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/17/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/19/">Next<span></span></a>
   </nav>
 
 </div>
@@ -419,7 +402,7 @@ sudo apt-get install wkhtm</p>
 		  
 		
 		  
-			<li><a href="/categories/java学习/" title="java学习">java学习<sup>30</sup></a></li>
+			<li><a href="/categories/java学习/" title="java学习">java学习<sup>26</sup></a></li>
 		  
 		
 		  
@@ -436,10 +419,6 @@ sudo apt-get install wkhtm</p>
 		
 		  
 			<li><a href="/categories/分布式/" title="分布式">分布式<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
 		  
 		
 		  
@@ -500,14 +479,6 @@ sudo apt-get install wkhtm</p>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>8</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
 			
 		
@@ -516,11 +487,15 @@ sudo apt-get install wkhtm</p>
 			
 		
 			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
+				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>8</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 			
 		
 			
@@ -540,11 +515,15 @@ sudo apt-get install wkhtm</p>
 			
 		
 			
-				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
+				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
 			
 		
 		</ul>

@@ -103,120 +103,6 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/购物车模块/" title="购物车模块" itemprop="url">
-  
-    <h1 itemprop="name">购物车模块</h1>
-    
-     
-           <p itemprop="description" >购物车模块建表
-创建购物车的表
-
-123456789create table t_cart(id int primary key auto_increment,　　//主键                   	goods_id varchar(200),　　　//商品的ｉｄ  </p>
-        
-    
-    <time datetime="2018-05-21T10:27:35.000Z" itemprop="datePublished">2018-05-21</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/05/21/用户管理模块之个人信息修改/" title="用户管理模块之个人信息修改" itemprop="url">
-  
-    <h1 itemprop="name">用户管理模块之个人信息修改</h1>
-    
-     
-           <p itemprop="description" >用户管理模块之个人信息修改功能
-修改用户名
-修改性别
-修改邮箱
-修改密码
-修改头像
-
-在UserMapper中定义方法和UserMapper.xml中定义定义接口方法
-定义接口方法
-
-12345/** * 更新用户信息 * @param user  User对象 */void u</p>
-        
-    
-    <time datetime="2018-05-21T10:26:45.000Z" itemprop="datePublished">2018-05-21</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/05/21/地址管理之省市区三级联动菜单/" title="地址管理之省市区三级联动菜单" itemprop="url">
-  
-    <h1 itemprop="name">地址管理之省市区三级联动菜单</h1>
-    
-     
-           <p itemprop="description" >地址管理之省市区三级联动菜单
-导入省市区的数据
-下载sql语句的文件
-在数据库中执行：source 文件路径即可导入
-导入成功之后，在数据库中会出现三张表，分别代表省,市,区
-
-创建实体类
-get，set方法
-hashCode和equals方法
-实现序列化接口，生成安全码
-
-Pr</p>
-        
-    
-    <time datetime="2018-05-21T10:26:00.000Z" itemprop="datePublished">2018-05-21</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/05/21/用户管理模块之用户登录/" title="用户管理模块之用户登录" itemprop="url">
-  
-    <h1 itemprop="name">用户管理模块之用户登录</h1>
-    
-     
-           <p itemprop="description" >用户管理模块之用户登录开发顺序
-持久层
-业务层
-控制层
-页面
-
-在cn.tedu.store.mapper中新建UserMapper.java接口
-由于在用户管理模块之用户注册已经创建了，所以不用新建了
-
-功能
-验证用户名是否存在，其中返回的是用户对象，这个在前面的注册已经定义过</p>
-        
-    
-    <time datetime="2018-05-21T10:24:56.000Z" itemprop="datePublished">2018-05-21</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
     <a href="/2018/05/21/Spring之AOP之底层实现/" title="Spring之AOP之底层实现" itemprop="url">
   
     <h1 itemprop="name">Spring之AOP之底层实现</h1>
@@ -347,9 +233,111 @@ commons-fileupload
 
 
 
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/05/21/拦截器拦截Ajax请求/" title="Springmvc拦截器拦截Ajax请求" itemprop="url">
+  
+    <h1 itemprop="name">Springmvc拦截器拦截Ajax请求</h1>
+    
+     
+           <p itemprop="description" >拦截器拦截Ajax请求##　问题
+
+如果我们在拦截器中定义了拦截器的路径为/user/*这个地址,并且拦截器拦截器之后，如果没有登录，那么重定向到登录界面。但是我们在未登录的前提下使用Ajax异步请求了/user/addUser.do这个地址，出现了拦截器是拦截了，但是并没有重定</p>
+        
+    
+    <time datetime="2018-05-21T10:16:29.000Z" itemprop="datePublished">2018-05-21</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/05/09/选择排序/" title="选择排序" itemprop="url">
+  
+    <h1 itemprop="name">选择排序</h1>
+    
+     
+           <p itemprop="description" >选择排序思想(从小到大)
+每一趟从待排序的记录中选出最小的元素，顺序放在已排好序的序列最后，直到全部记录排序完毕
+
+分析
+假设数组中有个n元素
+第一趟：在整个数组中选择出最小的元素，和数组中的第一个元素交换位置，那么此时的第一个元素就是最小的
+第二趟： 从第二个元素开始再次查找剩</p>
+        
+    
+    <time datetime="2018-05-09T00:44:07.000Z" itemprop="datePublished">2018-05-09</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/05/09/插入排序算法/" title="插入排序算法" itemprop="url">
+  
+    <h1 itemprop="name">插入排序算法</h1>
+    
+     
+           <p itemprop="description" >插入排序算法思想
+我们以从小到大的排序进行讲解
+
+
+插入排序就是将一个元素插入到一个已经是有序的序列中， 通过遍历比较这个待插入元素和有序的序列元素之间的大小，来比较需要插入的位置，使其仍然是一个有序的数组。
+数组插入的算法：向后移动元素给待插入的数据位置
+
+详解
+第一趟：假设我</p>
+        
+    
+    <time datetime="2018-05-09T00:43:57.000Z" itemprop="datePublished">2018-05-09</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/05/09/JQuery实现AJAX异步提交/" title="JQuery实现AJAX异步提交" itemprop="url">
+  
+    <h1 itemprop="name">JQuery实现AJAX异步提交</h1>
+    
+     
+           <p itemprop="description" >JQuery实现AJAX异步提交准备
+点击下载JQurery的文件
+
+
+添加JQuery的文件： &amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;文件路径&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+
+$.ajax</p>
+        
+    
+    <time datetime="2018-05-09T00:42:04.000Z" itemprop="datePublished">2018-05-09</time>
+  </a>
+</section>
+
+
+
+
+
+
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/6/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/8/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/8/">Next<span></span></a>
   </nav>
 
 </div>
@@ -445,7 +433,7 @@ commons-fileupload
 		  
 		
 		  
-			<li><a href="/categories/java学习/" title="java学习">java学习<sup>30</sup></a></li>
+			<li><a href="/categories/java学习/" title="java学习">java学习<sup>26</sup></a></li>
 		  
 		
 		  
@@ -462,10 +450,6 @@ commons-fileupload
 		
 		  
 			<li><a href="/categories/分布式/" title="分布式">分布式<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
 		  
 		
 		  
@@ -526,14 +510,6 @@ commons-fileupload
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>8</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
 			
 		
@@ -542,11 +518,15 @@ commons-fileupload
 			
 		
 			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
+				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>8</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/商城网站/" title="商城网站">商城网站<sup>7</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 			
 		
 			
@@ -566,11 +546,15 @@ commons-fileupload
 			
 		
 			
-				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
+				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>4</sup></a></li>
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
 			
 		
 		</ul>
