@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-10-07T12:58:09.091Z</updated>
+  <updated>2018-10-07T13:03:14.502Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Mycat</title>
+    <title>数据库中间件之Mycat</title>
     <link href="http://chenjiabing666.github.io/2018/10/07/Mycat/"/>
     <id>http://chenjiabing666.github.io/2018/10/07/Mycat/</id>
     <published>2018-10-07T12:57:37.000Z</published>
-    <updated>2018-10-07T12:58:09.091Z</updated>
+    <updated>2018-10-07T13:03:14.502Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Mycat入门"><a href="#Mycat入门" class="headerlink" title="Mycat入门"></a>Mycat入门</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
 <li><a href="https://github.com/MyCATApache/Mycat-download" target="_blank" rel="external">点击下载</a></li>
