@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-10-03T09:34:45.296Z</updated>
+  <updated>2018-10-07T12:58:09.091Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,451 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mycat</title>
+    <link href="http://chenjiabing666.github.io/2018/10/07/Mycat/"/>
+    <id>http://chenjiabing666.github.io/2018/10/07/Mycat/</id>
+    <published>2018-10-07T12:57:37.000Z</published>
+    <updated>2018-10-07T12:58:09.091Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Mycat入门"><a href="#Mycat入门" class="headerlink" title="Mycat入门"></a>Mycat入门</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li><a href="https://github.com/MyCATApache/Mycat-download" target="_blank" rel="external">点击下载</a></li>
+<li>配置java环境</li>
+<li>配置mysql数据库</li>
+<li><strong>打开<code>conf/wrapper.conf</code>文件，将其中的<code>wrapper.java.command</code>的值改成服务器上的jdk地址，如<code>wrapper.java.command=/usr/local/jdk/jdk1.8.0_172/bin/java</code></strong> </li>
+<li>为bin文件夹中的所有内容赋予执行的权限:<code>chmod a+x *</code></li>
+<li>修改<code>schemal.xml</code>文件中的内容，填上对应的表，数据节点，数据主机的内容</li>
+<li>启动 ：<code>./mycat start</code> (后台启动)、<code>./mycat console</code>（前台启动）</li>
+<li>开启服务器的8086端口</li>
+<li>使用navicat连接mycat，端口是8086</li>
+</ul>
+<h3 id="常用的命令"><a href="#常用的命令" class="headerlink" title="常用的命令"></a>常用的命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">./mycat start 启动</div><div class="line"></div><div class="line">./mycat stop 停止</div><div class="line"></div><div class="line">./mycat console 前台运行</div><div class="line"></div><div class="line">./mycat install 添加到系统自动启动（暂未实现）</div><div class="line"></div><div class="line">./mycat remove 取消随系统自动启动（暂未实现）</div><div class="line"></div><div class="line">./mycat restart 重启服务</div><div class="line"></div><div class="line">./mycat pause 暂停</div><div class="line"></div><div class="line">./mycat status 查看启动状态</div></pre></td></tr></table></figure>
+<h2 id="数据库切分"><a href="#数据库切分" class="headerlink" title="数据库切分"></a>数据库切分</h2><ul>
+<li>数据库切分分为垂直切分，水平切分</li>
+</ul>
+<h3 id="垂直切分"><a href="#垂直切分" class="headerlink" title="垂直切分"></a>垂直切分</h3><ul>
+<li>一个数据库由很多表的构成，每个表对应着不同的业务，垂直切分是指按照业务将表进行分类，分布到不同 的数据库上面，这样也就将数据或者说压力分担到不同的库上面 。</li>
+<li>比如商城项目可以根据不同的业务将表分成用户表、订单表等，这些表分布在不同的数据库中，从而实现了垂直切分</li>
+<li>优点：<ul>
+<li>拆分后业务清晰，拆分规则明确。    </li>
+<li>系统之间整合或扩展容易    </li>
+<li>数据维护简单。    </li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>部分业务表无法 join，只能通过接口方式解决，提高了系统复杂度。    </li>
+<li>受每种业务不同的限制存在单库性能瓶颈，不易数据扩展跟性能提高。    </li>
+<li>事务处理复杂。    </li>
+</ul>
+</li>
+<li><strong>由于垂直切分是按照业务的分类将表分散到不同的库，所以有些业务表会过于庞大，存在单库读写与存储瓶 颈，所以就需要水平拆分来做解决。</strong>    </li>
+</ul>
+<h3 id="水平切分"><a href="#水平切分" class="headerlink" title="水平切分"></a>水平切分</h3><ul>
+<li>水平拆分不是将表做分类，而是按照某个字段的某种规则来分散到多个库之中，每个表中 包含一部分数据。简单来说，我们可以将数据的水平切分理解为是按照数据行的切分，就是将表中的某些行切分 到一个数据库，而另外的某些行又切分到其他的数据库中    </li>
+<li>拆分规则：<ul>
+<li>按照用户 ID 求模，将数据分散到不同的数据库，具有相同数据用户的数据都被分散到一个库中。</li>
+<li>按照日期，将不同月甚至日的数据分散到不同的库中。</li>
+<li>按照某个特定的字段求摸，或者根据特定范围段分散到不同的库中。    </li>
+</ul>
+</li>
+<li>优点：<ul>
+<li>拆分规则抽象好，join 操作基本可以数据库做。</li>
+<li>不存在单库大数据，高并发的性能瓶颈。</li>
+<li>应用端改造较少。 </li>
+<li>提高了系统的稳定性跟负载能力。    </li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>拆分规则难以抽象。 </li>
+<li>分片事务一致性难以解决。 </li>
+<li>数据多次扩展难度跟维护量极大。 </li>
+<li>跨库 join 性能较差。    </li>
+</ul>
+</li>
+</ul>
+<h3 id="垂直拆分和水平拆分的共同缺点"><a href="#垂直拆分和水平拆分的共同缺点" class="headerlink" title="垂直拆分和水平拆分的共同缺点"></a>垂直拆分和水平拆分的共同缺点</h3><ul>
+<li>引入分布式事务的问题。 </li>
+<li>跨节点 Join 的问题。 </li>
+<li>跨节点合并排序分页问题。 </li>
+<li>多数据源管理问题。    </li>
+</ul>
+<h2 id="日志分析"><a href="#日志分析" class="headerlink" title="日志分析"></a>日志分析</h2><h2 id="sql防火墙配置"><a href="#sql防火墙配置" class="headerlink" title="sql防火墙配置"></a>sql防火墙配置</h2><ul>
+<li>在server.xml中配置</li>
+</ul>
+<h2 id="Mycat配置"><a href="#Mycat配置" class="headerlink" title="Mycat配置"></a>Mycat配置</h2><h3 id="schema（逻辑库）"><a href="#schema（逻辑库）" class="headerlink" title="schema（逻辑库）"></a>schema（逻辑库）</h3><ul>
+<li><p>一个标签，定义一个逻辑数据库。可以同时指定多个标签来指定不同的逻辑库</p>
+</li>
+<li><p>标签体的属性如下：</p>
+<ul>
+<li><code>dataNode</code>：字符串，该属性用于绑定逻辑库到某个具体的 database 上 ，多个值用逗号分隔</li>
+<li><code>checkSQLschema</code>：布尔值，当该值设置为 true 时，如果我们执行语句<strong>select * from TESTDB.travelrecord;</strong>则 MyCat 会把语句修改 为<strong>select * from travelrecord;</strong> ，设置这个属性为true，可以在navicat中直接查看逻辑表中的所有数据，否则将会报异常（Table ‘testdb.travelrecord’ doesn’ t exist）   </li>
+<li><code>sqlMaxLimit</code>：当该值设置为某个数值时。每条执行的 SQL 语句，如果没有加上 limit 语句，MyCat 也会自动的加上所对应 的值。例如设置值为 100，执行<strong>select * from TESTDB.travelrecord;</strong>的效果为和执行<strong>select * from TESTDB.travelrecord limit 100;</strong>相同。 设置该值的话，MyCat 默认会把查询到的信息全部都展示出来，造成过多的输出。所以，在正常使用中，还 是建议加上一个值，用于减少过多的数据返回.当然 SQL 语句中也显式的指定 limit 的大小，不受该属性的约束。 需要注意的是，如果运行的 schema 为非拆分库的，那么该属性不会生效。需要手动添加 limit 语句。    </li>
+</ul>
+</li>
+</ul>
+<h3 id="table-逻辑表"><a href="#table-逻辑表" class="headerlink" title="table (逻辑表)"></a>table (逻辑表)</h3><ul>
+<li>属性如下：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>String</th>
+<th>定义逻辑表的表名，这个名字就如同我在数据库中执行 create table 命令指定的名字一样，同个 schema 标 签中定义的名字必须唯一</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dataNode</td>
+<td>String</td>
+<td>定义这个逻辑表所属的 dataNode, 该属性的值需要和 dataNode 标签中 name 属性的值相互对应。多个值用逗号分隔</td>
+</tr>
+<tr>
+<td>rule</td>
+<td>String</td>
+<td>该属性用于指定逻辑表要使用的规则名字，规则名字在 rule.xml 中定义，必须与 tableRule 标签中 name 属 性属性值一一对应</td>
+</tr>
+<tr>
+<td>ruleRequired</td>
+<td>boolean</td>
+<td>该属性用于指定表是否绑定分片规则，如果配置为 true，但没有配置具体 rule 的话 ，程序会报错。</td>
+</tr>
+<tr>
+<td>primaryKey</td>
+<td>String</td>
+<td>该逻辑表对应真实表的主键，例如：分片的规则是使用非主键进行分片的，那么在使用主键查询的时候，就 会发送查询语句到所有配置的 DN 上，如果使用该属性配置真实表的主键。难么 MyCat 会缓存主键与具体 DN 的 信息，那么再次使用非主键进行查询的时候就不会进行广播式的查询，就会直接发送语句给具体的 DN，但是尽管 配置该属性，如果缓存并没有命中的话，还是会发送语句给具体的 DN，来获得数据。<strong>如果没有指定，那么默认使用的是主键字段是id</strong></td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>该属性定义了逻辑表的类型，目前逻辑表只有“全局表”和”普通表”两种类型。对应的配置： 1、全局表：global。 2、 普通表：不指定该值为 globla 的所有表</td>
+</tr>
+<tr>
+<td>autoIncrement</td>
+<td>boolean</td>
+<td>mysql 对非自增长主键，使用 last_insert_id()是不会返回结果的，只会返回 0。所以，只有定义了自增长主 键的表才可以用 last_insert_id()返回主键值。 mycat 目前提供了自增长主键功能，但是如果对应的 mysql 节点上数据表，没有定义 auto_increment，那 么在 mycat 层调用 last_insert_id()也是不会返回结果的。 由于 insert 操作的时候没有带入分片键，mycat 会先取下这个表对应的全局序列，然后赋值给分片键。这样 才能正常的插入到数据库中，最后使用 last_insert_id()才会返回插入的分片键值。 如果要使用这个功能最好配合使用数据库模式的全局序列。 75 使用 autoIncrement=“true” 指定这个表有使用自增长主键，这样 mycat 才会不抛出分片键找不到的异 常。 使用 autoIncrement=“false” 来禁用这个功能，当然你也可以直接删除掉这个属性。默认就是禁用的。</td>
+</tr>
+<tr>
+<td>subTables</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>needAddLimit</td>
+<td>boolean</td>
+<td>指定表是否需要自动的在每个语句后面加上 limit 限制。由于使用了分库分表，数据量有时会特别巨大。这时 候执行查询语句，如果恰巧又忘记了加上数量限制的话。那么查询所有的数据出来，也够等上一小会儿的。 所以，mycat 就自动的为我们加上 LIMIT 100。当然，如果语句中有 limit，就不会在次添加了。 这个属性默认为 true,你也可以设置成 false`禁用掉默认行为。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dataNode"><a href="#dataNode" class="headerlink" title="dataNode"></a>dataNode</h3><ul>
+<li>数据节点，用来设置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>String</th>
+<th>定义数据节点的名字，这个名字需要是唯一的，我们需要在 table 标签上应用这个名字，来建立表与分片对 应的关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dataHost</td>
+<td>String</td>
+<td>该属性用于定义该分片属于哪个数据库实例的，属性值是引用 dataHost 标签上定义的 name 属性。</td>
+</tr>
+<tr>
+<td>database</td>
+<td>String</td>
+<td>该属性用于定义该分片属性哪个具体数据库实例上的具体库，因为这里使用两个纬度来定义分片，就是：实 例+具体的库。因为每个库上建立的表和表结构是一样的。所以这样做就可以轻松的对表进行水平拆分</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dataHost"><a href="#dataHost" class="headerlink" title="dataHost"></a>dataHost</h3><ul>
+<li><p>作为 Schema.xml 中最后的一个标签，该标签在 mycat 逻辑库中也是作为最底层的标签存在，直接定义了具 体的数据库实例、读写分离配置和心跳语句。现在我们就解析下这个标签。    </p>
+</li>
+<li><p>配置如下：</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>String</th>
+<th>唯一标识 dataHost 标签，供上层的标签使用。</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>maxCon</td>
+<td>Integer</td>
+<td>指定每个读写实例连接池的最大连接。也就是说，标签内嵌套的 writeHost、 readHost 标签都会使用这个属 性的值来实例化出连接池的最大连接数</td>
+</tr>
+<tr>
+<td>minCon</td>
+<td>Integer</td>
+<td>指定每个读写实例连接池的最小连接，初始化连接池的大小</td>
+</tr>
+<tr>
+<td>balance</td>
+<td>Integer</td>
+<td>负载均衡类型，目前的取值有 3 种： 1. balance=”0”, 不开启读写分离机制，所有读操作都发送到当前可用的 writeHost 上。 2. balance=”1”，全部的 readHost 与 stand by writeHost 参与 select 语句的负载均衡，简单的说，当双 主双从模式(M1-&gt;S1，M2-&gt;S2，并且 M1 与 M2 互为主备)，正常情况下，M2,S1,S2 都参与 select 语句的负载 均衡。 3. balance=”2”，所有读操作都随机的在 writeHost、 readhost 上分发。 4. balance=”3”，所有读请求随机的分发到 wiriterHost 对应的 readhost 执行，writerHost 不负担读压 力，注意 balance=3 只在 1.4 及其以后版本有，1.3 没有。</td>
+</tr>
+<tr>
+<td>writeType</td>
+<td>Integer</td>
+<td>负载均衡类型，目前的取值有 3 种： 1. writeType=”0”, 所有写操作发送到配置的第一个 writeHost，第一个挂了切到还生存的第二个 writeHost，重新启动后已切换后的为准，切换记录在配置文件中:dnindex.properties . 2. writeType=”1”，所有写操作都随机的发送到配置的 writeHost，1.5 以后废弃不推荐。</td>
+</tr>
+<tr>
+<td>dbType</td>
+<td>String</td>
+<td>指定后端连接的数据库类型，目前支持二进制的 mysql 协议，还有其他使用 JDBC 连接的数据库。例如： mongodb、 oracle、 spark 等。</td>
+</tr>
+<tr>
+<td>dbDriver</td>
+<td>String</td>
+<td>指定连接后端数据库使用的 Driver，目前可选的值有 native 和 JDBC。使用 native 的话，因为这个值执行的 是二进制的 mysql 协议，所以可以使用 mysql 和 maridb。其他类型的数据库则需要使用 JDBC 驱动来支持。 从 1.6 版本开始支持 postgresql 的 native 原始协议。 如果使用 JDBC 的话需要将符合 JDBC 4 标准的驱动 JAR 包放到 MYCAT\lib 目录下，并检查驱动 JAR 包中 包括如下目录结构的文件：META-INF\services\java.sql.Driver。在这个文件内写上具体的 Driver 类名，例如： com.mysql.jdbc.Driver。</td>
+</tr>
+<tr>
+<td>switchType</td>
+<td>Integer</td>
+<td>-1 表示不自动切换 1 默认值，自动切换 2 基于 MySQL 主从同步的状态决定是否切换 心跳语句为 show slave status 3 基于 MySQL galary cluster 的切换机制（适合集群）（1.4.1） 心跳语句为 show status like ‘wsrep%’.    这个和writeType结合使用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heartbeat"><a href="#heartbeat" class="headerlink" title="heartbeat"></a>heartbeat</h3><ul>
+<li>这个标签内指明用于和后端数据库进行心跳检查的语句。例如,MYSQL 可以使用<code>select user()</code>，Oracle 可以 使用 <code>select 1 from dual</code>等。 这个标签还有一个 <code>connectionInitSql</code>属性，主要是当使用 Oracla 数据库时，需要执行的初始化 SQL 语句就 这个放到这里面来。例如：alter session set nls_date_format=’yyyy-mm-dd hh24:mi:ss’ <strong>1.4 主从切换的语句必须是：show slave status</strong>    </li>
+</ul>
+<h3 id="writeHost-、-readHost"><a href="#writeHost-、-readHost" class="headerlink" title="writeHost 、 readHost"></a>writeHost 、 readHost</h3><ul>
+<li>这两个标签都指定后端数据库的相关配置给 mycat，用于实例化后端连接池。唯一不同的是，writeHost 指 定写实例、 readHost 指定读实例，组着这些读写实例来满足系统的要求    </li>
+<li>在一个 dataHost 内可以定义多个 writeHost 和 readHost。但是，如果 writeHost 指定的后端数据库宕机， 那么这个 writeHost 绑定的所有 readHost 都将不可用。另一方面，由于这个 writeHost 宕机系统会自动的检测 到，并切换到备用的 writeHost 上去   </li>
+<li>这两个标签的属性相同，这里就一起介绍。    </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>host</th>
+<th>String</th>
+<th>用于标识不同实例，一般 writeHost 我们使用<em>M1，readHost 我们用</em>S1。</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>后端实例连接地址，如果是使用 native 的 dbDriver，则一般为 address:port 这种形式。用 JDBC 或其他的 dbDriver，则需要特殊指定。当使用 JDBC 时则可以这么写：jdbc:mysql://localhost:3306/。</td>
+</tr>
+<tr>
+<td>password</td>
+<td>String</td>
+<td>后端存储实例需要的用户名字  ,即是指向mysql的密码</td>
+</tr>
+<tr>
+<td>user</td>
+<td>String</td>
+<td>后端存储实例需要的密码    ，即是指向mysql的用户</td>
+</tr>
+<tr>
+<td>weight</td>
+<td>String</td>
+<td>权重 配置在 readhost 中作为读节点的权重（1.4 以后）</td>
+</tr>
+<tr>
+<td>usingDecrypt</td>
+<td>String</td>
+<td>是否对密码加密默认 0 否 如需要开启配置 1，同时使用加密程序对密码加密</td>
+</tr>
+</tbody>
+</table>
+<h3 id="childTable"><a href="#childTable" class="headerlink" title="childTable"></a>childTable</h3><ul>
+<li>childTable 标签用于定义 E-R 分片的子表。通过标签上的属性与父表进行关联。    </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>String</th>
+<th>定义子表的表名。</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>joinKey</td>
+<td>String</td>
+<td>插入子表的时候会使用这个列的值查找父表存储的数据节点</td>
+</tr>
+<tr>
+<td>parentKey</td>
+<td>String</td>
+<td>属性指定的值一般为与父表建立关联关系的列名。程序首先获取 joinkey 的值，再通过 parentKey 属性指定 的列名产生查询语句，通过执行该语句得到父表存储在哪个分片上。从而确定子表存储的位置。</td>
+</tr>
+<tr>
+<td>primaryKey</td>
+<td>String</td>
+<td>同 table 标签所描述的</td>
+</tr>
+<tr>
+<td>needAddLimit</td>
+<td>boolean</td>
+<td>同 table 标签所描述的</td>
+</tr>
+<tr>
+<td>autoIncrement</td>
+<td>boolean</td>
+<td>设置是否主键自增</td>
+</tr>
+</tbody>
+</table>
+<h3 id="server-xml中的标签"><a href="#server-xml中的标签" class="headerlink" title="server.xml中的标签"></a>server.xml中的标签</h3><h4 id="设置用户"><a href="#设置用户" class="headerlink" title="设置用户"></a>设置用户</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--</span></div><div class="line">		user标签可以设置登录的用户，可以指定多个</div><div class="line">		</div><div class="line">		&lt;property name="password"&gt;： 设置该用户登录的密码</div><div class="line">		</div><div class="line">		&lt;property name="schemas"&gt; ：设置该用户可以访问的逻辑库，如果有多个，那么需要使用逗号分隔</div><div class="line">		</div><div class="line">		&lt;property name="readOnly"&gt;true&lt;/property&gt; ： 设置该用户是否对逻辑库为只读权限</div><div class="line">		</div><div class="line">		&lt;property name="benchmark"&gt;11111&lt;/property&gt;： mycat 连接服务降级处理：benchmark 基准, 当前端的整体 connection 数达到基准值是, 对来自该账户的请求开始拒绝连接， 0 或不设</div><div class="line">表示不限制</div><div class="line">		</div><div class="line">		&lt;property name="usingDecrypt"&gt;1&lt;/property&gt;：是否对密码加密默认 0 否 如需要开启配置 1，同时使用加密程序对密码加密</div><div class="line">		</div><div class="line">		privileges 子节点：对用户的 schema 及 下级的 table 进行精细化的 DML 权限控制，privileges 节点中的 check 属性是用</div><div class="line">于标识是否开启 DML 权限检查， 默认 false 标识不检查，当然 privileges 节点不配置，等同 check=false,</div><div class="line">由于 Mycat 一个用户的 schemas 属性可配置多个 schema ，所以 privileges 的下级节点 schema 节点同样</div><div class="line">可配置多个，对多库多表进行细粒度的 DML 权限控制</div><div class="line"></div><div class="line">				schema 标签： 指定逻辑库的名称，用来选择对应的表，可以有多个</div><div class="line"></div><div class="line">        				dml：设置对指定表的crud操作，分别是insert,update,select,delete，对应的如果是0表示禁止，1表示不禁止</div><div class="line">		</div><div class="line">		</div><div class="line">		</div><div class="line">	--&gt;</div><div class="line">	<span class="tag">&lt;<span class="name">user</span> <span class="attr">name</span>=<span class="string">"root"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"schemas"</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		</div><div class="line">		<span class="comment">&lt;!-- 表级 DML 权限设置 --&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 		</span></div><div class="line">		&lt;privileges check="false"&gt;</div><div class="line">			&lt;schema name="TESTDB" dml="0110" &gt;</div><div class="line">				&lt;table name="tb01" dml="0000"&gt;&lt;/table&gt;</div><div class="line">				&lt;table name="tb02" dml="1111"&gt;&lt;/table&gt;</div><div class="line">			&lt;/schema&gt;</div><div class="line">			</div><div class="line">			&lt;schema name="TESTDB" dml="0110" &gt;</div><div class="line">				&lt;table name="tb01" dml="0000"&gt;&lt;/table&gt;</div><div class="line">				&lt;table name="tb02" dml="1111"&gt;&lt;/table&gt;</div><div class="line">			&lt;/schema&gt;</div><div class="line">			</div><div class="line">		&lt;/privileges&gt;		</div><div class="line">		 --&gt;</div><div class="line">	<span class="tag">&lt;/<span class="name">user</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="system标签"><a href="#system标签" class="headerlink" title="system标签"></a>system标签</h4><ul>
+<li>这个标签内嵌套的所有 property 标签都与系统配置有关，请注意，下面我会省去标签 property 直接使用这 个标签的 name 属性内的值来介绍这个属性的作用。    </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>作用</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>charset</td>
+<td>字符集设置。</td>
+<td>配置字符集的时候一定要坚持 mycat 的字符集与数据库端的字符集是一致的，可以通过变量来查询。比如<code>&lt;property name=&quot;charset&quot;&gt;utf8&lt;/property&gt;</code></td>
+</tr>
+<tr>
+<td>defaultSqlParser</td>
+<td>1.3 解析器默认为 fdbparser，1.4 默认为 druidparser，1.4 以后 fdbparser 作废。</td>
+<td>由于 mycat 最初是时候 Foundation DB 的 sql 解析器，而后才添加的 Druid 的解析器。所以这个属性用来 指定默认的解析器。目前的可用的取值有：druidparser 和 fdbparser。使用的时候可以选择其中的一种，目前一 般都使用 druidparser</td>
+</tr>
+<tr>
+<td>processors</td>
+<td></td>
+<td>这个属性主要用于指定系统可用的线程数，默认值为机器 CPU 核心线程数。 主要影响 processorBufferPool、 processorBufferLocalPercent、 processorExecutor 属性。 NIOProcessor 的个数也是由这个属性定义的，所以调优的时候可以适当的调高这个属性。</td>
+</tr>
+<tr>
+<td>processorBufferChunk</td>
+<td></td>
+<td>这个属性指定每次分配 Socket Direct Buffer 的大小，默认是 4096 个字节。这个属性也影响 buffer pool 的 长度。如果一次性获取的数过大 buffer 不够用 经常出现警告，则可以适当调大。</td>
+</tr>
+<tr>
+<td>processorBufferPool</td>
+<td></td>
+<td>这个属性指定 bufferPool 计算 比例值。由于每次执行 NIO 读、写操作都需要使用到 buffer，系统初始化的 时候会建立一定长度的 buffer 池来加快读、写的效率，减少建立 buffer 的时间。 Mycat 中有两个主要的 buffer 池: - BufferPool - ThreadLocalPool BufferPool 由 ThreadLocalPool 组合而成，每次从 BufferPool 中获取 buffer 都会优先获取 ThreadLocalPool 中的 buffer，未命中之后才会去获取 BufferPool 中的 buffer。也就是说 ThreadLocalPool 是 作为 BufferPool 的二级缓存，每个线程内部自己使用的。当然，这其中还有一些限制条件需要线程的名字是由$_ 开头。然而，BufferPool 上的 buffer 则是每个 NIOProcessor 都共享的。 默认这个属性的值为： 默认 bufferChunkSize(4096) <em> processors 属性 </em> 1000 BufferPool 的总长度 = bufferPool / bufferChunk。 若 bufferPool 不是 bufferChunk 的整数倍，则总长度为前面计算得出的商 + 1 假设系统线程数为 4，其他都为属性的默认值，则： bufferPool ＝ 4096 <em> 4 </em> 1000 BufferPool 的总长度 : 4000 = 16384000 / 4096</td>
+</tr>
+<tr>
+<td>processorBufferLocalPercent</td>
+<td></td>
+<td>前面提到了 ThreadLocalPool。这个属性就是用来控制分配这个 pool 的大小用的，但其也并不是一个准确 的值，也是一个比例值。这个属性默认值为 100。 线程缓存百分比 = bufferLocalPercent / processors 属性。 例如，系统可以同时运行 4 个线程，使用默认值，则根据公式每个线程的百分比为 25。最后根据这个百分比 来计算出具体的 ThreadLocalPool 的长度公式如下： ThreadLocalPool 的长度 = 线程缓存百分比 <em> BufferPool 长度 / 100 假设 BufferPool 的长度为 4000，其他保持默认值。 那么最后每个线程建立上的 ThreadLocalPool 的长度为： 1000 = 25 </em> 4000 / 100</td>
+</tr>
+<tr>
+<td>processorExecutor</td>
+<td></td>
+<td>这个属性主要用于指定 NIOProcessor 上共享的 businessExecutor 固定线程池大小。 mycat 在需要处理一 些异步逻辑的时候会把任务提交到这个线程池中。新版本中这个连接池的使用频率不是很大了，可以设置一个较 小的值</td>
+</tr>
+<tr>
+<td><strong>sequnceHandlerType</strong></td>
+<td></td>
+<td>指定使用 Mycat 全局序列的类型。 0 为本地文件方式，1 为数据库方式，2 为时间戳序列方式，3 为分布式 ZK ID 生成器，4 为 zk 递增 id 生成。</td>
+</tr>
+<tr>
+<td><strong>handleDistributedTransactions</strong></td>
+<td></td>
+<td>分布式事务开关，0为不过滤分布式事务，1为过滤分布式事务（如果分布式事务内只涉及全局表，则不过滤），2为不过滤分布式事务,但是记录分布式事务日志</td>
+</tr>
+</tbody>
+</table>
+<h2 id="全局表"><a href="#全局表" class="headerlink" title="全局表"></a>全局表</h2><ul>
+<li>mycat中使用type定义全局表和普通表(<code>type=global</code>)，没有定义type的类型的都是普通表，是需要分片的</li>
+<li>全局表适合那些数据量比较少的，变动不是很频繁的</li>
+<li>全局表的插入，更新操作会实时在所有节点上执行，保持各个分片的数据一致性。没有太激烈的update操作。</li>
+<li><strong>全局表查询只从一个节点获取</strong></li>
+<li><strong>全局表可以和任何一个表进行JOIN操作</strong></li>
+<li>需要注意的是，全局表每个分片节点上都要有运行创建表的 DDL 语句。    </li>
+</ul>
+<h2 id="Mycat的跨分片join"><a href="#Mycat的跨分片join" class="headerlink" title="Mycat的跨分片join"></a>Mycat的跨分片join</h2><ul>
+<li>同一个分片的数据可以任意的join，join的数量也没有限制，但是不同分片的数据跨分片join的话，是查询不到结果的</li>
+</ul>
+<h3 id="全局表-1"><a href="#全局表-1" class="headerlink" title="全局表"></a>全局表</h3><ul>
+<li>全局表在每一个分片上都保持着相同的数据，因此全局表可以和任意的表跨分片join</li>
+</ul>
+<h3 id="ER-join"><a href="#ER-join" class="headerlink" title="ER join"></a>ER join</h3><ul>
+<li>我们可以根据ER关系设置每张表的关系，比如订单表依赖于用户表，我们可以设置ER join方式的，那么会根据外键（joinKey）的值和相关依赖的表分配在同一个分片上，那么就可以join了</li>
+<li><strong>支持多表join</strong></li>
+<li>配置如下（其中childTable中也可以嵌套childTable）：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">name</span>=<span class="string">"t_user"</span> <span class="attr">dataNode</span>=<span class="string">"dn1,dn2,dn3"</span> <span class="attr">rule</span>=<span class="string">"auto-sharding-long"</span> <span class="attr">primaryKey</span>=<span class="string">"id"</span> <span class="attr">autoIncrement</span>=<span class="string">"true"</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!--订单表，</span></div><div class="line">			joinKey是t_order和t_user关联的外键关系，</div><div class="line">			parentKey指定的是t_user表中的主键</div><div class="line">			primaryKey：指定的是t_order的主键</div><div class="line">			autoIncrement：设置是否主键自增</div><div class="line">--&gt;</div><div class="line">			<span class="tag">&lt;<span class="name">childTable</span> <span class="attr">name</span>=<span class="string">"t_order"</span> <span class="attr">joinKey</span>=<span class="string">"user_id"</span> <span class="attr">parentKey</span>=<span class="string">"id"</span> <span class="attr">primaryKey</span>=<span class="string">"id"</span> <span class="attr">autoIncrement</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="Share-Join"><a href="#Share-Join" class="headerlink" title="Share Join"></a>Share Join</h3><h2 id="mycat自增主键的配置（数据库方式）"><a href="#mycat自增主键的配置（数据库方式）" class="headerlink" title="mycat自增主键的配置（数据库方式）"></a>mycat自增主键的配置（数据库方式）</h2><ul>
+<li>在mycat中并没有实现mysql的自增主键的配置，如果需要实现的话，需要自己配置。</li>
+<li>自增主键的方式配置有多种方式，比如本地方式，数据库方式，ZK方式，时间戳的方式，这里我们测试的是数据库的方式。</li>
+</ul>
+<h3 id="测试步骤"><a href="#测试步骤" class="headerlink" title="测试步骤"></a>测试步骤</h3><p>1、修改<code>server.xml</code>中生成方式为数据库生成的方式</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--将sequnceHandlerType设置为1--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sequnceHandlerType"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>2、在<code>schema.xml</code>中，table中增加属性<code>autoIncrement</code>值为<code>true</code>，添加<code>mycat_sequence</code>表 </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">schema</span> <span class="attr">name</span>=<span class="string">"Test"</span> <span class="attr">checkSQLschema</span>=<span class="string">"true"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- auto sharding by id (long)</span></div><div class="line"> 		rule:指定分片的规则为根据Id自动分片</div><div class="line">		primaryKey： 指定主键</div><div class="line">		autoIncrement： 指定自增长，一定要为true</div><div class="line">		--&gt;</div><div class="line">		<span class="tag">&lt;<span class="name">table</span> <span class="attr">name</span>=<span class="string">"t_item"</span> <span class="attr">dataNode</span>=<span class="string">"dn1,dn2,dn3"</span> <span class="attr">rule</span>=<span class="string">"auto-sharding-long"</span> <span class="attr">primaryKey</span>=<span class="string">"id"</span> <span class="attr">autoIncrement</span>=<span class="string">"true"</span>  /&gt;</span></div><div class="line">    	<span class="comment">&lt;!--指定自增长的表，数据节点为dn1--&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">table</span> <span class="attr">name</span>=<span class="string">"mycat_sequence"</span> <span class="attr">primaryKey</span>=<span class="string">"name"</span> <span class="attr">dataNode</span>=<span class="string">"dn1"</span> /&gt;</span></div><div class="line">		</div><div class="line">	<span class="tag">&lt;/<span class="name">schema</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dataNode</span> <span class="attr">name</span>=<span class="string">"dn1"</span> <span class="attr">dataHost</span>=<span class="string">"localhost1"</span> <span class="attr">database</span>=<span class="string">"db1"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dataNode</span> <span class="attr">name</span>=<span class="string">"dn2"</span> <span class="attr">dataHost</span>=<span class="string">"localhost1"</span> <span class="attr">database</span>=<span class="string">"db2"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dataNode</span> <span class="attr">name</span>=<span class="string">"dn3"</span> <span class="attr">dataHost</span>=<span class="string">"localhost1"</span> <span class="attr">database</span>=<span class="string">"db3"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p>3、在数据节点<code>dn1</code>的数据库<code>db1</code>中新建<code>mycat_sequence</code>的表，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1、name：sequence：名称</div><div class="line"></div><div class="line">2、currenct_value：当前value</div><div class="line"></div><div class="line">3、increment：增长步长</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> MYCAT_SEQUENCE;   </div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> MYCAT_SEQUENCE(   </div><div class="line">    <span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,  </div><div class="line">    current_value <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,  </div><div class="line">    <span class="keyword">increment</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">100</span>,  </div><div class="line">    PRIMARY <span class="keyword">KEY</span>(<span class="keyword">name</span>)  </div><div class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>;</div></pre></td></tr></table></figure>
+<p>4、在db1数据中创建存储函数，用来维持自增长</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 获取当前sequence的值 (返回当前值,增量)  </span></div><div class="line"><span class="keyword">DROP</span> <span class="keyword">FUNCTION</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> mycat_seq_currval;  </div><div class="line">DELIMITER $  </div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> mycat_seq_currval(seq_name <span class="built_in">VARCHAR</span>(<span class="number">50</span>)) <span class="keyword">RETURNS</span> <span class="built_in">varchar</span>(<span class="number">64</span>) <span class="keyword">CHARSET</span> utf8  </div><div class="line"><span class="keyword">DETERMINISTIC</span>  </div><div class="line"><span class="keyword">BEGIN</span>  </div><div class="line"><span class="keyword">DECLARE</span> retval <span class="built_in">VARCHAR</span>(<span class="number">64</span>);  </div><div class="line"><span class="keyword">SET</span> retval=<span class="string">"-999999999,null"</span>;  </div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">concat</span>(<span class="keyword">CAST</span>(current_value <span class="keyword">AS</span> <span class="built_in">CHAR</span>),<span class="string">","</span>,<span class="keyword">CAST</span>(<span class="keyword">increment</span> <span class="keyword">AS</span> <span class="built_in">CHAR</span>)) <span class="keyword">INTO</span> retval <span class="keyword">FROM</span> MYCAT_SEQUENCE <span class="keyword">WHERE</span> <span class="keyword">name</span> = seq_name;  </div><div class="line">RETURN retval;  </div><div class="line"><span class="keyword">END</span> $  </div><div class="line">DELIMITER ;  </div><div class="line">      </div><div class="line"><span class="comment">-- 设置sequence值  </span></div><div class="line"><span class="keyword">DROP</span> <span class="keyword">FUNCTION</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> mycat_seq_setval;  </div><div class="line">DELIMITER $  </div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> mycat_seq_setval(seq_name <span class="built_in">VARCHAR</span>(<span class="number">50</span>),<span class="keyword">value</span> <span class="built_in">INTEGER</span>) <span class="keyword">RETURNS</span> <span class="built_in">varchar</span>(<span class="number">64</span>) <span class="keyword">CHARSET</span> utf8  </div><div class="line"><span class="keyword">DETERMINISTIC</span>  </div><div class="line"><span class="keyword">BEGIN</span>  </div><div class="line"><span class="keyword">UPDATE</span> MYCAT_SEQUENCE  </div><div class="line"><span class="keyword">SET</span> current_value = <span class="keyword">value</span>  </div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">name</span> = seq_name;  </div><div class="line">RETURN mycat_seq_currval(seq_name);  </div><div class="line"><span class="keyword">END</span> $  </div><div class="line">DELIMITER ;  </div><div class="line">    </div><div class="line"><span class="comment">-- 获取下一个sequence值  </span></div><div class="line"><span class="keyword">DROP</span> <span class="keyword">FUNCTION</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> mycat_seq_nextval;  </div><div class="line">DELIMITER $  </div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> mycat_seq_nextval(seq_name <span class="built_in">VARCHAR</span>(<span class="number">50</span>)) <span class="keyword">RETURNS</span> <span class="built_in">varchar</span>(<span class="number">64</span>) <span class="keyword">CHARSET</span> utf8  </div><div class="line"><span class="keyword">DETERMINISTIC</span>  </div><div class="line"><span class="keyword">BEGIN</span>  </div><div class="line"><span class="keyword">UPDATE</span> MYCAT_SEQUENCE  </div><div class="line"><span class="keyword">SET</span> current_value = current_value + <span class="keyword">increment</span> <span class="keyword">WHERE</span> <span class="keyword">name</span> = seq_name;  </div><div class="line">RETURN mycat_seq_currval(seq_name);  </div><div class="line"><span class="keyword">END</span> $  </div><div class="line">DELIMITER ;</div></pre></td></tr></table></figure>
+<p>5、在<code>mycat_sequence</code>表中插入数据，用来记录<code>t_item</code>表的自增长数据，名称必须全部大写</p>
+<p>​    1、<strong>当然这里一条数据就代表一张表自增长，如果想要其他的表也能自增长，那么直接添加即可</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> MYCAT_SEQUENCE(<span class="keyword">name</span>, current_value, <span class="keyword">increment</span>) <span class="keyword">VALUES</span> (<span class="string">'T_TIEM'</span>, <span class="number">0</span>,<span class="number">1</span>);</div></pre></td></tr></table></figure>
+<p>6、在<code>conf/sequence_db_conf.properties</code>的文件中添加依赖全局序列，增加序列，与table名称相同全大写 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># T_ITEM是自增长的表，dn1是mycat_sequence所在的数据节点，之后每添加一张自增长的表，只需要在其中添加即可</div><div class="line">T_ITEM=dn1</div></pre></td></tr></table></figure>
+<p>7、测试，向t_item表中添加数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> t_item(<span class="keyword">name</span>) <span class="keyword">values</span>(<span class="string">"chenjiabing"</span>);</div></pre></td></tr></table></figure>
+<p>8、测试使用mybatis添加数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Insert</span>(<span class="string">"INSERT into t_item(name) values(#&#123;name&#125;)"</span>)</div><div class="line"><span class="meta">@Options</span>(useGeneratedKeys = <span class="keyword">true</span>,keyProperty = <span class="string">"id"</span>)   <span class="comment">//自增长主键返回</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(Item item)</span></span>;</div></pre></td></tr></table></figure>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
+<li><a href="http://deweing.github.io/2016/06/28/mycat-auto-increment/" target="_blank" rel="external">http://deweing.github.io/2016/06/28/mycat-auto-increment/</a></li>
+</ul>
+<h2 id="Java操作Mycat"><a href="#Java操作Mycat" class="headerlink" title="Java操作Mycat"></a>Java操作Mycat</h2><ul>
+<li>只需要将连接mysql的端口改成<strong>8066</strong>即可，其他的就像是操作mysql一样</li>
+</ul>
+<h2 id="Mycat的事务处理"><a href="#Mycat的事务处理" class="headerlink" title="Mycat的事务处理"></a>Mycat的事务处理</h2><ul>
+<li>Mycat 目前没有出来跨分片的事务强一致性支持，目前单库内部可以保证事务的完整性，如果跨库事务， 在执行的时候任何分片出错，可以保证所有分片回滚，但是一旦应用发起 commit 指令，无法保证所有分片都成 功，考虑到某个分片挂的可能性不大所以称为弱 XA。    </li>
+<li>也就是说，我们在单体应用中可以正常使用spring提供的事务管理器进行事务的管理，在处理出现异常的时候也是可以回滚的。</li>
+</ul>
+<h2 id="Mycat查询"><a href="#Mycat查询" class="headerlink" title="Mycat查询"></a>Mycat查询</h2><h3 id="非分片字段查询"><a href="#非分片字段查询" class="headerlink" title="非分片字段查询"></a>非分片字段查询</h3><ul>
+<li>如果查询条件中有分片字段的话，那么mycat就可以轻松的根据分片规则找到对应的数据节点，然后在对应节点中查询，比如使用的是id取模分片规则，那么此时的id就是分片字段，一旦查询条件中有id这个字段的，就可以根据id的值定位到指定的节点中查询，否则将会在每个节点中执行sql语句，然后将每个节点的返回结果汇总返回</li>
+</ul>
+<h3 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h3><ul>
+<li>mycat针对分页查询的执行逻辑如下：<ul>
+<li>根据sql语句的过滤条件到每个数据节点筛选数据，筛选完成之后返回各个节点的分页数据</li>
+<li>mycat会判断哪个节点先返回数据，真正返回给客户端的就是<strong>先返回数据</strong>的那个节点上的数据库中</li>
+</ul>
+</li>
+<li><strong>根据上面的分析，我们可以判断分页查询的数据每次都是不同的，不同数据节点的返回速度决定着分页查询的数据显示。</strong></li>
+<li><strong>解决办法：在分页查询的时候必要的时候进行排序，这样返回的结果才是正确的，不然每次返回的结果可能不同，比如<code>select * from t_item order by id desc limit 1,29</code></strong></li>
+</ul>
+<h3 id="排序查询"><a href="#排序查询" class="headerlink" title="排序查询"></a>排序查询</h3><ul>
+<li>mycat 的排序查询的执行逻辑如下：<ul>
+<li>将sql语句发送到各个节点进行筛选数据，返回数据给mycat</li>
+<li>mycat获取到各个节点的数据的时候会根据 不同的排序规则（升序，降序）对全部节点的数据重新排序，最后所有数据排序完成的结果就是正确的结果</li>
+</ul>
+</li>
+</ul>
+<h3 id="分页排序查询"><a href="#分页排序查询" class="headerlink" title="分页排序查询"></a>分页排序查询</h3><h2 id="参考文章-1"><a href="#参考文章-1" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="https://www.cnblogs.com/jpfss/p/8194111.html" target="_blank" rel="external">https://www.cnblogs.com/jpfss/p/8194111.html</a></li>
+<li><a href="http://ono60m7tl.bkt.clouddn.com/Mycat_V1.6.0.pdf" target="_blank" rel="external">Mycat权威指南</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Mycat入门&quot;&gt;&lt;a href=&quot;#Mycat入门&quot; class=&quot;headerlink&quot; title=&quot;Mycat入门&quot;&gt;&lt;/a&gt;Mycat入门&lt;/h1&gt;&lt;h2 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安
+    
+    </summary>
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>springBoot整合dubbo</title>
@@ -4367,119 +4812,6 @@
 &lt;li&gt;spring封装的字符串工具类&lt;/li&gt;
 &lt;/ul&gt;
 &lt;
-    
-    </summary>
-    
-      <category term="Spring" scheme="http://chenjiabing666.github.io/categories/Spring/"/>
-    
-    
-      <category term="Spring" scheme="http://chenjiabing666.github.io/tags/Spring/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>spring整合Log4j</title>
-    <link href="http://chenjiabing666.github.io/2018/08/04/spring%E6%95%B4%E5%90%88Log4j/"/>
-    <id>http://chenjiabing666.github.io/2018/08/04/spring整合Log4j/</id>
-    <published>2018-08-04T15:46:43.000Z</published>
-    <updated>2018-08-04T15:47:02.892Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="spring使用Log4j"><a href="#spring使用Log4j" class="headerlink" title="spring使用Log4j"></a>spring使用Log4j</h1><h2 id="常用日志框架介绍"><a href="#常用日志框架介绍" class="headerlink" title="常用日志框架介绍"></a>常用日志框架介绍</h2><ul>
-<li><p>转载自<a href="https://blog.csdn.net/liupeifeng3514/article/details/79624446" target="_blank" rel="external">https://blog.csdn.net/liupeifeng3514/article/details/79624446</a></p>
-</li>
-<li><p><strong>Log4j</strong> Apache Log4j是一个基于Java的日志记录工具。它是由Ceki Gülcü首创的，现在则是Apache软件基金会的一个项目。 Log4j是几种Java日志框架之一；</p>
-</li>
-<li><strong>Log4j 2</strong> Apache Log4j 2是apache开发的一款Log4j的升级产品；</li>
-<li><strong>Commons Logging</strong> Apache基金会所属的项目，是一套Java日志接口，之前叫Jakarta Commons Logging，后更名为Commons Logging；</li>
-<li><strong>Slf4j</strong> 类似于Commons Logging，是一套简易Java日志门面，本身并无日志的实现。（Simple Logging Facade for Java，缩写Slf4j）；</li>
-<li><strong>Logback</strong> 一套日志组件的实现（slf4j阵营）；</li>
-<li><strong>Jul</strong> （Java Util Logging）,自Java1.4以来的官方日志实现。</li>
-</ul>
-<h2 id="日志切换"><a href="#日志切换" class="headerlink" title="日志切换"></a>日志切换</h2><ul>
-<li>springBoot处切换</li>
-</ul>
-<h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="日志配置"><a href="#日志配置" class="headerlink" title="日志配置"></a>日志配置</h2><h3 id="日志的输出级别的设置"><a href="#日志的输出级别的设置" class="headerlink" title="日志的输出级别的设置"></a>日志的输出级别的设置</h3><p>​    1、<strong>OFF</strong>  - <strong>FATAL</strong>  - <strong>WARN</strong>  - <strong>INFO</strong>  - <strong>DEBUG</strong>  - <strong>TRACE</strong>  - <strong>ALL</strong>  </p>
-<p>​    2、Log4j建议只使用四个级别，优先级从高到低分别是ERROR、WARN、INFO、DEBUG。通过在这里定义的级别，您可以控制到应用程序中相应级别的日志信息的开关。  比如在这里定义了INFO级别，则应用程序中所有DEBUG级别的日志信息将不被打印出来。  程序会打印高于或等于所设置级别的日志，设置的日志等级越高，打印出来的日志就越少。  如果设置级别为INFO，则优先级高于等于INFO级别（如：INFO、WARN、  ERROR）的日志信息将可以被输出,小于该级别的如DEBUG将不会被输出。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">## level：设定日志记录的最低级别，可设的值有OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL或者自定义的级别，Log4j建议只使用中间四个级别。通过在这里设定级别，您可以控制应用程序中相应级别的日志信息的开关，比如在这里设定了INFO级别，则应用程序中所有DEBUG级别的日志信息将不会被打印出来。</div><div class="line"></div><div class="line">## appenderName：就是指定日志信息要输出到哪里。可以同时指定多个输出目的地，用逗号隔开。例如：log4j.rootLogger＝INFO,A1,B2,C3</div><div class="line">log4j.rootLogger=[level],appenderName1,appenderName2</div></pre></td></tr></table></figure>
-<h3 id="配置日志的输出地"><a href="#配置日志的输出地" class="headerlink" title="配置日志的输出地"></a>配置日志的输出地</h3><p>​    1、<strong>appenderName</strong>：自定义appderName，在log4j.rootLogger设置中使用；</p>
-<p>​    2、<strong>className</strong>：可设值如下： </p>
-<p>​        (1) <strong>org.apache.log4j.ConsoleAppender</strong>（控制台）</p>
-<p>​        (2) <strong>org.apache.log4j.FileAppender</strong>（文件）</p>
-<p>​        (3) <strong>org.apache.log4j.DailyRollingFileAppender</strong>（每天产生一个日志文件）</p>
-<p>​        (4) <strong>org.apache.log4j.RollingFileAppender</strong>（文件大小到达指定尺寸的时候产生一个新的文件）</p>
-<p>​        (5) <strong>org.apache.log4j.WriterAppender</strong>（将日志信息以流格式发送到任意指定的地方）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">log4j.appender.appenderName = className</div></pre></td></tr></table></figure>
-<p>(1) ConsoleAppender选项：</p>
-<ul>
-<li>Threshold=WARN：指定日志信息的最低输出级别，默认为DEBUG。</li>
-<li>ImmediateFlush=true：表示所有消息都会被立即输出，设为false则不输出，默认值是true。</li>
-<li>Target=System.err：默认值是System.out。</li>
-</ul>
-<p>(2 )FileAppender选项：</p>
-<ul>
-<li>Threshold=WARN：指定日志信息的最低输出级别，默认为DEBUG。</li>
-<li>ImmediateFlush=true：表示所有消息都会被立即输出，设为false则不输出，默认值是true。</li>
-<li>Append=false：true表示消息增加到指定文件中，false则将消息覆盖指定的文件内容，默认值是true。</li>
-<li>File=D:/logs/logging.log4j：指定消息输出到logging.log4j文件中。</li>
-</ul>
-<p>(3) DailyRollingFileAppender选项：</p>
-<ul>
-<li>Threshold=WARN：指定日志信息的最低输出级别，默认为DEBUG。</li>
-<li>ImmediateFlush=true：表示所有消息都会被立即输出，设为false则不输出，默认值是true。</li>
-<li>Append=false：true表示消息增加到指定文件中，false则将消息覆盖指定的文件内容，默认值是true。</li>
-<li>File=D:/logs/logging.log4j：指定当前消息输出到logging.log4j文件中。</li>
-<li>DatePattern=’.’yyyy-MM：每月滚动一次日志文件，即每月产生一个新的日志文件。当前月的日志文件名为logging.log4j，前一个月的日志文件名为logging.log4j.yyyy-MM。<br>另外，也可以指定按周、天、时、分等来滚动日志文件，对应的格式如下： <ul>
-<li>1)’.’yyyy-MM：每月</li>
-<li>2)’.’yyyy-ww：每周</li>
-<li>3)’.’yyyy-MM-dd：每天</li>
-<li>4)’.’yyyy-MM-dd-a：每天两次</li>
-<li>5)’.’yyyy-MM-dd-HH：每小时</li>
-<li>6)’.’yyyy-MM-dd-HH-mm：每分钟</li>
-</ul>
-</li>
-</ul>
-<p>(4) RollingFileAppender选项：</p>
-<ul>
-<li>Threshold=WARN：指定日志信息的最低输出级别，默认为DEBUG。</li>
-<li>ImmediateFlush=true：表示所有消息都会被立即输出，设为false则不输出，默认值是true。</li>
-<li>Append=false：true表示消息增加到指定文件中，false则将消息覆盖指定的文件内容，默认值是true。</li>
-<li>File=D:/logs/logging.log4j：指定消息输出到logging.log4j文件中。</li>
-<li>MaxFileSize=100KB：后缀可以是KB, MB或者GB。在日志文件到达该大小时，将会自动滚动，即将原来的内容移到logging.log4j.1文件中。</li>
-<li>MaxBackupIndex=2：指定可以产生的滚动文件的最大数，例如，设为2则可以产生logging.log4j.1，logging.log4j.2两个滚动文件和一个logging.log4j文件。</li>
-</ul>
-<h3 id="配置日志信息的输出格式（Layout）"><a href="#配置日志信息的输出格式（Layout）" class="headerlink" title="配置日志信息的输出格式（Layout）"></a>配置日志信息的输出格式（Layout）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">log4j.appender.appenderName.layout=className</div></pre></td></tr></table></figure>
-<p><strong>className</strong>：可设值如下：</p>
-<ul>
-<li>(1)org.apache.log4j.HTMLLayout（以HTML表格形式布局）</li>
-<li>(2)org.apache.log4j.PatternLayout（可以灵活地指定布局模式）</li>
-<li>(3)org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串）</li>
-<li>(4)org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等等信息）</li>
-</ul>
-<p><strong>(1) HTMLLayout选项：</strong></p>
-<ul>
-<li>LocationInfo=true：输出java文件名称和行号，默认值是false。</li>
-<li>Title=My Logging： 默认值是Log4J Log Messages。</li>
-</ul>
-<p><strong>(2)PatternLayout选项：</strong></p>
-<ul>
-<li>ConversionPattern=%m%n：设定以怎样的格式显示消息。</li>
-<li>格式说明如下</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">%p：输出日志信息的优先级，即DEBUG，INFO，WARN，ERROR，FATAL。</div><div class="line">%d：输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，如：%d&#123;yyyy/MM/dd HH:mm:ss,SSS&#125;。</div><div class="line">%r：输出自应用程序启动到输出该log信息耗费的毫秒数。</div><div class="line">%t：输出产生该日志事件的线程名。</div><div class="line">%l：输出日志事件的发生位置，相当于%c.%M(%F:%L)的组合，包括类全名、方法、文件名以及在代码中的行数。例如：test.TestLog4j.main(TestLog4j.java:10)。</div><div class="line">%c：输出日志信息所属的类目，通常就是所在类的全名。</div><div class="line">%M：输出产生日志信息的方法名。</div><div class="line">%F：输出日志消息产生时所在的文件名称。</div><div class="line">%L：输出代码中的行号。</div><div class="line">%m：输出代码中指定的具体日志信息。</div><div class="line">%n：输出一个回车换行符，Windows平台为"rn"，Unix平台为"n"。</div><div class="line">%x：输出和当前线程相关联的NDC(嵌套诊断环境)，尤其用到像java servlets这样的多客户多线程的应用中。</div><div class="line">%%：输出一个"%"字符。</div><div class="line"></div><div class="line">另外，还可以在%与格式字符之间加上修饰符来控制其最小长度、最大长度、和文本的对齐方式。如：</div><div class="line">1) c：指定输出category的名称，最小的长度是20，如果category的名称长度小于20的话，默认的情况下右对齐。</div><div class="line">2) %-20c："-"号表示左对齐。</div><div class="line">3) %.30c：指定输出category的名称，最大的长度是30，如果category的名称长度大于30的话，就会将左边多出的字符截掉，但小于30的话也不会补空格。</div></pre></td></tr></table></figure>
-<h3 id="Log4j比较全面的配置"><a href="#Log4j比较全面的配置" class="headerlink" title="Log4j比较全面的配置"></a>Log4j比较全面的配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">log4j.rootLogger=DEBUG,console,dailyFile,im</div><div class="line">log4j.additivity.org.apache=true</div><div class="line"># 控制台(console)</div><div class="line">log4j.appender.console=org.apache.log4j.ConsoleAppender</div><div class="line">log4j.appender.console.Threshold=DEBUG</div><div class="line">log4j.appender.console.ImmediateFlush=true</div><div class="line">log4j.appender.console.Target=System.err</div><div class="line">log4j.appender.console.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.console.layout.ConversionPattern=[%-5p] %d(%r) --&gt; [%t] %l: %m %x %n</div><div class="line"></div><div class="line"># 日志文件(logFile)</div><div class="line">log4j.appender.logFile=org.apache.log4j.FileAppender</div><div class="line">log4j.appender.logFile.Threshold=DEBUG</div><div class="line">log4j.appender.logFile.ImmediateFlush=true</div><div class="line">log4j.appender.logFile.Append=true</div><div class="line">log4j.appender.logFile.File=D:/logs/log.log4j</div><div class="line">log4j.appender.logFile.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.logFile.layout.ConversionPattern=[%-5p] %d(%r) --&gt; [%t] %l: %m %x %n</div><div class="line"># 回滚文件(rollingFile)</div><div class="line">log4j.appender.rollingFile=org.apache.log4j.RollingFileAppender</div><div class="line">log4j.appender.rollingFile.Threshold=DEBUG</div><div class="line">log4j.appender.rollingFile.ImmediateFlush=true</div><div class="line">log4j.appender.rollingFile.Append=true</div><div class="line">log4j.appender.rollingFile.File=D:/logs/log.log4j</div><div class="line">log4j.appender.rollingFile.MaxFileSize=200KB</div><div class="line">log4j.appender.rollingFile.MaxBackupIndex=50</div><div class="line">log4j.appender.rollingFile.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.rollingFile.layout.ConversionPattern=[%-5p] %d(%r) --&gt; [%t] %l: %m %x %n</div><div class="line"># 定期回滚日志文件(dailyFile)</div><div class="line">log4j.appender.dailyFile=org.apache.log4j.DailyRollingFileAppender</div><div class="line">log4j.appender.dailyFile.Threshold=DEBUG</div><div class="line">log4j.appender.dailyFile.ImmediateFlush=true</div><div class="line">log4j.appender.dailyFile.Append=true</div><div class="line">log4j.appender.dailyFile.File=D:/logs/log.log4j</div><div class="line">log4j.appender.dailyFile.DatePattern=&apos;.&apos;yyyy-MM-dd</div><div class="line">log4j.appender.dailyFile.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.dailyFile.layout.ConversionPattern=[%-5p] %d(%r) --&gt; [%t] %l: %m %x %n</div><div class="line"># 应用于socket</div><div class="line">log4j.appender.socket=org.apache.log4j.RollingFileAppender</div><div class="line">log4j.appender.socket.RemoteHost=localhost</div><div class="line">log4j.appender.socket.Port=5001</div><div class="line">log4j.appender.socket.LocationInfo=true</div><div class="line"># Set up for Log Factor 5</div><div class="line">log4j.appender.socket.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.socket.layout.ConversionPattern=[%-5p] %d(%r) --&gt; [%t] %l: %m %x %n</div><div class="line"># Log Factor 5 Appender</div><div class="line">log4j.appender.LF5_APPENDER=org.apache.log4j.lf5.LF5Appender</div><div class="line">log4j.appender.LF5_APPENDER.MaxNumberOfRecords=2000</div><div class="line"># 发送日志到指定邮件</div><div class="line">log4j.appender.mail=org.apache.log4j.net.SMTPAppender</div><div class="line">log4j.appender.mail.Threshold=FATAL</div><div class="line">log4j.appender.mail.BufferSize=10</div><div class="line">log4j.appender.mail.From = xxx@mail.com</div><div class="line">log4j.appender.mail.SMTPHost=mail.com</div><div class="line">log4j.appender.mail.Subject=Log4J Message</div><div class="line">log4j.appender.mail.To= xxx@mail.com</div><div class="line">log4j.appender.mail.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.mail.layout.ConversionPattern=[%-5p] %d(%r) --&gt; [%t] %l: %m %x %n</div><div class="line"># 应用于数据库</div><div class="line">log4j.appender.database=org.apache.log4j.jdbc.JDBCAppender</div><div class="line">log4j.appender.database.URL=jdbc:mysql://localhost:3306/test</div><div class="line">log4j.appender.database.driver=com.mysql.jdbc.Driver</div><div class="line">log4j.appender.database.user=root</div><div class="line">log4j.appender.database.password=</div><div class="line">log4j.appender.database.sql=INSERT INTO LOG4J (Message) VALUES(&apos;=[%-5p] %d(%r) --&gt; [%t] %l: %m %x %n&apos;)</div><div class="line">log4j.appender.database.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.database.layout.ConversionPattern=[%-5p] %d(%r) --&gt; [%t] %l: %m %x %n</div><div class="line"></div><div class="line"># 自定义Appender</div><div class="line">log4j.appender.im = net.cybercorlin.util.logger.appender.IMAppender</div><div class="line">log4j.appender.im.host = mail.cybercorlin.net</div><div class="line">log4j.appender.im.username = username</div><div class="line">log4j.appender.im.password = password</div><div class="line">log4j.appender.im.recipient = corlin@cybercorlin.net</div><div class="line">log4j.appender.im.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.im.layout.ConversionPattern=[%-5p] %d(%r) --&gt; [%t] %l: %m %x %n</div></pre></td></tr></table></figure>
-<h2 id="Spring使用Log4j日志框架"><a href="#Spring使用Log4j日志框架" class="headerlink" title="Spring使用Log4j日志框架"></a>Spring使用Log4j日志框架</h2><p>1、log4j框架指定日志输出文件只能使用绝对路径，但是我们的项目是跟着系统走的，因此我们需要将日志存放在项目的路径中，这样就需要获取到当前项目的路径，这里只需要在web.xml中添加一个Log4j的监听器即可实现，如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 设置根目录,必须每个项目的值都不相同，否则将会发生冲突如果一个tomcat部署多个项目的话 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">context-param</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>webAppRootKey<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>lifecrystal.root<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- 指定log4j配置文件的位置，项目路径下 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">context-param</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>log4jConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:log4j.properties<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- 3000表示 开一条watchdog线程每60秒扫描一下配置文件的变化;这样便于日志存放位置的改变 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">context-param</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>log4jRefreshInterval<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>3000<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- 1、log4j监听器，将webAppRootKey设置的值加载到系统参数中，这样就可以在配置文件中引用项目的路径</span></div><div class="line">		 2、项目运行期间，每次改变配置文件中的值都会被监听到</div><div class="line">	 --&gt;</div><div class="line">	<span class="tag">&lt;<span class="name">listener</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.util.Log4jConfigListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">listener</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>2、此时我们就可以在log4j.properties中使用<code>${lifecrystal.root}</code>获取到项目的路径，实际使用的就是<strong>System.getProperty()</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">#LOG 输出级别和输出的地方，分别为Console和File，这里到值可以随意改变，但是在下文一定要和这里的一样</div><div class="line">log4j.rootLogger=DEBUG,Console,File</div><div class="line"></div><div class="line">#################################输出到控制台，级别为DEBUG#############################################</div><div class="line">#输出目的地方为控制台</div><div class="line">log4j.appender.Console=org.apache.log4j.ConsoleAppender</div><div class="line">## 以system.out的格式输出，黑色的</div><div class="line">log4j.appender.Console.Target=System.out</div><div class="line">## 只有在DEBUG的模式下才会在控制台输出</div><div class="line">log4j.appender.console.Threshold=DEBUG</div><div class="line">#在控制台输出的格式  </div><div class="line">log4j.appender.Console.layout = org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.Console.layout.ConversionPattern=[%p]:[%c]:[%d&#123;yyyy/MM/dd HH:mm:ss&#125;] - %m%n</div><div class="line"></div><div class="line"></div><div class="line">#################################输出到文件中，级别为DEBUG#############################################</div><div class="line"></div><div class="line">#文件大小到一定尺寸产生一个新文件</div><div class="line">log4j.appender.File = org.apache.log4j.RollingFileAppender</div><div class="line">#指定输出目录</div><div class="line">log4j.appender.File.File = $&#123;lifecrystal.root&#125;/logs/debug/logs.log</div><div class="line">#定义文件最大大小</div><div class="line">log4j.appender.File.MaxFileSize = 1000MB</div><div class="line">#DEBUG 日志</div><div class="line">log4j.appender.File.Threshold = DEBUG</div><div class="line">log4j.appender.File.layout = org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.File.layout.ConversionPattern =[%p] [%d&#123;yyyy-MM-dd HH\:mm\:ss &#125;][%c]%m%n</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">##################################Mybatis的sql语句的输出，DEBUG级别#####################################################</div><div class="line">log4j.logger.com.ibatis=DEBUG log4j.logger.com.ibatis.common.jdbc.SimpleDataSource=DEBUG </div><div class="line">log4j.logger.com.ibatis.common.jdbc.ScriptRunner=DEBUG</div><div class="line">log4j.logger.com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate=DEBUG</div><div class="line">log4j.logger.java.sql.Connection=DEBUG log4j.logger.java.sql.Statement=DEBUG </div><div class="line">log4j.logger.java.sql.PreparedStatement=DEBUG</div></pre></td></tr></table></figure>
-<p>3、在方法中使用Log4j调试一些内容，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Logger logger=Logger.getLogger(TestController.class);   <span class="comment">//获取Logger对象</span></div><div class="line">	</div><div class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/test/test"</span>)</div><div class="line">	<span class="meta">@ResponseBody</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"这个是测试方法"</span>);</div><div class="line">		</div><div class="line">		logger.debug(<span class="string">"debug信息"</span>);</div><div class="line">		logger.info(<span class="string">"info信息"</span>);</div><div class="line">		</div><div class="line">		logger.error(<span class="string">"这个是error级别的信息"</span>);</div><div class="line">		System.out.println(<span class="number">10</span>/<span class="number">0</span>);</div><div class="line">		</div><div class="line">		<span class="keyword">return</span> <span class="string">"test"</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>1、<a href="https://blog.csdn.net/liupeifeng3514" target="_blank" rel="external">https://blog.csdn.net/qq_35029429/article/details/78826936</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;spring使用Log4j&quot;&gt;&lt;a href=&quot;#spring使用Log4j&quot; class=&quot;headerlink&quot; title=&quot;spring使用Log4j&quot;&gt;&lt;/a&gt;spring使用Log4j&lt;/h1&gt;&lt;h2 id=&quot;常用日志框架介绍&quot;&gt;&lt;a href=&quot;#常
     
     </summary>
     
