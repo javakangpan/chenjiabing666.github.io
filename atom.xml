@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-10-08T16:48:39.343Z</updated>
+  <updated>2018-10-08T16:55:05.773Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,12 +20,12 @@
     <link href="http://chenjiabing666.github.io/2018/10/09/docker%E5%AE%89%E8%A3%85%E6%9C%8D%E5%8A%A1/"/>
     <id>http://chenjiabing666.github.io/2018/10/09/docker安装服务/</id>
     <published>2018-10-08T16:47:55.000Z</published>
-    <updated>2018-10-08T16:48:39.343Z</updated>
+    <updated>2018-10-08T16:55:05.773Z</updated>
     
     <content type="html"><![CDATA[<h2 id="docker安装Nginx"><a href="#docker安装Nginx" class="headerlink" title="docker安装Nginx"></a>docker安装Nginx</h2><p>1、<code>docker pull nginx</code> ：下载nginx</p>
 <p>2、<code>docker run --name mynginx -d nginx</code>： 运行nginx实例</p>
 <p>3、新建nginx目录在本地</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/</div><div class="line">mkdir nginx</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /usr/share/</div><div class="line">mkdir nginx</div></pre></td></tr></table></figure>
 <p>3、复制nginx的目录到本地，命令如下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//复制配置文件到本地</div><div class="line">docker cp mynginx:/etc/nginx/nginx /usr/share/nginx/conf/</div><div class="line"></div><div class="line">//复制html目录到本地</div><div class="line">docker cp mynginx:/usr/share/nginx/html /usr/share/nginx/html</div><div class="line"></div><div class="line">//复制日志到到本地</div><div class="line">docker cp mynginx:/var/log/nginx /usr/share/nginx/logs</div></pre></td></tr></table></figure>
 <p>4、挂载目录并且启动nginx，如下：</p>
