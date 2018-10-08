@@ -4,6 +4,46 @@
 
     
   <url>
+    <loc>http://chenjiabing666.github.io/2018/10/09/docker%E5%AE%89%E8%A3%85%E6%9C%8D%E5%8A%A1/</loc>
+    <lastmod>2018-10-08T16:48:39.343Z</lastmod>
+    <data>
+        <display>
+        <title>docker安装服务</title>
+        <pubTime>2018-10-08T16:47:55.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://chenjiabing666.github.io/categories/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/06/26/Dubbo%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2018-10-08T16:45:50.423Z</lastmod>
+    <data>
+        <display>
+        <title>Dubbo使用总结</title>
+        <pubTime>2018-06-26T14:41:16.000Z</pubTime>
+        
+        <tag>分布式</tag>
+         
+         
+           
+             
+              <breadCrumb title="分布式" url="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://chenjiabing666.github.io/2018/10/07/Mycat/</loc>
     <lastmod>2018-10-07T13:03:14.502Z</lastmod>
     <data>
@@ -917,26 +957,6 @@
            
              
               <breadCrumb title="Git" url="http://chenjiabing666.github.io/categories/Git/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://chenjiabing666.github.io/2018/06/26/Dubbo%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2018-06-26T14:41:47.360Z</lastmod>
-    <data>
-        <display>
-        <title>Dubbo使用总结</title>
-        <pubTime>2018-06-26T14:41:16.000Z</pubTime>
-        
-        <tag>Dubbo</tag>
-         
-         
-           
-             
-              <breadCrumb title="Dubbo" url="http://chenjiabing666.github.io/categories/Dubbo/"/>
           
         </display>
     </data>

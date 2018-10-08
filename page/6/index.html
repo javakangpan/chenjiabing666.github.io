@@ -79,6 +79,35 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2018/06/26/Redis的管道Pipeline/" title="Redis的管道Pipeline" itemprop="url">
+  
+    <h1 itemprop="name">Redis的管道Pipeline</h1>
+    
+     
+           <p itemprop="description" >Redis的管道(Pipeline)为什么使用管道
+其中redis的执行一条命令可以分为四个步骤
+发送命令
+命令排队
+命令执行
+返回结果
+
+
+其中1-4之间所需要的时间称为往返时间(RTT)
+Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但大部分命令</p>
+        
+    
+    <time datetime="2018-06-26T14:35:00.000Z" itemprop="datePublished">2018-06-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2018/06/26/Redis持久化/" title="Redis持久化" itemprop="url">
   
     <h1 itemprop="name">Redis持久化</h1>
@@ -315,29 +344,9 @@ Linux文件系统结构
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/05/27/SSM整合/" title="SSM整合" itemprop="url">
-  
-    <h1 itemprop="name">SSM整合</h1>
-    
-     
-           <p itemprop="description" >Spring + SpringMVC + Mybatis整合依赖123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585</p>
-        
-    
-    <time datetime="2018-05-27T02:16:20.000Z" itemprop="datePublished">2018-05-27</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/5/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/7/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/7/">Next<span></span></a>
   </nav>
 
 </div>
@@ -358,10 +367,6 @@ Linux文件系统结构
 		
 		  
 			<li><a href="/categories/BootStrap学习/" title="BootStrap学习">BootStrap学习<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Dubbo/" title="Dubbo">Dubbo<sup>1</sup></a></li>
 		  
 		
 		  
@@ -429,7 +434,7 @@ Linux文件系统结构
 		  
 		
 		  
-			<li><a href="/categories/docker/" title="docker">docker<sup>1</sup></a></li>
+			<li><a href="/categories/docker/" title="docker">docker<sup>2</sup></a></li>
 		  
 		
 		  
@@ -449,7 +454,7 @@ Linux文件系统结构
 		  
 		
 		  
-			<li><a href="/categories/分布式/" title="分布式">分布式<sup>1</sup></a></li>
+			<li><a href="/categories/分布式/" title="分布式">分布式<sup>2</sup></a></li>
 		  
 		
 		  
@@ -510,19 +515,19 @@ Linux文件系统结构
 			
 		
 			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>8</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Servlet/" title="Servlet">Servlet<sup>8</sup></a></li>
 			
 		
 			
@@ -534,15 +539,11 @@ Linux文件系统结构
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/java基础/" title="java基础">java基础<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
@@ -550,11 +551,15 @@ Linux文件系统结构
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Ajax/" title="Ajax">Ajax<sup>3</sup></a></li>
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
 			
 		
 		</ul>
