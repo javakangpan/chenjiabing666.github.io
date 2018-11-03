@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-10-24T14:44:41.707Z</updated>
+  <updated>2018-11-03T14:52:09.998Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,155 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java自定义注解</title>
+    <link href="http://chenjiabing666.github.io/2018/11/03/java%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/"/>
+    <id>http://chenjiabing666.github.io/2018/11/03/java自定义注解/</id>
+    <published>2018-11-03T14:50:08.000Z</published>
+    <updated>2018-11-03T14:52:09.998Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="自定义注解【Annotation】"><a href="#自定义注解【Annotation】" class="headerlink" title="自定义注解【Annotation】"></a>自定义注解【Annotation】</h1><h2 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h2><h3 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h3><ul>
+<li>表示需要在什么级别保存该注解信息 。分为如下三类：<ul>
+<li><code>@Retention(RetentionPolicy.SOURCE)</code>：注解仅存在于源码中，在class字节码文件中不包含 </li>
+<li><code>@Retention(RetentionPolicy.CLASS)</code>：默认的保留策略，注解会在class字节码文件中存在，但运行时无法获得 </li>
+<li><code>@Retention(RetentionPolicy.RUNTIME)</code>： 注解会在class字节码文件中存在，在运行时可以通过反射获取到 </li>
+</ul>
+</li>
+</ul>
+<h3 id="Target"><a href="#Target" class="headerlink" title="@Target"></a>@Target</h3><ul>
+<li>注解的作用目标 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>取值</th>
+<th>作用域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@Target(ElementType.TYPE)</code></td>
+<td>接口、类、枚举、注解</td>
+</tr>
+<tr>
+<td><code>@Target(ElementType.FIELD)</code></td>
+<td>字段、枚举的常量</td>
+</tr>
+<tr>
+<td><code>@Target(ElementType.METHOD)</code></td>
+<td>方法</td>
+</tr>
+<tr>
+<td><code>@Target(ElementType.PARAMETER)</code></td>
+<td>方法参数</td>
+</tr>
+<tr>
+<td><code>@Target(ElementType.CONSTRUCTOR)</code></td>
+<td>构造函数</td>
+</tr>
+<tr>
+<td><code>@Target(ElementType.LOCAL_VARIABLE)</code></td>
+<td>局部变量</td>
+</tr>
+<tr>
+<td><code>@Target(ElementType.ANNOTATION_TYPE)</code></td>
+<td>注解</td>
+</tr>
+<tr>
+<td><code>@Target(ElementType.PACKAGE)</code></td>
+<td>包</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Document"><a href="#Document" class="headerlink" title="@Document"></a>@Document</h3><ul>
+<li>注解包含在javadoc中 </li>
+</ul>
+<h3 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a>@Inherited</h3><ul>
+<li>注解可以被继承 </li>
+</ul>
+<h2 id="关于注解的反射方法"><a href="#关于注解的反射方法" class="headerlink" title="关于注解的反射方法"></a>关于注解的反射方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取某个类型的注解</span></div><div class="line"><span class="keyword">public</span> &lt;A extends Annotation&gt; <span class="function">A <span class="title">getAnnotation</span><span class="params">(Class&lt;A&gt; annotationClass)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">// 获取所有注解(包括父类中被Inherited修饰的注解)</span></div><div class="line"><span class="keyword">public</span> Annotation[] getAnnotations(); </div><div class="line"></div><div class="line"><span class="comment">// 获取声明的注解(但是不包括父类中被Inherited修饰的注解)</span></div><div class="line"><span class="keyword">public</span> Annotation[] getDeclaredAnnotations();</div><div class="line"></div><div class="line"><span class="comment">// 判断某个对象上是否被某个注解进行标注</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isAnnotationPresent</span><span class="params">(Class&lt;? extends Annotation&gt; annotationClass)</span></span></div><div class="line"></div><div class="line"><span class="comment">// 获取某个类声明的所有字段</span></div><div class="line"><span class="keyword">public</span> Field[] <span class="title">getDeclaredFields</span><span class="params">()</span> <span class="keyword">throws</span> SecurityException;</div><div class="line"></div><div class="line"><span class="comment">// 获取某个方法</span></div><div class="line"><span class="function"><span class="keyword">public</span> Method <span class="title">getMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span></span>;</div></pre></td></tr></table></figure>
+<h2 id="五种通知"><a href="#五种通知" class="headerlink" title="五种通知"></a>五种通知</h2><ul>
+<li><code>@Before</code>：前置通知，在调用目标方法之前执行通知定义的任务</li>
+<li><code>@After</code>：后置通知，在目标方法执行结束后，无论执行结果如何（异常或者正常执行）都执行通知定义的任务</li>
+<li><code>@After-returning</code>：后置通知，在目标方法执行结束后，如果执行成功（没有异常），则执行通知定义的任务</li>
+<li><code>@After-throwing</code>：异常通知，如果目标方法执行过程中抛出异常，则执行通知定义的任务</li>
+<li><code>@Around</code>：环绕通知，在目标方法执行前和执行后，都需要执行通知定义的任务</li>
+</ul>
+<h2 id="JoinPoint-对象"><a href="#JoinPoint-对象" class="headerlink" title="JoinPoint 对象"></a>JoinPoint 对象</h2><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Signature getSignature();</code></td>
+<td>获取封装了署名信息的对象,在该对象中可以获取到目标方法名,所属类的Class等信息</td>
+</tr>
+<tr>
+<td><code>Object[] getArgs();</code></td>
+<td>获取传入目标方法的参数对象</td>
+</tr>
+<tr>
+<td><code>Object getTarget();</code></td>
+<td>获取被代理的对象</td>
+</tr>
+<tr>
+<td><code>Object getThis();</code></td>
+<td>获取代理对象</td>
+</tr>
+</tbody>
+</table>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><ul>
+<li>使用springBoot，需要 添加aop相关的依赖，如下：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- springBoot的aop功能启动器 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h3><ul>
+<li>实际的生产环境中会对每个都记录日志，比如xxx用户执行了xxx操作，这些日志如果都使用一个方法的话，未免太不雅，此时我们可以定义一个注解，使用spring中的aop，在方法执行成功之后记录日志信息，步骤如下：</li>
+<li>定义一个注解，使用<code>@Interface</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.annotation.*;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 定义日志的注解，作用在方法上</div><div class="line"> * <span class="doctag">@author</span> 陈加兵 	</div><div class="line"> * <span class="doctag">@since</span> 2018年11月3日 上午11:53:59</div><div class="line"> */</div><div class="line"><span class="meta">@Target</span>(&#123;ElementType.PARAMETER, ElementType.METHOD&#125;)  <span class="comment">//作用在方法上面</span></div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)   <span class="comment">//程序运行  </span></div><div class="line"><span class="meta">@Documented</span>  </div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> InsertLog &#123;</div><div class="line">	<span class="function">String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;   <span class="comment">//用户名</span></div><div class="line">	<span class="function">String <span class="title">operation</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;  <span class="comment">//操作</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>定义一个注解的实现类，使用aop实现该注解</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>   <span class="comment">//注入</span></div><div class="line"><span class="meta">@Aspect</span>   <span class="comment">//切面</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InsertLogAnnotation</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> LogService logService;   <span class="comment">//日志的service，用来记录日志</span></div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 1、<span class="doctag">@pointCut</span>：定义切入点，其中支持多种表达式来匹配切入点，这里的annotation是用来匹配注解的</div><div class="line">	 * 2、<span class="doctag">@annotation</span>的参数必须和这个方法的参数字段相同，因为这里表示的扫描的哪个注解</div><div class="line">	 * 3、这个切入点的 意思：只要被`<span class="doctag">@InsertLog</span>`这个注解标注的都会被扫描到成为切入点</div><div class="line">	 * <span class="doctag">@param</span> log  注解的对象</div><div class="line">	 */</div><div class="line">	<span class="meta">@Pointcut</span>(<span class="string">"@annotation(log)"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertLog</span><span class="params">(InsertLog log)</span></span>&#123;&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * `<span class="doctag">@AfterReturning</span>`:定义后置通知，只有程序执行成功才会调用该注解，用来添加操作的日志</div><div class="line">	 * `insertLog(log)`: 这里的log一定要和上面定义切入点(<span class="doctag">@Pointcut</span>)中的参数字段一样</div><div class="line">	 * <span class="doctag">@param</span> point JoinPoint对象，可以获取一些切面信息，比如调用的类，调用的方法名称</div><div class="line">	 * <span class="doctag">@param</span> log  该注解的对象，可以获取注解中参数的内容</div><div class="line">	 * <span class="doctag">@throws</span> Exception </div><div class="line">	 */</div><div class="line">	<span class="meta">@AfterReturning</span>(<span class="string">"insertLog(log)"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SystemLog</span><span class="params">(JoinPoint point,InsertLog log)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">		<span class="comment">//获取注解中的参数内容</span></div><div class="line">		String name=log.name();  <span class="comment">//姓名</span></div><div class="line">		String operation=log.operation();  <span class="comment">//操作</span></div><div class="line">		</div><div class="line">		Log log2=<span class="keyword">new</span> Log();</div><div class="line">		log2.setName(name);</div><div class="line">		log2.setOperation(operation);</div><div class="line">		logService.addLog(log2);  <span class="comment">//添加到日志中</span></div><div class="line">		</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>此时就已经完成了，我们只需要将该注解添加到需要记录日志的方法上即可，如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@InsertLog</span>(name=<span class="string">"陈加兵"</span>,operation=<span class="string">"删除用户"</span>)  <span class="comment">//使用日志注解，在程序执行成功之后记录日志</span></div><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">deleteUserById</span><span class="params">(Integer userId)</span> </span>&#123;</div><div class="line">	System.out.println(<span class="string">"删除成功"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>完整的项目截图如下：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/chenjiabing666/BlogImage/master/annotation.png" alt="注解截图"></p>
+<h3 id="性能监控"><a href="#性能监控" class="headerlink" title="性能监控"></a>性能监控</h3><ul>
+<li>可以定义一个注解实现性能监控，设置一个环绕通知即可，在程序执行开始和结束之后统计时间即可</li>
+<li>定义一个注解，如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 性能监控的注解</div><div class="line"> * <span class="doctag">@author</span> 陈加兵 	</div><div class="line"> * <span class="doctag">@since</span> 2018年11月3日 下午1:08:30</div><div class="line"> */</div><div class="line"><span class="meta">@Target</span>(&#123;ElementType.PARAMETER, ElementType.METHOD&#125;)  <span class="comment">//作用在方法上面</span></div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)   <span class="comment">//程序运行  </span></div><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> CapabilityMonitor &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>定义注解的实现类，使用切面的环绕通知</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 性能监控注解的实现类</div><div class="line"> * <span class="doctag">@author</span> 陈加兵 	</div><div class="line"> * <span class="doctag">@since</span> 2018年11月3日 下午1:09:40</div><div class="line"> */</div><div class="line"><span class="meta">@Aspect</span>    <span class="comment">//切面</span></div><div class="line"><span class="meta">@Component</span>   <span class="comment">//注入</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CapabilityMonitorAnnotationImpl</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> Logger logger=LoggerFactory.getLogger(CapabilityMonitorAnnotationImpl.class);  <span class="comment">//selfj的日志信息</span></div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 定义切入点，只要方法体上有这个注解</div><div class="line">	 * <span class="doctag">@param</span> capabilityMonitor  注解的对象</div><div class="line">	 */</div><div class="line">	<span class="meta">@Pointcut</span>(<span class="string">"@annotation(capabilityMonitor)"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">capabilityMonitor</span><span class="params">(CapabilityMonitor capabilityMonitor)</span></span>&#123;&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 环绕通知，在方法执行之前和之后都执行</div><div class="line">	 * capabilityMonitor(capabilityMonitor)：这里的参数一定要和切入点（`<span class="doctag">@Pointcut</span>("<span class="doctag">@annotation</span>(capabilityMonitor)")`）的参数相同</div><div class="line">	 * <span class="doctag">@param</span> point</div><div class="line">	 * <span class="doctag">@param</span> capabilityMonitor  注解的对象</div><div class="line">	 * <span class="doctag">@throws</span> Throwable </div><div class="line">	 */</div><div class="line">	<span class="meta">@Around</span>(<span class="string">"capabilityMonitor(capabilityMonitor)"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(ProceedingJoinPoint point,CapabilityMonitor capabilityMonitor)</span> <span class="keyword">throws</span> Throwable</span>&#123;</div><div class="line">		Long startTime=System.currentTimeMillis();  <span class="comment">//开始时间</span></div><div class="line">		Object[] args=point.getArgs(); <span class="comment">//获取目标方法执行的参数数组</span></div><div class="line">		Object returnValues=point.proceed(args);   <span class="comment">//执行目标方法</span></div><div class="line">		Long endTime=System.currentTimeMillis();  <span class="comment">//结束时间</span></div><div class="line">		logger.info(<span class="string">"程序执行的时间："</span>+((endTime-startTime)/<span class="number">1000.0</span>));   <span class="comment">//输出程序执行的时间，秒位单位</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="http://shouce.jb51.net/spring/aop.html" target="_blank" rel="external">aop的相关知识点</a></li>
+<li><a href="https://chenjiabing666.github.io/2018/05/21/Spring%E4%B9%8BAOP/">spring aop</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;自定义注解【Annotation】&quot;&gt;&lt;a href=&quot;#自定义注解【Annotation】&quot; class=&quot;headerlink&quot; title=&quot;自定义注解【Annotation】&quot;&gt;&lt;/a&gt;自定义注解【Annotation】&lt;/h1&gt;&lt;h2 id=&quot;元注解&quot;&gt;
+    
+    </summary>
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/categories/Spring/"/>
+    
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/tags/Spring/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot整合Swagger</title>
@@ -4651,107 +4800,6 @@
     
     
       <category term="Nginx" scheme="http://chenjiabing666.github.io/tags/Nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker基本使用</title>
-    <link href="http://chenjiabing666.github.io/2018/09/02/docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
-    <id>http://chenjiabing666.github.io/2018/09/02/docker基本使用/</id>
-    <published>2018-09-02T11:27:01.000Z</published>
-    <updated>2018-09-02T11:27:24.521Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="docker入门"><a href="#docker入门" class="headerlink" title="docker入门"></a>docker入门</h1><h2 id="配置阿里云的镜像加速器"><a href="#配置阿里云的镜像加速器" class="headerlink" title="配置阿里云的镜像加速器"></a>配置阿里云的镜像加速器</h2><p>1、登录阿里云控制台，找到自己的控制台，配置docker的镜像加速，在自己的centos7的机器上执行下述命令即可:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sudo mkdir -p /etc/docker</div><div class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-'EOF'</div><div class="line">&#123;</div><div class="line">  "registry-mirrors": ["https://rxx4pnmv.mirror.aliyuncs.com"]</div><div class="line">&#125;</div><div class="line">EOF</div><div class="line">sudo systemctl daemon-reload</div><div class="line">sudo systemctl restart docker</div></pre></td></tr></table></figure>
-<h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><p>1、搜索镜像：<code>docker search image</code></p>
-<p>​    1、image是镜像的名字</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker search mysql ---- 搜索全部的mysql镜像</div></pre></td></tr></table></figure>
-<p>2、拉取镜像：<code>docker pull　image：tag</code></p>
-<p>​    1、image是镜像的名称</p>
-<p>​    2、tag是镜像的版本，如果不指定tag，那么默认拉取最新的latest</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker pull mysql   --- 拉取最新版本的mysql</div><div class="line">docker pull mysql:5.5  -- 指定版本</div></pre></td></tr></table></figure>
-<p>3、列出本地所有的镜像：<code>docker images [options]</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">docker images -a  -- 列出本地所有的镜像</div><div class="line"></div><div class="line">docker images -q  --显示镜像Ｉｄ</div><div class="line"></div><div class="line">docker　images -aq  -- 显示所有的镜像id</div><div class="line"></div><div class="line">docker images   -- 查看本地的镜像列表</div><div class="line"></div><div class="line">docker images  mysql  -- 列出本地仓库中镜像名称为mysql的镜像，会列出所有的版本</div><div class="line"></div><div class="line">docker images mysql:5.5   --- 列出指定版本的镜像</div><div class="line"></div><div class="line">docker image ls -f since=mysql:5.5  --- 列出所有在mysql:5.5之后拉取的镜像，之前的只需要将since改成before即可</div></pre></td></tr></table></figure>
-<p>4、查看镜像，容器，数据卷所占用的空间 : <code>docker system df</code></p>
-<p>5、显示本地仓库中虚悬镜像 <code>docker image ls -f dangling=true</code></p>
-<p>6、删除虚悬镜像： <code>docker image prune</code></p>
-<p>7、删除本地镜像：<code>docker rmi  [options],&lt;image&gt;</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">1、先列出所有的镜像   docker images</div><div class="line"></div><div class="line">2、删除指定的本地镜像  docker rmi image_id   使用Id删除镜像</div><div class="line"></div><div class="line">3、强制删除镜像       docker rmi image_id  </div><div class="line"></div><div class="line">4、使用仓库名和标签删除指定镜像   docker rmi mysql:5.5   如果没有指定tag，那么默认是latest，这里的mysql是仓库的名字</div><div class="line"></div><div class="line">5、docker rmi mysql nginx  删除多个镜像，比如mysql，nginx</div><div class="line"></div><div class="line">6、删除全部镜像  docker rmi $(dokcer images -aq)</div></pre></td></tr></table></figure>
-<p>8、运行容器：<code>docker run [options] image ...</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">-a stdin: 指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项；</div><div class="line"></div><div class="line">-d: 后台运行容器，并返回容器ID；</div><div class="line"></div><div class="line">-i: 以交互模式运行容器，通常与 -t 同时使用；</div><div class="line"></div><div class="line">-p: 端口映射，格式为：主机(宿主)端口:容器端口</div><div class="line"></div><div class="line">-t: 为容器重新分配一个伪输入终端，通常与 -i 同时使用；</div><div class="line"></div><div class="line">--name="nginx-lb": 为容器指定一个名称；</div><div class="line"></div><div class="line">--dns 8.8.8.8: 指定容器使用的DNS服务器，默认和宿主一致；</div><div class="line"></div><div class="line">--dns-search example.com: 指定容器DNS搜索域名，默认和宿主一致；</div><div class="line"></div><div class="line">-h "mars": 指定容器的hostname；</div><div class="line"></div><div class="line">-e username="ritchie": 设置环境变量；</div><div class="line"></div><div class="line">--env-file=[]: 从指定文件读入环境变量；</div><div class="line"></div><div class="line">--cpuset="0-2" or --cpuset="0,1,2": 绑定容器到指定CPU运行；</div><div class="line"></div><div class="line">-m :设置容器使用内存最大值；</div><div class="line"></div><div class="line">--net="bridge": 指定容器的网络连接类型，支持 bridge/host/none/container: 四种类型；</div><div class="line"></div><div class="line">--link=[]: 添加链接到另一个容器；</div><div class="line"></div><div class="line">--expose=[]: 开放一个端口或一组端口；</div></pre></td></tr></table></figure>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1、docker pull centos  -- 拉取一个centos</div><div class="line"></div><div class="line">2、docker run -it  --name mycentos 5182e96772bf   --- 以交互形式运行该centos，就会在控制台上有一个输入终端</div><div class="line"></div><div class="line">3、docker run --name tomcat01 -d -p 8081:8080 tomcat   -- 运行tomcat，将docker的8081端口映射到tomcat的默认端口8080</div></pre></td></tr></table></figure>
-<p>9、退出容器： <code>exit</code></p>
-<p>10、列出当前所有的运行的容器  <code>docker ps</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">-a :显示所有的容器，包括未运行的。</div><div class="line"></div><div class="line">-f :根据条件过滤显示的内容。</div><div class="line"></div><div class="line">--format :指定返回值的模板文件。</div><div class="line"></div><div class="line">-l :显示最近创建的容器。</div><div class="line"></div><div class="line">-n :列出最近创建的n个容器。</div><div class="line"></div><div class="line">--no-trunc :不截断输出。</div><div class="line"></div><div class="line">-q :静默模式，只显示容器编号。</div><div class="line"></div><div class="line">-s :显示总的文件大小。</div></pre></td></tr></table></figure>
-<p>11、启动容器 ： <code>docker start container</code>，其中container可以是容器的名字，也可以是容器的Id</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker start mycentos   ## 启动之前停止的容器</div></pre></td></tr></table></figure>
-<p>12、重启容器 <code>docker restart container</code> </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker restart mycentos   -- 重启容器</div></pre></td></tr></table></figure>
-<p>13、停止容器：<code>docker stop container</code>，平滑的停止</p>
-<p>14、杀掉当前正在运行的容器：<code>docker kill container</code> </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker kill mycentos   </div><div class="line">docker kill -s mycentos</div></pre></td></tr></table></figure>
-<p>15、删除容器：<code>docker rm container</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">docker rm containerId  -- 删除已经关闭的容器</div><div class="line"></div><div class="line">docker rm　-f containerId  -- 删除正在运行的容器，强制删除</div><div class="line"></div><div class="line">docker rm $(docker ps -aq)  -- 删除当前全部的容器</div></pre></td></tr></table></figure>
-<h2 id="重要命令"><a href="#重要命令" class="headerlink" title="重要命令"></a>重要命令</h2><p>1、启动守护式的容器（后台运行） ： <code>docker　run --name mycentos -d centos</code></p>
-<p>2、查看容器的日志信息：<code>docker logs [options] container</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-f : 跟踪日志输出</div><div class="line"></div><div class="line">--since :显示某个开始时间的所有日志</div><div class="line"></div><div class="line">-t : 显示时间戳</div><div class="line"></div><div class="line">--tail :仅列出最新N条容器日志</div></pre></td></tr></table></figure>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker logs -f mycentos</div></pre></td></tr></table></figure>
-<p>3、查看容器中运行的进程信息： <code>docker top container</code>，这个命令和Linux中的<code>ps</code>一样的效果</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker top mymysql  查看当前正在运行的mysql的进程信息，如下：</div><div class="line"></div><div class="line">UID    PID    PPID    C      STIME   TTY  TIME       CMD</div><div class="line">999    40347  40331   18     00:58   ?    00:00:02   mysqld</div></pre></td></tr></table></figure>
-<p>4、查看容器内部的细节： <code>docker inspect container</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker inspect mycentos</div></pre></td></tr></table></figure>
-<p>5、进入正在运行的容器，并以命令行的形式进行交互：<code>docker attach container</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker attach myCentos  -- 进入正在运行的centos</div></pre></td></tr></table></figure>
-<p>6、在运行的容器中执行命令 <code>docker exec</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker exec -it  mysql bash  -- 这个命令将会连接上mysql的终端，可以执行命令行</div></pre></td></tr></table></figure>
-<h2 id="持久化数据-—-数据卷"><a href="#持久化数据-—-数据卷" class="headerlink" title="持久化数据  — 数据卷"></a>持久化数据  — 数据卷</h2><p>1、<code>docker run -it -v /宿主机绝对路径:/docker容器内的路径  镜像名</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"># 这个命令是在后台执行运行一个tomcat容器，使用-v可以在服务器的根目录下创建一个myDataVolum，在tomcat的根目录中创建一个dataVolumContainer文件夹</div><div class="line">1、docker run -d --name tomcat01 -v /myDataVolum:/dataVolumContainer tomcat</div><div class="line"></div><div class="line">## 进入tomcat 的根目录查看是否存在这个文件夹</div><div class="line">2、docker exec -it tomcat01 /bin/bash</div><div class="line"></div><div class="line">## 查看此时的tomcat的内部实现细节，可以看到有一段文字如下：</div><div class="line">3、 docker inspect tomcat01  </div><div class="line"></div><div class="line">"HostConfig": &#123;</div><div class="line">            "Binds": [</div><div class="line">                "/myData:/myDataContainer"</div><div class="line">          ],</div><div class="line"></div><div class="line"></div><div class="line">4、在服务器的根目录下查看是否存在这个文件</div></pre></td></tr></table></figure>
-<p>2、此时的我们docker容器中的目录<code>dataVolumContainer</code>和服务器下的目录myDataVolum就可以实现数据共享了，即是实时的互相共享数据。</p>
-<p>3、有了这个数据卷我们将一些容器的配置文件和服务器本地的配置文件绑定在一起，那么我们只需要修改服务器中的配置文件即可。</p>
-<h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><p>1、在服务器新建文件夹，用来和容器中的mysql共享配置信息和日志（当然也可以不用创建，会自动创建）</p>
-<p>​    1、在服务器的根目录下新建mysql的配置文件夹，用于和docker容器mysql的配置文件挂载 ：<code>/mysql/conf.d</code></p>
-<p>​    2、新建一个日志文件夹，用于挂载日志信息：<code>/mysql/logs</code></p>
-<p>​    3、新建一个文件夹，挂载data目录：<code>/mysql/data</code></p>
-<p>2、拉取指定版本的镜像：<code>docker pull mysql:5.7</code></p>
-<p>3、运行镜像，指定挂载目录</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name mysql -p 3306:3306 -v /mysql/data:/var/lib/mysql -v /mysql/conf.d:/etc/mysql/conf.d -v /mysql/logs:/logs -e MYSQL_ROOT_PASSWORD=12345 -d mysql:5.7</div></pre></td></tr></table></figure>
-<p>4、移植配置文件到我们服务器的配置文件目录中：<code>/mysql/conf.d/</code>，新建一个配置文件mysql.cnf，内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[mysql]</div><div class="line">default-character-set=utf8</div><div class="line">[mysqld]</div><div class="line">character-set-server=utf8</div></pre></td></tr></table></figure>
-<p>5、新建配置文件<code>mysqldump.cnf</code>,内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[mysqldump]</div><div class="line">quick</div><div class="line">quote-names</div><div class="line">max_allowed_packet      = 16M</div></pre></td></tr></table></figure>
-<p>6、连接数据库，在docker容器中连接：<code>docker exec -it mysql bash</code></p>
-<p>7、远程登录服务器的mysql：<code>mysql -h 47.123.23.44 -u root -p</code></p>
-<p>8、查看mysql的日志信息：<code>docker logs mysql</code></p>
-<p>9、我们在使用docker run命令的时候传入一个或者多个参数指定mysql的环境变量，如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MYSQL_ROOT_PASSWORD：必须。用于设置MySQLroot用户的密码</div><div class="line">MYSQL_DATABASE：可选。用于指定镜像启动容器时要创建的数据库。如果提供了用户/密码，则会将该用户做为此数据库的超级用户。</div><div class="line">MYSQL_USER，MYSQL_PASSWORD：可选。用于创建一个新用户并设置密码。</div><div class="line">MYSQL_ALLOW_EMPTY_PASSWORD：可选。设置为yes时，则可以使用空密码登录</div><div class="line">MYSQL_RANDOM_ROOT_PASSWORD：可选。设置为yes时会为root用户设置一个随机密码（使用pwgen），所生成的随机密码会被输出到stdout</div><div class="line">MYSQL_ONETIME_PASSWORD：可选。为root用户指定一个一次性密码，该密码会在用户首次登录时强制修改</div></pre></td></tr></table></figure>
-<p>10、参考文章：<a href="https://itbilu.com/linux/docker/EyP7QP86M.html" target="_blank" rel="external">https://itbilu.com/linux/docker/EyP7QP86M.html</a></p>
-<h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><p>0、<a href="https://lvtao.net/config/docker-nginx.html" target="_blank" rel="external">https://lvtao.net/config/docker-nginx.html</a></p>
-<p>1、<a href="https://my.oschina.net/u/3375733/blog/1591091" target="_blank" rel="external">https://my.oschina.net/u/3375733/blog/1591091</a></p>
-<p>1、在服务器上创建文件夹（可以不创建，会自动创建），用于和docker容器中的Nginx的共享数据，文件夹如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1、html目录将映射为nginx容器配置的虚拟目录</div><div class="line"></div><div class="line">2、logs目录将映射为nginx容器的日志目录</div><div class="line"></div><div class="line">3、conf目录里的配置文件将映射为nginx容器的配置文件</div></pre></td></tr></table></figure>
-<p>2、拉取最新的Nginx，<code>docker pull nginx</code></p>
-<p>3、运行容器，使用<code>-v</code>指定共享的容器卷，如下：</p>
-<p>​    1、运行下面的指令会报错，因为<code>-v /nginx/conf/nginx.conf:/etc/nginx/nginx.conf</code>这个nginx.conf根本不知道是文件夹还是文件，因此我们应该现在服务器上建立一个和nginx一样的配置文件，那么执行下面的语句将会正确执行</p>
-<p>​        1、首先先运行一个nginx容器，名字为mynginx</p>
-<p>​        2、执行<code>docker cp mynginx:/etc/nginx/nginx.conf /nginx/conf/</code>,将配置文件复制到<code>/nginx/conf/</code>下</p>
-<p>​        3、执行下面的语句</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run  --name mynginx -p 80:80 -v /nginx/html:/usr/share/nginx/html -v /nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /nginx/logs:/var/log/nginx/ -v /nginx/www:/usr/share/nginx/www -d nginx</div></pre></td></tr></table></figure>
-<p>​    </p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>1、<a href="https://yeasy.gitbooks.io/docker_practice/content/image/list.html" target="_blank" rel="external">https://yeasy.gitbooks.io/docker_practice/content/image/list.html</a></p>
-<p>2、<a href="https://itbilu.com/linux/docker" target="_blank" rel="external">https://itbilu.com/linux/docker</a></p>
-<p>3、<a href="http://docs.linux.xyz/docs/show/24" target="_blank" rel="external">http://docs.linux.xyz/docs/show/24</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;docker入门&quot;&gt;&lt;a href=&quot;#docker入门&quot; class=&quot;headerlink&quot; title=&quot;docker入门&quot;&gt;&lt;/a&gt;docker入门&lt;/h1&gt;&lt;h2 id=&quot;配置阿里云的镜像加速器&quot;&gt;&lt;a href=&quot;#配置阿里云的镜像加速器&quot; class
-    
-    </summary>
-    
-      <category term="docker" scheme="http://chenjiabing666.github.io/categories/docker/"/>
-    
-    
-      <category term="docker" scheme="http://chenjiabing666.github.io/tags/docker/"/>
     
   </entry>
   
