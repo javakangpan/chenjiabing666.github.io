@@ -4,6 +4,46 @@
 
     
   <url>
+    <loc>http://chenjiabing666.github.io/2018/12/03/springBoot%E9%9B%86%E6%88%90RestTemplate/</loc>
+    <lastmod>2018-12-03T14:38:00.847Z</lastmod>
+    <data>
+        <display>
+        <title>springBoot集成RestTemplate</title>
+        <pubTime>2018-12-03T14:36:42.000Z</pubTime>
+        
+        <tag>SpringBoot</tag>
+         
+         
+           
+             
+              <breadCrumb title="SpringBoot" url="http://chenjiabing666.github.io/categories/SpringBoot/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/10/09/docker%E5%AE%89%E8%A3%85%E6%9C%8D%E5%8A%A1/</loc>
+    <lastmod>2018-12-02T15:47:43.171Z</lastmod>
+    <data>
+        <display>
+        <title>docker安装服务</title>
+        <pubTime>2018-10-08T16:47:55.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://chenjiabing666.github.io/categories/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://chenjiabing666.github.io/2018/12/01/java-nio/</loc>
     <lastmod>2018-12-01T14:06:56.753Z</lastmod>
     <data>
@@ -877,26 +917,6 @@
            
              
               <breadCrumb title="java学习" url="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://chenjiabing666.github.io/2018/10/09/docker%E5%AE%89%E8%A3%85%E6%9C%8D%E5%8A%A1/</loc>
-    <lastmod>2018-10-08T16:55:05.773Z</lastmod>
-    <data>
-        <display>
-        <title>docker安装服务</title>
-        <pubTime>2018-10-08T16:47:55.000Z</pubTime>
-        
-        <tag>docker</tag>
-         
-         
-           
-             
-              <breadCrumb title="docker" url="http://chenjiabing666.github.io/categories/docker/"/>
           
         </display>
     </data>
