@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-12-03T14:38:00.847Z</updated>
+  <updated>2018-12-08T03:13:56.631Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot集成JSR303校验</title>
+    <link href="http://chenjiabing666.github.io/2018/12/08/SpringBoot%E9%9B%86%E6%88%90JSR303%E6%A0%A1%E9%AA%8C/"/>
+    <id>http://chenjiabing666.github.io/2018/12/08/SpringBoot集成JSR303校验/</id>
+    <published>2018-12-08T03:13:03.000Z</published>
+    <updated>2018-12-08T03:13:56.631Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="SpringBoot集成JSR303"><a href="#SpringBoot集成JSR303" class="headerlink" title="SpringBoot集成JSR303"></a>SpringBoot集成JSR303</h1><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
+<li>添加依赖：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--JSR303校验的依赖 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-validation<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>实体类添加校验</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">	<span class="meta">@NotEmpty</span>(message=<span class="string">"姓名不能为空"</span>)</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> userId;</div><div class="line">	</div><div class="line">	<span class="meta">@Length</span>(min=<span class="number">6</span>,max=<span class="number">10</span>,message=<span class="string">"密码必须在6-10位之间"</span>)</div><div class="line">	<span class="keyword">private</span> String password;</div><div class="line">	</div><div class="line">	<span class="meta">@Email</span>(message=<span class="string">"邮箱不符合格式"</span>)</div><div class="line">	<span class="keyword">private</span> String email;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>controller层传参的校验，<strong>必须对参数用@Valid，并且后面必须紧跟着BindingResult，否则将会抛出全局异常</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 校验Person</div><div class="line"> * 必须对参数用<span class="doctag">@Valid</span>，并且后面必须紧跟着BindingResult，否则将会抛出全局异常</div><div class="line"> * <span class="doctag">@param</span> person</div><div class="line"> * <span class="doctag">@param</span> result</div><div class="line"> * <span class="doctag">@return</span></div><div class="line"> */</div><div class="line"><span class="meta">@PostMapping</span>(<span class="string">"/person"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">addPerson</span><span class="params">(@RequestBody @Valid Person person,</span></span></div><div class="line">		BindingResult result) &#123;</div><div class="line">	<span class="keyword">if</span> (result.hasErrors()) &#123; <span class="comment">// 如果有异常的话，就会返回</span></div><div class="line">		List&lt;ObjectError&gt; allErrors = result.getAllErrors();  <span class="comment">//获取所有的异常信息</span></div><div class="line">		<span class="keyword">for</span> (ObjectError error : allErrors) &#123;</div><div class="line">			System.out.println(error.getCode() + <span class="string">"\t"</span></div><div class="line">					+ error.getDefaultMessage());</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> person;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="常用的校验注解"><a href="#常用的校验注解" class="headerlink" title="常用的校验注解"></a>常用的校验注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">空检查</div><div class="line"><span class="meta">@Null</span>       验证对象是否为<span class="keyword">null</span></div><div class="line"><span class="meta">@NotNull</span>    验证对象是否不为<span class="keyword">null</span>, 无法查检长度为<span class="number">0</span>的字符串</div><div class="line"><span class="meta">@NotBlank</span> 检查约束字符串是不是Null还有被Trim的长度是否大于<span class="number">0</span>,只对字符串,且会去掉前后空格.</div><div class="line"><span class="meta">@NotEmpty</span> 检查约束元素是否为NULL或者是EMPTY.</div><div class="line"> </div><div class="line">Booelan检查</div><div class="line"><span class="meta">@AssertTrue</span>     验证 Boolean 对象是否为 <span class="keyword">true</span>  </div><div class="line"><span class="meta">@AssertFalse</span>    验证 Boolean 对象是否为 <span class="keyword">false</span>  </div><div class="line"> </div><div class="line">长度检查</div><div class="line"><span class="meta">@Size</span>(min=, max=) 验证对象（Array,Collection,Map,String）长度是否在给定的范围之内  </div><div class="line"><span class="meta">@Length</span>(min=, max=) Validates that the annotated string is between min and max included.</div><div class="line"> </div><div class="line">日期检查</div><div class="line"><span class="meta">@Past</span>           验证 Date 和 Calendar 对象是否在当前时间之前  </div><div class="line"><span class="meta">@Future</span>     	验证 Date 和 Calendar 对象是否在当前时间之后  </div><div class="line"><span class="meta">@Pattern</span>    	验证 String 对象是否符合正则表达式的规则</div><div class="line"> </div><div class="line">数值检查，建议使用在Stirng,Integer类型，不建议使用在<span class="keyword">int</span>类型上，因为表单值为“”时无法转换为<span class="keyword">int</span>，但可以转换为Stirng为<span class="string">""</span>,Integer为<span class="keyword">null</span></div><div class="line"><span class="meta">@Min</span>            验证 Number 和 String 对象是否大等于指定的值  </div><div class="line"><span class="meta">@Max</span>            验证 Number 和 String 对象是否小等于指定的值  </div><div class="line"><span class="meta">@DecimalMax</span> 被标注的值必须不大于约束中指定的最大值. 这个约束的参数是一个通过BigDecimal定义的最大值的字符串表示.小数存在精度</div><div class="line"><span class="meta">@DecimalMin</span> 被标注的值必须不小于约束中指定的最小值. 这个约束的参数是一个通过BigDecimal定义的最小值的字符串表示.小数存在精度</div><div class="line"><span class="meta">@Digits</span>     验证 Number 和 String 的构成是否合法  </div><div class="line"><span class="meta">@Digits</span>(integer=,fraction=) 验证字符串是否是符合指定格式的数字，interger指定整数精度，fraction指定小数精度。</div><div class="line"> </div><div class="line"><span class="meta">@Range</span>(min=, max=) 检查数字是否介于min和max之间.</div><div class="line"><span class="meta">@Range</span>(min=<span class="number">10000</span>,max=<span class="number">50000</span>,message=<span class="string">"range.bean.wage"</span>)</div><div class="line"><span class="keyword">private</span> BigDecimal wage;</div><div class="line"> </div><div class="line"><span class="meta">@Valid</span>  递归的对关联对象进行校验, 如果关联对象是个集合或者数组,那么对其中的元素进行递归校验,如果是一个map,则对其中的值部分进行校验.(是否进行递归验证)</div><div class="line">    </div><div class="line"><span class="meta">@CreditCardNumber</span> 信用卡验证</div><div class="line"></div><div class="line"><span class="meta">@Email</span>  验证是否是邮件地址，如果为<span class="keyword">null</span>,不进行验证，算通过验证。</div><div class="line"></div><div class="line"><span class="meta">@ScriptAssert</span>(lang= ,script=, alias=)</div><div class="line">    </div><div class="line"><span class="meta">@URL</span>(protocol=,host=, port=,regexp=, flags=)</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;SpringBoot集成JSR303&quot;&gt;&lt;a href=&quot;#SpringBoot集成JSR303&quot; class=&quot;headerlink&quot; title=&quot;SpringBoot集成JSR303&quot;&gt;&lt;/a&gt;SpringBoot集成JSR303&lt;/h1&gt;&lt;h2 id=&quot;使
+    
+    </summary>
+    
+      <category term="SpringBoot" scheme="http://chenjiabing666.github.io/categories/SpringBoot/"/>
+    
+    
+      <category term="SpringBoot" scheme="http://chenjiabing666.github.io/tags/SpringBoot/"/>
+    
+  </entry>
   
   <entry>
     <title>springBoot集成RestTemplate</title>
@@ -2808,78 +2843,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;ElasticSearch的简单的CRUD&quot;&gt;&lt;a href=&quot;#ElasticSearch的简单的CRUD&quot; class=&quot;headerlink&quot; title=&quot;ElasticSearch的简单的CRUD&quot;&gt;&lt;/a&gt;ElasticSearch的简单的CRUD&lt;/
-    
-    </summary>
-    
-      <category term="Elasticsearch" scheme="http://chenjiabing666.github.io/categories/Elasticsearch/"/>
-    
-    
-      <category term="Elasticsearch" scheme="http://chenjiabing666.github.io/tags/Elasticsearch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>es的安装</title>
-    <link href="http://chenjiabing666.github.io/2018/09/02/es%E7%9A%84%E5%AE%89%E8%A3%85/"/>
-    <id>http://chenjiabing666.github.io/2018/09/02/es的安装/</id>
-    <published>2018-09-02T11:33:04.000Z</published>
-    <updated>2018-09-02T11:33:23.919Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="安装包安装"><a href="#安装包安装" class="headerlink" title="安装包安装"></a>安装包安装</h2><p>1、官网下载安装包</p>
-<p>2、不能以root身份运行，因此需要新建一个用户专门运行elasticSearch</p>
-<pre><code>1、`groupadd esgroup`
-
-2、`useradd esuser -g esgroup -p esuser`
-
-3、将elasticSearch文件夹下的运行身份添加到esuser中：`chown -R esgroup:esuser elasticSearch/ `
-
-4、`su esuser `切换用户
-
-5、进入bin文件夹中，使用`./elasticSearch`
-</code></pre><p>3、需要在服务器上开启9200端口，使用<code>firewall-cmd --permanent --add-port=9200/tcp</code></p>
-<p>4、如果提示没有开启防火墙，那么使用<code>service firewalld start</code></p>
-<h2 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h2><p>1、<code>docker pull elasticsearch</code>  ： 直接下载最新版本的即可</p>
-<p>2、挂在目录，挂载之前我们需要启动一个容器用于cp指定目录下的内容，否则将不能挂载成功</p>
-<pre><code>1、`docker run -e ES_JAVA_OPTS=&quot;-Xmx256m -Xms256m&quot; --name myele -p 9200:9200 -d 73e6fdf8bd4f` ：先运行容器，不指定挂载的目录
-
-2、cp容器中的配置到本地的服务器目录
-
-    1、`docker cp myele:/usr/share/elasticsearch/lib   /elasticsearch/lib `： 复制lib目录下的所有文件到本地的/elasticsearch/lib目录
-
-    2、`docker cp myele:/usr/share/elasticsearch/config   /elasticsearch/config` ： 复制config所有文件到本地
-
-    3、`docker cp myele:/usr/share/elasticsearch/plugins   /elasticsearch/plugins`：复制plugins到本地
-
-    4、`docker cp myele:/usr/share/elasticsearch/logs     /elasticsearch/logs` ：复制logs下的文件到本地        
-
-    5、`docker cp myele:/usr/share/elasticsearch/data   /elasticsearch/data`：复制data目录下的文件到本地
-</code></pre><p>3、开启9200和9300端口</p>
-<p>4、修改：<code>sysctl -w vm.max_map_count=262144</code></p>
-<p>5、启动容器并且挂载目录,如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run  -e ES_JAVA_OPTS="-Xmx256m -Xms256m" --name ele -v /elasticsearch/lib:/usr/share/elasticsearch/lib -v /elasticsearch/config:/usr/share/elasticsearch/config -v /elasticsearch/plugins:/usr/share/elasticsearch/plugins -v /elasticsearch/logs:/usr/share/elasticsearch/logs: -v /elasticsearch/data:/usr/share/elasticsearch/data -d -p 9200:9200 -p 9300:9300 73e6fdf8bd4f</div></pre></td></tr></table></figure>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>1、前台启动： <code>./bin/elasticSearch</code></p>
-<p>2、后台启动：<code>./bin/elasticsearch -d</code></p>
-<h2 id="指定内存空间"><a href="#指定内存空间" class="headerlink" title="指定内存空间"></a>指定内存空间</h2><h2 id="安装常见错误"><a href="#安装常见错误" class="headerlink" title="安装常见错误"></a>安装常见错误</h2><p>1、<a href="https://blog.csdn.net/qq_21387171/article/details/53577115" target="_blank" rel="external">https://blog.csdn.net/qq_21387171/article/details/53577115</a></p>
-<h2 id="安装kibana"><a href="#安装kibana" class="headerlink" title="安装kibana"></a>安装kibana</h2><p>1、<code>docker pull kibana</code> ： 默认拉取最新版本的，这里的版本要和elasticsearch的版本一致</p>
-<p>2、<code>firewall-cmd --permanent --add-port=5601/tcp</code>：开启服务器上的5601端口</p>
-<p>3、<code>docker run --name mykibana -e ELASTICSEARCH_URL=http://some-elasticsearch:9200 -p 5601:5601 -d kibana</code> : 运行kibana，需要指定elasticsearch的地址</p>
-<p>4、此时运行成功之后即可访问：<code>http://IP:5601</code></p>
-<h2 id="配置中文分词器IK"><a href="#配置中文分词器IK" class="headerlink" title="配置中文分词器IK"></a>配置中文分词器IK</h2><p>1、从github中下载和ElasticSearch对应版本的IK分词器： <a href="https://github.com/medcl/elasticsearch-analysis-ik/releases" target="_blank" rel="external">下载地址</a></p>
-<p>2、使用maven编译 ： </p>
-<pre><code>1、由于我安装docker最新版本的elasticsearch版本是5.6.10，但是下载对应的IK分词器编译出来的是5.6.9版本的，此时就不行，因此我们可以修改下载IK中的pom.xml的elasticsearch版本为5.6.10，如下：
-</code></pre><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">elasticsearch.version</span>&gt;</span>5.6.10<span class="tag">&lt;/<span class="name">elasticsearch.version</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">elasticsearch.assembly.descriptor</span>&gt;</span>$&#123;project.basedir&#125;/src/main/assemblies/plugin.xml<span class="tag">&lt;/<span class="name">elasticsearch.assembly.descriptor</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">elasticsearch.plugin.name</span>&gt;</span>analysis-ik<span class="tag">&lt;/<span class="name">elasticsearch.plugin.name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">elasticsearch.plugin.classname</span>&gt;</span>org.elasticsearch.plugin.analysis.ik.AnalysisIkPlugin<span class="tag">&lt;/<span class="name">elasticsearch.plugin.classname</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">elasticsearch.plugin.jvm</span>&gt;</span>true<span class="tag">&lt;/<span class="name">elasticsearch.plugin.jvm</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">tests.rest.load_packaged</span>&gt;</span>false<span class="tag">&lt;/<span class="name">tests.rest.load_packaged</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">skip.unit.tests</span>&gt;</span>true<span class="tag">&lt;/<span class="name">skip.unit.tests</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">gpg.keyname</span>&gt;</span>4E899B30<span class="tag">&lt;/<span class="name">gpg.keyname</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">gpg.useagent</span>&gt;</span>true<span class="tag">&lt;/<span class="name">gpg.useagent</span>&gt;</span> </div><div class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>3、修改完成之后使用<code>mvn package</code>命令打包即可</p>
-<p>4、将target中的realease目录下的压缩包解压</p>
-<p>5、将解压出来的<code>elasticsearch</code>下的所有文件全部拷贝到elasticsearch中的plugins下的<code>ik</code>文件夹中</p>
-<p>6、重启即可</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>1、<a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/running-elasticsearch.html" target="_blank" rel="external">https://www.elastic.co/guide/cn/elasticsearch/guide/current/running-elasticsearch.html</a></p>
-<p>2、<a href="https://es.xiaoleilu.com/010_Intro/20_Document.html" target="_blank" rel="external">https://es.xiaoleilu.com/010_Intro/20_Document.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;安装包安装&quot;&gt;&lt;a href=&quot;#安装包安装&quot; class=&quot;headerlink&quot; title=&quot;安装包安装&quot;&gt;&lt;/a&gt;安装包安装&lt;/h2&gt;&lt;p&gt;1、官网下载安装包&lt;/p&gt;
-&lt;p&gt;2、不能以root身份运行，因此需要新建一个用户专门运行elasticSearch
     
     </summary>
     

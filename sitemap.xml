@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://chenjiabing666.github.io/2018/12/08/SpringBoot%E9%9B%86%E6%88%90JSR303%E6%A0%A1%E9%AA%8C/</loc>
+    
+    <lastmod>2018-12-08T03:13:56.631Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://chenjiabing666.github.io/2018/12/03/springBoot%E9%9B%86%E6%88%90RestTemplate/</loc>
     
     <lastmod>2018-12-03T14:38:00.847Z</lastmod>
@@ -856,20 +863,6 @@
   </url>
   
   <url>
-    <loc>http://chenjiabing666.github.io/2018/05/04/Mybatis%E4%B9%8B%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/</loc>
-    
-    <lastmod>2018-05-04T09:51:35.550Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://chenjiabing666.github.io/2018/05/04/Mybatis%E4%B9%8BResultMap/</loc>
-    
-    <lastmod>2018-05-04T09:50:47.711Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://chenjiabing666.github.io/2018/05/04/MyBatis%E5%85%A5%E9%97%A8%E7%A8%8B%E5%BA%8F/</loc>
     
     <lastmod>2018-05-04T09:48:00.623Z</lastmod>
@@ -894,13 +887,6 @@
     <loc>http://chenjiabing666.github.io/2018/05/04/Springmvc%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8/</loc>
     
     <lastmod>2018-05-04T09:45:33.599Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://chenjiabing666.github.io/2018/05/04/MVC%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8/</loc>
-    
-    <lastmod>2018-05-04T09:42:42.928Z</lastmod>
     
   </url>
   

@@ -5,44 +5,32 @@
   <meta charset="UTF-8">
   
   
-    <title>javascript实现Ajax | 爱撒谎的男孩</title>
+    <title>SpringBoot集成JSR303校验 | 爱撒谎的男孩</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="javascript实现Ajax定义
-异步的javascript和XML，实现异步提交功能的技术(XMLHttpRequest)
-不响应页面的前提下，服务器可以响应其中的一小部分数据到页面上
+    <meta name="description" content="SpringBoot集成JSR303使用
+添加依赖：
 
-实现的步骤创建XMLHttpRequest
-解决浏览器兼容问题
-
-12345678910111213function getXHR()&amp;#123;	var xmlhttp;	//判断当前浏览器是否识别XML">
+12345&amp;lt;!--JSR303校验的依赖 --&amp;gt;	&amp;lt;dependency&amp;gt;		&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;		&amp;lt;artifactId&amp;gt;spring-boot-starter-validation&amp;lt;/artifactId&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="javascript实现Ajax">
-<meta property="og:url" content="http://chenjiabing666.github.io/2018/05/04/javascript实现Ajax/index.html">
+<meta property="og:title" content="SpringBoot集成JSR303校验">
+<meta property="og:url" content="http://chenjiabing666.github.io/2018/12/08/SpringBoot集成JSR303校验/index.html">
 <meta property="og:site_name" content="爱撒谎的男孩">
-<meta property="og:description" content="javascript实现Ajax定义
-异步的javascript和XML，实现异步提交功能的技术(XMLHttpRequest)
-不响应页面的前提下，服务器可以响应其中的一小部分数据到页面上
+<meta property="og:description" content="SpringBoot集成JSR303使用
+添加依赖：
 
-实现的步骤创建XMLHttpRequest
-解决浏览器兼容问题
-
-12345678910111213function getXHR()&amp;#123;	var xmlhttp;	//判断当前浏览器是否识别XML">
-<meta property="og:updated_time" content="2018-10-12T16:49:59.003Z">
+12345&amp;lt;!--JSR303校验的依赖 --&amp;gt;	&amp;lt;dependency&amp;gt;		&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;		&amp;lt;artifactId&amp;gt;spring-boot-starter-validation&amp;lt;/artifactId&amp;">
+<meta property="og:updated_time" content="2018-12-08T03:13:56.631Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="javascript实现Ajax">
-<meta name="twitter:description" content="javascript实现Ajax定义
-异步的javascript和XML，实现异步提交功能的技术(XMLHttpRequest)
-不响应页面的前提下，服务器可以响应其中的一小部分数据到页面上
+<meta name="twitter:title" content="SpringBoot集成JSR303校验">
+<meta name="twitter:description" content="SpringBoot集成JSR303使用
+添加依赖：
 
-实现的步骤创建XMLHttpRequest
-解决浏览器兼容问题
-
-12345678910111213function getXHR()&amp;#123;	var xmlhttp;	//判断当前浏览器是否识别XML">
+12345&amp;lt;!--JSR303校验的依赖 --&amp;gt;	&amp;lt;dependency&amp;gt;		&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;		&amp;lt;artifactId&amp;gt;spring-boot-starter-validation&amp;lt;/artifactId&amp;">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -102,14 +90,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/05/04/javascript实现Ajax/" title="javascript实现Ajax" itemprop="url">javascript实现Ajax</a>
+      <a href="/2018/12/08/SpringBoot集成JSR303校验/" title="SpringBoot集成JSR303校验" itemprop="url">SpringBoot集成JSR303校验</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2018-05-04T09:52:53.000Z" itemprop="datePublished"> 发表于 2018-05-04</time>
+    <time datetime="2018-12-08T03:13:03.000Z" itemprop="datePublished"> 发表于 2018-12-08</time>
     
   </p>
 </header>
@@ -118,42 +106,23 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript实现Ajax"><span class="toc-number">1.</span> <span class="toc-text">javascript实现Ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现的步骤"><span class="toc-number">2.</span> <span class="toc-text">实现的步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建XMLHttpRequest"><span class="toc-number">2.1.</span> <span class="toc-text">创建XMLHttpRequest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开"><span class="toc-number">2.2.</span> <span class="toc-text">打开</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发送请求"><span class="toc-number">2.3.</span> <span class="toc-text">发送请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接收服务器响应数据"><span class="toc-number">2.4.</span> <span class="toc-text">接收服务器响应数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">3.</span> <span class="toc-text">实例</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot集成JSR303"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot集成JSR303</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.1.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的校验注解"><span class="toc-number">1.2.</span> <span class="toc-text">常用的校验注解</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h2 id="javascript实现Ajax"><a href="#javascript实现Ajax" class="headerlink" title="javascript实现Ajax"></a>javascript实现Ajax</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
-<li>异步的<code>javascript</code>和<code>XML</code>，实现异步提交功能的技术(XMLHttpRequest)</li>
-<li>不响应页面的前提下，服务器可以响应其中的一小部分数据到页面上</li>
+		<h1 id="SpringBoot集成JSR303"><a href="#SpringBoot集成JSR303" class="headerlink" title="SpringBoot集成JSR303"></a>SpringBoot集成JSR303</h1><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
+<li>添加依赖：</li>
 </ul>
-<h2 id="实现的步骤"><a href="#实现的步骤" class="headerlink" title="实现的步骤"></a>实现的步骤</h2><h3 id="创建XMLHttpRequest"><a href="#创建XMLHttpRequest" class="headerlink" title="创建XMLHttpRequest"></a>创建XMLHttpRequest</h3><ul>
-<li>解决浏览器兼容问题</li>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--JSR303校验的依赖 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-validation<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>实体类添加校验</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getXHR</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> xmlhttp;</div><div class="line">	<span class="comment">//判断当前浏览器是否识别XMLHttpRequest</span></div><div class="line">	<span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest)</div><div class="line"> 			&#123;<span class="comment">// code for IE7+, Firefox, Chrome, Opera, Safari</span></div><div class="line"> 				xmlhttp=<span class="keyword">new</span> XMLHttpRequest();</div><div class="line"> 			&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line"> 			&#123;<span class="comment">// code for IE6, IE5</span></div><div class="line"> 				xmlhttp=<span class="keyword">new</span> ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</div><div class="line"> 			&#125;</div><div class="line"> 		<span class="keyword">return</span> xmlhttp;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="打开"><a href="#打开" class="headerlink" title="打开"></a>打开</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//第一个参数：请求的方式</span></div><div class="line"><span class="comment">//第二： 请求的url</span></div><div class="line"><span class="comment">//第三个：是否为异步，true表示异步，false表示同步</span></div><div class="line">xhr.open(<span class="string">"GET"</span>,<span class="string">"Url"</span>,<span class="literal">true</span>);</div></pre></td></tr></table></figure>
-<h3 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.send();</div></pre></td></tr></table></figure>
-<h3 id="接收服务器响应数据"><a href="#接收服务器响应数据" class="headerlink" title="接收服务器响应数据"></a>接收服务器响应数据</h3><ul>
-<li><code>xhr.onreadystatechange</code> : 表示从发送请求到响应请求的状态变化，根据状态的变化，处理数据5种状态</li>
-<li><code>xhr.readyState</code> ： 获取状态值<ul>
-<li><code>0</code> : 表示<code>xhr</code>对象创建，但是还未初始化</li>
-<li><code>1</code> ：初始化完成，发送请求</li>
-<li><code>2</code> ： 接收服务器的响应</li>
-<li><code>3</code>：解析服务器断响应的数据</li>
-<li><code>4</code>： 响应数据</li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">	<span class="meta">@NotEmpty</span>(message=<span class="string">"姓名不能为空"</span>)</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> userId;</div><div class="line">	</div><div class="line">	<span class="meta">@Length</span>(min=<span class="number">6</span>,max=<span class="number">10</span>,message=<span class="string">"密码必须在6-10位之间"</span>)</div><div class="line">	<span class="keyword">private</span> String password;</div><div class="line">	</div><div class="line">	<span class="meta">@Email</span>(message=<span class="string">"邮箱不符合格式"</span>)</div><div class="line">	<span class="keyword">private</span> String email;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>controller层传参的校验，<strong>必须对参数用@Valid，并且后面必须紧跟着BindingResult，否则将会抛出全局异常</strong></li>
 </ul>
-</li>
-<li><code>xhr.status</code> : 获取响应状态码 <ul>
-<li><code>200</code> ：表示<code>ok</code></li>
-<li><code>if(xhr.status==200)</code></li>
-</ul>
-</li>
-<li><code>xhr.responseText</code> : 获取文本数据</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//用于监听</span></div><div class="line">		xhr.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="comment">//如果数据响应成功，并且状态码为200</span></div><div class="line">			<span class="keyword">if</span> (xhr.readyState==<span class="number">4</span>&amp;&amp;xhr.status==<span class="number">200</span>) &#123;</div><div class="line">				<span class="comment">//处理数据</span></div><div class="line">				<span class="keyword">var</span> text=xhr.responseText;   <span class="comment">//获取文本数据</span></div><div class="line"></div><div class="line">			&#125;</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ul>
-<li>请求本地的<code>file.text</code>文件</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">LoadText</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> xhr;</div><div class="line">	<span class="comment">//判断当前浏览器是否识别XMLHttpRequest</span></div><div class="line">	<span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest)</div><div class="line"> 			&#123;<span class="comment">// code for IE7+, Firefox, Chrome, Opera, Safari</span></div><div class="line"> 				xhr=<span class="keyword">new</span> XMLHttpRequest();</div><div class="line"> 			&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line"> 			&#123;<span class="comment">// code for IE6, IE5</span></div><div class="line"> 				xhr=<span class="keyword">new</span> ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</div><div class="line"> 			&#125;</div><div class="line"> 		</div><div class="line"> 		<span class="comment">//用于监听</span></div><div class="line"> 		xhr.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"> 			<span class="comment">//如果数据响应成功，并且状态码为200</span></div><div class="line"> 			<span class="keyword">if</span> (xhr.readyState==<span class="number">4</span>&amp;&amp;xhr.status==<span class="number">200</span>) &#123;</div><div class="line"> 				<span class="comment">//处理数据</span></div><div class="line"> 				<span class="keyword">var</span> text=xhr.responseText;   <span class="comment">//获取文本数据</span></div><div class="line"> 				alert(text);</div><div class="line"> 			&#125;</div><div class="line"> 		&#125;</div><div class="line">	</div><div class="line">             <span class="comment">//异步请求</span></div><div class="line"> 		xhr.open(<span class="string">"GET"</span>,<span class="string">"file.text"</span>,<span class="literal">true</span>);  </div><div class="line"> 		xhr.send();  <span class="comment">//发送请求</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 校验Person</div><div class="line"> * 必须对参数用<span class="doctag">@Valid</span>，并且后面必须紧跟着BindingResult，否则将会抛出全局异常</div><div class="line"> * <span class="doctag">@param</span> person</div><div class="line"> * <span class="doctag">@param</span> result</div><div class="line"> * <span class="doctag">@return</span></div><div class="line"> */</div><div class="line"><span class="meta">@PostMapping</span>(<span class="string">"/person"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">addPerson</span><span class="params">(@RequestBody @Valid Person person,</span></span></div><div class="line">		BindingResult result) &#123;</div><div class="line">	<span class="keyword">if</span> (result.hasErrors()) &#123; <span class="comment">// 如果有异常的话，就会返回</span></div><div class="line">		List&lt;ObjectError&gt; allErrors = result.getAllErrors();  <span class="comment">//获取所有的异常信息</span></div><div class="line">		<span class="keyword">for</span> (ObjectError error : allErrors) &#123;</div><div class="line">			System.out.println(error.getCode() + <span class="string">"\t"</span></div><div class="line">					+ error.getDefaultMessage());</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> person;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="常用的校验注解"><a href="#常用的校验注解" class="headerlink" title="常用的校验注解"></a>常用的校验注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">空检查</div><div class="line"><span class="meta">@Null</span>       验证对象是否为<span class="keyword">null</span></div><div class="line"><span class="meta">@NotNull</span>    验证对象是否不为<span class="keyword">null</span>, 无法查检长度为<span class="number">0</span>的字符串</div><div class="line"><span class="meta">@NotBlank</span> 检查约束字符串是不是Null还有被Trim的长度是否大于<span class="number">0</span>,只对字符串,且会去掉前后空格.</div><div class="line"><span class="meta">@NotEmpty</span> 检查约束元素是否为NULL或者是EMPTY.</div><div class="line"> </div><div class="line">Booelan检查</div><div class="line"><span class="meta">@AssertTrue</span>     验证 Boolean 对象是否为 <span class="keyword">true</span>  </div><div class="line"><span class="meta">@AssertFalse</span>    验证 Boolean 对象是否为 <span class="keyword">false</span>  </div><div class="line"> </div><div class="line">长度检查</div><div class="line"><span class="meta">@Size</span>(min=, max=) 验证对象（Array,Collection,Map,String）长度是否在给定的范围之内  </div><div class="line"><span class="meta">@Length</span>(min=, max=) Validates that the annotated string is between min and max included.</div><div class="line"> </div><div class="line">日期检查</div><div class="line"><span class="meta">@Past</span>           验证 Date 和 Calendar 对象是否在当前时间之前  </div><div class="line"><span class="meta">@Future</span>     	验证 Date 和 Calendar 对象是否在当前时间之后  </div><div class="line"><span class="meta">@Pattern</span>    	验证 String 对象是否符合正则表达式的规则</div><div class="line"> </div><div class="line">数值检查，建议使用在Stirng,Integer类型，不建议使用在<span class="keyword">int</span>类型上，因为表单值为“”时无法转换为<span class="keyword">int</span>，但可以转换为Stirng为<span class="string">""</span>,Integer为<span class="keyword">null</span></div><div class="line"><span class="meta">@Min</span>            验证 Number 和 String 对象是否大等于指定的值  </div><div class="line"><span class="meta">@Max</span>            验证 Number 和 String 对象是否小等于指定的值  </div><div class="line"><span class="meta">@DecimalMax</span> 被标注的值必须不大于约束中指定的最大值. 这个约束的参数是一个通过BigDecimal定义的最大值的字符串表示.小数存在精度</div><div class="line"><span class="meta">@DecimalMin</span> 被标注的值必须不小于约束中指定的最小值. 这个约束的参数是一个通过BigDecimal定义的最小值的字符串表示.小数存在精度</div><div class="line"><span class="meta">@Digits</span>     验证 Number 和 String 的构成是否合法  </div><div class="line"><span class="meta">@Digits</span>(integer=,fraction=) 验证字符串是否是符合指定格式的数字，interger指定整数精度，fraction指定小数精度。</div><div class="line"> </div><div class="line"><span class="meta">@Range</span>(min=, max=) 检查数字是否介于min和max之间.</div><div class="line"><span class="meta">@Range</span>(min=<span class="number">10000</span>,max=<span class="number">50000</span>,message=<span class="string">"range.bean.wage"</span>)</div><div class="line"><span class="keyword">private</span> BigDecimal wage;</div><div class="line"> </div><div class="line"><span class="meta">@Valid</span>  递归的对关联对象进行校验, 如果关联对象是个集合或者数组,那么对其中的元素进行递归校验,如果是一个map,则对其中的值部分进行校验.(是否进行递归验证)</div><div class="line">    </div><div class="line"><span class="meta">@CreditCardNumber</span> 信用卡验证</div><div class="line"></div><div class="line"><span class="meta">@Email</span>  验证是否是邮件地址，如果为<span class="keyword">null</span>,不进行验证，算通过验证。</div><div class="line"></div><div class="line"><span class="meta">@ScriptAssert</span>(lang= ,script=, alias=)</div><div class="line">    </div><div class="line"><span class="meta">@URL</span>(protocol=,host=, port=,regexp=, flags=)</div></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -161,13 +130,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/web前端/">web前端</a>
+  <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/web前端/">web前端</a>
+  <span></span> <a href="/tags/SpringBoot/">SpringBoot</a>
   </div>
 
 </div>
@@ -176,7 +145,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2018/05/04/javascript实现Ajax/" data-title="javascript实现Ajax | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2018/12/08/SpringBoot集成JSR303校验/" data-title="SpringBoot集成JSR303校验 | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -189,19 +158,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/05/04/JSON/" title="JSON">
-  <strong>上一篇：</strong><br/>
-  <span>
-  JSON</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/05/04/Mybatis配置事务管理器/"  title="Mybatis配置事务管理器">
+<a href="/2018/12/03/springBoot集成RestTemplate/"  title="springBoot集成RestTemplate">
  <strong>下一篇：</strong><br/> 
- <span>Mybatis配置事务管理器
+ <span>springBoot集成RestTemplate
 </span>
 </a>
 </div>
@@ -222,7 +183,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript实现Ajax"><span class="toc-number">1.</span> <span class="toc-text">javascript实现Ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现的步骤"><span class="toc-number">2.</span> <span class="toc-text">实现的步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建XMLHttpRequest"><span class="toc-number">2.1.</span> <span class="toc-text">创建XMLHttpRequest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开"><span class="toc-number">2.2.</span> <span class="toc-text">打开</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发送请求"><span class="toc-number">2.3.</span> <span class="toc-text">发送请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接收服务器响应数据"><span class="toc-number">2.4.</span> <span class="toc-text">接收服务器响应数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">3.</span> <span class="toc-text">实例</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot集成JSR303"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot集成JSR303</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.1.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的校验注解"><span class="toc-number">1.2.</span> <span class="toc-text">常用的校验注解</span></a></li></ol></li></ol>
  
   </div>
 
