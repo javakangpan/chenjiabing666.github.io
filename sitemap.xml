@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://chenjiabing666.github.io/2018/12/22/springBoot%E6%95%B4%E5%90%88spring-data-redis/</loc>
+    
+    <lastmod>2018-12-22T05:09:57.093Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://chenjiabing666.github.io/2018/12/20/SpringBoot%E6%95%B4%E5%90%88Spring-data-jpa/</loc>
     
     <lastmod>2018-12-20T15:54:18.920Z</lastmod>

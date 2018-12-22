@@ -5,38 +5,23 @@
   <meta charset="UTF-8">
   
   
-    <title>spring加载properties属性 | 爱撒谎的男孩</title>
+    <title>springBoot整合spring-data-redis | 爱撒谎的男孩</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="spring有两种方式加载properties中的属性第一种
-使用&amp;lt;context:property-placeholder  location=&amp;quot;classpath:jdbc.properties&amp;quot; /&amp;gt;在spring的配置文件中加载类路径下的资源文件
-假设我们的jdbc.properties文件中的内容如下：
-如果后面有重复的键值，将会覆盖前面的值
-
-12345">
+    <meta name="description" content="SpringBoot整合Spring data redis依赖1234&amp;lt;dependency&amp;gt;       &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;       &amp;lt;artifactId&amp;gt;spring-boot-starter-data-redis&amp;lt;/artifactId&amp;gt;   &amp;lt;/dep">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spring加载properties属性">
-<meta property="og:url" content="http://chenjiabing666.github.io/2018/08/04/spring加载properties属性/index.html">
+<meta property="og:title" content="springBoot整合spring-data-redis">
+<meta property="og:url" content="http://chenjiabing666.github.io/2018/12/22/springBoot整合spring-data-redis/index.html">
 <meta property="og:site_name" content="爱撒谎的男孩">
-<meta property="og:description" content="spring有两种方式加载properties中的属性第一种
-使用&amp;lt;context:property-placeholder  location=&amp;quot;classpath:jdbc.properties&amp;quot; /&amp;gt;在spring的配置文件中加载类路径下的资源文件
-假设我们的jdbc.properties文件中的内容如下：
-如果后面有重复的键值，将会覆盖前面的值
-
-12345">
-<meta property="og:updated_time" content="2018-08-04T15:45:12.758Z">
+<meta property="og:description" content="SpringBoot整合Spring data redis依赖1234&amp;lt;dependency&amp;gt;       &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;       &amp;lt;artifactId&amp;gt;spring-boot-starter-data-redis&amp;lt;/artifactId&amp;gt;   &amp;lt;/dep">
+<meta property="og:updated_time" content="2018-12-22T05:09:57.093Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spring加载properties属性">
-<meta name="twitter:description" content="spring有两种方式加载properties中的属性第一种
-使用&amp;lt;context:property-placeholder  location=&amp;quot;classpath:jdbc.properties&amp;quot; /&amp;gt;在spring的配置文件中加载类路径下的资源文件
-假设我们的jdbc.properties文件中的内容如下：
-如果后面有重复的键值，将会覆盖前面的值
-
-12345">
+<meta name="twitter:title" content="springBoot整合spring-data-redis">
+<meta name="twitter:description" content="SpringBoot整合Spring data redis依赖1234&amp;lt;dependency&amp;gt;       &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;       &amp;lt;artifactId&amp;gt;spring-boot-starter-data-redis&amp;lt;/artifactId&amp;gt;   &amp;lt;/dep">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -96,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/08/04/spring加载properties属性/" title="spring加载properties属性" itemprop="url">spring加载properties属性</a>
+      <a href="/2018/12/22/springBoot整合spring-data-redis/" title="springBoot整合spring-data-redis" itemprop="url">springBoot整合spring-data-redis</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2018-08-04T15:44:26.000Z" itemprop="datePublished"> 发表于 2018-08-04</time>
+    <time datetime="2018-12-22T05:09:13.000Z" itemprop="datePublished"> 发表于 2018-12-22</time>
     
   </p>
 </header>
@@ -112,35 +97,24 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#spring有两种方式加载properties中的属性"><span class="toc-number">1.</span> <span class="toc-text">spring有两种方式加载properties中的属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一种"><span class="toc-number">1.1.</span> <span class="toc-text">第一种</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二种"><span class="toc-number">1.2.</span> <span class="toc-text">第二种</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot整合Spring-data-redis"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot整合Spring data redis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖"><span class="toc-number">1.1.</span> <span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#连接配置"><span class="toc-number">1.2.</span> <span class="toc-text">连接配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列化方式的配置"><span class="toc-number">1.3.</span> <span class="toc-text">序列化方式的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringRedisTemplate"><span class="toc-number">1.4.</span> <span class="toc-text">StringRedisTemplate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RedisTemplate"><span class="toc-number">1.5.</span> <span class="toc-text">RedisTemplate</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="spring有两种方式加载properties中的属性"><a href="#spring有两种方式加载properties中的属性" class="headerlink" title="spring有两种方式加载properties中的属性"></a>spring有两种方式加载properties中的属性</h1><h2 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h2><ul>
-<li><strong>使用<code>&lt;context:property-placeholder  location=&quot;classpath:jdbc.properties&quot; /&gt;</code>在spring的配置文件中加载类路径下的资源文件</strong></li>
-<li>假设我们的<code>jdbc.properties</code>文件中的内容如下：</li>
-<li><strong>如果后面有重复的键值，将会覆盖前面的值</strong></li>
+		<h1 id="SpringBoot整合Spring-data-redis"><a href="#SpringBoot整合Spring-data-redis" class="headerlink" title="SpringBoot整合Spring data redis"></a>SpringBoot整合Spring data redis</h1><h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="连接配置"><a href="#连接配置" class="headerlink" title="连接配置"></a>连接配置</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  redis:</span></div><div class="line"><span class="attr">    host:</span> <span class="string">******</span>   <span class="comment">## redis的主机地址</span></div><div class="line"><span class="attr">    port:</span> <span class="number">6379</span></div></pre></td></tr></table></figure>
+<h2 id="序列化方式的配置"><a href="#序列化方式的配置" class="headerlink" title="序列化方式的配置"></a>序列化方式的配置</h2><ul>
+<li>默认采用的是jdk的序列化</li>
+<li>我们可以改变成json序列化方式，如下:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">url=jdbc:mysql://localhost:3306/face?useUnicode=true&amp;characterEncoding=utf8</div><div class="line">driver=com.mysql.jdbc.Driver</div><div class="line">user=root</div><div class="line">password=root</div><div class="line">initSize=2</div><div class="line">maxSize=10</div></pre></td></tr></table></figure>
-<ul>
-<li>那么我们在spring的配置文件中配置数据源就直接使用里面的属性即可，如下，<strong>使用<code>${}</code>直接即可取出其中的属性</strong></li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.connection.RedisConnectionFactory;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.serializer.StringRedisSerializer;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Redis的配置类</div><div class="line"> * <span class="doctag">@author</span> Administrator</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfig</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 重写Redis序列化方式，使用Json方式:</div><div class="line">     * 当我们的数据存储到Redis的时候，我们的键（key）和值（value）都是通过Spring提供的Serializer序列化到数据库的。RedisTemplate默认使用的是JdkSerializationRedisSerializer，StringRedisTemplate默认使用的是StringRedisSerializer。</div><div class="line">     * Spring Data JPA为我们提供了下面的Serializer：</div><div class="line">     * GenericToStringSerializer、Jackson2JsonRedisSerializer、JacksonJsonRedisSerializer、JdkSerializationRedisSerializer、OxmSerializer、StringRedisSerializer。</div><div class="line">     * 在此我们将自己配置RedisTemplate并定义Serializer。</div><div class="line">     * <span class="doctag">@param</span> redisConnectionFactory</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> RedisTemplate&lt;String, Object&gt; <span class="title">redisTemplate</span><span class="params">(RedisConnectionFactory redisConnectionFactory)</span> </span>&#123;</div><div class="line">        RedisTemplate&lt;String, Object&gt; redisTemplate = <span class="keyword">new</span> RedisTemplate&lt;&gt;();</div><div class="line">        redisTemplate.setConnectionFactory(redisConnectionFactory);</div><div class="line"><span class="comment">//      JdkSerializationRedisSerializer jdkSerializationRedisSerializer = new JdkSerializationRedisSerializer();</span></div><div class="line">        GenericJackson2JsonRedisSerializer jackson2JsonRedisSerializer = <span class="keyword">new</span> GenericJackson2JsonRedisSerializer();</div><div class="line">        <span class="comment">// 设置值（value）的序列化采用FastJsonRedisSerializer。</span></div><div class="line">        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);</div><div class="line"><span class="comment">//        redisTemplate.setHashValueSerializer(fastJsonRedisSerializer);</span></div><div class="line">        <span class="comment">// 设置键（key）的序列化采用StringRedisSerializer。</span></div><div class="line">        redisTemplate.setKeySerializer(<span class="keyword">new</span> StringRedisSerializer());</div><div class="line">        redisTemplate.setHashKeySerializer(<span class="keyword">new</span> StringRedisSerializer());</div><div class="line">        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);</div><div class="line">        redisTemplate.afterPropertiesSet();</div><div class="line">        <span class="keyword">return</span> redisTemplate;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="StringRedisTemplate"><a href="#StringRedisTemplate" class="headerlink" title="StringRedisTemplate"></a>StringRedisTemplate</h2><ul>
+<li>这个只能存放字符串，如果需要存放对象，那么需要将其转换成json存储即可</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;context:property-placeholder  location=&quot;classpath:jdbc.properties&quot; /&gt;</div><div class="line"></div><div class="line">&lt;!-- 数据源 --&gt;</div><div class="line">&lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot;&gt;</div><div class="line">	&lt;property name=&quot;url&quot; value=&quot;#&#123;url&#125;&quot; /&gt;</div><div class="line">	&lt;property name=&quot;driverClassName&quot; value=&quot;$&#123;driver&#125;&quot; /&gt;</div><div class="line">	&lt;property name=&quot;username&quot; value=&quot;$&#123;user&#125;&quot; /&gt;</div><div class="line">	&lt;property name=&quot;password&quot; value=&quot;$&#123;password&#125;&quot; /&gt;</div><div class="line">	&lt;property name=&quot;initialSize&quot; value=&quot;$&#123;initSize&#125;&quot; /&gt;</div><div class="line">	&lt;property name=&quot;maxActive&quot; value=&quot;$&#123;maxSize&#125;&quot; /&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li><strong>我们也可以使用<code>@Value(&quot;${}&quot;)</code>来取出其中的值</strong></li>
+<h2 id="RedisTemplate"><a href="#RedisTemplate" class="headerlink" title="RedisTemplate"></a>RedisTemplate</h2><ul>
+<li>配置好序列化方式之后，即可注入，如下：</li>
 </ul>
-<h2 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h2><ul>
-<li><strong>使用<code>&lt;util:properties id=&quot;dbConfig&quot; location=&quot;classpath:db.properties&quot; /&gt;</code>来加载文件中的属性值</strong></li>
-<li>假设<code>db.properties</code>文件如下：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">url=jdbc:mysql://localhost:3306/face?useUnicode=true&amp;characterEncoding=utf8</div><div class="line">driver=com.mysql.jdbc.Driver</div><div class="line">user=root</div><div class="line">password=root</div><div class="line">initSize=2</div><div class="line">maxSize=10</div></pre></td></tr></table></figure>
-<ul>
-<li>配置的数据源如下：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 数据源 --&gt;</div><div class="line">&lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot;&gt;</div><div class="line">	&lt;property name=&quot;url&quot; value=&quot;#&#123;dbConfig.url&#125;&quot; /&gt;</div><div class="line">	&lt;property name=&quot;driverClassName&quot; value=&quot;#&#123;dbConfig.driver&#125;&quot; /&gt;</div><div class="line">	&lt;property name=&quot;username&quot; value=&quot;#&#123;dbConfig.user&#125;&quot; /&gt;</div><div class="line">	&lt;property name=&quot;password&quot; value=&quot;#&#123;dbConfig.password&#125;&quot; /&gt;</div><div class="line">	&lt;property name=&quot;initialSize&quot; value=&quot;#&#123;dbConfig.initSize&#125;&quot; /&gt;</div><div class="line">	&lt;property name=&quot;maxActive&quot; value=&quot;#&#123;dbConfig.maxSize&#125;&quot; /&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li><strong>也可以使用 <code>@Value(&quot;#{}&quot;)</code>直接取出其中的值</strong></li>
-</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</div><div class="line"><span class="meta">@SpringBootTest</span>    <span class="comment">//springBoot测试类，可以自定义测试类，不过需要引用这两个注解</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BlueApplicationTests</span> </span>&#123;</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> RedisTemplate&lt;String, Object&gt; redisTemplate;</div><div class="line">	</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span>&#123;</div><div class="line">		Person person=<span class="keyword">new</span> Person();</div><div class="line">		person.setAge(<span class="number">22</span>);</div><div class="line">		person.setName(<span class="string">"陈加兵"</span>);</div><div class="line">		redisTemplate.opsForHash().put(<span class="string">"p"</span>, <span class="string">"3"</span>, person);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span></span>&#123;</div><div class="line">		Person person= (Person) redisTemplate.opsForHash().get(<span class="string">"p"</span>, <span class="string">"3"</span>);</div><div class="line">		System.out.println(person);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -148,13 +122,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Spring/">Spring</a>
+  <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Spring/">Spring</a>
+  <span></span> <a href="/tags/SpringBoot/">SpringBoot</a>
   </div>
 
 </div>
@@ -163,7 +137,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2018/08/04/spring加载properties属性/" data-title="spring加载properties属性 | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2018/12/22/springBoot整合spring-data-redis/" data-title="springBoot整合spring-data-redis | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -176,19 +150,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/08/04/spring整合Log4j/" title="spring整合Log4j">
-  <strong>上一篇：</strong><br/>
-  <span>
-  spring整合Log4j</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/07/01/maven使用总结/"  title="maven使用总结">
+<a href="/2018/12/20/SpringBoot整合Spring-data-jpa/"  title="SpringBoot整合Spring-data-jpa">
  <strong>下一篇：</strong><br/> 
- <span>maven使用总结
+ <span>SpringBoot整合Spring-data-jpa
 </span>
 </a>
 </div>
@@ -209,7 +175,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#spring有两种方式加载properties中的属性"><span class="toc-number">1.</span> <span class="toc-text">spring有两种方式加载properties中的属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一种"><span class="toc-number">1.1.</span> <span class="toc-text">第一种</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二种"><span class="toc-number">1.2.</span> <span class="toc-text">第二种</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot整合Spring-data-redis"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot整合Spring data redis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖"><span class="toc-number">1.1.</span> <span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#连接配置"><span class="toc-number">1.2.</span> <span class="toc-text">连接配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列化方式的配置"><span class="toc-number">1.3.</span> <span class="toc-text">序列化方式的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringRedisTemplate"><span class="toc-number">1.4.</span> <span class="toc-text">StringRedisTemplate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RedisTemplate"><span class="toc-number">1.5.</span> <span class="toc-text">RedisTemplate</span></a></li></ol></li></ol>
  
   </div>
 
