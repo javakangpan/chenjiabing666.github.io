@@ -18,7 +18,7 @@
 <meta property="og:url" content="http://chenjiabing666.github.io/2018/12/20/SpringBoot整合Spring-data-jpa/index.html">
 <meta property="og:site_name" content="爱撒谎的男孩">
 <meta property="og:description" content="SpringBoot整合Spring data jpa依赖1234567891011121314151617&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;spring-boot-starter-data-jpa&amp;lt;/artifactId&amp;gt;&amp;lt;/d">
-<meta property="og:updated_time" content="2018-12-20T15:54:18.920Z">
+<meta property="og:updated_time" content="2018-12-22T12:46:31.135Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot整合Spring-data-jpa">
 <meta name="twitter:description" content="SpringBoot整合Spring data jpa依赖1234567891011121314151617&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;spring-boot-starter-data-jpa&amp;lt;/artifactId&amp;gt;&amp;lt;/d">
@@ -97,7 +97,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot整合Spring-data-jpa"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot整合Spring data jpa</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖"><span class="toc-number">1.1.</span> <span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主键生成策略"><span class="toc-number">1.2.</span> <span class="toc-text">主键生成策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">1.3.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个实体类"><span class="toc-number">1.4.</span> <span class="toc-text">创建一个实体类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本的查询"><span class="toc-number">1.5.</span> <span class="toc-text">基本的查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义查询-Query"><span class="toc-number">1.6.</span> <span class="toc-text">自定义查询@Query</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用HQL语句查询"><span class="toc-number">1.6.1.</span> <span class="toc-text">使用HQL语句查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用sql语句查询"><span class="toc-number">1.6.2.</span> <span class="toc-text">使用sql语句查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除和修改"><span class="toc-number">1.6.3.</span> <span class="toc-text">删除和修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复杂条件查询"><span class="toc-number">1.7.</span> <span class="toc-text">复杂条件查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分页查询"><span class="toc-number">1.8.</span> <span class="toc-text">分页查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PageRequest"><span class="toc-number">1.8.1.</span> <span class="toc-text">PageRequest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Page"><span class="toc-number">1.8.2.</span> <span class="toc-text">Page</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单查询"><span class="toc-number">1.8.3.</span> <span class="toc-text">简单查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复杂条件分页查询"><span class="toc-number">1.8.4.</span> <span class="toc-text">复杂条件分页查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查找关键字"><span class="toc-number">1.9.</span> <span class="toc-text">查找关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number">1.10.</span> <span class="toc-text">源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.11.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot整合Spring-data-jpa"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot整合Spring data jpa</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖"><span class="toc-number">1.1.</span> <span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主键生成策略"><span class="toc-number">1.2.</span> <span class="toc-text">主键生成策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">1.3.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个实体类"><span class="toc-number">1.4.</span> <span class="toc-text">创建一个实体类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本的查询"><span class="toc-number">1.5.</span> <span class="toc-text">基本的查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义查询-Query"><span class="toc-number">1.6.</span> <span class="toc-text">自定义查询@Query</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用HQL语句查询"><span class="toc-number">1.6.1.</span> <span class="toc-text">使用HQL语句查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用sql语句查询"><span class="toc-number">1.6.2.</span> <span class="toc-text">使用sql语句查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除和修改"><span class="toc-number">1.6.3.</span> <span class="toc-text">删除和修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复杂条件查询"><span class="toc-number">1.7.</span> <span class="toc-text">复杂条件查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分页查询"><span class="toc-number">1.8.</span> <span class="toc-text">分页查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PageRequest"><span class="toc-number">1.8.1.</span> <span class="toc-text">PageRequest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Page"><span class="toc-number">1.8.2.</span> <span class="toc-text">Page</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单查询"><span class="toc-number">1.8.3.</span> <span class="toc-text">简单查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单条件分页查询"><span class="toc-number">1.8.4.</span> <span class="toc-text">简单条件分页查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复杂条件分页查询"><span class="toc-number">1.8.5.</span> <span class="toc-text">复杂条件分页查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查找关键字"><span class="toc-number">1.9.</span> <span class="toc-text">查找关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.10.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -182,6 +182,10 @@
 <li>不同的排序方式查询</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findAll</span><span class="params">()</span> </span>&#123;</div><div class="line">	Order order1=<span class="keyword">new</span> Order(Direction.DESC, <span class="string">"age"</span>);  <span class="comment">//创建排序方式</span></div><div class="line">	Order order2=<span class="keyword">new</span> Order(Direction.ASC, <span class="string">"industryId"</span>);</div><div class="line">	List&lt;Order&gt; orders=<span class="keyword">new</span> ArrayList&lt;&gt;();  <span class="comment">//放入集合</span></div><div class="line">	orders.add(order1);</div><div class="line">	orders.add(order2);</div><div class="line">	</div><div class="line">	Sort sort=<span class="keyword">new</span> Sort(orders);  <span class="comment">//创建Sort</span></div><div class="line">	</div><div class="line">	<span class="comment">//构造分页数据，查找第二页，每页2条记录，order by age desc,industryId asc</span></div><div class="line">	Pageable pageable=<span class="keyword">new</span> PageRequest(<span class="number">0</span>, <span class="number">2</span>,sort);</div><div class="line">	Page&lt;User&gt; pages = userRepository.findAll(pageable);  <span class="comment">//执行分页查询的方法</span></div><div class="line">	<span class="keyword">if</span> (pages.hasContent()) &#123;  <span class="comment">//如果查询到了内容</span></div><div class="line">		List&lt;User&gt; users = pages.getContent();  <span class="comment">//获取查询到的结果</span></div><div class="line">		<span class="keyword">long</span> total = pages.getTotalElements();   <span class="comment">//获取总数</span></div><div class="line">		<span class="keyword">for</span> (User user : users) &#123;</div><div class="line">			System.out.println(user);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="简单条件分页查询"><a href="#简单条件分页查询" class="headerlink" title="简单条件分页查询"></a>简单条件分页查询</h3><ul>
+<li>方法如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 根据条件查询的结果分页，相当于select * from user where name=xxx limit #,#</div><div class="line"> */</div><div class="line"><span class="function">List&lt;User&gt; <span class="title">findByName</span><span class="params">(String name,Pageable pageable)</span></span>;</div></pre></td></tr></table></figure>
 <h3 id="复杂条件分页查询"><a href="#复杂条件分页查询" class="headerlink" title="复杂条件分页查询"></a>复杂条件分页查询</h3><ul>
 <li>Repository接口需要继承<code>JpaSpecificationExecutor</code>，如下：</li>
 </ul>
@@ -345,9 +349,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
-<li><a href="https://gitee.com/chenjiabing666/jpa-server.git" target="_blank" rel="external">https://gitee.com/chenjiabing666/jpa-server.git</a></li>
-</ul>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
 <li><a href="https://docs.spring.io/spring-data/jpa/docs/2.1.3.RELEASE/reference/html/" target="_blank" rel="external">https://docs.spring.io/spring-data/jpa/docs/2.1.3.RELEASE/reference/html/</a></li>
 </ul>
@@ -419,7 +420,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot整合Spring-data-jpa"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot整合Spring data jpa</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖"><span class="toc-number">1.1.</span> <span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主键生成策略"><span class="toc-number">1.2.</span> <span class="toc-text">主键生成策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">1.3.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个实体类"><span class="toc-number">1.4.</span> <span class="toc-text">创建一个实体类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本的查询"><span class="toc-number">1.5.</span> <span class="toc-text">基本的查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义查询-Query"><span class="toc-number">1.6.</span> <span class="toc-text">自定义查询@Query</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用HQL语句查询"><span class="toc-number">1.6.1.</span> <span class="toc-text">使用HQL语句查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用sql语句查询"><span class="toc-number">1.6.2.</span> <span class="toc-text">使用sql语句查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除和修改"><span class="toc-number">1.6.3.</span> <span class="toc-text">删除和修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复杂条件查询"><span class="toc-number">1.7.</span> <span class="toc-text">复杂条件查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分页查询"><span class="toc-number">1.8.</span> <span class="toc-text">分页查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PageRequest"><span class="toc-number">1.8.1.</span> <span class="toc-text">PageRequest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Page"><span class="toc-number">1.8.2.</span> <span class="toc-text">Page</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单查询"><span class="toc-number">1.8.3.</span> <span class="toc-text">简单查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复杂条件分页查询"><span class="toc-number">1.8.4.</span> <span class="toc-text">复杂条件分页查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查找关键字"><span class="toc-number">1.9.</span> <span class="toc-text">查找关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number">1.10.</span> <span class="toc-text">源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.11.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot整合Spring-data-jpa"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot整合Spring data jpa</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖"><span class="toc-number">1.1.</span> <span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主键生成策略"><span class="toc-number">1.2.</span> <span class="toc-text">主键生成策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">1.3.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个实体类"><span class="toc-number">1.4.</span> <span class="toc-text">创建一个实体类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本的查询"><span class="toc-number">1.5.</span> <span class="toc-text">基本的查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义查询-Query"><span class="toc-number">1.6.</span> <span class="toc-text">自定义查询@Query</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用HQL语句查询"><span class="toc-number">1.6.1.</span> <span class="toc-text">使用HQL语句查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用sql语句查询"><span class="toc-number">1.6.2.</span> <span class="toc-text">使用sql语句查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除和修改"><span class="toc-number">1.6.3.</span> <span class="toc-text">删除和修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复杂条件查询"><span class="toc-number">1.7.</span> <span class="toc-text">复杂条件查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分页查询"><span class="toc-number">1.8.</span> <span class="toc-text">分页查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PageRequest"><span class="toc-number">1.8.1.</span> <span class="toc-text">PageRequest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Page"><span class="toc-number">1.8.2.</span> <span class="toc-text">Page</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单查询"><span class="toc-number">1.8.3.</span> <span class="toc-text">简单查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单条件分页查询"><span class="toc-number">1.8.4.</span> <span class="toc-text">简单条件分页查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复杂条件分页查询"><span class="toc-number">1.8.5.</span> <span class="toc-text">复杂条件分页查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查找关键字"><span class="toc-number">1.9.</span> <span class="toc-text">查找关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.10.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
  
   </div>
 
@@ -497,19 +498,15 @@
 		  
 		
 		  
-			<li><a href="/categories/学习资源/" title="学习资源">学习资源<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/常用工具/" title="常用工具">常用工具<sup>3</sup></a></li>
-		  
-		
-		  
 			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>15</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>8</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
 		  
 		
 		  
@@ -558,15 +555,15 @@
 			
 		
 			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>9</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>9</sup></a></li>
 			
 		
 			
@@ -586,11 +583,11 @@
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
@@ -598,7 +595,7 @@
 			
 		
 			
-				<li><a href="/tags/常用工具/" title="常用工具">常用工具<sup>3</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>3</sup></a></li>
 			
 		
 			
