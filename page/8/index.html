@@ -79,15 +79,16 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/27/SSM整合/" title="SSM整合" itemprop="url">
+    <a href="/2018/06/26/Redis主从复制/" title="Redis主从复制" itemprop="url">
   
-    <h1 itemprop="name">SSM整合</h1>
+    <h1 itemprop="name">Redis主从复制</h1>
     
      
-           <p itemprop="description" >Spring + SpringMVC + Mybatis整合依赖123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585</p>
+           <p itemprop="description" >Redis主从复制
+本章介绍Redis的一个强大功能–主从复制。一台master主机可以拥有多台slave从机。而一台slave从机又可以拥有多个slave从机。如此下去，形成强大的多级服务器集群架构（高扩展）。可以避免Redis单点故障，实现容灾恢复效果（高可用）。读写分离的架</p>
         
     
-    <time datetime="2018-05-27T02:16:20.000Z" itemprop="datePublished">2018-05-27</time>
+    <time datetime="2018-06-26T14:35:44.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -99,19 +100,24 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/27/Lucene全文检索/" title="Lucene全文检索" itemprop="url">
+    <a href="/2018/06/26/Redis的管道Pipeline/" title="Redis的管道Pipeline" itemprop="url">
   
-    <h1 itemprop="name">Lucene全文检索</h1>
+    <h1 itemprop="name">Redis的管道Pipeline</h1>
     
      
-           <p itemprop="description" >Lucene  全文检索Field域
-Field是文档中的域，包括Field名和Field值两部分，一个文档可以包括多个Field，Document只是Field的一个承载体，Field值即为要索引的内容，也是要搜索的内容。
+           <p itemprop="description" >Redis的管道(Pipeline)为什么使用管道
+其中redis的执行一条命令可以分为四个步骤
+发送命令
+命令排队
+命令执行
+返回结果
 
-是否分词
-分词就是对文件的内容或者其他的属性进行分割</p>
+
+其中1-4之间所需要的时间称为往返时间(RTT)
+Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但大部分命令</p>
         
     
-    <time datetime="2018-05-27T02:13:57.000Z" itemprop="datePublished">2018-05-27</time>
+    <time datetime="2018-06-26T14:35:00.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -123,18 +129,19 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Spring之AOP之底层实现/" title="Spring之AOP之底层实现" itemprop="url">
+    <a href="/2018/06/26/Redis持久化/" title="Redis持久化" itemprop="url">
   
-    <h1 itemprop="name">Spring之AOP之底层实现</h1>
+    <h1 itemprop="name">Redis持久化</h1>
     
      
-           <p itemprop="description" >Spring之AOP之底层实现静态代理实现
-定义IStudnetService接口
+           <p itemprop="description" >Redis持久化RDB (默认使用)
+RDB持久化是把当前进程数据生成快照保存到硬盘的过程,触发RDB持久化过程分为手动触发和自动触发。
 
-12345678/** * IStudentService的接口 * @author chenjiabing */public interface IStudentService &amp;#123;	</p>
+手动触发 (bgsave)
+执行bgsave命令,Redis父进程判断当前是否存在正在执行的子进程,如RDB/AOF子进程,如果存在bgsa</p>
         
     
-    <time datetime="2018-05-21T10:22:48.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:34:07.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -146,29 +153,22 @@ Field是文档中的域，包括Field名和Field值两部分，一个文档可�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Spring之AOP/" title="Spring之AOP" itemprop="url">
+    <a href="/2018/06/26/Redis客户端操作/" title="Redis客户端操作" itemprop="url">
   
-    <h1 itemprop="name">Spring之AOP</h1>
+    <h1 itemprop="name">Redis客户端操作</h1>
     
      
-           <p itemprop="description" >Spring之AOPSpring框架两大核心内容IOC （ＤＩ）
-ＩＯＣ：控制反转
-
-将创建和管理对象全部交给框架完成
-
-
-DI : 依赖注入
-
-为成员变量赋值
-其中有不同的方法赋值，但是我们推荐使用set方法注入或者注解方式
+           <p itemprop="description" >Redis客户端Jedis远程连接
+yum install redis  : 安装redis
+开启6379端口
+在自己的阿里云的控制台上开启防火墙6379
+firewall-cmd --zone=public --add-port=6379/tcp
 
 
-
-AOP
-面向切面编程，是面向对象编程的重要组成</p>
+如果显示firewall </p>
         
     
-    <time datetime="2018-05-21T10:22:06.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:33:32.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -180,19 +180,18 @@ AOP
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Mybatis之使用总结/" title="Mybatis之使用总结" itemprop="url">
+    <a href="/2018/06/26/Redis常用命令/" title="Redis常用命令" itemprop="url">
   
-    <h1 itemprop="name">Mybatis之使用总结</h1>
+    <h1 itemprop="name">Redis常用命令</h1>
     
      
-           <p itemprop="description" >Mybatis之使用总结多表连接查询
-如果需要使用多表连接查询，使用resultMap对应表与实体类的对应关系太麻烦，我们可以定义一个值对象，其中封装了多表连接查询返回的字段，我们直接使用值对象接收返回的结果即可
-比如我们在商城网站上的显示购物车的模块，使用的CartVo
-
-12</p>
+           <p itemprop="description" >Redis常用命令Redis全局命令
+keys * : 查看所有的key，这个会遍历所有的键,复杂度为O(n)，因此当存在了大量的key，应该禁止使用这个命令
+dbsize ：查看键key的个数，这个是直接获取内置的键总数变量，因此复杂度为O(1)
+exists key  : 检</p>
         
     
-    <time datetime="2018-05-21T10:20:56.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:32:44.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -204,22 +203,16 @@ AOP
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Springmvc之文件上传和下载/" title="Springmvc之文件上传和下载" itemprop="url">
+    <a href="/2018/06/26/Redis使用场景/" title="Redis使用场景" itemprop="url">
   
-    <h1 itemprop="name">Springmvc之文件上传和下载</h1>
+    <h1 itemprop="name">Redis使用场景</h1>
     
      
-           <p itemprop="description" >Springmvc之文件上传和下载前提
-在上传和下载之前需要在对应的根目录下创建对应的文件夹，比如我们在webApp下创建upload文件夹下
-
-添加依赖
-commons-io
-commons-fileupload
-
-123456789101112&amp;lt;!-- 添加文件上传的依</p>
+           <p itemprop="description" >Redis使用场景缓存
+缓存机制几乎在所有的大型网站都有使用,合理地使用缓存不仅可以加快数据的访问速度,而且能够有效地降低后端数据源的压力。Redis提供了键值过期时间设置,并且也提供了灵活控制最大内存和内存溢出后的淘汰策略。可以这么说,一个合理的缓存设计能够为一个网站的稳定保驾</p>
         
     
-    <time datetime="2018-05-21T10:20:12.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-26T14:31:31.000Z" itemprop="datePublished">2018-06-26</time>
   </a>
 </section>
 
@@ -231,20 +224,21 @@ commons-fileupload
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/Spring之密码加密/" title="Spring之密码加密" itemprop="url">
+    <a href="/2018/06/14/二分查找/" title="二分查找" itemprop="url">
   
-    <h1 itemprop="name">Spring之密码加密</h1>
+    <h1 itemprop="name">二分查找</h1>
     
      
-           <p itemprop="description" >密码加密消息摘要(数据的指纹)定义
-对不固定的消息（字符串，一段文本，一个文件），通过一种特定的算法，得到一个固定长度的文本，固定长度的文本叫做消息摘要
-比如我是程序员经过特定的算法之后，得到了消息摘要为：adaf02515dfds7885csdfcdsc
+           <p itemprop="description" >二分查找算法
+对一个有序数组的查找
 
-作用
-数据完整性的检</p>
+准备
+使用冒泡排序算法对数组排序
+
+12345678910111213//冒泡排序   , 从小到大public void bubbleSort(Integer[] array)&amp;#123;	//外层遍历n-1次	for (int i = 0</p>
         
     
-    <time datetime="2018-05-21T10:19:21.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-14T04:38:49.000Z" itemprop="datePublished">2018-06-14</time>
   </a>
 </section>
 
@@ -256,17 +250,39 @@ commons-fileupload
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/21/拦截器拦截Ajax请求/" title="Springmvc拦截器拦截Ajax请求" itemprop="url">
+    <a href="/2018/06/06/Redis总结/" title="Redis总结" itemprop="url">
   
-    <h1 itemprop="name">Springmvc拦截器拦截Ajax请求</h1>
+    <h1 itemprop="name">Redis总结</h1>
     
      
-           <p itemprop="description" >拦截器拦截Ajax请求##　问题
+           <p itemprop="description" >Redis
+中文文档
 
-如果我们在拦截器中定义了拦截器的路径为/user/*这个地址,并且拦截器拦截器之后，如果没有登录，那么重定向到登录界面。但是我们在未登录的前提下使用Ajax异步请求了/user/addUser.do这个地址，出现了拦截器是拦截了，但是并没有重定</p>
+数据库的分类
+关系型数据库
+存储表
+使用SQL
+也称为结构化数据库
+常见产品
+MySQL
+Oracle
+SQL Server
+DB2
+
+
+
+
+非关系型数据库
+泛指不使用SQL操作的数据库
+文档数据库
+存储文档
+MogoDB，用于存储JSON文档
+
+
+Key</p>
         
     
-    <time datetime="2018-05-21T10:16:29.000Z" itemprop="datePublished">2018-05-21</time>
+    <time datetime="2018-06-06T02:23:50.000Z" itemprop="datePublished">2018-06-06</time>
   </a>
 </section>
 
@@ -278,21 +294,21 @@ commons-fileupload
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/选择排序/" title="选择排序" itemprop="url">
+    <a href="/2018/06/06/Nginx总结/" title="Nginx总结" itemprop="url">
   
-    <h1 itemprop="name">选择排序</h1>
+    <h1 itemprop="name">Nginx总结</h1>
     
      
-           <p itemprop="description" >选择排序思想(从小到大)
-每一趟从待排序的记录中选出最小的元素，顺序放在已排好序的序列最后，直到全部记录排序完毕
+           <p itemprop="description" >Nginx什么是Nginx
+是俄罗斯程序员开发的一款高性能的web服务器
+Nginx可以承受高并发，可以同时承受近百万请求
+利用Nginx和Tomcat(应用服务器)组合搭建反向代理服务器集群，可以解决WEB的高并发问题
 
-分析
-假设数组中有个n元素
-第一趟：在整个数组中选择出最小的元素，和数组中的第一个元素交换位置，那么此时的第一个元素就是最小的
-第二趟： 从第二个元素开始再次查找剩</p>
+WEB 服务器
+凡是能够处理Http协议的服务器统称为w</p>
         
     
-    <time datetime="2018-05-09T00:44:07.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-06-06T02:23:10.000Z" itemprop="datePublished">2018-06-06</time>
   </a>
 </section>
 
@@ -304,23 +320,21 @@ commons-fileupload
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/05/09/插入排序算法/" title="插入排序算法" itemprop="url">
+    <a href="/2018/05/27/Linux使用总结/" title="Linux使用总结" itemprop="url">
   
-    <h1 itemprop="name">插入排序算法</h1>
+    <h1 itemprop="name">Linux使用总结</h1>
     
      
-           <p itemprop="description" >插入排序算法思想
-我们以从小到大的排序进行讲解
+           <p itemprop="description" >Liunx使用命令管道连接 |
+命令管道符合为|,可以将两个命令进行连接，连接后第一个命令的输出结果作为第二个命令的输入信息
+比如   ls  /ect | more -10  分屏显示etc文件夹下的10行数据
 
-
-插入排序就是将一个元素插入到一个已经是有序的序列中， 通过遍历比较这个待插入元素和有序的序列元素之间的大小，来比较需要插入的位置，使其仍然是一个有序的数组。
-数组插入的算法：向后移动元素给待插入的数据位置
-
-详解
-第一趟：假设我</p>
+Linux文件系统结构
+/ : 根目录
+/home： 主文件夹，</p>
         
     
-    <time datetime="2018-05-09T00:43:57.000Z" itemprop="datePublished">2018-05-09</time>
+    <time datetime="2018-05-27T02:19:42.000Z" itemprop="datePublished">2018-05-27</time>
   </a>
 </section>
 
@@ -331,7 +345,7 @@ commons-fileupload
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/7/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/9/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/9/">Next<span></span></a>
   </nav>
 
 </div>
@@ -379,7 +393,7 @@ commons-fileupload
 		  
 		
 		  
-			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>9</sup></a></li>
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>10</sup></a></li>
 		  
 		
 		  
@@ -407,7 +421,7 @@ commons-fileupload
 		  
 		
 		  
-			<li><a href="/categories/分布式/" title="分布式">分布式<sup>3</sup></a></li>
+			<li><a href="/categories/分布式/" title="分布式">分布式<sup>11</sup></a></li>
 		  
 		
 		  
@@ -452,11 +466,15 @@ commons-fileupload
 			
 		
 			
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>11</sup></a></li>
 			
 		
 			
@@ -468,7 +486,7 @@ commons-fileupload
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>10</sup></a></li>
 			
 		
 			
@@ -476,15 +494,15 @@ commons-fileupload
 			
 		
 			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>9</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
@@ -496,15 +514,11 @@ commons-fileupload
 			
 		
 			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>3</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
 			
 		
 			

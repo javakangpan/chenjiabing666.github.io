@@ -79,112 +79,28 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/22/Hibernate常用API/" title="Hibernate常用API" itemprop="url">
+    <a href="/2018/04/24/Spring表达式和自动装配/" title="Spring表达式和自动装配" itemprop="url">
   
-    <h1 itemprop="name">Hibernate常用API</h1>
+    <h1 itemprop="name">Spring表达式和自动装配</h1>
     
      
-           <p itemprop="description" >Hibernate常用API
-Configuration ：负责加载核心配置文件
+           <p itemprop="description" >Spring表达式和自动装配【重要】spring表达式作用
+通过spring表达式可以在配置Y节点时，如果Y的某些属性需要注入值，可以是已经配置的好的X类的节点中的值
 
-加载的默认名字为hibernate.cfg.xml，如果不是这个名字，那么需要指定
-SessionFactory configuration.buildSessionFactory()  创建Se</p>
-        
-    
-    <time datetime="2018-04-21T20:19:37.000Z" itemprop="datePublished">2018-04-22</time>
-  </a>
-</section>
+直接使用#{id.属性名}
 
 
+前提
+必须为每个属性都要设置set方法
 
+实现
+新建两个类
 
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/22/Hibernate的基本配置/" title="Hibernate的基本配置" itemprop="url">
-  
-    <h1 itemprop="name">Hibernate的基本配置</h1>
-    
-     
-           <p itemprop="description" >Hibernate的基本配置核心配置文件(hibernate.cfg.xml)
-名字为hibernate.cfg.xml
-放在根目录下(resource)
-
-必须的配置(配置数据库信息)
-hibernate.connection.driver_class加载驱动，其中的mysql</p>
-        
-    
-    <time datetime="2018-04-21T20:18:40.000Z" itemprop="datePublished">2018-04-22</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/22/Hibernate第一个程序/" title="Hibernate第一个程序" itemprop="url">
-  
-    <h1 itemprop="name">Hibernate第一个程序</h1>
-    
-     
-           <p itemprop="description" >Hibernate第一个程序创建一个Maven项目
-在pom.xml中配置Hibernate的jar包1234567891011121314151617181920212223242526272829303132333435363738394041424344454647&amp;lt;</p>
-        
-    
-    <time datetime="2018-04-21T20:18:04.000Z" itemprop="datePublished">2018-04-22</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/22/Hibernate简介/" title="Hibernate简介" itemprop="url">
-  
-    <h1 itemprop="name">Hibernate简介</h1>
-    
-     
-           <p itemprop="description" >hibernate简介什么是hibernate
-hibernate是数据访问层的框架，对JDBC进行了封装，是针对数据库访问提出的面向对象的解决方案
-
-Hibernate的作用
-使用Hibrenate可以直接访问对象，从hierbnate自动将此访问转换成SQL执行，从而达到间接</p>
-        
-    
-    <time datetime="2018-04-21T20:16:59.000Z" itemprop="datePublished">2018-04-22</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/22/Hibernate对象导语言HQL/" title="Hibernate对象导航语言" itemprop="url">
-  
-    <h1 itemprop="name">Hibernate对象导航语言</h1>
-    
-     
-           <p itemprop="description" >HQL - 对象导航语言简介
-HQL(Hibernate Query Language) 是面向对象的查询语言, 它和 SQL 查询语言有些相似. 在 Hibernate 提供的各种检索方式中, HQL 是使用最广的一种检索方式. 它有如下功能:
-在查询语句中设定各种查询条件；
+Message
 </p>
         
     
-    <time datetime="2018-04-21T20:16:59.000Z" itemprop="datePublished">2018-04-22</time>
+    <time datetime="2018-04-24T03:12:59.000Z" itemprop="datePublished">2018-04-24</time>
   </a>
 </section>
 
@@ -196,35 +112,18 @@ HQL(Hibernate Query Language) 是面向对象的查询语言, 它和 SQL 查询�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/22/自己写springmvc框架/" title="自己写springmvc框架" itemprop="url">
+    <a href="/2018/04/24/Spring依赖注入/" title="Spring依赖注入" itemprop="url">
   
-    <h1 itemprop="name">自己写springmvc框架</h1>
+    <h1 itemprop="name">Spring依赖注入</h1>
     
      
-           <p itemprop="description" >简易的springmvc框架三层架构
-表示层(视图层，显示层)
+           <p itemprop="description" >Spring依赖注入【了解】Spring管理对象的生命周期(只有在单例的模式有意义，这个是默认的)
+由spring管理的对象可以有生命周期方法，这些生命周期方法是开发人员自定义的，方法名自定义，无参数
 
-jsp
-servlet
-
-
-业务逻辑层
-
-service
-
-
-数据访问层(持久层)
-
-dao
-
-
-
-什么是mvc
-Model View Controller
-是一种架构思想，其核心思想将项目划分成三种不同模块，分别</p>
+由spring管理的对象的类可以有初始化和销毁这两种生命周期方法，按需设计即</p>
         
     
-    <time datetime="2018-04-21T20:15:32.000Z" itemprop="datePublished">2018-04-22</time>
+    <time datetime="2018-04-24T03:12:24.000Z" itemprop="datePublished">2018-04-24</time>
   </a>
 </section>
 
@@ -236,20 +135,22 @@ Model View Controller
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/16/设计模式之适配器模式/" title="设计模式之适配器模式" itemprop="url">
+    <a href="/2018/04/24/Spring入门/" title="Spring入门" itemprop="url">
   
-    <h1 itemprop="name">设计模式之适配器模式</h1>
+    <h1 itemprop="name">Spring入门</h1>
     
      
-           <p itemprop="description" >结构型模式之适配器模式定义
-适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。
+           <p itemprop="description" >spring_day01SSM框架
+Spring + springMVC + mybatis
 
+作用
+管理对象： 当开发人员需要某一个类的对象时，不需要自行new对象，而是通过spring直接获取即可
 
-
-Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一</p>
+使用【掌握】通过spring获取存在无参构造方法类的对象
+创建Maven P</p>
         
     
-    <time datetime="2018-04-16T05:56:28.000Z" itemprop="datePublished">2018-04-16</time>
+    <time datetime="2018-04-24T03:11:04.000Z" itemprop="datePublished">2018-04-24</time>
   </a>
 </section>
 
@@ -261,16 +162,24 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/16/设计模式之桥接模式/" title="设计模式之桥接模式" itemprop="url">
+    <a href="/2018/04/24/Servlet和JSP总结/" title="Servlet和JSP总结" itemprop="url">
   
-    <h1 itemprop="name">设计模式之桥接模式</h1>
+    <h1 itemprop="name">Servlet和JSP总结</h1>
     
      
-           <p itemprop="description" >结构型模式之桥接模式
-桥接模式是一种很实用的结构型设计模式，如果软件系统中某个类存在两个独立变化的维度，通过该模式可以将这两个维度分离出来，使两者可以独立扩展，让系统更加符合“单一职责原则”。与多层继承方案不同，它将两个独立变化的维度设计为两个独立的继承等级结构，并且在抽象层建立</p>
+           <p itemprop="description" >Servlet和JSP总结B/S和C/S
+BS: Browser Server 浏览器和服务器
+特点： 跨平台，功能升级比较方便，加载数据慢，用户体验稍差
+
+
+
+
+CS： Client Server 客户端和服务器
+
+特点： 功能升级  需要下载新版本客户端，用户交互界面炫酷，体</p>
         
     
-    <time datetime="2018-04-16T05:55:29.000Z" itemprop="datePublished">2018-04-16</time>
+    <time datetime="2018-04-24T03:09:29.000Z" itemprop="datePublished">2018-04-24</time>
   </a>
 </section>
 
@@ -282,18 +191,16 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/16/设计模式之原型模式/" title="设计模式之原型模式" itemprop="url">
+    <a href="/2018/04/24/Hibernate关联查询/" title="Hibernate关联查询" itemprop="url">
   
-    <h1 itemprop="name">设计模式之原型模式</h1>
+    <h1 itemprop="name">Hibernate关联查询</h1>
     
      
-           <p itemprop="description" >创建型模式之原型模式定义
-原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。
-
-这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这</p>
+           <p itemprop="description" >Hibernate关联查询关联查询之延迟加载(lazy)什么是延迟加载
+前面单独讲过延迟加载就是在根据id查询获取的对象中只是有一个id的属性值，只有当使用其他属性的时候才会发出sql语句查询数据库，session.load(Class&amp;lt;T&amp;gt; cls,id)就是这个原</p>
         
     
-    <time datetime="2018-04-16T05:53:04.000Z" itemprop="datePublished">2018-04-16</time>
+    <time datetime="2018-04-24T03:08:43.000Z" itemprop="datePublished">2018-04-24</time>
   </a>
 </section>
 
@@ -305,18 +212,118 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/16/设计模式之建造模式/" title="设计模式之建造模式" itemprop="url">
+    <a href="/2018/04/24/Hibernate关联关系/" title="Hibernate关联关系" itemprop="url">
   
-    <h1 itemprop="name">设计模式之建造模式</h1>
+    <h1 itemprop="name">Hibernate关联关系</h1>
     
      
-           <p itemprop="description" >创建型模式之建造者模式定义
-建造者模式(Builder Pattern)：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。建造者模式是一种对象创建型模式。
+           <p itemprop="description" >Hibernate关联关系一对一背景
+在中国一个丈夫只能有一个妻子，那么丈夫和妻子的关系就是一对一的关系
 
-简单说，建造者的功能就是先构造复杂对象的每一个部件，指挥者的功能就是将这些部件以一定的步骤组装起</p>
+准备
+创建丈夫和妻子的实体类
+
+丈夫的实体类
+
+
+1234567891011121314151617181920212223242526272829303132@Entit</p>
         
     
-    <time datetime="2018-04-16T05:52:36.000Z" itemprop="datePublished">2018-04-16</time>
+    <time datetime="2018-04-24T03:05:56.000Z" itemprop="datePublished">2018-04-24</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/22/Hibernate之一级缓存/" title="Hibernate之一级缓存" itemprop="url">
+  
+    <h1 itemprop="name">Hibernate之一级缓存</h1>
+    
+     
+           <p itemprop="description" >Hibernate之一级缓存什么是一级缓存
+Hibernate创建每个Session对象时，都会给Session分配一块独立的缓存区，用于存放Session查询出来的对象，这个分配给Session的缓存区称之为一级缓存，也叫Session级缓存
+
+为什么使用一级缓存
+Sessio</p>
+        
+    
+    <time datetime="2018-04-21T20:23:26.000Z" itemprop="datePublished">2018-04-22</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/22/Hibernate中的三种状态/" title="Hibernate中的三种状态" itemprop="url">
+  
+    <h1 itemprop="name">Hibernate中的三种状态</h1>
+    
+     
+           <p itemprop="description" >Hibernate中的三种状态
+在Hibernate中可以将实体对象看成3种状态，分别是临时态，持久态，游离态
+
+临时态(瞬时态)特征
+临时态的对象可以被垃圾回收
+临时态的对象未经过持久化，没有和session关联(没有经过session存储和查找)
+
+转换
+新new出来的对象就</p>
+        
+    
+    <time datetime="2018-04-21T20:22:50.000Z" itemprop="datePublished">2018-04-22</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/22/Hibernate之延迟加载/" title="Hibernate之延迟加载" itemprop="url">
+  
+    <h1 itemprop="name">Hibernate之延迟加载</h1>
+    
+     
+           <p itemprop="description" >hibernate之延迟加载什么是延迟加载
+在使用某些Hibernate方法查询数据的时候，Hibernate返回的只是一个空对象(除了id外属性都为null)，并没有真正的查询数据库。而是在使用这个对象的时候才会出发查询数据，并将查询到的数据注入到这个空对象中，这种查询时机推迟</p>
+        
+    
+    <time datetime="2018-04-21T20:22:12.000Z" itemprop="datePublished">2018-04-22</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/22/Hibernate注解之基本注解的注解使用/" title="Hibernate注解之基本注解的注解使用" itemprop="url">
+  
+    <h1 itemprop="name">Hibernate注解之基本注解的注解使用</h1>
+    
+     
+           <p itemprop="description" >Hibernate注解之基本注解的注解使用使用注解须知
+我们在使用注解自动创建表的时候，系统会默认为我们创建一张表Hibernate_sequence，我们可以在Hibernate.cfg.xml文件中添加如下语句解决问题12&amp;lt;!--  配置不生成Hibernate_seq</p>
+        
+    
+    <time datetime="2018-04-21T20:21:08.000Z" itemprop="datePublished">2018-04-22</time>
   </a>
 </section>
 
@@ -327,7 +334,7 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/11/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/13/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/13/">Next<span></span></a>
   </nav>
 
 </div>
@@ -375,7 +382,7 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 		  
 		
 		  
-			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>9</sup></a></li>
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>10</sup></a></li>
 		  
 		
 		  
@@ -403,7 +410,7 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 		  
 		
 		  
-			<li><a href="/categories/分布式/" title="分布式">分布式<sup>3</sup></a></li>
+			<li><a href="/categories/分布式/" title="分布式">分布式<sup>11</sup></a></li>
 		  
 		
 		  
@@ -448,11 +455,15 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 			
 		
 			
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>11</sup></a></li>
 			
 		
 			
@@ -464,7 +475,7 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>10</sup></a></li>
 			
 		
 			
@@ -472,15 +483,15 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 			
 		
 			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>9</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
@@ -492,15 +503,11 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 			
 		
 			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>3</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
 			
 		
 			

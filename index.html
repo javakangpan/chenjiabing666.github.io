@@ -79,15 +79,22 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/22/springBoot整合spring-data-redis/" title="springBoot整合spring-data-redis" itemprop="url">
+    <a href="/2018/12/25/Config(统一配置中心)/" title="Config统一配置中心" itemprop="url">
   
-    <h1 itemprop="name">springBoot整合spring-data-redis</h1>
+    <h1 itemprop="name">Config统一配置中心</h1>
     
      
-           <p itemprop="description" >SpringBoot整合Spring data redis依赖1234&amp;lt;dependency&amp;gt;       &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;       &amp;lt;artifactId&amp;gt;</p>
+           <p itemprop="description" >Config 统一配置中心为什么使用？
+方便维护：微服务可能成百个，如果一个个配置都是在项目中配置的话，会给运维造成不必要的麻烦
+安全：配置统一是由运维来操作，如果涉及到数据库的账户和密码，肯定是不能让开发知道的
+
+服务端
+添加依赖:
+
+1234567891011&amp;lt;!-- </p>
         
     
-    <time datetime="2018-12-22T05:09:13.000Z" itemprop="datePublished">2018-12-22</time>
+    <time datetime="2018-12-24T16:24:18.000Z" itemprop="datePublished">2018-12-25</time>
   </a>
 </section>
 
@@ -99,15 +106,17 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/20/SpringBoot整合Spring-data-jpa/" title="SpringBoot整合Spring-data-jpa" itemprop="url">
+    <a href="/2018/12/25/spring-sleuth-服务追踪/" title="spring sleuth 服务追踪" itemprop="url">
   
-    <h1 itemprop="name">SpringBoot整合Spring-data-jpa</h1>
+    <h1 itemprop="name">spring sleuth 服务追踪</h1>
     
      
-           <p itemprop="description" >SpringBoot整合Spring data jpa依赖1234567891011121314151617&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;	&amp;lt;artifac</p>
+           <p itemprop="description" >spring  sleuth- 服务追踪Zipkin
+Zipkin 是一个开放源代码分布式的跟踪系统，由Twitter公司开源，它致力于收集服务的定时数据，以解决微服务架构中的延迟问题，包括数据的收集、存储、查找和展现。
+每个服务向zipkin报告计时数据，zipkin会根据调用</p>
         
     
-    <time datetime="2018-12-20T15:50:34.000Z" itemprop="datePublished">2018-12-20</time>
+    <time datetime="2018-12-24T16:23:20.000Z" itemprop="datePublished">2018-12-25</time>
   </a>
 </section>
 
@@ -119,20 +128,17 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/20/SpringBoot集成lombok/" title="SpringBoot集成lombok" itemprop="url">
+    <a href="/2018/12/25/Zuul/" title="" itemprop="url">
   
-    <h1 itemprop="name">SpringBoot集成lombok</h1>
+    <h1 itemprop="name"></h1>
     
      
-           <p itemprop="description" >SpringBoot集成lombokSTS安装
-https://blog.csdn.net/blueheart20/article/details/52909775
-
-常用的注解
-@Getter:   自动生成Getter方法
-@NonNull：  标识对象是否为空，为空则抛出异</p>
+           <p itemprop="description" >title: Zuuldate: 2018-12-25 00:22:19categories: 分布式
+tags: 分布式Zuul简介
+Zuul包含了对请求的路由和过滤两个主要的功能，其中路由功能负责将外部的请求转发到具体的微服务实例上，是实现外部访问统一入口的基础上，而过滤功能</p>
         
     
-    <time datetime="2018-12-20T15:46:20.000Z" itemprop="datePublished">2018-12-20</time>
+    <time datetime="2018-12-24T16:22:19.349Z" itemprop="datePublished">2018-12-25</time>
   </a>
 </section>
 
@@ -144,18 +150,17 @@ https://blog.csdn.net/blueheart20/article/details/52909775
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/08/SpringBoot集成JSR303校验/" title="SpringBoot集成JSR303校验" itemprop="url">
+    <a href="/2018/12/25/Hystrix断路器、熔断器/" title="Hystrix断路器、熔断器" itemprop="url">
   
-    <h1 itemprop="name">SpringBoot集成JSR303校验</h1>
+    <h1 itemprop="name">Hystrix断路器、熔断器</h1>
     
      
-           <p itemprop="description" >SpringBoot集成JSR303使用
-添加依赖：
-
-12345&amp;lt;!--JSR303校验的依赖 --&amp;gt;	&amp;lt;dependency&amp;gt;		&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;		&amp;lt;</p>
+           <p itemprop="description" >Hystrix 断路器、熔断器服务雪崩
+在微服务架构中通常会有多个服务层调用，基础服务的故障可能会导致级联故障，进而造成整个系统不可用的情况，这种现象被称为服务雪崩效应。服务雪崩效应是一种因“服务提供者”的不可用导致“服务消费者”的不可用,并将不可用逐渐放大的过程。
+如果下图所示</p>
         
     
-    <time datetime="2018-12-08T03:13:03.000Z" itemprop="datePublished">2018-12-08</time>
+    <time datetime="2018-12-24T16:21:38.000Z" itemprop="datePublished">2018-12-25</time>
   </a>
 </section>
 
@@ -167,15 +172,16 @@ https://blog.csdn.net/blueheart20/article/details/52909775
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/03/springBoot集成RestTemplate/" title="springBoot集成RestTemplate" itemprop="url">
+    <a href="/2018/12/25/Feign负载均衡/" title="Feign（负载均衡）" itemprop="url">
   
-    <h1 itemprop="name">springBoot集成RestTemplate</h1>
+    <h1 itemprop="name">Feign（负载均衡）</h1>
     
      
-           <p itemprop="description" >SpringBoot集成RestTemplate构造restful风格的api12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455</p>
+           <p itemprop="description" >Feign 负载均衡简介
+Feign是一个声明式的伪Http客户端，它使得写Http客户端变得更简单。使用Feign，只需要创建一个接口并注解。它具有可插拔的注解特性，可使用Feign 注解和JAX-RS注解。Feign支持可插拔的编码器和解码器。Feign默认集成了Ribbon</p>
         
     
-    <time datetime="2018-12-03T14:36:42.000Z" itemprop="datePublished">2018-12-03</time>
+    <time datetime="2018-12-24T16:20:36.000Z" itemprop="datePublished">2018-12-25</time>
   </a>
 </section>
 
@@ -187,21 +193,24 @@ https://blog.csdn.net/blueheart20/article/details/52909775
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/01/java-nio/" title="java nio" itemprop="url">
+    <a href="/2018/12/25/Spring cloud的优秀资源/" title="spring cloud的资源" itemprop="url">
   
-    <h1 itemprop="name">java nio</h1>
+    <h1 itemprop="name">spring cloud的资源</h1>
     
      
-           <p itemprop="description" >缓冲区（Buffer）
-负责数据的存取，实际上就是一个数组，用于存储不同的数据
-除了布尔类型之后，其他类型都有，最常用的就是ByteBuffer
-
-常用的方法
-allocate(int capacity)： 分配指定大小的缓冲区（非直接缓冲区）
-allocateDirect(in</p>
+           <p itemprop="description" >spring cloud的资源
+Springcloud中文网
+中文文档
+中国社区
+优质学习资源
+SpringBoot学习资源
+官方文档
+http://www.itmuch.com/spring-cloud-sum-eureka/
+指南
+https://www.cnblogs.co</p>
         
     
-    <time datetime="2018-12-01T14:05:47.000Z" itemprop="datePublished">2018-12-01</time>
+    <time datetime="2018-12-24T16:19:33.000Z" itemprop="datePublished">2018-12-25</time>
   </a>
 </section>
 
@@ -213,16 +222,16 @@ allocateDirect(in</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/11/15/消息中间件之Rabbitmq/" title="消息中间件之Rabbitmq" itemprop="url">
+    <a href="/2018/12/25/Ribbon客户端负载均衡/" title="Ribbon（客户端负载均衡）" itemprop="url">
   
-    <h1 itemprop="name">消息中间件之Rabbitmq</h1>
+    <h1 itemprop="name">Ribbon（客户端负载均衡）</h1>
     
      
-           <p itemprop="description" >RabbitMQ【消息中间件】介绍
-RabbitMQ是实现AMQP（高级消息队列协议）的消息中间件的一种，最初起源于金融系统，用于在分布式系统中存储转发消息，在易用性、扩展性、高可用性等方面表现不俗。RabbitMQ主要是为了实现系统之间的双向解耦而实现的。当生产者大量产生数据时</p>
+           <p itemprop="description" >Ribbon - 客户端负载均衡简介
+Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡的工具。它是一个基于HTTP和TCP的客户端负载均衡器。它可以通过在客户端中配置ribbonServerList来设置服务端列表去轮询访问以达到均</p>
         
     
-    <time datetime="2018-11-15T14:15:01.000Z" itemprop="datePublished">2018-11-15</time>
+    <time datetime="2018-12-24T16:19:33.000Z" itemprop="datePublished">2018-12-25</time>
   </a>
 </section>
 
@@ -234,18 +243,19 @@ RabbitMQ是实现AMQP（高级消息队列协议）的消息中间件的一种�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/11/03/java自定义注解/" title="java自定义注解" itemprop="url">
+    <a href="/2018/12/25/Eureka服务发现和注册/" title="Eureka服务发现和注册" itemprop="url">
   
-    <h1 itemprop="name">java自定义注解</h1>
+    <h1 itemprop="name">Eureka服务发现和注册</h1>
     
      
-           <p itemprop="description" >自定义注解【Annotation】元注解@Retention
-表示需要在什么级别保存该注解信息 。分为如下三类：
-@Retention(RetentionPolicy.SOURCE)：注解仅存在于源码中，在class字节码文件中不包含 
-@Retention(RetentionP</p>
+           <p itemprop="description" >Eureka - 服务发现和注册服务端
+新建springBoot项目，选择模块cloud Discovery====&amp;gt;Eureka Server
+此时的依赖如下：
+
+12345678910111213141516171819&amp;lt;dependencies&amp;gt;		&amp;lt</p>
         
     
-    <time datetime="2018-11-03T14:50:08.000Z" itemprop="datePublished">2018-11-03</time>
+    <time datetime="2018-12-24T16:18:42.000Z" itemprop="datePublished">2018-12-25</time>
   </a>
 </section>
 
@@ -257,15 +267,24 @@ RabbitMQ是实现AMQP（高级消息队列协议）的消息中间件的一种�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/10/22/SpringBoot整合Swagger/" title="SpringBoot整合Swagger" itemprop="url">
+    <a href="/2018/12/25/SpringBoot整合Spring-Data-Mongodb/" title="SpringBoot整合Spring Data Mongodb" itemprop="url">
   
-    <h1 itemprop="name">SpringBoot整合Swagger</h1>
+    <h1 itemprop="name">SpringBoot整合Spring Data Mongodb</h1>
     
      
-           <p itemprop="description" >SpringBoot整合Swagger依赖12345678910&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;io.springfox&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;springfox-swagger2&amp;lt;/arti</p>
+           <p itemprop="description" >SpringBoot整合Spring Data Mongodb简介
+MongoDB是一款面向文档的数据库，类似json（Bson）的数据存储格式
+
+何时使用
+数据量大
+数据价值较低
+
+安装
+docker pull mongo
+docker run --name mymongo -</p>
         
     
-    <time datetime="2018-10-22T15:22:23.000Z" itemprop="datePublished">2018-10-22</time>
+    <time datetime="2018-12-24T16:17:07.000Z" itemprop="datePublished">2018-12-25</time>
   </a>
 </section>
 
@@ -277,23 +296,17 @@ RabbitMQ是实现AMQP（高级消息队列协议）的消息中间件的一种�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/10/21/Shell编程/" title="Shell编程" itemprop="url">
+    <a href="/2018/12/25/SpringBoot实现BCrypt密码加密/" title="" itemprop="url">
   
-    <h1 itemprop="name">Shell编程</h1>
+    <h1 itemprop="name"></h1>
     
      
-           <p itemprop="description" >Shell编程变量
-定义变量：name=&amp;quot;陈加兵&amp;quot;
-撤销变量：unset name
-声明静态变量：readonly name=&amp;quot;陈加兵&amp;quot;
-静态变量不能unset，否则报错
-
-
-使用变量：${}或者$变量
-echo &amp;quot;姓名：${na</p>
+           <p itemprop="description" >title: SpringBoot实现BCrypt密码加密date: 2018-12-25 00:15:41categories: SpringBoot
+tags: SpringBootSpringBoot 实现 BCrypt密码加密前言
+出于安全的考虑，一些敏感的信息是绝对不能</p>
         
     
-    <time datetime="2018-10-21T09:42:59.000Z" itemprop="datePublished">2018-10-21</time>
+    <time datetime="2018-12-24T16:15:41.739Z" itemprop="datePublished">2018-12-25</time>
   </a>
 </section>
 
@@ -304,7 +317,7 @@ echo &amp;quot;姓名：${na</p>
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -352,7 +365,7 @@ echo &amp;quot;姓名：${na</p>
 		  
 		
 		  
-			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>9</sup></a></li>
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>10</sup></a></li>
 		  
 		
 		  
@@ -380,7 +393,7 @@ echo &amp;quot;姓名：${na</p>
 		  
 		
 		  
-			<li><a href="/categories/分布式/" title="分布式">分布式<sup>3</sup></a></li>
+			<li><a href="/categories/分布式/" title="分布式">分布式<sup>11</sup></a></li>
 		  
 		
 		  
@@ -425,11 +438,15 @@ echo &amp;quot;姓名：${na</p>
 			
 		
 			
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>11</sup></a></li>
 			
 		
 			
@@ -441,7 +458,7 @@ echo &amp;quot;姓名：${na</p>
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>10</sup></a></li>
 			
 		
 			
@@ -449,15 +466,15 @@ echo &amp;quot;姓名：${na</p>
 			
 		
 			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>9</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
@@ -469,15 +486,11 @@ echo &amp;quot;姓名：${na</p>
 			
 		
 			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>3</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
 			
 		
 			

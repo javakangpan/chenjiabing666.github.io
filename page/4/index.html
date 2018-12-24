@@ -79,24 +79,19 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/08/04/StringUtils的源码解析/" title="StringUtils的源码解析" itemprop="url">
+    <a href="/2018/09/02/es各种查询/" title="es各种查询" itemprop="url">
   
-    <h1 itemprop="name">StringUtils的源码解析</h1>
+    <h1 itemprop="name">es各种查询</h1>
     
      
-           <p itemprop="description" >StringUtils
-spring封装的字符串工具类
-
-源码解析
-isEmpty(Object str)  ：判断当前字符串为空，如果为空返回true
-如果字符串为空或者是个空字符串，那么返回true
-
-
-
-123public static boolean isEmpty(Ob</p>
+           <p itemprop="description" >请求体查询简单查询 【不推荐】空查询1、GET /lib/user/_search  ： 查询lib索引下的user类型的全部数据
+2、GET /lib/_search ：查询lib索引下的全部类型的数据
+3、GET /_search ：查询全部索引下的数据
+精确值查找
+当进行精</p>
         
     
-    <time datetime="2018-08-04T15:47:46.000Z" itemprop="datePublished">2018-08-04</time>
+    <time datetime="2018-09-02T11:36:38.000Z" itemprop="datePublished">2018-09-02</time>
   </a>
 </section>
 
@@ -108,18 +103,23 @@ isEmpty(Object str)  ：判断当前字符串为空，如果为空返回true
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/08/04/spring整合Log4j/" title="spring整合Log4j" itemprop="url">
+    <a href="/2018/09/02/es中的mapping/" title="es中的mapping" itemprop="url">
   
-    <h1 itemprop="name">spring整合Log4j</h1>
+    <h1 itemprop="name">es中的mapping</h1>
     
      
-           <p itemprop="description" >spring使用Log4j常用日志框架介绍
-转载自https://blog.csdn.net/liupeifeng3514/article/details/79624446
+           <p itemprop="description" >Mapping
+GET /index/type/_mapping 
+我们可以使用上面的语句检查自己创建的文档的映射，如果类型映射错误，那么将会造成意想不到的结果
 
-Log4j Apache Log4j是一个基于Java的日志记录工具。它是由Ceki Gülcü首创的，</p>
+核心数据类型
+Elasticsearch 支持 如下简单域类型：
+字符串: string
+text ：支持分词
+ke</p>
         
     
-    <time datetime="2018-08-04T15:46:43.000Z" itemprop="datePublished">2018-08-04</time>
+    <time datetime="2018-09-02T11:35:47.000Z" itemprop="datePublished">2018-09-02</time>
   </a>
 </section>
 
@@ -131,16 +131,19 @@ Log4j Apache Log4j是一个基于Java的日志记录工具。它是由Ceki Gülc
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/08/04/spring加载properties属性/" title="spring加载properties属性" itemprop="url">
+    <a href="/2018/09/02/es初探/" title="es初探" itemprop="url">
   
-    <h1 itemprop="name">spring加载properties属性</h1>
+    <h1 itemprop="name">es初探</h1>
     
      
-           <p itemprop="description" >spring有两种方式加载properties中的属性第一种
-使用&amp;lt;context:property-placeholder  location=&amp;quot;classpath:jdbc.properties&amp;quot; /&amp;gt;在spring的配置文件中加载类路径下的资</p>
+           <p itemprop="description" >ES初探文档元数据1、_index ：文档在哪存放
+2、_type ：文档表示的对象类别
+3、_id ：文档唯一标识
+自动生成Id1、如果在Put数据的时候没有指定Id，那么会自动生成一个唯一的ID，如下：
+12345678910111213141516171819202122P</p>
         
     
-    <time datetime="2018-08-04T15:44:26.000Z" itemprop="datePublished">2018-08-04</time>
+    <time datetime="2018-09-02T11:35:01.000Z" itemprop="datePublished">2018-09-02</time>
   </a>
 </section>
 
@@ -152,22 +155,19 @@ Log4j Apache Log4j是一个基于Java的日志记录工具。它是由Ceki Gülc
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/07/01/maven使用总结/" title="maven使用总结" itemprop="url">
+    <a href="/2018/09/02/es的crud/" title="es的crud" itemprop="url">
   
-    <h1 itemprop="name">maven使用总结</h1>
+    <h1 itemprop="name">es的crud</h1>
     
      
-           <p itemprop="description" >Maven使用总结依赖范围
-maven创建的工程的目录中包含main和test文件夹，分别表示主程序的文件夹和测试程序的文件夹
-
-maven使用scop设置依赖范围，常用的依赖范围如下：
-
-compile ：编译依赖范围，在测试和运行都有效，这个是默认的依赖范围
-
-对主程序是否有</p>
+           <p itemprop="description" >ElasticSearch的简单的CRUD1、ElasticSearch使用的是RestFul风格的API
+2、http://39.105.123.197:5601/
+添加索引1、需要指定索引，文档的类型，文档的Id
+2、使用PUT风格的提交方式，如下：
+1、`group`：索引</p>
         
     
-    <time datetime="2018-07-01T06:26:24.000Z" itemprop="datePublished">2018-07-01</time>
+    <time datetime="2018-09-02T11:34:06.000Z" itemprop="datePublished">2018-09-02</time>
   </a>
 </section>
 
@@ -179,22 +179,21 @@ compile ：编译依赖范围，在测试和运行都有效，这个是默认的
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/07/01/二叉树/" title="二叉树" itemprop="url">
+    <a href="/2018/09/02/es的安装/" title="es的安装" itemprop="url">
   
-    <h1 itemprop="name">二叉树</h1>
+    <h1 itemprop="name">es的安装</h1>
     
      
-           <p itemprop="description" >二叉树定义二叉树是每个节点最多有两个子树的树结构。它有五种基本形态：二叉树可以是空集；根可以有空的左子树或右子树；或者左、右子树皆为空。
+           <p itemprop="description" >安装包安装1、官网下载安装包
+2、不能以root身份运行，因此需要新建一个用户专门运行elasticSearch
+1、`groupadd esgroup`
 
-基本术语
-度：节点所拥有子节点的个数
-叶子节点：度为0的节点，即是没有子节点的节点
-分支节点：度不为0的节点
-根节点： 没有父节点的节点
-层</p>
+2、`useradd esuser -g esgroup -p esuser`
+
+3、将elasticSearch文件夹下</p>
         
     
-    <time datetime="2018-07-01T06:00:57.000Z" itemprop="datePublished">2018-07-01</time>
+    <time datetime="2018-09-02T11:33:04.000Z" itemprop="datePublished">2018-09-02</time>
   </a>
 </section>
 
@@ -206,19 +205,30 @@ compile ：编译依赖范围，在测试和运行都有效，这个是默认的
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/07/01/堆排序/" title="堆排序" itemprop="url">
+    <a href="/2018/09/02/Java后端学习之路/" title="Java后端学习之路" itemprop="url">
   
-    <h1 itemprop="name">堆排序</h1>
+    <h1 itemprop="name">Java后端学习之路</h1>
     
      
-           <p itemprop="description" >堆排序堆的定义
-堆(heap)，这里所说的堆是数据结构中的堆，而不是内存模型中的堆。堆通常是一个可以被看做一棵树，它满足下列性质：
-[性质一] 堆中任意节点的值总是不大于(不小于)其子节点的值；
-[性质二] 堆总是一棵完全树。
-将任意节点不大于其子节点的堆叫做最小堆或小根堆，而将</p>
+           <p itemprop="description" >Java后端学习之路转载自https://github.com/xingshaocheng/architect-awesome
+
+数据结构
+队列
+集合
+链表、数组
+字典、关联数组
+栈
+树
+二叉树
+完全二叉树
+平衡二叉树
+二叉查找树（BST）
+红黑树
+B-，B+，B*树
+LSM 树</p>
         
     
-    <time datetime="2018-07-01T06:00:09.000Z" itemprop="datePublished">2018-07-01</time>
+    <time datetime="2018-09-02T11:30:54.000Z" itemprop="datePublished">2018-09-02</time>
   </a>
 </section>
 
@@ -230,17 +240,25 @@ compile ：编译依赖范围，在测试和运行都有效，这个是默认的
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/07/01/shell排序/" title="shell排序" itemprop="url">
+    <a href="/2018/09/02/GitHub上优秀的资源/" title="GitHub上优秀的资源" itemprop="url">
   
-    <h1 itemprop="name">shell排序</h1>
+    <h1 itemprop="name">GitHub上优秀的资源</h1>
     
      
-           <p itemprop="description" >Shell 排序定义
-希尔排序(Shell Sort)是插入排序的一种。也称缩小增量排序，是直接插入排序算法的一种更高效的改进版本。希尔排序是非稳定排序算法。该方法因DL．Shell于1959年提出而得名。
-希尔排序是把记录按下标的一定增量分组，对每组使用直接插入排序算法排序；随</p>
+           <p itemprop="description" >GitHub上优秀的资源语言无关类
+操作系统
+
+鸟哥的Linux私房菜 (简体)
+Linux 系统高级编程
+The Linux Command Line (中英文版)
+Linux 设备驱动 (第三版)
+深入分析Linux内核源码
+UNIX TOOLBOX
+Docker中文指南
+D</p>
         
     
-    <time datetime="2018-07-01T05:59:09.000Z" itemprop="datePublished">2018-07-01</time>
+    <time datetime="2018-09-02T11:29:40.000Z" itemprop="datePublished">2018-09-02</time>
   </a>
 </section>
 
@@ -252,21 +270,17 @@ compile ：编译依赖范围，在测试和运行都有效，这个是默认的
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/06/26/MySQL性能优化/" title="MySQL性能优化" itemprop="url">
+    <a href="/2018/09/02/Nginx之location详解/" title="Nginx之location详解" itemprop="url">
   
-    <h1 itemprop="name">MySQL性能优化</h1>
+    <h1 itemprop="name">Nginx之location详解</h1>
     
      
-           <p itemprop="description" >MySQL性能优化查看数据库性能参数
-show status like &amp;quot;value&amp;quot; ：value是要查询的参数值，常用的值如下：
-
-
-优化查询分析查询语句
-Mysql中提供explain和describe来分析查询语句
-格式：explain select </p>
+           <p itemprop="description" >location详解1、root 
+1 、location中root指定的只是相对路径，需要和路径结合起来映射地址，比如
+12345location ^~/static/ &amp;#123;	## 这里的root需要和路径结合使用，即是映射的文件位置为 /usr/alyingboy/s</p>
         
     
-    <time datetime="2018-06-26T14:59:48.000Z" itemprop="datePublished">2018-06-26</time>
+    <time datetime="2018-09-02T11:28:21.000Z" itemprop="datePublished">2018-09-02</time>
   </a>
 </section>
 
@@ -278,18 +292,16 @@ Mysql中提供explain和describe来分析查询语句
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/06/26/MySQL触发器/" title="MySQL触发器" itemprop="url">
+    <a href="/2018/09/02/docker基本使用/" title="docker基本使用" itemprop="url">
   
-    <h1 itemprop="name">MySQL触发器</h1>
+    <h1 itemprop="name">docker基本使用</h1>
     
      
-           <p itemprop="description" >MySQL触发器定义
-MySQL的触发器和存储过程一样，都是嵌入到MysQL中的一段程序，不过触发器不要调用，而是由事件触发的，这些事件包括insert，update，delete语句，如果定义了触发程序，当数据执行这些语句的时候就会激发触发器执行相应的操作。
-
-创建触发器创建一</p>
+           <p itemprop="description" >docker入门配置阿里云的镜像加速器1、登录阿里云控制台，找到自己的控制台，配置docker的镜像加速，在自己的centos7的机器上执行下述命令即可:
+12345678sudo mkdir -p /etc/dockersudo tee /etc/docker/daemon.j</p>
         
     
-    <time datetime="2018-06-26T14:58:57.000Z" itemprop="datePublished">2018-06-26</time>
+    <time datetime="2018-09-02T11:27:01.000Z" itemprop="datePublished">2018-09-02</time>
   </a>
 </section>
 
@@ -301,22 +313,17 @@ MySQL的触发器和存储过程一样，都是嵌入到MysQL中的一段程序�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/06/26/MySQL中的锁/" title="MySQL中的锁" itemprop="url">
+    <a href="/2018/09/02/springBoot高级/" title="springBoot高级" itemprop="url">
   
-    <h1 itemprop="name">MySQL中的锁</h1>
+    <h1 itemprop="name">springBoot高级</h1>
     
      
-           <p itemprop="description" >MySQL中的锁数据库引擎
-数据库的引擎分为MyISAM和InnoDB和其他的
-不同的数据库引擎默认使用的锁是不同的
-MyISAM默认使用的是表级别锁，InnoDB默认使用的是行级锁
-我们在使用的时候，一般都是使用InnoDB，支持事务，事务安全等功能
-
-锁的分类
-表级锁：开销小</p>
+           <p itemprop="description" >springBoot高级普通缓存1、在springBoot中可以使用注解式开发缓存，默认没有开启缓存中间件，那么使用的就是存储在Map中的原理，但是我们还可以配置自己的缓存中间件，比如redis
+2、引入依赖，启动器
+12345&amp;lt;!--导入缓存的启动器--&amp;gt;     </p>
         
     
-    <time datetime="2018-06-26T14:58:12.000Z" itemprop="datePublished">2018-06-26</time>
+    <time datetime="2018-09-02T11:25:24.000Z" itemprop="datePublished">2018-09-02</time>
   </a>
 </section>
 
@@ -327,7 +334,7 @@ MyISAM默认使用的是表级别锁，InnoDB默认使用的是行级锁
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
   </nav>
 
 </div>
@@ -375,7 +382,7 @@ MyISAM默认使用的是表级别锁，InnoDB默认使用的是行级锁
 		  
 		
 		  
-			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>9</sup></a></li>
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>10</sup></a></li>
 		  
 		
 		  
@@ -403,7 +410,7 @@ MyISAM默认使用的是表级别锁，InnoDB默认使用的是行级锁
 		  
 		
 		  
-			<li><a href="/categories/分布式/" title="分布式">分布式<sup>3</sup></a></li>
+			<li><a href="/categories/分布式/" title="分布式">分布式<sup>11</sup></a></li>
 		  
 		
 		  
@@ -448,11 +455,15 @@ MyISAM默认使用的是表级别锁，InnoDB默认使用的是行级锁
 			
 		
 			
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>11</sup></a></li>
 			
 		
 			
@@ -464,7 +475,7 @@ MyISAM默认使用的是表级别锁，InnoDB默认使用的是行级锁
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>10</sup></a></li>
 			
 		
 			
@@ -472,15 +483,15 @@ MyISAM默认使用的是表级别锁，InnoDB默认使用的是行级锁
 			
 		
 			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>9</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
@@ -492,15 +503,11 @@ MyISAM默认使用的是表级别锁，InnoDB默认使用的是行级锁
 			
 		
 			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>3</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
 			
 		
 			

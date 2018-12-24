@@ -2,6 +2,90 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://chenjiabing666.github.io/2018/12/25/Spring%20cloud%E7%9A%84%E4%BC%98%E7%A7%80%E8%B5%84%E6%BA%90/</loc>
+    
+    <lastmod>2018-12-24T16:27:21.228Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/12/25/Config(%E7%BB%9F%E4%B8%80%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83)/</loc>
+    
+    <lastmod>2018-12-24T16:25:36.658Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/12/25/spring-sleuth-%E6%9C%8D%E5%8A%A1%E8%BF%BD%E8%B8%AA/</loc>
+    
+    <lastmod>2018-12-24T16:23:47.952Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/12/25/Zuul/</loc>
+    
+    <lastmod>2018-12-24T16:22:52.540Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/12/25/Hystrix%E6%96%AD%E8%B7%AF%E5%99%A8%E3%80%81%E7%86%94%E6%96%AD%E5%99%A8/</loc>
+    
+    <lastmod>2018-12-24T16:22:01.009Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/12/25/Feign%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</loc>
+    
+    <lastmod>2018-12-24T16:21:17.320Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/12/25/Ribbon%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</loc>
+    
+    <lastmod>2018-12-24T16:20:03.649Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/12/25/Eureka%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E5%92%8C%E6%B3%A8%E5%86%8C/</loc>
+    
+    <lastmod>2018-12-24T16:19:09.701Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/12/25/SpringBoot%E6%95%B4%E5%90%88Spring-Data-Mongodb/</loc>
+    
+    <lastmod>2018-12-24T16:17:54.565Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/12/25/SpringBoot%E5%AE%9E%E7%8E%B0BCrypt%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86/</loc>
+    
+    <lastmod>2018-12-24T16:16:12.367Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/12/25/Token%E8%AE%A4%E8%AF%81/</loc>
+    
+    <lastmod>2018-12-24T16:14:43.856Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/09/02/springBoot%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</loc>
+    
+    <lastmod>2018-12-23T16:10:52.254Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://chenjiabing666.github.io/2017/05/07/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
     
     <lastmod>2018-12-23T09:39:12.959Z</lastmod>
@@ -82,13 +166,6 @@
     <loc>http://chenjiabing666.github.io/2018/12/01/java-nio/</loc>
     
     <lastmod>2018-12-01T14:06:56.753Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://chenjiabing666.github.io/2018/09/02/springBoot%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</loc>
-    
-    <lastmod>2018-11-30T13:44:57.475Z</lastmod>
     
   </url>
   

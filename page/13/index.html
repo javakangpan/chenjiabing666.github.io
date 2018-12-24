@@ -79,18 +79,16 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/16/设计模式之代理模式/" title="设计模式之代理模式" itemprop="url">
+    <a href="/2018/04/22/Hibernate使用日志-log4j/" title="Hibernate使用日志(log4j)" itemprop="url">
   
-    <h1 itemprop="name">设计模式之代理模式</h1>
+    <h1 itemprop="name">Hibernate使用日志(log4j)</h1>
     
      
-           <p itemprop="description" >结构型模式之代理模式(静态代理)
-由于某些原因，客户端不想或不能直接访问一个对象，此时可以通过一个称之为“代理”的第三者来实现间接访问，该方案对应的设计模式被称为代理模式。
-
-代理其实是实现简介访问的媒介，当然在代理类中还可以在执行代理操作之前，之后，之中，环绕等执行相关动作。S</p>
+           <p itemprop="description" >Hibernate使用日志(log4j)添加依赖
+在pom.xml中添加如下的依赖123456789101112131415161718&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;log4j&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;g</p>
         
     
-    <time datetime="2018-04-16T05:52:12.000Z" itemprop="datePublished">2018-04-16</time>
+    <time datetime="2018-04-21T20:20:20.000Z" itemprop="datePublished">2018-04-22</time>
   </a>
 </section>
 
@@ -102,21 +100,19 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/12/设计模式之工厂模式/" title="设计模式之工厂模式" itemprop="url">
+    <a href="/2018/04/22/Hibernate常用API/" title="Hibernate常用API" itemprop="url">
   
-    <h1 itemprop="name">设计模式之工厂模式</h1>
+    <h1 itemprop="name">Hibernate常用API</h1>
     
      
-           <p itemprop="description" >创建型模式之工厂模式什么是工厂模式
-工厂模式是java中最常见的创建型模式，客户端在不知道创建逻辑的情况下，只需要在工厂中直接创建即可
+           <p itemprop="description" >Hibernate常用API
+Configuration ：负责加载核心配置文件
 
-简单工厂模式
-简单工厂在创建对象的时候不需要知道具体的创建逻辑，客户端只需要知道该产品的一个标志即可，比如产品的名字
-必备的两个元素：
-产品的</p>
+加载的默认名字为hibernate.cfg.xml，如果不是这个名字，那么需要指定
+SessionFactory configuration.buildSessionFactory()  创建Se</p>
         
     
-    <time datetime="2018-04-12T03:28:21.000Z" itemprop="datePublished">2018-04-12</time>
+    <time datetime="2018-04-21T20:19:37.000Z" itemprop="datePublished">2018-04-22</time>
   </a>
 </section>
 
@@ -128,24 +124,20 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/12/设计模式之单例模式/" title="设计模式之单例模式" itemprop="url">
+    <a href="/2018/04/22/Hibernate的基本配置/" title="Hibernate的基本配置" itemprop="url">
   
-    <h1 itemprop="name">设计模式之单例模式</h1>
+    <h1 itemprop="name">Hibernate的基本配置</h1>
     
      
-           <p itemprop="description" >创建型模式之单例模式(Singleton)什么是单例模式
-该类只有一个实例
-构造方法是私有的
-有一个获取该类对象的静态方法getInstance()
+           <p itemprop="description" >Hibernate的基本配置核心配置文件(hibernate.cfg.xml)
+名字为hibernate.cfg.xml
+放在根目录下(resource)
 
-应用场景
-一个国家只有一个主席
-如果此时的限定必须是抽象出来的类只能是一个对象，这个时候就需要使用单例模式
-
-懒汉式什么是懒汉式</p>
+必须的配置(配置数据库信息)
+hibernate.connection.driver_class加载驱动，其中的mysql</p>
         
     
-    <time datetime="2018-04-12T03:28:05.000Z" itemprop="datePublished">2018-04-12</time>
+    <time datetime="2018-04-21T20:18:40.000Z" itemprop="datePublished">2018-04-22</time>
   </a>
 </section>
 
@@ -157,24 +149,16 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/12/设计模式之常见关系/" title="设计模式之常见关系" itemprop="url">
+    <a href="/2018/04/22/Hibernate第一个程序/" title="Hibernate第一个程序" itemprop="url">
   
-    <h1 itemprop="name">设计模式之常见关系</h1>
+    <h1 itemprop="name">Hibernate第一个程序</h1>
     
      
-           <p itemprop="description" >继承和泛化
-泛华关系是一种继承关系，表示一般与特殊的关系，它指定了子类如何特化父类的所有特征和行为。
-使用三角箭头的实线表示继承，其中箭头指向的是父类
-
-接口与实现
-在java中一个类只能继承一个父类，但是可以实现多个接口
-使用的是带三角的虚线表示，其中箭头指向的是接口
-
-
-依赖</p>
+           <p itemprop="description" >Hibernate第一个程序创建一个Maven项目
+在pom.xml中配置Hibernate的jar包1234567891011121314151617181920212223242526272829303132333435363738394041424344454647&amp;lt;</p>
         
     
-    <time datetime="2018-04-12T03:27:45.000Z" itemprop="datePublished">2018-04-12</time>
+    <time datetime="2018-04-21T20:18:04.000Z" itemprop="datePublished">2018-04-22</time>
   </a>
 </section>
 
@@ -186,143 +170,151 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/04/12/Struts2之类型转换器/" title="Struts2之类型转换器" itemprop="url">
+    <a href="/2018/04/22/Hibernate对象导语言HQL/" title="Hibernate对象导航语言" itemprop="url">
   
-    <h1 itemprop="name">Struts2之类型转换器</h1>
+    <h1 itemprop="name">Hibernate对象导航语言</h1>
     
      
-           <p itemprop="description" >Struts2之类型转换器
-在我们接收表单的请求参数的时候其实默认的都是String类型，但是有时候我们需要其他的数据类型，比如int,double,float,Date。
-其实前面表单的传值都是字符串形式的，但是为什么我们在JavaBean中定义了不同的类型的数据，Struts</p>
-        
-    
-    <time datetime="2018-04-11T16:41:07.000Z" itemprop="datePublished">2018-04-12</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/12/Struts之标签库/" title="Struts之标签库" itemprop="url">
-  
-    <h1 itemprop="name">Struts之标签库</h1>
-    
-     
-           <p itemprop="description" >Struts标签库
-如果想要在jsp页面使用struts2的标签，需要引入标签库
-
-&amp;lt;%@ taglib uri=&amp;quot;/struts-tags&amp;quot;  prefix=&amp;quot;s&amp;quot;%&amp;gt;
-
-
-
-数据标签
-作用: 用于数据的存储和处理
-
-acti</p>
-        
-    
-    <time datetime="2018-04-11T16:40:06.000Z" itemprop="datePublished">2018-04-12</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/02/Struts之OGNL使用/" title="Struts之OGNL使用" itemprop="url">
-  
-    <h1 itemprop="name">Struts之OGNL使用</h1>
-    
-     
-           <p itemprop="description" >OGNL的使用OGNL简介
-OGNI是一种对象图导航语言(object graphics navigation language) ,这也是一种表达式语言，这个和EL表达式一样，但是EL表达式只能在JSTL标签库中使用，这个OGNL只能在struts标签库中使用。
-
-值栈（val</p>
-        
-    
-    <time datetime="2018-04-02T03:07:39.000Z" itemprop="datePublished">2018-04-02</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/02/Struts之配置拦截器/" title="Struts之配置拦截器" itemprop="url">
-  
-    <h1 itemprop="name">Struts之配置拦截器</h1>
-    
-     
-           <p itemprop="description" >struts2之配置拦截器什么是拦截器
-java里的拦截器是动态拦截Action调用的对象。它提供了一种机制可以使开发者可以定义在一个action执行的前后执行的代码，也可以在一个action执行前阻止其执行，同时也提供了一种可以提取action中可重用部分的方式。在AOP（As</p>
-        
-    
-    <time datetime="2018-04-02T03:06:24.000Z" itemprop="datePublished">2018-04-02</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/02/JDBC干货三/" title="JDBC干货三" itemprop="url">
-  
-    <h1 itemprop="name">JDBC干货三</h1>
-    
-     
-           <p itemprop="description" >JDBC干货三生成get,set方法的快捷键
-alt+shift+s
-r
-alt+a  a松手 alt不松手  按o   最后回车
-
-eclipse中生成toString方法的快捷键
-alt+shift+o   回车
-
-数据库操作和对象的关系
-因为数据库中查询的数据比较零散，需要</p>
-        
-    
-    <time datetime="2018-04-02T03:04:31.000Z" itemprop="datePublished">2018-04-02</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/03/31/Struts之获取请求参数/" title="Struts之获取请求参数" itemprop="url">
-  
-    <h1 itemprop="name">Struts之获取请求参数</h1>
-    
-     
-           <p itemprop="description" >获取请求参数
-在Servlet中可以调用HttpServletRequest的getParameter()的方法接收传递过来的请求参数，但是在struts2中对这种方式进行了三种封装
-我们一般发出请求都是通过表单传递的，但是在服务端如果获取表单传递过来的值，其中有三种不同的方式
+           <p itemprop="description" >HQL - 对象导航语言简介
+HQL(Hibernate Query Language) 是面向对象的查询语言, 它和 SQL 查询语言有些相似. 在 Hibernate 提供的各种检索方式中, HQL 是使用最广的一种检索方式. 它有如下功能:
+在查询语句中设定各种查询条件；
 </p>
         
     
-    <time datetime="2018-03-30T23:26:35.000Z" itemprop="datePublished">2018-03-31</time>
+    <time datetime="2018-04-21T20:16:59.000Z" itemprop="datePublished">2018-04-22</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/22/Hibernate简介/" title="Hibernate简介" itemprop="url">
+  
+    <h1 itemprop="name">Hibernate简介</h1>
+    
+     
+           <p itemprop="description" >hibernate简介什么是hibernate
+hibernate是数据访问层的框架，对JDBC进行了封装，是针对数据库访问提出的面向对象的解决方案
+
+Hibernate的作用
+使用Hibrenate可以直接访问对象，从hierbnate自动将此访问转换成SQL执行，从而达到间接</p>
+        
+    
+    <time datetime="2018-04-21T20:16:59.000Z" itemprop="datePublished">2018-04-22</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/22/自己写springmvc框架/" title="自己写springmvc框架" itemprop="url">
+  
+    <h1 itemprop="name">自己写springmvc框架</h1>
+    
+     
+           <p itemprop="description" >简易的springmvc框架三层架构
+表示层(视图层，显示层)
+
+jsp
+servlet
+
+
+业务逻辑层
+
+service
+
+
+数据访问层(持久层)
+
+dao
+
+
+
+什么是mvc
+Model View Controller
+是一种架构思想，其核心思想将项目划分成三种不同模块，分别</p>
+        
+    
+    <time datetime="2018-04-21T20:15:32.000Z" itemprop="datePublished">2018-04-22</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/16/设计模式之适配器模式/" title="设计模式之适配器模式" itemprop="url">
+  
+    <h1 itemprop="name">设计模式之适配器模式</h1>
+    
+     
+           <p itemprop="description" >结构型模式之适配器模式定义
+适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。
+
+
+
+Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一</p>
+        
+    
+    <time datetime="2018-04-16T05:56:28.000Z" itemprop="datePublished">2018-04-16</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/16/设计模式之桥接模式/" title="设计模式之桥接模式" itemprop="url">
+  
+    <h1 itemprop="name">设计模式之桥接模式</h1>
+    
+     
+           <p itemprop="description" >结构型模式之桥接模式
+桥接模式是一种很实用的结构型设计模式，如果软件系统中某个类存在两个独立变化的维度，通过该模式可以将这两个维度分离出来，使两者可以独立扩展，让系统更加符合“单一职责原则”。与多层继承方案不同，它将两个独立变化的维度设计为两个独立的继承等级结构，并且在抽象层建立</p>
+        
+    
+    <time datetime="2018-04-16T05:55:29.000Z" itemprop="datePublished">2018-04-16</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/16/设计模式之原型模式/" title="设计模式之原型模式" itemprop="url">
+  
+    <h1 itemprop="name">设计模式之原型模式</h1>
+    
+     
+           <p itemprop="description" >创建型模式之原型模式定义
+原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。
+
+这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这</p>
+        
+    
+    <time datetime="2018-04-16T05:53:04.000Z" itemprop="datePublished">2018-04-16</time>
   </a>
 </section>
 
@@ -333,7 +325,7 @@ alt+shift+o   回车
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/12/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/14/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/12/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/14/">Next<span></span></a>
   </nav>
 
 </div>
@@ -381,7 +373,7 @@ alt+shift+o   回车
 		  
 		
 		  
-			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>9</sup></a></li>
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>10</sup></a></li>
 		  
 		
 		  
@@ -409,7 +401,7 @@ alt+shift+o   回车
 		  
 		
 		  
-			<li><a href="/categories/分布式/" title="分布式">分布式<sup>3</sup></a></li>
+			<li><a href="/categories/分布式/" title="分布式">分布式<sup>11</sup></a></li>
 		  
 		
 		  
@@ -454,11 +446,15 @@ alt+shift+o   回车
 			
 		
 			
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>11</sup></a></li>
 			
 		
 			
@@ -470,7 +466,7 @@ alt+shift+o   回车
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>10</sup></a></li>
 			
 		
 			
@@ -478,15 +474,15 @@ alt+shift+o   回车
 			
 		
 			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>9</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
@@ -498,15 +494,11 @@ alt+shift+o   回车
 			
 		
 			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>3</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
 			
 		
 			
