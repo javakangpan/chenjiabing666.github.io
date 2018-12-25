@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-12-24T16:25:36.658Z</updated>
+  <updated>2018-12-25T13:07:44.432Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -16,210 +16,70 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Config统一配置中心</title>
-    <link href="http://chenjiabing666.github.io/2018/12/25/Config(%E7%BB%9F%E4%B8%80%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83)/"/>
-    <id>http://chenjiabing666.github.io/2018/12/25/Config(统一配置中心)/</id>
-    <published>2018-12-24T16:24:18.000Z</published>
-    <updated>2018-12-24T16:25:36.658Z</updated>
+    <title>SpringBoot实现BCrypt密码加密</title>
+    <link href="http://chenjiabing666.github.io/2018/12/25/SpringBoot%E5%AE%9E%E7%8E%B0BCrypt%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86/"/>
+    <id>http://chenjiabing666.github.io/2018/12/25/SpringBoot实现BCrypt密码加密/</id>
+    <published>2018-12-25T13:07:15.000Z</published>
+    <updated>2018-12-25T13:07:44.432Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Config-统一配置中心"><a href="#Config-统一配置中心" class="headerlink" title="Config 统一配置中心"></a>Config 统一配置中心</h1><h2 id="为什么使用？"><a href="#为什么使用？" class="headerlink" title="为什么使用？"></a>为什么使用？</h2><ul>
-<li>方便维护：微服务可能成百个，如果一个个配置都是在项目中配置的话，会给运维造成不必要的麻烦</li>
-<li>安全：配置统一是由运维来操作，如果涉及到数据库的账户和密码，肯定是不能让开发知道的</li>
+    <content type="html"><![CDATA[<h1 id="SpringBoot-实现-BCrypt密码加密"><a href="#SpringBoot-实现-BCrypt密码加密" class="headerlink" title="SpringBoot 实现 BCrypt密码加密"></a>SpringBoot 实现 BCrypt密码加密</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>出于安全的考虑，一些敏感的信息是绝对不能以明文的方式存储在数据库中的，比如密码通常是通过哈希算法进行加密的。有很多标准的算法比如<code>SHA</code>和<code>MD5</code>，结合<code>salt</code>（盐）是一种不错的选择，但是如果知道其加密的规则还是相对不安全。</li>
+<li>Spring security提供了<code>BCryptPasswordEncoder</code>类，使用Bcrypt强哈希方法来加密密码</li>
+<li><strong>Bcrypt强哈希算法每次加密的结果都是不一样的。</strong></li>
 </ul>
-<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><ul>
-<li>添加依赖:</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- config server的依赖 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-config-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- eureka客户端的依赖 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>配置如下：<ul>
-<li>这里使用的是git仓库，当然也是可以使用svn</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">3344</span></div><div class="line"><span class="attr">eureka:</span></div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    serviceUrl:</span></div><div class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:7001/eureka</span>  <span class="comment"># eureka的暴露地址，直接注册</span></div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">config-server</span>   <span class="comment">#应用的名称，在同一个eureka中必须不重复</span></div><div class="line"><span class="attr">  cloud:</span></div><div class="line"><span class="attr">    config:</span></div><div class="line"><span class="attr">      server:</span></div><div class="line"><span class="attr">        git:</span></div><div class="line"><span class="attr">          uri:</span> <span class="attr">https://github.com/chenjiabing666/dept-config.git</span>  <span class="comment"># git仓库的地址，如果是ssh方式的不需要指定用户名和密码，但是需要在github上添加秘钥</span></div><div class="line"><span class="attr">          username:</span> <span class="string">******</span> <span class="comment"># 用户名</span></div><div class="line"><span class="attr">          password:</span> <span class="string">******</span>     <span class="comment"># 密码</span></div><div class="line"><span class="attr">          basedir:</span> <span class="attr">C:/images/config-server</span>   <span class="comment"># 本地的路径，将会自动在这个路径创建一个git仓库</span></div></pre></td></tr></table></figure>
-<ul>
-<li>在主启动类上添加<code>@EnableConfigServer</code>这个注解，如下:</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableEurekaClient</span>   <span class="comment">//开启eureka</span></div><div class="line"><span class="meta">@EnableConfigServer</span>  <span class="comment">//开启config sever</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigServerApplication</span> </span>&#123;</div></pre></td></tr></table></figure>
-<ul>
-<li>此时需要在远程的github仓库创建如下内容：</li>
-<li><img src="https://github.com/chenjiabing666/BlogImage/blob/master/config.png?raw=true" alt=""></li>
-<li>此时访问如下的路径：<code>http://localhost:3344/orderClient9002-{profile}.yml</code>，就会输出orderClient9002的内容<ul>
-<li>如果后缀写的是<code>.json</code>就会以json格式输出，是<code>.properties</code>就会以properties的格式输出</li>
-<li>如果输出报错说明配置的内容有错误</li>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><ul>
+<li><code>public String encode(CharSequence rawPassword)</code>： 对给定的内容进行加密，返回加密后的字符串</li>
+<li><code>public boolean matches(CharSequence rawPassword, String encodedPassword)</code>： 比较给定的字符串和加密后的字符串是否是同一个<ul>
+<li><code>rawPassword</code>：未加密的字符串</li>
+<li><code>encodedPassword</code>： 加密后的字符串</li>
 </ul>
 </li>
 </ul>
-<h3 id="访问方式"><a href="#访问方式" class="headerlink" title="访问方式"></a>访问方式</h3><ul>
-<li><code>/name-{profile}.yml</code> <ul>
-<li>name是github仓库中的文档名称</li>
-<li>{profile}是springBoot的profile，可以指定任意的环境</li>
-<li>这里默认是master分支的内容</li>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
+<li>引入spring security的依赖</li>
 </ul>
-</li>
-<li><code>/label/name-{profile}.yml</code><ul>
-<li>lable是仓库的分支名称</li>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">   <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-security<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>添加security的配置类，如下:<ul>
+<li><strong>在其中注入<code>BCryptPasswordEncoder</code></strong></li>
 </ul>
 </li>
 </ul>
-<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><ul>
-<li><a href="https://github.com/chenjiabing666/cloud-config-server.git" target="_blank" rel="external">https://github.com/chenjiabing666/cloud-config-server.git</a></li>
-</ul>
-<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
-<li>启动配置中心的服务端，将其注入到eureka的注册中心</li>
-<li>客户端相通过注册中心找到服务端的实例，然后读取到github仓库中对应的配置</li>
-</ul>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
-<li>添加依赖：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 统一配置中心的客户端 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-config<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- eureka注册中心的客户端 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Spring security的配置类</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecurityConfig</span> <span class="keyword">extends</span> <span class="title">WebSecurityConfigurerAdapter</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		http.authorizeRequests()</div><div class="line">		.antMatchers(<span class="string">"/**"</span>)</div><div class="line">		.permitAll()</div><div class="line">		.anyRequest()</div><div class="line">		.authenticated()</div><div class="line">		.and().csrf().disable();</div><div class="line">		<span class="keyword">super</span>.configure(http);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 注入BCryptPasswordEncoder</div><div class="line">	 */</div><div class="line">	<span class="meta">@Bean</span></div><div class="line">	<span class="function"><span class="keyword">public</span> BCryptPasswordEncoder <span class="title">bCryptPasswordEncoder</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> BCryptPasswordEncoder();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
-<li>在配置文件中（<code>bootstrap.xml</code>）中配置：<ul>
-<li><strong><code>bootstrap.xml</code>是最高级的，其中的配置项不会被application.yml或者application.properties覆盖</strong></li>
-<li><strong>其中一定要配置eureka的客户端，否则将不能找到统一配置中心的配置</strong></li>
+<li>主配置类添加<code>@EnableWebSecurity</code></li>
 </ul>
-</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="attr">eureka:</span>   <span class="comment"># 配置eureka客户端，一定要bootstrap文件中配置，因为需要到注册中心获取配置中心的服务端的地址，如果配置在github上面的配置，那么将会找不到配置中心的服务端</span></div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    serviceUrl:</span></div><div class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:7001/eureka</span>  <span class="comment"># eureka的暴露地址，直接注册</span></div><div class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">false</span></div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">orderClient9002</span>   <span class="comment"># 配置项目的名称，也是github中对应配置文件的名称（去掉后缀）</span></div><div class="line"><span class="attr">  cloud:</span></div><div class="line"><span class="attr">    config:</span></div><div class="line"><span class="attr">      discovery:</span></div><div class="line"><span class="attr">        enabled:</span> <span class="literal">true</span>   <span class="comment"># 开启config的客户端</span></div><div class="line"><span class="attr">        service-id:</span> <span class="string">config-server</span>   <span class="comment"># 指定eureka中的配置中心服务端的实例名称</span></div><div class="line"><span class="attr">      profile:</span> <span class="string">dev</span>   <span class="comment"># 指定配置文件的环境</span></div><div class="line"><span class="attr">      label:</span> <span class="string">master</span>  <span class="comment"># 指定需要访问github上的分支，这里不填默认是master分支</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableWebSecurity</span>   <span class="comment">//开启security</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AuthServerApplication</span> </span>&#123;</div></pre></td></tr></table></figure>
 <ul>
-<li>在主启动类上不需要对应的注解，只需要添加eureka客户端的注解即可，如下:</li>
+<li>在业务层实现登录和注册的功能 ，对密码进行加密和校验</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableEurekaClient</span>   <span class="comment">//开启eureka</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderClient9001Application</span> </span>&#123;</div></pre></td></tr></table></figure>
-<h3 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h3><ul>
-<li><a href="https://github.com/chenjiabing666/config-client.git" target="_blank" rel="external">https://github.com/chenjiabing666/config-client.git</a></li>
-</ul>
-<h2 id="配置中心服务端的高可用"><a href="#配置中心服务端的高可用" class="headerlink" title="配置中心服务端的高可用"></a>配置中心服务端的高可用</h2><ul>
-<li><strong>只需要同时开启多个服务端即可，相当于配置了一个集群</strong></li>
-</ul>
-<h2 id="spring-cloud-bus"><a href="#spring-cloud-bus" class="headerlink" title="spring cloud bus"></a>spring cloud bus</h2><ul>
-<li>git仓库的配置改变了，但是统一配置中心并不能及时更新，因此我们需要一种机制能够保证git仓库中的配置改变了就会及时通知配置中心，bus就是这种机制</li>
-</ul>
-<h3 id="使用（bus-rabbitmq）"><a href="#使用（bus-rabbitmq）" class="headerlink" title="使用（bus + rabbitmq）"></a>使用（bus + rabbitmq）</h3><h4 id="配置中心的服务端"><a href="#配置中心的服务端" class="headerlink" title="配置中心的服务端"></a>配置中心的服务端</h4><ul>
-<li>添加依赖</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- spring cloud bus 消息总线的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-bus-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>在配置文件中配置<strong>eureka</strong>和<strong>rabbitmq</strong></li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">3344</span></div><div class="line"><span class="attr">eureka:</span></div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    serviceUrl:</span></div><div class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:7001/eureka</span>  <span class="comment"># eureka的暴露地址，直接注册</span></div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">config-server</span>   <span class="comment"># 应用的名称，在同一个eureka中必须不重复</span></div><div class="line"><span class="attr">  rabbitmq:</span>              <span class="comment"># rabbitmq配置的</span></div><div class="line"><span class="attr">    host:</span> <span class="number">39.105</span><span class="number">.123</span><span class="number">.197</span>  <span class="comment"># 主机的地址</span></div><div class="line"><span class="attr">    port:</span> <span class="number">5672</span>            <span class="comment"># 端口</span></div><div class="line"><span class="attr">    username:</span> <span class="string">guest</span>       <span class="comment"># 用户名</span></div><div class="line"><span class="attr">    password:</span> <span class="string">guest</span>      <span class="comment"># 密码</span></div><div class="line"><span class="attr">    virtual-host:</span> <span class="string">/</span>     <span class="comment"># 虚拟主机</span></div><div class="line"></div><div class="line"><span class="attr">  cloud:</span></div><div class="line"><span class="attr">    config:</span></div><div class="line"><span class="attr">      server:</span></div><div class="line"><span class="attr">        git:</span></div><div class="line"><span class="attr">          uri:</span> <span class="attr">https://github.com/chenjiabing666/dept-config.git</span>  <span class="comment"># git仓库的地址，如果是ssh方式的不需要指定用户名和密码，但是需要在github上添加秘钥</span></div><div class="line"><span class="attr">          username:</span> <span class="string">******</span> <span class="comment"># 用户名</span></div><div class="line"><span class="attr">          password:</span> <span class="string">******</span>     <span class="comment"># 密码</span></div><div class="line"><span class="attr">          basedir:</span> <span class="attr">C:/images/config-server</span>   <span class="comment"># 本地的路径，将会自动在这个路径创建一个git仓库</span></div></pre></td></tr></table></figure>
-<ul>
-<li><strong>开启刷新配置的uri：</strong></li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attr">management:</span>   <span class="comment"># 开启刷新配置的地址 /bus-refresh</span></div><div class="line"><span class="attr">  endpoints:</span></div><div class="line"><span class="attr">    web:</span></div><div class="line"><span class="attr">      exposure:</span></div><div class="line"><span class="attr">        include:</span></div><div class="line"><span class="bullet">        -</span> <span class="string">bus-refresh</span></div></pre></td></tr></table></figure>
-<ul>
-<li>主启动类上添加eureka和config的server</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableEurekaClient</span>   <span class="comment">//开启eureka</span></div><div class="line"><span class="meta">@EnableConfigServer</span>  <span class="comment">//开启config sever</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigServerApplication</span> </span>&#123;</div></pre></td></tr></table></figure>
-<ul>
-<li>启动之后将会发现在rabbitmq中新增了一个队列，如下:</li>
-</ul>
-<p><img src="https://github.com/chenjiabing666/BlogImage/blob/master/bus1.png?raw=true" alt=""></p>
-<ul>
-<li><strong>在github仓库中新增一个配置文件orderClient9001.yml:</strong></li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">9001</span></div><div class="line">  </div><div class="line"><span class="attr">person:</span></div><div class="line"><span class="attr">  name:</span> <span class="string">chenjaibing</span></div><div class="line"><span class="attr">  age:</span> <span class="number">20</span></div></pre></td></tr></table></figure>
-<h5 id="完整的配置"><a href="#完整的配置" class="headerlink" title="完整的配置"></a>完整的配置</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">3344</span></div><div class="line"><span class="attr">eureka:</span></div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    serviceUrl:</span></div><div class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:7001/eureka</span>  <span class="comment"># eureka的暴露地址，直接注册</span></div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">config-server</span>   <span class="comment"># 应用的名称，在同一个eureka中必须不重复</span></div><div class="line"><span class="attr">  rabbitmq:</span>              <span class="comment"># rabbitmq配置的</span></div><div class="line"><span class="attr">    host:</span> <span class="number">39.105</span><span class="number">.123</span><span class="number">.197</span>  <span class="comment"># 主机的地址</span></div><div class="line"><span class="attr">    port:</span> <span class="number">5672</span>            <span class="comment"># 端口</span></div><div class="line"><span class="attr">    username:</span> <span class="string">guest</span>       <span class="comment"># 用户名</span></div><div class="line"><span class="attr">    password:</span> <span class="string">guest</span>      <span class="comment"># 密码</span></div><div class="line"><span class="attr">    virtual-host:</span> <span class="string">/</span>     <span class="comment"># 虚拟主机</span></div><div class="line"></div><div class="line"><span class="attr">  cloud:</span></div><div class="line"><span class="attr">    config:</span></div><div class="line"><span class="attr">      server:</span></div><div class="line"><span class="attr">        git:</span></div><div class="line"><span class="attr">          uri:</span> <span class="attr">https://github.com/chenjiabing666/dept-config.git</span>  <span class="comment"># git仓库的地址，如果是ssh方式的不需要指定用户名和密码，但是需要在github上添加秘钥</span></div><div class="line"><span class="attr">          username:</span> <span class="string">chenjiabing666</span> <span class="comment"># 用户名</span></div><div class="line"><span class="attr">          password:</span> <span class="string">as676767as</span>     <span class="comment"># 密码</span></div><div class="line"><span class="attr">          basedir:</span> <span class="attr">C:/images/config-server</span>   <span class="comment"># 本地的路径，将会自动在这个路径创建一个git仓库</span></div><div class="line">          </div><div class="line"><span class="attr">management:</span>   <span class="comment"># 开启刷新配置的地址 /bus-refresh</span></div><div class="line"><span class="attr">  endpoints:</span></div><div class="line"><span class="attr">    web:</span></div><div class="line"><span class="attr">      exposure:</span></div><div class="line"><span class="attr">        include:</span></div><div class="line"><span class="bullet">        -</span> <span class="string">bus-refresh</span></div></pre></td></tr></table></figure>
-<h4 id="配置中心的客户端"><a href="#配置中心的客户端" class="headerlink" title="配置中心的客户端"></a>配置中心的客户端</h4><ul>
-<li>添加依赖</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- spring cloud bus 消息总线的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-bus-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>添加eureka、rabbitmq、config client的配置（<strong>bootstrap.xml</strong>）</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="attr">eureka:</span>   <span class="comment"># 配置eureka客户端，一定要bootstrap文件中配置，因为需要到注册中心获取配置中心的服务端的地址，如果配置在github上面的配置，那么将会找不到配置中心的服务端</span></div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    serviceUrl:</span></div><div class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:7001/eureka</span>  <span class="comment"># eureka的暴露地址，直接注册</span></div><div class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">false</span></div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">orderClient9001</span>   <span class="comment"># 配置项目的名称，也是github中对应配置文件的名称（去掉后缀）</span></div><div class="line"><span class="attr">  rabbitmq:</span>              <span class="comment"># rabbitmq配置的</span></div><div class="line"><span class="attr">    host:</span> <span class="number">39.105</span><span class="number">.123</span><span class="number">.197</span>  <span class="comment"># 主机的地址</span></div><div class="line"><span class="attr">    port:</span> <span class="number">5672</span>            <span class="comment"># 端口</span></div><div class="line"><span class="attr">    username:</span> <span class="string">guest</span>       <span class="comment"># 用户名</span></div><div class="line"><span class="attr">    password:</span> <span class="string">guest</span>      <span class="comment"># 密码</span></div><div class="line"><span class="attr">    virtual-host:</span> <span class="string">/</span>     <span class="comment"># 虚拟主机</span></div><div class="line"><span class="attr">  cloud:</span></div><div class="line"><span class="attr">    config:</span></div><div class="line"><span class="attr">      discovery:</span></div><div class="line"><span class="attr">        enabled:</span> <span class="literal">true</span>   <span class="comment"># 开启config的客户端</span></div><div class="line"><span class="attr">        service-id:</span> <span class="string">config-server</span>   <span class="comment"># 指定eureka中的配置中心服务端的实例名称</span></div><div class="line"><span class="attr">      profile:</span> <span class="string">dev</span>   <span class="comment"># 指定配置文件的环境</span></div><div class="line"><span class="attr">      label:</span> <span class="string">master</span>  <span class="comment"># 指定需要访问github上的分支，这里不填默认是master分支</span></div></pre></td></tr></table></figure>
-<ul>
-<li><strong>新增一个Person类，其中的属性来自配置文件，并且通过controller读取其中的值，用作测试</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="meta">@ConfigurationProperties</span>(prefix=<span class="string">"person"</span>)  <span class="comment">//读取配置文件中前缀为person的值，并且赋值给其中的变量</span></div><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> String age;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonController</span> </span>&#123;</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> Person person;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 获取配置文件中的值</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/person"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Person <span class="title">getPerson</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> person;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>在主启动类上只需要开启eureka客户端即可</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableEurekaClient</span>   <span class="comment">//开启eureka</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderClient9001Application</span> </span>&#123;</div></pre></td></tr></table></figure>
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><ul>
-<li>启动eurkea，config server，config client</li>
-<li>访问<code>http://localhost:9001/person</code>，返回一个person的信息</li>
-<li>此时我们修改github仓库中的person的配置，再次访问<code>http://localhost:9001/person</code>,但是值并没有改变</li>
-<li>我们通过post请求访问<code>http://localhost:3344/actuator/bus-refresh</code>（config server端的接口，自动生成的），再次获取person的信息之后，发现改变了，此时说明我们的配置成功了</li>
-</ul>
-<h4 id="在github中配置提交代码自动更新"><a href="#在github中配置提交代码自动更新" class="headerlink" title="在github中配置提交代码自动更新"></a>在github中配置提交代码自动更新</h4><ul>
-<li>之前我们更新配置之后都是需要手动的post一个请求才会自动更新，现在我们可以在github中配置自动更新。<ul>
-<li>在github仓库中的webhooks中配置一个post请求，地址写外网访问到bus-refresh即可。</li>
-</ul>
-</li>
-</ul>
-<h4 id="源码-2"><a href="#源码-2" class="headerlink" title="源码"></a>源码</h4><ul>
-<li><a href="https://github.com/chenjiabing666/cloud-bus" target="_blank" rel="external">https://github.com/chenjiabing666/cloud-bus</a></li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Service</span></div><div class="line"><span class="meta">@Transactional</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> UserRepository userRepository;</div><div class="line">	</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> BCryptPasswordEncoder bCryptPasswordEncoder;  <span class="comment">//注入bcryct加密</span></div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">add</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword())); <span class="comment">//对密码进行加密</span></div><div class="line">		User user2 = userRepository.save(user);</div><div class="line">		<span class="keyword">return</span> user2;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> ResultInfo <span class="title">login</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">		ResultInfo resultInfo=<span class="keyword">new</span> ResultInfo();</div><div class="line">		User user2 = userRepository.findByName(user.getName());  </div><div class="line">		<span class="keyword">if</span> (user2==<span class="keyword">null</span>) &#123;</div><div class="line">			resultInfo.setCode(<span class="string">"-1"</span>);</div><div class="line">			resultInfo.setMessage(<span class="string">"用户名不存在"</span>);</div><div class="line">			<span class="keyword">return</span> resultInfo;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">//判断密码是否正确</span></div><div class="line">		<span class="keyword">if</span> (!bCryptPasswordEncoder.matches(user.getPassword(),user2.getPassword())) &#123;</div><div class="line">			resultInfo.setCode(<span class="string">"-1"</span>);</div><div class="line">			resultInfo.setMessage(<span class="string">"密码不正确"</span>);</div><div class="line">			<span class="keyword">return</span> resultInfo;</div><div class="line">		&#125;</div><div class="line">		resultInfo.setMessage(<span class="string">"登录成功"</span>);</div><div class="line">		<span class="keyword">return</span> resultInfo;</div><div class="line">	&#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
+<li><a href="https://gitee.com/chenjiabing666/auth-server.git" target="_blank" rel="external">https://gitee.com/chenjiabing666/auth-server.git</a></li>
 </ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Config-统一配置中心&quot;&gt;&lt;a href=&quot;#Config-统一配置中心&quot; class=&quot;headerlink&quot; title=&quot;Config 统一配置中心&quot;&gt;&lt;/a&gt;Config 统一配置中心&lt;/h1&gt;&lt;h2 id=&quot;为什么使用？&quot;&gt;&lt;a href=&quot;#为什么
+      &lt;h1 id=&quot;SpringBoot-实现-BCrypt密码加密&quot;&gt;&lt;a href=&quot;#SpringBoot-实现-BCrypt密码加密&quot; class=&quot;headerlink&quot; title=&quot;SpringBoot 实现 BCrypt密码加密&quot;&gt;&lt;/a&gt;SpringBoot 实现 
     
     </summary>
     
-      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+      <category term="SpringBoot" scheme="http://chenjiabing666.github.io/categories/SpringBoot/"/>
     
     
-      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+      <category term="SpringBoot" scheme="http://chenjiabing666.github.io/tags/SpringBoot/"/>
     
   </entry>
   
   <entry>
-    <title>spring sleuth 服务追踪</title>
-    <link href="http://chenjiabing666.github.io/2018/12/25/spring-sleuth-%E6%9C%8D%E5%8A%A1%E8%BF%BD%E8%B8%AA/"/>
-    <id>http://chenjiabing666.github.io/2018/12/25/spring-sleuth-服务追踪/</id>
-    <published>2018-12-24T16:23:20.000Z</published>
-    <updated>2018-12-24T16:23:47.952Z</updated>
+    <title>zuul服务网关</title>
+    <link href="http://chenjiabing666.github.io/2018/12/25/zuul%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3/"/>
+    <id>http://chenjiabing666.github.io/2018/12/25/zuul服务网关/</id>
+    <published>2018-12-25T13:05:22.000Z</published>
+    <updated>2018-12-25T13:06:01.563Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="spring-sleuth-服务追踪"><a href="#spring-sleuth-服务追踪" class="headerlink" title="spring  sleuth- 服务追踪"></a>spring  sleuth- 服务追踪</h1><h2 id="Zipkin"><a href="#Zipkin" class="headerlink" title="Zipkin"></a>Zipkin</h2><ul>
-<li>Zipkin 是一个开放源代码分布式的跟踪系统，由Twitter公司开源，它致力于收集服务的定时数据，以解决微服务架构中的延迟问题，包括数据的收集、存储、查找和展现。</li>
-<li>每个服务向zipkin报告计时数据，zipkin会根据调用关系通过Zipkin UI生成依赖关系图，显示了多少跟踪请求通过每个服务，该系统让开发者可通过一个 Web 前端轻松的收集和分析数据，例如用户每次请求服务的处理时间等，可方便的监测系统中存在的瓶颈。</li>
-<li>Zipkin提供了可插拔数据存储方式：In-Memory、MySql、Cassandra以及Elasticsearch。接下来的测试为方便直接采用In-Memory方式进行存储，生产推荐Elasticsearch。</li>
-</ul>
-<h3 id="服务端的安装"><a href="#服务端的安装" class="headerlink" title="服务端的安装"></a>服务端的安装</h3><ul>
-<li>使用docker安装：<code>docker run --name zipkin -d -p 9411:9411 openzipkin/zipkin</code></li>
-<li>访问<code>http://localhost:9411/zipkin/</code>即可看到可视化的界面</li>
-</ul>
-<h3 id="客户端使用"><a href="#客户端使用" class="headerlink" title="客户端使用"></a>客户端使用</h3><ul>
-<li>需要在每一个项目中（包括提供者，消费者，网关等），依赖如下:</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- zipkin的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-zipkin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- sleuth的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-sleuth<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>在上面所有的项目中添加如下的配置：<ul>
-<li><strong>在开发环境中可以指定抽样的比例为1，在生产环境中可以使用默认的即可</strong></li>
-</ul>
-</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  zipkin:</span></div><div class="line"><span class="attr">    base-url:</span> <span class="attr">http://192.168.174.128:9411</span>   <span class="comment"># 指定zipkin的服务端的地址</span></div><div class="line"><span class="attr">  sleuth:</span></div><div class="line"><span class="attr">    web:</span></div><div class="line"><span class="attr">      client:</span></div><div class="line"><span class="attr">        enabled:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    sampler:</span></div><div class="line"><span class="attr">      probability:</span> <span class="number">1.0</span> <span class="comment"># 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1</span></div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><a href="http://www.ityouknow.com/springcloud/2018/02/02/spring-cloud-sleuth-zipkin.html" target="_blank" rel="external">http://www.ityouknow.com/springcloud/2018/02/02/spring-cloud-sleuth-zipkin.html</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;spring-sleuth-服务追踪&quot;&gt;&lt;a href=&quot;#spring-sleuth-服务追踪&quot; class=&quot;headerlink&quot; title=&quot;spring  sleuth- 服务追踪&quot;&gt;&lt;/a&gt;spring  sleuth- 服务追踪&lt;/h1&gt;&lt;h2 i
-    
-    </summary>
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://chenjiabing666.github.io/2018/12/25/Zuul/"/>
-    <id>http://chenjiabing666.github.io/2018/12/25/Zuul/</id>
-    <published>2018-12-24T16:22:19.349Z</published>
-    <updated>2018-12-24T16:22:52.540Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<p>title: Zuul<br>date: 2018-12-25 00:22:19<br>categories: 分布式</p>
-<h2 id="tags-分布式"><a href="#tags-分布式" class="headerlink" title="tags: 分布式"></a>tags: 分布式</h2><h1 id="Zuul"><a href="#Zuul" class="headerlink" title="Zuul"></a>Zuul</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+    <content type="html"><![CDATA[<h1 id="Zuul"><a href="#Zuul" class="headerlink" title="Zuul"></a>Zuul</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
 <li>Zuul包含了对请求的路由和过滤两个主要的功能，其中路由功能负责将外部的请求转发到具体的微服务实例上，是实现外部访问统一入口的基础上，而过滤功能则负责对请求的处理过程进行干预，是实现请求校验，服务聚合等功能的基础。</li>
 <li>Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用，同时从Eureka中获取其他微服务的信息，也即以后访问微服务都是通过Zuul跳转后获得</li>
 <li>代理+路由+过滤三大功能</li>
@@ -390,12 +250,209 @@
     
     <summary type="html">
     
-      &lt;hr&gt;
-&lt;p&gt;title: Zuul&lt;br&gt;date: 2018-12-25 00:22:19&lt;br&gt;categories: 分布式&lt;/p&gt;
-&lt;h2 id=&quot;tags-分布式&quot;&gt;&lt;a href=&quot;#tags-分布式&quot; class=&quot;headerlink&quot; title=&quot;tags
+      &lt;h1 id=&quot;Zuul&quot;&gt;&lt;a href=&quot;#Zuul&quot; class=&quot;headerlink&quot; title=&quot;Zuul&quot;&gt;&lt;/a&gt;Zuul&lt;/h1&gt;&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h
     
     </summary>
     
+      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Config统一配置中心</title>
+    <link href="http://chenjiabing666.github.io/2018/12/25/Config(%E7%BB%9F%E4%B8%80%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83)/"/>
+    <id>http://chenjiabing666.github.io/2018/12/25/Config(统一配置中心)/</id>
+    <published>2018-12-24T16:24:18.000Z</published>
+    <updated>2018-12-25T13:04:28.347Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Config-统一配置中心"><a href="#Config-统一配置中心" class="headerlink" title="Config 统一配置中心"></a>Config 统一配置中心</h1><h2 id="为什么使用？"><a href="#为什么使用？" class="headerlink" title="为什么使用？"></a>为什么使用？</h2><ul>
+<li>方便维护：微服务可能成百个，如果一个个配置都是在项目中配置的话，会给运维造成不必要的麻烦</li>
+<li>安全：配置统一是由运维来操作，如果涉及到数据库的账户和密码，肯定是不能让开发知道的</li>
+</ul>
+<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><ul>
+<li>添加依赖:</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- config server的依赖 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-config-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- eureka客户端的依赖 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>配置如下：<ul>
+<li>这里使用的是git仓库，当然也是可以使用svn</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">3344</span></div><div class="line"><span class="attr">eureka:</span></div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    serviceUrl:</span></div><div class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:7001/eureka</span>  <span class="comment"># eureka的暴露地址，直接注册</span></div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">config-server</span>   <span class="comment">#应用的名称，在同一个eureka中必须不重复</span></div><div class="line"><span class="attr">  cloud:</span></div><div class="line"><span class="attr">    config:</span></div><div class="line"><span class="attr">      server:</span></div><div class="line"><span class="attr">        git:</span></div><div class="line"><span class="attr">          uri:</span> <span class="attr">https://github.com/chenjiabing666/dept-config.git</span>  <span class="comment"># git仓库的地址，如果是ssh方式的不需要指定用户名和密码，但是需要在github上添加秘钥</span></div><div class="line"><span class="attr">          username:</span> <span class="string">******</span> <span class="comment"># 用户名</span></div><div class="line"><span class="attr">          password:</span> <span class="string">******</span>     <span class="comment"># 密码</span></div><div class="line"><span class="attr">          basedir:</span> <span class="attr">C:/images/config-server</span>   <span class="comment"># 本地的路径，将会自动在这个路径创建一个git仓库</span></div></pre></td></tr></table></figure>
+<ul>
+<li>在主启动类上添加<code>@EnableConfigServer</code>这个注解，如下:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableEurekaClient</span>   <span class="comment">//开启eureka</span></div><div class="line"><span class="meta">@EnableConfigServer</span>  <span class="comment">//开启config sever</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigServerApplication</span> </span>&#123;</div></pre></td></tr></table></figure>
+<ul>
+<li>此时需要在远程的github仓库创建如下内容：</li>
+<li><img src="https://github.com/chenjiabing666/BlogImage/blob/master/config.png?raw=true" alt=""></li>
+<li>此时访问如下的路径：<code>http://localhost:3344/orderClient9002-{profile}.yml</code>，就会输出orderClient9002的内容<ul>
+<li>如果后缀写的是<code>.json</code>就会以json格式输出，是<code>.properties</code>就会以properties的格式输出</li>
+<li>如果输出报错说明配置的内容有错误</li>
+</ul>
+</li>
+</ul>
+<h3 id="访问方式"><a href="#访问方式" class="headerlink" title="访问方式"></a>访问方式</h3><ul>
+<li><code>/name-{profile}.yml</code> <ul>
+<li>name是github仓库中的文档名称</li>
+<li>{profile}是springBoot的profile，可以指定任意的环境</li>
+<li>这里默认是master分支的内容</li>
+</ul>
+</li>
+<li><code>/label/name-{profile}.yml</code><ul>
+<li>lable是仓库的分支名称</li>
+</ul>
+</li>
+</ul>
+<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><ul>
+<li><a href="https://github.com/chenjiabing666/cloud-config-server.git" target="_blank" rel="external">https://github.com/chenjiabing666/cloud-config-server.git</a></li>
+</ul>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>启动配置中心的服务端，将其注入到eureka的注册中心</li>
+<li>客户端相通过注册中心找到服务端的实例，然后读取到github仓库中对应的配置</li>
+</ul>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<li>添加依赖：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 统一配置中心的客户端 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-config<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- eureka注册中心的客户端 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>在配置文件中（<code>bootstrap.xml</code>）中配置：<ul>
+<li><strong><code>bootstrap.xml</code>是最高级的，其中的配置项不会被application.yml或者application.properties覆盖</strong></li>
+<li><strong>其中一定要配置eureka的客户端，否则将不能找到统一配置中心的配置</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="attr">eureka:</span>   <span class="comment"># 配置eureka客户端，一定要bootstrap文件中配置，因为需要到注册中心获取配置中心的服务端的地址，如果配置在github上面的配置，那么将会找不到配置中心的服务端</span></div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    serviceUrl:</span></div><div class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:7001/eureka</span>  <span class="comment"># eureka的暴露地址，直接注册</span></div><div class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">false</span></div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">orderClient9002</span>   <span class="comment"># 配置项目的名称，也是github中对应配置文件的名称（去掉后缀）</span></div><div class="line"><span class="attr">  cloud:</span></div><div class="line"><span class="attr">    config:</span></div><div class="line"><span class="attr">      discovery:</span></div><div class="line"><span class="attr">        enabled:</span> <span class="literal">true</span>   <span class="comment"># 开启config的客户端</span></div><div class="line"><span class="attr">        service-id:</span> <span class="string">config-server</span>   <span class="comment"># 指定eureka中的配置中心服务端的实例名称</span></div><div class="line"><span class="attr">      profile:</span> <span class="string">dev</span>   <span class="comment"># 指定配置文件的环境</span></div><div class="line"><span class="attr">      label:</span> <span class="string">master</span>  <span class="comment"># 指定需要访问github上的分支，这里不填默认是master分支</span></div></pre></td></tr></table></figure>
+<ul>
+<li>在主启动类上不需要对应的注解，只需要添加eureka客户端的注解即可，如下:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableEurekaClient</span>   <span class="comment">//开启eureka</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderClient9001Application</span> </span>&#123;</div></pre></td></tr></table></figure>
+<h3 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h3><ul>
+<li><a href="https://github.com/chenjiabing666/config-client.git" target="_blank" rel="external">https://github.com/chenjiabing666/config-client.git</a></li>
+</ul>
+<h2 id="配置中心服务端的高可用"><a href="#配置中心服务端的高可用" class="headerlink" title="配置中心服务端的高可用"></a>配置中心服务端的高可用</h2><ul>
+<li><strong>只需要同时开启多个服务端即可，相当于配置了一个集群</strong></li>
+</ul>
+<h2 id="spring-cloud-bus"><a href="#spring-cloud-bus" class="headerlink" title="spring cloud bus"></a>spring cloud bus</h2><ul>
+<li>git仓库的配置改变了，但是统一配置中心并不能及时更新，因此我们需要一种机制能够保证git仓库中的配置改变了就会及时通知配置中心，bus就是这种机制</li>
+</ul>
+<h3 id="使用（bus-rabbitmq）"><a href="#使用（bus-rabbitmq）" class="headerlink" title="使用（bus + rabbitmq）"></a>使用（bus + rabbitmq）</h3><h4 id="配置中心的服务端"><a href="#配置中心的服务端" class="headerlink" title="配置中心的服务端"></a>配置中心的服务端</h4><ul>
+<li>添加依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- spring cloud bus 消息总线的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-bus-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>在配置文件中配置<strong>eureka</strong>和<strong>rabbitmq</strong></li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">3344</span></div><div class="line"><span class="attr">eureka:</span></div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    serviceUrl:</span></div><div class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:7001/eureka</span>  <span class="comment"># eureka的暴露地址，直接注册</span></div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">config-server</span>   <span class="comment"># 应用的名称，在同一个eureka中必须不重复</span></div><div class="line"><span class="attr">  rabbitmq:</span>              <span class="comment"># rabbitmq配置的</span></div><div class="line"><span class="attr">    host:</span> <span class="number">39.105</span><span class="number">.123</span><span class="number">.197</span>  <span class="comment"># 主机的地址</span></div><div class="line"><span class="attr">    port:</span> <span class="number">5672</span>            <span class="comment"># 端口</span></div><div class="line"><span class="attr">    username:</span> <span class="string">guest</span>       <span class="comment"># 用户名</span></div><div class="line"><span class="attr">    password:</span> <span class="string">guest</span>      <span class="comment"># 密码</span></div><div class="line"><span class="attr">    virtual-host:</span> <span class="string">/</span>     <span class="comment"># 虚拟主机</span></div><div class="line"></div><div class="line"><span class="attr">  cloud:</span></div><div class="line"><span class="attr">    config:</span></div><div class="line"><span class="attr">      server:</span></div><div class="line"><span class="attr">        git:</span></div><div class="line"><span class="attr">          uri:</span> <span class="attr">https://github.com/chenjiabing666/dept-config.git</span>  <span class="comment"># git仓库的地址，如果是ssh方式的不需要指定用户名和密码，但是需要在github上添加秘钥</span></div><div class="line"><span class="attr">          username:</span> <span class="string">******</span> <span class="comment"># 用户名</span></div><div class="line"><span class="attr">          password:</span> <span class="string">******</span>     <span class="comment"># 密码</span></div><div class="line"><span class="attr">          basedir:</span> <span class="attr">C:/images/config-server</span>   <span class="comment"># 本地的路径，将会自动在这个路径创建一个git仓库</span></div></pre></td></tr></table></figure>
+<ul>
+<li><strong>开启刷新配置的uri：</strong></li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attr">management:</span>   <span class="comment"># 开启刷新配置的地址 /bus-refresh</span></div><div class="line"><span class="attr">  endpoints:</span></div><div class="line"><span class="attr">    web:</span></div><div class="line"><span class="attr">      exposure:</span></div><div class="line"><span class="attr">        include:</span></div><div class="line"><span class="bullet">        -</span> <span class="string">bus-refresh</span></div></pre></td></tr></table></figure>
+<ul>
+<li>主启动类上添加eureka和config的server</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableEurekaClient</span>   <span class="comment">//开启eureka</span></div><div class="line"><span class="meta">@EnableConfigServer</span>  <span class="comment">//开启config sever</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigServerApplication</span> </span>&#123;</div></pre></td></tr></table></figure>
+<ul>
+<li>启动之后将会发现在rabbitmq中新增了一个队列，如下:</li>
+</ul>
+<p><img src="https://github.com/chenjiabing666/BlogImage/blob/master/bus1.png?raw=true" alt=""></p>
+<ul>
+<li><strong>在github仓库中新增一个配置文件orderClient9001.yml:</strong></li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">9001</span></div><div class="line">  </div><div class="line"><span class="attr">person:</span></div><div class="line"><span class="attr">  name:</span> <span class="string">chenjaibing</span></div><div class="line"><span class="attr">  age:</span> <span class="number">20</span></div></pre></td></tr></table></figure>
+<h5 id="完整的配置"><a href="#完整的配置" class="headerlink" title="完整的配置"></a>完整的配置</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">3344</span></div><div class="line"><span class="attr">eureka:</span></div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    serviceUrl:</span></div><div class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:7001/eureka</span>  <span class="comment"># eureka的暴露地址，直接注册</span></div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">config-server</span>   <span class="comment"># 应用的名称，在同一个eureka中必须不重复</span></div><div class="line"><span class="attr">  rabbitmq:</span>              <span class="comment"># rabbitmq配置的</span></div><div class="line"><span class="attr">    host:</span> <span class="number">39.105</span><span class="number">.123</span><span class="number">.197</span>  <span class="comment"># 主机的地址</span></div><div class="line"><span class="attr">    port:</span> <span class="number">5672</span>            <span class="comment"># 端口</span></div><div class="line"><span class="attr">    username:</span> <span class="string">guest</span>       <span class="comment"># 用户名</span></div><div class="line"><span class="attr">    password:</span> <span class="string">guest</span>      <span class="comment"># 密码</span></div><div class="line"><span class="attr">    virtual-host:</span> <span class="string">/</span>     <span class="comment"># 虚拟主机</span></div><div class="line"></div><div class="line"><span class="attr">  cloud:</span></div><div class="line"><span class="attr">    config:</span></div><div class="line"><span class="attr">      server:</span></div><div class="line"><span class="attr">        git:</span></div><div class="line"><span class="attr">          uri:</span> <span class="attr">https://github.com/chenjiabing666/dept-config.git</span>  <span class="comment"># git仓库的地址，如果是ssh方式的不需要指定用户名和密码，但是需要在github上添加秘钥</span></div><div class="line"><span class="attr">          username:</span> <span class="string">chenjiabing666</span> <span class="comment"># 用户名</span></div><div class="line"><span class="attr">          password:</span> <span class="string">**********</span>     <span class="comment"># 密码</span></div><div class="line"><span class="attr">          basedir:</span> <span class="attr">C:/images/config-server</span>   <span class="comment"># 本地的路径，将会自动在这个路径创建一个git仓库</span></div><div class="line">          </div><div class="line"><span class="attr">management:</span>   <span class="comment"># 开启刷新配置的地址 /bus-refresh</span></div><div class="line"><span class="attr">  endpoints:</span></div><div class="line"><span class="attr">    web:</span></div><div class="line"><span class="attr">      exposure:</span></div><div class="line"><span class="attr">        include:</span></div><div class="line"><span class="bullet">        -</span> <span class="string">bus-refresh</span></div></pre></td></tr></table></figure>
+<h4 id="配置中心的客户端"><a href="#配置中心的客户端" class="headerlink" title="配置中心的客户端"></a>配置中心的客户端</h4><ul>
+<li>添加依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- spring cloud bus 消息总线的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-bus-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>添加eureka、rabbitmq、config client的配置（<strong>bootstrap.xml</strong>）</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="attr">eureka:</span>   <span class="comment"># 配置eureka客户端，一定要bootstrap文件中配置，因为需要到注册中心获取配置中心的服务端的地址，如果配置在github上面的配置，那么将会找不到配置中心的服务端</span></div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    serviceUrl:</span></div><div class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:7001/eureka</span>  <span class="comment"># eureka的暴露地址，直接注册</span></div><div class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">false</span></div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">orderClient9001</span>   <span class="comment"># 配置项目的名称，也是github中对应配置文件的名称（去掉后缀）</span></div><div class="line"><span class="attr">  rabbitmq:</span>              <span class="comment"># rabbitmq配置的</span></div><div class="line"><span class="attr">    host:</span> <span class="number">39.105</span><span class="number">.123</span><span class="number">.197</span>  <span class="comment"># 主机的地址</span></div><div class="line"><span class="attr">    port:</span> <span class="number">5672</span>            <span class="comment"># 端口</span></div><div class="line"><span class="attr">    username:</span> <span class="string">guest</span>       <span class="comment"># 用户名</span></div><div class="line"><span class="attr">    password:</span> <span class="string">guest</span>      <span class="comment"># 密码</span></div><div class="line"><span class="attr">    virtual-host:</span> <span class="string">/</span>     <span class="comment"># 虚拟主机</span></div><div class="line"><span class="attr">  cloud:</span></div><div class="line"><span class="attr">    config:</span></div><div class="line"><span class="attr">      discovery:</span></div><div class="line"><span class="attr">        enabled:</span> <span class="literal">true</span>   <span class="comment"># 开启config的客户端</span></div><div class="line"><span class="attr">        service-id:</span> <span class="string">config-server</span>   <span class="comment"># 指定eureka中的配置中心服务端的实例名称</span></div><div class="line"><span class="attr">      profile:</span> <span class="string">dev</span>   <span class="comment"># 指定配置文件的环境</span></div><div class="line"><span class="attr">      label:</span> <span class="string">master</span>  <span class="comment"># 指定需要访问github上的分支，这里不填默认是master分支</span></div></pre></td></tr></table></figure>
+<ul>
+<li><strong>新增一个Person类，其中的属性来自配置文件，并且通过controller读取其中的值，用作测试</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="meta">@ConfigurationProperties</span>(prefix=<span class="string">"person"</span>)  <span class="comment">//读取配置文件中前缀为person的值，并且赋值给其中的变量</span></div><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> String age;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonController</span> </span>&#123;</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> Person person;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 获取配置文件中的值</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/person"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Person <span class="title">getPerson</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> person;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>在主启动类上只需要开启eureka客户端即可</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableEurekaClient</span>   <span class="comment">//开启eureka</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderClient9001Application</span> </span>&#123;</div></pre></td></tr></table></figure>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><ul>
+<li>启动eurkea，config server，config client</li>
+<li>访问<code>http://localhost:9001/person</code>，返回一个person的信息</li>
+<li>此时我们修改github仓库中的person的配置，再次访问<code>http://localhost:9001/person</code>,但是值并没有改变</li>
+<li>我们通过post请求访问<code>http://localhost:3344/actuator/bus-refresh</code>（config server端的接口，自动生成的），再次获取person的信息之后，发现改变了，此时说明我们的配置成功了</li>
+</ul>
+<h4 id="在github中配置提交代码自动更新"><a href="#在github中配置提交代码自动更新" class="headerlink" title="在github中配置提交代码自动更新"></a>在github中配置提交代码自动更新</h4><ul>
+<li>之前我们更新配置之后都是需要手动的post一个请求才会自动更新，现在我们可以在github中配置自动更新。<ul>
+<li>在github仓库中的webhooks中配置一个post请求，地址写外网访问到bus-refresh即可。</li>
+</ul>
+</li>
+</ul>
+<h4 id="源码-2"><a href="#源码-2" class="headerlink" title="源码"></a>源码</h4><ul>
+<li><a href="https://github.com/chenjiabing666/cloud-bus" target="_blank" rel="external">https://github.com/chenjiabing666/cloud-bus</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Config-统一配置中心&quot;&gt;&lt;a href=&quot;#Config-统一配置中心&quot; class=&quot;headerlink&quot; title=&quot;Config 统一配置中心&quot;&gt;&lt;/a&gt;Config 统一配置中心&lt;/h1&gt;&lt;h2 id=&quot;为什么使用？&quot;&gt;&lt;a href=&quot;#为什么
+    
+    </summary>
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>spring sleuth 服务追踪</title>
+    <link href="http://chenjiabing666.github.io/2018/12/25/spring-sleuth-%E6%9C%8D%E5%8A%A1%E8%BF%BD%E8%B8%AA/"/>
+    <id>http://chenjiabing666.github.io/2018/12/25/spring-sleuth-服务追踪/</id>
+    <published>2018-12-24T16:23:20.000Z</published>
+    <updated>2018-12-24T16:23:47.952Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="spring-sleuth-服务追踪"><a href="#spring-sleuth-服务追踪" class="headerlink" title="spring  sleuth- 服务追踪"></a>spring  sleuth- 服务追踪</h1><h2 id="Zipkin"><a href="#Zipkin" class="headerlink" title="Zipkin"></a>Zipkin</h2><ul>
+<li>Zipkin 是一个开放源代码分布式的跟踪系统，由Twitter公司开源，它致力于收集服务的定时数据，以解决微服务架构中的延迟问题，包括数据的收集、存储、查找和展现。</li>
+<li>每个服务向zipkin报告计时数据，zipkin会根据调用关系通过Zipkin UI生成依赖关系图，显示了多少跟踪请求通过每个服务，该系统让开发者可通过一个 Web 前端轻松的收集和分析数据，例如用户每次请求服务的处理时间等，可方便的监测系统中存在的瓶颈。</li>
+<li>Zipkin提供了可插拔数据存储方式：In-Memory、MySql、Cassandra以及Elasticsearch。接下来的测试为方便直接采用In-Memory方式进行存储，生产推荐Elasticsearch。</li>
+</ul>
+<h3 id="服务端的安装"><a href="#服务端的安装" class="headerlink" title="服务端的安装"></a>服务端的安装</h3><ul>
+<li>使用docker安装：<code>docker run --name zipkin -d -p 9411:9411 openzipkin/zipkin</code></li>
+<li>访问<code>http://localhost:9411/zipkin/</code>即可看到可视化的界面</li>
+</ul>
+<h3 id="客户端使用"><a href="#客户端使用" class="headerlink" title="客户端使用"></a>客户端使用</h3><ul>
+<li>需要在每一个项目中（包括提供者，消费者，网关等），依赖如下:</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- zipkin的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-zipkin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- sleuth的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-sleuth<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>在上面所有的项目中添加如下的配置：<ul>
+<li><strong>在开发环境中可以指定抽样的比例为1，在生产环境中可以使用默认的即可</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  zipkin:</span></div><div class="line"><span class="attr">    base-url:</span> <span class="attr">http://192.168.174.128:9411</span>   <span class="comment"># 指定zipkin的服务端的地址</span></div><div class="line"><span class="attr">  sleuth:</span></div><div class="line"><span class="attr">    web:</span></div><div class="line"><span class="attr">      client:</span></div><div class="line"><span class="attr">        enabled:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    sampler:</span></div><div class="line"><span class="attr">      probability:</span> <span class="number">1.0</span> <span class="comment"># 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1</span></div></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="http://www.ityouknow.com/springcloud/2018/02/02/spring-cloud-sleuth-zipkin.html" target="_blank" rel="external">http://www.ityouknow.com/springcloud/2018/02/02/spring-cloud-sleuth-zipkin.html</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;spring-sleuth-服务追踪&quot;&gt;&lt;a href=&quot;#spring-sleuth-服务追踪&quot; class=&quot;headerlink&quot; title=&quot;spring  sleuth- 服务追踪&quot;&gt;&lt;/a&gt;spring  sleuth- 服务追踪&lt;/h1&gt;&lt;h2 i
+    
+    </summary>
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
     
   </entry>
   
@@ -732,45 +789,6 @@
   </entry>
   
   <entry>
-    <title>spring cloud的资源</title>
-    <link href="http://chenjiabing666.github.io/2018/12/25/Spring%20cloud%E7%9A%84%E4%BC%98%E7%A7%80%E8%B5%84%E6%BA%90/"/>
-    <id>http://chenjiabing666.github.io/2018/12/25/Spring cloud的优秀资源/</id>
-    <published>2018-12-24T16:19:33.000Z</published>
-    <updated>2018-12-24T16:27:21.228Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="spring-cloud的资源"><a href="#spring-cloud的资源" class="headerlink" title="spring cloud的资源"></a>spring cloud的资源</h2><ul>
-<li><a href="https://springcloud.cc/" target="_blank" rel="external">Springcloud中文网</a></li>
-<li><a href="https://springcloud.cc/spring-cloud-dalston.html" target="_blank" rel="external">中文文档</a></li>
-<li><a href="http://springcloud.cn/" target="_blank" rel="external">中国社区</a></li>
-<li><a href="http://springcloud.fun/" target="_blank" rel="external">优质学习资源</a></li>
-<li><a href="http://www.cnblogs.com/skyme/p/8976866.html" target="_blank" rel="external">SpringBoot学习资源</a></li>
-<li><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.0.M3/single/spring-cloud-netflix.html" target="_blank" rel="external">官方文档</a></li>
-<li><a href="http://www.itmuch.com/spring-cloud-sum-eureka/" target="_blank" rel="external">http://www.itmuch.com/spring-cloud-sum-eureka/</a></li>
-<li><a href="https://yujunhao8831.github.io/2017/05/27/Spring-Cloud-Eureka-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank" rel="external">指南</a></li>
-<li><a href="https://www.cnblogs.com/huangjuncong/tag/SpringCloud/" target="_blank" rel="external">https://www.cnblogs.com/huangjuncong/tag/SpringCloud/</a></li>
-<li><a href="https://blog.csdn.net/u012702547/article/details/78547925" target="_blank" rel="external">https://blog.csdn.net/u012702547/article/details/78547925</a></li>
-<li><a href="https://www.cnblogs.com/leeSmall/category/1185489.html" target="_blank" rel="external">https://www.cnblogs.com/leeSmall/category/1185489.html</a></li>
-<li><a href="https://windmt.com/tags/Spring-Cloud/" target="_blank" rel="external">https://windmt.com/tags/Spring-Cloud/</a></li>
-<li><a href="http://www.ityouknow.com" target="_blank" rel="external">http://www.ityouknow.com</a></li>
-<li><a href="http://www.itmuch.com/categories/Spring-Cloud" target="_blank" rel="external">http://www.itmuch.com/categories/Spring-Cloud</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;spring-cloud的资源&quot;&gt;&lt;a href=&quot;#spring-cloud的资源&quot; class=&quot;headerlink&quot; title=&quot;spring cloud的资源&quot;&gt;&lt;/a&gt;spring cloud的资源&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;htt
-    
-    </summary>
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Ribbon（客户端负载均衡）</title>
     <link href="http://chenjiabing666.github.io/2018/12/25/Ribbon%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/"/>
     <id>http://chenjiabing666.github.io/2018/12/25/Ribbon客户端负载均衡/</id>
@@ -856,6 +874,45 @@
     <summary type="html">
     
       &lt;h1 id=&quot;Ribbon-客户端负载均衡&quot;&gt;&lt;a href=&quot;#Ribbon-客户端负载均衡&quot; class=&quot;headerlink&quot; title=&quot;Ribbon - 客户端负载均衡&quot;&gt;&lt;/a&gt;Ribbon - 客户端负载均衡&lt;/h1&gt;&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;
+    
+    </summary>
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>spring cloud的资源</title>
+    <link href="http://chenjiabing666.github.io/2018/12/25/Spring%20cloud%E7%9A%84%E4%BC%98%E7%A7%80%E8%B5%84%E6%BA%90/"/>
+    <id>http://chenjiabing666.github.io/2018/12/25/Spring cloud的优秀资源/</id>
+    <published>2018-12-24T16:19:33.000Z</published>
+    <updated>2018-12-24T16:27:21.228Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="spring-cloud的资源"><a href="#spring-cloud的资源" class="headerlink" title="spring cloud的资源"></a>spring cloud的资源</h2><ul>
+<li><a href="https://springcloud.cc/" target="_blank" rel="external">Springcloud中文网</a></li>
+<li><a href="https://springcloud.cc/spring-cloud-dalston.html" target="_blank" rel="external">中文文档</a></li>
+<li><a href="http://springcloud.cn/" target="_blank" rel="external">中国社区</a></li>
+<li><a href="http://springcloud.fun/" target="_blank" rel="external">优质学习资源</a></li>
+<li><a href="http://www.cnblogs.com/skyme/p/8976866.html" target="_blank" rel="external">SpringBoot学习资源</a></li>
+<li><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.0.M3/single/spring-cloud-netflix.html" target="_blank" rel="external">官方文档</a></li>
+<li><a href="http://www.itmuch.com/spring-cloud-sum-eureka/" target="_blank" rel="external">http://www.itmuch.com/spring-cloud-sum-eureka/</a></li>
+<li><a href="https://yujunhao8831.github.io/2017/05/27/Spring-Cloud-Eureka-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank" rel="external">指南</a></li>
+<li><a href="https://www.cnblogs.com/huangjuncong/tag/SpringCloud/" target="_blank" rel="external">https://www.cnblogs.com/huangjuncong/tag/SpringCloud/</a></li>
+<li><a href="https://blog.csdn.net/u012702547/article/details/78547925" target="_blank" rel="external">https://blog.csdn.net/u012702547/article/details/78547925</a></li>
+<li><a href="https://www.cnblogs.com/leeSmall/category/1185489.html" target="_blank" rel="external">https://www.cnblogs.com/leeSmall/category/1185489.html</a></li>
+<li><a href="https://windmt.com/tags/Spring-Cloud/" target="_blank" rel="external">https://windmt.com/tags/Spring-Cloud/</a></li>
+<li><a href="http://www.ityouknow.com" target="_blank" rel="external">http://www.ityouknow.com</a></li>
+<li><a href="http://www.itmuch.com/categories/Spring-Cloud" target="_blank" rel="external">http://www.itmuch.com/categories/Spring-Cloud</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;spring-cloud的资源&quot;&gt;&lt;a href=&quot;#spring-cloud的资源&quot; class=&quot;headerlink&quot; title=&quot;spring cloud的资源&quot;&gt;&lt;/a&gt;spring cloud的资源&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;htt
     
     </summary>
     
@@ -1119,63 +1176,6 @@
     
     
       <category term="SpringBoot" scheme="http://chenjiabing666.github.io/tags/SpringBoot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://chenjiabing666.github.io/2018/12/25/SpringBoot%E5%AE%9E%E7%8E%B0BCrypt%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86/"/>
-    <id>http://chenjiabing666.github.io/2018/12/25/SpringBoot实现BCrypt密码加密/</id>
-    <published>2018-12-24T16:15:41.739Z</published>
-    <updated>2018-12-24T16:16:12.367Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<p>title: SpringBoot实现BCrypt密码加密<br>date: 2018-12-25 00:15:41<br>categories: SpringBoot</p>
-<h2 id="tags-SpringBoot"><a href="#tags-SpringBoot" class="headerlink" title="tags: SpringBoot"></a>tags: SpringBoot</h2><h1 id="SpringBoot-实现-BCrypt密码加密"><a href="#SpringBoot-实现-BCrypt密码加密" class="headerlink" title="SpringBoot 实现 BCrypt密码加密"></a>SpringBoot 实现 BCrypt密码加密</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li>出于安全的考虑，一些敏感的信息是绝对不能以明文的方式存储在数据库中的，比如密码通常是通过哈希算法进行加密的。有很多标准的算法比如<code>SHA</code>和<code>MD5</code>，结合<code>salt</code>（盐）是一种不错的选择，但是如果知道其加密的规则还是相对不安全。</li>
-<li>Spring security提供了<code>BCryptPasswordEncoder</code>类，使用Bcrypt强哈希方法来加密密码</li>
-<li><strong>Bcrypt强哈希算法每次加密的结果都是不一样的。</strong></li>
-</ul>
-<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><ul>
-<li><code>public String encode(CharSequence rawPassword)</code>： 对给定的内容进行加密，返回加密后的字符串</li>
-<li><code>public boolean matches(CharSequence rawPassword, String encodedPassword)</code>： 比较给定的字符串和加密后的字符串是否是同一个<ul>
-<li><code>rawPassword</code>：未加密的字符串</li>
-<li><code>encodedPassword</code>： 加密后的字符串</li>
-</ul>
-</li>
-</ul>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
-<li>引入spring security的依赖</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">   <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-security<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>添加security的配置类，如下:<ul>
-<li><strong>在其中注入<code>BCryptPasswordEncoder</code></strong></li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Spring security的配置类</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecurityConfig</span> <span class="keyword">extends</span> <span class="title">WebSecurityConfigurerAdapter</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		http.authorizeRequests()</div><div class="line">		.antMatchers(<span class="string">"/**"</span>)</div><div class="line">		.permitAll()</div><div class="line">		.anyRequest()</div><div class="line">		.authenticated()</div><div class="line">		.and().csrf().disable();</div><div class="line">		<span class="keyword">super</span>.configure(http);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 注入BCryptPasswordEncoder</div><div class="line">	 */</div><div class="line">	<span class="meta">@Bean</span></div><div class="line">	<span class="function"><span class="keyword">public</span> BCryptPasswordEncoder <span class="title">bCryptPasswordEncoder</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> BCryptPasswordEncoder();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>主配置类添加<code>@EnableWebSecurity</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableWebSecurity</span>   <span class="comment">//开启security</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AuthServerApplication</span> </span>&#123;</div></pre></td></tr></table></figure>
-<ul>
-<li>在业务层实现登录和注册的功能 ，对密码进行加密和校验</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Service</span></div><div class="line"><span class="meta">@Transactional</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> UserRepository userRepository;</div><div class="line">	</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> BCryptPasswordEncoder bCryptPasswordEncoder;  <span class="comment">//注入bcryct加密</span></div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">add</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword())); <span class="comment">//对密码进行加密</span></div><div class="line">		User user2 = userRepository.save(user);</div><div class="line">		<span class="keyword">return</span> user2;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> ResultInfo <span class="title">login</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">		ResultInfo resultInfo=<span class="keyword">new</span> ResultInfo();</div><div class="line">		User user2 = userRepository.findByName(user.getName());  </div><div class="line">		<span class="keyword">if</span> (user2==<span class="keyword">null</span>) &#123;</div><div class="line">			resultInfo.setCode(<span class="string">"-1"</span>);</div><div class="line">			resultInfo.setMessage(<span class="string">"用户名不存在"</span>);</div><div class="line">			<span class="keyword">return</span> resultInfo;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">//判断密码是否正确</span></div><div class="line">		<span class="keyword">if</span> (!bCryptPasswordEncoder.matches(user.getPassword(),user2.getPassword())) &#123;</div><div class="line">			resultInfo.setCode(<span class="string">"-1"</span>);</div><div class="line">			resultInfo.setMessage(<span class="string">"密码不正确"</span>);</div><div class="line">			<span class="keyword">return</span> resultInfo;</div><div class="line">		&#125;</div><div class="line">		resultInfo.setMessage(<span class="string">"登录成功"</span>);</div><div class="line">		<span class="keyword">return</span> resultInfo;</div><div class="line">	&#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
-<li><a href="https://gitee.com/chenjiabing666/auth-server.git" target="_blank" rel="external">https://gitee.com/chenjiabing666/auth-server.git</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;p&gt;title: SpringBoot实现BCrypt密码加密&lt;br&gt;date: 2018-12-25 00:15:41&lt;br&gt;categories: SpringBoot&lt;/p&gt;
-&lt;h2 id=&quot;tags-SpringBoot&quot;&gt;&lt;a href=&quot;#tags-Spr
-    
-    </summary>
-    
     
   </entry>
   

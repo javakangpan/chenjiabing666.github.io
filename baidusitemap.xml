@@ -4,12 +4,32 @@
 
     
   <url>
-    <loc>http://chenjiabing666.github.io/2018/12/25/Spring%20cloud%E7%9A%84%E4%BC%98%E7%A7%80%E8%B5%84%E6%BA%90/</loc>
-    <lastmod>2018-12-24T16:27:21.228Z</lastmod>
+    <loc>http://chenjiabing666.github.io/2018/12/25/SpringBoot%E5%AE%9E%E7%8E%B0BCrypt%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86/</loc>
+    <lastmod>2018-12-25T13:07:44.432Z</lastmod>
     <data>
         <display>
-        <title>spring cloud的资源</title>
-        <pubTime>2018-12-24T16:19:33.000Z</pubTime>
+        <title>SpringBoot实现BCrypt密码加密</title>
+        <pubTime>2018-12-25T13:07:15.000Z</pubTime>
+        
+        <tag>SpringBoot</tag>
+         
+         
+           
+             
+              <breadCrumb title="SpringBoot" url="http://chenjiabing666.github.io/categories/SpringBoot/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/12/25/zuul%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3/</loc>
+    <lastmod>2018-12-25T13:06:01.563Z</lastmod>
+    <data>
+        <display>
+        <title>zuul服务网关</title>
+        <pubTime>2018-12-25T13:05:22.000Z</pubTime>
         
         <tag>分布式</tag>
          
@@ -25,11 +45,31 @@
     
   <url>
     <loc>http://chenjiabing666.github.io/2018/12/25/Config(%E7%BB%9F%E4%B8%80%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83)/</loc>
-    <lastmod>2018-12-24T16:25:36.658Z</lastmod>
+    <lastmod>2018-12-25T13:04:28.347Z</lastmod>
     <data>
         <display>
         <title>Config统一配置中心</title>
         <pubTime>2018-12-24T16:24:18.000Z</pubTime>
+        
+        <tag>分布式</tag>
+         
+         
+           
+             
+              <breadCrumb title="分布式" url="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/12/25/Spring%20cloud%E7%9A%84%E4%BC%98%E7%A7%80%E8%B5%84%E6%BA%90/</loc>
+    <lastmod>2018-12-24T16:27:21.228Z</lastmod>
+    <data>
+        <display>
+        <title>spring cloud的资源</title>
+        <pubTime>2018-12-24T16:19:33.000Z</pubTime>
         
         <tag>分布式</tag>
          
@@ -58,21 +98,6 @@
              
               <breadCrumb title="分布式" url="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://chenjiabing666.github.io/2018/12/25/Zuul/</loc>
-    <lastmod>2018-12-24T16:22:52.540Z</lastmod>
-    <data>
-        <display>
-        <title></title>
-        <pubTime>2018-12-24T16:22:19.349Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
@@ -173,21 +198,6 @@
              
               <breadCrumb title="SpringBoot" url="http://chenjiabing666.github.io/categories/SpringBoot/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://chenjiabing666.github.io/2018/12/25/SpringBoot%E5%AE%9E%E7%8E%B0BCrypt%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86/</loc>
-    <lastmod>2018-12-24T16:16:12.367Z</lastmod>
-    <data>
-        <display>
-        <title></title>
-        <pubTime>2018-12-24T16:15:41.739Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>

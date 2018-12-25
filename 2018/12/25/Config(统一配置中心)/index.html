@@ -34,7 +34,7 @@
 1234567891011&amp;lt;!-- config server的依赖 --&amp;gt;	&amp;lt;dependency&amp;gt;		&amp;lt;groupId&amp;gt;o">
 <meta property="og:image" content="https://github.com/chenjiabing666/BlogImage/blob/master/config.png?raw=true">
 <meta property="og:image" content="https://github.com/chenjiabing666/BlogImage/blob/master/bus1.png?raw=true">
-<meta property="og:updated_time" content="2018-12-24T16:25:36.658Z">
+<meta property="og:updated_time" content="2018-12-25T13:04:28.347Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Config统一配置中心">
 <meta name="twitter:description" content="Config 统一配置中心为什么使用？
@@ -221,7 +221,7 @@
 <li><strong>在github仓库中新增一个配置文件orderClient9001.yml:</strong></li>
 </ul>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">9001</span></div><div class="line">  </div><div class="line"><span class="attr">person:</span></div><div class="line"><span class="attr">  name:</span> <span class="string">chenjaibing</span></div><div class="line"><span class="attr">  age:</span> <span class="number">20</span></div></pre></td></tr></table></figure>
-<h5 id="完整的配置"><a href="#完整的配置" class="headerlink" title="完整的配置"></a>完整的配置</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">3344</span></div><div class="line"><span class="attr">eureka:</span></div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    serviceUrl:</span></div><div class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:7001/eureka</span>  <span class="comment"># eureka的暴露地址，直接注册</span></div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">config-server</span>   <span class="comment"># 应用的名称，在同一个eureka中必须不重复</span></div><div class="line"><span class="attr">  rabbitmq:</span>              <span class="comment"># rabbitmq配置的</span></div><div class="line"><span class="attr">    host:</span> <span class="number">39.105</span><span class="number">.123</span><span class="number">.197</span>  <span class="comment"># 主机的地址</span></div><div class="line"><span class="attr">    port:</span> <span class="number">5672</span>            <span class="comment"># 端口</span></div><div class="line"><span class="attr">    username:</span> <span class="string">guest</span>       <span class="comment"># 用户名</span></div><div class="line"><span class="attr">    password:</span> <span class="string">guest</span>      <span class="comment"># 密码</span></div><div class="line"><span class="attr">    virtual-host:</span> <span class="string">/</span>     <span class="comment"># 虚拟主机</span></div><div class="line"></div><div class="line"><span class="attr">  cloud:</span></div><div class="line"><span class="attr">    config:</span></div><div class="line"><span class="attr">      server:</span></div><div class="line"><span class="attr">        git:</span></div><div class="line"><span class="attr">          uri:</span> <span class="attr">https://github.com/chenjiabing666/dept-config.git</span>  <span class="comment"># git仓库的地址，如果是ssh方式的不需要指定用户名和密码，但是需要在github上添加秘钥</span></div><div class="line"><span class="attr">          username:</span> <span class="string">chenjiabing666</span> <span class="comment"># 用户名</span></div><div class="line"><span class="attr">          password:</span> <span class="string">as676767as</span>     <span class="comment"># 密码</span></div><div class="line"><span class="attr">          basedir:</span> <span class="attr">C:/images/config-server</span>   <span class="comment"># 本地的路径，将会自动在这个路径创建一个git仓库</span></div><div class="line">          </div><div class="line"><span class="attr">management:</span>   <span class="comment"># 开启刷新配置的地址 /bus-refresh</span></div><div class="line"><span class="attr">  endpoints:</span></div><div class="line"><span class="attr">    web:</span></div><div class="line"><span class="attr">      exposure:</span></div><div class="line"><span class="attr">        include:</span></div><div class="line"><span class="bullet">        -</span> <span class="string">bus-refresh</span></div></pre></td></tr></table></figure>
+<h5 id="完整的配置"><a href="#完整的配置" class="headerlink" title="完整的配置"></a>完整的配置</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">3344</span></div><div class="line"><span class="attr">eureka:</span></div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    serviceUrl:</span></div><div class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:7001/eureka</span>  <span class="comment"># eureka的暴露地址，直接注册</span></div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">config-server</span>   <span class="comment"># 应用的名称，在同一个eureka中必须不重复</span></div><div class="line"><span class="attr">  rabbitmq:</span>              <span class="comment"># rabbitmq配置的</span></div><div class="line"><span class="attr">    host:</span> <span class="number">39.105</span><span class="number">.123</span><span class="number">.197</span>  <span class="comment"># 主机的地址</span></div><div class="line"><span class="attr">    port:</span> <span class="number">5672</span>            <span class="comment"># 端口</span></div><div class="line"><span class="attr">    username:</span> <span class="string">guest</span>       <span class="comment"># 用户名</span></div><div class="line"><span class="attr">    password:</span> <span class="string">guest</span>      <span class="comment"># 密码</span></div><div class="line"><span class="attr">    virtual-host:</span> <span class="string">/</span>     <span class="comment"># 虚拟主机</span></div><div class="line"></div><div class="line"><span class="attr">  cloud:</span></div><div class="line"><span class="attr">    config:</span></div><div class="line"><span class="attr">      server:</span></div><div class="line"><span class="attr">        git:</span></div><div class="line"><span class="attr">          uri:</span> <span class="attr">https://github.com/chenjiabing666/dept-config.git</span>  <span class="comment"># git仓库的地址，如果是ssh方式的不需要指定用户名和密码，但是需要在github上添加秘钥</span></div><div class="line"><span class="attr">          username:</span> <span class="string">chenjiabing666</span> <span class="comment"># 用户名</span></div><div class="line"><span class="attr">          password:</span> <span class="string">**********</span>     <span class="comment"># 密码</span></div><div class="line"><span class="attr">          basedir:</span> <span class="attr">C:/images/config-server</span>   <span class="comment"># 本地的路径，将会自动在这个路径创建一个git仓库</span></div><div class="line">          </div><div class="line"><span class="attr">management:</span>   <span class="comment"># 开启刷新配置的地址 /bus-refresh</span></div><div class="line"><span class="attr">  endpoints:</span></div><div class="line"><span class="attr">    web:</span></div><div class="line"><span class="attr">      exposure:</span></div><div class="line"><span class="attr">        include:</span></div><div class="line"><span class="bullet">        -</span> <span class="string">bus-refresh</span></div></pre></td></tr></table></figure>
 <h4 id="配置中心的客户端"><a href="#配置中心的客户端" class="headerlink" title="配置中心的客户端"></a>配置中心的客户端</h4><ul>
 <li>添加依赖</li>
 </ul>
@@ -288,6 +288,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2018/12/25/zuul服务网关/" title="zuul服务网关">
+  <strong>上一篇：</strong><br/>
+  <span>
+  zuul服务网关</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2018/12/25/spring-sleuth-服务追踪/"  title="spring sleuth 服务追踪">
@@ -359,7 +367,7 @@
 		  
 		
 		  
-			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>10</sup></a></li>
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>11</sup></a></li>
 		  
 		
 		  
@@ -387,7 +395,7 @@
 		  
 		
 		  
-			<li><a href="/categories/分布式/" title="分布式">分布式<sup>11</sup></a></li>
+			<li><a href="/categories/分布式/" title="分布式">分布式<sup>12</sup></a></li>
 		  
 		
 		  
@@ -432,7 +440,7 @@
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>12</sup></a></li>
 			
 		
 			
@@ -440,7 +448,7 @@
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>11</sup></a></li>
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
@@ -448,11 +456,11 @@
 			
 		
 			
-				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>11</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>10</sup></a></li>
+				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
 			
 		
 			
@@ -464,19 +472,15 @@
 			
 		
 			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/web前端/" title="web前端">web前端<sup>7</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
+				<li><a href="/tags/web前端/" title="web前端">web前端<sup>7</sup></a></li>
 			
 		
 			
@@ -485,6 +489,10 @@
 		
 			
 				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
 			
 		
 			
