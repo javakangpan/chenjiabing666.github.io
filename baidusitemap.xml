@@ -4,6 +4,46 @@
 
     
   <url>
+    <loc>http://chenjiabing666.github.io/2018/12/30/docker%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</loc>
+    <lastmod>2018-12-30T05:27:46.613Z</lastmod>
+    <data>
+        <display>
+        <title>docker搭建私有仓库</title>
+        <pubTime>2018-12-30T05:27:20.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://chenjiabing666.github.io/categories/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2018/12/30/Dockerfile/</loc>
+    <lastmod>2018-12-30T05:26:37.001Z</lastmod>
+    <data>
+        <display>
+        <title>Dockerfile</title>
+        <pubTime>2018-12-30T05:26:02.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://chenjiabing666.github.io/categories/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://chenjiabing666.github.io/2018/12/25/SpringBoot%E5%AE%9E%E7%8E%B0BCrypt%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86/</loc>
     <lastmod>2018-12-25T13:07:44.432Z</lastmod>
     <data>

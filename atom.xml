@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2018-12-25T13:07:44.432Z</updated>
+  <updated>2018-12-30T05:27:46.613Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,240 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>docker搭建私有仓库</title>
+    <link href="http://chenjiabing666.github.io/2018/12/30/docker%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/"/>
+    <id>http://chenjiabing666.github.io/2018/12/30/docker搭建私有仓库/</id>
+    <published>2018-12-30T05:27:20.000Z</published>
+    <updated>2018-12-30T05:27:46.613Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Docker私有仓库"><a href="#Docker私有仓库" class="headerlink" title="Docker私有仓库"></a>Docker私有仓库</h1><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ul>
+<li><code>docker pull registry</code></li>
+<li><code>docker run --name registry -p 5000:5000 -d registry</code></li>
+<li>启动完成后访问<code>http:// 192.168.174.130:5000/v2/_catalog</code>即可看到如下的内容说明启动成功：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"repositories"</span>: []</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>添加信任（无论是下载还是上传都需要添加，这里的ip和端口指定的是私有仓库的宿主机的ip）：</strong></p>
+<ul>
+<li><code>vim /etc/docker/daemon.json</code>，添加如下的内容：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">"insecure-registries":["192.168.174.130:5000"]</div></pre></td></tr></table></figure>
+<ul>
+<li>重启docker ,<code>systemctl restart docker</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="上传镜像到私有仓库"><a href="#上传镜像到私有仓库" class="headerlink" title="上传镜像到私有仓库"></a>上传镜像到私有仓库</h2><ul>
+<li><code>docker tag jdk8 192.168.174.130:5000/jdk8</code>： 标记该镜像<ul>
+<li>指定仓库所在的ip和端口号</li>
+<li>第一个jdk8是当前的镜像名称（或者填Id），后一个是上传到仓库中的名字，可以任意起</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><code>docker images</code>：此时查看镜像，发现多了一个<code>192.168.174.130:5000/jdk8</code>的镜像</p>
+</li>
+<li><p><code>docker push 192.168.174.130:5000/jdk8</code> ：将标记的镜像上传到私有仓库中</p>
+</li>
+<li><p>此时再次访问<code>http:// 192.168.174.130:5000/v2/_catalog</code>，将会看到如下内容</p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"repositories"</span>: [</div><div class="line">    <span class="string">"jdk8"</span></div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h2><ul>
+<li><p>添加信任</p>
+<ul>
+<li>vim /etc/docker/daemon.json`，添加如下的内容：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">"insecure-registries":["192.168.174.130:5000"]</div></pre></td></tr></table></figure>
+<ul>
+<li>重启docker ,<code>systemctl restart docker</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>下载，需要指定ip和端口：<code>docker pull 192.168.174.130:5000/jdk8</code></li>
+</ul>
+<h2 id="Docker-Maven插件自动上传镜像到私有仓库"><a href="#Docker-Maven插件自动上传镜像到私有仓库" class="headerlink" title="Docker Maven插件自动上传镜像到私有仓库"></a>Docker Maven插件自动上传镜像到私有仓库</h2><h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><h4 id="仓库所在服务器的配置"><a href="#仓库所在服务器的配置" class="headerlink" title="仓库所在服务器的配置"></a>仓库所在服务器的配置</h4><ul>
+<li><p><strong>添加信任，同上</strong></p>
+</li>
+<li><p>修改 <code>/etc/sysconfig/docker</code>文件：<code>vim /etc/sysconfig/docker</code></p>
+<ul>
+<li><p>在最下面添加一行<code>DOCKER_OPTS=&#39;-H unix:///var/run/docker.sock -H 0.0.0.0:2375&#39;</code></p>
+<ul>
+<li><img src="https://github.com/chenjiabing666/BlogImage/blob/master/docker2.png?raw=true" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>vim /lib/systemd/system/docker.service</code>添加如下内容<ul>
+<li><img src="https://github.com/chenjiabing666/BlogImage/blob/master/docker1.png?raw=true" alt=""></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>执行下面的命令刷新配置并且重启docker</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl daemon-reload</div><div class="line">systemctl restart docker</div></pre></td></tr></table></figure>
+<ul>
+<li><p>开启防火墙的端口：<code>firewall-cmd --zone=public --add-port=2375/tcp --permanent</code></p>
+</li>
+<li><p>重新载入配置<code>firewall-cmd --reload</code></p>
+</li>
+</ul>
+<h4 id="项目中的配置"><a href="#项目中的配置" class="headerlink" title="项目中的配置"></a>项目中的配置</h4><ul>
+<li>在pom.xml文件中添加如下内容：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 指定的最终打成jar包的名字 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">finalName</span>&gt;</span>demo<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- SpringBoot的maven插件 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.spotify<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>docker-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.4.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">					<span class="comment">&lt;!-- 注意imageName需要指定的`IP:端口/image_name`的格式--&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">imageName</span>&gt;</span>192.168.174.130:5000/$&#123;project.artifactId&#125;:$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">imageName</span>&gt;</span></div><div class="line">					<span class="comment">&lt;!-- 指定基础镜像，不需要运行，相当于 from hub.c.163.com/library/java:8-alpine --&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">baseImage</span>&gt;</span>hub.c.163.com/library/java:8-alpine<span class="tag">&lt;/<span class="name">baseImage</span>&gt;</span></div><div class="line">					<span class="comment">&lt;!--覆盖相同标签镜像--&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">forceTags</span>&gt;</span>true<span class="tag">&lt;/<span class="name">forceTags</span>&gt;</span>    </div><div class="line">					<span class="comment">&lt;!-- 运行jar包 --&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">entryPoint</span>&gt;</span>["java", "-jar", "/$&#123;project.build.finalName&#125;.jar"]<span class="tag">&lt;/<span class="name">entryPoint</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">						<span class="tag">&lt;<span class="name">resource</span>&gt;</span></div><div class="line">							<span class="tag">&lt;<span class="name">targetPath</span>&gt;</span>/<span class="tag">&lt;/<span class="name">targetPath</span>&gt;</span></div><div class="line">							<span class="tag">&lt;<span class="name">directory</span>&gt;</span>$&#123;project.build.directory&#125;<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></div><div class="line">							<span class="tag">&lt;<span class="name">include</span>&gt;</span>$&#123;project.build.finalName&#125;.jar<span class="tag">&lt;/<span class="name">include</span>&gt;</span></div><div class="line">						<span class="tag">&lt;/<span class="name">resource</span>&gt;</span></div><div class="line">					<span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div><div class="line">					<span class="comment">&lt;!-- 指定私有仓库所在服务器的2375端口，之前配置过可以远程访问的那个 --&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">dockerHost</span>&gt;</span>http://192.168.174.130:2375<span class="tag">&lt;/<span class="name">dockerHost</span>&gt;</span></div><div class="line">				<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li><strong>在命令台运行如下的命令，即可完成生成镜像并且上传到私有仓库</strong><ul>
+<li><code>mvn clean package docker:build -DpushImage</code></li>
+</ul>
+</li>
+<li><strong>上述命令的解析如下：</strong><ul>
+<li><code>mvn clean package</code>：maven打jar包</li>
+<li><code>docker:build</code>：docker构建镜像的命令</li>
+<li><code>-DpushImage</code>： 将生成的镜像上传到私有仓库中</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>执行并且运行成功之后访问<code>http://192.168.174.130:5000/v2/_catalog</code>，将会出现如下的内容</strong></li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"repositories"</span>: [</div><div class="line">    <span class="string">"demo"</span></div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>访问<code>http://192.168.174.130:5000/v2/demo/tags/list</code>，可以看到demo这个镜像的所有版本</strong></li>
+</ul>
+<p><img src="https://github.com/chenjiabing666/BlogImage/blob/master/docker3.png?raw=true" alt=""></p>
+<ul>
+<li>上面的运行完成之后，查看项目中自动生成Dockerfile，如下：</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">FROM</span> hub.c.<span class="number">163</span>.com/library/java:<span class="number">8</span>-alpine</div><div class="line"><span class="keyword">ADD</span> /demo.jar //</div><div class="line"><span class="keyword">ENTRYPOINT</span> ["java", "-jar", "/demo.jar"]</div></pre></td></tr></table></figure>
+<h4 id="拉取上传的镜像并且运行"><a href="#拉取上传的镜像并且运行" class="headerlink" title="拉取上传的镜像并且运行"></a>拉取上传的镜像并且运行</h4><ul>
+<li>在拉取之前需要添加信任</li>
+<li>使用 <code>docker pull 192.168.174.130:5000/demo:0.0.1-SNAPSHOT</code>下载仓库中的镜像</li>
+<li>运行镜像：<code>docker run --name demo -p 7001:7001 -d f7f36f3f3f06</code><ul>
+<li><strong>其中生成的镜像端口为项目自己本身配置的端口，只需要映射出去即可</strong></li>
+</ul>
+</li>
+<li>此时我们可以访问<code>http://192.168.174.128:7001/</code>，就能看到eureka注册中心的页面</li>
+</ul>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
+<li><a href="https://gitee.com/chenjiabing666/docker-maven.git" target="_blank" rel="external">https://gitee.com/chenjiabing666/docker-maven.git</a></li>
+</ul>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="https://blog.csdn.net/qq_39623859/article/details/80072545" target="_blank" rel="external">https://blog.csdn.net/qq_39623859/article/details/80072545</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Docker私有仓库&quot;&gt;&lt;a href=&quot;#Docker私有仓库&quot; class=&quot;headerlink&quot; title=&quot;Docker私有仓库&quot;&gt;&lt;/a&gt;Docker私有仓库&lt;/h1&gt;&lt;h2 id=&quot;步骤&quot;&gt;&lt;a href=&quot;#步骤&quot; class=&quot;headerli
+    
+    </summary>
+    
+      <category term="docker" scheme="http://chenjiabing666.github.io/categories/docker/"/>
+    
+    
+      <category term="docker" scheme="http://chenjiabing666.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Dockerfile</title>
+    <link href="http://chenjiabing666.github.io/2018/12/30/Dockerfile/"/>
+    <id>http://chenjiabing666.github.io/2018/12/30/Dockerfile/</id>
+    <published>2018-12-30T05:26:02.000Z</published>
+    <updated>2018-12-30T05:26:37.001Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="DockerFile"><a href="#DockerFile" class="headerlink" title="DockerFile"></a>DockerFile</h1><ul>
+<li><p>镜像的定制实际上就是定制每一层所添加的配置、文件。如果我们可以把每一层修改、安装、构建、操作的命令都写入一个脚本，用这个脚本来构建、定制镜像，那么无法重复的问题、镜像构建透明性的问题、体积的问题就都会解决。这个脚本就是 Dockerfile。</p>
+</li>
+<li><p>Dockerfile 是一个文本文件，其内包含了一条条的指令(Instruction)，每一条指令构建一层，因此每一条指令的内容，就是描述该层应当如何构建。</p>
+</li>
+</ul>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FROM image:tag</code></td>
+<td>指定基础镜像，有点继承的意思</td>
+</tr>
+<tr>
+<td><code>MAINTAINER user_name</code></td>
+<td>声明镜像的创建者</td>
+</tr>
+<tr>
+<td><code>ENV key value</code></td>
+<td>设置环境变量，可以设置多条,比如 ENV VERSION=1.0</td>
+</tr>
+<tr>
+<td><code>RUN command</code></td>
+<td>核心命令，多个命令用&amp;&amp;连接即可</td>
+</tr>
+<tr>
+<td><code>ADD source_dir/file dest_dir/file</code></td>
+<td>将宿主机的文件负复制到容器内，如果是一个压缩文件，将会自动解压缩</td>
+</tr>
+<tr>
+<td><code>COPY source_dir/file dest_dir/file</code></td>
+<td>和ADD命令类似，但是不能自动解压缩</td>
+</tr>
+<tr>
+<td><code>WORKDIR path_dir</code></td>
+<td>指定当前的工作目录，由于分层的概念，每一个命令的工作目录都不同，因此需要使用该命令显示指定工作目录</td>
+</tr>
+<tr>
+<td>CMD args</td>
+<td>在构建容器的时候使用，会docker run 后的args覆盖</td>
+</tr>
+<tr>
+<td>ENTRYPOINT  args</td>
+<td>和CMD相似，但是不会被docker run后的args覆盖</td>
+</tr>
+<tr>
+<td>VOLUME</td>
+<td>将本地文件夹挂载到容器中</td>
+</tr>
+</tbody>
+</table>
+<h2 id="配置镜像加速"><a href="#配置镜像加速" class="headerlink" title="配置镜像加速"></a>配置镜像加速</h2><ul>
+<li>我们使用阿里云的镜像加速</li>
+<li><code>vim /etc/docker/daemon.json</code>,设置如下内容即可：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">        <span class="attr">"registry-mirrors"</span>:[<span class="string">"https://rxx4pnmv.mirror.aliyuncs.com"</span>]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="构建简单的JDK镜像"><a href="#构建简单的JDK镜像" class="headerlink" title="构建简单的JDK镜像"></a>构建简单的JDK镜像</h2><ul>
+<li>新建一个<code>Dockerfile</code></li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 初始镜像,默认拉去lastest的</span></div><div class="line"><span class="keyword">FROM</span> centos</div><div class="line"><span class="comment"># 指定镜像的构建者</span></div><div class="line"><span class="keyword">MAINTAINER</span> chenjiabing666</div><div class="line"><span class="comment"># 切换工作目到usr，这个是容器中的目录</span></div><div class="line"><span class="keyword">WORKDIR</span> /usr</div><div class="line"><span class="comment"># 新建 /usr/local/java目录</span></div><div class="line"><span class="keyword">RUN</span> mkdir /usr/local/java</div><div class="line"><span class="comment"># 添加本地的jdk到容器中并且解压</span></div><div class="line"><span class="keyword">ADD</span> jdk-8u172-linux-x64.tar.gz /usr/local/java/</div><div class="line"><span class="comment"># 设置环境变量</span></div><div class="line"><span class="keyword">ENV</span> JAVA_HOME /usr/local/java/jdk1.<span class="number">8.0</span>_181</div><div class="line"><span class="keyword">ENV</span> CLASSPATH $JAVA_HOME/lib;$JAVA_HOME/jre/lib</div><div class="line"><span class="keyword">ENV</span> PATH $PATH:$JAVA_HOME/bin</div></pre></td></tr></table></figure>
+<ul>
+<li><code>docker build -t jdk8 .</code>：构建镜像</li>
+<li><code>docker run --name jdk -di jdk8</code>：运行镜像</li>
+</ul>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="https://blog.csdn.net/wo18237095579/article/details/80540571" target="_blank" rel="external">https://blog.csdn.net/wo18237095579/article/details/80540571</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;DockerFile&quot;&gt;&lt;a href=&quot;#DockerFile&quot; class=&quot;headerlink&quot; title=&quot;DockerFile&quot;&gt;&lt;/a&gt;DockerFile&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;镜像的定制实际上就是定制每一层所添加的配置、文件。如果我们
+    
+    </summary>
+    
+      <category term="docker" scheme="http://chenjiabing666.github.io/categories/docker/"/>
+    
+    
+      <category term="docker" scheme="http://chenjiabing666.github.io/tags/docker/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot实现BCrypt密码加密</title>
@@ -789,6 +1023,45 @@
   </entry>
   
   <entry>
+    <title>spring cloud的资源</title>
+    <link href="http://chenjiabing666.github.io/2018/12/25/Spring%20cloud%E7%9A%84%E4%BC%98%E7%A7%80%E8%B5%84%E6%BA%90/"/>
+    <id>http://chenjiabing666.github.io/2018/12/25/Spring cloud的优秀资源/</id>
+    <published>2018-12-24T16:19:33.000Z</published>
+    <updated>2018-12-24T16:27:21.228Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="spring-cloud的资源"><a href="#spring-cloud的资源" class="headerlink" title="spring cloud的资源"></a>spring cloud的资源</h2><ul>
+<li><a href="https://springcloud.cc/" target="_blank" rel="external">Springcloud中文网</a></li>
+<li><a href="https://springcloud.cc/spring-cloud-dalston.html" target="_blank" rel="external">中文文档</a></li>
+<li><a href="http://springcloud.cn/" target="_blank" rel="external">中国社区</a></li>
+<li><a href="http://springcloud.fun/" target="_blank" rel="external">优质学习资源</a></li>
+<li><a href="http://www.cnblogs.com/skyme/p/8976866.html" target="_blank" rel="external">SpringBoot学习资源</a></li>
+<li><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.0.M3/single/spring-cloud-netflix.html" target="_blank" rel="external">官方文档</a></li>
+<li><a href="http://www.itmuch.com/spring-cloud-sum-eureka/" target="_blank" rel="external">http://www.itmuch.com/spring-cloud-sum-eureka/</a></li>
+<li><a href="https://yujunhao8831.github.io/2017/05/27/Spring-Cloud-Eureka-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank" rel="external">指南</a></li>
+<li><a href="https://www.cnblogs.com/huangjuncong/tag/SpringCloud/" target="_blank" rel="external">https://www.cnblogs.com/huangjuncong/tag/SpringCloud/</a></li>
+<li><a href="https://blog.csdn.net/u012702547/article/details/78547925" target="_blank" rel="external">https://blog.csdn.net/u012702547/article/details/78547925</a></li>
+<li><a href="https://www.cnblogs.com/leeSmall/category/1185489.html" target="_blank" rel="external">https://www.cnblogs.com/leeSmall/category/1185489.html</a></li>
+<li><a href="https://windmt.com/tags/Spring-Cloud/" target="_blank" rel="external">https://windmt.com/tags/Spring-Cloud/</a></li>
+<li><a href="http://www.ityouknow.com" target="_blank" rel="external">http://www.ityouknow.com</a></li>
+<li><a href="http://www.itmuch.com/categories/Spring-Cloud" target="_blank" rel="external">http://www.itmuch.com/categories/Spring-Cloud</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;spring-cloud的资源&quot;&gt;&lt;a href=&quot;#spring-cloud的资源&quot; class=&quot;headerlink&quot; title=&quot;spring cloud的资源&quot;&gt;&lt;/a&gt;spring cloud的资源&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;htt
+    
+    </summary>
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Ribbon（客户端负载均衡）</title>
     <link href="http://chenjiabing666.github.io/2018/12/25/Ribbon%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/"/>
     <id>http://chenjiabing666.github.io/2018/12/25/Ribbon客户端负载均衡/</id>
@@ -874,45 +1147,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;Ribbon-客户端负载均衡&quot;&gt;&lt;a href=&quot;#Ribbon-客户端负载均衡&quot; class=&quot;headerlink&quot; title=&quot;Ribbon - 客户端负载均衡&quot;&gt;&lt;/a&gt;Ribbon - 客户端负载均衡&lt;/h1&gt;&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;
-    
-    </summary>
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>spring cloud的资源</title>
-    <link href="http://chenjiabing666.github.io/2018/12/25/Spring%20cloud%E7%9A%84%E4%BC%98%E7%A7%80%E8%B5%84%E6%BA%90/"/>
-    <id>http://chenjiabing666.github.io/2018/12/25/Spring cloud的优秀资源/</id>
-    <published>2018-12-24T16:19:33.000Z</published>
-    <updated>2018-12-24T16:27:21.228Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="spring-cloud的资源"><a href="#spring-cloud的资源" class="headerlink" title="spring cloud的资源"></a>spring cloud的资源</h2><ul>
-<li><a href="https://springcloud.cc/" target="_blank" rel="external">Springcloud中文网</a></li>
-<li><a href="https://springcloud.cc/spring-cloud-dalston.html" target="_blank" rel="external">中文文档</a></li>
-<li><a href="http://springcloud.cn/" target="_blank" rel="external">中国社区</a></li>
-<li><a href="http://springcloud.fun/" target="_blank" rel="external">优质学习资源</a></li>
-<li><a href="http://www.cnblogs.com/skyme/p/8976866.html" target="_blank" rel="external">SpringBoot学习资源</a></li>
-<li><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.0.M3/single/spring-cloud-netflix.html" target="_blank" rel="external">官方文档</a></li>
-<li><a href="http://www.itmuch.com/spring-cloud-sum-eureka/" target="_blank" rel="external">http://www.itmuch.com/spring-cloud-sum-eureka/</a></li>
-<li><a href="https://yujunhao8831.github.io/2017/05/27/Spring-Cloud-Eureka-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank" rel="external">指南</a></li>
-<li><a href="https://www.cnblogs.com/huangjuncong/tag/SpringCloud/" target="_blank" rel="external">https://www.cnblogs.com/huangjuncong/tag/SpringCloud/</a></li>
-<li><a href="https://blog.csdn.net/u012702547/article/details/78547925" target="_blank" rel="external">https://blog.csdn.net/u012702547/article/details/78547925</a></li>
-<li><a href="https://www.cnblogs.com/leeSmall/category/1185489.html" target="_blank" rel="external">https://www.cnblogs.com/leeSmall/category/1185489.html</a></li>
-<li><a href="https://windmt.com/tags/Spring-Cloud/" target="_blank" rel="external">https://windmt.com/tags/Spring-Cloud/</a></li>
-<li><a href="http://www.ityouknow.com" target="_blank" rel="external">http://www.ityouknow.com</a></li>
-<li><a href="http://www.itmuch.com/categories/Spring-Cloud" target="_blank" rel="external">http://www.itmuch.com/categories/Spring-Cloud</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;spring-cloud的资源&quot;&gt;&lt;a href=&quot;#spring-cloud的资源&quot; class=&quot;headerlink&quot; title=&quot;spring cloud的资源&quot;&gt;&lt;/a&gt;spring cloud的资源&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;htt
     
     </summary>
     
@@ -2170,394 +2404,6 @@
     
     
       <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java自定义注解</title>
-    <link href="http://chenjiabing666.github.io/2018/11/03/java%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/"/>
-    <id>http://chenjiabing666.github.io/2018/11/03/java自定义注解/</id>
-    <published>2018-11-03T14:50:08.000Z</published>
-    <updated>2018-11-07T14:23:31.025Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="自定义注解【Annotation】"><a href="#自定义注解【Annotation】" class="headerlink" title="自定义注解【Annotation】"></a>自定义注解【Annotation】</h1><h2 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h2><h3 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h3><ul>
-<li>表示需要在什么级别保存该注解信息 。分为如下三类：<ul>
-<li><code>@Retention(RetentionPolicy.SOURCE)</code>：注解仅存在于源码中，在class字节码文件中不包含 </li>
-<li><code>@Retention(RetentionPolicy.CLASS)</code>：默认的保留策略，注解会在class字节码文件中存在，但运行时无法获得 </li>
-<li><code>@Retention(RetentionPolicy.RUNTIME)</code>： 注解会在class字节码文件中存在，在运行时可以通过反射获取到 </li>
-</ul>
-</li>
-</ul>
-<h3 id="Target"><a href="#Target" class="headerlink" title="@Target"></a>@Target</h3><ul>
-<li>注解的作用目标 </li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>取值</th>
-<th>作用域</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>@Target(ElementType.TYPE)</code></td>
-<td>接口、类、枚举、注解</td>
-</tr>
-<tr>
-<td><code>@Target(ElementType.FIELD)</code></td>
-<td>字段、枚举的常量</td>
-</tr>
-<tr>
-<td><code>@Target(ElementType.METHOD)</code></td>
-<td>方法</td>
-</tr>
-<tr>
-<td><code>@Target(ElementType.PARAMETER)</code></td>
-<td>方法参数</td>
-</tr>
-<tr>
-<td><code>@Target(ElementType.CONSTRUCTOR)</code></td>
-<td>构造函数</td>
-</tr>
-<tr>
-<td><code>@Target(ElementType.LOCAL_VARIABLE)</code></td>
-<td>局部变量</td>
-</tr>
-<tr>
-<td><code>@Target(ElementType.ANNOTATION_TYPE)</code></td>
-<td>注解</td>
-</tr>
-<tr>
-<td><code>@Target(ElementType.PACKAGE)</code></td>
-<td>包</td>
-</tr>
-</tbody>
-</table>
-<h3 id="Document"><a href="#Document" class="headerlink" title="@Document"></a>@Document</h3><ul>
-<li>注解包含在javadoc中 </li>
-</ul>
-<h3 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a>@Inherited</h3><ul>
-<li>注解可以被继承 </li>
-</ul>
-<h2 id="关于注解的反射方法"><a href="#关于注解的反射方法" class="headerlink" title="关于注解的反射方法"></a>关于注解的反射方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取某个类型的注解</span></div><div class="line"><span class="keyword">public</span> &lt;A extends Annotation&gt; <span class="function">A <span class="title">getAnnotation</span><span class="params">(Class&lt;A&gt; annotationClass)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">// 获取所有注解(包括父类中被Inherited修饰的注解)</span></div><div class="line"><span class="keyword">public</span> Annotation[] getAnnotations(); </div><div class="line"></div><div class="line"><span class="comment">// 获取声明的注解(但是不包括父类中被Inherited修饰的注解)</span></div><div class="line"><span class="keyword">public</span> Annotation[] getDeclaredAnnotations();</div><div class="line"></div><div class="line"><span class="comment">// 判断某个对象上是否被某个注解进行标注</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isAnnotationPresent</span><span class="params">(Class&lt;? extends Annotation&gt; annotationClass)</span></span></div><div class="line"></div><div class="line"><span class="comment">// 获取某个类声明的所有字段</span></div><div class="line"><span class="keyword">public</span> Field[] <span class="title">getDeclaredFields</span><span class="params">()</span> <span class="keyword">throws</span> SecurityException;</div><div class="line"></div><div class="line"><span class="comment">// 获取某个方法</span></div><div class="line"><span class="function"><span class="keyword">public</span> Method <span class="title">getMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span></span>;</div></pre></td></tr></table></figure>
-<h2 id="五种通知"><a href="#五种通知" class="headerlink" title="五种通知"></a>五种通知</h2><ul>
-<li><code>@Before</code>：前置通知，在调用目标方法之前执行通知定义的任务</li>
-<li><code>@After</code>：后置通知，在目标方法执行结束后，无论执行结果如何（异常或者正常执行）都执行通知定义的任务</li>
-<li><code>@After-returning</code>：后置通知，在目标方法执行结束后，如果执行成功（没有异常），则执行通知定义的任务</li>
-<li><code>@After-throwing</code>：异常通知，如果目标方法执行过程中抛出异常，则执行通知定义的任务</li>
-<li><code>@Around</code>：环绕通知，在目标方法执行前和执行后，都需要执行通知定义的任务</li>
-</ul>
-<h2 id="JoinPoint-对象"><a href="#JoinPoint-对象" class="headerlink" title="JoinPoint 对象"></a>JoinPoint 对象</h2><table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Signature getSignature();</code></td>
-<td>获取封装了署名信息的对象,在该对象中可以获取到目标方法名,所属类的Class等信息</td>
-</tr>
-<tr>
-<td><code>Object[] getArgs();</code></td>
-<td>获取传入目标方法的参数对象</td>
-</tr>
-<tr>
-<td><code>Object getTarget();</code></td>
-<td>获取被代理的对象</td>
-</tr>
-<tr>
-<td><code>Object getThis();</code></td>
-<td>获取代理对象</td>
-</tr>
-</tbody>
-</table>
-<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><ul>
-<li>使用springBoot，需要 添加aop相关的依赖，如下：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- springBoot的aop功能启动器 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h3><ul>
-<li>实际的生产环境中会对每个都记录日志，比如xxx用户执行了xxx操作，这些日志如果都使用一个方法的话，未免太不雅，此时我们可以定义一个注解，使用spring中的aop，在方法执行成功之后记录日志信息，步骤如下：</li>
-<li>定义一个注解，使用<code>@Interface</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.annotation.*;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 定义日志的注解，作用在方法上</div><div class="line"> * <span class="doctag">@author</span> 陈加兵 	</div><div class="line"> * <span class="doctag">@since</span> 2018年11月3日 上午11:53:59</div><div class="line"> */</div><div class="line"><span class="meta">@Target</span>(&#123;ElementType.PARAMETER, ElementType.METHOD&#125;)  <span class="comment">//作用在方法上面</span></div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)   <span class="comment">//程序运行  </span></div><div class="line"><span class="meta">@Documented</span>  </div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> InsertLog &#123;</div><div class="line">	<span class="function">String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;   <span class="comment">//用户名</span></div><div class="line">	<span class="function">String <span class="title">operation</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;  <span class="comment">//操作</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>定义一个注解的实现类，使用aop实现该注解</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>   <span class="comment">//注入</span></div><div class="line"><span class="meta">@Aspect</span>   <span class="comment">//切面</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InsertLogAnnotation</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> LogService logService;   <span class="comment">//日志的service，用来记录日志</span></div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 1、<span class="doctag">@pointCut</span>：定义切入点，其中支持多种表达式来匹配切入点，这里的annotation是用来匹配注解的</div><div class="line">	 * 2、<span class="doctag">@annotation</span>的参数必须和这个方法的参数字段相同，因为这里表示的扫描的哪个注解</div><div class="line">	 * 3、这个切入点的 意思：只要被`<span class="doctag">@InsertLog</span>`这个注解标注的都会被扫描到成为切入点</div><div class="line">	 * <span class="doctag">@param</span> log  注解的对象</div><div class="line">	 */</div><div class="line">	<span class="meta">@Pointcut</span>(<span class="string">"@annotation(log)"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertLog</span><span class="params">(InsertLog log)</span></span>&#123;&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * `<span class="doctag">@AfterReturning</span>`:定义后置通知，只有程序执行成功才会调用该注解，用来添加操作的日志</div><div class="line">	 * `insertLog(log)`: 这里的log一定要和上面定义切入点(<span class="doctag">@Pointcut</span>)中的参数字段一样</div><div class="line">	 * <span class="doctag">@param</span> point JoinPoint对象，可以获取一些切面信息，比如调用的类，调用的方法名称</div><div class="line">	 * <span class="doctag">@param</span> log  该注解的对象，可以获取注解中参数的内容</div><div class="line">	 * <span class="doctag">@throws</span> Exception </div><div class="line">	 */</div><div class="line">	<span class="meta">@AfterReturning</span>(<span class="string">"insertLog(log)"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SystemLog</span><span class="params">(JoinPoint point,InsertLog log)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">		<span class="comment">//获取注解中的参数内容</span></div><div class="line">		String name=log.name();  <span class="comment">//姓名</span></div><div class="line">		String operation=log.operation();  <span class="comment">//操作</span></div><div class="line">		</div><div class="line">		Log log2=<span class="keyword">new</span> Log();</div><div class="line">		log2.setName(name);</div><div class="line">		log2.setOperation(operation);</div><div class="line">		logService.addLog(log2);  <span class="comment">//添加到日志中</span></div><div class="line">		</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>此时就已经完成了，我们只需要将该注解添加到需要记录日志的方法上即可，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@InsertLog</span>(name=<span class="string">"陈加兵"</span>,operation=<span class="string">"删除用户"</span>)  <span class="comment">//使用日志注解，在程序执行成功之后记录日志</span></div><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">deleteUserById</span><span class="params">(Integer userId)</span> </span>&#123;</div><div class="line">	System.out.println(<span class="string">"删除成功"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>完整的项目截图如下：</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/chenjiabing666/BlogImage/master/annotation.png" alt="注解截图"></p>
-<h3 id="性能监控"><a href="#性能监控" class="headerlink" title="性能监控"></a>性能监控</h3><ul>
-<li>可以定义一个注解实现性能监控，设置一个环绕通知即可，在程序执行开始和结束之后统计时间即可</li>
-<li>定义一个注解，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 性能监控的注解</div><div class="line"> * <span class="doctag">@author</span> 陈加兵 	</div><div class="line"> * <span class="doctag">@since</span> 2018年11月3日 下午1:08:30</div><div class="line"> */</div><div class="line"><span class="meta">@Target</span>(&#123;ElementType.PARAMETER, ElementType.METHOD&#125;)  <span class="comment">//作用在方法上面</span></div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)   <span class="comment">//程序运行  </span></div><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> CapabilityMonitor &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>定义注解的实现类，使用切面的环绕通知</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 性能监控注解的实现类</div><div class="line"> * <span class="doctag">@author</span> 陈加兵 	</div><div class="line"> * <span class="doctag">@since</span> 2018年11月3日 下午1:09:40</div><div class="line"> */</div><div class="line"><span class="meta">@Aspect</span>    <span class="comment">//切面</span></div><div class="line"><span class="meta">@Component</span>   <span class="comment">//注入</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CapabilityMonitorAnnotationImpl</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> Logger logger=LoggerFactory.getLogger(CapabilityMonitorAnnotationImpl.class);  <span class="comment">//selfj的日志信息</span></div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 定义切入点，只要方法体上有这个注解</div><div class="line">	 * <span class="doctag">@param</span> capabilityMonitor  注解的对象</div><div class="line">	 */</div><div class="line">	<span class="meta">@Pointcut</span>(<span class="string">"@annotation(capabilityMonitor)"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">capabilityMonitor</span><span class="params">(CapabilityMonitor capabilityMonitor)</span></span>&#123;&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 环绕通知，在方法执行之前和之后都执行</div><div class="line">	 * capabilityMonitor(capabilityMonitor)：这里的参数一定要和切入点（`<span class="doctag">@Pointcut</span>("<span class="doctag">@annotation</span>(capabilityMonitor)")`）的参数相同</div><div class="line">	 * <span class="doctag">@param</span> point</div><div class="line">	 * <span class="doctag">@param</span> capabilityMonitor  注解的对象</div><div class="line">	 * <span class="doctag">@throws</span> Throwable </div><div class="line">	 */</div><div class="line">	<span class="meta">@Around</span>(<span class="string">"capabilityMonitor(capabilityMonitor)"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(ProceedingJoinPoint point,CapabilityMonitor capabilityMonitor)</span> <span class="keyword">throws</span> Throwable</span>&#123;</div><div class="line">		Long startTime=System.currentTimeMillis();  <span class="comment">//开始时间</span></div><div class="line">		Object[] args=point.getArgs(); <span class="comment">//获取目标方法执行的参数数组</span></div><div class="line">		Object returnValues=point.proceed(args);   <span class="comment">//执行目标方法</span></div><div class="line">		Long endTime=System.currentTimeMillis();  <span class="comment">//结束时间</span></div><div class="line">		logger.info(<span class="string">"程序执行的时间："</span>+((endTime-startTime)/<span class="number">1000.0</span>));   <span class="comment">//输出程序执行的时间，秒位单位</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="输出错误日志到文件中"><a href="#输出错误日志到文件中" class="headerlink" title="输出错误日志到文件中"></a>输出错误日志到文件中</h3><ul>
-<li>定义日志注解，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 输出日志信息到日志文件的注解</div><div class="line"> * <span class="doctag">@author</span> 陈加兵 	</div><div class="line"> * <span class="doctag">@since</span> 2018年11月7日 下午5:52:55</div><div class="line"> */</div><div class="line"><span class="meta">@Target</span>(&#123;ElementType.PARAMETER, ElementType.METHOD&#125;)  <span class="comment">//作用在方法上面</span></div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)   <span class="comment">//程序运行  </span></div><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> PrintLog &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>注解的实现类，结合aop实现</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrintLogAnnotationImpl</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 定义切入点，凡是方法体上标注<span class="doctag">@PrintLog</span>这个注解都会被增强</div><div class="line">	 * <span class="doctag">@param</span> printLog</div><div class="line">	 */</div><div class="line">	<span class="meta">@Pointcut</span>(<span class="string">"@annotation(printLog)"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printLog</span><span class="params">(PrintLog printLog)</span></span>&#123;&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 在程序之后执行并且在出现异常的时候才会执行</div><div class="line">	 * <span class="doctag">@param</span> point  JoinPoint对象，用于获取切入点的信息，比如被增加的类，被增强的方法名称、方法传入的参数等信息</div><div class="line">	 * <span class="doctag">@param</span> printLog  注解的接口信息，可以获取接口的信息</div><div class="line">	 * <span class="doctag">@param</span> message   异常信息</div><div class="line">	 */</div><div class="line">	<span class="meta">@AfterThrowing</span>(value=<span class="string">"printLog(printLog)"</span>,throwing=<span class="string">"message"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">excute</span><span class="params">(JoinPoint point,PrintLog printLog,Throwable message)</span></span>&#123;</div><div class="line">		Class targetCls=point.getTarget().getClass();  <span class="comment">//获取目标类</span></div><div class="line">		Logger logger = LoggerFactory.getLogger(targetCls);</div><div class="line">		logger.error(<span class="string">"异常信息："</span>,message);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>只需要在方法上标注这个注解，只要是遇到异常信息，就会自动写入日志文件中</li>
-</ul>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><a href="http://shouce.jb51.net/spring/aop.html" target="_blank" rel="external">aop的相关知识点</a></li>
-<li><a href="https://chenjiabing666.github.io/2018/05/21/Spring%E4%B9%8BAOP/">spring aop</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;自定义注解【Annotation】&quot;&gt;&lt;a href=&quot;#自定义注解【Annotation】&quot; class=&quot;headerlink&quot; title=&quot;自定义注解【Annotation】&quot;&gt;&lt;/a&gt;自定义注解【Annotation】&lt;/h1&gt;&lt;h2 id=&quot;元注解&quot;&gt;
-    
-    </summary>
-    
-      <category term="Spring" scheme="http://chenjiabing666.github.io/categories/Spring/"/>
-    
-    
-      <category term="Spring" scheme="http://chenjiabing666.github.io/tags/Spring/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SpringBoot整合Swagger</title>
-    <link href="http://chenjiabing666.github.io/2018/10/22/SpringBoot%E6%95%B4%E5%90%88Swagger/"/>
-    <id>http://chenjiabing666.github.io/2018/10/22/SpringBoot整合Swagger/</id>
-    <published>2018-10-22T15:22:23.000Z</published>
-    <updated>2018-10-24T14:44:41.707Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="SpringBoot整合Swagger"><a href="#SpringBoot整合Swagger" class="headerlink" title="SpringBoot整合Swagger"></a>SpringBoot整合Swagger</h1><h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="配置类"><a href="#配置类" class="headerlink" title="配置类"></a>配置类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> springfox.documentation.builders.ApiInfoBuilder;</div><div class="line"><span class="keyword">import</span> springfox.documentation.builders.PathSelectors;</div><div class="line"><span class="keyword">import</span> springfox.documentation.builders.RequestHandlerSelectors;</div><div class="line"><span class="keyword">import</span> springfox.documentation.service.ApiInfo;</div><div class="line"><span class="keyword">import</span> springfox.documentation.service.Contact;</div><div class="line"><span class="keyword">import</span> springfox.documentation.spi.DocumentationType;</div><div class="line"><span class="keyword">import</span> springfox.documentation.spring.web.plugins.Docket;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Swagger的配置类</div><div class="line"> * <span class="doctag">@author</span> 陈加兵</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerConfig</span> </span>&#123;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 创建用户API文档</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="meta">@Bean</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Docket <span class="title">createRestUserApi</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</div><div class="line">				.groupName(<span class="string">"user"</span>)  </div><div class="line">				.apiInfo(apiInfo())   <span class="comment">//api的信息</span></div><div class="line">				.select()</div><div class="line">				.apis(RequestHandlerSelectors</div><div class="line">						.basePackage(<span class="string">"cn.tedu.mycat.controller"</span>))   <span class="comment">//添加包扫描</span></div><div class="line">				.paths(PathSelectors.any()).build();</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 创建API信息</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</div><div class="line">				.title(<span class="string">"api文档的标题"</span>)   <span class="comment">//标题</span></div><div class="line">				.description(<span class="string">"api文档的描述"</span>)  <span class="comment">//描述  </span></div><div class="line">				.contact(    <span class="comment">//添加开发者的一些信息</span></div><div class="line">						<span class="keyword">new</span> Contact(<span class="string">"爱撒谎的男孩"</span>, <span class="string">"https://chenjiabing666.github.io"</span>,</div><div class="line">								<span class="string">"18796327106@163.com"</span>)).version(<span class="string">"1.0"</span>).build();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="启动类"><a href="#启动类" class="headerlink" title="启动类"></a>启动类</h2><ul>
-<li>在springBoot的启动类上添加一个注解即可配置成功：<code>@EnableSwagger2</code></li>
-</ul>
-<h2 id="访问api的路径"><a href="#访问api的路径" class="headerlink" title="访问api的路径"></a>访问api的路径</h2><ul>
-<li><code>http://ip/projectName/swagger-ui.html</code> ：html的页面</li>
-<li><code>http://localhost:8080/demo/v2/api-docs</code>：这个是json数据的页面</li>
-</ul>
-<h2 id="注解说明"><a href="#注解说明" class="headerlink" title="注解说明"></a>注解说明</h2><h3 id="Api"><a href="#Api" class="headerlink" title="@Api"></a>@Api</h3><ul>
-<li>标注在类上，用来对这个类进行说明的</li>
-<li><strong>如果想要生成文档，必须在类或者接口上标注</strong></li>
-<li>属性如下：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>属性名称</th>
-<th>备注</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>value</td>
-<td>url的路径值</td>
-<td></td>
-</tr>
-<tr>
-<td>tags</td>
-<td>如果设置这个值、value的值会被覆盖</td>
-<td></td>
-</tr>
-<tr>
-<td><strong>description</strong></td>
-<td>对api资源的描述</td>
-<td></td>
-</tr>
-<tr>
-<td>basePath</td>
-<td>基本路径可以不配置</td>
-<td></td>
-</tr>
-<tr>
-<td><strong>position</strong></td>
-<td>如果配置多个Api 想改变显示的顺序位置</td>
-<td></td>
-</tr>
-<tr>
-<td>produces</td>
-<td>For example, “application/json, application/xml”</td>
-<td></td>
-</tr>
-<tr>
-<td>consumes</td>
-<td>For example, “application/json, application/xml”</td>
-<td></td>
-</tr>
-<tr>
-<td>protocols</td>
-<td>Possible values: http, https, ws, wss.</td>
-<td></td>
-</tr>
-<tr>
-<td><strong>authorizations</strong></td>
-<td>高级特性认证时配置</td>
-<td></td>
-</tr>
-<tr>
-<td><strong>hidden</strong></td>
-<td>配置为true 将在文档中隐藏</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ApiOperation"><a href="#ApiOperation" class="headerlink" title="@ApiOperation"></a>@ApiOperation</h3><ul>
-<li>用在API方法上，对该API做注释，说明API的作用</li>
-<li>不需要多讲，看源码，使用默认的value属性即可，说明该方法的作用</li>
-<li>属性如下：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>value</th>
-<th>url的路径值</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>tags</td>
-<td>如果设置这个值、value的值会被覆盖</td>
-<td></td>
-</tr>
-<tr>
-<td>notes</td>
-<td>对api资源的描述</td>
-<td></td>
-</tr>
-<tr>
-<td>response</td>
-<td>返回的对象，<strong>在文档中点击Model可以获取该配置的内容</strong></td>
-<td></td>
-</tr>
-<tr>
-<td>responseContainer</td>
-<td>这些对象是有效的 “List”, “Set” or “Map”.，其他无效</td>
-<td></td>
-</tr>
-<tr>
-<td>responseReference</td>
-<td>可以不配置</td>
-<td></td>
-</tr>
-<tr>
-<td>httpMethod</td>
-<td>可以接受 “GET”, “HEAD”, “POST”, “PUT”, “DELETE”, “OPTIONS” and “PATCH”</td>
-<td></td>
-</tr>
-<tr>
-<td>position</td>
-<td>如果配置多个Api 想改变显示的顺序位置</td>
-<td></td>
-</tr>
-<tr>
-<td>produces</td>
-<td>同 Api中的定义</td>
-<td></td>
-</tr>
-<tr>
-<td>consumes</td>
-<td>同 Api中的定义</td>
-<td></td>
-</tr>
-<tr>
-<td>protocols</td>
-<td>同 Api中的定义</td>
-<td></td>
-</tr>
-<tr>
-<td>authorizations</td>
-<td>同 Api中的定义</td>
-<td></td>
-</tr>
-<tr>
-<td>hidden</td>
-<td>是否隐藏，true 或者false ，这个可以隐藏后台接口</td>
-<td></td>
-</tr>
-<tr>
-<td>code</td>
-<td>http的状态码 默认 200</td>
-<td></td>
-</tr>
-<tr>
-<td>extensions</td>
-<td>扩展属性</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ApiImplicitParams"><a href="#ApiImplicitParams" class="headerlink" title="@ApiImplicitParams"></a>@ApiImplicitParams</h3><ul>
-<li>用来包含API的一组参数注解，可以简单的理解为参数注解的集合声明</li>
-<li><strong>很重要，这个注解其中包含接口入参的详细说明</strong></li>
-<li>内容是集合</li>
-</ul>
-<h3 id="ApiImplicitParam"><a href="#ApiImplicitParam" class="headerlink" title="@ApiImplicitParam"></a>@ApiImplicitParam</h3><ul>
-<li>用在<code>@ApiImplicitParams</code>注解中，也可以单独使用，说明一个请求参数的各个方面 </li>
-<li>详细的属性使用说明如下：<ul>
-<li><code>name</code>：属性的字段名称，相当于form表单中的name，这个就是入参的字段</li>
-<li><code>dataType</code>：参数的类型，标识，字符串</li>
-<li><code>value</code>：该参数的描述</li>
-<li><code>required</code>：是否必填，布尔值</li>
-<li><code>defaultValue</code>：缺省值，会在文档中缺省填入，这样更方面造数据，不需要调用接口的去填值了</li>
-<li><code>paramType</code>：指定参数的入参数方式（也就是请求参数的位置），其中有四种常用的，如下：<ul>
-<li><code>query</code></li>
-<li><code>path</code></li>
-<li><code>body</code></li>
-<li><code>form</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="paramType属性的详细说明"><a href="#paramType属性的详细说明" class="headerlink" title="paramType属性的详细说明"></a>paramType属性的详细说明</h4><ul>
-<li><code>query</code>：必须要和入参的字段一样，也可以使用<code>@RequestParam()</code>指定</li>
-<li><code>path</code>：用于Restful的风格的url，请求的参数写在路径上，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ApiOperation</span>(value=<span class="string">"根据用户Id获取用户信息"</span>,response=User.class,hidden=<span class="keyword">false</span>)</div><div class="line">	<span class="meta">@ApiImplicitParams</span>(&#123;</div><div class="line">			<span class="meta">@ApiImplicitParam</span>(paramType = <span class="string">"path"</span>, name = <span class="string">"id"</span>, dataType=<span class="string">"Integer"</span>, required = <span class="keyword">false</span>, value = <span class="string">"用户的id"</span>, defaultValue = <span class="string">"1"</span>)</div><div class="line">	&#125;)</div><div class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/user/get/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">getUser</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Integer id) </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> User(id, <span class="string">"陈加兵"</span>);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><code>body</code>：以流的形式提交 仅支持POST </li>
-<li><code>form</code>：以表单的形式提交</li>
-</ul>
-<h2 id="导出到markdown文件"><a href="#导出到markdown文件" class="headerlink" title="导出到markdown文件"></a>导出到markdown文件</h2><h3 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- swagger自动生成文档依赖 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;swagger-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.swagger<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>swagger-models<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;swagger-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="comment">&lt;!--导出到markdown文件的依赖 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.github.swagger2markup<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>swagger2markup<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.netzwerg<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>paleo-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.11.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>$&#123;basedir&#125;/src/main/webapp/WEB-INF/lib/paleo-core-0.11.0.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>nl.jworks.markdown_to_asciidoc<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>markdown_to_asciidoc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>$&#123;basedir&#125;/src/main/webapp/WEB-INF/lib/markdown_to_asciidoc-1.0.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>由于需要<code>paleo-core</code>和<code>markdown_to_asciidoc</code>，但是这两个依赖使用maven不能自动导入，只能使用本地jar的方式了</li>
-</ul>
-<h3 id="添加一个测试类"><a href="#添加一个测试类" class="headerlink" title="添加一个测试类"></a>添加一个测试类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.net.URL;</div><div class="line"><span class="keyword">import</span> java.nio.file.Path;</div><div class="line"><span class="keyword">import</span> java.nio.file.Paths;</div><div class="line"><span class="keyword">import</span> io.github.swagger2markup.GroupBy;</div><div class="line"><span class="keyword">import</span> io.github.swagger2markup.Language;</div><div class="line"><span class="keyword">import</span> io.github.swagger2markup.Swagger2MarkupConfig;</div><div class="line"><span class="keyword">import</span> io.github.swagger2markup.Swagger2MarkupConverter;</div><div class="line"><span class="keyword">import</span> io.github.swagger2markup.builder.Swagger2MarkupConfigBuilder;</div><div class="line"><span class="keyword">import</span> io.github.swagger2markup.markup.builder.MarkupLanguage;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">* 生成Markdown文件的类</div><div class="line">*/</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerTest</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">	    Path outputFile = Paths.get(<span class="string">"build/swagger"</span>);   <span class="comment">//指定生成的目录和文件的名称swagger.md</span></div><div class="line">	    Swagger2MarkupConfig config = <span class="keyword">new</span> Swagger2MarkupConfigBuilder()</div><div class="line">	            .withMarkupLanguage(MarkupLanguage.MARKDOWN)</div><div class="line">	            .withOutputLanguage(Language.ZH)</div><div class="line">	            .withPathsGroupedBy(GroupBy.TAGS)</div><div class="line">	            .withGeneratedExamples()</div><div class="line">	            .withoutInlineSchema()</div><div class="line">	            .build();</div><div class="line">	    Swagger2MarkupConverter converter = Swagger2MarkupConverter.from(<span class="keyword">new</span> URL(<span class="string">"http://localhost:8080/demo/v2/api-docs"</span>))   <span class="comment">//url是可以访问的在线json数据的url</span></div><div class="line">	            .withConfig(config)</div><div class="line">	            .build();</div><div class="line">	    converter.toFile(outputFile);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><strong>一定要保证这里的链接可以访问，因此可以把项目启动起来之后再执行这个测试类，将会在项目的build目录下生成对应的文档</strong></li>
-<li><strong>如果需要生成其他的文档，可以使用Typora导出到pdf或者doc文件</strong></li>
-</ul>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><p><a href="https://my.oschina.net/zzuqiang/blog/793606" target="_blank" rel="external">https://my.oschina.net/zzuqiang/blog/793606</a></p>
-</li>
-<li><p><a href="https://blog.csdn.net/qq_37512634/article/details/78984397" target="_blank" rel="external">https://blog.csdn.net/qq_37512634/article/details/78984397</a></p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;SpringBoot整合Swagger&quot;&gt;&lt;a href=&quot;#SpringBoot整合Swagger&quot; class=&quot;headerlink&quot; title=&quot;SpringBoot整合Swagger&quot;&gt;&lt;/a&gt;SpringBoot整合Swagger&lt;/h1&gt;&lt;h2 i
-    
-    </summary>
-    
-      <category term="SpringBoot" scheme="http://chenjiabing666.github.io/categories/SpringBoot/"/>
-    
-    
-      <category term="SpringBoot" scheme="http://chenjiabing666.github.io/tags/SpringBoot/"/>
     
   </entry>
   
