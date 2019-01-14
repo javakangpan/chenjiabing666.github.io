@@ -23,7 +23,7 @@ Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用
 Zuul包含了对请求的路由和过滤两个主要的功能，其中路由功能负责将外部的请求转发到具体的微服务实例上，是实现外部访问统一入口的基础上，而过滤功能则负责对请求的处理过程进行干预，是实现请求校验，服务聚合等功能的基础。
 Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用，同时从Eureka中获取其他微服务的信息，也即以后访问微服务都是通过Zuul跳转后获得">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fqmg1wtyhdj30pl0fqdgt.jpg">
-<meta property="og:updated_time" content="2018-12-25T13:06:01.563Z">
+<meta property="og:updated_time" content="2019-01-14T12:30:08.510Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zuul服务网关">
 <meta name="twitter:description" content="Zuul简介
@@ -132,14 +132,14 @@ Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用
 </ul>
 <h2 id="路由映射规则"><a href="#路由映射规则" class="headerlink" title="路由映射规则"></a>路由映射规则</h2><h3 id="代理名称"><a href="#代理名称" class="headerlink" title="代理名称"></a>代理名称</h3><ul>
 <li>之前的配置访问的还是需要带上微服务的实例名称，但是我们不想微服务的实例名称暴露，那么此时就需要使用代理名称替代，配置如下:<ul>
-<li>使用<code>ignored-services</code>忽略真实的服务名称访问，可以同时指定多个，其中服务名称必须和服务配置文件中一样，不能使用和</li>
+<li>使用<code>ignored-services</code>忽略真实的服务名称访问，可以同时指定多个，其中服务名称必须和服务配置文件中一样。</li>
 <li>在routes下指定多个路由映射规则</li>
 </ul>
 </li>
 </ul>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="attr">zuul:</span></div><div class="line">  <span class="comment"># 忽略真实的服务名称实例访问，是一个Set集合，可以指定多个，取消全部使用 "*"即可</span></div><div class="line"><span class="attr">  ignored-services:</span></div><div class="line"><span class="bullet">  -</span> <span class="string">order-provider</span></div><div class="line">  <span class="comment">#routes下面指定代理规则，可以同时指定多个</span></div><div class="line"><span class="attr">  routes:</span></div><div class="line">    <span class="comment">#指定第一个规则，这里的名称任意</span></div><div class="line"><span class="attr">    api-order:</span></div><div class="line">      <span class="comment">#指定的实例名称</span></div><div class="line"><span class="attr">      serviceId:</span> <span class="string">order-provider</span></div><div class="line">      <span class="comment">#指定可以访问的路由</span></div><div class="line"><span class="attr">      path:</span> <span class="string">/api-order/**</span></div></pre></td></tr></table></figure>
 <ul>
-<li>按照上面的配置完成之后就可以直接使用映射的路由访问即可，如：<code>http://zuul.com:9001/api-dept/dept/1</code></li>
+<li>按照上面的配置完成之后就可以直接使用映射的路由访问即可，如：<code>http://zuul.com:9001/api-order/order/1</code></li>
 </ul>
 <h2 id="设置统一前缀"><a href="#设置统一前缀" class="headerlink" title="设置统一前缀"></a>设置统一前缀</h2><ul>
 <li>我们可以在所有的访问uri前面加上统一的前缀，配置如下:<ul>
@@ -147,9 +147,9 @@ Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用
 </ul>
 </li>
 </ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="attr">zuul:</span></div><div class="line">  <span class="comment">#加上统一的前缀，那么访问的时候一定要加上这个前缀才可以访问到</span></div><div class="line"><span class="attr">  prefix:</span> <span class="string">/chenjiabing</span></div><div class="line">  <span class="comment"># 忽略真实的服务名称实例访问，是一个Set集合，可以指定多个，取消全部使用 "*"即可</span></div><div class="line"><span class="attr">  ignored-services:</span></div><div class="line"><span class="bullet">  -</span> <span class="string">dept-provider</span></div><div class="line">  <span class="comment">#routes下面指定代理规则，可以同时指定多个</span></div><div class="line"><span class="attr">  routes:</span></div><div class="line">    <span class="comment">#指定第一个规则，这里的名称任意</span></div><div class="line"><span class="attr">    api-dept:</span></div><div class="line">      <span class="comment">#指定的实例名称</span></div><div class="line"><span class="attr">      serviceId:</span> <span class="string">dept-provider</span></div><div class="line">      <span class="comment">#指定可以访问的路由</span></div><div class="line"><span class="attr">      path:</span> <span class="string">/api-dept/**</span></div></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="attr">zuul:</span></div><div class="line">  <span class="comment">#加上统一的前缀，那么访问的时候一定要加上这个前缀才可以访问到</span></div><div class="line"><span class="attr">  prefix:</span> <span class="string">/chenjiabing</span></div><div class="line">  <span class="comment"># 忽略真实的服务名称实例访问，是一个Set集合，可以指定多个，取消全部使用 "*"即可</span></div><div class="line"><span class="attr">  ignored-services:</span></div><div class="line"><span class="bullet">  -</span> <span class="string">order-provider</span></div><div class="line">  <span class="comment">#routes下面指定代理规则，可以同时指定多个</span></div><div class="line"><span class="attr">  routes:</span></div><div class="line">    <span class="comment">#指定第一个规则，这里的名称任意</span></div><div class="line"><span class="attr">    api-dept:</span></div><div class="line">      <span class="comment">#指定的实例名称</span></div><div class="line"><span class="attr">      serviceId:</span> <span class="string">order-provider</span></div><div class="line">      <span class="comment">#指定可以访问的路由</span></div><div class="line"><span class="attr">      path:</span> <span class="string">/api-order/**</span></div></pre></td></tr></table></figure>
 <ul>
-<li>通过上面的配置，此时的访问路径变成<code>http://zuul.com:9001/chenjiabing/api-dept/dept/1</code></li>
+<li>通过上面的配置，此时的访问路径变成<code>http://zuul.com:9001/chenjiabing/api-order/order/1</code></li>
 </ul>
 <h2 id="某个uri取消路由"><a href="#某个uri取消路由" class="headerlink" title="某个uri取消路由"></a>某个uri取消路由</h2><ul>
 <li><p>使用<code>zuul.ignored-services</code>是忽略一个或者多个微服务的全部接口，但是如果我们可以更细化</p>
@@ -463,10 +463,6 @@ Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>12</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
@@ -475,7 +471,7 @@ Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用
 			
 		
 			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>11</sup></a></li>
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>12</sup></a></li>
 			
 		
 			
@@ -483,15 +479,19 @@ Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用
 			
 		
 			
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>11</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
@@ -507,15 +507,15 @@ Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
@@ -612,7 +612,7 @@ Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
 		
 		<a href="/about" target="_blank" title="Chenjiabing">Chenjiabing</a>
 		
