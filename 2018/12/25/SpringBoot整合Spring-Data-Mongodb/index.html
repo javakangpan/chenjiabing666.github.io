@@ -50,7 +50,7 @@ docker run --name mymongo -p 27017:27017 -d mongo
 SQL术语/概念
 MongoDB术语/概念
 解释/说明">
-<meta property="og:updated_time" content="2018-12-24T16:17:54.565Z">
+<meta property="og:updated_time" content="2019-01-24T13:27:57.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot整合Spring Data Mongodb">
 <meta name="twitter:description" content="SpringBoot整合Spring Data Mongodb简介
@@ -145,7 +145,7 @@ MongoDB术语/概念
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot整合Spring-Data-Mongodb"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot整合Spring Data Mongodb</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#何时使用"><span class="toc-number">1.2.</span> <span class="toc-text">何时使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.3.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概念解析"><span class="toc-number">1.4.</span> <span class="toc-text">概念解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.5.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-number">1.6.</span> <span class="toc-text">事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number">1.7.</span> <span class="toc-text">源码</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot整合Spring-Data-Mongodb"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot整合Spring Data Mongodb</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#何时使用"><span class="toc-number">1.2.</span> <span class="toc-text">何时使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.3.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概念解析"><span class="toc-number">1.4.</span> <span class="toc-text">概念解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.5.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分页查询"><span class="toc-number">1.6.</span> <span class="toc-text">分页查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的查询关键字"><span class="toc-number">1.7.</span> <span class="toc-text">常用的查询关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-number">1.8.</span> <span class="toc-text">事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number">1.9.</span> <span class="toc-text">源码</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -217,7 +217,7 @@ MongoDB术语/概念
 <ul>
 <li>新建User实体类，存储在MongonDB中，如下:</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="meta">@Accessors</span>(chain=<span class="keyword">true</span>)  <span class="comment">//链式调用</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">	<span class="meta">@Id</span></div><div class="line">	<span class="keyword">private</span> Integer _id;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> String mobile;</div><div class="line">	<span class="keyword">private</span> Date birthday;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="meta">@Accessors</span>(chain=<span class="keyword">true</span>)  <span class="comment">//链式调用</span></div><div class="line"><span class="meta">@Document</span>(collection=<span class="string">"user"</span>)   <span class="comment">//指定集合</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">	<span class="meta">@Id</span></div><div class="line">	<span class="keyword">private</span> Integer _id;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> String mobile;</div><div class="line">	<span class="keyword">private</span> Date birthday;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
 <li>定义一个<code>UserRepository</code>继承<code>MongoRepository</code></li>
 </ul>
@@ -226,6 +226,17 @@ MongoDB术语/概念
 <li>在service使用如下:</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Service</span></div><div class="line"><span class="meta">@Transactional</span>   <span class="comment">//开启事务</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> </span>&#123;</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> UserRepository userRepository;  <span class="comment">//注入</span></div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	添加用户</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">addUser</span><span class="params">(User user)</span></span>&#123;</div><div class="line">		User user2 = userRepository.save(user);</div><div class="line">		System.out.println(<span class="number">1</span>/<span class="number">0</span>);</div><div class="line">		<span class="keyword">return</span> user2;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	批量添加</div><div class="line">	 * <span class="doctag">@param</span> users</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">addUserBatch</span><span class="params">(List&lt;User&gt; users)</span></span>&#123;</div><div class="line">		List&lt;User&gt; user2 = userRepository.saveAll(users);</div><div class="line">		<span class="keyword">return</span> user2;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	根据Id删除</div><div class="line">	 * <span class="doctag">@param</span> id</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteById</span><span class="params">(Integer id)</span> </span>&#123;</div><div class="line">		userRepository.deleteById(id);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	更新数据，使用的还是save方法，相当于覆盖</div><div class="line">	 * <span class="doctag">@param</span> user</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> User  <span class="title">update</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">		User user2 = userRepository.save(user);</div><div class="line">		<span class="keyword">return</span> user2;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 根据Id获取信息</div><div class="line">	 * <span class="doctag">@param</span> id</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">findById</span><span class="params">(Integer id)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> userRepository.findById(id).get();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	查询全部</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">findAll</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> userRepository.findAll();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	分页查询信息</div><div class="line">	 * <span class="doctag">@param</span> pageSize</div><div class="line">	 * <span class="doctag">@param</span> pageNum</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">findUserList</span><span class="params">(Integer pageNum,Integer pageSize)</span></span>&#123;</div><div class="line">		Pageable pageable=<span class="keyword">new</span> PageRequest(pageNum-<span class="number">1</span>,pageSize);</div><div class="line">		Page&lt;User&gt; pages = userRepository.findAll(pageable);</div><div class="line">		<span class="keyword">if</span> (pages.hasContent()) &#123;</div><div class="line">			<span class="keyword">return</span> pages.getContent();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h2><ul>
+<li>dao层</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"><span class="keyword">import</span> org.springframework.data.domain.Pageable;</div><div class="line"><span class="keyword">import</span> org.springframework.data.mongodb.repository.MongoRepository;</div><div class="line"><span class="keyword">import</span> com.techwells.study.domain.DynamicComment;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DynamicCommentRepository</span> <span class="keyword">extends</span> <span class="title">MongoRepository</span>&lt;<span class="title">DynamicComment</span>, <span class="title">Integer</span>&gt;</span>&#123;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 *  分页查询，先根据nickName筛选出结果，之后分页</div><div class="line">	 * <span class="doctag">@param</span> nickName  昵称</div><div class="line">	 * <span class="doctag">@param</span> pageable  分页</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function">List&lt;DynamicComment&gt; <span class="title">findByNickName</span><span class="params">(String nickName,Pageable pageable)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>测试如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> </span>&#123;</div><div class="line">		</div><div class="line">		<span class="comment">//构建分页信息</span></div><div class="line">		Pageable pageable=<span class="keyword">new</span> PageRequest(<span class="number">0</span>, <span class="number">2</span>, Sort.Direction.DESC,<span class="string">"id"</span>);</div><div class="line">		</div><div class="line">		List&lt;DynamicComment&gt; comments = dynamicRepository.findByNickName(<span class="string">"爱撒谎的男孩"</span>,pageable);</div><div class="line">		<span class="keyword">for</span> (DynamicComment dynamicComment : comments) &#123;</div><div class="line">			System.out.println(dynamicComment);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h2 id="常用的查询关键字"><a href="#常用的查询关键字" class="headerlink" title="常用的查询关键字"></a>常用的查询关键字</h2><ul>
+<li><a href="https://docs.spring.io/spring-data/jpa/docs/2.1.3.RELEASE/reference/html/#jpa.query-methods" target="_blank" rel="external">https://docs.spring.io/spring-data/jpa/docs/2.1.3.RELEASE/reference/html/#jpa.query-methods</a></li>
+</ul>
 <h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><ul>
 <li>未完待续………………..</li>
 </ul>
@@ -300,7 +311,7 @@ MongoDB术语/概念
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot整合Spring-Data-Mongodb"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot整合Spring Data Mongodb</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#何时使用"><span class="toc-number">1.2.</span> <span class="toc-text">何时使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.3.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概念解析"><span class="toc-number">1.4.</span> <span class="toc-text">概念解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.5.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-number">1.6.</span> <span class="toc-text">事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number">1.7.</span> <span class="toc-text">源码</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot整合Spring-Data-Mongodb"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot整合Spring Data Mongodb</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#何时使用"><span class="toc-number">1.2.</span> <span class="toc-text">何时使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.3.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概念解析"><span class="toc-number">1.4.</span> <span class="toc-text">概念解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.5.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分页查询"><span class="toc-number">1.6.</span> <span class="toc-text">分页查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的查询关键字"><span class="toc-number">1.7.</span> <span class="toc-text">常用的查询关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-number">1.8.</span> <span class="toc-text">事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number">1.9.</span> <span class="toc-text">源码</span></a></li></ol></li></ol>
  
   </div>
 
@@ -419,6 +430,10 @@ MongoDB术语/概念
 			
 		
 			
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/分布式/" title="分布式">分布式<sup>12</sup></a></li>
 			
 		
@@ -428,10 +443,6 @@ MongoDB术语/概念
 		
 			
 				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>12</sup></a></li>
 			
 		
 			
@@ -451,11 +462,11 @@ MongoDB术语/概念
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
 			
 		
 			
@@ -463,7 +474,7 @@ MongoDB术语/概念
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
+				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
 			
 		
 			
@@ -471,7 +482,7 @@ MongoDB术语/概念
 			
 		
 			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
 			
 		
 			
