@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2019-01-19T05:52:29.236Z</updated>
+  <updated>2019-06-02T15:08:58.136Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,356 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>面试集锦</title>
+    <link href="http://chenjiabing666.github.io/2019/06/02/%E9%9D%A2%E8%AF%95%E9%9B%86%E9%94%A6/"/>
+    <id>http://chenjiabing666.github.io/2019/06/02/面试集锦/</id>
+    <published>2019-06-02T15:06:46.000Z</published>
+    <updated>2019-06-02T15:08:58.136Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h2><h3 id="三大范式"><a href="#三大范式" class="headerlink" title="三大范式"></a>三大范式</h3><ul>
+<li><a href="https://blog.csdn.net/sinat_27143551/article/details/80216842" target="_blank" rel="external">https://blog.csdn.net/sinat_27143551/article/details/80216842</a></li>
+<li><a href="https://www.cnblogs.com/li1992/articles/9217391.html" target="_blank" rel="external">https://www.cnblogs.com/li1992/articles/9217391.html</a></li>
+<li>第一范式： 要求数据库中的每个字段都是不可再分的（原子性），比如地址这个字段可以拆分成省份、城市等字段，不满足第一范式</li>
+<li>第二范式：<ul>
+<li>满足第一范式</li>
+<li>所有的非主属性都必须<strong>完全依赖（如果主键是两个字段，必须依赖这两个字段，不能部分依赖）</strong>于主键</li>
+</ul>
+</li>
+<li>第三范式：<ul>
+<li>满足第二范式（即是同时满足第一范式和第二范式）</li>
+<li>属性不依赖于其他非主属性</li>
+<li>例如：存在一个部门信息表，其中每个部门有部门编号（dept_id）、部门名称、部门简介等信息。那么在员工信息表中列出部门编号后就不能再将部门名称、部门简介等与部门有关的信息再加入员工信息表中。如果不存在部门信息表，则根据第三范式（3NF）也应该构建它，否则就会有大量的数据冗余。</li>
+</ul>
+</li>
+</ul>
+<h3 id="mysql性能优化（索引，分库分表，升级硬盘SSD，主从部署，读写分离）"><a href="#mysql性能优化（索引，分库分表，升级硬盘SSD，主从部署，读写分离）" class="headerlink" title="mysql性能优化（索引，分库分表，升级硬盘SSD，主从部署，读写分离）"></a>mysql性能优化（索引，分库分表，升级硬盘SSD，主从部署，读写分离）</h3><h4 id="硬件优化"><a href="#硬件优化" class="headerlink" title="硬件优化"></a>硬件优化</h4><ul>
+<li>升级内存，带宽等</li>
+<li>提升读写速度</li>
+</ul>
+<h4 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h4><ul>
+<li><a href="https://chenjiabing666.github.io/2018/09/07/mysql%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E8%AF%A6%E8%A7%A3/">https://chenjiabing666.github.io/2018/09/07/mysql%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E8%AF%A6%E8%A7%A3/</a></li>
+</ul>
+<h5 id="全值匹配"><a href="#全值匹配" class="headerlink" title="全值匹配"></a>全值匹配</h5><h5 id="最佳左前缀，并且不能组合索引的中间字段"><a href="#最佳左前缀，并且不能组合索引的中间字段" class="headerlink" title="最佳左前缀，并且不能组合索引的中间字段"></a>最佳左前缀，并且不能组合索引的中间字段</h5><h5 id="不要在索引列上做任何的操作（函数，计算等）"><a href="#不要在索引列上做任何的操作（函数，计算等）" class="headerlink" title="不要在索引列上做任何的操作（函数，计算等）"></a>不要在索引列上做任何的操作（函数，计算等）</h5><h5 id="使用覆盖索引，少使用select"><a href="#使用覆盖索引，少使用select" class="headerlink" title="使用覆盖索引，少使用select *"></a>使用覆盖索引，少使用select *</h5><h5 id="mysql在使用不等于-或者-lt-gt-的时候无法使用导致全表扫描"><a href="#mysql在使用不等于-或者-lt-gt-的时候无法使用导致全表扫描" class="headerlink" title="mysql在使用不等于(!=或者&lt;&gt;)的时候无法使用导致全表扫描"></a>mysql在使用不等于(!=或者&lt;&gt;)的时候无法使用导致全表扫描</h5><h5 id="在使用or的时候，前后两个都是索引的时候才会生效"><a href="#在使用or的时候，前后两个都是索引的时候才会生效" class="headerlink" title="在使用or的时候，前后两个都是索引的时候才会生效"></a>在使用or的时候，前后两个都是索引的时候才会生效</h5><h5 id="is-null和is-not-null-导致索引失效"><a href="#is-null和is-not-null-导致索引失效" class="headerlink" title="is null和is not null 导致索引失效"></a>is null和is not null 导致索引失效</h5><h5 id="like使用-开头的将会导致索引失效"><a href="#like使用-开头的将会导致索引失效" class="headerlink" title="like使用%开头的将会导致索引失效"></a>like使用%开头的将会导致索引失效</h5><h5 id="字符串不加单引号导致索引失效"><a href="#字符串不加单引号导致索引失效" class="headerlink" title="字符串不加单引号导致索引失效"></a>字符串不加单引号导致索引失效</h5><h4 id="索引的优缺点"><a href="#索引的优缺点" class="headerlink" title="索引的优缺点"></a>索引的优缺点</h4><ul>
+<li>优点：<ul>
+<li>通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性。  </li>
+<li>大大加快查询的速度</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>创建索引和维护索引要耗费时间，这种时间随着数据 量的增加而增加。  </li>
+<li>索引需要占物理空间，除了数据表占数据空间之外，每一个索引还要占一定的物理空间，如果要建立聚簇索引，那么需要的空间就会更大。  </li>
+<li>当对表中的数据进行增加、删除和修改的时候，索引也要动态的维护，这样就降低了数据的维护速度。 </li>
+</ul>
+</li>
+</ul>
+<h4 id="开启查询缓存"><a href="#开启查询缓存" class="headerlink" title="开启查询缓存"></a>开启查询缓存</h4><h4 id="分库分表"><a href="#分库分表" class="headerlink" title="分库分表"></a>分库分表</h4><ul>
+<li><p><a href="https://chenjiabing666.github.io/2018/10/07/Mycat/">https://chenjiabing666.github.io/2018/10/07/Mycat/</a></p>
+</li>
+<li><p>Mycat和sharding-jdbc</p>
+</li>
+<li><p>水平拆分和垂直拆分</p>
+</li>
+</ul>
+<h4 id="重构查询方式"><a href="#重构查询方式" class="headerlink" title="重构查询方式"></a>重构查询方式</h4><ul>
+<li>一个复杂查询能够解决就不要使用多个简单的查询</li>
+<li>切分查询，将一个大的查询方式切分成多个小的查询，比如删除数据，可以尽可能的多次删除</li>
+<li>分解关联查询：将关联查询分解成多个子查询，利用查询缓存</li>
+</ul>
+<h4 id="使用冗余的字段避免多表联合查询"><a href="#使用冗余的字段避免多表联合查询" class="headerlink" title="使用冗余的字段避免多表联合查询"></a>使用冗余的字段避免多表联合查询</h4><h4 id="禁用外键关联"><a href="#禁用外键关联" class="headerlink" title="禁用外键关联"></a>禁用外键关联</h4><h3 id="事务的ACID"><a href="#事务的ACID" class="headerlink" title="事务的ACID"></a>事务的ACID</h3><ul>
+<li>原子性： 一个事务中的所有操作要么同时完成要么同时失败</li>
+<li>一致性： 无论事务是否执行成功，必须保证一个一致性的标准，比如转账，必须保证转账前后的总金额不变 </li>
+<li>隔离性： 事务与事务之间互不影响</li>
+<li>持久性： 事务执行完成之后数据将会持久的保存到数据库中</li>
+</ul>
+<h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><ul>
+<li>READ UNCOMMITTED（未提交读） ：在READ UNCOMMITTED级别，事务中的修改，即使没有提交，对其他事务也都是可见的。事务可以读取未提交的数据，这也被称为<strong>脏读</strong>（Dirty Read）。这个级别会导致很多问题，从性能上来说，READ UNCOMMITTED不会比其他的级别好太多，但却缺乏其他级别的很多好处，除非真的有非常必要的理由，在实际应用中一般很少使用。 </li>
+<li>READ COMMITTED（提交读） ：大多数数据库系统的默认隔离级别都是READ COMMITTED（但MySQL不是）。READ COMMITTED满足前面提到的隔离性的 简单定义：一个事务开始时，只能“看见”已经提交的事务所做的修改。换句话说，一个事务从开始直到提交之前，所做的任何修改对其他事务都是不可见的。这个级别有时候也叫做不可重复读（nonrepeatable read），因为两次执行同样的查询，可能会得到不一样的结果。 </li>
+<li>REPEATABLE READ（可重复读） ：REPEATABLE READ解决了脏读的问题。该级别保证了在同一个事务中多次读取同样记录的结果是一致的。但是理论上，可重复读隔离级别还是无法解决另外一个<strong>幻读</strong>（Phantom Read）的问题。所谓幻读，指的是当某个事务在读取某个范围内的记录时，另外一个事务又在该范围内插入了新的记录，当之前的事务再次读取该范围的记录时，会产生幻行（Phantom Row）。InnoDB和XtraDB存储引擎通过多版本并发控制（MVCC，Multiversion Concurrency Control）解决了幻读的问题。本章稍后会做进一步的讨论。<strong>可重复读是MySQL的默认事务隔离级别。</strong></li>
+<li>SERIALIZABLE（可串行化） ：SERIALIZABLE是最高的隔离级别。它通过强制事务串行执行，避免了前面说的幻读的问题。简单来说，SERIALIZABLE会在读取的每一行数据上都加锁，所以可能导致大量的超时和锁争用的问题。实际应用中也很少用到这个隔离级别，只有在非常需要确保数据的一致性而且可以接受没有并发的情况下，才考虑采用该级别。 </li>
+</ul>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><ul>
+<li><a href="https://chenjiabing666.github.io/2018/03/28/SQL%E6%93%8D%E4%BD%9C%E5%85%AD/#%E8%A7%86%E5%9B%BE">https://chenjiabing666.github.io/2018/03/28/SQL%E6%93%8D%E4%BD%9C%E5%85%AD/#%E8%A7%86%E5%9B%BE</a></li>
+<li>一张虚拟的表，create view name as …..</li>
+<li>简化查询，隐藏敏感信息</li>
+</ul>
+<h3 id="Mysql中的锁"><a href="#Mysql中的锁" class="headerlink" title="Mysql中的锁"></a>Mysql中的锁</h3><ul>
+<li><a href="https://chenjiabing666.github.io/2018/06/26/MySQL%E4%B8%AD%E7%9A%84%E9%94%81/">https://chenjiabing666.github.io/2018/06/26/MySQL%E4%B8%AD%E7%9A%84%E9%94%81/</a></li>
+</ul>
+<h3 id="Mysql中的explain的各个属性"><a href="#Mysql中的explain的各个属性" class="headerlink" title="Mysql中的explain的各个属性"></a>Mysql中的explain的各个属性</h3><ul>
+<li><a href="https://blog.csdn.net/qq_36120342/article/details/85333749" target="_blank" rel="external">https://blog.csdn.net/qq_36120342/article/details/85333749</a></li>
+</ul>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="算法的稳定性"><a href="#算法的稳定性" class="headerlink" title="算法的稳定性"></a>算法的稳定性</h3><ul>
+<li><a href="https://www.cnblogs.com/zhaoshuai1215/p/3448154.html" target="_blank" rel="external">https://www.cnblogs.com/zhaoshuai1215/p/3448154.html</a></li>
+<li>两个相同的数，经过一趟排序前后的位置保持不变就是稳定排序，反之不稳定</li>
+</ul>
+<h3 id="排序算法的稳定性"><a href="#排序算法的稳定性" class="headerlink" title="排序算法的稳定性"></a>排序算法的稳定性</h3><ul>
+<li><a href="https://www.cnblogs.com/xiaochun126/p/5086037.html" target="_blank" rel="external">https://www.cnblogs.com/xiaochun126/p/5086037.html</a></li>
+<li><a href="https://blog.csdn.net/stand1210/article/details/52403569" target="_blank" rel="external">https://blog.csdn.net/stand1210/article/details/52403569</a></li>
+<li><p><a href="https://www.cnblogs.com/zhaoshuai1215/p/3448154.html" target="_blank" rel="external">https://www.cnblogs.com/zhaoshuai1215/p/3448154.html</a></p>
+</li>
+<li><p>不稳定的算法</p>
+<ul>
+<li>选择排序：O(nlogn)</li>
+<li>快速排序：平均时间复杂度为O(nlogn)，最坏的情况时间复杂度为O(n^2）<ul>
+<li>最坏的情况：已经排好序或者倒序的</li>
+</ul>
+</li>
+<li>希尔排序：希尔排序的时间复杂度与增量(即，步长gap)的选取有关。例如，当增量为1时，希尔排序退化成了直接插入排序，此时的时间复杂度为O(N²)，而Hibbard增量的希尔排序的时间复杂度为O(N3/2)。 </li>
+<li>堆排序：O(nlogn)</li>
+</ul>
+</li>
+<li>稳定的算法：<ul>
+<li>冒泡排序：O(n^2)</li>
+<li>归并排序：O(nlogn)</li>
+<li>插入排序：O(n^2)</li>
+</ul>
+</li>
+</ul>
+<h3 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</div><div class="line">		<span class="keyword">int</span>[] arrays= &#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">5</span>&#125;;</div><div class="line">		insertSort(arrays);</div><div class="line">		<span class="keyword">for</span> (Integer a : arrays) &#123;</div><div class="line">			System.out.print(a+<span class="string">"\t"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 冒泡排序</div><div class="line">	 * <span class="doctag">@param</span> arrays</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span>[] arrays)</span> </span>&#123;</div><div class="line">		<span class="comment">// 外层循环</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arrays.length - <span class="number">1</span>; i++) &#123;</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = arrays.length - <span class="number">1</span>; j &gt; i; j--) &#123;</div><div class="line">				<span class="keyword">if</span> (arrays[j] &lt; arrays[j - <span class="number">1</span>]) &#123;</div><div class="line">					<span class="keyword">int</span> c = arrays[j];</div><div class="line">					arrays[j] = arrays[j - <span class="number">1</span>];</div><div class="line">					arrays[j - <span class="number">1</span>] = c;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 选择排序</div><div class="line">	 * 1、先假设第一个元素是最小的，依次和后面的元素比较，第一轮之后，第一个元素就是最小的，依次经过n轮之后，前n个元素是有序的（由小到大排序）</div><div class="line">	 * <span class="doctag">@param</span> arrays</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">changeSort</span><span class="params">(<span class="keyword">int</span>[] arrays)</span> </span>&#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arrays.length-<span class="number">1</span>; i++) &#123;</div><div class="line">			<span class="keyword">int</span> minIndex=i;  <span class="comment">//假设第一个元素是最小的</span></div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;arrays.length;j++) &#123;</div><div class="line">				<span class="keyword">if</span> (arrays[minIndex]&gt;arrays[j]) &#123;</div><div class="line">					minIndex=j;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			<span class="comment">//经过一轮之后，minIndex的值改变了，那么表示出之前定的最小值改变了，此时就需要交换</span></div><div class="line">			<span class="keyword">if</span> (minIndex!=i) &#123; </div><div class="line">				<span class="keyword">int</span> c = arrays[minIndex];</div><div class="line">				arrays[minIndex] = arrays[i];</div><div class="line">				arrays[i] = c;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 插入排序</div><div class="line">	 * <span class="doctag">@param</span> arrays</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span>[] arrays)</span> </span>&#123;</div><div class="line">		<span class="comment">//从第二个开始，假设第一个已经是排好序的</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arrays.length; i++) &#123;</div><div class="line">			<span class="keyword">int</span> target=arrays[i];  <span class="comment">//待插入的</span></div><div class="line">			<span class="keyword">int</span> j=i;</div><div class="line">			</div><div class="line">			<span class="comment">//如果待插入的数字比前面的数字（已经是有序的）小，那么前面的元素就后移，等待这个元素插入</span></div><div class="line">			<span class="keyword">while</span>(j&gt;<span class="number">0</span>&amp;&amp;target&lt;arrays[j-<span class="number">1</span>]) &#123;</div><div class="line">				arrays[j]=arrays[j-<span class="number">1</span>];</div><div class="line">				j--;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			<span class="comment">//移动完之后，当前的j的位置就是待插入的</span></div><div class="line">			arrays[j]=target;</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="二分查找算法"><a href="#二分查找算法" class="headerlink" title="二分查找算法"></a>二分查找算法</h3><h3 id="二叉树相关概念"><a href="#二叉树相关概念" class="headerlink" title="二叉树相关概念"></a>二叉树相关概念</h3><ul>
+<li>二叉树<ul>
+<li>每个节点最多有两个子树的结构，通常子树被称作“左子树”和“右子树” 。</li>
+</ul>
+</li>
+<li>满二叉树<ul>
+<li><a href="http://www.cnblogs.com/K-artorias/p/8340182.html" target="_blank" rel="external">http://www.cnblogs.com/K-artorias/p/8340182.html</a></li>
+<li>叶子节点只出现在最后一层</li>
+</ul>
+</li>
+<li>完全二叉树<ul>
+<li><a href="http://www.cnblogs.com/K-artorias/p/8340182.html" target="_blank" rel="external">http://www.cnblogs.com/K-artorias/p/8340182.html</a></li>
+<li>叶子节点只能出现在最后一层或者倒数第二层，并且如果存在叶子节点，那么只能出现在该层最左边的若干位置</li>
+<li>满二叉树是特殊的完全二叉树</li>
+</ul>
+</li>
+<li>二叉查找树<ul>
+<li>满足二叉树的定义</li>
+<li>每个节点的键都大于左子树中任意节点的键而小于右子树中任意节点的键。 </li>
+</ul>
+</li>
+<li>平衡二叉树<ul>
+<li>满足二叉查找树的定义</li>
+<li>树的左右两边的层级数相差不会大于1;</li>
+</ul>
+</li>
+<li>红黑树<ul>
+<li><a href="https://www.cnblogs.com/skywang12345/p/3245399.html" target="_blank" rel="external">https://www.cnblogs.com/skywang12345/p/3245399.html</a></li>
+<li>特点：<ul>
+<li>根节点是黑色的</li>
+<li>叶子节点必须是黑色的</li>
+<li>节点的颜色要么是黑色，要么是红色</li>
+<li><strong>如果一个节点是红色的，则它的子节点必须是黑色的。</strong> </li>
+<li><strong>从一个节点到该节点的子孙节点的所有路径上包含相同数目的黑节点。</strong> </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>B树<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h2><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><ol>
+<li>线程：是进程的一个实体，是cpu调度和分派的基本单位，是比进程更小的可以独立运行的基本单位。</li>
+<li>进程：具有一定独立功能的程序关于某个数据集合上的一次运行活动，是操作系统进行资源分配和调度的一个独 立单位。    </li>
+</ol>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><ul>
+<li>继承Thread和实现Runable接口，第二种方式可以实现多个线程共享一个Runable</li>
+<li>多线程的三大特性：原子性，可见性，有序性</li>
+<li>线程同步代码块（ synchronized）、轻量级锁（volatile）、Lock</li>
+<li>volatile关键字的作用<ul>
+<li><a href="https://www.cnblogs.com/monkeysayhi/p/7654460.html" target="_blank" rel="external">https://www.cnblogs.com/monkeysayhi/p/7654460.html</a></li>
+<li>保证了<code>可见性</code>和<code>有序性</code>，不能保证<code>原子性</code></li>
+</ul>
+</li>
+<li>ThreadLocal的原理<ul>
+<li><a href="https://www.cnblogs.com/dolphin0520/p/3920407.html" target="_blank" rel="external">https://www.cnblogs.com/dolphin0520/p/3920407.html</a></li>
+</ul>
+</li>
+<li>面试题：<ul>
+<li><a href="https://www.cnblogs.com/kexianting/p/8566318.html" target="_blank" rel="external">https://www.cnblogs.com/kexianting/p/8566318.html</a></li>
+<li><a href="https://www.cnblogs.com/Jansens520/p/8624708.html" target="_blank" rel="external">https://www.cnblogs.com/Jansens520/p/8624708.html</a></li>
+</ul>
+</li>
+<li>如何终止线程？<ul>
+<li>调用stop方法，已经废弃，会立刻杀死线程，无论线程执行到哪里</li>
+<li>设置一个volatile标志变量，在run方法中手动退出即可（return）。</li>
+<li>线程自己执行完任务，自动退出。</li>
+</ul>
+</li>
+</ul>
+<h4 id="如何确保高并发安全性"><a href="#如何确保高并发安全性" class="headerlink" title="如何确保高并发安全性"></a>如何确保高并发安全性</h4><ul>
+<li>链接：<a href="https://blog.csdn.net/andong154564667/article/details/82153104" target="_blank" rel="external">https://blog.csdn.net/andong154564667/article/details/82153104</a></li>
+</ul>
+<p>1、浏览器层或者APP层限制同一个用户或者IP的操作每x秒只能执行一次</p>
+<p>2、浏览器或者APP做页面缓存，</p>
+<p>3、图片和短信验证码的验证也能有效的限流</p>
+<p>4、服务器层的限流，比如令牌桶算法，保证每秒限制多少个请求</p>
+<p>5、数据的缓存，可以将一些热点数据存放到redis中，防止击穿db层</p>
+<p>6、使用消息队列，既能保证任务的异步执行，也能达到限流的作用。</p>
+<p>7、数据库层比如读写分离，分库分表等都能实现一定的优化。</p>
+<p>8、服务器做负载均衡，使用分布式</p>
+<h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><ul>
+<li>路由，路由键（routineKey），队列</li>
+<li>rabbitMq的四种路由：direct，fanout，topic，header</li>
+<li><a href="https://segmentfault.com/a/1190000015301449?utm_source=tag-newest" target="_blank" rel="external">https://segmentfault.com/a/1190000015301449?utm_source=tag-newest</a></li>
+<li><strong>消息队列的优势：解耦、异步、流量削峰</strong></li>
+<li><strong>消息队列的缺点</strong>：<ul>
+<li>系统的复杂性提高</li>
+<li>系统的可用性降低，一旦消息队列挂掉，系统也会随之瘫痪</li>
+</ul>
+</li>
+<li><strong>消息队列的使用场景？</strong><ul>
+<li><a href="https://blog.csdn.net/jasonhui512/article/details/53231566" target="_blank" rel="external">https://blog.csdn.net/jasonhui512/article/details/53231566</a></li>
+</ul>
+</li>
+<li><p><strong>如何保证消息可靠性投递？</strong></p>
+<ul>
+<li>生产者丢弄丢数据：只需要在生产者的开启事务，一旦消息投递失败，事务回滚即可，另外一种模式是confirm模式，一种异步的处理模式，一旦消息被成功投递到队列之后会异步发送一个ACK的消息，否则发送一个NACK的消息</li>
+<li>消息队列弄丢数据：开启消息队列持久化和消息确认机制，可以在消息持久化之后发送一个ACK消息给生产者，如果持久化之前没有接收到</li>
+<li>消费者弄丢数据：采用自动确认的模式即可，如果消费者成功消费了数据，那么发送一个ACK消息，否则发送一个NACK消息</li>
+</ul>
+</li>
+<li>如何保证消息的顺序性</li>
+<li><p>如何保证消息不被重复消费？</p>
+<ul>
+<li>开启自动确认机制，一旦消息被成功消费，那么就发送一个ACK消息，否则发送一个NACK</li>
+</ul>
+</li>
+<li>如何保证消息的高可用？</li>
+</ul>
+<h2 id="Tomcat性能调优"><a href="#Tomcat性能调优" class="headerlink" title="Tomcat性能调优"></a>Tomcat性能调优</h2><ul>
+<li><p><a href="https://blog.csdn.net/u010195563/article/details/80966025，https://www.cnblogs.com/zhuawang/p/5213192.html，https://blog.csdn.net/lz13502800153/article/details/80089770" target="_blank" rel="external">https://blog.csdn.net/u010195563/article/details/80966025，https://www.cnblogs.com/zhuawang/p/5213192.html，https://blog.csdn.net/lz13502800153/article/details/80089770</a></p>
+</li>
+<li><p>内存优化：指定tomcat的运行内存</p>
+</li>
+<li>线程优化：</li>
+<li>IO优化，使用NIO，在tomcat8之后使用的都是NIO，可以使用apr，这个是在操作系统级别提升并发的性能</li>
+<li>APR：<ul>
+<li><a href="https://blog.csdn.net/goldenfish1919/article/details/78859620" target="_blank" rel="external">https://blog.csdn.net/goldenfish1919/article/details/78859620</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="JDK"><a href="#JDK" class="headerlink" title="JDK"></a>JDK</h2><h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><ul>
+<li>HashMap的底层原理<ul>
+<li><a href="https://blog.csdn.net/hefenglian/article/details/79763634" target="_blank" rel="external">https://blog.csdn.net/hefenglian/article/details/79763634</a></li>
+</ul>
+</li>
+<li>初始大小为16，负载因子默认为0.75，也就是如果元素个数大于16*0.75=12，那么将会扩容（resize）一倍（32），扩容的过程是非常消耗性能，因此如果清楚知道元素的个数，那么需要创建的时候就指定，避免中途扩容。</li>
+<li>JDK1.7是使用位桶(数组)+链表的方式实现的<ul>
+<li><img src="https://img-blog.csdn.net/20180330211416496?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hlZmVuZ2xpYW4=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></li>
+<li>添加元素<ul>
+<li>通过计算key的hash值找到在数组中的位置，如果此时数组位置为空，直接添加一个元素（Entry）</li>
+<li>如果此时数组的位置不为空，通过的equals方法查找当前链表中是否有相同的，如果没有，直接插入到链表的末尾，否则覆盖之前的元素。</li>
+</ul>
+</li>
+<li>get<ul>
+<li>通过计算key的hash值找到数组中的位置</li>
+<li>通过key的equals方法在链表中查找和当前key的相等的，如果存在返回这个Entry即可。</li>
+</ul>
+</li>
+<li>问题：<ul>
+<li><strong>链表的查询很慢，如果有成千上万个元素，那么此时的性能很低。</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>JDK1.8使用的是位桶+链表+红黑树，当<strong>位桶中的链表元素</strong>的个数超过阀值8，那个链表将会转换为红黑树。<ul>
+<li>链表的时候和JDK1.7是一致的，如果是红黑树，那么就是红黑树的遍历</li>
+</ul>
+</li>
+</ul>
+<h3 id="数组和链表的区别"><a href="#数组和链表的区别" class="headerlink" title="数组和链表的区别"></a>数组和链表的区别</h3><ul>
+<li>数组：<ul>
+<li>初始化需要指定大小</li>
+<li>查询性能高</li>
+<li>添加、删除需要前后移动元素，性能低</li>
+</ul>
+</li>
+<li>链表：<ul>
+<li>动态增长，不需要提前指定个数</li>
+<li>查询性能较低</li>
+<li>添加、删除、修改性能较高</li>
+</ul>
+</li>
+</ul>
+<h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h3><ul>
+<li>初始化默认的容量为<strong>10</strong>，当数组中的元素大于当前的默认容量了，那么调用<code>grow</code>方法，扩容<strong>1.5倍</strong>（<code>Arrays.copyOf</code>）</li>
+<li>ArrayList的扩容：<a href="https://blog.csdn.net/zymx14/article/details/78324464" target="_blank" rel="external">https://blog.csdn.net/zymx14/article/details/78324464</a></li>
+</ul>
+<h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><ul>
+<li><p><a href="https://www.cnblogs.com/gdpuzxs/p/7044963.html" target="_blank" rel="external">https://www.cnblogs.com/gdpuzxs/p/7044963.html</a></p>
+</li>
+<li><p>类加载器的类型？</p>
+<ul>
+<li>根类加载器(Bootstrap) –C++写的 ，看不到源码 （BootStrapClassLoader）   </li>
+<li>扩展类加载器（Extension） –加载位置 ： jre\lib\ext 中    (ExtStrapClassLoader)</li>
+<li>系统(应用)类加载器(System\App) –加载位置 ： classpath 中   (AppClassLoader) </li>
+<li>自定义加载器(必须继承 ClassLoader)    </li>
+</ul>
+</li>
+<li>双亲委派机制</li>
+<li>自定义类加载器，继承ClassLoader</li>
+</ul>
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><h3 id="网络七层协议"><a href="#网络七层协议" class="headerlink" title="网络七层协议"></a>网络七层协议</h3><ul>
+<li><p><a href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E4%B8%83%E5%B1%82%E5%8D%8F%E8%AE%AE/6056879?fr=aladdin" target="_blank" rel="external">https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E4%B8%83%E5%B1%82%E5%8D%8F%E8%AE%AE/6056879?fr=aladdin</a></p>
+</li>
+<li><p>应用层：FTP、HTTP、TELNET、SMTP、DNS等协议。 </p>
+</li>
+<li>表示层</li>
+<li>会话层</li>
+<li>传输层：TCP协议与UDP协议。 </li>
+<li>网络层：IP协议、ICMP协议、ARP协议、RARP协议和BOOTP协议。 </li>
+<li>数据链路层</li>
+<li>物理层</li>
+</ul>
+<h3 id="TCP和UDP"><a href="#TCP和UDP" class="headerlink" title="TCP和UDP"></a>TCP和UDP</h3><ul>
+<li><a href="https://www.cnblogs.com/xiohao/p/4439164.html" target="_blank" rel="external">https://www.cnblogs.com/xiohao/p/4439164.html</a></li>
+</ul>
+<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><ul>
+<li><a href="https://www.cnblogs.com/xiohao/p/4439164.html" target="_blank" rel="external">https://www.cnblogs.com/xiohao/p/4439164.html</a></li>
+</ul>
+<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><h3 id="长连接"><a href="#长连接" class="headerlink" title="长连接"></a>长连接</h3><ul>
+<li><a href="https://www.cnblogs.com/gotodsp/p/6366163.html" target="_blank" rel="external">https://www.cnblogs.com/gotodsp/p/6366163.html</a></li>
+</ul>
+<h2 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h2><h3 id="Spring中的BeanFactory和FactoryBean的区别"><a href="#Spring中的BeanFactory和FactoryBean的区别" class="headerlink" title="Spring中的BeanFactory和FactoryBean的区别"></a>Spring中的BeanFactory和FactoryBean的区别</h3><ul>
+<li><a href="http://www.cnblogs.com/aspirant/p/9082858.html" target="_blank" rel="external">http://www.cnblogs.com/aspirant/p/9082858.html</a></li>
+</ul>
+<h3 id="FactoryBean的作用"><a href="#FactoryBean的作用" class="headerlink" title="FactoryBean的作用"></a>FactoryBean的作用</h3><ul>
+<li><a href="https://www.cnblogs.com/davidwang456/p/3688250.html" target="_blank" rel="external">https://www.cnblogs.com/davidwang456/p/3688250.html</a></li>
+<li>一般情况下，Spring通过反射机制利用bean的class属性指定实现类来实例化bean 。在某些情况下，实例化bean过程比较复杂，如果按照传统的方式，则需要在<bean>中提供大量的配置信息，配置方式的灵活性是受限的，这时采用编码的方式可能会得到一个简单的方案。Spring为此提供了一个org.Springframework.bean.factory.FactoryBean的工厂类接口，用户可以通过实现该接口定制实例化bean的逻辑。FactoryBean接口对于Spring框架来说占有重要的地位，Spring 自身就提供了70多个FactoryBean的实现。它们隐藏了实例化一些复杂bean的细节，给上层应用带来了便利。从Spring 3.0 开始， FactoryBean开始支持泛型，即接口声明改为FactoryBean<t> 。</t></bean></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 创建一个UserFactoryBean，实现FactoryBean，用来创建一个User对象</div><div class="line"> * InitializingBean：初始化</div><div class="line"> * ApplicationContextAware：设置ApplicationContext</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserFactoryBean</span> <span class="keyword">implements</span> <span class="title">FactoryBean</span>&lt;<span class="title">User</span>&gt;, <span class="title">InitializingBean</span>, <span class="title">ApplicationContextAware</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//User对象</span></div><div class="line">    <span class="keyword">private</span> User user;</div><div class="line">    <span class="comment">//ApplicationContext对象，可以获取指定的Bean</span></div><div class="line">    <span class="keyword">private</span> ApplicationContext applicationContext;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 返回一个User</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">return</span> user;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> Class&lt;?&gt; getObjectType() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        user=<span class="keyword">new</span> User();</div><div class="line">        user.setName(<span class="string">"陈加兵"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setApplicationContext</span><span class="params">(ApplicationContext applicationContext)</span> <span class="keyword">throws</span> BeansException </span>&#123;</div><div class="line">        <span class="keyword">this</span>.applicationContext=applicationContext;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h2><ul>
+<li><a href="https://www.cnblogs.com/3xmq/p/springboot.html" target="_blank" rel="external">https://www.cnblogs.com/3xmq/p/springboot.html</a></li>
+</ul>
+<h2 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h2><h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2><ul>
+<li><a href="https://blog.csdn.net/zhengzhaoyang122/article/details/80142955" target="_blank" rel="external">https://blog.csdn.net/zhengzhaoyang122/article/details/80142955</a></li>
+<li></li>
+</ul>
+<h2 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h2><h2 id="网络协议和网络编程"><a href="#网络协议和网络编程" class="headerlink" title="网络协议和网络编程"></a>网络协议和网络编程</h2><h2 id="面试题集锦"><a href="#面试题集锦" class="headerlink" title="面试题集锦"></a>面试题集锦</h2><ul>
+<li><a href="https://www.csrcrx.com/article/4817.html" target="_blank" rel="external">阿里面试</a></li>
+<li></li>
+</ul>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="https://mp.weixin.qq.com/s/kJpRgfI3zT77XqMeRfmmQQ" target="_blank" rel="external">https://mp.weixin.qq.com/s/kJpRgfI3zT77XqMeRfmmQQ</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Mysql&quot;&gt;&lt;a href=&quot;#Mysql&quot; class=&quot;headerlink&quot; title=&quot;Mysql&quot;&gt;&lt;/a&gt;Mysql&lt;/h2&gt;&lt;h3 id=&quot;三大范式&quot;&gt;&lt;a href=&quot;#三大范式&quot; class=&quot;headerlink&quot; title=&quot;三大范式&quot;
+    
+    </summary>
+    
+      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>springBoot制作docker镜像</title>
@@ -2140,146 +2490,6 @@
     
     
       <category term="SpringBoot" scheme="http://chenjiabing666.github.io/tags/SpringBoot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java nio</title>
-    <link href="http://chenjiabing666.github.io/2018/12/01/java-nio/"/>
-    <id>http://chenjiabing666.github.io/2018/12/01/java-nio/</id>
-    <published>2018-12-01T14:05:47.000Z</published>
-    <updated>2018-12-01T14:06:56.753Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="缓冲区（Buffer）"><a href="#缓冲区（Buffer）" class="headerlink" title="缓冲区（Buffer）"></a>缓冲区（Buffer）</h2><ul>
-<li>负责数据的存取，实际上就是一个数组，用于存储不同的数据</li>
-<li>除了布尔类型之后，其他类型都有，最常用的就是<code>ByteBuffer</code></li>
-</ul>
-<h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><ul>
-<li><code>allocate(int capacity)</code>： 分配指定大小的缓冲区（非直接缓冲区）</li>
-<li><code>allocateDirect(int capacity)</code>： 分配指定大小的缓冲区（直接缓冲区）</li>
-<li><code>put()</code>：向缓冲区中存储数据</li>
-<li><code>get(byte[] dst)</code>：从缓冲区获取数据，这里的dst的容量必须和缓冲区的大小一致</li>
-<li><code>get(byte[] dst,int offest,int length)</code> ：读取指定长度的内容到dst中，这里的dst容量没有要求</li>
-<li><code>flip()</code>： 缓冲区从写模式切换到读模式</li>
-<li><code>clear()</code>：清空缓冲区，数据依然存在，只是处于一个“被遗忘”状态，改变的只是<code>limit</code>和<code>position</code></li>
-<li><code>array()</code> ：返回实现此缓冲区的 byte 数组 </li>
-<li><code>mark()</code>： 标记当前位置（position）</li>
-<li><code>reset()</code>：恢复到mark的位置</li>
-</ul>
-<h3 id="核心属性"><a href="#核心属性" class="headerlink" title="核心属性"></a>核心属性</h3><ul>
-<li><code>capacity</code>：容量，表示缓冲区的最大容量，一旦声明不能改变</li>
-<li><code>limit</code>： 界限，缓冲区中可以操作的数据的大小，实际存储数据的大小，limit之后的数据不能进行读写</li>
-<li><code>position</code>：位置，表示缓冲区中正在操作数据的位置</li>
-<li><code>position&lt;=limit&lt;=capacity</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</div><div class="line">	String str=<span class="string">"abcd"</span>;</div><div class="line">	ByteBuffer buffer=ByteBuffer.allocate(<span class="number">1024</span>);<span class="comment">//分配1024个字节大小的缓冲区</span></div><div class="line">	buffer.put(str.getBytes());  <span class="comment">//写入数据</span></div><div class="line">	System.out.println(buffer.capacity());  <span class="comment">//容量 1024</span></div><div class="line">	System.out.println(buffer.limit()); <span class="comment">//界限，1024</span></div><div class="line">	System.out.println(buffer.position());  <span class="comment">//正在操作数据的位置  0</span></div><div class="line">	</div><div class="line">	buffer.flip();   <span class="comment">//切换到读模式，读取数据的时候一定要切换，否则将会没有界限</span></div><div class="line">	</div><div class="line">	System.out.println(buffer.capacity());  <span class="comment">//容量 1024</span></div><div class="line">	System.out.println(buffer.limit()); <span class="comment">//界限，4，允许读取的位置只能到4，因为就存储了这么多的数据</span></div><div class="line">	System.out.println(buffer.position());  <span class="comment">//正在操作数据的位置  0</span></div><div class="line">	System.err.println(buffer.get(<span class="number">4</span>));   <span class="comment">//超出界限了，下标记从0开始，0&lt;=index&lt;limit</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>实例</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 读取缓冲区中的数据到指定的字节数组中</div><div class="line"> * 1、字节数组的大小一定要和buffer.limit()一样大小，否则会报错</div><div class="line"> */</div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span>&#123;</div><div class="line">	String str=<span class="string">"abcdefg"</span>;</div><div class="line">	ByteBuffer buffer=ByteBuffer.allocate(<span class="number">1024</span>);  <span class="comment">//申请空间大小</span></div><div class="line">	buffer.put(str.getBytes());  <span class="comment">//存入数据</span></div><div class="line">	buffer.flip();   <span class="comment">//切换到读模式</span></div><div class="line">	<span class="comment">//申请一个字节数组和实际数据一样大,这里必须和缓冲区的实际数据大小一样，否则将会报错</span></div><div class="line">	<span class="keyword">byte</span>[] dst=<span class="keyword">new</span> <span class="keyword">byte</span>[buffer.limit()]; </div><div class="line">	buffer.get(dst);   <span class="comment">//读取缓冲区的数据到dst字节数组中</span></div><div class="line">	System.out.println(<span class="keyword">new</span> String(dst));</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 读取一个字节</div><div class="line"> */</div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span></span>&#123;</div><div class="line">	String str=<span class="string">"abcdefg"</span>;</div><div class="line">	ByteBuffer buffer=ByteBuffer.allocate(<span class="number">10</span>);  <span class="comment">//申请空间大小</span></div><div class="line">	buffer.put(str.getBytes());  <span class="comment">//存入数据</span></div><div class="line">	buffer.flip();   <span class="comment">//切换到读模式</span></div><div class="line">	System.out.println((<span class="keyword">char</span>)buffer.get());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>测试remark和reset</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">	 * 测试remark和rest</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</div><div class="line">		ByteBuffer buffer=ByteBuffer.allocate(<span class="number">1024</span>);</div><div class="line">		String str=<span class="string">"abcdcdscdscds"</span>;</div><div class="line">		buffer.put(str.getBytes());   <span class="comment">//向缓冲区中写入数据</span></div><div class="line">		buffer.flip();  <span class="comment">//切换到读的模式</span></div><div class="line">		<span class="keyword">byte</span>[] dst=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];   <span class="comment">//创建byte数组</span></div><div class="line">		System.out.println(<span class="string">"---------------------读取两个字节的数据----------------------------"</span>);</div><div class="line">		buffer.get(dst,<span class="number">0</span>,<span class="number">2</span>);   <span class="comment">//读取两个字节长度的数据到dst中，此时的position的位置位2</span></div><div class="line">		System.out.println(<span class="keyword">new</span> String(dst));</div><div class="line">		System.out.println(<span class="string">"----------------------标记此时的位置------------------------------"</span>);</div><div class="line">		buffer.mark();  <span class="comment">//标记位置，此时的position的位置位2</span></div><div class="line">		System.out.println(<span class="string">"---------------------继续读取两个字节的数据----------------------------"</span>);</div><div class="line">		buffer.get(dst,buffer.position(),<span class="number">2</span>);  <span class="comment">//继续从当前位置读取两个字节到dst中</span></div><div class="line">		System.out.println(<span class="keyword">new</span> String(dst));</div><div class="line">		System.out.println(buffer.position());  <span class="comment">//此时的position的位置为4</span></div><div class="line">		</div><div class="line">		System.out.println(<span class="string">"---------------------重置缓冲区到remark的位置----------------------------"</span>);</div><div class="line">		buffer.reset();  <span class="comment">//重置缓冲区到rmark的位置</span></div><div class="line">		System.out.println(buffer.position());   <span class="comment">//此时的position为2</span></div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<h3 id="直接缓冲区"><a href="#直接缓冲区" class="headerlink" title="直接缓冲区"></a>直接缓冲区</h3><ul>
-<li>直接字节缓冲区可以通过调用此类的 <code>allocateDirect()</code>工厂方法 来创建。此方法返回的 缓冲区进行分配和取消分配所需成本通常高于非直接缓冲区 。直接缓冲区的内容可以驻留在常规的垃圾回收堆之外，因此，它们对应用程序的内存需求量造成的影响可能并不明显。所以，建议将直接缓冲区主要分配给那些易受基础系统的机 本机 I/O 操作影响的大型、持久的缓冲区。一般情况下，最好仅在直接缓冲区能在程序性能方面带来明显好处时分配它们。</li>
-<li><img src="http://upload-images.jianshu.io/upload_images/8244809-fcb728300855e16b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="直接缓冲区"></li>
-</ul>
-<h3 id="非直接缓冲区"><a href="#非直接缓冲区" class="headerlink" title="非直接缓冲区"></a>非直接缓冲区</h3><ul>
-<li>在JVM中内存中创建，在每次调用基础操作系统的一个本机IO之前或者之后，虚拟机都会将缓冲区的内容复制到中间缓冲区（或者从中间缓冲区复制内容），缓冲区的内容驻留在JVM内，因此销毁容易，但是占用JVM内存开销，处理过程中有复制操作。</li>
-<li><p><img src="http://upload-images.jianshu.io/upload_images/8244809-7cb17b790f670380.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="非直接缓冲区"></p>
-<ul>
-<li>写入步骤如下：<ol>
-<li>创建一个临时的直接ByteBuffer对象。</li>
-<li>将非直接缓冲区的内容复制到临时缓冲中。</li>
-<li>使用临时缓冲区执行低层次I/O操作。</li>
-<li>临时缓冲区对象离开作用域，并最终成为被回收的无用数据。</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="通道（Channel）"><a href="#通道（Channel）" class="headerlink" title="通道（Channel）"></a>通道（Channel）</h2><ul>
-<li>通道是双向的，流是单向的</li>
-<li>通道相当于输出和输入流</li>
-<li>主要的实现类如下：<ul>
-<li><code>FileChannel</code>：文件的操作</li>
-<li><code>SocketChannel</code>：TCP</li>
-<li><code>ServerSocketChannel</code>：TCP</li>
-<li><code>DatagramChannel</code>：UDP</li>
-</ul>
-</li>
-</ul>
-<h3 id="获取通道"><a href="#获取通道" class="headerlink" title="获取通道"></a>获取通道</h3><ol>
-<li>本地IO，提供了<code>getChannel()</code>方法获取通道<ol>
-<li><code>FileInputStream</code></li>
-<li><code>FileOutputStram</code></li>
-<li><code>RandomAccessFile</code></li>
-</ol>
-</li>
-<li>在JDK1.7中的NIO，针对各个通道提供了静态方法<code>open()</code></li>
-<li>在JDK1.7中的NIO的Files工具类的<code>newByteChannel()</code></li>
-</ol>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><ul>
-<li>利用通道实现文件的复制（非直接缓冲区）</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 使用getChannel获取通道,实现文件的复制</div><div class="line"> * <span class="doctag">@throws</span> IOException </div><div class="line"> */</div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</div><div class="line">	FileInputStream inputStream=<span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(<span class="string">"C:/images/lifecrystal.png"</span>));</div><div class="line">	FileOutputStream outputStream=<span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(<span class="string">"C:/images/2.png"</span>));</div><div class="line">	</div><div class="line">	FileChannel inchannel = inputStream.getChannel();  <span class="comment">//获取通道，用于读取</span></div><div class="line">	FileChannel outchannel=outputStream.getChannel();  <span class="comment">//获取通道，用于写入</span></div><div class="line">	</div><div class="line">	ByteBuffer buffer=ByteBuffer.allocate(<span class="number">1024</span>);  <span class="comment">//申请缓冲区</span></div><div class="line">	<span class="comment">//将通道中的数据写入缓冲区</span></div><div class="line">	<span class="keyword">while</span> (inchannel.read(buffer)!=-<span class="number">1</span>) &#123;</div><div class="line">		buffer.flip(); <span class="comment">//切换到读模式</span></div><div class="line">		<span class="comment">//将缓冲区中的数据写入通道</span></div><div class="line">		outchannel.write(buffer);  </div><div class="line">		buffer.clear();  <span class="comment">//清空缓冲区，继续读取数据</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">//关闭通道</span></div><div class="line">	inchannel.close();</div><div class="line">	outchannel.close();</div><div class="line">	inputStream.close();</div><div class="line">	outchannel.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>使用直接缓冲区完成文件的复制，使用open()的方法获取通道</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">	 * 使用直接缓冲区完成文件的复制</div><div class="line">	 * 使用open()的方法获取通道</div><div class="line">	 * <span class="doctag">@throws</span> IOException</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</div><div class="line">		<span class="comment">//获取一个读取数据的通道，使用的读模式</span></div><div class="line">		FileChannel inchannel=FileChannel.open(Paths.get(<span class="string">"C:/images/2.png"</span>), StandardOpenOption.READ);</div><div class="line">		</div><div class="line">		<span class="comment">/**</span></div><div class="line">		 * StandardOpenOption.CREATE : 如果文件不存在，那么就创建，如果存在将会覆盖，不报错</div><div class="line">		 * StandardOpenOption.CREATE_NEW ： 如果不存在就创建，如果存在，将会报错</div><div class="line">		 */</div><div class="line">		FileChannel outchannel=FileChannel.open(Paths.get(<span class="string">"C:/images/3.png"</span>), StandardOpenOption.CREATE,StandardOpenOption.WRITE,StandardOpenOption.READ);</div><div class="line">		</div><div class="line">		<span class="comment">//创建一个内存映射文件，操作直接缓冲区，和allocatDirect()一样，MapMode.READ_ONLY表示只读的模式，用于读取</span></div><div class="line">		MappedByteBuffer inMappedBuff = inchannel.map(MapMode.READ_ONLY, <span class="number">0</span>, inchannel.size());</div><div class="line">		</div><div class="line">		<span class="comment">//创建一个内容映射文件，MapMode.READ_WRITE表示读写模式，可以读写</span></div><div class="line">		MappedByteBuffer outMappedBuffer = outchannel.map(MapMode.READ_WRITE, <span class="number">0</span>, inchannel.size());</div><div class="line">		</div><div class="line">		<span class="keyword">byte</span>[] dst=<span class="keyword">new</span> <span class="keyword">byte</span>[inMappedBuff.limit()];</div><div class="line">		<span class="comment">//将数据读入到dst中</span></div><div class="line">		inMappedBuff.get(dst);</div><div class="line">		</div><div class="line">		<span class="comment">//将数据从dst中读取到outMappedBuffer</span></div><div class="line">		outMappedBuffer.put(dst);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<h3 id="通道之间指定进行数据传输"><a href="#通道之间指定进行数据传输" class="headerlink" title="通道之间指定进行数据传输"></a>通道之间指定进行数据传输</h3><ul>
-<li><code>transferTo(long position,long count,WritableByteChannel target)</code>:将数据从通道写入可写的通道target中</li>
-<li><code>transferFrom(ReadableByteChannel from,long position,long count)</code>：将数据从通道from中读取到通道中</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 通道之间直接进行传输</div><div class="line">	 * 	1、transferTo(long position,long count,WritableByteChannel target):将数据从通道写入可写的通道target中</div><div class="line">	 * 	2、transferFrom(ReadableByteChannel from,long position,long count)：将数据从通道from中读取到通道中</div><div class="line">	 * <span class="doctag">@throws</span> IOException</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</div><div class="line">		<span class="comment">//获取一个读取数据的通道，使用的读模式</span></div><div class="line">		FileChannel inchannel = FileChannel.open(Paths.get(<span class="string">"C:/images/2.png"</span>),</div><div class="line">				StandardOpenOption.READ);</div><div class="line"></div><div class="line">		<span class="comment">/**</span></div><div class="line">		 * StandardOpenOption.CREATE : 如果文件不存在，那么就创建，如果存在将会覆盖，不报错</div><div class="line">		 * StandardOpenOption.CREATE_NEW ： 如果不存在就创建，如果存在，将会报错</div><div class="line">		 */</div><div class="line">		FileChannel outchannel=FileChannel.open(Paths.get(<span class="string">"C:/images/4.png"</span>), StandardOpenOption.CREATE,StandardOpenOption.WRITE,StandardOpenOption.READ);</div><div class="line">		</div><div class="line">		<span class="comment">//将通道inchannel中的数据直接写入outchannel中</span></div><div class="line">		inchannel.transferTo(<span class="number">0</span>, inchannel.size(), outchannel);</div><div class="line">		</div><div class="line">		<span class="comment">//和上面一样的效果</span></div><div class="line"><span class="comment">//		outchannel.transferFrom(inchannel, 0, inchannel.size());</span></div><div class="line">		</div><div class="line">		inchannel.close();</div><div class="line">		outchannel.close();</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<h3 id="分散读取"><a href="#分散读取" class="headerlink" title="分散读取"></a>分散读取</h3><ul>
-<li>将通道中的数据分散到各个缓冲区中</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 分散读取：将通道中的数据写入各个缓冲区中，是按照顺序写入的，第一个缓冲区写满才会写入第二个缓冲区</div><div class="line"> * <span class="doctag">@throws</span> IOException </div><div class="line"> */</div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</div><div class="line">	<span class="comment">//创建读写模式的RandomAccessFile</span></div><div class="line">	RandomAccessFile accessFile=<span class="keyword">new</span> RandomAccessFile(<span class="keyword">new</span> File(<span class="string">"C:/images/2.png"</span>), <span class="string">"rw"</span>);</div><div class="line">	FileChannel inchannel=accessFile.getChannel(); <span class="comment">//读取</span></div><div class="line">	</div><div class="line">	ByteBuffer buffer1=ByteBuffer.allocate(<span class="number">10</span>); <span class="comment">//第一个缓冲区，10个字节大小</span></div><div class="line">	ByteBuffer buffer2=ByteBuffer.allocate(<span class="number">1024</span>);<span class="comment">//第二个缓冲区</span></div><div class="line">	</div><div class="line">	ByteBuffer[] dst=&#123;buffer1,buffer2&#125;;</div><div class="line">	</div><div class="line">	<span class="comment">//分散读取</span></div><div class="line">	inchannel.read(dst);</div><div class="line">	</div><div class="line">	<span class="keyword">for</span> (ByteBuffer byteBuffer : dst) &#123;</div><div class="line">		byteBuffer.flip();  <span class="comment">//切换到读的模式</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">//输出第一个缓冲区的数据</span></div><div class="line">	System.out.println(<span class="keyword">new</span> String(buffer1.array()));</div><div class="line">	</div><div class="line">	<span class="comment">//输出第二个缓冲区中的数据</span></div><div class="line">	System.out.println(<span class="keyword">new</span> String(buffer2.array()));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="聚集写入"><a href="#聚集写入" class="headerlink" title="聚集写入"></a>聚集写入</h3><ul>
-<li>将各个缓冲区的数据读入到通道中</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</div><div class="line">	<span class="comment">//创建读写模式的RandomAccessFile</span></div><div class="line">	RandomAccessFile accessFile=<span class="keyword">new</span> RandomAccessFile(<span class="keyword">new</span> File(<span class="string">"C:/images/2.png"</span>), <span class="string">"rw"</span>);</div><div class="line">	FileChannel inchannel=accessFile.getChannel(); <span class="comment">//读取</span></div><div class="line">	</div><div class="line">	ByteBuffer buffer1=ByteBuffer.allocate(<span class="number">10</span>); <span class="comment">//第一个缓冲区，10个字节大小</span></div><div class="line">	ByteBuffer buffer2=ByteBuffer.allocate(<span class="number">1024</span>);<span class="comment">//第二个缓冲区</span></div><div class="line">	</div><div class="line">	ByteBuffer[] dst=&#123;buffer1,buffer2&#125;;</div><div class="line">	</div><div class="line">	<span class="comment">//分散读取</span></div><div class="line">	inchannel.read(dst);</div><div class="line">	</div><div class="line">	<span class="keyword">for</span> (ByteBuffer byteBuffer : dst) &#123;</div><div class="line">		byteBuffer.flip();  <span class="comment">//切换到读的模式</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">//输出第一个缓冲区的数据</span></div><div class="line">	System.out.println(<span class="keyword">new</span> String(buffer1.array()));</div><div class="line">	</div><div class="line">	<span class="comment">//输出第二个缓冲区中的数据</span></div><div class="line">	System.out.println(<span class="keyword">new</span> String(buffer2.array()));</div><div class="line">	</div><div class="line">	System.out.println(<span class="string">"---------------------聚集写入-------------------"</span>);</div><div class="line">	</div><div class="line">	RandomAccessFile accessFile2=<span class="keyword">new</span> RandomAccessFile(<span class="keyword">new</span> File(<span class="string">"C:/images/6.png"</span>), <span class="string">"rw"</span>);</div><div class="line">	FileChannel outChannel=accessFile2.getChannel();   <span class="comment">//写入数据的通道</span></div><div class="line">	<span class="comment">//聚集写入，将数据从各个缓冲区中写入到通道中</span></div><div class="line">	outChannel.write(dst); </div><div class="line">	</div><div class="line">	inchannel.close();</div><div class="line">	outChannel.close();</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="NIO阻塞式"><a href="#NIO阻塞式" class="headerlink" title="NIO阻塞式"></a>NIO阻塞式</h3><ul>
-<li>阻塞或者不阻塞是针对<code>SocketChannel</code>，<code>ServerSocketChannel</code></li>
-<li>NIO中的套接字可以轻松在阻塞和非阻塞之间切换，这里我们使用NIO实现阻塞式的TCP数据传输</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">	 * 客户端使用SocketChannel</div><div class="line">	 * 客户端使用SocketChannel中的write()方法向服务端发送数据，使用read()读取服务端返回的反馈</div><div class="line">	 * 在数据发送完成之后如果不调用shutdownOutput告知服务端数据已传送完成，那么将会一直阻塞下去</div><div class="line">	 * <span class="doctag">@throws</span> Exception</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testClient</span><span class="params">()</span><span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">		<span class="comment">//获取通道</span></div><div class="line">		SocketChannel clientChannel = SocketChannel.open(<span class="keyword">new</span> InetSocketAddress(<span class="string">"127.0.0.1"</span>,<span class="number">9898</span>));</div><div class="line">		</div><div class="line">		FileChannel inchannel = FileChannel.open(Paths.get(<span class="string">"C:/images/2.png"</span>), StandardOpenOption.READ);</div><div class="line">		</div><div class="line">		ByteBuffer buffer=ByteBuffer.allocate(<span class="number">1024</span>);</div><div class="line">		</div><div class="line">		<span class="comment">//循环读取本地图片，并且发送到服务端</span></div><div class="line">		<span class="comment">//1、先使用FileChannel将数据读取到缓冲区中</span></div><div class="line">		<span class="comment">//2、再使用SocketChannel的write方法将缓冲区的数据发送到服务端</span></div><div class="line">		<span class="keyword">while</span>(inchannel.read(buffer)!=-<span class="number">1</span>)&#123;</div><div class="line">			buffer.flip(); <span class="comment">//切换读模式</span></div><div class="line">			clientChannel.write(buffer);  <span class="comment">//发送数据</span></div><div class="line">			buffer.clear(); <span class="comment">//清空缓冲区</span></div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">//告诉服务端数据已经传送完成，否则将会一直阻塞</span></div><div class="line">		clientChannel.shutdownOutput();  </div><div class="line">		</div><div class="line">		<span class="comment">//接收服务端的反馈</span></div><div class="line">		<span class="comment">//使用read()方法接收服务端的反馈，将其读入到缓冲区中</span></div><div class="line">		<span class="keyword">while</span>(clientChannel.read(buffer)&gt;<span class="number">0</span>)&#123;</div><div class="line">			buffer.flip();  <span class="comment">//切换读模式</span></div><div class="line">			System.out.println(<span class="string">"服务端："</span>+<span class="keyword">new</span> String(buffer.array()));</div><div class="line">			buffer.clear();</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">//关闭通道</span></div><div class="line">		inchannel.close();</div><div class="line">		clientChannel.close();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 服务端使用ServerSocketChannel</div><div class="line">	 * 服务端使用SocketChannel的read()方法读取客户端发送的数据，使用write()方法向客户端返回数据</div><div class="line">	 * <span class="doctag">@throws</span> Exception</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testServer</span><span class="params">()</span><span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">		<span class="comment">//获取服务端的通道</span></div><div class="line">		ServerSocketChannel serverChannel = ServerSocketChannel.open();</div><div class="line">		</div><div class="line">		<span class="comment">//绑定连接</span></div><div class="line">		serverChannel.bind(<span class="keyword">new</span> InetSocketAddress(<span class="number">9898</span>));</div><div class="line">		</div><div class="line">		<span class="comment">//获取客户端的连接通道</span></div><div class="line">		SocketChannel clientChannel = serverChannel.accept();</div><div class="line">		</div><div class="line">		<span class="comment">//申请缓冲区</span></div><div class="line">		ByteBuffer byteBuffer=ByteBuffer.allocate(<span class="number">1024</span>);</div><div class="line">		</div><div class="line">		</div><div class="line">		FileChannel outChannel = FileChannel.open(Paths.get(<span class="string">"C:/images/12.png"</span>), StandardOpenOption.WRITE,StandardOpenOption.CREATE);</div><div class="line">		</div><div class="line">		<span class="comment">//循环接收客户端发送过来的数据，并且将其保存在本地</span></div><div class="line">		<span class="keyword">while</span>(clientChannel.read(byteBuffer)&gt;<span class="number">0</span>)&#123;</div><div class="line">			byteBuffer.flip(); <span class="comment">//切换读模式</span></div><div class="line">			outChannel.write(byteBuffer);  <span class="comment">//写入到本地</span></div><div class="line">			byteBuffer.clear(); <span class="comment">//清空缓冲区</span></div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">//服务端发送反馈信息给客户端，使用的还是SocketChannel的write方法</span></div><div class="line">		byteBuffer.put(<span class="string">"服务端接收数据成功"</span>.getBytes());</div><div class="line">		byteBuffer.flip(); <span class="comment">//切换模式</span></div><div class="line">		clientChannel.write(byteBuffer);</div><div class="line">		clientChannel.shutdownOutput();  <span class="comment">//告知客户端传输完成</span></div><div class="line">		</div><div class="line">		<span class="comment">//关闭通道</span></div><div class="line">		outChannel.close();</div><div class="line">		clientChannel.close();</div><div class="line">		serverChannel.close();</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<h2 id="Selector（选择器）"><a href="#Selector（选择器）" class="headerlink" title="Selector（选择器）"></a>Selector（选择器）</h2><ul>
-<li>总的来说，选择器是对通道进行监听，这样就会避免阻塞的发生，实现了多路复用</li>
-</ul>
-<h3 id="SelectionKey"><a href="#SelectionKey" class="headerlink" title="SelectionKey"></a>SelectionKey</h3><ul>
-<li><p>某个Channel成功连接到另一个服务器称为“ <strong>连接就绪</strong> ”。一个Server Socket Channel准备好接收新进入的连接称为“ <strong>接收就绪</strong> ”。一个有数据可读的通道可以说是“ <strong>读就绪</strong> ”。等待写数据的通道可以说是“ <strong>写就绪</strong> ”。 </p>
-</li>
-<li><p>选择器是用来轮询监听通道的状态，其中有四种状态如下：</p>
-<ul>
-<li><code>SelectionKey.OP_CONNECT</code>：连接就绪</li>
-<li><code>SelectionKey.OP_ACCEPT</code>：接收就绪</li>
-<li><code>SelectionKey.OP_READ</code>：读就绪</li>
-<li><code>SelectionKey.OP_WRITE</code>：写就绪</li>
-</ul>
-</li>
-</ul>
-<h3 id="NIO非阻塞式"><a href="#NIO非阻塞式" class="headerlink" title="NIO非阻塞式"></a>NIO非阻塞式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 客户端需要使用configureBlocking(false)设置成非阻塞模式的</div><div class="line"> * <span class="doctag">@throws</span> Exception</div><div class="line"> */</div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testClient</span><span class="params">()</span><span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">	<span class="comment">//获取通道</span></div><div class="line">	SocketChannel client = SocketChannel.open(<span class="keyword">new</span> InetSocketAddress(<span class="string">"127.0.0.1"</span>,<span class="number">9898</span>));</div><div class="line">	<span class="comment">//切换成非阻塞模式</span></div><div class="line">	client.configureBlocking(<span class="keyword">false</span>);</div><div class="line">	</div><div class="line">	ByteBuffer buf=ByteBuffer.allocate(<span class="number">1024</span>);  <span class="comment">//申请缓冲区</span></div><div class="line">	</div><div class="line">	Scanner scanner=<span class="keyword">new</span> Scanner(System.in);</div><div class="line">	<span class="keyword">while</span>(scanner.hasNext())&#123;</div><div class="line">		String line=scanner.next();  <span class="comment">//读取控制台输入的内容</span></div><div class="line">		buf.put((<span class="keyword">new</span> Date().toString()+<span class="string">"\n"</span>+line).getBytes());  <span class="comment">//向缓冲区写入数据</span></div><div class="line">		buf.flip(); <span class="comment">//切换到读模式</span></div><div class="line">		client.write(buf);  <span class="comment">//向服务端发送数据</span></div><div class="line">		buf.clear();  <span class="comment">//清空缓存区</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	scanner.close();</div><div class="line">	client.close();</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 服务端</div><div class="line"> * 1、将通道注册到选择器中，并且指定监听的事件</div><div class="line"> * 2、程序每次都会轮询的从选择器中选择事件，可以选择不同状态的通道进行操作</div><div class="line"> * <span class="doctag">@throws</span> Exception</div><div class="line"> */</div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testServer</span><span class="params">()</span><span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">	<span class="comment">//获取通道</span></div><div class="line">	ServerSocketChannel server = ServerSocketChannel.open();</div><div class="line">	</div><div class="line">	<span class="comment">//绑定端口</span></div><div class="line">	server.bind(<span class="keyword">new</span> InetSocketAddress(<span class="number">9898</span>));</div><div class="line">	</div><div class="line">	<span class="comment">//配置非阻塞</span></div><div class="line">	server.configureBlocking(<span class="keyword">false</span>);</div><div class="line">	</div><div class="line">	<span class="comment">//获取选择器</span></div><div class="line">	Selector selector = Selector.open();</div><div class="line">	</div><div class="line">	<span class="comment">//将通道注册到选择器上，并且知道指定监听的事件为"接收就绪"</span></div><div class="line">	server.register(selector, SelectionKey.OP_ACCEPT);</div><div class="line">	</div><div class="line">	<span class="comment">//轮询式获取选择器上已经准备就绪的事件</span></div><div class="line">	<span class="keyword">while</span>(selector.select()&gt;<span class="number">0</span>)&#123;</div><div class="line">		<span class="comment">//获取当前选择器中所有的选择键(已经准备就绪的)</span></div><div class="line">		Set&lt;SelectionKey&gt; keys = selector.selectedKeys();</div><div class="line">		</div><div class="line">		<span class="comment">//获取迭代器</span></div><div class="line">		Iterator&lt;SelectionKey&gt; iterator = keys.iterator();</div><div class="line">		</div><div class="line">		<span class="comment">//迭代器遍历所有的选择键</span></div><div class="line">		<span class="keyword">while</span>(iterator.hasNext())&#123;</div><div class="line">			<span class="comment">//获取当前选择键</span></div><div class="line">			SelectionKey key = iterator.next();</div><div class="line">			iterator.remove(); <span class="comment">//删除选择键</span></div><div class="line">			</div><div class="line">			<span class="keyword">if</span> (key.isAcceptable()) &#123;  <span class="comment">//如果接收就绪了 </span></div><div class="line">				SocketChannel client = server.accept();  <span class="comment">//获取SocketChannel</span></div><div class="line">				client.configureBlocking(<span class="keyword">false</span>);  <span class="comment">//设置非阻塞模式</span></div><div class="line">				client.register(selector, SelectionKey.OP_READ);  <span class="comment">//将此通道注册到选择器中，指定监听的事件是读就绪</span></div><div class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(key.isReadable())&#123;  <span class="comment">//如果读就绪</span></div><div class="line">				SocketChannel client = (SocketChannel) key.channel();  <span class="comment">//读就绪了，那么可以获取通道直接读取数据</span></div><div class="line">				ByteBuffer buf=ByteBuffer.allocate(<span class="number">1024</span>);  <span class="comment">//声明一个缓冲区</span></div><div class="line">				<span class="comment">//循环接收客户端的到缓冲区中</span></div><div class="line">				<span class="keyword">int</span> len=<span class="number">0</span>;</div><div class="line">				<span class="keyword">while</span>((len=client.read(buf))&gt;<span class="number">0</span>)&#123;</div><div class="line">					buf.flip();</div><div class="line">					System.out.println(<span class="keyword">new</span> String(buf.array(),<span class="number">0</span>,len));</div><div class="line">					buf.clear();</div><div class="line">				&#125;</div><div class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span> (key.isWritable()) &#123;  <span class="comment">//如果写就绪</span></div><div class="line">				</div><div class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span> (key.isConnectable()) &#123;  <span class="comment">//如果连接就绪</span></div><div class="line">				</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	server.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><a href="https://www.cnblogs.com/tengpan-cn/p/5809273.html" target="_blank" rel="external">https://www.cnblogs.com/tengpan-cn/p/5809273.html</a></li>
-<li><a href="http://ifeve.com/overview/" target="_blank" rel="external">并发编程网</a></li>
-<li><a href="http://www.cnblogs.com/snailclimb/p/9086334.html" target="_blank" rel="external">http://www.cnblogs.com/snailclimb/p/9086334.html</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;缓冲区（Buffer）&quot;&gt;&lt;a href=&quot;#缓冲区（Buffer）&quot; class=&quot;headerlink&quot; title=&quot;缓冲区（Buffer）&quot;&gt;&lt;/a&gt;缓冲区（Buffer）&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;负责数据的存取，实际上就是一个数组，用于存储不同的数据&lt;
-    
-    </summary>
-    
-      <category term="java学习" scheme="http://chenjiabing666.github.io/categories/java%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="java基础" scheme="http://chenjiabing666.github.io/tags/java%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
