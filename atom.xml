@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2019-06-12T07:00:09.297Z</updated>
+  <updated>2019-06-12T11:33:48.558Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring中的Aware解析</title>
+    <link href="http://chenjiabing666.github.io/2019/06/12/Spring%E4%B8%AD%E7%9A%84Aware%E8%A7%A3%E6%9E%90/"/>
+    <id>http://chenjiabing666.github.io/2019/06/12/Spring中的Aware解析/</id>
+    <published>2019-06-12T11:33:01.000Z</published>
+    <updated>2019-06-12T11:33:48.558Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Spring中的Aware"><a href="#Spring中的Aware" class="headerlink" title="Spring中的Aware"></a>Spring中的Aware</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>Spring框架中提供了许多实现了Aware接口的类，这些类主要是为了辅助Spring访问容器中的数据，比如<code>BeanNameAware</code>，这个类能够在Spring容器加载的过程中将Bean的名字（id）赋值给变量。</li>
+</ul>
+<h2 id="常用的Aware"><a href="#常用的Aware" class="headerlink" title="常用的Aware"></a>常用的Aware</h2><ul>
+<li><code>BeanNameAware</code>：能够获取bean的名称，即是id</li>
+<li><code>BeanFactoryAware</code>：获取BeanFactory实例</li>
+<li><code>ApplicationContextAware</code>：获取<code>ApplicationContext</code></li>
+<li><code>MessageSourceAware</code>：获取MessageSource</li>
+</ul>
+<h2 id="ApplicationContextAware"><a href="#ApplicationContextAware" class="headerlink" title="ApplicationContextAware"></a>ApplicationContextAware</h2><ul>
+<li>ApplicationContext可以获取容器中的bean，但是必须注入才能使用，当一些类不能注入的时候怎么才能获得bean呢？比如Utils中的类，通常不能直接通过注入直接使用ApplicationContext，此时就需要借助<code>ApplicationContextAware</code>这个接口了。</li>
+<li><code>ApplicationContextAware</code>的实现类如下</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 自定义一个实现类，一定要注入到容器中</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationContextAwareImpl</span> <span class="keyword">implements</span> <span class="title">ApplicationContextAware</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 容器启动的时候会调用这个方法，只需要将applicationContext设置即可</div><div class="line">     * <span class="doctag">@param</span> applicationContext 容器启动会自动注入</div><div class="line">     * <span class="doctag">@throws</span> BeansException</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setApplicationContext</span><span class="params">(ApplicationContext applicationContext)</span> <span class="keyword">throws</span> BeansException </span>&#123;</div><div class="line">        <span class="comment">//将其设置到ApplicationContextUtil</span></div><div class="line">        ApplicationContextUtil.setApplicationContext(applicationContext);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>ApplicationContextUtil</code>如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * ApplicationContext的工具类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationContextUtil</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * ApplicationContext对象，会ApplicationContextAwareImpl中的setApplicationContext方法中赋值</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ApplicationContext applicationContext;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ApplicationContext <span class="title">getApplicationContext</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> applicationContext;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setApplicationContext</span><span class="params">(ApplicationContext applicationContext)</span> </span>&#123;</div><div class="line">        ApplicationContextUtil.applicationContext = applicationContext;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 根据类型获取指定的bean</div><div class="line">     * <span class="doctag">@param</span> requiredType Class</div><div class="line">     * <span class="doctag">@param</span> &lt;T&gt; 泛型</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">getBean</span><span class="params">(Class&lt;T&gt; requiredType )</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> applicationContext.getBean(requiredType);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 根据名称和类型获取Bean</div><div class="line">     * <span class="doctag">@param</span> name bean的id</div><div class="line">     * <span class="doctag">@param</span> requiredType class</div><div class="line">     * <span class="doctag">@param</span> &lt;T&gt;</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">getBean</span><span class="params">(String name,Class&lt;T&gt; requiredType)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> applicationContext.getBean(name,requiredType);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>配置了如上的工具类，那么就可以直接使用ApplicationContextUtil获取ApplicationContext对象了，而不需要注入了，如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">StringRedisTemplate redisTemplate=ApplicationContextUtil.getBean(<span class="string">"stringRedisTemplate"</span>,StringRedisTemplate.class);</div></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="https://blog.csdn.net/iechenyb/article/details/83788338" target="_blank" rel="external">https://blog.csdn.net/iechenyb/article/details/83788338</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Spring中的Aware&quot;&gt;&lt;a href=&quot;#Spring中的Aware&quot; class=&quot;headerlink&quot; title=&quot;Spring中的Aware&quot;&gt;&lt;/a&gt;Spring中的Aware&lt;/h1&gt;&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; cla
+    
+    </summary>
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/categories/Spring/"/>
+    
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/tags/Spring/"/>
+    
+  </entry>
   
   <entry>
     <title>JDK8新特性</title>
@@ -2208,111 +2255,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;SpringBoot集成JSR303&quot;&gt;&lt;a href=&quot;#SpringBoot集成JSR303&quot; class=&quot;headerlink&quot; title=&quot;SpringBoot集成JSR303&quot;&gt;&lt;/a&gt;SpringBoot集成JSR303&lt;/h1&gt;&lt;h2 id=&quot;使
-    
-    </summary>
-    
-      <category term="SpringBoot" scheme="http://chenjiabing666.github.io/categories/SpringBoot/"/>
-    
-    
-      <category term="SpringBoot" scheme="http://chenjiabing666.github.io/tags/SpringBoot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>springBoot集成RestTemplate</title>
-    <link href="http://chenjiabing666.github.io/2018/12/03/springBoot%E9%9B%86%E6%88%90RestTemplate/"/>
-    <id>http://chenjiabing666.github.io/2018/12/03/springBoot集成RestTemplate/</id>
-    <published>2018-12-03T14:36:42.000Z</published>
-    <updated>2018-12-03T14:38:00.847Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="SpringBoot集成RestTemplate"><a href="#SpringBoot集成RestTemplate" class="headerlink" title="SpringBoot集成RestTemplate"></a>SpringBoot集成RestTemplate</h1><h2 id="构造restful风格的api"><a href="#构造restful风格的api" class="headerlink" title="构造restful风格的api"></a>构造restful风格的api</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DepetController</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> DeptService deptService;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 根据Id查找</div><div class="line">	 * <span class="doctag">@param</span> id </div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/dept/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Dept <span class="title">getDept</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Integer id)</span>&#123;</div><div class="line">		Dept dept = deptService.getDeptById(id);</div><div class="line">		<span class="keyword">return</span> dept;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 分页获取列表</div><div class="line">	 * <span class="doctag">@param</span> pageNum</div><div class="line">	 * <span class="doctag">@param</span> pageSize</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/dept"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;Dept&gt; <span class="title">getDeptList</span><span class="params">(Integer pageNum,Integer pageSize)</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> deptService.getDeptList(pageNum,pageSize);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 添加dept</div><div class="line">	 * <span class="doctag">@param</span> dept</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="meta">@PostMapping</span>(<span class="string">"/dept"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Dept <span class="title">addDepet</span><span class="params">(@RequestBody Dept dept)</span></span>&#123;</div><div class="line">		Dept dept1=deptService.addDept(dept);</div><div class="line">		<span class="keyword">return</span> dept1;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 修改dept</div><div class="line">	 * <span class="doctag">@param</span> dept</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="meta">@PutMapping</span>(<span class="string">"/dept"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">modifyDept</span><span class="params">(@RequestBody Dept dept)</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> deptService.modifyDept(dept);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 根据Id删除</div><div class="line">	 * <span class="doctag">@param</span> id</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="meta">@DeleteMapping</span>(<span class="string">"/dept/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">deleteDept</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Integer id)</span>&#123;</div><div class="line">		<span class="keyword">return</span> deptService.deleteDept(id);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="注入"><a href="#注入" class="headerlink" title="注入"></a>注入</h2><ul>
-<li>在使用之前需要在配置文件中注入，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RestConfig</span> </span>&#123;</div><div class="line">	<span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">(ClientHttpRequestFactory factory)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate(factory);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> ClientHttpRequestFactory <span class="title">simpleClientHttpRequestFactory</span><span class="params">()</span> </span>&#123;</div><div class="line">        SimpleClientHttpRequestFactory factory = <span class="keyword">new</span> SimpleClientHttpRequestFactory();</div><div class="line">        factory.setReadTimeout(<span class="number">5000</span>);<span class="comment">//单位为ms</span></div><div class="line">        factory.setConnectTimeout(<span class="number">5000</span>);<span class="comment">//单位为ms</span></div><div class="line">        <span class="keyword">return</span> factory;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>注入之后即可直接使用了</li>
-</ul>
-<h2 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h2><h3 id="GET（获取数据）"><a href="#GET（获取数据）" class="headerlink" title="GET（获取数据）"></a>GET（获取数据）</h3><h4 id="生产"><a href="#生产" class="headerlink" title="生产"></a>生产</h4><ul>
-<li>安全幂等操作</li>
-<li>先创建一个GET请求的controller，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 通过get请求方式</div><div class="line"> * <span class="doctag">@param</span> id </div><div class="line"> * <span class="doctag">@param</span> name</div><div class="line"> * <span class="doctag">@return</span></div><div class="line"> */</div><div class="line"><span class="meta">@GetMapping</span>(<span class="string">"/dept/&#123;id&#125;/&#123;name&#125;"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Dept <span class="title">getDept</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Integer id,@<span class="title">PathVariable</span><span class="params">(<span class="string">"name"</span>)</span>String name)</span>&#123;</div><div class="line">	Dept dept=<span class="keyword">new</span> Dept();</div><div class="line">	dept.setDepetId(id);</div><div class="line">	dept.setDepetName(name);</div><div class="line">	<span class="keyword">return</span> dept;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="消费"><a href="#消费" class="headerlink" title="消费"></a>消费</h4><ul>
-<li><code>public &lt;T&gt; T getForObject(String url, Class&lt;T&gt; responseType, Map&lt;String, ?&gt; uriVariables)</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 使用RestTemplate的getForObject()发出get请求</div><div class="line"> */</div><div class="line"><span class="meta">@GetMapping</span>(<span class="string">"/consumer/&#123;id&#125;/&#123;name&#125;"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Dept <span class="title">getDept</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Integer id,@<span class="title">PathVariable</span><span class="params">(<span class="string">"name"</span>)</span> String name) <span class="keyword">throws</span> RestClientException, URISyntaxException</span>&#123;</div><div class="line">	<span class="comment">//使用一个Map封装Get请求的参数，其中key一定要和uri中的占位符一致</span></div><div class="line">	Map&lt;String, Object&gt; params=<span class="keyword">new</span> HashMap&lt;String, Object&gt;();</div><div class="line">	params.put(<span class="string">"id"</span>, id);</div><div class="line">	params.put(<span class="string">"name"</span>, name);</div><div class="line">	Dept dept = restTemplate.getForObject(URL_PRFIX+<span class="string">"&#123;id&#125;/&#123;name&#125;"</span>, Dept.class,params);</div><div class="line">	<span class="keyword">return</span> dept;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><code>public &lt;T&gt; T getForObject(URI url, Class&lt;T&gt; responseType)</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 使用RestTemplate的getForObject()发出get请求</div><div class="line"> */</div><div class="line"><span class="meta">@GetMapping</span>(<span class="string">"/consumer/&#123;id&#125;/&#123;name&#125;"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Dept <span class="title">getDept</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Integer id,@<span class="title">PathVariable</span><span class="params">(<span class="string">"name"</span>)</span> String name) <span class="keyword">throws</span> RestClientException, URISyntaxException</span>&#123;</div><div class="line">	<span class="comment">//直接在uri中拼接参数</span></div><div class="line">	Dept dept = restTemplate.getForObject(URL_PRFIX+id+<span class="string">"/"</span>+name, Dept.class);</div><div class="line">	<span class="keyword">return</span> dept;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><code>public &lt;T&gt; T getForObject(String url, Class&lt;T&gt; responseType, Object... uriVariables)</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 使用RestTemplate的getForObject()发出get请求</div><div class="line"> */</div><div class="line"><span class="meta">@GetMapping</span>(<span class="string">"/consumer/&#123;id&#125;/&#123;name&#125;"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Dept <span class="title">getDept</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Integer id,@<span class="title">PathVariable</span><span class="params">(<span class="string">"name"</span>)</span> String name) <span class="keyword">throws</span> RestClientException, URISyntaxException</span>&#123;</div><div class="line">	<span class="comment">//使用&#123;id&#125;作为一个占位符，第三个参数是用来设置这个占位符的值，当然可以有多个占位符</span></div><div class="line">	Dept dept = restTemplate.getForObject(URL_PRFIX+<span class="string">"&#123;id&#125;/&#123;name&#125;"</span>, Dept.class, id,name);</div><div class="line">	<span class="keyword">return</span> dept;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>以上三种形式的请求都是大同小异的，只是入参的方式不同罢了</li>
-</ul>
-<h3 id="POST（新建、添加）"><a href="#POST（新建、添加）" class="headerlink" title="POST（新建、添加）"></a>POST（新建、添加）</h3><ul>
-<li>不安全</li>
-<li><code>public &lt;T&gt; T postForObject(URI url, @Nullable Object request, Class&lt;T&gt; responseType)</code><ul>
-<li>第一个参数是请求的uri</li>
-<li>第二个参数是添加的数据</li>
-<li>第三个是返回的数据类型</li>
-</ul>
-</li>
-<li><code>public &lt;T&gt; T postForObject(String url, @Nullable Object request, Class&lt;T&gt; responseType,Map&lt;String, ?&gt; uriVariables)</code><ul>
-<li>前三个参数同上</li>
-<li>第四个参数是用来封装过滤参数的（?后面的）</li>
-</ul>
-</li>
-<li><code>public &lt;T&gt; T postForObject(String url, @Nullable Object request, Class&lt;T&gt; responseType,Object... uriVariables)</code><ul>
-<li>同上</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 新建数据</div><div class="line"> */</div><div class="line"><span class="meta">@PostMapping</span>(<span class="string">"/dept"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Dept <span class="title">addDept</span><span class="params">(@RequestBody Dept dept)</span> <span class="keyword">throws</span> RestClientException, URISyntaxException</span>&#123;</div><div class="line">	Dept dept2 = restTemplate.postForObject(<span class="keyword">new</span> URI(URL_PRFIX), dept, Dept.class);</div><div class="line">	<span class="keyword">return</span> dept2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="PUT（更新）"><a href="#PUT（更新）" class="headerlink" title="PUT（更新）"></a>PUT（更新）</h3><ul>
-<li><code>public void put(URI url, @Nullable Object request)</code><ul>
-<li>第一个参数是地址</li>
-<li>第二个参数是更新需要提交的数据</li>
-</ul>
-</li>
-<li><code>public void put(String url, @Nullable Object request, Object... uriVariables)</code><ul>
-<li>前两个参数同上</li>
-<li>第二个参数是封装需要过滤的数据（？后面的数据）</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 更新数据</div><div class="line"> * <span class="doctag">@param</span> dept</div><div class="line"> * <span class="doctag">@throws</span> RestClientException</div><div class="line"> * <span class="doctag">@throws</span> URISyntaxException</div><div class="line"> */</div><div class="line"><span class="meta">@PutMapping</span>(<span class="string">"/dept"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">modifyDept</span><span class="params">(@RequestBody Dept dept)</span> <span class="keyword">throws</span> RestClientException, URISyntaxException</span>&#123;</div><div class="line">	restTemplate.put(<span class="keyword">new</span> URI(URL_PRFIX), dept);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="DELETE（删除）"><a href="#DELETE（删除）" class="headerlink" title="DELETE（删除）"></a>DELETE（删除）</h3><ul>
-<li><code>public void delete(URI url)</code><ul>
-<li>第一个参数是地址</li>
-</ul>
-</li>
-<li><code>public void delete(String url, Object... uriVariables)</code><ul>
-<li>第一个参数是地址</li>
-<li>第二个参数是过滤参数（？后面的）</li>
-</ul>
-</li>
-<li><code>public void delete(String url, Map&lt;String, ?&gt; uriVariables)</code><ul>
-<li>第二个参数是过滤参数（？后面的）</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 删除数据</div><div class="line"> * <span class="doctag">@param</span> id</div><div class="line"> */</div><div class="line"><span class="meta">@DeleteMapping</span>(<span class="string">"/dept/&#123;id&#125;"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Integer id)</span>&#123;</div><div class="line">	restTemplate.delete(URL_PRFIX+<span class="string">"/&#123;id&#125;"</span>, id);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><a href="http://www.ruanyifeng.com/blog/2018/10/restful-api-best-practices.html" target="_blank" rel="external">RESTful API 最佳实践</a></li>
-<li><p><a href="https://www.cnblogs.com/softidea/p/5977375.html" target="_blank" rel="external">https://www.cnblogs.com/softidea/p/5977375.html</a></p>
-</li>
-<li><p><a href="https://blog.csdn.net/itguangit/article/details/80198895" target="_blank" rel="external">https://blog.csdn.net/itguangit/article/details/80198895</a></p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;SpringBoot集成RestTemplate&quot;&gt;&lt;a href=&quot;#SpringBoot集成RestTemplate&quot; class=&quot;headerlink&quot; title=&quot;SpringBoot集成RestTemplate&quot;&gt;&lt;/a&gt;SpringBoot集成Re
     
     </summary>
     

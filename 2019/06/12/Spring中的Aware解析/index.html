@@ -5,38 +5,41 @@
   <meta charset="UTF-8">
   
   
-    <title>Springmvc拦截器拦截Ajax请求 | 爱撒谎的男孩</title>
+    <title>Spring中的Aware解析 | 爱撒谎的男孩</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chenjiabing">
     
 
     
-    <meta name="description" content="拦截器拦截Ajax请求##　问题
+    <meta name="description" content="Spring中的Aware简介
+Spring框架中提供了许多实现了Aware接口的类，这些类主要是为了辅助Spring访问容器中的数据，比如BeanNameAware，这个类能够在Spring容器加载的过程中将Bean的名字（id）赋值给变量。
 
-如果我们在拦截器中定义了拦截器的路径为/user/*这个地址,并且拦截器拦截器之后，如果没有登录，那么重定向到登录界面。但是我们在未登录的前提下使用Ajax异步请求了/user/addUser.do这个地址，出现了拦截器是拦截了，但是并没有重定向到登录界面。
-
-原因
-可以参照这篇文章 ：http://www.cnblogs.com/dudu/p/ajax_302">
+常用的Aware
+BeanNameAware：能够获取bean的名称，即是id
+BeanFactoryAware：获取BeanFactory实例
+App">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Springmvc拦截器拦截Ajax请求">
-<meta property="og:url" content="http://chenjiabing666.github.io/2018/05/21/拦截器拦截Ajax请求/index.html">
+<meta property="og:title" content="Spring中的Aware解析">
+<meta property="og:url" content="http://chenjiabing666.github.io/2019/06/12/Spring中的Aware解析/index.html">
 <meta property="og:site_name" content="爱撒谎的男孩">
-<meta property="og:description" content="拦截器拦截Ajax请求##　问题
+<meta property="og:description" content="Spring中的Aware简介
+Spring框架中提供了许多实现了Aware接口的类，这些类主要是为了辅助Spring访问容器中的数据，比如BeanNameAware，这个类能够在Spring容器加载的过程中将Bean的名字（id）赋值给变量。
 
-如果我们在拦截器中定义了拦截器的路径为/user/*这个地址,并且拦截器拦截器之后，如果没有登录，那么重定向到登录界面。但是我们在未登录的前提下使用Ajax异步请求了/user/addUser.do这个地址，出现了拦截器是拦截了，但是并没有重定向到登录界面。
-
-原因
-可以参照这篇文章 ：http://www.cnblogs.com/dudu/p/ajax_302">
-<meta property="og:updated_time" content="2018-05-21T10:18:42.184Z">
+常用的Aware
+BeanNameAware：能够获取bean的名称，即是id
+BeanFactoryAware：获取BeanFactory实例
+App">
+<meta property="og:updated_time" content="2019-06-12T11:33:48.558Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Springmvc拦截器拦截Ajax请求">
-<meta name="twitter:description" content="拦截器拦截Ajax请求##　问题
+<meta name="twitter:title" content="Spring中的Aware解析">
+<meta name="twitter:description" content="Spring中的Aware简介
+Spring框架中提供了许多实现了Aware接口的类，这些类主要是为了辅助Spring访问容器中的数据，比如BeanNameAware，这个类能够在Spring容器加载的过程中将Bean的名字（id）赋值给变量。
 
-如果我们在拦截器中定义了拦截器的路径为/user/*这个地址,并且拦截器拦截器之后，如果没有登录，那么重定向到登录界面。但是我们在未登录的前提下使用Ajax异步请求了/user/addUser.do这个地址，出现了拦截器是拦截了，但是并没有重定向到登录界面。
-
-原因
-可以参照这篇文章 ：http://www.cnblogs.com/dudu/p/ajax_302">
+常用的Aware
+BeanNameAware：能够获取bean的名称，即是id
+BeanFactoryAware：获取BeanFactory实例
+App">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -96,14 +99,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/05/21/拦截器拦截Ajax请求/" title="Springmvc拦截器拦截Ajax请求" itemprop="url">Springmvc拦截器拦截Ajax请求</a>
+      <a href="/2019/06/12/Spring中的Aware解析/" title="Spring中的Aware解析" itemprop="url">Spring中的Aware解析</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
 		
   <p class="article-time">
-    <time datetime="2018-05-21T10:16:29.000Z" itemprop="datePublished"> 发表于 2018-05-21</time>
+    <time datetime="2019-06-12T11:33:01.000Z" itemprop="datePublished"> 发表于 2019-06-12</time>
     
   </p>
 </header>
@@ -112,21 +115,35 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#拦截器拦截Ajax请求"><span class="toc-number">1.</span> <span class="toc-text">拦截器拦截Ajax请求</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原因"><span class="toc-number">1.1.</span> <span class="toc-text">原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决"><span class="toc-number">1.2.</span> <span class="toc-text">解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一种"><span class="toc-number">1.3.</span> <span class="toc-text">第一种</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring中的Aware"><span class="toc-number">1.</span> <span class="toc-text">Spring中的Aware</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的Aware"><span class="toc-number">1.2.</span> <span class="toc-text">常用的Aware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ApplicationContextAware"><span class="toc-number">1.3.</span> <span class="toc-text">ApplicationContextAware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.4.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="拦截器拦截Ajax请求"><a href="#拦截器拦截Ajax请求" class="headerlink" title="拦截器拦截Ajax请求"></a>拦截器拦截Ajax请求</h1><p>##　问题</p>
+		<h1 id="Spring中的Aware"><a href="#Spring中的Aware" class="headerlink" title="Spring中的Aware"></a>Spring中的Aware</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>Spring框架中提供了许多实现了Aware接口的类，这些类主要是为了辅助Spring访问容器中的数据，比如<code>BeanNameAware</code>，这个类能够在Spring容器加载的过程中将Bean的名字（id）赋值给变量。</li>
+</ul>
+<h2 id="常用的Aware"><a href="#常用的Aware" class="headerlink" title="常用的Aware"></a>常用的Aware</h2><ul>
+<li><code>BeanNameAware</code>：能够获取bean的名称，即是id</li>
+<li><code>BeanFactoryAware</code>：获取BeanFactory实例</li>
+<li><code>ApplicationContextAware</code>：获取<code>ApplicationContext</code></li>
+<li><code>MessageSourceAware</code>：获取MessageSource</li>
+</ul>
+<h2 id="ApplicationContextAware"><a href="#ApplicationContextAware" class="headerlink" title="ApplicationContextAware"></a>ApplicationContextAware</h2><ul>
+<li>ApplicationContext可以获取容器中的bean，但是必须注入才能使用，当一些类不能注入的时候怎么才能获得bean呢？比如Utils中的类，通常不能直接通过注入直接使用ApplicationContext，此时就需要借助<code>ApplicationContextAware</code>这个接口了。</li>
+<li><code>ApplicationContextAware</code>的实现类如下</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 自定义一个实现类，一定要注入到容器中</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationContextAwareImpl</span> <span class="keyword">implements</span> <span class="title">ApplicationContextAware</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 容器启动的时候会调用这个方法，只需要将applicationContext设置即可</div><div class="line">     * <span class="doctag">@param</span> applicationContext 容器启动会自动注入</div><div class="line">     * <span class="doctag">@throws</span> BeansException</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setApplicationContext</span><span class="params">(ApplicationContext applicationContext)</span> <span class="keyword">throws</span> BeansException </span>&#123;</div><div class="line">        <span class="comment">//将其设置到ApplicationContextUtil</span></div><div class="line">        ApplicationContextUtil.setApplicationContext(applicationContext);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
-<li>如果我们在拦截器中定义了拦截器的路径为<code>/user/*</code>这个地址,并且拦截器拦截器之后，如果没有登录，那么<code>重定向</code>到<code>登录界面</code>。但是我们在<code>未登录</code>的前提下使用<code>Ajax</code>异步请求了<code>/user/addUser.do</code>这个地址，出现了拦截器是拦截了，但是并没有重定向到登录界面。</li>
+<li><code>ApplicationContextUtil</code>如下：</li>
 </ul>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><ul>
-<li>可以参照这篇文章 ：<a href="http://www.cnblogs.com/dudu/p/ajax_302_found.html" target="_blank" rel="external">http://www.cnblogs.com/dudu/p/ajax_302_found.html</a></li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * ApplicationContext的工具类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationContextUtil</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * ApplicationContext对象，会ApplicationContextAwareImpl中的setApplicationContext方法中赋值</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ApplicationContext applicationContext;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ApplicationContext <span class="title">getApplicationContext</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> applicationContext;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setApplicationContext</span><span class="params">(ApplicationContext applicationContext)</span> </span>&#123;</div><div class="line">        ApplicationContextUtil.applicationContext = applicationContext;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 根据类型获取指定的bean</div><div class="line">     * <span class="doctag">@param</span> requiredType Class</div><div class="line">     * <span class="doctag">@param</span> &lt;T&gt; 泛型</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">getBean</span><span class="params">(Class&lt;T&gt; requiredType )</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> applicationContext.getBean(requiredType);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 根据名称和类型获取Bean</div><div class="line">     * <span class="doctag">@param</span> name bean的id</div><div class="line">     * <span class="doctag">@param</span> requiredType class</div><div class="line">     * <span class="doctag">@param</span> &lt;T&gt;</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">getBean</span><span class="params">(String name,Class&lt;T&gt; requiredType)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> applicationContext.getBean(name,requiredType);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>配置了如上的工具类，那么就可以直接使用ApplicationContextUtil获取ApplicationContext对象了，而不需要注入了，如下：</li>
 </ul>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h2 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h2><ul>
-<li>我们可以使用<code>$.ajax</code>中的<code>error</code>中的方法内直接重定向</li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">StringRedisTemplate redisTemplate=ApplicationContextUtil.getBean(<span class="string">"stringRedisTemplate"</span>,StringRedisTemplate.class);</div></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="https://blog.csdn.net/iechenyb/article/details/83788338" target="_blank" rel="external">https://blog.csdn.net/iechenyb/article/details/83788338</a></li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">    		<span class="attr">url</span>:url,</div><div class="line">    		<span class="attr">type</span>:<span class="string">"GET"</span>,</div><div class="line">    		<span class="attr">data</span>:d,</div><div class="line">    		<span class="attr">dataType</span>:<span class="string">"json"</span>,</div><div class="line">    		<span class="attr">success</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    			alert(data.message);</div><div class="line">    		&#125;,</div><div class="line">    		<span class="comment">//一旦拦截器拦截url的请求，那么会执行error中的回调方法</span></div><div class="line">    		<span class="comment">//这个是失败的执行的回调方法，我们可以在其中重定向到登录界面</span></div><div class="line">    		error:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    			<span class="built_in">window</span>.location=<span class="string">"$&#123;pageContext.request.contextPath&#125;/user/showLogin.do"</span>;</div><div class="line">    		&#125;</div><div class="line">    	&#125;)</div></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -149,7 +166,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2018/05/21/拦截器拦截Ajax请求/" data-title="Springmvc拦截器拦截Ajax请求 | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2019/06/12/Spring中的Aware解析/" data-title="Spring中的Aware解析 | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -162,19 +179,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2018/05/21/Spring之密码加密/" title="Spring之密码加密">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Spring之密码加密</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2018/05/09/选择排序/"  title="选择排序">
+<a href="/2019/06/12/JDK8新特性/"  title="JDK8新特性">
  <strong>下一篇：</strong><br/> 
- <span>选择排序
+ <span>JDK8新特性
 </span>
 </a>
 </div>
@@ -195,7 +204,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#拦截器拦截Ajax请求"><span class="toc-number">1.</span> <span class="toc-text">拦截器拦截Ajax请求</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原因"><span class="toc-number">1.1.</span> <span class="toc-text">原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决"><span class="toc-number">1.2.</span> <span class="toc-text">解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一种"><span class="toc-number">1.3.</span> <span class="toc-text">第一种</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring中的Aware"><span class="toc-number">1.</span> <span class="toc-text">Spring中的Aware</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的Aware"><span class="toc-number">1.2.</span> <span class="toc-text">常用的Aware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ApplicationContextAware"><span class="toc-number">1.3.</span> <span class="toc-text">ApplicationContextAware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.4.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
  
   </div>
 
