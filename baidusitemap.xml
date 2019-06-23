@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://chenjiabing666.github.io/2019/06/12/Spring%E4%B8%AD%E7%9A%84Aware%E8%A7%A3%E6%9E%90/</loc>
+    <lastmod>2019-06-23T14:05:13.567Z</lastmod>
+    <data>
+        <display>
+        <title>Spring中的Aware解析</title>
+        <pubTime>2019-06-12T11:33:01.000Z</pubTime>
+        
+        <tag>Spring</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring" url="http://chenjiabing666.github.io/categories/Spring/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://chenjiabing666.github.io/2019/06/23/FactoryBean%E8%A7%A3%E6%9E%90/</loc>
     <lastmod>2019-06-23T13:50:08.637Z</lastmod>
     <data>
@@ -50,26 +70,6 @@
         <display>
         <title>Spring注解开发</title>
         <pubTime>2019-06-23T03:17:49.000Z</pubTime>
-        
-        <tag>Spring</tag>
-         
-         
-           
-             
-              <breadCrumb title="Spring" url="http://chenjiabing666.github.io/categories/Spring/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://chenjiabing666.github.io/2019/06/12/Spring%E4%B8%AD%E7%9A%84Aware%E8%A7%A3%E6%9E%90/</loc>
-    <lastmod>2019-06-12T11:33:48.558Z</lastmod>
-    <data>
-        <display>
-        <title>Spring中的Aware解析</title>
-        <pubTime>2019-06-12T11:33:01.000Z</pubTime>
         
         <tag>Spring</tag>
          
