@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2019-06-23T03:18:16.999Z</updated>
+  <updated>2019-06-23T13:50:08.637Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,172 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>FactoryBean解析</title>
+    <link href="http://chenjiabing666.github.io/2019/06/23/FactoryBean%E8%A7%A3%E6%9E%90/"/>
+    <id>http://chenjiabing666.github.io/2019/06/23/FactoryBean解析/</id>
+    <published>2019-06-23T13:49:47.000Z</published>
+    <updated>2019-06-23T13:50:08.637Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
+<li>简单的说FactoryBean实际上是一个Bean，并不是一个工厂，它能够为我们创建一个Bean，但是创建的这个Bean实际指向的并不是FactoryBean类型的，而是其中<code>getObject</code>方法返回类型的对象。</li>
+</ul>
+<h1 id="接口解析"><a href="#接口解析" class="headerlink" title="接口解析"></a>接口解析</h1><ul>
+<li>FactoryBean中有三个需要实现的方法，如下：<ul>
+<li><code>getObject()</code> ：获取返回的对象，此处返回的对象会被注入到ioc容器中</li>
+<li><code>public Class&lt;?&gt; getObjectType()</code>：返回创建Bean类型</li>
+<li><code>public boolean isSingleton()</code>：返回是否创建单例，如果返回true，那么创建的对象将是单例的，返回false，创建的是多实例的对象。</li>
+</ul>
+</li>
+</ul>
+<h1 id="自定义实现"><a href="#自定义实现" class="headerlink" title="自定义实现"></a>自定义实现</h1><ul>
+<li><p>自定义一个FactoryBean，实现Admin的注入，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 自定义FactoryBean，用来创建对象</div><div class="line"> * 1、<span class="doctag">@Component</span> :将创建的MyFactoryBean注入到容器中</div><div class="line"> * 2、实现FactoryBean</div><div class="line"> * 3、指定泛型&lt;T&gt;</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyFactoryBean</span> <span class="keyword">implements</span> <span class="title">FactoryBean</span>&lt;<span class="title">Admin</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Admin <span class="title">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        System.out.println(<span class="string">"创建Admin"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Admin();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> Class&lt;?&gt; getObjectType() &#123;</div><div class="line">        <span class="keyword">return</span> Admin.class;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSingleton</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>此时即可从容器中获取到对应的Bean了，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFactoryBean</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="comment">//根据id获取实例，这里实际获取的是getObject返回的对象</span></div><div class="line">    Admin admin1 = applicationContext.getBean(<span class="string">"myFactoryBean"</span>, Admin.class);</div><div class="line">    System.out.println(admin1);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>以上是获取的实例Bean，现在我们就想获取MyBeanFactory本身这个对象，可以在id的前面加上<code>&amp;</code>即可，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFactoryBean2</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="comment">//根据&amp;id获取实例，实际获取的就是MyFactoryBean的对象</span></div><div class="line">    MyFactoryBean bean = applicationContext.getBean(<span class="string">"&amp;myFactoryBean"</span>, MyFactoryBean.class);</div><div class="line">    System.out.println(bean);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h1><ul>
+<li>指定的是FactoryBean的id，为什么获取的是getObject返回的对象？<ul>
+<li>简单的逻辑：判断传入的类型是否是<code>FactoryBean</code>类型，如果是该类型的，调用getObject方法返回对象即可。</li>
+<li>在源码中可以看到调用的是<code>org.springframework.beans.factory.support.FactoryBeanRegistrySupport#doGetObjectFromFactoryBean</code>方法</li>
+<li><img src="https://github.com/chenjiabing666/BlogImage/blob/master/spring2.png?raw=true" alt=""></li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;简单的说FactoryBean实际上是一个Bean，并不是一个工厂，它能够为我们创建一个Bean，但是创建的这个Bean实际指向
+    
+    </summary>
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/categories/Spring/"/>
+    
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Bean的后置处理器</title>
+    <link href="http://chenjiabing666.github.io/2019/06/23/Bean%E7%9A%84%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86%E5%99%A8/"/>
+    <id>http://chenjiabing666.github.io/2019/06/23/Bean的后置处理器/</id>
+    <published>2019-06-23T13:48:55.000Z</published>
+    <updated>2019-06-23T13:49:26.187Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
+<li>调用顺序：在Bean的初始化前后调用，分别对应了其中的两个方法</li>
+<li>Bean的后置处理器对应的接口是<code>BeanPostProcessor</code>，其中定义了两个方法，如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BeanPostProcessor</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 在Bean初始化之前执行，即是在执行Bean的构造方法之后，在执行InitializingBean的afterPropertiesSet方法之前执行</div><div class="line">	 */</div><div class="line">	<span class="function">Object <span class="title">postProcessBeforeInitialization</span><span class="params">(Object bean, String beanName)</span> <span class="keyword">throws</span> BeansException</span>;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">         * 在Bean的初始化之后执行，即是在InitializingBean的afterPropertiesSet方法之后执行</div><div class="line">	 */</div><div class="line">	<span class="function">Object <span class="title">postProcessAfterInitialization</span><span class="params">(Object bean, String beanName)</span> <span class="keyword">throws</span> BeansException</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li>在Bean的初始化前后做一些自己的逻辑处理，比如为Bean设置一些额外的属性。<ul>
+<li>最典型的例子就是spring中的Aware接口的实现，都是利用<code>BeanPostProcessor</code>在Bean初始化之前进行调用set方法设置相应的属性【详情请看<code>ApplicationContextAwareProcessor</code>源码】</li>
+<li><code>@Autowired</code>的实现依赖注入也是使用的BeanPostProcessor的原理，详情请看<code>AutowiredAnnotationBeanPostProcessor</code>的源码</li>
+</ul>
+</li>
+</ul>
+<h2 id="自定义后置处理器"><a href="#自定义后置处理器" class="headerlink" title="自定义后置处理器"></a>自定义后置处理器</h2><ul>
+<li>必备条件：<ul>
+<li>自定义的后置处理器必须注入到容器中</li>
+<li>必须实现<code>BeanPostProcessor</code>接口，实现其中的方法</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>自定义一个User类，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 实现InitializingBean接口，定义初始化方法，在构造方法之后执行</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span>, <span class="title">InitializingBean</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Integer age;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">()</span></span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(String name, Integer age)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"执行构造方法"</span>);</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">        <span class="keyword">this</span>.age = age;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        System.out.println(<span class="string">"执行初始化方法，在构造方法执行之后执行"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>自定义后置处理器，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 1、自定义的后置处理器,实现BeanPostProcessor</div><div class="line"> * 2、必须注入到容器中才能执行</div><div class="line"> * 3、后置处理器是每一个Bean实例化前后都会调用的，并不能指定某一个</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FirstPostProcessor</span> <span class="keyword">implements</span> <span class="title">BeanPostProcessor</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 在Bean初始化之前执行，即是在执行Bean的构造方法之后，在执行InitializingBean的afterPropertiesSet方法之前执行</div><div class="line">     * <span class="doctag">@param</span> bean bean的对象</div><div class="line">     * <span class="doctag">@param</span> beanName bean的名字，即是在ioc容器中的id</div><div class="line">     * <span class="doctag">@return</span> 一定不能null</div><div class="line">     * <span class="doctag">@throws</span> BeansException</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">postProcessBeforeInitialization</span><span class="params">(Object bean, String beanName)</span> <span class="keyword">throws</span> BeansException </span>&#123;</div><div class="line">        <span class="comment">//如果这个Bean是User类型</span></div><div class="line">        <span class="keyword">if</span> (bean <span class="keyword">instanceof</span> User)&#123;</div><div class="line">            System.out.println(<span class="string">"在User的初始化方法【afterPropertiesSet】之前执行"</span>);</div><div class="line">            <span class="comment">//改变属性的值</span></div><div class="line">            User user=(User)bean;</div><div class="line">            user.setName(<span class="string">"马云"</span>);</div><div class="line">            user.setAge(<span class="number">40</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> bean;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 在Bean的初始化之后执行，即是在InitializingBean的afterPropertiesSet方法之后执行</div><div class="line">     * <span class="doctag">@param</span> bean bean的对象</div><div class="line">     * <span class="doctag">@param</span> beanName bean的名字，即是在ioc容器中的id</div><div class="line">     * <span class="doctag">@return</span> 一定不能null</div><div class="line">     * <span class="doctag">@throws</span> BeansException</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">postProcessAfterInitialization</span><span class="params">(Object bean, String beanName)</span> <span class="keyword">throws</span> BeansException </span>&#123;</div><div class="line">        <span class="keyword">if</span> (bean <span class="keyword">instanceof</span> User)&#123;</div><div class="line">            System.out.println(<span class="string">"在User的初始化方法【afterPropertiesSet】之后执行"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> bean;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h1><ul>
+<li>最重要的就是后置处理器两个方法的执行顺序：<ul>
+<li>为什么<code>postProcessBeforeInitialization</code>在构造方法之后，初始化之前调用？</li>
+<li>为什么<code>postProcessAfterInitialization</code>在初始化之后调用？</li>
+</ul>
+</li>
+<li>我们分别在自定义的后置处理器上打上断点，通过debug模式跟踪代码，程序的入口测试类如下：<ul>
+<li>使用<code>AnnotationConfigApplicationContext</code>启动容器<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FirstConfigTest</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> AnnotationConfigApplicationContext applicationContext;</div><div class="line"></div><div class="line">    <span class="meta">@Before</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initApplicationContext</span><span class="params">()</span> </span>&#123;</div><div class="line">        applicationContext = <span class="keyword">new</span> AnnotationConfigApplicationContext(FirstConfig.class);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>执行AnnotationConfigApplicationContext的构造方法<code>public AnnotationConfigApplicationContext(Class&lt;?&gt;... annotatedClasses)</code>： <ol>
+<li><code>register(annotatedClasses)</code>：注入指定的配置类<code>FirstConfig</code></li>
+<li><strong>【<code>refresh()</code>：刷新容器，在这个执行结束之后会完成Bean的加载，详情见第2步】</strong></li>
+</ol>
+</li>
+<li>进入<code>org.springframework.context.support.AbstractApplicationContext#refresh</code>方法：<ol>
+<li><code>prepareRefresh();</code>：在刷新容器之前做一些准备工作，比如设置激活状态【activate】,设置启动时间【startupDate】</li>
+<li><code>ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();</code><ol>
+<li><code>refreshBeanFactory()</code>：刷新BeanFactory，如果之前存在了就删除创建新的，返回的是</li>
+<li>返回<code>ConfigurableListableBeanFactory</code>类型的Bean工厂</li>
+</ol>
+</li>
+<li><code>prepareBeanFactory(beanFactory);</code>：对新创建的Bean工厂设置一些属性配置<ol>
+<li>设置ClassLoader、表达式解析器、属性注入器</li>
+<li><strong>设置<code>ApplicationContextAwareProcessor</code>这个后置处理器到<code>org.springframework.beans.factory.support.AbstractBeanFactory#beanPostProcessors</code>该成员变量中、去除一些不能自动注入的类【ResourceLoaderAware、ApplicationEventPublisherAware、MessageSourceAware、ApplicationContextAware、EnvironmentAware】，因为这些Aware类型的类需要后续自定义实现的</strong></li>
+<li><strong>向容器中注入一些能够自动注入的类【BeanFactory，ResourceLoader，ApplicationEventPublisher，ApplicationContext】，这些类能够直接通过<code>@Autowired</code>直接注入使用</strong></li>
+<li><strong>向容器中注入一些运行环境的Bean【<code>ConfigurableEnvironment</code>、<code>systemProperties(Map&lt;String,Object&gt;</code>其中存放的是配置参数)】，这些Bean可以直接自动注入使用</strong></li>
+</ol>
+</li>
+<li><code>invokeBeanFactoryPostProcessors(beanFactory)</code>：调用已经注册在容器中的BeanFactory后置处理器</li>
+<li><code>registerBeanPostProcessors(beanFactory)</code>：向ioc容器中注册BeanFactoryProcessor</li>
+<li><code>initMessageSource()</code>：初始化MessageSource</li>
+<li><code>initApplicationEventMulticaster()</code>：初始化事件分发器</li>
+<li><code>registerListeners()</code>：注册事件监听器，用来监听事件</li>
+<li><strong>【<code>finishBeanFactoryInitialization(beanFactory)</code>：初始化单例、非懒加载的Bean】，详情见步骤3</strong></li>
+<li><code>finishRefresh()</code>：发布事件</li>
+</ol>
+</li>
+<li>进入<code>org.springframework.context.support.AbstractApplicationContext#finishBeanFactoryInitialization</code>:<ol>
+<li>初始化类型转换类</li>
+<li>初始化<code>LoadTimeWeaverAware</code>，用于方法织入</li>
+<li>冻结BeanDefinition，表示后面的BeanDefinition不能再改变</li>
+<li><strong>【<code>beanFactory.preInstantiateSingletons()</code>：初始化Bean，详情请看第4步】</strong></li>
+</ol>
+</li>
+<li><p>进入到<code>org.springframework.beans.factory.support.DefaultListableBeanFactory#preInstantiateSingletons</code>方法中，用于初始化Bean</p>
+<ol>
+<li>遍历所有的BeanNames，判断当前Bean是否是FactoryBean，如果不是运行getBean方法</li>
+</ol>
+</li>
+<li><p>进入到<code>org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#initializeBean</code>，如下图所示，将是完整的逻辑，可以看出后置处理器为什么是在初始化之前和之后执行。</p>
+<ol>
+<li><img src="https://raw.githubusercontent.com/chenjiabing666/BlogImage/master/spring1.png" alt=""></li>
+</ol>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>从源码可以看出，最核心的执行就是在<code>org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#initializeBean</code>的方法中，主要的代码逻辑是在初始化之前调用对应的before方法，在之后调用after方法。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;调用顺序：在Bean的初始化前后调用，分别对应了其中的两个方法&lt;/li&gt;
+&lt;li&gt;Bean的后置处理器对应的接口是&lt;code&gt;B
+    
+    </summary>
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/categories/Spring/"/>
+    
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/tags/Spring/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring注解开发</title>
@@ -1476,45 +1642,6 @@
   </entry>
   
   <entry>
-    <title>spring cloud的资源</title>
-    <link href="http://chenjiabing666.github.io/2018/12/25/Spring%20cloud%E7%9A%84%E4%BC%98%E7%A7%80%E8%B5%84%E6%BA%90/"/>
-    <id>http://chenjiabing666.github.io/2018/12/25/Spring cloud的优秀资源/</id>
-    <published>2018-12-24T16:19:33.000Z</published>
-    <updated>2018-12-24T16:27:21.228Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="spring-cloud的资源"><a href="#spring-cloud的资源" class="headerlink" title="spring cloud的资源"></a>spring cloud的资源</h2><ul>
-<li><a href="https://springcloud.cc/" target="_blank" rel="external">Springcloud中文网</a></li>
-<li><a href="https://springcloud.cc/spring-cloud-dalston.html" target="_blank" rel="external">中文文档</a></li>
-<li><a href="http://springcloud.cn/" target="_blank" rel="external">中国社区</a></li>
-<li><a href="http://springcloud.fun/" target="_blank" rel="external">优质学习资源</a></li>
-<li><a href="http://www.cnblogs.com/skyme/p/8976866.html" target="_blank" rel="external">SpringBoot学习资源</a></li>
-<li><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.0.M3/single/spring-cloud-netflix.html" target="_blank" rel="external">官方文档</a></li>
-<li><a href="http://www.itmuch.com/spring-cloud-sum-eureka/" target="_blank" rel="external">http://www.itmuch.com/spring-cloud-sum-eureka/</a></li>
-<li><a href="https://yujunhao8831.github.io/2017/05/27/Spring-Cloud-Eureka-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank" rel="external">指南</a></li>
-<li><a href="https://www.cnblogs.com/huangjuncong/tag/SpringCloud/" target="_blank" rel="external">https://www.cnblogs.com/huangjuncong/tag/SpringCloud/</a></li>
-<li><a href="https://blog.csdn.net/u012702547/article/details/78547925" target="_blank" rel="external">https://blog.csdn.net/u012702547/article/details/78547925</a></li>
-<li><a href="https://www.cnblogs.com/leeSmall/category/1185489.html" target="_blank" rel="external">https://www.cnblogs.com/leeSmall/category/1185489.html</a></li>
-<li><a href="https://windmt.com/tags/Spring-Cloud/" target="_blank" rel="external">https://windmt.com/tags/Spring-Cloud/</a></li>
-<li><a href="http://www.ityouknow.com" target="_blank" rel="external">http://www.ityouknow.com</a></li>
-<li><a href="http://www.itmuch.com/categories/Spring-Cloud" target="_blank" rel="external">http://www.itmuch.com/categories/Spring-Cloud</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;spring-cloud的资源&quot;&gt;&lt;a href=&quot;#spring-cloud的资源&quot; class=&quot;headerlink&quot; title=&quot;spring cloud的资源&quot;&gt;&lt;/a&gt;spring cloud的资源&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;htt
-    
-    </summary>
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Ribbon（客户端负载均衡）</title>
     <link href="http://chenjiabing666.github.io/2018/12/25/Ribbon%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/"/>
     <id>http://chenjiabing666.github.io/2018/12/25/Ribbon客户端负载均衡/</id>
@@ -1600,6 +1727,45 @@
     <summary type="html">
     
       &lt;h1 id=&quot;Ribbon-客户端负载均衡&quot;&gt;&lt;a href=&quot;#Ribbon-客户端负载均衡&quot; class=&quot;headerlink&quot; title=&quot;Ribbon - 客户端负载均衡&quot;&gt;&lt;/a&gt;Ribbon - 客户端负载均衡&lt;/h1&gt;&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;
+    
+    </summary>
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>spring cloud的资源</title>
+    <link href="http://chenjiabing666.github.io/2018/12/25/Spring%20cloud%E7%9A%84%E4%BC%98%E7%A7%80%E8%B5%84%E6%BA%90/"/>
+    <id>http://chenjiabing666.github.io/2018/12/25/Spring cloud的优秀资源/</id>
+    <published>2018-12-24T16:19:33.000Z</published>
+    <updated>2018-12-24T16:27:21.228Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="spring-cloud的资源"><a href="#spring-cloud的资源" class="headerlink" title="spring cloud的资源"></a>spring cloud的资源</h2><ul>
+<li><a href="https://springcloud.cc/" target="_blank" rel="external">Springcloud中文网</a></li>
+<li><a href="https://springcloud.cc/spring-cloud-dalston.html" target="_blank" rel="external">中文文档</a></li>
+<li><a href="http://springcloud.cn/" target="_blank" rel="external">中国社区</a></li>
+<li><a href="http://springcloud.fun/" target="_blank" rel="external">优质学习资源</a></li>
+<li><a href="http://www.cnblogs.com/skyme/p/8976866.html" target="_blank" rel="external">SpringBoot学习资源</a></li>
+<li><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.0.M3/single/spring-cloud-netflix.html" target="_blank" rel="external">官方文档</a></li>
+<li><a href="http://www.itmuch.com/spring-cloud-sum-eureka/" target="_blank" rel="external">http://www.itmuch.com/spring-cloud-sum-eureka/</a></li>
+<li><a href="https://yujunhao8831.github.io/2017/05/27/Spring-Cloud-Eureka-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank" rel="external">指南</a></li>
+<li><a href="https://www.cnblogs.com/huangjuncong/tag/SpringCloud/" target="_blank" rel="external">https://www.cnblogs.com/huangjuncong/tag/SpringCloud/</a></li>
+<li><a href="https://blog.csdn.net/u012702547/article/details/78547925" target="_blank" rel="external">https://blog.csdn.net/u012702547/article/details/78547925</a></li>
+<li><a href="https://www.cnblogs.com/leeSmall/category/1185489.html" target="_blank" rel="external">https://www.cnblogs.com/leeSmall/category/1185489.html</a></li>
+<li><a href="https://windmt.com/tags/Spring-Cloud/" target="_blank" rel="external">https://windmt.com/tags/Spring-Cloud/</a></li>
+<li><a href="http://www.ityouknow.com" target="_blank" rel="external">http://www.ityouknow.com</a></li>
+<li><a href="http://www.itmuch.com/categories/Spring-Cloud" target="_blank" rel="external">http://www.itmuch.com/categories/Spring-Cloud</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;spring-cloud的资源&quot;&gt;&lt;a href=&quot;#spring-cloud的资源&quot; class=&quot;headerlink&quot; title=&quot;spring cloud的资源&quot;&gt;&lt;/a&gt;spring cloud的资源&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;htt
     
     </summary>
     
@@ -2073,324 +2239,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;SpringBoot整合Spring-data-redis&quot;&gt;&lt;a href=&quot;#SpringBoot整合Spring-data-redis&quot; class=&quot;headerlink&quot; title=&quot;SpringBoot整合Spring data redis&quot;&gt;&lt;/a
-    
-    </summary>
-    
-      <category term="SpringBoot" scheme="http://chenjiabing666.github.io/categories/SpringBoot/"/>
-    
-    
-      <category term="SpringBoot" scheme="http://chenjiabing666.github.io/tags/SpringBoot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SpringBoot整合Spring-data-jpa</title>
-    <link href="http://chenjiabing666.github.io/2018/12/20/SpringBoot%E6%95%B4%E5%90%88Spring-data-jpa/"/>
-    <id>http://chenjiabing666.github.io/2018/12/20/SpringBoot整合Spring-data-jpa/</id>
-    <published>2018-12-20T15:50:34.000Z</published>
-    <updated>2018-12-22T12:46:31.135Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="SpringBoot整合Spring-data-jpa"><a href="#SpringBoot整合Spring-data-jpa" class="headerlink" title="SpringBoot整合Spring data jpa"></a>SpringBoot整合Spring data jpa</h1><h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--mysql驱动--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 添加数据库连接池 druid --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="主键生成策略"><a href="#主键生成策略" class="headerlink" title="主键生成策略"></a>主键生成策略</h2><ul>
-<li><code>@GeneratedValue(strategy=GenerationType.xxx)</code>指定主键的生成策略<ul>
-<li><strong><code>IDENTITY</code>：根据数据库的主键自增长策略</strong></li>
-<li><code>GenerationType.TABLE</code>：使用一个特定的数据库表格来保存主键</li>
-<li><code>GenerationType.SEQUENCE</code>：在某些数据库中,不支持主键自增长,比如Oracle,其提供了一种叫做”序列(sequence)”的机制生成主键。此时,GenerationType.SEQUENCE就可以作为主键生成策略。该策略的不足之处正好与TABLE相反,由于只有部分数据库(Oracle,PostgreSQL,DB2)支持序列对象,所以该策略一般不应用于其他数据库。类似的,该策略一般与另外一个注解一起使用@SequenceGenerator,@SequenceGenerator注解指定了生成主键的序列.然后JPA会根据注解内容创建一个序列(或使用一个现有的序列)。如果不指定序列,则会自动生成一个序列SEQ_GEN_SEQUENCE</li>
-<li><code>GenerationType.AUTO</code>：把主键生成策略交给持久化引擎(persistence engine),持久化引擎会根据数据库在以上三种主键生成策略中选择其中一种。此种主键生成策略比较常用,由于JPA默认的生成策略就是GenerationType.AUTO,所以使用此种策略时.可以显式的指定@GeneratedValue(strategy = GenerationType.AUTO)也可以直接@GeneratedValue</li>
-</ul>
-</li>
-<li>实例如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Id</span></div><div class="line"><span class="meta">@GeneratedValue</span>(strategy=GenerationType.IDENTITY)  <span class="comment">//数据库自增</span></div><div class="line"><span class="keyword">private</span> Integer id;</div></pre></td></tr></table></figure>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  datasource:</span>                <span class="comment">## 配置数据源</span></div><div class="line"><span class="attr">    type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></div><div class="line"><span class="attr">    url:</span> <span class="attr">jdbc:mysql://118.31.15.108:3306/jpa?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false</span></div><div class="line"><span class="attr">    driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></div><div class="line"><span class="attr">    username:</span> <span class="string">root</span></div><div class="line"><span class="attr">    password:</span> <span class="string">****</span></div><div class="line"><span class="attr">    initialSize:</span> <span class="number">5</span></div><div class="line"><span class="attr">    minIdle:</span> <span class="number">5</span></div><div class="line"><span class="attr">    maxActive:</span> <span class="number">20</span></div><div class="line"><span class="attr">    maxWait:</span> <span class="number">6000</span></div><div class="line"><span class="attr">    timeBetweenEvictionRunsMillis:</span> <span class="number">6000</span></div><div class="line"><span class="attr">    minEvictableIdleTimeMillis:</span> <span class="number">25200000</span></div><div class="line"><span class="attr">    testWhileIdle:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    testOnBorrow:</span> <span class="literal">false</span></div><div class="line"><span class="attr">    testOnReturn:</span> <span class="literal">false</span></div><div class="line"><span class="attr">    validationQuery:</span> <span class="string">SELECT</span> <span class="number">1</span> <span class="string">FROM</span> <span class="string">DUAL</span></div><div class="line"><span class="attr">    RemoveAbandanded:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    removeAbandonedTimeout:</span> <span class="number">1800</span></div><div class="line"><span class="attr">    logAbandoned:</span> <span class="literal">true</span></div><div class="line"><span class="attr">  jpa:</span></div><div class="line"><span class="attr">    show-sql:</span> <span class="literal">true</span>    <span class="comment">#控制台打印sql语句</span></div><div class="line"><span class="attr">    database:</span> <span class="string">MYSQL</span>   <span class="comment"># 指定数据库的类型，不填会默认检测</span></div><div class="line"><span class="attr">    generate-ddl:</span> <span class="literal">false</span>  <span class="comment">## 是否自动生成表,默认是false</span></div><div class="line"><span class="comment">#    hibernate:</span></div><div class="line"><span class="comment">#      ddl-auto: update</span></div></pre></td></tr></table></figure>
-<h2 id="创建一个实体类"><a href="#创建一个实体类" class="headerlink" title="创建一个实体类"></a>创建一个实体类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 用户的实体类，其中的变量和数据库默认是以驼峰形式对应的，比如industryId,那么在表中的字段一定要是industry_id，否则将会报错</div><div class="line"> */</div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"t_user"</span>)  <span class="comment">//指定对应数据库对应的表名</span></div><div class="line"><span class="meta">@Entity</span>    <span class="comment">//标记这是一个实体类</span></div><div class="line"><span class="meta">@Data</span>    	<span class="comment">//lombook的自动生成set，get</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">	<span class="meta">@Id</span>    <span class="comment">//标记主键</span></div><div class="line">	<span class="meta">@GeneratedValue</span>(strategy=GenerationType.IDENTITY)</div><div class="line">	<span class="keyword">private</span> Integer id;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> Integer age;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> String address;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> Integer industryId;   <span class="comment">//在数据库中的对应字段一定要是industry_id</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="基本的查询"><a href="#基本的查询" class="headerlink" title="基本的查询"></a>基本的查询</h2><ul>
-<li>定义一个<code>UserRepository</code>，相当于Mybatis中的Mapper，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.JpaRepository;</div><div class="line"><span class="keyword">import</span> cn.tedu.jpa.domain.User;</div><div class="line"><span class="keyword">import</span> java.lang.String;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * JpaRepository的接口，相当于mapper</div><div class="line"> * 泛型：JpaRepository&lt;User, Integer&gt; ：第一个是实体类的类型，第二个是主键的类型</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">User</span>, <span class="title">Integer</span>&gt;</span>&#123;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 根据指定条件查询 Byxxx(where xxx=xxx)，除了根据主键查询，否则返回的都是List</div><div class="line">	 * 	其中查询的条件对应的类型必须相同</div><div class="line">	 */</div><div class="line">	<span class="function">List&lt;User&gt; <span class="title">findByName</span><span class="params">(String name)</span></span>;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 并列条件查询 ，相当于where name=xxx and age=xxx</div><div class="line">	 */</div><div class="line">	<span class="function">List&lt;User&gt; <span class="title">findByNameAndAge</span><span class="params">(String name,Integer age)</span></span>;</div><div class="line">	</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 三个条件的并列查询 where xxx and xxx and xxx</div><div class="line">	 */</div><div class="line">	<span class="function">List&lt;User&gt; <span class="title">findByNameAndAgeAndIndustryId</span><span class="params">(String name,Integer age,Integer industryId)</span></span>;</div><div class="line">	</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * Top或者First指定返回结果数量,默认返回第一个，相当于limit 1</div><div class="line">	 */</div><div class="line">	<span class="function">User <span class="title">findTopByNameAndAge</span><span class="params">(String name,Integer age)</span></span>;</div><div class="line">	</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * Topn或者Firstn指定返回结果数量,这里的n表示返回的数量，相当于limit n</div><div class="line">	 */</div><div class="line">	<span class="function">List&lt;User&gt; <span class="title">findTop2ByNameAndAge</span><span class="params">(String name,Integer age)</span></span>;</div><div class="line">	</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * In 相当于where age in(....) 其中的变量类型可以数组、List、Set只要是Collection即可，泛型必须和查询条件的类型一致</div><div class="line">	 */</div><div class="line">	<span class="function">List&lt;User&gt; <span class="title">findByAgeIn</span><span class="params">(Integer[] ages)</span></span>;</div><div class="line">	</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 统计数据  相当于select count(*) where age=xxx</div><div class="line">	 */</div><div class="line">	<span class="function">Long <span class="title">countByAge</span><span class="params">(Integer age)</span></span>;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>测试类如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</div><div class="line"><span class="meta">@SpringBootTest</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JpaServerApplicationTests</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> UserRepository userRepository;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 新增数据（单个）</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addUser</span><span class="params">()</span> </span>&#123;</div><div class="line">		User user=<span class="keyword">new</span> User();</div><div class="line">		user.setAge(<span class="number">22</span>);</div><div class="line">		user.setName(<span class="string">"陈加兵"</span>);</div><div class="line">		User user2 = userRepository.save(user);  <span class="comment">//自增主键的返回</span></div><div class="line">		System.out.println(user);  </div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 批量插入</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveAll</span><span class="params">()</span> </span>&#123;</div><div class="line">		User user1=<span class="keyword">new</span> User();</div><div class="line">		user1.setAge(<span class="number">22</span>);</div><div class="line">		user1.setName(<span class="string">"陈加兵"</span>);</div><div class="line">		User user2=<span class="keyword">new</span> User();</div><div class="line">		user2.setAge(<span class="number">22</span>);</div><div class="line">		user2.setName(<span class="string">"陈加兵"</span>);</div><div class="line">		</div><div class="line">		List&lt;User&gt; users=<span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">		users.add(user1);</div><div class="line">		users.add(user2);</div><div class="line">		List&lt;User&gt; usersResturn=userRepository.saveAll(users);   <span class="comment">//返回列表，自增主键的返回</span></div><div class="line">		<span class="keyword">for</span> (User user : usersResturn) &#123;</div><div class="line">			System.out.println(user);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 更新数据，使用的仍然是save方法，如果其中包含id，那么就是更新数据，否则就是添加</div><div class="line">	 * 	1、如果有数据不更新，那么就出入null即可</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> </span>&#123;</div><div class="line">		User user1=<span class="keyword">new</span> User();</div><div class="line">		user1.setId(<span class="number">1</span>);</div><div class="line">		user1.setAge(<span class="number">22</span>);</div><div class="line">		user1.setName(<span class="string">"郑元梅"</span>);</div><div class="line">		User user = userRepository.save(user1);</div><div class="line">		System.out.println(user);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 统计数据</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">count</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(userRepository.count());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 统计数据</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">countByAge</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(userRepository.countByAge(<span class="number">23</span>));</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findByName</span><span class="params">()</span> </span>&#123;</div><div class="line">		List&lt;User&gt; users=userRepository.findTop2ByNameAndAge(<span class="string">"陈加兵"</span>, <span class="number">22</span>);</div><div class="line">		<span class="keyword">for</span> (User user : users) &#123;</div><div class="line">			System.out.println(user);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findByAgeIn</span><span class="params">()</span> </span>&#123;</div><div class="line">		Integer[] ages= &#123;<span class="number">22</span>,<span class="number">23</span>&#125;;</div><div class="line">		List&lt;User&gt; users=userRepository.findByAgeIn(ages);</div><div class="line">		<span class="keyword">for</span> (User user : users) &#123;</div><div class="line">			System.out.println(user);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="自定义查询-Query"><a href="#自定义查询-Query" class="headerlink" title="自定义查询@Query"></a>自定义查询@Query</h2><h3 id="使用HQL语句查询"><a href="#使用HQL语句查询" class="headerlink" title="使用HQL语句查询"></a>使用HQL语句查询</h3><ul>
-<li>默认使用的就是HQL语句查询的，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 使用hql表达式查询，其中?1表示对应第一个参数，不能直接使用?作为占位符</div><div class="line"> */</div><div class="line"><span class="meta">@Query</span>(value=<span class="string">"select u from User u where u.age=?1 and u.name=?2"</span>)</div><div class="line"><span class="function">List&lt;User&gt; <span class="title">findUserList</span><span class="params">(Integer age,String name)</span></span>;</div></pre></td></tr></table></figure>
-<h3 id="使用sql语句查询"><a href="#使用sql语句查询" class="headerlink" title="使用sql语句查询"></a>使用sql语句查询</h3><ul>
-<li>需要指定<code>nativeQuery=true</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 使用sql语句查询，其中nativeQuery表示使用本地查询，即是sql语句查询</div><div class="line"> */</div><div class="line"><span class="meta">@Query</span>(value=<span class="string">"select * from t_user where age=?1 order by industry_id desc"</span>,nativeQuery=<span class="keyword">true</span>)</div><div class="line"><span class="function">List&lt;User&gt; <span class="title">findUserListByAge</span><span class="params">(Integer age)</span></span>;</div></pre></td></tr></table></figure>
-<h3 id="删除和修改"><a href="#删除和修改" class="headerlink" title="删除和修改"></a>删除和修改</h3><ul>
-<li>使用自定义sql的时候，如果涉及到删除和修改的sql需要满足两个条件才能执行，如下：<ul>
-<li>使用<code>@Modifying</code>标注</li>
-<li>在事务中执行</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">	 * 删除和修改信息，必须同时使用<span class="doctag">@Modifying</span>注解标注</div><div class="line">	 */</div><div class="line">	<span class="meta">@Modifying</span></div><div class="line">	<span class="meta">@Query</span>(value=<span class="string">"delete from t_user where industry_id=?1"</span>,nativeQuery=<span class="keyword">true</span>)</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">deleteByIndustryId</span><span class="params">(Integer industryId)</span></span>;</div></pre></td></tr></table></figure>
-<h2 id="复杂条件查询"><a href="#复杂条件查询" class="headerlink" title="复杂条件查询"></a>复杂条件查询</h2><ul>
-<li>Repository接口需要继承<code>JpaSpecificationExecutor</code>，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">User</span>, <span class="title">Integer</span>&gt;,<span class="title">JpaSpecificationExecutor</span>&lt;<span class="title">User</span>&gt;</span>&#123;</div></pre></td></tr></table></figure>
-<ul>
-<li>查询如下:</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">	 *   结果筛选</div><div class="line">	 * <span class="doctag">@param</span> user  封装了查询的条件</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">findAll_2</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">		List&lt;User&gt; users = userRepository.findAll(<span class="keyword">new</span> Specification&lt;User&gt;() &#123;</div><div class="line">			<span class="comment">/**</span></div><div class="line">			 * <span class="doctag">@param</span> root 根对象，用于封装查询的条件，比如name,jack、age 10等</div><div class="line">			 * <span class="doctag">@param</span> query  封装查询关键字  比如group by order by</div><div class="line">			 * <span class="doctag">@param</span> criteriaBuilder  封装对象条件</div><div class="line">			 * <span class="doctag">@return</span> 返回null表示没有查询条件</div><div class="line">			 */</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> Predicate <span class="title">toPredicate</span><span class="params">(Root&lt;User&gt; root, CriteriaQuery&lt;?&gt; query, CriteriaBuilder criteriaBuilder)</span> </span>&#123;</div><div class="line">				<span class="comment">//new 一个集合，存放所有的查询条件</span></div><div class="line">				List&lt;Predicate&gt; predicates=<span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">				</div><div class="line">				<span class="keyword">if</span> (!StringUtils.isEmpty(user.getName())) &#123;  <span class="comment">//如果name不是null，就填入到筛选条件中</span></div><div class="line">					<span class="comment">//第一个参数是表达式，第二个参数是值,相当于where name=%name%</span></div><div class="line">					Predicate predicate = criteriaBuilder.like(root.get(<span class="string">"name"</span>).as(String.class),<span class="string">"%"</span>+user.getName()+<span class="string">"%"</span>);</div><div class="line">					predicates.add(predicate);   <span class="comment">//加入到条件集合中</span></div><div class="line">				&#125;</div><div class="line">				</div><div class="line">				<span class="keyword">if</span> (!StringUtils.isEmpty(user.getAddress())) &#123; <span class="comment">//如果地址不为空，填入筛选条件</span></div><div class="line">					<span class="comment">//where address=xxx</span></div><div class="line">					Predicate predicate = criteriaBuilder.equal(root.get(<span class="string">"address"</span>).as(String.class), user.getAddress());</div><div class="line">					predicates.add(predicate);</div><div class="line">				&#125;</div><div class="line">				</div><div class="line">				<span class="keyword">if</span> (user.getAge()!=<span class="keyword">null</span>) &#123; <span class="comment">//如果年龄不为空</span></div><div class="line">					<span class="comment">//where age&lt;=xxx</span></div><div class="line">					Predicate predicate = criteriaBuilder.le(root.get(<span class="string">"age"</span>).as(Integer.class), user.getAge());</div><div class="line">					predicates.add(predicate);</div><div class="line">				&#125;</div><div class="line">				</div><div class="line">				Predicate[] parray=<span class="keyword">new</span> Predicate[predicates.size()];</div><div class="line">				<span class="comment">//返回，这里的使用的and条件，将上面所有的条件用and连接</span></div><div class="line">				<span class="keyword">return</span> criteriaBuilder.and(predicates.toArray(parray));</div><div class="line">		&#125;</div><div class="line">		&#125;);</div><div class="line">	<span class="keyword">return</span> users;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 测试</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</div><div class="line">		User user=<span class="keyword">new</span> User();</div><div class="line">		user.setName(<span class="string">"a"</span>);  <span class="comment">//封装name</span></div><div class="line">		List&lt;User&gt; users = findAll_2(user);</div><div class="line">		<span class="keyword">for</span> (User user2 : users) &#123;</div><div class="line">			System.out.println(user2);</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<h2 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h2><h3 id="PageRequest"><a href="#PageRequest" class="headerlink" title="PageRequest"></a>PageRequest</h3><ul>
-<li>构造方法如下：<ul>
-<li><code>public PageRequest(int page, int size)</code><ul>
-<li><code>size</code>：每页查询的大小</li>
-<li><code>page</code>：从第几页开始，从0开始，0 表示第一页</li>
-</ul>
-</li>
-<li><code>public PageRequest(int page, int size, Direction direction, String... properties)</code><ul>
-<li><code>direction</code>： 排序的方式，枚举类，其中有ASC，DESC</li>
-<li><code>properties</code>： 进行排序的字段，可以指定多个</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Page"><a href="#Page" class="headerlink" title="Page"></a>Page</h3><ul>
-<li><code>int getTotalPages()</code>：返回共有多少页数</li>
-<li><code>long getTotalElements()</code>：获取总数</li>
-<li><code>boolean hasContent();</code>： 当前分页是否有数据</li>
-<li><code>List&lt;T&gt; getContent();</code>： 返回当前页所有的数据</li>
-<li><code>boolean isFirst();</code>：判断当前的页数是否是第一页</li>
-<li><code>boolean isLast();</code>： 是否是最后页</li>
-<li><code>boolean hasNext();</code>： 是否还有下一页</li>
-<li><code>boolean hasPrevious();</code>： 是否还有前一页</li>
-<li><code>Pageable nextPageable();</code>： 获取下一页</li>
-<li><code>Pageable previousPageable();</code>：获取前一页</li>
-</ul>
-<h3 id="简单查询"><a href="#简单查询" class="headerlink" title="简单查询"></a>简单查询</h3><ul>
-<li>以相同的排序方式查询</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findAll</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">//构造分页数据，查找第二页，每页2条记录，order by age,industryId desc</span></div><div class="line">	Pageable pageable=<span class="keyword">new</span> PageRequest(<span class="number">1</span>, <span class="number">2</span>,Direction.DESC,<span class="string">"age"</span>,<span class="string">"industryId"</span>);</div><div class="line">	Page&lt;User&gt; pages = userRepository.findAll(pageable);  <span class="comment">//执行分页查询的方法</span></div><div class="line">	<span class="keyword">if</span> (pages.hasContent()) &#123;  <span class="comment">//如果查询到了内容</span></div><div class="line">		List&lt;User&gt; users = pages.getContent();  <span class="comment">//获取查询到的结果</span></div><div class="line">		<span class="keyword">long</span> total = pages.getTotalElements();   <span class="comment">//获取总数</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>不同的排序方式查询</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findAll</span><span class="params">()</span> </span>&#123;</div><div class="line">	Order order1=<span class="keyword">new</span> Order(Direction.DESC, <span class="string">"age"</span>);  <span class="comment">//创建排序方式</span></div><div class="line">	Order order2=<span class="keyword">new</span> Order(Direction.ASC, <span class="string">"industryId"</span>);</div><div class="line">	List&lt;Order&gt; orders=<span class="keyword">new</span> ArrayList&lt;&gt;();  <span class="comment">//放入集合</span></div><div class="line">	orders.add(order1);</div><div class="line">	orders.add(order2);</div><div class="line">	</div><div class="line">	Sort sort=<span class="keyword">new</span> Sort(orders);  <span class="comment">//创建Sort</span></div><div class="line">	</div><div class="line">	<span class="comment">//构造分页数据，查找第二页，每页2条记录，order by age desc,industryId asc</span></div><div class="line">	Pageable pageable=<span class="keyword">new</span> PageRequest(<span class="number">0</span>, <span class="number">2</span>,sort);</div><div class="line">	Page&lt;User&gt; pages = userRepository.findAll(pageable);  <span class="comment">//执行分页查询的方法</span></div><div class="line">	<span class="keyword">if</span> (pages.hasContent()) &#123;  <span class="comment">//如果查询到了内容</span></div><div class="line">		List&lt;User&gt; users = pages.getContent();  <span class="comment">//获取查询到的结果</span></div><div class="line">		<span class="keyword">long</span> total = pages.getTotalElements();   <span class="comment">//获取总数</span></div><div class="line">		<span class="keyword">for</span> (User user : users) &#123;</div><div class="line">			System.out.println(user);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="简单条件分页查询"><a href="#简单条件分页查询" class="headerlink" title="简单条件分页查询"></a>简单条件分页查询</h3><ul>
-<li>方法如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 根据条件查询的结果分页，相当于select * from user where name=xxx limit #,#</div><div class="line"> */</div><div class="line"><span class="function">List&lt;User&gt; <span class="title">findByName</span><span class="params">(String name,Pageable pageable)</span></span>;</div></pre></td></tr></table></figure>
-<h3 id="复杂条件分页查询"><a href="#复杂条件分页查询" class="headerlink" title="复杂条件分页查询"></a>复杂条件分页查询</h3><ul>
-<li>Repository接口需要继承<code>JpaSpecificationExecutor</code>，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">User</span>, <span class="title">Integer</span>&gt;,<span class="title">JpaSpecificationExecutor</span>&lt;<span class="title">User</span>&gt;</span>&#123;</div></pre></td></tr></table></figure>
-<ul>
-<li>和复杂条件查询一样，只是多了一个分页</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">	 *   结果筛选</div><div class="line">	 * <span class="doctag">@param</span> user  封装了查询的条件</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">findAll_3</span><span class="params">(User user,Integer pageNum,Integer pageSize)</span> </span>&#123;</div><div class="line">		 </div><div class="line">		Pageable pageable=<span class="keyword">new</span> PageRequest(pageNum-<span class="number">1</span>, pageSize);   <span class="comment">//分页的查询</span></div><div class="line">		 </div><div class="line">		Page&lt;User&gt; pages = userRepository.findAll(<span class="keyword">new</span> Specification&lt;User&gt;() &#123;</div><div class="line">			<span class="comment">/**</span></div><div class="line">			 * <span class="doctag">@param</span> root 根对象，用于封装查询的条件，比如name,jack、age 10等</div><div class="line">			 * <span class="doctag">@param</span> query  封装查询关键字  比如group by order by</div><div class="line">			 * <span class="doctag">@param</span> criteriaBuilder  封装对象条件</div><div class="line">			 * <span class="doctag">@return</span> 返回null表示没有查询条件</div><div class="line">			 */</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> Predicate <span class="title">toPredicate</span><span class="params">(Root&lt;User&gt; root, CriteriaQuery&lt;?&gt; query, CriteriaBuilder criteriaBuilder)</span> </span>&#123;</div><div class="line">				<span class="comment">//new 一个集合，存放所有的查询条件</span></div><div class="line">				List&lt;Predicate&gt; predicates=<span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">				</div><div class="line">				<span class="keyword">if</span> (!StringUtils.isEmpty(user.getName())) &#123;  <span class="comment">//如果name不是null，就填入到筛选条件中</span></div><div class="line">					<span class="comment">//第一个参数是表达式，第二个参数是值,相当于where name=%name%</span></div><div class="line">					Predicate predicate = criteriaBuilder.like(root.get(<span class="string">"name"</span>).as(String.class),<span class="string">"%"</span>+user.getName()+<span class="string">"%"</span>);</div><div class="line">					predicates.add(predicate);   <span class="comment">//加入到条件集合中</span></div><div class="line">				&#125;</div><div class="line">				</div><div class="line">				<span class="keyword">if</span> (!StringUtils.isEmpty(user.getAddress())) &#123; <span class="comment">//如果地址不为空，填入筛选条件</span></div><div class="line">					<span class="comment">//where address=xxx</span></div><div class="line">					Predicate predicate = criteriaBuilder.equal(root.get(<span class="string">"address"</span>).as(String.class), user.getAddress());</div><div class="line">					predicates.add(predicate);</div><div class="line">				&#125;</div><div class="line">				</div><div class="line">				<span class="keyword">if</span> (user.getAge()!=<span class="keyword">null</span>) &#123; <span class="comment">//如果年龄不为空</span></div><div class="line">					<span class="comment">//where age&lt;=xxx</span></div><div class="line">					Predicate predicate = criteriaBuilder.le(root.get(<span class="string">"age"</span>).as(Integer.class), user.getAge());</div><div class="line">					predicates.add(predicate);</div><div class="line">				&#125;</div><div class="line">				</div><div class="line">				Predicate[] parray=<span class="keyword">new</span> Predicate[predicates.size()];</div><div class="line">				<span class="comment">//返回，这里的使用的and条件，将上面所有的条件用and连接</span></div><div class="line">				<span class="keyword">return</span> criteriaBuilder.and(predicates.toArray(parray));</div><div class="line">		&#125;</div><div class="line">		&#125;,pageable);</div><div class="line">		</div><div class="line">		<span class="keyword">return</span> pages.getContent();  <span class="comment">//返回结果</span></div><div class="line">&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 测试</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</div><div class="line">		User user=<span class="keyword">new</span> User();</div><div class="line">		user.setName(<span class="string">"a"</span>);  <span class="comment">//封装name</span></div><div class="line">		List&lt;User&gt; users = findAll_3(user,<span class="number">1</span>,<span class="number">10</span>);</div><div class="line">		<span class="keyword">for</span> (User user2 : users) &#123;</div><div class="line">			System.out.println(user2);</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<h2 id="查找关键字"><a href="#查找关键字" class="headerlink" title="查找关键字"></a>查找关键字</h2><table>
-<thead>
-<tr>
-<th>关键词</th>
-<th>样品</th>
-<th>JPQL代码段</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>And</code></td>
-<td><code>findByLastnameAndFirstname</code></td>
-<td><code>… where x.lastname = ?1 and x.firstname = ?2</code></td>
-</tr>
-<tr>
-<td><code>Or</code></td>
-<td><code>findByLastnameOrFirstname</code></td>
-<td><code>… where x.lastname = ?1 or x.firstname = ?2</code></td>
-</tr>
-<tr>
-<td><code>Is,Equals</code></td>
-<td><code>findByFirstname</code>，<code>findByFirstnameIs</code>，<code>findByFirstnameEquals</code></td>
-<td><code>… where x.firstname = ?1</code></td>
-</tr>
-<tr>
-<td><code>Between</code></td>
-<td><code>findByStartDateBetween</code></td>
-<td><code>… where x.startDate between ?1 and ?2</code></td>
-</tr>
-<tr>
-<td><code>LessThan</code></td>
-<td><code>findByAgeLessThan</code></td>
-<td><code>… where x.age &lt; ?1</code></td>
-</tr>
-<tr>
-<td><code>LessThanEqual</code></td>
-<td><code>findByAgeLessThanEqual</code></td>
-<td><code>… where x.age &lt;= ?1</code></td>
-</tr>
-<tr>
-<td><code>GreaterThan</code></td>
-<td><code>findByAgeGreaterThan</code></td>
-<td><code>… where x.age &gt; ?1</code></td>
-</tr>
-<tr>
-<td><code>GreaterThanEqual</code></td>
-<td><code>findByAgeGreaterThanEqual</code></td>
-<td><code>… where x.age &gt;= ?1</code></td>
-</tr>
-<tr>
-<td><code>After</code></td>
-<td><code>findByStartDateAfter</code></td>
-<td><code>… where x.startDate &gt; ?1</code></td>
-</tr>
-<tr>
-<td><code>Before</code></td>
-<td><code>findByStartDateBefore</code></td>
-<td><code>… where x.startDate &lt; ?1</code></td>
-</tr>
-<tr>
-<td><code>IsNull</code></td>
-<td><code>findByAgeIsNull</code></td>
-<td><code>… where x.age is null</code></td>
-</tr>
-<tr>
-<td><code>IsNotNull,NotNull</code></td>
-<td><code>findByAge(Is)NotNull</code></td>
-<td><code>… where x.age not null</code></td>
-</tr>
-<tr>
-<td><code>Like</code></td>
-<td><code>findByFirstnameLike</code></td>
-<td><code>… where x.firstname like ?1</code></td>
-</tr>
-<tr>
-<td><code>NotLike</code></td>
-<td><code>findByFirstnameNotLike</code></td>
-<td><code>… where x.firstname not like ?1</code></td>
-</tr>
-<tr>
-<td><code>StartingWith</code></td>
-<td><code>findByFirstnameStartingWith</code></td>
-<td><code>… where x.firstname like ?1</code>（附加参数绑定<code>%</code>）</td>
-</tr>
-<tr>
-<td><code>EndingWith</code></td>
-<td><code>findByFirstnameEndingWith</code></td>
-<td><code>… where x.firstname like ?1</code>（与前置绑定的参数<code>%</code>）</td>
-</tr>
-<tr>
-<td><code>Containing</code></td>
-<td><code>findByFirstnameContaining</code></td>
-<td><code>… where x.firstname like ?1</code>（参数绑定包装<code>%</code>）</td>
-</tr>
-<tr>
-<td><code>OrderBy</code></td>
-<td><code>findByAgeOrderByLastnameDesc</code></td>
-<td><code>… where x.age = ?1 order by x.lastname desc</code></td>
-</tr>
-<tr>
-<td><code>Not</code></td>
-<td><code>findByLastnameNot</code></td>
-<td><code>… where x.lastname &lt;&gt; ?1</code></td>
-</tr>
-<tr>
-<td><code>In</code></td>
-<td><code>findByAgeIn(Collection&lt;Age&gt; ages)</code></td>
-<td><code>… where x.age in ?1</code></td>
-</tr>
-<tr>
-<td><code>NotIn</code></td>
-<td><code>findByAgeNotIn(Collection&lt;Age&gt; ages)</code></td>
-<td><code>… where x.age not in ?1</code></td>
-</tr>
-<tr>
-<td><code>True</code></td>
-<td><code>findByActiveTrue()</code></td>
-<td><code>… where x.active = true</code></td>
-</tr>
-<tr>
-<td><code>False</code></td>
-<td><code>findByActiveFalse()</code></td>
-<td><code>… where x.active = false</code></td>
-</tr>
-<tr>
-<td><code>IgnoreCase</code></td>
-<td><code>findByFirstnameIgnoreCase</code></td>
-<td><code>… where UPPER(x.firstame) = UPPER(?1)</code></td>
-</tr>
-<tr>
-<td><code>Top或者First</code></td>
-<td><code>findTopByNameAndAge</code>，<code>findFirstByNameAndAge</code></td>
-<td>where … limit 1</td>
-</tr>
-<tr>
-<td><code>Topn或者Firstn</code></td>
-<td><code>findTop2ByNameAndAge</code>，<code>findFirst2ByNameAndAge</code></td>
-<td>where … limit 2</td>
-</tr>
-<tr>
-<td><code>Distinct</code></td>
-<td><code>findDistinctPeopleByLastnameOrFirstname</code></td>
-<td>select distinct ….</td>
-</tr>
-<tr>
-<td><code>count</code></td>
-<td><code>countByAge</code>，<code>count</code></td>
-<td>select count(*)</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><a href="https://docs.spring.io/spring-data/jpa/docs/2.1.3.RELEASE/reference/html/" target="_blank" rel="external">https://docs.spring.io/spring-data/jpa/docs/2.1.3.RELEASE/reference/html/</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;SpringBoot整合Spring-data-jpa&quot;&gt;&lt;a href=&quot;#SpringBoot整合Spring-data-jpa&quot; class=&quot;headerlink&quot; title=&quot;SpringBoot整合Spring data jpa&quot;&gt;&lt;/a&gt;Sprin
-    
-    </summary>
-    
-      <category term="SpringBoot" scheme="http://chenjiabing666.github.io/categories/SpringBoot/"/>
-    
-    
-      <category term="SpringBoot" scheme="http://chenjiabing666.github.io/tags/SpringBoot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SpringBoot集成lombok</title>
-    <link href="http://chenjiabing666.github.io/2018/12/20/SpringBoot%E9%9B%86%E6%88%90lombok/"/>
-    <id>http://chenjiabing666.github.io/2018/12/20/SpringBoot集成lombok/</id>
-    <published>2018-12-20T15:46:20.000Z</published>
-    <updated>2018-12-20T15:47:26.439Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="SpringBoot集成lombok"><a href="#SpringBoot集成lombok" class="headerlink" title="SpringBoot集成lombok"></a>SpringBoot集成lombok</h1><h2 id="STS安装"><a href="#STS安装" class="headerlink" title="STS安装"></a>STS安装</h2><ul>
-<li><a href="https://blog.csdn.net/blueheart20/article/details/52909775" target="_blank" rel="external">https://blog.csdn.net/blueheart20/article/details/52909775</a></li>
-</ul>
-<h2 id="常用的注解"><a href="#常用的注解" class="headerlink" title="常用的注解"></a>常用的注解</h2><ul>
-<li><code>@Getter</code>:   自动生成Getter方法</li>
-<li><code>@NonNull</code>：  标识对象是否为空，为空则抛出异常</li>
-<li><code>@Setter</code>:  自动生成Setter</li>
-<li><code>@ToString</code>：  覆盖tostring方法</li>
-<li><code>@Slf4j</code>:  默认使用slf4j的日志对象</li>
-<li><code>@EqualsAndHashCode</code>: 覆盖equal和hashCode方法</li>
-<li><code>@Data</code>:  @Getter/@Setter, @ToString, @EqualAndHashCode等组合</li>
-<li><code>@AllArgsConstructor</code>：自动生成全参构造方法</li>
-<li><code>@NoArgsConstructor</code>：自动生成无参构造方法</li>
-<li><code>@Accessors(chain = true)</code>：实现链式编程</li>
-</ul>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
-<li>添加依赖</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- lombok的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>创建实体类，如下:</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Data</span> <span class="comment">// 自动生成get、set、toString、equals方法</span></div><div class="line"><span class="meta">@AllArgsConstructor</span> <span class="comment">// 全参构造方法</span></div><div class="line"><span class="meta">@NoArgsConstructor</span> <span class="comment">// 无参构造方法</span></div><div class="line"><span class="meta">@Accessors</span>(chain = <span class="keyword">true</span>) <span class="comment">// 链式编程</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Order</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> Integer orderId; <span class="comment">// 订单Id</span></div><div class="line">	<span class="keyword">private</span> String orderNum; <span class="comment">// 订单编号</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Order order = <span class="keyword">new</span> Order();</div><div class="line">		order.setOrderId(<span class="number">1</span>).setOrderNum(<span class="string">"156416516"</span>); <span class="comment">// 链式调用</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;SpringBoot集成lombok&quot;&gt;&lt;a href=&quot;#SpringBoot集成lombok&quot; class=&quot;headerlink&quot; title=&quot;SpringBoot集成lombok&quot;&gt;&lt;/a&gt;SpringBoot集成lombok&lt;/h1&gt;&lt;h2 id=&quot;S
     
     </summary>
     
