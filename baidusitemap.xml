@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://chenjiabing666.github.io/2019/06/25/InstantiationAwareBeanPostProcessor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</loc>
+    <lastmod>2019-06-25T13:25:40.879Z</lastmod>
+    <data>
+        <display>
+        <title>InstantiationAwareBeanPostProcessor源码解析</title>
+        <pubTime>2019-06-25T13:24:43.000Z</pubTime>
+        
+        <tag>Spring</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring" url="http://chenjiabing666.github.io/categories/Spring/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://chenjiabing666.github.io/2019/06/12/Spring%E4%B8%AD%E7%9A%84Aware%E8%A7%A3%E6%9E%90/</loc>
     <lastmod>2019-06-23T14:05:13.567Z</lastmod>
     <data>
