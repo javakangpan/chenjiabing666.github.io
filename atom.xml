@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2019-06-25T13:25:40.879Z</updated>
+  <updated>2019-06-25T13:54:19.629Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://chenjiabing666.github.io/2019/06/25/InstantiationAwareBeanPostProcessor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
     <id>http://chenjiabing666.github.io/2019/06/25/InstantiationAwareBeanPostProcessor源码解析/</id>
     <published>2019-06-25T13:24:43.000Z</published>
-    <updated>2019-06-25T13:25:40.879Z</updated>
+    <updated>2019-06-25T13:54:19.629Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
 <li>继承<code>BeanPostProcessor</code>接口，在此基础上又定义了三个方法，分别在Bean<strong>实例化前后【不是初始化】</strong>执行。</li>
@@ -93,6 +93,11 @@
 <li><img src="https://github.com/chenjiabing666/BlogImage/blob/master/spring12.png?raw=true" alt=""></li>
 </ul>
 </li>
+</ul>
+<h1 id="Autowired源码解析"><a href="#Autowired源码解析" class="headerlink" title="Autowired源码解析"></a>Autowired源码解析</h1><ul>
+<li>从源码可以看出，Autowired的功能实现最重要的一个接口就是<code>AutowiredAnnotationBeanPostProcessor</code>，继承关系如下：<br><img src="https://github.com/chenjiabing666/BlogImage/blob/master/spring13.png?raw=true" alt=""></li>
+<li>从继承关系图可以看出，实际上关键的实现了<code>InstantiationAwareBeanPostProcessor</code>这个接口。</li>
+<li>源码实现如下图：<br><img src="https://github.com/chenjiabing666/BlogImage/blob/master/spring14.png?raw=true" alt=""></li>
 </ul>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
 <li>源码：<ul>

@@ -39,7 +39,9 @@ InstantiationAwareBeanPostProcessor接口">
 <meta property="og:image" content="https://github.com/chenjiabing666/BlogImage/blob/master/spring10.png?raw=true">
 <meta property="og:image" content="https://github.com/chenjiabing666/BlogImage/blob/master/spring11.png?raw=true">
 <meta property="og:image" content="https://github.com/chenjiabing666/BlogImage/blob/master/spring12.png?raw=true">
-<meta property="og:updated_time" content="2019-06-25T13:25:40.879Z">
+<meta property="og:image" content="https://github.com/chenjiabing666/BlogImage/blob/master/spring13.png?raw=true">
+<meta property="og:image" content="https://github.com/chenjiabing666/BlogImage/blob/master/spring14.png?raw=true">
+<meta property="og:updated_time" content="2019-06-25T13:54:19.629Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="InstantiationAwareBeanPostProcessor源码解析">
 <meta name="twitter:description" content="简介
@@ -125,7 +127,7 @@ InstantiationAwareBeanPostProcessor接口">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bean加载顺序"><span class="toc-number">2.</span> <span class="toc-text">Bean加载顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#InstantiationAwareBeanPostProcessor接口方法的执行顺序"><span class="toc-number">3.</span> <span class="toc-text">InstantiationAwareBeanPostProcessor接口方法的执行顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法解析"><span class="toc-number">4.</span> <span class="toc-text">方法解析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-number">5.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码梳理"><span class="toc-number">6.</span> <span class="toc-text">源码梳理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bean加载顺序"><span class="toc-number">2.</span> <span class="toc-text">Bean加载顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#InstantiationAwareBeanPostProcessor接口方法的执行顺序"><span class="toc-number">3.</span> <span class="toc-text">InstantiationAwareBeanPostProcessor接口方法的执行顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法解析"><span class="toc-number">4.</span> <span class="toc-text">方法解析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-number">5.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码梳理"><span class="toc-number">6.</span> <span class="toc-text">源码梳理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Autowired源码解析"><span class="toc-number">7.</span> <span class="toc-text">Autowired源码解析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">8.</span> <span class="toc-text">总结</span></a></li></ol>
 		
 		</div>
 		
@@ -200,6 +202,11 @@ InstantiationAwareBeanPostProcessor接口">
 <li><img src="https://github.com/chenjiabing666/BlogImage/blob/master/spring12.png?raw=true" alt=""></li>
 </ul>
 </li>
+</ul>
+<h1 id="Autowired源码解析"><a href="#Autowired源码解析" class="headerlink" title="Autowired源码解析"></a>Autowired源码解析</h1><ul>
+<li>从源码可以看出，Autowired的功能实现最重要的一个接口就是<code>AutowiredAnnotationBeanPostProcessor</code>，继承关系如下：<br><img src="https://github.com/chenjiabing666/BlogImage/blob/master/spring13.png?raw=true" alt=""></li>
+<li>从继承关系图可以看出，实际上关键的实现了<code>InstantiationAwareBeanPostProcessor</code>这个接口。</li>
+<li>源码实现如下图：<br><img src="https://github.com/chenjiabing666/BlogImage/blob/master/spring14.png?raw=true" alt=""></li>
 </ul>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
 <li>源码：<ul>
@@ -284,7 +291,7 @@ InstantiationAwareBeanPostProcessor接口">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bean加载顺序"><span class="toc-number">2.</span> <span class="toc-text">Bean加载顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#InstantiationAwareBeanPostProcessor接口方法的执行顺序"><span class="toc-number">3.</span> <span class="toc-text">InstantiationAwareBeanPostProcessor接口方法的执行顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法解析"><span class="toc-number">4.</span> <span class="toc-text">方法解析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-number">5.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码梳理"><span class="toc-number">6.</span> <span class="toc-text">源码梳理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bean加载顺序"><span class="toc-number">2.</span> <span class="toc-text">Bean加载顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#InstantiationAwareBeanPostProcessor接口方法的执行顺序"><span class="toc-number">3.</span> <span class="toc-text">InstantiationAwareBeanPostProcessor接口方法的执行顺序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法解析"><span class="toc-number">4.</span> <span class="toc-text">方法解析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-number">5.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码梳理"><span class="toc-number">6.</span> <span class="toc-text">源码梳理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Autowired源码解析"><span class="toc-number">7.</span> <span class="toc-text">Autowired源码解析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">8.</span> <span class="toc-text">总结</span></a></li></ol>
  
   </div>
 
@@ -403,10 +410,6 @@ InstantiationAwareBeanPostProcessor接口">
 			
 		
 			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>12</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 			
 		
@@ -416,6 +419,10 @@ InstantiationAwareBeanPostProcessor接口">
 		
 			
 				<li><a href="/tags/分布式/" title="分布式">分布式<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>12</sup></a></li>
 			
 		
 			
