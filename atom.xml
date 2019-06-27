@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2019-06-25T13:54:19.629Z</updated>
+  <updated>2019-06-27T15:35:13.866Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,89 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>BeanFactoryPostProcessor解析</title>
+    <link href="http://chenjiabing666.github.io/2019/06/27/BeanFactoryPostProcessor%E8%A7%A3%E6%9E%90/"/>
+    <id>http://chenjiabing666.github.io/2019/06/27/BeanFactoryPostProcessor解析/</id>
+    <published>2019-06-27T15:34:47.000Z</published>
+    <updated>2019-06-27T15:35:13.866Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
+<li>Spring IoC容器允许BeanFactoryPostProcessor在容器实例化任何bean之前读取bean的定义(配置元数据)，并可以修改它。同时可以定义多个BeanFactoryPostProcessor，通过设置’order’属性来确定各个BeanFactoryPostProcessor执行顺序。</li>
+</ul>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBeanFactoryPostProcessor</span> <span class="keyword">implements</span> <span class="title">BeanFactoryPostProcessor</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postProcessBeanFactory</span><span class="params">(ConfigurableListableBeanFactory beanFactory)</span> <span class="keyword">throws</span> BeansException </span>&#123;</div><div class="line">        System.out.println(<span class="string">"MyBeanFactoryPostProcessor开始执行"</span>);</div><div class="line">        String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();</div><div class="line">        <span class="keyword">for</span> (String name : beanDefinitionNames) &#123;</div><div class="line">            <span class="keyword">if</span> (name.equals(<span class="string">"user"</span>))&#123;</div><div class="line">                BeanDefinition beanDefinition = beanFactory.getBeanDefinition(name);</div><div class="line">                MutablePropertyValues propertyValues = beanDefinition.getPropertyValues();</div><div class="line">                propertyValues.add(<span class="string">"name"</span>,<span class="string">"Jack"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><ul>
+<li>在刷新ioc容器的方法<code>org.springframework.context.support.AbstractApplicationContext.refresh</code>中执行，如下图：<br><img src="https://github.com/chenjiabing666/BlogImage/blob/master/spring20.png?raw=true" alt=""></li>
+</ul>
+<h1 id="BeanDefinitionRegistryPostProcessor"><a href="#BeanDefinitionRegistryPostProcessor" class="headerlink" title="BeanDefinitionRegistryPostProcessor"></a>BeanDefinitionRegistryPostProcessor</h1><ul>
+<li>后续更新。。。。</li>
+</ul>
+<h1 id="MergedBeanDefinitionPostProcessor"><a href="#MergedBeanDefinitionPostProcessor" class="headerlink" title="MergedBeanDefinitionPostProcessor"></a>MergedBeanDefinitionPostProcessor</h1><ul>
+<li>后续更新</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;Spring IoC容器允许BeanFactoryPostProcessor在容器实例化任何bean之前读取bean的定义(配置
+    
+    </summary>
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/categories/Spring/"/>
+    
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BeanWrapper解析</title>
+    <link href="http://chenjiabing666.github.io/2019/06/27/BeanWrapper%E8%A7%A3%E6%9E%90/"/>
+    <id>http://chenjiabing666.github.io/2019/06/27/BeanWrapper解析/</id>
+    <published>2019-06-27T15:33:20.000Z</published>
+    <updated>2019-06-27T15:33:53.410Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
+<li>BeanWrapper是Spring底层经常使用的一个接口，简单来说是对Bean的一种包装，包括对Bean的属性、方法，数据等。</li>
+<li>唯一的一个实现类是<code>BeanWrapperImpl</code>，继承和实现关系图如下：<br><img src="https://github.com/chenjiabing666/BlogImage/blob/master/ssss.png?raw=true" alt=""></li>
+</ul>
+<h1 id="常用API"><a href="#常用API" class="headerlink" title="常用API"></a>常用API</h1><ul>
+<li><code>public BeanWrapperImpl(Object object)</code>：指定对象构造</li>
+<li><code>public BeanWrapperImpl(Class&lt;?&gt; clazz)</code>：指定Class构造，内部会通过反射调用clazz的默认无参构造方法进行实例化</li>
+<li><code>public final Object getWrappedInstance()</code>：获取对象实例</li>
+<li><code>public PropertyDescriptor getPropertyDescriptor(String propertyName</code>：获取指定属性的PropertyDescriptor </li>
+<li><code>public PropertyDescriptor[] getPropertyDescriptors()</code>：获取所有属性的PropertyDescriptor【包括继承而来的】</li>
+<li><code>public Object getPropertyValue(String propertyName)</code>：获取指定属性的值</li>
+</ul>
+<h1 id="PropertyDescriptor"><a href="#PropertyDescriptor" class="headerlink" title="PropertyDescriptor"></a>PropertyDescriptor</h1><ul>
+<li>简称属性描述器，是对属性的封装，包括属性的类型，值，get和set方法，可以通过属性描述器可以很简单的获取和修改对应的值。</li>
+<li>两个概念如下：<ul>
+<li><code>ReadMethod</code>：即是对应属性的get方法</li>
+<li><code>WriteMethod</code>：即是对应属性的set方法</li>
+</ul>
+</li>
+</ul>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><ul>
+<li>我们可以同<code>BeanWrapper</code>和<code>PropertyDescriptor</code>可以很轻松实现属性的复制，下面是本人手写的一个复制的工具类【当然这个是很粗糙的，和BeanUtils中的copyPropreties方法不能相提并论，不喜勿喷】<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 对象复制【浅克隆】</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NewCopyUtils</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CLASS=<span class="string">"class"</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 复制对象【只能复制基本数据类型，浅克隆】</div><div class="line">     * <span class="doctag">@param</span> source 源对象</div><div class="line">     * <span class="doctag">@param</span> target 目标对象</div><div class="line">     * <span class="doctag">@param</span> ingoreAgrs 忽略的属性</div><div class="line">     * <span class="doctag">@throws</span> Exception</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">copyProperties</span><span class="params">(Object source,Object target,String... ingoreAgrs)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">if</span> (source.getClass().isInterface()||target.getClass().isInterface())&#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"source和target不能为接口"</span>);</div><div class="line">        &#125;</div><div class="line">        BeanWrapper sourceWrap = createBeanWrap(source);</div><div class="line">        BeanWrapper targetWrap = createBeanWrap(target);</div><div class="line">        PropertyDescriptor[] targetPds = targetWrap.getPropertyDescriptors();</div><div class="line">        PropertyDescriptor[] sourcePds = sourceWrap.getPropertyDescriptors();</div><div class="line">        <span class="comment">//根据名称分组，减少一层循环</span></div><div class="line">        Map&lt;String, List&lt;PropertyDescriptor&gt;&gt; map = Arrays.asList(sourcePds).parallelStream().filter(o -&gt; !StringUtils.equals(CLASS, o.getName())).collect(Collectors.groupingBy(o -&gt; o.getName()));</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; targetPds.length; i++) &#123;</div><div class="line">            PropertyDescriptor tpd=targetPds[i];</div><div class="line">            <span class="comment">//去掉class属性和不要的复制的属性</span></div><div class="line">            <span class="keyword">if</span> (!StringUtils.equals(CLASS,tpd.getName())&amp;&amp; !Arrays.asList(ingoreAgrs).contains(tpd.getName()))&#123;</div><div class="line">                List&lt;PropertyDescriptor&gt; list = map.getOrDefault(tpd.getName(), <span class="keyword">null</span>);</div><div class="line">                <span class="keyword">if</span> (Objects.nonNull(list))&#123;</div><div class="line">                    Method writeMethod = tpd.getWriteMethod();</div><div class="line">                    Method readMethod = list.get(<span class="number">0</span>).getReadMethod();</div><div class="line">                    <span class="keyword">if</span> (Objects.isNull(writeMethod)&amp;&amp;Objects.isNull(readMethod))&#123;</div><div class="line">                        <span class="keyword">throw</span>  <span class="keyword">new</span> Exception(<span class="string">"属性必须有get和set方法"</span>);</div><div class="line">                    &#125;</div><div class="line">                    Object o = readMethod.invoke(source);</div><div class="line">                    writeMethod.invoke(target,o);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 构造BeanWrapImpl</div><div class="line">     * <span class="doctag">@param</span> source 对象</div><div class="line">     * <span class="doctag">@return</span> BeanWrapper</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> BeanWrapper <span class="title">createBeanWrap</span><span class="params">(Object source)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BeanWrapperImpl(source);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;BeanWrapper是Spring底层经常使用的一个接口，简单来说是对Bean的一种包装，包括对Bean的属性、方法，数据等。
+    
+    </summary>
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/categories/Spring/"/>
+    
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/tags/Spring/"/>
+    
+  </entry>
   
   <entry>
     <title>InstantiationAwareBeanPostProcessor源码解析</title>
@@ -1782,45 +1865,6 @@
   </entry>
   
   <entry>
-    <title>spring cloud的资源</title>
-    <link href="http://chenjiabing666.github.io/2018/12/25/Spring%20cloud%E7%9A%84%E4%BC%98%E7%A7%80%E8%B5%84%E6%BA%90/"/>
-    <id>http://chenjiabing666.github.io/2018/12/25/Spring cloud的优秀资源/</id>
-    <published>2018-12-24T16:19:33.000Z</published>
-    <updated>2018-12-24T16:27:21.228Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="spring-cloud的资源"><a href="#spring-cloud的资源" class="headerlink" title="spring cloud的资源"></a>spring cloud的资源</h2><ul>
-<li><a href="https://springcloud.cc/" target="_blank" rel="external">Springcloud中文网</a></li>
-<li><a href="https://springcloud.cc/spring-cloud-dalston.html" target="_blank" rel="external">中文文档</a></li>
-<li><a href="http://springcloud.cn/" target="_blank" rel="external">中国社区</a></li>
-<li><a href="http://springcloud.fun/" target="_blank" rel="external">优质学习资源</a></li>
-<li><a href="http://www.cnblogs.com/skyme/p/8976866.html" target="_blank" rel="external">SpringBoot学习资源</a></li>
-<li><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.0.M3/single/spring-cloud-netflix.html" target="_blank" rel="external">官方文档</a></li>
-<li><a href="http://www.itmuch.com/spring-cloud-sum-eureka/" target="_blank" rel="external">http://www.itmuch.com/spring-cloud-sum-eureka/</a></li>
-<li><a href="https://yujunhao8831.github.io/2017/05/27/Spring-Cloud-Eureka-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank" rel="external">指南</a></li>
-<li><a href="https://www.cnblogs.com/huangjuncong/tag/SpringCloud/" target="_blank" rel="external">https://www.cnblogs.com/huangjuncong/tag/SpringCloud/</a></li>
-<li><a href="https://blog.csdn.net/u012702547/article/details/78547925" target="_blank" rel="external">https://blog.csdn.net/u012702547/article/details/78547925</a></li>
-<li><a href="https://www.cnblogs.com/leeSmall/category/1185489.html" target="_blank" rel="external">https://www.cnblogs.com/leeSmall/category/1185489.html</a></li>
-<li><a href="https://windmt.com/tags/Spring-Cloud/" target="_blank" rel="external">https://windmt.com/tags/Spring-Cloud/</a></li>
-<li><a href="http://www.ityouknow.com" target="_blank" rel="external">http://www.ityouknow.com</a></li>
-<li><a href="http://www.itmuch.com/categories/Spring-Cloud" target="_blank" rel="external">http://www.itmuch.com/categories/Spring-Cloud</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;spring-cloud的资源&quot;&gt;&lt;a href=&quot;#spring-cloud的资源&quot; class=&quot;headerlink&quot; title=&quot;spring cloud的资源&quot;&gt;&lt;/a&gt;spring cloud的资源&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;htt
-    
-    </summary>
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Ribbon（客户端负载均衡）</title>
     <link href="http://chenjiabing666.github.io/2018/12/25/Ribbon%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/"/>
     <id>http://chenjiabing666.github.io/2018/12/25/Ribbon客户端负载均衡/</id>
@@ -1906,6 +1950,45 @@
     <summary type="html">
     
       &lt;h1 id=&quot;Ribbon-客户端负载均衡&quot;&gt;&lt;a href=&quot;#Ribbon-客户端负载均衡&quot; class=&quot;headerlink&quot; title=&quot;Ribbon - 客户端负载均衡&quot;&gt;&lt;/a&gt;Ribbon - 客户端负载均衡&lt;/h1&gt;&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;
+    
+    </summary>
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+    
+      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>spring cloud的资源</title>
+    <link href="http://chenjiabing666.github.io/2018/12/25/Spring%20cloud%E7%9A%84%E4%BC%98%E7%A7%80%E8%B5%84%E6%BA%90/"/>
+    <id>http://chenjiabing666.github.io/2018/12/25/Spring cloud的优秀资源/</id>
+    <published>2018-12-24T16:19:33.000Z</published>
+    <updated>2018-12-24T16:27:21.228Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="spring-cloud的资源"><a href="#spring-cloud的资源" class="headerlink" title="spring cloud的资源"></a>spring cloud的资源</h2><ul>
+<li><a href="https://springcloud.cc/" target="_blank" rel="external">Springcloud中文网</a></li>
+<li><a href="https://springcloud.cc/spring-cloud-dalston.html" target="_blank" rel="external">中文文档</a></li>
+<li><a href="http://springcloud.cn/" target="_blank" rel="external">中国社区</a></li>
+<li><a href="http://springcloud.fun/" target="_blank" rel="external">优质学习资源</a></li>
+<li><a href="http://www.cnblogs.com/skyme/p/8976866.html" target="_blank" rel="external">SpringBoot学习资源</a></li>
+<li><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.0.M3/single/spring-cloud-netflix.html" target="_blank" rel="external">官方文档</a></li>
+<li><a href="http://www.itmuch.com/spring-cloud-sum-eureka/" target="_blank" rel="external">http://www.itmuch.com/spring-cloud-sum-eureka/</a></li>
+<li><a href="https://yujunhao8831.github.io/2017/05/27/Spring-Cloud-Eureka-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank" rel="external">指南</a></li>
+<li><a href="https://www.cnblogs.com/huangjuncong/tag/SpringCloud/" target="_blank" rel="external">https://www.cnblogs.com/huangjuncong/tag/SpringCloud/</a></li>
+<li><a href="https://blog.csdn.net/u012702547/article/details/78547925" target="_blank" rel="external">https://blog.csdn.net/u012702547/article/details/78547925</a></li>
+<li><a href="https://www.cnblogs.com/leeSmall/category/1185489.html" target="_blank" rel="external">https://www.cnblogs.com/leeSmall/category/1185489.html</a></li>
+<li><a href="https://windmt.com/tags/Spring-Cloud/" target="_blank" rel="external">https://windmt.com/tags/Spring-Cloud/</a></li>
+<li><a href="http://www.ityouknow.com" target="_blank" rel="external">http://www.ityouknow.com</a></li>
+<li><a href="http://www.itmuch.com/categories/Spring-Cloud" target="_blank" rel="external">http://www.itmuch.com/categories/Spring-Cloud</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;spring-cloud的资源&quot;&gt;&lt;a href=&quot;#spring-cloud的资源&quot; class=&quot;headerlink&quot; title=&quot;spring cloud的资源&quot;&gt;&lt;/a&gt;spring cloud的资源&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;htt
     
     </summary>
     
@@ -2057,292 +2140,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;Eureka-服务发现和注册&quot;&gt;&lt;a href=&quot;#Eureka-服务发现和注册&quot; class=&quot;headerlink&quot; title=&quot;Eureka - 服务发现和注册&quot;&gt;&lt;/a&gt;Eureka - 服务发现和注册&lt;/h2&gt;&lt;h2 id=&quot;服务端&quot;&gt;&lt;a href=
-    
-    </summary>
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SpringBoot整合Spring Data Mongodb</title>
-    <link href="http://chenjiabing666.github.io/2018/12/25/SpringBoot%E6%95%B4%E5%90%88Spring-Data-Mongodb/"/>
-    <id>http://chenjiabing666.github.io/2018/12/25/SpringBoot整合Spring-Data-Mongodb/</id>
-    <published>2018-12-24T16:17:07.000Z</published>
-    <updated>2019-01-24T13:27:57.303Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="SpringBoot整合Spring-Data-Mongodb"><a href="#SpringBoot整合Spring-Data-Mongodb" class="headerlink" title="SpringBoot整合Spring Data Mongodb"></a>SpringBoot整合Spring Data Mongodb</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
-<li>MongoDB是一款<strong>面向文档</strong>的数据库，类似json（Bson）的数据存储格式</li>
-</ul>
-<h2 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h2><ul>
-<li>数据量大</li>
-<li>数据价值较低</li>
-</ul>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
-<li><code>docker pull mongo</code></li>
-<li><code>docker run --name mymongo -p 27017:27017 -d mongo</code></li>
-</ul>
-<h2 id="概念解析"><a href="#概念解析" class="headerlink" title="概念解析"></a>概念解析</h2><table>
-<thead>
-<tr>
-<th>SQL术语/概念</th>
-<th>MongoDB术语/概念</th>
-<th>解释/说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>database</td>
-<td>database</td>
-<td>数据库</td>
-</tr>
-<tr>
-<td>table</td>
-<td>collection</td>
-<td>数据库表/集合</td>
-</tr>
-<tr>
-<td>row</td>
-<td>document</td>
-<td>数据记录行/文档</td>
-</tr>
-<tr>
-<td>column</td>
-<td>field</td>
-<td>数据字段/域</td>
-</tr>
-<tr>
-<td>index</td>
-<td>index</td>
-<td>索引</td>
-</tr>
-<tr>
-<td>table joins</td>
-<td></td>
-<td>表连接,MongoDB不支持</td>
-</tr>
-<tr>
-<td>primary key</td>
-<td>primary key</td>
-<td>主键,MongoDB自动将_id字段设置为主键</td>
-</tr>
-</tbody>
-</table>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
-<li>添加依赖：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-mongodb<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>配置如下:</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">mongodb-server</span></div><div class="line"><span class="attr">  data:</span></div><div class="line"><span class="attr">    mongodb:</span></div><div class="line"><span class="attr">      host:</span> <span class="string">******</span>  <span class="comment"># 主机地址</span></div><div class="line"><span class="attr">      port:</span> <span class="number">27017</span>           <span class="comment"># 端口</span></div><div class="line"><span class="attr">      database:</span> <span class="string">test</span>        <span class="comment"># 数据库</span></div><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">9003</span></div></pre></td></tr></table></figure>
-<ul>
-<li>新建User实体类，存储在MongonDB中，如下:</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="meta">@Accessors</span>(chain=<span class="keyword">true</span>)  <span class="comment">//链式调用</span></div><div class="line"><span class="meta">@Document</span>(collection=<span class="string">"user"</span>)   <span class="comment">//指定集合</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">	<span class="meta">@Id</span></div><div class="line">	<span class="keyword">private</span> Integer _id;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="keyword">private</span> String mobile;</div><div class="line">	<span class="keyword">private</span> Date birthday;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>定义一个<code>UserRepository</code>继承<code>MongoRepository</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 	用户的dao层的接口，实现MongoRepository</div><div class="line"> * 	第一个泛型指定的是实体类，第二个指定的是主键Id的类型</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserRepository</span> <span class="keyword">extends</span> <span class="title">MongoRepository</span>&lt;<span class="title">User</span>, <span class="title">Integer</span>&gt;</span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>在service使用如下:</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Service</span></div><div class="line"><span class="meta">@Transactional</span>   <span class="comment">//开启事务</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> </span>&#123;</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> UserRepository userRepository;  <span class="comment">//注入</span></div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	添加用户</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">addUser</span><span class="params">(User user)</span></span>&#123;</div><div class="line">		User user2 = userRepository.save(user);</div><div class="line">		System.out.println(<span class="number">1</span>/<span class="number">0</span>);</div><div class="line">		<span class="keyword">return</span> user2;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	批量添加</div><div class="line">	 * <span class="doctag">@param</span> users</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">addUserBatch</span><span class="params">(List&lt;User&gt; users)</span></span>&#123;</div><div class="line">		List&lt;User&gt; user2 = userRepository.saveAll(users);</div><div class="line">		<span class="keyword">return</span> user2;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	根据Id删除</div><div class="line">	 * <span class="doctag">@param</span> id</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteById</span><span class="params">(Integer id)</span> </span>&#123;</div><div class="line">		userRepository.deleteById(id);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	更新数据，使用的还是save方法，相当于覆盖</div><div class="line">	 * <span class="doctag">@param</span> user</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> User  <span class="title">update</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">		User user2 = userRepository.save(user);</div><div class="line">		<span class="keyword">return</span> user2;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 根据Id获取信息</div><div class="line">	 * <span class="doctag">@param</span> id</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">findById</span><span class="params">(Integer id)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> userRepository.findById(id).get();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	查询全部</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">findAll</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> userRepository.findAll();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	分页查询信息</div><div class="line">	 * <span class="doctag">@param</span> pageSize</div><div class="line">	 * <span class="doctag">@param</span> pageNum</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">findUserList</span><span class="params">(Integer pageNum,Integer pageSize)</span></span>&#123;</div><div class="line">		Pageable pageable=<span class="keyword">new</span> PageRequest(pageNum-<span class="number">1</span>,pageSize);</div><div class="line">		Page&lt;User&gt; pages = userRepository.findAll(pageable);</div><div class="line">		<span class="keyword">if</span> (pages.hasContent()) &#123;</div><div class="line">			<span class="keyword">return</span> pages.getContent();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h2><ul>
-<li>dao层</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"><span class="keyword">import</span> org.springframework.data.domain.Pageable;</div><div class="line"><span class="keyword">import</span> org.springframework.data.mongodb.repository.MongoRepository;</div><div class="line"><span class="keyword">import</span> com.techwells.study.domain.DynamicComment;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DynamicCommentRepository</span> <span class="keyword">extends</span> <span class="title">MongoRepository</span>&lt;<span class="title">DynamicComment</span>, <span class="title">Integer</span>&gt;</span>&#123;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 *  分页查询，先根据nickName筛选出结果，之后分页</div><div class="line">	 * <span class="doctag">@param</span> nickName  昵称</div><div class="line">	 * <span class="doctag">@param</span> pageable  分页</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function">List&lt;DynamicComment&gt; <span class="title">findByNickName</span><span class="params">(String nickName,Pageable pageable)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>测试如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> </span>&#123;</div><div class="line">		</div><div class="line">		<span class="comment">//构建分页信息</span></div><div class="line">		Pageable pageable=<span class="keyword">new</span> PageRequest(<span class="number">0</span>, <span class="number">2</span>, Sort.Direction.DESC,<span class="string">"id"</span>);</div><div class="line">		</div><div class="line">		List&lt;DynamicComment&gt; comments = dynamicRepository.findByNickName(<span class="string">"爱撒谎的男孩"</span>,pageable);</div><div class="line">		<span class="keyword">for</span> (DynamicComment dynamicComment : comments) &#123;</div><div class="line">			System.out.println(dynamicComment);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<h2 id="常用的查询关键字"><a href="#常用的查询关键字" class="headerlink" title="常用的查询关键字"></a>常用的查询关键字</h2><ul>
-<li><a href="https://docs.spring.io/spring-data/jpa/docs/2.1.3.RELEASE/reference/html/#jpa.query-methods" target="_blank" rel="external">https://docs.spring.io/spring-data/jpa/docs/2.1.3.RELEASE/reference/html/#jpa.query-methods</a></li>
-</ul>
-<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><ul>
-<li>未完待续………………..</li>
-</ul>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
-<li><a href="https://gitee.com/chenjiabing666/mongo-server.git" target="_blank" rel="external">https://gitee.com/chenjiabing666/mongo-server.git</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;SpringBoot整合Spring-Data-Mongodb&quot;&gt;&lt;a href=&quot;#SpringBoot整合Spring-Data-Mongodb&quot; class=&quot;headerlink&quot; title=&quot;SpringBoot整合Spring Data Mongod
-    
-    </summary>
-    
-      <category term="SpringBoot" scheme="http://chenjiabing666.github.io/categories/SpringBoot/"/>
-    
-    
-      <category term="SpringBoot" scheme="http://chenjiabing666.github.io/tags/SpringBoot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Token认证</title>
-    <link href="http://chenjiabing666.github.io/2018/12/25/Token%E8%AE%A4%E8%AF%81/"/>
-    <id>http://chenjiabing666.github.io/2018/12/25/Token认证/</id>
-    <published>2018-12-24T16:13:57.000Z</published>
-    <updated>2018-12-24T16:14:43.856Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="认证机制"><a href="#认证机制" class="headerlink" title="认证机制"></a>认证机制</h1><h2 id="常见的几种认证机制"><a href="#常见的几种认证机制" class="headerlink" title="常见的几种认证机制"></a>常见的几种认证机制</h2><h3 id="HTTP-Basic-Auth"><a href="#HTTP-Basic-Auth" class="headerlink" title="HTTP Basic Auth"></a>HTTP Basic Auth</h3><ul>
-<li>在HTTP中，HTTP基本认证是一种允许Web浏览器或者其他客户端在请求时提供用户名和口令形式的身份凭证的一种登录验证方式。</li>
-<li><strong>简单而言，HTTP基本认证就是我们平时在网站中最常用的通过用户名和密码登录来认证的机制。 就是每次请求都会带上用户名和密码</strong></li>
-<li><p>优点 </p>
-<ul>
-<li>HTTP 基本认证是基本上所有流行的网页浏览器都支持。但是基本认证很少在可公开访问的互联网网站上使用，有时候会在小的私有系统中使用。 </li>
-<li>适用于各种平台，包括app和web</li>
-</ul>
-</li>
-<li><p>缺点 </p>
-<ul>
-<li>HTTP 基本认证虽然足够简单，但是前提是在客户端和服务器主机之间的连接足够安全。如果没有使用SSL/TLS这样的传输层安全的协议，那么以明文传输的密钥和口令很容易被拦截。 </li>
-<li>由于现存的浏览器保存认证信息直到标签页或浏览器关闭，或者用户清除历史记录。导致了服务器端无法主动来当前用户登出或者认证失效。</li>
-</ul>
-</li>
-</ul>
-<h3 id="OAuth（开放授权）"><a href="#OAuth（开放授权）" class="headerlink" title="OAuth（开放授权）"></a>OAuth（开放授权）</h3><ul>
-<li>OAuth 是一个开放标准，允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表等），而无需将用户名和密码提供给第三方应用。 </li>
-<li>OAuth 允许用户提供一个令牌，而不是用户名和密码来访问他们存放在特定服务提供者的数据。每一个令牌授权一个特定的网站（例如，视频编辑网站）在特定的时段（例如，接下来的2小时内）内访问特定的资源（例如仅仅是某一相册中的视频）。这样，OAuth让用户可以授权第三方网站访问他们存储在另外服务提供者的某些特定信息，而非所有内容。</li>
-<li><strong>最常见的就是qq和微信授权登录</strong> </li>
-</ul>
-<h3 id="Cookie-Session-认证机制"><a href="#Cookie-Session-认证机制" class="headerlink" title="Cookie/Session 认证机制"></a>Cookie/Session 认证机制</h3><ul>
-<li>Cookie 是由客户端保存的小型文本文件，其内容为一系列的键值对。Cookie 是由 HTTP 服务器设置的，保存在浏览器中。Cookie会随着 HTTP请求一起发送。 </li>
-<li>Session 是存储在服务器端的，避免在客户端 Cookie 中存储敏感数据。Session 可以存储在 HTTP 服务器的内存中，也可以存在内存数据库（如redis）中。 </li>
-<li>Cookie/Session认证机制就是为一次请求认证在服务端创建一个Session对象，同时在客户端的浏览器端创建了一个Cookie对象；通过客户端带上来Cookie对象来与服务器端的session对象匹配来实现状态管理的。默认的，当我们关闭浏览器的时候，cookie会被删除。但可以通过修改cookie 的expire time使cookie在一定时间内有效</li>
-<li>缺点：<ul>
-<li>平台有限，不适合App端</li>
-<li>数据量过大的话，对服务器会造成负担</li>
-</ul>
-</li>
-</ul>
-<h3 id="基于-Token-的认证机制"><a href="#基于-Token-的认证机制" class="headerlink" title="基于 Token 的认证机制"></a>基于 Token 的认证机制</h3><ul>
-<li>Token机制相对于Cookie机制又有什么好处呢？<ul>
-<li><strong>支持跨域访问</strong>: Cookie是不允许垮域访问的，这一点对Token机制是不存在的，前提是传输的用户认证信息通过HTTP头传输.</li>
-<li><strong>无状态(也称：服务端可扩展行)</strong>:Token机制在服务端不需要存储session信息，因为Token 自身包含了所有登录用户的信息，只需要在客户端的cookie或本地介质存储状态信息.</li>
-<li><strong>更适用CDN</strong>: 可以通过内容分发网络请求你服务端的所有资料（如：javascript，HTML,图片等），而你的服务端只要提供API即可.</li>
-<li><strong>去耦</strong>: 不需要绑定到一个特定的身份验证方案。Token可以在任何地方生成，只要在你的API被调用的时候，你可以进行Token生成调用即可.</li>
-<li><strong>更适用于移动应用</strong>: 当你的客户端是一个原生平台（iOS, Android，Windows 8等）时，Cookie是不被支持的（你需要通过Cookie容器进行处理），这时采用Token认证机制就会简单得多。</li>
-<li><strong>CSRF</strong>:因为不再依赖于Cookie，所以你就不需要考虑对CSRF（跨站请求伪造）的防范。</li>
-<li><strong>性能</strong>: 一次网络往返时间（通过数据库查询session信息）总比做一次HMACSHA256计算 的Token验证和解析要费时得多.</li>
-<li><strong>不需要为登录页面做特殊处理</strong>: 如果你使用Protractor 做功能测试的时候，不再需要为登录页面做特殊处理.</li>
-<li><strong>基于标准化</strong>:你的API可以采用标准化的 JSON Web Token (JWT). 这个标准已经存在多个后端库（.NET, Ruby, Java,Python, PHP）和多家公司的支持（如：Firebase,Google, Microsoft）.</li>
-</ul>
-</li>
-</ul>
-<h3 id="有状态服务和无状态服务"><a href="#有状态服务和无状态服务" class="headerlink" title="有状态服务和无状态服务"></a>有状态服务和无状态服务</h3><ul>
-<li><strong>无状态服务</strong>:就是没有特殊状态的服务,各个请求对于服务器来说统一无差别处理,请求自身携带了所有服务端所需要的所有参数(服务端自身不存储跟请求相关的任何数据,不包括数据库存储信息) </li>
-<li><strong>有状态服务</strong>:与之相反,有状态服务在服务端保留之前请求的信息,用以处理当前请求,比如<code>session</code>等 </li>
-</ul>
-<h2 id="基于JWT（JSON-WEB-TOKEN）的Token认证机制实现"><a href="#基于JWT（JSON-WEB-TOKEN）的Token认证机制实现" class="headerlink" title="基于JWT（JSON WEB TOKEN）的Token认证机制实现"></a>基于JWT（JSON WEB TOKEN）的Token认证机制实现</h2><ul>
-<li>一个JWT实际上就是一个字符串，它由三部分组成，头部、载荷与签名。 </li>
-</ul>
-<h3 id="头部（Header）"><a href="#头部（Header）" class="headerlink" title="头部（Header）"></a><strong>头部（Header）</strong></h3><ul>
-<li>JWT还需要一个头部，头部用于描述关于该JWT的最基本的信息，例如其类型以及签名所用的算法等。这也可以被表示成一个JSON对象。 </li>
-</ul>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"typ"</span>: <span class="string">"JWT"</span>,</div><div class="line">    <span class="attr">"alg"</span>: <span class="string">"HS256"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="载荷（Payload）"><a href="#载荷（Payload）" class="headerlink" title="载荷（Payload）"></a><strong>载荷（Payload）</strong></h3><ul>
-<li>iss: 该JWT的签发者，是否使用是可选的；</li>
-<li>sub: 该JWT所面向的用户,一般是用户名，是否使用是可选的；</li>
-<li>aud: 接收该JWT的一方，是否使用是可选的；</li>
-<li>exp(expires): 什么时候过期，这里是一个Unix时间戳，是否使用是可选的；</li>
-<li>iat(issued at): 在什么时候签发的(UNIX时间)，一般是登录时间，是否使用是可选的；<br>其他还有：</li>
-<li>nbf (Not Before)：如果当前时间在nbf里的时间之前，则Token不被接受；一般都会留一些余地，比如几分钟；，是否使用是可选的；</li>
-</ul>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="attr">"iss"</span>: <span class="string">"Online JWT Builder"</span>, </div><div class="line">  <span class="attr">"iat"</span>: <span class="number">1416797419</span>, </div><div class="line">  <span class="attr">"exp"</span>: <span class="number">1448333419</span>, </div><div class="line">  <span class="attr">"aud"</span>: <span class="string">"www.example.com"</span>, </div><div class="line">  <span class="attr">"sub"</span>: <span class="string">"jrocket@example.com"</span>, </div><div class="line">  <span class="attr">"GivenName"</span>: <span class="string">"Johnny"</span>, </div><div class="line">  <span class="attr">"Surname"</span>: <span class="string">"Rocket"</span>, </div><div class="line">  <span class="attr">"Email"</span>: <span class="string">"jrocket@example.com"</span>, </div><div class="line">  <span class="attr">"Role"</span>: [ <span class="string">"Manager"</span>, <span class="string">"Project Administrator"</span> ] </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><strong>将上面的JSON对象进行[base64编码]可以得到编码后的字符串。这个字符串我们将它称作JWT的Payload（载荷）。</strong> </li>
-</ul>
-<h3 id="签名（Signature）"><a href="#签名（Signature）" class="headerlink" title="签名（Signature）"></a><strong>签名（Signature）</strong></h3><ul>
-<li>将头部和载荷编码后的字符串用<code>.</code>分隔（头部在前）,最后将拼接后的字符串和秘钥（secret）用头部指定的算法进行加密得到一个字符串。那么此时完整的JWT的内容就是<strong>头部+载荷+最后加密得到的字符串</strong>，中间用<code>.</code>分割</li>
-</ul>
-<h2 id="JJWT"><a href="#JJWT" class="headerlink" title="JJWT"></a>JJWT</h2><ul>
-<li>Java实现JWT的token生成</li>
-</ul>
-<h3 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- jjwt --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.jsonwebtoken<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jjwt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="生成token"><a href="#生成token" class="headerlink" title="生成token"></a>生成token</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> *  	生成token</div><div class="line"> */</div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">//eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwiaWF0IjoxNTQ1NTc0ODE1LCJzdWIiOiLpmYjliqDlhbUifQ.WF0VoGSP5oH0XRsCraJ9lRjtVFRs6I0KJpkhFngpwgk</span></div><div class="line">	JwtBuilder builder = Jwts.builder()</div><div class="line">			.setId(<span class="string">"1"</span>)   <span class="comment">//用户Id</span></div><div class="line">               .setIssuedAt(<span class="keyword">new</span> Date())  <span class="comment">//用户登录的日期 </span></div><div class="line">               .setSubject(<span class="string">"陈加兵"</span>)<span class="comment">//用户名</span></div><div class="line">               .signWith(SignatureAlgorithm.HS256, <span class="string">"sercet"</span>);  <span class="comment">//指定签名的算法和秘钥（盐）  </span></div><div class="line">	String token = builder.compact();  <span class="comment">//获取生成的token</span></div><div class="line">	System.out.println(token);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="解析token"><a href="#解析token" class="headerlink" title="解析token"></a>解析token</h3><ul>
-<li>解析token需要知道秘钥</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">	 * 	解析token</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</div><div class="line">		Claims claims = Jwts.parser()</div><div class="line">				.setSigningKey(<span class="string">"sercet"</span>)  <span class="comment">//设置解析的秘钥</span></div><div class="line">				.parseClaimsJws(<span class="string">"eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwiaWF0IjoxNTQ1NTc0ODE1LCJzdWIiOiLpmYjliqDlhbUifQ.WF0VoGSP5oH0XRsCraJ9lRjtVFRs6I0KJpkhFngpwgk"</span>)</div><div class="line">				.getBody();</div><div class="line">		</div><div class="line">		System.out.println(<span class="string">"用户Id："</span>+claims.getId());</div><div class="line">		System.out.println(<span class="string">"用户名："</span>+claims.getSubject());</div><div class="line">		System.out.println(<span class="string">"登录时间："</span>+claims.getIssuedAt());</div><div class="line">		</div><div class="line">		</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<h3 id="设置过期时间"><a href="#设置过期时间" class="headerlink" title="设置过期时间"></a>设置过期时间</h3><ul>
-<li>不设置过期时间默认是无时间限制的</li>
-<li><code>JwtBuilder setExpiration(Date exp);</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">JwtBuilder builder = Jwts.builder()</div><div class="line">				.setId(<span class="string">"1"</span>)   <span class="comment">//用户Id</span></div><div class="line">                .setIssuedAt(<span class="keyword">new</span> Date())  <span class="comment">//用户登录的日期 </span></div><div class="line">                .setSubject(<span class="string">"陈加兵"</span>)<span class="comment">//用户名</span></div><div class="line">                .setExpiration(<span class="keyword">new</span> Date(<span class="keyword">new</span> Date().getTime()+<span class="number">1000</span>*<span class="number">60</span>*<span class="number">60</span>))  <span class="comment">//设置过期时间为1小时</span></div><div class="line">                .signWith(SignatureAlgorithm.HS256, <span class="string">"sercet"</span>);  <span class="comment">//指定签名的算法和秘钥（盐）</span></div></pre></td></tr></table></figure>
-<h3 id="添加自定义属性"><a href="#添加自定义属性" class="headerlink" title="添加自定义属性"></a>添加自定义属性</h3><ul>
-<li><code>JwtBuilder claim(String name, Object value);</code>： 直接添加自定义的属性，key-value形式</li>
-<li><code>JwtBuilder addClaims(Map&lt;String, Object&gt; claims);</code>： 直接添加一个Map作为自定义的属性</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">	 *  	生成token</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</div><div class="line">		JwtBuilder builder = Jwts.builder()</div><div class="line">				.setId(<span class="string">"1"</span>)   <span class="comment">//用户Id</span></div><div class="line">                .setIssuedAt(<span class="keyword">new</span> Date())  <span class="comment">//用户登录的日期 </span></div><div class="line">                .setSubject(<span class="string">"陈加兵"</span>)<span class="comment">//用户名</span></div><div class="line">                .setExpiration(<span class="keyword">new</span> Date(<span class="keyword">new</span> Date().getTime()+<span class="number">1000</span>*<span class="number">60</span>*<span class="number">60</span>))  <span class="comment">//设置过期时间为1小时</span></div><div class="line">                .signWith(SignatureAlgorithm.HS256, <span class="string">"sercet"</span>) <span class="comment">//指定签名的算法和秘钥（盐）</span></div><div class="line">                .claim(<span class="string">"age"</span>, <span class="number">22</span>)    <span class="comment">//自定义内容</span></div><div class="line">                .claim(<span class="string">"address"</span>, <span class="string">"江苏省"</span>); <span class="comment">//自定义内容</span></div><div class="line">		String token = builder.compact();  <span class="comment">//获取生成的token</span></div><div class="line">		System.out.println(token);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 	解析token</div><div class="line">	 */</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</div><div class="line">		Claims claims = Jwts.parser()</div><div class="line">				.setSigningKey(<span class="string">"sercet"</span>)  <span class="comment">//设置解析的秘钥</span></div><div class="line">				.parseClaimsJws(<span class="string">"eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwiaWF0IjoxNTQ1NTc1ODQzLCJzdWIiOiLpmYjliqDlhbUiLCJleHAiOjE1NDU1Nzk0NDMsImFnZSI6MjIsImFkZHJlc3MiOiLmsZ_oi4_nnIEifQ.uRhzSnsWl5IO-K6SA3zHsqGacZzkOOsFlD8lvqYDleY"</span>)</div><div class="line">				.getBody();</div><div class="line">		</div><div class="line">		System.out.println(<span class="string">"用户Id："</span>+claims.getId());</div><div class="line">		System.out.println(<span class="string">"用户名："</span>+claims.getSubject());</div><div class="line">		System.out.println(<span class="string">"登录时间："</span>+claims.getIssuedAt());</div><div class="line">		System.out.println(<span class="string">"过期时间："</span>+claims.getExpiration());</div><div class="line">		System.out.println(<span class="string">"address："</span>+claims.get(<span class="string">"address"</span>));</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<h2 id="在拦截器中配置"><a href="#在拦截器中配置" class="headerlink" title="在拦截器中配置"></a>在拦截器中配置</h2><h3 id="JWT工具类"><a href="#JWT工具类" class="headerlink" title="JWT工具类"></a>JWT工具类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Date;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.context.properties.ConfigurationProperties;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"><span class="keyword">import</span> io.jsonwebtoken.Claims;</div><div class="line"><span class="keyword">import</span> io.jsonwebtoken.JwtBuilder;</div><div class="line"><span class="keyword">import</span> io.jsonwebtoken.Jwts;</div><div class="line"><span class="keyword">import</span> io.jsonwebtoken.SignatureAlgorithm;</div><div class="line"><span class="keyword">import</span> lombok.Data;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * JWT的工具类</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="meta">@ConfigurationProperties</span>(prefix=<span class="string">"jwt.config"</span>)  <span class="comment">//读取配置文件中的配置</span></div><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JwtUtil</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String secret;  <span class="comment">//秘钥</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">long</span> expire;  <span class="comment">//过期时间</span></div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	生成token </div><div class="line">	 * <span class="doctag">@param</span> id  用户的Id</div><div class="line">	 * <span class="doctag">@param</span> subject  用户名</div><div class="line">	 * <span class="doctag">@param</span> role 角色，分为用户和后台管理员</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">encoder</span><span class="params">(String id,String subject,String role)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">		JwtBuilder builder = Jwts.builder()</div><div class="line">				.setId(id)   <span class="comment">//用户Id</span></div><div class="line">                .setIssuedAt(<span class="keyword">new</span> Date())  <span class="comment">//用户登录的日期 </span></div><div class="line">                .setSubject(subject)<span class="comment">//用户名</span></div><div class="line">                .setExpiration(<span class="keyword">new</span> Date(<span class="keyword">new</span> Date().getTime()+expire))  <span class="comment">//设置过期时间为1小时</span></div><div class="line">                .claim(<span class="string">"role"</span>,role)  <span class="comment">//自定义属性，指定角色</span></div><div class="line">                .signWith(SignatureAlgorithm.HS256, secret); <span class="comment">//指定签名的算法和秘钥（盐）</span></div><div class="line">                </div><div class="line">		<span class="keyword">return</span> builder.compact();  </div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	对token进行解码</div><div class="line">	 * <span class="doctag">@param</span> token</div><div class="line">	 * <span class="doctag">@return</span> 解码后的结果集，相当于Map</div><div class="line">	 * <span class="doctag">@throws</span> Exception  如果解码失败会抛出异常</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> Claims <span class="title">decoder</span><span class="params">(String token)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">		<span class="keyword">return</span> Jwts.parser()</div><div class="line">				.setSigningKey(secret)  <span class="comment">//设置解析的秘钥</span></div><div class="line">				.parseClaimsJws(token)  <span class="comment">//解析的token</span></div><div class="line">				.getBody();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">jwt:</span> <span class="comment"># JWT的配置</span></div><div class="line"><span class="attr">  config:</span></div><div class="line"><span class="attr">    secret:</span> <span class="string">secret</span>   <span class="comment">## 秘钥</span></div><div class="line"><span class="attr">    expire:</span> <span class="number">3600000</span>  <span class="comment">## 过期时间1个小时</span></div></pre></td></tr></table></figure>
-<h3 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> javax.annotation.Resource;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"><span class="keyword">import</span> org.springframework.http.HttpStatus;</div><div class="line"><span class="keyword">import</span> org.springframework.util.StringUtils;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.handler.HandlerInterceptorAdapter;</div><div class="line"><span class="keyword">import</span> cn.tedu.auth.util.JwtUtil;</div><div class="line"><span class="keyword">import</span> io.jsonwebtoken.Claims;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * JWT验证token的拦截器</div><div class="line"> * 	改进： 如果没有权限，那么可以跳转到一个指定的错误页面护.......</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JwtInterceptor</span> <span class="keyword">extends</span> <span class="title">HandlerInterceptorAdapter</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> JwtUtil jwtUtil;    <span class="comment">//注入JwtUtil</span></div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span></span></div><div class="line">			<span class="keyword">throws</span> Exception &#123;</div><div class="line">		</div><div class="line">		<span class="comment">//获取请求头中的token</span></div><div class="line">		String token=request.getHeader(<span class="string">"token"</span>);</div><div class="line">		<span class="keyword">if</span> (StringUtils.isEmpty(token)) &#123;</div><div class="line">			response.setStatus(HttpStatus.UNAUTHORIZED.value());  <span class="comment">//设置401响应信息，没有权限</span></div><div class="line">			System.err.println(<span class="string">"没有权限"</span>);</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;  <span class="comment">//直接拦截，不继续进行</span></div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">//如果有token，需要解码</span></div><div class="line">		Claims claims=<span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			System.err.println(token);</div><div class="line">			claims = jwtUtil.decoder(token);</div><div class="line">			<span class="keyword">if</span> (claims!=<span class="keyword">null</span>) &#123;</div><div class="line">				request.setAttribute(<span class="string">"claims"</span>, claims);  <span class="comment">//放置在request中，后续的接口可能还需使用</span></div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			response.setStatus(HttpStatus.UNAUTHORIZED.value());  <span class="comment">//设置401响应信息，没有权限</span></div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>; </div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="配置拦截器"><a href="#配置拦截器" class="headerlink" title="配置拦截器"></a>配置拦截器</h3><ul>
-<li><strong>一定要先注入拦截器类，否则拦截器内的其他对象将不能注入</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">webConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 注入拦截器，这里一定需要提前注入，否则拦截器中注入的对象将无法注入</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="meta">@Bean</span></div><div class="line">	<span class="function"><span class="keyword">public</span> JwtInterceptor <span class="title">jwtInterceptor</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> JwtInterceptor();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</div><div class="line">		<span class="comment">// 注册自定义拦截器，添加拦截路径和排除拦截路径 ，这里直接使用上面的方法直接获取注入的拦截器即可，否则将会造成拦截器中无法注入其他的对象</span></div><div class="line">		registry.addInterceptor(jwtInterceptor()).addPathPatterns(<span class="string">"/**"</span>).excludePathPatterns(<span class="string">"/user/test"</span>)</div><div class="line">				.excludePathPatterns(<span class="string">"/user/login"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
-<li>登录成功返回token</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> ResultInfo <span class="title">login</span><span class="params">(User user)</span><span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">		ResultInfo resultInfo=<span class="keyword">new</span> ResultInfo();</div><div class="line">		User user2 = userRepository.findByName(user.getName());  </div><div class="line">		<span class="keyword">if</span> (user2==<span class="keyword">null</span>) &#123;</div><div class="line">			resultInfo.setCode(<span class="string">"-1"</span>);</div><div class="line">			resultInfo.setMessage(<span class="string">"用户名不存在"</span>);</div><div class="line">			<span class="keyword">return</span> resultInfo;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">//判断密码是否正确</span></div><div class="line">		<span class="keyword">if</span> (!bCryptPasswordEncoder.matches(user.getPassword(),user2.getPassword())) &#123;</div><div class="line">			resultInfo.setCode(<span class="string">"-1"</span>);</div><div class="line">			resultInfo.setMessage(<span class="string">"密码不正确"</span>);</div><div class="line">			<span class="keyword">return</span> resultInfo;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">//生成token</span></div><div class="line">		String token=JwtUtil.encoder(user2.getId()+<span class="string">""</span>, user2.getName(),<span class="string">"user"</span>);</div><div class="line">		System.err.println(token);</div><div class="line">		</div><div class="line">		Map&lt;String, Object&gt; map=<span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">		map.put(<span class="string">"token"</span>, token);   <span class="comment">//返回token</span></div><div class="line">		map.put(<span class="string">"user"</span>, user);</div><div class="line">		resultInfo.setData(map);</div><div class="line">		resultInfo.setMessage(<span class="string">"登录成功"</span>);</div><div class="line">		<span class="keyword">return</span> resultInfo;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>删除操作需要验证token是否具有指定的权限<ul>
-<li>拦截器验证</li>
-<li>controller中的角色验证码（后期可以使用切面将其提取出来）</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> *   删除用户</div><div class="line"> * <span class="doctag">@param</span> id</div><div class="line"> * <span class="doctag">@return</span></div><div class="line"> */</div><div class="line"><span class="meta">@DeleteMapping</span>(<span class="string">"/&#123;id&#125;"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> ResultInfo <span class="title">deleteById</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Integer id,HttpServletRequest request) </span>&#123;</div><div class="line">	ResultInfo resultInfo=<span class="keyword">new</span> ResultInfo();</div><div class="line">	</div><div class="line">	<span class="comment">//验证角色，之后该段可以直接用切面完成</span></div><div class="line">	Claims claims = (Claims) request.getAttribute(<span class="string">"claims"</span>); <span class="comment">//获取token解析的map</span></div><div class="line">	String role=(String) claims.get(<span class="string">"role"</span>);  <span class="comment">//获取角色</span></div><div class="line">	<span class="keyword">if</span> (!<span class="string">"user"</span>.equals(role)) &#123;</div><div class="line">		resultInfo.setCode(<span class="string">"-1"</span>);</div><div class="line">		resultInfo.setMessage(<span class="string">"权限不足！"</span>);</div><div class="line">		<span class="keyword">return</span> resultInfo;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		resultInfo=userService.deleteById(id);</div><div class="line">		<span class="keyword">return</span> resultInfo;</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		resultInfo.setCode(<span class="string">"-1"</span>);</div><div class="line">		resultInfo.setMessage(<span class="string">"异常"</span>);</div><div class="line">		<span class="keyword">return</span> resultInfo;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h2><ul>
-<li>为什么用JWT？<ul>
-<li>JWT只通过算法实现对Token合法性的验证，不依赖数据库，Memcached的等存储系统，因此可以做到跨服务器验证，只要密钥和算法相同，不同服务器程序生成的Token可以互相验证。</li>
-</ul>
-</li>
-<li>JWT Token不需要持久化在任何NoSQL中，不然背离其算法验证的初心</li>
-<li>在退出登录时怎样实现JWT Token失效呢？<ul>
-<li>退出登录， 只要客户端端把Token丢弃就可以了，服务器端不需要废弃Token。</li>
-</ul>
-</li>
-<li>怎样保持客户端长时间保持登录状态？<ul>
-<li>服务器端提供刷新Token的接口， 客户端负责按一定的逻辑刷新服务器Token。</li>
-</ul>
-</li>
-<li>服务器端是否应该从JWT中取出userid用于业务查询？<ul>
-<li>REST API是无状态的，意味着服务器端每次请求都是独立的，即不依赖以前请求的结果，因此也不应该依赖JWT token做业务查询， 应该在请求报文中单独加个userid 字段。</li>
-</ul>
-</li>
-<li>为了做用户水平越权的检查，可以在业务层判断传入的userid和从JWT token中解析出的userid是否一致， 有些业务可能会允许查不同用户的数据。</li>
-</ul>
-<h2 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h2><ul>
-<li><strong>常见验证流程:</strong><ul>
-<li>用户提交用户名、密码到服务器后台</li>
-<li>后台验证用户信息的正确性</li>
-<li>若用户验证通过，服务器端生成Token，返回到客户端</li>
-<li>客户端保存Token，再下一次请求资源时，附带上Token信息</li>
-<li>服务器端（一般在拦截器中进行拦截）验证Token是否由服务器签发的</li>
-<li>若Token验证通过，则返回需要的资源</li>
-</ul>
-</li>
-</ul>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
-<li><a href="https://gitee.com/chenjiabing666/auth-server.git" target="_blank" rel="external">https://gitee.com/chenjiabing666/auth-server.git</a></li>
-</ul>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><a href="https://blog.csdn.net/qq_36838191/article/details/79926196" target="_blank" rel="external">https://blog.csdn.net/qq_36838191/article/details/79926196</a></li>
-<li><a href="https://www.cnblogs.com/howhy/p/7063247.html" target="_blank" rel="external">https://www.cnblogs.com/howhy/p/7063247.html</a></li>
-<li><a href="https://blog.csdn.net/swl979623074/article/details/81150184" target="_blank" rel="external">https://blog.csdn.net/swl979623074/article/details/81150184</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;认证机制&quot;&gt;&lt;a href=&quot;#认证机制&quot; class=&quot;headerlink&quot; title=&quot;认证机制&quot;&gt;&lt;/a&gt;认证机制&lt;/h1&gt;&lt;h2 id=&quot;常见的几种认证机制&quot;&gt;&lt;a href=&quot;#常见的几种认证机制&quot; class=&quot;headerlink&quot; title=
     
     </summary>
     
