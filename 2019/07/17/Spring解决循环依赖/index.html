@@ -1,0 +1,776 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+  
+    <title>Spring解决循环依赖 | 爱撒谎的男孩</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Chenjiabing">
+    
+
+    
+    <meta name="description" content="什么是循环依赖
+循环依赖分为两种，一种是构造器的相互依赖，另外一种是属性的相互依赖。
+
+属性的相互依赖
+属性的相互依赖就是A类的属性中有B，B类的属性中有A，如下：
+这里仅仅是两个类的循环依赖，当然还有更多的类相互依赖
+
+
+
+1234567public class A&amp;#123;    private B b;&amp;#125;public class B&amp;#123;    private A a;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring解决循环依赖">
+<meta property="og:url" content="http://chenjiabing666.github.io/2019/07/17/Spring解决循环依赖/index.html">
+<meta property="og:site_name" content="爱撒谎的男孩">
+<meta property="og:description" content="什么是循环依赖
+循环依赖分为两种，一种是构造器的相互依赖，另外一种是属性的相互依赖。
+
+属性的相互依赖
+属性的相互依赖就是A类的属性中有B，B类的属性中有A，如下：
+这里仅仅是两个类的循环依赖，当然还有更多的类相互依赖
+
+
+
+1234567public class A&amp;#123;    private B b;&amp;#125;public class B&amp;#123;    private A a;&amp;#">
+<meta property="og:image" content="https://github.com/chenjiabing666/BlogImage/blob/master/circleDependency.png?raw=true">
+<meta property="og:updated_time" content="2019-07-16T17:14:14.661Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring解决循环依赖">
+<meta name="twitter:description" content="什么是循环依赖
+循环依赖分为两种，一种是构造器的相互依赖，另外一种是属性的相互依赖。
+
+属性的相互依赖
+属性的相互依赖就是A类的属性中有B，B类的属性中有A，如下：
+这里仅仅是两个类的循环依赖，当然还有更多的类相互依赖
+
+
+
+1234567public class A&amp;#123;    private B b;&amp;#125;public class B&amp;#123;    private A a;&amp;#">
+<meta name="twitter:image" content="https://github.com/chenjiabing666/BlogImage/blob/master/circleDependency.png?raw=true">
+
+    
+    <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/avatar.jpg" alt="爱撒谎的男孩" title="爱撒谎的男孩"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="爱撒谎的男孩">爱撒谎的男孩</a></h1>
+				<h2 class="blog-motto">一只程序猿</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives/">归档</a></li>
+					
+						<li><a href="/about/">关于我</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="https://chenjiabing666.github.io/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 14509119671822170000 ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>	
+			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2019/07/17/Spring解决循环依赖/" title="Spring解决循环依赖" itemprop="url">Spring解决循环依赖</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
+		
+  <p class="article-time">
+    <time datetime="2019-07-16T17:13:29.000Z" itemprop="datePublished"> 发表于 2019-07-17</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是循环依赖"><span class="toc-number">1.</span> <span class="toc-text">什么是循环依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#属性的相互依赖"><span class="toc-number">1.1.</span> <span class="toc-text">属性的相互依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造器的依赖"><span class="toc-number">1.2.</span> <span class="toc-text">构造器的依赖</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何解决"><span class="toc-number">2.</span> <span class="toc-text">如何解决</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#三级缓存"><span class="toc-number">2.1.</span> <span class="toc-text">三级缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程分析"><span class="toc-number">2.2.</span> <span class="toc-text">流程分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结合上述例子分析"><span class="toc-number">2.3.</span> <span class="toc-text">结合上述例子分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么不能解决构造器的循环依赖"><span class="toc-number">3.</span> <span class="toc-text">为什么不能解决构造器的循环依赖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring为什么不能解决多例的循环依赖"><span class="toc-number">4.</span> <span class="toc-text">Spring为什么不能解决多例的循环依赖</span></a></li></ol>
+		
+		</div>
+		
+		<h1 id="什么是循环依赖"><a href="#什么是循环依赖" class="headerlink" title="什么是循环依赖"></a>什么是循环依赖</h1><ul>
+<li>循环依赖分为两种，一种是构造器的相互依赖，另外一种是属性的相互依赖。</li>
+</ul>
+<h2 id="属性的相互依赖"><a href="#属性的相互依赖" class="headerlink" title="属性的相互依赖"></a>属性的相互依赖</h2><ul>
+<li>属性的相互依赖就是A类的属性中有B，B类的属性中有A，如下：<ul>
+<li>这里仅仅是两个类的循环依赖，当然还有更多的类相互依赖</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> B b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> A a;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="构造器的依赖"><a href="#构造器的依赖" class="headerlink" title="构造器的依赖"></a>构造器的依赖</h2><ul>
+<li>构造器的依赖就是A类的构造器需要传入B类对象，B的构造器需要传入A类对象，如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">A</span><span class="params">(B b)</span></span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">B</span><span class="params">(A a)</span></span>&#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h1><ul>
+<li>Spring只能解决属性的循环依赖，构造器的循环依赖是不能解决的。</li>
+<li>spring中解决循环依赖的核心思想就是利用<strong>三级缓存</strong>，先创建Bean，后为各个属性赋值具体什么是三级缓存呢？</li>
+</ul>
+<h2 id="三级缓存"><a href="#三级缓存" class="headerlink" title="三级缓存"></a>三级缓存</h2><ul>
+<li>三级缓存的实现在<code>org.springframework.beans.factory.support.DefaultSingletonBeanRegistry</code>类中，如下：<ul>
+<li><code>private final Map&lt;String, Object&gt; singletonObjects = new ConcurrentHashMap&lt;&gt;(256);</code>：单例对象缓存池，beanName-&gt;Bean，其中存储的就是实例化，属性赋值成功之后的单例对象</li>
+<li><code>private final Map&lt;String, Object&gt; earlySingletonObjects = new HashMap&lt;&gt;(16);</code>：早期的单例对象，beanName-&gt;Bean，其中存储的是实例化之后，属性未赋值的单例对象。</li>
+<li><code>private final Map&lt;String, ObjectFactory&lt;?&gt;&gt; singletonFactories = new HashMap&lt;&gt;(16);</code>：单例工厂的缓存，beanName-&gt;ObjectFactory</li>
+</ul>
+</li>
+</ul>
+<h2 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h2><ul>
+<li>在分析之前，先写个实例，制造循环依赖，如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Husband</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> Integer age;</div><div class="line">    <span class="comment">//丈夫依赖妻子</span></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> Wife wife;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(Integer age)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.age = age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Wife <span class="title">getWife</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> wife;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setWife</span><span class="params">(Wife wife)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.wife = wife;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Wife</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> Integer age;</div><div class="line">    <span class="comment">//妻子依赖丈夫</span></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> Husband husband;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(Integer age)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.age = age;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Husband <span class="title">getHusband</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> husband;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setHusband</span><span class="params">(Husband husband)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.husband = husband;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>解决循环依赖是在容器启动的时候实现的，我们分析源码可以知道，容器启动初始化的大部分过程都是在refresh方法中实现的，因此我们从refresh入口即可，流程如下：<ul>
+<li>下面只分析与循环依赖有关的流程，其他的会省略</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">1、finishBeanFactoryInitialization(beanFactory)：实例化所有饿加载的单例Bean</div><div class="line"></div><div class="line">2、org.springframework.beans.factory.config.ConfigurableListableBeanFactory#preInstantiateSingletons：真正的实现的方法</div><div class="line"></div><div class="line">3、org.springframework.beans.factory.support.AbstractBeanFactory#getBean：调用方法获取Bean</div><div class="line"></div><div class="line">4、org.springframework.beans.factory.support.AbstractBeanFactory#doGetBean：真正getBean的方法</div><div class="line">	4.1 Object sharedInstance = getSingleton(beanName)：先尝试从三级缓存中获取Bean，第一次执行缓存中肯定是没有</div><div class="line">	4.2 BeanFactory parentBeanFactory = getParentBeanFactory()：检查父工厂中是否存在当前Bean</div><div class="line">	4.3 markBeanAsCreated(beanName)：将Bean放入alreadyCreated中，表示当前Bean已经创建了</div><div class="line">	4.4 String[] dependsOn = mbd.getDependsOn()：检查dependOn</div><div class="line">	4.5 Object bean = resolveBeforeInstantiation(beanName, mbdToUse)：执行后置处理器，在初始化之前执行</div><div class="line">	4.6 sharedInstance = getSingleton(beanName, () -&gt; &#123;：调用getSingleton方法，尝试从单例缓存池中获取Bean</div><div class="line">		4.6.1 Object singletonObject = this.singletonObjects.get(beanName)：从单例缓存池中获取</div><div class="line">		4.6.2 if (singletonObject == null) &#123;：如果缓存池中没有，那么执行后续的逻辑，如果有直接返回即可</div><div class="line">		4.6.3 单例池中没有的逻辑：singletonObject = singletonFactory.getObject()：调用createBean方法创建Bean</div><div class="line">		4.6.4 addSingleton(beanName, singletonObject)：创建Bean成功之后将其添加到单例缓存池中，并且将其从二三级缓存中移除（singletonFactories，earlySingletonObjects）</div><div class="line">		</div><div class="line">	4.7 return createBean(beanName, mbd, args)：三级缓存和父工厂中都没有当前的这个Bean，此时进入创建Bean的过程</div><div class="line">	</div><div class="line">5、org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#doCreateBean：真正执行创建Bean的逻辑</div><div class="line">	5.1 instanceWrapper = createBeanInstance(beanName, mbd, args)：调用构造器创建Bean，此时的Bean称为早期Bean，还未进行属性赋值</div><div class="line">	5.2 applyMergedBeanDefinitionPostProcessors(mbd, beanType, beanName)：执行MergedBeanDefinitionPostProcessor，也是一种后置处理器</div><div class="line">	5.3 addSingletonFactory(beanName, () -&gt; getEarlyBeanReference(beanName, mbd, bean))：将早期Bean放入三级缓存singletonFactories中，并且从早期对象缓存earlySingletonObjects中删除，用来解决循环依赖。</div><div class="line">	if (!this.singletonObjects.containsKey(beanName)) &#123;</div><div class="line">				this.singletonFactories.put(beanName, singletonFactory);</div><div class="line">				this.earlySingletonObjects.remove(beanName);</div><div class="line">				this.registeredSingletons.add(beanName);</div><div class="line">			&#125;</div><div class="line">	5.4 populateBean(beanName, mbd, instanceWrapper)：此时执行当前Bean的属性赋值</div><div class="line">	</div><div class="line">6、org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#populateBean：进行属性的赋值</div><div class="line">	6.1 if (!mbd.isSynthetic() &amp;&amp; hasInstantiationAwareBeanPostProcessors()) ：执行实例化之后的后置处理器</div><div class="line">	6.2 for (BeanPostProcessor bp : getBeanPostProcessors()) ：执行属性赋值之前的后置处理器，返回PropertyVlaue，我们知道@Autowired注解就是后置处理器实现的，主要的逻辑就是在postProcessProperties方法中，并且我们的例子中是自动注入Wife和Husband的，所以逻辑一定是在这里实现的，进入</div><div class="line"></div><div class="line">7、org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor#postProcessProperties：@Autowired注解解析，为标注该注解的属性赋值</div><div class="line">	7.1 org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.AutowiredFieldElement#inject：真正执行赋值的逻辑</div><div class="line">		7.1.1 value = beanFactory.resolveDependency(desc, beanName, autowiredBeanNames, typeConverter)：解析依赖</div><div class="line"></div><div class="line">8、org.springframework.beans.factory.support.DefaultListableBeanFactory#resolveDependency：解析标注@Autowired的依赖</div><div class="line">	8.1 org.springframework.beans.factory.support.DefaultListableBeanFactory#doResolveDependency：真正解析逻辑</div><div class="line">	8.2 instanceCandidate = descriptor.resolveCandidate(autowiredBeanName, type, this)：从容器中获取指定的Bean，内部调用的又是getBean方法</div><div class="line"></div><div class="line">9、org.springframework.beans.factory.config.DependencyDescriptor#resolveCandidate：至此，又回到了getBean这个方法，从ioc容器中获取指定的Bean</div></pre></td></tr></table></figure>
+<ul>
+<li>流程图如下：<ul>
+<li>红色是关于三级缓存的操作</li>
+<li>蓝色是关于后置处理器的操作</li>
+<li>唯一一个淡黄色是解决循环依赖的关键，重新调用doGetBean</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://github.com/chenjiabing666/BlogImage/blob/master/circleDependency.png?raw=true" alt=""></p>
+<h2 id="结合上述例子分析"><a href="#结合上述例子分析" class="headerlink" title="结合上述例子分析"></a>结合上述例子分析</h2><p>1、Husband创建Bean，先判断缓存池中是否存在，存在直接返回，不存在进入createBean创建的流程，调用构造方法创建一个早期的Bean【未进行属性赋值】，创建成功将其放入二级缓存<code>earlySingletonObjects</code>中，之后又调用<code>addSingletonFactory</code>方法将其放入三级缓存中并且将二级缓存中的移除，之后调用<code>populateBean</code>为属性赋值，在@Autowired的后置处理器中查找需要注入的依赖，发现Husband中的一个属性<code>Wife</code>，因此调用<code>getBean</code>方法从容器中获取，但是此时的Wife还未创建，因此又进入了doGetBean的流程，但是此时Wife并没有创建，因此在一二三级缓存中不能获取，又执行createBean方法创建Wife，同样调用构造方法创建一个早期Bean放入二级缓存中，调用<code>addSingletonFactory</code>放入三级缓存并移除二级缓存，然后调用<code>populateBean</code>方法为Wife属性赋值，在@Autowired的后置处理器中查找需要注入的依赖，发现Wife类中有一个属性是Husband，因此调用getBean方法，再次调用doGetBean获取Husband，但是此时的Husband已经创建成功【未赋值】，存放在三级缓存中，因此直接从三级缓存中取出Husband赋值给Wife属性，至此Wife属性已经赋值成功，直接添加到一级缓存（<code>singletonObjects</code>）中并且移除三级缓存，直接返回给Husband赋值，因此Husband中的属性也持有了Wife的引用，都创建并且赋值成功了。</p>
+<h1 id="为什么不能解决构造器的循环依赖"><a href="#为什么不能解决构造器的循环依赖" class="headerlink" title="为什么不能解决构造器的循环依赖"></a>为什么不能解决构造器的循环依赖</h1><ul>
+<li>Spring解决循环依赖主要是依赖三级缓存，<strong>但是的在调用构造方法之前还未将其放入三级缓存之中</strong>，因此后续的依赖调用构造方法的时候并不能从三级缓存中获取到依赖的Bean，因此不能解决。</li>
+</ul>
+<h1 id="Spring为什么不能解决多例的循环依赖"><a href="#Spring为什么不能解决多例的循环依赖" class="headerlink" title="Spring为什么不能解决多例的循环依赖"></a>Spring为什么不能解决多例的循环依赖</h1><ul>
+<li>多实例Bean是每次调用一次getBean都会执行一次构造方法并且未属性赋值，根本没有三级缓存，因此解决循环依赖。</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Spring/">Spring</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Spring/">Spring</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://chenjiabing666.github.io/2019/07/17/Spring解决循环依赖/" data-title="Spring解决循环依赖 | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2019/07/07/Spring事务源码解析/"  title="Spring事务源码解析">
+ <strong>下一篇：</strong><br/> 
+ <span>Spring事务源码解析
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是循环依赖"><span class="toc-number">1.</span> <span class="toc-text">什么是循环依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#属性的相互依赖"><span class="toc-number">1.1.</span> <span class="toc-text">属性的相互依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造器的依赖"><span class="toc-number">1.2.</span> <span class="toc-text">构造器的依赖</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何解决"><span class="toc-number">2.</span> <span class="toc-text">如何解决</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#三级缓存"><span class="toc-number">2.1.</span> <span class="toc-text">三级缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程分析"><span class="toc-number">2.2.</span> <span class="toc-text">流程分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结合上述例子分析"><span class="toc-number">2.3.</span> <span class="toc-text">结合上述例子分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么不能解决构造器的循环依赖"><span class="toc-number">3.</span> <span class="toc-text">为什么不能解决构造器的循环依赖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring为什么不能解决多例的循环依赖"><span class="toc-number">4.</span> <span class="toc-text">Spring为什么不能解决多例的循环依赖</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java-Web/" title="Java-Web">Java-Web<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>37</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/docker/" title="docker">docker<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java学习/" title="java学习">java学习<sup>35</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/python/" title="python">python<sup>19</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/web前端/" title="web前端">web前端<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/分布式/" title="分布式">分布式<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>15</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>8</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>37</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java基础/" title="java基础">java基础<sup>21</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>18</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/web前端/" title="web前端">web前端<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/docker/" title="docker">docker<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.zhihu.com/people/xiao-ming-64-34-45/activities" target="_blank" title="本人知乎">本人知乎</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/Chenjiabing/" target="_blank" title="本人博客园">本人博客园</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://blog.csdn.net/qq_34162294" target="_blank" title="本人CSDN">本人CSDN</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://coolshell.cn/" target="_blank" title="酷壳网">酷壳网</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 人前显贵人后受罪 <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	 <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=14509119671822169205' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/5651317821" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/chenjiabing666" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		<a href="https://www.douban.com/people/155022807" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="http://www.zhihu.com/people/https://www.zhihu.com/people/xiao-ming-64-34-45" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Chenjiabing">Chenjiabing</a>
+		
+		
+		</p>
+		
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    $('#toc.toc-aside').css('display', 'block').addClass('fadeIn');//新加的，打开文章时自动隐藏左边的栏
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'chenjiabing666';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'null', 'null');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261577779'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1261577779' type='text/javascript'%3E%3C/script%3E"));</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+    <script type="text/javascript" src="/js/src/love.js"></script>
+
+  </body>
+  
+  <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</html>
