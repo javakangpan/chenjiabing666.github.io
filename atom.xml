@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2019-07-21T17:19:02.247Z</updated>
+  <updated>2019-07-31T06:46:45.729Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,314 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Springmvc源码解读</title>
+    <link href="http://chenjiabing666.github.io/2019/07/31/Springmvc%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/"/>
+    <id>http://chenjiabing666.github.io/2019/07/31/Springmvc源码解读/</id>
+    <published>2019-07-31T06:45:44.000Z</published>
+    <updated>2019-07-31T06:46:45.729Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="实现Controller的方式"><a href="#实现Controller的方式" class="headerlink" title="实现Controller的方式"></a>实现Controller的方式</h1><ul>
+<li>如何实现一个controller，在源码中其实将controller叫做handler，我们通常知道实现controller的方式就是在类上添加一个<code>@Controller</code>和<code>@RequestMapping</code>注解，但是还有其他的方式定义一个controller</li>
+</ul>
+<h2 id="实现Controller"><a href="#实现Controller" class="headerlink" title="实现Controller"></a>实现Controller</h2><ul>
+<li>使用Bean中的id指定路径，必须是以<code>/</code>开头</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(value = <span class="string">"/user/test.do"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> <span class="keyword">implements</span> <span class="title">Controller</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">handleRequest</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        System.out.println(<span class="string">"userController run....."</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="实现HttpRequestHandler"><a href="#实现HttpRequestHandler" class="headerlink" title="实现HttpRequestHandler"></a>实现HttpRequestHandler</h2><ul>
+<li>要求同上</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(value = <span class="string">"/prod/test.do"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductController</span> <span class="keyword">implements</span> <span class="title">HttpRequestHandler</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleRequest</span><span class="params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</div><div class="line">        System.out.println(<span class="string">"prodController run ....."</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="使用注解"><a href="#使用注解" class="headerlink" title="使用注解"></a>使用注解</h2><ul>
+<li>经常使用，不再细说</li>
+</ul>
+<h1 id="EnableWebMvc"><a href="#EnableWebMvc" class="headerlink" title="@EnableWebMvc"></a>@EnableWebMvc</h1><ul>
+<li>该注解使Spring MVC 开启高级功能的入口，主要的作用就是加载了一个配置类<code>DelegatingWebMvcConfiguration</code>，其中创建了MVC默认的一些组件，比如<code>viewControllerHandlerMapping</code>、<code>RequestMappingHandlerMapping</code>、<code>BeanNameUrlHandlerMapping</code>、<code>RequestMappingHandlerAdapter</code> 等等。</li>
+</ul>
+<h1 id="DispatcherServlet"><a href="#DispatcherServlet" class="headerlink" title="DispatcherServlet"></a>DispatcherServlet</h1><ul>
+<li>一个用于分发请求的Servlet，一个请求进来之后，Servlet会根据HandlerMapping将请求转发给对应的Handler（controller）处理。</li>
+<li>其中重要的方法如下：<ul>
+<li><code>protected void doDispatch(HttpServletRequest request, HttpServletResponse response)</code>：执行分发的流程</li>
+<li><code>protected void render(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)</code>：渲染视图</li>
+</ul>
+</li>
+</ul>
+<h1 id="HandlerMapping"><a href="#HandlerMapping" class="headerlink" title="HandlerMapping"></a>HandlerMapping</h1><ul>
+<li>顾名思义，就是保存Handler和Mapping之间的对应的关系，当然这种关系是多种的，有<strong>uri to beanName</strong>，有<strong>uri to HandlerMethod</strong>，不同的对应关系有不同的实现类处理，因此就衍生了后续的三种实现类。</li>
+</ul>
+<h2 id="BeanNameUrlHandlerMapping"><a href="#BeanNameUrlHandlerMapping" class="headerlink" title="BeanNameUrlHandlerMapping"></a>BeanNameUrlHandlerMapping</h2><ul>
+<li>见名思意，这种肯定是uri to beanName的实现，用于存储实现了<code>Controller</code>和<code>HttpRequestHandler</code>接口的Handler的映射关系</li>
+</ul>
+<h2 id="SimpleUrlHandlerMapping"><a href="#SimpleUrlHandlerMapping" class="headerlink" title="SimpleUrlHandlerMapping"></a>SimpleUrlHandlerMapping</h2><ul>
+<li>这种也是uri to Handler的实现，不过这种用于存储<code>View-controller</code>、<code>ResourceHttpRequestHandler</code>的映射关系</li>
+</ul>
+<h2 id="RequestMappingHandlerMapping"><a href="#RequestMappingHandlerMapping" class="headerlink" title="RequestMappingHandlerMapping"></a>RequestMappingHandlerMapping</h2><ul>
+<li>这种用于实现uri to HandlerMethod的关系，从名称可以看出，这种是用于使用<code>@RequestMapping</code>注解的</li>
+</ul>
+<h1 id="HandlerExecutionChain"><a href="#HandlerExecutionChain" class="headerlink" title="HandlerExecutionChain"></a>HandlerExecutionChain</h1><ul>
+<li>处理器执行链，其中存储了Handler和拦截器</li>
+</ul>
+<h1 id="HandlerAdapter"><a href="#HandlerAdapter" class="headerlink" title="HandlerAdapter"></a>HandlerAdapter</h1><ul>
+<li>简单的说就是执行的Handler的适配类，定义了三个方法，如下：<ul>
+<li><code>boolean supports(Object handler);</code>：判断当前的HandlerAdapter是否支持这个Handler</li>
+<li><code>ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception;</code>：执行Handler的方法</li>
+<li><code>long getLastModified(HttpServletRequest request, Object handler);</code>：获取请求都中的<code>LastModified</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>该接口有多个实现类，如下：<ul>
+<li><code>RequestMappingHandlerAdapter</code>：匹配HandlerMethod</li>
+<li><code>HttpRequestHandlerAdapter</code>：匹配实现了<code>HttpRequestHandler</code>接口的Handler</li>
+<li><code>SimpleControllerHandlerAdapter</code>：匹配实现了Controller接口的Handler</li>
+</ul>
+</li>
+</ul>
+<h1 id="执行流程分析"><a href="#执行流程分析" class="headerlink" title="执行流程分析"></a>执行流程分析</h1><p><img src="https://raw.githubusercontent.com/chenjiabing666/BlogImage/master/springMVC%20-proceed.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;实现Controller的方式&quot;&gt;&lt;a href=&quot;#实现Controller的方式&quot; class=&quot;headerlink&quot; title=&quot;实现Controller的方式&quot;&gt;&lt;/a&gt;实现Controller的方式&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;如何实现一个contro
+    
+    </summary>
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/categories/Spring/"/>
+    
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Springmvc注解版开发</title>
+    <link href="http://chenjiabing666.github.io/2019/07/31/Springmvc%E6%B3%A8%E8%A7%A3%E7%89%88%E5%BC%80%E5%8F%91/"/>
+    <id>http://chenjiabing666.github.io/2019/07/31/Springmvc注解版开发/</id>
+    <published>2019-07-31T06:45:22.000Z</published>
+    <updated>2019-07-31T06:47:07.028Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h1><h2 id="搭建原理"><a href="#搭建原理" class="headerlink" title="搭建原理"></a>搭建原理</h2><p><img src="https://docs.spring.io/spring/docs/5.1.8.RELEASE/spring-framework-reference/images/mvc-context-hierarchy.png" alt=""></p>
+<h2 id="springMVC版本"><a href="#springMVC版本" class="headerlink" title="springMVC版本"></a>springMVC版本</h2><ul>
+<li>此次使用的版本是Spring 5.1.8</li>
+</ul>
+<h2 id="配置内嵌tomcat"><a href="#配置内嵌tomcat" class="headerlink" title="配置内嵌tomcat"></a>配置内嵌tomcat</h2><ul>
+<li>为了简化开发，使用tomcat插件实现web项目的运行，只需要在pom.xml中配置一个插件即可，如下：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat.maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat7-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">port</span>&gt;</span>8080<span class="tag">&lt;/<span class="name">port</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">path</span>&gt;</span>/<span class="tag">&lt;/<span class="name">path</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">uriEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">uriEncoding</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>之后在IDEA右侧的maven处可以看见tomcat7这个插件了，点击run即可运行</li>
+</ul>
+<h2 id="配置DispatcherServlet初始化器"><a href="#配置DispatcherServlet初始化器" class="headerlink" title="配置DispatcherServlet初始化器"></a>配置DispatcherServlet初始化器</h2><ul>
+<li>配置的方式有多种，但是根据Spring文档推荐的方式如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> cn.tedu.demo.config.AppConfig;</div><div class="line"><span class="keyword">import</span> cn.tedu.demo.config.WebMvcConfig;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 配置DispatcherServlet初始化器，在容器启动的时候会加载初始化</div><div class="line"> * 入口就是/org/springframework/spring-web/5.1.8.RELEASE/spring-web-5.1.8.RELEASE.jar!/META-INF/services/javax.servlet.ServletContainerInitializer</div><div class="line"> * web容器在启动的时候会加载META-INF/service下的文件</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StrartWebApplicationInitializer</span> <span class="keyword">extends</span> <span class="title">AbstractAnnotationConfigDispatcherServletInitializer</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 配置主配置类，主配置类的作用就是配置业务所需要的各种Bean，比如dao，service</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> Class&lt;?&gt;[] getRootConfigClasses() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Class[]&#123;AppConfig.class&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 配置MVC所需的配置类，该配置类的作用就是扫描controller，配置mvc的各种组件，比如视图解析器，拦截器等</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> Class&lt;?&gt;[] getServletConfigClasses() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Class[]&#123;WebMvcConfig.class&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 配置servletMapping，相当于在DispatcherServlet中配置的url</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> String[] getServletMappings() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String[]&#123;<span class="string">"/"</span>&#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="主配置文件"><a href="#主配置文件" class="headerlink" title="主配置文件"></a>主配置文件</h2><ul>
+<li>主配置文件主要的作用就是配置业务需求的Bean，比如dao，service层的</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.ComponentScan;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.FilterType;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 业务逻辑的配置类，扫描所有的业务Bean，比如dao，service，排除所有的controller</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages = &#123;<span class="string">"cn.tedu.demo"</span>&#125;,excludeFilters = &#123;<span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION,classes = &#123;Controller.class&#125;)&#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="MVC配置类"><a href="#MVC配置类" class="headerlink" title="MVC配置类"></a>MVC配置类</h2><ul>
+<li>MVC配置类主要的作用就是扫描Controller，配置各种组件，比如视图解析器，拦截器等等</li>
+<li>重要的两点如下：<ul>
+<li>使用<code>@EnableWebMvc</code>注解开启MVC功能，相当于xml文件中的<code>&lt;mvc:annotation-driven/&gt;</code></li>
+<li>配置类需要实现<code>WebMvcConfigurer</code>，该接口下有各种方法，开发者可以实现其中的方法完成相关组件的生成</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> cn.tedu.demo.interceptor.CustomInterceptor;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.ComponentScan;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.FilterType;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * MVC的配置类，扫描所有的controller，排除所有的业务类</div><div class="line"> * <span class="doctag">@EnableWebMvc</span> 注解开启mvc功能</div><div class="line"> * <span class="doctag">@ComponentScan</span> 注解中的属性useDefaultFilters（默认是true，扫描全部的Bean），这里我们定义了只扫描controller，因此要设置该属性为false，否则不起作用，排除Bean则不需要</div><div class="line"> */</div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages = &#123;<span class="string">"cn.tedu.demo"</span>&#125;,includeFilters = &#123;<span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION,classes = &#123;Controller.class&#125;)&#125;,useDefaultFilters = <span class="keyword">false</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="配置拦截器"><a href="#配置拦截器" class="headerlink" title="配置拦截器"></a>配置拦截器</h1><ul>
+<li>自定义一个拦截器，如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 自定义一个拦截器，实现HandlerInterceptor</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 在拦截器方法之前执行</div><div class="line">     * <span class="doctag">@param</span> request request</div><div class="line">     * <span class="doctag">@param</span> response response</div><div class="line">     * <span class="doctag">@param</span> handler 拦截的handler</div><div class="line">     * <span class="doctag">@return</span> 如果返回false，后续的拦截器和拦截的handler不执行</div><div class="line">     * <span class="doctag">@throws</span> Exception</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        System.out.println(<span class="string">"在之前执行"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>在配置类设置自定义的拦截器，使得起作用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</div><div class="line">       <span class="comment">//创建</span></div><div class="line">       CustomInterceptor customInterceptor = <span class="keyword">new</span> CustomInterceptor();</div><div class="line">       <span class="comment">//添加自定义的拦截器</span></div><div class="line">       registry.addInterceptor(customInterceptor).addPathPatterns(<span class="string">"/**"</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>自定义的拦截器的真实实现类其实是<code>MappedInterceptor</code>，在源码中获取处理器执行链的时候会将其添加到执行链中。</li>
+</ul>
+<h1 id="配置过滤器"><a href="#配置过滤器" class="headerlink" title="配置过滤器"></a>配置过滤器</h1><ul>
+<li>过滤器不属于SpringMVC，而是属于Servlet中的组件，因此配置过滤器使用的并不是MVC的配置，但是在Servlet3.0中也是提供了注解版的Servlet和Filter的生成方式，我们使用注解生成一个Filter，如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 自定义过滤器</div><div class="line"> */</div><div class="line"><span class="meta">@WebFilter</span>(filterName = <span class="string">"customFilter"</span>,urlPatterns = <span class="string">"/*"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</div><div class="line">        System.out.println(<span class="string">"过滤器初始化"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</div><div class="line">        System.out.println(<span class="string">"过滤器执行"</span>);</div><div class="line">        chain.doFilter(request,response);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"过滤器销毁"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="配置视图解析器"><a href="#配置视图解析器" class="headerlink" title="配置视图解析器"></a>配置视图解析器</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureViewResolvers</span><span class="params">(ViewResolverRegistry registry)</span> </span>&#123;</div><div class="line">       registry.jsp(<span class="string">"/WEB_INF/"</span>,<span class="string">".jsp"</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h1 id="配置ViewController"><a href="#配置ViewController" class="headerlink" title="配置ViewController"></a>配置ViewController</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addViewControllers</span><span class="params">(ViewControllerRegistry registry)</span> </span>&#123;</div><div class="line">        <span class="comment">//定义一个controller，访问路径是/index.do，跳转的视图是index.jsp</span></div><div class="line">        registry.addViewController(<span class="string">"/index.do"</span>).setViewName(<span class="string">"index"</span>);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h1 id="配置MessageConverters"><a href="#配置MessageConverters" class="headerlink" title="配置MessageConverters"></a>配置MessageConverters</h1><ul>
+<li>消息转换器用于对Request和Response的消息进行处理，比如将Response中的消息转换为指定JSON字符串的形式</li>
+<li>默认的消息转换器对于日期的类型的转换是时间戳，即是返回的JSON字符串的日期类型是时间戳，接收的日期类型参数也只能是时间戳</li>
+<li>如何配置消息转换器，只需要重写springmvc配置类中的方法即可。</li>
+<li>我们使用的是<code>MappingJackson2HttpMessageConverter</code>这类转换器，但是其中依赖的是ObjectMapper，因此我们比如引入依赖，如下：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>在上述的MVC配置类中重写如下方法：<ul>
+<li>设置日期的格式化格式是yyyy-MM-dd，此时返回和接收的格式就是<code>yyyy-MM-dd</code></li>
+<li>在配置类中配置的消息转换器属于<strong>全局配置</strong>，所有的消息都会遵循这种配置。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureMessageConverters</span><span class="params">(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters)</span> </span>&#123;</div><div class="line">       Jackson2ObjectMapperBuilder builder = <span class="keyword">new</span> Jackson2ObjectMapperBuilder()</div><div class="line">               .indentOutput(<span class="keyword">true</span>)</div><div class="line">               <span class="comment">//指定格式化的日期，这里只是举例，不建议在此处全局配置</span></div><div class="line">               .dateFormat(<span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>))</div><div class="line">               <span class="comment">//设置时区，默认是UTC，需要修改成北京时间</span></div><div class="line">               .timeZone(<span class="string">"GMT+8"</span>);</div><div class="line">       converters.add(<span class="keyword">new</span> MappingJackson2HttpMessageConverter(builder.build()));</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h2 id="注解版"><a href="#注解版" class="headerlink" title="注解版"></a>注解版</h2><ul>
+<li>在实际的项目中这种方式太鸡肋，实际的需求有实际的变化，因此我们最好能够寻找一种灵活的处理方式，类似注解的方式。</li>
+<li>在<code>jackson-databind</code>中提供了许多的注解，可以供我们使用，<strong>可以覆盖全局配置，和全局配置形成一种互补的作用</strong>。</li>
+<li><code>@JsonFormat</code>：日期格式化注解，如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//timeZone如果在全局配置过，可以不写	</span></div><div class="line"><span class="meta">@JsonFormat</span>(pattern = <span class="string">"yyyy-MM-dd HH:mm:ss"</span>,timezone = <span class="string">"GMT+8"</span>)</div><div class="line">    <span class="keyword">private</span> Date birthDay;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>@JsonIgnore</code>：在返回的JSON字符串中不显示</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@JsonIgnore</span></div><div class="line">   <span class="keyword">private</span> String name;</div></pre></td></tr></table></figure>
+<ul>
+<li>其他的注解请参考<a href="https://blog.51cto.com/7308310/2310930?source=dra" target="_blank" rel="external">https://blog.51cto.com/7308310/2310930?source=dra</a></li>
+</ul>
+<h1 id="异常处理器"><a href="#异常处理器" class="headerlink" title="异常处理器"></a>异常处理器</h1><ul>
+<li>springMvc处理异常有三种方式，分别为：<ul>
+<li><code>ExceptionHandlerExceptionResolver</code>：通过调用或 类中的<code>@ExceptionHandler</code>方法来解决异常，可以结合<code>@ControllerAdvice</code></li>
+<li><code>DefaultHandlerExceptionResolver</code>：对一些特殊的异常进行处理</li>
+<li><code>ResponseStatusExceptionResolver</code>：使用<code>@ResponseStatus</code>解析异常，并根据注解中的值将它们映射到HTTP状态代码 </li>
+<li><code>SimpleMappingExceptionResolver</code>：异常和视图的映射，可以自定义指定的异常对应的视图</li>
+</ul>
+</li>
+<li><strong>原理：主要的解析逻辑都是在<code>doResolveException</code>方法中完成的。</strong></li>
+</ul>
+<h2 id="异常处理器执行的顺序"><a href="#异常处理器执行的顺序" class="headerlink" title="异常处理器执行的顺序"></a>异常处理器执行的顺序</h2><ul>
+<li>异常处理器的执行是有顺序的，优先级高的执行完之后，如果有对应的处理，那么后续的就不再执行。</li>
+<li>异常处理器的执行顺序如下：<ul>
+<li><code>ExceptionHandlerExceptionResolver</code></li>
+<li><code>DefaultHandlerExceptionResolver</code></li>
+<li><code>ResponseStatusExceptionResolver</code></li>
+<li><code>SimpleMappingExceptionResolver</code></li>
+</ul>
+</li>
+<li>四种异常处理器的顺序执行可以形成一种互补的配置。</li>
+</ul>
+<h2 id="SimpleMappingExceptionResolver"><a href="#SimpleMappingExceptionResolver" class="headerlink" title="SimpleMappingExceptionResolver"></a>SimpleMappingExceptionResolver</h2><ul>
+<li>在配置中配置即可</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> SimpleMappingExceptionResolver <span class="title">simpleMappingExceptionResolver</span><span class="params">()</span></span>&#123;</div><div class="line">        SimpleMappingExceptionResolver resolver = <span class="keyword">new</span> SimpleMappingExceptionResolver();</div><div class="line">        <span class="comment">//设置默认的视图，如果有的异常没有指定处理，那么使用默认的视图</span></div><div class="line">        resolver.setDefaultErrorView(<span class="string">"index"</span>);</div><div class="line">        <span class="comment">//设置排除的异常</span></div><div class="line"><span class="comment">//        resolver.setExcludedExceptions();</span></div><div class="line">        <span class="comment">//指定异常视图映射</span></div><div class="line">        Properties properties=<span class="keyword">new</span> Properties();</div><div class="line">        properties.put(RuntimeException.class.getName(),<span class="string">"error"</span>);</div><div class="line">        resolver.setExceptionMappings(properties);</div><div class="line">        <span class="keyword">return</span> resolver;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="DefaultHandlerExceptionResolver"><a href="#DefaultHandlerExceptionResolver" class="headerlink" title="DefaultHandlerExceptionResolver"></a>DefaultHandlerExceptionResolver</h2><ul>
+<li>此类异常解析器只能针对一些特殊的异常进行处理，如下：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Exception</th>
+<th>HTTP Status Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HttpRequestMethodNotSupportedException</td>
+<td>405 (SC_METHOD_NOT_ALLOWED)</td>
+</tr>
+<tr>
+<td>HttpMediaTypeNotSupportedException</td>
+<td>415 (SC_UNSUPPORTED_MEDIA_TYPE)</td>
+</tr>
+<tr>
+<td>HttpMediaTypeNotAcceptableException</td>
+<td>406 (SC_NOT_ACCEPTABLE)</td>
+</tr>
+<tr>
+<td>MissingPathVariableException</td>
+<td>500 (SC_INTERNAL_SERVER_ERROR)</td>
+</tr>
+<tr>
+<td>MissingServletRequestParameterException</td>
+<td>400 (SC_BAD_REQUEST)</td>
+</tr>
+<tr>
+<td>ServletRequestBindingException</td>
+<td>400 (SC_BAD_REQUEST)</td>
+</tr>
+<tr>
+<td>ConversionNotSupportedException</td>
+<td>500 (SC_INTERNAL_SERVER_ERROR)</td>
+</tr>
+<tr>
+<td>TypeMismatchException</td>
+<td>400 (SC_BAD_REQUEST)</td>
+</tr>
+<tr>
+<td>HttpMessageNotReadableException</td>
+<td>400 (SC_BAD_REQUEST)</td>
+</tr>
+<tr>
+<td>HttpMessageNotWritableException</td>
+<td>500 (SC_INTERNAL_SERVER_ERROR)</td>
+</tr>
+<tr>
+<td>MethodArgumentNotValidException</td>
+<td>400 (SC_BAD_REQUEST)</td>
+</tr>
+<tr>
+<td>MissingServletRequestPartException</td>
+<td>400 (SC_BAD_REQUEST)</td>
+</tr>
+<tr>
+<td>BindException</td>
+<td>400 (SC_BAD_REQUEST)</td>
+</tr>
+<tr>
+<td>NoHandlerFoundException</td>
+<td>404 (SC_NOT_FOUND)</td>
+</tr>
+<tr>
+<td>AsyncRequestTimeoutException</td>
+<td>503 (SC_SERVICE_UNAVAILABLE)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>不需要声明，默认存在</li>
+</ul>
+<h2 id="ResponseStatusExceptionResolver"><a href="#ResponseStatusExceptionResolver" class="headerlink" title="ResponseStatusExceptionResolver"></a>ResponseStatusExceptionResolver</h2><ul>
+<li>在自定义的异常类上标注<code>@ResponseStatus</code>注解，当抛出此种异常的时候，将会响应定义的状态码和提示语</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ResponseStatus</span>(code = HttpStatus.FORBIDDEN,reason = <span class="string">"没有权限"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomException</span> <span class="keyword">extends</span>  <span class="title">RuntimeException</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="ExceptionHandlerExceptionResolver"><a href="#ExceptionHandlerExceptionResolver" class="headerlink" title="ExceptionHandlerExceptionResolver"></a>ExceptionHandlerExceptionResolver</h2><ul>
+<li>集合<code>@ControllerAdvice</code>和<code>@RestControllerAdvice</code>使用</li>
+<li>方法中能够自动赋值的参数和返回值的类型都在Spring文档上有详细的记载，参考<code>https://docs.spring.io/spring/docs/5.1.8.RELEASE/spring-framework-reference/web.html#mvc-ann-exceptionhandler-args</code></li>
+<li>详细的使用如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ControllerAdvice</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     *</div><div class="line">     *处理FileNotFoundException，返回JSOn数据</div><div class="line">     */</div><div class="line">    <span class="meta">@ExceptionHandler</span>(value = ArrayIndexOutOfBoundsException.class)</div><div class="line">    <span class="meta">@ResponseBody</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">handleFileNotFoundException</span><span class="params">(Exception ex, HttpServletRequest request, HandlerMethod method)</span></span>&#123;</div><div class="line">        System.out.println(request.getRequestURI());</div><div class="line">        System.out.println(method);</div><div class="line">        System.out.println(ex);</div><div class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@ExceptionHandler</span>(value = Exception.class)</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">handleException</span><span class="params">(Exception ex, HttpServletRequest request, HandlerMethod method)</span></span>&#123;</div><div class="line">        System.out.println(request.getRequestURI());</div><div class="line">        System.out.println(method);</div><div class="line">        System.out.println(ex);</div><div class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="配置跨域请求"><a href="#配置跨域请求" class="headerlink" title="配置跨域请求"></a>配置跨域请求</h1><h2 id="使用注解"><a href="#使用注解" class="headerlink" title="使用注解"></a>使用注解</h2><ul>
+<li>使用注解<code>@CrossOrigin</code>，可以标注在Controller上，也可以标注在方法上，如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@CrossOrigin</span></div><div class="line">   <span class="meta">@PostMapping</span>(<span class="string">"/getObj"</span>)</div><div class="line">   <span class="function"><span class="keyword">public</span> Object <span class="title">getObject</span><span class="params">(@RequestBody AdminReq req)</span></span>&#123;</div><div class="line">       System.out.println(req);</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Admin(<span class="string">"陈加兵"</span>,<span class="number">22</span>,<span class="keyword">new</span> Date(),<span class="keyword">new</span> Date());</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>该注解中可以配置各种属性，这里不再细讲，在下面的全局配置中会涉及到。</li>
+</ul>
+<h2 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h2><ul>
+<li>全局配置就是在MVC的配置文件中重写方法即可，如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</div><div class="line">       registry.addMapping(<span class="string">"/api/**"</span>)</div><div class="line">               <span class="comment">//允许的源</span></div><div class="line">               .allowedOrigins(<span class="string">"https://domain2.com"</span>)</div><div class="line">               <span class="comment">//允许请求跨域的请求类型</span></div><div class="line">               .allowedMethods(<span class="string">"PUT"</span>, <span class="string">"DELETE"</span>)</div><div class="line">               <span class="comment">//允许的请求头</span></div><div class="line">               .allowedHeaders(<span class="string">"header1"</span>, <span class="string">"header2"</span>, <span class="string">"header3"</span>)</div><div class="line">               <span class="comment">//暴露的请求头</span></div><div class="line">               .exposedHeaders(<span class="string">"header1"</span>, <span class="string">"header2"</span>)</div><div class="line">               <span class="comment">//允许携带cookie等用户信息，这样才能实现登录</span></div><div class="line">               .allowCredentials(<span class="keyword">true</span>).maxAge(<span class="number">3600</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h1 id="配置静态资源解析"><a href="#配置静态资源解析" class="headerlink" title="配置静态资源解析"></a>配置静态资源解析</h1><ul>
+<li>springmvc中的DispatcherServlet如果设置了拦截的请求是<code>/</code>，那么也会拦截静态资源，但是我们可以在配置文件中配置，如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;</div><div class="line">       <span class="comment">//拦截的请求</span></div><div class="line">       registry.addResourceHandler(<span class="string">"/resources/**"</span>)</div><div class="line">               <span class="comment">//资源的位置</span></div><div class="line">               .addResourceLocations(<span class="string">"/public"</span>, <span class="string">"classpath:/static/"</span>)</div><div class="line">               <span class="comment">//缓存的时间，单位秒</span></div><div class="line">               .setCachePeriod(<span class="number">31556926</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>该配置会在ioc中注册一个<code>ResourceHttpRequestHandler</code>，封装在<strong>SimpleUrlHandlermapping</strong>中。</li>
+</ul>
+<h1 id="高级配置"><a href="#高级配置" class="headerlink" title="高级配置"></a>高级配置</h1><ul>
+<li><code>@EnableMvc</code>注解其实就是注入了一个配置类<code>DelegatingWebMvcConfiguration</code>，那么我们可以将自定义的配置类实现该类即可完成MVC的高级功能，此时就不需要使用该注解了，如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages = &#123;<span class="string">"cn.tedu.demo"</span>&#125;,includeFilters = &#123;<span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION,classes = &#123;Controller.class, Component.class&#125;)&#125;,useDefaultFilters = <span class="keyword">false</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AdvanceConfig</span> <span class="keyword">extends</span> <span class="title">DelegatingWebMvcConfiguration</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;项目搭建&quot;&gt;&lt;a href=&quot;#项目搭建&quot; class=&quot;headerlink&quot; title=&quot;项目搭建&quot;&gt;&lt;/a&gt;项目搭建&lt;/h1&gt;&lt;h2 id=&quot;搭建原理&quot;&gt;&lt;a href=&quot;#搭建原理&quot; class=&quot;headerlink&quot; title=&quot;搭建原理&quot;&gt;&lt;/a
+    
+    </summary>
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/categories/Spring/"/>
+    
+    
+      <category term="Spring" scheme="http://chenjiabing666.github.io/tags/Spring/"/>
+    
+  </entry>
   
   <entry>
     <title>一文搞懂Spring-AOP原理</title>
@@ -2230,321 +2538,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;Config-统一配置中心&quot;&gt;&lt;a href=&quot;#Config-统一配置中心&quot; class=&quot;headerlink&quot; title=&quot;Config 统一配置中心&quot;&gt;&lt;/a&gt;Config 统一配置中心&lt;/h1&gt;&lt;h2 id=&quot;为什么使用？&quot;&gt;&lt;a href=&quot;#为什么
-    
-    </summary>
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>spring sleuth 服务追踪</title>
-    <link href="http://chenjiabing666.github.io/2018/12/25/spring-sleuth-%E6%9C%8D%E5%8A%A1%E8%BF%BD%E8%B8%AA/"/>
-    <id>http://chenjiabing666.github.io/2018/12/25/spring-sleuth-服务追踪/</id>
-    <published>2018-12-24T16:23:20.000Z</published>
-    <updated>2018-12-24T16:23:47.952Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="spring-sleuth-服务追踪"><a href="#spring-sleuth-服务追踪" class="headerlink" title="spring  sleuth- 服务追踪"></a>spring  sleuth- 服务追踪</h1><h2 id="Zipkin"><a href="#Zipkin" class="headerlink" title="Zipkin"></a>Zipkin</h2><ul>
-<li>Zipkin 是一个开放源代码分布式的跟踪系统，由Twitter公司开源，它致力于收集服务的定时数据，以解决微服务架构中的延迟问题，包括数据的收集、存储、查找和展现。</li>
-<li>每个服务向zipkin报告计时数据，zipkin会根据调用关系通过Zipkin UI生成依赖关系图，显示了多少跟踪请求通过每个服务，该系统让开发者可通过一个 Web 前端轻松的收集和分析数据，例如用户每次请求服务的处理时间等，可方便的监测系统中存在的瓶颈。</li>
-<li>Zipkin提供了可插拔数据存储方式：In-Memory、MySql、Cassandra以及Elasticsearch。接下来的测试为方便直接采用In-Memory方式进行存储，生产推荐Elasticsearch。</li>
-</ul>
-<h3 id="服务端的安装"><a href="#服务端的安装" class="headerlink" title="服务端的安装"></a>服务端的安装</h3><ul>
-<li>使用docker安装：<code>docker run --name zipkin -d -p 9411:9411 openzipkin/zipkin</code></li>
-<li>访问<code>http://localhost:9411/zipkin/</code>即可看到可视化的界面</li>
-</ul>
-<h3 id="客户端使用"><a href="#客户端使用" class="headerlink" title="客户端使用"></a>客户端使用</h3><ul>
-<li>需要在每一个项目中（包括提供者，消费者，网关等），依赖如下:</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- zipkin的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-zipkin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- sleuth的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-sleuth<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>在上面所有的项目中添加如下的配置：<ul>
-<li><strong>在开发环境中可以指定抽样的比例为1，在生产环境中可以使用默认的即可</strong></li>
-</ul>
-</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  zipkin:</span></div><div class="line"><span class="attr">    base-url:</span> <span class="attr">http://192.168.174.128:9411</span>   <span class="comment"># 指定zipkin的服务端的地址</span></div><div class="line"><span class="attr">  sleuth:</span></div><div class="line"><span class="attr">    web:</span></div><div class="line"><span class="attr">      client:</span></div><div class="line"><span class="attr">        enabled:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    sampler:</span></div><div class="line"><span class="attr">      probability:</span> <span class="number">1.0</span> <span class="comment"># 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1</span></div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><a href="http://www.ityouknow.com/springcloud/2018/02/02/spring-cloud-sleuth-zipkin.html" target="_blank" rel="external">http://www.ityouknow.com/springcloud/2018/02/02/spring-cloud-sleuth-zipkin.html</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;spring-sleuth-服务追踪&quot;&gt;&lt;a href=&quot;#spring-sleuth-服务追踪&quot; class=&quot;headerlink&quot; title=&quot;spring  sleuth- 服务追踪&quot;&gt;&lt;/a&gt;spring  sleuth- 服务追踪&lt;/h1&gt;&lt;h2 i
-    
-    </summary>
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-    
-      <category term="分布式" scheme="http://chenjiabing666.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hystrix断路器、熔断器</title>
-    <link href="http://chenjiabing666.github.io/2018/12/25/Hystrix%E6%96%AD%E8%B7%AF%E5%99%A8%E3%80%81%E7%86%94%E6%96%AD%E5%99%A8/"/>
-    <id>http://chenjiabing666.github.io/2018/12/25/Hystrix断路器、熔断器/</id>
-    <published>2018-12-24T16:21:38.000Z</published>
-    <updated>2018-12-24T16:22:01.009Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hystrix-断路器、熔断器"><a href="#Hystrix-断路器、熔断器" class="headerlink" title="Hystrix 断路器、熔断器"></a>Hystrix 断路器、熔断器</h1><h2 id="服务雪崩"><a href="#服务雪崩" class="headerlink" title="服务雪崩"></a>服务雪崩</h2><ul>
-<li><p>在微服务架构中通常会有多个服务层调用，基础服务的故障可能会导致级联故障，进而造成整个系统不可用的情况，这种现象被称为服务雪崩效应。服务雪崩效应是一种因“服务提供者”的不可用导致“服务消费者”的不可用,并将不可用逐渐放大的过程。</p>
-<p>如果下图所示：A作为服务提供者，B为A的服务消费者，C和D是B的服务消费者。A不可用引起了B的不可用，并将不可用像滚雪球一样放大到C和D时，雪崩效应就形成了。</p>
-</li>
-</ul>
-<p><img src="http://www.itmind.net/assets/images/2017/springcloud/hystrix-1.png" alt=""></p>
-<h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><ul>
-<li>Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在分布式系统里，许多依赖不可避免的会调用失败，Hystrix能够保证在一个依赖出现问题的情况下，不会导致整个服务失败，避免级联故障，以提高分布式系统的弹性。</li>
-<li>断路器本身是一种开关装置，当某个服务单元发生故障之后，通过断路器的故障监控（类似熔断保险丝），向调用方返回一个符合预期，可处理的备选响应（FallBack），而不是长时间等待或者抛出调用方法无法处理的异常，这样就保证了调用方线程不会被长时间，不必要的占用，从而避免了故障在分布式系统中的蔓延，乃至雪崩</li>
-</ul>
-<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul>
-<li>简单的说就是当程序出现异常的时候返回一个错误的状态告知其他的服务，而不是任由异常发展下去导致整个系统的瘫痪</li>
-</ul>
-<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><ul>
-<li>服务提供者</li>
-</ul>
-<h2 id="服务降级"><a href="#服务降级" class="headerlink" title="服务降级"></a>服务降级</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ul>
-<li>什么是服务降级？当服务器压力剧增的情况下，根据实际业务情况及流量，对一些服务和页面有策略的不处理或换种简单的方式处理，从而释放服务器资源以保证核心交易正常运作或高效运作。</li>
-<li>如果还是不理解，那么可以举个例子：假如目前有很多人想要给我付钱，但我的服务器除了正在运行支付的服务之外，还有一些其它的服务在运行，比如搜索、定时任务和详情等等。然而这些不重要的服务就占用了JVM的不少内存与CPU资源，为了能把钱都收下来（钱才是目标），我设计了一个动态开关，把这些不重要的服务直接在最外层拒掉，这样处理后的后端处理收钱的服务就有更多的资源来收钱了（收钱速度更快了），这就是一个简单的服务降级的使用场景。</li>
-</ul>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
-<li>服务降级主要用于什么场景呢？当整个微服务架构整体的负载超出了预设的上限阈值或即将到来的流量预计将会超过预设的阈值时，为了保证重要或基本的服务能正常运行，我们可以将一些 不重要或 不紧急 的服务或任务进行服务的 延迟使用 或 暂停使用。 </li>
-</ul>
-<h3 id="使用效果"><a href="#使用效果" class="headerlink" title="使用效果"></a>使用效果</h3><ul>
-<li><strong>在客户端结合Feign配置熔断处理，当没有服务提供者或者服务出现异常的时候就会调用熔断Hystrix定制的接口，返回特定的错误信息</strong></li>
-</ul>
-<h3 id="使用Feign达到服务降级"><a href="#使用Feign达到服务降级" class="headerlink" title="使用Feign达到服务降级"></a>使用Feign达到服务降级</h3><ul>
-<li><strong>服务降级是在客户端配置，与服务提供者无关</strong></li>
-<li>添加依赖如下：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- feign的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- Hystrix的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- eureka的客户端依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">      <span class="comment">&lt;!-- ribbon的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-ribbon<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>使用<code>@FeignClient</code>在<strong>公共模块上</strong>创建一个接口实现负载均衡，如下：<ul>
-<li><code>@FeignClient(name=&quot;DEPT-PROVIDER&quot;,fallbackFactory=DeptFallBack.class)</code><ul>
-<li><code>name</code>：指定服务提供者的实例名称</li>
-<li><code>fallbackFactory</code>：熔断处理的接口，在下面会定义</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.cloud.openfeign.FeignClient;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PathVariable;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMethod;</div><div class="line"><span class="keyword">import</span> cn.tedu.provider.domain.Dept;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Hystrix和Feign结合实现服务的降级</div><div class="line"> * <span class="doctag">@FeignClient</span> 标注这个接口使用Feign实现负载均衡</div><div class="line"> * 	1、name指定了微服务提供者的实例名称</div><div class="line"> * 	2、fallbackFactory指定了熔断的接口，一旦出现异常就会调用这个接口的方法返回指定的熔断信息</div><div class="line"> */</div><div class="line"><span class="meta">@FeignClient</span>(name=<span class="string">"DEPT-PROVIDER"</span>,fallbackFactory=DeptFallBack.class)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DeptFeign</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 获取部门，使用Get方式请求</div><div class="line">	 * <span class="doctag">@param</span> id</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="meta">@RequestMapping</span>(value=<span class="string">"/dept/&#123;id&#125;"</span>,method=RequestMethod.GET)</div><div class="line">	<span class="function">Dept <span class="title">get</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Integer id)</span>;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 添加部门，使用POST请求的方式</div><div class="line">	 * <span class="doctag">@param</span> dept</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="meta">@RequestMapping</span>(value=<span class="string">"/dept"</span>,method=RequestMethod.POST)</div><div class="line">	<span class="function">Dept <span class="title">addDept</span><span class="params">(Dept dept)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>在<strong>公共模块</strong>创建熔断处理的接口，如下：<ul>
-<li><strong>这个类需要使用<code>FallbackFactory</code>，其中的泛型是Feign定义的接口</strong></li>
-<li><strong>一定要使用<code>@Component</code>这个注解将其注入到IOC容器中</strong></li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"><span class="keyword">import</span> cn.tedu.provider.domain.Dept;</div><div class="line"><span class="keyword">import</span> feign.hystrix.FallbackFactory;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> *  针对DeptFiegn接口的服务熔断的公共类，在其中可以对各个接口进行服务熔断响应进行定制</div><div class="line"> *  1、这个接口必须实现`feign.hystrix.FallbackFactory`</div><div class="line"> *  2、这个FallbackFactory中的泛型必须是`<span class="doctag">@FeignClient</span>`标注的接口（实现负载均衡）</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span>   <span class="comment">//一定要将其注入到容器中</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeptFallBack</span> <span class="keyword">implements</span> <span class="title">FallbackFactory</span>&lt;<span class="title">DeptFeign</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 实现其中的方法</div><div class="line">	 */</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> DeptFeign <span class="title">create</span><span class="params">(Throwable cause)</span> </span>&#123;</div><div class="line">		<span class="comment">//直接return这个接口的对象，并且实现其中的所有接口方法，下面的每一个接口返回的信息就将是服务熔断返回的消息</span></div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> DeptFeign() &#123;</div><div class="line">			</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> Dept <span class="title">get</span><span class="params">(Integer id)</span> </span>&#123;   <span class="comment">//根据Id获取异常之后就会返回其中的信息</span></div><div class="line">				Dept dept=<span class="keyword">new</span> Dept();</div><div class="line">				dept.setDeptId(-<span class="number">1</span>);</div><div class="line">				dept.setDeptName(<span class="string">"服务熔断......"</span>);</div><div class="line">				<span class="keyword">return</span> dept;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> Dept <span class="title">addDept</span><span class="params">(Dept dept)</span> </span>&#123;  <span class="comment">//添加异常返回这个信息</span></div><div class="line">				dept.setDeptId(-<span class="number">1</span>);</div><div class="line">				dept.setDeptName(<span class="string">"服务熔断......"</span>);</div><div class="line">				<span class="keyword">return</span> dept;</div><div class="line">			&#125;&#125;;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>在消费者端controller中调用Feign的接口即可，如果程序抛出异常或者没有服务提供者，那么将会调用定义好的熔断方法，返回对应的信息，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeptController</span> </span>&#123;</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> DeptFeign deptFeign;  <span class="comment">//直接注入Feign接口，不过需要在主启动类上扫描该类所在的包或者父包</span></div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 根据部门Id获取部门</div><div class="line">	 * <span class="doctag">@param</span> id</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/dept/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Dept <span class="title">getDept</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Integer id) </span>&#123;</div><div class="line">		<span class="keyword">return</span> deptFeign.get(id);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 添加部门，json方式提交</div><div class="line">	 * <span class="doctag">@param</span> dept</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="meta">@PostMapping</span>(<span class="string">"/dept"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Dept <span class="title">addDept</span><span class="params">(@RequestBody Dept dept)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> deptFeign.addDept(dept);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>在消费者端开启feign对Hystrix的支持，如下：</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">feign:</span></div><div class="line"><span class="attr">  hystrix:</span></div><div class="line"><span class="attr">    enabled:</span> <span class="literal">true</span></div></pre></td></tr></table></figure>
-<ul>
-<li>在消费者的启动类上添加注解，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableEurekaClient</span>   <span class="comment">//开启eureka</span></div><div class="line"><span class="meta">@EnableCircuitBreaker</span>  <span class="comment">//开启熔断器</span></div><div class="line"><span class="meta">@EnableFeignClients</span>(basePackages= &#123;<span class="string">"cn.tedu.api.*"</span>&#125;)  <span class="comment">//由于是分模块开发，feignclient是定义在公共模块的，因此必须指定basePackages扫描@FeignClient所在的包</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages= &#123;<span class="string">"cn.tedu.api.*"</span>,<span class="string">"cn.tedu.client.*"</span>&#125;) <span class="comment">//由于分模块开发，因此必须扫描Hystrix定义的fallbackFactory所在的包，同时也要扫描本模块所在的包，当然可以直接扫描cn.tedu.*这个包</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderClient9002Application</span> </span>&#123;</div></pre></td></tr></table></figure>
-<ul>
-<li>源码<ul>
-<li><a href="https://gitee.com/chenjiabing666/order-api.git" target="_blank" rel="external">order-api</a></li>
-<li><a href="https://gitee.com/chenjiabing666/order-client9002.git" target="_blank" rel="external">order-client</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="使用RestTemplate服务降级"><a href="#使用RestTemplate服务降级" class="headerlink" title="使用RestTemplate服务降级"></a>使用RestTemplate服务降级</h3><ul>
-<li>添加依赖，如下:</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- Hystrix的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>启动类上开启熔断</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableEurekaClient</span>   <span class="comment">//开启eureka</span></div><div class="line"><span class="meta">@EnableCircuitBreaker</span>  <span class="comment">//开启服务熔断</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderClient9001Application</span> </span>&#123;</div></pre></td></tr></table></figure>
-<h3 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h3><ul>
-<li>第一种的实现方式就是每一个方法都对应一个熔断的方法（复杂，很难拓展和管理）</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderController</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String URI_PRFIX=<span class="string">"http://zuul-server/api-order"</span>;  <span class="comment">//直接使用zuul网管连接订单的服务提供者</span></div><div class="line">	</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> RestTemplate restTemplate;</div><div class="line">	</div><div class="line">    <span class="comment">//使用@HystrixCommand这个注解，其中指定熔断后调用的方法</span></div><div class="line">	<span class="meta">@HystrixCommand</span>(fallbackMethod=<span class="string">"getOrderFallback"</span>)   </div><div class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/order/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Order <span class="title">getOrder</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Integer id) </span>&#123;</div><div class="line">		System.out.println(<span class="number">1</span>/<span class="number">0</span>);   <span class="comment">//特意出异常</span></div><div class="line">		<span class="keyword">return</span> restTemplate.getForObject(URI_PRFIX+<span class="string">"/order/"</span>+id, Order.class);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 	服务的熔断方法，只有当没有服务提供者提供服务或者程序出现异常的时候才会执行这个方法</div><div class="line">	 * 	注意：</div><div class="line">	 * 		1、返回的类型一定要相同或者是其子类</div><div class="line">	 * 		2、入参的参数和类型一定要相同</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> Order <span class="title">getOrderFallback</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Integer id) </span>&#123;</div><div class="line">		Order order=<span class="keyword">new</span> Order();</div><div class="line">		order.setOrderId(-<span class="number">1</span>);</div><div class="line">		order.setOrderNum(<span class="string">"太拥挤了，请稍后再试......"</span>);</div><div class="line">		<span class="keyword">return</span> order;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="默认的熔断"><a href="#默认的熔断" class="headerlink" title="默认的熔断"></a>默认的熔断</h3><ul>
-<li>上面是针对一对一的熔断，每个接口都要写一个熔断方法，但是我们也可以针对一个类写一个默认的熔断方法即可</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 使用<span class="doctag">@DefaultProperties</span>指定默认的熔断方法</div><div class="line"> * 	1、需要熔断机制的接口上只需要添加<span class="doctag">@HystrixCommand</span>注解即可</div><div class="line"> * <span class="doctag">@author</span> Administrator</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="meta">@DefaultProperties</span>(defaultFallback=<span class="string">"defaultFallBack"</span>)   </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderController</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String URI_PRFIX=<span class="string">"http://zuul-server/api-order"</span>;  <span class="comment">//直接使用zuul网管连接订单的服务提供者</span></div><div class="line">	</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> RestTemplate restTemplate;</div><div class="line">	</div><div class="line">	<span class="meta">@HystrixCommand</span>   <span class="comment">//使用这个注解，其中指定熔断后调用的方法</span></div><div class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/order/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Order <span class="title">getOrder</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Integer id) </span>&#123;</div><div class="line">		System.out.println(<span class="number">1</span>/<span class="number">0</span>);</div><div class="line">		<span class="keyword">return</span> restTemplate.getForObject(URI_PRFIX+<span class="string">"/order/"</span>+id, Order.class);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 *  	默认的熔断方法</div><div class="line">	 *  	1、参数必须为空</div><div class="line">	 *  	2、返回的类型有特殊要求	</div><div class="line">	 *  		1、必须和出现熔断的方法的返回类型相同或者是其子类</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> Order <span class="title">defaultFallBack</span><span class="params">()</span> </span>&#123;</div><div class="line">		Order order=<span class="keyword">new</span> Order();</div><div class="line">		order.setOrderId(-<span class="number">1</span>);</div><div class="line">		order.setOrderNum(<span class="string">"太拥挤了，请稍后再试......"</span>);</div><div class="line">		<span class="keyword">return</span> order;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="超时设置"><a href="#超时设置" class="headerlink" title="超时设置"></a>超时设置</h2><h3 id="ribbon-Hystrix"><a href="#ribbon-Hystrix" class="headerlink" title="ribbon+ Hystrix"></a>ribbon+ Hystrix</h3><ul>
-<li>熔断超时时间默认是<strong>1秒</strong>，即是当请求的服务在一秒之内没有执行完成，那么将会直接熔断，调用熔断方法，返回熔断信息，如下：<ul>
-<li>请求这个接口将会直接熔断，因为这里等待的时间超过了设置的时间</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@HystrixCommand</span>  <span class="comment">//使用这个注解，其中指定熔断后调用的方法</span></div><div class="line"><span class="meta">@GetMapping</span>(<span class="string">"/order/&#123;id&#125;"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Order <span class="title">getOrder</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Integer id) </span>&#123;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		Thread.sleep(<span class="number">2000</span>);</div><div class="line">	&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">		<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> restTemplate.getForObject(URI_PRFIX+<span class="string">"/order/"</span>+id, Order.class);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="直接在-HystrixCommand注解中配置"><a href="#直接在-HystrixCommand注解中配置" class="headerlink" title="直接在@HystrixCommand注解中配置"></a>直接在@HystrixCommand注解中配置</h4><ul>
-<li>我们可以通过配置改变这个默认的时间，如下：<ul>
-<li>直接在<code>@HystrixCommand</code>的注解中配置</li>
-<li>一些常用的常量配置都可以在<code>com.netflix.hystrix.HystrixCommandProperties</code>这个类中找到</li>
-<li><strong>单位毫秒</strong></li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@HystrixCommand</span>(commandProperties=&#123;</div><div class="line">		<span class="meta">@HystrixProperty</span>(name=<span class="string">"execution.isolation.thread.timeoutInMilliseconds"</span>,value=<span class="string">"3000"</span>)</div><div class="line">	&#125;)   <span class="comment">//使用这个注解，其中指定熔断后调用的方法</span></div><div class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/order/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Order <span class="title">getOrder</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Integer id) </span>&#123;</div><div class="line"><span class="comment">//		System.out.println(1/0);</span></div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			Thread.sleep(<span class="number">2000</span>);</div><div class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">			<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> restTemplate.getForObject(URI_PRFIX+<span class="string">"/order/"</span>+id, Order.class);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<h4 id="配置文件中配置"><a href="#配置文件中配置" class="headerlink" title="配置文件中配置"></a>配置文件中配置</h4><ul>
-<li>直接在配置文件中配置，但是在需要熔断的方法上面一定要加上<code>@HystrixCommand</code>这个注解</li>
-<li>针对所有的方法设置超时时间，如下：</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attr">hystrix:</span></div><div class="line"><span class="attr">  command:</span></div><div class="line"><span class="attr">    default:</span></div><div class="line"><span class="attr">      execution:</span></div><div class="line"><span class="attr">        isolation:</span></div><div class="line"><span class="attr">          thread:</span></div><div class="line"><span class="attr">            timeoutInMilliseconds:</span> <span class="number">3000</span></div></pre></td></tr></table></figure>
-<ul>
-<li>针对指定的方法设置超时时间，如下：<ul>
-<li><strong>也可以对指定的方法指定<code>commandKey</code>,只需要在@HystrixCommand这个注解中指定这个属性即可，默认是方法的名称</strong></li>
-</ul>
-</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attr">hystrix:</span></div><div class="line"><span class="attr">  command:</span></div><div class="line"><span class="attr">    getOrder:</span>  <span class="comment"># 方法名称</span></div><div class="line"><span class="attr">      execution:</span></div><div class="line"><span class="attr">        isolation:</span></div><div class="line"><span class="attr">          thread:</span></div><div class="line"><span class="attr">            timeoutInMilliseconds:</span> <span class="number">3000</span></div></pre></td></tr></table></figure>
-<h3 id="Feign-Hystrix"><a href="#Feign-Hystrix" class="headerlink" title="Feign+Hystrix"></a>Feign+Hystrix</h3><ul>
-<li>在使用Feign+Hystrix实现服务熔断的时候，虽然我们在配置文件中改变了hystrix的默认的熔断超时时间，但是并不作用，如下:</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attr">hystrix:</span></div><div class="line"><span class="attr">  command:</span></div><div class="line"><span class="attr">    default:</span>  <span class="comment"># 方法名称</span></div><div class="line"><span class="attr">      execution:</span></div><div class="line"><span class="attr">        isolation:</span></div><div class="line"><span class="attr">          thread:</span></div><div class="line"><span class="attr">            timeoutInMilliseconds:</span> <span class="number">7000</span></div></pre></td></tr></table></figure>
-<ul>
-<li><strong>上面的配置并不起作用，因为<code>Feign</code>也是使用<code>ribbon</code>的，ribbon也是有超时时间的，默认也是一秒，因此我们要想上面的配置生效，必须指定ribbon的超时时间，并且Hystrix的超时时间应该比ribbon的时间长，因为ribbon还有重试机制，只有当重试也失效之后才应该熔断，完整的配置如下</strong>:</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="attr">ribbon:</span>   <span class="comment"># 设置ribbon的超时时间，这里使用Feign会和Hystrix的超时间相互干扰</span></div><div class="line"><span class="attr">  ReadTimeout:</span> <span class="number">5000</span></div><div class="line"><span class="attr">  ConnectTimeout:</span> <span class="number">3000</span></div><div class="line"><span class="attr">  OkToRetryOnAllOperations:</span> <span class="literal">true</span>  <span class="comment">#对所有操作都进行重试。</span></div><div class="line"><span class="attr">  MaxAutoRetriesNextServer:</span> <span class="number">2</span>     <span class="comment"># 切换实例的重试次数。 </span></div><div class="line"><span class="attr">  MaxAutoRetries:</span> <span class="number">1</span>               <span class="comment"># 对当前实例的重试次数。</span></div><div class="line"></div><div class="line"><span class="attr">hystrix:</span></div><div class="line"><span class="attr">  command:</span></div><div class="line"><span class="attr">    default:</span>  </div><div class="line"><span class="attr">      execution:</span></div><div class="line"><span class="attr">        isolation:</span></div><div class="line"><span class="attr">          thread:</span></div><div class="line"><span class="attr">            timeoutInMilliseconds:</span> <span class="number">7000</span></div></pre></td></tr></table></figure>
-<ul>
-<li><a href="https://blog.csdn.net/east123321/article/details/82385816" target="_blank" rel="external">https://blog.csdn.net/east123321/article/details/82385816</a></li>
-</ul>
-<h2 id="服务熔断"><a href="#服务熔断" class="headerlink" title="服务熔断"></a>服务熔断</h2><h3 id="熔断器的状态机"><a href="#熔断器的状态机" class="headerlink" title="熔断器的状态机"></a>熔断器的状态机</h3><ul>
-<li><img src="https://images2015.cnblogs.com/blog/978381/201705/978381-20170516093016728-916759277.png" alt=""></li>
-</ul>
-<ul>
-<li><code>Closed</code>：熔断器关闭状态，调用失败次数积累，到了阈值（或一定比例）则启动熔断机制；</li>
-<li><code>Open</code>：熔断器打开状态，此时对下游的调用都内部直接返回错误，不走网络，但设计了一个时钟选项，默认的时钟达到了一定时间（这个时间一般设置成平均故障处理时间，也就是MTTR），到了这个时间，进入半熔断状态；</li>
-<li><code>Half-Open</code>：半熔断状态，允许定量的服务请求，如果调用都成功（或一定比例）则认为恢复了，关闭熔断器，否则认为还没好，又回到熔断器打开状态； </li>
-</ul>
-<h3 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h3><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>作用</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>circuitBreaker.enabled</td>
-<td>是否开启熔断器</td>
-<td>默认true</td>
-</tr>
-<tr>
-<td>circuitBreaker.sleepWindowInMilliseconds</td>
-<td>熔断多少秒后去尝试请求</td>
-<td>当熔断器处于open的时候，并且达到了这个阈值，熔断器处于half-open状态，当再次有请求过来的时候就会尝试再次请求服务，而不是直接熔断服务，当此时访问服务正常的话，那么熔断器就会关闭。默认值5000毫秒</td>
-</tr>
-<tr>
-<td>circuitBreaker.requestVolumeThreshold</td>
-<td>在使用统计信息做出打开/关闭决策之前，必须在统计窗口中进行的请求数量</td>
-<td>默认20</td>
-</tr>
-<tr>
-<td>circuitBreaker.errorThresholdPercentage</td>
-<td>失败率达到多少百分比后熔断</td>
-<td>默认值50，即是请求失败率达到50%熔断器处于open状态</td>
-</tr>
-<tr>
-<td>commandKey</td>
-<td></td>
-<td>默认值：当前执行方法名</td>
-</tr>
-</tbody>
-</table>
-<h3 id="直接在-HystrixCommand注解中配置熔断"><a href="#直接在-HystrixCommand注解中配置熔断" class="headerlink" title="直接在@HystrixCommand注解中配置熔断"></a>直接在@HystrixCommand注解中配置熔断</h3><ul>
-<li>添加依赖</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!-- Hystrix的依赖 --&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">	&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</div><div class="line">	&lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>直接在消费者端使用即可，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 使用<span class="doctag">@DefaultProperties</span>指定默认的熔断方法</div><div class="line"> * 	1、需要熔断机制的接口上只需要添加<span class="doctag">@HystrixCommand</span>注解即可</div><div class="line"> * <span class="doctag">@author</span> Administrator</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="meta">@DefaultProperties</span>(defaultFallback=<span class="string">"defaultFallBack"</span>)   </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderController</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String URI_PRFIX=<span class="string">"http://zuul-server/api-order"</span>;  <span class="comment">//直接使用zuul网管连接订单的服务提供者</span></div><div class="line">	</div><div class="line">	<span class="meta">@Resource</span></div><div class="line">	<span class="keyword">private</span> RestTemplate restTemplate;</div><div class="line">	</div><div class="line">	<span class="meta">@HystrixCommand</span>(commandProperties=&#123;</div><div class="line">			<span class="meta">@HystrixProperty</span>(name=<span class="string">"execution.isolation.thread.timeoutInMilliseconds"</span>,value=<span class="string">"3000"</span>),  <span class="comment">//设置超时时间</span></div><div class="line">			<span class="meta">@HystrixProperty</span>(name=<span class="string">"circuitBreaker.enabled"</span>,value=<span class="string">"true"</span>),  <span class="comment">// 开启熔断</span></div><div class="line">			<span class="meta">@HystrixProperty</span>(name=<span class="string">"circuitBreaker.requestVolumeThreshold"</span>,value=<span class="string">"10"</span>),  <span class="comment">//最小请求数</span></div><div class="line">			<span class="meta">@HystrixProperty</span>(name=<span class="string">"circuitBreaker.sleepWindowInMilliseconds"</span>,value=<span class="string">"10000"</span>),  <span class="comment">//请求重试时间，单位毫秒</span></div><div class="line">			<span class="meta">@HystrixProperty</span>(name=<span class="string">"circuitBreaker.errorThresholdPercentage"</span>,value=<span class="string">"60"</span>),   <span class="comment">//失败率</span></div><div class="line">	&#125;)   <span class="comment">//使用这个注解，其中指定熔断后调用的方法</span></div><div class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/order/&#123;id&#125;"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> Order <span class="title">getOrder</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span>Integer id) </span>&#123;</div><div class="line">		<span class="keyword">if</span> (id==<span class="number">1</span>) &#123;   <span class="comment">//模拟异常</span></div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> restTemplate.getForObject(URI_PRFIX+<span class="string">"/order/"</span>+id, Order.class);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 *  	默认的熔断方法</div><div class="line">	 *  	1、参数必须为空</div><div class="line">	 *  	2、返回的类型有特殊要求	</div><div class="line">	 *  		1、必须和出现熔断的方法的返回类型相同或者是其子类</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> Order <span class="title">defaultFallBack</span><span class="params">()</span> </span>&#123;</div><div class="line">		Order order=<span class="keyword">new</span> Order();</div><div class="line">		order.setOrderId(-<span class="number">1</span>);</div><div class="line">		order.setOrderNum(<span class="string">"太拥挤了，请稍后再试......"</span>);</div><div class="line">		<span class="keyword">return</span> order;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><strong>上面的配置完成之后，先请求传入id=1，达到失败率50%，那么熔断器就会开启，此时再传入id=1，那么本应该正常访问的，但是此时会被熔断，经过10000毫秒之后，再次访问传入id=2，请求成功之后，表示熔断机制关闭了</strong></li>
-</ul>
-<h3 id="使用配置文件实现"><a href="#使用配置文件实现" class="headerlink" title="使用配置文件实现"></a>使用配置文件实现</h3><ul>
-<li>在需要熔断的方法上面添加<code>@HystrixCommand</code>这个注解</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="attr">hystrix:</span></div><div class="line"><span class="attr">  command:</span></div><div class="line"><span class="attr">    default:</span>  <span class="comment"># 这里使用default，但是如果针对单个方法，可以使用方法名称</span></div><div class="line"><span class="attr">      execution:</span></div><div class="line"><span class="attr">        isolation:</span></div><div class="line"><span class="attr">          thread:</span></div><div class="line"><span class="attr">            timeoutInMilliseconds:</span> <span class="number">3000</span></div><div class="line"><span class="attr">      circuitBreaker:</span></div><div class="line"><span class="attr">        enabled:</span> <span class="literal">true</span></div><div class="line"><span class="attr">        requestVolumeThreshold:</span> <span class="number">10</span></div><div class="line"><span class="attr">        sleepWindowInMilliseconds:</span> <span class="number">10000</span></div><div class="line"><span class="attr">        errorThresholdPercentage:</span> <span class="number">60</span></div></pre></td></tr></table></figure>
-<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><ul>
-<li><a href="https://gitee.com/chenjiabing666/order-client.git" target="_blank" rel="external">https://gitee.com/chenjiabing666/order-client.git</a></li>
-</ul>
-<h2 id="Hystrix-Dashboard-图形化监控"><a href="#Hystrix-Dashboard-图形化监控" class="headerlink" title="Hystrix Dashboard  图形化监控"></a>Hystrix Dashboard  图形化监控</h2><ul>
-<li>主要是用来监控服务提供者的情况（服务提供者必须实现了Hystrix的熔断机制才能被监控）</li>
-</ul>
-<h3 id="Hystrix-dashboard-服务端配置"><a href="#Hystrix-dashboard-服务端配置" class="headerlink" title="Hystrix-dashboard 服务端配置"></a>Hystrix-dashboard 服务端配置</h3><ul>
-<li>添加依赖：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix-dashboard<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">         <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">             <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">             <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">         <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>添加eureka客户端的依赖，并且将其注册到eureka中</li>
-<li>在主启动类上添加对应的注解<code>@EnableHystrixDashboard</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableHystrixDashboard</span>   <span class="comment">//开启Hystrix-dashboard</span></div><div class="line"><span class="meta">@EnableEurekaClient</span>     <span class="comment">//eureka的客户端</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HystrixDashboardApplication</span> </span>&#123;</div></pre></td></tr></table></figure>
-<ul>
-<li>配置如下：</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="attr">server:</span></div><div class="line"><span class="attr">  port:</span> <span class="number">3366</span></div><div class="line"><span class="attr">eureka:</span></div><div class="line"><span class="attr">  client:</span></div><div class="line"><span class="attr">    serviceUrl:</span></div><div class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:7001/eureka</span>  <span class="comment"># eureka的暴露地址，直接注册</span></div><div class="line"><span class="attr">spring:</span></div><div class="line"><span class="attr">  application:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">hystrix-dashborad</span>   <span class="comment">#应用的名称，在同一个eureka中必须不重复</span></div></pre></td></tr></table></figure>
-<ul>
-<li>启动服务访问地址：<code>http://localhost:3366/hystrix</code>，将会出现如下界面:</li>
-<li><img src="https://github.com/chenjiabing666/BlogImage/blob/master/hystrix1.png?raw=true" alt=""></li>
-</ul>
-<ul>
-<li>源码：<a href="https://gitee.com/chenjiabing666/hystrix-dashboard.git" target="_blank" rel="external">https://gitee.com/chenjiabing666/hystrix-dashboard.git</a></li>
-</ul>
-<h3 id="被监控服务的创建"><a href="#被监控服务的创建" class="headerlink" title="被监控服务的创建"></a>被监控服务的创建</h3><ul>
-<li>添加依赖：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- Hystrix的依赖 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>配置如下：<ul>
-<li><strong>必须配置<code>endpoints</code>，否则将会连接补上</strong></li>
-</ul>
-</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="attr">hystrix:</span></div><div class="line"><span class="attr">  command:</span></div><div class="line"><span class="attr">    default:</span>  <span class="comment"># 这里使用default，但是如果针对单个方法，可以使用方法名称</span></div><div class="line"><span class="attr">      execution:</span></div><div class="line"><span class="attr">        isolation:</span></div><div class="line"><span class="attr">          thread:</span></div><div class="line"><span class="attr">            timeoutInMilliseconds:</span> <span class="number">3000</span></div><div class="line"><span class="attr">      circuitBreaker:</span></div><div class="line"><span class="attr">        enabled:</span> <span class="literal">true</span></div><div class="line"><span class="attr">        requestVolumeThreshold:</span> <span class="number">10</span></div><div class="line"><span class="attr">        sleepWindowInMilliseconds:</span> <span class="number">10000</span></div><div class="line"><span class="attr">        errorThresholdPercentage:</span> <span class="number">60</span></div><div class="line">        </div><div class="line"><span class="attr">ribbon:</span>   <span class="comment"># 设置ribbon的超时时间，这里使用Feign会和Hystrix的超时间相互干扰</span></div><div class="line"><span class="attr">  ReadTimeout:</span> <span class="number">5000</span></div><div class="line"><span class="attr">  ConnectTimeout:</span> <span class="number">3000</span></div><div class="line"><span class="attr">  OkToRetryOnAllOperations:</span> <span class="literal">true</span>  <span class="comment">#对所有操作都进行重试。</span></div><div class="line"><span class="attr">  MaxAutoRetriesNextServer:</span> <span class="number">2</span>     <span class="comment"># 切换实例的重试次数。 </span></div><div class="line"><span class="attr">  MaxAutoRetries:</span> <span class="number">1</span>               <span class="comment"># 对当前实例的重试次数。</span></div><div class="line">  </div><div class="line"><span class="attr">management:</span>    <span class="comment"># 配置节点，一定要配置，否则将不能连接上</span></div><div class="line"><span class="attr">  endpoints:</span></div><div class="line"><span class="attr">    web:</span></div><div class="line"><span class="attr">      exposure:</span></div><div class="line"><span class="attr">        include:</span> <span class="string">hystrix.stream</span></div></pre></td></tr></table></figure>
-<ul>
-<li><strong>在主启动类上必须添加注解`@EnableCircuitBreaker</strong>`</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableEurekaClient</span>   <span class="comment">//开启eureka</span></div><div class="line"><span class="meta">@EnableCircuitBreaker</span>   <span class="comment">//开启熔断</span></div><div class="line"><span class="meta">@EnableFeignClients</span>(basePackages= &#123;<span class="string">"cn.tedu.api.feign"</span>&#125;)  <span class="comment">//扫描FeignClient</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages= &#123;<span class="string">"cn.tedu.*"</span>&#125;)   <span class="comment">//扫描Hystrix的fallbackFactory</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderClient9002Application</span> </span>&#123;</div></pre></td></tr></table></figure>
-<ul>
-<li><p>启动成功后在<code>hystrix-dashboard</code>添加如下地址即可被监控:</p>
-<ul>
-<li><code>http://localhost:9002/actuator/hystrix.stream</code></li>
-</ul>
-</li>
-<li><p>源码（<code>order-client9002</code>）：<a href="https://github.com/chenjiabing666/order-parent.git" target="_blank" rel="external">https://github.com/chenjiabing666/order-parent.git</a></p>
-</li>
-</ul>
-<h3 id="详细指标"><a href="#详细指标" class="headerlink" title="详细指标"></a>详细指标</h3><ul>
-<li><img src="https://github.com/chenjiabing666/BlogImage/blob/master/hystrix2.jpg?raw=true" alt=""></li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="熔断发生的场景"><a href="#熔断发生的场景" class="headerlink" title="熔断发生的场景"></a>熔断发生的场景</h3><ul>
-<li>达到配置的超时时间</li>
-<li>没有服务提供者提供服务</li>
-<li>服务提供者程序发生异常</li>
-</ul>
-<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><ul>
-<li>Feign+Hystrix的方式配置Hystrix的超时时间一定还要配置Ribbon的超时时间</li>
-<li>Feign+Hystrix的熔断配置和Ribbon+Hystrix的配置方式基本相同</li>
-</ul>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><a href="https://www.cnblogs.com/yawen/p/6655352.html" target="_blank" rel="external">https://www.cnblogs.com/yawen/p/6655352.html</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hystrix-断路器、熔断器&quot;&gt;&lt;a href=&quot;#Hystrix-断路器、熔断器&quot; class=&quot;headerlink&quot; title=&quot;Hystrix 断路器、熔断器&quot;&gt;&lt;/a&gt;Hystrix 断路器、熔断器&lt;/h1&gt;&lt;h2 id=&quot;服务雪崩&quot;&gt;&lt;a href
     
     </summary>
     
