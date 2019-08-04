@@ -79,6 +79,54 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2019/08/05/mybatis源码解析/" title="mybatis源码解析" itemprop="url">
+  
+    <h1 itemprop="name">mybatis源码解析</h1>
+    
+     
+           <p itemprop="description" >Configuration
+mybatis的全局配置类，其中封装了mybatis的全部配置，在mybaits加载全局配置文件和Mapper文件的时候，会将里面的xml中的各个元素解析出来，封装在其中。
+主要的解析流程在org.apache.ibatis.builder.xml.X</p>
+        
+    
+    <time datetime="2019-08-04T16:47:11.000Z" itemprop="datePublished">2019-08-05</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/08/05/mybatis深入学习/" title="mybatis深入学习" itemprop="url">
+  
+    <h1 itemprop="name">mybatis深入学习</h1>
+    
+     
+           <p itemprop="description" >环境搭建
+按照官方文档搭建即可
+
+typeAliases（别名）
+在使用mybatis标签的时候，需要指定类的全类名，比如resultType=xx.xxx.xx，但是我们可以为类指定别名，那么就可以直接使用别名，避免全类名冗余【不推荐使用】
+
+别名的配置有两种方式，这里我们讲解</p>
+        
+    
+    <time datetime="2019-08-04T16:46:56.000Z" itemprop="datePublished">2019-08-05</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2019/07/31/Springmvc源码解读/" title="Springmvc源码解读" itemprop="url">
   
     <h1 itemprop="name">Springmvc源码解读</h1>
@@ -268,54 +316,6 @@ public BeanWrapperImpl(Objec</p>
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/06/25/InstantiationAwareBeanPostProcessor源码解析/" title="InstantiationAwareBeanPostProcessor源码解析" itemprop="url">
-  
-    <h1 itemprop="name">InstantiationAwareBeanPostProcessor源码解析</h1>
-    
-     
-           <p itemprop="description" >简介
-继承BeanPostProcessor接口，在此基础上又定义了三个方法，分别在Bean实例化前后【不是初始化】执行。
-从上面的介绍可以看到，这个接口相对于BeanPostProcessor功能更加强大，一个接口承担了Bean的实例化前后、初始化前后责任。
-
-Bean加载顺序</p>
-        
-    
-    <time datetime="2019-06-25T13:24:43.000Z" itemprop="datePublished">2019-06-25</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/06/23/FactoryBean解析/" title="FactoryBean解析" itemprop="url">
-  
-    <h1 itemprop="name">FactoryBean解析</h1>
-    
-     
-           <p itemprop="description" >简介
-简单的说FactoryBean实际上是一个Bean，并不是一个工厂，它能够为我们创建一个Bean，但是创建的这个Bean实际指向的并不是FactoryBean类型的，而是其中getObject方法返回类型的对象。
-
-接口解析
-FactoryBean中有三个需要实现的方法，如</p>
-        
-    
-    <time datetime="2019-06-23T13:49:47.000Z" itemprop="datePublished">2019-06-23</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -350,7 +350,7 @@ FactoryBean中有三个需要实现的方法，如</p>
 		  
 		
 		  
-			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
+			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 		  
 		
 		  
@@ -479,11 +479,11 @@ FactoryBean中有三个需要实现的方法，如</p>
 			
 		
 			
-				<li><a href="/tags/web前端/" title="web前端">web前端<sup>7</sup></a></li>
+				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>5</sup></a></li>
+				<li><a href="/tags/web前端/" title="web前端">web前端<sup>7</sup></a></li>
 			
 		
 			
