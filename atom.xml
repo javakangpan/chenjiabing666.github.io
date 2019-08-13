@@ -162,10 +162,10 @@
     <link href="http://chenjiabing666.github.io/2019/08/13/%E5%AE%89%E5%85%A8%E8%AE%A4%E8%AF%81%E6%A1%86%E6%9E%B6-Shiro/"/>
     <id>http://chenjiabing666.github.io/2019/08/13/安全认证框架-Shiro/</id>
     <published>2019-08-13T14:39:22.627Z</published>
-    <updated>2019-08-13T14:41:17.030Z</updated>
+    <updated>2019-08-13T14:46:38.952Z</updated>
     
     <content type="html"><![CDATA[<hr>
-<p>title: 安全认证框架-Shiro<br>date: 2019-08-13 22:39:22<br>categories: 分布式</p>
+<p>title: Shiro<br>date: 2019-08-13 22:39:22<br>categories: 分布式</p>
 <h2 id="tags-分布式"><a href="#tags-分布式" class="headerlink" title="tags: 分布式"></a>tags: 分布式</h2><h1 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h1><ul>
 <li>添加Shiro的依赖</li>
 </ul>
@@ -304,8 +304,8 @@
     <summary type="html">
     
       &lt;hr&gt;
-&lt;p&gt;title: 安全认证框架-Shiro&lt;br&gt;date: 2019-08-13 22:39:22&lt;br&gt;categories: 分布式&lt;/p&gt;
-&lt;h2 id=&quot;tags-分布式&quot;&gt;&lt;a href=&quot;#tags-分布式&quot; class=&quot;headerlink&quot; tit
+&lt;p&gt;title: Shiro&lt;br&gt;date: 2019-08-13 22:39:22&lt;br&gt;categories: 分布式&lt;/p&gt;
+&lt;h2 id=&quot;tags-分布式&quot;&gt;&lt;a href=&quot;#tags-分布式&quot; class=&quot;headerlink&quot; title=&quot;tag
     
     </summary>
     
