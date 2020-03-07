@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2019-08-17T11:23:11.324Z</updated>
+  <updated>2020-03-07T09:55:08.104Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,93 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>分布式锁-redis实现</title>
+    <link href="http://chenjiabing666.github.io/2020/03/07/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81-redis%E5%AE%9E%E7%8E%B0/"/>
+    <id>http://chenjiabing666.github.io/2020/03/07/分布式锁-redis实现/</id>
+    <published>2020-03-07T09:53:15.000Z</published>
+    <updated>2020-03-07T09:55:08.104Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="为什么要分布式锁"><a href="#为什么要分布式锁" class="headerlink" title="为什么要分布式锁"></a>为什么要分布式锁</h2><ul>
+<li>在单机的情况下，可以通过jvm提供的系列线程安全的操作来处理高并发的情况，但是在分布式的环境下，jvm提供的线程安全操作明显是不能满足要求的。在一些小型的互联网公司经常做的crud操作如果在高并发的情况下会出现很大的问题，比如：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//伪代码：下订单</span></div><div class="line"><span class="number">1</span>、查库存：getStock()</div><div class="line"><span class="number">2</span>、判断库存：stock&gt;<span class="number">0</span>下单</div><div class="line"><span class="number">3</span>、下单：addOrder()</div><div class="line"><span class="number">4</span>、减库存</div></pre></td></tr></table></figure>
+<ul>
+<li>仅仅以上三步，如果在高并发的情况下，无论是单机或者集群，如果不加锁一定会出现超卖的情况。一瞬间成千上万个请求过来，如何能够确保查询到的库存是最新的数据？</li>
+</ul>
+<h2 id="Redis实现"><a href="#Redis实现" class="headerlink" title="Redis实现"></a>Redis实现</h2><ul>
+<li>通过redis的setNx方法可以自己简单的实现以下分布式锁，但是在实现之前需要考虑清楚几个问题。</li>
+</ul>
+<h3 id="问题与解决思路"><a href="#问题与解决思路" class="headerlink" title="问题与解决思路"></a>问题与解决思路</h3><ul>
+<li><strong>如何避免死锁？</strong>在高并发的情况下很可能由于服务重启，服务器宕机的等情况导致锁没有及时释放，导致其他线程不能获得锁。<ul>
+<li>setNx的使用设置一个过期时间，当锁没有手动释放的时候能够超过一定时间自动释放</li>
+<li>这个时间如何设置？如果业务没有执行完成但是过期时间到了，这个锁释放了，怎么处理？<ul>
+<li>过期时间最好能够是业务执行完成的时间，为了防止时间到了业务没有执行完成，可以分开一个线程或者设置一个定时器，定时的延长这个过期时间，直到当前线程完成业务。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>如何避免锁的误删（设置过期时间没有设置定时器延长过期时间）？</strong>高并发的情况下瞬间几万个请求过来，很有可能A线程执行完成之后，但是B线程没有执行完成（<em>前提：B线程先获得锁先执行并且未执行完成之后过期时间到了删除了自己持有的锁，此时A线程获得锁并率先执行完成</em>），A线程执行<strong>deleteKey</strong>方法，删除了B的锁。<ul>
+<li>在执行每一个业务逻辑之前先生成一个唯一id作为setNx的value值标识这个线程执行的任务，删除的时候先获取和当前线程的id比对一下，如果不一样，这个锁不是当前的线程持有的。</li>
+</ul>
+</li>
+<li><strong>如何保证锁的可重入性？</strong><ul>
+<li>在获取锁的时候先获取锁，比对一下当前的唯一标识，相同的话可重入。</li>
+</ul>
+</li>
+<li><strong>如何确保获取锁和释放锁的原子性？</strong>在获取锁或者释放锁的过程中如果不是原子操作很有可能导致一系列问题<ul>
+<li>使用Lua脚本获取锁和释放锁来保证原子性</li>
+</ul>
+</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>根据上面的思路可以通过redis自己手写一个分布式锁的实现，当然这个例子并没有保证解锁和获得锁的原子性，不喜勿喷。</li>
+<li>redis的工具类：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisUtils</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> RedisTemplate redisTemplate=ApplicationContextUtils.applicationContext.getBean(<span class="string">"redisTemplate"</span>,RedisTemplate.class);</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> StringRedisTemplate stringRedisTemplate=ApplicationContextUtils.applicationContext.getBean(StringRedisTemplate.class);</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * setNx</div><div class="line">     * <span class="doctag">@param</span> key</div><div class="line">     * <span class="doctag">@param</span> value</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">setNx</span><span class="params">(String key,String value)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> stringRedisTemplate.opsForValue().setIfAbsent(key,value);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * setNx</div><div class="line">     * <span class="doctag">@param</span> key</div><div class="line">     * <span class="doctag">@param</span> value</div><div class="line">     * <span class="doctag">@param</span> seconds  过期时间，单位秒</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">setNx</span><span class="params">(String key, String value, Long seconds)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> stringRedisTemplate.opsForValue().setIfAbsent(key,value,seconds, TimeUnit.SECONDS);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 删除key</div><div class="line">     * <span class="doctag">@param</span> key</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">deleteKey</span><span class="params">(String key)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> redisTemplate.delete(key);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取NX设置的值</div><div class="line">     * <span class="doctag">@param</span> key</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getNX</span><span class="params">(String key)</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> stringRedisTemplate.opsForValue().get(key);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 设置key的过期时间</div><div class="line">     * <span class="doctag">@param</span> key</div><div class="line">     * <span class="doctag">@param</span> seconds</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">expireKey</span><span class="params">(String key,Long seconds)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> stringRedisTemplate.expire(key,seconds,TimeUnit.SECONDS);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>分布式锁的实现：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisLock</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 存储的KEY，每个业务应该不同</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> String key;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 过期时间，单位秒</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> Long expireSeconds;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 异步任务，用于分开一个线程延长过期时间，也可以使用定时器</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> TaskAsync taskAsync;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RedisLock</span><span class="params">(String key,Long expireSeconds)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.key=key;</div><div class="line">        <span class="keyword">this</span>.expireSeconds=expireSeconds;</div><div class="line">        taskAsync= ApplicationContextUtils.applicationContext.getBean(TaskAsync.class);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 上锁</div><div class="line">     * <span class="doctag">@param</span>  uuid setNx的值，唯一标识当前线程</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">(String uuid)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        <span class="comment">//获取value</span></div><div class="line">        String nx = RedisUtils.getNX(key);</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 如果此时的uuid和redis中的一致，那么就是可重入的</div><div class="line">         */</div><div class="line">        <span class="keyword">if</span> (StringUtils.equals(nx,uuid))&#123;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//如果不一致，需要设置，为了避免死锁，需要设置一个过期时间</span></div><div class="line">        Boolean b = RedisUtils.setNx(key, uuid,expireSeconds);</div><div class="line">        <span class="comment">//加锁失败，每隔两秒重试一次</span></div><div class="line">        <span class="keyword">while</span>(!b)&#123;</div><div class="line">            b = RedisUtils.setNx(key, uuid,expireSeconds);</div><div class="line">            Thread.sleep(<span class="number">2000</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//开启异步线程延长过期时间</span></div><div class="line">        taskAsync.delayExpireTime(uuid,key,expireSeconds);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 解锁</div><div class="line">     * <span class="doctag">@param</span>  uuid 为了避免误删，这里的uuid是唯一标识当前方法执行的，如果和当前方法的相同才能删除</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">(String uuid)</span> </span>&#123;</div><div class="line">         String value= RedisUtils.getNX(key);</div><div class="line">         <span class="comment">//说明当前线程执行的方法所获得的锁已经被释放了</span></div><div class="line">         <span class="keyword">if</span> (!StringUtils.equals(value,uuid))&#123;</div><div class="line">             <span class="keyword">return</span>;</div><div class="line">         &#125;</div><div class="line">        Boolean b = RedisUtils.deleteKey(key);</div><div class="line">        <span class="keyword">while</span>(!b)&#123;</div><div class="line">            b=RedisUtils.deleteKey(key);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>异步线程延长锁的过期时间：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskAsync</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 异步开一个线程延长执行的任务，</div><div class="line">     * <span class="doctag">@param</span> uuid 当前线程持有锁的唯一标识</div><div class="line">     * <span class="doctag">@param</span>  key key</div><div class="line">     * <span class="doctag">@param</span>  expireSeconds 过期时间</div><div class="line">     */</div><div class="line">    <span class="meta">@Async</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delayExpireTime</span><span class="params">(String uuid,String key,Long expireSeconds)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        <span class="comment">//无限循环</span></div><div class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">            String nx = RedisUtils.getNX(key);</div><div class="line">            <span class="comment">//key对应的值不存在，或者不等于当前方法的唯一id，直接跳出，不需要延长时间了</span></div><div class="line">            <span class="keyword">if</span> (nx==<span class="keyword">null</span>||!StringUtils.equals(uuid,nx))</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="comment">//延长时间</span></div><div class="line">            RedisUtils.expireKey(key,expireSeconds);</div><div class="line">            Thread.sleep(<span class="number">3000L</span>);</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Redisson"><a href="#Redisson" class="headerlink" title="Redisson"></a>Redisson</h2><ul>
+<li>Redisson和jedis一样同样是redis的客户端，但是其在解决分布式问题上有着很大的优势，对分布式锁的实现更是封装的更加简洁，能够通过简单的api完成。</li>
+<li>Redisson封装了多种锁，包括重入锁，公平锁，红锁……，这里简单的演示一下重入锁的使用方式。</li>
+</ul>
+<h3 id="可重入锁"><a href="#可重入锁" class="headerlink" title="可重入锁"></a>可重入锁</h3><ul>
+<li><code>RedissonClient</code>通过<code>getxxLock(name)</code>获取不同锁的对象，RLock对应的是可重入锁的接口。与SpringBoot整合之后，配置的方式创建RedissonClient，并且注入了一个处理订单业务的锁：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableConfigurationProperties</span>(value = &#123;RedissonProperties.class&#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedissonConfig</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 注入RedissonClient对象</div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> RedissonClient <span class="title">redissonClient</span><span class="params">(RedissonProperties redissonProperties)</span></span>&#123;</div><div class="line">        Config config = <span class="keyword">new</span> Config();</div><div class="line">        config.useSingleServer().setAddress(redissonProperties.getAddress()).setPassword(redissonProperties.getPassword()).setDatabase(redissonProperties.getDatabase());</div><div class="line">        <span class="keyword">return</span> Redisson.create(config);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 注入可重入锁，用于订单业务</div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> RLock <span class="title">orderLock</span><span class="params">(@Qualifier(value = <span class="string">"redissonClient"</span>)</span> RedissonClient redissonClient,RedissonProperties redissonProperties)</span>&#123;</div><div class="line">        <span class="keyword">return</span> redissonClient.getLock(redissonProperties.getOrderLock());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>模拟订单的下单，如下：<ul>
+<li><code>void lock(long leaseTime, TimeUnit unit)</code>：获得锁，leaseTime设置的过期时间，unit是时间单位，如果设置了-1，redisson会设置默认的时间30秒，这个时间可以在config配置中修改，具体看文档。锁的值是<code>UUID:线程Id</code>(作为唯一标识)</li>
+<li><code>void unlock()</code>：解锁</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(String goodsId)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//获取锁</span></div><div class="line">            rLock.lock(<span class="number">10</span>, TimeUnit.SECONDS);</div><div class="line">            <span class="comment">//检查库存，存储在redis中</span></div><div class="line">            Integer stock = Integer.valueOf(stringRedisTemplate.opsForValue().get(goodsId));</div><div class="line">            <span class="keyword">if</span> (stock&lt;<span class="number">0</span>)</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            <span class="comment">//减库存</span></div><div class="line">            Long increment = stringRedisTemplate.opsForValue().increment(goodsId, -<span class="number">1</span>);</div><div class="line">            <span class="keyword">if</span> (increment&lt;<span class="number">0</span>)</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            <span class="comment">//减库存成功，下单</span></div><div class="line">            Order order = Order.builder().build();</div><div class="line">            orderMapper.add(order);</div><div class="line">        &#125;<span class="keyword">finally</span> &#123;</div><div class="line">            <span class="comment">//解锁</span></div><div class="line">            rLock.unlock();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><ul>
+<li>Redisson的文档很齐全，具体可看文档<a href="https://github.com/redisson/redisson/wiki/%E7%9B%AE%E5%BD%95" target="_blank" rel="external">https://github.com/redisson/redisson/wiki/%E7%9B%AE%E5%BD%95</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;为什么要分布式锁&quot;&gt;&lt;a href=&quot;#为什么要分布式锁&quot; class=&quot;headerlink&quot; title=&quot;为什么要分布式锁&quot;&gt;&lt;/a&gt;为什么要分布式锁&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在单机的情况下，可以通过jvm提供的系列线程安全的操作来处理高并发的情况，但是在
+    
+    </summary>
+    
+      <category term="杂谈" scheme="http://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+      <category term="杂谈" scheme="http://chenjiabing666.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>Shiro</title>
@@ -2752,145 +2839,6 @@
     
     
       <category term="SpringBoot" scheme="http://chenjiabing666.github.io/tags/SpringBoot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker搭建私有仓库</title>
-    <link href="http://chenjiabing666.github.io/2018/12/30/docker%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/"/>
-    <id>http://chenjiabing666.github.io/2018/12/30/docker搭建私有仓库/</id>
-    <published>2018-12-30T05:27:20.000Z</published>
-    <updated>2018-12-30T05:27:46.613Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Docker私有仓库"><a href="#Docker私有仓库" class="headerlink" title="Docker私有仓库"></a>Docker私有仓库</h1><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ul>
-<li><code>docker pull registry</code></li>
-<li><code>docker run --name registry -p 5000:5000 -d registry</code></li>
-<li>启动完成后访问<code>http:// 192.168.174.130:5000/v2/_catalog</code>即可看到如下的内容说明启动成功：</li>
-</ul>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"repositories"</span>: []</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><p><strong>添加信任（无论是下载还是上传都需要添加，这里的ip和端口指定的是私有仓库的宿主机的ip）：</strong></p>
-<ul>
-<li><code>vim /etc/docker/daemon.json</code>，添加如下的内容：</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">"insecure-registries":["192.168.174.130:5000"]</div></pre></td></tr></table></figure>
-<ul>
-<li>重启docker ,<code>systemctl restart docker</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="上传镜像到私有仓库"><a href="#上传镜像到私有仓库" class="headerlink" title="上传镜像到私有仓库"></a>上传镜像到私有仓库</h2><ul>
-<li><code>docker tag jdk8 192.168.174.130:5000/jdk8</code>： 标记该镜像<ul>
-<li>指定仓库所在的ip和端口号</li>
-<li>第一个jdk8是当前的镜像名称（或者填Id），后一个是上传到仓库中的名字，可以任意起</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p><code>docker images</code>：此时查看镜像，发现多了一个<code>192.168.174.130:5000/jdk8</code>的镜像</p>
-</li>
-<li><p><code>docker push 192.168.174.130:5000/jdk8</code> ：将标记的镜像上传到私有仓库中</p>
-</li>
-<li><p>此时再次访问<code>http:// 192.168.174.130:5000/v2/_catalog</code>，将会看到如下内容</p>
-</li>
-</ul>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"repositories"</span>: [</div><div class="line">    <span class="string">"jdk8"</span></div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h2><ul>
-<li><p>添加信任</p>
-<ul>
-<li>vim /etc/docker/daemon.json`，添加如下的内容：</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">"insecure-registries":["192.168.174.130:5000"]</div></pre></td></tr></table></figure>
-<ul>
-<li>重启docker ,<code>systemctl restart docker</code></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>下载，需要指定ip和端口：<code>docker pull 192.168.174.130:5000/jdk8</code></li>
-</ul>
-<h2 id="Docker-Maven插件自动上传镜像到私有仓库"><a href="#Docker-Maven插件自动上传镜像到私有仓库" class="headerlink" title="Docker Maven插件自动上传镜像到私有仓库"></a>Docker Maven插件自动上传镜像到私有仓库</h2><h3 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h3><h4 id="仓库所在服务器的配置"><a href="#仓库所在服务器的配置" class="headerlink" title="仓库所在服务器的配置"></a>仓库所在服务器的配置</h4><ul>
-<li><p><strong>添加信任，同上</strong></p>
-</li>
-<li><p>修改 <code>/etc/sysconfig/docker</code>文件：<code>vim /etc/sysconfig/docker</code></p>
-<ul>
-<li><p>在最下面添加一行<code>DOCKER_OPTS=&#39;-H unix:///var/run/docker.sock -H 0.0.0.0:2375&#39;</code></p>
-<ul>
-<li><img src="https://github.com/chenjiabing666/BlogImage/blob/master/docker2.png?raw=true" alt=""></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>vim /lib/systemd/system/docker.service</code>添加如下内容<ul>
-<li><img src="https://github.com/chenjiabing666/BlogImage/blob/master/docker1.png?raw=true" alt=""></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>执行下面的命令刷新配置并且重启docker</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl daemon-reload</div><div class="line">systemctl restart docker</div></pre></td></tr></table></figure>
-<ul>
-<li><p>开启防火墙的端口：<code>firewall-cmd --zone=public --add-port=2375/tcp --permanent</code></p>
-</li>
-<li><p>重新载入配置<code>firewall-cmd --reload</code></p>
-</li>
-</ul>
-<h4 id="项目中的配置"><a href="#项目中的配置" class="headerlink" title="项目中的配置"></a>项目中的配置</h4><ul>
-<li>在pom.xml文件中添加如下内容：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 指定的最终打成jar包的名字 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">finalName</span>&gt;</span>demo<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- SpringBoot的maven插件 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.spotify<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>docker-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.4.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">					<span class="comment">&lt;!-- 注意imageName需要指定的`IP:端口/image_name`的格式--&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">imageName</span>&gt;</span>192.168.174.130:5000/$&#123;project.artifactId&#125;:$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">imageName</span>&gt;</span></div><div class="line">					<span class="comment">&lt;!-- 指定基础镜像，不需要运行，相当于 from hub.c.163.com/library/java:8-alpine --&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">baseImage</span>&gt;</span>hub.c.163.com/library/java:8-alpine<span class="tag">&lt;/<span class="name">baseImage</span>&gt;</span></div><div class="line">					<span class="comment">&lt;!--覆盖相同标签镜像--&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">forceTags</span>&gt;</span>true<span class="tag">&lt;/<span class="name">forceTags</span>&gt;</span>    </div><div class="line">					<span class="comment">&lt;!-- 运行jar包 --&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">entryPoint</span>&gt;</span>["java", "-jar", "/$&#123;project.build.finalName&#125;.jar"]<span class="tag">&lt;/<span class="name">entryPoint</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">						<span class="tag">&lt;<span class="name">resource</span>&gt;</span></div><div class="line">							<span class="tag">&lt;<span class="name">targetPath</span>&gt;</span>/<span class="tag">&lt;/<span class="name">targetPath</span>&gt;</span></div><div class="line">							<span class="tag">&lt;<span class="name">directory</span>&gt;</span>$&#123;project.build.directory&#125;<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></div><div class="line">							<span class="tag">&lt;<span class="name">include</span>&gt;</span>$&#123;project.build.finalName&#125;.jar<span class="tag">&lt;/<span class="name">include</span>&gt;</span></div><div class="line">						<span class="tag">&lt;/<span class="name">resource</span>&gt;</span></div><div class="line">					<span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div><div class="line">					<span class="comment">&lt;!-- 指定私有仓库所在服务器的2375端口，之前配置过可以远程访问的那个 --&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">dockerHost</span>&gt;</span>http://192.168.174.130:2375<span class="tag">&lt;/<span class="name">dockerHost</span>&gt;</span></div><div class="line">				<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li><strong>在命令台运行如下的命令，即可完成生成镜像并且上传到私有仓库</strong><ul>
-<li><code>mvn clean package docker:build -DpushImage</code></li>
-</ul>
-</li>
-<li><strong>上述命令的解析如下：</strong><ul>
-<li><code>mvn clean package</code>：maven打jar包</li>
-<li><code>docker:build</code>：docker构建镜像的命令</li>
-<li><code>-DpushImage</code>： 将生成的镜像上传到私有仓库中</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><strong>执行并且运行成功之后访问<code>http://192.168.174.130:5000/v2/_catalog</code>，将会出现如下的内容</strong></li>
-</ul>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"repositories"</span>: [</div><div class="line">    <span class="string">"demo"</span></div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><strong>访问<code>http://192.168.174.130:5000/v2/demo/tags/list</code>，可以看到demo这个镜像的所有版本</strong></li>
-</ul>
-<p><img src="https://github.com/chenjiabing666/BlogImage/blob/master/docker3.png?raw=true" alt=""></p>
-<ul>
-<li>上面的运行完成之后，查看项目中自动生成Dockerfile，如下：</li>
-</ul>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">FROM</span> hub.c.<span class="number">163</span>.com/library/java:<span class="number">8</span>-alpine</div><div class="line"><span class="keyword">ADD</span> /demo.jar //</div><div class="line"><span class="keyword">ENTRYPOINT</span> ["java", "-jar", "/demo.jar"]</div></pre></td></tr></table></figure>
-<h4 id="拉取上传的镜像并且运行"><a href="#拉取上传的镜像并且运行" class="headerlink" title="拉取上传的镜像并且运行"></a>拉取上传的镜像并且运行</h4><ul>
-<li>在拉取之前需要添加信任</li>
-<li>使用 <code>docker pull 192.168.174.130:5000/demo:0.0.1-SNAPSHOT</code>下载仓库中的镜像</li>
-<li>运行镜像：<code>docker run --name demo -p 7001:7001 -d f7f36f3f3f06</code><ul>
-<li><strong>其中生成的镜像端口为项目自己本身配置的端口，只需要映射出去即可</strong></li>
-</ul>
-</li>
-<li>此时我们可以访问<code>http://192.168.174.128:7001/</code>，就能看到eureka注册中心的页面</li>
-</ul>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
-<li><a href="https://gitee.com/chenjiabing666/docker-maven.git" target="_blank" rel="external">https://gitee.com/chenjiabing666/docker-maven.git</a></li>
-</ul>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><a href="https://blog.csdn.net/qq_39623859/article/details/80072545" target="_blank" rel="external">https://blog.csdn.net/qq_39623859/article/details/80072545</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Docker私有仓库&quot;&gt;&lt;a href=&quot;#Docker私有仓库&quot; class=&quot;headerlink&quot; title=&quot;Docker私有仓库&quot;&gt;&lt;/a&gt;Docker私有仓库&lt;/h1&gt;&lt;h2 id=&quot;步骤&quot;&gt;&lt;a href=&quot;#步骤&quot; class=&quot;headerli
-    
-    </summary>
-    
-      <category term="docker" scheme="http://chenjiabing666.github.io/categories/docker/"/>
-    
-    
-      <category term="docker" scheme="http://chenjiabing666.github.io/tags/docker/"/>
     
   </entry>
   
