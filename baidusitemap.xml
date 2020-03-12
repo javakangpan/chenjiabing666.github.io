@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>http://chenjiabing666.github.io/2020/03/12/SpringBoot%E6%95%B4%E5%90%88%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%8C%E4%BD%A0%E4%BC%9A%E4%BA%86%E5%90%97%EF%BC%9F/</loc>
+    <lastmod>2020-03-12T14:42:19.809Z</lastmod>
+    <data>
+        <display>
+        <title>SpringBoot整合多数据源，你会了吗？</title>
+        <pubTime>2020-03-12T14:41:57.000Z</pubTime>
+        
+        <tag>SpringBoot</tag>
+         
+         
+           
+             
+              <breadCrumb title="SpringBoot" url="http://chenjiabing666.github.io/categories/SpringBoot/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://chenjiabing666.github.io/2020/03/11/SpringBoot%E6%95%B4%E5%90%88JTA/</loc>
-    <lastmod>2020-03-11T13:04:58.415Z</lastmod>
+    <lastmod>2020-03-12T14:40:46.527Z</lastmod>
     <data>
         <display>
         <title>SpringBoot整合JTA</title>
