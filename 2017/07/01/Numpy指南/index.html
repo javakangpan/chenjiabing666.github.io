@@ -38,7 +38,8 @@ pip install numpy
 创建array
 
 array函数是一个最基本的创建方式，其中传入的参数是一个序列，既可以创建一维数组，也可以创建二维数组，但是这种方法不太灵活，因为你要把这个序列显式的写出来，先不">
-<meta property="og:updated_time" content="2018-10-12T16:56:22.074Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:05:39.816Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Numpy指南">
 <meta name="twitter:description" content="numpy指南
@@ -52,6 +53,7 @@ pip install numpy
 创建array
 
 array函数是一个最基本的创建方式，其中传入的参数是一个序列，既可以创建一维数组，也可以创建二维数组，但是这种方法不太灵活，因为你要把这个序列显式的写出来，先不">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -127,7 +129,7 @@ array函数是一个最基本的创建方式，其中传入的参数是一个序
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#numpy指南"><span class="toc-number">1.</span> <span class="toc-text">numpy指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建"><span class="toc-number">1.2.</span> <span class="toc-text">创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#array"><span class="toc-number">1.2.1.</span> <span class="toc-text">array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#arange"><span class="toc-number">1.2.2.</span> <span class="toc-text">arange</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reshape"><span class="toc-number">1.2.3.</span> <span class="toc-text">reshape</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linspace"><span class="toc-number">1.2.4.</span> <span class="toc-text">linspace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#logspace"><span class="toc-number">1.2.5.</span> <span class="toc-text">logspace</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存取数据"><span class="toc-number">1.3.</span> <span class="toc-text">存取数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下标存取"><span class="toc-number">1.3.1.</span> <span class="toc-text">下标存取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用整数序列"><span class="toc-number">1.3.2.</span> <span class="toc-text">使用整数序列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ufunc"><span class="toc-number">1.4.</span> <span class="toc-text">ufunc</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#numpy指南"><span class="toc-number">1.</span> <span class="toc-text">numpy指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建"><span class="toc-number">1.2.</span> <span class="toc-text">创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#array"><span class="toc-number">1.2.1.</span> <span class="toc-text">array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#arange"><span class="toc-number">1.2.2.</span> <span class="toc-text">arange</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reshape"><span class="toc-number">1.2.3.</span> <span class="toc-text">reshape</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linspace"><span class="toc-number">1.2.4.</span> <span class="toc-text">linspace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#logspace"><span class="toc-number">1.2.5.</span> <span class="toc-text">logspace</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存取数据"><span class="toc-number">1.3.</span> <span class="toc-text">存取数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下标存取"><span class="toc-number">1.3.1.</span> <span class="toc-text">下标存取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用整数序列"><span class="toc-number">1.3.2.</span> <span class="toc-text">使用整数序列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ufunc"><span class="toc-number">1.4.</span> <span class="toc-text">ufunc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.5.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -178,6 +180,10 @@ array函数是一个最基本的创建方式，其中传入的参数是一个序
 <p>ufunc是universal function的缩写，它是一种能对数组的每个元素进行操作的函数。NumPy内置的许多ufunc函数都是在C语言级别实现的，因此它们的计算速度非常快.</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">np.sin(x)  <span class="comment">#对数组中的每一个值进行sin操作，并且返回一个数组</span></div><div class="line">np.sin(x,y)  <span class="comment">#对数组x中的值进行sin操纵，所得结果返回给y，但是也返回一个结果数组，这个数组和y共享一块空间的</span></div><div class="line">np.add(a,b) <span class="comment">#将两个数组中的对应的值都相加，返回的是一个新的数组</span></div><div class="line">np.add(a,b,c) <span class="comment"># 将两个数组中对应的值相加，结果复制给c，并且返回一个新的数组</span></div><div class="line">np.subtract(a,b) <span class="comment"># 两个数组相减，a-b,返回的是一个新的数组</span></div><div class="line">np.subtract(a,b,c)  </div><div class="line">np.multiply(a,b)  <span class="comment">#相乘</span></div><div class="line">np.multiply(a,b,c)  <span class="comment">#相乘</span></div><div class="line">divide(a,b,[,y])  <span class="comment">#相除，如果是两个整数相除，那么返回的是整数</span></div><div class="line">true_divide(a,b,[,y])  <span class="comment">#相除，总是返回精确的商</span></div><div class="line">floor_divide(a,b,[,y])  <span class="comment">#总是对返回值取整</span></div><div class="line">power(a,b,[,y])   <span class="comment"># a^b  平方</span></div><div class="line">mod(a,b,[,y])   <span class="comment">#取余   %</span></div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -246,7 +252,7 @@ array函数是一个最基本的创建方式，其中传入的参数是一个序
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#numpy指南"><span class="toc-number">1.</span> <span class="toc-text">numpy指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建"><span class="toc-number">1.2.</span> <span class="toc-text">创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#array"><span class="toc-number">1.2.1.</span> <span class="toc-text">array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#arange"><span class="toc-number">1.2.2.</span> <span class="toc-text">arange</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reshape"><span class="toc-number">1.2.3.</span> <span class="toc-text">reshape</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linspace"><span class="toc-number">1.2.4.</span> <span class="toc-text">linspace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#logspace"><span class="toc-number">1.2.5.</span> <span class="toc-text">logspace</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存取数据"><span class="toc-number">1.3.</span> <span class="toc-text">存取数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下标存取"><span class="toc-number">1.3.1.</span> <span class="toc-text">下标存取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用整数序列"><span class="toc-number">1.3.2.</span> <span class="toc-text">使用整数序列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ufunc"><span class="toc-number">1.4.</span> <span class="toc-text">ufunc</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#numpy指南"><span class="toc-number">1.</span> <span class="toc-text">numpy指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建"><span class="toc-number">1.2.</span> <span class="toc-text">创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#array"><span class="toc-number">1.2.1.</span> <span class="toc-text">array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#arange"><span class="toc-number">1.2.2.</span> <span class="toc-text">arange</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reshape"><span class="toc-number">1.2.3.</span> <span class="toc-text">reshape</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linspace"><span class="toc-number">1.2.4.</span> <span class="toc-text">linspace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#logspace"><span class="toc-number">1.2.5.</span> <span class="toc-text">logspace</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存取数据"><span class="toc-number">1.3.</span> <span class="toc-text">存取数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下标存取"><span class="toc-number">1.3.1.</span> <span class="toc-text">下标存取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用整数序列"><span class="toc-number">1.3.2.</span> <span class="toc-text">使用整数序列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ufunc"><span class="toc-number">1.4.</span> <span class="toc-text">ufunc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.5.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -288,7 +294,7 @@ array函数是一个最基本的创建方式，其中传入的参数是一个序
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -349,7 +355,7 @@ array函数是一个最基本的创建方式，其中传入的参数是一个序
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -389,11 +395,11 @@ array函数是一个最基本的创建方式，其中传入的参数是一个序
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

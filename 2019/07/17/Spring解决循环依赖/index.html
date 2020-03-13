@@ -37,7 +37,8 @@
 
 1234567public class A&amp;#123;    private B b;&amp;#125;public class B&amp;#123;    private A a;&amp;#">
 <meta property="og:image" content="https://github.com/chenjiabing666/BlogImage/blob/master/circleDependency.png?raw=true">
-<meta property="og:updated_time" content="2019-07-16T17:14:14.661Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:16:32.614Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring解决循环依赖">
 <meta name="twitter:description" content="什么是循环依赖
@@ -126,7 +127,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是循环依赖"><span class="toc-number">1.</span> <span class="toc-text">什么是循环依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#属性的相互依赖"><span class="toc-number">1.1.</span> <span class="toc-text">属性的相互依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造器的依赖"><span class="toc-number">1.2.</span> <span class="toc-text">构造器的依赖</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何解决"><span class="toc-number">2.</span> <span class="toc-text">如何解决</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#三级缓存"><span class="toc-number">2.1.</span> <span class="toc-text">三级缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程分析"><span class="toc-number">2.2.</span> <span class="toc-text">流程分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结合上述例子分析"><span class="toc-number">2.3.</span> <span class="toc-text">结合上述例子分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么不能解决构造器的循环依赖"><span class="toc-number">3.</span> <span class="toc-text">为什么不能解决构造器的循环依赖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring为什么不能解决多例的循环依赖"><span class="toc-number">4.</span> <span class="toc-text">Spring为什么不能解决多例的循环依赖</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是循环依赖"><span class="toc-number">1.</span> <span class="toc-text">什么是循环依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#属性的相互依赖"><span class="toc-number">1.1.</span> <span class="toc-text">属性的相互依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造器的依赖"><span class="toc-number">1.2.</span> <span class="toc-text">构造器的依赖</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何解决"><span class="toc-number">2.</span> <span class="toc-text">如何解决</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#三级缓存"><span class="toc-number">2.1.</span> <span class="toc-text">三级缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程分析"><span class="toc-number">2.2.</span> <span class="toc-text">流程分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结合上述例子分析"><span class="toc-number">2.3.</span> <span class="toc-text">结合上述例子分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么不能解决构造器的循环依赖"><span class="toc-number">3.</span> <span class="toc-text">为什么不能解决构造器的循环依赖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring为什么不能解决多例的循环依赖"><span class="toc-number">4.</span> <span class="toc-text">Spring为什么不能解决多例的循环依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">4.1.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -183,6 +184,10 @@
 <h1 id="Spring为什么不能解决多例的循环依赖"><a href="#Spring为什么不能解决多例的循环依赖" class="headerlink" title="Spring为什么不能解决多例的循环依赖"></a>Spring为什么不能解决多例的循环依赖</h1><ul>
 <li>多实例Bean是每次调用一次getBean都会执行一次构造方法并且未属性赋值，根本没有三级缓存，因此解决循环依赖。</li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -251,7 +256,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是循环依赖"><span class="toc-number">1.</span> <span class="toc-text">什么是循环依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#属性的相互依赖"><span class="toc-number">1.1.</span> <span class="toc-text">属性的相互依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造器的依赖"><span class="toc-number">1.2.</span> <span class="toc-text">构造器的依赖</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何解决"><span class="toc-number">2.</span> <span class="toc-text">如何解决</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#三级缓存"><span class="toc-number">2.1.</span> <span class="toc-text">三级缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程分析"><span class="toc-number">2.2.</span> <span class="toc-text">流程分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结合上述例子分析"><span class="toc-number">2.3.</span> <span class="toc-text">结合上述例子分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么不能解决构造器的循环依赖"><span class="toc-number">3.</span> <span class="toc-text">为什么不能解决构造器的循环依赖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring为什么不能解决多例的循环依赖"><span class="toc-number">4.</span> <span class="toc-text">Spring为什么不能解决多例的循环依赖</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是循环依赖"><span class="toc-number">1.</span> <span class="toc-text">什么是循环依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#属性的相互依赖"><span class="toc-number">1.1.</span> <span class="toc-text">属性的相互依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造器的依赖"><span class="toc-number">1.2.</span> <span class="toc-text">构造器的依赖</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何解决"><span class="toc-number">2.</span> <span class="toc-text">如何解决</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#三级缓存"><span class="toc-number">2.1.</span> <span class="toc-text">三级缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程分析"><span class="toc-number">2.2.</span> <span class="toc-text">流程分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结合上述例子分析"><span class="toc-number">2.3.</span> <span class="toc-text">结合上述例子分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么不能解决构造器的循环依赖"><span class="toc-number">3.</span> <span class="toc-text">为什么不能解决构造器的循环依赖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring为什么不能解决多例的循环依赖"><span class="toc-number">4.</span> <span class="toc-text">Spring为什么不能解决多例的循环依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">4.1.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -293,7 +298,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -354,7 +359,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -394,11 +399,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

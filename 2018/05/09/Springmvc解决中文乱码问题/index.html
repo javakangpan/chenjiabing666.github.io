@@ -31,7 +31,8 @@
 在web.xml中配置CharacterEncodingFilter编码格式要和JSP页面的编码格式一致
 解决中文乱码必须使用过滤器(在Dispatch">
 <meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/s1.png">
-<meta property="og:updated_time" content="2018-05-09T00:40:35.494Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:14:08.901Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Springmvc解决中文乱码问题">
 <meta name="twitter:description" content="Springmvc解决中文乱码问题POST
@@ -117,7 +118,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Springmvc解决中文乱码问题"><span class="toc-number">1.</span> <span class="toc-text">Springmvc解决中文乱码问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#POST"><span class="toc-number">1.1.</span> <span class="toc-text">POST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意"><span class="toc-number">1.1.1.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在web-xml配置"><span class="toc-number">1.1.2.</span> <span class="toc-text">在web.xml配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GET"><span class="toc-number">1.2.</span> <span class="toc-text">GET</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Springmvc解决中文乱码问题"><span class="toc-number">1.</span> <span class="toc-text">Springmvc解决中文乱码问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#POST"><span class="toc-number">1.1.</span> <span class="toc-text">POST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意"><span class="toc-number">1.1.1.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在web-xml配置"><span class="toc-number">1.1.2.</span> <span class="toc-text">在web.xml配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GET"><span class="toc-number">1.2.</span> <span class="toc-text">GET</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.4.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -142,6 +143,10 @@
 <li>那么以后创建项目时候的完整的web.xml如下：</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></div><div class="line">	<span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/javaee"</span></div><div class="line">	<span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"</span></div><div class="line">	<span class="attr">version</span>=<span class="string">"2.5"</span>&gt;</div><div class="line">	<span class="tag">&lt;<span class="name">display-name</span>&gt;</span>Springmvc<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">welcome-file-list</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">welcome-file</span>&gt;</span>index.jsp<span class="tag">&lt;/<span class="name">welcome-file</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">welcome-file-list</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">	<span class="comment">&lt;!-- 配置前端控制器DispatcherServlet --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 配置springMVC配置文件的路径，这里如果想要使用默认的可以不用配置 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- classpath表示根路径，这里找的项目根路径下的applicationContext.xml --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:spring-*.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 当tomcat启动的时候就加载，设置启动的优先级 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 配置分发规则，这个是用来控制所有的请求,只要是请求后缀为.do的都会拦截分发 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.do<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- 配置 CharacterEncodingFilter解决中文乱码问题--&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">filter</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></div><div class="line">		</div><div class="line">		<span class="comment">&lt;!-- 配置编码格式为UTF-8 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">filter</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -210,7 +215,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Springmvc解决中文乱码问题"><span class="toc-number">1.</span> <span class="toc-text">Springmvc解决中文乱码问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#POST"><span class="toc-number">1.1.</span> <span class="toc-text">POST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意"><span class="toc-number">1.1.1.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在web-xml配置"><span class="toc-number">1.1.2.</span> <span class="toc-text">在web.xml配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GET"><span class="toc-number">1.2.</span> <span class="toc-text">GET</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Springmvc解决中文乱码问题"><span class="toc-number">1.</span> <span class="toc-text">Springmvc解决中文乱码问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#POST"><span class="toc-number">1.1.</span> <span class="toc-text">POST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意"><span class="toc-number">1.1.1.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在web-xml配置"><span class="toc-number">1.1.2.</span> <span class="toc-text">在web.xml配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GET"><span class="toc-number">1.2.</span> <span class="toc-text">GET</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.4.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -252,7 +257,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -313,7 +318,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -353,11 +358,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

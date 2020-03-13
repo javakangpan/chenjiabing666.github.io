@@ -26,7 +26,8 @@
 
 读取WebRoot文件下的文件
 我们知道当我们将项目部署到Tomcat服务器中时，项目中的文件路径其实就是在Tomcat中的文件路径，所有的项目都是存储在webapps下的，我们可以看到webaapps下有两个文件夹(WEB-I">
-<meta property="og:updated_time" content="2018-10-12T17:04:08.946Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:09:50.136Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Servlet总结二(文件路径获取）">
 <meta name="twitter:description" content="Servlet总结二（文件路径）前言
@@ -34,6 +35,7 @@
 
 读取WebRoot文件下的文件
 我们知道当我们将项目部署到Tomcat服务器中时，项目中的文件路径其实就是在Tomcat中的文件路径，所有的项目都是存储在webapps下的，我们可以看到webaapps下有两个文件夹(WEB-I">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -109,7 +111,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Servlet总结二（文件路径）"><span class="toc-number">1.</span> <span class="toc-text">Servlet总结二（文件路径）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取WebRoot文件下的文件"><span class="toc-number">1.2.</span> <span class="toc-text">读取WebRoot文件下的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取src下的class文件"><span class="toc-number">1.3.</span> <span class="toc-text">读取src下的class文件</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Servlet总结二（文件路径）"><span class="toc-number">1.</span> <span class="toc-text">Servlet总结二（文件路径）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取WebRoot文件下的文件"><span class="toc-number">1.2.</span> <span class="toc-text">读取WebRoot文件下的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取src下的class文件"><span class="toc-number">1.3.</span> <span class="toc-text">读取src下的class文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.4.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -138,6 +140,10 @@
 <p>下面我们读取<code>src</code>文件夹下的<code>file.txt</code>中的内容，代码如下:</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">      <span class="comment">// 获取ServletContext对象</span></div><div class="line">ServletContext context = <span class="keyword">this</span>.getServletContext();</div><div class="line"><span class="comment">// 这个是获取项目下的src文件夹下的file.txt文件</span></div><div class="line">File file = <span class="keyword">new</span> File(context.getRealPath(<span class="string">"/"</span>)</div><div class="line">		+ <span class="string">"\\WEB-INF\\classes\\file.txt"</span>);</div><div class="line">BufferedReader reader = <span class="keyword">null</span>;</div><div class="line"><span class="keyword">if</span> (file.exists()) &#123;</div><div class="line">	System.out.println(<span class="string">"文件存在，现在可以读取"</span>);</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		<span class="comment">// 创建缓冲流对象，实现读取文件</span></div><div class="line">		reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(file));</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="comment">// 输出第一行内容</span></div><div class="line">			System.out.println(reader.readLine());</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</div><div class="line">		System.out.println(<span class="string">"文件不存在"</span>);</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		<span class="keyword">if</span> (reader != <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				reader.close(); <span class="comment">// 如果reader不是空，就关闭</span></div><div class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">				System.out.println(<span class="string">"文件关闭失败"</span>);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	System.out.println(<span class="string">"文件不存在，现在开始创建一个"</span>);</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		file.createNewFile();<span class="comment">// 创建一个</span></div><div class="line">	&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">		System.out.println(<span class="string">"没有创建成功"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -206,7 +212,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Servlet总结二（文件路径）"><span class="toc-number">1.</span> <span class="toc-text">Servlet总结二（文件路径）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取WebRoot文件下的文件"><span class="toc-number">1.2.</span> <span class="toc-text">读取WebRoot文件下的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取src下的class文件"><span class="toc-number">1.3.</span> <span class="toc-text">读取src下的class文件</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Servlet总结二（文件路径）"><span class="toc-number">1.</span> <span class="toc-text">Servlet总结二（文件路径）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取WebRoot文件下的文件"><span class="toc-number">1.2.</span> <span class="toc-text">读取WebRoot文件下的文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取src下的class文件"><span class="toc-number">1.3.</span> <span class="toc-text">读取src下的class文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.4.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -248,7 +254,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -309,7 +315,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -349,11 +355,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

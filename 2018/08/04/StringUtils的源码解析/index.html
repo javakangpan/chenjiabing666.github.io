@@ -36,7 +36,8 @@ isEmpty(Object str)  ：判断当前字符串为空，如果为空返回true
 
 
 123public static boolean isEmpty(Object str) &amp;#123;		return (str == null || &quot;&quot;.equals(str));	&amp;#">
-<meta property="og:updated_time" content="2018-08-04T15:48:19.118Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:17:48.520Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="StringUtils的源码解析">
 <meta name="twitter:description" content="StringUtils
@@ -49,6 +50,7 @@ isEmpty(Object str)  ：判断当前字符串为空，如果为空返回true
 
 
 123public static boolean isEmpty(Object str) &amp;#123;		return (str == null || &quot;&quot;.equals(str));	&amp;#">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -124,7 +126,7 @@ isEmpty(Object str)  ：判断当前字符串为空，如果为空返回true
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#StringUtils"><span class="toc-number">1.</span> <span class="toc-text">StringUtils</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码解析"><span class="toc-number">1.1.</span> <span class="toc-text">源码解析</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#StringUtils"><span class="toc-number">1.</span> <span class="toc-text">StringUtils</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码解析"><span class="toc-number">1.1.</span> <span class="toc-text">源码解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.2.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -265,6 +267,10 @@ isEmpty(Object str)  ：判断当前字符串为空，如果为空返回true
 <li><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">cleanPath</span><span class="params">(String path)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (path == <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">		&#125;</div><div class="line">    	<span class="comment">//将path中的\\全部替换成/</span></div><div class="line">    <span class="comment">//如果这个路径是在windows下，如 c:\\image\\file.jpg,那么经过replace，将会变成 c://image//file.jpg</span></div><div class="line">		String pathToUse = replace(path, WINDOWS_FOLDER_SEPARATOR, FOLDER_SEPARATOR);</div><div class="line">    	<span class="comment">//获取pathToUse中:的索引</span></div><div class="line">		<span class="keyword">int</span> prefixIndex = pathToUse.indexOf(<span class="string">":"</span>);</div><div class="line">		String prefix = <span class="string">""</span>;   <span class="comment">//前缀，比如  c: 或者 /</span></div><div class="line">    <span class="comment">//如果这个路径是在windows下，如 c:\\image\\file.jpg,那么经过replace，将会变成 c://image//file.jpg</span></div><div class="line">		<span class="keyword">if</span> (prefixIndex != -<span class="number">1</span>) &#123;</div><div class="line">			prefix = pathToUse.substring(<span class="number">0</span>, prefixIndex + <span class="number">1</span>);  <span class="comment">//前缀变成 `c:`</span></div><div class="line">			pathToUse = pathToUse.substring(prefixIndex + <span class="number">1</span>);  <span class="comment">//去掉前面的前缀</span></div><div class="line">		&#125;</div><div class="line">    	<span class="comment">//如果pathToUse是以/开头，表示是linux下的路径</span></div><div class="line">		<span class="keyword">if</span> (pathToUse.startsWith(FOLDER_SEPARATOR)) &#123;</div><div class="line">			prefix = prefix + FOLDER_SEPARATOR;   <span class="comment">//前缀就是  /</span></div><div class="line">			pathToUse = pathToUse.substring(<span class="number">1</span>);   <span class="comment">//pathToUse就变成了去掉/之后的字符串</span></div><div class="line">		&#125;</div><div class="line">		<span class="comment">//将pathToUse使用/分割成一个字符串数组，比如pathToUse=home/chenjiabinbg/file.txt，那么数组为 ["home","chenjiabing","file.txt"]</span></div><div class="line">		String[] pathArray = delimitedListToStringArray(pathToUse, FOLDER_SEPARATOR);</div><div class="line">    </div><div class="line">		List&lt;String&gt; pathElements = <span class="keyword">new</span> LinkedList&lt;String&gt;();</div><div class="line">		<span class="keyword">int</span> tops = <span class="number">0</span>;</div><div class="line">		</div><div class="line">    	<span class="comment">//遍历数组</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = pathArray.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</div><div class="line">			String element = pathArray[i];</div><div class="line">            <span class="comment">//如果这个元素是表示当前路径的   .表示当前路径，..表示上一级路径</span></div><div class="line">			<span class="keyword">if</span> (CURRENT_PATH.equals(element)) &#123;</div><div class="line">				<span class="comment">// Points to current directory - drop it.</span></div><div class="line">			&#125;</div><div class="line">            <span class="comment">//如果是上一级路径，tops+1</span></div><div class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (TOP_PATH.equals(element)) &#123;</div><div class="line">				<span class="comment">// Registering top path found.</span></div><div class="line">				tops++;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span> &#123;</div><div class="line">				<span class="keyword">if</span> (tops &gt; <span class="number">0</span>) &#123;</div><div class="line">					<span class="comment">// Merging path element with element corresponding to top path.</span></div><div class="line">					tops--;</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">else</span> &#123;</div><div class="line">					<span class="comment">// Normal path element found.</span></div><div class="line">					pathElements.add(<span class="number">0</span>, element);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">// Remaining top paths need to be retained.</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; tops; i++) &#123;</div><div class="line">			pathElements.add(<span class="number">0</span>, TOP_PATH);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">return</span> prefix + collectionToDelimitedString(pathElements, FOLDER_SEPARATOR);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -333,7 +339,7 @@ isEmpty(Object str)  ：判断当前字符串为空，如果为空返回true
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#StringUtils"><span class="toc-number">1.</span> <span class="toc-text">StringUtils</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码解析"><span class="toc-number">1.1.</span> <span class="toc-text">源码解析</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#StringUtils"><span class="toc-number">1.</span> <span class="toc-text">StringUtils</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码解析"><span class="toc-number">1.1.</span> <span class="toc-text">源码解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.2.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -375,7 +381,7 @@ isEmpty(Object str)  ：判断当前字符串为空，如果为空返回true
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -436,7 +442,7 @@ isEmpty(Object str)  ：判断当前字符串为空，如果为空返回true
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -476,11 +482,11 @@ isEmpty(Object str)  ：判断当前字符串为空，如果为空返回true
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

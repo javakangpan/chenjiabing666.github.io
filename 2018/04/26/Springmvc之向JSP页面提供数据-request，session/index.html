@@ -30,7 +30,8 @@ Springmvc默认就是转发,因此可以在request域中共享数据
 
 
 123456&amp;lt;form action=&quot;&amp;lt;%=request.getContextPath()%&amp;gt;/user/login.do&quot; method=&quot;post&quot;&amp;gt;	username:&amp;lt;input typ">
-<meta property="og:updated_time" content="2018-04-26T02:05:13.854Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:13:00.777Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Springmvc之向JSP页面提供数据(request，session)">
 <meta name="twitter:description" content="Springmvc之向JSP页面提供数据(request，session)准备
@@ -40,6 +41,7 @@ Springmvc默认就是转发,因此可以在request域中共享数据
 
 
 123456&amp;lt;form action=&quot;&amp;lt;%=request.getContextPath()%&amp;gt;/user/login.do&quot; method=&quot;post&quot;&amp;gt;	username:&amp;lt;input typ">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -115,7 +117,7 @@ Springmvc默认就是转发,因此可以在request域中共享数据
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Springmvc之向JSP页面提供数据-request，session"><span class="toc-number">1.</span> <span class="toc-text">Springmvc之向JSP页面提供数据(request，session)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-number">1.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用HttpServletRequest转发"><span class="toc-number">1.2.</span> <span class="toc-text">使用HttpServletRequest转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【不常用】使用ModelAndView转发"><span class="toc-number">1.3.</span> <span class="toc-text">【不常用】使用ModelAndView转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【推荐使用】使用ModelMap转发"><span class="toc-number">1.4.</span> <span class="toc-text">【推荐使用】使用ModelMap转发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展"><span class="toc-number">1.4.1.</span> <span class="toc-text">拓展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Session"><span class="toc-number">1.5.</span> <span class="toc-text">Session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用HttpSession"><span class="toc-number">1.6.</span> <span class="toc-text">使用HttpSession</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Springmvc之向JSP页面提供数据-request，session"><span class="toc-number">1.</span> <span class="toc-text">Springmvc之向JSP页面提供数据(request，session)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-number">1.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用HttpServletRequest转发"><span class="toc-number">1.2.</span> <span class="toc-text">使用HttpServletRequest转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【不常用】使用ModelAndView转发"><span class="toc-number">1.3.</span> <span class="toc-text">【不常用】使用ModelAndView转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【推荐使用】使用ModelMap转发"><span class="toc-number">1.4.</span> <span class="toc-text">【推荐使用】使用ModelMap转发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展"><span class="toc-number">1.4.1.</span> <span class="toc-text">拓展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Session"><span class="toc-number">1.5.</span> <span class="toc-text">Session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用HttpSession"><span class="toc-number">1.6.</span> <span class="toc-text">使用HttpSession</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.7.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -161,6 +163,10 @@ Springmvc默认就是转发,因此可以在request域中共享数据
 </li>
 </ul>
 <h2 id="使用HttpSession"><a href="#使用HttpSession" class="headerlink" title="使用HttpSession"></a>使用HttpSession</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/login.do"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(User user,HttpSession session)</span> </span>&#123;</div><div class="line">	<span class="comment">//将id存储在session中</span></div><div class="line">	session.setAttribute(<span class="string">"uid"</span>, <span class="string">"9527"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="string">"error"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -229,7 +235,7 @@ Springmvc默认就是转发,因此可以在request域中共享数据
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Springmvc之向JSP页面提供数据-request，session"><span class="toc-number">1.</span> <span class="toc-text">Springmvc之向JSP页面提供数据(request，session)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-number">1.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用HttpServletRequest转发"><span class="toc-number">1.2.</span> <span class="toc-text">使用HttpServletRequest转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【不常用】使用ModelAndView转发"><span class="toc-number">1.3.</span> <span class="toc-text">【不常用】使用ModelAndView转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【推荐使用】使用ModelMap转发"><span class="toc-number">1.4.</span> <span class="toc-text">【推荐使用】使用ModelMap转发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展"><span class="toc-number">1.4.1.</span> <span class="toc-text">拓展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Session"><span class="toc-number">1.5.</span> <span class="toc-text">Session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用HttpSession"><span class="toc-number">1.6.</span> <span class="toc-text">使用HttpSession</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Springmvc之向JSP页面提供数据-request，session"><span class="toc-number">1.</span> <span class="toc-text">Springmvc之向JSP页面提供数据(request，session)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-number">1.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用HttpServletRequest转发"><span class="toc-number">1.2.</span> <span class="toc-text">使用HttpServletRequest转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【不常用】使用ModelAndView转发"><span class="toc-number">1.3.</span> <span class="toc-text">【不常用】使用ModelAndView转发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【推荐使用】使用ModelMap转发"><span class="toc-number">1.4.</span> <span class="toc-text">【推荐使用】使用ModelMap转发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展"><span class="toc-number">1.4.1.</span> <span class="toc-text">拓展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Session"><span class="toc-number">1.5.</span> <span class="toc-text">Session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用HttpSession"><span class="toc-number">1.6.</span> <span class="toc-text">使用HttpSession</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.7.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -271,7 +277,7 @@ Springmvc默认就是转发,因此可以在request域中共享数据
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -332,7 +338,7 @@ Springmvc默认就是转发,因此可以在request域中共享数据
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -372,11 +378,11 @@ Springmvc默认就是转发,因此可以在request域中共享数据
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

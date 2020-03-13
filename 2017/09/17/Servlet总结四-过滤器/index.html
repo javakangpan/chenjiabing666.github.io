@@ -22,12 +22,14 @@
 <meta property="og:description" content="Servlet总结四(过滤器的使用)简介
 在容器调用Servlet的service()的方法钱，Servlet其实并不会知道有请求的到来，而在service()方法执行后，容器真正对浏览器进行HTTP响应之前，浏览器也不知道Servlet真正响应是什么。过滤器(Filter)正如其名称所示，它介于Servlet之前，可拦截浏览器对Servlet的请求，也可以改变Servlet对浏览器的响应。
 其实">
-<meta property="og:updated_time" content="2018-10-12T17:04:22.433Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:10:04.293Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Servlet总结四(过滤器)">
 <meta name="twitter:description" content="Servlet总结四(过滤器的使用)简介
 在容器调用Servlet的service()的方法钱，Servlet其实并不会知道有请求的到来，而在service()方法执行后，容器真正对浏览器进行HTTP响应之前，浏览器也不知道Servlet真正响应是什么。过滤器(Filter)正如其名称所示，它介于Servlet之前，可拦截浏览器对Servlet的请求，也可以改变Servlet对浏览器的响应。
 其实">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -103,7 +105,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Servlet总结四-过滤器的使用"><span class="toc-number">1.</span> <span class="toc-text">Servlet总结四(过滤器的使用)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过滤器的实现"><span class="toc-number">1.2.</span> <span class="toc-text">过滤器的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重点"><span class="toc-number">1.2.1.</span> <span class="toc-text">重点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单的例子"><span class="toc-number">1.2.2.</span> <span class="toc-text">简单的例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#过滤器的设置"><span class="toc-number">1.2.3.</span> <span class="toc-text">过滤器的设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始参数的设置和获取"><span class="toc-number">1.2.4.</span> <span class="toc-text">初始参数的设置和获取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置初始值"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">设置初始值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取初始参数的值"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">获取初始参数的值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置触发的时机"><span class="toc-number">1.2.5.</span> <span class="toc-text">设置触发的时机</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Servlet总结四-过滤器的使用"><span class="toc-number">1.</span> <span class="toc-text">Servlet总结四(过滤器的使用)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过滤器的实现"><span class="toc-number">1.2.</span> <span class="toc-text">过滤器的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重点"><span class="toc-number">1.2.1.</span> <span class="toc-text">重点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单的例子"><span class="toc-number">1.2.2.</span> <span class="toc-text">简单的例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#过滤器的设置"><span class="toc-number">1.2.3.</span> <span class="toc-text">过滤器的设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始参数的设置和获取"><span class="toc-number">1.2.4.</span> <span class="toc-text">初始参数的设置和获取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置初始值"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">设置初始值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取初始参数的值"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">获取初始参数的值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置触发的时机"><span class="toc-number">1.2.5.</span> <span class="toc-text">设置触发的时机</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.3.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -161,7 +163,12 @@
 <h3 id="设置触发的时机"><a href="#设置触发的时机" class="headerlink" title="设置触发的时机"></a>设置触发的时机</h3><blockquote>
 <p>当我们直接请求Servlet文件的url或者表单提交的时候使用的都是浏览器默认发出的请求，这个是可以触发过滤器的。但是如果是那些重定向(<code>sendirect</code>)或者转发包含(<code>forward</code>,<code>include</code>)就不会默认触发，因此我们需要在<code>web.xml</code>设置触发的时机，定义如下:</p>
 </blockquote>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>FilterDemo1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/Demo1<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span>REQUEST<span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span>      <span class="comment">&lt;!--默认的--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span>FORWARD<span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span>       <span class="comment">&lt;!--forward--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span>INCLUDE<span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span>        <span class="comment">&lt;!--include--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span>ERROR<span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span>        <span class="comment">&lt;!--error --&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div></pre></td></tr></table></figure>  
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>FilterDemo1<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/Demo1<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span>REQUEST<span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span>      <span class="comment">&lt;!--默认的--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span>FORWARD<span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span>       <span class="comment">&lt;!--forward--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span>INCLUDE<span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span>        <span class="comment">&lt;!--include--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span>ERROR<span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span>        <span class="comment">&lt;!--error --&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -229,7 +236,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Servlet总结四-过滤器的使用"><span class="toc-number">1.</span> <span class="toc-text">Servlet总结四(过滤器的使用)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过滤器的实现"><span class="toc-number">1.2.</span> <span class="toc-text">过滤器的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重点"><span class="toc-number">1.2.1.</span> <span class="toc-text">重点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单的例子"><span class="toc-number">1.2.2.</span> <span class="toc-text">简单的例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#过滤器的设置"><span class="toc-number">1.2.3.</span> <span class="toc-text">过滤器的设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始参数的设置和获取"><span class="toc-number">1.2.4.</span> <span class="toc-text">初始参数的设置和获取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置初始值"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">设置初始值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取初始参数的值"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">获取初始参数的值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置触发的时机"><span class="toc-number">1.2.5.</span> <span class="toc-text">设置触发的时机</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Servlet总结四-过滤器的使用"><span class="toc-number">1.</span> <span class="toc-text">Servlet总结四(过滤器的使用)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过滤器的实现"><span class="toc-number">1.2.</span> <span class="toc-text">过滤器的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#重点"><span class="toc-number">1.2.1.</span> <span class="toc-text">重点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单的例子"><span class="toc-number">1.2.2.</span> <span class="toc-text">简单的例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#过滤器的设置"><span class="toc-number">1.2.3.</span> <span class="toc-text">过滤器的设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始参数的设置和获取"><span class="toc-number">1.2.4.</span> <span class="toc-text">初始参数的设置和获取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置初始值"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">设置初始值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取初始参数的值"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">获取初始参数的值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置触发的时机"><span class="toc-number">1.2.5.</span> <span class="toc-text">设置触发的时机</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.3.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -271,7 +278,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -332,7 +339,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -372,11 +379,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

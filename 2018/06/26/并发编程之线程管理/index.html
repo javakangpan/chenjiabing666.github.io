@@ -24,13 +24,15 @@ Jdk中使用UncaughtExceptionHandler接口实现了对线程的异常信息的�
 如果线程的run方法抛出异常未被铺货（Uncaught Exception），那么随着run方法的退出，相应的线程也会提前终止。对于线程的这种异常终止，我们如何得知并做出可能的补救动作，例如重新创建并启动一个替代线程。
 Jdk中使用UncaughtExceptionHandler接口实现了对线程的异常信息的监控和处理
 其中有一个uncaughtExcept">
-<meta property="og:updated_time" content="2018-06-26T14:53:47.681Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:22:28.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并发编程之线程管理">
 <meta name="twitter:description" content="并发编程之线程管理线程的未捕获异常与监控
 如果线程的run方法抛出异常未被铺货（Uncaught Exception），那么随着run方法的退出，相应的线程也会提前终止。对于线程的这种异常终止，我们如何得知并做出可能的补救动作，例如重新创建并启动一个替代线程。
 Jdk中使用UncaughtExceptionHandler接口实现了对线程的异常信息的监控和处理
 其中有一个uncaughtExcept">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -106,7 +108,7 @@ Jdk中使用UncaughtExceptionHandler接口实现了对线程的异常信息的�
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#并发编程之线程管理"><span class="toc-number">1.</span> <span class="toc-text">并发编程之线程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的未捕获异常与监控"><span class="toc-number">1.1.</span> <span class="toc-text">线程的未捕获异常与监控</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.1.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程工厂"><span class="toc-number">1.2.</span> <span class="toc-text">线程工厂</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#并发编程之线程管理"><span class="toc-number">1.</span> <span class="toc-text">并发编程之线程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的未捕获异常与监控"><span class="toc-number">1.1.</span> <span class="toc-text">线程的未捕获异常与监控</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.1.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程工厂"><span class="toc-number">1.2.</span> <span class="toc-text">线程工厂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.3.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -121,6 +123,10 @@ Jdk中使用UncaughtExceptionHandler接口实现了对线程的异常信息的�
 <h2 id="线程工厂"><a href="#线程工厂" class="headerlink" title="线程工厂"></a>线程工厂</h2><ul>
 <li><a href="http://ifeve.com/thread-management-13/" target="_blank" rel="external">http://ifeve.com/thread-management-13/</a></li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -189,7 +195,7 @@ Jdk中使用UncaughtExceptionHandler接口实现了对线程的异常信息的�
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#并发编程之线程管理"><span class="toc-number">1.</span> <span class="toc-text">并发编程之线程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的未捕获异常与监控"><span class="toc-number">1.1.</span> <span class="toc-text">线程的未捕获异常与监控</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.1.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程工厂"><span class="toc-number">1.2.</span> <span class="toc-text">线程工厂</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#并发编程之线程管理"><span class="toc-number">1.</span> <span class="toc-text">并发编程之线程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的未捕获异常与监控"><span class="toc-number">1.1.</span> <span class="toc-text">线程的未捕获异常与监控</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.1.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程工厂"><span class="toc-number">1.2.</span> <span class="toc-text">线程工厂</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.3.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -231,7 +237,7 @@ Jdk中使用UncaughtExceptionHandler接口实现了对线程的异常信息的�
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -292,7 +298,7 @@ Jdk中使用UncaughtExceptionHandler接口实现了对线程的异常信息的�
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -332,11 +338,11 @@ Jdk中使用UncaughtExceptionHandler接口实现了对线程的异常信息的�
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

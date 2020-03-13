@@ -26,7 +26,8 @@ https://www.cnblogs.com/aubin/p/8012840.html
 
 cluster
 代表一个集群，集群中有多个节点，其中有一个为主节点，这个主节点是可以通过选举产生的，主从节点是对于集群内部来说的。es的一个概念就是去中心化，字面上理解就是无中心节点，这是对于集群外部来说的，因为从外部来看es集群，在逻辑上是个整体，你与任何一个节点的通信和与整个es集群通信是等价">
-<meta property="og:updated_time" content="2018-09-02T11:38:35.269Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T05:54:13.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="es集群管理">
 <meta name="twitter:description" content="集群管理
@@ -34,6 +35,7 @@ https://www.cnblogs.com/aubin/p/8012840.html
 
 cluster
 代表一个集群，集群中有多个节点，其中有一个为主节点，这个主节点是可以通过选举产生的，主从节点是对于集群内部来说的。es的一个概念就是去中心化，字面上理解就是无中心节点，这是对于集群外部来说的，因为从外部来看es集群，在逻辑上是个整体，你与任何一个节点的通信和与整个es集群通信是等价">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -109,7 +111,7 @@ cluster
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#集群管理"><span class="toc-number">1.</span> <span class="toc-text">集群管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cluster"><span class="toc-number">1.0.1.</span> <span class="toc-text">cluster</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shards"><span class="toc-number">1.0.2.</span> <span class="toc-text">shards</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replicas"><span class="toc-number">1.0.3.</span> <span class="toc-text">replicas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#recovery"><span class="toc-number">1.0.4.</span> <span class="toc-text">recovery</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#river"><span class="toc-number">1.0.5.</span> <span class="toc-text">river</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gateway"><span class="toc-number">1.0.6.</span> <span class="toc-text">gateway</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#discovery-zen"><span class="toc-number">1.0.7.</span> <span class="toc-text">discovery.zen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transport"><span class="toc-number">1.0.8.</span> <span class="toc-text">Transport</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意事项"><span class="toc-number">1.1.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#监控集群健康状况"><span class="toc-number">1.2.</span> <span class="toc-text">监控集群健康状况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#监控单个节点"><span class="toc-number">1.3.</span> <span class="toc-text">监控单个节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引统计"><span class="toc-number">1.4.</span> <span class="toc-text">索引统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cat-API"><span class="toc-number">1.5.</span> <span class="toc-text">cat API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要配置的修改"><span class="toc-number">1.6.</span> <span class="toc-text">重要配置的修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.7.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#集群管理"><span class="toc-number">1.</span> <span class="toc-text">集群管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cluster"><span class="toc-number">1.0.1.</span> <span class="toc-text">cluster</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shards"><span class="toc-number">1.0.2.</span> <span class="toc-text">shards</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replicas"><span class="toc-number">1.0.3.</span> <span class="toc-text">replicas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#recovery"><span class="toc-number">1.0.4.</span> <span class="toc-text">recovery</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#river"><span class="toc-number">1.0.5.</span> <span class="toc-text">river</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gateway"><span class="toc-number">1.0.6.</span> <span class="toc-text">gateway</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#discovery-zen"><span class="toc-number">1.0.7.</span> <span class="toc-text">discovery.zen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transport"><span class="toc-number">1.0.8.</span> <span class="toc-text">Transport</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意事项"><span class="toc-number">1.1.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#监控集群健康状况"><span class="toc-number">1.2.</span> <span class="toc-text">监控集群健康状况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#监控单个节点"><span class="toc-number">1.3.</span> <span class="toc-text">监控单个节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引统计"><span class="toc-number">1.4.</span> <span class="toc-text">索引统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cat-API"><span class="toc-number">1.5.</span> <span class="toc-text">cat API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要配置的修改"><span class="toc-number">1.6.</span> <span class="toc-text">重要配置的修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.7.</span> <span class="toc-text">参考文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.8.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -190,6 +192,10 @@ cluster
 <li><a href="http://www.cnblogs.com/ljhdo/p/4959412.html" target="_blank" rel="external">http://www.cnblogs.com/ljhdo/p/4959412.html</a></li>
 <li><a href="http://lxw1234.com/archives/2015/12/582.htm" target="_blank" rel="external">http://lxw1234.com/archives/2015/12/582.htm</a></li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -258,7 +264,7 @@ cluster
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#集群管理"><span class="toc-number">1.</span> <span class="toc-text">集群管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cluster"><span class="toc-number">1.0.1.</span> <span class="toc-text">cluster</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shards"><span class="toc-number">1.0.2.</span> <span class="toc-text">shards</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replicas"><span class="toc-number">1.0.3.</span> <span class="toc-text">replicas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#recovery"><span class="toc-number">1.0.4.</span> <span class="toc-text">recovery</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#river"><span class="toc-number">1.0.5.</span> <span class="toc-text">river</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gateway"><span class="toc-number">1.0.6.</span> <span class="toc-text">gateway</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#discovery-zen"><span class="toc-number">1.0.7.</span> <span class="toc-text">discovery.zen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transport"><span class="toc-number">1.0.8.</span> <span class="toc-text">Transport</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意事项"><span class="toc-number">1.1.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#监控集群健康状况"><span class="toc-number">1.2.</span> <span class="toc-text">监控集群健康状况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#监控单个节点"><span class="toc-number">1.3.</span> <span class="toc-text">监控单个节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引统计"><span class="toc-number">1.4.</span> <span class="toc-text">索引统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cat-API"><span class="toc-number">1.5.</span> <span class="toc-text">cat API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要配置的修改"><span class="toc-number">1.6.</span> <span class="toc-text">重要配置的修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.7.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#集群管理"><span class="toc-number">1.</span> <span class="toc-text">集群管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cluster"><span class="toc-number">1.0.1.</span> <span class="toc-text">cluster</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shards"><span class="toc-number">1.0.2.</span> <span class="toc-text">shards</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replicas"><span class="toc-number">1.0.3.</span> <span class="toc-text">replicas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#recovery"><span class="toc-number">1.0.4.</span> <span class="toc-text">recovery</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#river"><span class="toc-number">1.0.5.</span> <span class="toc-text">river</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gateway"><span class="toc-number">1.0.6.</span> <span class="toc-text">gateway</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#discovery-zen"><span class="toc-number">1.0.7.</span> <span class="toc-text">discovery.zen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Transport"><span class="toc-number">1.0.8.</span> <span class="toc-text">Transport</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意事项"><span class="toc-number">1.1.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#监控集群健康状况"><span class="toc-number">1.2.</span> <span class="toc-text">监控集群健康状况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#监控单个节点"><span class="toc-number">1.3.</span> <span class="toc-text">监控单个节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引统计"><span class="toc-number">1.4.</span> <span class="toc-text">索引统计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cat-API"><span class="toc-number">1.5.</span> <span class="toc-text">cat API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重要配置的修改"><span class="toc-number">1.6.</span> <span class="toc-text">重要配置的修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.7.</span> <span class="toc-text">参考文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.8.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -300,7 +306,7 @@ cluster
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -361,7 +367,7 @@ cluster
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -401,11 +407,11 @@ cluster
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

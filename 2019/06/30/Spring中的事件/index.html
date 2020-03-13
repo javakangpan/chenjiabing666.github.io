@@ -30,7 +30,8 @@ ContextRefreshe">
 事件Spring中内置的事件
 ContextStartedEvent：容器启动的时候触发(start方法)
 ContextRefreshe">
-<meta property="og:updated_time" content="2019-06-30T06:22:33.196Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:14:25.700Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring中的事件">
 <meta name="twitter:description" content="简介
@@ -40,6 +41,7 @@ ContextRefreshe">
 事件Spring中内置的事件
 ContextStartedEvent：容器启动的时候触发(start方法)
 ContextRefreshe">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -115,7 +117,7 @@ ContextRefreshe">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件"><span class="toc-number">2.</span> <span class="toc-text">事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring中内置的事件"><span class="toc-number">2.1.</span> <span class="toc-text">Spring中内置的事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义事件"><span class="toc-number">2.2.</span> <span class="toc-text">自定义事件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#监听器"><span class="toc-number">3.</span> <span class="toc-text">监听器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现ApplicationListener接口"><span class="toc-number">3.1.</span> <span class="toc-text">实现ApplicationListener接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-EventListener注解"><span class="toc-number">3.2.</span> <span class="toc-text">使用@EventListener注解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件发布"><span class="toc-number">4.</span> <span class="toc-text">事件发布</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring的事件发布类"><span class="toc-number">4.1.</span> <span class="toc-text">Spring的事件发布类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直接注入"><span class="toc-number">4.2.</span> <span class="toc-text">直接注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用ApplicationEventPublisherAware注入"><span class="toc-number">4.3.</span> <span class="toc-text">使用ApplicationEventPublisherAware注入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件多播器"><span class="toc-number">5.</span> <span class="toc-text">事件多播器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#异步事件"><span class="toc-number">6.</span> <span class="toc-text">异步事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-Async实现异步"><span class="toc-number">6.1.</span> <span class="toc-text">使用@Async实现异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义事件多播器"><span class="toc-number">6.2.</span> <span class="toc-text">自定义事件多播器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码解析"><span class="toc-number">7.</span> <span class="toc-text">源码解析</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件"><span class="toc-number">2.</span> <span class="toc-text">事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring中内置的事件"><span class="toc-number">2.1.</span> <span class="toc-text">Spring中内置的事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义事件"><span class="toc-number">2.2.</span> <span class="toc-text">自定义事件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#监听器"><span class="toc-number">3.</span> <span class="toc-text">监听器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现ApplicationListener接口"><span class="toc-number">3.1.</span> <span class="toc-text">实现ApplicationListener接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-EventListener注解"><span class="toc-number">3.2.</span> <span class="toc-text">使用@EventListener注解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件发布"><span class="toc-number">4.</span> <span class="toc-text">事件发布</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring的事件发布类"><span class="toc-number">4.1.</span> <span class="toc-text">Spring的事件发布类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直接注入"><span class="toc-number">4.2.</span> <span class="toc-text">直接注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用ApplicationEventPublisherAware注入"><span class="toc-number">4.3.</span> <span class="toc-text">使用ApplicationEventPublisherAware注入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件多播器"><span class="toc-number">5.</span> <span class="toc-text">事件多播器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#异步事件"><span class="toc-number">6.</span> <span class="toc-text">异步事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-Async实现异步"><span class="toc-number">6.1.</span> <span class="toc-text">使用@Async实现异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义事件多播器"><span class="toc-number">6.2.</span> <span class="toc-text">自定义事件多播器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码解析"><span class="toc-number">7.</span> <span class="toc-text">源码解析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">7.1.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -230,6 +232,10 @@ ContextRefreshe">
 </li>
 </ul>
 <p>​    </p>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -298,7 +304,7 @@ ContextRefreshe">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件"><span class="toc-number">2.</span> <span class="toc-text">事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring中内置的事件"><span class="toc-number">2.1.</span> <span class="toc-text">Spring中内置的事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义事件"><span class="toc-number">2.2.</span> <span class="toc-text">自定义事件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#监听器"><span class="toc-number">3.</span> <span class="toc-text">监听器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现ApplicationListener接口"><span class="toc-number">3.1.</span> <span class="toc-text">实现ApplicationListener接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-EventListener注解"><span class="toc-number">3.2.</span> <span class="toc-text">使用@EventListener注解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件发布"><span class="toc-number">4.</span> <span class="toc-text">事件发布</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring的事件发布类"><span class="toc-number">4.1.</span> <span class="toc-text">Spring的事件发布类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直接注入"><span class="toc-number">4.2.</span> <span class="toc-text">直接注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用ApplicationEventPublisherAware注入"><span class="toc-number">4.3.</span> <span class="toc-text">使用ApplicationEventPublisherAware注入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件多播器"><span class="toc-number">5.</span> <span class="toc-text">事件多播器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#异步事件"><span class="toc-number">6.</span> <span class="toc-text">异步事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-Async实现异步"><span class="toc-number">6.1.</span> <span class="toc-text">使用@Async实现异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义事件多播器"><span class="toc-number">6.2.</span> <span class="toc-text">自定义事件多播器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码解析"><span class="toc-number">7.</span> <span class="toc-text">源码解析</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件"><span class="toc-number">2.</span> <span class="toc-text">事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring中内置的事件"><span class="toc-number">2.1.</span> <span class="toc-text">Spring中内置的事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义事件"><span class="toc-number">2.2.</span> <span class="toc-text">自定义事件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#监听器"><span class="toc-number">3.</span> <span class="toc-text">监听器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现ApplicationListener接口"><span class="toc-number">3.1.</span> <span class="toc-text">实现ApplicationListener接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-EventListener注解"><span class="toc-number">3.2.</span> <span class="toc-text">使用@EventListener注解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件发布"><span class="toc-number">4.</span> <span class="toc-text">事件发布</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring的事件发布类"><span class="toc-number">4.1.</span> <span class="toc-text">Spring的事件发布类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直接注入"><span class="toc-number">4.2.</span> <span class="toc-text">直接注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用ApplicationEventPublisherAware注入"><span class="toc-number">4.3.</span> <span class="toc-text">使用ApplicationEventPublisherAware注入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事件多播器"><span class="toc-number">5.</span> <span class="toc-text">事件多播器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#异步事件"><span class="toc-number">6.</span> <span class="toc-text">异步事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-Async实现异步"><span class="toc-number">6.1.</span> <span class="toc-text">使用@Async实现异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义事件多播器"><span class="toc-number">6.2.</span> <span class="toc-text">自定义事件多播器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码解析"><span class="toc-number">7.</span> <span class="toc-text">源码解析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">7.1.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -340,7 +346,7 @@ ContextRefreshe">
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -401,7 +407,7 @@ ContextRefreshe">
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -441,11 +447,11 @@ ContextRefreshe">
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

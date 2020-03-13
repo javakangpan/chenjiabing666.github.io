@@ -23,7 +23,8 @@
 在单处理器的情况下，每个线程的执行时间是根据时间片大小决定或者自身的其他原因，如果一个线程被迫或者主动暂停运行时，另外一个线程(可能是同一个进程中的线程或者其他进程中的)可以被操作系统(线程调度器)选中占用处理器开始或者继续运行。这种一个线程被暂停，即是被剥夺处理器使用的权利，另外一个线程被选中开始或者继续运行的过程就叫做上下文切换
 一个线程被剥夺处理器的使用权而被暂停运行">
 <meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/shangxiawen1.png">
-<meta property="og:updated_time" content="2018-06-26T14:47:49.395Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:21:49.534Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并发编程之上下文切换">
 <meta name="twitter:description" content="多线程之上下文切换定义
@@ -105,7 +106,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#多线程之上下文切换"><span class="toc-number">1.</span> <span class="toc-text">多线程之上下文切换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上下文切换的分类和诱因"><span class="toc-number">1.2.</span> <span class="toc-text">上下文切换的分类和诱因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自发性的上下文切换"><span class="toc-number">1.2.1.</span> <span class="toc-text">自发性的上下文切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非自发性上下文切换"><span class="toc-number">1.2.2.</span> <span class="toc-text">非自发性上下文切换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上下文切换的花销"><span class="toc-number">1.3.</span> <span class="toc-text">上下文切换的花销</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接开销"><span class="toc-number">1.3.1.</span> <span class="toc-text">直接开销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#间接开销"><span class="toc-number">1.3.2.</span> <span class="toc-text">间接开销</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#多线程之上下文切换"><span class="toc-number">1.</span> <span class="toc-text">多线程之上下文切换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上下文切换的分类和诱因"><span class="toc-number">1.2.</span> <span class="toc-text">上下文切换的分类和诱因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自发性的上下文切换"><span class="toc-number">1.2.1.</span> <span class="toc-text">自发性的上下文切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非自发性上下文切换"><span class="toc-number">1.2.2.</span> <span class="toc-text">非自发性上下文切换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上下文切换的花销"><span class="toc-number">1.3.</span> <span class="toc-text">上下文切换的花销</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接开销"><span class="toc-number">1.3.1.</span> <span class="toc-text">直接开销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#间接开销"><span class="toc-number">1.3.2.</span> <span class="toc-text">间接开销</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.4.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -148,6 +149,10 @@
 <li>处理高速缓存重新加载的开销，一个被迫切出的线程在另外一个处理器切入运行，由于这个处理器之前可能没有运行过该线程，那么这个线程在运行过程中需访问的变量仍然需要该处理器从主内存或者通过一致性协议从其他处理器加载到高速缓存之中，这个也是需要时间消耗的</li>
 <li>上下文切换可能导致整个一级高速缓存被冲刷（Flush），即一级高速缓存中的内容会被写入下一级高速缓存或者主内存中。</li>
 </ol>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -216,7 +221,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#多线程之上下文切换"><span class="toc-number">1.</span> <span class="toc-text">多线程之上下文切换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上下文切换的分类和诱因"><span class="toc-number">1.2.</span> <span class="toc-text">上下文切换的分类和诱因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自发性的上下文切换"><span class="toc-number">1.2.1.</span> <span class="toc-text">自发性的上下文切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非自发性上下文切换"><span class="toc-number">1.2.2.</span> <span class="toc-text">非自发性上下文切换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上下文切换的花销"><span class="toc-number">1.3.</span> <span class="toc-text">上下文切换的花销</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接开销"><span class="toc-number">1.3.1.</span> <span class="toc-text">直接开销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#间接开销"><span class="toc-number">1.3.2.</span> <span class="toc-text">间接开销</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#多线程之上下文切换"><span class="toc-number">1.</span> <span class="toc-text">多线程之上下文切换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上下文切换的分类和诱因"><span class="toc-number">1.2.</span> <span class="toc-text">上下文切换的分类和诱因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自发性的上下文切换"><span class="toc-number">1.2.1.</span> <span class="toc-text">自发性的上下文切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非自发性上下文切换"><span class="toc-number">1.2.2.</span> <span class="toc-text">非自发性上下文切换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上下文切换的花销"><span class="toc-number">1.3.</span> <span class="toc-text">上下文切换的花销</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接开销"><span class="toc-number">1.3.1.</span> <span class="toc-text">直接开销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#间接开销"><span class="toc-number">1.3.2.</span> <span class="toc-text">间接开销</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.4.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -258,7 +263,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -319,7 +324,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -359,11 +364,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

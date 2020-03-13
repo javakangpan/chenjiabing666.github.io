@@ -34,7 +34,8 @@
 字节流和字符流
 
 实际上字节流在操作时本身不会用到缓冲区（内存），是文件本身直接操作的，而字符流在操作时使用了缓冲区，通过缓冲区再操作文件">
-<meta property="og:updated_time" content="2017-06-20T00:55:10.245Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T05:57:05.556Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java IO学习笔记二">
 <meta name="twitter:description" content="Java IO学习笔记二流的概念
@@ -46,6 +47,7 @@
 字节流和字符流
 
 实际上字节流在操作时本身不会用到缓冲区（内存），是文件本身直接操作的，而字符流在操作时使用了缓冲区，通过缓冲区再操作文件">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -121,7 +123,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-IO学习笔记二"><span class="toc-number">1.</span> <span class="toc-text">Java IO学习笔记二</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#流的概念"><span class="toc-number">1.1.</span> <span class="toc-text">流的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字节流和字符流"><span class="toc-number">1.2.</span> <span class="toc-text">字节流和字符流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作流程"><span class="toc-number">1.3.</span> <span class="toc-text">操作流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字节流"><span class="toc-number">1.4.</span> <span class="toc-text">字节流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileOutputStream"><span class="toc-number">1.4.1.</span> <span class="toc-text">FileOutputStream</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用的方法"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">常用的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FileInputStream"><span class="toc-number">1.4.2.</span> <span class="toc-text">FileInputStream</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数-1"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用方法"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-1"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符流"><span class="toc-number">1.5.</span> <span class="toc-text">字符流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符输出流"><span class="toc-number">1.5.1.</span> <span class="toc-text">字符输出流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FileWriter"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">FileWriter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数-2"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用方法-1"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-2"><span class="toc-number">1.5.1.4.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符输入流"><span class="toc-number">1.5.2.</span> <span class="toc-text">字符输入流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FileReader"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">FileReader</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数-3"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用函数"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">常用函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-3"><span class="toc-number">1.5.2.4.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.6.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-IO学习笔记二"><span class="toc-number">1.</span> <span class="toc-text">Java IO学习笔记二</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#流的概念"><span class="toc-number">1.1.</span> <span class="toc-text">流的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字节流和字符流"><span class="toc-number">1.2.</span> <span class="toc-text">字节流和字符流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作流程"><span class="toc-number">1.3.</span> <span class="toc-text">操作流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字节流"><span class="toc-number">1.4.</span> <span class="toc-text">字节流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileOutputStream"><span class="toc-number">1.4.1.</span> <span class="toc-text">FileOutputStream</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用的方法"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">常用的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FileInputStream"><span class="toc-number">1.4.2.</span> <span class="toc-text">FileInputStream</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数-1"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用方法"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-1"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符流"><span class="toc-number">1.5.</span> <span class="toc-text">字符流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符输出流"><span class="toc-number">1.5.1.</span> <span class="toc-text">字符输出流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FileWriter"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">FileWriter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数-2"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用方法-1"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-2"><span class="toc-number">1.5.1.4.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符输入流"><span class="toc-number">1.5.2.</span> <span class="toc-text">字符输入流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FileReader"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">FileReader</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数-3"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用函数"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">常用函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-3"><span class="toc-number">1.5.2.4.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.6.</span> <span class="toc-text">参考文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.7.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -171,9 +173,7 @@
 </blockquote>
 <h4 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h4><blockquote>
 <ul>
-<li><code>close()</code>  关闭文件输出流</li>
-<li><code>void    write(byte[] b)</code>   将 b.length 个字节从指定 byte 数组写入此文件输出流中。</li>
-<li><code>void    write(byte[] b, int off, int len)</code>   将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此文件输出流，这里需要注意的是中文所占字节数为3，英文所占字节数为1</li>
+<li><code>close()</code>  关闭文件输出流<br>  <code>void    write(byte[] b)</code>   将 b.length 个字节从指定 byte 数组写入此文件输出流中。<br>  <code>void    write(byte[] b, int off, int len)</code>   将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此文件输出流，这里需要注意的是中文所占字节数为3，英文所占字节数为1</li>
 <li><code>void write(int b)</code>  将指定字节写入此文件输出流，这个是按照ascii码写入文件的，并不是直接写入的是整数</li>
 </ul>
 </blockquote>
@@ -197,11 +197,7 @@
 </blockquote>
 <h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><blockquote>
 <ul>
-<li><code>int read()</code>  从输入流中读取数据字节，如果到达文件的末尾就返回-1</li>
-<li><code>int    read(byte[] b)</code> 将文件中的内容读取到byte数组中，如果到达文件末尾返回-1</li>
-<li><code>int    read(byte[] b, int off, int len)</code>   从此输入流中将最多 len 个字节的数据读入一个 byte 数组中,这个用于截取字节流，注意这里中文是占三个字节</li>
-<li><code>long    skip(long n)</code>   从输入流中跳过并丢弃 n 个字节的数据，一旦跳过字节那么就从跳过的字节的后面开始读取</li>
-<li><code>int    available()</code>返回的数据是输入流中的字节数，如果没有字节就返回0，<strong>因此可以用这个函数判断文件中是否还有内容</strong></li>
+<li><code>int read()</code>  从输入流中读取数据字节，如果到达文件的末尾就返回-1<br>  <code>int    read(byte[] b)</code> 将文件中的内容读取到byte数组中，如果到达文件末尾返回-1<br>   <code>int    read(byte[] b, int off, int len)</code>   从此输入流中将最多 len 个字节的数据读入一个 byte 数组中,这个用于截取字节流，注意这里中文是占三个字节<br>  <code>long    skip(long n)</code>   从输入流中跳过并丢弃 n 个字节的数据，一旦跳过字节那么就从跳过的字节的后面开始读取<br>   <code>int    available()</code>返回的数据是输入流中的字节数，如果没有字节就返回0，<strong>因此可以用这个函数判断文件中是否还有内容</strong></li>
 </ul>
 </blockquote>
 <h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><blockquote>
@@ -273,8 +269,7 @@
 <ul>
 <li><code>int read(char[] cbuf)</code>   将字符读入数组。</li>
 <li><code>int read()</code>  读取单个字符，之后使用char类型强制转换成字符就行</li>
-<li><code>read(char[] cbuf, int off, int len)</code>  将字符读入数组的某一部分。</li>
-<li><code>boolean    ready()</code>   判断是否准备读取此流，如果读到文件末尾那么就返回false</li>
+<li><code>read(char[] cbuf, int off, int len)</code>  将字符读入数组的某一部分。<br>  <code>boolean    ready()</code>   判断是否准备读取此流，如果读到文件末尾那么就返回false</li>
 <li><code>long skip(long n)</code> 跳过字符。</li>
 </ul>
 </blockquote>
@@ -296,6 +291,10 @@
 <li><a href="http://blog.csdn.net/cynhafa/article/details/6882061" target="_blank" rel="external">http://blog.csdn.net/cynhafa/article/details/6882061</a></li>
 </ul>
 </blockquote>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -364,7 +363,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-IO学习笔记二"><span class="toc-number">1.</span> <span class="toc-text">Java IO学习笔记二</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#流的概念"><span class="toc-number">1.1.</span> <span class="toc-text">流的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字节流和字符流"><span class="toc-number">1.2.</span> <span class="toc-text">字节流和字符流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作流程"><span class="toc-number">1.3.</span> <span class="toc-text">操作流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字节流"><span class="toc-number">1.4.</span> <span class="toc-text">字节流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileOutputStream"><span class="toc-number">1.4.1.</span> <span class="toc-text">FileOutputStream</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用的方法"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">常用的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FileInputStream"><span class="toc-number">1.4.2.</span> <span class="toc-text">FileInputStream</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数-1"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用方法"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-1"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符流"><span class="toc-number">1.5.</span> <span class="toc-text">字符流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符输出流"><span class="toc-number">1.5.1.</span> <span class="toc-text">字符输出流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FileWriter"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">FileWriter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数-2"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用方法-1"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-2"><span class="toc-number">1.5.1.4.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符输入流"><span class="toc-number">1.5.2.</span> <span class="toc-text">字符输入流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FileReader"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">FileReader</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数-3"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用函数"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">常用函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-3"><span class="toc-number">1.5.2.4.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.6.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-IO学习笔记二"><span class="toc-number">1.</span> <span class="toc-text">Java IO学习笔记二</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#流的概念"><span class="toc-number">1.1.</span> <span class="toc-text">流的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字节流和字符流"><span class="toc-number">1.2.</span> <span class="toc-text">字节流和字符流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作流程"><span class="toc-number">1.3.</span> <span class="toc-text">操作流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字节流"><span class="toc-number">1.4.</span> <span class="toc-text">字节流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileOutputStream"><span class="toc-number">1.4.1.</span> <span class="toc-text">FileOutputStream</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用的方法"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">常用的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FileInputStream"><span class="toc-number">1.4.2.</span> <span class="toc-text">FileInputStream</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数-1"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用方法"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-1"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符流"><span class="toc-number">1.5.</span> <span class="toc-text">字符流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符输出流"><span class="toc-number">1.5.1.</span> <span class="toc-text">字符输出流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FileWriter"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">FileWriter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数-2"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用方法-1"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">常用方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-2"><span class="toc-number">1.5.1.4.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符输入流"><span class="toc-number">1.5.2.</span> <span class="toc-text">字符输入流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#FileReader"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">FileReader</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造函数-3"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用函数"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">常用函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例-3"><span class="toc-number">1.5.2.4.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.6.</span> <span class="toc-text">参考文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.7.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -406,7 +405,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -467,7 +466,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -507,11 +506,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

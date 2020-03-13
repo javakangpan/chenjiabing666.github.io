@@ -34,7 +34,8 @@
 
 详解
 第一趟：假设我们需要排序的数组大小为n，一般的思想是先假设第一个元素是有序的，即是已经排序好的，那么第二个元素此时就是待插入的元素，我">
-<meta property="og:updated_time" content="2018-05-09T00:44:35.467Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:23:07.408Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="插入排序算法">
 <meta name="twitter:description" content="插入排序算法思想
@@ -46,6 +47,7 @@
 
 详解
 第一趟：假设我们需要排序的数组大小为n，一般的思想是先假设第一个元素是有序的，即是已经排序好的，那么第二个元素此时就是待插入的元素，我">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -121,7 +123,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#插入排序算法"><span class="toc-number">1.</span> <span class="toc-text">插入排序算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#思想"><span class="toc-number">1.1.</span> <span class="toc-text">思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#详解"><span class="toc-number">1.2.</span> <span class="toc-text">详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法分析"><span class="toc-number">1.3.</span> <span class="toc-text">算法分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法实现-—-java"><span class="toc-number">1.4.</span> <span class="toc-text">算法实现 — java</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#插入排序算法"><span class="toc-number">1.</span> <span class="toc-text">插入排序算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#思想"><span class="toc-number">1.1.</span> <span class="toc-text">思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#详解"><span class="toc-number">1.2.</span> <span class="toc-text">详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法分析"><span class="toc-number">1.3.</span> <span class="toc-text">算法分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法实现-—-java"><span class="toc-number">1.4.</span> <span class="toc-text">算法实现 — java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.5.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -146,6 +148,10 @@
 <li>需要注意的是判断条件一定是<code>j&gt;=0&amp;&amp;insertNode&lt;array[j]</code>，因为如果调换顺序的话，那么会造成数组<code>下标越界</code></li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">* 这个是从小到大的插入排序</div><div class="line">* @Param array  待排序的数组</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span>[] array)</span></span>&#123;</div><div class="line">	<span class="comment">//我们假设第一个元素已经是有序的，因此从第二个开始遍历，总共需要遍历n-1次</span></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; array.length; i++) &#123;</div><div class="line">		</div><div class="line">		<span class="keyword">int</span> insertNode=array[i];  <span class="comment">//这个就是待插入的数，需要和在之前的元素比较</span></div><div class="line">		</div><div class="line">		<span class="keyword">int</span> j=i-<span class="number">1</span>;   <span class="comment">//这个的初始值是待插入数字的前一个数字</span></div><div class="line">		</div><div class="line">		<span class="comment">//如果待插入的数字比前面的元素小并且此时的j没有到达第一个元素(j&gt;=0)</span></div><div class="line">		<span class="comment">//循环结束的条件是insertNode&gt;=array[j],那么此时的insertNode需要插入的位置就是array[j+1]这个位置了</span></div><div class="line">		<span class="comment">//需要注意的是&amp;&amp;是短路与的判断，因此需要将j&gt;=0放在前面，否则如果是insertNode&lt;array[j]&amp;&amp;j&gt;=0的形式，那么当j=-1的时候就会造成下标数组越界</span></div><div class="line">		<span class="keyword">while</span>(j&gt;=<span class="number">0</span>&amp;&amp;insertNode&lt;array[j])&#123;</div><div class="line">			array[j+<span class="number">1</span>]=array[j];  <span class="comment">//元素后移，以便插入   </span></div><div class="line">			j--;   <span class="comment">//比较的元素的下标此时需要前移，和待插入的数据进行比较</span></div><div class="line">		&#125;</div><div class="line">		array[j+<span class="number">1</span>]=insertNode;  <span class="comment">//这个位置就是待插入元素需要插入的位置</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -214,7 +220,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#插入排序算法"><span class="toc-number">1.</span> <span class="toc-text">插入排序算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#思想"><span class="toc-number">1.1.</span> <span class="toc-text">思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#详解"><span class="toc-number">1.2.</span> <span class="toc-text">详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法分析"><span class="toc-number">1.3.</span> <span class="toc-text">算法分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法实现-—-java"><span class="toc-number">1.4.</span> <span class="toc-text">算法实现 — java</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#插入排序算法"><span class="toc-number">1.</span> <span class="toc-text">插入排序算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#思想"><span class="toc-number">1.1.</span> <span class="toc-text">思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#详解"><span class="toc-number">1.2.</span> <span class="toc-text">详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法分析"><span class="toc-number">1.3.</span> <span class="toc-text">算法分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法实现-—-java"><span class="toc-number">1.4.</span> <span class="toc-text">算法实现 — java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.5.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -256,7 +262,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -317,7 +323,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -357,11 +363,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

@@ -33,7 +33,8 @@ ShiroFilterFactoryBean
 
 创建FIlte">
 <meta property="og:image" content="https://raw.githubusercontent.com/chenjiabing666/BlogImage/master/Shiro.png">
-<meta property="og:updated_time" content="2019-08-13T14:42:09.500Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:10:31.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro源码解析">
 <meta name="twitter:description" content="FilterChainManager
@@ -120,7 +121,7 @@ ShiroFilterFactoryBean
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#FilterChainManager"><span class="toc-number">1.</span> <span class="toc-text">FilterChainManager</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ShiroFilterFactoryBean"><span class="toc-number">2.</span> <span class="toc-text">ShiroFilterFactoryBean</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Shiro中的过滤器"><span class="toc-number">3.</span> <span class="toc-text">Shiro中的过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#OncePerRequestFilter"><span class="toc-number">3.1.</span> <span class="toc-text">OncePerRequestFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AdviceFilter"><span class="toc-number">3.2.</span> <span class="toc-text">AdviceFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PathMatchingFilter"><span class="toc-number">3.3.</span> <span class="toc-text">PathMatchingFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AccessControlFilter"><span class="toc-number">3.4.</span> <span class="toc-text">AccessControlFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AuthenticationFilter"><span class="toc-number">3.5.</span> <span class="toc-text">AuthenticationFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现的过滤器"><span class="toc-number">3.6.</span> <span class="toc-text">实现的过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FormAuthenticationFilter"><span class="toc-number">3.6.1.</span> <span class="toc-text">FormAuthenticationFilter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义过滤器"><span class="toc-number">3.7.</span> <span class="toc-text">自定义过滤器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#过滤器创建"><span class="toc-number">4.</span> <span class="toc-text">过滤器创建</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#FilterChainManager"><span class="toc-number">1.</span> <span class="toc-text">FilterChainManager</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ShiroFilterFactoryBean"><span class="toc-number">2.</span> <span class="toc-text">ShiroFilterFactoryBean</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Shiro中的过滤器"><span class="toc-number">3.</span> <span class="toc-text">Shiro中的过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#OncePerRequestFilter"><span class="toc-number">3.1.</span> <span class="toc-text">OncePerRequestFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AdviceFilter"><span class="toc-number">3.2.</span> <span class="toc-text">AdviceFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PathMatchingFilter"><span class="toc-number">3.3.</span> <span class="toc-text">PathMatchingFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AccessControlFilter"><span class="toc-number">3.4.</span> <span class="toc-text">AccessControlFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AuthenticationFilter"><span class="toc-number">3.5.</span> <span class="toc-text">AuthenticationFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现的过滤器"><span class="toc-number">3.6.</span> <span class="toc-text">实现的过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FormAuthenticationFilter"><span class="toc-number">3.6.1.</span> <span class="toc-text">FormAuthenticationFilter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义过滤器"><span class="toc-number">3.7.</span> <span class="toc-text">自定义过滤器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#过滤器创建"><span class="toc-number">4.</span> <span class="toc-text">过滤器创建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">4.1.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -243,6 +244,10 @@ ShiroFilterFactoryBean
 <li>创建过滤器的流程图如下：</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/chenjiabing666/BlogImage/master/Shiro.png" alt=""></p>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -311,7 +316,7 @@ ShiroFilterFactoryBean
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#FilterChainManager"><span class="toc-number">1.</span> <span class="toc-text">FilterChainManager</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ShiroFilterFactoryBean"><span class="toc-number">2.</span> <span class="toc-text">ShiroFilterFactoryBean</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Shiro中的过滤器"><span class="toc-number">3.</span> <span class="toc-text">Shiro中的过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#OncePerRequestFilter"><span class="toc-number">3.1.</span> <span class="toc-text">OncePerRequestFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AdviceFilter"><span class="toc-number">3.2.</span> <span class="toc-text">AdviceFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PathMatchingFilter"><span class="toc-number">3.3.</span> <span class="toc-text">PathMatchingFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AccessControlFilter"><span class="toc-number">3.4.</span> <span class="toc-text">AccessControlFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AuthenticationFilter"><span class="toc-number">3.5.</span> <span class="toc-text">AuthenticationFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现的过滤器"><span class="toc-number">3.6.</span> <span class="toc-text">实现的过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FormAuthenticationFilter"><span class="toc-number">3.6.1.</span> <span class="toc-text">FormAuthenticationFilter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义过滤器"><span class="toc-number">3.7.</span> <span class="toc-text">自定义过滤器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#过滤器创建"><span class="toc-number">4.</span> <span class="toc-text">过滤器创建</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#FilterChainManager"><span class="toc-number">1.</span> <span class="toc-text">FilterChainManager</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ShiroFilterFactoryBean"><span class="toc-number">2.</span> <span class="toc-text">ShiroFilterFactoryBean</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Shiro中的过滤器"><span class="toc-number">3.</span> <span class="toc-text">Shiro中的过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#OncePerRequestFilter"><span class="toc-number">3.1.</span> <span class="toc-text">OncePerRequestFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AdviceFilter"><span class="toc-number">3.2.</span> <span class="toc-text">AdviceFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PathMatchingFilter"><span class="toc-number">3.3.</span> <span class="toc-text">PathMatchingFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AccessControlFilter"><span class="toc-number">3.4.</span> <span class="toc-text">AccessControlFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AuthenticationFilter"><span class="toc-number">3.5.</span> <span class="toc-text">AuthenticationFilter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现的过滤器"><span class="toc-number">3.6.</span> <span class="toc-text">实现的过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FormAuthenticationFilter"><span class="toc-number">3.6.1.</span> <span class="toc-text">FormAuthenticationFilter</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义过滤器"><span class="toc-number">3.7.</span> <span class="toc-text">自定义过滤器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#过滤器创建"><span class="toc-number">4.</span> <span class="toc-text">过滤器创建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">4.1.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -353,7 +358,7 @@ ShiroFilterFactoryBean
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -414,7 +419,7 @@ ShiroFilterFactoryBean
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -454,11 +459,11 @@ ShiroFilterFactoryBean
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

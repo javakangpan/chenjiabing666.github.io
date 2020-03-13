@@ -30,7 +30,8 @@ File是文件和目录路径名的抽象表示形式，总的来说就是java创
 
 File(File parent, String child) 根据 parent 抽象路径名和 child 路径名字符串创建一个新 File 实例。
 File(String pathname)        通过将给定路径名">
-<meta property="og:updated_time" content="2017-06-20T00:55:48.635Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T05:56:45.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java IO学习笔记一">
 <meta name="twitter:description" content="Java IO学习笔记一File
@@ -40,6 +41,7 @@ File是文件和目录路径名的抽象表示形式，总的来说就是java创
 
 File(File parent, String child) 根据 parent 抽象路径名和 child 路径名字符串创建一个新 File 实例。
 File(String pathname)        通过将给定路径名">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -115,7 +117,7 @@ File(String pathname)        通过将给定路径名">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-IO学习笔记一"><span class="toc-number">1.</span> <span class="toc-text">Java IO学习笔记一</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#File"><span class="toc-number">1.1.</span> <span class="toc-text">File</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构造函数"><span class="toc-number">1.1.1.</span> <span class="toc-text">构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-number">1.1.2.</span> <span class="toc-text">常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字段"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">字段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法摘要"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">方法摘要</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例-1"><span class="toc-number">1.2.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建文件"><span class="toc-number">1.2.1.</span> <span class="toc-text">创建文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建文件夹"><span class="toc-number">1.2.2.</span> <span class="toc-text">创建文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列出全部文件"><span class="toc-number">1.2.3.</span> <span class="toc-text">列出全部文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#list"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">list</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#listFiles"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">listFiles</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.3.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-IO学习笔记一"><span class="toc-number">1.</span> <span class="toc-text">Java IO学习笔记一</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#File"><span class="toc-number">1.1.</span> <span class="toc-text">File</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构造函数"><span class="toc-number">1.1.1.</span> <span class="toc-text">构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-number">1.1.2.</span> <span class="toc-text">常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字段"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">字段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法摘要"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">方法摘要</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例-1"><span class="toc-number">1.2.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建文件"><span class="toc-number">1.2.1.</span> <span class="toc-text">创建文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建文件夹"><span class="toc-number">1.2.2.</span> <span class="toc-text">创建文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列出全部文件"><span class="toc-number">1.2.3.</span> <span class="toc-text">列出全部文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#list"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">list</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#listFiles"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">listFiles</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.3.</span> <span class="toc-text">参考文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.4.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -140,25 +142,13 @@ File(String pathname)        通过将给定路径名">
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp"</span>+File.separator+<span class="string">"demo"</span>);   <span class="comment">//使用分隔符创建一个路径</span></div></pre></td></tr></table></figure>
 <h4 id="方法摘要"><a href="#方法摘要" class="headerlink" title="方法摘要"></a>方法摘要</h4><blockquote>
 <ul>
-<li><code>boolean    canExecute()</code> 测试文件或者目录是否是可执行的，测试可执行权限</li>
-<li><code>boolean    canRead()</code>  测试可读权限</li>
-<li><code>boolean    canWrite()</code>    测试可写权限</li>
-<li><code>boolean    setExecutable(boolean executable)</code> 设置文件或者目录的执行权限</li>
-<li><code>setExecutable(boolean executable, boolean ownerOnly)</code> 设置执行权限，如果第二个为true那么只有创建这个文件的用户拥有执行权限</li>
-<li><code>boolean    setReadable(boolean readable)</code> 设置可读的权限</li>
-<li><code>boolean    setReadable(boolean readable, boolean ownerOnly)</code> 同上</li>
+<li><code>boolean    canExecute()</code> 测试文件或者目录是否是可执行的，测试可执行权限<br>  <code>boolean    canRead()</code>  测试可读权限<br>  <code>boolean    canWrite()</code>    测试可写权限<br>  <code>boolean    setExecutable(boolean executable)</code> 设置文件或者目录的执行权限</li>
+<li><code>setExecutable(boolean executable, boolean ownerOnly)</code> 设置执行权限，如果第二个为true那么只有创建这个文件的用户拥有执行权限<br>  <code>boolean    setReadable(boolean readable)</code> 设置可读的权限<br>  <code>boolean    setReadable(boolean readable, boolean ownerOnly)</code> 同上</li>
 <li><code>boolean setReadOnly()</code>   标记此抽象路径名指定的文件或目录，从而只能对其进行读操作。</li>
-<li><code>boolean setWritable(boolean writable)</code>  设置可写的权限</li>
-<li><code>boolean    createNewFile()</code>   创建一个文件，这里创建的不是目录</li>
-<li><code>boolean mkdir()</code>     创建文件夹</li>
-<li><code>File    getAbsoluteFile()</code>  返回此抽象路径名的绝对路径名形式。</li>
-<li><code>String    getAbsolutePath()</code>  返回此抽象路径名的绝对路径名字符串。</li>
-<li><code>String    getName()</code> 返回由此抽象路径名表示的文件或目录的名称。</li>
-<li><code>boolean    isDirectory()</code> 测试此抽象路径名表示的文件是否是一个目录。</li>
+<li><code>boolean setWritable(boolean writable)</code>  设置可写的权限<br> <code>boolean    createNewFile()</code>   创建一个文件，这里创建的不是目录</li>
+<li><code>boolean mkdir()</code>     创建文件夹<br> <code>File    getAbsoluteFile()</code>  返回此抽象路径名的绝对路径名形式。<br>  <code>String    getAbsolutePath()</code>  返回此抽象路径名的绝对路径名字符串。<br>  <code>String    getName()</code> 返回由此抽象路径名表示的文件或目录的名称。<br> <code>boolean    isDirectory()</code> 测试此抽象路径名表示的文件是否是一个目录。</li>
 <li><code>boolean  isFile()</code>    测试此抽象路径名表示的文件是否是一个标准文件。</li>
-<li><code>boolean isHidden()</code>      测试此抽象路径名指定的文件是否是一个隐藏文件。</li>
-<li><code>String[]    list()</code>  返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中的文件和目录。</li>
-<li><code>File[]    listFiles()</code>   返回一个抽象路径名数组，这些路径名表示此抽象路径名表示的目录中的文件。</li>
+<li><code>boolean isHidden()</code>      测试此抽象路径名指定的文件是否是一个隐藏文件。<br>  <code>String[]    list()</code>  返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中的文件和目录。<br> <code>File[]    listFiles()</code>   返回一个抽象路径名数组，这些路径名表示此抽象路径名表示的目录中的文件。</li>
 </ul>
 </blockquote>
 <h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><h3 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">File file=<span class="keyword">new</span> File(<span class="string">"/tmp/demo.txt"</span>);</div><div class="line">    <span class="keyword">if</span>(file.exists())<span class="comment">//如果文件存在就删除这个文件</span></div><div class="line">    &#123;</div><div class="line">        file.delete();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">     <span class="keyword">try</span>&#123;</div><div class="line">        file.createNewFile();   <span class="comment">//创建一个文件</span></div><div class="line">        file.setExecutable(<span class="keyword">false</span>);  <span class="comment">//设置执行权限</span></div><div class="line"></div><div class="line">    &#125;<span class="keyword">catch</span> (IOException e)</div><div class="line">        &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
@@ -176,6 +166,10 @@ File(String pathname)        通过将给定路径名">
 <li><a href="http://www.cnblogs.com/lich/archive/2011/12/10/2283445.html" target="_blank" rel="external">http://www.cnblogs.com/lich/archive/2011/12/10/2283445.html</a></li>
 </ul>
 </blockquote>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -244,7 +238,7 @@ File(String pathname)        通过将给定路径名">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-IO学习笔记一"><span class="toc-number">1.</span> <span class="toc-text">Java IO学习笔记一</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#File"><span class="toc-number">1.1.</span> <span class="toc-text">File</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构造函数"><span class="toc-number">1.1.1.</span> <span class="toc-text">构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-number">1.1.2.</span> <span class="toc-text">常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字段"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">字段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法摘要"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">方法摘要</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例-1"><span class="toc-number">1.2.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建文件"><span class="toc-number">1.2.1.</span> <span class="toc-text">创建文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建文件夹"><span class="toc-number">1.2.2.</span> <span class="toc-text">创建文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列出全部文件"><span class="toc-number">1.2.3.</span> <span class="toc-text">列出全部文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#list"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">list</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#listFiles"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">listFiles</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.3.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-IO学习笔记一"><span class="toc-number">1.</span> <span class="toc-text">Java IO学习笔记一</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#File"><span class="toc-number">1.1.</span> <span class="toc-text">File</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构造函数"><span class="toc-number">1.1.1.</span> <span class="toc-text">构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-number">1.1.2.</span> <span class="toc-text">常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字段"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">字段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法摘要"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">方法摘要</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例-1"><span class="toc-number">1.2.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建文件"><span class="toc-number">1.2.1.</span> <span class="toc-text">创建文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建文件夹"><span class="toc-number">1.2.2.</span> <span class="toc-text">创建文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列出全部文件"><span class="toc-number">1.2.3.</span> <span class="toc-text">列出全部文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#list"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">list</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#listFiles"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">listFiles</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.3.</span> <span class="toc-text">参考文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.4.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -286,7 +280,7 @@ File(String pathname)        通过将给定路径名">
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -347,7 +341,7 @@ File(String pathname)        通过将给定路径名">
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -387,11 +381,11 @@ File(String pathname)        通过将给定路径名">
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

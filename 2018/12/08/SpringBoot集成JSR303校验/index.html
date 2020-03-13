@@ -24,13 +24,15 @@
 添加依赖：
 
 12345&amp;lt;!--JSR303校验的依赖 --&amp;gt;	&amp;lt;dependency&amp;gt;		&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;		&amp;lt;artifactId&amp;gt;spring-boot-starter-validation&amp;lt;/artifactId&amp;">
-<meta property="og:updated_time" content="2018-12-08T03:13:56.631Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:12:16.719Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot集成JSR303校验">
 <meta name="twitter:description" content="SpringBoot集成JSR303使用
 添加依赖：
 
 12345&amp;lt;!--JSR303校验的依赖 --&amp;gt;	&amp;lt;dependency&amp;gt;		&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;		&amp;lt;artifactId&amp;gt;spring-boot-starter-validation&amp;lt;/artifactId&amp;">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -106,7 +108,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot集成JSR303"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot集成JSR303</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.1.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的校验注解"><span class="toc-number">1.2.</span> <span class="toc-text">常用的校验注解</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot集成JSR303"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot集成JSR303</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.1.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的校验注解"><span class="toc-number">1.2.</span> <span class="toc-text">常用的校验注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.3.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -123,6 +125,10 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 校验Person</div><div class="line"> * 必须对参数用<span class="doctag">@Valid</span>，并且后面必须紧跟着BindingResult，否则将会抛出全局异常</div><div class="line"> * <span class="doctag">@param</span> person</div><div class="line"> * <span class="doctag">@param</span> result</div><div class="line"> * <span class="doctag">@return</span></div><div class="line"> */</div><div class="line"><span class="meta">@PostMapping</span>(<span class="string">"/person"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">addPerson</span><span class="params">(@RequestBody @Valid Person person,</span></span></div><div class="line">		BindingResult result) &#123;</div><div class="line">	<span class="keyword">if</span> (result.hasErrors()) &#123; <span class="comment">// 如果有异常的话，就会返回</span></div><div class="line">		List&lt;ObjectError&gt; allErrors = result.getAllErrors();  <span class="comment">//获取所有的异常信息</span></div><div class="line">		<span class="keyword">for</span> (ObjectError error : allErrors) &#123;</div><div class="line">			System.out.println(error.getCode() + <span class="string">"\t"</span></div><div class="line">					+ error.getDefaultMessage());</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> person;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="常用的校验注解"><a href="#常用的校验注解" class="headerlink" title="常用的校验注解"></a>常用的校验注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">空检查</div><div class="line"><span class="meta">@Null</span>       验证对象是否为<span class="keyword">null</span></div><div class="line"><span class="meta">@NotNull</span>    验证对象是否不为<span class="keyword">null</span>, 无法查检长度为<span class="number">0</span>的字符串</div><div class="line"><span class="meta">@NotBlank</span> 检查约束字符串是不是Null还有被Trim的长度是否大于<span class="number">0</span>,只对字符串,且会去掉前后空格.</div><div class="line"><span class="meta">@NotEmpty</span> 检查约束元素是否为NULL或者是EMPTY.</div><div class="line"> </div><div class="line">Booelan检查</div><div class="line"><span class="meta">@AssertTrue</span>     验证 Boolean 对象是否为 <span class="keyword">true</span>  </div><div class="line"><span class="meta">@AssertFalse</span>    验证 Boolean 对象是否为 <span class="keyword">false</span>  </div><div class="line"> </div><div class="line">长度检查</div><div class="line"><span class="meta">@Size</span>(min=, max=) 验证对象（Array,Collection,Map,String）长度是否在给定的范围之内  </div><div class="line"><span class="meta">@Length</span>(min=, max=) Validates that the annotated string is between min and max included.</div><div class="line"> </div><div class="line">日期检查</div><div class="line"><span class="meta">@Past</span>           验证 Date 和 Calendar 对象是否在当前时间之前  </div><div class="line"><span class="meta">@Future</span>     	验证 Date 和 Calendar 对象是否在当前时间之后  </div><div class="line"><span class="meta">@Pattern</span>    	验证 String 对象是否符合正则表达式的规则</div><div class="line"> </div><div class="line">数值检查，建议使用在Stirng,Integer类型，不建议使用在<span class="keyword">int</span>类型上，因为表单值为“”时无法转换为<span class="keyword">int</span>，但可以转换为Stirng为<span class="string">""</span>,Integer为<span class="keyword">null</span></div><div class="line"><span class="meta">@Min</span>            验证 Number 和 String 对象是否大等于指定的值  </div><div class="line"><span class="meta">@Max</span>            验证 Number 和 String 对象是否小等于指定的值  </div><div class="line"><span class="meta">@DecimalMax</span> 被标注的值必须不大于约束中指定的最大值. 这个约束的参数是一个通过BigDecimal定义的最大值的字符串表示.小数存在精度</div><div class="line"><span class="meta">@DecimalMin</span> 被标注的值必须不小于约束中指定的最小值. 这个约束的参数是一个通过BigDecimal定义的最小值的字符串表示.小数存在精度</div><div class="line"><span class="meta">@Digits</span>     验证 Number 和 String 的构成是否合法  </div><div class="line"><span class="meta">@Digits</span>(integer=,fraction=) 验证字符串是否是符合指定格式的数字，interger指定整数精度，fraction指定小数精度。</div><div class="line"> </div><div class="line"><span class="meta">@Range</span>(min=, max=) 检查数字是否介于min和max之间.</div><div class="line"><span class="meta">@Range</span>(min=<span class="number">10000</span>,max=<span class="number">50000</span>,message=<span class="string">"range.bean.wage"</span>)</div><div class="line"><span class="keyword">private</span> BigDecimal wage;</div><div class="line"> </div><div class="line"><span class="meta">@Valid</span>  递归的对关联对象进行校验, 如果关联对象是个集合或者数组,那么对其中的元素进行递归校验,如果是一个map,则对其中的值部分进行校验.(是否进行递归验证)</div><div class="line">    </div><div class="line"><span class="meta">@CreditCardNumber</span> 信用卡验证</div><div class="line"></div><div class="line"><span class="meta">@Email</span>  验证是否是邮件地址，如果为<span class="keyword">null</span>,不进行验证，算通过验证。</div><div class="line"></div><div class="line"><span class="meta">@ScriptAssert</span>(lang= ,script=, alias=)</div><div class="line">    </div><div class="line"><span class="meta">@URL</span>(protocol=,host=, port=,regexp=, flags=)</div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -191,7 +197,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot集成JSR303"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot集成JSR303</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.1.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的校验注解"><span class="toc-number">1.2.</span> <span class="toc-text">常用的校验注解</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot集成JSR303"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot集成JSR303</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.1.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的校验注解"><span class="toc-number">1.2.</span> <span class="toc-text">常用的校验注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.3.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -233,7 +239,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -294,7 +300,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -334,11 +340,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

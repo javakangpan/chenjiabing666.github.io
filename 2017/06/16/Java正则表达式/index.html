@@ -20,11 +20,13 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 <meta property="og:site_name" content="爱撒谎的男孩">
 <meta property="og:description" content="Java正则表达式
 java.util.regex是一个用正则表达式所订制的模式来对字符串进行匹配工作的类库包。它包括两个类：Pattern和Matcher。Pattern是一个正则表达式经编译后的表现模式。Matcher对象是一个状态机器，它依据Pattern对象做为匹配模式对字符串展开匹配检查。 首先一个Pattern实例订制了一个所用语法与PERL的类似的正则表达式经编译后的模式，然后一个M">
-<meta property="og:updated_time" content="2017-06-15T16:23:45.080Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T05:59:10.152Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java正则表达式">
 <meta name="twitter:description" content="Java正则表达式
 java.util.regex是一个用正则表达式所订制的模式来对字符串进行匹配工作的类库包。它包括两个类：Pattern和Matcher。Pattern是一个正则表达式经编译后的表现模式。Matcher对象是一个状态机器，它依据Pattern对象做为匹配模式对字符串展开匹配检查。 首先一个Pattern实例订制了一个所用语法与PERL的类似的正则表达式经编译后的模式，然后一个M">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -100,7 +102,7 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java正则表达式"><span class="toc-number">1.</span> <span class="toc-text">Java正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式的构造摘要"><span class="toc-number">1.1.</span> <span class="toc-text">正则表达式的构造摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern"><span class="toc-number">1.2.</span> <span class="toc-text">Pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-number">1.2.1.</span> <span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-number">1.2.2.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Matcher"><span class="toc-number">1.3.</span> <span class="toc-text">Matcher</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的方法"><span class="toc-number">1.3.1.</span> <span class="toc-text">常用的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#捕获组"><span class="toc-number">1.4.</span> <span class="toc-text">捕获组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贪婪模式和非贪婪模式"><span class="toc-number">1.5.</span> <span class="toc-text">贪婪模式和非贪婪模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.5.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.6.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java正则表达式"><span class="toc-number">1.</span> <span class="toc-text">Java正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式的构造摘要"><span class="toc-number">1.1.</span> <span class="toc-text">正则表达式的构造摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern"><span class="toc-number">1.2.</span> <span class="toc-text">Pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-number">1.2.1.</span> <span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-number">1.2.2.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Matcher"><span class="toc-number">1.3.</span> <span class="toc-text">Matcher</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的方法"><span class="toc-number">1.3.1.</span> <span class="toc-text">常用的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#捕获组"><span class="toc-number">1.4.</span> <span class="toc-text">捕获组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贪婪模式和非贪婪模式"><span class="toc-number">1.5.</span> <span class="toc-text">贪婪模式和非贪婪模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.5.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.6.</span> <span class="toc-text">参考文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.7.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -267,6 +269,10 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 <li><a href="http://blog.csdn.net/lxcnn/article/details/4756030" target="_blank" rel="external">http://blog.csdn.net/lxcnn/article/details/4756030</a></li>
 </ul>
 </blockquote>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -335,7 +341,7 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java正则表达式"><span class="toc-number">1.</span> <span class="toc-text">Java正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式的构造摘要"><span class="toc-number">1.1.</span> <span class="toc-text">正则表达式的构造摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern"><span class="toc-number">1.2.</span> <span class="toc-text">Pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-number">1.2.1.</span> <span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-number">1.2.2.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Matcher"><span class="toc-number">1.3.</span> <span class="toc-text">Matcher</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的方法"><span class="toc-number">1.3.1.</span> <span class="toc-text">常用的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#捕获组"><span class="toc-number">1.4.</span> <span class="toc-text">捕获组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贪婪模式和非贪婪模式"><span class="toc-number">1.5.</span> <span class="toc-text">贪婪模式和非贪婪模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.5.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.6.</span> <span class="toc-text">参考文章</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java正则表达式"><span class="toc-number">1.</span> <span class="toc-text">Java正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式的构造摘要"><span class="toc-number">1.1.</span> <span class="toc-text">正则表达式的构造摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern"><span class="toc-number">1.2.</span> <span class="toc-text">Pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-number">1.2.1.</span> <span class="toc-text">创建对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-number">1.2.2.</span> <span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Matcher"><span class="toc-number">1.3.</span> <span class="toc-text">Matcher</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的方法"><span class="toc-number">1.3.1.</span> <span class="toc-text">常用的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#捕获组"><span class="toc-number">1.4.</span> <span class="toc-text">捕获组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贪婪模式和非贪婪模式"><span class="toc-number">1.5.</span> <span class="toc-text">贪婪模式和非贪婪模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.5.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">1.6.</span> <span class="toc-text">参考文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.7.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -377,7 +383,7 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -438,7 +444,7 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -478,11 +484,11 @@ java.util.regex是一个用正则表达式所订制的模式来对字符串进�
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

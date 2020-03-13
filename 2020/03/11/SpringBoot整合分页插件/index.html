@@ -29,7 +29,8 @@ SSM的整合这里就不再说了，相信现在大部分公司都在使用Sprin
 SpringBoot整合
 SSM的整合这里就不再说了，相信现在大部分公司都在使用SpringBoot，当然万变不离其中，你会了SSM的整合，">
 <meta property="og:image" content="https://raw.githubusercontent.com/chenjiabing666/BlogImage/master/myjszl.jpg">
-<meta property="og:updated_time" content="2020-03-11T03:00:56.966Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:12:05.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot整合分页插件">
 <meta name="twitter:description" content="导读
@@ -114,7 +115,7 @@ SSM的整合这里就不再说了，相信现在大部分公司都在使用Sprin
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#导读"><span class="toc-number">1.</span> <span class="toc-text">导读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot整合"><span class="toc-number">2.</span> <span class="toc-text">SpringBoot整合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#整合之前"><span class="toc-number">2.1.</span> <span class="toc-text">整合之前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开干"><span class="toc-number">2.2.</span> <span class="toc-text">开干</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装xx开始"><span class="toc-number">3.</span> <span class="toc-text">装xx开始</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#导读"><span class="toc-number">1.</span> <span class="toc-text">导读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot整合"><span class="toc-number">2.</span> <span class="toc-text">SpringBoot整合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#整合之前"><span class="toc-number">2.1.</span> <span class="toc-text">整合之前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开干"><span class="toc-number">2.2.</span> <span class="toc-text">开干</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装xx开始"><span class="toc-number">3.</span> <span class="toc-text">装xx开始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">4.</span> <span class="toc-text">笔者有话说</span></a></li></ol>
 		
 		</div>
 		
@@ -157,6 +158,10 @@ SSM的整合这里就不再说了，相信现在大部分公司都在使用Sprin
 <li>另外，笔者新开了一个公众号，以后大部分文章会直接放在公众号上，后续会在公众号上分享精选资源供读者阅览，下面附上公众号链接或者直接搜索【码猿技术专栏】</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/chenjiabing666/BlogImage/master/myjszl.jpg" alt=""></p>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -225,7 +230,7 @@ SSM的整合这里就不再说了，相信现在大部分公司都在使用Sprin
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#导读"><span class="toc-number">1.</span> <span class="toc-text">导读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot整合"><span class="toc-number">2.</span> <span class="toc-text">SpringBoot整合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#整合之前"><span class="toc-number">2.1.</span> <span class="toc-text">整合之前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开干"><span class="toc-number">2.2.</span> <span class="toc-text">开干</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装xx开始"><span class="toc-number">3.</span> <span class="toc-text">装xx开始</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#导读"><span class="toc-number">1.</span> <span class="toc-text">导读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot整合"><span class="toc-number">2.</span> <span class="toc-text">SpringBoot整合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#整合之前"><span class="toc-number">2.1.</span> <span class="toc-text">整合之前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开干"><span class="toc-number">2.2.</span> <span class="toc-text">开干</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装xx开始"><span class="toc-number">3.</span> <span class="toc-text">装xx开始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">4.</span> <span class="toc-text">笔者有话说</span></a></li></ol>
  
   </div>
 
@@ -267,7 +272,7 @@ SSM的整合这里就不再说了，相信现在大部分公司都在使用Sprin
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -328,7 +333,7 @@ SSM的整合这里就不再说了，相信现在大部分公司都在使用Sprin
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -368,11 +373,11 @@ SSM的整合这里就不再说了，相信现在大部分公司都在使用Sprin
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

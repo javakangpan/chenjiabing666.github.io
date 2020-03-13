@@ -48,7 +48,8 @@ Message
 
 
 1234567891011121314151617181920212223242526272829303132333">
-<meta property="og:updated_time" content="2018-05-21T03:32:57.057Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:16:24.081Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring表达式和自动装配">
 <meta name="twitter:description" content="Spring表达式和自动装配【重要】spring表达式作用
@@ -67,6 +68,7 @@ Message
 
 
 1234567891011121314151617181920212223242526272829303132333">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -142,7 +144,7 @@ Message
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring表达式和自动装配"><span class="toc-number">1.</span> <span class="toc-text">Spring表达式和自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#【重要】spring表达式"><span class="toc-number">1.1.</span> <span class="toc-text">【重要】spring表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用"><span class="toc-number">1.1.1.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.1.2.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">1.1.3.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取不是集合类型的值"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">获取不是集合类型的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用数组集合或者List的值"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">引用数组集合或者List的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ValueBean的name属性设置为Person中的Address对象的city值"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">ValueBean的name属性设置为Person中的Address对象的city值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用Map集合中的某个value"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">引用Map集合中的某个value</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】spring表达式支持方法的调用"><span class="toc-number">1.2.</span> <span class="toc-text">【了解】spring表达式支持方法的调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】-自动装装配-autowire"><span class="toc-number">1.3.</span> <span class="toc-text">【了解】 自动装装配(autowire)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.3.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Value"><span class="toc-number">1.4.</span> <span class="toc-text">@Value()</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring表达式和自动装配"><span class="toc-number">1.</span> <span class="toc-text">Spring表达式和自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#【重要】spring表达式"><span class="toc-number">1.1.</span> <span class="toc-text">【重要】spring表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用"><span class="toc-number">1.1.1.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.1.2.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">1.1.3.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取不是集合类型的值"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">获取不是集合类型的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用数组集合或者List的值"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">引用数组集合或者List的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ValueBean的name属性设置为Person中的Address对象的city值"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">ValueBean的name属性设置为Person中的Address对象的city值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用Map集合中的某个value"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">引用Map集合中的某个value</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】spring表达式支持方法的调用"><span class="toc-number">1.2.</span> <span class="toc-text">【了解】spring表达式支持方法的调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】-自动装装配-autowire"><span class="toc-number">1.3.</span> <span class="toc-text">【了解】 自动装装配(autowire)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.3.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Value"><span class="toc-number">1.4.</span> <span class="toc-text">@Value()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.5.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -213,6 +215,10 @@ Message
 <ul>
 <li>可以使用这个注解读配置文件中的值并未成员变量赋值： <code>@Value(#{dbConfig.url})</code>，这个是读取<code>spring-dao.xml</code>中的<utils id="dbConfig" ,location="">中的key为<code>url</code>的值</utils></li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -281,7 +287,7 @@ Message
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring表达式和自动装配"><span class="toc-number">1.</span> <span class="toc-text">Spring表达式和自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#【重要】spring表达式"><span class="toc-number">1.1.</span> <span class="toc-text">【重要】spring表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用"><span class="toc-number">1.1.1.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.1.2.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">1.1.3.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取不是集合类型的值"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">获取不是集合类型的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用数组集合或者List的值"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">引用数组集合或者List的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ValueBean的name属性设置为Person中的Address对象的city值"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">ValueBean的name属性设置为Person中的Address对象的city值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用Map集合中的某个value"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">引用Map集合中的某个value</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】spring表达式支持方法的调用"><span class="toc-number">1.2.</span> <span class="toc-text">【了解】spring表达式支持方法的调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】-自动装装配-autowire"><span class="toc-number">1.3.</span> <span class="toc-text">【了解】 自动装装配(autowire)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.3.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Value"><span class="toc-number">1.4.</span> <span class="toc-text">@Value()</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring表达式和自动装配"><span class="toc-number">1.</span> <span class="toc-text">Spring表达式和自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#【重要】spring表达式"><span class="toc-number">1.1.</span> <span class="toc-text">【重要】spring表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用"><span class="toc-number">1.1.1.</span> <span class="toc-text">作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前提"><span class="toc-number">1.1.2.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">1.1.3.</span> <span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取不是集合类型的值"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">获取不是集合类型的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用数组集合或者List的值"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">引用数组集合或者List的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ValueBean的name属性设置为Person中的Address对象的city值"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">ValueBean的name属性设置为Person中的Address对象的city值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引用Map集合中的某个value"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">引用Map集合中的某个value</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】spring表达式支持方法的调用"><span class="toc-number">1.2.</span> <span class="toc-text">【了解】spring表达式支持方法的调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#【了解】-自动装装配-autowire"><span class="toc-number">1.3.</span> <span class="toc-text">【了解】 自动装装配(autowire)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">1.3.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Value"><span class="toc-number">1.4.</span> <span class="toc-text">@Value()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.5.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -323,7 +329,7 @@ Message
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -384,7 +390,7 @@ Message
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -424,11 +430,11 @@ Message
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

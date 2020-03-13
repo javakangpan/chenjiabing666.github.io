@@ -34,7 +34,8 @@
 
 
 123456url=jdbc:mysql://localhost:3306/tedu_ums?useUnicode=true&amp;amp;characterEncod">
-<meta property="og:updated_time" content="2018-05-04T09:46:12.458Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:16:36.618Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring配置DBCP连接池">
 <meta name="twitter:description" content="Spring配置DBCP连接池建立数据库配置文件jdbc.properties
@@ -46,6 +47,7 @@
 
 
 123456url=jdbc:mysql://localhost:3306/tedu_ums?useUnicode=true&amp;amp;characterEncod">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -121,7 +123,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring配置DBCP连接池"><span class="toc-number">1.</span> <span class="toc-text">Spring配置DBCP连接池</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#建立数据库配置文件jdbc-properties"><span class="toc-number">1.1.</span> <span class="toc-text">建立数据库配置文件jdbc.properties</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring配置DBCP连接池"><span class="toc-number">1.</span> <span class="toc-text">Spring配置DBCP连接池</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#建立数据库配置文件jdbc-properties"><span class="toc-number">1.1.</span> <span class="toc-text">建立数据库配置文件jdbc.properties</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.2.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -143,6 +145,10 @@
 </li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 加载db.properties --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">util:properties</span> <span class="attr">id</span>=<span class="string">"dbConfig"</span></span></div><div class="line">		<span class="attr">location</span>=<span class="string">"classpath:jdbc.properties"</span> /&gt;</div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- 数据源 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span></span></div><div class="line">		<span class="attr">class</span>=<span class="string">"org.apache.commons.dbcp.BasicDataSource"</span>&gt;</div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> </span></div><div class="line">			<span class="attr">value</span>=<span class="string">"#&#123;dbConfig.url&#125;"</span> /&gt;</div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClassName"</span> </span></div><div class="line">			<span class="attr">value</span>=<span class="string">"#&#123;dbConfig.driver&#125;"</span> /&gt;</div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> </span></div><div class="line">			<span class="attr">value</span>=<span class="string">"#&#123;dbConfig.user&#125;"</span> /&gt;</div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> </span></div><div class="line">			<span class="attr">value</span>=<span class="string">"#&#123;dbConfig.password&#125;"</span> /&gt;</div><div class="line">        <span class="comment">&lt;!--初始化链接数量--&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"initialSize"</span> </span></div><div class="line">			<span class="attr">value</span>=<span class="string">"#&#123;dbConfig.initSize&#125;"</span> /&gt;</div><div class="line">        <span class="comment">&lt;!--最大链接数量--&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxActive"</span> </span></div><div class="line">			<span class="attr">value</span>=<span class="string">"#&#123;dbConfig.maxSize&#125;"</span> /&gt;</div><div class="line">	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -211,7 +217,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring配置DBCP连接池"><span class="toc-number">1.</span> <span class="toc-text">Spring配置DBCP连接池</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#建立数据库配置文件jdbc-properties"><span class="toc-number">1.1.</span> <span class="toc-text">建立数据库配置文件jdbc.properties</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring配置DBCP连接池"><span class="toc-number">1.</span> <span class="toc-text">Spring配置DBCP连接池</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#建立数据库配置文件jdbc-properties"><span class="toc-number">1.1.</span> <span class="toc-text">建立数据库配置文件jdbc.properties</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.2.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -253,7 +259,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -314,7 +320,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -354,11 +360,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

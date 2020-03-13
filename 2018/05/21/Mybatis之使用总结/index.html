@@ -26,7 +26,8 @@
 比如我们在商城网站上的显示购物车的模块，使用的CartVo
 
 12345678910111213141516171819202122232425262728293031323334353">
-<meta property="og:updated_time" content="2018-05-21T10:21:36.700Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:03:27.442Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis之使用总结">
 <meta name="twitter:description" content="Mybatis之使用总结多表连接查询
@@ -34,6 +35,7 @@
 比如我们在商城网站上的显示购物车的模块，使用的CartVo
 
 12345678910111213141516171819202122232425262728293031323334353">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -109,7 +111,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mybatis之使用总结"><span class="toc-number">1.</span> <span class="toc-text">Mybatis之使用总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多表连接查询"><span class="toc-number">1.1.</span> <span class="toc-text">多表连接查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表与实体类中的字段不对应"><span class="toc-number">1.2.</span> <span class="toc-text">表与实体类中的字段不对应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mapper方法中参数问题"><span class="toc-number">1.3.</span> <span class="toc-text">Mapper方法中参数问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量删除"><span class="toc-number">1.4.</span> <span class="toc-text">批量删除</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mybatis之使用总结"><span class="toc-number">1.</span> <span class="toc-text">Mybatis之使用总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多表连接查询"><span class="toc-number">1.1.</span> <span class="toc-text">多表连接查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表与实体类中的字段不对应"><span class="toc-number">1.2.</span> <span class="toc-text">表与实体类中的字段不对应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mapper方法中参数问题"><span class="toc-number">1.3.</span> <span class="toc-text">Mapper方法中参数问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量删除"><span class="toc-number">1.4.</span> <span class="toc-text">批量删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.5.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -130,6 +132,10 @@
 <li>我们可以在<code>&lt;delete&gt;</code>节点中使用<code>&lt;forEach&gt;</code>标签来遍历传入的数组</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- </span></div><div class="line"> 	void deleteCartById(Integer[] ids);</div><div class="line"> 	批量删除</div><div class="line">  --&gt;</div><div class="line">  <span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"deleteCartById"</span> <span class="attr">parameterType</span>=<span class="string">"java.lang.Integer"</span>&gt;</span></div><div class="line">  		delete from t_cart </div><div class="line">  		where</div><div class="line">  		id in</div><div class="line">  		<span class="comment">&lt;!-- </span></div><div class="line">  			遍历数组ids</div><div class="line">  			collection:需要遍历的数组</div><div class="line">  			item: 数组中的每一个值</div><div class="line">  			open ： 开始的内容</div><div class="line">  			close: 结束的内容</div><div class="line">  			separator ：每个元素的分割符</div><div class="line">  			最后拼接的就是  (id,id,id,id,id)</div><div class="line">  		 --&gt;</div><div class="line">  		<span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"ids"</span> <span class="attr">item</span>=<span class="string">"id"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></div><div class="line">  			#&#123;id&#125;</div><div class="line">  		<span class="tag">&lt;/<span class="name">foreach</span>&gt;</span> </div><div class="line">  <span class="tag">&lt;/<span class="name">delete</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -198,7 +204,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mybatis之使用总结"><span class="toc-number">1.</span> <span class="toc-text">Mybatis之使用总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多表连接查询"><span class="toc-number">1.1.</span> <span class="toc-text">多表连接查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表与实体类中的字段不对应"><span class="toc-number">1.2.</span> <span class="toc-text">表与实体类中的字段不对应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mapper方法中参数问题"><span class="toc-number">1.3.</span> <span class="toc-text">Mapper方法中参数问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量删除"><span class="toc-number">1.4.</span> <span class="toc-text">批量删除</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mybatis之使用总结"><span class="toc-number">1.</span> <span class="toc-text">Mybatis之使用总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多表连接查询"><span class="toc-number">1.1.</span> <span class="toc-text">多表连接查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表与实体类中的字段不对应"><span class="toc-number">1.2.</span> <span class="toc-text">表与实体类中的字段不对应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mapper方法中参数问题"><span class="toc-number">1.3.</span> <span class="toc-text">Mapper方法中参数问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#批量删除"><span class="toc-number">1.4.</span> <span class="toc-text">批量删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.5.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -240,7 +246,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -301,7 +307,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -341,11 +347,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

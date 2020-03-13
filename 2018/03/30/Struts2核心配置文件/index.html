@@ -34,7 +34,8 @@ name
 属性
 name
 这是一个必填的属性，指定包的名字，便于其他的包引用，因为其他的包可以继承这">
-<meta property="og:updated_time" content="2018-03-30T23:20:28.193Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:18:17.778Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Struts2核心配置文件(package)">
 <meta name="twitter:description" content="struts核心配置文件详解包(package)
@@ -46,6 +47,7 @@ name
 属性
 name
 这是一个必填的属性，指定包的名字，便于其他的包引用，因为其他的包可以继承这">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -121,7 +123,7 @@ name
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#struts核心配置文件详解"><span class="toc-number">1.</span> <span class="toc-text">struts核心配置文件详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#包-package"><span class="toc-number">1.1.</span> <span class="toc-text">包(package)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性"><span class="toc-number">1.1.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#范例"><span class="toc-number">1.1.2.</span> <span class="toc-text">范例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引入另一个包中的action"><span class="toc-number">1.1.3.</span> <span class="toc-text">引入另一个包中的action</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#包含另外一个包（include"><span class="toc-number">1.1.4.</span> <span class="toc-text">包含另外一个包（include)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置处理结果-result"><span class="toc-number">1.2.</span> <span class="toc-text">配置处理结果(result)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类型"><span class="toc-number">1.2.1.</span> <span class="toc-text">类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#局部结果"><span class="toc-number">1.2.2.</span> <span class="toc-text">局部结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置全局结果"><span class="toc-number">1.2.3.</span> <span class="toc-text">配置全局结果</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#struts核心配置文件详解"><span class="toc-number">1.</span> <span class="toc-text">struts核心配置文件详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#包-package"><span class="toc-number">1.1.</span> <span class="toc-text">包(package)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性"><span class="toc-number">1.1.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#范例"><span class="toc-number">1.1.2.</span> <span class="toc-text">范例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引入另一个包中的action"><span class="toc-number">1.1.3.</span> <span class="toc-text">引入另一个包中的action</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#包含另外一个包（include"><span class="toc-number">1.1.4.</span> <span class="toc-text">包含另外一个包（include)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置处理结果-result"><span class="toc-number">1.2.</span> <span class="toc-text">配置处理结果(result)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类型"><span class="toc-number">1.2.1.</span> <span class="toc-text">类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#局部结果"><span class="toc-number">1.2.2.</span> <span class="toc-text">局部结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置全局结果"><span class="toc-number">1.2.3.</span> <span class="toc-text">配置全局结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.3.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -266,6 +268,10 @@ name
 <li><p>但是我们一个action处理错误的页面和特殊，虽然返回的是error，但是我就想跳转到其他的页面，那么可以在这个action的标签下重新定义一个结果，此时的局部结果就会覆盖全局结果</p>
 </li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -334,7 +340,7 @@ name
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#struts核心配置文件详解"><span class="toc-number">1.</span> <span class="toc-text">struts核心配置文件详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#包-package"><span class="toc-number">1.1.</span> <span class="toc-text">包(package)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性"><span class="toc-number">1.1.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#范例"><span class="toc-number">1.1.2.</span> <span class="toc-text">范例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引入另一个包中的action"><span class="toc-number">1.1.3.</span> <span class="toc-text">引入另一个包中的action</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#包含另外一个包（include"><span class="toc-number">1.1.4.</span> <span class="toc-text">包含另外一个包（include)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置处理结果-result"><span class="toc-number">1.2.</span> <span class="toc-text">配置处理结果(result)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类型"><span class="toc-number">1.2.1.</span> <span class="toc-text">类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#局部结果"><span class="toc-number">1.2.2.</span> <span class="toc-text">局部结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置全局结果"><span class="toc-number">1.2.3.</span> <span class="toc-text">配置全局结果</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#struts核心配置文件详解"><span class="toc-number">1.</span> <span class="toc-text">struts核心配置文件详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#包-package"><span class="toc-number">1.1.</span> <span class="toc-text">包(package)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性"><span class="toc-number">1.1.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#范例"><span class="toc-number">1.1.2.</span> <span class="toc-text">范例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引入另一个包中的action"><span class="toc-number">1.1.3.</span> <span class="toc-text">引入另一个包中的action</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#包含另外一个包（include"><span class="toc-number">1.1.4.</span> <span class="toc-text">包含另外一个包（include)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置处理结果-result"><span class="toc-number">1.2.</span> <span class="toc-text">配置处理结果(result)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类型"><span class="toc-number">1.2.1.</span> <span class="toc-text">类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#局部结果"><span class="toc-number">1.2.2.</span> <span class="toc-text">局部结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置全局结果"><span class="toc-number">1.2.3.</span> <span class="toc-text">配置全局结果</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.3.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -376,7 +382,7 @@ name
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -437,7 +443,7 @@ name
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -477,11 +483,11 @@ name
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

@@ -32,7 +32,8 @@ SpringBoot整合es文档
 indexName： 索引名称
 type：索引类型
 shards：分片的数量">
-<meta property="og:updated_time" content="2018-09-02T11:39:23.053Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:10:47.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring-data-elasticsearch">
 <meta name="twitter:description" content="spring-data-elasticsearch
@@ -43,6 +44,7 @@ SpringBoot整合es文档
 indexName： 索引名称
 type：索引类型
 shards：分片的数量">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -118,7 +120,7 @@ shards：分片的数量">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#spring-data-elasticsearch"><span class="toc-number">1.</span> <span class="toc-text">spring-data-elasticsearch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Document"><span class="toc-number">1.1.</span> <span class="toc-text">@Document</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Field"><span class="toc-number">1.2.</span> <span class="toc-text">@Field</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Id"><span class="toc-number">1.3.</span> <span class="toc-text">@Id</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Date类型的存储"><span class="toc-number">1.4.</span> <span class="toc-text">Date类型的存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个实体类"><span class="toc-number">1.5.</span> <span class="toc-text">创建一个实体类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定义查询接口"><span class="toc-number">1.6.</span> <span class="toc-text">定义查询接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法如下："><span class="toc-number">1.6.1.</span> <span class="toc-text">常用方法如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义查询"><span class="toc-number">1.6.2.</span> <span class="toc-text">自定义查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-Query定义自己的es语句"><span class="toc-number">1.7.</span> <span class="toc-text">使用@Query定义自己的es语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#控制结果集数量"><span class="toc-number">1.8.</span> <span class="toc-text">控制结果集数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分页查询"><span class="toc-number">1.9.</span> <span class="toc-text">分页查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单条件分页排序"><span class="toc-number">1.9.1.</span> <span class="toc-text">单条件分页排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多条件分页排序"><span class="toc-number">1.9.2.</span> <span class="toc-text">多条件分页排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日期格式问题"><span class="toc-number">1.10.</span> <span class="toc-text">日期格式问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用ElasticsearchTemplate"><span class="toc-number">1.11.</span> <span class="toc-text">使用ElasticsearchTemplate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-number">1.12.</span> <span class="toc-text">参考文档</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#spring-data-elasticsearch"><span class="toc-number">1.</span> <span class="toc-text">spring-data-elasticsearch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Document"><span class="toc-number">1.1.</span> <span class="toc-text">@Document</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Field"><span class="toc-number">1.2.</span> <span class="toc-text">@Field</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Id"><span class="toc-number">1.3.</span> <span class="toc-text">@Id</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Date类型的存储"><span class="toc-number">1.4.</span> <span class="toc-text">Date类型的存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个实体类"><span class="toc-number">1.5.</span> <span class="toc-text">创建一个实体类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定义查询接口"><span class="toc-number">1.6.</span> <span class="toc-text">定义查询接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法如下："><span class="toc-number">1.6.1.</span> <span class="toc-text">常用方法如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义查询"><span class="toc-number">1.6.2.</span> <span class="toc-text">自定义查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-Query定义自己的es语句"><span class="toc-number">1.7.</span> <span class="toc-text">使用@Query定义自己的es语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#控制结果集数量"><span class="toc-number">1.8.</span> <span class="toc-text">控制结果集数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分页查询"><span class="toc-number">1.9.</span> <span class="toc-text">分页查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单条件分页排序"><span class="toc-number">1.9.1.</span> <span class="toc-text">单条件分页排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多条件分页排序"><span class="toc-number">1.9.2.</span> <span class="toc-text">多条件分页排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日期格式问题"><span class="toc-number">1.10.</span> <span class="toc-text">日期格式问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用ElasticsearchTemplate"><span class="toc-number">1.11.</span> <span class="toc-text">使用ElasticsearchTemplate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-number">1.12.</span> <span class="toc-text">参考文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.13.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -331,6 +333,10 @@ shards：分片的数量">
 <li><a href="https://es.yemengying.com/4/4.1.html" target="_blank" rel="external">https://es.yemengying.com/4/4.1.html</a></li>
 <li><a href="https://docs.spring.io/spring-data/elasticsearch/docs/3.0.9.RELEASE/api/" target="_blank" rel="external">sptring-data-es的API</a></li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -399,7 +405,7 @@ shards：分片的数量">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#spring-data-elasticsearch"><span class="toc-number">1.</span> <span class="toc-text">spring-data-elasticsearch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Document"><span class="toc-number">1.1.</span> <span class="toc-text">@Document</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Field"><span class="toc-number">1.2.</span> <span class="toc-text">@Field</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Id"><span class="toc-number">1.3.</span> <span class="toc-text">@Id</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Date类型的存储"><span class="toc-number">1.4.</span> <span class="toc-text">Date类型的存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个实体类"><span class="toc-number">1.5.</span> <span class="toc-text">创建一个实体类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定义查询接口"><span class="toc-number">1.6.</span> <span class="toc-text">定义查询接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法如下："><span class="toc-number">1.6.1.</span> <span class="toc-text">常用方法如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义查询"><span class="toc-number">1.6.2.</span> <span class="toc-text">自定义查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-Query定义自己的es语句"><span class="toc-number">1.7.</span> <span class="toc-text">使用@Query定义自己的es语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#控制结果集数量"><span class="toc-number">1.8.</span> <span class="toc-text">控制结果集数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分页查询"><span class="toc-number">1.9.</span> <span class="toc-text">分页查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单条件分页排序"><span class="toc-number">1.9.1.</span> <span class="toc-text">单条件分页排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多条件分页排序"><span class="toc-number">1.9.2.</span> <span class="toc-text">多条件分页排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日期格式问题"><span class="toc-number">1.10.</span> <span class="toc-text">日期格式问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用ElasticsearchTemplate"><span class="toc-number">1.11.</span> <span class="toc-text">使用ElasticsearchTemplate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-number">1.12.</span> <span class="toc-text">参考文档</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#spring-data-elasticsearch"><span class="toc-number">1.</span> <span class="toc-text">spring-data-elasticsearch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Document"><span class="toc-number">1.1.</span> <span class="toc-text">@Document</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Field"><span class="toc-number">1.2.</span> <span class="toc-text">@Field</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Id"><span class="toc-number">1.3.</span> <span class="toc-text">@Id</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Date类型的存储"><span class="toc-number">1.4.</span> <span class="toc-text">Date类型的存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个实体类"><span class="toc-number">1.5.</span> <span class="toc-text">创建一个实体类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定义查询接口"><span class="toc-number">1.6.</span> <span class="toc-text">定义查询接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法如下："><span class="toc-number">1.6.1.</span> <span class="toc-text">常用方法如下：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义查询"><span class="toc-number">1.6.2.</span> <span class="toc-text">自定义查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-Query定义自己的es语句"><span class="toc-number">1.7.</span> <span class="toc-text">使用@Query定义自己的es语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#控制结果集数量"><span class="toc-number">1.8.</span> <span class="toc-text">控制结果集数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分页查询"><span class="toc-number">1.9.</span> <span class="toc-text">分页查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单条件分页排序"><span class="toc-number">1.9.1.</span> <span class="toc-text">单条件分页排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多条件分页排序"><span class="toc-number">1.9.2.</span> <span class="toc-text">多条件分页排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日期格式问题"><span class="toc-number">1.10.</span> <span class="toc-text">日期格式问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用ElasticsearchTemplate"><span class="toc-number">1.11.</span> <span class="toc-text">使用ElasticsearchTemplate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-number">1.12.</span> <span class="toc-text">参考文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.13.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -441,7 +447,7 @@ shards：分片的数量">
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -502,7 +508,7 @@ shards：分片的数量">
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -542,11 +548,11 @@ shards：分片的数量">
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

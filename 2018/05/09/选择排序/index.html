@@ -32,7 +32,8 @@
 第一趟：在整个数组中选择出最小的元素，和数组中的第一个元素交换位置，那么此时的第一个元素就是最小的
 第二趟： 从第二个元素开始再次查找剩余数组中最小的元素，和数组中的第二个元素交换位置，那么此时的第一个和第二个元素就是最小的
 第三趟： 从第三个元素开始再次">
-<meta property="og:updated_time" content="2018-06-09T13:02:51.634Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:24:57.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="选择排序">
 <meta name="twitter:description" content="选择排序思想(从小到大)
@@ -43,6 +44,7 @@
 第一趟：在整个数组中选择出最小的元素，和数组中的第一个元素交换位置，那么此时的第一个元素就是最小的
 第二趟： 从第二个元素开始再次查找剩余数组中最小的元素，和数组中的第二个元素交换位置，那么此时的第一个和第二个元素就是最小的
 第三趟： 从第三个元素开始再次">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -118,7 +120,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#选择排序"><span class="toc-number">1.</span> <span class="toc-text">选择排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#思想-从小到大"><span class="toc-number">1.1.</span> <span class="toc-text">思想(从小到大)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析"><span class="toc-number">1.2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现"><span class="toc-number">1.3.</span> <span class="toc-text">实现</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#选择排序"><span class="toc-number">1.</span> <span class="toc-text">选择排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#思想-从小到大"><span class="toc-number">1.1.</span> <span class="toc-text">思想(从小到大)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析"><span class="toc-number">1.2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现"><span class="toc-number">1.3.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.4.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -133,6 +135,10 @@
 <li><code>第四趟</code>………………………….<code>第n-1趟</code></li>
 </ul>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 思想： 从第一个开始取值和后面的元素开始比较，如果有比它小的，那么就交换元素值</div><div class="line"> * 		 外层循环从第一个元素开始，内层循环保证了从外层循环的后面一个元素开始，这样就是保证了比较</div><div class="line"> * <span class="doctag">@param</span> arrary 待排序的数组</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectSort</span><span class="params">(<span class="keyword">int</span>[] arrary)</span></span>&#123;</div><div class="line">	<span class="comment">//外层循环，从第一个元素开始直到倒数第二个元素</span></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arrary.length-<span class="number">1</span>; i++) &#123;</div><div class="line">		<span class="keyword">int</span> k=i;   <span class="comment">//这个是保存最小元素的下标，初始化是i</span></div><div class="line">		<span class="comment">//内层循环，从i+1个元素开始直到最后一个元素</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; arrary.length; j++) &#123;</div><div class="line">			<span class="comment">//如果下标为j的元素比下标为k的元素小，那么k=j</span></div><div class="line">			<span class="keyword">if</span> (arrary[j]&lt;arrary[k]) &#123;</div><div class="line">				k=j;  <span class="comment">//记录此时的最小的下标</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//如果此时的k改变了，即是不等于初始值i了，那么表示找到比初始值更小的了，则交换位置</span></div><div class="line">		<span class="keyword">if</span> (k!=i) &#123;</div><div class="line">			<span class="comment">//arrary[k]和arrary[i]交换位置，因为最小的放在前面</span></div><div class="line">			<span class="keyword">int</span> temp=arrary[i];</div><div class="line">			arrary[i]=arrary[k];</div><div class="line">			arrary[k]=temp;  </div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -201,7 +207,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#选择排序"><span class="toc-number">1.</span> <span class="toc-text">选择排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#思想-从小到大"><span class="toc-number">1.1.</span> <span class="toc-text">思想(从小到大)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析"><span class="toc-number">1.2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现"><span class="toc-number">1.3.</span> <span class="toc-text">实现</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#选择排序"><span class="toc-number">1.</span> <span class="toc-text">选择排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#思想-从小到大"><span class="toc-number">1.1.</span> <span class="toc-text">思想(从小到大)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析"><span class="toc-number">1.2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现"><span class="toc-number">1.3.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.4.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -243,7 +249,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -304,7 +310,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -344,11 +350,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

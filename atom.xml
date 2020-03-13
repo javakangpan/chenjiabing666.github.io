@@ -151,7 +151,7 @@
     <link href="http://chenjiabing666.github.io/2020/03/11/SpringBoot%E6%95%B4%E5%90%88%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6/"/>
     <id>http://chenjiabing666.github.io/2020/03/11/SpringBoot整合分页插件/</id>
     <published>2020-03-11T03:00:04.000Z</published>
-    <updated>2020-03-11T03:00:56.966Z</updated>
+    <updated>2020-03-13T06:12:05.645Z</updated>
     
     <content type="html"><![CDATA[<h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
 <li>很久以前的项目分页查询的话大概会用limit，如果要统计总数还需要使用count，总之大多数情况下都是很麻烦的一件事，特别是使用Mybatis。</li>
@@ -192,6 +192,10 @@
 <li>另外，笔者新开了一个公众号，以后大部分文章会直接放在公众号上，后续会在公众号上分享精选资源供读者阅览，下面附上公众号链接或者直接搜索【码猿技术专栏】</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/chenjiabing666/BlogImage/master/myjszl.jpg" alt=""></p>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -429,7 +433,7 @@
     <link href="http://chenjiabing666.github.io/2020/03/07/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81-redis%E5%AE%9E%E7%8E%B0/"/>
     <id>http://chenjiabing666.github.io/2020/03/07/分布式锁-redis实现/</id>
     <published>2020-03-07T09:53:15.000Z</published>
-    <updated>2020-03-07T09:55:08.104Z</updated>
+    <updated>2020-03-13T06:20:54.400Z</updated>
     
     <content type="html"><![CDATA[<h2 id="为什么要分布式锁"><a href="#为什么要分布式锁" class="headerlink" title="为什么要分布式锁"></a>为什么要分布式锁</h2><ul>
 <li>在单机的情况下，可以通过jvm提供的系列线程安全的操作来处理高并发的情况，但是在分布式的环境下，jvm提供的线程安全操作明显是不能满足要求的。在一些小型的互联网公司经常做的crud操作如果在高并发的情况下会出现很大的问题，比如：</li>
@@ -495,6 +499,10 @@
 <h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><ul>
 <li>Redisson的文档很齐全，具体可看文档<a href="https://github.com/redisson/redisson/wiki/%E7%9B%AE%E5%BD%95" target="_blank" rel="external">https://github.com/redisson/redisson/wiki/%E7%9B%AE%E5%BD%95</a></li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -516,7 +524,7 @@
     <link href="http://chenjiabing666.github.io/2019/08/17/Shiro/"/>
     <id>http://chenjiabing666.github.io/2019/08/17/Shiro/</id>
     <published>2019-08-17T11:22:05.000Z</published>
-    <updated>2019-08-17T11:23:11.324Z</updated>
+    <updated>2020-03-13T06:10:24.420Z</updated>
     
     <content type="html"><![CDATA[<h1 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h1><ul>
 <li>添加Shiro的依赖</li>
@@ -654,6 +662,10 @@
 <h1 id="SSM-Shiro整合"><a href="#SSM-Shiro整合" class="headerlink" title="SSM+Shiro整合"></a>SSM+Shiro整合</h1><ul>
 <li>源码地址：<a href="https://github.com/chenjiabing666/ssm-shiro" target="_blank" rel="external">https://github.com/chenjiabing666/ssm-shiro</a></li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -677,7 +689,7 @@
     <link href="http://chenjiabing666.github.io/2019/08/13/Shiro%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
     <id>http://chenjiabing666.github.io/2019/08/13/Shiro源码解析/</id>
     <published>2019-08-13T14:41:32.000Z</published>
-    <updated>2019-08-13T14:42:09.500Z</updated>
+    <updated>2020-03-13T06:10:31.333Z</updated>
     
     <content type="html"><![CDATA[<h1 id="FilterChainManager"><a href="#FilterChainManager" class="headerlink" title="FilterChainManager"></a>FilterChainManager</h1><ul>
 <li>过滤器管理器，在ShiroFilterFactoryBean创建的时候会创建管理器，将配置好的过滤器添加到其中</li>
@@ -798,6 +810,10 @@
 <li>创建过滤器的流程图如下：</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/chenjiabing666/BlogImage/master/Shiro.png" alt=""></p>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -819,7 +835,7 @@
     <link href="http://chenjiabing666.github.io/2019/08/05/mybatis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
     <id>http://chenjiabing666.github.io/2019/08/05/mybatis源码解析/</id>
     <published>2019-08-04T16:47:11.000Z</published>
-    <updated>2019-08-04T16:48:02.274Z</updated>
+    <updated>2020-03-13T06:04:08.884Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h1><ul>
 <li>mybatis的全局配置类，其中封装了mybatis的全部配置，在mybaits加载全局配置文件和Mapper文件的时候，会将里面的xml中的各个元素解析出来，封装在其中。</li>
@@ -920,6 +936,10 @@
 <h2 id="Mybaits执行查询的简化版"><a href="#Mybaits执行查询的简化版" class="headerlink" title="Mybaits执行查询的简化版"></a>Mybaits执行查询的简化版</h2><ul>
 <li>主要根据Mybatis中的重要的四大类，和SqlSession、TypeHandler进行简化描述，如下：<br><img src="https://raw.githubusercontent.com/chenjiabing666/BlogImage/master/mybatis%20select%20simple.png" alt=""></li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -941,7 +961,7 @@
     <link href="http://chenjiabing666.github.io/2019/08/05/mybatis%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/"/>
     <id>http://chenjiabing666.github.io/2019/08/05/mybatis深入学习/</id>
     <published>2019-08-04T16:46:56.000Z</published>
-    <updated>2019-08-04T16:48:48.418Z</updated>
+    <updated>2020-03-13T06:03:46.855Z</updated>
     
     <content type="html"><![CDATA[<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><ul>
 <li>按照官方文档搭建即可</li>
@@ -1330,6 +1350,10 @@
 </li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span></span>&#123;</div><div class="line">       SqlSessionTemplate sqlSessionTemplate = applicationContext.getBean(SqlSessionTemplate.class);</div><div class="line">       PatientMapper mapper = sqlSessionTemplate.getMapper(PatientMapper.class);</div><div class="line">       <span class="comment">//分页的请求类，继承ParamReq</span></div><div class="line">       UserReq req=<span class="keyword">new</span> UserReq();</div><div class="line">       PageInfo&lt;Patient&gt; pageInfo = PageHelperUtils.execute(req, mapper::selectAllPatient);</div><div class="line">       System.out.println(pageInfo.getList());</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -1353,7 +1377,7 @@
     <link href="http://chenjiabing666.github.io/2019/07/31/Springmvc%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/"/>
     <id>http://chenjiabing666.github.io/2019/07/31/Springmvc源码解读/</id>
     <published>2019-07-31T06:45:44.000Z</published>
-    <updated>2019-07-31T06:46:45.729Z</updated>
+    <updated>2020-03-13T06:14:02.398Z</updated>
     
     <content type="html"><![CDATA[<h1 id="实现Controller的方式"><a href="#实现Controller的方式" class="headerlink" title="实现Controller的方式"></a>实现Controller的方式</h1><ul>
 <li>如何实现一个controller，在源码中其实将controller叫做handler，我们通常知道实现controller的方式就是在类上添加一个<code>@Controller</code>和<code>@RequestMapping</code>注解，但是还有其他的方式定义一个controller</li>
@@ -1412,6 +1436,10 @@
 </li>
 </ul>
 <h1 id="执行流程分析"><a href="#执行流程分析" class="headerlink" title="执行流程分析"></a>执行流程分析</h1><p><img src="https://raw.githubusercontent.com/chenjiabing666/BlogImage/master/springMVC%20-proceed.png" alt=""></p>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -1433,7 +1461,7 @@
     <link href="http://chenjiabing666.github.io/2019/07/31/Springmvc%E6%B3%A8%E8%A7%A3%E7%89%88%E5%BC%80%E5%8F%91/"/>
     <id>http://chenjiabing666.github.io/2019/07/31/Springmvc注解版开发/</id>
     <published>2019-07-31T06:45:22.000Z</published>
-    <updated>2019-07-31T06:47:07.028Z</updated>
+    <updated>2020-03-13T06:13:50.784Z</updated>
     
     <content type="html"><![CDATA[<h1 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h1><h2 id="搭建原理"><a href="#搭建原理" class="headerlink" title="搭建原理"></a>搭建原理</h2><p><img src="https://docs.spring.io/spring/docs/5.1.8.RELEASE/spring-framework-reference/images/mvc-context-hierarchy.png" alt=""></p>
 <h2 id="springMVC版本"><a href="#springMVC版本" class="headerlink" title="springMVC版本"></a>springMVC版本</h2><ul>
@@ -1641,6 +1669,10 @@
 <li><code>@EnableMvc</code>注解其实就是注入了一个配置类<code>DelegatingWebMvcConfiguration</code>，那么我们可以将自定义的配置类实现该类即可完成MVC的高级功能，此时就不需要使用该注解了，如下：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages = &#123;<span class="string">"cn.tedu.demo"</span>&#125;,includeFilters = &#123;<span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION,classes = &#123;Controller.class, Component.class&#125;)&#125;,useDefaultFilters = <span class="keyword">false</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AdvanceConfig</span> <span class="keyword">extends</span> <span class="title">DelegatingWebMvcConfiguration</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -1661,7 +1693,7 @@
     <link href="http://chenjiabing666.github.io/2019/07/19/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82Spring-AOP%E5%8E%9F%E7%90%86/"/>
     <id>http://chenjiabing666.github.io/2019/07/19/一文搞懂Spring-AOP原理/</id>
     <published>2019-07-19T14:16:50.000Z</published>
-    <updated>2019-07-21T17:19:02.247Z</updated>
+    <updated>2020-03-13T06:20:20.595Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
 <li>面向切面编程，是面向对象编程的重要组成部分，在不改变业务逻辑功能的基础上，对<strong>横切逻辑</strong>进行扩展</li>
@@ -1921,6 +1953,10 @@
 <h1 id="AOP执行流程"><a href="#AOP执行流程" class="headerlink" title="AOP执行流程"></a>AOP执行流程</h1><ul>
 <li><img src="https://raw.githubusercontent.com/chenjiabing666/BlogImage/master/AOP-proceed.png" alt=""></li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -1942,7 +1978,7 @@
     <link href="http://chenjiabing666.github.io/2019/07/17/Spring%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/"/>
     <id>http://chenjiabing666.github.io/2019/07/17/Spring解决循环依赖/</id>
     <published>2019-07-16T17:13:29.000Z</published>
-    <updated>2019-07-16T17:14:14.661Z</updated>
+    <updated>2020-03-13T06:16:32.614Z</updated>
     
     <content type="html"><![CDATA[<h1 id="什么是循环依赖"><a href="#什么是循环依赖" class="headerlink" title="什么是循环依赖"></a>什么是循环依赖</h1><ul>
 <li>循环依赖分为两种，一种是构造器的相互依赖，另外一种是属性的相互依赖。</li>
@@ -1997,6 +2033,10 @@
 <h1 id="Spring为什么不能解决多例的循环依赖"><a href="#Spring为什么不能解决多例的循环依赖" class="headerlink" title="Spring为什么不能解决多例的循环依赖"></a>Spring为什么不能解决多例的循环依赖</h1><ul>
 <li>多实例Bean是每次调用一次getBean都会执行一次构造方法并且未属性赋值，根本没有三级缓存，因此解决循环依赖。</li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -2019,7 +2059,7 @@
     <link href="http://chenjiabing666.github.io/2019/07/07/Spring%E4%BA%8B%E5%8A%A1%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
     <id>http://chenjiabing666.github.io/2019/07/07/Spring事务源码解析/</id>
     <published>2019-07-07T11:41:07.000Z</published>
-    <updated>2019-07-20T10:21:12.753Z</updated>
+    <updated>2020-03-13T06:15:23.797Z</updated>
     
     <content type="html"><![CDATA[<h1 id="配置注解版事务"><a href="#配置注解版事务" class="headerlink" title="配置注解版事务"></a>配置注解版事务</h1><h2 id="事务管理器"><a href="#事务管理器" class="headerlink" title="事务管理器"></a>事务管理器</h2><ul>
 <li>事务管理器的接口是<code>PlatformTransactionManager</code>，其中定义了三个接口方法如下：<ul>
@@ -2260,6 +2300,10 @@
 </ul>
 </li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -2280,7 +2324,7 @@
     <link href="http://chenjiabing666.github.io/2019/06/30/Spring%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6/"/>
     <id>http://chenjiabing666.github.io/2019/06/30/Spring中的事件/</id>
     <published>2019-06-30T06:22:07.000Z</published>
-    <updated>2019-06-30T06:22:33.196Z</updated>
+    <updated>2020-03-13T06:14:25.700Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
 <li>学过编程语言的肯定知道事件，在JS中事件，Android中的事件，大多是鼠标点击，键盘事件，手指滑动事件等等。在Spring中也有一些事件，比如容器启动、容器关闭、容器刷新都是一个事件。</li>
@@ -2393,6 +2437,10 @@
 </li>
 </ul>
 <p>​    </p>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -2414,7 +2462,7 @@
     <link href="http://chenjiabing666.github.io/2019/06/27/BeanFactoryPostProcessor%E8%A7%A3%E6%9E%90/"/>
     <id>http://chenjiabing666.github.io/2019/06/27/BeanFactoryPostProcessor解析/</id>
     <published>2019-06-27T15:34:47.000Z</published>
-    <updated>2019-06-27T15:35:13.866Z</updated>
+    <updated>2020-03-13T05:51:19.899Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
 <li>Spring IoC容器允许BeanFactoryPostProcessor在容器实例化任何bean之前读取bean的定义(配置元数据)，并可以修改它。同时可以定义多个BeanFactoryPostProcessor，通过设置’order’属性来确定各个BeanFactoryPostProcessor执行顺序。</li>
@@ -2429,6 +2477,10 @@
 <h1 id="MergedBeanDefinitionPostProcessor"><a href="#MergedBeanDefinitionPostProcessor" class="headerlink" title="MergedBeanDefinitionPostProcessor"></a>MergedBeanDefinitionPostProcessor</h1><ul>
 <li>后续更新</li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -2450,7 +2502,7 @@
     <link href="http://chenjiabing666.github.io/2019/06/27/BeanWrapper%E8%A7%A3%E6%9E%90/"/>
     <id>http://chenjiabing666.github.io/2019/06/27/BeanWrapper解析/</id>
     <published>2019-06-27T15:33:20.000Z</published>
-    <updated>2019-06-27T15:33:53.410Z</updated>
+    <updated>2020-03-13T05:51:40.048Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
 <li>BeanWrapper是Spring底层经常使用的一个接口，简单来说是对Bean的一种包装，包括对Bean的属性、方法，数据等。</li>
@@ -2476,6 +2528,10 @@
 <li>我们可以同<code>BeanWrapper</code>和<code>PropertyDescriptor</code>可以很轻松实现属性的复制，下面是本人手写的一个复制的工具类【当然这个是很粗糙的，和BeanUtils中的copyPropreties方法不能相提并论，不喜勿喷】<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 对象复制【浅克隆】</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NewCopyUtils</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CLASS=<span class="string">"class"</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 复制对象【只能复制基本数据类型，浅克隆】</div><div class="line">     * <span class="doctag">@param</span> source 源对象</div><div class="line">     * <span class="doctag">@param</span> target 目标对象</div><div class="line">     * <span class="doctag">@param</span> ingoreAgrs 忽略的属性</div><div class="line">     * <span class="doctag">@throws</span> Exception</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">copyProperties</span><span class="params">(Object source,Object target,String... ingoreAgrs)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">if</span> (source.getClass().isInterface()||target.getClass().isInterface())&#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"source和target不能为接口"</span>);</div><div class="line">        &#125;</div><div class="line">        BeanWrapper sourceWrap = createBeanWrap(source);</div><div class="line">        BeanWrapper targetWrap = createBeanWrap(target);</div><div class="line">        PropertyDescriptor[] targetPds = targetWrap.getPropertyDescriptors();</div><div class="line">        PropertyDescriptor[] sourcePds = sourceWrap.getPropertyDescriptors();</div><div class="line">        <span class="comment">//根据名称分组，减少一层循环</span></div><div class="line">        Map&lt;String, List&lt;PropertyDescriptor&gt;&gt; map = Arrays.asList(sourcePds).parallelStream().filter(o -&gt; !StringUtils.equals(CLASS, o.getName())).collect(Collectors.groupingBy(o -&gt; o.getName()));</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; targetPds.length; i++) &#123;</div><div class="line">            PropertyDescriptor tpd=targetPds[i];</div><div class="line">            <span class="comment">//去掉class属性和不要的复制的属性</span></div><div class="line">            <span class="keyword">if</span> (!StringUtils.equals(CLASS,tpd.getName())&amp;&amp; !Arrays.asList(ingoreAgrs).contains(tpd.getName()))&#123;</div><div class="line">                List&lt;PropertyDescriptor&gt; list = map.getOrDefault(tpd.getName(), <span class="keyword">null</span>);</div><div class="line">                <span class="keyword">if</span> (Objects.nonNull(list))&#123;</div><div class="line">                    Method writeMethod = tpd.getWriteMethod();</div><div class="line">                    Method readMethod = list.get(<span class="number">0</span>).getReadMethod();</div><div class="line">                    <span class="keyword">if</span> (Objects.isNull(writeMethod)&amp;&amp;Objects.isNull(readMethod))&#123;</div><div class="line">                        <span class="keyword">throw</span>  <span class="keyword">new</span> Exception(<span class="string">"属性必须有get和set方法"</span>);</div><div class="line">                    &#125;</div><div class="line">                    Object o = readMethod.invoke(source);</div><div class="line">                    writeMethod.invoke(target,o);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 构造BeanWrapImpl</div><div class="line">     * <span class="doctag">@param</span> source 对象</div><div class="line">     * <span class="doctag">@return</span> BeanWrapper</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> BeanWrapper <span class="title">createBeanWrap</span><span class="params">(Object source)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BeanWrapperImpl(source);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -2497,7 +2553,7 @@
     <link href="http://chenjiabing666.github.io/2019/06/25/InstantiationAwareBeanPostProcessor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
     <id>http://chenjiabing666.github.io/2019/06/25/InstantiationAwareBeanPostProcessor源码解析/</id>
     <published>2019-06-25T13:24:43.000Z</published>
-    <updated>2019-06-25T13:54:19.629Z</updated>
+    <updated>2020-03-13T05:56:41.654Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
 <li>继承<code>BeanPostProcessor</code>接口，在此基础上又定义了三个方法，分别在Bean<strong>实例化前后【不是初始化】</strong>执行。</li>
@@ -2599,6 +2655,10 @@
 </ul>
 </li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -2620,7 +2680,7 @@
     <link href="http://chenjiabing666.github.io/2019/06/23/FactoryBean%E8%A7%A3%E6%9E%90/"/>
     <id>http://chenjiabing666.github.io/2019/06/23/FactoryBean解析/</id>
     <published>2019-06-23T13:49:47.000Z</published>
-    <updated>2019-06-23T13:50:08.637Z</updated>
+    <updated>2020-03-13T05:54:39.691Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
 <li>简单的说FactoryBean实际上是一个Bean，并不是一个工厂，它能够为我们创建一个Bean，但是创建的这个Bean实际指向的并不是FactoryBean类型的，而是其中<code>getObject</code>方法返回类型的对象。</li>
@@ -2652,6 +2712,10 @@
 </ul>
 </li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
@@ -2673,7 +2737,7 @@
     <link href="http://chenjiabing666.github.io/2019/06/23/Bean%E7%9A%84%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86%E5%99%A8/"/>
     <id>http://chenjiabing666.github.io/2019/06/23/Bean的后置处理器/</id>
     <published>2019-06-23T13:48:55.000Z</published>
-    <updated>2019-06-23T13:49:26.187Z</updated>
+    <updated>2020-03-13T05:51:53.965Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
 <li>调用顺序：在Bean的初始化前后调用，分别对应了其中的两个方法</li>
@@ -2764,6 +2828,11 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
 <li>从源码可以看出，最核心的执行就是在<code>org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#initializeBean</code>的方法中，主要的代码逻辑是在初始化之前调用对应的before方法，在之后调用after方法。</li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
+<p>​    </p>
 ]]></content>
     
     <summary type="html">

@@ -28,7 +28,8 @@
 12345//伪代码：下订单1、查库存：getStock()2、判断库存：stock&amp;gt;0下单3、下单：addOrder()4、减库存
 
 仅仅以上">
-<meta property="og:updated_time" content="2020-03-07T09:55:08.104Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:20:54.400Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式锁-redis实现">
 <meta name="twitter:description" content="为什么要分布式锁
@@ -37,6 +38,7 @@
 12345//伪代码：下订单1、查库存：getStock()2、判断库存：stock&amp;gt;0下单3、下单：addOrder()4、减库存
 
 仅仅以上">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -112,7 +114,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要分布式锁"><span class="toc-number">1.</span> <span class="toc-text">为什么要分布式锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis实现"><span class="toc-number">2.</span> <span class="toc-text">Redis实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题与解决思路"><span class="toc-number">2.1.</span> <span class="toc-text">问题与解决思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">2.2.</span> <span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redisson"><span class="toc-number">3.</span> <span class="toc-text">Redisson</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#可重入锁"><span class="toc-number">3.1.</span> <span class="toc-text">可重入锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文档"><span class="toc-number">3.2.</span> <span class="toc-text">文档</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要分布式锁"><span class="toc-number">1.</span> <span class="toc-text">为什么要分布式锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis实现"><span class="toc-number">2.</span> <span class="toc-text">Redis实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题与解决思路"><span class="toc-number">2.1.</span> <span class="toc-text">问题与解决思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">2.2.</span> <span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redisson"><span class="toc-number">3.</span> <span class="toc-text">Redisson</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#可重入锁"><span class="toc-number">3.1.</span> <span class="toc-text">可重入锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文档"><span class="toc-number">3.2.</span> <span class="toc-text">文档</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">4.</span> <span class="toc-text">笔者有话说</span></a></li></ol>
 		
 		</div>
 		
@@ -180,6 +182,10 @@
 <h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><ul>
 <li>Redisson的文档很齐全，具体可看文档<a href="https://github.com/redisson/redisson/wiki/%E7%9B%AE%E5%BD%95" target="_blank" rel="external">https://github.com/redisson/redisson/wiki/%E7%9B%AE%E5%BD%95</a></li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -248,7 +254,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要分布式锁"><span class="toc-number">1.</span> <span class="toc-text">为什么要分布式锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis实现"><span class="toc-number">2.</span> <span class="toc-text">Redis实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题与解决思路"><span class="toc-number">2.1.</span> <span class="toc-text">问题与解决思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">2.2.</span> <span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redisson"><span class="toc-number">3.</span> <span class="toc-text">Redisson</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#可重入锁"><span class="toc-number">3.1.</span> <span class="toc-text">可重入锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文档"><span class="toc-number">3.2.</span> <span class="toc-text">文档</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要分布式锁"><span class="toc-number">1.</span> <span class="toc-text">为什么要分布式锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis实现"><span class="toc-number">2.</span> <span class="toc-text">Redis实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题与解决思路"><span class="toc-number">2.1.</span> <span class="toc-text">问题与解决思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">2.2.</span> <span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redisson"><span class="toc-number">3.</span> <span class="toc-text">Redisson</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#可重入锁"><span class="toc-number">3.1.</span> <span class="toc-text">可重入锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文档"><span class="toc-number">3.2.</span> <span class="toc-text">文档</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">4.</span> <span class="toc-text">笔者有话说</span></a></li></ol>
  
   </div>
 
@@ -290,7 +296,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -351,7 +357,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -391,11 +397,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

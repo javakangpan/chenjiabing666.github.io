@@ -26,7 +26,8 @@
 
 什么是关联查询的延迟加载
 简单的说就是在关联关系中，根据id查询对象的时候仅仅发出sql语句查询的是当前的实体类的">
-<meta property="og:updated_time" content="2018-04-24T03:09:02.357Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T05:55:51.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hibernate关联查询">
 <meta name="twitter:description" content="Hibernate关联查询关联查询之延迟加载(lazy)什么是延迟加载
@@ -34,6 +35,7 @@
 
 什么是关联查询的延迟加载
 简单的说就是在关联关系中，根据id查询对象的时候仅仅发出sql语句查询的是当前的实体类的">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -109,7 +111,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate关联查询"><span class="toc-number">1.</span> <span class="toc-text">Hibernate关联查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关联查询之延迟加载-lazy"><span class="toc-number">1.1.</span> <span class="toc-text">关联查询之延迟加载(lazy)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是延迟加载"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是延迟加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是关联查询的延迟加载"><span class="toc-number">1.1.2.</span> <span class="toc-text">什么是关联查询的延迟加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一对一"><span class="toc-number">1.1.3.</span> <span class="toc-text">一对一</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#测试"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">测试</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#测试默认的情况-饿汉式的加载"><span class="toc-number">1.1.3.1.1.</span> <span class="toc-text">测试默认的情况(饿汉式的加载)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#测试懒加载"><span class="toc-number">1.1.3.1.2.</span> <span class="toc-text">测试懒加载</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一对多或者多对一"><span class="toc-number">1.1.4.</span> <span class="toc-text">一对多或者多对一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多对多"><span class="toc-number">1.1.5.</span> <span class="toc-text">多对多</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate关联查询"><span class="toc-number">1.</span> <span class="toc-text">Hibernate关联查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关联查询之延迟加载-lazy"><span class="toc-number">1.1.</span> <span class="toc-text">关联查询之延迟加载(lazy)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是延迟加载"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是延迟加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是关联查询的延迟加载"><span class="toc-number">1.1.2.</span> <span class="toc-text">什么是关联查询的延迟加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一对一"><span class="toc-number">1.1.3.</span> <span class="toc-text">一对一</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#测试"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">测试</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#测试默认的情况-饿汉式的加载"><span class="toc-number">1.1.3.1.1.</span> <span class="toc-text">测试默认的情况(饿汉式的加载)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#测试懒加载"><span class="toc-number">1.1.3.1.2.</span> <span class="toc-text">测试懒加载</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一对多或者多对一"><span class="toc-number">1.1.4.</span> <span class="toc-text">一对多或者多对一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多对多"><span class="toc-number">1.1.5.</span> <span class="toc-text">多对多</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.2.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -165,6 +167,10 @@
 <li>如果想要设置饿汉式加载，可以使用<code>@ManyToMany(fetch=FetchType.EAGER)</code>，这里就不在演示了</li>
 <li>如果在双向外键关联中都要饿汉式加载，那么可以在两个<code>@ManyToMany</code>注解中设置属性</li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -233,7 +239,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate关联查询"><span class="toc-number">1.</span> <span class="toc-text">Hibernate关联查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关联查询之延迟加载-lazy"><span class="toc-number">1.1.</span> <span class="toc-text">关联查询之延迟加载(lazy)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是延迟加载"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是延迟加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是关联查询的延迟加载"><span class="toc-number">1.1.2.</span> <span class="toc-text">什么是关联查询的延迟加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一对一"><span class="toc-number">1.1.3.</span> <span class="toc-text">一对一</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#测试"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">测试</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#测试默认的情况-饿汉式的加载"><span class="toc-number">1.1.3.1.1.</span> <span class="toc-text">测试默认的情况(饿汉式的加载)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#测试懒加载"><span class="toc-number">1.1.3.1.2.</span> <span class="toc-text">测试懒加载</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一对多或者多对一"><span class="toc-number">1.1.4.</span> <span class="toc-text">一对多或者多对一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多对多"><span class="toc-number">1.1.5.</span> <span class="toc-text">多对多</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate关联查询"><span class="toc-number">1.</span> <span class="toc-text">Hibernate关联查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关联查询之延迟加载-lazy"><span class="toc-number">1.1.</span> <span class="toc-text">关联查询之延迟加载(lazy)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是延迟加载"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是延迟加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是关联查询的延迟加载"><span class="toc-number">1.1.2.</span> <span class="toc-text">什么是关联查询的延迟加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一对一"><span class="toc-number">1.1.3.</span> <span class="toc-text">一对一</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#测试"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">测试</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#测试默认的情况-饿汉式的加载"><span class="toc-number">1.1.3.1.1.</span> <span class="toc-text">测试默认的情况(饿汉式的加载)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#测试懒加载"><span class="toc-number">1.1.3.1.2.</span> <span class="toc-text">测试懒加载</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一对多或者多对一"><span class="toc-number">1.1.4.</span> <span class="toc-text">一对多或者多对一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多对多"><span class="toc-number">1.1.5.</span> <span class="toc-text">多对多</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.2.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -275,7 +281,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -336,7 +342,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -376,11 +382,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

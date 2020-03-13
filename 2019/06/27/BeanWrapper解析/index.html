@@ -31,7 +31,8 @@ BeanWrapper是Spring底层经常使用的一个接口，简单来说是对Bean�
 public BeanWrapperImpl(Object object)：指定对象构造
 public BeanWrapperImpl(Class&amp;lt;?&amp;gt; clazz">
 <meta property="og:image" content="https://github.com/chenjiabing666/BlogImage/blob/master/ssss.png?raw=true">
-<meta property="og:updated_time" content="2019-06-27T15:33:53.410Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T05:51:40.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BeanWrapper解析">
 <meta name="twitter:description" content="简介
@@ -117,7 +118,7 @@ public BeanWrapperImpl(Class&amp;lt;?&amp;gt; clazz">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常用API"><span class="toc-number">2.</span> <span class="toc-text">常用API</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PropertyDescriptor"><span class="toc-number">3.</span> <span class="toc-text">PropertyDescriptor</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-number">4.</span> <span class="toc-text">实例</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常用API"><span class="toc-number">2.</span> <span class="toc-text">常用API</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PropertyDescriptor"><span class="toc-number">3.</span> <span class="toc-text">PropertyDescriptor</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-number">4.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">4.1.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -145,6 +146,10 @@ public BeanWrapperImpl(Class&amp;lt;?&amp;gt; clazz">
 <li>我们可以同<code>BeanWrapper</code>和<code>PropertyDescriptor</code>可以很轻松实现属性的复制，下面是本人手写的一个复制的工具类【当然这个是很粗糙的，和BeanUtils中的copyPropreties方法不能相提并论，不喜勿喷】<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 对象复制【浅克隆】</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NewCopyUtils</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CLASS=<span class="string">"class"</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 复制对象【只能复制基本数据类型，浅克隆】</div><div class="line">     * <span class="doctag">@param</span> source 源对象</div><div class="line">     * <span class="doctag">@param</span> target 目标对象</div><div class="line">     * <span class="doctag">@param</span> ingoreAgrs 忽略的属性</div><div class="line">     * <span class="doctag">@throws</span> Exception</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">copyProperties</span><span class="params">(Object source,Object target,String... ingoreAgrs)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">if</span> (source.getClass().isInterface()||target.getClass().isInterface())&#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"source和target不能为接口"</span>);</div><div class="line">        &#125;</div><div class="line">        BeanWrapper sourceWrap = createBeanWrap(source);</div><div class="line">        BeanWrapper targetWrap = createBeanWrap(target);</div><div class="line">        PropertyDescriptor[] targetPds = targetWrap.getPropertyDescriptors();</div><div class="line">        PropertyDescriptor[] sourcePds = sourceWrap.getPropertyDescriptors();</div><div class="line">        <span class="comment">//根据名称分组，减少一层循环</span></div><div class="line">        Map&lt;String, List&lt;PropertyDescriptor&gt;&gt; map = Arrays.asList(sourcePds).parallelStream().filter(o -&gt; !StringUtils.equals(CLASS, o.getName())).collect(Collectors.groupingBy(o -&gt; o.getName()));</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; targetPds.length; i++) &#123;</div><div class="line">            PropertyDescriptor tpd=targetPds[i];</div><div class="line">            <span class="comment">//去掉class属性和不要的复制的属性</span></div><div class="line">            <span class="keyword">if</span> (!StringUtils.equals(CLASS,tpd.getName())&amp;&amp; !Arrays.asList(ingoreAgrs).contains(tpd.getName()))&#123;</div><div class="line">                List&lt;PropertyDescriptor&gt; list = map.getOrDefault(tpd.getName(), <span class="keyword">null</span>);</div><div class="line">                <span class="keyword">if</span> (Objects.nonNull(list))&#123;</div><div class="line">                    Method writeMethod = tpd.getWriteMethod();</div><div class="line">                    Method readMethod = list.get(<span class="number">0</span>).getReadMethod();</div><div class="line">                    <span class="keyword">if</span> (Objects.isNull(writeMethod)&amp;&amp;Objects.isNull(readMethod))&#123;</div><div class="line">                        <span class="keyword">throw</span>  <span class="keyword">new</span> Exception(<span class="string">"属性必须有get和set方法"</span>);</div><div class="line">                    &#125;</div><div class="line">                    Object o = readMethod.invoke(source);</div><div class="line">                    writeMethod.invoke(target,o);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 构造BeanWrapImpl</div><div class="line">     * <span class="doctag">@param</span> source 对象</div><div class="line">     * <span class="doctag">@return</span> BeanWrapper</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> BeanWrapper <span class="title">createBeanWrap</span><span class="params">(Object source)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BeanWrapperImpl(source);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -213,7 +218,7 @@ public BeanWrapperImpl(Class&amp;lt;?&amp;gt; clazz">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常用API"><span class="toc-number">2.</span> <span class="toc-text">常用API</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PropertyDescriptor"><span class="toc-number">3.</span> <span class="toc-text">PropertyDescriptor</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-number">4.</span> <span class="toc-text">实例</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常用API"><span class="toc-number">2.</span> <span class="toc-text">常用API</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PropertyDescriptor"><span class="toc-number">3.</span> <span class="toc-text">PropertyDescriptor</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例"><span class="toc-number">4.</span> <span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">4.1.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -255,7 +260,7 @@ public BeanWrapperImpl(Class&amp;lt;?&amp;gt; clazz">
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -316,7 +321,7 @@ public BeanWrapperImpl(Class&amp;lt;?&amp;gt; clazz">
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -356,11 +361,11 @@ public BeanWrapperImpl(Class&amp;lt;?&amp;gt; clazz">
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

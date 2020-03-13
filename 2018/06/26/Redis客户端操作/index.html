@@ -44,7 +44,8 @@ start firewalld.service
 
 解决拒绝连接问题
 redis默认只能允许本">
-<meta property="og:updated_time" content="2018-06-26T14:33:50.874Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:07:11.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis客户端操作">
 <meta name="twitter:description" content="Redis客户端Jedis远程连接
@@ -61,6 +62,7 @@ start firewalld.service
 
 解决拒绝连接问题
 redis默认只能允许本">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -136,7 +138,7 @@ redis默认只能允许本">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis客户端"><span class="toc-number">1.</span> <span class="toc-text">Redis客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Jedis"><span class="toc-number">1.1.</span> <span class="toc-text">Jedis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#远程连接"><span class="toc-number">1.1.1.</span> <span class="toc-text">远程连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决拒绝连接问题"><span class="toc-number">1.1.2.</span> <span class="toc-text">解决拒绝连接问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加依赖"><span class="toc-number">1.1.3.</span> <span class="toc-text">添加依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">1.1.4.</span> <span class="toc-text">测试</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis客户端"><span class="toc-number">1.</span> <span class="toc-text">Redis客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Jedis"><span class="toc-number">1.1.</span> <span class="toc-text">Jedis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#远程连接"><span class="toc-number">1.1.1.</span> <span class="toc-text">远程连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决拒绝连接问题"><span class="toc-number">1.1.2.</span> <span class="toc-text">解决拒绝连接问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加依赖"><span class="toc-number">1.1.3.</span> <span class="toc-text">添加依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">1.1.4.</span> <span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.2.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -161,6 +163,10 @@ redis默认只能允许本">
 </ul>
 <h3 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- jedis --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//操作String类型的数据</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testString</span><span class="params">()</span></span>&#123;</div><div class="line">	Jedis jedis=<span class="keyword">new</span> Jedis(<span class="string">"47.104.192.157"</span>,<span class="number">6379</span>);  <span class="comment">//创建jedis对象，其中的参数是IP地址，如果是本地写localhost</span></div><div class="line">	jedis.set(<span class="string">"name"</span>, <span class="string">"chenjiabing"</span>);   <span class="comment">//添加一个String 类型的数据  key为name</span></div><div class="line">	jedis.get(<span class="string">"name"</span>);  <span class="comment">//获取key为name的值</span></div><div class="line">	jedis.del(<span class="string">"name"</span>);  <span class="comment">//删除key为name的数据</span></div><div class="line">    jedis.close();	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//测试Hash类型</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> testHa	<span class="title">shSet</span><span class="params">()</span></span>&#123;</div><div class="line">	Jedis jedis=<span class="keyword">new</span> Jedis(<span class="string">"localhost"</span>);</div><div class="line">	jedis.hset(<span class="string">"user"</span>, <span class="string">"name"</span>,<span class="string">"陈加兵"</span>);   <span class="comment">//添加一个key为user的Hash类型的数据</span></div><div class="line">	jedis.hset(<span class="string">"user"</span>, <span class="string">"age"</span>, <span class="string">"22"</span>);   <span class="comment">//添加age</span></div><div class="line">	jedis.hincrBy(<span class="string">"user"</span>, <span class="string">"age"</span>, <span class="number">200</span>);   <span class="comment">//年龄增加200</span></div><div class="line">	String name=jedis.hget(<span class="string">"user"</span>, <span class="string">"name"</span>); <span class="comment">//获取name的值</span></div><div class="line">	Integer age=Integer.parseInt(jedis.hget(<span class="string">"user"</span>, <span class="string">"age"</span>));  <span class="comment">//获取age的值，转换为Integer类型</span></div><div class="line">	System.out.println(name);</div><div class="line">	System.out.println(age);</div><div class="line">    jedis.close();</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//测试List类型</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testList</span><span class="params">()</span></span>&#123;</div><div class="line">	Jedis jedis=<span class="keyword">new</span> Jedis(<span class="string">"localhost"</span>);</div><div class="line">	jedis.lpush(<span class="string">"list"</span>, <span class="string">"陈加兵"</span>);  <span class="comment">//从左侧添加一个值</span></div><div class="line">	System.out.println(jedis.llen(<span class="string">"list"</span>));  <span class="comment">//获取长度</span></div><div class="line">	jedis.lpush(<span class="string">"list"</span>, <span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"TOM"</span>);  <span class="comment">//左侧存放多个值</span></div><div class="line">	System.out.println(jedis.rpop(<span class="string">"list"</span>));  <span class="comment">//从右侧取出</span></div><div class="line">    jedis.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -229,7 +235,7 @@ redis默认只能允许本">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis客户端"><span class="toc-number">1.</span> <span class="toc-text">Redis客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Jedis"><span class="toc-number">1.1.</span> <span class="toc-text">Jedis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#远程连接"><span class="toc-number">1.1.1.</span> <span class="toc-text">远程连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决拒绝连接问题"><span class="toc-number">1.1.2.</span> <span class="toc-text">解决拒绝连接问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加依赖"><span class="toc-number">1.1.3.</span> <span class="toc-text">添加依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">1.1.4.</span> <span class="toc-text">测试</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis客户端"><span class="toc-number">1.</span> <span class="toc-text">Redis客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Jedis"><span class="toc-number">1.1.</span> <span class="toc-text">Jedis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#远程连接"><span class="toc-number">1.1.1.</span> <span class="toc-text">远程连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决拒绝连接问题"><span class="toc-number">1.1.2.</span> <span class="toc-text">解决拒绝连接问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加依赖"><span class="toc-number">1.1.3.</span> <span class="toc-text">添加依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">1.1.4.</span> <span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.2.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -271,7 +277,7 @@ redis默认只能允许本">
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -332,7 +338,7 @@ redis默认只能允许本">
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -372,11 +378,11 @@ redis默认只能允许本">
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

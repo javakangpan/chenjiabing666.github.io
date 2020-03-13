@@ -31,7 +31,8 @@ Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡�
 
 12345678910      &amp;lt;!--eureka客户端--&amp;g">
 <meta property="og:image" content="https://github.com/chenjiabing666/BlogImage/blob/master/eureka4.png?raw=true">
-<meta property="og:updated_time" content="2018-12-24T16:20:03.649Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:07:56.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ribbon（客户端负载均衡）">
 <meta name="twitter:description" content="Ribbon - 客户端负载均衡简介
@@ -117,7 +118,7 @@ Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡�
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ribbon-客户端负载均衡"><span class="toc-number">1.</span> <span class="toc-text">Ribbon - 客户端负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用（消费端）"><span class="toc-number">1.2.</span> <span class="toc-text">使用（消费端）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意"><span class="toc-number">1.2.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#负载均衡算法"><span class="toc-number">1.3.</span> <span class="toc-text">负载均衡算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置负载均衡策略"><span class="toc-number">1.4.</span> <span class="toc-text">配置负载均衡策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义负载均衡算法"><span class="toc-number">1.5.</span> <span class="toc-text">自定义负载均衡算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#超时时间设置"><span class="toc-number">1.6.</span> <span class="toc-text">超时时间设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重试机制"><span class="toc-number">1.7.</span> <span class="toc-text">重试机制</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ribbon-客户端负载均衡"><span class="toc-number">1.</span> <span class="toc-text">Ribbon - 客户端负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用（消费端）"><span class="toc-number">1.2.</span> <span class="toc-text">使用（消费端）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意"><span class="toc-number">1.2.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#负载均衡算法"><span class="toc-number">1.3.</span> <span class="toc-text">负载均衡算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置负载均衡策略"><span class="toc-number">1.4.</span> <span class="toc-text">配置负载均衡策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义负载均衡算法"><span class="toc-number">1.5.</span> <span class="toc-text">自定义负载均衡算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#超时时间设置"><span class="toc-number">1.6.</span> <span class="toc-text">超时时间设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重试机制"><span class="toc-number">1.7.</span> <span class="toc-text">重试机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.8.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -195,6 +196,10 @@ Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡�
 <li>全局配置如下：</li>
 </ul>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">ribbon:</span> </div><div class="line"><span class="attr">  OkToRetryOnAllOperations:</span> <span class="literal">true</span>  <span class="comment">#对所有操作都进行重试。</span></div><div class="line"><span class="attr">  MaxAutoRetriesNextServer:</span> <span class="number">2</span>     <span class="comment"># 切换实例的重试次数。 </span></div><div class="line"><span class="attr">  MaxAutoRetries:</span> <span class="number">1</span>               <span class="comment"># 对当前实例的重试次数。</span></div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -263,7 +268,7 @@ Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡�
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ribbon-客户端负载均衡"><span class="toc-number">1.</span> <span class="toc-text">Ribbon - 客户端负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用（消费端）"><span class="toc-number">1.2.</span> <span class="toc-text">使用（消费端）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意"><span class="toc-number">1.2.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#负载均衡算法"><span class="toc-number">1.3.</span> <span class="toc-text">负载均衡算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置负载均衡策略"><span class="toc-number">1.4.</span> <span class="toc-text">配置负载均衡策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义负载均衡算法"><span class="toc-number">1.5.</span> <span class="toc-text">自定义负载均衡算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#超时时间设置"><span class="toc-number">1.6.</span> <span class="toc-text">超时时间设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重试机制"><span class="toc-number">1.7.</span> <span class="toc-text">重试机制</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ribbon-客户端负载均衡"><span class="toc-number">1.</span> <span class="toc-text">Ribbon - 客户端负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用（消费端）"><span class="toc-number">1.2.</span> <span class="toc-text">使用（消费端）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意"><span class="toc-number">1.2.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#负载均衡算法"><span class="toc-number">1.3.</span> <span class="toc-text">负载均衡算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置负载均衡策略"><span class="toc-number">1.4.</span> <span class="toc-text">配置负载均衡策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义负载均衡算法"><span class="toc-number">1.5.</span> <span class="toc-text">自定义负载均衡算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#超时时间设置"><span class="toc-number">1.6.</span> <span class="toc-text">超时时间设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重试机制"><span class="toc-number">1.7.</span> <span class="toc-text">重试机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.8.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -305,7 +310,7 @@ Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡�
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -366,7 +371,7 @@ Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡�
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -406,11 +411,11 @@ Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡�
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

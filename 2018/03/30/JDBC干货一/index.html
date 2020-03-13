@@ -28,7 +28,8 @@ JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
 
 为什么使用JDBC
 因为java程序猿需要连接各种数据库（oracle，mysql，db2等）为了避免java程序猿每一种数据库都需要学习一遍，sun公司提出一个JDBC接口，各个数据库厂商去针对此接口写实现类（数据库驱动），这样的话java程序猿连">
-<meta property="og:updated_time" content="2018-10-12T16:46:07.791Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T05:59:36.873Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JDBC干货一">
 <meta name="twitter:description" content="JDBC什么是JDBC
@@ -37,6 +38,7 @@ JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
 
 为什么使用JDBC
 因为java程序猿需要连接各种数据库（oracle，mysql，db2等）为了避免java程序猿每一种数据库都需要学习一遍，sun公司提出一个JDBC接口，各个数据库厂商去针对此接口写实现类（数据库驱动），这样的话java程序猿连">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -112,7 +114,7 @@ JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JDBC"><span class="toc-number">1.</span> <span class="toc-text">JDBC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是JDBC"><span class="toc-number">1.1.</span> <span class="toc-text">什么是JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么使用JDBC"><span class="toc-number">1.2.</span> <span class="toc-text">为什么使用JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eclipse配置maven"><span class="toc-number">1.3.</span> <span class="toc-text">eclipse配置maven</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何使用JDBC"><span class="toc-number">1.4.</span> <span class="toc-text">如何使用JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行方法-Statement"><span class="toc-number">1.5.</span> <span class="toc-text">执行方法(Statement)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ResultSet-查询得到结果集"><span class="toc-number">1.6.</span> <span class="toc-text">ResultSet(查询得到结果集)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关闭资源-close"><span class="toc-number">1.7.</span> <span class="toc-text">关闭资源(close)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关闭顺序"><span class="toc-number">1.8.</span> <span class="toc-text">关闭顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常处理"><span class="toc-number">1.9.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDBC封装"><span class="toc-number">1.10.</span> <span class="toc-text">JDBC封装</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JDBC"><span class="toc-number">1.</span> <span class="toc-text">JDBC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是JDBC"><span class="toc-number">1.1.</span> <span class="toc-text">什么是JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么使用JDBC"><span class="toc-number">1.2.</span> <span class="toc-text">为什么使用JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eclipse配置maven"><span class="toc-number">1.3.</span> <span class="toc-text">eclipse配置maven</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何使用JDBC"><span class="toc-number">1.4.</span> <span class="toc-text">如何使用JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行方法-Statement"><span class="toc-number">1.5.</span> <span class="toc-text">执行方法(Statement)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ResultSet-查询得到结果集"><span class="toc-number">1.6.</span> <span class="toc-text">ResultSet(查询得到结果集)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关闭资源-close"><span class="toc-number">1.7.</span> <span class="toc-text">关闭资源(close)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关闭顺序"><span class="toc-number">1.8.</span> <span class="toc-text">关闭顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常处理"><span class="toc-number">1.9.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDBC封装"><span class="toc-number">1.10.</span> <span class="toc-text">JDBC封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.11.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -203,6 +205,10 @@ JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
 <li>测试</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">   <span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUntils</span><span class="params">()</span></span>&#123;</div><div class="line">	Connection connection=<span class="keyword">null</span>;</div><div class="line">	Statement statement=<span class="keyword">null</span>;</div><div class="line">	ResultSet resultSet=<span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		 connection=DBUtils.getConnection(<span class="string">"root"</span>, <span class="string">"root"</span>, <span class="string">"jdbc"</span>);  <span class="comment">//获取连接</span></div><div class="line">		 statement=connection.createStatement();</div><div class="line">		 <span class="comment">//插入数据</span></div><div class="line">		 <span class="keyword">int</span> row = statement.executeUpdate(<span class="string">"insert into t(age,name) values(22,'陈加兵'),(33,'Jackson')"</span>);</div><div class="line">		 System.out.println(row);</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;<span class="keyword">finally</span>&#123;</div><div class="line">		DBUtils.close(connection, statement, resultSet);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -271,7 +277,7 @@ JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JDBC"><span class="toc-number">1.</span> <span class="toc-text">JDBC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是JDBC"><span class="toc-number">1.1.</span> <span class="toc-text">什么是JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么使用JDBC"><span class="toc-number">1.2.</span> <span class="toc-text">为什么使用JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eclipse配置maven"><span class="toc-number">1.3.</span> <span class="toc-text">eclipse配置maven</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何使用JDBC"><span class="toc-number">1.4.</span> <span class="toc-text">如何使用JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行方法-Statement"><span class="toc-number">1.5.</span> <span class="toc-text">执行方法(Statement)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ResultSet-查询得到结果集"><span class="toc-number">1.6.</span> <span class="toc-text">ResultSet(查询得到结果集)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关闭资源-close"><span class="toc-number">1.7.</span> <span class="toc-text">关闭资源(close)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关闭顺序"><span class="toc-number">1.8.</span> <span class="toc-text">关闭顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常处理"><span class="toc-number">1.9.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDBC封装"><span class="toc-number">1.10.</span> <span class="toc-text">JDBC封装</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JDBC"><span class="toc-number">1.</span> <span class="toc-text">JDBC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是JDBC"><span class="toc-number">1.1.</span> <span class="toc-text">什么是JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么使用JDBC"><span class="toc-number">1.2.</span> <span class="toc-text">为什么使用JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eclipse配置maven"><span class="toc-number">1.3.</span> <span class="toc-text">eclipse配置maven</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何使用JDBC"><span class="toc-number">1.4.</span> <span class="toc-text">如何使用JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行方法-Statement"><span class="toc-number">1.5.</span> <span class="toc-text">执行方法(Statement)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ResultSet-查询得到结果集"><span class="toc-number">1.6.</span> <span class="toc-text">ResultSet(查询得到结果集)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关闭资源-close"><span class="toc-number">1.7.</span> <span class="toc-text">关闭资源(close)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关闭顺序"><span class="toc-number">1.8.</span> <span class="toc-text">关闭顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常处理"><span class="toc-number">1.9.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDBC封装"><span class="toc-number">1.10.</span> <span class="toc-text">JDBC封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.11.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -313,7 +319,7 @@ JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -374,7 +380,7 @@ JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -414,11 +420,11 @@ JDBC是java中一套和数据库进行交互的API(应用程序编程接口)
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

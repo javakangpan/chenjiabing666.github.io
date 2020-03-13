@@ -32,7 +32,8 @@
 解决浏览器兼容问题
 
 12345678910111213function getXHR()&amp;#123;	var xmlhttp;	//判断当前浏览器是否识别XML">
-<meta property="og:updated_time" content="2018-10-12T16:49:59.003Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T05:58:05.289Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript实现Ajax">
 <meta name="twitter:description" content="javascript实现Ajax定义
@@ -43,6 +44,7 @@
 解决浏览器兼容问题
 
 12345678910111213function getXHR()&amp;#123;	var xmlhttp;	//判断当前浏览器是否识别XML">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -118,7 +120,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript实现Ajax"><span class="toc-number">1.</span> <span class="toc-text">javascript实现Ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现的步骤"><span class="toc-number">2.</span> <span class="toc-text">实现的步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建XMLHttpRequest"><span class="toc-number">2.1.</span> <span class="toc-text">创建XMLHttpRequest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开"><span class="toc-number">2.2.</span> <span class="toc-text">打开</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发送请求"><span class="toc-number">2.3.</span> <span class="toc-text">发送请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接收服务器响应数据"><span class="toc-number">2.4.</span> <span class="toc-text">接收服务器响应数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">3.</span> <span class="toc-text">实例</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript实现Ajax"><span class="toc-number">1.</span> <span class="toc-text">javascript实现Ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现的步骤"><span class="toc-number">2.</span> <span class="toc-text">实现的步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建XMLHttpRequest"><span class="toc-number">2.1.</span> <span class="toc-text">创建XMLHttpRequest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开"><span class="toc-number">2.2.</span> <span class="toc-text">打开</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发送请求"><span class="toc-number">2.3.</span> <span class="toc-text">发送请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接收服务器响应数据"><span class="toc-number">2.4.</span> <span class="toc-text">接收服务器响应数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">3.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">4.</span> <span class="toc-text">笔者有话说</span></a></li></ol>
 		
 		</div>
 		
@@ -154,6 +156,10 @@
 <li>请求本地的<code>file.text</code>文件</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">LoadText</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> xhr;</div><div class="line">	<span class="comment">//判断当前浏览器是否识别XMLHttpRequest</span></div><div class="line">	<span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest)</div><div class="line"> 			&#123;<span class="comment">// code for IE7+, Firefox, Chrome, Opera, Safari</span></div><div class="line"> 				xhr=<span class="keyword">new</span> XMLHttpRequest();</div><div class="line"> 			&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line"> 			&#123;<span class="comment">// code for IE6, IE5</span></div><div class="line"> 				xhr=<span class="keyword">new</span> ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</div><div class="line"> 			&#125;</div><div class="line"> 		</div><div class="line"> 		<span class="comment">//用于监听</span></div><div class="line"> 		xhr.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"> 			<span class="comment">//如果数据响应成功，并且状态码为200</span></div><div class="line"> 			<span class="keyword">if</span> (xhr.readyState==<span class="number">4</span>&amp;&amp;xhr.status==<span class="number">200</span>) &#123;</div><div class="line"> 				<span class="comment">//处理数据</span></div><div class="line"> 				<span class="keyword">var</span> text=xhr.responseText;   <span class="comment">//获取文本数据</span></div><div class="line"> 				alert(text);</div><div class="line"> 			&#125;</div><div class="line"> 		&#125;</div><div class="line">	</div><div class="line">             <span class="comment">//异步请求</span></div><div class="line"> 		xhr.open(<span class="string">"GET"</span>,<span class="string">"file.text"</span>,<span class="literal">true</span>);  </div><div class="line"> 		xhr.send();  <span class="comment">//发送请求</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -222,7 +228,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript实现Ajax"><span class="toc-number">1.</span> <span class="toc-text">javascript实现Ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现的步骤"><span class="toc-number">2.</span> <span class="toc-text">实现的步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建XMLHttpRequest"><span class="toc-number">2.1.</span> <span class="toc-text">创建XMLHttpRequest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开"><span class="toc-number">2.2.</span> <span class="toc-text">打开</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发送请求"><span class="toc-number">2.3.</span> <span class="toc-text">发送请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接收服务器响应数据"><span class="toc-number">2.4.</span> <span class="toc-text">接收服务器响应数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">3.</span> <span class="toc-text">实例</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript实现Ajax"><span class="toc-number">1.</span> <span class="toc-text">javascript实现Ajax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现的步骤"><span class="toc-number">2.</span> <span class="toc-text">实现的步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建XMLHttpRequest"><span class="toc-number">2.1.</span> <span class="toc-text">创建XMLHttpRequest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开"><span class="toc-number">2.2.</span> <span class="toc-text">打开</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发送请求"><span class="toc-number">2.3.</span> <span class="toc-text">发送请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接收服务器响应数据"><span class="toc-number">2.4.</span> <span class="toc-text">接收服务器响应数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">3.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">4.</span> <span class="toc-text">笔者有话说</span></a></li></ol>
  
   </div>
 
@@ -264,7 +270,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -325,7 +331,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -365,11 +371,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

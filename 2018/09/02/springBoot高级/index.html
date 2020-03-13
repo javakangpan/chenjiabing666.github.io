@@ -22,12 +22,14 @@
 <meta property="og:description" content="springBoot高级普通缓存1、在springBoot中可以使用注解式开发缓存，默认没有开启缓存中间件，那么使用的就是存储在Map中的原理，但是我们还可以配置自己的缓存中间件，比如redis
 2、引入依赖，启动器
 12345&amp;lt;!--导入缓存的启动器--&amp;gt;       &amp;lt;dependency&amp;gt;           &amp;lt;groupId&amp;gt;org.springfram">
-<meta property="og:updated_time" content="2018-10-03T09:33:31.008Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:12:41.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springBoot高级">
 <meta name="twitter:description" content="springBoot高级普通缓存1、在springBoot中可以使用注解式开发缓存，默认没有开启缓存中间件，那么使用的就是存储在Map中的原理，但是我们还可以配置自己的缓存中间件，比如redis
 2、引入依赖，启动器
 12345&amp;lt;!--导入缓存的启动器--&amp;gt;       &amp;lt;dependency&amp;gt;           &amp;lt;groupId&amp;gt;org.springfram">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -103,7 +105,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#springBoot高级"><span class="toc-number">1.</span> <span class="toc-text">springBoot高级</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#普通缓存"><span class="toc-number">1.1.</span> <span class="toc-text">普通缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis缓存"><span class="toc-number">1.2.</span> <span class="toc-text">Redis缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot共用session"><span class="toc-number">1.3.</span> <span class="toc-text">SpringBoot共用session</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#springBoot高级-1"><span class="toc-number">2.</span> <span class="toc-text">springBoot高级</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#普通缓存-1"><span class="toc-number">2.1.</span> <span class="toc-text">普通缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis缓存-1"><span class="toc-number">2.2.</span> <span class="toc-text">Redis缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot共用session-1"><span class="toc-number">2.3.</span> <span class="toc-text">SpringBoot共用session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#springBoot异步任务"><span class="toc-number">2.4.</span> <span class="toc-text">springBoot异步任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#springBoot定时任务"><span class="toc-number">2.5.</span> <span class="toc-text">springBoot定时任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">2.5.1.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#springBoot高级"><span class="toc-number">1.</span> <span class="toc-text">springBoot高级</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#普通缓存"><span class="toc-number">1.1.</span> <span class="toc-text">普通缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis缓存"><span class="toc-number">1.2.</span> <span class="toc-text">Redis缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot共用session"><span class="toc-number">1.3.</span> <span class="toc-text">SpringBoot共用session</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#springBoot高级-1"><span class="toc-number">2.</span> <span class="toc-text">springBoot高级</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#普通缓存-1"><span class="toc-number">2.1.</span> <span class="toc-text">普通缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis缓存-1"><span class="toc-number">2.2.</span> <span class="toc-text">Redis缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot共用session-1"><span class="toc-number">2.3.</span> <span class="toc-text">SpringBoot共用session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#springBoot异步任务"><span class="toc-number">2.4.</span> <span class="toc-text">springBoot异步任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#springBoot定时任务"><span class="toc-number">2.5.</span> <span class="toc-text">springBoot定时任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">2.5.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">2.6.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -162,6 +164,10 @@
 <li>启动类上添加注解开启定时任务</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableScheduling</span>  <span class="comment">//开启定时任务调度</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		SpringApplication.run(DemoApplication.class, args);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -230,7 +236,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#springBoot高级"><span class="toc-number">1.</span> <span class="toc-text">springBoot高级</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#普通缓存"><span class="toc-number">1.1.</span> <span class="toc-text">普通缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis缓存"><span class="toc-number">1.2.</span> <span class="toc-text">Redis缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot共用session"><span class="toc-number">1.3.</span> <span class="toc-text">SpringBoot共用session</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#springBoot高级-1"><span class="toc-number">2.</span> <span class="toc-text">springBoot高级</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#普通缓存-1"><span class="toc-number">2.1.</span> <span class="toc-text">普通缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis缓存-1"><span class="toc-number">2.2.</span> <span class="toc-text">Redis缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot共用session-1"><span class="toc-number">2.3.</span> <span class="toc-text">SpringBoot共用session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#springBoot异步任务"><span class="toc-number">2.4.</span> <span class="toc-text">springBoot异步任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#springBoot定时任务"><span class="toc-number">2.5.</span> <span class="toc-text">springBoot定时任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">2.5.1.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#springBoot高级"><span class="toc-number">1.</span> <span class="toc-text">springBoot高级</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#普通缓存"><span class="toc-number">1.1.</span> <span class="toc-text">普通缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis缓存"><span class="toc-number">1.2.</span> <span class="toc-text">Redis缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot共用session"><span class="toc-number">1.3.</span> <span class="toc-text">SpringBoot共用session</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#springBoot高级-1"><span class="toc-number">2.</span> <span class="toc-text">springBoot高级</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#普通缓存-1"><span class="toc-number">2.1.</span> <span class="toc-text">普通缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis缓存-1"><span class="toc-number">2.2.</span> <span class="toc-text">Redis缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot共用session-1"><span class="toc-number">2.3.</span> <span class="toc-text">SpringBoot共用session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#springBoot异步任务"><span class="toc-number">2.4.</span> <span class="toc-text">springBoot异步任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#springBoot定时任务"><span class="toc-number">2.5.</span> <span class="toc-text">springBoot定时任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-number">2.5.1.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">2.6.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -272,7 +278,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -333,7 +339,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -373,11 +379,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

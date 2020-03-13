@@ -33,7 +33,8 @@ Target Runtime 选择 Tomcat
 
 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748">
 <meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/jackson.png">
-<meta property="og:updated_time" content="2018-05-04T09:47:15.325Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:13:34.752Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Springmvc响应Ajax请求(@ResponseBody)">
 <meta name="twitter:description" content="Springmvc响应Ajax请求(@ResponseBody)创建工程
@@ -120,7 +121,7 @@ Target Runtime 选择 Tomcat
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Springmvc响应Ajax请求-ResponseBody"><span class="toc-number">1.</span> <span class="toc-text">Springmvc响应Ajax请求(@ResponseBody)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建工程"><span class="toc-number">1.1.</span> <span class="toc-text">创建工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写前端表单"><span class="toc-number">1.2.</span> <span class="toc-text">编写前端表单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#效果和实现-RequestBody"><span class="toc-number">1.3.</span> <span class="toc-text">效果和实现(@RequestBody)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用户名文本框失去焦点，异步检测用户"><span class="toc-number">1.3.1.</span> <span class="toc-text">用户名文本框失去焦点，异步检测用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text"> </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ResponseBody"><span class="toc-number">1.5.</span> <span class="toc-text">@ResponseBody</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#返回单个值"><span class="toc-number">1.5.1.</span> <span class="toc-text">返回单个值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回Map"><span class="toc-number">1.5.2.</span> <span class="toc-text">返回Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回List"><span class="toc-number">1.5.3.</span> <span class="toc-text">返回List</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回单个对象"><span class="toc-number">1.5.4.</span> <span class="toc-text">返回单个对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#练习"><span class="toc-number">1.6.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#省市二级菜单联动"><span class="toc-number">1.6.1.</span> <span class="toc-text">省市二级菜单联动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.7.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Springmvc响应Ajax请求-ResponseBody"><span class="toc-number">1.</span> <span class="toc-text">Springmvc响应Ajax请求(@ResponseBody)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建工程"><span class="toc-number">1.1.</span> <span class="toc-text">创建工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写前端表单"><span class="toc-number">1.2.</span> <span class="toc-text">编写前端表单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#效果和实现-RequestBody"><span class="toc-number">1.3.</span> <span class="toc-text">效果和实现(@RequestBody)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用户名文本框失去焦点，异步检测用户"><span class="toc-number">1.3.1.</span> <span class="toc-text">用户名文本框失去焦点，异步检测用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text"> </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ResponseBody"><span class="toc-number">1.5.</span> <span class="toc-text">@ResponseBody</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#返回单个值"><span class="toc-number">1.5.1.</span> <span class="toc-text">返回单个值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回Map"><span class="toc-number">1.5.2.</span> <span class="toc-text">返回Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回List"><span class="toc-number">1.5.3.</span> <span class="toc-text">返回List</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回单个对象"><span class="toc-number">1.5.4.</span> <span class="toc-text">返回单个对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#练习"><span class="toc-number">1.6.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#省市二级菜单联动"><span class="toc-number">1.6.1.</span> <span class="toc-text">省市二级菜单联动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.7.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.8.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -254,6 +255,10 @@ Target Runtime 选择 Tomcat
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
 <li><strong><code>springmvc</code>会通过<code>jackson</code>将返回给<code>ajax</code>请求的对象自动封装成<code>JSON对象</code>，那么在<code>JSP</code>页面我们就可以使用<code>JSON</code>的读取方式获取返回的数据即可</strong></li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -322,7 +327,7 @@ Target Runtime 选择 Tomcat
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Springmvc响应Ajax请求-ResponseBody"><span class="toc-number">1.</span> <span class="toc-text">Springmvc响应Ajax请求(@ResponseBody)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建工程"><span class="toc-number">1.1.</span> <span class="toc-text">创建工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写前端表单"><span class="toc-number">1.2.</span> <span class="toc-text">编写前端表单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#效果和实现-RequestBody"><span class="toc-number">1.3.</span> <span class="toc-text">效果和实现(@RequestBody)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用户名文本框失去焦点，异步检测用户"><span class="toc-number">1.3.1.</span> <span class="toc-text">用户名文本框失去焦点，异步检测用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text"> </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ResponseBody"><span class="toc-number">1.5.</span> <span class="toc-text">@ResponseBody</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#返回单个值"><span class="toc-number">1.5.1.</span> <span class="toc-text">返回单个值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回Map"><span class="toc-number">1.5.2.</span> <span class="toc-text">返回Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回List"><span class="toc-number">1.5.3.</span> <span class="toc-text">返回List</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回单个对象"><span class="toc-number">1.5.4.</span> <span class="toc-text">返回单个对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#练习"><span class="toc-number">1.6.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#省市二级菜单联动"><span class="toc-number">1.6.1.</span> <span class="toc-text">省市二级菜单联动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.7.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Springmvc响应Ajax请求-ResponseBody"><span class="toc-number">1.</span> <span class="toc-text">Springmvc响应Ajax请求(@ResponseBody)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建工程"><span class="toc-number">1.1.</span> <span class="toc-text">创建工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写前端表单"><span class="toc-number">1.2.</span> <span class="toc-text">编写前端表单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#效果和实现-RequestBody"><span class="toc-number">1.3.</span> <span class="toc-text">效果和实现(@RequestBody)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用户名文本框失去焦点，异步检测用户"><span class="toc-number">1.3.1.</span> <span class="toc-text">用户名文本框失去焦点，异步检测用户</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text"> </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ResponseBody"><span class="toc-number">1.5.</span> <span class="toc-text">@ResponseBody</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#返回单个值"><span class="toc-number">1.5.1.</span> <span class="toc-text">返回单个值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回Map"><span class="toc-number">1.5.2.</span> <span class="toc-text">返回Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回List"><span class="toc-number">1.5.3.</span> <span class="toc-text">返回List</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回单个对象"><span class="toc-number">1.5.4.</span> <span class="toc-text">返回单个对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#练习"><span class="toc-number">1.6.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#省市二级菜单联动"><span class="toc-number">1.6.1.</span> <span class="toc-text">省市二级菜单联动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.7.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.8.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -364,7 +369,7 @@ Target Runtime 选择 Tomcat
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -425,7 +430,7 @@ Target Runtime 选择 Tomcat
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -465,11 +470,11 @@ Target Runtime 选择 Tomcat
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

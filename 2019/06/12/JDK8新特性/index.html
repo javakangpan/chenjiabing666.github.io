@@ -26,7 +26,8 @@ List
 
 这里的表示List中每一个元素，可以不指定类型，JDK会自动推测出类型，但是也是可以使用()加上类型
 如果有一条语句可以直接在后面输出，如果有多行，那么可以在后面使用{}指定12Arrays.asList(1,2,4,1,76).forEach(e-&amp;gt; System.out.println(e));   Arrays.asList(1">
-<meta property="og:updated_time" content="2019-06-12T07:00:09.297Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T05:59:59.990Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JDK8新特性">
 <meta name="twitter:description" content="JDk8新特性函数式编程集合的foreach
@@ -34,6 +35,7 @@ List
 
 这里的表示List中每一个元素，可以不指定类型，JDK会自动推测出类型，但是也是可以使用()加上类型
 如果有一条语句可以直接在后面输出，如果有多行，那么可以在后面使用{}指定12Arrays.asList(1,2,4,1,76).forEach(e-&amp;gt; System.out.println(e));   Arrays.asList(1">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -109,7 +111,7 @@ List
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JDk8新特性"><span class="toc-number">1.</span> <span class="toc-text">JDk8新特性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数式编程"><span class="toc-number">1.1.</span> <span class="toc-text">函数式编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#集合的foreach"><span class="toc-number">1.1.1.</span> <span class="toc-text">集合的foreach</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lambda表达式轻松创建接口实例"><span class="toc-number">1.1.2.</span> <span class="toc-text">lambda表达式轻松创建接口实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口的默认方法和静态方法"><span class="toc-number">1.1.3.</span> <span class="toc-text">接口的默认方法和静态方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stream"><span class="toc-number">1.1.4.</span> <span class="toc-text">Stream</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#filter"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">filter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sorted"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">sorted</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找和匹配"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">查找和匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#归约"><span class="toc-number">1.1.4.4.</span> <span class="toc-text">归约</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#map"><span class="toc-number">1.1.4.4.1.</span> <span class="toc-text">map</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#reduce"><span class="toc-number">1.1.4.4.2.</span> <span class="toc-text">reduce</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组"><span class="toc-number">1.1.4.5.</span> <span class="toc-text">分组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Optional"><span class="toc-number">1.2.</span> <span class="toc-text">Optional</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Collectors"><span class="toc-number">1.3.</span> <span class="toc-text">Collectors</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#toMap"><span class="toc-number">1.3.1.</span> <span class="toc-text">toMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toList"><span class="toc-number">1.3.2.</span> <span class="toc-text">toList</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toSet"><span class="toc-number">1.3.3.</span> <span class="toc-text">toSet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#groupingBy"><span class="toc-number">1.3.4.</span> <span class="toc-text">groupingBy</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JDk8新特性"><span class="toc-number">1.</span> <span class="toc-text">JDk8新特性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数式编程"><span class="toc-number">1.1.</span> <span class="toc-text">函数式编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#集合的foreach"><span class="toc-number">1.1.1.</span> <span class="toc-text">集合的foreach</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lambda表达式轻松创建接口实例"><span class="toc-number">1.1.2.</span> <span class="toc-text">lambda表达式轻松创建接口实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口的默认方法和静态方法"><span class="toc-number">1.1.3.</span> <span class="toc-text">接口的默认方法和静态方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stream"><span class="toc-number">1.1.4.</span> <span class="toc-text">Stream</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#filter"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">filter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sorted"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">sorted</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找和匹配"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">查找和匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#归约"><span class="toc-number">1.1.4.4.</span> <span class="toc-text">归约</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#map"><span class="toc-number">1.1.4.4.1.</span> <span class="toc-text">map</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#reduce"><span class="toc-number">1.1.4.4.2.</span> <span class="toc-text">reduce</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组"><span class="toc-number">1.1.4.5.</span> <span class="toc-text">分组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Optional"><span class="toc-number">1.2.</span> <span class="toc-text">Optional</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Collectors"><span class="toc-number">1.3.</span> <span class="toc-text">Collectors</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#toMap"><span class="toc-number">1.3.1.</span> <span class="toc-text">toMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toList"><span class="toc-number">1.3.2.</span> <span class="toc-text">toList</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toSet"><span class="toc-number">1.3.3.</span> <span class="toc-text">toSet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#groupingBy"><span class="toc-number">1.3.4.</span> <span class="toc-text">groupingBy</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.4.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -271,6 +273,10 @@ List
 </ul>
 </li>
 </ul>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -339,7 +345,7 @@ List
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JDk8新特性"><span class="toc-number">1.</span> <span class="toc-text">JDk8新特性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数式编程"><span class="toc-number">1.1.</span> <span class="toc-text">函数式编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#集合的foreach"><span class="toc-number">1.1.1.</span> <span class="toc-text">集合的foreach</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lambda表达式轻松创建接口实例"><span class="toc-number">1.1.2.</span> <span class="toc-text">lambda表达式轻松创建接口实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口的默认方法和静态方法"><span class="toc-number">1.1.3.</span> <span class="toc-text">接口的默认方法和静态方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stream"><span class="toc-number">1.1.4.</span> <span class="toc-text">Stream</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#filter"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">filter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sorted"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">sorted</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找和匹配"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">查找和匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#归约"><span class="toc-number">1.1.4.4.</span> <span class="toc-text">归约</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#map"><span class="toc-number">1.1.4.4.1.</span> <span class="toc-text">map</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#reduce"><span class="toc-number">1.1.4.4.2.</span> <span class="toc-text">reduce</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组"><span class="toc-number">1.1.4.5.</span> <span class="toc-text">分组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Optional"><span class="toc-number">1.2.</span> <span class="toc-text">Optional</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Collectors"><span class="toc-number">1.3.</span> <span class="toc-text">Collectors</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#toMap"><span class="toc-number">1.3.1.</span> <span class="toc-text">toMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toList"><span class="toc-number">1.3.2.</span> <span class="toc-text">toList</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toSet"><span class="toc-number">1.3.3.</span> <span class="toc-text">toSet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#groupingBy"><span class="toc-number">1.3.4.</span> <span class="toc-text">groupingBy</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JDk8新特性"><span class="toc-number">1.</span> <span class="toc-text">JDk8新特性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数式编程"><span class="toc-number">1.1.</span> <span class="toc-text">函数式编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#集合的foreach"><span class="toc-number">1.1.1.</span> <span class="toc-text">集合的foreach</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lambda表达式轻松创建接口实例"><span class="toc-number">1.1.2.</span> <span class="toc-text">lambda表达式轻松创建接口实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口的默认方法和静态方法"><span class="toc-number">1.1.3.</span> <span class="toc-text">接口的默认方法和静态方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stream"><span class="toc-number">1.1.4.</span> <span class="toc-text">Stream</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#filter"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">filter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sorted"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">sorted</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找和匹配"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">查找和匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#归约"><span class="toc-number">1.1.4.4.</span> <span class="toc-text">归约</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#map"><span class="toc-number">1.1.4.4.1.</span> <span class="toc-text">map</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#reduce"><span class="toc-number">1.1.4.4.2.</span> <span class="toc-text">reduce</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组"><span class="toc-number">1.1.4.5.</span> <span class="toc-text">分组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Optional"><span class="toc-number">1.2.</span> <span class="toc-text">Optional</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Collectors"><span class="toc-number">1.3.</span> <span class="toc-text">Collectors</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#toMap"><span class="toc-number">1.3.1.</span> <span class="toc-text">toMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toList"><span class="toc-number">1.3.2.</span> <span class="toc-text">toList</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toSet"><span class="toc-number">1.3.3.</span> <span class="toc-text">toSet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#groupingBy"><span class="toc-number">1.3.4.</span> <span class="toc-text">groupingBy</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.4.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -381,7 +387,7 @@ List
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -442,7 +448,7 @@ List
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -482,11 +488,11 @@ List
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

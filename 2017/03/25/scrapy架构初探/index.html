@@ -26,7 +26,8 @@ Python即时网络爬虫启动的目标是一起把互联网变成大数据库�
 Python即时网络爬虫启动的目标是一起把互联网变成大数据库。单纯的开放源代码并不是开源的全部，开源的核心是“开放的思想”，聚合最好的想法、技术、人员，所以将会参照众多领先产品，比如，Scrapy，ScrapingHub，import io等。
 本文简单讲解一下Scrapy的架构。没错，通用提取器gsExtractor就是要集成到Scrapy架构中。
 请注意，本文不想复">
-<meta property="og:updated_time" content="2018-10-12T16:57:00.572Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:08:36.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="scrapy架构初探">
 <meta name="twitter:description" content="scrapy架构初探引言
@@ -34,6 +35,7 @@ Python即时网络爬虫启动的目标是一起把互联网变成大数据库�
 Python即时网络爬虫启动的目标是一起把互联网变成大数据库。单纯的开放源代码并不是开源的全部，开源的核心是“开放的思想”，聚合最好的想法、技术、人员，所以将会参照众多领先产品，比如，Scrapy，ScrapingHub，import io等。
 本文简单讲解一下Scrapy的架构。没错，通用提取器gsExtractor就是要集成到Scrapy架构中。
 请注意，本文不想复">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -109,7 +111,7 @@ Python即时网络爬虫启动的目标是一起把互联网变成大数据库�
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy架构初探"><span class="toc-number">1.</span> <span class="toc-text">scrapy架构初探</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scrapy数据流"><span class="toc-number">1.2.</span> <span class="toc-text">scrapy数据流</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy架构初探"><span class="toc-number">1.</span> <span class="toc-text">scrapy架构初探</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scrapy数据流"><span class="toc-number">1.2.</span> <span class="toc-text">scrapy数据流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.3.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -173,7 +175,10 @@ Python即时网络爬虫启动的目标是一起把互联网变成大数据库�
 <p>持续不断地运行。</p>
 </blockquote>
 </blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -234,7 +239,7 @@ Python即时网络爬虫启动的目标是一起把互联网变成大数据库�
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy架构初探"><span class="toc-number">1.</span> <span class="toc-text">scrapy架构初探</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scrapy数据流"><span class="toc-number">1.2.</span> <span class="toc-text">scrapy数据流</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#scrapy架构初探"><span class="toc-number">1.</span> <span class="toc-text">scrapy架构初探</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scrapy数据流"><span class="toc-number">1.2.</span> <span class="toc-text">scrapy数据流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.3.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -276,7 +281,7 @@ Python即时网络爬虫启动的目标是一起把互联网变成大数据库�
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -337,7 +342,7 @@ Python即时网络爬虫启动的目标是一起把互联网变成大数据库�
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -377,11 +382,11 @@ Python即时网络爬虫启动的目标是一起把互联网变成大数据库�
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

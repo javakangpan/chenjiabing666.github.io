@@ -36,7 +36,8 @@
 
 3、`1`：对应的id
 123456789101112131415161">
-<meta property="og:updated_time" content="2018-09-02T11:34:24.975Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T05:53:52.462Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="es的crud">
 <meta name="twitter:description" content="ElasticSearch的简单的CRUD1、ElasticSearch使用的是RestFul风格的API
@@ -49,6 +50,7 @@
 
 3、`1`：对应的id
 123456789101112131415161">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -124,7 +126,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ElasticSearch的简单的CRUD"><span class="toc-number">1.</span> <span class="toc-text">ElasticSearch的简单的CRUD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加索引"><span class="toc-number">2.</span> <span class="toc-text">添加索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检索文档"><span class="toc-number">3.</span> <span class="toc-text">检索文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除文档"><span class="toc-number">4.</span> <span class="toc-text">删除文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改文档"><span class="toc-number">5.</span> <span class="toc-text">修改文档</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接覆盖全部"><span class="toc-number">5.1.</span> <span class="toc-text">直接覆盖全部</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部分更新"><span class="toc-number">5.2.</span> <span class="toc-text">部分更新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-number">6.</span> <span class="toc-text">参考文档</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ElasticSearch的简单的CRUD"><span class="toc-number">1.</span> <span class="toc-text">ElasticSearch的简单的CRUD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加索引"><span class="toc-number">2.</span> <span class="toc-text">添加索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检索文档"><span class="toc-number">3.</span> <span class="toc-text">检索文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除文档"><span class="toc-number">4.</span> <span class="toc-text">删除文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改文档"><span class="toc-number">5.</span> <span class="toc-text">修改文档</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接覆盖全部"><span class="toc-number">5.1.</span> <span class="toc-text">直接覆盖全部</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部分更新"><span class="toc-number">5.2.</span> <span class="toc-text">部分更新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-number">6.</span> <span class="toc-text">参考文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">7.</span> <span class="toc-text">笔者有话说</span></a></li></ol>
 		
 		</div>
 		
@@ -157,6 +159,10 @@
 <p>1、ElasticSearch在文档更新的时候，每个进程会自动保存版本号<code>_version</code>的值，更改成功之后，如果版本号改变了，那么表示这个文档已经被人更新过了，此时就会更新请求失败。但是我们可以使用指定的参数指定在更新失败之前尝试的更新的次数,<code>retry_on_conflict</code>，如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">POST /megacorp/employee/<span class="number">2</span>/_update?retry_on_conflict=<span class="number">5</span> </div><div class="line">&#123;</div><div class="line">   <span class="string">"script"</span> : <span class="string">"ctx._source.views+=1"</span>,</div><div class="line">   <span class="string">"upsert"</span>: &#123;</div><div class="line">       <span class="string">"views"</span>: <span class="number">0</span></div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>1、<a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/getting-started.html" target="_blank" rel="external">https://www.elastic.co/guide/cn/elasticsearch/guide/current/getting-started.html</a></p>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -225,7 +231,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ElasticSearch的简单的CRUD"><span class="toc-number">1.</span> <span class="toc-text">ElasticSearch的简单的CRUD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加索引"><span class="toc-number">2.</span> <span class="toc-text">添加索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检索文档"><span class="toc-number">3.</span> <span class="toc-text">检索文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除文档"><span class="toc-number">4.</span> <span class="toc-text">删除文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改文档"><span class="toc-number">5.</span> <span class="toc-text">修改文档</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接覆盖全部"><span class="toc-number">5.1.</span> <span class="toc-text">直接覆盖全部</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部分更新"><span class="toc-number">5.2.</span> <span class="toc-text">部分更新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-number">6.</span> <span class="toc-text">参考文档</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ElasticSearch的简单的CRUD"><span class="toc-number">1.</span> <span class="toc-text">ElasticSearch的简单的CRUD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加索引"><span class="toc-number">2.</span> <span class="toc-text">添加索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检索文档"><span class="toc-number">3.</span> <span class="toc-text">检索文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除文档"><span class="toc-number">4.</span> <span class="toc-text">删除文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改文档"><span class="toc-number">5.</span> <span class="toc-text">修改文档</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接覆盖全部"><span class="toc-number">5.1.</span> <span class="toc-text">直接覆盖全部</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部分更新"><span class="toc-number">5.2.</span> <span class="toc-text">部分更新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-number">6.</span> <span class="toc-text">参考文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">7.</span> <span class="toc-text">笔者有话说</span></a></li></ol>
  
   </div>
 
@@ -267,7 +273,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -328,7 +334,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -368,11 +374,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

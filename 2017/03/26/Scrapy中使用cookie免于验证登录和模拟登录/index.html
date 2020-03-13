@@ -22,12 +22,14 @@ cookie提">
 <meta property="og:description" content="Scrapy中使用cookie免于验证登录和模拟登录引言
 python爬虫我认为最困难的问题一个是ip代理，另外一个就是模拟登录了，更操蛋的就是模拟登录了之后还有验证码，真的是不让人省心，不过既然有了反爬虫，那么就有反反爬虫的策略，这里就先介绍一个cookie模拟登陆，后续还有seleminum+phantomjs模拟浏览器登录的文章。还不知道cookie是什么朋友们，可以点击这里
 cookie提">
-<meta property="og:updated_time" content="2018-10-12T16:57:25.788Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:08:11.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scrapy中使用cookie免于验证登录和模拟登录">
 <meta name="twitter:description" content="Scrapy中使用cookie免于验证登录和模拟登录引言
 python爬虫我认为最困难的问题一个是ip代理，另外一个就是模拟登录了，更操蛋的就是模拟登录了之后还有验证码，真的是不让人省心，不过既然有了反爬虫，那么就有反反爬虫的策略，这里就先介绍一个cookie模拟登陆，后续还有seleminum+phantomjs模拟浏览器登录的文章。还不知道cookie是什么朋友们，可以点击这里
 cookie提">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -103,7 +105,7 @@ cookie提">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Scrapy中使用cookie免于验证登录和模拟登录"><span class="toc-number">1.</span> <span class="toc-text">Scrapy中使用cookie免于验证登录和模拟登录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie提取方法："><span class="toc-number">1.2.</span> <span class="toc-text">cookie提取方法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充说明："><span class="toc-number">1.3.</span> <span class="toc-text">补充说明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用cookie操作scrapy"><span class="toc-number">1.4.</span> <span class="toc-text">使用cookie操作scrapy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接撸代码"><span class="toc-number">1.4.1.</span> <span class="toc-text">直接撸代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-number">1.4.2.</span> <span class="toc-text">说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意"><span class="toc-number">1.5.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.6.</span> <span class="toc-text">作者说</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最后欢迎大家看看我的其他scrapy文章"><span class="toc-number">1.6.1.</span> <span class="toc-text">最后欢迎大家看看我的其他scrapy文章</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Scrapy中使用cookie免于验证登录和模拟登录"><span class="toc-number">1.</span> <span class="toc-text">Scrapy中使用cookie免于验证登录和模拟登录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie提取方法："><span class="toc-number">1.2.</span> <span class="toc-text">cookie提取方法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充说明："><span class="toc-number">1.3.</span> <span class="toc-text">补充说明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用cookie操作scrapy"><span class="toc-number">1.4.</span> <span class="toc-text">使用cookie操作scrapy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接撸代码"><span class="toc-number">1.4.1.</span> <span class="toc-text">直接撸代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-number">1.4.2.</span> <span class="toc-text">说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意"><span class="toc-number">1.5.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.6.</span> <span class="toc-text">作者说</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最后欢迎大家看看我的其他scrapy文章"><span class="toc-number">1.6.1.</span> <span class="toc-text">最后欢迎大家看看我的其他scrapy文章</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.7.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -143,7 +145,10 @@ cookie提">
 </ul>
 </blockquote>
 </blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -212,7 +217,7 @@ cookie提">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Scrapy中使用cookie免于验证登录和模拟登录"><span class="toc-number">1.</span> <span class="toc-text">Scrapy中使用cookie免于验证登录和模拟登录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie提取方法："><span class="toc-number">1.2.</span> <span class="toc-text">cookie提取方法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充说明："><span class="toc-number">1.3.</span> <span class="toc-text">补充说明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用cookie操作scrapy"><span class="toc-number">1.4.</span> <span class="toc-text">使用cookie操作scrapy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接撸代码"><span class="toc-number">1.4.1.</span> <span class="toc-text">直接撸代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-number">1.4.2.</span> <span class="toc-text">说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意"><span class="toc-number">1.5.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.6.</span> <span class="toc-text">作者说</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最后欢迎大家看看我的其他scrapy文章"><span class="toc-number">1.6.1.</span> <span class="toc-text">最后欢迎大家看看我的其他scrapy文章</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Scrapy中使用cookie免于验证登录和模拟登录"><span class="toc-number">1.</span> <span class="toc-text">Scrapy中使用cookie免于验证登录和模拟登录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie提取方法："><span class="toc-number">1.2.</span> <span class="toc-text">cookie提取方法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充说明："><span class="toc-number">1.3.</span> <span class="toc-text">补充说明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用cookie操作scrapy"><span class="toc-number">1.4.</span> <span class="toc-text">使用cookie操作scrapy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#直接撸代码"><span class="toc-number">1.4.1.</span> <span class="toc-text">直接撸代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-number">1.4.2.</span> <span class="toc-text">说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意"><span class="toc-number">1.5.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作者说"><span class="toc-number">1.6.</span> <span class="toc-text">作者说</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最后欢迎大家看看我的其他scrapy文章"><span class="toc-number">1.6.1.</span> <span class="toc-text">最后欢迎大家看看我的其他scrapy文章</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.7.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -254,7 +259,7 @@ cookie提">
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -315,7 +320,7 @@ cookie提">
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -355,11 +360,11 @@ cookie提">
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

@@ -32,7 +32,8 @@ ik_smart：做最粗粒度的拆分
 自动映射默认使用的标准的分词器，如果想要使用IK中文分词器，那么需要手动创建映射，如下：
 
 12345678910111213141516171819202122232425262728PUT /lib &amp;#123;    &quot;mappings&quot; : &amp;#123;        &quot;user">
-<meta property="og:updated_time" content="2018-09-02T11:37:40.121Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:20:26.902Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="中文分词器的使用">
 <meta name="twitter:description" content="中文分词器的使用
@@ -43,6 +44,7 @@ ik_smart：做最粗粒度的拆分
 自动映射默认使用的标准的分词器，如果想要使用IK中文分词器，那么需要手动创建映射，如下：
 
 12345678910111213141516171819202122232425262728PUT /lib &amp;#123;    &quot;mappings&quot; : &amp;#123;        &quot;user">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -118,7 +120,7 @@ ik_smart：做最粗粒度的拆分
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#中文分词器的使用"><span class="toc-number">1.</span> <span class="toc-text">中文分词器的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#查询"><span class="toc-number">1.1.</span> <span class="toc-text">查询</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#中文分词器的使用"><span class="toc-number">1.</span> <span class="toc-text">中文分词器的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#查询"><span class="toc-number">1.1.</span> <span class="toc-text">查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.2.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -142,6 +144,10 @@ ik_smart：做最粗粒度的拆分
 <li>通过上面的分词，我们可以进行查询了，如下：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">GET /lib/user/_search</div><div class="line">&#123;</div><div class="line">  <span class="string">"query"</span>: &#123;</div><div class="line">    <span class="string">"match"</span>: &#123;</div><div class="line">      <span class="string">"address"</span>: <span class="string">"江苏"</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">GET /lib/user/_search</div><div class="line">&#123;</div><div class="line">  <span class="string">"query"</span>: &#123;</div><div class="line">    <span class="string">"match"</span>: &#123;</div><div class="line">      <span class="string">"address"</span>: <span class="string">"淮安"</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">GET /lib/user/_search</div><div class="line">&#123;</div><div class="line">  <span class="string">"query"</span>: &#123;</div><div class="line">    <span class="string">"term"</span>: &#123;</div><div class="line">      <span class="string">"address"</span>: <span class="string">"淮安"</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -210,7 +216,7 @@ ik_smart：做最粗粒度的拆分
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#中文分词器的使用"><span class="toc-number">1.</span> <span class="toc-text">中文分词器的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#查询"><span class="toc-number">1.1.</span> <span class="toc-text">查询</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#中文分词器的使用"><span class="toc-number">1.</span> <span class="toc-text">中文分词器的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#查询"><span class="toc-number">1.1.</span> <span class="toc-text">查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.2.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -252,7 +258,7 @@ ik_smart：做最粗粒度的拆分
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -313,7 +319,7 @@ ik_smart：做最粗粒度的拆分
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -353,11 +359,11 @@ ik_smart：做最粗粒度的拆分
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

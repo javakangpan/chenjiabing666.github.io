@@ -20,11 +20,13 @@
 <meta property="og:site_name" content="爱撒谎的男孩">
 <meta property="og:description" content="Hibernate使用日志(log4j)添加依赖
 在pom.xml中添加如下的依赖123456789101112131415161718&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;log4j&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;log4j&amp;lt;/artifactId&amp;gt;	&amp;lt;version&amp;gt;1.2.17&amp;lt;/version">
-<meta property="og:updated_time" content="2018-04-21T20:20:50.174Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T05:55:35.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hibernate使用日志(log4j)">
 <meta name="twitter:description" content="Hibernate使用日志(log4j)添加依赖
 在pom.xml中添加如下的依赖123456789101112131415161718&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;log4j&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;log4j&amp;lt;/artifactId&amp;gt;	&amp;lt;version&amp;gt;1.2.17&amp;lt;/version">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -100,7 +102,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate使用日志-log4j"><span class="toc-number">1.</span> <span class="toc-text">Hibernate使用日志(log4j)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#添加依赖"><span class="toc-number">1.1.</span> <span class="toc-text">添加依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在resource目录下创建log4j-properties文件"><span class="toc-number">1.2.</span> <span class="toc-text">在resource目录下创建log4j.properties文件</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate使用日志-log4j"><span class="toc-number">1.</span> <span class="toc-text">Hibernate使用日志(log4j)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#添加依赖"><span class="toc-number">1.1.</span> <span class="toc-text">添加依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在resource目录下创建log4j-properties文件"><span class="toc-number">1.2.</span> <span class="toc-text">在resource目录下创建log4j.properties文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.3.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -109,6 +111,10 @@
 </li>
 </ul>
 <h2 id="在resource目录下创建log4j-properties文件"><a href="#在resource目录下创建log4j-properties文件" class="headerlink" title="在resource目录下创建log4j.properties文件"></a>在resource目录下创建log4j.properties文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"># Direct log messages to a log file</div><div class="line">log4j.appender.file=org.apache.log4j.RollingFileAppender</div><div class="line"># define the log to file</div><div class="line">log4j.appender.file.File=jsnu-log4j.log</div><div class="line"></div><div class="line">log4j.appender.file.MaxFileSize=1MB</div><div class="line">log4j.appender.file.MaxBackupIndex=1</div><div class="line">log4j.appender.file.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.file.layout.ConversionPattern=%d&#123;ABSOLUTE&#125; %5p %c&#123;1&#125;:%L - %m%n</div><div class="line"></div><div class="line"># Direct log messages to stdout</div><div class="line">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</div><div class="line">log4j.appender.stdout.Target=System.out</div><div class="line">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.stdout.layout.ConversionPattern=%d&#123;ABSOLUTE&#125; %5p %c&#123;1&#125;:%L - %m%n</div><div class="line"></div><div class="line"># Root logger option</div><div class="line">log4j.rootLogger=INFO, file, stdout</div><div class="line"></div><div class="line"># Log everything. Good for troubleshooting</div><div class="line">log4j.logger.org.hibernate=INFO</div><div class="line"></div><div class="line"># Log all JDBC parameters</div><div class="line">log4j.logger.org.hibernate.type=ALL</div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -177,7 +183,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate使用日志-log4j"><span class="toc-number">1.</span> <span class="toc-text">Hibernate使用日志(log4j)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#添加依赖"><span class="toc-number">1.1.</span> <span class="toc-text">添加依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在resource目录下创建log4j-properties文件"><span class="toc-number">1.2.</span> <span class="toc-text">在resource目录下创建log4j.properties文件</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hibernate使用日志-log4j"><span class="toc-number">1.</span> <span class="toc-text">Hibernate使用日志(log4j)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#添加依赖"><span class="toc-number">1.1.</span> <span class="toc-text">添加依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在resource目录下创建log4j-properties文件"><span class="toc-number">1.2.</span> <span class="toc-text">在resource目录下创建log4j.properties文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.3.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -219,7 +225,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -280,7 +286,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -320,11 +326,11 @@
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

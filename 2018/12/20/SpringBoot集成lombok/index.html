@@ -34,7 +34,8 @@ https://blog.csdn.net/blueheart20/article/details/52909775
 @Setter:  自动生成Setter
 @ToString：  覆盖tostring方法
 @Slf4j:  默认使">
-<meta property="og:updated_time" content="2018-12-20T15:47:26.439Z">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
+<meta property="og:updated_time" content="2020-03-13T06:12:19.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot集成lombok">
 <meta name="twitter:description" content="SpringBoot集成lombokSTS安装
@@ -46,6 +47,7 @@ https://blog.csdn.net/blueheart20/article/details/52909775
 @Setter:  自动生成Setter
 @ToString：  覆盖tostring方法
 @Slf4j:  默认使">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="爱撒谎的男孩" type="application/atom+xml">
@@ -121,7 +123,7 @@ https://blog.csdn.net/blueheart20/article/details/52909775
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot集成lombok"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot集成lombok</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#STS安装"><span class="toc-number">1.1.</span> <span class="toc-text">STS安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的注解"><span class="toc-number">1.2.</span> <span class="toc-text">常用的注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.3.</span> <span class="toc-text">使用</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot集成lombok"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot集成lombok</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#STS安装"><span class="toc-number">1.1.</span> <span class="toc-text">STS安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的注解"><span class="toc-number">1.2.</span> <span class="toc-text">常用的注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.3.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.4.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -148,6 +150,10 @@ https://blog.csdn.net/blueheart20/article/details/52909775
 <li>创建实体类，如下:</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Data</span> <span class="comment">// 自动生成get、set、toString、equals方法</span></div><div class="line"><span class="meta">@AllArgsConstructor</span> <span class="comment">// 全参构造方法</span></div><div class="line"><span class="meta">@NoArgsConstructor</span> <span class="comment">// 无参构造方法</span></div><div class="line"><span class="meta">@Accessors</span>(chain = <span class="keyword">true</span>) <span class="comment">// 链式编程</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Order</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> Integer orderId; <span class="comment">// 订单Id</span></div><div class="line">	<span class="keyword">private</span> String orderNum; <span class="comment">// 订单编号</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Order order = <span class="keyword">new</span> Order();</div><div class="line">		order.setOrderId(<span class="number">1</span>).setOrderNum(<span class="string">"156416516"</span>); <span class="comment">// 链式调用</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
+<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -216,7 +222,7 @@ https://blog.csdn.net/blueheart20/article/details/52909775
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot集成lombok"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot集成lombok</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#STS安装"><span class="toc-number">1.1.</span> <span class="toc-text">STS安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的注解"><span class="toc-number">1.2.</span> <span class="toc-text">常用的注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.3.</span> <span class="toc-text">使用</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot集成lombok"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot集成lombok</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#STS安装"><span class="toc-number">1.1.</span> <span class="toc-text">STS安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的注解"><span class="toc-number">1.2.</span> <span class="toc-text">常用的注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">1.3.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#笔者有话说"><span class="toc-number">1.4.</span> <span class="toc-text">笔者有话说</span></a></li></ol></li></ol>
  
   </div>
 
@@ -258,7 +264,7 @@ https://blog.csdn.net/blueheart20/article/details/52909775
 		  
 		
 		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 		  
 		
 		  
@@ -319,7 +325,7 @@ https://blog.csdn.net/blueheart20/article/details/52909775
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>40</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
@@ -359,11 +365,11 @@ https://blog.csdn.net/blueheart20/article/details/52909775
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
