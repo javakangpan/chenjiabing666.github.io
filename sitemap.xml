@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://chenjiabing666.github.io/about/index.html</loc>
+    
+    <lastmod>2020-03-13T06:45:18.205Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://chenjiabing666.github.io/2018/05/09/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</loc>
     
     <lastmod>2020-03-13T06:24:57.570Z</lastmod>
@@ -1678,13 +1685,6 @@
     <loc>http://chenjiabing666.github.io/2018/06/26/Redis/</loc>
     
     <lastmod>2018-06-26T14:36:28.858Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://chenjiabing666.github.io/about/index.html</loc>
-    
-    <lastmod>2018-06-08T07:35:16.999Z</lastmod>
     
   </url>
   
