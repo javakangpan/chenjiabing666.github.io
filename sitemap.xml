@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://chenjiabing666.github.io/about/index.html</loc>
+    
+    <lastmod>2020-03-24T08:09:05.173Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://chenjiabing666.github.io/2020/03/23/IDEA%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/</loc>
     
     <lastmod>2020-03-23T08:15:44.491Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>http://chenjiabing666.github.io/2020/03/18/SpringBoot%E6%95%B4%E5%90%88%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E7%9A%84%E5%B7%A8%E5%9D%91/</loc>
     
     <lastmod>2020-03-18T08:53:17.542Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://chenjiabing666.github.io/about/index.html</loc>
-    
-    <lastmod>2020-03-15T06:54:59.132Z</lastmod>
     
   </url>
   
