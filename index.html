@@ -79,6 +79,132 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2020/04/01/接口幂等性如何设计？/" title="接口幂等性如何设计？" itemprop="url">
+  
+    <h1 itemprop="name">接口幂等性如何设计？</h1>
+    
+     
+           <p itemprop="description" >导读
+现在这个时代大家可能最关心的就是钱了，那么有没有想过你银行转账给你没有一次是转多的，要么失败，要么成功，为什么不能失误一下多转一笔呢？醒醒吧年轻人，别做梦了，做银行的能那么傻x吗？
+今天我们就来谈一谈为什么银行转账不能多给我转一笔？关乎到钱的问题，小伙伴们打起精神！！！
+要</p>
+        
+    
+    <time datetime="2020-04-01T02:38:34.000Z" itemprop="datePublished">2020-04-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/01/Mysql性能优化：什么是索引下推？/" title="Mysql性能优化：什么是索引下推？" itemprop="url">
+  
+    <h1 itemprop="name">Mysql性能优化：什么是索引下推？</h1>
+    
+     
+           <p itemprop="description" >导读
+索引下推（index condition pushdown ）简称ICP，在Mysql5.6的版本上推出，用于优化查询。
+在不使用ICP的情况下，在使用非主键索引（又叫普通索引或者二级索引）进行查询时，存储引擎通过索引检索到数据，然后返回给MySQL服务器，服务器然后判断数</p>
+        
+    
+    <time datetime="2020-04-01T02:37:30.000Z" itemprop="datePublished">2020-04-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/01/Mysql性能优化：为什么使用覆盖索引/" title="Mysql性能优化：为什么使用覆盖索引?" itemprop="url">
+  
+    <h1 itemprop="name">Mysql性能优化：为什么使用覆盖索引?</h1>
+    
+     
+           <p itemprop="description" >导读
+相信读者看过很多MYSQL索引优化的文章，其中有很多优化的方法，比如最佳左前缀，覆盖索引等方法，但是你真正理解为什么要使用最佳左前缀，为什么使用覆盖索引会提升查询的效率吗？
+
+本篇文章将从MYSQL内部结构上讲一下为什么覆盖索引能够提升效率。
+
+
+InnoDB索引模型
+在I</p>
+        
+    
+    <time datetime="2020-04-01T02:36:34.000Z" itemprop="datePublished">2020-04-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/01/一条查询语句到底是如何执行的/" title="一条查询语句到底是如何执行的?" itemprop="url">
+  
+    <h1 itemprop="name">一条查询语句到底是如何执行的?</h1>
+    
+     
+           <p itemprop="description" >导读
+Mysql在中小型企业中是个香饽饽，目前主流的数据库之一，几乎没有一个后端开发者不会使用的，但是作为一个老司机，仅仅会用真的不够。
+
+今天陈某透过一个简单的查询语句来讲述在Mysql内部的执行过程。
+1select * from table where id=10;
+
+
+撸</p>
+        
+    
+    <time datetime="2020-04-01T02:35:30.000Z" itemprop="datePublished">2020-04-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/01/Mysql中的三类锁，你知道吗？/" title="Mysql中的三类锁，你知道吗？" itemprop="url">
+  
+    <h1 itemprop="name">Mysql中的三类锁，你知道吗？</h1>
+    
+     
+           <p itemprop="description" >导读
+正所谓有人(锁)的地方就有江湖(事务)，人在江湖飘，怎能一无所知？
+
+今天来细说一下Mysql中的三类锁，分别是全局锁、表级锁、行级锁。
+
+
+全局锁
+全局锁简单的说就是锁住整个数据库实例，命令是Flush tables with read lock。当你需要为整个数据库处于</p>
+        
+    
+    <time datetime="2020-04-01T02:31:58.000Z" itemprop="datePublished">2020-04-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2020/03/23/IDEA调试技巧/" title="IDEA调试技巧" itemprop="url">
   
     <h1 itemprop="name">IDEA调试技巧</h1>
@@ -188,122 +314,6 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/03/11/SpringBoot整合JTA/" title="SpringBoot整合JTA" itemprop="url">
-  
-    <h1 itemprop="name">SpringBoot整合JTA</h1>
-    
-     
-           <p itemprop="description" >导读
-JTA，即Java Transaction API，JTA允许应用程序执行分布式事务处理——在两个或多个网络计算机资源上访问并且更新数据。JDBC驱动程序的JTA支持极大地增强了数据访问能力。 
-JTA是基于XA标准制定的，采用两阶段提交的方式来管理分布式事务。即是一个事务</p>
-        
-    
-    <time datetime="2020-03-11T13:04:24.000Z" itemprop="datePublished">2020-03-11</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/03/11/SpringBoot整合分页插件/" title="SpringBoot整合分页插件" itemprop="url">
-  
-    <h1 itemprop="name">SpringBoot整合分页插件</h1>
-    
-     
-           <p itemprop="description" >导读
-很久以前的项目分页查询的话大概会用limit，如果要统计总数还需要使用count，总之大多数情况下都是很麻烦的一件事，特别是使用Mybatis。
-分页插件确实解放了我们的双手，不用再写重复的sql，利用mybatis的插件的原理帮我们解决了系列问题。
-
-SpringBoot</p>
-        
-    
-    <time datetime="2020-03-11T03:00:04.000Z" itemprop="datePublished">2020-03-11</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/03/09/一文搞懂Spring-AMQP/" title="一文搞懂Spring-AMQP" itemprop="url">
-  
-    <h1 itemprop="name">一文搞懂Spring-AMQP</h1>
-    
-     
-           <p itemprop="description" >RabbitAdmin
-队列，交换器的声明创建、删除、清空
-创建：
-
-123456@Bean   public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory ) &amp;#123;       RabbitAdm</p>
-        
-    
-    <time datetime="2020-03-09T01:11:16.000Z" itemprop="datePublished">2020-03-09</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/03/07/分布式锁-redis实现/" title="分布式锁-redis实现" itemprop="url">
-  
-    <h1 itemprop="name">分布式锁-redis实现</h1>
-    
-     
-           <p itemprop="description" >为什么要分布式锁
-在单机的情况下，可以通过jvm提供的系列线程安全的操作来处理高并发的情况，但是在分布式的环境下，jvm提供的线程安全操作明显是不能满足要求的。在一些小型的互联网公司经常做的crud操作如果在高并发的情况下会出现很大的问题，比如：
-
-12345//伪代码：下订单1</p>
-        
-    
-    <time datetime="2020-03-07T09:53:15.000Z" itemprop="datePublished">2020-03-07</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/08/17/Shiro/" title="Shiro" itemprop="url">
-  
-    <h1 itemprop="name">Shiro</h1>
-    
-     
-           <p itemprop="description" >项目搭建
-添加Shiro的依赖
-
-1234567891011&amp;lt;!--Spring整合的shiro依赖--&amp;gt;   &amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.apache.shiro&amp;lt;/groupId&amp;gt;     &amp;lt</p>
-        
-    
-    <time datetime="2019-08-17T11:22:05.000Z" itemprop="datePublished">2019-08-17</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -386,7 +396,7 @@ SpringBoot</p>
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>15</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>19</sup></a></li>
 		  
 		
 		  
@@ -394,7 +404,7 @@ SpringBoot</p>
 		  
 		
 		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>9</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
 		  
 		
 		  
@@ -423,11 +433,15 @@ SpringBoot</p>
 			
 		
 			
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>15</sup></a></li>
 			
 		
 			
@@ -435,15 +449,15 @@ SpringBoot</p>
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>11</sup></a></li>
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
 			
 		
 			
@@ -456,10 +470,6 @@ SpringBoot</p>
 		
 			
 				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>9</sup></a></li>
 			
 		
 			

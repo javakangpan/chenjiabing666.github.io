@@ -79,6 +79,121 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2019/07/19/一文搞懂Spring-AOP原理/" title="一文搞懂Spring-AOP原理" itemprop="url">
+  
+    <h1 itemprop="name">一文搞懂Spring-AOP原理</h1>
+    
+     
+           <p itemprop="description" >简介
+面向切面编程，是面向对象编程的重要组成部分，在不改变业务逻辑功能的基础上，对横切逻辑进行扩展
+
+添加依赖12345&amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;     &amp;l</p>
+        
+    
+    <time datetime="2019-07-19T14:16:50.000Z" itemprop="datePublished">2019-07-19</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/07/17/Spring解决循环依赖/" title="Spring解决循环依赖" itemprop="url">
+  
+    <h1 itemprop="name">Spring解决循环依赖</h1>
+    
+     
+           <p itemprop="description" >导读
+前几天发表的文章SpringBoot多数据源动态切换和SpringBoot整合多数据源的巨坑中，提到了一个坑就是动态数据源添加@Primary接口就会造成循环依赖异常，如下图：
+
+
+
+这个就是典型的构造器依赖，详情请看上面两篇文章，这里不再详细赘述了。本篇文章将会从源码深入</p>
+        
+    
+    <time datetime="2019-07-16T17:13:29.000Z" itemprop="datePublished">2019-07-17</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/07/07/Spring事务源码解析/" title="Spring事务源码解析" itemprop="url">
+  
+    <h1 itemprop="name">Spring事务源码解析</h1>
+    
+     
+           <p itemprop="description" >配置注解版事务事务管理器
+事务管理器的接口是PlatformTransactionManager，其中定义了三个接口方法如下：
+TransactionStatus getTransaction(@Nullable TransactionDefinition definition)</p>
+        
+    
+    <time datetime="2019-07-07T11:41:07.000Z" itemprop="datePublished">2019-07-07</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/06/30/Spring中的事件/" title="Spring中的事件" itemprop="url">
+  
+    <h1 itemprop="name">Spring中的事件</h1>
+    
+     
+           <p itemprop="description" >简介
+学过编程语言的肯定知道事件，在JS中事件，Android中的事件，大多是鼠标点击，键盘事件，手指滑动事件等等。在Spring中也有一些事件，比如容器启动、容器关闭、容器刷新都是一个事件。
+既然有了事件，自然少不了事件监听器，事件分发器等，后续会详细介绍
+
+事件Spring中</p>
+        
+    
+    <time datetime="2019-06-30T06:22:07.000Z" itemprop="datePublished">2019-06-30</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/06/27/BeanFactoryPostProcessor解析/" title="BeanFactoryPostProcessor解析" itemprop="url">
+  
+    <h1 itemprop="name">BeanFactoryPostProcessor解析</h1>
+    
+     
+           <p itemprop="description" >简介
+Spring IoC容器允许BeanFactoryPostProcessor在容器实例化任何bean之前读取bean的定义(配置元数据)，并可以修改它。同时可以定义多个BeanFactoryPostProcessor，通过设置’order’属性来确定各个BeanFactor</p>
+        
+    
+    <time datetime="2019-06-27T15:34:47.000Z" itemprop="datePublished">2019-06-27</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2019/06/27/BeanWrapper解析/" title="BeanWrapper解析" itemprop="url">
   
     <h1 itemprop="name">BeanWrapper解析</h1>
@@ -195,124 +310,6 @@ Bean的后置处理器对应的接口是BeanPostProcessor，其中定义了两�
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/06/12/Spring中的Aware解析/" title="Spring中的Aware解析" itemprop="url">
-  
-    <h1 itemprop="name">Spring中的Aware解析</h1>
-    
-     
-           <p itemprop="description" >简介
-Spring框架中提供了许多实现了Aware接口的类，这些类主要是为了辅助Spring访问容器中的数据，比如BeanNameAware，这个类能够在Spring容器加载的过程中将Bean的名字（id）赋值给变量。
-
-常用的Aware
-BeanNameAware：能够获取be</p>
-        
-    
-    <time datetime="2019-06-12T11:33:01.000Z" itemprop="datePublished">2019-06-12</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/06/12/JDK8新特性/" title="JDK8新特性" itemprop="url">
-  
-    <h1 itemprop="name">JDK8新特性</h1>
-    
-     
-           <p itemprop="description" >JDk8新特性函数式编程集合的foreach
-List
-
-这里的表示List中每一个元素，可以不指定类型，JDK会自动推测出类型，但是也是可以使用()加上类型
-如果有一条语句可以直接在后面输出，如果有多行，那么可以在后面使用{}指定12Arrays.asList(1,2,4,1,</p>
-        
-    
-    <time datetime="2019-06-12T06:58:55.000Z" itemprop="datePublished">2019-06-12</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/01/19/springBoot制作docker镜像/" title="springBoot制作docker镜像" itemprop="url">
-  
-    <h1 itemprop="name">springBoot制作docker镜像</h1>
-    
-     
-           <p itemprop="description" >SpringBoot制作docker镜像开启2375端口修改docker配置文件
-vim /usr/lib/systemd/system/docker.service
-在ExecStart=/usr/bin/dockerd配置加上如下内容
-
-1-H tcp://0.0.0.0:2</p>
-        
-    
-    <time datetime="2019-01-19T05:51:31.000Z" itemprop="datePublished">2019-01-19</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/12/30/docker搭建私有仓库/" title="docker搭建私有仓库" itemprop="url">
-  
-    <h1 itemprop="name">docker搭建私有仓库</h1>
-    
-     
-           <p itemprop="description" >Docker私有仓库步骤
-docker pull registry
-docker run --name registry -p 5000:5000 -d registry
-启动完成后访问http:// 192.168.174.130:5000/v2/_catalog即可看到如下的</p>
-        
-    
-    <time datetime="2018-12-30T05:27:20.000Z" itemprop="datePublished">2018-12-30</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/12/30/Dockerfile/" title="Dockerfile" itemprop="url">
-  
-    <h1 itemprop="name">Dockerfile</h1>
-    
-     
-           <p itemprop="description" >DockerFile
-镜像的定制实际上就是定制每一层所添加的配置、文件。如果我们可以把每一层修改、安装、构建、操作的命令都写入一个脚本，用这个脚本来构建、定制镜像，那么无法重复的问题、镜像构建透明性的问题、体积的问题就都会解决。这个脚本就是 Dockerfile。
-
-Docker</p>
-        
-    
-    <time datetime="2018-12-30T05:26:02.000Z" itemprop="datePublished">2018-12-30</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
@@ -395,7 +392,7 @@ Docker</p>
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>15</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>19</sup></a></li>
 		  
 		
 		  
@@ -403,7 +400,7 @@ Docker</p>
 		  
 		
 		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>9</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
 		  
 		
 		  
@@ -432,11 +429,15 @@ Docker</p>
 			
 		
 			
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>15</sup></a></li>
 			
 		
 			
@@ -444,15 +445,15 @@ Docker</p>
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>11</sup></a></li>
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
 			
 		
 			
@@ -465,10 +466,6 @@ Docker</p>
 		
 			
 				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>9</sup></a></li>
 			
 		
 			
