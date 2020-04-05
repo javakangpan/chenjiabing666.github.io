@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2020-04-01T02:38:57.101Z</updated>
+  <updated>2020-04-05T13:46:31.832Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,285 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式：工厂方法模式</title>
+    <link href="http://chenjiabing666.github.io/2020/04/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://chenjiabing666.github.io/2020/04/05/设计模式：工厂方法模式/</id>
+    <published>2020-04-05T13:44:06.000Z</published>
+    <updated>2020-04-05T13:46:31.832Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li>工厂方法模式是所有设计模式中比较常用的一种模式，但是真正能搞懂用好的少之又少，Spring底层大量的使用该设计模式来进行封装，以致开发者阅读源代码的时候晕头转向。</li>
+<li>今天陈某分别从以下五个方面详细讲述一下工厂方法模式：<ol>
+<li><strong>从什么是工厂方法模式</strong></li>
+<li><strong>通用框架实现</strong></li>
+<li><strong>工厂方法模式的优点</strong></li>
+<li><strong>工厂方法模式的升级</strong></li>
+<li><strong>Spring底层如何使用工厂方法模式</strong></li>
+</ol>
+</li>
+</ul>
+<h2 id="什么是工厂方法模式？"><a href="#什么是工厂方法模式？" class="headerlink" title="什么是工厂方法模式？"></a>什么是工厂方法模式？</h2><ul>
+<li>定义：定义一个用于创建对象的 接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。</li>
+<li>工厂方法模式通用类图如下：<br><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/1.png" alt=""></li>
+<li>在工厂方法模式中，抽象产品<code>Product</code>负责定义产品的特性，实现对事物的抽象定义。</li>
+<li><code>AbstractFactory</code>是抽象工厂类，定义了一个抽象工厂方法。具体的如何创建产品由工厂实现类<code>ConcreteFactory</code>完成。</li>
+</ul>
+<h2 id="通用框架实现"><a href="#通用框架实现" class="headerlink" title="通用框架实现"></a>通用框架实现</h2><ul>
+<li>工厂方法模式的变种有很多，陈某给出一个比较实用的通用框架。</li>
+<li><p><code>抽象产品类</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 公共逻辑方法</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 抽象方法：由子类实现，根据业务逻辑定义多个</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>具体产品类1</code>，继承抽象产品类，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product1</span> <span class="keyword">extends</span> <span class="title">Product</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 实现抽象产品类的抽象方法</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>具体产品类2</code>，继承抽象产品类，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product2</span> <span class="keyword">extends</span> <span class="title">Product</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 实现抽象产品类的抽象方法</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>抽象工厂类</code>，必须定义一个工厂方法来自己实现具体的创建逻辑，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractFactory</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 工厂方法，需要子类实现</div><div class="line">     * <span class="doctag">@param</span> cls</div><div class="line">     * <span class="doctag">@param</span> &lt;T&gt;</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> &lt;T extends Product&gt; <span class="function">T <span class="title">create</span><span class="params">(Class&lt;T&gt; cls)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>具体工厂类，使用了反射对具体产品的实例化，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteFactory</span> <span class="keyword">extends</span> <span class="title">AbstractFactory</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> &lt;T extends Product&gt; <span class="function">T <span class="title">create</span><span class="params">(Class&lt;T&gt; cls)</span> </span>&#123;</div><div class="line">        Product product=<span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            product= (Product) Class.forName(cls.getName()).newInstance();</div><div class="line">        &#125;<span class="keyword">catch</span> (Exception ex)&#123;</div><div class="line">            ex.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> (T) product;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>测试如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">//创建具体工厂类</span></div><div class="line">        ConcreteFactory factory = <span class="keyword">new</span> ConcreteFactory();</div><div class="line">        <span class="comment">//调用工厂方法获取产品类1的实例</span></div><div class="line">        Product1 product1 = factory.create(Product1.class);</div><div class="line">        System.out.println(product1);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>以上是简单的一个通用框架，读者可以根据自己的业务在其上拓展。</p>
+</li>
+</ul>
+<h2 id="工厂方法模式的优点"><a href="#工厂方法模式的优点" class="headerlink" title="工厂方法模式的优点"></a>工厂方法模式的优点</h2><ul>
+<li>良好的封装性，代码结构清晰，调用者不用关系具体的实现过程，只需要提供对应的产品类名称即可。</li>
+<li>易扩展性，在增加产品类的情况下，只需要适当的修改工厂类逻辑或者重新拓展一个工厂类即可。</li>
+<li>屏蔽了产品类，产品类的变化调用者不用关心。比如在使用<code>JDBC</code>连接数据库时，只需要改动一个驱动的名称，数据库就会从<code>Mysql</code>切换到<code>Oracle</code>，极其灵活。</li>
+</ul>
+<h2 id="工厂方法模式的升级"><a href="#工厂方法模式的升级" class="headerlink" title="工厂方法模式的升级"></a>工厂方法模式的升级</h2><ul>
+<li>在复杂的系统中，一个产品的初始化过程是及其复杂的，仅仅一个具体工厂实现可能有些吃力，此时最好的做法就是为每个产品实现一个工厂，达到一个工厂类只负责生产一个产品。</li>
+<li>此时工厂方法模式的类图如下：</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/2.png" alt=""></p>
+<ul>
+<li>如上图，每个产品类都对应了一个工厂，一个工厂只负责生产一个产品，非常符合单一职责原则。</li>
+<li>针对上述的升级过程，那么工厂方法中不需要传入抽象产品类了，因为一个工厂只负责一个产品的生产，此时的抽象工厂类如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractFactory</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 工厂方法，需要子类实现</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> &lt;T extends Product&gt; <span class="function">T <span class="title">create</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Spring底层如何使用工厂方法模式？"><a href="#Spring底层如何使用工厂方法模式？" class="headerlink" title="Spring底层如何使用工厂方法模式？"></a>Spring底层如何使用工厂方法模式？</h2><ul>
+<li>工厂方法模式在Spring底层被广泛的使用，陈某今天举个最常用的例子就是<code>AbstractFactoryBean</code>。</li>
+<li>这个抽象工厂很熟悉了，这里不再讨论具体的作用。其实现了<code>FactoryBean</code>接口，这个接口中<code>getObject()</code>方法返回真正的Bean实例。</li>
+<li><p><code>AbstractFactoryBean</code>中的<code>getObject()</code>方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> T <span class="title">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    <span class="comment">//单例，从缓存中取，或者暴露一个早期实例解决循环引用</span></div><div class="line">		<span class="keyword">if</span> (isSingleton()) &#123;</div><div class="line">			<span class="keyword">return</span> (<span class="keyword">this</span>.initialized ? <span class="keyword">this</span>.singletonInstance : getEarlySingletonInstance());</div><div class="line">		&#125;</div><div class="line">    <span class="comment">//多实例</span></div><div class="line">		<span class="keyword">else</span> &#123; </div><div class="line">      <span class="comment">//调用createInstance</span></div><div class="line">			<span class="keyword">return</span> createInstance();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">  <span class="comment">//创建对象</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> T <span class="title">createInstance</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>从以上代码可以看出，创建对象的职责交给了<code>createInstance</code>这个抽象方法，由其子类去定制自己的创建逻辑。</p>
+</li>
+<li>下图显示了继承了<code>AbstractFactoryBean</code>的具体工厂类，如下：</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/3.png" alt=""></p>
+<ul>
+<li>其实与其说<code>AbstractFactoryBean</code>是抽象工厂类，不如说<code>FactoryBean</code>是真正的抽象工厂类，前者只是对后者的一种增强，完成大部分的可复用的逻辑。比如常用的<code>sqlSessionFactoryBean</code>只是简单的实现了<code>FactoryBean</code>，并未继承<code>AbstractFactoryBean</code>，至于结论如何，具体看你从哪方面看了。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>工厂方法模式是一种常见的设计模式，但是真正能够用的高级，用的透彻还是有些难度的，开发者所能做的就是在此模式基础上思考如何优化自己的代码，达到易扩展、封装性强的效果了。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;导读&quot;&gt;&lt;a href=&quot;#导读&quot; class=&quot;headerlink&quot; title=&quot;导读&quot;&gt;&lt;/a&gt;导读&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;工厂方法模式是所有设计模式中比较常用的一种模式，但是真正能搞懂用好的少之又少，Spring底层大量的使用该设计模式来进行封装，以
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://chenjiabing666.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="http://chenjiabing666.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式：模板模式</title>
+    <link href="http://chenjiabing666.github.io/2020/04/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://chenjiabing666.github.io/2020/04/05/设计模式：模板模式/</id>
+    <published>2020-04-05T13:43:52.000Z</published>
+    <updated>2020-04-05T13:45:53.821Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li>模板模式在是Spring底层被广泛的应用，比如事务管理器的实现，JDBC模板的实现。</li>
+<li>今天就来谈谈<strong>什么是模板模式</strong>、<strong>模板模式的优缺点</strong>、<strong>模板模式的简单演示</strong>、<strong>模板模式在Spring底层的实现</strong>。</li>
+</ul>
+<h2 id="什么是模板模式"><a href="#什么是模板模式" class="headerlink" title="什么是模板模式"></a>什么是模板模式</h2><ul>
+<li>模板模式首先要有一个抽象类，这个抽象类公开定义了执行它的方法的方式/模板。它的子类可以按需要重写方法实现，但调用将以抽象类中定义的方式进行。这种类型的设计模式属于行为型模式。</li>
+<li>定义：<strong>定义一个操作中的算法骨架，而将算法的一些步骤延迟到子类中，使得子类可以不改变该算法结构的情况下重定义该算法的某些特定步骤。</strong></li>
+<li>比如在造房子一样，<code>地基</code>，<code>铺线</code>，<code>房子户型</code>都是一样的，由开发商决定，但是在交房之后，室内的<code>装修风格</code>和<code>场景布置</code>却是由业主决定，在这个场景中，开发商其实就是一个抽象类，地基，铺线，房子户型都是可以复用的，但是装修却是不可复用的，必须由业主决定，此时的每一个业主的房子就是一个实现的子类。</li>
+<li>模板方法的实现条件注意：<ol>
+<li>必须是一个抽象类。</li>
+<li>抽象类有一个模板方法，其中定义了算法骨架。</li>
+<li>为了防止恶意操作，模板方法必须加上<code>final</code>关键词。</li>
+<li>模板方法中除了复用的代码，其他的关键代码必须是抽象的，子类可以继承实现。</li>
+</ol>
+</li>
+</ul>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>它封装了不变部分，扩展可变部分。它把认为是不变部分的算法封装到父类中实现，而把可变部分算法由子类继承实现，便于子类继续扩展。</li>
+<li>它在父类中提取了公共的部分代码，便于代码复用。</li>
+<li>部分方法是由子类实现的，因此子类可以通过扩展方式增加相应的功能，符合开闭原则。</li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>对每个不同的实现都需要定义一个子类，这会导致类的个数增加，系统更加庞大，设计也更加抽象。</li>
+<li>父类中的抽象方法由子类实现，子类执行的结果会影响父类的结果，这导致一种反向的控制结构，它提高了代码阅读的难度。</li>
+</ul>
+<h2 id="简单演示"><a href="#简单演示" class="headerlink" title="简单演示"></a>简单演示</h2><ul>
+<li>比如游戏的运行需要如下几个步骤：<ol>
+<li>初始化游戏</li>
+<li>开始游戏</li>
+<li>结束游戏</li>
+</ol>
+</li>
+<li>上述的三个步骤可以是模板类的抽象方法，由具体的子类实现，比如足球游戏。</li>
+<li><p>定义模板类，必须是一个抽象类，模板方法必须是<code>final</code>修饰。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Game</span> </span>&#123;</div><div class="line">    <span class="comment">//抽象方法</span></div><div class="line">   <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">initialize</span><span class="params">()</span></span>;</div><div class="line">   <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">startPlay</span><span class="params">()</span></span>;</div><div class="line">   <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">endPlay</span><span class="params">()</span></span>;</div><div class="line"> </div><div class="line">   <span class="comment">//模板方法</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>&#123;</div><div class="line"> </div><div class="line">      <span class="comment">//初始化游戏</span></div><div class="line">      initialize();</div><div class="line"> </div><div class="line">      <span class="comment">//开始游戏</span></div><div class="line">      startPlay();</div><div class="line"> </div><div class="line">      <span class="comment">//结束游戏</span></div><div class="line">      endPlay();</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>定义实现类，足球游戏，继承模板类，实现其中的三个抽象方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Football</span> <span class="keyword">extends</span> <span class="title">Game</span> </span>&#123;</div><div class="line"> </div><div class="line">   <span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">void</span> <span class="title">endPlay</span><span class="params">()</span> </span>&#123;</div><div class="line">      System.out.println(<span class="string">"足球游戏结束......"</span>);</div><div class="line">   &#125;</div><div class="line"> </div><div class="line">   <span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">void</span> <span class="title">initialize</span><span class="params">()</span> </span>&#123;</div><div class="line">      System.out.println(<span class="string">"足球游戏初始化中......"</span>);</div><div class="line">   &#125;</div><div class="line"> </div><div class="line">   <span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">void</span> <span class="title">startPlay</span><span class="params">()</span> </span>&#123;</div><div class="line">      System.out.println(<span class="string">"足球游侠开始了......"</span>);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>此时写一个测试方法，运行足球游戏，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TemplatePatternDemo</span> </span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      <span class="comment">//创建足球游戏实例</span></div><div class="line">      Game game = <span class="keyword">new</span> Football();</div><div class="line">      <span class="comment">//开始游戏</span></div><div class="line">      game.play();      </div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>输出结果如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">足球游戏初始化中......</div><div class="line">足球游侠开始了......</div><div class="line">足球游戏结束......</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Spring中的模板模式"><a href="#Spring中的模板模式" class="headerlink" title="Spring中的模板模式"></a>Spring中的模板模式</h2><ul>
+<li>Spring底层对于模板模式的使用有很多处，今天陈某带大家康康事务管理器是如何使用模板模式的。</li>
+</ul>
+<h3 id="模板抽象类"><a href="#模板抽象类" class="headerlink" title="模板抽象类"></a>模板抽象类</h3><ul>
+<li><code>AbstractPlatformTransactionManager</code>是Spring中的<code>模板抽象类</code>，来看看它的继承关系图：<br><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F/1.png" alt=""></li>
+<li>实现了<code>PlatformTransactionManager</code>接口，重载了接口中的方法。</li>
+</ul>
+<h3 id="模板方法"><a href="#模板方法" class="headerlink" title="模板方法"></a>模板方法</h3><ul>
+<li><p>事务管理器中抽象类中的模板方法不止一个，比如以下两个方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//提交事务</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">commit</span><span class="params">()</span></span></div><div class="line"></div><div class="line"><span class="comment">//获取TransactionStatus</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> TransactionStatus <span class="title">getTransaction</span><span class="params">()</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>这两个方法都对于自己要实现的逻辑搭建了一个骨架，主要的功能是由抽象方法完成，由子类来完成。</p>
+</li>
+</ul>
+<h3 id="抽象方法"><a href="#抽象方法" class="headerlink" title="抽象方法"></a>抽象方法</h3><ul>
+<li><p>事务管理器抽象类中的抽象方法定义了多个，分别用于处理不同的业务逻辑，由子类实现其中具体的逻辑，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//提交事务</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">doCommit</span><span class="params">(DefaultTransactionStatus status)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//回滚事务</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">doRollback</span><span class="params">(DefaultTransactionStatus status)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//开始事务</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">doBegin</span><span class="params">(Object transaction, TransactionDefinition definition)</span></span></div><div class="line"></div><div class="line"><span class="comment">//获取当前的事务对象</span></div><div class="line"><span class="keyword">protected</span> <span class="keyword">abstract</span> Object <span class="title">doGetTransaction</span><span class="params">()</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>抽象方法的定义便于子类去扩展，在保证算法逻辑不变的情况下，子类能够定制自己的实现。</p>
+</li>
+</ul>
+<h3 id="具体子类"><a href="#具体子类" class="headerlink" title="具体子类"></a>具体子类</h3><ul>
+<li>事务管理器的模板类有很多的具体子类，如下图：<br><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F/2.png" alt=""></li>
+<li>其中我们熟悉的有<code>DataSourceTransactionManager</code>、<code>JtaTransactionManager</code>、<code>RabbitTransactionManager</code>。具体承担什么样的角色和责任不是本节的重点，不再细说。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>模板模式是一个很重要，易扩展的模式，提高了代码复用性，在Spring中有着广泛的应用，比如<code>JDBCTemplate</code>,<code>AbstractPlatformTransactionManager</code>，这些实现都用到了模板模式。</li>
+<li>如果觉得陈某的文章能够对你有所帮助，有所启发，关注分享一波，点个在看，谢谢支持！！！</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;导读&quot;&gt;&lt;a href=&quot;#导读&quot; class=&quot;headerlink&quot; title=&quot;导读&quot;&gt;&lt;/a&gt;导读&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;模板模式在是Spring底层被广泛的应用，比如事务管理器的实现，JDBC模板的实现。&lt;/li&gt;
+&lt;li&gt;今天就来谈谈&lt;stron
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://chenjiabing666.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="http://chenjiabing666.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mysql性能优化：为什么count(*)这么慢？</title>
+    <link href="http://chenjiabing666.github.io/2020/04/05/Mysql%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88count%E8%BF%99%E4%B9%88%E6%85%A2/"/>
+    <id>http://chenjiabing666.github.io/2020/04/05/Mysql性能优化：为什么count这么慢/</id>
+    <published>2020-04-05T13:41:59.000Z</published>
+    <updated>2020-04-05T13:43:11.200Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li>在开发中一定会用到统计一张表的行数，比如一个交易系统，老板会让你每天生成一个报表，这些统计信息少不了sql中的<code>count</code>函数。</li>
+<li>但是随着记录越来越多，查询的速度会越来越慢，为什么会这样呢？Mysql内部到底是怎么处理的？</li>
+<li>今天这篇文章将从Mysql内部对于<code>count</code>函数是怎样处理的？</li>
+</ul>
+<h2 id="count的实现方式"><a href="#count的实现方式" class="headerlink" title="count的实现方式"></a>count的实现方式</h2><ul>
+<li>在Mysql中的不同的存储引擎对<code>count</code>函数有不同的实现方式。</li>
+<li><code>MyISAM</code>引擎把一个表的总行数存在了磁盘上，因此执行<code>count(*)</code>的时候会直接返回这个数，效率很高（没有<code>where</code>查询条件）。</li>
+<li><code>InnoDB</code>引擎并没有直接将总数存在磁盘上，在执行<code>count(*)</code>函数的时候需要一行一行的将数据读出来，然后累计总数。</li>
+</ul>
+<h2 id="为什么InnoDB不将总数存起来？"><a href="#为什么InnoDB不将总数存起来？" class="headerlink" title="为什么InnoDB不将总数存起来？"></a>为什么InnoDB不将总数存起来？</h2><ul>
+<li><p>说道InnoDB相信读者总会想到其支持事务的特性，事务具有隔离性，如果将总数存起来，怎么保证各个事务之间的总数的一致性呢？不明白的看下图：<br><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/count/1.png" alt=""></p>
+</li>
+<li><p><code>事务A</code>和<code>事务B</code>中的<code>count(*)</code>的执行结果是不同的，因此InnoDB引擎在每个事务中返回多少行是不确定的，只能一行一行的读出来用来判断总数。</p>
+</li>
+</ul>
+<h2 id="如何提升count效率"><a href="#如何提升count效率" class="headerlink" title="如何提升count效率"></a>如何提升count效率</h2><ul>
+<li>在<code>InnoDB</code>对于如何提升<code>count(*)</code>的查询效率，网上有多种解决办法，这里主要介绍三种，并分析可行性。</li>
+</ul>
+<h3 id="show-table-status"><a href="#show-table-status" class="headerlink" title="show table status"></a>show table status</h3><ul>
+<li><code>show table status</code>这个命令能够很快的查询出数据库中每个表的行数，但是真的能够替代<code>count(*)</code>吗？</li>
+<li>答案是不能。原因很简单，这个命令统计出来的值是一个<strong>估值</strong>，因此是不准确的，官方文档说误差大概在<code>40%-50%</code>。</li>
+<li>因此这种方法直接pass，不准确还用它干嘛。</li>
+</ul>
+<h3 id="缓存系统存储总数"><a href="#缓存系统存储总数" class="headerlink" title="缓存系统存储总数"></a>缓存系统存储总数</h3><ul>
+<li>这种方法也是最容易想到的，增加一行就<code>+1</code>，删除一行就<code>-1</code>，并且缓存系统读取也是很快，既简单又方便的为什么不用？</li>
+<li><p>缓存系统和Mysql是两个系统，比如<code>redis</code>和<code>Mysql</code>这两个是典型的比较。两个系统最难的就是在高并发下无法保证数据的一致性。通过以下两图我们来理解一下：<br><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/count/2.png" alt=""><br><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/count/3.png" alt=""></p>
+</li>
+<li><p>通过上面两张图，无论是<code>redis计数+1</code>还是<code>insert into user</code>先执行，最终都会导致数据在逻辑上的不一致。第一张图会出现<code>redis计数</code>少了，第二张图虽然计数正确了但是并没有查询出插入的那一行数据。</p>
+</li>
+<li>在并发系统里面，我们是无法精确控制不同线程的执行时刻的，因为存在图中的这种操作序列，所以，我们说即使Redis正常工作，这个计数值还是逻辑上不精确的。</li>
+</ul>
+<h3 id="在数据库保存计数"><a href="#在数据库保存计数" class="headerlink" title="在数据库保存计数"></a>在数据库保存计数</h3><ul>
+<li>通过缓存系统保存的分析得知了使用缓存无法保证数据在逻辑上的一致性，因此我们想到了直接使用数据库来保存，有了<strong>事务</strong>的支持，也就保证了数据的一致性了。</li>
+<li>如何使用呢？很简单，直接将计数保存在一张表中<code>（table_name,total）</code>。</li>
+<li><p>至于执行的逻辑只需要将缓存系统中<code>redis计数+1</code>改成<code>total</code>字段+1即可，如下图：<br><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/count/4.png" alt=""></p>
+</li>
+<li><p>由于在同一个事务中，保证了数据在逻辑上的一致性。</p>
+</li>
+</ul>
+<h2 id="不同count的用法"><a href="#不同count的用法" class="headerlink" title="不同count的用法"></a>不同count的用法</h2><ul>
+<li><code>count()</code>是一个聚合函数，对于返回的结果集，一行行地判断，如果count函数的参数不是NULL，累计值就加1，否则不加。最后返回累计值。</li>
+<li><code>count</code>的用法有多种，分别是<code>count(*)</code>、<code>count(字段)</code>、<code>count(1)</code>、<code>count(主键id)</code>。那么多种用法，到底有什么差别呢？当然，<strong>前提是没有<code>where</code>条件语句</strong>。</li>
+<li><code>count(id)</code>：InnoDB引擎会遍历整张表，把每一行的id值都取出来，返回给server层。server层拿到id后，判断是不可能为空的，就按行累加。</li>
+<li><code>count(1)</code>：InnoDB引擎遍历整张表，但不取值。server层对于返回的每一行，放一个数字<code>1</code>进去，判断是不可能为空的，按行累加。</li>
+<li><code>count(字段)</code>：<ul>
+<li>如果这个“字段”是定义为<code>not null</code>的话，一行行地从记录里面读出这个字段，判断不能为null，按行累加；</li>
+<li>如果这个字段定义允许为<code>null</code>，那么执行的时候，判断到有可能是null，还要把值取出来再判断一下，不是null才累加。</li>
+</ul>
+</li>
+<li><code>count(*)</code>：不会把全部字段取出来，而是专门做了优化，不取值。<code>count(*)</code>肯定不是null，按行累加。</li>
+<li>所以结论很简单：<strong>按照效率排序的话，<code>count(字段)</code>&lt;<code>count(主键id)</code>&lt;<code>count(1)</code>≈<code>count(*)</code>，所以建议读者，尽量使用<code>count(*)</code>。</strong></li>
+<li><strong>注意</strong>：这里肯定有人会问，<code>count(id)</code>不是走的索引吗，为什么查询效率和其他的差不多呢？陈某在这里解释一下，虽然走的索引，但是还是要一行一行的扫描才能统计出来总数。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><code>MyISAM</code>表虽然<code>count(*)</code>很快，但是不支持事务；</li>
+<li><code>show table status</code>命令虽然返回很快，但是不准确；</li>
+<li><code>InnoDB</code>直接<code>count(*)</code>会遍历全表(没有where条件)，虽然结果准确，但会导致性能问题。</li>
+<li>缓存系统的存储计数虽然简单效率高，但是无法保证数据的一致性。</li>
+<li>数据库保存计数很简单，也能保证数据的一致性，建议使用。</li>
+<li><strong>思考题，读者留言区讨论</strong>：在系统高并发的情况下，使用数据库保存计数，是先<code>更新计数+1</code>,还是先<code>插入数据</code>。即是先<code>update total+=1</code>还是先<code>insert into</code>。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;导读&quot;&gt;&lt;a href=&quot;#导读&quot; class=&quot;headerlink&quot; title=&quot;导读&quot;&gt;&lt;/a&gt;导读&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在开发中一定会用到统计一张表的行数，比如一个交易系统，老板会让你每天生成一个报表，这些统计信息少不了sql中的&lt;code&gt;cou
+    
+    </summary>
+    
+      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
+    
+    
+      <category term="SQL" scheme="http://chenjiabing666.github.io/tags/SQL/"/>
+    
+  </entry>
   
   <entry>
     <title>接口幂等性如何设计？</title>
@@ -1844,738 +2123,6 @@
     
     
       <category term="MyBatis" scheme="http://chenjiabing666.github.io/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mybatis深入学习</title>
-    <link href="http://chenjiabing666.github.io/2019/08/05/mybatis%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://chenjiabing666.github.io/2019/08/05/mybatis深入学习/</id>
-    <published>2019-08-04T16:46:56.000Z</published>
-    <updated>2020-03-13T06:03:46.855Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><ul>
-<li>按照官方文档搭建即可</li>
-</ul>
-<h1 id="typeAliases（别名）"><a href="#typeAliases（别名）" class="headerlink" title="typeAliases（别名）"></a>typeAliases（别名）</h1><ul>
-<li><p>在使用mybatis标签的时候，需要指定类的全类名，比如<code>resultType=xx.xxx.xx</code>，但是我们可以为类指定别名，那么就可以直接使用别名，避免全类名冗余【不推荐使用】</p>
-</li>
-<li><p>别名的配置有两种方式，这里我们讲解简单的配置方式，步骤如下：</p>
-<ul>
-<li>在mybatis的全局配置文件下指定别名的包扫描如下：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.tedu.domain"</span>/&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>在domain这个包下的所有类默认的别名是类名首字母小写，但是我们也可以使用注解指定，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Alias</span>(<span class="string">"author"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Author</span> </span>&#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="内建的别名【推荐使用】"><a href="#内建的别名【推荐使用】" class="headerlink" title="内建的别名【推荐使用】"></a>内建的别名【推荐使用】</h2><ul>
-<li>mybatis对java中基本类型和基本的引用类型内嵌了别名，我们可以直接使用别名进行指定，这样利于开发，内建的别名如下：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>别名</th>
-<th>映射的类型</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>_byte</td>
-<td>byte</td>
-</tr>
-<tr>
-<td>_long</td>
-<td>long</td>
-</tr>
-<tr>
-<td>_short</td>
-<td>short</td>
-</tr>
-<tr>
-<td>_int</td>
-<td>int</td>
-</tr>
-<tr>
-<td>_integer</td>
-<td>int</td>
-</tr>
-<tr>
-<td>_double</td>
-<td>double</td>
-</tr>
-<tr>
-<td>_float</td>
-<td>float</td>
-</tr>
-<tr>
-<td>_boolean</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>string</td>
-<td>String</td>
-</tr>
-<tr>
-<td>byte</td>
-<td>Byte</td>
-</tr>
-<tr>
-<td>long</td>
-<td>Long</td>
-</tr>
-<tr>
-<td>short</td>
-<td>Short</td>
-</tr>
-<tr>
-<td>int</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>integer</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>double</td>
-<td>Double</td>
-</tr>
-<tr>
-<td>float</td>
-<td>Float</td>
-</tr>
-<tr>
-<td>boolean</td>
-<td>Boolean</td>
-</tr>
-<tr>
-<td>date</td>
-<td>Date</td>
-</tr>
-<tr>
-<td>decimal</td>
-<td>BigDecimal</td>
-</tr>
-<tr>
-<td>bigdecimal</td>
-<td>BigDecimal</td>
-</tr>
-<tr>
-<td>object</td>
-<td>Object</td>
-</tr>
-<tr>
-<td>map</td>
-<td>Map</td>
-</tr>
-<tr>
-<td>hashmap</td>
-<td>HashMap</td>
-</tr>
-<tr>
-<td>list</td>
-<td>List</td>
-</tr>
-<tr>
-<td>arraylist</td>
-<td>ArrayList</td>
-</tr>
-<tr>
-<td>collection</td>
-<td>Collection</td>
-</tr>
-<tr>
-<td>iterator</td>
-<td>Iterator</td>
-</tr>
-</tbody>
-</table>
-<h1 id="参数处理"><a href="#参数处理" class="headerlink" title="参数处理"></a>参数处理</h1><ul>
-<li>mybatis内部会将我们传入的参数封装成一个Map，key就是以<code>param1、param2....</code></li>
-</ul>
-<h2 id="单个参数"><a href="#单个参数" class="headerlink" title="单个参数"></a>单个参数</h2><ul>
-<li>单个参数在sql语句中可以任意指定，比如#{a}…，或者可以使用<code>#{param1}</code></li>
-</ul>
-<h1 id="多个参数"><a href="#多个参数" class="headerlink" title="多个参数"></a>多个参数</h1><ul>
-<li>使用<code>@Param</code>指定key，那么就可以在sql语句中直接使用这个key即可，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Select</span>(<span class="string">"select * from patient_info where ipt_num=#&#123;iptNum&#125; and status=#&#123;status&#125;"</span>)</div><div class="line">   <span class="function">Patient <span class="title">selectByIptNumAndInhos</span><span class="params">(@Param(<span class="string">"iptNum"</span>)</span> String iptNum, @<span class="title">Param</span><span class="params">(<span class="string">"status"</span>)</span> String status)</span>;</div></pre></td></tr></table></figure>
-<ul>
-<li>也可以直接使用mybatis中默认的key，即是param1…..</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Select</span>(<span class="string">"select * from patient_info where ipt_num=#&#123;param1&#125; and status=#&#123;param2&#125;"</span>)</div><div class="line">  <span class="function">Patient <span class="title">selectByIptNumAndInhos</span><span class="params">(String iptNum,String status)</span></span>;</div></pre></td></tr></table></figure>
-<h2 id="参数是Map类型"><a href="#参数是Map类型" class="headerlink" title="参数是Map类型"></a>参数是Map类型</h2><ul>
-<li>mybatis默认的会将参数转换为map，那么我们直接传入一个map那是再好不过了，此时的key就可以直接使用，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Select</span>(<span class="string">"select * from patient_info where ipt_num=#&#123;iptNum&#125; and status=#&#123;status&#125;"</span>)</div><div class="line"> <span class="function">Patient <span class="title">selectByIptAndInhosNumMap</span><span class="params">(Map ipts)</span></span>;</div><div class="line"></div><div class="line"><span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        SqlSessionFactory sqlSessionFactory = XmlConfigInit.getSqlSessionFactory();</div><div class="line">        PatientMapper mapper = sqlSessionFactory.openSession().getMapper(PatientMapper.class);</div><div class="line">        Map&lt;String,String&gt; map=<span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">        map.put(<span class="string">"iptNum"</span>,<span class="string">"15627656"</span>);</div><div class="line">        map.put(<span class="string">"status"</span>,<span class="string">"1"</span>);</div><div class="line">        Patient patient = mapper.selectByIptAndInhosNumMap(map);</div><div class="line">        System.out.println(patient);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h2 id="POJO【推荐使用】"><a href="#POJO【推荐使用】" class="headerlink" title="POJO【推荐使用】"></a>POJO【推荐使用】</h2><ul>
-<li>对于POJO可以直接使用成员属性的名称就可以取值，这个经常使用，不再演示</li>
-</ul>
-<h1 id="返回结果封装"><a href="#返回结果封装" class="headerlink" title="返回结果封装"></a>返回结果封装</h1><ul>
-<li>mybatis对于返回结果如何封装有多种实现方式，可以返回List，POJO，Map等类型的数据</li>
-</ul>
-<h2 id="返回POJO"><a href="#返回POJO" class="headerlink" title="返回POJO"></a>返回POJO</h2><ul>
-<li>对于从数据库中查询单条数据库的时候，返回一个POJO只需要sql查询的字段和POJO类中的属性相同即可自动映射，当然我们也可以开启<strong>驼峰配置</strong></li>
-<li><code>resultType</code>指定返回的POJO的全类名即可，或者指定别名</li>
-<li>此处不演示</li>
-</ul>
-<h2 id="返回List"><a href="#返回List" class="headerlink" title="返回List"></a>返回List</h2><ul>
-<li>同POJO，此时的resultType指定的仍然是List泛型的全类名或者别名</li>
-</ul>
-<h2 id="返回Map"><a href="#返回Map" class="headerlink" title="返回Map"></a>返回Map</h2><ul>
-<li>mybatis还可以返回Map类型的数据，比如我们查询患者的信息，使用Map接收数据，key是患者的id，value就是POJO，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">    * 使用<span class="doctag">@MapKey</span>注解指定返回Map中的key，这里设定的是Patient中的id属性作为key</div><div class="line">    * <span class="doctag">@return</span></div><div class="line">    */</div><div class="line">   <span class="meta">@MapKey</span>(<span class="string">"id"</span>)</div><div class="line">   <span class="meta">@Select</span>(<span class="string">"select * from patient_info"</span>)</div><div class="line">   <span class="function">Map&lt;Integer,Patient&gt; <span class="title">selectAllReturnMap</span><span class="params">()</span></span>;</div></pre></td></tr></table></figure>
-<ul>
-<li>在返回的Map的时候需要指定POJO类的哪个字段作为Map的key，使用<code>@MapKey</code>这个注解指定</li>
-</ul>
-<h2 id="ResultMap"><a href="#ResultMap" class="headerlink" title="ResultMap"></a>ResultMap</h2><ul>
-<li>mybatis还支持使用ResultMap自定义结果映射，此时的select语句中需要指定resultMap为当前的定义的id</li>
-<li>经常使用，不再演示</li>
-</ul>
-<h1 id="分步查询"><a href="#分步查询" class="headerlink" title="分步查询"></a>分步查询</h1><ul>
-<li><p>在mybatis中<code>collection</code>和<code>association</code>中都是可以使用分步查询</p>
-</li>
-<li><p>我们需要查询一个科室下的所有患者，那么实体类定义如下：</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="meta">@ToString</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dept</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Integer id;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> List&lt;Patient&gt; patients;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="meta">@ToString</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Patient</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String userId;</div><div class="line">    <span class="keyword">private</span> Integer id;</div><div class="line">    <span class="keyword">private</span> String status;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>不采用分布查询，此时我们的resultMap应该如下：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"baseResultMap"</span> <span class="attr">type</span>=<span class="string">"cn.tedu.domain.Dept"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"patients"</span> <span class="attr">ofType</span>=<span class="string">"cn.tedu.domain.Patient"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"pid"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"userId"</span> <span class="attr">property</span>=<span class="string">"userId"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"pstatus"</span> <span class="attr">property</span>=<span class="string">"status"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></div><div class="line"></div><div class="line">//sql</div><div class="line"></div><div class="line"> SELECT</div><div class="line">        d.id AS id,</div><div class="line">        d.NAME AS NAME,</div><div class="line">        p.id AS pid,</div><div class="line">        p.user_id AS userId,</div><div class="line">        p.STATUS AS pstatus</div><div class="line">    FROM</div><div class="line">        dept_info d</div><div class="line">        LEFT JOIN patient_info p ON p.dept_id = d.id</div><div class="line">    WHERE</div><div class="line">        d.id =#&#123;id,jdbcType=INTEGER&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><p>但是我们也可以采用分布查询的方式，先查询出科室的信息，再根据科室的id查询出对应患者的信息，实现步骤如下：</p>
-<ul>
-<li>定义一个方法查找科室，此时的resultMap指定的是分步查询的id</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;select id="selectById" resultMap="ByStepResultMap"&gt;</div><div class="line">           SELECT</div><div class="line">       *</div><div class="line">   FROM</div><div class="line">       dept_info</div><div class="line">   WHERE</div><div class="line">       id =#&#123;id,jdbcType=INTEGER&#125;</div><div class="line">   &lt;/select&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>定义一个方法根据科室id查询患者信息</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Select</span>(<span class="string">"SELECT * from patient_info where dept_id=#&#123;deptId&#125;"</span>)</div><div class="line">    <span class="function">List&lt;Patient&gt; <span class="title">selectByDeptId</span><span class="params">(Integer deptId)</span></span>;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>在resultMap中指定分步查询</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--分步查询科室信息和患者信息--&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"ByStepResultMap"</span> <span class="attr">type</span>=<span class="string">"cn.tedu.domain.Dept"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></div><div class="line">  </div><div class="line">       <span class="comment">&lt;!--ofType：指定级联属性的类型--&gt;</span></div><div class="line">       <span class="comment">&lt;!--select：指定分步查询患者信息的方法，全类名+方法名--&gt;</span></div><div class="line">       <span class="comment">&lt;!--column：指定查询科室获取的结果的哪一个字段作为查询患者方法的参数，可以指定多个</span></div><div class="line">                   如果指定多个，那么需要将参数封装成map，比如column="&#123;key1=column1,key2=column2&#125;"</div><div class="line">       --&gt;</div><div class="line">        <span class="comment">&lt;!--fetchType：在开启全局延迟加载的时候设置是否延迟加载，默认是延迟加载，可以设置为eager表示不延迟加载--&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"patients"</span> <span class="attr">ofType</span>=<span class="string">"cn.tedu.domain.Patient"</span></span></div><div class="line">                   <span class="attr">select</span>=<span class="string">"cn.tedu.mapper.PatientMapper.selectByDeptId"</span></div><div class="line">                   <span class="attr">column</span>=<span class="string">"id"</span>&gt;</div><div class="line">       <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="延迟加载"><a href="#延迟加载" class="headerlink" title="延迟加载"></a>延迟加载</h2><ul>
-<li>mybatis默认是不使用延迟加载的，因此当使用分步查询的时候即使没有用到分步查询的结果仍然会发出sql语句</li>
-<li>我们可以在全局配置文件中设置开启延迟加载，如下：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--延迟加载的全局开关。当开启时，所有关联对象都会延迟加载。 特定关联关系中可通过设置 fetchType 属性来覆盖该项的开关状态。--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"lazyLoadingEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line">        <span class="comment">&lt;!--当开启时，任何方法的调用都会加载该对象的所有属性。 否则，每个属性会按需加载（参考 lazyLoadTriggerMethods)。--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"aggressiveLazyLoading"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">settings</span>&gt;</span></div></pre></td></tr></table></figure>
-<h1 id="内置参数"><a href="#内置参数" class="headerlink" title="内置参数"></a>内置参数</h1><ul>
-<li>mybatis中内置了两个参数，在写sql的时候可以直接拿来使用，如下：<ul>
-<li><code>_parameter</code>：代表整个参数，如果是一个参数就表示这个参数，如果是多个参数，此时的参数会被封装成一个Map，那么_parameter此时就代表整个Map</li>
-<li><code>_databaseId</code>：如果配置了databaseIdProvider标签，就代表当前数据库的别名</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>实例：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Select</span>(<span class="string">"SELECT * from patient_info where dept_id=#&#123;_parameter&#125;"</span>)</div><div class="line">   <span class="function">List&lt;Patient&gt; <span class="title">selectByDeptId</span><span class="params">(Integer deptId)</span></span>;</div></pre></td></tr></table></figure>
-<ul>
-<li>如果是一个参数，并且是POJO对象，我们还可以使用<code>_parameter</code>判断是否为空，如下：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"_parameter!=null"</span>&gt;</span></div><div class="line">	.....</div><div class="line"><span class="tag">&lt;/<span class="name">if</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>如果是多个参数，那么就表示一个Map，此时可以直接使用<code>_parameter.key1....</code>直接获取值即可，当然如果没有指定@Param注解，此时还可以使用<code>_parameter.param1,_parameter.param2...</code>直接获取对应的值</li>
-</ul>
-<h1 id="批量处理"><a href="#批量处理" class="headerlink" title="批量处理"></a>批量处理</h1><ul>
-<li>Mybatis针对批量操作有两种常用的方法，第一种就死通过动态sql在sql语句中使用for-each拼写，第二种就是使用Mybaits自带的批量执行器（BatchExecutor），这里主要介绍第二种的方式</li>
-<li>如何配置？有如下两种方式<ul>
-<li>在全局配置文件的settings中配置一个属性<code>defaultExecutorType =BATCH</code>即可，不过这种方式将会导致所有的sql操作都会使用批量操作。</li>
-<li>我们可以在获取SqlSession的时候指定执行类型，如下：<ul>
-<li><code>SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);</code>，此时当前的SqlSession执行的就是批量操作。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Mybaits-Spring执行批量处理"><a href="#Mybaits-Spring执行批量处理" class="headerlink" title="Mybaits-Spring执行批量处理"></a>Mybaits-Spring执行批量处理</h2><ul>
-<li>Spring执行批量处理很简单，只需要在ioc容器中注入一个<code>SqlSessionTemplate</code>，并且设置批量处理的属性即可，如下：<ul>
-<li>这种改变是全局的，慎用</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 注入SqlSessionTemplate，替代SqlSessionFactory直接创建SqlSession，并且能够使用Spring的事务管理</div><div class="line">     * 如果需要使用批量处理，在构造方法中指定ExecutorType.BATCH即可，那么全部的操作的都会使用</div><div class="line">     * 【可以不配置，需要的时候使用】</div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> SqlSessionTemplate <span class="title">sqlSessionTemplate</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        SqlSessionTemplate sqlSessionTemplate = <span class="keyword">new</span> SqlSessionTemplate(sqlSessionFactory().getObject(),ExecutorType.BATCH);</div><div class="line">        <span class="keyword">return</span> sqlSessionTemplate;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h1 id="类型处理器（TypeHandler）"><a href="#类型处理器（TypeHandler）" class="headerlink" title="类型处理器（TypeHandler）"></a>类型处理器（TypeHandler）</h1><ul>
-<li>用于处理Java类型和JDBC类型之前的映射关系，mybaits中内置了许多的类型处理器，一般我们在使用<code>#{}</code>中的jdbcType属性的时候，mybaits框架会为我们设置相应的处理器，比如jdbcType=DATE，那么mybatis默认对应的处理器就是<code>DateOnlyTypeHandler</code>（只有年月日），如果我们设置了jdbcType=TIMESTAMP，那么mybatis对Date类型的类型处理器就是<code>DateTypeHandler</code>，关于类型处理器和jdbcType的对应关系，看<a href="http://www.mybatis.org/mybatis-3/zh/configuration.html#typeHandlers" target="_blank" rel="external">官方文档中typeHandler这一节</a></li>
-<li>内置处理器执行的时间：<ul>
-<li>在StatementHandler创建Statement之后，会调用ParameterHandler设置参数，其中执行了类型处理器的setParametes的方法，设置对应的参数</li>
-<li>在DefaultResultsetHandler处理执行结果的时候，会调用的TypeHandler中的<code>getResult</code>方法获取结果集</li>
-</ul>
-</li>
-<li>TypeHandler中的方法如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TypeHandler</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line">   * 为预编译语句设置参数的时候执行，实际就是调用setxxx方法设置参数</div><div class="line">   * <span class="doctag">@param</span> ps PreparedStatement 对象</div><div class="line">   * <span class="doctag">@param</span> i</div><div class="line">   * <span class="doctag">@param</span> parameter 参数</div><div class="line">   * <span class="doctag">@param</span> jdbcType #&#123;&#125;中自定义的jdbcType</div><div class="line">   * <span class="doctag">@throws</span> SQLException</div><div class="line">   */</div><div class="line">  <span class="function"><span class="keyword">void</span> <span class="title">setParameter</span><span class="params">(PreparedStatement ps, <span class="keyword">int</span> i, T parameter, JdbcType jdbcType)</span> <span class="keyword">throws</span> SQLException</span>;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line">   * 根据列名获取指定的值</div><div class="line">   * <span class="doctag">@param</span> rs ResultSet结果集</div><div class="line">   * <span class="doctag">@param</span> columnName 列名</div><div class="line">   * <span class="doctag">@return</span></div><div class="line">   * <span class="doctag">@throws</span> SQLException</div><div class="line">   */</div><div class="line">  <span class="function">T <span class="title">getResult</span><span class="params">(ResultSet rs, String columnName)</span> <span class="keyword">throws</span> SQLException</span>;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line">   * 根据下标获取指定列的值</div><div class="line">   * <span class="doctag">@param</span> rs ResultSet结果集</div><div class="line">   * <span class="doctag">@param</span> columnIndex  下标</div><div class="line">   * <span class="doctag">@return</span></div><div class="line">   * <span class="doctag">@throws</span> SQLException</div><div class="line">   */</div><div class="line">  <span class="function">T <span class="title">getResult</span><span class="params">(ResultSet rs, <span class="keyword">int</span> columnIndex)</span> <span class="keyword">throws</span> SQLException</span>;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line">   * 调用存储过程的获取返回值的时候</div><div class="line">   * <span class="doctag">@param</span> cs</div><div class="line">   * <span class="doctag">@param</span> columnIndex</div><div class="line">   * <span class="doctag">@return</span></div><div class="line">   * <span class="doctag">@throws</span> SQLException</div><div class="line">   */</div><div class="line">  <span class="function">T <span class="title">getResult</span><span class="params">(CallableStatement cs, <span class="keyword">int</span> columnIndex)</span> <span class="keyword">throws</span> SQLException</span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>虽然mybatis中内置了许多的类型处理器，但是我们也可以自定义类型处理器，并且作用到指定需要处理的类型中，自定义的方式有两种，如下：<ul>
-<li>实现<code>TypeHandler</code>接口</li>
-<li>继承<code>BaseTypeHandler</code>【推荐】</li>
-</ul>
-</li>
-</ul>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ul>
-<li>实例：我们需要将一个<code>List&lt;Auth&gt;</code>对象存入数据库的时候是以json字符串的形式，获取的是以List集合的形式，此时我们可以自定义一个TypeHandler，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 自定义类型转换器，将List&lt;Auth&gt;数据存入数据库的时候是以json字符串存入的，获取返回的结果的时候是List集合</div><div class="line"> * <span class="doctag">@MappedJdbcTypes</span>(value = &#123;JdbcType.VARCHAR&#125;)：指定了映射的jdbcType的类型是VARCHAR</div><div class="line"> * <span class="doctag">@MappedTypes</span>(value = &#123;Auth.class&#125;)：指定了映射的java类型是Auth</div><div class="line"> */</div><div class="line"><span class="meta">@MappedJdbcTypes</span>(value = &#123;JdbcType.VARCHAR&#125;)</div><div class="line"><span class="meta">@MappedTypes</span>(value = &#123;Auth.class&#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AuthTypeHandler</span> <span class="keyword">extends</span> <span class="title">BaseTypeHandler</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 将参数转换为json数据存入数据库</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNonNullParameter</span><span class="params">(PreparedStatement ps, <span class="keyword">int</span> i, Object parameter, JdbcType jdbcType)</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">        String json = <span class="keyword">new</span> Gson().toJson(parameter);</div><div class="line">        ps.setString(i,json);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getNullableResult</span><span class="params">(ResultSet rs, String columnName)</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">        String string = rs.getString(columnName);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Gson().fromJson(string,<span class="keyword">new</span> TypeToken&lt;List&lt;Auth&gt;&gt;()&#123;&#125;.getType());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getNullableResult</span><span class="params">(ResultSet rs, <span class="keyword">int</span> columnIndex)</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">        String string = rs.getString(columnIndex);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Gson().fromJson(string,<span class="keyword">new</span> TypeToken&lt;List&lt;Auth&gt;&gt;()&#123;&#125;.getType());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getNullableResult</span><span class="params">(CallableStatement cs, <span class="keyword">int</span> columnIndex)</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>需要在全局配置文件中设置TypeHandler的包扫描，如下：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--设置自动扫描包下的typeHandler--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">typeHandlers</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.tedu.typehandler"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">typeHandlers</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>此时的类型处理器还是不起作用的，需要在insert、update的#{}中设置一下typehandler属性，如下：<ul>
-<li>#{}中有一个typeHandler属性，指定自定义的TypeHandler即可</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"insertAdmin"</span> <span class="attr">parameterType</span>=<span class="string">"cn.tedu.domain.Admin"</span>&gt;</span></div><div class="line">        insert into t_admin(name,birthday,account,password,point,status,auths)</div><div class="line">         values (#&#123;name,jdbcType=VARCHAR&#125;,#&#123;birthday,jdbcType=DATE&#125;,</div><div class="line">         #&#123;account,jdbcType=VARCHAR&#125;,#&#123;password,jdbcType=VARCHAR&#125;,</div><div class="line">         #&#123;point,jdbcType=DOUBLE&#125;,#&#123;status,jdbcType=VARCHAR&#125;,#&#123;auths,jdbcType=VARCHAR,typeHandler=cn.tedu.typehandler.AuthTypeHandler&#125;)</div><div class="line">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>对select语句设置类型处理器，只能在resultMap中设置，如下：<ul>
-<li>在result中需要设置javaType，jdbcType，typeHandler三个属性，这里的auths就是需要映射的<code>List&lt;AUth&gt;</code></li>
-</ul>
-</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"BaseResultMap"</span> <span class="attr">type</span>=<span class="string">"cn.tedu.domain.Admin"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span> /&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"auths"</span> <span class="attr">property</span>=<span class="string">"auths"</span> <span class="attr">javaType</span>=<span class="string">"cn.tedu.domain.Auth"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">typeHandler</span>=<span class="string">"cn.tedu.typehandler.AuthTypeHandler"</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"></div><div class="line">   <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="枚举类型处理器"><a href="#枚举类型处理器" class="headerlink" title="枚举类型处理器"></a>枚举类型处理器</h2><ul>
-<li>枚举的类型处理器默认是<code>EnumTypeHandler</code>，存入和取出都是存储的枚举的名称，也有一个<code>EnumOrdinalTypeHandler</code>是按照枚举的索引存储和查询的。</li>
-<li>我们也可以自定义类型处理器来处理枚举类型。</li>
-</ul>
-<h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><ul>
-<li>插件的设计其实就是一个拦截器，在目标方法执行之前进行拦截，当然这里只是针对Mybatis中的四大对象进行拦截，四大对象如下：<ul>
-<li><strong>Executor</strong></li>
-<li><strong>StatementHandler</strong></li>
-<li><strong>ParameterHandler</strong></li>
-<li><strong>ResultSetHandler</strong></li>
-</ul>
-</li>
-<li>Interceptor能够做到对四大对象中的每一个方法进行拦截</li>
-<li>实现一个插件很简单，只需要实现<code>org.apache.ibatis.plugin.Interceptor</code>接口即可</li>
-<li>对应Interceptor这个接口的方法解释如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Interceptor</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line">   * 拦截器真正执行的方法，其中的invocation.proceed()是用来执行目标方法的，只有执行了这个proceed方法，目标方法才会执行，否则不执行</div><div class="line">   * <span class="doctag">@param</span> invocation</div><div class="line">   * <span class="doctag">@return</span> 返回目标方法执行的结果，return invocation.proceed();</div><div class="line">   * <span class="doctag">@throws</span> Throwable</div><div class="line">   */</div><div class="line">  <span class="function">Object <span class="title">intercept</span><span class="params">(Invocation invocation)</span> <span class="keyword">throws</span> Throwable</span>;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line">   * 四大对象生成代理对象的方法，在四大对象创建的时候，都会调用一个pluginAll方法返回一个代理对象</div><div class="line">   * 这个方法不需要做修改，默认就行了</div><div class="line">   * <span class="doctag">@param</span> target 目标对象</div><div class="line">   * <span class="doctag">@return</span> 返回的代理对象（层层包装，表示只有一层）</div><div class="line">   */</div><div class="line">  <span class="function"><span class="keyword">default</span> Object <span class="title">plugin</span><span class="params">(Object target)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> Plugin.wrap(target, <span class="keyword">this</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line">   * 在全局配置文件中&lt;plugin&gt;标签中设置properties属性，会封装在此方法的properties中</div><div class="line">   * <span class="doctag">@param</span> properties</div><div class="line">   */</div><div class="line">  <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">setProperties</span><span class="params">(Properties properties)</span> </span>&#123;</div><div class="line">    <span class="comment">// NOP</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="实现一个简单的插件"><a href="#实现一个简单的插件" class="headerlink" title="实现一个简单的插件"></a>实现一个简单的插件</h2><ul>
-<li>自定义一个插件，修改指定查询语句的入参。如下：<ul>
-<li>实现原理其实很简单，因为mybaits的增删改查标签所有的信息都封装在MappedStatement中，我们只需要获取这个对象，然后通过属性判断即可。</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@Intercepts</span>注解标记这是一个拦截器,其中可以指定多个<span class="doctag">@Signature</span></div><div class="line"> * <span class="doctag">@Signature</span>：指定该拦截器拦截的是四大对象中的哪个方法</div><div class="line"> *      type：拦截器的四大对象的类型</div><div class="line"> *      method：拦截器的方法，方法名</div><div class="line"> *      args：入参的类型</div><div class="line"> */</div><div class="line"><span class="meta">@Intercepts</span>(</div><div class="line">        &#123;</div><div class="line">                <span class="meta">@Signature</span>(type = ParameterHandler.class,method =<span class="string">"setParameters"</span>,args = &#123;PreparedStatement.class&#125;)</div><div class="line">        &#125;</div><div class="line">)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FirstPlugin</span> <span class="keyword">implements</span> <span class="title">Interceptor</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Invocation invocation)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">        System.out.println(<span class="string">"拦截器执行："</span>+invocation.getTarget());</div><div class="line">        <span class="comment">//目标对象</span></div><div class="line">        Object target = invocation.getTarget();</div><div class="line">        <span class="comment">//获取目标对象中所有属性的值，因为ParameterHandler使用的是DefaultParameterHandler，因此里面的所有的属性都封装在其中</span></div><div class="line">        MetaObject metaObject = SystemMetaObject.forObject(target);</div><div class="line">        <span class="comment">//使用xxx.xxx.xx的方式可以层层获取属性值，这里获取的是mappedStatement中的id值</span></div><div class="line">        String value = (String) metaObject.getValue(<span class="string">"mappedStatement.id"</span>);</div><div class="line">        <span class="comment">//如果是指定的查询方法</span></div><div class="line">        <span class="keyword">if</span> (<span class="string">"cn.tedu.mapper.AdminMapper.selectById"</span>.equals(value))&#123;</div><div class="line">            <span class="comment">//设置参数的值是2，即是设置id=2，因为这里只有一个参数，可以这么设置，如果有多个需要需要循环</span></div><div class="line">            metaObject.setValue(<span class="string">"parameterObject"</span>, <span class="number">2</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//执行目标方法</span></div><div class="line">        <span class="keyword">return</span> invocation.proceed();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//可以省略</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">plugin</span><span class="params">(Object target)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> Plugin.wrap(target, <span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">//可以省略</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setProperties</span><span class="params">(Properties properties)</span> </span>&#123;</div><div class="line">        System.out.println(properties);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>全局文件中配置：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--配置插件，其中的property可以设置自己的属性，可以封装到setProperties中的properties中--&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">interceptor</span>=<span class="string">"cn.tedu.plugin.FirstPlugin"</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">value</span>=<span class="string">"11"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="重要的方法"><a href="#重要的方法" class="headerlink" title="重要的方法"></a>重要的方法</h2><ul>
-<li><code>SystemMetaObject.forObject(target)</code>：可以获取目标类中所有的属性的值</li>
-<li><code>metaObject.getValue(&quot;mappedStatement.id&quot;)</code>：可以使用xxx.xxx层层的获取属性的值</li>
-<li><code>metaObject.setValue(name, value)</code>：设置属性的值</li>
-</ul>
-<h2 id="多个插件的执行顺序"><a href="#多个插件的执行顺序" class="headerlink" title="多个插件的执行顺序"></a>多个插件的执行顺序</h2><ul>
-<li><p><strong>全局配置文件中配置插件的顺序，决定插件的执行顺序，是相反的顺序。</strong></p>
-</li>
-<li><p>如果有多个插件作用在同一个对象的同一个方法上，那么插件的执行顺序是怎样的？我们知道四大对象在创建的时候会调用拦截器中的plugin方法创建代理对象，这种代理实层层包装的，那么在后面的插件创建的代理是包裹在最外层的，因此肯定是先执行最外层的拦截器方法。</p>
-</li>
-</ul>
-<h1 id="Spring整合Mybatis"><a href="#Spring整合Mybatis" class="headerlink" title="Spring整合Mybatis"></a>Spring整合Mybatis</h1><ul>
-<li><a href="http://www.mybatis.org/spring/zh/index.html" target="_blank" rel="external">官方文档</a></li>
-<li>添加依赖：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>配置数据源、事务管理器、SqlSessionFactoryBean<ul>
-<li>这里使用了<code>@MapperScan</code>注解自动扫描Mapper接口</li>
-<li>在<code>SqlSessionFactoryBean</code>中的配置中设置xml文件的位置和全局配置文件中的位置</li>
-<li><code>SqlSessionTemplate</code>的注入能够让我们很方便的获取一个SqlSession和Mapper，一旦注入之后，所有的获取Mapper的代理对象都会执行其中的getMapper方法获取，因此如果这里设置了批量处理，那么改变是全局的。</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 配置类</div><div class="line"> * <span class="doctag">@MapperScan</span>：扫描所有的Mapper接口</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages = &#123;<span class="string">"cn.tedu.ssm"</span>&#125;)</div><div class="line"><span class="meta">@MapperScan</span>(basePackages = &#123;<span class="string">"cn.tedu.ssm.mapper"</span>&#125;)</div><div class="line"><span class="meta">@EnableAspectJAutoProxy</span></div><div class="line"><span class="meta">@EnableAsync</span></div><div class="line"><span class="meta">@EnableTransactionManagement</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainConfig</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 注册数据源</div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> DruidDataSource <span class="title">dataSource</span><span class="params">()</span></span>&#123;</div><div class="line">        DruidDataSource dataSource = <span class="keyword">new</span> DruidDataSource();</div><div class="line">        dataSource.setUrl(DataConfig.URL);</div><div class="line">        dataSource.setUsername(DataConfig.USER);</div><div class="line">        dataSource.setPassword(DataConfig.PWD);</div><div class="line">        dataSource.setDriverClassName(DataConfig.DRIVER_NAME);</div><div class="line">        <span class="keyword">return</span> dataSource;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 配置SqlSessionFactoryBean，实际就是SqlSessionFactory</div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> SqlSessionFactoryBean <span class="title">sqlSessionFactory</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        SqlSessionFactoryBean sqlSessionFactoryBean = <span class="keyword">new</span> SqlSessionFactoryBean();</div><div class="line">        <span class="comment">//设置数据源</span></div><div class="line">        sqlSessionFactoryBean.setDataSource(dataSource());</div><div class="line">        <span class="comment">//配置扫描mapepr.xml文件</span></div><div class="line">        PathMatchingResourcePatternResolver classPathResource = <span class="keyword">new</span> PathMatchingResourcePatternResolver();</div><div class="line">        sqlSessionFactoryBean.setMapperLocations(classPathResource.getResources(<span class="string">"classpath:mappers/*.xml"</span>));</div><div class="line">        <span class="comment">//设置全局配置文件的位置</span></div><div class="line">        sqlSessionFactoryBean.setConfigLocation(classPathResource.getResource(<span class="string">"classpath:mybatis-config.xml"</span>));</div><div class="line">        <span class="keyword">return</span> sqlSessionFactoryBean;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 注入SqlSessionTemplate，替代SqlSessionFactory直接创建SqlSession，并且能够使用Spring的事务管理</div><div class="line">     * 如果需要使用批量处理，在构造方法中指定ExecutorType.BATCH即可，那么全部的操作的都会使用</div><div class="line">     * 【可以不配置，需要的时候使用】</div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> SqlSessionTemplate <span class="title">sqlSessionTemplate</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        SqlSessionTemplate sqlSessionTemplate = <span class="keyword">new</span> SqlSessionTemplate(sqlSessionFactory().getObject());</div><div class="line">        <span class="keyword">return</span> sqlSessionTemplate;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 创建事务管理器</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> PlatformTransactionManager <span class="title">transactionManager</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DataSourceTransactionManager(dataSource());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li>在和Spring整合的时候，原先全局配置中配置的数据源，事务管理器等都会被忽略，默认会加载Spring配置的事务管理器和数据源。</li>
-<li>如果想要配置TypeHandler、Plugin、TypeAlias等设置，在SqlSessionFactoryBean中都是可以直接配置的，因此在和Spring整合之后，Mybaits的全局配置文件中需要配置的东西很少，几乎可以不用。</li>
-</ul>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
-<li>全注解版的SSM整合，包括下面分页插件的整合：<a href="https://github.com/chenjiabing666/ssm-demo" target="_blank" rel="external">https://github.com/chenjiabing666/ssm-demo</a></li>
-</ul>
-<h1 id="分页插件"><a href="#分页插件" class="headerlink" title="分页插件"></a>分页插件</h1><ul>
-<li><a href="https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md" target="_blank" rel="external">官方文档https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md</a></li>
-<li>使用环境：ssm环境下配置</li>
-<li>添加依赖：</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">      &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;</div><div class="line">      &lt;artifactId&gt;pagehelper&lt;/artifactId&gt;</div><div class="line">      &lt;version&gt;5.1.6&lt;/version&gt;</div><div class="line"> &lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>配置拦截器，在和Spring整合下就只需要在SqlSessionFactoryBean中配置拦截器即可，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 配置SqlSessionFactoryBean，实际就是SqlSessionFactory</div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> SqlSessionFactoryBean <span class="title">sqlSessionFactory</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        SqlSessionFactoryBean sqlSessionFactoryBean = <span class="keyword">new</span> SqlSessionFactoryBean();</div><div class="line">        <span class="comment">//设置数据源</span></div><div class="line">        sqlSessionFactoryBean.setDataSource(dataSource());</div><div class="line">        <span class="comment">//配置扫描mapepr.xml文件</span></div><div class="line">        PathMatchingResourcePatternResolver classPathResource = <span class="keyword">new</span> PathMatchingResourcePatternResolver();</div><div class="line">        sqlSessionFactoryBean.setMapperLocations(classPathResource.getResources(<span class="string">"classpath:mappers/*.xml"</span>));</div><div class="line">        <span class="comment">//设置全局配置文件的位置</span></div><div class="line">        sqlSessionFactoryBean.setConfigLocation(classPathResource.getResource(<span class="string">"classpath:mybatis-config.xml"</span>));</div><div class="line">        <span class="comment">//配置插件</span></div><div class="line">        PageInterceptor pageInterceptor = <span class="keyword">new</span> PageInterceptor();</div><div class="line">        <span class="comment">//可以配置PageHelper中的参数映射关系，这里使用默认的，不需配置</span></div><div class="line"><span class="comment">//        pageInterceptor.setProperties();</span></div><div class="line">        sqlSessionFactoryBean.setPlugins(pageInterceptor);</div><div class="line">        <span class="keyword">return</span> sqlSessionFactoryBean;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>官方文档中有多种使用方式，我们使用面向接口的方式，如下：<ul>
-<li>只需要在doSelect中调用查询全部的sql即可</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span></span>&#123;</div><div class="line">       SqlSessionTemplate sqlSessionTemplate = applicationContext.getBean(SqlSessionTemplate.class);</div><div class="line">       <span class="keyword">final</span> PatientMapper mapper = sqlSessionTemplate.getMapper(PatientMapper.class);</div><div class="line">       PageInfo&lt;Object&gt; pageInfo = PageHelper.startPage(<span class="number">1</span>, <span class="number">10</span>).doSelectPageInfo(<span class="keyword">new</span> ISelect() &#123;</div><div class="line">           <span class="meta">@Override</span></div><div class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSelect</span><span class="params">()</span> </span>&#123;</div><div class="line">               mapper.selectAllPatient();</div><div class="line">           &#125;</div><div class="line">       &#125;);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<h2 id="自己整合工具类"><a href="#自己整合工具类" class="headerlink" title="自己整合工具类"></a>自己整合工具类</h2><ul>
-<li>在实际使用过程中上述的方式有点繁琐，本人自己整合一个工具类，能够很轻松的完成分页。</li>
-<li>定义一个ParamReq类，如果有需要的分页的请求都继承这个类，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> com.fasterxml.jackson.annotation.JsonIgnore;</div><div class="line"><span class="keyword">import</span> lombok.Data;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 所有需要分页的请求要继承的类，其中提供了分页需要的参数</div><div class="line"> * 默认的映射关系是:pageNum=pageNum;pageSize=pageSize;count=countSql;reasonable=reasonable;pageSizeZero=pageSizeZero</div><div class="line"> * 也可在设置拦截器的时候指定映射关系，具体看官方文档</div><div class="line"> * https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md</div><div class="line"> */</div><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PageParam</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 当前第几页</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> Integer pageNum=<span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 每页查询的数量</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> Integer pageSize=<span class="number">10</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 是否进行count查询，默认是true，查询</div><div class="line">     * 如果设置为false，那么总数total将会为-1，不进行count查询</div><div class="line">     */</div><div class="line">    <span class="meta">@JsonIgnore</span></div><div class="line">    <span class="keyword">private</span> Boolean countSql=<span class="keyword">true</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 分页合理化参数，默认值为false。当该参数设置为 true 时，pageNum&lt;=0 时会查询第一页， pageNum&gt;pages（超过总数时），会查询最后一页。默认false 时，直接根据参数进行查询。</div><div class="line">     */</div><div class="line">    <span class="meta">@JsonIgnore</span></div><div class="line">    <span class="keyword">private</span> Boolean reasonable;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 默认值为 false，当该参数设置为 true 时，如果 pageSize=0 或者 RowBounds.limit = 0 就会查询出全部的结果（相当于没有执行分页查询，但是返回结果仍然是 Page 类型）。</div><div class="line">     */</div><div class="line">    <span class="meta">@JsonIgnore</span></div><div class="line">    <span class="keyword">private</span> Boolean pageSizeZero=<span class="keyword">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>自定义执行接口，其实就是覆盖上面的doSelect方法，实现自己的执行查询的方法，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 分页需要实现的接口，在doExecute中只需调用查询全部数据的mapper即可</div><div class="line"> */</div><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ExecutePageHelper</span> <span class="keyword">extends</span> <span class="title">ISelect</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 实现类应该覆盖的方法</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">doExecute</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">doSelect</span><span class="params">()</span> </span>&#123;</div><div class="line">        doExecute();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>分页工具类，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 执行分页插件的工具类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PageHelperUtils</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 执行PageHelper分页的方法</div><div class="line">     * <span class="doctag">@param</span> req 请求对象，继承PageParam类</div><div class="line">     * <span class="doctag">@param</span> executePageHelper ExecutePageHelper的接口实现类</div><div class="line">     * <span class="doctag">@param</span> &lt;T&gt; 泛型，需要返回结果的类型</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt;  <span class="function">PageInfo&lt;T&gt; <span class="title">execute</span><span class="params">(PageParam req,ExecutePageHelper executePageHelper)</span></span>&#123;</div><div class="line">        <span class="comment">//这里直接传入req，其实其中的值是有映射关系的，在PageParam中有讲到</span></div><div class="line">        <span class="keyword">return</span> PageHelper.startPage(req).doSelectPageInfo(executePageHelper);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>测试：<ul>
-<li>使用lambda表示可以方便的执行分页查询</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span></span>&#123;</div><div class="line">       SqlSessionTemplate sqlSessionTemplate = applicationContext.getBean(SqlSessionTemplate.class);</div><div class="line">       PatientMapper mapper = sqlSessionTemplate.getMapper(PatientMapper.class);</div><div class="line">       <span class="comment">//分页的请求类，继承ParamReq</span></div><div class="line">       UserReq req=<span class="keyword">new</span> UserReq();</div><div class="line">       PageInfo&lt;Patient&gt; pageInfo = PageHelperUtils.execute(req, mapper::selectAllPatient);</div><div class="line">       System.out.println(pageInfo.getList());</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;环境搭建&quot;&gt;&lt;a href=&quot;#环境搭建&quot; class=&quot;headerlink&quot; title=&quot;环境搭建&quot;&gt;&lt;/a&gt;环境搭建&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;按照官方文档搭建即可&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;typeAliases（别名）&quot;&gt;&lt;a href=&quot;
-    
-    </summary>
-    
-      <category term="MyBatis" scheme="http://chenjiabing666.github.io/categories/MyBatis/"/>
-    
-    
-      <category term="MyBatis" scheme="http://chenjiabing666.github.io/tags/MyBatis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Springmvc源码解读</title>
-    <link href="http://chenjiabing666.github.io/2019/07/31/Springmvc%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/"/>
-    <id>http://chenjiabing666.github.io/2019/07/31/Springmvc源码解读/</id>
-    <published>2019-07-31T06:45:44.000Z</published>
-    <updated>2020-03-13T06:14:02.398Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="实现Controller的方式"><a href="#实现Controller的方式" class="headerlink" title="实现Controller的方式"></a>实现Controller的方式</h1><ul>
-<li>如何实现一个controller，在源码中其实将controller叫做handler，我们通常知道实现controller的方式就是在类上添加一个<code>@Controller</code>和<code>@RequestMapping</code>注解，但是还有其他的方式定义一个controller</li>
-</ul>
-<h2 id="实现Controller"><a href="#实现Controller" class="headerlink" title="实现Controller"></a>实现Controller</h2><ul>
-<li>使用Bean中的id指定路径，必须是以<code>/</code>开头</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(value = <span class="string">"/user/test.do"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> <span class="keyword">implements</span> <span class="title">Controller</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">handleRequest</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        System.out.println(<span class="string">"userController run....."</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="实现HttpRequestHandler"><a href="#实现HttpRequestHandler" class="headerlink" title="实现HttpRequestHandler"></a>实现HttpRequestHandler</h2><ul>
-<li>要求同上</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(value = <span class="string">"/prod/test.do"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductController</span> <span class="keyword">implements</span> <span class="title">HttpRequestHandler</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleRequest</span><span class="params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</div><div class="line">        System.out.println(<span class="string">"prodController run ....."</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="使用注解"><a href="#使用注解" class="headerlink" title="使用注解"></a>使用注解</h2><ul>
-<li>经常使用，不再细说</li>
-</ul>
-<h1 id="EnableWebMvc"><a href="#EnableWebMvc" class="headerlink" title="@EnableWebMvc"></a>@EnableWebMvc</h1><ul>
-<li>该注解使Spring MVC 开启高级功能的入口，主要的作用就是加载了一个配置类<code>DelegatingWebMvcConfiguration</code>，其中创建了MVC默认的一些组件，比如<code>viewControllerHandlerMapping</code>、<code>RequestMappingHandlerMapping</code>、<code>BeanNameUrlHandlerMapping</code>、<code>RequestMappingHandlerAdapter</code> 等等。</li>
-</ul>
-<h1 id="DispatcherServlet"><a href="#DispatcherServlet" class="headerlink" title="DispatcherServlet"></a>DispatcherServlet</h1><ul>
-<li>一个用于分发请求的Servlet，一个请求进来之后，Servlet会根据HandlerMapping将请求转发给对应的Handler（controller）处理。</li>
-<li>其中重要的方法如下：<ul>
-<li><code>protected void doDispatch(HttpServletRequest request, HttpServletResponse response)</code>：执行分发的流程</li>
-<li><code>protected void render(ModelAndView mv, HttpServletRequest request, HttpServletResponse response)</code>：渲染视图</li>
-</ul>
-</li>
-</ul>
-<h1 id="HandlerMapping"><a href="#HandlerMapping" class="headerlink" title="HandlerMapping"></a>HandlerMapping</h1><ul>
-<li>顾名思义，就是保存Handler和Mapping之间的对应的关系，当然这种关系是多种的，有<strong>uri to beanName</strong>，有<strong>uri to HandlerMethod</strong>，不同的对应关系有不同的实现类处理，因此就衍生了后续的三种实现类。</li>
-</ul>
-<h2 id="BeanNameUrlHandlerMapping"><a href="#BeanNameUrlHandlerMapping" class="headerlink" title="BeanNameUrlHandlerMapping"></a>BeanNameUrlHandlerMapping</h2><ul>
-<li>见名思意，这种肯定是uri to beanName的实现，用于存储实现了<code>Controller</code>和<code>HttpRequestHandler</code>接口的Handler的映射关系</li>
-</ul>
-<h2 id="SimpleUrlHandlerMapping"><a href="#SimpleUrlHandlerMapping" class="headerlink" title="SimpleUrlHandlerMapping"></a>SimpleUrlHandlerMapping</h2><ul>
-<li>这种也是uri to Handler的实现，不过这种用于存储<code>View-controller</code>、<code>ResourceHttpRequestHandler</code>的映射关系</li>
-</ul>
-<h2 id="RequestMappingHandlerMapping"><a href="#RequestMappingHandlerMapping" class="headerlink" title="RequestMappingHandlerMapping"></a>RequestMappingHandlerMapping</h2><ul>
-<li>这种用于实现uri to HandlerMethod的关系，从名称可以看出，这种是用于使用<code>@RequestMapping</code>注解的</li>
-</ul>
-<h1 id="HandlerExecutionChain"><a href="#HandlerExecutionChain" class="headerlink" title="HandlerExecutionChain"></a>HandlerExecutionChain</h1><ul>
-<li>处理器执行链，其中存储了Handler和拦截器</li>
-</ul>
-<h1 id="HandlerAdapter"><a href="#HandlerAdapter" class="headerlink" title="HandlerAdapter"></a>HandlerAdapter</h1><ul>
-<li>简单的说就是执行的Handler的适配类，定义了三个方法，如下：<ul>
-<li><code>boolean supports(Object handler);</code>：判断当前的HandlerAdapter是否支持这个Handler</li>
-<li><code>ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception;</code>：执行Handler的方法</li>
-<li><code>long getLastModified(HttpServletRequest request, Object handler);</code>：获取请求都中的<code>LastModified</code></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>该接口有多个实现类，如下：<ul>
-<li><code>RequestMappingHandlerAdapter</code>：匹配HandlerMethod</li>
-<li><code>HttpRequestHandlerAdapter</code>：匹配实现了<code>HttpRequestHandler</code>接口的Handler</li>
-<li><code>SimpleControllerHandlerAdapter</code>：匹配实现了Controller接口的Handler</li>
-</ul>
-</li>
-</ul>
-<h1 id="执行流程分析"><a href="#执行流程分析" class="headerlink" title="执行流程分析"></a>执行流程分析</h1><p><img src="https://raw.githubusercontent.com/chenjiabing666/BlogImage/master/springMVC%20-proceed.png" alt=""></p>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;实现Controller的方式&quot;&gt;&lt;a href=&quot;#实现Controller的方式&quot; class=&quot;headerlink&quot; title=&quot;实现Controller的方式&quot;&gt;&lt;/a&gt;实现Controller的方式&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;如何实现一个contro
-    
-    </summary>
-    
-      <category term="Spring" scheme="http://chenjiabing666.github.io/categories/Spring/"/>
-    
-    
-      <category term="Spring" scheme="http://chenjiabing666.github.io/tags/Spring/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Springmvc注解版开发</title>
-    <link href="http://chenjiabing666.github.io/2019/07/31/Springmvc%E6%B3%A8%E8%A7%A3%E7%89%88%E5%BC%80%E5%8F%91/"/>
-    <id>http://chenjiabing666.github.io/2019/07/31/Springmvc注解版开发/</id>
-    <published>2019-07-31T06:45:22.000Z</published>
-    <updated>2020-03-13T06:13:50.784Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h1><h2 id="搭建原理"><a href="#搭建原理" class="headerlink" title="搭建原理"></a>搭建原理</h2><p><img src="https://docs.spring.io/spring/docs/5.1.8.RELEASE/spring-framework-reference/images/mvc-context-hierarchy.png" alt=""></p>
-<h2 id="springMVC版本"><a href="#springMVC版本" class="headerlink" title="springMVC版本"></a>springMVC版本</h2><ul>
-<li>此次使用的版本是Spring 5.1.8</li>
-</ul>
-<h2 id="配置内嵌tomcat"><a href="#配置内嵌tomcat" class="headerlink" title="配置内嵌tomcat"></a>配置内嵌tomcat</h2><ul>
-<li>为了简化开发，使用tomcat插件实现web项目的运行，只需要在pom.xml中配置一个插件即可，如下：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat.maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat7-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">port</span>&gt;</span>8080<span class="tag">&lt;/<span class="name">port</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">path</span>&gt;</span>/<span class="tag">&lt;/<span class="name">path</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">uriEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">uriEncoding</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>之后在IDEA右侧的maven处可以看见tomcat7这个插件了，点击run即可运行</li>
-</ul>
-<h2 id="配置DispatcherServlet初始化器"><a href="#配置DispatcherServlet初始化器" class="headerlink" title="配置DispatcherServlet初始化器"></a>配置DispatcherServlet初始化器</h2><ul>
-<li>配置的方式有多种，但是根据Spring文档推荐的方式如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> cn.tedu.demo.config.AppConfig;</div><div class="line"><span class="keyword">import</span> cn.tedu.demo.config.WebMvcConfig;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 配置DispatcherServlet初始化器，在容器启动的时候会加载初始化</div><div class="line"> * 入口就是/org/springframework/spring-web/5.1.8.RELEASE/spring-web-5.1.8.RELEASE.jar!/META-INF/services/javax.servlet.ServletContainerInitializer</div><div class="line"> * web容器在启动的时候会加载META-INF/service下的文件</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StrartWebApplicationInitializer</span> <span class="keyword">extends</span> <span class="title">AbstractAnnotationConfigDispatcherServletInitializer</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 配置主配置类，主配置类的作用就是配置业务所需要的各种Bean，比如dao，service</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> Class&lt;?&gt;[] getRootConfigClasses() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Class[]&#123;AppConfig.class&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 配置MVC所需的配置类，该配置类的作用就是扫描controller，配置mvc的各种组件，比如视图解析器，拦截器等</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> Class&lt;?&gt;[] getServletConfigClasses() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Class[]&#123;WebMvcConfig.class&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 配置servletMapping，相当于在DispatcherServlet中配置的url</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> String[] getServletMappings() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String[]&#123;<span class="string">"/"</span>&#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="主配置文件"><a href="#主配置文件" class="headerlink" title="主配置文件"></a>主配置文件</h2><ul>
-<li>主配置文件主要的作用就是配置业务需求的Bean，比如dao，service层的</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.ComponentScan;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.FilterType;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 业务逻辑的配置类，扫描所有的业务Bean，比如dao，service，排除所有的controller</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages = &#123;<span class="string">"cn.tedu.demo"</span>&#125;,excludeFilters = &#123;<span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION,classes = &#123;Controller.class&#125;)&#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="MVC配置类"><a href="#MVC配置类" class="headerlink" title="MVC配置类"></a>MVC配置类</h2><ul>
-<li>MVC配置类主要的作用就是扫描Controller，配置各种组件，比如视图解析器，拦截器等等</li>
-<li>重要的两点如下：<ul>
-<li>使用<code>@EnableWebMvc</code>注解开启MVC功能，相当于xml文件中的<code>&lt;mvc:annotation-driven/&gt;</code></li>
-<li>配置类需要实现<code>WebMvcConfigurer</code>，该接口下有各种方法，开发者可以实现其中的方法完成相关组件的生成</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> cn.tedu.demo.interceptor.CustomInterceptor;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.ComponentScan;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.FilterType;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</div><div class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * MVC的配置类，扫描所有的controller，排除所有的业务类</div><div class="line"> * <span class="doctag">@EnableWebMvc</span> 注解开启mvc功能</div><div class="line"> * <span class="doctag">@ComponentScan</span> 注解中的属性useDefaultFilters（默认是true，扫描全部的Bean），这里我们定义了只扫描controller，因此要设置该属性为false，否则不起作用，排除Bean则不需要</div><div class="line"> */</div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages = &#123;<span class="string">"cn.tedu.demo"</span>&#125;,includeFilters = &#123;<span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION,classes = &#123;Controller.class&#125;)&#125;,useDefaultFilters = <span class="keyword">false</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="配置拦截器"><a href="#配置拦截器" class="headerlink" title="配置拦截器"></a>配置拦截器</h1><ul>
-<li>自定义一个拦截器，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 自定义一个拦截器，实现HandlerInterceptor</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 在拦截器方法之前执行</div><div class="line">     * <span class="doctag">@param</span> request request</div><div class="line">     * <span class="doctag">@param</span> response response</div><div class="line">     * <span class="doctag">@param</span> handler 拦截的handler</div><div class="line">     * <span class="doctag">@return</span> 如果返回false，后续的拦截器和拦截的handler不执行</div><div class="line">     * <span class="doctag">@throws</span> Exception</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        System.out.println(<span class="string">"在之前执行"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>在配置类设置自定义的拦截器，使得起作用</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</div><div class="line">       <span class="comment">//创建</span></div><div class="line">       CustomInterceptor customInterceptor = <span class="keyword">new</span> CustomInterceptor();</div><div class="line">       <span class="comment">//添加自定义的拦截器</span></div><div class="line">       registry.addInterceptor(customInterceptor).addPathPatterns(<span class="string">"/**"</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>自定义的拦截器的真实实现类其实是<code>MappedInterceptor</code>，在源码中获取处理器执行链的时候会将其添加到执行链中。</li>
-</ul>
-<h1 id="配置过滤器"><a href="#配置过滤器" class="headerlink" title="配置过滤器"></a>配置过滤器</h1><ul>
-<li>过滤器不属于SpringMVC，而是属于Servlet中的组件，因此配置过滤器使用的并不是MVC的配置，但是在Servlet3.0中也是提供了注解版的Servlet和Filter的生成方式，我们使用注解生成一个Filter，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 自定义过滤器</div><div class="line"> */</div><div class="line"><span class="meta">@WebFilter</span>(filterName = <span class="string">"customFilter"</span>,urlPatterns = <span class="string">"/*"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</div><div class="line">        System.out.println(<span class="string">"过滤器初始化"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</div><div class="line">        System.out.println(<span class="string">"过滤器执行"</span>);</div><div class="line">        chain.doFilter(request,response);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"过滤器销毁"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="配置视图解析器"><a href="#配置视图解析器" class="headerlink" title="配置视图解析器"></a>配置视图解析器</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureViewResolvers</span><span class="params">(ViewResolverRegistry registry)</span> </span>&#123;</div><div class="line">       registry.jsp(<span class="string">"/WEB_INF/"</span>,<span class="string">".jsp"</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<h1 id="配置ViewController"><a href="#配置ViewController" class="headerlink" title="配置ViewController"></a>配置ViewController</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addViewControllers</span><span class="params">(ViewControllerRegistry registry)</span> </span>&#123;</div><div class="line">        <span class="comment">//定义一个controller，访问路径是/index.do，跳转的视图是index.jsp</span></div><div class="line">        registry.addViewController(<span class="string">"/index.do"</span>).setViewName(<span class="string">"index"</span>);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h1 id="配置MessageConverters"><a href="#配置MessageConverters" class="headerlink" title="配置MessageConverters"></a>配置MessageConverters</h1><ul>
-<li>消息转换器用于对Request和Response的消息进行处理，比如将Response中的消息转换为指定JSON字符串的形式</li>
-<li>默认的消息转换器对于日期的类型的转换是时间戳，即是返回的JSON字符串的日期类型是时间戳，接收的日期类型参数也只能是时间戳</li>
-<li>如何配置消息转换器，只需要重写springmvc配置类中的方法即可。</li>
-<li>我们使用的是<code>MappingJackson2HttpMessageConverter</code>这类转换器，但是其中依赖的是ObjectMapper，因此我们比如引入依赖，如下：</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li>在上述的MVC配置类中重写如下方法：<ul>
-<li>设置日期的格式化格式是yyyy-MM-dd，此时返回和接收的格式就是<code>yyyy-MM-dd</code></li>
-<li>在配置类中配置的消息转换器属于<strong>全局配置</strong>，所有的消息都会遵循这种配置。</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureMessageConverters</span><span class="params">(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters)</span> </span>&#123;</div><div class="line">       Jackson2ObjectMapperBuilder builder = <span class="keyword">new</span> Jackson2ObjectMapperBuilder()</div><div class="line">               .indentOutput(<span class="keyword">true</span>)</div><div class="line">               <span class="comment">//指定格式化的日期，这里只是举例，不建议在此处全局配置</span></div><div class="line">               .dateFormat(<span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>))</div><div class="line">               <span class="comment">//设置时区，默认是UTC，需要修改成北京时间</span></div><div class="line">               .timeZone(<span class="string">"GMT+8"</span>);</div><div class="line">       converters.add(<span class="keyword">new</span> MappingJackson2HttpMessageConverter(builder.build()));</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<h2 id="注解版"><a href="#注解版" class="headerlink" title="注解版"></a>注解版</h2><ul>
-<li>在实际的项目中这种方式太鸡肋，实际的需求有实际的变化，因此我们最好能够寻找一种灵活的处理方式，类似注解的方式。</li>
-<li>在<code>jackson-databind</code>中提供了许多的注解，可以供我们使用，<strong>可以覆盖全局配置，和全局配置形成一种互补的作用</strong>。</li>
-<li><code>@JsonFormat</code>：日期格式化注解，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//timeZone如果在全局配置过，可以不写	</span></div><div class="line"><span class="meta">@JsonFormat</span>(pattern = <span class="string">"yyyy-MM-dd HH:mm:ss"</span>,timezone = <span class="string">"GMT+8"</span>)</div><div class="line">    <span class="keyword">private</span> Date birthDay;</div></pre></td></tr></table></figure>
-<ul>
-<li><code>@JsonIgnore</code>：在返回的JSON字符串中不显示</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@JsonIgnore</span></div><div class="line">   <span class="keyword">private</span> String name;</div></pre></td></tr></table></figure>
-<ul>
-<li>其他的注解请参考<a href="https://blog.51cto.com/7308310/2310930?source=dra" target="_blank" rel="external">https://blog.51cto.com/7308310/2310930?source=dra</a></li>
-</ul>
-<h1 id="异常处理器"><a href="#异常处理器" class="headerlink" title="异常处理器"></a>异常处理器</h1><ul>
-<li>springMvc处理异常有三种方式，分别为：<ul>
-<li><code>ExceptionHandlerExceptionResolver</code>：通过调用或 类中的<code>@ExceptionHandler</code>方法来解决异常，可以结合<code>@ControllerAdvice</code></li>
-<li><code>DefaultHandlerExceptionResolver</code>：对一些特殊的异常进行处理</li>
-<li><code>ResponseStatusExceptionResolver</code>：使用<code>@ResponseStatus</code>解析异常，并根据注解中的值将它们映射到HTTP状态代码 </li>
-<li><code>SimpleMappingExceptionResolver</code>：异常和视图的映射，可以自定义指定的异常对应的视图</li>
-</ul>
-</li>
-<li><strong>原理：主要的解析逻辑都是在<code>doResolveException</code>方法中完成的。</strong></li>
-</ul>
-<h2 id="异常处理器执行的顺序"><a href="#异常处理器执行的顺序" class="headerlink" title="异常处理器执行的顺序"></a>异常处理器执行的顺序</h2><ul>
-<li>异常处理器的执行是有顺序的，优先级高的执行完之后，如果有对应的处理，那么后续的就不再执行。</li>
-<li>异常处理器的执行顺序如下：<ul>
-<li><code>ExceptionHandlerExceptionResolver</code></li>
-<li><code>DefaultHandlerExceptionResolver</code></li>
-<li><code>ResponseStatusExceptionResolver</code></li>
-<li><code>SimpleMappingExceptionResolver</code></li>
-</ul>
-</li>
-<li>四种异常处理器的顺序执行可以形成一种互补的配置。</li>
-</ul>
-<h2 id="SimpleMappingExceptionResolver"><a href="#SimpleMappingExceptionResolver" class="headerlink" title="SimpleMappingExceptionResolver"></a>SimpleMappingExceptionResolver</h2><ul>
-<li>在配置中配置即可</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> SimpleMappingExceptionResolver <span class="title">simpleMappingExceptionResolver</span><span class="params">()</span></span>&#123;</div><div class="line">        SimpleMappingExceptionResolver resolver = <span class="keyword">new</span> SimpleMappingExceptionResolver();</div><div class="line">        <span class="comment">//设置默认的视图，如果有的异常没有指定处理，那么使用默认的视图</span></div><div class="line">        resolver.setDefaultErrorView(<span class="string">"index"</span>);</div><div class="line">        <span class="comment">//设置排除的异常</span></div><div class="line"><span class="comment">//        resolver.setExcludedExceptions();</span></div><div class="line">        <span class="comment">//指定异常视图映射</span></div><div class="line">        Properties properties=<span class="keyword">new</span> Properties();</div><div class="line">        properties.put(RuntimeException.class.getName(),<span class="string">"error"</span>);</div><div class="line">        resolver.setExceptionMappings(properties);</div><div class="line">        <span class="keyword">return</span> resolver;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h2 id="DefaultHandlerExceptionResolver"><a href="#DefaultHandlerExceptionResolver" class="headerlink" title="DefaultHandlerExceptionResolver"></a>DefaultHandlerExceptionResolver</h2><ul>
-<li>此类异常解析器只能针对一些特殊的异常进行处理，如下：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Exception</th>
-<th>HTTP Status Code</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HttpRequestMethodNotSupportedException</td>
-<td>405 (SC_METHOD_NOT_ALLOWED)</td>
-</tr>
-<tr>
-<td>HttpMediaTypeNotSupportedException</td>
-<td>415 (SC_UNSUPPORTED_MEDIA_TYPE)</td>
-</tr>
-<tr>
-<td>HttpMediaTypeNotAcceptableException</td>
-<td>406 (SC_NOT_ACCEPTABLE)</td>
-</tr>
-<tr>
-<td>MissingPathVariableException</td>
-<td>500 (SC_INTERNAL_SERVER_ERROR)</td>
-</tr>
-<tr>
-<td>MissingServletRequestParameterException</td>
-<td>400 (SC_BAD_REQUEST)</td>
-</tr>
-<tr>
-<td>ServletRequestBindingException</td>
-<td>400 (SC_BAD_REQUEST)</td>
-</tr>
-<tr>
-<td>ConversionNotSupportedException</td>
-<td>500 (SC_INTERNAL_SERVER_ERROR)</td>
-</tr>
-<tr>
-<td>TypeMismatchException</td>
-<td>400 (SC_BAD_REQUEST)</td>
-</tr>
-<tr>
-<td>HttpMessageNotReadableException</td>
-<td>400 (SC_BAD_REQUEST)</td>
-</tr>
-<tr>
-<td>HttpMessageNotWritableException</td>
-<td>500 (SC_INTERNAL_SERVER_ERROR)</td>
-</tr>
-<tr>
-<td>MethodArgumentNotValidException</td>
-<td>400 (SC_BAD_REQUEST)</td>
-</tr>
-<tr>
-<td>MissingServletRequestPartException</td>
-<td>400 (SC_BAD_REQUEST)</td>
-</tr>
-<tr>
-<td>BindException</td>
-<td>400 (SC_BAD_REQUEST)</td>
-</tr>
-<tr>
-<td>NoHandlerFoundException</td>
-<td>404 (SC_NOT_FOUND)</td>
-</tr>
-<tr>
-<td>AsyncRequestTimeoutException</td>
-<td>503 (SC_SERVICE_UNAVAILABLE)</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>不需要声明，默认存在</li>
-</ul>
-<h2 id="ResponseStatusExceptionResolver"><a href="#ResponseStatusExceptionResolver" class="headerlink" title="ResponseStatusExceptionResolver"></a>ResponseStatusExceptionResolver</h2><ul>
-<li>在自定义的异常类上标注<code>@ResponseStatus</code>注解，当抛出此种异常的时候，将会响应定义的状态码和提示语</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ResponseStatus</span>(code = HttpStatus.FORBIDDEN,reason = <span class="string">"没有权限"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomException</span> <span class="keyword">extends</span>  <span class="title">RuntimeException</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="ExceptionHandlerExceptionResolver"><a href="#ExceptionHandlerExceptionResolver" class="headerlink" title="ExceptionHandlerExceptionResolver"></a>ExceptionHandlerExceptionResolver</h2><ul>
-<li>集合<code>@ControllerAdvice</code>和<code>@RestControllerAdvice</code>使用</li>
-<li>方法中能够自动赋值的参数和返回值的类型都在Spring文档上有详细的记载，参考<code>https://docs.spring.io/spring/docs/5.1.8.RELEASE/spring-framework-reference/web.html#mvc-ann-exceptionhandler-args</code></li>
-<li>详细的使用如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ControllerAdvice</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     *</div><div class="line">     *处理FileNotFoundException，返回JSOn数据</div><div class="line">     */</div><div class="line">    <span class="meta">@ExceptionHandler</span>(value = ArrayIndexOutOfBoundsException.class)</div><div class="line">    <span class="meta">@ResponseBody</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">handleFileNotFoundException</span><span class="params">(Exception ex, HttpServletRequest request, HandlerMethod method)</span></span>&#123;</div><div class="line">        System.out.println(request.getRequestURI());</div><div class="line">        System.out.println(method);</div><div class="line">        System.out.println(ex);</div><div class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@ExceptionHandler</span>(value = Exception.class)</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">handleException</span><span class="params">(Exception ex, HttpServletRequest request, HandlerMethod method)</span></span>&#123;</div><div class="line">        System.out.println(request.getRequestURI());</div><div class="line">        System.out.println(method);</div><div class="line">        System.out.println(ex);</div><div class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="配置跨域请求"><a href="#配置跨域请求" class="headerlink" title="配置跨域请求"></a>配置跨域请求</h1><h2 id="使用注解"><a href="#使用注解" class="headerlink" title="使用注解"></a>使用注解</h2><ul>
-<li>使用注解<code>@CrossOrigin</code>，可以标注在Controller上，也可以标注在方法上，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@CrossOrigin</span></div><div class="line">   <span class="meta">@PostMapping</span>(<span class="string">"/getObj"</span>)</div><div class="line">   <span class="function"><span class="keyword">public</span> Object <span class="title">getObject</span><span class="params">(@RequestBody AdminReq req)</span></span>&#123;</div><div class="line">       System.out.println(req);</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Admin(<span class="string">"陈加兵"</span>,<span class="number">22</span>,<span class="keyword">new</span> Date(),<span class="keyword">new</span> Date());</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>该注解中可以配置各种属性，这里不再细讲，在下面的全局配置中会涉及到。</li>
-</ul>
-<h2 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h2><ul>
-<li>全局配置就是在MVC的配置文件中重写方法即可，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</div><div class="line">       registry.addMapping(<span class="string">"/api/**"</span>)</div><div class="line">               <span class="comment">//允许的源</span></div><div class="line">               .allowedOrigins(<span class="string">"https://domain2.com"</span>)</div><div class="line">               <span class="comment">//允许请求跨域的请求类型</span></div><div class="line">               .allowedMethods(<span class="string">"PUT"</span>, <span class="string">"DELETE"</span>)</div><div class="line">               <span class="comment">//允许的请求头</span></div><div class="line">               .allowedHeaders(<span class="string">"header1"</span>, <span class="string">"header2"</span>, <span class="string">"header3"</span>)</div><div class="line">               <span class="comment">//暴露的请求头</span></div><div class="line">               .exposedHeaders(<span class="string">"header1"</span>, <span class="string">"header2"</span>)</div><div class="line">               <span class="comment">//允许携带cookie等用户信息，这样才能实现登录</span></div><div class="line">               .allowCredentials(<span class="keyword">true</span>).maxAge(<span class="number">3600</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<h1 id="配置静态资源解析"><a href="#配置静态资源解析" class="headerlink" title="配置静态资源解析"></a>配置静态资源解析</h1><ul>
-<li>springmvc中的DispatcherServlet如果设置了拦截的请求是<code>/</code>，那么也会拦截静态资源，但是我们可以在配置文件中配置，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;</div><div class="line">       <span class="comment">//拦截的请求</span></div><div class="line">       registry.addResourceHandler(<span class="string">"/resources/**"</span>)</div><div class="line">               <span class="comment">//资源的位置</span></div><div class="line">               .addResourceLocations(<span class="string">"/public"</span>, <span class="string">"classpath:/static/"</span>)</div><div class="line">               <span class="comment">//缓存的时间，单位秒</span></div><div class="line">               .setCachePeriod(<span class="number">31556926</span>);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>该配置会在ioc中注册一个<code>ResourceHttpRequestHandler</code>，封装在<strong>SimpleUrlHandlermapping</strong>中。</li>
-</ul>
-<h1 id="高级配置"><a href="#高级配置" class="headerlink" title="高级配置"></a>高级配置</h1><ul>
-<li><code>@EnableMvc</code>注解其实就是注入了一个配置类<code>DelegatingWebMvcConfiguration</code>，那么我们可以将自定义的配置类实现该类即可完成MVC的高级功能，此时就不需要使用该注解了，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages = &#123;<span class="string">"cn.tedu.demo"</span>&#125;,includeFilters = &#123;<span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION,classes = &#123;Controller.class, Component.class&#125;)&#125;,useDefaultFilters = <span class="keyword">false</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AdvanceConfig</span> <span class="keyword">extends</span> <span class="title">DelegatingWebMvcConfiguration</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;项目搭建&quot;&gt;&lt;a href=&quot;#项目搭建&quot; class=&quot;headerlink&quot; title=&quot;项目搭建&quot;&gt;&lt;/a&gt;项目搭建&lt;/h1&gt;&lt;h2 id=&quot;搭建原理&quot;&gt;&lt;a href=&quot;#搭建原理&quot; class=&quot;headerlink&quot; title=&quot;搭建原理&quot;&gt;&lt;/a
-    
-    </summary>
-    
-      <category term="Spring" scheme="http://chenjiabing666.github.io/categories/Spring/"/>
-    
-    
-      <category term="Spring" scheme="http://chenjiabing666.github.io/tags/Spring/"/>
     
   </entry>
   

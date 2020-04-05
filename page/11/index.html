@@ -79,6 +79,76 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2018/06/26/并发编程之上下文切换/" title="并发编程之上下文切换" itemprop="url">
+  
+    <h1 itemprop="name">并发编程之上下文切换</h1>
+    
+     
+           <p itemprop="description" >多线程之上下文切换定义
+在单处理器的情况下，每个线程的执行时间是根据时间片大小决定或者自身的其他原因，如果一个线程被迫或者主动暂停运行时，另外一个线程(可能是同一个进程中的线程或者其他进程中的)可以被操作系统(线程调度器)选中占用处理器开始或者继续运行。这种一个线程被暂停，即是被</p>
+        
+    
+    <time datetime="2018-06-26T14:47:28.000Z" itemprop="datePublished">2018-06-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/06/26/并发编程之多线程状态/" title="并发编程之多线程状态" itemprop="url">
+  
+    <h1 itemprop="name">并发编程之多线程状态</h1>
+    
+     
+           <p itemprop="description" >多线程状态总的执行图：
+
+所有状态：
+1，创建状态(new)
+在程序中用构造方法创建了一个线程对象后，新的线程对象便处于新建状态，此时，它已经有了相应的
+内存空间和其他资源，但还处于不可运行状态。新建一个线程对象可采用Thread 类的构造方法来实现，例
+如，“Thread th</p>
+        
+    
+    <time datetime="2018-06-26T14:46:48.000Z" itemprop="datePublished">2018-06-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/06/26/并发编程之三大性质/" title="并发编程之三大性质" itemprop="url">
+  
+    <h1 itemprop="name">并发编程之三大性质</h1>
+    
+     
+           <p itemprop="description" >多线程的三大性质原子性
+对共享变量更新操作的时候，要保证执行不可分割，比如银行转账，一旦在多线程的环境下将其分割了，那么可能造成的后果可能是转账的账户钱少了，但是转到的账户的钱可能不是那么多或者根本没有转过去
+在单线程的环境下没有所谓的原子性，都是顺序执行的
+多线程的环境下对共享</p>
+        
+    
+    <time datetime="2018-06-26T14:45:20.000Z" itemprop="datePublished">2018-06-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2018/06/26/MongoDB使用总结/" title="MongoDB使用总结" itemprop="url">
   
     <h1 itemprop="name">MongoDB使用总结</h1>
@@ -240,83 +310,9 @@ Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但�
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/06/26/Redis持久化/" title="Redis持久化" itemprop="url">
-  
-    <h1 itemprop="name">Redis持久化</h1>
-    
-     
-           <p itemprop="description" >Redis持久化RDB (默认使用)
-RDB持久化是把当前进程数据生成快照保存到硬盘的过程,触发RDB持久化过程分为手动触发和自动触发。
-
-手动触发 (bgsave)
-执行bgsave命令,Redis父进程判断当前是否存在正在执行的子进程,如RDB/AOF子进程,如果存在bgsa</p>
-        
-    
-    <time datetime="2018-06-26T14:34:07.000Z" itemprop="datePublished">2018-06-26</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/06/26/Redis客户端操作/" title="Redis客户端操作" itemprop="url">
-  
-    <h1 itemprop="name">Redis客户端操作</h1>
-    
-     
-           <p itemprop="description" >Redis客户端Jedis远程连接
-yum install redis  : 安装redis
-开启6379端口
-在自己的阿里云的控制台上开启防火墙6379
-firewall-cmd --zone=public --add-port=6379/tcp
-
-
-如果显示firewall </p>
-        
-    
-    <time datetime="2018-06-26T14:33:32.000Z" itemprop="datePublished">2018-06-26</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/06/26/Redis常用命令/" title="Redis常用命令" itemprop="url">
-  
-    <h1 itemprop="name">Redis常用命令</h1>
-    
-     
-           <p itemprop="description" >Redis常用命令Redis全局命令
-keys * : 查看所有的key，这个会遍历所有的键,复杂度为O(n)，因此当存在了大量的key，应该禁止使用这个命令
-dbsize ：查看键key的个数，这个是直接获取内置的键总数变量，因此复杂度为O(1)
-exists key  : 检</p>
-        
-    
-    <time datetime="2018-06-26T14:32:44.000Z" itemprop="datePublished">2018-06-26</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/10/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/12/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/12/">Next<span></span></a>
   </nav>
 
 </div>
@@ -396,7 +392,7 @@ exists key  : 检</p>
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>19</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>20</sup></a></li>
 		  
 		
 		  
@@ -408,7 +404,7 @@ exists key  : 检</p>
 		  
 		
 		  
-			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>9</sup></a></li>
 		  
 		
 		</ul>
@@ -433,7 +429,7 @@ exists key  : 检</p>
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
 			
 		
 			
@@ -441,7 +437,7 @@ exists key  : 检</p>
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>15</sup></a></li>
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
 			
 		
 			
@@ -457,11 +453,11 @@ exists key  : 检</p>
 			
 		
 			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
+				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
 			
 		
 			
@@ -469,11 +465,11 @@ exists key  : 检</p>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			

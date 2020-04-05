@@ -79,6 +79,80 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2020/04/05/设计模式：工厂方法模式/" title="设计模式：工厂方法模式" itemprop="url">
+  
+    <h1 itemprop="name">设计模式：工厂方法模式</h1>
+    
+     
+           <p itemprop="description" >导读
+工厂方法模式是所有设计模式中比较常用的一种模式，但是真正能搞懂用好的少之又少，Spring底层大量的使用该设计模式来进行封装，以致开发者阅读源代码的时候晕头转向。
+今天陈某分别从以下五个方面详细讲述一下工厂方法模式：
+从什么是工厂方法模式
+通用框架实现
+工厂方法模式的优点
+</p>
+        
+    
+    <time datetime="2020-04-05T13:44:06.000Z" itemprop="datePublished">2020-04-05</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/05/设计模式：模板模式/" title="设计模式：模板模式" itemprop="url">
+  
+    <h1 itemprop="name">设计模式：模板模式</h1>
+    
+     
+           <p itemprop="description" >导读
+模板模式在是Spring底层被广泛的应用，比如事务管理器的实现，JDBC模板的实现。
+今天就来谈谈什么是模板模式、模板模式的优缺点、模板模式的简单演示、模板模式在Spring底层的实现。
+
+什么是模板模式
+模板模式首先要有一个抽象类，这个抽象类公开定义了执行它的方法的方式/</p>
+        
+    
+    <time datetime="2020-04-05T13:43:52.000Z" itemprop="datePublished">2020-04-05</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/05/Mysql性能优化：为什么count这么慢/" title="Mysql性能优化：为什么count(*)这么慢？" itemprop="url">
+  
+    <h1 itemprop="name">Mysql性能优化：为什么count(*)这么慢？</h1>
+    
+     
+           <p itemprop="description" >导读
+在开发中一定会用到统计一张表的行数，比如一个交易系统，老板会让你每天生成一个报表，这些统计信息少不了sql中的count函数。
+但是随着记录越来越多，查询的速度会越来越慢，为什么会这样呢？Mysql内部到底是怎么处理的？
+今天这篇文章将从Mysql内部对于count函数是怎</p>
+        
+    
+    <time datetime="2020-04-05T13:41:59.000Z" itemprop="datePublished">2020-04-05</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2020/04/01/接口幂等性如何设计？/" title="接口幂等性如何设计？" itemprop="url">
   
     <h1 itemprop="name">接口幂等性如何设计？</h1>
@@ -247,76 +321,9 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/03/23/接口限流算法/" title="接口限流算法" itemprop="url">
-  
-    <h1 itemprop="name">接口限流算法</h1>
-    
-     
-           <p itemprop="description" >导读
-前几天和一个朋友讨论了他们公司的系统问题，传统的单体应用，集群部署，他说近期服务的并发量可能会出现瞬时增加的风险，虽然部署了集群，但是通过压测后发现请求延迟仍然是很大，想问问我有什么改进的地方。我沉思了一会，现在去改架构显然是不可能的，于是我给出了一个建议，让他去做个接口限</p>
-        
-    
-    <time datetime="2020-03-23T01:38:58.000Z" itemprop="datePublished">2020-03-23</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/03/18/SpringBoot整合多数据源的巨坑/" title="SpringBoot整合多数据源的巨坑" itemprop="url">
-  
-    <h1 itemprop="name">SpringBoot整合多数据源的巨坑</h1>
-    
-     
-           <p itemprop="description" >导读
-本篇文章接上篇SpringBoot整合多数据源，你会了吗？，前面文章最后留了几个问题供大家思考，今天一一揭晓。
-
-配置如何优化
-上文整合的过程中的还顺带整合Mybatis和TransactionManager，为什么还要重新定义他们呢？SpringBoot不是给我们都配置好</p>
-        
-    
-    <time datetime="2020-03-18T08:51:57.000Z" itemprop="datePublished">2020-03-18</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/03/12/SpringBoot整合多数据源，你会了吗？/" title="SpringBoot整合多数据源，你会了吗？" itemprop="url">
-  
-    <h1 itemprop="name">SpringBoot整合多数据源，你会了吗？</h1>
-    
-     
-           <p itemprop="description" >导读
-平常的工作中可能大家的接触的都是单数据源的操作，很少能够用到多数据源的操作，但是在和其他系统对接的或者系统数据迁移时候往往需要定时从其他系统拉数据，此时多数据源变得很有必要了。
-多数据源的实现有两种方式，第一种是定义分别定义多个数据源，单个数据源分别和Mybatis整合，使</p>
-        
-    
-    <time datetime="2020-03-12T14:41:57.000Z" itemprop="datePublished">2020-03-12</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -396,7 +403,7 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>19</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>20</sup></a></li>
 		  
 		
 		  
@@ -408,7 +415,7 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 		  
 		
 		  
-			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>9</sup></a></li>
 		  
 		
 		</ul>
@@ -433,7 +440,7 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
 			
 		
 			
@@ -441,7 +448,7 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>15</sup></a></li>
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
 			
 		
 			
@@ -457,11 +464,11 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 			
 		
 			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
+				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
 			
 		
 			
@@ -469,11 +476,11 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>8</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
