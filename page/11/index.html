@@ -79,6 +79,108 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2018/06/26/并发编程之死锁/" title="并发编程之死锁" itemprop="url">
+  
+    <h1 itemprop="name">并发编程之死锁</h1>
+    
+     
+           <p itemprop="description" >并发编程之死锁定义
+是指两个或两个以上的进程在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。
+
+产生的条件
+互斥条件：所谓互斥就是线程在某一时间内独占资源。
+每一次的资源只能被一个线程使用
+
+
+请求与保持条件：一个线程因请求资源而阻塞时，对</p>
+        
+    
+    <time datetime="2018-06-26T14:50:58.000Z" itemprop="datePublished">2018-06-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/06/26/并发编程之线程协作/" title="并发编程之线程协作" itemprop="url">
+  
+    <h1 itemprop="name">并发编程之线程协作</h1>
+    
+     
+           <p itemprop="description" >并发编程之线程协作wait / notify / notifyAll
+Object.wait()/Object.notify()/Object.notifyAll()可用于实现等待和通知。
+wait()方法可以使其执行的线程被暂停，该方法用来实现等待。
+
+进入阻塞状态(Block</p>
+        
+    
+    <time datetime="2018-06-26T14:50:23.000Z" itemprop="datePublished">2018-06-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/06/26/并发编程之volatile/" title="并发编程之volatile" itemprop="url">
+  
+    <h1 itemprop="name">并发编程之volatile</h1>
+    
+     
+           <p itemprop="description" >并发编程之volatile
+volatile称之为轻量级锁，保证了可见性和原子性。
+volatile不会引起上下文切换，因此是轻量级的
+
+volatile的作用
+保障可见性，有序性和Long，double类型变量读写操作的原子性
+
+volatile仅仅能保证对其修饰的变量的写操作</p>
+        
+    
+    <time datetime="2018-06-26T14:49:47.000Z" itemprop="datePublished">2018-06-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/06/26/并发编程之线程同步机制的底层助手内存屏障/" title="并发编程之线程同步机制的底层助手内存屏障" itemprop="url">
+  
+    <h1 itemprop="name">并发编程之线程同步机制的底层助手内存屏障</h1>
+    
+     
+           <p itemprop="description" >线程同步机制的底层助手 ：内存屏障前提
+我们知道锁是可以保证可见性的，线程在获取锁和释放锁的时候会分别执行两个动作来保证可见性:
+刷新处理器缓存 ：保证了持有该锁的线程能够读取到前一个线程对共享数据的更新
+冲刷处理器缓存 ：保证了持有该锁的线程对共享数据所做的更新会对后续获取该锁</p>
+        
+    
+    <time datetime="2018-06-26T14:49:10.000Z" itemprop="datePublished">2018-06-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2018/06/26/并发编程之上下文切换/" title="并发编程之上下文切换" itemprop="url">
   
     <h1 itemprop="name">并发编程之上下文切换</h1>
@@ -217,99 +319,6 @@ Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会�
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/06/26/Spring整合Redis/" title="Spring整合Redis" itemprop="url">
-  
-    <h1 itemprop="name">Spring整合Redis</h1>
-    
-     
-           <p itemprop="description" >Spring - Data - Redis添加依赖
-需要spring的版本为4.xxx
-
-12345678910111213&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;redis.clients&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId</p>
-        
-    
-    <time datetime="2018-06-26T14:37:40.000Z" itemprop="datePublished">2018-06-26</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/06/26/Redis/" title="Redis" itemprop="url">
-  
-    <h1 itemprop="name">Redis</h1>
-    
-     
-           <p itemprop="description" ></p>
-        
-    
-    <time datetime="2018-06-26T14:36:28.000Z" itemprop="datePublished">2018-06-26</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/06/26/Redis主从复制/" title="Redis主从复制" itemprop="url">
-  
-    <h1 itemprop="name">Redis主从复制</h1>
-    
-     
-           <p itemprop="description" >Redis主从复制
-本章介绍Redis的一个强大功能–主从复制。一台master主机可以拥有多台slave从机。而一台slave从机又可以拥有多个slave从机。如此下去，形成强大的多级服务器集群架构（高扩展）。可以避免Redis单点故障，实现容灾恢复效果（高可用）。读写分离的架</p>
-        
-    
-    <time datetime="2018-06-26T14:35:44.000Z" itemprop="datePublished">2018-06-26</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/06/26/Redis的管道Pipeline/" title="Redis的管道Pipeline" itemprop="url">
-  
-    <h1 itemprop="name">Redis的管道Pipeline</h1>
-    
-     
-           <p itemprop="description" >Redis的管道(Pipeline)为什么使用管道
-其中redis的执行一条命令可以分为四个步骤
-发送命令
-命令排队
-命令执行
-返回结果
-
-
-其中1-4之间所需要的时间称为往返时间(RTT)
-Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但大部分命令</p>
-        
-    
-    <time datetime="2018-06-26T14:35:00.000Z" itemprop="datePublished">2018-06-26</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <a class="extend prev" rel="prev" href="/page/10/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/12/">Next<span></span></a>
@@ -400,7 +409,7 @@ Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但�
 		  
 		
 		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
 		  
 		
 		  
@@ -429,10 +438,6 @@ Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但�
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
 			
 		
@@ -441,11 +446,15 @@ Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但�
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
 			
 		
 			
@@ -453,15 +462,11 @@ Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但�
 			
 		
 			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
@@ -470,6 +475,10 @@ Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但�
 		
 			
 				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

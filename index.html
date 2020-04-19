@@ -79,6 +79,102 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2020/04/19/Zookeeper实现分布式锁/" title="Zookeeper实现分布式锁" itemprop="url">
+  
+    <h1 itemprop="name">Zookeeper实现分布式锁</h1>
+    
+     
+           <p itemprop="description" >导读
+真是有人(锁)的地方就有江湖(事务)，今天不谈江湖，来撩撩人。
+分布式锁的概念、为什么使用分布式锁，想必大家已经很清楚了。前段时间作者写过Redis是如何实现分布式锁，今天这篇文章来谈谈Zookeeper是如何实现分布式锁的。
+陈某今天分别从如下几个方面来详细讲讲ZK如何实</p>
+        
+    
+    <time datetime="2020-04-19T07:48:54.000Z" itemprop="datePublished">2020-04-19</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/19/Zookeeper入门/" title="Zookeeper入门" itemprop="url">
+  
+    <h1 itemprop="name">Zookeeper入门</h1>
+    
+     
+           <p itemprop="description" >导读
+Zookeeper 相信大家都听说过，最典型的使用就是作为服务注册中心。今天陈某带大家从零基础入门 Zookeeper，看了本文，你将会对 Zookeeper 有了初步的了解和认识。
+注意：本文基于 Zookeeper 的版本是 3.4.14，最新版本的在使用上会有一些出入</p>
+        
+    
+    <time datetime="2020-04-19T07:48:16.000Z" itemprop="datePublished">2020-04-19</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/19/Mysql中orderby底层执行流程/" title="Mysql中orderby底层执行流程" itemprop="url">
+  
+    <h1 itemprop="name">Mysql中orderby底层执行流程</h1>
+    
+     
+           <p itemprop="description" >前言
+在实际的开发中一定会碰到根据某个字段进行排序后来显示结果的需求，但是你真的理解order by在 Mysql 底层是如何执行的吗？
+假设你要查询城市是苏州的所有人名字，并且按照姓名进行排序返回前 1000 个人的姓名、年龄，这条 sql 语句应该如何写？
+首先创建一张用户表</p>
+        
+    
+    <time datetime="2020-04-19T07:46:13.000Z" itemprop="datePublished">2020-04-19</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/19/面试官：你知道哪些事务失效的场景？/" title="面试官：你知道哪些事务失效的场景？" itemprop="url">
+  
+    <h1 itemprop="name">面试官：你知道哪些事务失效的场景？</h1>
+    
+     
+           <p itemprop="description" >前言
+声明式事务是Spring功能中最爽之一，可是有些时候，我们在使用声明式事务并未生效，这是为什么呢？
+今天陈某带大家来聊一聊声明事务的几种失效场景。本文将会从以下两个方面来说一下事务为什么会失效？
+@Transactional介绍
+@Transactional失效场景
+
+
+
+</p>
+        
+    
+    <time datetime="2020-04-19T07:45:21.000Z" itemprop="datePublished">2020-04-19</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2020/04/05/设计模式：工厂方法模式/" title="设计模式：工厂方法模式" itemprop="url">
   
     <h1 itemprop="name">设计模式：工厂方法模式</h1>
@@ -222,105 +318,6 @@ InnoDB索引模型
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/04/01/一条查询语句到底是如何执行的/" title="一条查询语句到底是如何执行的?" itemprop="url">
-  
-    <h1 itemprop="name">一条查询语句到底是如何执行的?</h1>
-    
-     
-           <p itemprop="description" >导读
-Mysql在中小型企业中是个香饽饽，目前主流的数据库之一，几乎没有一个后端开发者不会使用的，但是作为一个老司机，仅仅会用真的不够。
-
-今天陈某透过一个简单的查询语句来讲述在Mysql内部的执行过程。
-1select * from table where id=10;
-
-
-撸</p>
-        
-    
-    <time datetime="2020-04-01T02:35:30.000Z" itemprop="datePublished">2020-04-01</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/04/01/Mysql中的三类锁，你知道吗？/" title="Mysql中的三类锁，你知道吗？" itemprop="url">
-  
-    <h1 itemprop="name">Mysql中的三类锁，你知道吗？</h1>
-    
-     
-           <p itemprop="description" >导读
-正所谓有人(锁)的地方就有江湖(事务)，人在江湖飘，怎能一无所知？
-
-今天来细说一下Mysql中的三类锁，分别是全局锁、表级锁、行级锁。
-
-
-全局锁
-全局锁简单的说就是锁住整个数据库实例，命令是Flush tables with read lock。当你需要为整个数据库处于</p>
-        
-    
-    <time datetime="2020-04-01T02:31:58.000Z" itemprop="datePublished">2020-04-01</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/03/23/IDEA调试技巧/" title="IDEA调试技巧" itemprop="url">
-  
-    <h1 itemprop="name">IDEA调试技巧</h1>
-    
-     
-           <p itemprop="description" >导读
-前天面试了一个985高校的实习生，问了他平时用什么开发工具，他想也没想的说IDEA，于是我抛砖引玉的问了一下IDEA的调试用过吧，你说说怎么设置断点条件？那孩子懵了，想了好一会对我说没用过，甚至都没听说过这个。
-作为一名资深的老司机，IDEA调试可以说是家常便饭，如果不会d</p>
-        
-    
-    <time datetime="2020-03-23T08:15:12.000Z" itemprop="datePublished">2020-03-23</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/03/23/Spring生命周期/" title="Spring生命周期" itemprop="url">
-  
-    <h1 itemprop="name">Spring生命周期</h1>
-    
-     
-           <p itemprop="description" >导读
-Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主要是在org.springframework.context.support.AbstractApplicationContext.refresh方法中，下面也是围绕其中的逻辑进行讲解。
-
-开撸【1】 pre</p>
-        
-    
-    <time datetime="2020-03-23T02:13:32.000Z" itemprop="datePublished">2020-03-23</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -411,7 +408,7 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 		  
 		
 		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
 		  
 		
 		  
@@ -440,10 +437,6 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
 			
 		
@@ -452,11 +445,15 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
 			
 		
 			
@@ -464,15 +461,11 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 			
 		
 			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
@@ -481,6 +474,10 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 		
 			
 				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

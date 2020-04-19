@@ -79,6 +79,100 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2019/06/30/Spring中的事件/" title="Spring中的事件" itemprop="url">
+  
+    <h1 itemprop="name">Spring中的事件</h1>
+    
+     
+           <p itemprop="description" >简介
+学过编程语言的肯定知道事件，在JS中事件，Android中的事件，大多是鼠标点击，键盘事件，手指滑动事件等等。在Spring中也有一些事件，比如容器启动、容器关闭、容器刷新都是一个事件。
+既然有了事件，自然少不了事件监听器，事件分发器等，后续会详细介绍
+
+事件Spring中</p>
+        
+    
+    <time datetime="2019-06-30T06:22:07.000Z" itemprop="datePublished">2019-06-30</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/06/27/BeanFactoryPostProcessor解析/" title="BeanFactoryPostProcessor解析" itemprop="url">
+  
+    <h1 itemprop="name">BeanFactoryPostProcessor解析</h1>
+    
+     
+           <p itemprop="description" >简介
+Spring IoC容器允许BeanFactoryPostProcessor在容器实例化任何bean之前读取bean的定义(配置元数据)，并可以修改它。同时可以定义多个BeanFactoryPostProcessor，通过设置’order’属性来确定各个BeanFactor</p>
+        
+    
+    <time datetime="2019-06-27T15:34:47.000Z" itemprop="datePublished">2019-06-27</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/06/27/BeanWrapper解析/" title="BeanWrapper解析" itemprop="url">
+  
+    <h1 itemprop="name">BeanWrapper解析</h1>
+    
+     
+           <p itemprop="description" >简介
+BeanWrapper是Spring底层经常使用的一个接口，简单来说是对Bean的一种包装，包括对Bean的属性、方法，数据等。
+唯一的一个实现类是BeanWrapperImpl，继承和实现关系图如下：
+
+常用API
+public BeanWrapperImpl(Objec</p>
+        
+    
+    <time datetime="2019-06-27T15:33:20.000Z" itemprop="datePublished">2019-06-27</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/06/25/InstantiationAwareBeanPostProcessor源码解析/" title="InstantiationAwareBeanPostProcessor源码解析" itemprop="url">
+  
+    <h1 itemprop="name">InstantiationAwareBeanPostProcessor源码解析</h1>
+    
+     
+           <p itemprop="description" >简介
+继承BeanPostProcessor接口，在此基础上又定义了三个方法，分别在Bean实例化前后【不是初始化】执行。
+从上面的介绍可以看到，这个接口相对于BeanPostProcessor功能更加强大，一个接口承担了Bean的实例化前后、初始化前后责任。
+
+Bean加载顺序</p>
+        
+    
+    <time datetime="2019-06-25T13:24:43.000Z" itemprop="datePublished">2019-06-25</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2019/06/23/FactoryBean解析/" title="FactoryBean解析" itemprop="url">
   
     <h1 itemprop="name">FactoryBean解析</h1>
@@ -218,96 +312,6 @@ vim /usr/lib/systemd/system/docker.service
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/12/30/docker搭建私有仓库/" title="docker搭建私有仓库" itemprop="url">
-  
-    <h1 itemprop="name">docker搭建私有仓库</h1>
-    
-     
-           <p itemprop="description" >Docker私有仓库步骤
-docker pull registry
-docker run --name registry -p 5000:5000 -d registry
-启动完成后访问http:// 192.168.174.130:5000/v2/_catalog即可看到如下的</p>
-        
-    
-    <time datetime="2018-12-30T05:27:20.000Z" itemprop="datePublished">2018-12-30</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/12/30/Dockerfile/" title="Dockerfile" itemprop="url">
-  
-    <h1 itemprop="name">Dockerfile</h1>
-    
-     
-           <p itemprop="description" >DockerFile
-镜像的定制实际上就是定制每一层所添加的配置、文件。如果我们可以把每一层修改、安装、构建、操作的命令都写入一个脚本，用这个脚本来构建、定制镜像，那么无法重复的问题、镜像构建透明性的问题、体积的问题就都会解决。这个脚本就是 Dockerfile。
-
-Docker</p>
-        
-    
-    <time datetime="2018-12-30T05:26:02.000Z" itemprop="datePublished">2018-12-30</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/12/25/SpringBoot实现BCrypt密码加密/" title="SpringBoot实现BCrypt密码加密" itemprop="url">
-  
-    <h1 itemprop="name">SpringBoot实现BCrypt密码加密</h1>
-    
-     
-           <p itemprop="description" >SpringBoot 实现 BCrypt密码加密前言
-出于安全的考虑，一些敏感的信息是绝对不能以明文的方式存储在数据库中的，比如密码通常是通过哈希算法进行加密的。有很多标准的算法比如SHA和MD5，结合salt（盐）是一种不错的选择，但是如果知道其加密的规则还是相对不安全。
-Sp</p>
-        
-    
-    <time datetime="2018-12-25T13:07:15.000Z" itemprop="datePublished">2018-12-25</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/12/25/zuul服务网关/" title="zuul服务网关" itemprop="url">
-  
-    <h1 itemprop="name">zuul服务网关</h1>
-    
-     
-           <p itemprop="description" >Zuul简介
-Zuul包含了对请求的路由和过滤两个主要的功能，其中路由功能负责将外部的请求转发到具体的微服务实例上，是实现外部访问统一入口的基础上，而过滤功能则负责对请求的处理过程进行干预，是实现请求校验，服务聚合等功能的基础。
-Zuul和Eureka进行整合，将Zuul自身注册</p>
-        
-    
-    <time datetime="2018-12-25T13:05:22.000Z" itemprop="datePublished">2018-12-25</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
@@ -398,7 +402,7 @@ Zuul和Eureka进行整合，将Zuul自身注册</p>
 		  
 		
 		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
 		  
 		
 		  
@@ -427,10 +431,6 @@ Zuul和Eureka进行整合，将Zuul自身注册</p>
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
 			
 		
@@ -439,11 +439,15 @@ Zuul和Eureka进行整合，将Zuul自身注册</p>
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
 			
 		
 			
@@ -451,15 +455,11 @@ Zuul和Eureka进行整合，将Zuul自身注册</p>
 			
 		
 			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
@@ -468,6 +468,10 @@ Zuul和Eureka进行整合，将Zuul自身注册</p>
 		
 			
 				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

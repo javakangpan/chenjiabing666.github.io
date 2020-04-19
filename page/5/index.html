@@ -79,6 +79,96 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2018/12/30/docker搭建私有仓库/" title="docker搭建私有仓库" itemprop="url">
+  
+    <h1 itemprop="name">docker搭建私有仓库</h1>
+    
+     
+           <p itemprop="description" >Docker私有仓库步骤
+docker pull registry
+docker run --name registry -p 5000:5000 -d registry
+启动完成后访问http:// 192.168.174.130:5000/v2/_catalog即可看到如下的</p>
+        
+    
+    <time datetime="2018-12-30T05:27:20.000Z" itemprop="datePublished">2018-12-30</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/12/30/Dockerfile/" title="Dockerfile" itemprop="url">
+  
+    <h1 itemprop="name">Dockerfile</h1>
+    
+     
+           <p itemprop="description" >DockerFile
+镜像的定制实际上就是定制每一层所添加的配置、文件。如果我们可以把每一层修改、安装、构建、操作的命令都写入一个脚本，用这个脚本来构建、定制镜像，那么无法重复的问题、镜像构建透明性的问题、体积的问题就都会解决。这个脚本就是 Dockerfile。
+
+Docker</p>
+        
+    
+    <time datetime="2018-12-30T05:26:02.000Z" itemprop="datePublished">2018-12-30</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/12/25/SpringBoot实现BCrypt密码加密/" title="SpringBoot实现BCrypt密码加密" itemprop="url">
+  
+    <h1 itemprop="name">SpringBoot实现BCrypt密码加密</h1>
+    
+     
+           <p itemprop="description" >SpringBoot 实现 BCrypt密码加密前言
+出于安全的考虑，一些敏感的信息是绝对不能以明文的方式存储在数据库中的，比如密码通常是通过哈希算法进行加密的。有很多标准的算法比如SHA和MD5，结合salt（盐）是一种不错的选择，但是如果知道其加密的规则还是相对不安全。
+Sp</p>
+        
+    
+    <time datetime="2018-12-25T13:07:15.000Z" itemprop="datePublished">2018-12-25</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/12/25/zuul服务网关/" title="zuul服务网关" itemprop="url">
+  
+    <h1 itemprop="name">zuul服务网关</h1>
+    
+     
+           <p itemprop="description" >Zuul简介
+Zuul包含了对请求的路由和过滤两个主要的功能，其中路由功能负责将外部的请求转发到具体的微服务实例上，是实现外部访问统一入口的基础上，而过滤功能则负责对请求的处理过程进行干预，是实现请求校验，服务聚合等功能的基础。
+Zuul和Eureka进行整合，将Zuul自身注册</p>
+        
+    
+    <time datetime="2018-12-25T13:05:22.000Z" itemprop="datePublished">2018-12-25</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2018/12/25/Config(统一配置中心)/" title="Config统一配置中心" itemprop="url">
   
     <h1 itemprop="name">Config统一配置中心</h1>
@@ -218,101 +308,6 @@ Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡�
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/12/25/Eureka服务发现和注册/" title="Eureka服务发现和注册" itemprop="url">
-  
-    <h1 itemprop="name">Eureka服务发现和注册</h1>
-    
-     
-           <p itemprop="description" >Eureka - 服务发现和注册服务端
-新建springBoot项目，选择模块cloud Discovery====&amp;gt;Eureka Server
-此时的依赖如下：
-
-12345678910111213141516171819&amp;lt;dependencies&amp;gt;		&amp;lt</p>
-        
-    
-    <time datetime="2018-12-24T16:18:42.000Z" itemprop="datePublished">2018-12-25</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/12/25/SpringBoot整合Spring-Data-Mongodb/" title="SpringBoot整合Spring Data Mongodb" itemprop="url">
-  
-    <h1 itemprop="name">SpringBoot整合Spring Data Mongodb</h1>
-    
-     
-           <p itemprop="description" >SpringBoot整合Spring Data Mongodb简介
-MongoDB是一款面向文档的数据库，类似json（Bson）的数据存储格式
-
-何时使用
-数据量大
-数据价值较低
-
-安装
-docker pull mongo
-docker run --name mymongo -</p>
-        
-    
-    <time datetime="2018-12-24T16:17:07.000Z" itemprop="datePublished">2018-12-25</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/12/25/Token认证/" title="Token认证" itemprop="url">
-  
-    <h1 itemprop="name">Token认证</h1>
-    
-     
-           <p itemprop="description" >认证机制常见的几种认证机制HTTP Basic Auth
-在HTTP中，HTTP基本认证是一种允许Web浏览器或者其他客户端在请求时提供用户名和口令形式的身份凭证的一种登录验证方式。
-简单而言，HTTP基本认证就是我们平时在网站中最常用的通过用户名和密码登录来认证的机制。 就是每</p>
-        
-    
-    <time datetime="2018-12-24T16:13:57.000Z" itemprop="datePublished">2018-12-25</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/12/22/springBoot整合spring-data-redis/" title="springBoot整合spring-data-redis" itemprop="url">
-  
-    <h1 itemprop="name">springBoot整合spring-data-redis</h1>
-    
-     
-           <p itemprop="description" >SpringBoot整合Spring data redis依赖1234&amp;lt;dependency&amp;gt;       &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;       &amp;lt;artifactId&amp;gt;</p>
-        
-    
-    <time datetime="2018-12-22T05:09:13.000Z" itemprop="datePublished">2018-12-22</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
@@ -403,7 +398,7 @@ docker run --name mymongo -</p>
 		  
 		
 		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
 		  
 		
 		  
@@ -432,10 +427,6 @@ docker run --name mymongo -</p>
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
 			
 		
@@ -444,11 +435,15 @@ docker run --name mymongo -</p>
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
 			
 		
 			
@@ -456,15 +451,11 @@ docker run --name mymongo -</p>
 			
 		
 			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
@@ -473,6 +464,10 @@ docker run --name mymongo -</p>
 		
 			
 				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

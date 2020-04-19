@@ -79,6 +79,113 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2017/04/23/scrapy大战京东商城/" title="scrapy大战京东商城" itemprop="url">
+  
+    <h1 itemprop="name">scrapy大战京东商城</h1>
+    
+     
+           <p itemprop="description" >SCrapy爬虫大战京东商城引言
+上一篇已经讲过怎样获取链接，怎样获得参数了，详情请看python爬取京东商城普通篇
+
+代码详解
+
+首先应该构造请求，这里使用scrapy.Request,这个方法默认调用的是start_urls构造请求，如果要改变默认的请求，那么必须重载该方法，</p>
+        
+    
+    <time datetime="2017-04-23T14:12:30.000Z" itemprop="datePublished">2017-04-23</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/23/python爬虫大战京东商城/" title="python爬虫大战京东商城" itemprop="url">
+  
+    <h1 itemprop="name">python爬虫大战京东商城</h1>
+    
+     
+           <p itemprop="description" >python大规模爬取京东主要工具
+
+scrapy
+BeautifulSoup
+requests
+
+
+分析步骤
+
+打开京东首页，输入裤子将会看到页面跳转到了这里，这就是我们要分析的起点
+
+我们可以看到这个页面并不是完全的，当我们往下拉的时候将会看到图片在不停的加载，这就是ajax</p>
+        
+    
+    <time datetime="2017-04-23T10:34:48.000Z" itemprop="datePublished">2017-04-23</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/22/JQuery干货篇之处理元素/" title="JQuery干货篇之处理元素" itemprop="url">
+  
+    <h1 itemprop="name">JQuery干货篇之处理元素</h1>
+    
+     
+           <p itemprop="description" >JQuery干货篇之处理元素
+注意这里用的还是我前两篇用的例子，详情请看我的博客
+attrattr() 方法设置或返回被选元素的属性值。
+语法：
+
+
+$(selector).attr(attribute) 返回被选元素的属性值。
+$(selector).attr(attribut</p>
+        
+    
+    <time datetime="2017-04-22T13:45:23.000Z" itemprop="datePublished">2017-04-22</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/21/JQuery干货篇之操控DOM/" title="JQuery干货篇之操控DOM" itemprop="url">
+  
+    <h1 itemprop="name">JQuery干货篇之操控DOM</h1>
+    
+     
+           <p itemprop="description" >JQuery干货篇之插入元素本次使用的html,css还是我上一篇的源代码，详情请看上一篇文章
+分类
+插入子元素：append,prepend ,appendTo,prependTo
+封装包裹元素：wrap,wrapAll,wrapInner
+插入兄弟元素：after,befor</p>
+        
+    
+    <time datetime="2017-04-21T09:53:16.000Z" itemprop="datePublished">2017-04-21</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2017/04/20/JQuery干货篇之选择元素/" title="JQuery干货篇之选择元素" itemprop="url">
   
     <h1 itemprop="name">JQuery干货篇之选择元素</h1>
@@ -211,101 +318,6 @@ python爬虫我认为最困难的问题一个是ip代理，另外一个就是模
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/03/26/scrapy设置代理ip/" title="scrapy设置代理ip" itemprop="url">
-  
-    <h1 itemprop="name">scrapy设置代理ip</h1>
-    
-     
-           <p itemprop="description" >scrapy代理的设置
-在我的上一篇文章介绍了scrapy下载器中间件的使用,这里的scrapyIP的代理就是用这个原理实现的，重写了下载器中间件的process_request(self,request,spider)这个函数,这个函数的主要作用就是对request进行处理。
-</p>
-        
-    
-    <time datetime="2017-03-25T16:49:29.000Z" itemprop="datePublished">2017-03-26</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/03/25/scrapy的下载器中间件/" title="scrapy的下载器中间件" itemprop="url">
-  
-    <h1 itemprop="name">scrapy的下载器中间件</h1>
-    
-     
-           <p itemprop="description" >scrapy中的下载器中间件下载中间件
-下载器中间件是介于Scrapy的request/response处理的钩子框架。 是用于全局修改Scrapy request和response的一个轻量、底层的系统。
-
-编写下载器中间件
-1. process_request(request</p>
-        
-    
-    <time datetime="2017-03-25T07:04:08.000Z" itemprop="datePublished">2017-03-25</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/03/25/scrapy初试/" title="scrapy初试" itemprop="url">
-  
-    <h1 itemprop="name">scrapy初试</h1>
-    
-     
-           <p itemprop="description" >scrapy初试
-创建项目
-打开cmd，在终端输入scrapy startproject tutorial,这里将在指定的文件夹下创建一个scrapy工程
-
-其中将会创建以下的文件：
-
-scrapy.cfg: 项目的配置文件
-tutorial/: 该项目的python模块。之后您</p>
-        
-    
-    <time datetime="2017-03-25T06:21:21.000Z" itemprop="datePublished">2017-03-25</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/03/25/java中的IO操作/" title="java中的IO操作" itemprop="url">
-  
-    <h1 itemprop="name">java中的IO操作</h1>
-    
-     
-           <p itemprop="description" >java中IO操作读取文件中的内容
-使用Scanner读取文本中的内容
-相信大家都知道Scanner console=new Scanner(System.in)是用来读取控制台上输入的内容，但是这里是用来读取文件的内容，原理是一样的，只是对象不同罢了，这里用到的是File对象，</p>
-        
-    
-    <time datetime="2017-03-25T05:52:53.000Z" itemprop="datePublished">2017-03-25</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <a class="extend prev" rel="prev" href="/page/24/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="page-number" href="/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/26/">Next<span></span></a>
@@ -396,7 +408,7 @@ tutorial/: 该项目的python模块。之后您</p>
 		  
 		
 		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
 		  
 		
 		  
@@ -425,10 +437,6 @@ tutorial/: 该项目的python模块。之后您</p>
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
 			
 		
@@ -437,11 +445,15 @@ tutorial/: 该项目的python模块。之后您</p>
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
 			
 		
 			
@@ -449,15 +461,11 @@ tutorial/: 该项目的python模块。之后您</p>
 			
 		
 			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
@@ -466,6 +474,10 @@ tutorial/: 该项目的python模块。之后您</p>
 		
 			
 				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

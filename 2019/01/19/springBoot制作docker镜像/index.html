@@ -145,7 +145,7 @@ vim /usr/lib/systemd/system/docker.service
 <h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><ul>
 <li>将编写的Dockerfile文件放在<code>/src/main/docker</code>下，内容如下：</li>
 </ul>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">FROM</span> java:<span class="number">8</span></div><div class="line"></div><div class="line"><span class="keyword">MAINTAINER</span> https://chenjiabing666.github.io</div><div class="line"></div><div class="line"><span class="comment"># 指定虚拟卷，/tmp是tomcat运行时需要的，/usr/local/images是上传文件需要的，/usr/local/weblogs/demo是记录日志需要的</span></div><div class="line"><span class="keyword">VOLUME</span> ["/tmp","/usr/local/images","/usr/local/weblogs/demo"]</div><div class="line"></div><div class="line"><span class="comment"># 添加jar</span></div><div class="line"><span class="keyword">ADD</span> demo-server.jar demo.jar</div><div class="line"></div><div class="line"><span class="comment"># 暴露8080端口</span></div><div class="line"><span class="keyword">EXPOSE</span> <span class="number">8080</span></div><div class="line"></div><div class="line"><span class="comment"># 运行jar</span></div><div class="line"><span class="keyword">CMD</span> ["java","-jar","demo.jar"]</div></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">FROM</span> java:<span class="number">8</span></div><div class="line"></div><div class="line"><span class="keyword">MAINTAINER</span> https://chenjiabing666.github.io</div><div class="line"></div><div class="line"><span class="comment"># 指定虚拟卷，/tmp是tomcat运行时需要的，/usr/local/images是上传文件需要的，/usr/local/weblogs/demo是记录日志需要的</span></div><div class="line"><span class="keyword">VOLUME</span><span class="bash"> [<span class="string">"/tmp"</span>,<span class="string">"/usr/local/images"</span>,<span class="string">"/usr/local/weblogs/demo"</span>]</span></div><div class="line"></div><div class="line"><span class="comment"># 添加jar</span></div><div class="line"><span class="keyword">ADD</span><span class="bash"> demo-server.jar demo.jar</span></div><div class="line"></div><div class="line"><span class="comment"># 暴露8080端口</span></div><div class="line"><span class="keyword">EXPOSE</span> <span class="number">8080</span></div><div class="line"></div><div class="line"><span class="comment"># 运行jar</span></div><div class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"java"</span>,<span class="string">"-jar"</span>,<span class="string">"demo.jar"</span>]</span></div></pre></td></tr></table></figure>
 <h2 id="配置maven插件"><a href="#配置maven插件" class="headerlink" title="配置maven插件"></a>配置maven插件</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">&lt;build&gt;</div><div class="line">		&lt;finalName&gt;demo-server&lt;/finalName&gt;</div><div class="line">		&lt;plugins&gt;</div><div class="line">			&lt;!-- springBoot的maven打包插件 --&gt;</div><div class="line">			&lt;plugin&gt;</div><div class="line">				&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</div><div class="line">				&lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</div><div class="line">			&lt;/plugin&gt;</div><div class="line"></div><div class="line">			&lt;plugin&gt;</div><div class="line">				&lt;groupId&gt;com.spotify&lt;/groupId&gt;</div><div class="line">				&lt;artifactId&gt;docker-maven-plugin&lt;/artifactId&gt;</div><div class="line">				&lt;version&gt;0.4.13&lt;/version&gt;</div><div class="line">				</div><div class="line">				&lt;!-- 将docker:build这个动作绑定在package这个动作上，只要maven install 即可上传到远程服务器 --&gt;</div><div class="line">				&lt;executions&gt;</div><div class="line">					&lt;execution&gt;</div><div class="line">						&lt;id&gt;build-image&lt;/id&gt;</div><div class="line">						&lt;phase&gt;package&lt;/phase&gt;</div><div class="line">						&lt;goals&gt;</div><div class="line">							&lt;goal&gt;build&lt;/goal&gt;</div><div class="line">						&lt;/goals&gt;</div><div class="line">					&lt;/execution&gt;</div><div class="line">				&lt;/executions&gt;</div><div class="line">				</div><div class="line">				&lt;configuration&gt;</div><div class="line">					</div><div class="line">					&lt;!-- 指定镜像的名称+版本，必须是满足[a-z,0-9]这个正则才行 --&gt;</div><div class="line">					&lt;imageName&gt;$&#123;project.artifactId&#125;:$&#123;project.version&#125;&lt;/imageName&gt;</div><div class="line">					</div><div class="line">					&lt;!-- 覆盖相同标签镜像 --&gt;</div><div class="line">					&lt;forceTags&gt;true&lt;/forceTags&gt;</div><div class="line">					</div><div class="line">					&lt;!-- 指定Dockerfile的文件位置 --&gt;</div><div class="line">					&lt;dockerDirectory&gt;$&#123;project.basedir&#125;/src/main/docker&lt;/dockerDirectory&gt;</div><div class="line">					</div><div class="line">					&lt;!-- 指定Dockerfile的文件位置 --&gt;</div><div class="line">					&lt;dockerHost&gt;http://39.105.123.197:2375&lt;/dockerHost&gt;</div><div class="line">					</div><div class="line">					&lt;!-- 指定jar包所在的位置 --&gt;</div><div class="line">					&lt;resources&gt;</div><div class="line">						&lt;resource&gt;</div><div class="line">							&lt;targetPath&gt;/&lt;/targetPath&gt;</div><div class="line">							&lt;directory&gt;$&#123;project.build.directory&#125;&lt;/directory&gt;</div><div class="line">							&lt;include&gt;$&#123;project.build.finalName&#125;.jar&lt;/include&gt;</div><div class="line">						&lt;/resource&gt;</div><div class="line">					&lt;/resources&gt;</div><div class="line">				&lt;/configuration&gt;</div><div class="line">			&lt;/plugin&gt;</div><div class="line">		&lt;/plugins&gt;</div><div class="line">	&lt;/build&gt;</div></pre></td></tr></table></figure>
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><ul>
 <li>我们制作镜像运行的时候需要挂载自己的虚拟卷，否则诸如创建文件夹和上传文件之类的都是在容器内创建的，不会在本机创建，因此我们需要将其挂载在自己的宿主机上，运行命令如下：<ul>
@@ -318,7 +318,7 @@ vim /usr/lib/systemd/system/docker.service
 		  
 		
 		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
 		  
 		
 		  
@@ -347,10 +347,6 @@ vim /usr/lib/systemd/system/docker.service
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
 			
 		
@@ -359,11 +355,15 @@ vim /usr/lib/systemd/system/docker.service
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
 			
 		
 			
@@ -371,15 +371,11 @@ vim /usr/lib/systemd/system/docker.service
 			
 		
 			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
@@ -388,6 +384,10 @@ vim /usr/lib/systemd/system/docker.service
 		
 			
 				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

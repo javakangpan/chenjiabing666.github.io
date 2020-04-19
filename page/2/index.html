@@ -79,6 +79,105 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2020/04/01/一条查询语句到底是如何执行的/" title="一条查询语句到底是如何执行的?" itemprop="url">
+  
+    <h1 itemprop="name">一条查询语句到底是如何执行的?</h1>
+    
+     
+           <p itemprop="description" >导读
+Mysql在中小型企业中是个香饽饽，目前主流的数据库之一，几乎没有一个后端开发者不会使用的，但是作为一个老司机，仅仅会用真的不够。
+
+今天陈某透过一个简单的查询语句来讲述在Mysql内部的执行过程。
+1select * from table where id=10;
+
+
+撸</p>
+        
+    
+    <time datetime="2020-04-01T02:35:30.000Z" itemprop="datePublished">2020-04-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/01/Mysql中的三类锁，你知道吗？/" title="Mysql中的三类锁，你知道吗？" itemprop="url">
+  
+    <h1 itemprop="name">Mysql中的三类锁，你知道吗？</h1>
+    
+     
+           <p itemprop="description" >导读
+正所谓有人(锁)的地方就有江湖(事务)，人在江湖飘，怎能一无所知？
+
+今天来细说一下Mysql中的三类锁，分别是全局锁、表级锁、行级锁。
+
+
+全局锁
+全局锁简单的说就是锁住整个数据库实例，命令是Flush tables with read lock。当你需要为整个数据库处于</p>
+        
+    
+    <time datetime="2020-04-01T02:31:58.000Z" itemprop="datePublished">2020-04-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/03/23/IDEA调试技巧/" title="IDEA调试技巧" itemprop="url">
+  
+    <h1 itemprop="name">IDEA调试技巧</h1>
+    
+     
+           <p itemprop="description" >导读
+前天面试了一个985高校的实习生，问了他平时用什么开发工具，他想也没想的说IDEA，于是我抛砖引玉的问了一下IDEA的调试用过吧，你说说怎么设置断点条件？那孩子懵了，想了好一会对我说没用过，甚至都没听说过这个。
+作为一名资深的老司机，IDEA调试可以说是家常便饭，如果不会d</p>
+        
+    
+    <time datetime="2020-03-23T08:15:12.000Z" itemprop="datePublished">2020-03-23</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/03/23/Spring生命周期/" title="Spring生命周期" itemprop="url">
+  
+    <h1 itemprop="name">Spring生命周期</h1>
+    
+     
+           <p itemprop="description" >导读
+Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主要是在org.springframework.context.support.AbstractApplicationContext.refresh方法中，下面也是围绕其中的逻辑进行讲解。
+
+开撸【1】 pre</p>
+        
+    
+    <time datetime="2020-03-23T02:13:32.000Z" itemprop="datePublished">2020-03-23</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2020/03/23/接口限流算法/" title="接口限流算法" itemprop="url">
   
     <h1 itemprop="name">接口限流算法</h1>
@@ -213,99 +312,6 @@ SpringBoot</p>
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/03/07/分布式锁-redis实现/" title="分布式锁-redis实现" itemprop="url">
-  
-    <h1 itemprop="name">分布式锁-redis实现</h1>
-    
-     
-           <p itemprop="description" >为什么要分布式锁
-在单机的情况下，可以通过jvm提供的系列线程安全的操作来处理高并发的情况，但是在分布式的环境下，jvm提供的线程安全操作明显是不能满足要求的。在一些小型的互联网公司经常做的crud操作如果在高并发的情况下会出现很大的问题，比如：
-
-12345//伪代码：下订单1</p>
-        
-    
-    <time datetime="2020-03-07T09:53:15.000Z" itemprop="datePublished">2020-03-07</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/08/17/Shiro/" title="Shiro" itemprop="url">
-  
-    <h1 itemprop="name">Shiro</h1>
-    
-     
-           <p itemprop="description" >项目搭建
-添加Shiro的依赖
-
-1234567891011&amp;lt;!--Spring整合的shiro依赖--&amp;gt;   &amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.apache.shiro&amp;lt;/groupId&amp;gt;     &amp;lt</p>
-        
-    
-    <time datetime="2019-08-17T11:22:05.000Z" itemprop="datePublished">2019-08-17</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/08/13/Shiro源码解析/" title="Shiro源码解析" itemprop="url">
-  
-    <h1 itemprop="name">Shiro源码解析</h1>
-    
-     
-           <p itemprop="description" >FilterChainManager
-过滤器管理器，在ShiroFilterFactoryBean创建的时候会创建管理器，将配置好的过滤器添加到其中
-当发出请求的时候会其中找出和url匹配过滤器执行
-
-ShiroFilterFactoryBean
-实现了FactoryBean接口</p>
-        
-    
-    <time datetime="2019-08-13T14:41:32.000Z" itemprop="datePublished">2019-08-13</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/08/05/mybatis源码解析/" title="mybatis源码解析" itemprop="url">
-  
-    <h1 itemprop="name">mybatis源码解析</h1>
-    
-     
-           <p itemprop="description" >Configuration
-mybatis的全局配置类，其中封装了mybatis的全部配置，在mybaits加载全局配置文件和Mapper文件的时候，会将里面的xml中的各个元素解析出来，封装在其中。
-主要的解析流程在org.apache.ibatis.builder.xml.X</p>
-        
-    
-    <time datetime="2019-08-04T16:47:11.000Z" itemprop="datePublished">2019-08-05</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -396,7 +402,7 @@ mybatis的全局配置类，其中封装了mybatis的全部配置，在mybaits�
 		  
 		
 		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
 		  
 		
 		  
@@ -425,10 +431,6 @@ mybatis的全局配置类，其中封装了mybatis的全部配置，在mybaits�
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
 			
 		
@@ -437,11 +439,15 @@ mybatis的全局配置类，其中封装了mybatis的全部配置，在mybaits�
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
 			
 		
 			
@@ -449,15 +455,11 @@ mybatis的全局配置类，其中封装了mybatis的全部配置，在mybaits�
 			
 		
 			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
@@ -466,6 +468,10 @@ mybatis的全局配置类，其中封装了mybatis的全部配置，在mybaits�
 		
 			
 				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			

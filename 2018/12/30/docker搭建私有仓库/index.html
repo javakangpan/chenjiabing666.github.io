@@ -228,7 +228,7 @@ docker run --name registry -p 5000:5000 -d registry
 <ul>
 <li>上面的运行完成之后，查看项目中自动生成Dockerfile，如下：</li>
 </ul>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">FROM</span> hub.c.<span class="number">163</span>.com/library/java:<span class="number">8</span>-alpine</div><div class="line"><span class="keyword">ADD</span> /demo.jar //</div><div class="line"><span class="keyword">ENTRYPOINT</span> ["java", "-jar", "/demo.jar"]</div></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">FROM</span> hub.c.<span class="number">163</span>.com/library/java:<span class="number">8</span>-alpine</div><div class="line"><span class="keyword">ADD</span><span class="bash"> /demo.jar //</span></div><div class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> [<span class="string">"java"</span>, <span class="string">"-jar"</span>, <span class="string">"/demo.jar"</span>]</span></div></pre></td></tr></table></figure>
 <h4 id="拉取上传的镜像并且运行"><a href="#拉取上传的镜像并且运行" class="headerlink" title="拉取上传的镜像并且运行"></a>拉取上传的镜像并且运行</h4><ul>
 <li>在拉取之前需要添加信任</li>
 <li>使用 <code>docker pull 192.168.174.130:5000/demo:0.0.1-SNAPSHOT</code>下载仓库中的镜像</li>
@@ -402,7 +402,7 @@ docker run --name registry -p 5000:5000 -d registry
 		  
 		
 		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
 		  
 		
 		  
@@ -431,10 +431,6 @@ docker run --name registry -p 5000:5000 -d registry
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
 			
 		
@@ -443,11 +439,15 @@ docker run --name registry -p 5000:5000 -d registry
 			
 		
 			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
 			
 		
 			
@@ -455,15 +455,11 @@ docker run --name registry -p 5000:5000 -d registry
 			
 		
 			
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>10</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
@@ -472,6 +468,10 @@ docker run --name registry -p 5000:5000 -d registry
 		
 			
 				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
