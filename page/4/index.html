@@ -79,6 +79,53 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2019/07/17/Spring解决循环依赖/" title="Spring解决循环依赖" itemprop="url">
+  
+    <h1 itemprop="name">Spring解决循环依赖</h1>
+    
+     
+           <p itemprop="description" >导读
+前几天发表的文章SpringBoot多数据源动态切换和SpringBoot整合多数据源的巨坑中，提到了一个坑就是动态数据源添加@Primary接口就会造成循环依赖异常，如下图：
+
+
+
+这个就是典型的构造器依赖，详情请看上面两篇文章，这里不再详细赘述了。本篇文章将会从源码深入</p>
+        
+    
+    <time datetime="2019-07-16T17:13:29.000Z" itemprop="datePublished">2019-07-17</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/07/07/Spring事务源码解析/" title="Spring事务源码解析" itemprop="url">
+  
+    <h1 itemprop="name">Spring事务源码解析</h1>
+    
+     
+           <p itemprop="description" >配置注解版事务事务管理器
+事务管理器的接口是PlatformTransactionManager，其中定义了三个接口方法如下：
+TransactionStatus getTransaction(@Nullable TransactionDefinition definition)</p>
+        
+    
+    <time datetime="2019-07-07T11:41:07.000Z" itemprop="datePublished">2019-07-07</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2019/06/30/Spring中的事件/" title="Spring中的事件" itemprop="url">
   
     <h1 itemprop="name">Spring中的事件</h1>
@@ -264,54 +311,6 @@ BeanNameAware：能够获取be</p>
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/06/12/JDK8新特性/" title="JDK8新特性" itemprop="url">
-  
-    <h1 itemprop="name">JDK8新特性</h1>
-    
-     
-           <p itemprop="description" >JDk8新特性函数式编程集合的foreach
-List
-
-这里的表示List中每一个元素，可以不指定类型，JDK会自动推测出类型，但是也是可以使用()加上类型
-如果有一条语句可以直接在后面输出，如果有多行，那么可以在后面使用{}指定12Arrays.asList(1,2,4,1,</p>
-        
-    
-    <time datetime="2019-06-12T06:58:55.000Z" itemprop="datePublished">2019-06-12</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/01/19/springBoot制作docker镜像/" title="springBoot制作docker镜像" itemprop="url">
-  
-    <h1 itemprop="name">springBoot制作docker镜像</h1>
-    
-     
-           <p itemprop="description" >SpringBoot制作docker镜像开启2375端口修改docker配置文件
-vim /usr/lib/systemd/system/docker.service
-在ExecStart=/usr/bin/dockerd配置加上如下内容
-
-1-H tcp://0.0.0.0:2</p>
-        
-    
-    <time datetime="2019-01-19T05:51:31.000Z" itemprop="datePublished">2019-01-19</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
@@ -402,7 +401,7 @@ vim /usr/lib/systemd/system/docker.service
 		  
 		
 		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>16</sup></a></li>
 		  
 		
 		  
@@ -435,15 +434,15 @@ vim /usr/lib/systemd/system/docker.service
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>16</sup></a></li>
 			
 		
 			
@@ -451,11 +450,11 @@ vim /usr/lib/systemd/system/docker.service
 			
 		
 			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
@@ -467,11 +466,11 @@ vim /usr/lib/systemd/system/docker.service
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 			
 		
 			
