@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>爱撒谎的男孩</title>
-  <subtitle>一只程序猿</subtitle>
+  <subtitle>微信公众号：码猿技术专栏</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
@@ -9,7 +9,7 @@
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
-    <name>Chenjiabing</name>
+    <name>不才陈某</name>
     
   </author>
   
