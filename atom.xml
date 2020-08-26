@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2020-08-20T04:31:34.449Z</updated>
+  <updated>2020-08-26T06:50:58.913Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mybatis Log plugin破解，亲测可用！！！</title>
+    <link href="http://chenjiabing666.github.io/2020/08/26/plugin%E7%A0%B4%E8%A7%A3%EF%BC%8C%E4%BA%B2%E6%B5%8B%E5%8F%AF%E7%94%A8/"/>
+    <id>http://chenjiabing666.github.io/2020/08/26/plugin破解，亲测可用/</id>
+    <published>2020-08-26T06:50:11.000Z</published>
+    <updated>2020-08-26T06:50:58.913Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>今天重新装了IDEA2020，顺带重装了一些插件，毕竟这些插件都是习惯一直在用，其中一款就是Mybatis  Log plugin，按照往常的思路，在IDEA插件市场搜索安装，艹，眼睛一瞟，竟然收费了，对于我这种支持盗版的人来说太难了，于是自己开始捣鼓各种尝试破解，下文分享自己的破解方式。</li>
+</ul>
+<h2 id="什么是Mybatis-Log-plugin"><a href="#什么是Mybatis-Log-plugin" class="headerlink" title="什么是Mybatis Log plugin"></a>什么是Mybatis Log plugin</h2><ul>
+<li>举个栗子，通常在找bug的时候都会查看执行了什么SQL，想把这条SQL拼接出来执行调试，可能有些小白还在傻傻的把各个参数复制出来，补到<code>?</code>占位符中，哈哈。</li>
+<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis-Log-plugin/6.jpg" alt=""></li>
+</ul>
+<ul>
+<li>简单的说就是能根据log4j的打印的sql日志一键生成执行的<code>sql</code>语句。</li>
+<li>类似如下一个日志信息：</li>
+<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis-Log-plugin/1.png" alt="日志信息"></li>
+<li>如果使用Log plugin这个插件，将会很容易的把参数添加到sql语句中得到一条完整的sql，效果如下：</li>
+<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis-Log-plugin/4.png" alt="完整sql"></li>
+<li>一旦开启了<code>Mybatis Log plugin</code>这个插件，在程序运行过程中只要是有SQL语句都会自动生成在<code>Mybatis Log</code>这个界面，当然也可以自己关掉。</li>
+</ul>
+<h2 id="如何安装"><a href="#如何安装" class="headerlink" title="如何安装"></a>如何安装</h2><ul>
+<li><code>Setting-&gt;plugin-&gt;Marketplace</code>搜索框输入<code>Mybatis Log plugin</code>，如下：</li>
+<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis-Log-plugin/2.png" alt="搜索输入"></li>
+<li>很遗憾的是， IDEA2020中已经开始收费了，艹，对于一向支持盗版的我来说，很不爽~</li>
+</ul>
+<h2 id="如何破解"><a href="#如何破解" class="headerlink" title="如何破解"></a>如何破解</h2><ul>
+<li>下载jar包<code>plugin.intellij.assistant.mybaitslog-2020.1-1.0.3.jar</code>，文末附有下载方式。</li>
+<li><code>setting-&gt;plguin-&gt;设置-&gt; install plugin from Disk...</code></li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis-Log-plugin/3.png" alt="破解步骤"></p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><ul>
+<li>日志中从<code>Preparing</code>到<code>Parameters</code>这两行的参数选中，右键选择<code>restore sql from Selection</code></li>
+<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis-Log-plugin/5.png" alt=""></li>
+<li>此时将会在<code>Mybatis Log</code>界面出现完整的SQL语句。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>对于复杂的SQL语句来说，Mybatis Log plugin这款插件简直是太爱了，能够自动拼接参数生成执行的SQL语句。</li>
+<li>老规矩，关注公众号【码猿技术专栏】，公众号回复<code>mybatis log</code>获取破解包。</li>
+<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E4%B8%83%E7%A7%92%E7%BC%96%E7%A8%8B.jpg" alt=""></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;今天重新装了IDEA2020，顺带重装了一些插件，毕竟这些插件都是习惯一直在用，其中一款就是Mybatis  Log plugi
+    
+    </summary>
+    
+      <category term="杂谈" scheme="http://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+      <category term="杂谈" scheme="http://chenjiabing666.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>IDEA2020永久破解，亲测可用！！！</title>
@@ -2530,82 +2588,6 @@
     
       &lt;h2 id=&quot;导读&quot;&gt;&lt;a href=&quot;#导读&quot; class=&quot;headerlink&quot; title=&quot;导读&quot;&gt;&lt;/a&gt;导读&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;前天面试了一个985高校的实习生，问了他平时用什么开发工具，他想也没想的说IDEA，于是我抛砖引玉的问了一下IDEA的调试用过吧
-    
-    </summary>
-    
-      <category term="杂谈" scheme="http://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
-    
-    
-      <category term="杂谈" scheme="http://chenjiabing666.github.io/tags/%E6%9D%82%E8%B0%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spring生命周期</title>
-    <link href="http://chenjiabing666.github.io/2020/03/23/Spring%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    <id>http://chenjiabing666.github.io/2020/03/23/Spring生命周期/</id>
-    <published>2020-03-23T02:13:32.000Z</published>
-    <updated>2020-03-23T02:15:15.480Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
-<li>Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主要是在<code>org.springframework.context.support.AbstractApplicationContext.refresh</code>方法中，下面也是围绕其中的逻辑进行讲解。</li>
-</ul>
-<h2 id="开撸"><a href="#开撸" class="headerlink" title="开撸"></a>开撸</h2><p>【1】 prepareRefresh()</p>
-<p> 内部其实很简单，就是设置一些标志，比如开始时间，激活的状态等。</p>
-<p>【2】prepareBeanFactory(beanFactory)</p>
-<p>做一些简单的准备工作，此处不再赘述！！！</p>
-<p>【3】postProcessBeanFactory(beanFactory)</p>
-<p>主要的作用就是添加了一个后置处理器<code>ServletContextAwareProcessor</code></p>
-<p>【4】invokeBeanFactoryPostProcessors(beanFactory)</p>
-<p>调用容器中的所有的<strong>BeanFactoryPostProcessor</strong>中的<strong>postProcessBeanFactory</strong>方法，按照优先级调用，主要实现逻辑在org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(org.springframework.beans.factory.config.ConfigurableListableBeanFactory, java.util.List<org.springframework.beans.factory.config.beanfactorypostprocessor>)<br>    (1) 执行所有BeanDefinitionRegistryPostProcessor(对BeanFactoryPostProcessor的扩展，运行在普通的实现类之前注册bean)的方法，同样是内部按照优先级进行排序调用<br>    (2) 对剩余的进行按照优先级排序调用，同样是内部进行排序执行</org.springframework.beans.factory.config.beanfactorypostprocessor></p>
-<p>【5】<strong>registerBeanPostProcessors(beanFactory)</strong></p>
-<p>注册所有的<strong>BeanPostProcessor</strong>（后置处理器），按照优先级注册，分别是PriorityOrdered，Ordered，普通的，内部的。主要的实现逻辑在PostProcessorRegistrationDelegate.registerBeanPostProcessors()</p>
-<p>【6】initMessageSource()<br>注册MessageSource,提供消息国际化等功能</p>
-<p>【7】initApplicationEventMulticaster();</p>
-<p>注册事件广播器ApplicationEventMulticaster，用于spring事件的广播和事件监听器的处理</p>
-<p>【8】registerListeners()</p>
-<p>注册事件监听器ApplicationListener，并且广播一些早期的事件，主要的逻辑在org.springframework.context.support.AbstractApplicationContext.registerListeners</p>
-<p>【9】finishBeanFactoryInitialization(beanFactory)</p>
-<p>实例化所有非懒加载的Bean，spring生命周期中的主要方法，主要逻辑在org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons，深入进去其实就是getBean()方法创建，详情向下看。</p>
-<p>【10】finishRefresh()</p>
-<p>主要的功能是发布事件ContextRefreshedEvent</p>
-<p>【11】destroyBeans()</p>
-<p>容器启动出现异常时销毁Bean</p>
-<p>以上就是Spring容器启动的过程，主要的逻辑都在org.springframework.context.support.AbstractApplicationContext#refresh中，其他的都很容易理解，现在我们着重分析一下单例Bean的创建过程，入口是第9步。</p>
-<h2 id="实例化单例Bean"><a href="#实例化单例Bean" class="headerlink" title="实例化单例Bean"></a>实例化单例Bean</h2><p>【1】debug进入，实际主要的逻辑都在org.springframework.beans.factory.support.DefaultListableBeanFactory#preInstantiateSingletons方法中，逻辑如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取所有注入到ioc容器中的bean定义信息</span></div><div class="line">List&lt;String&gt; beanNames = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="keyword">this</span>.beanDefinitionNames);</div><div class="line">		<span class="comment">//循环创建</span></div><div class="line">		<span class="keyword">for</span> (String beanName : beanNames) &#123;</div><div class="line">			RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);</div><div class="line">            <span class="comment">//非抽象，单例，非懒加载的bean初始化</span></div><div class="line">			<span class="keyword">if</span> (!bd.isAbstract() &amp;&amp; bd.isSingleton() &amp;&amp; !bd.isLazyInit()) &#123;</div><div class="line">                <span class="comment">//如果是FactoryBean</span></div><div class="line">				<span class="keyword">if</span> (isFactoryBean(beanName)) &#123;</div><div class="line">                    <span class="comment">//getBean</span></div><div class="line">					Object bean = getBean(FACTORY_BEAN_PREFIX + beanName);</div><div class="line">                    <span class="comment">//非FactoryBean，getBean</span></div><div class="line">				<span class="keyword">else</span> &#123;</div><div class="line">					getBean(beanName);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
-<p>以上源码总结得知，最终实例化Bean的方法肯定在getBean中的，debug进入，得知doGetBean是大boss，spring源码有趣的是最终的实现都是在doxxxx()。</p>
-<p>【2】AbstractBeanFactory#doGetBean，由于篇幅太短，就不贴源码了，只贴关键代码</p>
-<p>实例化的主要流程全部都在这里，下面一一解析即可。</p>
-<p>(1) Object sharedInstance = getSingleton(beanName)</p>
-<p>从早期的缓存中获取，如果存在返回Bean，实例化</p>
-<p>（2）BeanFactory parentBeanFactory = getParentBeanFactory()</p>
-<p>从父工厂的中获取Bean</p>
-<p>（3）if (mbd.isSingleton()) </p>
-<p>分单例和多例进行分开创建Bean，这里只分析单例Bean的创建</p>
-<p>（4）sharedInstance = getSingleton(beanName, () -&gt; {   try {      return createBean(beanName, mbd, args);   }</p>
-<p>createBean方法创建Bean，进入createBean(）</p>
-<p>​    a. Object bean = resolveBeforeInstantiation(beanName, mbdToUse)：执行所有的InstantiationAwareBeanPostProcessor中的<strong>postProcessBeforeInstantiation</strong>，在实例化之前调用，返回null继续下一步，返回一个bean，那么bean实例化完成，将调用其中的<strong>postProcessAfterInstantiation</strong>方法</p>
-<p>​       b. Object beanInstance = doCreateBean(beanName, mbdToUse, args)：创建Bean的完成过程</p>
-<p>​    c. 进入<strong>doCreateBean</strong>，instanceWrapper = createBeanInstance(beanName, mbd, args)：创建Bean的实例</p>
-<p>​    d. populateBean(beanName, mbd, instanceWrapper)：属性装配，执行InstantiationAwareBeanPostProcessor的<strong>postProcessAfterInstantiation</strong>，再执行<strong>postProcessProperties</strong>方法。</p>
-<p>​    e. exposedObject = initializeBean(beanName, exposedObject, mbd)：初始化Bean，debug进入</p>
-<p>​    f. invokeAwareMethods(beanName, bean)：调用<strong>BeanNameAware</strong>，<strong>BeanClassLoaderAware</strong>，<strong>BeanFactoryAware</strong>中的对应方法</p>
-<p>​    g. wrappedBean = applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName)：调用BeanPostProcessord中的<strong>postProcessBeforeInitialization</strong>方法</p>
-<p>​    h. invokeInitMethods(beanName, wrappedBean, mbd)：执行<strong>InitializingBean</strong>中的<strong>afterPropertiesSet</strong></p>
-<p>​    i. wrappedBean = applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName)：调用<strong>BeanPostProcessor</strong>中的<strong>postProcessAfterInitialization</strong>方法</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上是spring容器从启动到销毁的全部过程，根据源码陈某画了一张生命周期的图，仅供参考，请勿转载！！！</p>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/lifecy.png" alt=""></p>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;导读&quot;&gt;&lt;a href=&quot;#导读&quot; class=&quot;headerlink&quot; title=&quot;导读&quot;&gt;&lt;/a&gt;导读&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主要是在&lt;code&gt;org.springframework.co
     
     </summary>
     

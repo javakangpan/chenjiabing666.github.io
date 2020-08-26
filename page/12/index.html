@@ -79,6 +79,29 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2018/06/26/并发编程之线程同步机制的底层助手内存屏障/" title="并发编程之线程同步机制的底层助手内存屏障" itemprop="url">
+  
+    <h1 itemprop="name">并发编程之线程同步机制的底层助手内存屏障</h1>
+    
+     
+           <p itemprop="description" >线程同步机制的底层助手 ：内存屏障前提
+我们知道锁是可以保证可见性的，线程在获取锁和释放锁的时候会分别执行两个动作来保证可见性:
+刷新处理器缓存 ：保证了持有该锁的线程能够读取到前一个线程对共享数据的更新
+冲刷处理器缓存 ：保证了持有该锁的线程对共享数据所做的更新会对后续获取该锁</p>
+        
+    
+    <time datetime="2018-06-26T14:49:10.000Z" itemprop="datePublished">2018-06-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2018/06/26/并发编程之上下文切换/" title="并发编程之上下文切换" itemprop="url">
   
     <h1 itemprop="name">并发编程之上下文切换</h1>
@@ -281,35 +304,6 @@ Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会�
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/06/26/Redis的管道Pipeline/" title="Redis的管道Pipeline" itemprop="url">
-  
-    <h1 itemprop="name">Redis的管道Pipeline</h1>
-    
-     
-           <p itemprop="description" >Redis的管道(Pipeline)为什么使用管道
-其中redis的执行一条命令可以分为四个步骤
-发送命令
-命令排队
-命令执行
-返回结果
-
-
-其中1-4之间所需要的时间称为往返时间(RTT)
-Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但大部分命令</p>
-        
-    
-    <time datetime="2018-06-26T14:35:00.000Z" itemprop="datePublished">2018-06-26</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <a class="extend prev" rel="prev" href="/page/11/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/13/">Next<span></span></a>
@@ -400,7 +394,7 @@ Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但�
 		  
 		
 		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>20</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>21</sup></a></li>
 		  
 		
 		  
@@ -421,11 +415,11 @@ Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但�
 			
 		
 			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>21</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>21</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>20</sup></a></li>
+				<li><a href="/tags/java基础/" title="java基础">java基础<sup>21</sup></a></li>
 			
 		
 			
@@ -433,11 +427,11 @@ Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但�
 			
 		
 			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
 			
 		
 			
@@ -477,11 +471,11 @@ Redis提供了批量操作命令(例如mget、mset等),有效地节约RTT。但�
 			
 		
 			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
+				<li><a href="/tags/web前端/" title="web前端">web前端<sup>7</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/web前端/" title="web前端">web前端<sup>7</sup></a></li>
+				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 			
 		
 			
