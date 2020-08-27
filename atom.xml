@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chenjiabing666.github.io/"/>
-  <updated>2020-08-26T06:50:58.913Z</updated>
+  <updated>2020-08-27T09:06:59.796Z</updated>
   <id>http://chenjiabing666.github.io/</id>
   
   <author>
@@ -14,6 +14,72 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Navicat Premium 12破解版安装</title>
+    <link href="http://chenjiabing666.github.io/2020/08/27/Navicat%20Premium%2012%E5%85%8D%E8%B4%B9%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85/"/>
+    <id>http://chenjiabing666.github.io/2020/08/27/Navicat Premium 12免费版本安装/</id>
+    <published>2020-08-27T07:51:57.000Z</published>
+    <updated>2020-08-27T09:06:59.796Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>这几年的工作过程中使用了很多的数据库工具，比如Sqlyog，DBeaver,sqlplus等工具，但是个人觉得很好用的还是Navicat。</li>
+<li>不如人意的就是目前Navicat都在收费，今天就来分享下如何安装免费的Navicat。</li>
+<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis-Log-plugin/6.jpg" alt=""></li>
+</ul>
+<h2 id="免费版本安装"><a href="#免费版本安装" class="headerlink" title="免费版本安装"></a>免费版本安装</h2><ol>
+<li>首先去官网下载Navicat_12的安装包，根据自己电脑的配置下载合适的。</li>
+</ol>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/1.png" alt=""></p>
+<ol>
+<li>下载成功之后，直接<code>安装</code>，<code>启动</code>即可</li>
+<li>启动时选择<code>试用</code>版本。</li>
+<li>打开<strong>神秘的包包</strong>，找到匹配的，如下：</li>
+</ol>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/2.png" alt=""></p>
+<ol>
+<li>将其中的文件全部复制到<code>Navicat_12</code>的根目录，文件如下：</li>
+</ol>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/3.png" alt=""></p>
+<ol>
+<li>重新启动Navicat，出现以下界面，表示安装成功，如下：</li>
+</ol>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/4.png" alt=""></p>
+<h2 id="如何连接Oracle"><a href="#如何连接Oracle" class="headerlink" title="如何连接Oracle"></a>如何连接Oracle</h2><ul>
+<li>如果本地未安装过Oracle数据库，新安装的Navicat默认是连接不上oracle的，需要配置一下<code>oci.dll</code>。</li>
+<li>选择<code>工具</code>-&gt;<code>选项</code></li>
+<li><img src="https://images2018.cnblogs.com/blog/1023171/201808/1023171-20180819144807854-2077107245.png" alt=""></li>
+<li>指定<code>oci.dll</code>的路径，如下：</li>
+<li><img src="https://images2018.cnblogs.com/blog/1023171/201808/1023171-20180819144833188-1560669113.png" alt=""></li>
+<li>重新启动，即可连接。</li>
+<li><strong>注意</strong>：Navicat_12自带的oci.dll如果版本不合适，可以去官网下载对应的版本。</li>
+</ul>
+<h2 id="如何连接Sql-server"><a href="#如何连接Sql-server" class="headerlink" title="如何连接Sql server"></a>如何连接Sql server</h2><ul>
+<li>如果本地未安装过SQL Server数据库，Navicat是不能连接上数据库的，具体解决方案如下：</li>
+<li>在Navicat的根目录下找到<code>sqlncli_x64.msi</code>双击安装即可，当然如果版本不合适，可以自己去官网下载。</li>
+<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/5.png" alt=""></li>
+<li>安装成功后，重启启动，即可连接。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>安装免费版的Navicat很简单，只需要一个神秘的包包，哈哈。</li>
+<li>老规矩，关注公众号【码猿技术专栏】回复关键词<code>Navicat12</code>即可获取。</li>
+<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E4%B8%83%E7%A7%92%E7%BC%96%E7%A8%8B.jpg" alt=""></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;这几年的工作过程中使用了很多的数据库工具，比如Sqlyog，DBeaver,sqlplus等工具，但是个人觉得很好用的还是Nav
+    
+    </summary>
+    
+      <category term="杂谈" scheme="http://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+      <category term="杂谈" scheme="http://chenjiabing666.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>Mybatis Log plugin破解，亲测可用！！！</title>
@@ -2505,96 +2571,6 @@
     
     
       <category term="SQL" scheme="http://chenjiabing666.github.io/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IDEA调试技巧</title>
-    <link href="http://chenjiabing666.github.io/2020/03/23/IDEA%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/"/>
-    <id>http://chenjiabing666.github.io/2020/03/23/IDEA调试技巧/</id>
-    <published>2020-03-23T08:15:12.000Z</published>
-    <updated>2020-03-23T08:15:44.491Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
-<li>前天面试了一个985高校的实习生，问了他平时用什么开发工具，他想也没想的说IDEA，于是我抛砖引玉的问了一下IDEA的调试用过吧，你说说怎么设置断点条件？那孩子懵了，想了好一会对我说没用过，甚至都没听说过这个。</li>
-<li>作为一名资深的老司机，IDEA调试可以说是家常便饭，如果不会debug，我都不信你读过源码，就别和我说原理了，直接pass掉。</li>
-</ul>
-<h2 id="基本界面"><a href="#基本界面" class="headerlink" title="基本界面"></a>基本界面</h2><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWFnZXMyMDE3LmNuYmxvZ3MuY29tL2Jsb2cvODU2MTU0LzIwMTcwOS84NTYxNTQtMjAxNzA5MDUyMjE0MTgxNDctMTIwNTA0MzAyMC5wbmc" alt=""></p>
-<p>① 以Debug模式启动服务，左边的一个按钮则是以Run模式启动。在开发中，我一般会直接启动Debug模式，方便随时调试代码。 </p>
-<p>② 断点：在左边行号栏单击左键，或者快捷键Ctrl+F8 打上/取消断点，断点行的颜色可自己去设置。 </p>
-<p>③ Debug窗口：访问请求到达第一个断点后，会自动激活Debug窗口。如果没有自动激活，可以去设置里设置。</p>
-<p>④ 调试按钮：一共有8个按钮，调试的主要功能就对应着这几个按钮，鼠标悬停在按钮上可以查看对应的快捷键。</p>
-<p>⑤ 服务按钮：可以在这里关闭/启动服务，设置断点等。 </p>
-<p>⑥ 方法调用栈：这里显示了该线程调试所经过的所有方法，勾选右上角的[Show All Frames]按钮，就不会显示其它类库的方法了，否则这里会有一大堆的方法。 </p>
-<p>⑦ Variables：在变量区可以查看当前断点之前的当前方法内的变量。 </p>
-<p>⑧  Watches：查看变量，可以将Variables区中的变量拖到Watches中查看 。</p>
-<h2 id="变量查看"><a href="#变量查看" class="headerlink" title="变量查看"></a>变量查看</h2><ul>
-<li>在调试过程中往往需要观察变量的变化来判断业务逻辑，我们可以在以下的四个地方观察。</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032301.png" alt=""></p>
-<p>① 最常用的变量的观察区域variables</p>
-<p>② IDEA中最人性化的地方之一，会将变量的值阴影显示在变量的后面。</p>
-<p>③ watch区域，眼镜的形状，一般不会展开。如下图：</p>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032302.png" alt=""></p>
-<p>点击’+’号可以新增需要观察的变量，点击’-‘号可以删除。</p>
-<p>④ 鼠标悬停在变量上也会出现变量的值，点击展开即可查看。</p>
-<h2 id="计算表达式"><a href="#计算表达式" class="headerlink" title="计算表达式"></a>计算表达式</h2><ul>
-<li>在调试业务逻辑的时候一般总会遇到某个条件或者某个变量的计算值的还不知道的情况下就需要判断下一行代码，那么此处就需要用到计算表达式的功能。计算表达式有两种方法，如下：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032303.png" alt=""></p>
-<p>① 选择需要计算的代码，鼠标右键—-&gt;Evaluate Expression—&gt;Evaluate即可计算。</p>
-<p>② 直接点击计算器形状控件即可弹出计算的窗口，将代码复制进去即可，注意复制进去的代码一定要符合逻辑，比如局部变量一定要是已经声明的。</p>
-<h2 id="断点条件设置"><a href="#断点条件设置" class="headerlink" title="断点条件设置"></a>断点条件设置</h2><ul>
-<li>对于新手要看Spring源码的话，再遇到调试UserService的doGetBean的方法时可能要崩溃，因为doGetBean在容器启动的时候可能会被调用几十次，你把断点打在doGetBean方法体中能让你生不如死。</li>
-<li>设置断点条件有两种方式：<ul>
-<li>①直接在断点上右键，添加condition条件即可。</li>
-<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032304.png" alt=""></li>
-<li>② view breakpoints(ctrl+shift+8)显示所有的断点，在condition中添加条件即可。</li>
-<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032305.png" alt=""></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>异常断点：设置了异常断点后，比如空指针异常，在程序出现需要拦截的异常时会自动定位到指定的行。如下图：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032306.png" alt=""></p>
-<p>① ctrl+shift+F8显示所有断点，点击+号添加<code>Java Exception Breakpoints</code>。</p>
-<p>② debug运行，一旦有代码出现该异常，会自动定位到指定代码。</p>
-<h2 id="线程切换"><a href="#线程切换" class="headerlink" title="线程切换"></a>线程切换</h2><ul>
-<li>通常我们在调试的时候，一个请求过来被拦截了，此时想要发起另外一个请求是无法重新发的，因为另外一个请求被阻塞了，只有当前线程执行完成之后才会走其他的线程。在IDEA中可以改变一下阻塞级别，有两种方法：<ul>
-<li>断点上右键—&gt;选择Thread—-&gt;Make Default，如下图：</li>
-<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032307.png" alt=""></li>
-<li>显示所有断点(crtl+shift+F8)，选中某一个断点，选择Thread，Make Default即可。如下图：</li>
-<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032308.png" alt=""></li>
-</ul>
-</li>
-<li>设置了阻塞级别，此时就可以在线程切换了，如下图：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032309.png" alt=""></p>
-<h2 id="强制抛异常"><a href="#强制抛异常" class="headerlink" title="强制抛异常"></a>强制抛异常</h2><p>这是IDEA 2018年加入的新功能，可以直接在调试中抛出指定的异常。使用方法跟上面的弃栈帧类似，右击栈帧并选择<strong>Throw Exception</strong>，然后输入抛异常的代码，比如<code>throw new NullPointerException</code>，操作如下图：</p>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032310.png" alt=""></p>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032311.png" alt=""></p>
-<h2 id="强制返回"><a href="#强制返回" class="headerlink" title="强制返回"></a>强制返回</h2><ul>
-<li>这是IDEA2015版时增加的功能，类似上面的手动抛异常，只不过是返回一个指定值罢了。使用方法跟上面也都类似，右击栈帧并选择<strong>Force Return</strong>，然后输入要返回的值即可。如果是<code>void</code>的方法那就更简单了，连返回值都不用输。如下图：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032312.png" alt=""></p>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;导读&quot;&gt;&lt;a href=&quot;#导读&quot; class=&quot;headerlink&quot; title=&quot;导读&quot;&gt;&lt;/a&gt;导读&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;前天面试了一个985高校的实习生，问了他平时用什么开发工具，他想也没想的说IDEA，于是我抛砖引玉的问了一下IDEA的调试用过吧
-    
-    </summary>
-    
-      <category term="杂谈" scheme="http://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
-    
-    
-      <category term="杂谈" scheme="http://chenjiabing666.github.io/tags/%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
