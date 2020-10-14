@@ -195,6 +195,39 @@
   </entry>
   
   <entry>
+    <title>IDEA2020永久破解，亲测可用！！！</title>
+    <link href="http://chenjiabing666.github.io/2020/05/08/select%E8%AF%AD%E5%8F%A5%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/"/>
+    <id>http://chenjiabing666.github.io/2020/05/08/select语句做了什么？/</id>
+    <published>2020-05-08T10:51:57.000Z</published>
+    <updated>2020-10-14T02:19:14.530Z</updated>
+    
+    <content type="html"><![CDATA[<section id="nice" data-tool="mdnice编辑器" data-website="https://www.mdnice.com" style="padding: 0 10px; word-spacing: 0px; word-wrap: break-word; text-align: left; font-family: Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, 'PingFang SC', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; line-height: 1.6; letter-spacing: .034em; color: rgb(63, 63, 63); font-size: 16px; word-break: all;"><h2 data-tool="mdnice编辑器" style="padding: 0px; font-weight: bold; color: black; font-size: 22px; display: block; text-align: center; background-image: url(https://my-wechat.mdnice.com/koala-2.png); background-position: center center; background-repeat: no-repeat; background-attachment: initial; background-origin: initial; background-clip: initial; background-size: 50px; margin-top: 1em; margin-bottom: 10px;"><span class="prefix" style="display: none;"></span><span class="content" style="text-align: center; display: inline-block; height: 38px; line-height: 42px; color: #48b378; background-position: left center; background-repeat: no-repeat; background-attachment: initial; background-origin: initial; background-clip: initial; background-size: 63px; margin-top: 38px; font-size: 18px; margin-bottom: 10px;">导读</span><span class="suffix"></span></h2><br><ul data-tool="mdnice编辑器" style="margin-top: 8px; margin-bottom: 8px; padding-left: 25px; color: black; list-style-type: disc;"><br><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">Mysql在中小型企业中是个香饽饽，目前主流的数据库之一，几乎没有一个后端开发者不会使用的，但是作为一个老司机，仅仅会用真的不够。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">今天陈某透过一个简单的查询语句来讲述在Mysql内部的执行过程。</p><br></section></li></ul><br><pre class="custom" data-tool="mdnice编辑器" style="margin-top: 10px; margin-bottom: 10px; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.55) 0px 2px 10px;"><span style="display: block; background: url(https://my-wechat.mdnice.com/point.png); height: 30px; width: 100%; background-size: 40px; background-repeat: no-repeat; background-color: #f8f8f8; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code class="hljs" style="overflow-x: auto; padding: 16px; color: #333; display: -webkit-box; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 12px; -webkit-overflow-scrolling: touch; padding-top: 15px; background: #f8f8f8; border-radius: 5px;">select <em> from table where id=10;<br></em></code></pre><br><h2 data-tool="mdnice编辑器" style="padding: 0px; font-weight: bold; color: black; font-size: 22px; display: block; text-align: center; background-image: url(https://my-wechat.mdnice.com/koala-2.png); background-position: center center; background-repeat: no-repeat; background-attachment: initial; background-origin: initial; background-clip: initial; background-size: 50px; margin-top: 1em; margin-bottom: 10px;"><span class="prefix" style="display: none;"></span><span class="content" style="text-align: center; display: inline-block; height: 38px; line-height: 42px; color: #48b378; background-position: left center; background-repeat: no-repeat; background-attachment: initial; background-origin: initial; background-clip: initial; background-size: 63px; margin-top: 38px; font-size: 18px; margin-bottom: 10px;">撸它</span><span class="suffix"></span></h2><br><ul data-tool="mdnice编辑器" style="margin-top: 8px; margin-bottom: 8px; padding-left: 25px; color: black; list-style-type: disc;"><br><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">首先通过一张图片来了解一下Mysql的基础架构，如下：</p><br><figure style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/MYSQL%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/1.png" alt="" style="display: block; margin: 0 auto; max-width: 100%; border-radius: 4px; margin-bottom: 25px;"></figure><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">从上图可以看出，Mysql大致分为Server层和存储引擎层两部分。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">Server层包括连接器、查询缓存、分析器、优化器等，其中包含了Mysql的大多数核心功能以及所有的内置函数（如日期，时间函数等），所有跨存储引擎的功能都在这一层实现，比如存储过程、触发器、视图等。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">存储引擎层负责数据的存储和提取。它的架构是可插拔式的，支持InnoDB、MyISAM等多个存储引擎。Mysql中主流的存储引擎是InnoDB，由于它对事务的支持让它从Mysql5.5.5版本开始成为了默认的存储引擎。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">大致了解了整体架构，现在说说每一个基础的模块都承担着怎样的责任。</p><br></section></li></ul><br><h3 data-tool="mdnice编辑器" style="margin-bottom: 15px; padding: 0px; font-weight: bold; color: black; font-size: 20px; margin-top: 1.2em;"><span style="background-image: url(https://my-wechat.mdnice.com/koala-3.png); background-size: 100% 100%; background-repeat: no-repeat; display: inline-block; width: 16px; height: 15px; line-height: 15px; margin-bottom: -1px;"></span><span class="prefix" style="display: none;"></span><span class="content" style="font-size: 17px; font-weight: bold; display: inline-block; margin-left: 8px; color: #48b378;">1. 连接器</span><span class="suffix" style="display: none;"></span></h3><br><ul data-tool="mdnice编辑器" style="margin-top: 8px; margin-bottom: 8px; padding-left: 25px; color: black; list-style-type: disc;"><br><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;">顾名思义，是客户端和Mysql之间连接的媒介，负责登录、获取权限、维持连接和管理连接。连接命令一般如下：</section></li></ul><br><pre class="custom" data-tool="mdnice编辑器" style="margin-top: 10px; margin-bottom: 10px; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.55) 0px 2px 10px;"><span style="display: block; background: url(https://my-wechat.mdnice.com/point.png); height: 30px; width: 100%; background-size: 40px; background-repeat: no-repeat; background-color: #f8f8f8; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code class="hljs" style="overflow-x: auto; padding: 16px; color: #333; display: -webkit-box; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 12px; -webkit-overflow-scrolling: touch; padding-top: 15px; background: #f8f8f8; border-radius: 5px;">mysql [-h] ip [- P] port -u [user] -p<br></code></pre><br><ul data-tool="mdnice编辑器" style="margin-top: 8px; margin-bottom: 8px; padding-left: 25px; color: black; list-style-type: disc;"><br><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">在完成经典的TCP握手后，连接器会开始认证身份，要求输入密码。</p><br><ul style="margin-top: 8px; margin-bottom: 8px; padding-left: 25px; color: black; list-style-type: square;"><br><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;">密码认证通过，连接器会查询出拥有的权限，即使管理员修改了权限，也不会影响你这次的连接，只有重新连接才会生效。</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;">密码认证失败，会收到提示信息Access denied for user。</section></li></ul><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">连接完成后，没有后续动作的连接将会变成空闲连接，你可以输入<code style="font-size: 14px; word-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0 2px; background-color: rgba(27,31,35,.05); font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; word-break: break-all; color: #28ca71;">show processlist</code>命令看到它。如下图，其中的Command这一列显示为sleep的这一行表示在系统里面有一个空闲连接。</p><br><figure style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/MYSQL%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/2.png" alt="" style="display: block; margin: 0 auto; max-width: 100%; border-radius: 4px; margin-bottom: 25px;"></figure><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">客户端如果太长时间没有执行动作，连接器将会自动断开，这个时间由参数<code style="font-size: 14px; word-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0 2px; background-color: rgba(27,31,35,.05); font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; word-break: break-all; color: #28ca71;">wait_timeout</code>控制，默认值是8小时。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">如果在连接被断开之后，客户端再次发送请求的话，就会收到一个错误提醒： Lost connection to MySQL server during query。这时候如果你要继续，就需要重连，然后再执行请求了。</p><br></section></li></ul><br><h3 data-tool="mdnice编辑器" style="margin-bottom: 15px; padding: 0px; font-weight: bold; color: black; font-size: 20px; margin-top: 1.2em;"><span style="background-image: url(https://my-wechat.mdnice.com/koala-3.png); background-size: 100% 100%; background-repeat: no-repeat; display: inline-block; width: 16px; height: 15px; line-height: 15px; margin-bottom: -1px;"></span><span class="prefix" style="display: none;"></span><span class="content" style="font-size: 17px; font-weight: bold; display: inline-block; margin-left: 8px; color: #48b378;">2. 查询缓存【废材，8.0 版本完全删除】</span><span class="suffix" style="display: none;"></span></h3><br><ul data-tool="mdnice编辑器" style="margin-top: 8px; margin-bottom: 8px; padding-left: 25px; color: black; list-style-type: disc;"><br><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">连接建立完成后，你就可以select语句了，执行之前会查询缓存。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">查询缓存在Mysql中的是默认关闭的，因为缓存命中率非常低，只要有对表执行一个更新操作，这个表的所有查询缓存都将被清空。怎么样？一句废材足以形容了！！！</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">废材的东西不必多讲，主流的Redis的缓存你不用，别再搞这废材了。</p><br></section></li></ul><br><h3 data-tool="mdnice编辑器" style="margin-bottom: 15px; padding: 0px; font-weight: bold; color: black; font-size: 20px; margin-top: 1.2em;"><span style="background-image: url(https://my-wechat.mdnice.com/koala-3.png); background-size: 100% 100%; background-repeat: no-repeat; display: inline-block; width: 16px; height: 15px; line-height: 15px; margin-bottom: -1px;"></span><span class="prefix" style="display: none;"></span><span class="content" style="font-size: 17px; font-weight: bold; display: inline-block; margin-left: 8px; color: #48b378;">3. 分析器</span><span class="suffix" style="display: none;"></span></h3><br><ul data-tool="mdnice编辑器" style="margin-top: 8px; margin-bottom: 8px; padding-left: 25px; color: black; list-style-type: disc;"><br><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">如果没有命中查询缓存，就要执行查询了，但是在执行查询之前，需要对SQL语句做解析，判断你这条语句有没有语法错误。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">分析器会做 ‘词法分析’ ，你输入的无非可就是多个字符串和空格组成的SQL语句，MYSQL需要识别出里面的字符串是什么，代表什么，有没有关键词等。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">MYSQL会从你输入的select 这个关键字识别出来是一个查询语句，table是表名，id是列名。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">做完这些会做 ‘语法分析’ ，根据MYSQL定义的规则来判断你的SQL语句有没有语法错误，如果你的语法不对，就会收到类似如下的提醒：</p><br></section></li></ul><br><pre class="custom" data-tool="mdnice编辑器" style="margin-top: 10px; margin-bottom: 10px; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.55) 0px 2px 10px;"><span style="display: block; background: url(https://my-wechat.mdnice.com/point.png); height: 30px; width: 100%; background-size: 40px; background-repeat: no-repeat; background-color: #f8f8f8; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code class="hljs" style="overflow-x: auto; padding: 16px; color: #333; display: -webkit-box; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 12px; -webkit-overflow-scrolling: touch; padding-top: 15px; background: #f8f8f8; border-radius: 5px;">ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ‘elect  from t where ID=1’ at line 1<br></code></pre><br><ul data-tool="mdnice编辑器" style="margin-top: 8px; margin-bottom: 8px; padding-left: 25px; color: black; list-style-type: disc;"><br><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;">一般语法错误会提示第一个出现错误的位置，所以你要关注的是紧接“use near”的内容。</section></li></ul><br><h3 data-tool="mdnice编辑器" style="margin-bottom: 15px; padding: 0px; font-weight: bold; color: black; font-size: 20px; margin-top: 1.2em;"><span style="background-image: url(https://my-wechat.mdnice.com/koala-3.png); background-size: 100% 100%; background-repeat: no-repeat; display: inline-block; width: 16px; height: 15px; line-height: 15px; margin-bottom: -1px;"></span><span class="prefix" style="display: none;"></span><span class="content" style="font-size: 17px; font-weight: bold; display: inline-block; margin-left: 8px; color: #48b378;">4. 优化器</span><span class="suffix" style="display: none;"></span></h3><br><ul data-tool="mdnice编辑器" style="margin-top: 8px; margin-bottom: 8px; padding-left: 25px; color: black; list-style-type: disc;"><br><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">经过分析器词法和语法的分析，此时就能知道这条SQL语句是干什么的。但是在开始执行之前，MYSQL底层还要使用优化器对这条SQL语句进行优化处理。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">MYSQL内部会对这条SQL进行评估，比如涉及到多个索引会比较使用哪个索引代价更小、多表join的时候会考虑决定各个表的连接顺序。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">优化器的作用一句话总结：根据MYSQL内部的算法决定如何执行这条SQL语句来达到MYSQL认为代价最小目的。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">优化器阶段完成后，这个语句的执行方案就确定了，接下来就交给执行器执行了。</p><br></section></li></ul><br><h3 data-tool="mdnice编辑器" style="margin-bottom: 15px; padding: 0px; font-weight: bold; color: black; font-size: 20px; margin-top: 1.2em;"><span style="background-image: url(https://my-wechat.mdnice.com/koala-3.png); background-size: 100% 100%; background-repeat: no-repeat; display: inline-block; width: 16px; height: 15px; line-height: 15px; margin-bottom: -1px;"></span><span class="prefix" style="display: none;"></span><span class="content" style="font-size: 17px; font-weight: bold; display: inline-block; margin-left: 8px; color: #48b378;">5. 执行器</span><span class="suffix" style="display: none;"></span></h3><br><ul data-tool="mdnice编辑器" style="margin-top: 8px; margin-bottom: 8px; padding-left: 25px; color: black; list-style-type: disc;"><br><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">MYSQL通过分析器知道了要做什么，通过优化器知道了如何做，于是就进入了执行器阶段。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">执行器开始执行之前，需要检查一下用户对表table有没有执行的权限，没有返回权限不足的错误，有的话就执行。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">执行也是分类的，如果Id不是索引则全表扫描，一行一行的查找，如果是索引则在索引组织表中查询，索引的查询很复杂，其中涉及到B+树等算法，这里不再详细介绍。</p><br></section></li></ul><br><h2 data-tool="mdnice编辑器" style="padding: 0px; font-weight: bold; color: black; font-size: 22px; display: block; text-align: center; background-image: url(https://my-wechat.mdnice.com/koala-2.png); background-position: center center; background-repeat: no-repeat; background-attachment: initial; background-origin: initial; background-clip: initial; background-size: 50px; margin-top: 1em; margin-bottom: 10px;"><span class="prefix" style="display: none;"></span><span class="content" style="text-align: center; display: inline-block; height: 38px; line-height: 42px; color: #48b378; background-position: left center; background-repeat: no-repeat; background-attachment: initial; background-origin: initial; background-clip: initial; background-size: 63px; margin-top: 38px; font-size: 18px; margin-bottom: 10px;">总结</span><span class="suffix"></span></h2><br><ul data-tool="mdnice编辑器" style="margin-top: 8px; margin-bottom: 8px; padding-left: 25px; color: black; list-style-type: disc;"><br><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">一条SQL语句在MYSQL内部执行的过程涉及到的内部模块有：连接器、查询缓存、分析器、优化器、执行器、存储引擎。</p><br></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; color: rgb(1,1,1); font-weight: 500;"><p style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em;">至此，MYSQL的基础架构已经讲完了。</p><br></section></li></ul><br><p id="nice-suffix-juejin-container" class="nice-suffix-juejin-container" data-tool="mdnice编辑器" style="font-size: 16px; padding-bottom: 8px; margin: 0; padding-top: 1em; color: rgb(74,74,74); line-height: 1.75em; margin-top: 20px !important;">本文使用 <a href="https://mdnice.com/?from=juejin" style="word-wrap: break-word; font-weight: bold; color: #48b378; text-decoration: none; border-bottom: 1px solid #48b378;" target="_blank" rel="external">mdnice</a> 排版</p></section>
+
+
+
+
+
+
+
+
+
+
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;section id=&quot;nice&quot; data-tool=&quot;mdnice编辑器&quot; data-website=&quot;https://www.mdnice.com&quot; style=&quot;padding: 0 10px; word-spacing: 0px; word-wrap: break-w
+    
+    </summary>
+    
+      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
+    
+    
+      <category term="SQL" scheme="http://chenjiabing666.github.io/tags/SQL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>线上Bug无法复现怎么办？老司机教你一招，SpringBoot远程调试不用愁！</title>
     <link href="http://chenjiabing666.github.io/2020/04/28/%E7%BA%BF%E4%B8%8ABug%E6%97%A0%E6%B3%95%E5%A4%8D%E7%8E%B0%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%E8%80%81%E5%8F%B8%E6%9C%BA%E6%95%99%E4%BD%A0%E4%B8%80%E6%8B%9B%EF%BC%8CSpringBoot%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95%E4%B8%8D%E7%94%A8%E6%84%81%EF%BC%81/"/>
     <id>http://chenjiabing666.github.io/2020/04/28/线上Bug无法复现怎么办？老司机教你一招，SpringBoot远程调试不用愁！/</id>
@@ -2428,142 +2461,6 @@
     
       &lt;h2 id=&quot;导读&quot;&gt;&lt;a href=&quot;#导读&quot; class=&quot;headerlink&quot; title=&quot;导读&quot;&gt;&lt;/a&gt;导读&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Mysql在中小型企业中是个香饽饽，目前主流的数据库之一，几乎没有一个后端开发者不会使用的，但是作为一个老司机，仅仅会用真
-    
-    </summary>
-    
-      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
-    
-    
-      <category term="SQL" scheme="http://chenjiabing666.github.io/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mysql中的三类锁，你知道吗？</title>
-    <link href="http://chenjiabing666.github.io/2020/04/01/Mysql%E4%B8%AD%E7%9A%84%E4%B8%89%E7%B1%BB%E9%94%81%EF%BC%8C%E4%BD%A0%E7%9F%A5%E9%81%93%E5%90%97%EF%BC%9F/"/>
-    <id>http://chenjiabing666.github.io/2020/04/01/Mysql中的三类锁，你知道吗？/</id>
-    <published>2020-04-01T02:31:58.000Z</published>
-    <updated>2020-04-01T02:34:41.438Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
-<li><p>正所谓有人(锁)的地方就有江湖(事务)，人在江湖飘，怎能一无所知？</p>
-</li>
-<li><p>今天来细说一下Mysql中的三类锁，分别是全局锁、表级锁、行级锁。</p>
-</li>
-</ul>
-<h2 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h2><ul>
-<li>全局锁简单的说就是锁住整个数据库实例，命令是<code>Flush tables with read lock</code>。当你需要为整个数据库处于只读的状态的时候，可以使用这个命令。</li>
-<li>一旦使用全局锁，之后其他线程的以下语句会被阻塞：数据更新语句（数据的增删改）、数据定义语句（包括建表、修改表结构等）和更新类事务的提交语句。 </li>
-<li>全局锁的使用场景大部分都是用来<strong>数据库备份</strong>。</li>
-</ul>
-<h3 id="为什么备份要加全局锁？"><a href="#为什么备份要加全局锁？" class="headerlink" title="为什么备份要加全局锁？"></a>为什么备份要加全局锁？</h3><ul>
-<li>用户买东西，首先会从余额里扣除金额，然后在订单里添加商品。如果备份数据库，不加锁，并且备份顺序为先备份用余额，再备份订单商品，有可能备份了用户余额后，用户下订单买东西提交事务，然后再备份订单商品表， 此时订单商品已存在。最后备份出来的数据为。最后用户余额为买东西前的余额，没有减少，但是订单商品却多了。演示如下图：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mysql%E4%B8%AD%E7%9A%84%E9%94%81/1.png" alt=""></p>
-<ul>
-<li>这种情况可能用户会觉得赚了，但是如果备份顺序反过来，先备份商品表再备份余额表，用户就会发现我付了钱，但是商品没有加，这中结果就会更加的严重。 </li>
-<li>因此保证备份数据的一致性很重要，必要的手段就是加锁。</li>
-</ul>
-<h3 id="全局锁有什么坏处？"><a href="#全局锁有什么坏处？" class="headerlink" title="全局锁有什么坏处？"></a>全局锁有什么坏处？</h3><ul>
-<li>全局锁是个啥？介绍完了读者心里已经有数了，让这个库只读？这是多么可怕的操作，简单列举几个危险之处：<ul>
-<li>如果在主库备份，备份期间不能执行任何更新操作，会导致整个业务停摆，高并发情况下更甚。</li>
-<li>如果你在从库上备份，那么备份期间从库不能执行主库同步过来的binlog，会导致主从延迟。</li>
-</ul>
-</li>
-</ul>
-<h3 id="全局备份比较好的解决方案"><a href="#全局备份比较好的解决方案" class="headerlink" title="全局备份比较好的解决方案"></a>全局备份比较好的解决方案</h3><ul>
-<li>全局锁远瞅不错，近瞅吓一跳，陈某在此不推荐使用。</li>
-<li>其实 官方自带的逻辑备份工具是mysqldump。当<strong>mysqldump</strong>使用参数<strong>–single-transaction</strong>的时候，导数据之前就会启动一个事务，来确保拿到一致性视图。而由于MVCC的支持，这个过程中数据是可以正常更新的。 </li>
-<li>一致性备份是好，但前提是存储引擎支持事务，这也是MyISAM被InnoDB取代的原因之一。</li>
-</ul>
-<h2 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h2><ul>
-<li>MySQL里面表级别的锁有两种：一种是表锁，一种是元数据锁（meta data lock，MDL)。 </li>
-<li>表锁一般是在数据库引擎不支持行锁的时候才会被用到的 。</li>
-<li>MDL会直到事务提交才释放，在做<strong>表结构变更</strong>的时候，你一定要小心不要导致锁住线上查询和更新 。</li>
-</ul>
-<h3 id="如何加表锁"><a href="#如何加表锁" class="headerlink" title="如何加表锁"></a>如何加表锁</h3><ul>
-<li>显式加表锁和解锁的语句很简单，如下：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">lock</span> <span class="keyword">tables</span> tb_name <span class="keyword">read</span>/write;</div><div class="line"></div><div class="line"><span class="keyword">unlock</span> <span class="keyword">tables</span>;</div></pre></td></tr></table></figure>
-<ul>
-<li>需要注意，lock tables语法除了会限制别的线程的读写外，也限定了本线程接下来的操作对象。 </li>
-<li>举个例子, 如果在某个线程A中执行<strong>lock tables t1 read, t2 write;</strong> 这个语句，则其他线程写t1、读写t2的语句都会被阻塞。同时，线程A在执行<strong>unlock tables</strong>之前，也只能执行读t1、读写t2的操作。连写t1都不允许，自然也不能访问其他表。 </li>
-</ul>
-<h3 id="MDL"><a href="#MDL" class="headerlink" title="MDL"></a>MDL</h3><ul>
-<li>MDL不需要显式使用，在访问一个表的时候会被自动加上。 </li>
-<li>当对一个表做增删改查操作的时候，加MDL读锁；当要对表做结构变更操作的时候，加MDL写锁。 </li>
-<li><strong>读锁</strong>之间不互斥，因此你可以有多个线程同时对一张表增删改查。 </li>
-<li>读写锁之间、写锁之间是互斥的，用来保证变更表结构操作的安全性。因此，如果有两个线程要同时给一个表加字段，其中一个要等另一个执行完才能开始执行。 </li>
-</ul>
-<h3 id="查询表级锁争用"><a href="#查询表级锁争用" class="headerlink" title="查询表级锁争用"></a>查询表级锁争用</h3><ul>
-<li>查询表级锁的争用可以通过以下参数分析获得：<ul>
-<li><code>Table_locks_immediate</code>：能够立即获得表级锁的次数 </li>
-<li><code>Table_locks_waited</code>： 不能立即获取表级锁而需要等待的次数 </li>
-</ul>
-</li>
-<li>查询语句如下：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">status</span> <span class="keyword">like</span> <span class="string">'table_locks_waited'</span></div></pre></td></tr></table></figure>
-<ul>
-<li>如果<code>Table_locks_waited</code>的值比较大，则说明存在着较严重的表级锁争用情况。 </li>
-</ul>
-<h2 id="行级锁"><a href="#行级锁" class="headerlink" title="行级锁"></a>行级锁</h2><ul>
-<li>MySQL的行锁是在引擎层由各个引擎自己实现的。但并不是所有的引擎都支持行锁，比如MyISAM引擎就不支持行锁。不支持行锁意味着并发控制只能使用表锁，对于这种引擎的表，同一张表上任何时刻只能有一个更新在执行，这就会影响到业务并发度。InnoDB是支持行锁的，这也是MyISAM被InnoDB替代的重要原因之一。 </li>
-<li><strong>InnoDB的行锁是针对索引加的锁，不是针对记录加的锁。并且该索引不能失效，否则都会从行锁升级为表锁</strong>。 </li>
-<li><strong>在InnoDB事务中，行锁是在需要的时候才加上的，但并不是不需要了就立刻释放，而是要等到事务结束时才释放。</strong> </li>
-<li>行级锁分为排它锁（写锁）、共享锁（读锁）、间隙锁。</li>
-</ul>
-<h3 id="排他锁"><a href="#排他锁" class="headerlink" title="排他锁"></a>排他锁</h3><ul>
-<li>排他锁，也称写锁，独占锁，当前写操作没有完成前，它会阻断其他写锁和读锁。 </li>
-<li>Mysql中的更新语句(update/delete/insert)会自动加上排它锁。</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mysql%E4%B8%AD%E7%9A%84%E9%94%81/2.png" alt=""></p>
-<ul>
-<li>如上图，事务B中的update语句被阻塞了，直到事务A提交才能执行更新操作。</li>
-<li>排他锁也可以手动添加，如下：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="keyword">id</span>=<span class="number">1</span> <span class="keyword">for</span> <span class="keyword">update</span>;</div></pre></td></tr></table></figure>
-<ul>
-<li>注意以下两点：<ul>
-<li>行锁是针对索引加锁的，上述例子中id是主键索引。</li>
-<li><strong>加了排他锁并不是其他的事务不能读取这行的数据，而是不能再在这行上面加锁了。</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="间隙锁"><a href="#间隙锁" class="headerlink" title="间隙锁"></a>间隙锁</h3><ul>
-<li>当我们用范围条件检索数据，并请求共享或排他锁时，InnoDB会给符合条件的已有数据记录的索引项加锁；对于键值在条件范围内但<strong>并不存在</strong>的记录，叫做”间隙(GAP)”。InnoDB也会对这个”间隙”加锁，这种锁机制就是所谓的间隙锁(Next-Key锁)。 </li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mysql%E4%B8%AD%E7%9A%84%E9%94%81/3.png" alt=""></p>
-<ul>
-<li>如上图，给id&gt;5中并不存在的数据加上了间隙锁，当插入id=6的数据时被阻塞了。</li>
-<li>这是一个坑：<strong>若执行的条件是范围过大，则InnoDB会将整个范围内所有的索引键值全部锁定，很容易对性能造成影响</strong> </li>
-</ul>
-<h3 id="共享锁"><a href="#共享锁" class="headerlink" title="共享锁"></a>共享锁</h3><ul>
-<li>共享锁，也称读锁，多用于判断数据是否存在，多个读操作可以同时进行而不会互相影响。当如果事务对读锁进行修改操作，很可能会造成死锁。如下图所示。 </li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mysql%E4%B8%AD%E7%9A%84%E9%94%81/4.png" alt=""></p>
-<h3 id="分析行锁定"><a href="#分析行锁定" class="headerlink" title="分析行锁定"></a>分析行锁定</h3><ul>
-<li>通过检查InnoDB_row_lock 状态变量分析系统上的行锁的争夺情况 。</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">status</span> <span class="keyword">like</span> <span class="string">'innodb_row_lock%'</span></div></pre></td></tr></table></figure>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mysql%E4%B8%AD%E7%9A%84%E9%94%81/5.png" alt=""></p>
-<ul>
-<li>innodb_row_lock_current_waits: 当前正在等待锁定的数量。</li>
-<li>innodb_row_lock_time: 从系统启动到现在锁定总时间长度；非常重要的参数</li>
-<li>innodb_row_lock_time_avg: 每次等待所花平均时间；非常重要的参数。</li>
-<li>innodb_row_lock_time_max: 从系统启动到现在等待最常的一次所花的时间； </li>
-<li>innodb_row_lock_waits: 系统启动后到现在总共等待的次数；非常重要的参数。直接决定优化的方向和策略。 </li>
-</ul>
-<h3 id="死锁解决方案"><a href="#死锁解决方案" class="headerlink" title="死锁解决方案"></a>死锁解决方案</h3><p>1、直接进入等待，直到超时。这个超时时间可以通过参数<strong>innodb_lock_wait_timeout</strong>来设置，默认50秒。注意超时时间不能设置太短，如果仅仅是短暂的等待，一旦设置时间很短，很快便解锁了，会出现误伤。</p>
-<p>2、发起死锁检测，发现死锁后，主动回滚死锁链条中的某一个事务，让其他事务得以继续执行。将参数<strong>innodb_deadlock_detect</strong>设置为on，表示开启这个逻辑，默认开启。 主动死锁检测在发生死锁的时候，是能够快速发现并进行处理的，但是它也是有额外负担的。 当并发很高的时候，检测死锁将会消耗大量的资源，因此控制并发也是很重要的一种策略。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;导读&quot;&gt;&lt;a href=&quot;#导读&quot; class=&quot;headerlink&quot; title=&quot;导读&quot;&gt;&lt;/a&gt;导读&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;正所谓有人(锁)的地方就有江湖(事务)，人在江湖飘，怎能一无所知？&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;今天来细说一下Mys
     
     </summary>
     
