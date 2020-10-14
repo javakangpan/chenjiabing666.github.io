@@ -79,16 +79,12 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2020/04/20/一文搞懂Redis持久化/" title="一文搞懂Redis持久化" itemprop="url">
+    <a href="/2020/04/20/吐血总结：MySQL性能如何优化？/" title="吐血总结：MySQL性能如何优化？" itemprop="url">
   
-    <h1 itemprop="name">一文搞懂Redis持久化</h1>
+    <h1 itemprop="name">吐血总结：MySQL性能如何优化？</h1>
     
      
-           <p itemprop="description" >前言
-Redis目前已经成为主流的内存数据库了，但是大部分人仅仅是停留在会用的阶段，你真的了解Redis内部的工作原理吗？
-今天这篇文章将为大家介绍Redis持久化的两种方案，文章将会从以下五个方面介绍：
-什么是RDB，RDB如何实现持久化？
-什么是AOF，AOF如何实现持久化？</p>
+           <p itemprop="description" >前言上篇讲了MySQL的索引优化，此篇文章从大范围讲一下MySQL数据库到底该如何优化？这个问题在面试中时常被问到，今天陈某来总结下。SQL 优化的几个步骤1. 通过show status 命令了解各种 SQL 的执行效率show [session | global] statu</p>
         
     
     <time datetime="2020-04-20T08:59:42.000Z" itemprop="datePublished">2020-04-20</time>
@@ -123,12 +119,12 @@ Redis目前已经成为主流的内存数据库了，但是大部分人仅仅是
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2020/04/20/order by 如何工作/" title="order by 如何工作" itemprop="url">
+    <a href="/2020/04/20/explain执行计划/" title="explain执行计划" itemprop="url">
   
-    <h1 itemprop="name">order by 如何工作</h1>
+    <h1 itemprop="name">explain执行计划</h1>
     
      
-           <p itemprop="description" >前言在实际的开发中一定会碰到根据某个字段进行排序后来显示结果的需求，但是你真的理解order by在 Mysql 底层是如何执行的吗？假设你要查询城市是苏州的所有人名字，并且按照姓名进行排序返回前 1000 个人的姓名、年龄，这条 sql 语句应该如何写？首先创建一张用户表，sq</p>
+           <p itemprop="description" >前言如何写出效率高的SQL语句，提到这必然离不开Explain执行计划的分析，至于什么是执行计划，如何写出高效率的SQL，本篇文章将会一一介绍。执行计划执行计划是数据库根据 SQL 语句和相关表的统计信息作出的一个查询方案，这个方案是由查询优化器自动分析产生的。使用explain</p>
         
     
     <time datetime="2020-04-20T08:59:42.000Z" itemprop="datePublished">2020-04-20</time>
@@ -143,12 +139,79 @@ Redis目前已经成为主流的内存数据库了，但是大部分人仅仅是
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2020/04/20/explain执行计划/" title="explain执行计划" itemprop="url">
+    <a href="/2020/04/20/一文搞懂Redis持久化/" title="一文搞懂Redis持久化" itemprop="url">
   
-    <h1 itemprop="name">explain执行计划</h1>
+    <h1 itemprop="name">一文搞懂Redis持久化</h1>
     
      
-           <p itemprop="description" >前言如何写出效率高的SQL语句，提到这必然离不开Explain执行计划的分析，至于什么是执行计划，如何写出高效率的SQL，本篇文章将会一一介绍。执行计划执行计划是数据库根据 SQL 语句和相关表的统计信息作出的一个查询方案，这个方案是由查询优化器自动分析产生的。使用explain</p>
+           <p itemprop="description" >前言
+Redis目前已经成为主流的内存数据库了，但是大部分人仅仅是停留在会用的阶段，你真的了解Redis内部的工作原理吗？
+今天这篇文章将为大家介绍Redis持久化的两种方案，文章将会从以下五个方面介绍：
+什么是RDB，RDB如何实现持久化？
+什么是AOF，AOF如何实现持久化？</p>
+        
+    
+    <time datetime="2020-04-20T08:59:42.000Z" itemprop="datePublished">2020-04-20</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/20/索引的概念和数据结构/" title="索引的概念和数据结构" itemprop="url">
+  
+    <h1 itemprop="name">索引的概念和数据结构</h1>
+    
+     
+           <p itemprop="description" >前言索引是什么？有什么利弊？一旦在面试中被问道，对于新入门的小白可能是个棘手的问题。本篇文章将会详细讲述什么是索引、索引的优缺点、数据结构等等常见的知识。什么是索引索引就是一种的数据结构，存储表中特定列的值并对值进行排序，所以是在表的列上面创建的。索引将通过缩小一张表中需要查询的</p>
+        
+    
+    <time datetime="2020-04-20T08:59:42.000Z" itemprop="datePublished">2020-04-20</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/20/Mybatis入门之结果映射/" title="Mybatis入门之结果映射" itemprop="url">
+  
+    <h1 itemprop="name">Mybatis入门之结果映射</h1>
+    
+     
+           <p itemprop="description" >持续原创输出，点击上方蓝字关注我吧
+
+目录
+前言什么是结果映射？如何映射？别名映射驼峰映射配置文件开启驼峰映射配置类中开启驼峰映射resultMap映射总结高级结果映射关联(association)例子关联的嵌套 Select 查询关联的嵌套结果映射总结集合collection集</p>
+        
+    
+    <time datetime="2020-04-20T08:59:42.000Z" itemprop="datePublished">2020-04-20</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/20/order by 如何工作/" title="order by 如何工作" itemprop="url">
+  
+    <h1 itemprop="name">order by 如何工作</h1>
+    
+     
+           <p itemprop="description" >前言在实际的开发中一定会碰到根据某个字段进行排序后来显示结果的需求，但是你真的理解order by在 Mysql 底层是如何执行的吗？假设你要查询城市是苏州的所有人名字，并且按照姓名进行排序返回前 1000 个人的姓名、年龄，这条 sql 语句应该如何写？首先创建一张用户表，sq</p>
         
     
     <time datetime="2020-04-20T08:59:42.000Z" itemprop="datePublished">2020-04-20</time>
@@ -230,86 +293,9 @@ Zookeeper 相信大家都听说过，最典型的使用就是作为服务注册�
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/04/19/Mysql中orderby底层执行流程/" title="Mysql中orderby底层执行流程" itemprop="url">
-  
-    <h1 itemprop="name">Mysql中orderby底层执行流程</h1>
-    
-     
-           <p itemprop="description" >前言
-在实际的开发中一定会碰到根据某个字段进行排序后来显示结果的需求，但是你真的理解order by在 Mysql 底层是如何执行的吗？
-假设你要查询城市是苏州的所有人名字，并且按照姓名进行排序返回前 1000 个人的姓名、年龄，这条 sql 语句应该如何写？
-首先创建一张用户表</p>
-        
-    
-    <time datetime="2020-04-19T07:46:13.000Z" itemprop="datePublished">2020-04-19</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/04/19/面试官：你知道哪些事务失效的场景？/" title="面试官：你知道哪些事务失效的场景？" itemprop="url">
-  
-    <h1 itemprop="name">面试官：你知道哪些事务失效的场景？</h1>
-    
-     
-           <p itemprop="description" >前言
-声明式事务是Spring功能中最爽之一，可是有些时候，我们在使用声明式事务并未生效，这是为什么呢？
-今天陈某带大家来聊一聊声明事务的几种失效场景。本文将会从以下两个方面来说一下事务为什么会失效？
-@Transactional介绍
-@Transactional失效场景
-
-
-
-</p>
-        
-    
-    <time datetime="2020-04-19T07:45:21.000Z" itemprop="datePublished">2020-04-19</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/04/05/设计模式：工厂方法模式/" title="设计模式：工厂方法模式" itemprop="url">
-  
-    <h1 itemprop="name">设计模式：工厂方法模式</h1>
-    
-     
-           <p itemprop="description" >导读
-工厂方法模式是所有设计模式中比较常用的一种模式，但是真正能搞懂用好的少之又少，Spring底层大量的使用该设计模式来进行封装，以致开发者阅读源代码的时候晕头转向。
-今天陈某分别从以下五个方面详细讲述一下工厂方法模式：
-从什么是工厂方法模式
-通用框架实现
-工厂方法模式的优点
-</p>
-        
-    
-    <time datetime="2020-04-05T13:44:06.000Z" itemprop="datePublished">2020-04-05</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
   </nav>
 
 </div>
@@ -323,6 +309,10 @@ Zookeeper 相信大家都听说过，最典型的使用就是作为服务注册�
 <div class="categorieslist">
 	<p class="asidetitle">分类</p>
 		<ul>
+		
+		  
+			<li><a href="/categories/Mybatis进阶/" title="Mybatis进阶">Mybatis进阶<sup>3</sup></a></li>
+		  
 		
 		  
 			<li><a href="/categories/Spring/" title="Spring">Spring<sup>1</sup></a></li>
@@ -363,6 +353,10 @@ Zookeeper 相信大家都听说过，最典型的使用就是作为服务注册�
 		
 			
 				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Mybatis/" title="Mybatis">Mybatis<sup>3</sup></a></li>
 			
 		
 			

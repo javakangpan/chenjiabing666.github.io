@@ -79,20 +79,24 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2019/06/27/BeanWrapper解析/" title="BeanWrapper解析" itemprop="url">
+    <a href="/2018/04/12/设计模式之单例模式/" title="设计模式之单例模式" itemprop="url">
   
-    <h1 itemprop="name">BeanWrapper解析</h1>
+    <h1 itemprop="name">设计模式之单例模式</h1>
     
      
-           <p itemprop="description" >简介
-BeanWrapper是Spring底层经常使用的一个接口，简单来说是对Bean的一种包装，包括对Bean的属性、方法，数据等。
-唯一的一个实现类是BeanWrapperImpl，继承和实现关系图如下：
+           <p itemprop="description" >创建型模式之单例模式(Singleton)什么是单例模式
+该类只有一个实例
+构造方法是私有的
+有一个获取该类对象的静态方法getInstance()
 
-常用API
-public BeanWrapperImpl(Objec</p>
+应用场景
+一个国家只有一个主席
+如果此时的限定必须是抽象出来的类只能是一个对象，这个时候就需要使用单例模式
+
+懒汉式什么是懒汉式</p>
         
     
-    <time datetime="2019-06-27T15:33:20.000Z" itemprop="datePublished">2019-06-27</time>
+    <time datetime="2018-04-12T03:28:05.000Z" itemprop="datePublished">2018-04-12</time>
   </a>
 </section>
 
@@ -104,207 +108,24 @@ public BeanWrapperImpl(Objec</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2019/06/25/InstantiationAwareBeanPostProcessor源码解析/" title="InstantiationAwareBeanPostProcessor源码解析" itemprop="url">
+    <a href="/2018/04/12/设计模式之常见关系/" title="设计模式之常见关系" itemprop="url">
   
-    <h1 itemprop="name">InstantiationAwareBeanPostProcessor源码解析</h1>
+    <h1 itemprop="name">设计模式之常见关系</h1>
     
      
-           <p itemprop="description" >简介
-继承BeanPostProcessor接口，在此基础上又定义了三个方法，分别在Bean实例化前后【不是初始化】执行。
-从上面的介绍可以看到，这个接口相对于BeanPostProcessor功能更加强大，一个接口承担了Bean的实例化前后、初始化前后责任。
+           <p itemprop="description" >继承和泛化
+泛华关系是一种继承关系，表示一般与特殊的关系，它指定了子类如何特化父类的所有特征和行为。
+使用三角箭头的实线表示继承，其中箭头指向的是父类
 
-Bean加载顺序</p>
+接口与实现
+在java中一个类只能继承一个父类，但是可以实现多个接口
+使用的是带三角的虚线表示，其中箭头指向的是接口
+
+
+依赖</p>
         
     
-    <time datetime="2019-06-25T13:24:43.000Z" itemprop="datePublished">2019-06-25</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/06/23/FactoryBean解析/" title="FactoryBean解析" itemprop="url">
-  
-    <h1 itemprop="name">FactoryBean解析</h1>
-    
-     
-           <p itemprop="description" >简介
-简单的说FactoryBean实际上是一个Bean，并不是一个工厂，它能够为我们创建一个Bean，但是创建的这个Bean实际指向的并不是FactoryBean类型的，而是其中getObject方法返回类型的对象。
-
-接口解析
-FactoryBean中有三个需要实现的方法，如</p>
-        
-    
-    <time datetime="2019-06-23T13:49:47.000Z" itemprop="datePublished">2019-06-23</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/06/23/Bean的后置处理器/" title="Bean的后置处理器" itemprop="url">
-  
-    <h1 itemprop="name">Bean的后置处理器</h1>
-    
-     
-           <p itemprop="description" >简介
-调用顺序：在Bean的初始化前后调用，分别对应了其中的两个方法
-Bean的后置处理器对应的接口是BeanPostProcessor，其中定义了两个方法，如下：123456789101112public interface BeanPostProcessor &amp;#123;	/</p>
-        
-    
-    <time datetime="2019-06-23T13:48:55.000Z" itemprop="datePublished">2019-06-23</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/06/23/Spring注解开发/" title="Spring注解开发" itemprop="url">
-  
-    <h1 itemprop="name">Spring注解开发</h1>
-    
-     
-           <p itemprop="description" >@Configuration
-标注在类上，表明该类是一个配置类，相当于之前写的spring的xml文件，通常与@Bean结合使用
-该注解同时拥有了@Component的作用，将当前类注入ioc容器
-其中有一个value属性，指定注入ioc容器的名称，默认是类名首字母小写
-源码如下</p>
-        
-    
-    <time datetime="2019-06-23T03:17:49.000Z" itemprop="datePublished">2019-06-23</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/06/12/Spring中的Aware解析/" title="Spring中的Aware解析" itemprop="url">
-  
-    <h1 itemprop="name">Spring中的Aware解析</h1>
-    
-     
-           <p itemprop="description" >简介
-Spring框架中提供了许多实现了Aware接口的类，这些类主要是为了辅助Spring访问容器中的数据，比如BeanNameAware，这个类能够在Spring容器加载的过程中将Bean的名字（id）赋值给变量。
-
-常用的Aware
-BeanNameAware：能够获取be</p>
-        
-    
-    <time datetime="2019-06-12T11:33:01.000Z" itemprop="datePublished">2019-06-12</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/06/12/JDK8新特性/" title="JDK8新特性" itemprop="url">
-  
-    <h1 itemprop="name">JDK8新特性</h1>
-    
-     
-           <p itemprop="description" >JDk8新特性函数式编程集合的foreach
-List
-
-这里的表示List中每一个元素，可以不指定类型，JDK会自动推测出类型，但是也是可以使用()加上类型
-如果有一条语句可以直接在后面输出，如果有多行，那么可以在后面使用{}指定12Arrays.asList(1,2,4,1,</p>
-        
-    
-    <time datetime="2019-06-12T06:58:55.000Z" itemprop="datePublished">2019-06-12</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/01/19/springBoot制作docker镜像/" title="springBoot制作docker镜像" itemprop="url">
-  
-    <h1 itemprop="name">springBoot制作docker镜像</h1>
-    
-     
-           <p itemprop="description" >SpringBoot制作docker镜像开启2375端口修改docker配置文件
-vim /usr/lib/systemd/system/docker.service
-在ExecStart=/usr/bin/dockerd配置加上如下内容
-
-1-H tcp://0.0.0.0:2</p>
-        
-    
-    <time datetime="2019-01-19T05:51:31.000Z" itemprop="datePublished">2019-01-19</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/12/30/docker搭建私有仓库/" title="docker搭建私有仓库" itemprop="url">
-  
-    <h1 itemprop="name">docker搭建私有仓库</h1>
-    
-     
-           <p itemprop="description" >Docker私有仓库步骤
-docker pull registry
-docker run --name registry -p 5000:5000 -d registry
-启动完成后访问http:// 192.168.174.130:5000/v2/_catalog即可看到如下的</p>
-        
-    
-    <time datetime="2018-12-30T05:27:20.000Z" itemprop="datePublished">2018-12-30</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/12/30/Dockerfile/" title="Dockerfile" itemprop="url">
-  
-    <h1 itemprop="name">Dockerfile</h1>
-    
-     
-           <p itemprop="description" >DockerFile
-镜像的定制实际上就是定制每一层所添加的配置、文件。如果我们可以把每一层修改、安装、构建、操作的命令都写入一个脚本，用这个脚本来构建、定制镜像，那么无法重复的问题、镜像构建透明性的问题、体积的问题就都会解决。这个脚本就是 Dockerfile。
-
-Docker</p>
-        
-    
-    <time datetime="2018-12-30T05:26:02.000Z" itemprop="datePublished">2018-12-30</time>
+    <time datetime="2018-04-12T03:27:45.000Z" itemprop="datePublished">2018-04-12</time>
   </a>
 </section>
 
@@ -315,7 +136,7 @@ Docker</p>
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
   </nav>
 
 </div>
@@ -331,79 +152,23 @@ Docker</p>
 		<ul>
 		
 		  
-			<li><a href="/categories/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			<li><a href="/categories/Mybatis进阶/" title="Mybatis进阶">Mybatis进阶<sup>3</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Java-Web/" title="Java-Web">Java-Web<sup>1</sup></a></li>
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>12</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/docker/" title="docker">docker<sup>4</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/java学习/" title="java学习">java学习<sup>35</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/python/" title="python">python<sup>19</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/web前端/" title="web前端">web前端<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/分布式/" title="分布式">分布式<sup>14</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>20</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>22</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>16</sup></a></li>
 		  
 		
 		  
@@ -420,47 +185,11 @@ Docker</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>22</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>21</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>18</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>12</sup></a></li>
 			
 		
 			
@@ -468,35 +197,15 @@ Docker</p>
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Mybatis/" title="Mybatis">Mybatis<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/web前端/" title="web前端">web前端<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/docker/" title="docker">docker<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
 			
 		
 		</ul>
