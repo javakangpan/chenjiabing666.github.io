@@ -169,17 +169,20 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2020/03/12/SpringBoot整合多数据源，你会了吗？/" title="SpringBoot整合多数据源，你会了吗？" itemprop="url">
+    <a href="/2019/07/17/Spring解决循环依赖/" title="Spring解决循环依赖" itemprop="url">
   
-    <h1 itemprop="name">SpringBoot整合多数据源，你会了吗？</h1>
+    <h1 itemprop="name">Spring解决循环依赖</h1>
     
      
            <p itemprop="description" >导读
-平常的工作中可能大家的接触的都是单数据源的操作，很少能够用到多数据源的操作，但是在和其他系统对接的或者系统数据迁移时候往往需要定时从其他系统拉数据，此时多数据源变得很有必要了。
-多数据源的实现有两种方式，第一种是定义分别定义多个数据源，单个数据源分别和Mybatis整合，使</p>
+前几天发表的文章SpringBoot多数据源动态切换和SpringBoot整合多数据源的巨坑中，提到了一个坑就是动态数据源添加@Primary接口就会造成循环依赖异常，如下图：
+
+
+
+这个就是典型的构造器依赖，详情请看上面两篇文章，这里不再详细赘述了。本篇文章将会从源码深入</p>
         
     
-    <time datetime="2020-03-12T14:41:57.000Z" itemprop="datePublished">2020-03-12</time>
+    <time datetime="2019-07-16T17:13:29.000Z" itemprop="datePublished">2019-07-17</time>
   </a>
 </section>
 
@@ -191,17 +194,20 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2020/03/11/SpringBoot整合JTA/" title="SpringBoot整合JTA" itemprop="url">
+    <a href="/2018/04/16/设计模式之适配器模式/" title="设计模式之适配器模式" itemprop="url">
   
-    <h1 itemprop="name">SpringBoot整合JTA</h1>
+    <h1 itemprop="name">设计模式之适配器模式</h1>
     
      
-           <p itemprop="description" >导读
-JTA，即Java Transaction API，JTA允许应用程序执行分布式事务处理——在两个或多个网络计算机资源上访问并且更新数据。JDBC驱动程序的JTA支持极大地增强了数据访问能力。 
-JTA是基于XA标准制定的，采用两阶段提交的方式来管理分布式事务。即是一个事务</p>
+           <p itemprop="description" >结构型模式之适配器模式定义
+适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。
+
+
+
+Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一</p>
         
     
-    <time datetime="2020-03-11T13:04:24.000Z" itemprop="datePublished">2020-03-11</time>
+    <time datetime="2018-04-16T05:56:28.000Z" itemprop="datePublished">2018-04-16</time>
   </a>
 </section>
 
@@ -213,19 +219,16 @@ JTA是基于XA标准制定的，采用两阶段提交的方式来管理分布式
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2020/03/11/SpringBoot整合分页插件/" title="SpringBoot整合分页插件" itemprop="url">
+    <a href="/2018/04/16/设计模式之桥接模式/" title="设计模式之桥接模式" itemprop="url">
   
-    <h1 itemprop="name">SpringBoot整合分页插件</h1>
+    <h1 itemprop="name">设计模式之桥接模式</h1>
     
      
-           <p itemprop="description" >导读
-很久以前的项目分页查询的话大概会用limit，如果要统计总数还需要使用count，总之大多数情况下都是很麻烦的一件事，特别是使用Mybatis。
-分页插件确实解放了我们的双手，不用再写重复的sql，利用mybatis的插件的原理帮我们解决了系列问题。
-
-SpringBoot</p>
+           <p itemprop="description" >结构型模式之桥接模式
+桥接模式是一种很实用的结构型设计模式，如果软件系统中某个类存在两个独立变化的维度，通过该模式可以将这两个维度分离出来，使两者可以独立扩展，让系统更加符合“单一职责原则”。与多层继承方案不同，它将两个独立变化的维度设计为两个独立的继承等级结构，并且在抽象层建立</p>
         
     
-    <time datetime="2020-03-11T03:00:04.000Z" itemprop="datePublished">2020-03-11</time>
+    <time datetime="2018-04-16T05:55:29.000Z" itemprop="datePublished">2018-04-16</time>
   </a>
 </section>
 
@@ -237,19 +240,17 @@ SpringBoot</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2020/03/09/一文搞懂Spring-AMQP/" title="一文搞懂Spring-AMQP" itemprop="url">
+    <a href="/2018/04/16/设计模式之原型模式/" title="设计模式之原型模式" itemprop="url">
   
-    <h1 itemprop="name">一文搞懂Spring-AMQP</h1>
+    <h1 itemprop="name">设计模式之原型模式</h1>
     
      
-           <p itemprop="description" >RabbitAdmin
-队列，交换器的声明创建、删除、清空
-创建：
-
-123456@Bean   public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory ) &amp;#123;       RabbitAdm</p>
+           <p itemprop="description" >创建型模式之原型模式定义
+原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。
+   这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采</p>
         
     
-    <time datetime="2020-03-09T01:11:16.000Z" itemprop="datePublished">2020-03-09</time>
+    <time datetime="2018-04-16T05:53:04.000Z" itemprop="datePublished">2018-04-16</time>
   </a>
 </section>
 
@@ -261,18 +262,18 @@ SpringBoot</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2020/03/07/分布式锁-redis实现/" title="分布式锁-redis实现" itemprop="url">
+    <a href="/2018/04/16/设计模式之建造模式/" title="设计模式之建造模式" itemprop="url">
   
-    <h1 itemprop="name">分布式锁-redis实现</h1>
+    <h1 itemprop="name">设计模式之建造模式</h1>
     
      
-           <p itemprop="description" >为什么要分布式锁
-在单机的情况下，可以通过jvm提供的系列线程安全的操作来处理高并发的情况，但是在分布式的环境下，jvm提供的线程安全操作明显是不能满足要求的。在一些小型的互联网公司经常做的crud操作如果在高并发的情况下会出现很大的问题，比如：
+           <p itemprop="description" >创建型模式之建造者模式定义
+建造者模式(Builder Pattern)：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。建造者模式是一种对象创建型模式。
 
-12345//伪代码：下订单1</p>
+简单说，建造者的功能就是先构造复杂对象的每一个部件，指挥者的功能就是将这些部件以一定的步骤组装起</p>
         
     
-    <time datetime="2020-03-07T09:53:15.000Z" itemprop="datePublished">2020-03-07</time>
+    <time datetime="2018-04-16T05:52:36.000Z" itemprop="datePublished">2018-04-16</time>
   </a>
 </section>
 
@@ -284,18 +285,18 @@ SpringBoot</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2019/08/17/Shiro/" title="Shiro" itemprop="url">
+    <a href="/2018/04/16/设计模式之代理模式/" title="设计模式之代理模式" itemprop="url">
   
-    <h1 itemprop="name">Shiro</h1>
+    <h1 itemprop="name">设计模式之代理模式</h1>
     
      
-           <p itemprop="description" >项目搭建
-添加Shiro的依赖
+           <p itemprop="description" >结构型模式之代理模式(静态代理)
+由于某些原因，客户端不想或不能直接访问一个对象，此时可以通过一个称之为“代理”的第三者来实现间接访问，该方案对应的设计模式被称为代理模式。
 
-1234567891011&amp;lt;!--Spring整合的shiro依赖--&amp;gt;   &amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.apache.shiro&amp;lt;/groupId&amp;gt;     &amp;lt</p>
+代理其实是实现简介访问的媒介，当然在代理类中还可以在执行代理操作之前，之后，之中，环绕等执行相关动作。S</p>
         
     
-    <time datetime="2019-08-17T11:22:05.000Z" itemprop="datePublished">2019-08-17</time>
+    <time datetime="2018-04-16T05:52:12.000Z" itemprop="datePublished">2018-04-16</time>
   </a>
 </section>
 
@@ -306,7 +307,7 @@ SpringBoot</p>
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
   </nav>
 
 </div>
@@ -322,79 +323,19 @@ SpringBoot</p>
 		<ul>
 		
 		  
-			<li><a href="/categories/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Java-Web/" title="Java-Web">Java-Web<sup>1</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>5</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/docker/" title="docker">docker<sup>4</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/java学习/" title="java学习">java学习<sup>35</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/python/" title="python">python<sup>19</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/web前端/" title="web前端">web前端<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/分布式/" title="分布式">分布式<sup>14</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>20</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>22</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>16</sup></a></li>
 		  
 		
 		  
@@ -411,47 +352,7 @@ SpringBoot</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>22</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>21</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>18</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>16</sup></a></li>
 			
 		
 			
@@ -459,35 +360,15 @@ SpringBoot</p>
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/web前端/" title="web前端">web前端<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/docker/" title="docker">docker<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
 			
 		
 		</ul>

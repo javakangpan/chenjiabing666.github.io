@@ -79,20 +79,24 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2019/08/13/Shiro源码解析/" title="Shiro源码解析" itemprop="url">
+    <a href="/2018/04/12/设计模式之单例模式/" title="设计模式之单例模式" itemprop="url">
   
-    <h1 itemprop="name">Shiro源码解析</h1>
+    <h1 itemprop="name">设计模式之单例模式</h1>
     
      
-           <p itemprop="description" >FilterChainManager
-过滤器管理器，在ShiroFilterFactoryBean创建的时候会创建管理器，将配置好的过滤器添加到其中
-当发出请求的时候会其中找出和url匹配过滤器执行
+           <p itemprop="description" >创建型模式之单例模式(Singleton)什么是单例模式
+该类只有一个实例
+构造方法是私有的
+有一个获取该类对象的静态方法getInstance()
 
-ShiroFilterFactoryBean
-实现了FactoryBean接口</p>
+应用场景
+一个国家只有一个主席
+如果此时的限定必须是抽象出来的类只能是一个对象，这个时候就需要使用单例模式
+
+懒汉式什么是懒汉式</p>
         
     
-    <time datetime="2019-08-13T14:41:32.000Z" itemprop="datePublished">2019-08-13</time>
+    <time datetime="2018-04-12T03:28:05.000Z" itemprop="datePublished">2018-04-12</time>
   </a>
 </section>
 
@@ -104,206 +108,24 @@ ShiroFilterFactoryBean
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2019/08/05/mybatis源码解析/" title="mybatis源码解析" itemprop="url">
+    <a href="/2018/04/12/设计模式之常见关系/" title="设计模式之常见关系" itemprop="url">
   
-    <h1 itemprop="name">mybatis源码解析</h1>
+    <h1 itemprop="name">设计模式之常见关系</h1>
     
      
-           <p itemprop="description" >Configuration
-mybatis的全局配置类，其中封装了mybatis的全部配置，在mybaits加载全局配置文件和Mapper文件的时候，会将里面的xml中的各个元素解析出来，封装在其中。
-主要的解析流程在org.apache.ibatis.builder.xml.X</p>
+           <p itemprop="description" >继承和泛化
+泛华关系是一种继承关系，表示一般与特殊的关系，它指定了子类如何特化父类的所有特征和行为。
+使用三角箭头的实线表示继承，其中箭头指向的是父类
+
+接口与实现
+在java中一个类只能继承一个父类，但是可以实现多个接口
+使用的是带三角的虚线表示，其中箭头指向的是接口
+
+
+依赖</p>
         
     
-    <time datetime="2019-08-04T16:47:11.000Z" itemprop="datePublished">2019-08-05</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/08/05/mybatis深入学习/" title="mybatis深入学习" itemprop="url">
-  
-    <h1 itemprop="name">mybatis深入学习</h1>
-    
-     
-           <p itemprop="description" >环境搭建
-按照官方文档搭建即可
-
-typeAliases（别名）
-在使用mybatis标签的时候，需要指定类的全类名，比如resultType=xx.xxx.xx，但是我们可以为类指定别名，那么就可以直接使用别名，避免全类名冗余【不推荐使用】
-
-别名的配置有两种方式，这里我们讲解</p>
-        
-    
-    <time datetime="2019-08-04T16:46:56.000Z" itemprop="datePublished">2019-08-05</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/07/31/Springmvc源码解读/" title="Springmvc源码解读" itemprop="url">
-  
-    <h1 itemprop="name">Springmvc源码解读</h1>
-    
-     
-           <p itemprop="description" >实现Controller的方式
-如何实现一个controller，在源码中其实将controller叫做handler，我们通常知道实现controller的方式就是在类上添加一个@Controller和@RequestMapping注解，但是还有其他的方式定义一个control</p>
-        
-    
-    <time datetime="2019-07-31T06:45:44.000Z" itemprop="datePublished">2019-07-31</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/07/31/Springmvc注解版开发/" title="Springmvc注解版开发" itemprop="url">
-  
-    <h1 itemprop="name">Springmvc注解版开发</h1>
-    
-     
-           <p itemprop="description" >项目搭建搭建原理
-springMVC版本
-此次使用的版本是Spring 5.1.8
-
-配置内嵌tomcat
-为了简化开发，使用tomcat插件实现web项目的运行，只需要在pom.xml中配置一个插件即可，如下：
-
-123456789101112&amp;lt;plugins&amp;gt;  </p>
-        
-    
-    <time datetime="2019-07-31T06:45:22.000Z" itemprop="datePublished">2019-07-31</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/07/19/一文搞懂Spring-AOP原理/" title="一文搞懂Spring-AOP原理" itemprop="url">
-  
-    <h1 itemprop="name">一文搞懂Spring-AOP原理</h1>
-    
-     
-           <p itemprop="description" >简介
-面向切面编程，是面向对象编程的重要组成部分，在不改变业务逻辑功能的基础上，对横切逻辑进行扩展
-
-添加依赖12345&amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;     &amp;l</p>
-        
-    
-    <time datetime="2019-07-19T14:16:50.000Z" itemprop="datePublished">2019-07-19</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/07/17/Spring解决循环依赖/" title="Spring解决循环依赖" itemprop="url">
-  
-    <h1 itemprop="name">Spring解决循环依赖</h1>
-    
-     
-           <p itemprop="description" >导读
-前几天发表的文章SpringBoot多数据源动态切换和SpringBoot整合多数据源的巨坑中，提到了一个坑就是动态数据源添加@Primary接口就会造成循环依赖异常，如下图：
-
-
-
-这个就是典型的构造器依赖，详情请看上面两篇文章，这里不再详细赘述了。本篇文章将会从源码深入</p>
-        
-    
-    <time datetime="2019-07-16T17:13:29.000Z" itemprop="datePublished">2019-07-17</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/07/07/Spring事务源码解析/" title="Spring事务源码解析" itemprop="url">
-  
-    <h1 itemprop="name">Spring事务源码解析</h1>
-    
-     
-           <p itemprop="description" >配置注解版事务事务管理器
-事务管理器的接口是PlatformTransactionManager，其中定义了三个接口方法如下：
-TransactionStatus getTransaction(@Nullable TransactionDefinition definition)</p>
-        
-    
-    <time datetime="2019-07-07T11:41:07.000Z" itemprop="datePublished">2019-07-07</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/06/30/Spring中的事件/" title="Spring中的事件" itemprop="url">
-  
-    <h1 itemprop="name">Spring中的事件</h1>
-    
-     
-           <p itemprop="description" >简介
-学过编程语言的肯定知道事件，在JS中事件，Android中的事件，大多是鼠标点击，键盘事件，手指滑动事件等等。在Spring中也有一些事件，比如容器启动、容器关闭、容器刷新都是一个事件。
-既然有了事件，自然少不了事件监听器，事件分发器等，后续会详细介绍
-
-事件Spring中</p>
-        
-    
-    <time datetime="2019-06-30T06:22:07.000Z" itemprop="datePublished">2019-06-30</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/06/27/BeanFactoryPostProcessor解析/" title="BeanFactoryPostProcessor解析" itemprop="url">
-  
-    <h1 itemprop="name">BeanFactoryPostProcessor解析</h1>
-    
-     
-           <p itemprop="description" >简介
-Spring IoC容器允许BeanFactoryPostProcessor在容器实例化任何bean之前读取bean的定义(配置元数据)，并可以修改它。同时可以定义多个BeanFactoryPostProcessor，通过设置’order’属性来确定各个BeanFactor</p>
-        
-    
-    <time datetime="2019-06-27T15:34:47.000Z" itemprop="datePublished">2019-06-27</time>
+    <time datetime="2018-04-12T03:27:45.000Z" itemprop="datePublished">2018-04-12</time>
   </a>
 </section>
 
@@ -314,7 +136,7 @@ Spring IoC容器允许BeanFactoryPostProcessor在容器实例化任何bean之前
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
   </nav>
 
 </div>
@@ -330,79 +152,19 @@ Spring IoC容器允许BeanFactoryPostProcessor在容器实例化任何bean之前
 		<ul>
 		
 		  
-			<li><a href="/categories/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Java-Web/" title="Java-Web">Java-Web<sup>1</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>5</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/docker/" title="docker">docker<sup>4</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/java学习/" title="java学习">java学习<sup>35</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/python/" title="python">python<sup>19</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/web前端/" title="web前端">web前端<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/分布式/" title="分布式">分布式<sup>14</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>20</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>22</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>16</sup></a></li>
 		  
 		
 		  
@@ -419,47 +181,7 @@ Spring IoC容器允许BeanFactoryPostProcessor在容器实例化任何bean之前
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>22</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>21</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>18</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>10</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>16</sup></a></li>
 			
 		
 			
@@ -467,35 +189,15 @@ Spring IoC容器允许BeanFactoryPostProcessor在容器实例化任何bean之前
 			
 		
 			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>5</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/web前端/" title="web前端">web前端<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/docker/" title="docker">docker<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
 			
 		
 		</ul>
