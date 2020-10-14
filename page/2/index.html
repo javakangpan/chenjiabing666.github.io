@@ -79,6 +79,78 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2020/04/20/一文搞懂Redis持久化/" title="一文搞懂Redis持久化" itemprop="url">
+  
+    <h1 itemprop="name">一文搞懂Redis持久化</h1>
+    
+     
+           <p itemprop="description" >前言
+Redis目前已经成为主流的内存数据库了，但是大部分人仅仅是停留在会用的阶段，你真的了解Redis内部的工作原理吗？
+今天这篇文章将为大家介绍Redis持久化的两种方案，文章将会从以下五个方面介绍：
+什么是RDB，RDB如何实现持久化？
+什么是AOF，AOF如何实现持久化？</p>
+        
+    
+    <time datetime="2020-04-20T08:59:42.000Z" itemprop="datePublished">2020-04-20</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/20/Mysql最全面试指南/" title="Mysql最全面试指南" itemprop="url">
+  
+    <h1 itemprop="name">Mysql最全面试指南</h1>
+    
+     
+           <p itemprop="description" >前言
+前几天有读者找到我，说想要一套全面的Mysql面试题，今天陈某特地为她写了一篇。
+由于篇幅较长，陈某已经将此文章转换为PDF，公众号回复关键词Mysql面试题即可获取。
+
+Mysql什么是SQL？
+结构化查询语言(Structured Query Language)简称SQ</p>
+        
+    
+    <time datetime="2020-04-20T08:57:55.000Z" itemprop="datePublished">2020-04-20</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/19/Zookeeper实现分布式锁/" title="Zookeeper实现分布式锁" itemprop="url">
+  
+    <h1 itemprop="name">Zookeeper实现分布式锁</h1>
+    
+     
+           <p itemprop="description" >导读
+真是有人(锁)的地方就有江湖(事务)，今天不谈江湖，来撩撩人。
+分布式锁的概念、为什么使用分布式锁，想必大家已经很清楚了。前段时间作者写过Redis是如何实现分布式锁，今天这篇文章来谈谈Zookeeper是如何实现分布式锁的。
+陈某今天分别从如下几个方面来详细讲讲ZK如何实</p>
+        
+    
+    <time datetime="2020-04-19T07:48:54.000Z" itemprop="datePublished">2020-04-19</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2020/04/19/Zookeeper入门/" title="Zookeeper入门" itemprop="url">
   
     <h1 itemprop="name">Zookeeper入门</h1>
@@ -246,82 +318,6 @@ Zookeeper 相信大家都听说过，最典型的使用就是作为服务注册�
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/04/01/Mysql性能优化：什么是索引下推？/" title="Mysql性能优化：什么是索引下推？" itemprop="url">
-  
-    <h1 itemprop="name">Mysql性能优化：什么是索引下推？</h1>
-    
-     
-           <p itemprop="description" >导读
-索引下推（index condition pushdown ）简称ICP，在Mysql5.6的版本上推出，用于优化查询。
-在不使用ICP的情况下，在使用非主键索引（又叫普通索引或者二级索引）进行查询时，存储引擎通过索引检索到数据，然后返回给MySQL服务器，服务器然后判断数</p>
-        
-    
-    <time datetime="2020-04-01T02:37:30.000Z" itemprop="datePublished">2020-04-01</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/04/01/Mysql性能优化：为什么使用覆盖索引/" title="Mysql性能优化：为什么使用覆盖索引?" itemprop="url">
-  
-    <h1 itemprop="name">Mysql性能优化：为什么使用覆盖索引?</h1>
-    
-     
-           <p itemprop="description" >导读
-相信读者看过很多MYSQL索引优化的文章，其中有很多优化的方法，比如最佳左前缀，覆盖索引等方法，但是你真正理解为什么要使用最佳左前缀，为什么使用覆盖索引会提升查询的效率吗？
-
-本篇文章将从MYSQL内部结构上讲一下为什么覆盖索引能够提升效率。
-
-
-InnoDB索引模型
-在I</p>
-        
-    
-    <time datetime="2020-04-01T02:36:34.000Z" itemprop="datePublished">2020-04-01</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/04/01/一条查询语句到底是如何执行的/" title="一条查询语句到底是如何执行的?" itemprop="url">
-  
-    <h1 itemprop="name">一条查询语句到底是如何执行的?</h1>
-    
-     
-           <p itemprop="description" >导读
-Mysql在中小型企业中是个香饽饽，目前主流的数据库之一，几乎没有一个后端开发者不会使用的，但是作为一个老司机，仅仅会用真的不够。
-
-今天陈某透过一个简单的查询语句来讲述在Mysql内部的执行过程。
-1select * from table where id=10;
-
-
-撸</p>
-        
-    
-    <time datetime="2020-04-01T02:35:30.000Z" itemprop="datePublished">2020-04-01</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
@@ -348,7 +344,7 @@ Mysql在中小型企业中是个香饽饽，目前主流的数据库之一，几
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>6</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>9</sup></a></li>
 		  
 		
 		  
@@ -373,11 +369,11 @@ Mysql在中小型企业中是个香饽饽，目前主流的数据库之一，几
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>9</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>9</sup></a></li>
 			
 		
 			

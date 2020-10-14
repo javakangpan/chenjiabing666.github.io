@@ -79,6 +79,82 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2020/04/01/Mysql性能优化：什么是索引下推？/" title="Mysql性能优化：什么是索引下推？" itemprop="url">
+  
+    <h1 itemprop="name">Mysql性能优化：什么是索引下推？</h1>
+    
+     
+           <p itemprop="description" >导读
+索引下推（index condition pushdown ）简称ICP，在Mysql5.6的版本上推出，用于优化查询。
+在不使用ICP的情况下，在使用非主键索引（又叫普通索引或者二级索引）进行查询时，存储引擎通过索引检索到数据，然后返回给MySQL服务器，服务器然后判断数</p>
+        
+    
+    <time datetime="2020-04-01T02:37:30.000Z" itemprop="datePublished">2020-04-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/01/Mysql性能优化：为什么使用覆盖索引/" title="Mysql性能优化：为什么使用覆盖索引?" itemprop="url">
+  
+    <h1 itemprop="name">Mysql性能优化：为什么使用覆盖索引?</h1>
+    
+     
+           <p itemprop="description" >导读
+相信读者看过很多MYSQL索引优化的文章，其中有很多优化的方法，比如最佳左前缀，覆盖索引等方法，但是你真正理解为什么要使用最佳左前缀，为什么使用覆盖索引会提升查询的效率吗？
+
+本篇文章将从MYSQL内部结构上讲一下为什么覆盖索引能够提升效率。
+
+
+InnoDB索引模型
+在I</p>
+        
+    
+    <time datetime="2020-04-01T02:36:34.000Z" itemprop="datePublished">2020-04-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/01/一条查询语句到底是如何执行的/" title="一条查询语句到底是如何执行的?" itemprop="url">
+  
+    <h1 itemprop="name">一条查询语句到底是如何执行的?</h1>
+    
+     
+           <p itemprop="description" >导读
+Mysql在中小型企业中是个香饽饽，目前主流的数据库之一，几乎没有一个后端开发者不会使用的，但是作为一个老司机，仅仅会用真的不够。
+
+今天陈某透过一个简单的查询语句来讲述在Mysql内部的执行过程。
+1select * from table where id=10;
+
+
+撸</p>
+        
+    
+    <time datetime="2020-04-01T02:35:30.000Z" itemprop="datePublished">2020-04-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2020/04/01/Mysql中的三类锁，你知道吗？/" title="Mysql中的三类锁，你知道吗？" itemprop="url">
   
     <h1 itemprop="name">Mysql中的三类锁，你知道吗？</h1>
@@ -243,72 +319,6 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/16/设计模式之桥接模式/" title="设计模式之桥接模式" itemprop="url">
-  
-    <h1 itemprop="name">设计模式之桥接模式</h1>
-    
-     
-           <p itemprop="description" >结构型模式之桥接模式
-桥接模式是一种很实用的结构型设计模式，如果软件系统中某个类存在两个独立变化的维度，通过该模式可以将这两个维度分离出来，使两者可以独立扩展，让系统更加符合“单一职责原则”。与多层继承方案不同，它将两个独立变化的维度设计为两个独立的继承等级结构，并且在抽象层建立</p>
-        
-    
-    <time datetime="2018-04-16T05:55:29.000Z" itemprop="datePublished">2018-04-16</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/16/设计模式之原型模式/" title="设计模式之原型模式" itemprop="url">
-  
-    <h1 itemprop="name">设计模式之原型模式</h1>
-    
-     
-           <p itemprop="description" >创建型模式之原型模式定义
-原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。
-   这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采</p>
-        
-    
-    <time datetime="2018-04-16T05:53:04.000Z" itemprop="datePublished">2018-04-16</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/16/设计模式之建造模式/" title="设计模式之建造模式" itemprop="url">
-  
-    <h1 itemprop="name">设计模式之建造模式</h1>
-    
-     
-           <p itemprop="description" >创建型模式之建造者模式定义
-建造者模式(Builder Pattern)：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。建造者模式是一种对象创建型模式。
-
-简单说，建造者的功能就是先构造复杂对象的每一个部件，指挥者的功能就是将这些部件以一定的步骤组装起</p>
-        
-    
-    <time datetime="2018-04-16T05:52:36.000Z" itemprop="datePublished">2018-04-16</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
@@ -335,7 +345,7 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>6</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>9</sup></a></li>
 		  
 		
 		  
@@ -360,11 +370,11 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>9</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>6</sup></a></li>
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>9</sup></a></li>
 			
 		
 			

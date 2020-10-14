@@ -4,11 +4,71 @@
 
     
   <url>
-    <loc>http://chenjiabing666.github.io/2020/05/08/select%E8%AF%AD%E5%8F%A5%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/</loc>
-    <lastmod>2020-10-14T02:19:14.530Z</lastmod>
+    <loc>http://chenjiabing666.github.io/2020/04/20/explain%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92/</loc>
+    <lastmod>2020-10-14T02:50:21.911Z</lastmod>
     <data>
         <display>
-        <title>IDEA2020永久破解，亲测可用！！！</title>
+        <title>explain执行计划</title>
+        <pubTime>2020-04-20T08:59:42.000Z</pubTime>
+        
+        <tag>SQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据库干货篇" url="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2020/04/20/Mysql%E6%9C%80%E5%85%A8%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
+    <lastmod>2020-10-14T02:50:08.033Z</lastmod>
+    <data>
+        <display>
+        <title>Mysql最全面试题</title>
+        <pubTime>2020-04-20T08:59:42.000Z</pubTime>
+        
+        <tag>SQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据库干货篇" url="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2020/04/20/order%20by%20%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C/</loc>
+    <lastmod>2020-10-14T02:47:39.209Z</lastmod>
+    <data>
+        <display>
+        <title>order by 如何工作</title>
+        <pubTime>2020-04-20T08:59:42.000Z</pubTime>
+        
+        <tag>SQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据库干货篇" url="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chenjiabing666.github.io/2020/05/08/select%E8%AF%AD%E5%8F%A5%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/</loc>
+    <lastmod>2020-10-14T02:22:07.716Z</lastmod>
+    <data>
+        <display>
+        <title>select语句做了什么？</title>
         <pubTime>2020-05-08T10:51:57.000Z</pubTime>
         
         <tag>SQL</tag>
