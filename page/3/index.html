@@ -79,6 +79,77 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2020/04/05/设计模式：模板模式/" title="设计模式：模板模式" itemprop="url">
+  
+    <h1 itemprop="name">设计模式：模板模式</h1>
+    
+     
+           <p itemprop="description" >导读
+模板模式在是Spring底层被广泛的应用，比如事务管理器的实现，JDBC模板的实现。
+今天就来谈谈什么是模板模式、模板模式的优缺点、模板模式的简单演示、模板模式在Spring底层的实现。
+
+什么是模板模式
+模板模式首先要有一个抽象类，这个抽象类公开定义了执行它的方法的方式/</p>
+        
+    
+    <time datetime="2020-04-05T13:43:52.000Z" itemprop="datePublished">2020-04-05</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/05/Mysql性能优化：为什么count这么慢/" title="Mysql性能优化：为什么count(*)这么慢？" itemprop="url">
+  
+    <h1 itemprop="name">Mysql性能优化：为什么count(*)这么慢？</h1>
+    
+     
+           <p itemprop="description" >导读
+在开发中一定会用到统计一张表的行数，比如一个交易系统，老板会让你每天生成一个报表，这些统计信息少不了sql中的count函数。
+但是随着记录越来越多，查询的速度会越来越慢，为什么会这样呢？Mysql内部到底是怎么处理的？
+今天这篇文章将从Mysql内部对于count函数是怎</p>
+        
+    
+    <time datetime="2020-04-05T13:41:59.000Z" itemprop="datePublished">2020-04-05</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2020/04/01/接口幂等性如何设计？/" title="接口幂等性如何设计？" itemprop="url">
+  
+    <h1 itemprop="name">接口幂等性如何设计？</h1>
+    
+     
+           <p itemprop="description" >导读
+现在这个时代大家可能最关心的就是钱了，那么有没有想过你银行转账给你没有一次是转多的，要么失败，要么成功，为什么不能失误一下多转一笔呢？醒醒吧年轻人，别做梦了，做银行的能那么傻x吗？
+今天我们就来谈一谈为什么银行转账不能多给我转一笔？关乎到钱的问题，小伙伴们打起精神！！！
+要</p>
+        
+    
+    <time datetime="2020-04-01T02:38:34.000Z" itemprop="datePublished">2020-04-01</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2020/04/01/Mysql性能优化：什么是索引下推？/" title="Mysql性能优化：什么是索引下推？" itemprop="url">
   
     <h1 itemprop="name">Mysql性能优化：什么是索引下推？</h1>
@@ -245,80 +316,6 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2020/03/18/SpringBoot整合多数据源的巨坑/" title="SpringBoot整合多数据源的巨坑" itemprop="url">
-  
-    <h1 itemprop="name">SpringBoot整合多数据源的巨坑</h1>
-    
-     
-           <p itemprop="description" >导读
-本篇文章接上篇SpringBoot整合多数据源，你会了吗？，前面文章最后留了几个问题供大家思考，今天一一揭晓。
-
-配置如何优化
-上文整合的过程中的还顺带整合Mybatis和TransactionManager，为什么还要重新定义他们呢？SpringBoot不是给我们都配置好</p>
-        
-    
-    <time datetime="2020-03-18T08:51:57.000Z" itemprop="datePublished">2020-03-18</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2019/07/17/Spring解决循环依赖/" title="Spring解决循环依赖" itemprop="url">
-  
-    <h1 itemprop="name">Spring解决循环依赖</h1>
-    
-     
-           <p itemprop="description" >导读
-前几天发表的文章SpringBoot多数据源动态切换和SpringBoot整合多数据源的巨坑中，提到了一个坑就是动态数据源添加@Primary接口就会造成循环依赖异常，如下图：
-
-
-
-这个就是典型的构造器依赖，详情请看上面两篇文章，这里不再详细赘述了。本篇文章将会从源码深入</p>
-        
-    
-    <time datetime="2019-07-16T17:13:29.000Z" itemprop="datePublished">2019-07-17</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2018/04/16/设计模式之适配器模式/" title="设计模式之适配器模式" itemprop="url">
-  
-    <h1 itemprop="name">设计模式之适配器模式</h1>
-    
-     
-           <p itemprop="description" >结构型模式之适配器模式定义
-适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。
-
-
-
-Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一</p>
-        
-    
-    <time datetime="2018-04-16T05:56:28.000Z" itemprop="datePublished">2018-04-16</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
@@ -345,7 +342,7 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>9</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>12</sup></a></li>
 		  
 		
 		  
@@ -370,7 +367,7 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>9</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>12</sup></a></li>
 			
 		
 			
@@ -378,11 +375,11 @@ Target（目标抽象类）：目标抽象类定义客户所需接口，可以�
 			
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>1</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
 			
 		
 		</ul>
