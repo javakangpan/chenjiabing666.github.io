@@ -264,12 +264,12 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2020/04/20/索引的优化/" title="MySQL中索引如何优化？" itemprop="url">
+    <a href="/2020/04/20/explain执行计划/" title="explain执行计划" itemprop="url">
   
-    <h1 itemprop="name">MySQL中索引如何优化？</h1>
+    <h1 itemprop="name">explain执行计划</h1>
     
      
-           <p itemprop="description" >前言索引的相信大家都听说过，但是真正会用的又有几人？平时工作中写SQL真的会考虑到这条SQL如何能够用上索引，如何能够提升执行效率？此篇文章详细的讲述了索引优化的几个原则，只要在工作中能够随时应用到，相信你写出的SQL一定是效率最高，最牛逼的。文章的脑图如下：索引优化规则1、li</p>
+           <p itemprop="description" >前言如何写出效率高的SQL语句，提到这必然离不开Explain执行计划的分析，至于什么是执行计划，如何写出高效率的SQL，本篇文章将会一一介绍。执行计划执行计划是数据库根据 SQL 语句和相关表的统计信息作出的一个查询方案，这个方案是由查询优化器自动分析产生的。使用explain</p>
         
     
     <time datetime="2020-04-20T08:59:42.000Z" itemprop="datePublished">2020-04-20</time>
@@ -284,12 +284,12 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2020/04/20/吐血总结：MySQL性能如何优化？/" title="吐血总结：MySQL性能如何优化？" itemprop="url">
+    <a href="/2020/04/20/order by 如何工作/" title="order by 如何工作" itemprop="url">
   
-    <h1 itemprop="name">吐血总结：MySQL性能如何优化？</h1>
+    <h1 itemprop="name">order by 如何工作</h1>
     
      
-           <p itemprop="description" >前言上篇讲了MySQL的索引优化，此篇文章从大范围讲一下MySQL数据库到底该如何优化？这个问题在面试中时常被问到，今天陈某来总结下。SQL 优化的几个步骤1. 通过show status 命令了解各种 SQL 的执行效率show [session | global] statu</p>
+           <p itemprop="description" >前言在实际的开发中一定会碰到根据某个字段进行排序后来显示结果的需求，但是你真的理解order by在 Mysql 底层是如何执行的吗？假设你要查询城市是苏州的所有人名字，并且按照姓名进行排序返回前 1000 个人的姓名、年龄，这条 sql 语句应该如何写？首先创建一张用户表，sq</p>
         
     
     <time datetime="2020-04-20T08:59:42.000Z" itemprop="datePublished">2020-04-20</time>
