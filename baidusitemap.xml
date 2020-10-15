@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%20%E7%AC%AC%20%E5%8D%81%E4%BA%8C%E5%BC%B9%EF%BC%8CSpring%20Boot%E6%95%B4%E5%90%88%E5%A4%9A%E7%82%B9%E5%A5%97%E8%B7%AF%EF%BC%8C%E5%B0%91%E8%B5%B0%E7%82%B9%E5%BC%AF%E8%B7%AF%EF%BC%81%EF%BC%81%EF%BC%81/</loc>
+    <lastmod>2020-10-15T13:03:32.950Z</lastmod>
+    <data>
+        <display>
+        <title>Spring Boot 第 十二弹，Spring Boot整合多点套路，少走点弯路！！！</title>
+        <pubTime>2020-10-14T02:10:42.000Z</pubTime>
+        
+        <tag>Spring Boot</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring Boot 进阶" url="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%BC%B9%EF%BC%8C%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB%20!%20Spring%20Boot%20%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83%EF%BC%81%EF%BC%81%EF%BC%81/</loc>
     <lastmod>2020-10-14T04:30:05.231Z</lastmod>
     <data>
@@ -97,26 +117,6 @@
            
              
               <breadCrumb title="杂谈" url="http://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E5%8D%81%E4%B8%80%E5%BC%B9%EF%BC%8C%E8%BF%99%E7%B1%BB%E6%B3%A8%E8%A7%A3%E9%83%BD%E4%B8%8D%E7%9F%A5%E9%81%93%EF%BC%8C%E8%BF%98%E5%A5%BD%E6%84%8F%E6%80%9D%E8%AF%B4%E7%94%A8%E8%BF%87Spring%20Boot/</loc>
-    <lastmod>2020-10-14T03:58:49.522Z</lastmod>
-    <data>
-        <display>
-        <title>Spring Boot第十一弹，这类注解都不知道，还好意思说用过Spring Boot</title>
-        <pubTime>2020-10-14T02:11:42.000Z</pubTime>
-        
-        <tag>Spring Boot</tag>
-         
-         
-           
-             
-              <breadCrumb title="Spring Boot 进阶" url="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
           
         </display>
     </data>
