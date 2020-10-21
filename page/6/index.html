@@ -79,18 +79,22 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/30/Dockerfile/" title="Dockerfile" itemprop="url">
+    <a href="/2020/04/01/Mysql中的三类锁，你知道吗？/" title="Mysql中的三类锁，你知道吗？" itemprop="url">
   
-    <h1 itemprop="name">Dockerfile</h1>
+    <h1 itemprop="name">Mysql中的三类锁，你知道吗？</h1>
     
      
-           <p itemprop="description" >DockerFile
-镜像的定制实际上就是定制每一层所添加的配置、文件。如果我们可以把每一层修改、安装、构建、操作的命令都写入一个脚本，用这个脚本来构建、定制镜像，那么无法重复的问题、镜像构建透明性的问题、体积的问题就都会解决。这个脚本就是 Dockerfile。
+           <p itemprop="description" >导读
+正所谓有人(锁)的地方就有江湖(事务)，人在江湖飘，怎能一无所知？
 
-Docker</p>
+今天来细说一下Mysql中的三类锁，分别是全局锁、表级锁、行级锁。
+
+
+全局锁
+全局锁简单的说就是锁住整个数据库实例，命令是Flush tables with read lock。当你需要为整个数据库处于</p>
         
     
-    <time datetime="2018-12-30T05:26:02.000Z" itemprop="datePublished">2018-12-30</time>
+    <time datetime="2020-04-01T02:31:58.000Z" itemprop="datePublished">2020-04-01</time>
   </a>
 </section>
 
@@ -102,17 +106,17 @@ Docker</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/25/SpringBoot实现BCrypt密码加密/" title="SpringBoot实现BCrypt密码加密" itemprop="url">
+    <a href="/2020/03/23/IDEA调试技巧/" title="IDEA调试技巧" itemprop="url">
   
-    <h1 itemprop="name">SpringBoot实现BCrypt密码加密</h1>
+    <h1 itemprop="name">IDEA调试技巧</h1>
     
      
-           <p itemprop="description" >SpringBoot 实现 BCrypt密码加密前言
-出于安全的考虑，一些敏感的信息是绝对不能以明文的方式存储在数据库中的，比如密码通常是通过哈希算法进行加密的。有很多标准的算法比如SHA和MD5，结合salt（盐）是一种不错的选择，但是如果知道其加密的规则还是相对不安全。
-Sp</p>
+           <p itemprop="description" >导读
+前天面试了一个985高校的实习生，问了他平时用什么开发工具，他想也没想的说IDEA，于是我抛砖引玉的问了一下IDEA的调试用过吧，你说说怎么设置断点条件？那孩子懵了，想了好一会对我说没用过，甚至都没听说过这个。
+作为一名资深的老司机，IDEA调试可以说是家常便饭，如果不会d</p>
         
     
-    <time datetime="2018-12-25T13:07:15.000Z" itemprop="datePublished">2018-12-25</time>
+    <time datetime="2020-03-23T08:15:12.000Z" itemprop="datePublished">2020-03-23</time>
   </a>
 </section>
 
@@ -124,17 +128,18 @@ Sp</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/25/zuul服务网关/" title="zuul服务网关" itemprop="url">
+    <a href="/2020/03/23/Spring生命周期/" title="Spring生命周期" itemprop="url">
   
-    <h1 itemprop="name">zuul服务网关</h1>
+    <h1 itemprop="name">Spring生命周期</h1>
     
      
-           <p itemprop="description" >Zuul简介
-Zuul包含了对请求的路由和过滤两个主要的功能，其中路由功能负责将外部的请求转发到具体的微服务实例上，是实现外部访问统一入口的基础上，而过滤功能则负责对请求的处理过程进行干预，是实现请求校验，服务聚合等功能的基础。
-Zuul和Eureka进行整合，将Zuul自身注册</p>
+           <p itemprop="description" >导读
+Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主要是在org.springframework.context.support.AbstractApplicationContext.refresh方法中，下面也是围绕其中的逻辑进行讲解。
+
+开撸【1】 pre</p>
         
     
-    <time datetime="2018-12-25T13:05:22.000Z" itemprop="datePublished">2018-12-25</time>
+    <time datetime="2020-03-23T02:13:32.000Z" itemprop="datePublished">2020-03-23</time>
   </a>
 </section>
 
@@ -146,22 +151,16 @@ Zuul和Eureka进行整合，将Zuul自身注册</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/25/Config(统一配置中心)/" title="Config统一配置中心" itemprop="url">
+    <a href="/2020/03/23/接口限流算法/" title="接口限流算法" itemprop="url">
   
-    <h1 itemprop="name">Config统一配置中心</h1>
+    <h1 itemprop="name">接口限流算法</h1>
     
      
-           <p itemprop="description" >Config 统一配置中心为什么使用？
-方便维护：微服务可能成百个，如果一个个配置都是在项目中配置的话，会给运维造成不必要的麻烦
-安全：配置统一是由运维来操作，如果涉及到数据库的账户和密码，肯定是不能让开发知道的
-
-服务端
-添加依赖:
-
-1234567891011&amp;lt;!-- </p>
+           <p itemprop="description" >导读
+前几天和一个朋友讨论了他们公司的系统问题，传统的单体应用，集群部署，他说近期服务的并发量可能会出现瞬时增加的风险，虽然部署了集群，但是通过压测后发现请求延迟仍然是很大，想问问我有什么改进的地方。我沉思了一会，现在去改架构显然是不可能的，于是我给出了一个建议，让他去做个接口限</p>
         
     
-    <time datetime="2018-12-24T16:24:18.000Z" itemprop="datePublished">2018-12-25</time>
+    <time datetime="2020-03-23T01:38:58.000Z" itemprop="datePublished">2020-03-23</time>
   </a>
 </section>
 
@@ -173,17 +172,19 @@ Zuul和Eureka进行整合，将Zuul自身注册</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/25/spring-sleuth-服务追踪/" title="spring sleuth 服务追踪" itemprop="url">
+    <a href="/2020/03/18/SpringBoot整合多数据源的巨坑/" title="SpringBoot整合多数据源的巨坑" itemprop="url">
   
-    <h1 itemprop="name">spring sleuth 服务追踪</h1>
+    <h1 itemprop="name">SpringBoot整合多数据源的巨坑</h1>
     
      
-           <p itemprop="description" >spring  sleuth- 服务追踪Zipkin
-Zipkin 是一个开放源代码分布式的跟踪系统，由Twitter公司开源，它致力于收集服务的定时数据，以解决微服务架构中的延迟问题，包括数据的收集、存储、查找和展现。
-每个服务向zipkin报告计时数据，zipkin会根据调用</p>
+           <p itemprop="description" >导读
+本篇文章接上篇SpringBoot整合多数据源，你会了吗？，前面文章最后留了几个问题供大家思考，今天一一揭晓。
+
+配置如何优化
+上文整合的过程中的还顺带整合Mybatis和TransactionManager，为什么还要重新定义他们呢？SpringBoot不是给我们都配置好</p>
         
     
-    <time datetime="2018-12-24T16:23:20.000Z" itemprop="datePublished">2018-12-25</time>
+    <time datetime="2020-03-18T08:51:57.000Z" itemprop="datePublished">2020-03-18</time>
   </a>
 </section>
 
@@ -195,17 +196,20 @@ Zipkin 是一个开放源代码分布式的跟踪系统，由Twitter公司开源
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/25/Hystrix断路器、熔断器/" title="Hystrix断路器、熔断器" itemprop="url">
+    <a href="/2019/07/17/Spring解决循环依赖/" title="Spring解决循环依赖" itemprop="url">
   
-    <h1 itemprop="name">Hystrix断路器、熔断器</h1>
+    <h1 itemprop="name">Spring解决循环依赖</h1>
     
      
-           <p itemprop="description" >Hystrix 断路器、熔断器服务雪崩
-在微服务架构中通常会有多个服务层调用，基础服务的故障可能会导致级联故障，进而造成整个系统不可用的情况，这种现象被称为服务雪崩效应。服务雪崩效应是一种因“服务提供者”的不可用导致“服务消费者”的不可用,并将不可用逐渐放大的过程。
-如果下图所示</p>
+           <p itemprop="description" >导读
+前几天发表的文章SpringBoot多数据源动态切换和SpringBoot整合多数据源的巨坑中，提到了一个坑就是动态数据源添加@Primary接口就会造成循环依赖异常，如下图：
+
+
+
+这个就是典型的构造器依赖，详情请看上面两篇文章，这里不再详细赘述了。本篇文章将会从源码深入</p>
         
     
-    <time datetime="2018-12-24T16:21:38.000Z" itemprop="datePublished">2018-12-25</time>
+    <time datetime="2019-07-16T17:13:29.000Z" itemprop="datePublished">2019-07-17</time>
   </a>
 </section>
 
@@ -217,16 +221,20 @@ Zipkin 是一个开放源代码分布式的跟踪系统，由Twitter公司开源
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/25/Feign负载均衡/" title="Feign（负载均衡）" itemprop="url">
+    <a href="/2018/04/16/设计模式之适配器模式/" title="设计模式之适配器模式" itemprop="url">
   
-    <h1 itemprop="name">Feign（负载均衡）</h1>
+    <h1 itemprop="name">设计模式之适配器模式</h1>
     
      
-           <p itemprop="description" >Feign 负载均衡简介
-Feign是一个声明式的伪Http客户端，它使得写Http客户端变得更简单。使用Feign，只需要创建一个接口并注解。它具有可插拔的注解特性，可使用Feign 注解和JAX-RS注解。Feign支持可插拔的编码器和解码器。Feign默认集成了Ribbon</p>
+           <p itemprop="description" >结构型模式之适配器模式定义
+适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。
+
+
+
+Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一</p>
         
     
-    <time datetime="2018-12-24T16:20:36.000Z" itemprop="datePublished">2018-12-25</time>
+    <time datetime="2018-04-16T05:56:28.000Z" itemprop="datePublished">2018-04-16</time>
   </a>
 </section>
 
@@ -238,24 +246,16 @@ Feign是一个声明式的伪Http客户端，它使得写Http客户端变得更�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/25/Spring cloud的优秀资源/" title="spring cloud的资源" itemprop="url">
+    <a href="/2018/04/16/设计模式之桥接模式/" title="设计模式之桥接模式" itemprop="url">
   
-    <h1 itemprop="name">spring cloud的资源</h1>
+    <h1 itemprop="name">设计模式之桥接模式</h1>
     
      
-           <p itemprop="description" >spring cloud的资源
-Springcloud中文网
-中文文档
-中国社区
-优质学习资源
-SpringBoot学习资源
-官方文档
-http://www.itmuch.com/spring-cloud-sum-eureka/
-指南
-https://www.cnblogs.co</p>
+           <p itemprop="description" >结构型模式之桥接模式
+桥接模式是一种很实用的结构型设计模式，如果软件系统中某个类存在两个独立变化的维度，通过该模式可以将这两个维度分离出来，使两者可以独立扩展，让系统更加符合“单一职责原则”。与多层继承方案不同，它将两个独立变化的维度设计为两个独立的继承等级结构，并且在抽象层建立</p>
         
     
-    <time datetime="2018-12-24T16:19:33.000Z" itemprop="datePublished">2018-12-25</time>
+    <time datetime="2018-04-16T05:55:29.000Z" itemprop="datePublished">2018-04-16</time>
   </a>
 </section>
 
@@ -267,16 +267,17 @@ https://www.cnblogs.co</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/25/Ribbon客户端负载均衡/" title="Ribbon（客户端负载均衡）" itemprop="url">
+    <a href="/2018/04/16/设计模式之原型模式/" title="设计模式之原型模式" itemprop="url">
   
-    <h1 itemprop="name">Ribbon（客户端负载均衡）</h1>
+    <h1 itemprop="name">设计模式之原型模式</h1>
     
      
-           <p itemprop="description" >Ribbon - 客户端负载均衡简介
-Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡的工具。它是一个基于HTTP和TCP的客户端负载均衡器。它可以通过在客户端中配置ribbonServerList来设置服务端列表去轮询访问以达到均</p>
+           <p itemprop="description" >创建型模式之原型模式定义
+原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。
+   这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采</p>
         
     
-    <time datetime="2018-12-24T16:19:33.000Z" itemprop="datePublished">2018-12-25</time>
+    <time datetime="2018-04-16T05:53:04.000Z" itemprop="datePublished">2018-04-16</time>
   </a>
 </section>
 
@@ -288,19 +289,18 @@ Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/25/Eureka服务发现和注册/" title="Eureka服务发现和注册" itemprop="url">
+    <a href="/2018/04/16/设计模式之建造模式/" title="设计模式之建造模式" itemprop="url">
   
-    <h1 itemprop="name">Eureka服务发现和注册</h1>
+    <h1 itemprop="name">设计模式之建造模式</h1>
     
      
-           <p itemprop="description" >Eureka - 服务发现和注册服务端
-新建springBoot项目，选择模块cloud Discovery====&amp;gt;Eureka Server
-此时的依赖如下：
+           <p itemprop="description" >创建型模式之建造者模式定义
+建造者模式(Builder Pattern)：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。建造者模式是一种对象创建型模式。
 
-12345678910111213141516171819&amp;lt;dependencies&amp;gt;		&amp;lt</p>
+简单说，建造者的功能就是先构造复杂对象的每一个部件，指挥者的功能就是将这些部件以一定的步骤组装起</p>
         
     
-    <time datetime="2018-12-24T16:18:42.000Z" itemprop="datePublished">2018-12-25</time>
+    <time datetime="2018-04-16T05:52:36.000Z" itemprop="datePublished">2018-04-16</time>
   </a>
 </section>
 
@@ -311,7 +311,7 @@ Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡�
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/5/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/7/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">Next<span></span></a>
   </nav>
 
 </div>
@@ -327,79 +327,27 @@ Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡�
 		<ul>
 		
 		  
-			<li><a href="/categories/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			<li><a href="/categories/Mybatis进阶/" title="Mybatis进阶">Mybatis进阶<sup>11</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Java-Web/" title="Java-Web">Java-Web<sup>1</sup></a></li>
+			<li><a href="/categories/Spring-Boot-进阶/" title="Spring Boot 进阶">Spring Boot 进阶<sup>13</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+			<li><a href="/categories/开发工具/" title="开发工具">开发工具<sup>3</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>12</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/docker/" title="docker">docker<sup>4</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/java学习/" title="java学习">java学习<sup>34</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/python/" title="python">python<sup>19</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/web前端/" title="web前端">web前端<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/分布式/" title="分布式">分布式<sup>14</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>20</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>22</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
 		  
 		
 		  
@@ -416,47 +364,19 @@ Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡�
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
+				<li><a href="/tags/Spring-Boot/" title="Spring Boot">Spring Boot<sup>14</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>22</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>13</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>21</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>18</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Mybatis/" title="Mybatis">Mybatis<sup>11</sup></a></li>
 			
 		
 			
@@ -464,35 +384,11 @@ Spring Cloud Ribbon是基于Netflix Ribbon实现的一套客户端负载均衡�
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/破解/" title="破解">破解<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>8</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/web前端/" title="web前端">web前端<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/docker/" title="docker">docker<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
 			
 		
 		</ul>

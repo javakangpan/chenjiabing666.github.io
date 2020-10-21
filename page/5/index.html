@@ -79,16 +79,17 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2019/06/27/BeanFactoryPostProcessor解析/" title="BeanFactoryPostProcessor解析" itemprop="url">
+    <a href="/2020/04/19/Zookeeper入门/" title="Zookeeper入门" itemprop="url">
   
-    <h1 itemprop="name">BeanFactoryPostProcessor解析</h1>
+    <h1 itemprop="name">Zookeeper入门</h1>
     
      
-           <p itemprop="description" >简介
-Spring IoC容器允许BeanFactoryPostProcessor在容器实例化任何bean之前读取bean的定义(配置元数据)，并可以修改它。同时可以定义多个BeanFactoryPostProcessor，通过设置’order’属性来确定各个BeanFactor</p>
+           <p itemprop="description" >导读
+Zookeeper 相信大家都听说过，最典型的使用就是作为服务注册中心。今天陈某带大家从零基础入门 Zookeeper，看了本文，你将会对 Zookeeper 有了初步的了解和认识。
+注意：本文基于 Zookeeper 的版本是 3.4.14，最新版本的在使用上会有一些出入</p>
         
     
-    <time datetime="2019-06-27T15:34:47.000Z" itemprop="datePublished">2019-06-27</time>
+    <time datetime="2020-04-19T07:48:16.000Z" itemprop="datePublished">2020-04-19</time>
   </a>
 </section>
 
@@ -100,20 +101,18 @@ Spring IoC容器允许BeanFactoryPostProcessor在容器实例化任何bean之前
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2019/06/27/BeanWrapper解析/" title="BeanWrapper解析" itemprop="url">
+    <a href="/2020/04/19/Mysql中orderby底层执行流程/" title="Mysql中orderby底层执行流程" itemprop="url">
   
-    <h1 itemprop="name">BeanWrapper解析</h1>
+    <h1 itemprop="name">Mysql中orderby底层执行流程</h1>
     
      
-           <p itemprop="description" >简介
-BeanWrapper是Spring底层经常使用的一个接口，简单来说是对Bean的一种包装，包括对Bean的属性、方法，数据等。
-唯一的一个实现类是BeanWrapperImpl，继承和实现关系图如下：
-
-常用API
-public BeanWrapperImpl(Objec</p>
+           <p itemprop="description" >前言
+在实际的开发中一定会碰到根据某个字段进行排序后来显示结果的需求，但是你真的理解order by在 Mysql 底层是如何执行的吗？
+假设你要查询城市是苏州的所有人名字，并且按照姓名进行排序返回前 1000 个人的姓名、年龄，这条 sql 语句应该如何写？
+首先创建一张用户表</p>
         
     
-    <time datetime="2019-06-27T15:33:20.000Z" itemprop="datePublished">2019-06-27</time>
+    <time datetime="2020-04-19T07:46:13.000Z" itemprop="datePublished">2020-04-19</time>
   </a>
 </section>
 
@@ -125,19 +124,23 @@ public BeanWrapperImpl(Objec</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2019/06/25/InstantiationAwareBeanPostProcessor源码解析/" title="InstantiationAwareBeanPostProcessor源码解析" itemprop="url">
+    <a href="/2020/04/19/面试官：你知道哪些事务失效的场景？/" title="面试官：你知道哪些事务失效的场景？" itemprop="url">
   
-    <h1 itemprop="name">InstantiationAwareBeanPostProcessor源码解析</h1>
+    <h1 itemprop="name">面试官：你知道哪些事务失效的场景？</h1>
     
      
-           <p itemprop="description" >简介
-继承BeanPostProcessor接口，在此基础上又定义了三个方法，分别在Bean实例化前后【不是初始化】执行。
-从上面的介绍可以看到，这个接口相对于BeanPostProcessor功能更加强大，一个接口承担了Bean的实例化前后、初始化前后责任。
+           <p itemprop="description" >前言
+声明式事务是Spring功能中最爽之一，可是有些时候，我们在使用声明式事务并未生效，这是为什么呢？
+今天陈某带大家来聊一聊声明事务的几种失效场景。本文将会从以下两个方面来说一下事务为什么会失效？
+@Transactional介绍
+@Transactional失效场景
 
-Bean加载顺序</p>
+
+
+</p>
         
     
-    <time datetime="2019-06-25T13:24:43.000Z" itemprop="datePublished">2019-06-25</time>
+    <time datetime="2020-04-19T07:45:21.000Z" itemprop="datePublished">2020-04-19</time>
   </a>
 </section>
 
@@ -149,19 +152,21 @@ Bean加载顺序</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2019/06/23/FactoryBean解析/" title="FactoryBean解析" itemprop="url">
+    <a href="/2020/04/05/设计模式：工厂方法模式/" title="设计模式：工厂方法模式" itemprop="url">
   
-    <h1 itemprop="name">FactoryBean解析</h1>
+    <h1 itemprop="name">设计模式：工厂方法模式</h1>
     
      
-           <p itemprop="description" >简介
-简单的说FactoryBean实际上是一个Bean，并不是一个工厂，它能够为我们创建一个Bean，但是创建的这个Bean实际指向的并不是FactoryBean类型的，而是其中getObject方法返回类型的对象。
-
-接口解析
-FactoryBean中有三个需要实现的方法，如</p>
+           <p itemprop="description" >导读
+工厂方法模式是所有设计模式中比较常用的一种模式，但是真正能搞懂用好的少之又少，Spring底层大量的使用该设计模式来进行封装，以致开发者阅读源代码的时候晕头转向。
+今天陈某分别从以下五个方面详细讲述一下工厂方法模式：
+从什么是工厂方法模式
+通用框架实现
+工厂方法模式的优点
+</p>
         
     
-    <time datetime="2019-06-23T13:49:47.000Z" itemprop="datePublished">2019-06-23</time>
+    <time datetime="2020-04-05T13:44:06.000Z" itemprop="datePublished">2020-04-05</time>
   </a>
 </section>
 
@@ -173,17 +178,20 @@ FactoryBean中有三个需要实现的方法，如</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2019/06/23/Bean的后置处理器/" title="Bean的后置处理器" itemprop="url">
+    <a href="/2020/04/05/设计模式：模板模式/" title="设计模式：模板模式" itemprop="url">
   
-    <h1 itemprop="name">Bean的后置处理器</h1>
+    <h1 itemprop="name">设计模式：模板模式</h1>
     
      
-           <p itemprop="description" >简介
-调用顺序：在Bean的初始化前后调用，分别对应了其中的两个方法
-Bean的后置处理器对应的接口是BeanPostProcessor，其中定义了两个方法，如下：123456789101112public interface BeanPostProcessor &amp;#123;	/</p>
+           <p itemprop="description" >导读
+模板模式在是Spring底层被广泛的应用，比如事务管理器的实现，JDBC模板的实现。
+今天就来谈谈什么是模板模式、模板模式的优缺点、模板模式的简单演示、模板模式在Spring底层的实现。
+
+什么是模板模式
+模板模式首先要有一个抽象类，这个抽象类公开定义了执行它的方法的方式/</p>
         
     
-    <time datetime="2019-06-23T13:48:55.000Z" itemprop="datePublished">2019-06-23</time>
+    <time datetime="2020-04-05T13:43:52.000Z" itemprop="datePublished">2020-04-05</time>
   </a>
 </section>
 
@@ -195,19 +203,18 @@ Bean的后置处理器对应的接口是BeanPostProcessor，其中定义了两�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2019/06/23/Spring注解开发/" title="Spring注解开发" itemprop="url">
+    <a href="/2020/04/05/Mysql性能优化：为什么count这么慢/" title="Mysql性能优化：为什么count(*)这么慢？" itemprop="url">
   
-    <h1 itemprop="name">Spring注解开发</h1>
+    <h1 itemprop="name">Mysql性能优化：为什么count(*)这么慢？</h1>
     
      
-           <p itemprop="description" >@Configuration
-标注在类上，表明该类是一个配置类，相当于之前写的spring的xml文件，通常与@Bean结合使用
-该注解同时拥有了@Component的作用，将当前类注入ioc容器
-其中有一个value属性，指定注入ioc容器的名称，默认是类名首字母小写
-源码如下</p>
+           <p itemprop="description" >导读
+在开发中一定会用到统计一张表的行数，比如一个交易系统，老板会让你每天生成一个报表，这些统计信息少不了sql中的count函数。
+但是随着记录越来越多，查询的速度会越来越慢，为什么会这样呢？Mysql内部到底是怎么处理的？
+今天这篇文章将从Mysql内部对于count函数是怎</p>
         
     
-    <time datetime="2019-06-23T03:17:49.000Z" itemprop="datePublished">2019-06-23</time>
+    <time datetime="2020-04-05T13:41:59.000Z" itemprop="datePublished">2020-04-05</time>
   </a>
 </section>
 
@@ -219,19 +226,18 @@ Bean的后置处理器对应的接口是BeanPostProcessor，其中定义了两�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2019/06/12/Spring中的Aware解析/" title="Spring中的Aware解析" itemprop="url">
+    <a href="/2020/04/01/接口幂等性如何设计？/" title="接口幂等性如何设计？" itemprop="url">
   
-    <h1 itemprop="name">Spring中的Aware解析</h1>
+    <h1 itemprop="name">接口幂等性如何设计？</h1>
     
      
-           <p itemprop="description" >简介
-Spring框架中提供了许多实现了Aware接口的类，这些类主要是为了辅助Spring访问容器中的数据，比如BeanNameAware，这个类能够在Spring容器加载的过程中将Bean的名字（id）赋值给变量。
-
-常用的Aware
-BeanNameAware：能够获取be</p>
+           <p itemprop="description" >导读
+现在这个时代大家可能最关心的就是钱了，那么有没有想过你银行转账给你没有一次是转多的，要么失败，要么成功，为什么不能失误一下多转一笔呢？醒醒吧年轻人，别做梦了，做银行的能那么傻x吗？
+今天我们就来谈一谈为什么银行转账不能多给我转一笔？关乎到钱的问题，小伙伴们打起精神！！！
+要</p>
         
     
-    <time datetime="2019-06-12T11:33:01.000Z" itemprop="datePublished">2019-06-12</time>
+    <time datetime="2020-04-01T02:38:34.000Z" itemprop="datePublished">2020-04-01</time>
   </a>
 </section>
 
@@ -243,19 +249,17 @@ BeanNameAware：能够获取be</p>
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2019/06/12/JDK8新特性/" title="JDK8新特性" itemprop="url">
+    <a href="/2020/04/01/Mysql性能优化：什么是索引下推？/" title="Mysql性能优化：什么是索引下推？" itemprop="url">
   
-    <h1 itemprop="name">JDK8新特性</h1>
+    <h1 itemprop="name">Mysql性能优化：什么是索引下推？</h1>
     
      
-           <p itemprop="description" >JDk8新特性函数式编程集合的foreach
-List
-
-这里的表示List中每一个元素，可以不指定类型，JDK会自动推测出类型，但是也是可以使用()加上类型
-如果有一条语句可以直接在后面输出，如果有多行，那么可以在后面使用{}指定12Arrays.asList(1,2,4,1,</p>
+           <p itemprop="description" >导读
+索引下推（index condition pushdown ）简称ICP，在Mysql5.6的版本上推出，用于优化查询。
+在不使用ICP的情况下，在使用非主键索引（又叫普通索引或者二级索引）进行查询时，存储引擎通过索引检索到数据，然后返回给MySQL服务器，服务器然后判断数</p>
         
     
-    <time datetime="2019-06-12T06:58:55.000Z" itemprop="datePublished">2019-06-12</time>
+    <time datetime="2020-04-01T02:37:30.000Z" itemprop="datePublished">2020-04-01</time>
   </a>
 </section>
 
@@ -267,19 +271,22 @@ List
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2019/01/19/springBoot制作docker镜像/" title="springBoot制作docker镜像" itemprop="url">
+    <a href="/2020/04/01/Mysql性能优化：为什么使用覆盖索引/" title="Mysql性能优化：为什么使用覆盖索引?" itemprop="url">
   
-    <h1 itemprop="name">springBoot制作docker镜像</h1>
+    <h1 itemprop="name">Mysql性能优化：为什么使用覆盖索引?</h1>
     
      
-           <p itemprop="description" >SpringBoot制作docker镜像开启2375端口修改docker配置文件
-vim /usr/lib/systemd/system/docker.service
-在ExecStart=/usr/bin/dockerd配置加上如下内容
+           <p itemprop="description" >导读
+相信读者看过很多MYSQL索引优化的文章，其中有很多优化的方法，比如最佳左前缀，覆盖索引等方法，但是你真正理解为什么要使用最佳左前缀，为什么使用覆盖索引会提升查询的效率吗？
 
-1-H tcp://0.0.0.0:2</p>
+本篇文章将从MYSQL内部结构上讲一下为什么覆盖索引能够提升效率。
+
+
+InnoDB索引模型
+在I</p>
         
     
-    <time datetime="2019-01-19T05:51:31.000Z" itemprop="datePublished">2019-01-19</time>
+    <time datetime="2020-04-01T02:36:34.000Z" itemprop="datePublished">2020-04-01</time>
   </a>
 </section>
 
@@ -291,18 +298,22 @@ vim /usr/lib/systemd/system/docker.service
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2018/12/30/docker搭建私有仓库/" title="docker搭建私有仓库" itemprop="url">
+    <a href="/2020/04/01/一条查询语句到底是如何执行的/" title="一条查询语句到底是如何执行的?" itemprop="url">
   
-    <h1 itemprop="name">docker搭建私有仓库</h1>
+    <h1 itemprop="name">一条查询语句到底是如何执行的?</h1>
     
      
-           <p itemprop="description" >Docker私有仓库步骤
-docker pull registry
-docker run --name registry -p 5000:5000 -d registry
-启动完成后访问http:// 192.168.174.130:5000/v2/_catalog即可看到如下的</p>
+           <p itemprop="description" >导读
+Mysql在中小型企业中是个香饽饽，目前主流的数据库之一，几乎没有一个后端开发者不会使用的，但是作为一个老司机，仅仅会用真的不够。
+
+今天陈某透过一个简单的查询语句来讲述在Mysql内部的执行过程。
+1select * from table where id=10;
+
+
+撸</p>
         
     
-    <time datetime="2018-12-30T05:27:20.000Z" itemprop="datePublished">2018-12-30</time>
+    <time datetime="2020-04-01T02:35:30.000Z" itemprop="datePublished">2020-04-01</time>
   </a>
 </section>
 
@@ -313,7 +324,7 @@ docker run --name registry -p 5000:5000 -d registry
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next<span></span></a>
   </nav>
 
 </div>
@@ -329,79 +340,27 @@ docker run --name registry -p 5000:5000 -d registry
 		<ul>
 		
 		  
-			<li><a href="/categories/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			<li><a href="/categories/Mybatis进阶/" title="Mybatis进阶">Mybatis进阶<sup>11</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Java-Web/" title="Java-Web">Java-Web<sup>1</sup></a></li>
+			<li><a href="/categories/Spring-Boot-进阶/" title="Spring Boot 进阶">Spring Boot 进阶<sup>13</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+			<li><a href="/categories/开发工具/" title="开发工具">开发工具<sup>3</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>12</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Redis/" title="Redis">Redis<sup>8</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/docker/" title="docker">docker<sup>4</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/java学习/" title="java学习">java学习<sup>34</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/python/" title="python">python<sup>19</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/web前端/" title="web前端">web前端<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/分布式/" title="分布式">分布式<sup>14</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>20</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>22</sup></a></li>
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>14</sup></a></li>
 		  
 		
 		  
@@ -418,47 +377,19 @@ docker run --name registry -p 5000:5000 -d registry
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
+				<li><a href="/tags/Spring-Boot/" title="Spring Boot">Spring Boot<sup>14</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>22</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>13</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>21</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>18</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
+				<li><a href="/tags/Mybatis/" title="Mybatis">Mybatis<sup>11</sup></a></li>
 			
 		
 			
@@ -466,35 +397,11 @@ docker run --name registry -p 5000:5000 -d registry
 			
 		
 			
-				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+				<li><a href="/tags/破解/" title="破解">破解<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>8</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/web前端/" title="web前端">web前端<sup>7</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/docker/" title="docker">docker<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>3</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>1</sup></a></li>
 			
 		
 		</ul>
