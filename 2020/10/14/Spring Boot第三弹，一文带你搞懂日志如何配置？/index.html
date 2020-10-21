@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   
   
-    <title>Spring Boot 第三弹，一文带你搞懂日志如何配置？ | 爱撒谎的男孩</title>
+    <title>一文带你搞懂日志如何配置？ | 爱撒谎的男孩</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="不才陈某">
@@ -15,7 +15,7 @@
     <meta name="description" content="持续原创输出，点击上方蓝字关注我吧
 目录前言Spring Boot 版本日志级别日志框架有哪些？Spring Boot 日志框架代码中如何使用日志？如何定制日志级别？日志如何输出到文件中？如何定制日志格式？如何自定义日志配置？总结前言日志通常不会在需求阶段作为一个功能单独提出来，也不会在产品方案中看到它的细节。但是，这丝毫不影响它在任何一个系统中的重要的地位。今天就来介绍一下Spring Boot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring Boot 第三弹，一文带你搞懂日志如何配置？">
+<meta property="og:title" content="一文带你搞懂日志如何配置？">
 <meta property="og:url" content="http://chenjiabing666.github.io/2020/10/14/Spring Boot第三弹，一文带你搞懂日志如何配置？/index.html">
 <meta property="og:site_name" content="爱撒谎的男孩">
 <meta property="og:description" content="持续原创输出，点击上方蓝字关注我吧
@@ -23,9 +23,9 @@
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/Spring%20Boot%20%E7%AC%AC%E4%B8%89%E5%BC%B9%EF%BC%8C%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/2.jpg">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/Spring%20Boot%20%E7%AC%AC%E4%B8%89%E5%BC%B9%EF%BC%8C%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/1.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/myjszl_log.png">
-<meta property="og:updated_time" content="2020-10-14T03:52:33.760Z">
+<meta property="og:updated_time" content="2020-10-21T09:03:14.847Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Boot 第三弹，一文带你搞懂日志如何配置？">
+<meta name="twitter:title" content="一文带你搞懂日志如何配置？">
 <meta name="twitter:description" content="持续原创输出，点击上方蓝字关注我吧
 目录前言Spring Boot 版本日志级别日志框架有哪些？Spring Boot 日志框架代码中如何使用日志？如何定制日志级别？日志如何输出到文件中？如何定制日志格式？如何自定义日志配置？总结前言日志通常不会在需求阶段作为一个功能单独提出来，也不会在产品方案中看到它的细节。但是，这丝毫不影响它在任何一个系统中的重要的地位。今天就来介绍一下Spring Boot">
 <meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/Spring%20Boot%20%E7%AC%AC%E4%B8%89%E5%BC%B9%EF%BC%8C%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/2.jpg">
@@ -88,7 +88,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2020/10/14/Spring Boot第三弹，一文带你搞懂日志如何配置？/" title="Spring Boot 第三弹，一文带你搞懂日志如何配置？" itemprop="url">Spring Boot 第三弹，一文带你搞懂日志如何配置？</a>
+      <a href="/2020/10/14/Spring Boot第三弹，一文带你搞懂日志如何配置？/" title="一文带你搞懂日志如何配置？" itemprop="url">一文带你搞懂日志如何配置？</a>
   </h1>
   <p class="article-author">By
        
@@ -132,7 +132,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenjiabing666.github.io/2020/10/14/Spring Boot第三弹，一文带你搞懂日志如何配置？/" data-title="Spring Boot 第三弹，一文带你搞懂日志如何配置？ | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
+	  <div data-url="http://chenjiabing666.github.io/2020/10/14/Spring Boot第三弹，一文带你搞懂日志如何配置？/" data-title="一文带你搞懂日志如何配置？ | 爱撒谎的男孩" data-tsina="5651317821" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -146,18 +146,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2020/10/14/Spring Boot第四弹，一文带你搞懂日志框架如何切换？/" title="Spring Boot第四弹，一文带你搞懂日志框架如何切换？">
+ <a href="/2020/10/14/Spring Boot第四弹，一文带你搞懂日志框架如何切换？/" title="一文带你搞懂日志框架如何切换？">
   <strong>上一篇：</strong><br/>
   <span>
-  Spring Boot第四弹，一文带你搞懂日志框架如何切换？</span>
+  一文带你搞懂日志框架如何切换？</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2020/10/14/Spring Boot 第二弹，配置文件怎么造？/"  title="Spring Boot 第二弹，配置文件怎么造？">
+<a href="/2020/10/14/Spring Boot 第二弹，配置文件怎么造？/"  title="Spring Boot 配置文件怎么造？">
  <strong>下一篇：</strong><br/> 
- <span>Spring Boot 第二弹，配置文件怎么造？
+ <span>Spring Boot 配置文件怎么造？
 </span>
 </a>
 </div>
@@ -200,7 +200,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Spring-Boot-进阶/" title="Spring Boot 进阶">Spring Boot 进阶<sup>12</sup></a></li>
+			<li><a href="/categories/Spring-Boot-进阶/" title="Spring Boot 进阶">Spring Boot 进阶<sup>13</sup></a></li>
 		  
 		
 		  
@@ -229,11 +229,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>13</sup></a></li>
+				<li><a href="/tags/Spring-Boot/" title="Spring Boot">Spring Boot<sup>14</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Spring-Boot/" title="Spring Boot">Spring Boot<sup>13</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>13</sup></a></li>
 			
 		
 			
