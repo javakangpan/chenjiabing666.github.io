@@ -76,1480 +76,250 @@
     <div id="container">
       <div id="main">
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/05/01/MongoDB干货篇之更新数据/" title="MongoDB干货篇之更新数据" itemprop="url">MongoDB干货篇之更新数据</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
-		
-  <p class="article-time">
-    <time datetime="2017-05-01T00:13:32.000Z" itemprop="datePublished"> 发表于 2017-05-01</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="MongoDB干货篇之数据更新"><a href="#MongoDB干货篇之数据更新" class="headerlink" title="MongoDB干货篇之数据更新"></a>MongoDB干货篇之数据更新</h1><h2 id="常用的函数"><a href="#常用的函数" class="headerlink" title="常用的函数"></a>常用的函数</h2><blockquote>
-<ul>
-<li><p><code>update(&lt;query&gt;,&lt;update&gt;,&lt;upsert&gt;,&lt;multi&gt;)</code>,其中<code>&lt;query&gt;</code>表示筛选的条件，<code>&lt;update&gt;</code>是要更新的数据</p>
-</li>
-<li><p><code>updateMany()</code>   更新所有匹配到的数据</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="upsert"><a href="#upsert" class="headerlink" title="upsert"></a>upsert</h3><blockquote>
-<p><code>upsert</code>是一个布尔类型的数据，如果为<code>true</code>时，当根据<code>query</code>条件没有找到匹配的数据时，就表示插入此条数据，如果为<code>false</code>就表示不插入数据</p>
-<p>下面将会在一个空的集合中更新数据<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//就会插入此条数据，因为没有找到匹配的信息</span></div><div class="line">db.user.update(&#123;<span class="string">'name'</span>:<span class="string">'chenjiabing'</span>,<span class="string">'age'</span>:<span class="number">22</span>,<span class="string">'sex'</span>:<span class="string">"Man"</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'hobby'</span>:<span class="string">'read'</span>&#125;&#125;,&#123;<span class="string">'upsert'</span>:<span class="literal">true</span>&#125;);  </div><div class="line"></div><div class="line">db.user.update(&#123;<span class="string">'name'</span>:<span class="string">'chenjiabing'</span>,<span class="string">'age'</span>:<span class="number">22</span>,<span class="string">'sex'</span>:<span class="string">"Man"</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'hobby'</span>:<span class="string">'read'</span>&#125;&#125;,<span class="literal">true</span>);   <span class="comment">//和上面的语句等价</span></div><div class="line"></div><div class="line"><span class="comment">//输出  db.user.find()</span></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59067b70856d5893a687655f"</span>), <span class="string">"age"</span> : <span class="number">22</span>, <span class="string">"name"</span> : <span class="string">"chenjiabing"</span>, <span class="string">"sex"</span> : <span class="string">"Man"</span>, <span class="string">"hobby"</span> : <span class="string">"read"</span> &#125;</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="multi"><a href="#multi" class="headerlink" title="multi"></a>multi</h3><blockquote>
-<p><em>如果这个参数为<code>true</code>,就把按条件查出来多条记录全部更新。默认为<code>false</code>,如果为<code>true</code>的话和<code>updateMany()</code>一样的效果</em></p>
-<p>下面将会更新所有匹配到的数据</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'hobby'</span>:<span class="string">'code'</span>&#125;&#125;,&#123;<span class="string">'multi'</span>:<span class="literal">true</span>&#125;);</div></pre></td></tr></table></figure>
-<h2 id="字段更新操作符-Field-Update-Operators"><a href="#字段更新操作符-Field-Update-Operators" class="headerlink" title="字段更新操作符 Field Update Operators"></a>字段更新操作符 Field Update Operators</h2><h3 id="set"><a href="#set" class="headerlink" title="$set"></a>$set</h3><blockquote>
-<p><code>$set</code>用来指定一个键的值。如果这个键不存在，则创建它。<strong>注意这里的更新默认是只更新第一条匹配到的数据，如果第一条匹配的数据已经满足修改后的条件，那么将不会执行下面匹配的信息</strong></p>
-<ul>
-<li>下面我们将会添加一条信息在数据库中</li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.insert(&#123;<span class="string">"name"</span>:<span class="string">'jack'</span>,<span class="string">"age"</span>:<span class="number">22</span>,<span class="string">"sex"</span>:<span class="string">'Man'</span>,<span class="string">'school'</span>:&#123;<span class="string">'name'</span>:<span class="string">'jsnu'</span>,<span class="string">'city'</span>:<span class="string">'xuzhou'</span>&#125;&#125;);</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>运行下面的代码，将该用户的兴趣设置为“读书”并添加至文档中(此时文档中<code>hobby</code>键是不存在，该条文档就会创建它)</p>
-</blockquote>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'hobby'</span>:<span class="string">'read'</span>&#125;&#125;)</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>下面将会修改用户的<strong>年龄</strong></p>
-</blockquote>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="string">'name'</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'age'</span>:<span class="number">20</span>&#125;&#125;)</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>下面用<code>$set</code>修改<strong>数据类型</strong>，将<code>sex</code>设置为<code>1</code></p>
-</blockquote>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="string">'name'</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'sex'</span>:<span class="number">1</span>&#125;&#125;)</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>下面用<code>$set</code>修改<strong>内嵌文档</strong>，必须指定文档的名字和键值</p>
-</blockquote>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="string">'school.name'</span>:<span class="string">'shida'</span>,<span class="string">'school.city'</span>:<span class="string">'beijing'</span>&#125;&#125;)</div></pre></td></tr></table></figure>
-<h3 id="unset"><a href="#unset" class="headerlink" title="$unset"></a>$unset</h3><blockquote>
-<p>从文档中<strong>移除</strong>指定的键</p>
-<p>下面将要删除上面插入的<code>hobby</code>键</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$unset</span>:&#123;<span class="string">'hobby'</span>:<span class="number">1</span>&#125;&#125;)   <span class="comment">//这里的值是任意给的，随便什么值</span></div></pre></td></tr></table></figure>
-<h3 id="inc"><a href="#inc" class="headerlink" title="$inc"></a>$inc</h3><blockquote>
-<p><code>$inc</code>修改器用来<strong>增加</strong>已有键的值，<strong>或者在键不存在时创建一个键</strong><code>$inc</code>就是专门来增加（和减少）数字的。<code>$inc</code>只能用于<strong>整数、长整数或双精度浮点数</strong>。要是用在其他类型的数据上就会导致操作失败</p>
-<p>例如毎次有人访问该博文，该条博文的浏览数就加<code>1</code>，用键<code>pageViews</code>保存浏览数信息。这个键值上面没有定义过，所以会自动创建一个</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$inc</span>:&#123;<span class="string">'pageViews'</span>:<span class="number">1</span>&#125;&#125;);    <span class="comment">//起初没有就会自动创建一个键</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>下面演示增加和减少</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$inc</span>:&#123;<span class="string">'pageViews'</span>:<span class="number">100</span>&#125;&#125;)  ;  <span class="comment">//这里是在上面的基础上加上100，此时变成了101</span></div><div class="line"></div><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">$inc</span>:&#123;<span class="string">"pageViews"</span>:<span class="number">-100</span>&#125;&#125;) ;   <span class="comment">//这里是在上面的基础上减去100,此时还是变成了1</span></div></pre></td></tr></table></figure>
-<h3 id="rename"><a href="#rename" class="headerlink" title="$rename"></a>$rename</h3><blockquote>
-<p><strong>语法：</strong><code>{$rename: { &lt;old name1&gt;: &lt;new name1&gt;, &lt;old name2&gt;: &lt;new name2&gt;, ... } }</code></p>
-<p><code>$rename</code>操作符可以<strong>重命名字段名称</strong>，新的字段名称不能和文档中现有的字段名相同。</p>
-<p>下面重新插入一条数据，并且改变这条数据的键的名称</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">db.user.insert(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>,<span class="string">'age'</span>:<span class="number">22</span>,<span class="string">'sex'</span>:<span class="string">'Man'</span>,<span class="string">'school'</span>:&#123;<span class="string">'name'</span>:<span class="string">'jsnu'</span>,<span class="string">'city'</span>:<span class="string">'beijing'</span>&#125;&#125;);</div><div class="line"></div><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$rename</span>:&#123;<span class="string">'age'</span>:<span class="string">'Age'</span>&#125;&#125;)   <span class="comment">//重命名age为Age</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>下面将要演示怎样改变内嵌文档的键的名称，<strong>注意一定要带上文档的名字</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$rename</span>:&#123;<span class="string">'school.name'</span>:<span class="string">'school.Name'</span>,<span class="string">'school.city'</span>:<span class="string">'school.City'</span>&#125;&#125;);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>如果重命名的字段字和集合中原有的字段名字相同的话就会<strong>覆盖</strong>原有的字段名称，那么就会造成数据的丢失</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="string">'$rename'</span>:&#123;<span class="string">'sex'</span>,<span class="string">'age'</span>&#125;&#125;);  <span class="comment">//这里sex变成age和原来的age相同，那么原来的age就会丢失</span></div><div class="line"></div><div class="line">db.user.find(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;);  </div><div class="line"></div><div class="line"><span class="comment">//输出，可以看到原来的age没有了,变成了覆盖之后的</span></div><div class="line"></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"590674ce30b9f88dd43d7ee4"</span>), <span class="string">"name"</span> : <span class="string">"chenjiabing"</span>, <span class="string">"age"</span> : <span class="string">"Man"</span>, <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"jsnu"</span>, <span class="string">"city"</span> : <span class="string">"beijing"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>如果指定的字段不存在，那么将不会更新，对原来的字段没有影响</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$rename</span>:&#123;<span class="attr">value</span>:<span class="string">'name'</span>&#125;&#125;);  <span class="comment">//将不会有任何的改变，因为value这个字段根本不存在</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong><code>$rename</code>操作符也可以将子文档中键值移到其他子文档中</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$rename</span>:&#123;<span class="string">'school.name'</span>:<span class="string">'contact.name'</span>&#125;&#125;);<span class="comment">// 这里将会将school.name这个字段的值移到contact.name之中，如果contact不存在，那么就会创建一个</span></div><div class="line"></div><div class="line"><span class="comment">//输出</span></div><div class="line"></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"590674ce30b9f88dd43d7ee4"</span>), <span class="string">"name"</span> : <span class="string">"chenjiabing"</span>, <span class="string">"age"</span> : <span class="string">"Man"</span>, <span class="string">"school"</span> : &#123; <span class="string">"city"</span> : <span class="string">"beijing"</span> &#125;, <span class="string">"contact"</span> : &#123; <span class="string">"name"</span> : <span class="string">"jsnu"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<h2 id="数组更新操作符-Array-Update-Operators"><a href="#数组更新操作符-Array-Update-Operators" class="headerlink" title="数组更新操作符 Array Update Operators"></a>数组更新操作符 Array Update Operators</h2><blockquote>
-<p><em>只能用在键值为数组的键上的数组操作。</em></p>
-</blockquote>
-<h3 id="query"><a href="#query" class="headerlink" title="$ (query)"></a>$ (query)</h3><blockquote>
-<p><strong>语法</strong>:<code>{ &quot;&lt;array&gt;.$&quot; : value }</code></p>
-<p>当对数组字段进行更新时，且没有明确指定的元素在数组中的位置，我们使用定位操作符<code>$</code>标识一个元素，数字都是以<code>0</code>开始的。</p>
-<p><strong>注意:</strong></p>
-<ul>
-<li>定位操作符(“$”)作为第一个匹配查询条件的元素的占位符，也就是在数组中的索引值。</li>
-<li>数组字段必须出现查询文档中。</li>
-</ul>
-<p>向集合中插入两条数据</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">db.students.insert(&#123; <span class="string">"_id"</span> : <span class="number">1</span>, <span class="string">"grades"</span> : [ <span class="number">78</span>, <span class="number">88</span>, <span class="number">88</span> ] &#125;);</div><div class="line">db.students.insert(&#123; <span class="string">"_id"</span> : <span class="number">2</span>, <span class="string">"grades"</span> : [ <span class="number">88</span>, <span class="number">90</span>, <span class="number">92</span> ] &#125;);</div></pre></td></tr></table></figure>
-<blockquote>
-<p>执行下列操作</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//查询匹配的文档中，数组有2个88，只更新第一个匹配的元素，也就是"grades.1"</span></div><div class="line">db.students.update( &#123; <span class="attr">_id</span>: <span class="number">1</span>, <span class="attr">grades</span>: <span class="number">88</span> &#125;, &#123; <span class="attr">$set</span>: &#123; <span class="string">"grades.$"</span> : <span class="number">82</span> &#125; &#125;) ;</div><div class="line"><span class="comment">//查询文档中没有出现grades字段，查询报错</span></div><div class="line">db.students.update( &#123; <span class="attr">_id</span>: <span class="number">2</span> &#125;, &#123; <span class="attr">$set</span>: &#123; <span class="string">"grades.$"</span> : <span class="number">82</span> &#125; &#125; );</div></pre></td></tr></table></figure>
-<h3 id="push"><a href="#push" class="headerlink" title="$push"></a>$push</h3><blockquote>
-<p><em>如果指定的键已经存在，会向已有的数组末尾加入一个元素，要是没有就会创建一个新的数组。</em></p>
-<p>下面我们将使用<code>$push</code>对该文档添加一条评论信息。</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//将会创建一个comments数组，因为一开始这个数组没有存在</span></div><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$push</span>:&#123;<span class="attr">comments</span>:&#123;<span class="string">'name'</span>:<span class="string">'jack'</span>,<span class="string">'content'</span>:<span class="string">'hello thanks'</span>&#125;&#125;&#125;)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//继续添加一条，在comments的末尾进行添加，此时comments变成两条数据了</span></div><div class="line">db.user.update(&#123;<span class="attr">name</span>:<span class="string">'chenjiabing'</span>&#125;,&#123;<span class="attr">$push</span>:&#123;<span class="attr">comments</span>:&#123;<span class="string">'name'</span>:<span class="string">'john'</span>,<span class="string">'content'</span>:<span class="string">'hello'</span>&#125;&#125;&#125;)</div></pre></td></tr></table></figure>
-<h3 id="pull"><a href="#pull" class="headerlink" title="$pull"></a>$pull</h3><blockquote>
-<p><strong>语法</strong>：<code>db.collection.update( { field: &lt;query&gt; }, { $pull: { field: &lt;query&gt; } } );</code></p>
-<p><em><code>$pull</code>操作符移除指定字段值为数组，且匹配<code>$pull</code>操作符移除指定字段值为数组，且匹配<code>$pull</code>语句声明的查询条件的所有元素。</em></p>
-<p>执行如下操作</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//插入一条文档</span></div><div class="line">db.profiles.insert(&#123; <span class="attr">votes</span>: [ <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">8</span> ] &#125;);</div><div class="line"><span class="comment">//移除数组中所有元素7</span></div><div class="line">db.profiles.update( &#123; <span class="attr">votes</span>: <span class="number">3</span> &#125;, &#123; <span class="attr">$pull</span>: &#123; <span class="attr">votes</span>: <span class="number">7</span> &#125; &#125; );</div><div class="line"><span class="comment">//移除数组中所有大于6的元素</span></div><div class="line">db.profiles.update( &#123; <span class="attr">votes</span>: <span class="number">3</span> &#125;, &#123; <span class="attr">$pull</span>: &#123; <span class="attr">votes</span>: &#123; <span class="attr">$gt</span>: <span class="number">6</span> &#125; &#125; &#125; );</div><div class="line"></div><div class="line"><span class="comment">//Result</span></div><div class="line">&#123; <span class="attr">votes</span>: [ <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">8</span> ] &#125;</div><div class="line"></div><div class="line">&#123; <span class="attr">votes</span>: [ <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span> ] &#125;</div></pre></td></tr></table></figure>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/数据库干货篇/">数据库干货篇</a>
-</div>
-
-
-  <div class="article-tags">
   
-  <span></span> <a href="/tags/MongoDB/">MongoDB</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2017/05/01/MongoDB干货篇之更新数据/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/04/30/MongoDB干货篇之查询数据/" title="MongoDB干货篇之查询数据" itemprop="url">MongoDB干货篇之查询数据</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
-		
-  <p class="article-time">
-    <time datetime="2017-04-30T06:53:00.000Z" itemprop="datePublished"> 发表于 2017-04-30</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="MongoDB干货篇之查询"><a href="#MongoDB干货篇之查询" class="headerlink" title="MongoDB干货篇之查询"></a>MongoDB干货篇之查询</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><blockquote>
-<p><strong>在开始之前我们应该先准备数据方便演示，这里我插入的了几条数据，数据如下：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">db.user.insertMany(</div><div class="line">[&#123;</div><div class="line"><span class="attr">name</span>:<span class="string">'jack'</span>,</div><div class="line"><span class="attr">age</span>:<span class="number">22</span>,</div><div class="line"><span class="attr">sex</span>:<span class="string">'Man'</span>,</div><div class="line"><span class="attr">tags</span>:[<span class="string">'python'</span>,<span class="string">'c++'</span>,<span class="string">'c'</span>],</div><div class="line"><span class="attr">grades</span>:[<span class="number">22</span>,<span class="number">33</span>,<span class="number">44</span>,<span class="number">55</span>],</div><div class="line"><span class="attr">school</span>:&#123;</div><div class="line"><span class="attr">name</span>:<span class="string">'shida'</span>,</div><div class="line"><span class="attr">city</span>:<span class="string">'xuzhou'</span></div><div class="line">&#125;</div><div class="line">&#125;,&#123;</div><div class="line"><span class="attr">name</span>:<span class="string">'jhon'</span>,</div><div class="line"><span class="attr">age</span>:<span class="number">33</span>,</div><div class="line"><span class="attr">sex</span>:<span class="literal">null</span>,</div><div class="line"><span class="attr">tags</span>:[<span class="string">'python'</span>,<span class="string">'java'</span>],</div><div class="line"><span class="attr">grades</span>:[<span class="number">66</span>,<span class="number">22</span>,<span class="number">44</span>,<span class="number">88</span>],</div><div class="line"><span class="attr">school</span>:&#123;</div><div class="line"><span class="attr">name</span>:<span class="string">'kuangda'</span>,</div><div class="line"><span class="attr">city</span>:<span class="string">'xuzhou'</span></div><div class="line">&#125;</div><div class="line">&#125;,</div><div class="line">&#123;</div><div class="line"><span class="attr">name</span>:<span class="string">'xiaoming'</span>,</div><div class="line"><span class="attr">age</span>:<span class="number">33</span>,</div><div class="line"><span class="attr">tags</span>:[<span class="string">'python'</span>,<span class="string">'java'</span>],</div><div class="line"><span class="attr">grades</span>:[<span class="number">66</span>,<span class="number">22</span>,<span class="number">44</span>,<span class="number">88</span>],</div><div class="line"><span class="attr">school</span>:&#123;</div><div class="line"><span class="attr">name</span>:<span class="string">'kuangda'</span>,</div><div class="line"><span class="attr">city</span>:<span class="string">'xuzhou'</span></div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">]</div><div class="line">)</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="find"><a href="#find" class="headerlink" title="find()"></a>find()</h2><blockquote>
-<p><strong>其中<code>query</code>表示查找的条件，相当于<code>mysql</code>中<code>where</code>子句,<code>projection</code>列出你想要查找的数据，格式为<code>db.collection.find(find(&lt;query filter&gt;, &lt;projection&gt;))</code></strong></p>
-</blockquote>
-<h3 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h3><blockquote>
-<ul>
-<li><p><strong>下面不带参数的查找，将会查找出所有的结果</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">    db.find().pretty();</div><div class="line">    </div><div class="line">    //输出结果</div><div class="line">    </div><div class="line">    </div><div class="line">&#123;                                                     </div><div class="line">        &quot;_id&quot; : ObjectId(&quot;59056f81299fe049404b2899&quot;), </div><div class="line">        &quot;name&quot; : &quot;jack&quot;,                              </div><div class="line">        &quot;age&quot; : 22,                                   </div><div class="line">        &quot;tags&quot; : [                                    </div><div class="line">                &quot;python&quot;,                             </div><div class="line">                &quot;c++&quot;,                                </div><div class="line">                &quot;c&quot;                                   </div><div class="line">        ],                                            </div><div class="line">        &quot;grades&quot; : [                                  </div><div class="line">                22,                                   </div><div class="line">                33,                                   </div><div class="line">                44,                                   </div><div class="line">                55                                    </div><div class="line">        ],                                            </div><div class="line">        &quot;school&quot; : &#123;                                  </div><div class="line">                &quot;name&quot; : &quot;shida&quot;,                     </div><div class="line">                &quot;city&quot; : &quot;xuzhou&quot;                     </div><div class="line">        &#125;                                             </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>下面找出满足<code>name</code>为<code>jack</code>的数据，并且只输出<code>name</code>,<code>age</code>,这里的<code>_id</code>是默认输出的，如果不想输出将将它设置为<code>0</code>，想要输出那个字段将它设置为1</strong></p>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">name</span>:<span class="number">1</span>,<span class="attr">age</span>:<span class="number">1</span>&#125;)</div><div class="line"></div><div class="line"><span class="comment">//输出结果</span></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59056f81299fe049404b2899"</span>), <span class="string">"name"</span> : <span class="string">"jack"</span>, <span class="string">"age"</span> : <span class="number">22</span> &#125;</div><div class="line"></div><div class="line"></div><div class="line">db.user.find(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">name</span>:<span class="number">1</span>,<span class="attr">age</span>:<span class="number">1</span>，_id:<span class="number">0</span>&#125;)</div><div class="line"></div><div class="line"><span class="comment">//输出结果</span></div><div class="line">&#123;<span class="string">"name"</span> : <span class="string">"jack"</span>, <span class="string">"age"</span> : <span class="number">22</span> &#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>**注意这里的一个 <code>projection</code>不能 同时 指定包括和排除字段，除了排除 <code>_id</code>字段。 在 显式包括 字段的映射中，<code>_id</code> 字段是唯一一个您可以 显式排除 的。</p>
-</blockquote>
-</blockquote>
-<h2 id="查询内嵌文档"><a href="#查询内嵌文档" class="headerlink" title="查询内嵌文档"></a>查询内嵌文档</h2><blockquote>
-<p><strong>上述例子中插入的<code>school</code>数据就表示内嵌文档</strong></p>
-</blockquote>
-<h3 id="完全匹配查询"><a href="#完全匹配查询" class="headerlink" title="完全匹配查询"></a>完全匹配查询</h3><blockquote>
-<p><strong>完全匹配查询表示<code>school</code>中的查询数组必须和插入的数组完全一样，顺序都必须一样才能查找出来</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>,<span class="attr">school</span>:&#123;<span class="attr">name</span>:<span class="string">'shida'</span>,<span class="attr">city</span>:<span class="string">'xuzhou'</span>&#125;&#125;);</div><div class="line"></div><div class="line"><span class="comment">//输出结果</span></div><div class="line"></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59056f81299fe049404b2899"</span>), <span class="string">"name"</span> : <span class="string">"jack"</span>, <span class="string">"age"</span> : <span class="number">22</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"c++"</span>, <span class="string">"c"</span> ], <span class="string">"grades"</span> : [ <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>, <span class="number">55</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"shida"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//下面是指定输出的字段，这里的school.name表示只输出school文档中name字段，必须加引号</span></div><div class="line">db.user.find(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>,<span class="attr">school</span>:&#123;<span class="attr">name</span>:<span class="string">'shida'</span>,<span class="attr">city</span>:<span class="string">'xuzhou'</span>&#125;&#125;,&#123;<span class="attr">name</span>:<span class="number">1</span>,<span class="attr">age</span>:<span class="number">1</span>,<span class="string">'school.name'</span>:<span class="number">1</span>&#125;);</div><div class="line"><span class="comment">//输出结果</span></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59056f81299fe049404b2899"</span>), <span class="string">"name"</span> : <span class="string">"jack"</span>, <span class="string">"age"</span> : <span class="number">22</span>, <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"shida"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<h3 id="键值对查询"><a href="#键值对查询" class="headerlink" title="键值对查询"></a>键值对查询</h3><blockquote>
-<p><strong>可以通过键值对查询，不用考虑顺序，比如<code>&#39;school.name&#39;:&#39;shida&#39;</code>，表示查询学校名字为<code>shida</code>的数据，这里的引号是必须要的</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;<span class="string">'school.name'</span>:<span class="string">'shida'</span>&#125;,&#123;<span class="attr">name</span>:<span class="number">1</span>,<span class="attr">school</span>:<span class="number">1</span>&#125;);</div><div class="line"></div><div class="line"><span class="comment">//输出结果</span></div><div class="line"></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59056f81299fe049404b2899"</span>), <span class="string">"name"</span> : <span class="string">"jack"</span>, <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"shida"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<h2 id="查询操作符"><a href="#查询操作符" class="headerlink" title="查询操作符"></a>查询操作符</h2><blockquote>
-<p><strong>下面我们将配合查询操作符来执行复杂的查询操作，比如元素查询、 逻辑查询 、比较查询操作。我们使用下面的比较操作符<code>&quot;$gt&quot;</code> 、<code>&quot;$gte&quot;</code>、 <code>&quot;$lt&quot;</code>、 <code>&quot;$lte&quot;</code>(分别对应<code>&quot;&gt;&quot;</code>、 <code>&quot;&gt;=&quot;</code> 、<code>&quot;&lt;&quot;</code> 、<code>&quot;&lt;=&quot;</code>)</strong></p>
-</blockquote>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><blockquote>
-<p><strong>下面查询年龄在<code>20-30</code>之间的信息</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;</div><div class="line"><span class="attr">age</span>:&#123;<span class="attr">$gt</span>:<span class="number">20</span>,<span class="attr">$lt</span>:<span class="number">30</span>&#125;  </div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">//输出</span></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59056f81299fe049404b2899"</span>), <span class="string">"name"</span> : <span class="string">"jack"</span>, <span class="string">"age"</span> : <span class="number">22</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"c++"</span>, <span class="string">"c"</span> ], <span class="string">"grades"</span> : [ <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>, <span class="number">55</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"shida"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<h3 id="ne"><a href="#ne" class="headerlink" title="$ne"></a>$ne</h3><blockquote>
-<p><strong><code>$ne</code>表示不相等，例如查询年龄不等于<code>22</code>岁的信息</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;<span class="attr">age</span>:&#123;<span class="attr">$ne</span>:<span class="number">22</span>&#125;&#125;)</div><div class="line"></div><div class="line"><span class="comment">//输出</span></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59057c16f551d8c9003d31e0"</span>), <span class="string">"name"</span> : <span class="string">"jhon"</span>, <span class="string">"age"</span> : <span class="number">33</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"java"</span> ], <span class="string">"grades"</span> : [ <span class="number">66</span>, <span class="number">22</span>, <span class="number">44</span>, <span class="number">88</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"kuangda"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<h3 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h3><blockquote>
-<p><strong><code>$slice</code>操作符控制查询返回的数组中元素的个数。此操作符根据参数<code>{ field: value }</code> 指定键名和键值选择出文档集合，并且该文档集合中指定<code>array</code>键将返回从指定数量的元素。如果<code>count</code>的值大于数组中元素的数量，该查询返回数组中的所有元素的。</strong></p>
-<p><strong>语法：<code>db.collection.find( { field: value }, { array: {$slice: count }})</code>;</strong></p>
-<ul>
-<li><strong>下面将查询<code>grades</code>中的前两个数</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">grades</span>:&#123;<span class="attr">$slice</span>:<span class="number">2</span>&#125;,<span class="attr">name</span>:<span class="number">1</span>,<span class="attr">age</span>:<span class="number">1</span>,<span class="string">'school.name'</span>:<span class="number">1</span>&#125;);</div><div class="line"></div><div class="line"><span class="comment">//输出，可以看出这里的grades只输出了前面两个</span></div><div class="line"></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59057c16f551d8c9003d31df"</span>), <span class="string">"name"</span> : <span class="string">"jack"</span>, <span class="string">"age"</span> : <span class="number">22</span>, <span class="string">"grades"</span> : [ <span class="number">22</span>, <span class="number">33</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"shida"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>下面将输出后3个数据</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;<span class="attr">name</span>:<span class="string">'jhon'</span>&#125;,&#123;<span class="attr">grades</span>:&#123;<span class="attr">$slice</span>:<span class="number">-3</span>&#125;,<span class="attr">name</span>:<span class="number">1</span>&#125;);</div><div class="line"></div><div class="line"><span class="comment">//输出</span></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59057c16f551d8c9003d31e0"</span>), <span class="string">"name"</span> : <span class="string">"jhon"</span>, <span class="string">"grades"</span> : [ <span class="number">22</span>, <span class="number">44</span>, <span class="number">88</span> ] &#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>下面介绍指定一个数组作为参数。数组参数使用<code>[ skip , limit ]</code> 格式，其中第一个值表示在数组中跳过的项目数,第二个值表示返回的项目数。</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;,&#123;<span class="attr">grades</span>:&#123;<span class="attr">$slice</span>:[<span class="number">2</span>,<span class="number">2</span>]&#125;,<span class="attr">name</span>:<span class="number">1</span>&#125;);  <span class="comment">//这里将会跳过前面的两个，直接得到后面的两个数据</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//输出</span></div><div class="line"></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59057c16f551d8c9003d31df"</span>), <span class="string">"name"</span> : <span class="string">"jack"</span>, <span class="string">"grades"</span> : [ <span class="number">44</span>, <span class="number">55</span> ] &#125;</div></pre></td></tr></table></figure>
-<h3 id="exists"><a href="#exists" class="headerlink" title="$exists"></a>$exists</h3><blockquote>
-<p><strong>如果<code>$exists</code>的值为<code>true</code>,选择存在该字段的文档,若值为<code>false</code>则选择不包含该字段的文档</strong></p>
-<p><strong>下面将会查询不存在sex这一项的信息</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;<span class="attr">sex</span>:&#123;<span class="attr">$exists</span>:<span class="literal">false</span>&#125;&#125;)</div><div class="line"></div><div class="line"><span class="comment">//结果</span></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59058460fe58ed1089f2a5cd"</span>), <span class="string">"name"</span> : <span class="string">"xiaoming"</span>, <span class="string">"age"</span> : <span class="number">33</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"java"</span> ], <span class="string">"grades"</span> : [ <span class="number">66</span>, <span class="number">22</span>, <span class="number">44</span>, <span class="number">88</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"kuangda"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div><div class="line"></div><div class="line"></div><div class="line">db.user.find(&#123;<span class="attr">sex</span>:&#123;<span class="attr">$exists</span>:<span class="literal">true</span>&#125;&#125;);</div><div class="line"></div><div class="line"><span class="comment">//结果</span></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59058460fe58ed1089f2a5cb"</span>), <span class="string">"name"</span> : <span class="string">"jack"</span>, <span class="string">"age"</span> : <span class="number">22</span>, <span class="string">"sex"</span> : <span class="string">"Man"</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"c++"</span>, <span class="string">"c"</span> ], <span class="string">"grades"</span> : [ <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>, <span class="number">55</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"shida"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59058460fe58ed1089f2a5cc"</span>), <span class="string">"name"</span> : <span class="string">"jhon"</span>, <span class="string">"age"</span> : <span class="number">33</span>, <span class="string">"sex"</span> : <span class="literal">null</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"java"</span> ], <span class="string">"grades"</span> : [ <span class="number">66</span>, <span class="number">22</span>, <span class="number">44</span>, <span class="number">88</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"kuangda"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<h3 id="or"><a href="#or" class="headerlink" title="$or"></a>$or</h3><blockquote>
-<p><strong>执行逻辑<code>OR</code>运算,指定一个至少包含两个表达式的数组，选择出至少满足数组中一条表达式的文档。</strong><br><strong>语法：<code>{ $or: [ { &lt;expression1&gt; }, { &lt;expression2&gt; }, ... , { &lt;expressionN&gt; } ] }</code></strong></p>
-<ul>
-<li><strong>下面将要查找<code>age</code>等于<code>22</code>或者<code>age</code>等于<code>33</code>的值</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;<span class="attr">$or</span>:[&#123;<span class="attr">age</span>:<span class="number">22</span>&#125;,&#123;<span class="attr">age</span>:<span class="number">33</span>&#125;]&#125;)</div><div class="line"></div><div class="line"><span class="comment">//结果</span></div><div class="line"></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59058460fe58ed1089f2a5cb"</span>), <span class="string">"name"</span> : <span class="string">"jack"</span>, <span class="string">"age"</span> : <span class="number">22</span>, <span class="string">"sex"</span> : <span class="string">"Man"</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"c++"</span>, <span class="string">"c"</span> ], <span class="string">"grades"</span> : [ <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>, <span class="number">55</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"shida"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59058460fe58ed1089f2a5cc"</span>), <span class="string">"name"</span> : <span class="string">"jhon"</span>, <span class="string">"age"</span> : <span class="number">33</span>, <span class="string">"sex"</span> : <span class="literal">null</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"java"</span> ], <span class="string">"grades"</span> : [ <span class="number">66</span>, <span class="number">22</span>, <span class="number">44</span>, <span class="number">88</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"kuangda"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59058460fe58ed1089f2a5cd"</span>), <span class="string">"name"</span> : <span class="string">"xiaoming"</span>, <span class="string">"age"</span> : <span class="number">33</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"java"</span> ], <span class="string">"grades"</span> : [ <span class="number">66</span>, <span class="number">22</span>, <span class="number">44</span>, <span class="number">88</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"kuangda"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>下面将会查找出年龄为22或者33并且姓名为<code>jack</code>的人的信息</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;<span class="attr">name</span>:<span class="string">'jack'</span>,<span class="attr">$or</span>:[&#123;<span class="attr">age</span>:<span class="number">33</span>&#125;,&#123;<span class="attr">age</span>:<span class="number">22</span>&#125;]&#125;)</div><div class="line"></div><div class="line"><span class="comment">//结果</span></div><div class="line"></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59058460fe58ed1089f2a5cb"</span>), <span class="string">"name"</span> : <span class="string">"jack"</span>, <span class="string">"age"</span> : <span class="number">22</span>, <span class="string">"sex"</span> : <span class="string">"Man"</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"c++"</span>, <span class="string">"c"</span> ], <span class="string">"grades"</span> : [ <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>, <span class="number">55</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"shida"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<h3 id="and"><a href="#and" class="headerlink" title="$and"></a>$and</h3><blockquote>
-<p><strong>指定一个至少包含两个表达式的数组，选择出满足该数组中所有表达式的文档。<code>$and</code>操作符使用短路操作，若第一个表达式的值为“<code>false</code>”,余下的表达式将不会执行。</strong><br><strong>语法：<code>{ $and: [ { &lt;expression1&gt; }, { &lt;expression2&gt; } , ... , { &lt;expressionN&gt; } ] }</code></strong></p>
-<ul>
-<li><strong>下面将会查找年龄在<code>20-30</code>之间的信息，对于下面使用逗号分隔符的表达式列表，<code>MongoDB</code>会提供一个隐式的<code>$and</code>操作：</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;<span class="attr">$and</span>:[&#123;<span class="attr">age</span>:&#123;<span class="attr">$gt</span>:<span class="number">20</span>&#125;&#125;,&#123;<span class="attr">age</span>:&#123;<span class="attr">$lt</span>:<span class="number">30</span>&#125;&#125;]&#125;)</div><div class="line"><span class="comment">//上述语句相当于db.user.find(&#123;age:&#123;$gt:20&#125;,age:&#123;$lt:30&#125;&#125;)</span></div><div class="line"></div><div class="line"><span class="comment">//结果</span></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59058460fe58ed1089f2a5cb"</span>), <span class="string">"name"</span> : <span class="string">"jack"</span>, <span class="string">"age"</span> : <span class="number">22</span>, <span class="string">"sex"</span> : <span class="string">"Man"</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"c++"</span>, <span class="string">"c"</span> ], <span class="string">"grades"</span> : [ <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>, <span class="number">55</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"shida"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<h3 id="in"><a href="#in" class="headerlink" title="$in"></a>$in</h3><blockquote>
-<p><strong>匹配键值等于指定数组中任意值的文档。类似<code>sql</code>中<code>in</code>，只要匹配一个<code>value</code>就会输出</strong><br><strong>语法：<code>{ field: { $in: [&lt;value1&gt;, &lt;value2&gt;, ... &lt;valueN&gt; ] } }</code></strong></p>
-<ul>
-<li><strong>下面将会查找grades中存在22,33之间的任意一个数的信息</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> db.user.find(&#123;<span class="attr">grades</span>:&#123;<span class="attr">$in</span>:[<span class="number">22</span>,<span class="number">33</span>]&#125;&#125;)</div><div class="line"> </div><div class="line"> <span class="comment">//输出</span></div><div class="line"> </div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59058460fe58ed1089f2a5cb"</span>), <span class="string">"name"</span> : <span class="string">"jack"</span>, <span class="string">"age"</span> : <span class="number">22</span>, <span class="string">"sex"</span> : <span class="string">"Man"</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"c++"</span>, <span class="string">"c"</span> ], <span class="string">"grades"</span> : [ <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>, <span class="number">55</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"shida"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59058460fe58ed1089f2a5cc"</span>), <span class="string">"name"</span> : <span class="string">"jhon"</span>, <span class="string">"age"</span> : <span class="number">33</span>, <span class="string">"sex"</span> : <span class="literal">null</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"java"</span> ], <span class="string">"grades"</span> : [ <span class="number">66</span>, <span class="number">22</span>, <span class="number">44</span>, <span class="number">88</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"kuangda"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59058460fe58ed1089f2a5cd"</span>), <span class="string">"name"</span> : <span class="string">"xiaoming"</span>, <span class="string">"age"</span> : <span class="number">33</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"java"</span> ], <span class="string">"grades"</span> : [ <span class="number">66</span>, <span class="number">22</span>, <span class="number">44</span>, <span class="number">88</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"kuangda"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<h3 id="nin"><a href="#nin" class="headerlink" title="$nin"></a>$nin</h3><blockquote>
-<p><strong>　匹配键不存在或者键值不等于指定数组的任意值的文档。类似<code>sql</code>中<code>not in</code>(SQL中字段不存在使用会有语法错误).</strong></p>
-<ul>
-<li><strong>查询出<code>grades</code>中不存在100或者44的文档</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;<span class="attr">grades</span>:&#123;<span class="attr">$nin</span>:[<span class="number">100</span>,<span class="number">44</span>]&#125;&#125;)</div></pre></td></tr></table></figure>
-<h3 id="not"><a href="#not" class="headerlink" title="$not"></a>$not</h3><blockquote>
-<p><strong>执行逻辑<code>NOT</code>运算，选择出不能匹配表达式的文档 ，包括没有指定键的文档。<code>$not</code>操作符不能独立使用，必须跟其他操作一起使用</strong></p>
-<p><strong>语法:{ field: { $not: { <operator-expression> } } }</operator-expression></strong></p>
-<ul>
-<li><strong>查询年龄不大于30的信息</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">db.user.find(&#123;<span class="attr">age</span>:&#123;<span class="attr">$not</span>:&#123;<span class="attr">$gt</span>:<span class="number">30</span>&#125;&#125;&#125;)</div><div class="line"></div><div class="line"><span class="comment">//输出</span></div><div class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"59058460fe58ed1089f2a5cb"</span>), <span class="string">"name"</span> : <span class="string">"jack"</span>, <span class="string">"age"</span> : <span class="number">22</span>, <span class="string">"sex"</span> : <span class="string">"Man"</span>, <span class="string">"tags"</span> : [ <span class="string">"python"</span>, <span class="string">"c++"</span>, <span class="string">"c"</span> ], <span class="string">"grades"</span> : [ <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>, <span class="number">55</span> ], <span class="string">"school"</span> : &#123; <span class="string">"name"</span> : <span class="string">"shida"</span>, <span class="string">"city"</span> : <span class="string">"xuzhou"</span> &#125; &#125;</div></pre></td></tr></table></figure>
-<h2 id="迭代游标的查询"><a href="#迭代游标的查询" class="headerlink" title="迭代游标的查询"></a>迭代游标的查询</h2><blockquote>
-<p><strong>学过高级语言的朋友都知道迭代的问题，像java,下面使用迭代的方法查询</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cursor=db.usr.find();</div><div class="line"></div><div class="line"><span class="comment">//这里使用迭代输出所有的数据</span></div><div class="line"><span class="keyword">while</span>(cursor.hasNext())    <span class="comment">//这里的hasNext()是判断是否下一个中还有可迭代的值，如果没有返回false</span></div><div class="line">&#123;</div><div class="line">    printjson(cursor.next());     <span class="comment">//这里的cursor.next是迭代的输出，printjson是代替print(tojson()) </span></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">print cursor.count()    <span class="comment">//输出其中有多少个数据</span></div><div class="line"></div><div class="line">cursor.forEach(printjson);   <span class="comment">//forEach输出</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> <span class="built_in">document</span>=cursor.toArray();     <span class="comment">//将迭代对象转换成数组</span></div><div class="line"></div><div class="line">print <span class="built_in">document</span>[<span class="number">0</span>];       <span class="comment">//以数组的形式输出</span></div></pre></td></tr></table></figure>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/数据库干货篇/">数据库干货篇</a>
-</div>
-
-
-  <div class="article-tags">
+<section class="post" itemscope itemprop="blogitem">
   
-  <span></span> <a href="/tags/MongoDB/">MongoDB</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2017/04/30/MongoDB干货篇之查询数据/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/04/29/python爬虫之BeautifulSoup/" title="python爬虫之BeautifulSoup" itemprop="url">python爬虫之BeautifulSoup</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
-		
-  <p class="article-time">
-    <time datetime="2017-04-29T02:06:56.000Z" itemprop="datePublished"> 发表于 2017-04-29</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="python爬虫之BeautifulSoup"><a href="#python爬虫之BeautifulSoup" class="headerlink" title="python爬虫之BeautifulSoup"></a>python爬虫之BeautifulSoup</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p><strong><code>Beautiful Soup</code>提供一些简单的、<code>python</code>式的函数用来处理导航、搜索、修改分析树等功能。它是一个工具箱，通过解析文档为用户提供需要抓取的数据，因为简单，所以不需要多少代码就可以写出一个完整的应用程序。<code>Beautiful Soup</code>自动将输入文档转换为<code>Unicode</code>编码，输出文档转换为<code>utf-8</code>编码。你不需要考虑编码方式，除非文档没有指定一个编码方式，这时，<code>Beautiful Soup</code>就不能自动识别编码方式了。然后，你仅仅需要说明一下原始编码方式就可以了。<br><code>Beautiful Soup</code>已成为和<code>lxml</code>、<code>html6lib</code>一样出色的<code>python</code>解释器，为用户灵活地提供不同的解析策略或强劲的速度。</strong></p>
-</blockquote>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
-<ul>
-<li><strong><code>pip install BeautifulSoup4</code></strong></li>
-<li><strong><code>easy_install BeautifulSoup4</code></strong></li>
-</ul>
-</blockquote>
-<h2 id="创建BeautifulSoup对象"><a href="#创建BeautifulSoup对象" class="headerlink" title="创建BeautifulSoup对象"></a>创建BeautifulSoup对象</h2><blockquote>
-<ul>
-<li><p>首先应该导入<code>BeautifulSoup</code>类库 <code>from bs4 import BeautifulSoup</code></p>
-</li>
-<li><p><strong>下面开始创建对像，在开始之前为了方便演示，先创建一个<code>html</code>文本，如下：</strong></p>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">html = <span class="string">"""</span></div><div class="line">&lt;html&gt;&lt;head&gt;&lt;title&gt;The Dormouse's story&lt;/title&gt;&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;p class="title" name="dromouse"&gt;&lt;b&gt;The Dormouse's story&lt;/b&gt;&lt;/p&gt;</div><div class="line">&lt;p class="story"&gt;Once upon a time there were three little sisters; and their names were</div><div class="line">&lt;a href="http://example.com/elsie" class="sister" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;,</div><div class="line">&lt;a href="http://example.com/lacie" class="sister" id="link2"&gt;Lacie&lt;/a&gt; and</div><div class="line">&lt;a href="http://example.com/tillie" class="sister" id="link3"&gt;Tillie&lt;/a&gt;;</div><div class="line">and they lived at the bottom of a well.&lt;/p&gt;</div><div class="line">&lt;p class="story"&gt;...&lt;/p&gt;</div><div class="line">"""</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>创建对象：<code>soup=BeautifulSoup(html,&#39;lxml&#39;)</code>,这里的lxml是解析的类库，目前来说个人觉得最好的解析器了，一直在用这个，安装方法：<code>pip install lxml</code></strong></li>
-</ul>
-</blockquote>
-<h2 id="Tag"><a href="#Tag" class="headerlink" title="Tag"></a>Tag</h2><blockquote>
-<p><strong><code>Tag</code>就是<code>html</code>中的一个标签，用<code>BeautifulSoup</code>就能解析出来<code>Tag</code>的具体内容，具体的格式为<code>soup.name</code>,其中<code>name</code>是<code>html</code>下的标签，具体实例如下：</strong></p>
-<ul>
-<li><p><strong><code>print soup.title</code>输出<code>title</code>标签下的内容，包括此标签，这个将会输出<code>&lt;title&gt;The Dormouse&#39;s story&lt;/title&gt;</code></strong></p>
-</li>
-<li><p><strong><code>print soup.head</code></strong></p>
-</li>
-</ul>
-</blockquote>
-<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><blockquote>
-<p><strong>这里的格式只能获取这些标签的第一个，后面会讲到获取多个标签的方法。其中对于<code>Tag</code>有两个重要的属性<code>name</code>和<code>attrs</code>,分别表示名字和属性,介绍如下：</strong></p>
-<blockquote>
-<ul>
-<li><p><strong><code>name</code>:对于<code>Tag</code>，它的<code>name</code>就是其本身，如<code>soup.p.name</code>就是<code>p</code></strong></p>
-</li>
-<li><p><strong><code>attrs</code>是一个字典类型的，对应的是属性-值，如<code>print soup.p.attrs</code>,输出的就是<code>{&#39;class&#39;: [&#39;title&#39;], &#39;name&#39;: &#39;dromouse&#39;}</code>,当然你也可以得到具体的值，如<code>print soup.p.attrs[&#39;class&#39;]</code>,输出的就是<code>[title]</code>是一个列表的类型，因为一个属性可能对应多个值,当然你也可以通过get方法得到属性的，如：<code>print soup.p.get(&#39;class&#39;)</code>。还可以直接使用<code>print soup.p[&#39;class&#39;]</code></strong></p>
-</li>
-</ul>
-</blockquote>
-</blockquote>
-<h3 id="get"><a href="#get" class="headerlink" title="get"></a>get</h3><blockquote>
-<p><strong><code>get</code>方法用于得到标签下的属性值，注意这是一个重要的方法，在许多场合都能用到，比如你要得到<code>&lt;img src=&quot;#&quot;&gt;</code>标签下的图像<code>url</code>,那么就可以用<code>soup.img.get(&#39;src&#39;)</code>,具体解析如下：</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.p.get(<span class="string">"class"</span>)   <span class="comment">#得到第一个p标签下的src属性</span></div></pre></td></tr></table></figure>
-<h3 id="string"><a href="#string" class="headerlink" title="string"></a>string</h3><blockquote>
-<p><strong>得到标签下的文本内容，只有在此标签下没有子标签，或者只有一个子标签的情况下才能返回其中的内容，否则返回的是<code>None</code>具体实例如下：</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.p.string <span class="comment">#在上面的一段文本中p标签没有子标签，因此能够正确返回文本的内容</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> soup.html.string  <span class="comment">#这里得到的就是None,因为这里的html中有很多的子标签</span></div></pre></td></tr></table></figure>
-<h3 id="get-text"><a href="#get-text" class="headerlink" title="get_text()"></a>get_text()</h3><blockquote>
-<p><strong>可以获得一个标签中的所有文本内容，包括子孙节点的内容，这是最常用的方法</strong></p>
-</blockquote>
-<h2 id="搜索文档树"><a href="#搜索文档树" class="headerlink" title="搜索文档树"></a>搜索文档树</h2><h3 id="find-all-name-attrs-recursive-text-kwargs"><a href="#find-all-name-attrs-recursive-text-kwargs" class="headerlink" title="find_all( name , attrs , recursive , text , **kwargs )"></a>find_all( name , attrs , recursive , text , **kwargs )</h3><blockquote>
-<p><strong><code>find_all</code>是用于搜索节点中所有符合过滤条件的节点</strong></p>
-<p>1.<strong><code>name</code>参数：是<code>Tag</code>的名字，如<code>p</code>,<code>div</code>,<code>title</code> …..</strong></p>
-<blockquote>
-<ul>
-<li><p><strong><code>soup.find_all(&quot;p&quot;)</code>  查找所有的<code>p</code>标签，返回的是<code>[&lt;b&gt;The Dormouse&#39;s story&lt;/b&gt;]</code>，可以通过遍历获取每一个节点，如下：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ps=soup.find_all(<span class="string">"p"</span>)</div><div class="line"><span class="keyword">for</span> p <span class="keyword">in</span> ps:</div><div class="line">    <span class="keyword">print</span> p.get(<span class="string">'class'</span>)   <span class="comment">#得到p标签下的class属性</span></div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>传入正则表达式：<code>soup.find_all(re.compile(r&#39;^b&#39;)</code>查找以<code>b</code>开头的所有标签，这里的<code>body</code>和<code>b</code>标签都会被查到</strong></p>
-</li>
-<li><p><strong>传入类列表：如果传入列表参数,<code>BeautifulSoup</code>会将与列表中任一元素匹配的内容返回.下面代码找到文档中所有<code>&lt;a&gt;</code>标签和<code>&lt;b&gt;</code>标签</strong></p>
-</li>
-</ul>
-</blockquote>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">soup.find_all([<span class="string">"a"</span>, <span class="string">"b"</span>])</div></pre></td></tr></table></figure>
-<blockquote>
-<p>2.<code>KeyWords</code>参数，就是传入属性和对应的属性值，或者一些其他的表达式</p>
-<blockquote>
-<ul>
-<li><strong><code>soup.find_all(id=&#39;link2&#39;)</code>,这个将会搜索找到所有的<code>id</code>属性为<code>link2</code>的标签。传入正则表达式<code>soup.find_all(href=re.compile(&quot;elsie&quot;))</code>,这个将会查找所有<code>href</code>属性满足正则表达式的标签</strong></li>
-<li><p><strong>传入多个值：<code>soup.find_all(id=&#39;link2&#39;,class_=&#39;title&#39;)</code> ,这个将会查找到同时满足这两个属性的标签，这里的<code>class</code>必须用<code>class_</code>传入参数，因为<code>class</code>是<code>python</code>中的关键词</strong></p>
-</li>
-<li><p><strong>有些属性不能通过以上方法直接搜索，比如<code>html5</code>中的<code>data-*</code>属性，不过可以通过<code>attrs</code>参数指定一个字典参数来搜索包含特殊属性的标签，如下：</strong></p>
-</li>
-</ul>
-</blockquote>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># [&lt;div data-foo="value"&gt;foo!&lt;/div&gt;]</span></div><div class="line">data_soup.find_all(attrs=&#123;<span class="string">"data-foo"</span>: <span class="string">"value"</span>&#125;)   <span class="comment">#注意这里的atts不仅能够搜索特殊属性，亦可以搜索普通属性</span></div><div class="line"></div><div class="line">soup.find_all(<span class="string">"p"</span>,attrs=&#123;<span class="string">'class'</span>:<span class="string">'title'</span>,<span class="string">'id'</span>:<span class="string">'value'</span>&#125;)  <span class="comment">#相当与soup.find_all('p',class_='title',id='value')</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>3.<code>text</code>参数：通过 <code>text</code> 参数可以搜搜文档中的字符串内容.与 <code>name</code> 参数的可选值一样, <code>text</code> 参数接受 字符串 , 正则表达式 , 列表, <code>True</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">soup.find_all(text=<span class="string">"Elsie"</span>)</div><div class="line"><span class="comment"># [u'Elsie']</span></div><div class="line"> </div><div class="line">soup.find_all(text=[<span class="string">"Tillie"</span>, <span class="string">"Elsie"</span>, <span class="string">"Lacie"</span>])</div><div class="line"><span class="comment"># [u'Elsie', u'Lacie', u'Tillie']</span></div><div class="line"> </div><div class="line">soup.find_all(text=re.compile(<span class="string">"Dormouse"</span>))</div><div class="line">[<span class="string">u"The Dormouse's story"</span>, <span class="string">u"The Dormouse's story"</span>]</div></pre></td></tr></table></figure></p>
-<p>4.<strong><code>limit</code>参数：<code>find_all()</code> 方法返回全部的搜索结构,如果文档树很大那么搜索会很慢.如果我们不需要全部结果,可以使用 <code>limit</code> 参数限制返回结果的数量.效果与<code>SQL</code>中的<code>limit</code>关键字类似,当搜索到的结果数量达到 <code>limit</code> 的限制时,就停止搜索返回结果.</strong></p>
-<blockquote>
-<p><strong>文档树中有<code>3</code>个<code>tag</code>符合搜索条件,但结果只返回了<code>2</code>个,因为我们限制了返回数量,代码如下：</strong></p>
-</blockquote>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">soup.find_all(<span class="string">"a"</span>, limit=<span class="number">2</span>)</div><div class="line"><span class="comment"># [&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;Elsie&lt;/a&gt;,</span></div><div class="line"><span class="comment">#  &lt;a class="sister" href="http://example.com/lacie" id="link2"&gt;Lacie&lt;/a&gt;]</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>5.<strong><code>recursive</code> 参数:调用<code>tag</code>的 <code>find_all()</code> 方法时,<code>BeautifulSoup</code>会检索当前<code>tag</code>的所有子孙节点,如果只想搜索<code>tag</code>的直接子节点,可以使用参数 <code>recursive=False</code> </strong></p>
-</blockquote>
-<h3 id="find-name-attrs-recursive-text-kwargs"><a href="#find-name-attrs-recursive-text-kwargs" class="headerlink" title="find( name , attrs , recursive , text , **kwargs )"></a>find( name , attrs , recursive , text , **kwargs )</h3><blockquote>
-<p><strong>它与 <code>find_all()</code> 方法唯一的区别是 <code>find_all()</code> 方法的返回结果是值包含一个元素的列表,而 <code>find()</code> 方法直接返回结果,就是直接返回第一匹配到的元素，不是列表，不用遍历，如<code>soup.find(&quot;p&quot;).get(&quot;class&quot;)</code></strong></p>
-</blockquote>
-<h2 id="css选择器"><a href="#css选择器" class="headerlink" title="css选择器"></a>css选择器</h2><blockquote>
-<p><strong>我们在写 <code>CSS</code> 时，标签名不加任何修饰，类名前加点，<code>id</code>名前加<code>#</code>，在这里我们也可以利用类似的方法来筛选元素，用到的方法是 <code>soup.select()</code>，返回类型是 <code>list</code></strong></p>
-</blockquote>
-<h3 id="通过标签名查找"><a href="#通过标签名查找" class="headerlink" title="通过标签名查找"></a>通过标签名查找</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'title'</span>) </div><div class="line"><span class="comment">#[&lt;title&gt;The Dormouse's story&lt;/title&gt;]</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'a'</span>)</div><div class="line"><span class="comment">#[&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, &lt;a class="sister" href="http://example.com/lacie" id="link2"&gt;Lacie&lt;/a&gt;, &lt;a class="sister" href="http://example.com/tillie" id="link3"&gt;Tillie&lt;/a&gt;]</span></div></pre></td></tr></table></figure>
-<h3 id="通过类名查找"><a href="#通过类名查找" class="headerlink" title="通过类名查找"></a>通过类名查找</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'.sister'</span>)</div><div class="line"><span class="comment">#[&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, &lt;a class="sister" href="http://example.com/lacie" id="link2"&gt;Lacie&lt;/a&gt;, &lt;a class="sister" href="http://example.com/tillie" id="link3"&gt;Tillie&lt;/a&gt;]</span></div></pre></td></tr></table></figure>
-<h3 id="通过id名查找"><a href="#通过id名查找" class="headerlink" title="通过id名查找"></a>通过id名查找</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'#link1'</span>)</div><div class="line"><span class="comment">#[&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]</span></div></pre></td></tr></table></figure>
-<h3 id="组合查找"><a href="#组合查找" class="headerlink" title="组合查找"></a>组合查找</h3><blockquote>
-<p><strong>学过<code>css</code>的都知道<code>css</code>选择器，如<code>p #link1</code>是查找<code>p</code>标签下的<code>id</code>属性为<code>link1</code>的标签</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'p #link1'</span>)    <span class="comment">#查找p标签中内容为id属性为link1的标签</span></div><div class="line"><span class="comment">#[&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> soup.select(<span class="string">"head &gt; title"</span>)   <span class="comment">#直接查找子标签</span></div><div class="line"><span class="comment">#[&lt;title&gt;The Dormouse's story&lt;/title&gt;]</span></div></pre></td></tr></table></figure>
-<h3 id="属性查找"><a href="#属性查找" class="headerlink" title="属性查找"></a>属性查找</h3><blockquote>
-<p><strong>查找时还可以加入属性元素，属性需要用中括号括起来，注意属性和标签属于同一节点，所以中间不能加空格，否则会无法匹配到。</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'a[class="sister"]'</span>)</div><div class="line"><span class="comment">#[&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, &lt;a class="sister" href="http://example.com/lacie" id="link2"&gt;Lacie&lt;/a&gt;, &lt;a class="sister" href="http://example.com/tillie" id="link3"&gt;Tillie&lt;/a&gt;]</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'a[href="http://example.com/elsie"]'</span>)</div><div class="line"><span class="comment">#[&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>同样，属性仍然可以与上述查找方式组合，不在同一节点的空格隔开，同一节点的不加空格,代码如下：</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'p a[href="http://example.com/elsie"]'</span>)</div><div class="line"><span class="comment">#[&lt;a class="sister" href="http://example.com/elsie" id="link1"&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>以上的 <code>select</code> 方法返回的结果都是列表形式，可以遍历形式输出，然后用 <code>get_text()</code> 方法来获取它的内容</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">soup = BeautifulSoup(html, <span class="string">'lxml'</span>)</div><div class="line"><span class="keyword">print</span> type(soup.select(<span class="string">'title'</span>))</div><div class="line"><span class="keyword">print</span> soup.select(<span class="string">'title'</span>)[<span class="number">0</span>].get_text()</div><div class="line"></div><div class="line"><span class="keyword">for</span> title <span class="keyword">in</span> soup.select(<span class="string">'title'</span>):</div><div class="line">    <span class="keyword">print</span> title.get_text()</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
-<ul>
-<li><a href="http://beautifulsoup.readthedocs.io/zh_CN/latest/" target="_blank" rel="external">中文文档</a></li>
-</ul>
-</blockquote>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/python/">python</a>
-</div>
-
-
-  <div class="article-tags">
+    <a href="/2017/05/01/MongoDB干货篇之更新数据/" title="MongoDB干货篇之更新数据" itemprop="url">
   
-  <span></span> <a href="/tags/python爬虫/">python爬虫</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2017/04/29/python爬虫之BeautifulSoup/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+    <h1 itemprop="name">MongoDB干货篇之更新数据</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+           <p itemprop="description" >MongoDB干货篇之数据更新常用的函数
+
+update(&amp;lt;query&amp;gt;,&amp;lt;update&amp;gt;,&amp;lt;upsert&amp;gt;,&amp;lt;multi&amp;gt;),其中&amp;lt;query&amp;gt;表示筛选的条件，&amp;lt;update&amp;gt;是要更新的数据
+
+update</p>
+        
     
-      <a href="/2017/04/28/MongoDB干货篇之安装/" title="MongoDB干货篇之安装" itemprop="url">MongoDB干货篇之安装</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
-		
-  <p class="article-time">
-    <time datetime="2017-04-28T02:53:32.000Z" itemprop="datePublished"> 发表于 2017-04-28</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="MongoDB干货篇之安装"><a href="#MongoDB干货篇之安装" class="headerlink" title="MongoDB干货篇之安装"></a>MongoDB干货篇之安装</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
-<ul>
-<li><p><strong><a href="http://www.mongodb.org/downloads" target="_blank" rel="external">下载地址</a></strong></p>
-</li>
-<li><p><strong>点击安装,选择自定义，后选择安装路径，不过最好安装在根目录下(<code>C盘</code>)，然后点解<code>next</code>,这里我安装的路径是<code>C:\MongoDB</code></strong></p>
-</li>
-<li><p><strong>创建文件夹:在<code>C:\MongoDB</code>下创建一个文件夹<code>data</code>,然后在<code>data</code>文件夹下创建<code>db</code>,<code>log</code>两个子文件夹,在<code>log</code>文件下创建一个<code>MongoDB.log</code>文档，总得来说创建了<code>C:\MongoDB\data</code>,<code>C:\MongoDB\data\db</code>,<code>C:\MongoDB\data\log</code>,<code>C:\MongoDB\data\log\MongoDB.log</code></strong></p>
-</li>
-<li><p><strong>在<code>C:\MongoDB\bin</code>文件夹下运行<code>cmd.exe</code>进入<code>dos</code>命令，执行以下命令：</strong></p>
-<blockquote>
-<ul>
-<li><strong>然后在<code>cmd</code>下输入<code>mongod -dbpath &quot;C:\MongoDB\data\db</code>,将会看到一些信息，说明已经安装成功了</strong></li>
-</ul>
-</blockquote>
-</li>
-</ul>
-</blockquote>
-<h2 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h2><blockquote>
-<ul>
-<li><p><strong>在<code>C:\MongoDB\bin</code>文件夹下运行<code>cmd.exe</code>,输入<code>mongo</code>或者<code>mongo.exe</code>,将会出现连接的信息，说明已经连接成功了</strong></p>
-</li>
-<li><p><strong>然后在另外一个<code>cmd.exe</code>在<code>bin</code>目录下运行<code>mongo</code>可以看到已经连接上<code>MongoDB</code>了，注意上面打开的终端不能关闭，否则不能成功连接，这是比较麻烦的，需要每次连接都要启动，下面我们需要把它安装为<code>windows</code>服务</strong></p>
-</li>
-</ul>
-</blockquote>
-<h2 id="安装程windows服务"><a href="#安装程windows服务" class="headerlink" title="安装程windows服务"></a>安装程windows服务</h2><p><strong>注意在管理员的<code>cmd.exe</code>中运行以下命令，否则在<code>MongoDB.log</code>文件里出现遭到拒绝</strong></p>
-<blockquote>
-<ul>
-<li><p><strong>运行<code>cmd</code>，进入<code>bin</code>目录，执行以下命令:</strong></p>
-<blockquote>
-<ul>
-<li><strong><code>mongod --dbpath &quot;C:\MongoDB\data\db&quot; --logpath &quot;D:\MongoDB\data\log\MongoDB.log&quot; --install --serviceName &quot;MongoDB&quot;</code>,这里的服务名为<code>MongoDB</code>，可以在<code>C:\MongoDB\data\log\MongoDB.log</code>文件里查看相关信息，如果出现遭到拒绝就是没有在管理员的权限下执行命令</strong></li>
-</ul>
-</blockquote>
-</li>
-<li><p><strong>接下来就是启动服务了，现在在<code>cmd.exe</code>中运行<code>NET START MongoDB</code>，如果看到服务成功启动，那么就成功了，但是我在启动的时候出现<code>48</code>错误，下面将会做出解决方法：</strong></p>
-<blockquote>
-<ul>
-<li><strong>先删除服务:<code>mongod --dbpath &quot;C:\MongoDB\data\db&quot; --logpath &quot;C:\MongoDB\data\log\MongoDB.log&quot; --remove --serviceName &quot;MongoDB&quot;</code></strong></li>
-<li><strong>删除<code>MongoDB</code>目录下的<code>mongod.lock</code></strong></li>
-<li><strong>然后就是重新安装了,执行以下命令：</strong><blockquote>
-<ul>
-<li><strong><code>mongod --logpath &quot;C:\MongoDB\data\log\MongoDB.log&quot; --logappend --dbpath &quot;C:\Mongodb\data&quot; --directoryperdb --serviceName &quot;MongoDB&quot; --serviceDisplayName &quot;MongoDB&quot; --install</code></strong></li>
-</ul>
-</blockquote>
-</li>
-<li><strong>接下来重新启动服务，<code>net start MongoDB</code>,可以看到成功启动了</strong></li>
-</ul>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/数据库干货篇/">数据库干货篇</a>
-</div>
+    <time datetime="2017-05-01T00:13:32.000Z" itemprop="datePublished">2017-05-01</time>
+  </a>
+</section>
 
 
-  <div class="article-tags">
+
+
+
+
   
-  <span></span> <a href="/tags/MongoDB/">MongoDB</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2017/04/28/MongoDB干货篇之安装/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/04/27/JDBC干货篇一/" title="JDBC干货篇一" itemprop="url">JDBC干货篇一</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
-		
-  <p class="article-time">
-    <time datetime="2017-04-27T15:03:51.000Z" itemprop="datePublished"> 发表于 2017-04-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="JDBC干货篇一"><a href="#JDBC干货篇一" class="headerlink" title="JDBC干货篇一"></a>JDBC干货篇一</h1><h2 id="JDBC基础"><a href="#JDBC基础" class="headerlink" title="JDBC基础"></a>JDBC基础</h2><blockquote>
-<ul>
-<li><p><strong><code>JDBC</code>的全称是<code>Java Database Connectivity</code>，即<code>Java</code>数据库连接，它是一种可以执行<code>SQL</code>语句的<code>Java API</code>。程序可通过<code>JDBC API</code>连接到关系数据库，并使用结构化查询语言（<code>SQL</code>，数据库标准的查询语言）来完成对数据库的查询、更新</strong></p>
-</li>
-<li><p><strong>与其他数据库编程环境相比，<code>JDBC</code>为数据库开发提供了标准的<code>API</code>，使用<code>JDBC</code>开发的数据库应用可以跨平台运行，而且还可以跨数据库（如果全部使用标准的<code>SQL</code>语句）。也就是说如果使用JDBC开发一个数据库应用，则该应用既可以在Windows操作系统上运行，又可以在<code>Unix</code>等其他操作系统上运行，既可以使用<code>MySQ</code>L数据库，又可以使用<code>Oracle</code>等其他的数据库，应用程序不需要做任何的修改</strong></p>
-</li>
-</ul>
-</blockquote>
-<h2 id="加载数据库驱动"><a href="#加载数据库驱动" class="headerlink" title="加载数据库驱动"></a>加载数据库驱动</h2><blockquote>
-<ul>
-<li><strong><code>Class.forName(classDriver)</code>其中<code>classDrive</code>r就是数据库驱动类对应的字符串,下面给出加载<code>mysql</code>,<code>oracle</code>数据库的例子：</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);   <span class="comment">//mysql</span></div><div class="line">Class.forName(<span class="string">"oracle.jabc.driver.OracleDriver"</span>);    <span class="comment">//oracle</span></div></pre></td></tr></table></figure>
-<h2 id="获取数据库连接"><a href="#获取数据库连接" class="headerlink" title="获取数据库连接"></a>获取数据库连接</h2><p><strong>获得数据库连接的方法为<code>DriverManager.getConnection()</code>,其中有不同的参数，也对应不同的方法，下面将会详细介绍</strong></p>
-<blockquote>
-<ul>
-<li><p><strong><code>DriverManager.getConnection(String url)</code></strong>   </p>
-</li>
-<li><p><strong><code>DriverManager.getConnection(String url, Properties prop)</code>  这里的Properties是一个属性集，详情请看<a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/java/util/Properties.html" target="_blank" rel="external">文档</a></strong></p>
-</li>
-<li><p><strong><code>DriverManager.getConnection(String url,String user,String password)</code>  这里的<code>url</code>是<code>jdbc:mysql://localhost:3306/java_demo</code>，其中<code>java_demo</code>表示你自己创建的数据库名字，<code>urser</code>表示当前数据库的登录的用户名，<code>password</code>表示密码</strong></p>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//第二种方法</span></div><div class="line">String url=<span class="string">"jdbc:mysql://localhost:3306/java_demo"</span>;  <span class="comment">//这是连接的url</span></div><div class="line">String user=<span class="string">"root"</span>;</div><div class="line">String password=<span class="string">"root"</span>;   </div><div class="line">Properties properties=<span class="keyword">new</span> Properties();   <span class="comment">//创建属性集</span></div><div class="line">properties.setProperty(<span class="string">"password"</span>, password);   <span class="comment">//向起中添加属性,很想python中的字典</span></div><div class="line">properties.setProperty(<span class="string">"user"</span>,user);   </div><div class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);   <span class="comment">//加载数据库驱动</span></div><div class="line">Connection conn=DriverManager.getConnection(url,properties);   <span class="comment">//连接数据库</span></div><div class="line"></div><div class="line"><span class="comment">//第三种方法</span></div><div class="line"></div><div class="line">Connection conn=DriverManager.getConnection(url,user,password);   <span class="comment">//连接数据库</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>注意：以上只是一些例子，并不是完整的代码，其中并没有处理异常，还应该注意的是要关闭connection</strong></p>
-</blockquote>
-<h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><blockquote>
-<p><strong>查询数据有两种方法，分别为静态查询和动态查询，静态查询使用的<a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/index.html?index-filesindex-16.html" target="_blank" rel="external">Statement</a>，动态查询使用的<a href="http://tool.oschina.net/uploads/apidocs/jdk-zh/index.html?index-filesindex-16.html" target="_blank" rel="external">PrepareStatement</a>,下面详细介绍这两种查询方法</strong></p>
-</blockquote>
-<h3 id="静态查询"><a href="#静态查询" class="headerlink" title="静态查询"></a>静态查询</h3><blockquote>
-<p><strong>使用的是<code>Statement</code>,其中常用的函数如下：</strong></p>
-<ul>
-<li><p><strong><code>boolean execute(String SQL)</code>  如果<code>ResultSet</code>对象可以被检索，则返回的布尔值为<code>true</code>，否则返回 <code>false</code> 。当你需要使用真正的动态 <code>SQL</code> 时，可以使用这个方法来执行 <code>SQL DDL</code> 语句</strong></p>
-</li>
-<li><p><strong><code>int executeUpdate(String SQL)</code>  返回执行 <code>SQL</code> 语句影响的行的数目。使用该方法来执行 <code>SQL</code> 语句，是希望得到一些受影响的行的数目，例如，<code>INSERT</code>，<code>UPDATE</code> 或 <code>DELETE</code> 语句</strong></p>
-</li>
-<li><p><strong><code>ResultSet executeQuery(String SQL)</code>: 返回一个 <code>ResultSet</code> 对象。当你希望得到一个结果集时使用该方法，就像你使用一个 <code>SELECT</code> 语句。</strong></p>
-</li>
-<li><p><strong><code>close()</code>关闭<code>statement</code>对象，这个是必须有的，为了程序的安全，必须在结束之前关闭</strong></p>
-</li>
-</ul>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">    Statement stmt = <span class="keyword">null</span>;   <span class="comment">//申请对象</span></div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">   stmt = connection.createStatement( );   <span class="comment">//通过Connection对象创建statement对象</span></div><div class="line">   </div><div class="line">   String sql_1=<span class="string">"select * from course;"</span>;</div><div class="line">   String sql_2=<span class="string">"select * from course where id=2;"</span>;</div><div class="line">   </div><div class="line">   ResultSet res_1=stm.executeQuery(sql_1);   <span class="comment">//执行查询语句，返回的是一个结果集合，上面已经说明了</span></div><div class="line">   ResultSet res_2=stm.executeQuery(sql_1);</div><div class="line">   </div><div class="line">   <span class="keyword">while</span>(res_1.next())</div><div class="line">   &#123;</div><div class="line">   System.out.println(res_1.getInt(<span class="number">1</span>)+<span class="string">"---"</span>+res_1.getString(<span class="number">2</span>));   <span class="comment">//分别查询第一列和第二列的值，通过列数查询</span></div><div class="line">   System.out.println(res_1.getInt(<span class="string">"id"</span>)+<span class="string">"---"</span>+res_1.getString(<span class="string">"name"</span>));   <span class="comment">//通过列名查询</span></div><div class="line">   </div><div class="line">   &#125;</div><div class="line">  </div><div class="line">   &#125;</div><div class="line"><span class="keyword">catch</span> (SQLException e) &#123;    <span class="comment">//捕捉异常</span></div><div class="line">   . . .</div><div class="line">&#125;</div><div class="line"><span class="keyword">finally</span> &#123;</div><div class="line">    <span class="keyword">if</span>(connection!=<span class="keyword">null</span>)</div><div class="line">    &#123;</div><div class="line">        connection.close();    <span class="comment">//关闭连接</span></div><div class="line">    &#125;</div><div class="line">   <span class="keyword">if</span>(stmt!=<span class="keyword">null</span>)</div><div class="line">   &#123;</div><div class="line">       stmt.close();  <span class="comment">//关闭</span></div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>说明：<code>ResultSet</code>常用的方法如下：注意下面的方法会发生<code>SQLException</code>异常</strong></p>
-<ul>
-<li><p><strong><code>public void beforeFirst()</code> 将光标移动到第一行之前。</strong></p>
-</li>
-<li><p><strong><code>public void afterLast()</code>  将光标移动到最后一行之后。</strong></p>
-</li>
-<li><p><strong><code>public boolean first()</code>  将光标移动到第一行。从第一行的数据开始读取</strong></p>
-</li>
-<li><p><strong><code>public void last()</code> 将光标移动到最后一行。</strong></p>
-</li>
-<li><p><strong><code>public boolean absolute(int row)</code> 将光标移动到指定的第<code>row</code>行。</strong></p>
-</li>
-<li><p><strong><code>public boolean previous()</code> 将光标移动到上一行，如果超过结果集的范围则返回<code>false</code>。</strong></p>
-</li>
-<li><p><strong><code>public boolean next()</code> 将光标移动到下一行，如果是结果集的最后一行则返回 false。</strong></p>
-</li>
-<li><p><strong><code>public int getRow()</code> 返回当前光标指向的行数的值。</strong></p>
-</li>
-<li><p><strong><code>public void moveToInsertRow()</code> 将光标移动到结果集中指定的行，可以在数据库中插入新的一行。当前光标位置将被记住</strong></p>
-</li>
-<li><p><strong><code>public void moveToCurrentRow()</code> 如果光标处于插入行，则将光标返回到当前行，其他情况下，这个方法不执行任何操作</strong></p>
-</li>
-<li><p><strong><code>public int getInt(String columnName)</code>返回当前行中名为 <code>columnName</code>的列的 <code>int</code> 值。</strong></p>
-</li>
-<li><p><strong><code>public int getInt(int columnIndex)</code> 返回当前行中指定列的索引的<code>int</code>值。列索引从 <code>1</code> 开始，意味着行中的第一列是<code>1</code> ，第二列是 <code>2</code> ，以此类推。</strong></p>
-</li>
-<li><p><strong><code>getString(int columIndex)</code> 返回指定列的<code>String</code>类型的数据</strong></p>
-</li>
-<li><p><strong><code>getString(String columName)</code> 返回当前行中名为<code>columName</code>的<code>String</code>类型的值</strong></p>
-</li>
-</ul>
-</blockquote>
-<h3 id="动态查询"><a href="#动态查询" class="headerlink" title="动态查询"></a>动态查询</h3><blockquote>
-<p><strong>动态查询使用的<code>PrepareStatement</code>这个类实现的，<code>PreparedStatement</code> 接口扩展了 <code>Statement</code> 接口，它让你用一个常用的 <code>Statement</code> 对象增加几个高级功能。这个 <code>statement</code> 对象可以提供灵活多变的动态参数</strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">PreparedStatement pstmt = <span class="keyword">null</span>;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">   String SQL = <span class="string">"select * from course where age=? and name=?"</span>;</div><div class="line">   pstmt = conn.prepareStatement(SQL);   <span class="comment">//创建对象</span></div><div class="line">   pstmt.setInt(<span class="number">1</span>,<span class="number">22</span>);   <span class="comment">//设置参数age的值 ，1表示第一个参数</span></div><div class="line">   pstmt.setString(<span class="number">2</span>,<span class="string">"chenjiabing"</span>);   <span class="comment">//设置name的值，其中2表示第二个参数</span></div><div class="line">   ResultSet res=pstmt.execteQuery();</div><div class="line">   <span class="keyword">while</span>(res.next)</div><div class="line">   &#123;</div><div class="line">       ....</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   . . .</div><div class="line">&#125;</div><div class="line"><span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">   . . .</div><div class="line">&#125;</div><div class="line"><span class="keyword">finally</span> &#123;</div><div class="line">    <span class="keyword">if</span>(connection!=<span class="keyword">null</span>)</div><div class="line">    &#123;</div><div class="line">        connection.close();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(pstmt!=<span class="keyword">null</span>)</div><div class="line">    &#123;</div><div class="line">    pstmt.close();   <span class="comment">//关闭</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">   . . .</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>说明:<code>JDBC</code> 中所有的参数都被用<code>?</code>符号表示，这是已知的参数标记。在执行<code>SQL</code> 语句之前，你必须赋予每一个参数确切的数值。其中<code>PrepareStatement</code>的常用函数如下，当然<code>Statement</code>中的<code>execute</code> ,<code>executeQuery</code>,<code>executeUpdate</code>也可以使用</strong></p>
-<ul>
-<li><strong><code>void setInt(int parameterIndex, int x)</code> <code>parameterIndex</code>表示第几个<code>?</code>,这里的<code>int x</code>表示是<code>mysql</code>中定义的<code>int</code>类型的值</strong></li>
-<li><strong><code>void setString(int parameterIndex,String x)</code>  为第<code>parameterIndex</code>个<code>String</code>类型的?赋予<code>x</code>的值</strong></li>
-</ul>
-</blockquote>
-<h2 id="其他的操作"><a href="#其他的操作" class="headerlink" title="其他的操作"></a>其他的操作</h2><blockquote>
-<p><strong>这里还有<code>delete</code>,<code>update</code>,<code>alter</code>等一系列的操作都是和上面的一样，就是把<code>sql</code>语句改变以下，如果使用的是静态的就要为<code>delete</code>,<code>update</code>,使用<code>Statement.execteUpdate(sql)</code>这个函数,当然要使用动态的也是<code>executeUpdate</code>函数</strong></p>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/java学习/">java学习</a>
-</div>
-
-
-  <div class="article-tags">
+<section class="post" itemscope itemprop="blogitem">
   
-  <span></span> <a href="/tags/JDBC/">JDBC</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2017/04/27/JDBC干货篇一/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/04/26/BootStrap干货篇之表单/" title="BootStrap干货篇之表单" itemprop="url">BootStrap干货篇之表单</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
-		
-  <p class="article-time">
-    <time datetime="2017-04-26T15:11:37.000Z" itemprop="datePublished"> 发表于 2017-04-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="BootStrap干货篇之表单"><a href="#BootStrap干货篇之表单" class="headerlink" title="BootStrap干货篇之表单"></a>BootStrap干货篇之表单</h1><h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><blockquote>
-<p><strong>单独的表单控件会被自动赋予一些全局样式。所有设置了 <code>.form-control</code> 类的 <code>&lt;input&gt;</code>、<code>&lt;textarea&gt;</code> 和 <code>&lt;select&gt;</code> 元素都将被默认设置宽度属性为 <code>width: 100%</code>;。 将 <code>label</code>元素和前面提到的控件包裹在 <code>.form-group</code> 中可以获得最好的排列。</strong></p>
-<p><strong>基本实例：</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">    &lt;div class=&apos;container&apos;&gt;</div><div class="line">    &lt;form&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;label for=&quot;exampleInputEmail1&quot;&gt;Email address&lt;/label&gt;</div><div class="line">    &lt;input type=&quot;email&quot; class=&quot;form-control&quot; id=&quot;exampleInputEmail1&quot; placeholder=&quot;Email&quot;&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;label for=&quot;exampleInputPassword1&quot;&gt;Password&lt;/label&gt;</div><div class="line">    &lt;input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;exampleInputPassword1&quot; placeholder=&quot;Password&quot;&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;label for=&quot;exampleInputFile&quot;&gt;File input&lt;/label&gt;</div><div class="line">    &lt;input type=&quot;file&quot; id=&quot;exampleInputFile&quot;&gt;</div><div class="line">    &lt;p class=&quot;help-block&quot;&gt;Example block-level help text here.&lt;/p&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;checkbox&quot;&gt;</div><div class="line">    &lt;label&gt;</div><div class="line">      &lt;input type=&quot;checkbox&quot;&gt; Check me out</div><div class="line">    &lt;/label&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;Submit&lt;/button&gt;</div><div class="line">&lt;/form&gt;</div><div class="line">    &lt;/div&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>说明：这里的<code>form-control</code>是对所有的输入控件而言的,源码中将width设置为<code>100%</code>，表示会将这个输入控件占满一整行，<code>form-group</code>是用来对<code>label</code>和<code>input</code>更好的排版的，其中还有<code>form-group-sm</code>,<code>form-group-lg</code>，源码中分别利用这个对带有<code>form-control</code>的控件设置了不同的高度，具体看源码，不过正常情况下还是使用<code>form-group</code></strong></p>
-</blockquote>
-<h2 id="内联表单"><a href="#内联表单" class="headerlink" title="内联表单"></a>内联表单</h2><blockquote>
-<p><strong>为 <code>&lt;form&gt;</code> 元素添加 <code>.form-inline</code> 类可使其内容左对齐并且表现为<code>inline-block</code>级别的控件。只适用于视口（<code>viewport</code>）至少在 <code>768px</code> 宽度时（视口宽度再小的话就会使表单折叠）从源码中可以看到对<code>form-inline</code>下的<code>form-group</code>,<code>form-control</code>,<code>form-control-static</code>,<code>input-group</code>,<code>radio</code>,<code>checkbox</code>都是用了<code>display:inline-block</code></strong></p>
-<p><strong>注意：</strong></p>
-<ul>
-<li>在 <code>Bootstrap</code> 中，输入框和单选/多选框控件默认被设置为 <code>width</code>: <code>100%</code>; 宽度。在内联表单，我们将这些元素的宽度设置为<code>width: auto</code>;，因此，多个控件可以排列在同一行。根据你的布局需求，可能需要一些额外的定制化组件。</li>
-<li><strong>一定要有<code>label</code>标签，如果不想要<code>label</code>标签可以设置<code>.sr-only</code>将其隐藏</strong>如果你没有为每个输入控件设置 <code>label</code> 标签，屏幕阅读器将无法正确识别。对于这些内联表单，你可以通过为 label 设置 .sr-only 类将其隐藏。还有一些辅助技术提供label标签的替代方案，比如 <code>aria-label</code>、<code>aria-labelledby</code>或 <code>title</code> 属性。如果这些都不存在，屏幕阅读器可能会采取使用 <code>placeholder</code> 属性，如果存在的话，使用占位符来替代其他的标记，但要注意，这种方法是不妥当的。</li>
-</ul>
-<p><strong>实例:</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;form class=&quot;form-inline&quot;&gt;    &lt;!--指定了form-inline类--&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">  &lt;!--label中的for标签是用于绑定组件的，如果指定了for标签，input中的id也和for标签的内容相同，那么就会当鼠标点击&lt;label&gt;内容时会自动聚焦在input上--&gt;</div><div class="line">    &lt;label class=&quot;sr-only&quot; for=&quot;exampleInputEmail3&quot;&gt;Email address&lt;/label&gt;</div><div class="line">    &lt;input type=&quot;email&quot; class=&quot;form-control&quot; id=&quot;exampleInputEmail3&quot; placeholder=&quot;Email&quot;&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;label class=&quot;sr-only&quot; for=&quot;exampleInputPassword3&quot;&gt;Password&lt;/label&gt;</div><div class="line">    &lt;input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;exampleInputPassword3&quot; placeholder=&quot;Password&quot;&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;checkbox&quot;&gt;</div><div class="line">    &lt;label&gt;</div><div class="line">      &lt;input type=&quot;checkbox&quot;&gt; Remember me</div><div class="line">    &lt;/label&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;Sign in&lt;/button&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
-<h2 id="水平表单"><a href="#水平表单" class="headerlink" title="水平表单"></a>水平表单</h2><blockquote>
-<p><strong>水平表单通过指定为form指定<code>form-horizontal</code>类来设定，其中可以使用<code>BootStrap</code>的栅栏系统设置水平间距，其中的<code>form-group</code>的<code>div</code>就表示一行了，相当于<code>&lt;div class=&#39;row&#39;&gt;&lt;/div&gt;</code>,因此只需要在<code>label</code>和<code>input</code>中指定列就行了，但是<code>input</code>标签不能直接使用，要在外面加上<code>div</code></strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;form class=&quot;form-horizontal&quot;&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;   </div><div class="line">    &lt;label for=&quot;inputEmail3&quot; class=&quot;col-sm-2 control-label&quot;&gt;Email&lt;/label&gt;</div><div class="line">    &lt;div class=&quot;col-sm-10&quot;&gt;</div><div class="line">      &lt;input type=&quot;email&quot; class=&quot;form-control&quot; id=&quot;inputEmail3&quot; placeholder=&quot;Email&quot;&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;   &lt;!--相当与&lt;div class=&apos;row&apos;&gt;&lt;/div&gt;--&gt;</div><div class="line">    &lt;label for=&quot;inputPassword3&quot; class=&quot;col-sm-2 control-label&quot;&gt;Password&lt;/label&gt;</div><div class="line">    &lt;div class=&quot;col-sm-10&quot;&gt;</div><div class="line">      &lt;input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;inputPassword3&quot; placeholder=&quot;Password&quot;&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;div class=&quot;col-sm-offset-2 col-sm-10&quot;&gt;</div><div class="line">      &lt;div class=&quot;checkbox&quot;&gt;</div><div class="line">        &lt;label&gt;</div><div class="line">          &lt;input type=&quot;checkbox&quot;&gt; Remember me</div><div class="line">        &lt;/label&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;div class=&quot;col-sm-offset-2 col-sm-10&quot;&gt;</div><div class="line">      &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;Sign in&lt;/button&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>说明上面的<code>label</code>标签中的<code>control-label</code>主要的作用是设置文字的对齐方式为左对齐，如果不加这个将会在右边出现很大的空白</strong></p>
-</blockquote>
-<h2 id="多选和单选框"><a href="#多选和单选框" class="headerlink" title="多选和单选框"></a>多选和单选框</h2><blockquote>
-<p><strong>多选框<code>（checkbox）</code>用于选择列表中的一个或多个选项，而单选框（<code>radio</code>）用于从多个选项中只选择一个。其中提供的类有<code>checkbox</code>,<code>checkbox-inline</code>,<code>radio</code>,<code>radio-inline</code></strong></p>
-</blockquote>
-<h4 id="内联单选和多选框"><a href="#内联单选和多选框" class="headerlink" title="内联单选和多选框"></a>内联单选和多选框</h4><blockquote>
-<p><strong>通过将 .checkbox-inline 或 .radio-inline 类应用到一系列的多选框（<code>checkbox</code>）或单选框（<code>radio</code>）控件上，可以使这些控件排列在一行。</strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;label class=&quot;checkbox-inline&quot;&gt;</div><div class="line">  &lt;input type=&quot;checkbox&quot; id=&quot;inlineCheckbox1&quot; value=&quot;option1&quot;&gt; 1</div><div class="line">&lt;/label&gt;</div><div class="line">&lt;label class=&quot;checkbox-inline&quot;&gt;</div><div class="line">  &lt;input type=&quot;checkbox&quot; id=&quot;inlineCheckbox2&quot; value=&quot;option2&quot;&gt; 2</div><div class="line">&lt;/label&gt;</div><div class="line">&lt;label class=&quot;checkbox-inline&quot;&gt;</div><div class="line">  &lt;input type=&quot;checkbox&quot; id=&quot;inlineCheckbox3&quot; value=&quot;option3&quot;&gt; 3</div><div class="line">&lt;/label&gt;</div><div class="line"></div><div class="line">&lt;label class=&quot;radio-inline&quot;&gt;</div><div class="line">  &lt;input type=&quot;radio&quot; name=&quot;inlineRadioOptions&quot; id=&quot;inlineRadio1&quot; value=&quot;option1&quot;&gt; 1</div><div class="line">&lt;/label&gt;</div><div class="line">&lt;label class=&quot;radio-inline&quot;&gt;</div><div class="line">  &lt;input type=&quot;radio&quot; name=&quot;inlineRadioOptions&quot; id=&quot;inlineRadio2&quot; value=&quot;option2&quot;&gt; 2</div><div class="line">&lt;/label&gt;</div><div class="line">&lt;label class=&quot;radio-inline&quot;&gt;</div><div class="line">  &lt;input type=&quot;radio&quot; name=&quot;inlineRadioOptions&quot; id=&quot;inlineRadio3&quot; value=&quot;option3&quot;&gt; 3</div><div class="line">&lt;/label&gt;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&lt;div class=&quot;checkbox-inline&quot;&gt;</div><div class="line">            &lt;label for=&quot;sex&quot;&gt;&lt;input type=&quot;checkbox&quot;&gt;男&lt;/label&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;checkbox-inline&quot;&gt;</div><div class="line">        &lt;label for=&quot;sex&quot;&gt;&lt;input type=&quot;checkbox&quot;&gt;男&lt;/label&gt;</div><div class="line">    &lt;/div&gt;</div></pre></td></tr></table></figure>
-<h4 id="不带label文本的Checkbox-和-radio"><a href="#不带label文本的Checkbox-和-radio" class="headerlink" title="不带label文本的Checkbox 和 radio"></a>不带label文本的Checkbox 和 radio</h4><blockquote>
-<p><strong>如果需要 <code>&lt;label&gt;</code> 内没有文字，输入框（<code>input</code>）正是你所期望的。 目前只适用于</strong>非内联<strong>的 <code>checkbox</code>和 <code>radio</code>。 请记住，仍然需要为使用辅助技术的用户提供某种形式的 <code>label</code>（例如，使用 <code>aria-label</code>）。</strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;checkbox&quot;&gt;</div><div class="line">  &lt;label&gt;</div><div class="line">    &lt;input type=&quot;checkbox&quot; id=&quot;blankCheckbox&quot; value=&quot;option1&quot; aria-label=&quot;...&quot;&gt;</div><div class="line">  &lt;/label&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;div class=&quot;radio&quot;&gt;</div><div class="line">  &lt;label&gt;</div><div class="line">    &lt;input type=&quot;radio&quot; name=&quot;blankRadio&quot; id=&quot;blankRadio1&quot; value=&quot;option1&quot; aria-label=&quot;...&quot;&gt;</div><div class="line">  &lt;/label&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<h4 id="下拉列表（select）"><a href="#下拉列表（select）" class="headerlink" title="下拉列表（select）"></a>下拉列表（select）</h4><blockquote>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;select class=&quot;form-control&quot;&gt;</div><div class="line">  &lt;option&gt;1&lt;/option&gt;</div><div class="line">  &lt;option&gt;2&lt;/option&gt;</div><div class="line">  &lt;option&gt;3&lt;/option&gt;</div><div class="line">  &lt;option&gt;4&lt;/option&gt;</div><div class="line">  &lt;option&gt;5&lt;/option&gt;</div><div class="line">&lt;/select&gt;</div></pre></td></tr></table></figure>
-<h2 id="静态控件"><a href="#静态控件" class="headerlink" title="静态控件"></a>静态控件</h2><blockquote>
-<p><strong>如果需要在表单中将一行纯文本和 <code>label</code> 元素放置于同一行，为<code>&lt;p&gt;</code>标签设置为<code>form-control-static</code></strong></p>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;form class=&quot;form-horizontal&quot;&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;label class=&quot;col-sm-2 control-label&quot;&gt;Email&lt;/label&gt;</div><div class="line">    &lt;div class=&quot;col-sm-10&quot;&gt;</div><div class="line">      &lt;p class=&quot;form-control-static&quot;&gt;email@example.com&lt;/p&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=&quot;form-group&quot;&gt;</div><div class="line">    &lt;label for=&quot;inputPassword&quot; class=&quot;col-sm-2 control-label&quot;&gt;Password&lt;/label&gt;</div><div class="line">    &lt;div class=&quot;col-sm-10&quot;&gt;</div><div class="line">      &lt;input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;inputPassword&quot; placeholder=&quot;Password&quot;&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
-<ul>
-<li><a href="http://v3.bootcss.com/css/#forms-controls-static" target="_blank" rel="external">中文官网</a></li>
-<li><a href="http://www.shouce.ren/api/view/a/779" target="_blank" rel="external">文档手册</a></li>
-</ul>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/BootStrap学习/">BootStrap学习</a>
-</div>
-
-
-  <div class="article-tags">
+    <a href="/2017/04/30/MongoDB干货篇之查询数据/" title="MongoDB干货篇之查询数据" itemprop="url">
   
-  <span></span> <a href="/tags/BootStrap/">BootStrap</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2017/04/26/BootStrap干货篇之表单/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+    <h1 itemprop="name">MongoDB干货篇之查询数据</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+           <p itemprop="description" >MongoDB干货篇之查询准备工作
+在开始之前我们应该先准备数据方便演示，这里我插入的了几条数据，数据如下：12345678910111213141516171819202122232425262728293031323334db.user.insertMany([&amp;#123;n</p>
+        
     
-      <a href="/2017/04/24/Scrapyd部署爬虫/" title="Scrapyd部署爬虫" itemprop="url">Scrapyd部署爬虫</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
-		
-  <p class="article-time">
-    <time datetime="2017-04-24T02:58:07.000Z" itemprop="datePublished"> 发表于 2017-04-24</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Scrapyd部署爬虫"><a href="#Scrapyd部署爬虫" class="headerlink" title="Scrapyd部署爬虫"></a>Scrapyd部署爬虫</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><blockquote>
-<ul>
-<li><strong><code>安装scrapyd: pip install scrapyd</code></strong></li>
-<li><strong>安装<code>scrapyd-client : pip install scrapyd-client</code></strong></li>
-<li><strong><code>安装curl:[安装地址](http://ono60m7tl.bkt.clouddn.com/curl.exe)</code>,安装完成以后将所在目录配置到环境变量中</strong></li>
-</ul>
-</blockquote>
-<h2 id="开始部署"><a href="#开始部署" class="headerlink" title="开始部署"></a>开始部署</h2><blockquote>
-<ul>
-<li><p><strong>修改<code>scrapy</code>项目目录下的<code>scrapy.cfg</code>文件，修改如下</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[deploy:JD_Spider]    <span class="comment">#加上target   :name</span></div><div class="line">url = http://localhost:<span class="number">6800</span>/   <span class="comment">#将前面的#删除</span></div><div class="line">project = JD               <span class="comment">#project的名字，可以使用默认的，当然也可以改变</span></div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>在任意目录下的打开终端，输入<code>scrapyd</code>,观察是否运行成功，运行成功的话，就可以打开<code>http://localhost:6800</code>看是否正常显示，如果正常显示则看到下面的这张图,这里的<code>JD</code>是部署之后才能看到的，现在是看不到的，所以没出现也不要担心：</strong></p>
-</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/scrayd.bmp" alt="scrapyd"></p>
-<ul>
-<li><p><strong>在项目的根目录下运行如下的命令：<code>python E:\python2.7\Scripts\scrapyd-deploy target -p project</code>,这里的E:\python2.7\Scripts\是你的python安装目录，Scripts是安装目录下的一个文件夹，注意前面一定要加上python,target是在前面scrapy.cfg中设置的deploy:JD_Spider，JD_Spider就是target,project 是JD,因此这个完整的命令是<code>python E:\python2.7\Scripts\scrapyd-deploy JD_Spider -p JD</code>,现在项目就部署到上面了，这下网页上就有<code>JD</code>了，详情请见上图</strong></p>
-</li>
-<li><p><strong>验证是否成功，你可以在网页上看有没有显示你的工程名字，另外在根目录下输入<code>python E:\python2.7\Scripts\scrapyd-deploy -l</code>就能列出你所有部署过的项目了</strong></p>
-</li>
-<li><p><strong>启动爬虫：<code>curl http://localhost:6800/schedule.json -d project=myproject -d spider=spider_name</code>,这里的<code>project</code>填入的是项目名，<code>spider_name</code>填入的是你的爬虫中定义的<code>name</code>,运行我的实例完整的代码为：<code>curl http://localhost:6800/schedule.json -d project=JD -d spider=spider</code>，这里将会显示如下信息：</strong></p>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#这里的jobid比较重要，下面会用到这个取消爬虫</span></div><div class="line">&#123;<span class="string">"status"</span>: <span class="string">"ok"</span>, <span class="string">"jobid"</span>: <span class="string">"3013f9d1283611e79a63acb57dec5d04"</span>, <span class="string">"node_name"</span>: <span class="string">"DESKTOP-L78TJQ7"</span>&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>取消爬虫：<code>curl http://localhost:6800/cancel.json -d project=myproject -d job=jobid</code>,<code>jobid</code>就是上面的提到过的，如果取消我的这个实例代码如：<code>curl http://localhost:6800/cancel.json -d project=JD -d job=3013f9d1283611e79a63acb57dec5d04</code>,那么它的状态就会变成如下：</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="string">"status"</span>: <span class="string">"ok"</span>, <span class="string">"prevstate"</span>: <span class="string">"running"</span>, <span class="string">"node_name"</span>: <span class="string">"DESKTOP-L78TJQ7"</span>&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><p><strong>列出项目：<code>curl http://localhost:6800/listprojects.json</code>,下面将会出现你已经部署的项目</strong></p>
-</li>
-<li><p><strong>删除项目：<code>curl http://localhost:6800/delproject.json -d project=myproject</code></strong></p>
-</li>
-<li><p><strong>列出版本：<code>curl http://localhost:6800/listversions.json?project=myproject</code>,这里的<code>project</code>是项目的名字，是在scrapy.cfg设置的</strong></p>
-</li>
-<li><p><strong>列出爬虫：<code>curl http://localhost:6800/listspiders.json?project=myproject</code>这里的<code>project</code>是项目的名字，是在scrapy.cfg设置的</strong></p>
-</li>
-<li><p><strong>列出<code>job</code>:<code>curl http://localhost:6800/listjobs.json?project=myproject</code>这里的<code>project</code>是项目的名字，是在<code>scrapy.cfg</code>设置的</strong></p>
-</li>
-<li><p><strong>删除版本：<code>curl http://localhost:6800/delversion.json -d project=myproject -d version=r99</code>，这里的<code>version</code>是自己的项目版本号，在删除之前需要查看版本号</strong></p>
-</li>
-</ul>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Scrapy学习/">Scrapy学习</a>
-</div>
+    <time datetime="2017-04-30T06:53:00.000Z" itemprop="datePublished">2017-04-30</time>
+  </a>
+</section>
 
 
-  <div class="article-tags">
+
+
+
+
   
-  <span></span> <a href="/tags/scrapy/">scrapy</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2017/04/24/Scrapyd部署爬虫/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/04/23/scrapy大战京东商城/" title="scrapy大战京东商城" itemprop="url">scrapy大战京东商城</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
-		
-  <p class="article-time">
-    <time datetime="2017-04-23T14:12:30.000Z" itemprop="datePublished"> 发表于 2017-04-23</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="SCrapy爬虫大战京东商城"><a href="#SCrapy爬虫大战京东商城" class="headerlink" title="SCrapy爬虫大战京东商城"></a>SCrapy爬虫大战京东商城</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
-<p><strong>上一篇已经讲过怎样获取链接，怎样获得参数了，详情请看<a href="https://chenjiabing666.github.io/2017/04/23/python%E7%88%AC%E8%99%AB%E5%A4%A7%E6%88%98%E4%BA%AC%E4%B8%9C%E5%95%86%E5%9F%8E/">python爬取京东商城普通篇</a></strong></p>
-</blockquote>
-<h2 id="代码详解"><a href="#代码详解" class="headerlink" title="代码详解"></a>代码详解</h2><blockquote>
-<ul>
-<li><strong>首先应该构造请求，这里使用<a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/topics/spiders.html" target="_blank" rel="external">scrapy.Request</a>,这个方法默认调用的是<code>start_urls</code>构造请求，如果要改变默认的请求，那么必须重载该方法，这个方法的返回值必须是一个可迭代的对象，一般是用<code>yield</code>返回，代码如下：</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">start_requests</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">101</span>):</div><div class="line">        page=i*<span class="number">2</span><span class="number">-1</span>    <span class="comment">#这里是构造请求url的page,表示奇数</span></div><div class="line">        url=self.start_url+str(page)</div><div class="line">        <span class="keyword">yield</span> scrapy.Request(url,meta=&#123;<span class="string">'search_page'</span>:page+<span class="number">1</span>&#125;,callback=self.parse_url)   <span class="comment">#这里使用meta想回调函数传入数据，回调函数使用response.meta['search-page']接受数据</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>下面就是解析网页了，从上面看出这里的解析回调函数是<code>parse_url</code>,因此在此函数中解析网页。这里还是和上面说的一样，这个<code>url</code>得到的仅仅是前一半的信息，如果想要得到后一半的信息还有再次请求，这里还有注意的就是一个技巧：一般先解析出一个数据的数组，不急着取出第一个数，先要用if语句判断，因为如果得到的是<code>[]</code>，那么直接取出<code>[0]</code>是会报错的，这只是一个避免报错的方法吧，代码如下:</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_url</span><span class="params">(self,response)</span>:</span></div><div class="line">    <span class="keyword">if</span> response.status==<span class="number">200</span>:   <span class="comment">#判断是否请求成功</span></div><div class="line">        <span class="comment"># print response.url</span></div><div class="line">        pids = set()    <span class="comment">#这个集合用于过滤和保存得到的id,用于作为后面的ajax请求的url构成</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            all_goods = response.xpath(<span class="string">"//div[@id='J_goodsList']/ul/li"</span>)   <span class="comment">#首先得到所有衣服的整个框架，然后从中抽取每一个框架</span></div><div class="line"></div><div class="line">            <span class="keyword">for</span> goods <span class="keyword">in</span> all_goods:   <span class="comment">#从中解析每一个</span></div><div class="line">                <span class="comment"># scrapy.shell.inspect_response(response,self)   #这是一个调试的方法，这里会直接打开调试模式</span></div><div class="line">                items = JdSpiderItem()   <span class="comment">#定义要抓取的数据</span></div><div class="line">                img_url_src = goods.xpath(<span class="string">"div/div[1]/a/img/@src"</span>).extract()  <span class="comment"># 如果不存在就是一个空数组[]，因此不能在这里取[0]</span></div><div class="line">                img_url_delay = goods.xpath(</div><div class="line">                    <span class="string">"div/div[1]/a/img/@data-lazy-img"</span>).extract()  <span class="comment"># 这个是没有加载出来的图片，这里不能写上数组取第一个[0]</span></div><div class="line">                price = goods.xpath(<span class="string">"div/div[3]/strong/i/text()"</span>).extract()  <span class="comment">#价格</span></div><div class="line">                cloths_name = goods.xpath(<span class="string">"div/div[4]/a/em/text()"</span>).extract()</div><div class="line">                shop_id = goods.xpath(<span class="string">"div/div[7]/@ data-shopid"</span>).extract()</div><div class="line">                cloths_url = goods.xpath(<span class="string">"div/div[1]/a/@href"</span>).extract()</div><div class="line">                person_number = goods.xpath(<span class="string">"div/div[5]/strong/a/text()"</span>).extract()</div><div class="line">                pid = goods.xpath(<span class="string">"@data-pid"</span>).extract()</div><div class="line">                <span class="comment"># product_id=goods.xpath("@data-sku").extract()</span></div><div class="line">                <span class="keyword">if</span> pid:</div><div class="line">                    pids.add(pid[<span class="number">0</span>])</div><div class="line">                <span class="keyword">if</span> img_url_src:  <span class="comment"># 如果img_url_src存在</span></div><div class="line">                    <span class="keyword">print</span> img_url_src[<span class="number">0</span>]</div><div class="line">                    items[<span class="string">'img_url'</span>] = img_url_src[<span class="number">0</span>]</div><div class="line">                <span class="keyword">if</span> img_url_delay:  <span class="comment"># 如果到了没有加载完成的图片，就取这个url</span></div><div class="line">                    <span class="keyword">print</span> img_url_delay[<span class="number">0</span>]</div><div class="line">                    items[<span class="string">'img_url'</span>] = img_url_delay[<span class="number">0</span>]  <span class="comment"># 这里如果数组不是空的，就能写了</span></div><div class="line">                <span class="keyword">if</span> price:</div><div class="line">                    items[<span class="string">'price'</span>] = price[<span class="number">0</span>]</div><div class="line">                <span class="keyword">if</span> cloths_name:</div><div class="line">                    items[<span class="string">'cloths_name'</span>] = cloths_name[<span class="number">0</span>]</div><div class="line">                <span class="keyword">if</span> shop_id:</div><div class="line">                    items[<span class="string">'shop_id'</span>] = shop_id[<span class="number">0</span>]</div><div class="line">                    shop_url = <span class="string">"https://mall.jd.com/index-"</span> + str(shop_id[<span class="number">0</span>]) + <span class="string">".html"</span></div><div class="line">                    items[<span class="string">'shop_url'</span>] = shop_url</div><div class="line">                <span class="keyword">if</span> cloths_url:</div><div class="line">                    items[<span class="string">'cloths_url'</span>] = cloths_url[<span class="number">0</span>]</div><div class="line">                <span class="keyword">if</span> person_number:</div><div class="line">                    items[<span class="string">'person_number'</span>] = person_number[<span class="number">0</span>]</div><div class="line">                <span class="comment"># if product_id:</span></div><div class="line">                <span class="comment">#     print "************************************csdjkvjfskvnk***********************"</span></div><div class="line">                <span class="comment">#     print self.comments_url.format(str(product_id[0]),str(self.count))</span></div><div class="line">                <span class="comment">#     yield scrapy.Request(url=self.comments_url.format(str(product_id[0]),str(self.count)),callback=self.comments)</span></div><div class="line">                <span class="comment">#yield scrapy.Request写在这里就是每解析一个键裤子就会调用回调函数一次</span></div><div class="line">                <span class="keyword">yield</span> items</div><div class="line">        <span class="keyword">except</span> Exception:</div><div class="line">            <span class="keyword">print</span> <span class="string">"********************************************ERROR**********************************************************************"</span></div><div class="line"></div><div class="line">        <span class="keyword">yield</span> scrapy.Request(url=self.search_url.format(str(response.meta[<span class="string">'search_page'</span>]),<span class="string">","</span>.join(pids)),callback=self.next_half_parse)    <span class="comment">#再次请求，这里是请求ajax加载的数据，必须放在这里，因为只有等到得到所有的pid才能构成这个请求，回调函数用于下面的解析</span></div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>从上面代码的最后可以看出最后就是解析<code>ajax</code>加载的网页了，这里调用的<code>next_half_parse</code>函数，和解析前面一个网页一样，这里需要的注意的是，如果前面定义的数据没有搜索完毕是不能使用<code>yield items</code>的，必须将items通过meta传入下一个回调函数继续完善后才能<code>yield items</code>,这里就不需要了，代码如下：</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#分析异步加载的网页</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">next_half_parse</span><span class="params">(self,response)</span>:</span></div><div class="line">        <span class="keyword">if</span> response.status==<span class="number">200</span>:</div><div class="line">            <span class="keyword">print</span> response.url</div><div class="line">            items=JdSpiderItem()</div><div class="line">            <span class="comment">#scrapy.shell.inspect_response(response,self)    #y用来调试的</span></div><div class="line">            <span class="keyword">try</span>:</div><div class="line">                lis=response.xpath(<span class="string">"//li[@class='gl-item']"</span>)</div><div class="line">                <span class="keyword">for</span> li <span class="keyword">in</span> lis:</div><div class="line">                    cloths_url=li.xpath(<span class="string">"div/div[1]/a/@href"</span>).extract()</div><div class="line">                    img_url_1=li.xpath(<span class="string">"div/div[1]/a/img/@src"</span>).extract()</div><div class="line">                    img_url_2=li.xpath(<span class="string">"div/div[1]/a/img/@data-lazy-img"</span>).extract()</div><div class="line">                    cloths_name=li.xpath(<span class="string">"div/div[4]/a/em/text()"</span>).extract()</div><div class="line">                    price=li.xpath(<span class="string">"div/div[3]/strong/i/text()"</span>).extract()</div><div class="line">                    shop_id=li.xpath(<span class="string">"div/div[7]/@data-shopid"</span>).extract()</div><div class="line">                    person_number=li.xpath(<span class="string">"div/div[5]/strong/a/text()"</span>).extract()</div><div class="line">                    <span class="keyword">if</span> cloths_url:</div><div class="line">                        <span class="keyword">print</span> cloths_url[<span class="number">0</span>]</div><div class="line">                        items[<span class="string">'cloths_url'</span>]=cloths_url[<span class="number">0</span>]</div><div class="line">                    <span class="keyword">if</span> img_url_1:</div><div class="line">                        <span class="keyword">print</span> img_url_1[<span class="number">0</span>]</div><div class="line">                        items[<span class="string">'img_url'</span>]=img_url_1</div><div class="line">                    <span class="keyword">if</span> img_url_2:</div><div class="line">                        <span class="keyword">print</span> img_url_2[<span class="number">0</span>]</div><div class="line">                        items[<span class="string">'img_url'</span>]=img_url_2[<span class="number">0</span>]</div><div class="line">                    <span class="keyword">if</span> cloths_name:</div><div class="line">                        items[<span class="string">'cloths_name'</span>]=cloths_name[<span class="number">0</span>]</div><div class="line">                    <span class="keyword">if</span> price:</div><div class="line">                        items[<span class="string">'price'</span>]=price[<span class="number">0</span>]</div><div class="line">                    <span class="keyword">if</span> shop_id:</div><div class="line">                        items[<span class="string">'shop_id'</span>]=shop_id[<span class="number">0</span>]</div><div class="line">                        items[<span class="string">'shop_url'</span>]=<span class="string">"https://mall.jd.com/index-"</span> + str(shop_id[<span class="number">0</span>]) + <span class="string">".html"</span></div><div class="line">                    <span class="keyword">if</span> person_number:</div><div class="line">                        items[<span class="string">'person_number'</span>]=person_number[<span class="number">0</span>]</div><div class="line">                    <span class="keyword">yield</span> items   <span class="comment">#又一次的生成，这里是完整的数据，因此可以yield items</span></div><div class="line">            <span class="keyword">except</span> Exception:</div><div class="line">                <span class="keyword">print</span> <span class="string">"**************************************************"</span></div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>当然这里还用到了设置请求池，<code>mysql</code>存储，没有使用到<code>ip</code>代理，这个在我前面的博客中又讲到，这里就不再赘述了，想看源代码的朋友请<a href="https://github.com/chenjiabing666/JD_Scrapy_Spider" target="_blank" rel="external">点击这里</a></strong></li>
-</ul>
-</blockquote>
-<h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><blockquote>
-<ul>
-<li><p><strong>人们会抱怨为什么自己的爬虫在中途断开就要重头开始爬，为什么不能从断开那里开始爬呢，这里提供一个方法：在配置文件<code>settings.py</code>中加入<code>JOBDIR=file_name</code>,这里的<code>file_name</code>是一个文件的名字</strong></p>
-</li>
-<li><p><strong>设置下载延迟防止被<code>ban</code>:<code>DOWNLOAD_DELAY = 2</code>:设置每一次的间隔时间   <code>RANDOMIZE_DOWNLOAD_DELAY = True</code>:这个是随机设置延迟时间  在设置的时间的<code>0.5-1.5</code>倍之间，这样可以更有效的防止被ban,一般是配套使用的</strong></p>
-</li>
-<li><p><strong><code>ROBOTSTXT_OBEY = False</code> :这里是表示不遵循<code>robots.txt</code>文件，默认是<code>True</code>表示遵循，这里将之改成<code>False</code></strong></p>
-</li>
-<li><p><strong><code>CONCURRENT_REQUESTS</code> :设置最大请求数，这里默认的时<code>16</code>，我们可以根据自己电脑的配置改的大一点来加快请求的速度</strong></p>
-</li>
-</ul>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Scrapy学习/">Scrapy学习</a>
-</div>
-
-
-  <div class="article-tags">
+<section class="post" itemscope itemprop="blogitem">
   
-  <span></span> <a href="/tags/scrapy/">scrapy</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2017/04/23/scrapy大战京东商城/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/04/23/python爬虫大战京东商城/" title="python爬虫大战京东商城" itemprop="url">python爬虫大战京东商城</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
-		
-  <p class="article-time">
-    <time datetime="2017-04-23T10:34:48.000Z" itemprop="datePublished"> 发表于 2017-04-23</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="python大规模爬取京东"><a href="#python大规模爬取京东" class="headerlink" title="python大规模爬取京东"></a>python大规模爬取京东</h1><h2 id="主要工具"><a href="#主要工具" class="headerlink" title="主要工具"></a>主要工具</h2><blockquote>
-<ul>
-<li><strong><code>scrapy</code></strong></li>
-<li><strong><code>BeautifulSoup</code></strong></li>
-<li><strong><code>requests</code></strong></li>
-</ul>
-</blockquote>
-<h2 id="分析步骤"><a href="#分析步骤" class="headerlink" title="分析步骤"></a>分析步骤</h2><blockquote>
-<ul>
-<li><p><strong>打开京东首页，输入</strong>裤子<strong>将会看到页面跳转到了<a href="https://search.jd.com/Search?keyword=%E8%A3%A4%E5%AD%90&amp;enc=utf-8&amp;wq=%E8%A3%A4%E5%AD%90&amp;pvid=a424f5c84d7844aaa56d4d62286878be" target="_blank" rel="external">这里</a>，这就是我们要分析的起点</strong></p>
-</li>
-<li><p><strong>我们可以看到这个页面并不是完全的，当我们往下拉的时候将会看到图片在不停的加载，这就是<code>ajax</code>,但是当我们下拉到底的时候就会看到整个页面加载了60条裤子的信息，我们打开chrome的调试工具，查找页面元素时可以看到每条裤子的信息都在<code>&lt;li class=&#39;gl-item&#39;&gt;&lt;/li&gt;</code>这个标签中，如下图：</strong></p>
-</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/jd1.bmp" alt="生成图"></p>
-<ul>
-<li><strong>接着我们打开网页源码就会发现其实网页源码只有前30条的数据，后面30条的数据找不到，因此这里就会想到ajax，一种异步加载的方式，于是我们就要开始抓包了，我们打开chrome按F12，点击上面的NetWork,然后点击XHR,这个比较容易好找,下面开始抓包，如下图：</strong></li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/jd2.bmp" alt="抓包图"></p>
-<ul>
-<li><strong>从上面可以找到请求的<code>url</code>，发现有很长的一大段，我们试着去掉一些看看可不可以打开，简化之后的<code>url</code>=<a href="https://search.jd.com/s_new.php?keyword=%E8%A3%A4%E5%AD%90&amp;enc=utf-8&amp;qrst=1&amp;rt=1&amp;stop=1&amp;vt=2&amp;offset=3&amp;wq=%E8%A3%A4%E5%AD%90&amp;page={0}&amp;s=26&amp;scrolling=y&amp;pos=30&amp;show_items={1}" target="_blank" rel="external">https://search.jd.com/s_new.php?keyword=%E8%A3%A4%E5%AD%90&amp;enc=utf-8&amp;qrst=1&amp;rt=1&amp;stop=1&amp;vt=2&amp;offset=3&amp;wq=%E8%A3%A4%E5%AD%90&amp;page={0}&amp;s=26&amp;scrolling=y&amp;pos=30&amp;show_items={1}</a></strong><br><strong>这里的<code>showitems</code>是裤子的<code>id</code>,<code>page</code>是翻页的，可以看出来我们只需要改动两处就可以打开不同的网页了，这里的<code>page</code>很好找，你会发现一个很好玩的事情，就是主网页的<code>page</code>是奇数，但是异步加载的网页中的<code>page</code>是偶数，因此这里只要填上偶数就可以了，但是填奇数也是可以访问的。这里的<code>show_items</code>就是<code>id</code>了，我们可以在页面的源码中找到，通过查找可以看到<code>id</code>在<code>li</code>标签的<code>data-pid</code>中，详情请看下图</strong></li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/jd3.bmp" alt="id"></p>
-<ul>
-<li><strong>上面我们知道怎样找参数了，现在就可以撸代码了</strong></li>
-</ul>
-</blockquote>
-<h2 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h2><blockquote>
-<ul>
-<li><p><strong>首先我们要获取网页的源码，这里我用的requests库，安装方法为<code>pip install requests</code>，代码如下:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_html</span><span class="params">(self)</span>:</span></div><div class="line">    res = requests.get(self.url, headers=self.headers)</div><div class="line">    html = res.text     </div><div class="line">    <span class="keyword">return</span> html    <span class="comment">#返回的源代码</span></div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>根据上面的分析可以知道，第二步就是得到异步加载的url中的参数<code>show_items</code>,就是<code>li</code>标签中的<code>data-pid</code>,代码如下：</strong></p>
-</li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_pids</span><span class="params">(self)</span>:</span></div><div class="line">    html = self.get_html()</div><div class="line">    soup = BeautifulSoup(html, <span class="string">'lxml'</span>)    <span class="comment">#创建BeautifulSoup对象</span></div><div class="line">    lis = soup.find_all(<span class="string">"li"</span>, class_=<span class="string">'gl-item'</span>)   <span class="comment">#查找li标签</span></div><div class="line">    <span class="keyword">for</span> li <span class="keyword">in</span> lis:</div><div class="line">        data_pid = li.get(<span class="string">"data-pid"</span>)      <span class="comment">#得到li标签下的data-pid</span></div><div class="line">        <span class="keyword">if</span> (data_pid):</div><div class="line">            self.pids.add(data_pid)    <span class="comment">#这里的self.pids是一个集合，用于过滤重复的</span></div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>下面就是获取前30张图片的url了，也就是主网页上的图片，其中一个问题是img标签的属性并不是一样的，也就是源码中的<code>img</code>中不都是<code>src</code>属性，一开始已经加载出来的图片就是src属性，但是没有加载出来的图片是<code>data-lazy-img</code>，因此在解析页面的时候要加上讨论。代码如下：</strong></li>
-</ul>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_src_imgs_data</span><span class="params">(self)</span>:</span></div><div class="line">    html = self.get_html()</div><div class="line">    soup = BeautifulSoup(html, <span class="string">'lxml'</span>)</div><div class="line">    divs = soup.find_all(<span class="string">"div"</span>, class_=<span class="string">'p-img'</span>)  <span class="comment"># 图片</span></div><div class="line">    <span class="comment"># divs_prices = soup.find_all("div", class_='p-price')   #价格</span></div><div class="line">    <span class="keyword">for</span> div <span class="keyword">in</span> divs:</div><div class="line">        img_1 = div.find(<span class="string">"img"</span>).get(<span class="string">'data-lazy-img'</span>)  <span class="comment"># 得到没有加载出来的url</span></div><div class="line">        img_2 = div.find(<span class="string">"img"</span>).get(<span class="string">"src"</span>)  <span class="comment"># 得到已经加载出来的url</span></div><div class="line">        <span class="keyword">if</span> img_1:</div><div class="line">            <span class="keyword">print</span> img_1</div><div class="line">            self.sql.save_img(img_1)</div><div class="line">            self.img_urls.add(img_1)</div><div class="line">        <span class="keyword">if</span> img_2:</div><div class="line">            <span class="keyword">print</span> img_2</div><div class="line">            self.sql.save_img(img_2)</div><div class="line">            self.img_urls.add(img_2)</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>前三十张图片找到了，现在开始找后三十张图片了，当然是要请求那个异步加载的<code>url</code>，前面已经把需要的参数给找到了，下面就好办了，直接贴代码：</strong></p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_extend_imgs_data</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="comment"># self.search_urls=self.search_urls+','.join(self.pids)</span></div><div class="line">    self.search_urls = self.search_urls.format(str(self.search_page), <span class="string">','</span>.join(self.pids))  <span class="comment">#拼凑url,将获得的单数拼成url,其中show_items中的id是用','隔开的，因此要对集合中的每一个id分割，page就是偶数，这里直接用主网页的page加一就可以了</span></div><div class="line">    <span class="keyword">print</span> self.search_urls</div><div class="line">    html = requests.get(self.search_urls, headers=self.headers).text   <span class="comment">#请求</span></div><div class="line">    soup = BeautifulSoup(html, <span class="string">'lxml'</span>)   </div><div class="line">    div_search = soup.find_all(<span class="string">"div"</span>, class_=<span class="string">'p-img'</span>)   <span class="comment">#解析</span></div><div class="line">    <span class="keyword">for</span> div <span class="keyword">in</span> div_search:  </div><div class="line">        img_3 = div.find(<span class="string">"img"</span>).get(<span class="string">'data-lazy-img'</span>)    <span class="comment">#这里可以看到分开查找img属性了</span></div><div class="line">        img_4 = div.find(<span class="string">"img"</span>).get(<span class="string">"src"</span>)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> img_3:    <span class="comment">#如果是data-lazy-img</span></div><div class="line">            <span class="keyword">print</span> img_3</div><div class="line">            self.sql.save_img(img_3)    <span class="comment">#存储到数据库</span></div><div class="line">            self.img_urls.add(img_3)      <span class="comment">#用集合去重</span></div><div class="line">        <span class="keyword">if</span> img_4:    <span class="comment">#如果是src属性</span></div><div class="line">            <span class="keyword">print</span> img_4</div><div class="line">            self.sql.save_img(img_4)     </div><div class="line">            self.img_urls.add(img_4)</div></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>通过上面就可以爬取了，但是还是要考虑速度的问题，这里我用了多线程，直接每一页面开启一个线程，速度还是可以的，感觉这个速度还是可以的，几分钟解决问题，总共爬取了<code>100</code>个网页,这里的存储方式是<code>mysql</code>数据库存储的，要用发哦<code>MySQLdb</code>这个库，详情自己百度，当然也可以用mogodb但是还没有学呢，想要的源码的朋友请看<a href="https://github.com/chenjiabing666/JD_Spider_python/tree/master" target="_blank" rel="external">GitHub源码</a></strong></li>
-</ul>
-</blockquote>
-<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><p><strong>写到这里可以看到搜索首页的网址中<code>keyword</code>和<code>wq</code>都是你输入的词，如果你想要爬取更多的信息，可以将这两个词改成你想要搜索的词即可，直接将汉字写上，在请求的时候会自动帮你编码的，我也试过了，可以抓取源码的，如果你想要不断的抓取，可以将要搜索的词写上文件里，然后从文件中读取就可以了。以上只是一个普通的爬虫，并没有用到什么框架，接下来将会写<code>scrapy</code>框架爬取的，请继续关注我的博客哦！！！</strong></p>
-<blockquote>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/python/">python</a>
-</div>
-
-
-  <div class="article-tags">
+    <a href="/2017/04/29/python爬虫之BeautifulSoup/" title="python爬虫之BeautifulSoup" itemprop="url">
   
-  <span></span> <a href="/tags/python爬虫/">python爬虫</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2017/04/23/python爬虫大战京东商城/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+    <h1 itemprop="name">python爬虫之BeautifulSoup</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+           <p itemprop="description" >python爬虫之BeautifulSoup简介
+Beautiful Soup提供一些简单的、python式的函数用来处理导航、搜索、修改分析树等功能。它是一个工具箱，通过解析文档为用户提供需要抓取的数据，因为简单，所以不需要多少代码就可以写出一个完整的应用程序。Beautifu</p>
+        
     
-      <a href="/2017/04/22/JQuery干货篇之处理元素/" title="JQuery干货篇之处理元素" itemprop="url">JQuery干货篇之处理元素</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
-		
-  <p class="article-time">
-    <time datetime="2017-04-22T13:45:23.000Z" itemprop="datePublished"> 发表于 2017-04-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="JQuery干货篇之处理元素"><a href="#JQuery干货篇之处理元素" class="headerlink" title="JQuery干货篇之处理元素"></a>JQuery干货篇之处理元素</h1><blockquote>
-<p><strong>注意这里用的还是我前两篇用的例子，详情请看<a href="https://chenjiabing666.github.io/2017/04/20/JQuery%E5%B9%B2%E8%B4%A7%E7%AF%87%E4%B9%8B%E9%80%89%E6%8B%A9%E5%85%83%E7%B4%A0/">我的博客</a></strong></p>
-<h2 id="attr"><a href="#attr" class="headerlink" title="attr"></a>attr</h2><p><strong><code>attr()</code> 方法设置或返回被选元素的属性值。</strong></p>
-<p><strong>语法：</strong></p>
-<blockquote>
-<ul>
-<li><code>$(selector).attr(attribute)</code> 返回被选元素的属性值。</li>
-<li><code>$(selector).attr(attribute,value)</code> 设置被选元素的属性和值</li>
-<li><code>$(selector).attr(attribute,function(index,oldvalue))</code> 设置被选元素的属性和值。</li>
-</ul>
-</blockquote>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">参数</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><code>attribute</code></td>
-<td style="text-align:center">规定属性的名称。</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>function(index,oldvalue)</code></td>
-<td style="text-align:center">规定返回属性值的数。该函数可接收并使用选择器的 index 值和当前属性值。</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>实例：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">    $(<span class="string">"img"</span>).filter(<span class="string">":first"</span>).attr(<span class="string">'src'</span>);   <span class="comment">//得到属性</span></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">index,elem</span>) </span>&#123;    </div><div class="line">        <span class="keyword">if</span>(index%<span class="number">2</span>==<span class="number">0</span>)</div><div class="line">            $(elem).attr(<span class="string">"src"</span>,<span class="string">'lily.png'</span>);      <span class="comment">//设置属性</span></div><div class="line">        <span class="built_in">console</span>.log($(elem).attr(<span class="string">"src"</span>));</div><div class="line">        &#125;)</div><div class="line">        </div><div class="line">        </div><div class="line">        $(<span class="string">"img"</span>).attr(<span class="string">'src'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">index,oldValue</span>) </span>&#123;  <span class="comment">//这里的oldValue表示原来属性的值，index是索引</span></div><div class="line">        <span class="keyword">if</span>(oldValue==<span class="string">"rose.png"</span>)</div><div class="line">            <span class="keyword">return</span> <span class="string">'lily.png'</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="keyword">return</span> <span class="string">'astor.png'</span>;</div><div class="line">    &#125;)</div><div class="line">    </div><div class="line">    </div><div class="line">    attrs=&#123;       <span class="comment">//使用映射对象一次设置多个值</span></div><div class="line">        src:<span class="string">'lily.png'</span>,</div><div class="line">        <span class="attr">style</span>: <span class="string">'border: thick double red'</span></div><div class="line">    &#125;;</div><div class="line">    $(<span class="string">"img:eq(1)"</span>).attr(attrs);</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="removeAttr"><a href="#removeAttr" class="headerlink" title="removeAttr"></a>removeAttr</h2><blockquote>
-<p><strong><code>removeAttr()</code> 方法从被选元素中移除属性。</strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><code>$(selector).removeAttr(attribute)</code>  这里的attribute是属性的名字</li>
-</ul>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img:first"</span>).removeAttr(<span class="string">"src"</span>);  <span class="comment">//删除属性src</span></div></pre></td></tr></table></figure>
-<h2 id="addClass"><a href="#addClass" class="headerlink" title="addClass"></a>addClass</h2><blockquote>
-<p><strong><code>addClass()</code> 方法向被选元素添加一个或多个类</strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><p><code>$(selector).addClass(class)</code> 这里的class是类名如果需要添加多个类，中间用<strong>空格</strong>隔开</p>
-</li>
-<li><p><code>$(selector).addClass(function(index,oldclass))</code>  这里的index是索引，oldClass是原来就有的类名，都是<strong>可选参数</strong>。这个函数的返回的就是要添加的类名</p>
-</li>
-</ul>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img:even"</span>).addClass(<span class="string">"redBar"</span>);  <span class="comment">//向偶数的img添加类redBar</span></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).addClass(<span class="function"><span class="keyword">function</span> (<span class="params">index,currentClass</span>) </span>&#123;    <span class="comment">//这里的currentClass就是原来有的类名，可选</span></div><div class="line">        <span class="keyword">if</span>(index==<span class="number">1</span>)</div><div class="line">            <span class="keyword">return</span> <span class="string">'blueBar'</span>;   <span class="comment">//第二个img应用blueBar这个类</span></div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="keyword">return</span> <span class="string">'redBar'</span>;      <span class="comment">//这里需要注意的是，对同一个img应用类的时候，因为这个类的定义有优先级，上面定义会被后面定义的覆盖，所以要注意类定义的位置</span></div><div class="line">    &#125;)</div><div class="line">    </div><div class="line">    </div><div class="line">    $(<span class="string">"img"</span>).filter(<span class="string">":odd"</span>).addClass(<span class="string">"redBar"</span>).end().filter(<span class="string">":even"</span>).addClass(<span class="string">"blueBar"</span>);  <span class="comment">//链式调用</span></div><div class="line">    </div><div class="line">    $(<span class="string">"img"</span>).addClass(<span class="string">"blueBar redBar"</span>);   <span class="comment">//添加两个类</span></div></pre></td></tr></table></figure>
-<h2 id="hasClass"><a href="#hasClass" class="headerlink" title="hasClass"></a>hasClass</h2><blockquote>
-<p><strong><code>hasClass()</code> 方法检查被选元素是否包含指定的<code>class</code></strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><code>$(selector).hasClass(class)</code>  //返回值是false和true</li>
-</ul>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log($(<span class="string">"img:odd"</span>).hasClass(<span class="string">"redBar"</span>));</div></pre></td></tr></table></figure>
-<h2 id="toggleClass"><a href="#toggleClass" class="headerlink" title="toggleClass"></a>toggleClass</h2><blockquote>
-<p><strong>toggleClass() 对设置或移除被选元素的一个或多个类进行切换。该方法检查每个元素中指定的类。如果不存在则添加类，如果已设置则删除之。这就是所谓的切换效果</strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><p><code>$(selector).toggleClass(class,switch)</code>  <code>class</code>必需的，用来规定添加或移除<code>class</code>的指定元素，如需规定若干 <code>class</code>，请使用空格来分隔类名。<code>switch</code>是<code>boolean</code>可选参数，规定是否添加或移除<code>class</code></p>
-</li>
-<li><p><code>$(selector).toggleClass(function(index,class),switch)</code>   <code>index</code>表示索引，<code>class</code>表示选择器当前拥有的类</p>
-</li>
-</ul>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"img"</span>).toggleClass(<span class="string">"redBar"</span>);   <span class="comment">//这里对所有的img在redBar这个类之间切换</span></div><div class="line"></div><div class="line">$(<span class="string">"img"</span>).toggleClass(<span class="string">"redBar blueBar"</span>);  <span class="comment">//在两个类之间来回的切换</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">$(<span class="string">"&lt;button&gt;ToggleClass&lt;/button&gt;"</span>).appendTo(<span class="string">"#buttonDiv"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">        $(<span class="string">"img"</span>).toggleClass(<span class="string">'redBar blueBar'</span>);   <span class="comment">//在两种class之间切换，如果有就删除，没有的就添加</span></div><div class="line">        e.preventDefault();    </div><div class="line">        &#125;)</div><div class="line">        </div><div class="line">        </div><div class="line">        <span class="comment">//下面添加一个按钮，完成同时添加多个图片的效果</span></div><div class="line">    $(<span class="string">"&lt;button&gt;ToggleClass&lt;/button&gt;"</span>).appendTo(<span class="string">"#buttonDiv"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">        $(<span class="string">"img"</span>).toggleClass(<span class="function"><span class="keyword">function</span> (<span class="params">index,currentClass</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span>(index%<span class="number">2</span>==<span class="number">0</span>)</div><div class="line">                <span class="keyword">return</span> <span class="string">'blueBar'</span>;   <span class="comment">//动态的切换，这里是偶数就切换blue</span></div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> <span class="string">'redBar blueBar'</span>;  <span class="comment">//这里是奇数的图片在两种颜色来回的切换</span></div><div class="line"></div><div class="line">        &#125;);</div><div class="line">        e.preventDefault();</div><div class="line"></div><div class="line">    &#125;)</div></pre></td></tr></table></figure>
-<h2 id="css"><a href="#css" class="headerlink" title="css"></a>css</h2><blockquote>
-<p><strong><code>css()</code> 方法返回或设置匹配的元素的一个或多个样式属性，这里只说<code>css</code>，还有其他的设置<code>css</code>样式请看<a href="http://www.w3school.com.cn/jquery/jquery_ref_css.asp" target="_blank" rel="external">w3School</a></strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><p><code>$(selector).css(name)</code>  返回第一个匹配元素的 <code>CSS</code>属性值。<code>name</code>是<code>css</code>属性的名称</p>
-</li>
-<li><p><code>$(selector).css(name,value)</code> 设置所有匹配元素的指定 <code>CSS</code> 属性。<code>name</code>表示属性名称，<code>value</code>表示属性的值</p>
-</li>
-<li><p><code>$(selector).css(name,function(index,value))</code>   此函数返回要设置的属性值。接受两个参数，<code>index</code>为元素在对象集合中的索引位置，<code>value</code> 是原先的属性值。<code>name</code>表示要设置的属性名称，返回值就是要设置的属性值</p>
-</li>
-</ul>
-<p><strong>实例：</strong></p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"label"</span>).css(<span class="string">'font-size'</span>,<span class="string">'30px'</span>);  <span class="comment">//设置字体大小</span></div><div class="line"></div><div class="line">$(<span class="string">"label"</span>).css(<span class="string">'font-size'</span>,<span class="string">'+=10'</span>);  <span class="comment">//使用相对值设置属性值，在原有的基础上加上10</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log($(<span class="string">"h1"</span>).css(<span class="string">'font-family'</span>));   <span class="comment">//获取h1标签的字体</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> cssValues=&#123;</div><div class="line">    <span class="string">'border'</span>:<span class="string">'thick double red'</span>,</div><div class="line">    <span class="string">'font-size'</span>:<span class="string">'1.5em'</span></div><div class="line">&#125;;</div><div class="line">$(<span class="string">"label"</span>).css(cssValues);   <span class="comment">//同时设置多个属性</span></div></pre></td></tr></table></figure>
-<h2 id="text"><a href="#text" class="headerlink" title="text"></a>text</h2><blockquote>
-<p><strong><code>text()</code> 方法方法设置或返回被选元素的文本内容。当该方法用于返回一个值时，它会返回所有匹配元素的组合的文本内容(会删除 <code>HTML</code> 标记)</strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><code>$(selector).text()</code>   当该方法用于返回一个值时，它会返回所有匹配元素的组合的文本内容（会删除 <code>HTML</code> 标记）。</li>
-<li><code>$(selector).text(content)</code>  当该方法用于设置值时，它会覆盖被选元素的所有内容。</li>
-<li><code>$(selector).text(function(index,oldcontent))</code>  <code>index</code>表示索引,<code>oldcontent</code>表示选择器当前的文本内容</li>
-</ul>
-</blockquote>
-<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><blockquote>
-<p><strong><code>html()</code> 方法返回或设置被选元素的内容 <code>(inner HTML)</code>。如果该方法未设置参数，则返回被选元素的当前内容。</strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><p><code>$(selector).html()</code>    当使用该方法返回一个值时，它会返回<strong>第一个</strong>匹配元素的内容。</p>
-</li>
-<li><p><code>$(selector).html(content)</code>   当使用该方法设置一个值时，它会覆盖所有匹配元素的内容。</p>
-</li>
-<li><p><code>$(selector).html(function(index,oldcontent))</code>  使用函数来设置所有匹配元素的内容。<code>index</code> - 可选。接收选择器的<code>index</code> 位置,<code>oldcontent</code> - 可选。接收选择器的当前内容</p>
-</li>
-</ul>
-</blockquote>
-<h2 id="val"><a href="#val" class="headerlink" title="val"></a>val</h2><blockquote>
-<p><strong><code>val()</code> 方法返回或设置被选元素的值,元素的值是通过 <code>value</code> 属性设置的。该方法大多用于 <code>input</code> 元素,如果该方法未设置参数，则返回被选元素的当前值</strong></p>
-<p><strong>语法：</strong></p>
-<ul>
-<li><code>$(selector).val(value)</code>    设置文本域的值为value</li>
-<li><code>$(selector).val()</code>       得到文本域的值</li>
-<li><code>$(selector).val(function(index,oldvalue))</code>  设置文本域的值，这里函数的返回值将会用来设置文本域的值，<code>index</code>表示元素索引，<code>oldvalue</code>表示选择器当前文本域的值</li>
-</ul>
-<blockquote>
-<h2 id="作者说"><a href="#作者说" class="headerlink" title="作者说"></a>作者说</h2><blockquote>
-<p>本人秉着方便他人的想法才开始写技术文章的，因为对于自学的人来说想要找到系统的学习教程很困难，这一点我深有体会，我也是在不断的摸索中才小有所成，如果你们觉得我写的不错就帮我推广一下，让更多的人看到。另外如果有什么错误的地方也要及时联系我，方便我改进，谢谢大家对我的支持</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><em>版权信息所有者：chenjiabing</em><br><em>如若转载请标明出处：chenjiabing666.github.io6</em></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/JQuery学习/">JQuery学习</a>
-</div>
+    <time datetime="2017-04-29T02:06:56.000Z" itemprop="datePublished">2017-04-29</time>
+  </a>
+</section>
 
 
-  <div class="article-tags">
+
+
+
+
   
-  <span></span> <a href="/tags/JQuery/">JQuery</a>
-  </div>
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/28/MongoDB干货篇之安装/" title="MongoDB干货篇之安装" itemprop="url">
+  
+    <h1 itemprop="name">MongoDB干货篇之安装</h1>
+    
+     
+           <p itemprop="description" >MongoDB干货篇之安装安装
 
-</div>
+下载地址
 
+点击安装,选择自定义，后选择安装路径，不过最好安装在根目录下(C盘)，然后点解next,这里我安装的路径是C:\MongoDB
 
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2017/04/22/JQuery干货篇之处理元素/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
+创建文件夹:在C:\MongoDB下创建一个文件夹data,然后在data文件夹下创建db,log两个子</p>
+        
+    
+    <time datetime="2017-04-28T02:53:32.000Z" itemprop="datePublished">2017-04-28</time>
+  </a>
+</section>
 
 
 
 
 
-  <nav id="page-nav" class="clearfix">
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/27/JDBC干货篇一/" title="JDBC干货篇一" itemprop="url">
+  
+    <h1 itemprop="name">JDBC干货篇一</h1>
+    
+     
+           <p itemprop="description" >JDBC干货篇一JDBC基础
+
+JDBC的全称是Java Database Connectivity，即Java数据库连接，它是一种可以执行SQL语句的Java API。程序可通过JDBC API连接到关系数据库，并使用结构化查询语言（SQL，数据库标准的查询语言）来完成对数据库</p>
+        
+    
+    <time datetime="2017-04-27T15:03:51.000Z" itemprop="datePublished">2017-04-27</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/26/BootStrap干货篇之表单/" title="BootStrap干货篇之表单" itemprop="url">
+  
+    <h1 itemprop="name">BootStrap干货篇之表单</h1>
+    
+     
+           <p itemprop="description" >BootStrap干货篇之表单基本介绍
+单独的表单控件会被自动赋予一些全局样式。所有设置了 .form-control 类的 &amp;lt;input&amp;gt;、&amp;lt;textarea&amp;gt; 和 &amp;lt;select&amp;gt; 元素都将被默认设置宽度属性为 width: 100%;。 </p>
+        
+    
+    <time datetime="2017-04-26T15:11:37.000Z" itemprop="datePublished">2017-04-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/24/Scrapyd部署爬虫/" title="Scrapyd部署爬虫" itemprop="url">
+  
+    <h1 itemprop="name">Scrapyd部署爬虫</h1>
+    
+     
+           <p itemprop="description" >Scrapyd部署爬虫准备工作
+
+安装scrapyd: pip install scrapyd
+安装scrapyd-client : pip install scrapyd-client
+安装curl:[安装地址](http://ono60m7tl.bkt.clouddn.com</p>
+        
+    
+    <time datetime="2017-04-24T02:58:07.000Z" itemprop="datePublished">2017-04-24</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/23/scrapy大战京东商城/" title="scrapy大战京东商城" itemprop="url">
+  
+    <h1 itemprop="name">scrapy大战京东商城</h1>
+    
+     
+           <p itemprop="description" >SCrapy爬虫大战京东商城引言
+上一篇已经讲过怎样获取链接，怎样获得参数了，详情请看python爬取京东商城普通篇
+
+代码详解
+
+首先应该构造请求，这里使用scrapy.Request,这个方法默认调用的是start_urls构造请求，如果要改变默认的请求，那么必须重载该方法，</p>
+        
+    
+    <time datetime="2017-04-23T14:12:30.000Z" itemprop="datePublished">2017-04-23</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/23/python爬虫大战京东商城/" title="python爬虫大战京东商城" itemprop="url">
+  
+    <h1 itemprop="name">python爬虫大战京东商城</h1>
+    
+     
+           <p itemprop="description" >python大规模爬取京东主要工具
+
+scrapy
+BeautifulSoup
+requests
+
+
+分析步骤
+
+打开京东首页，输入裤子将会看到页面跳转到了这里，这就是我们要分析的起点
+
+我们可以看到这个页面并不是完全的，当我们往下拉的时候将会看到图片在不停的加载，这就是ajax</p>
+        
+    
+    <time datetime="2017-04-23T10:34:48.000Z" itemprop="datePublished">2017-04-23</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/04/22/JQuery干货篇之处理元素/" title="JQuery干货篇之处理元素" itemprop="url">
+  
+    <h1 itemprop="name">JQuery干货篇之处理元素</h1>
+    
+     
+           <p itemprop="description" >JQuery干货篇之处理元素
+注意这里用的还是我前两篇用的例子，详情请看我的博客
+attrattr() 方法设置或返回被选元素的属性值。
+语法：
+
+
+$(selector).attr(attribute) 返回被选元素的属性值。
+$(selector).attr(attribut</p>
+        
+    
+    <time datetime="2017-04-22T13:45:23.000Z" itemprop="datePublished">2017-04-22</time>
+  </a>
+</section>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix unexpand">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
@@ -1619,15 +389,15 @@
 			
 		
 			
+				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>3</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/SQL/" title="SQL">SQL<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
 			
 		
 			
@@ -1639,15 +409,15 @@
 			
 		
 			
+				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/java基础/" title="java基础">java基础<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
 			
 		
 			
@@ -1664,7 +434,13 @@
         
           <li>
             
-            	<a href="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png" target="_blank" title="微信公众号">微信公众号</a>
+            	<a href="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E4%B8%83%E7%A7%92%E7%BC%96%E7%A8%8B.jpg" target="_blank" title="微信公众号">微信公众号</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
             
           </li>
         
@@ -1712,7 +488,7 @@
 	
 	<section class="info">
 		<p> 欢迎关注微信公众号：码猿技术专栏 <br/>
-			作者不才陈某，专业老司机多年</p>
+			This is my blog,believe it or not.</p>
 	</section>
 	 
 	 <script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=14509119671822169205' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
