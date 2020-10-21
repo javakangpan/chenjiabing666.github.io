@@ -79,19 +79,17 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/21/JQuery干货篇之操控DOM/" title="JQuery干货篇之操控DOM" itemprop="url">
+    <a href="/2020/04/19/Zookeeper入门/" title="Zookeeper入门" itemprop="url">
   
-    <h1 itemprop="name">JQuery干货篇之操控DOM</h1>
+    <h1 itemprop="name">Zookeeper入门</h1>
     
      
-           <p itemprop="description" >JQuery干货篇之插入元素本次使用的html,css还是我上一篇的源代码，详情请看上一篇文章
-分类
-插入子元素：append,prepend ,appendTo,prependTo
-封装包裹元素：wrap,wrapAll,wrapInner
-插入兄弟元素：after,befor</p>
+           <p itemprop="description" >导读
+Zookeeper 相信大家都听说过，最典型的使用就是作为服务注册中心。今天陈某带大家从零基础入门 Zookeeper，看了本文，你将会对 Zookeeper 有了初步的了解和认识。
+注意：本文基于 Zookeeper 的版本是 3.4.14，最新版本的在使用上会有一些出入</p>
         
     
-    <time datetime="2017-04-21T09:53:16.000Z" itemprop="datePublished">2017-04-21</time>
+    <time datetime="2020-04-19T07:48:16.000Z" itemprop="datePublished">2020-04-19</time>
   </a>
 </section>
 
@@ -103,16 +101,18 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/20/JQuery干货篇之选择元素/" title="JQuery干货篇之选择元素" itemprop="url">
+    <a href="/2020/04/19/Mysql中orderby底层执行流程/" title="Mysql中orderby底层执行流程" itemprop="url">
   
-    <h1 itemprop="name">JQuery干货篇之选择元素</h1>
+    <h1 itemprop="name">Mysql中orderby底层执行流程</h1>
     
      
-           <p itemprop="description" >JQuery 干货篇之选择元素实验的HTML+CSS的代码
-html12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849&amp;lt;!DOCTYPE html</p>
+           <p itemprop="description" >前言
+在实际的开发中一定会碰到根据某个字段进行排序后来显示结果的需求，但是你真的理解order by在 Mysql 底层是如何执行的吗？
+假设你要查询城市是苏州的所有人名字，并且按照姓名进行排序返回前 1000 个人的姓名、年龄，这条 sql 语句应该如何写？
+首先创建一张用户表</p>
         
     
-    <time datetime="2017-04-20T06:55:07.000Z" itemprop="datePublished">2017-04-20</time>
+    <time datetime="2020-04-19T07:46:13.000Z" itemprop="datePublished">2020-04-19</time>
   </a>
 </section>
 
@@ -124,18 +124,23 @@ html1234567891011121314151617181920212223242526272829303132333435363738394041424
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/16/SQL干货篇三/" title="SQL干货篇三" itemprop="url">
+    <a href="/2020/04/19/面试官：你知道哪些事务失效的场景？/" title="面试官：你知道哪些事务失效的场景？" itemprop="url">
   
-    <h1 itemprop="name">SQL干货篇三</h1>
+    <h1 itemprop="name">面试官：你知道哪些事务失效的场景？</h1>
     
      
-           <p itemprop="description" >SQL干货篇三创建视图
+           <p itemprop="description" >前言
+声明式事务是Spring功能中最爽之一，可是有些时候，我们在使用声明式事务并未生效，这是为什么呢？
+今天陈某带大家来聊一聊声明事务的几种失效场景。本文将会从以下两个方面来说一下事务为什么会失效？
+@Transactional介绍
+@Transactional失效场景
 
-create view &amp;lt;视图名&amp;gt;[(列名),(列名)...] as &amp;lt;子查询&amp;gt; [with check option]
-子查询可以是select语句或者包含order by子句，具体情况而定，视图名是一定要有的，列名可以省略，如</p>
+
+
+</p>
         
     
-    <time datetime="2017-04-16T14:36:33.000Z" itemprop="datePublished">2017-04-16</time>
+    <time datetime="2020-04-19T07:45:21.000Z" itemprop="datePublished">2020-04-19</time>
   </a>
 </section>
 
@@ -147,21 +152,21 @@ create view &amp;lt;视图名&amp;gt;[(列名),(列名)...] as &amp;lt;子查询
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/16/java连接mysql初探篇/" title="java连接mysql初探篇" itemprop="url">
+    <a href="/2020/04/05/设计模式：工厂方法模式/" title="设计模式：工厂方法模式" itemprop="url">
   
-    <h1 itemprop="name">java连接mysql初探篇</h1>
+    <h1 itemprop="name">设计模式：工厂方法模式</h1>
     
      
-           <p itemprop="description" >java连接mysql基本连接
-
-加载驱动: Class.forName(com.mysql.jdbc.Driver)
-
-建立连接:Connection conn=DriverManager.getConnection(url,user,password)
-
-其中url=&amp;quo</p>
+           <p itemprop="description" >导读
+工厂方法模式是所有设计模式中比较常用的一种模式，但是真正能搞懂用好的少之又少，Spring底层大量的使用该设计模式来进行封装，以致开发者阅读源代码的时候晕头转向。
+今天陈某分别从以下五个方面详细讲述一下工厂方法模式：
+从什么是工厂方法模式
+通用框架实现
+工厂方法模式的优点
+</p>
         
     
-    <time datetime="2017-04-16T06:13:04.000Z" itemprop="datePublished">2017-04-16</time>
+    <time datetime="2020-04-05T13:44:06.000Z" itemprop="datePublished">2020-04-05</time>
   </a>
 </section>
 
@@ -173,22 +178,20 @@ create view &amp;lt;视图名&amp;gt;[(列名),(列名)...] as &amp;lt;子查询
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/13/Linux干货篇一/" title="Linux干货篇一" itemprop="url">
+    <a href="/2020/04/05/设计模式：模板模式/" title="设计模式：模板模式" itemprop="url">
   
-    <h1 itemprop="name">Linux干货篇一</h1>
+    <h1 itemprop="name">设计模式：模板模式</h1>
     
      
-           <p itemprop="description" >Linux干货篇一虚拟机的安装(VMware)
+           <p itemprop="description" >导读
+模板模式在是Spring底层被广泛的应用，比如事务管理器的实现，JDBC模板的实现。
+今天就来谈谈什么是模板模式、模板模式的优缺点、模板模式的简单演示、模板模式在Spring底层的实现。
 
-选择文件-&amp;gt;新建虚拟机
-选择自定义
-设置安装来源，选择稍后安装
-选择安装的操作系统，选择Linux,然后选择自己安装的对应版本即可
-设置虚拟机的安装路径，自己选择
-指定磁盘容量，选择默认20G,然后选择将虚拟磁盘存储为单个文</p>
+什么是模板模式
+模板模式首先要有一个抽象类，这个抽象类公开定义了执行它的方法的方式/</p>
         
     
-    <time datetime="2017-04-13T04:29:34.000Z" itemprop="datePublished">2017-04-13</time>
+    <time datetime="2020-04-05T13:43:52.000Z" itemprop="datePublished">2020-04-05</time>
   </a>
 </section>
 
@@ -200,19 +203,18 @@ create view &amp;lt;视图名&amp;gt;[(列名),(列名)...] as &amp;lt;子查询
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/09/SQL干货篇二/" title="SQL干货篇二" itemprop="url">
+    <a href="/2020/04/05/Mysql性能优化：为什么count这么慢/" title="Mysql性能优化：为什么count(*)这么慢？" itemprop="url">
   
-    <h1 itemprop="name">SQL干货篇二</h1>
+    <h1 itemprop="name">Mysql性能优化：为什么count(*)这么慢？</h1>
     
      
-           <p itemprop="description" >SQL干货篇之查询数据单表查询
-只在一个表中查询数据1SELECT * FROM student where Sno=&#39;13143&#39;;   //根据学号查询数据
-
-多表查询
-同时查询多个表12SELECT student.Sno,student.Sname,GradeFROM s</p>
+           <p itemprop="description" >导读
+在开发中一定会用到统计一张表的行数，比如一个交易系统，老板会让你每天生成一个报表，这些统计信息少不了sql中的count函数。
+但是随着记录越来越多，查询的速度会越来越慢，为什么会这样呢？Mysql内部到底是怎么处理的？
+今天这篇文章将从Mysql内部对于count函数是怎</p>
         
     
-    <time datetime="2017-04-09T15:13:13.000Z" itemprop="datePublished">2017-04-09</time>
+    <time datetime="2020-04-05T13:41:59.000Z" itemprop="datePublished">2020-04-05</time>
   </a>
 </section>
 
@@ -224,17 +226,18 @@ create view &amp;lt;视图名&amp;gt;[(列名),(列名)...] as &amp;lt;子查询
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/09/java干货篇之文字特效/" title="java干货篇之文字特效" itemprop="url">
+    <a href="/2020/04/01/接口幂等性如何设计？/" title="接口幂等性如何设计？" itemprop="url">
   
-    <h1 itemprop="name">java干货篇之文字特效</h1>
+    <h1 itemprop="name">接口幂等性如何设计？</h1>
     
      
-           <p itemprop="description" >java干货篇文字特效立体效果的文字主要使用了Graphics类中的setFont和setColor的方法，绘制多层字然后加上平移一个坐标即可实现多重叠加的效果,让人看起来就像是立体一样,详情请见源码
-阴影效果的文字和面一样，只是平移的方式有些不同，详情请见源码
-倾斜效果的文字主</p>
+           <p itemprop="description" >导读
+现在这个时代大家可能最关心的就是钱了，那么有没有想过你银行转账给你没有一次是转多的，要么失败，要么成功，为什么不能失误一下多转一笔呢？醒醒吧年轻人，别做梦了，做银行的能那么傻x吗？
+今天我们就来谈一谈为什么银行转账不能多给我转一笔？关乎到钱的问题，小伙伴们打起精神！！！
+要</p>
         
     
-    <time datetime="2017-04-09T08:15:16.000Z" itemprop="datePublished">2017-04-09</time>
+    <time datetime="2020-04-01T02:38:34.000Z" itemprop="datePublished">2020-04-01</time>
   </a>
 </section>
 
@@ -246,17 +249,17 @@ create view &amp;lt;视图名&amp;gt;[(列名),(列名)...] as &amp;lt;子查询
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/08/Swing干货系列之JTextField/" title="swing干货系列之JTextField" itemprop="url">
+    <a href="/2020/04/01/Mysql性能优化：什么是索引下推？/" title="Mysql性能优化：什么是索引下推？" itemprop="url">
   
-    <h1 itemprop="name">swing干货系列之JTextField</h1>
+    <h1 itemprop="name">Mysql性能优化：什么是索引下推？</h1>
     
      
-           <p itemprop="description" >Swing系列之JTextField(单行文本框)介绍
-JTextField是一个轻量级组件，它允许编辑单行文本。
-JTextField 具有建立字符串的方法，此字符串用作针对被激发的操作事件的命令字符串。java.awt.TextField 把字段文本用作针对 ActionEv</p>
+           <p itemprop="description" >导读
+索引下推（index condition pushdown ）简称ICP，在Mysql5.6的版本上推出，用于优化查询。
+在不使用ICP的情况下，在使用非主键索引（又叫普通索引或者二级索引）进行查询时，存储引擎通过索引检索到数据，然后返回给MySQL服务器，服务器然后判断数</p>
         
     
-    <time datetime="2017-04-08T12:32:04.000Z" itemprop="datePublished">2017-04-08</time>
+    <time datetime="2020-04-01T02:37:30.000Z" itemprop="datePublished">2020-04-01</time>
   </a>
 </section>
 
@@ -268,20 +271,22 @@ JTextField 具有建立字符串的方法，此字符串用作针对被激发的
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/08/scrapy爬取豆瓣全站/" title="scrapy爬取豆瓣全站" itemprop="url">
+    <a href="/2020/04/01/Mysql性能优化：为什么使用覆盖索引/" title="Mysql性能优化：为什么使用覆盖索引?" itemprop="url">
   
-    <h1 itemprop="name">scrapy爬取豆瓣全站</h1>
+    <h1 itemprop="name">Mysql性能优化：为什么使用覆盖索引?</h1>
     
      
-           <p itemprop="description" >Scrapy爬取豆瓣读书全站分析网页
-首先打开豆瓣读书中的分类浏览，可以看到其中有很多的分类
+           <p itemprop="description" >导读
+相信读者看过很多MYSQL索引优化的文章，其中有很多优化的方法，比如最佳左前缀，覆盖索引等方法，但是你真正理解为什么要使用最佳左前缀，为什么使用覆盖索引会提升查询的效率吗？
 
-豆瓣应该是一个比较好爬的网站，所有的数据都不是ajax加载的，我们打开谷歌的F12或者是火狐的FireBug可以很轻松的找到每一个分类的链接
+本篇文章将从MYSQL内部结构上讲一下为什么覆盖索引能够提升效率。
 
-这里我们使用scrapy中的一个link</p>
+
+InnoDB索引模型
+在I</p>
         
     
-    <time datetime="2017-04-08T06:24:26.000Z" itemprop="datePublished">2017-04-08</time>
+    <time datetime="2020-04-01T02:36:34.000Z" itemprop="datePublished">2020-04-01</time>
   </a>
 </section>
 
@@ -293,19 +298,22 @@ JTextField 具有建立字符串的方法，此字符串用作针对被激发的
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/04/06/SQL基本操作/" title="SQL干货篇一" itemprop="url">
+    <a href="/2020/04/01/一条查询语句到底是如何执行的/" title="一条查询语句到底是如何执行的?" itemprop="url">
   
-    <h1 itemprop="name">SQL干货篇一</h1>
+    <h1 itemprop="name">一条查询语句到底是如何执行的?</h1>
     
      
-           <p itemprop="description" >SQL系列之基本操作新建表
-CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]],[&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性约束条件]]……
-实例
+           <p itemprop="description" >导读
+Mysql在中小型企业中是个香饽饽，目前主流的数据库之一，几乎没有一个后端开发者不会使用的，但是作为一个老司机，仅仅会用真的不够。
 
-12345CREATE TABLE student(Sno CHAR(</p>
+今天陈某透过一个简单的查询语句来讲述在Mysql内部的执行过程。
+1select * from table where id=10;
+
+
+撸</p>
         
     
-    <time datetime="2017-04-06T14:33:37.000Z" itemprop="datePublished">2017-04-06</time>
+    <time datetime="2020-04-01T02:35:30.000Z" itemprop="datePublished">2020-04-01</time>
   </a>
 </section>
 
@@ -316,7 +324,7 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
   </nav>
 
 </div>
@@ -332,35 +340,83 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 		<ul>
 		
 		  
-			<li><a href="/categories/BootStrap学习/" title="BootStrap学习">BootStrap学习<sup>1</sup></a></li>
+			<li><a href="/categories/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/JQuery学习/" title="JQuery学习">JQuery学习<sup>3</sup></a></li>
+			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			<li><a href="/categories/Java-Web/" title="Java-Web">Java-Web<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Scrapy学习/" title="Scrapy学习">Scrapy学习<sup>9</sup></a></li>
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/java学习/" title="java学习">java学习<sup>10</sup></a></li>
+			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/python/" title="python">python<sup>2</sup></a></li>
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/python数据挖掘与分析/" title="python数据挖掘与分析">python数据挖掘与分析<sup>1</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>6</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/docker/" title="docker">docker<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java学习/" title="java学习">java学习<sup>34</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/python/" title="python">python<sup>19</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/web前端/" title="web前端">web前端<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/分布式/" title="分布式">分布式<sup>14</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>20</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>22</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>9</sup></a></li>
 		  
 		
 		</ul>
@@ -373,51 +429,83 @@ CREATE TABLE [&amp;lt;列名&amp;gt;&amp;lt;数据类型&amp;gt;[表级完整性
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/scrapy/" title="scrapy">scrapy<sup>9</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>22</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+				<li><a href="/tags/java基础/" title="java基础">java基础<sup>21</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
+				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>18</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>3</sup></a></li>
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>3</sup></a></li>
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>2</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>2</sup></a></li>
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>1</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/web前端/" title="web前端">web前端<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/docker/" title="docker">docker<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>3</sup></a></li>
 			
 		
 		</ul>

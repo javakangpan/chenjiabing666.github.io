@@ -79,17 +79,18 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/03/25/java中的IO操作/" title="java中的IO操作" itemprop="url">
+    <a href="/2019/08/17/Shiro/" title="Shiro" itemprop="url">
   
-    <h1 itemprop="name">java中的IO操作</h1>
+    <h1 itemprop="name">Shiro</h1>
     
      
-           <p itemprop="description" >java中IO操作读取文件中的内容
-使用Scanner读取文本中的内容
-相信大家都知道Scanner console=new Scanner(System.in)是用来读取控制台上输入的内容，但是这里是用来读取文件的内容，原理是一样的，只是对象不同罢了，这里用到的是File对象，</p>
+           <p itemprop="description" >项目搭建
+添加Shiro的依赖
+
+1234567891011&amp;lt;!--Spring整合的shiro依赖--&amp;gt;   &amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.apache.shiro&amp;lt;/groupId&amp;gt;     &amp;lt</p>
         
     
-    <time datetime="2017-03-25T05:52:53.000Z" itemprop="datePublished">2017-03-25</time>
+    <time datetime="2019-08-17T11:22:05.000Z" itemprop="datePublished">2019-08-17</time>
   </a>
 </section>
 
@@ -101,18 +102,20 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/03/25/scrapy架构初探/" title="scrapy架构初探" itemprop="url">
+    <a href="/2019/08/13/Shiro源码解析/" title="Shiro源码解析" itemprop="url">
   
-    <h1 itemprop="name">scrapy架构初探</h1>
+    <h1 itemprop="name">Shiro源码解析</h1>
     
      
-           <p itemprop="description" >scrapy架构初探引言
+           <p itemprop="description" >FilterChainManager
+过滤器管理器，在ShiroFilterFactoryBean创建的时候会创建管理器，将配置好的过滤器添加到其中
+当发出请求的时候会其中找出和url匹配过滤器执行
 
-Python即时网络爬虫启动的目标是一起把互联网变成大数据库。单纯的开放源代码并不是开源的全部，开源的核心是“开放的思想”，聚合最好的想法、技术、人员，所以将会参照众多领先产品，比如，Scrapy，ScrapingHub，import io等。
-本文简</p>
+ShiroFilterFactoryBean
+实现了FactoryBean接口</p>
         
     
-    <time datetime="2017-03-25T05:11:58.000Z" itemprop="datePublished">2017-03-25</time>
+    <time datetime="2019-08-13T14:41:32.000Z" itemprop="datePublished">2019-08-13</time>
   </a>
 </section>
 
@@ -124,16 +127,185 @@ Python即时网络爬虫启动的目标是一起把互联网变成大数据库�
   
 <section class="post" itemscope itemprop="blogitem">
   
-    <a href="/2017/03/25/java图形与文本处理一/" title="java图形与文本处理一" itemprop="url">
+    <a href="/2019/08/05/mybatis源码解析/" title="mybatis源码解析" itemprop="url">
   
-    <h1 itemprop="name">java图形与文本处理一</h1>
+    <h1 itemprop="name">mybatis源码解析</h1>
     
      
-           <p itemprop="description" >java绘制图形和文本&amp;lt;一&amp;gt;开篇介绍(官方文档)
-java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子类：DebugGraphics, Graphics2Dpublic abstract class </p>
+           <p itemprop="description" >Configuration
+mybatis的全局配置类，其中封装了mybatis的全部配置，在mybaits加载全局配置文件和Mapper文件的时候，会将里面的xml中的各个元素解析出来，封装在其中。
+主要的解析流程在org.apache.ibatis.builder.xml.X</p>
         
     
-    <time datetime="2017-03-25T04:38:51.000Z" itemprop="datePublished">2017-03-25</time>
+    <time datetime="2019-08-04T16:47:11.000Z" itemprop="datePublished">2019-08-05</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/08/05/mybatis深入学习/" title="mybatis深入学习" itemprop="url">
+  
+    <h1 itemprop="name">mybatis深入学习</h1>
+    
+     
+           <p itemprop="description" >环境搭建
+按照官方文档搭建即可
+
+typeAliases（别名）
+在使用mybatis标签的时候，需要指定类的全类名，比如resultType=xx.xxx.xx，但是我们可以为类指定别名，那么就可以直接使用别名，避免全类名冗余【不推荐使用】
+
+别名的配置有两种方式，这里我们讲解</p>
+        
+    
+    <time datetime="2019-08-04T16:46:56.000Z" itemprop="datePublished">2019-08-05</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/07/31/Springmvc源码解读/" title="Springmvc源码解读" itemprop="url">
+  
+    <h1 itemprop="name">Springmvc源码解读</h1>
+    
+     
+           <p itemprop="description" >实现Controller的方式
+如何实现一个controller，在源码中其实将controller叫做handler，我们通常知道实现controller的方式就是在类上添加一个@Controller和@RequestMapping注解，但是还有其他的方式定义一个control</p>
+        
+    
+    <time datetime="2019-07-31T06:45:44.000Z" itemprop="datePublished">2019-07-31</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/07/31/Springmvc注解版开发/" title="Springmvc注解版开发" itemprop="url">
+  
+    <h1 itemprop="name">Springmvc注解版开发</h1>
+    
+     
+           <p itemprop="description" >项目搭建搭建原理
+springMVC版本
+此次使用的版本是Spring 5.1.8
+
+配置内嵌tomcat
+为了简化开发，使用tomcat插件实现web项目的运行，只需要在pom.xml中配置一个插件即可，如下：
+
+123456789101112&amp;lt;plugins&amp;gt;  </p>
+        
+    
+    <time datetime="2019-07-31T06:45:22.000Z" itemprop="datePublished">2019-07-31</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/07/19/一文搞懂Spring-AOP原理/" title="一文搞懂Spring-AOP原理" itemprop="url">
+  
+    <h1 itemprop="name">一文搞懂Spring-AOP原理</h1>
+    
+     
+           <p itemprop="description" >简介
+面向切面编程，是面向对象编程的重要组成部分，在不改变业务逻辑功能的基础上，对横切逻辑进行扩展
+
+添加依赖12345&amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;     &amp;l</p>
+        
+    
+    <time datetime="2019-07-19T14:16:50.000Z" itemprop="datePublished">2019-07-19</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/07/17/Spring解决循环依赖/" title="Spring解决循环依赖" itemprop="url">
+  
+    <h1 itemprop="name">Spring解决循环依赖</h1>
+    
+     
+           <p itemprop="description" >导读
+前几天发表的文章SpringBoot多数据源动态切换和SpringBoot整合多数据源的巨坑中，提到了一个坑就是动态数据源添加@Primary接口就会造成循环依赖异常，如下图：
+
+
+
+这个就是典型的构造器依赖，详情请看上面两篇文章，这里不再详细赘述了。本篇文章将会从源码深入</p>
+        
+    
+    <time datetime="2019-07-16T17:13:29.000Z" itemprop="datePublished">2019-07-17</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/07/07/Spring事务源码解析/" title="Spring事务源码解析" itemprop="url">
+  
+    <h1 itemprop="name">Spring事务源码解析</h1>
+    
+     
+           <p itemprop="description" >配置注解版事务事务管理器
+事务管理器的接口是PlatformTransactionManager，其中定义了三个接口方法如下：
+TransactionStatus getTransaction(@Nullable TransactionDefinition definition)</p>
+        
+    
+    <time datetime="2019-07-07T11:41:07.000Z" itemprop="datePublished">2019-07-07</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2019/06/30/Spring中的事件/" title="Spring中的事件" itemprop="url">
+  
+    <h1 itemprop="name">Spring中的事件</h1>
+    
+     
+           <p itemprop="description" >简介
+学过编程语言的肯定知道事件，在JS中事件，Android中的事件，大多是鼠标点击，键盘事件，手指滑动事件等等。在Spring中也有一些事件，比如容器启动、容器关闭、容器刷新都是一个事件。
+既然有了事件，自然少不了事件监听器，事件分发器等，后续会详细介绍
+
+事件Spring中</p>
+        
+    
+    <time datetime="2019-06-30T06:22:07.000Z" itemprop="datePublished">2019-06-30</time>
   </a>
 </section>
 
@@ -144,7 +316,7 @@ java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子�
 
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/5/">Next<span></span></a>
   </nav>
 
 </div>
@@ -160,35 +332,83 @@ java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子�
 		<ul>
 		
 		  
-			<li><a href="/categories/BootStrap学习/" title="BootStrap学习">BootStrap学习<sup>1</sup></a></li>
+			<li><a href="/categories/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/JQuery学习/" title="JQuery学习">JQuery学习<sup>3</sup></a></li>
+			<li><a href="/categories/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			<li><a href="/categories/Java-Web/" title="Java-Web">Java-Web<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Scrapy学习/" title="Scrapy学习">Scrapy学习<sup>9</sup></a></li>
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>3</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/java学习/" title="java学习">java学习<sup>10</sup></a></li>
+			<li><a href="/categories/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/python/" title="python">python<sup>2</sup></a></li>
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/python数据挖掘与分析/" title="python数据挖掘与分析">python数据挖掘与分析<sup>1</sup></a></li>
+			<li><a href="/categories/Redis/" title="Redis">Redis<sup>8</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>6</sup></a></li>
+			<li><a href="/categories/Spring/" title="Spring">Spring<sup>39</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/docker/" title="docker">docker<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java学习/" title="java学习">java学习<sup>34</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java并发编程/" title="java并发编程">java并发编程<sup>13</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/python/" title="python">python<sup>19</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/web前端/" title="web前端">web前端<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/分布式/" title="分布式">分布式<sup>14</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数据库干货篇/" title="数据库干货篇">数据库干货篇<sup>20</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/杂谈/" title="杂谈">杂谈<sup>22</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>9</sup></a></li>
 		  
 		
 		</ul>
@@ -201,51 +421,83 @@ java.awt类 Graphicsjava.lang.Object继承者 java.awt.Graphics直接已知子�
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/scrapy/" title="scrapy">scrapy<sup>9</sup></a></li>
+				<li><a href="/tags/Spring/" title="Spring">Spring<sup>39</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/swing/" title="swing">swing<sup>4</sup></a></li>
+				<li><a href="/tags/杂谈/" title="杂谈">杂谈<sup>22</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JQuery/" title="JQuery">JQuery<sup>3</sup></a></li>
+				<li><a href="/tags/java基础/" title="java基础">java基础<sup>21</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java图形与文本处理/" title="java图形与文本处理">java图形与文本处理<sup>3</sup></a></li>
+				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>18</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>3</sup></a></li>
+				<li><a href="/tags/SpringBoot/" title="SpringBoot">SpringBoot<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/SQL/" title="SQL">SQL<sup>3</sup></a></li>
+				<li><a href="/tags/java并发编程/" title="java并发编程">java并发编程<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JDBC/" title="JDBC">JDBC<sup>2</sup></a></li>
+				<li><a href="/tags/SQL/" title="SQL">SQL<sup>16</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/python爬虫/" title="python爬虫">python爬虫<sup>2</sup></a></li>
+				<li><a href="/tags/分布式/" title="分布式">分布式<sup>14</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/BootStrap/" title="BootStrap">BootStrap<sup>1</sup></a></li>
+				<li><a href="/tags/Struts2/" title="Struts2">Struts2<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+				<li><a href="/tags/Hibernate/" title="Hibernate">Hibernate<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/java基础/" title="java基础">java基础<sup>1</sup></a></li>
+				<li><a href="/tags/java-IO编程/" title="java IO编程">java IO编程<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/matplotlib/" title="matplotlib">matplotlib<sup>1</sup></a></li>
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Elasticsearch/" title="Elasticsearch">Elasticsearch<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Redis/" title="Redis">Redis<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MyBatis/" title="MyBatis">MyBatis<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/web前端/" title="web前端">web前端<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/docker/" title="docker">docker<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>3</sup></a></li>
 			
 		
 		</ul>
