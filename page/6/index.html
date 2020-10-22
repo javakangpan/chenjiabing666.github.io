@@ -11,8 +11,28 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("https://chenjiabing666.github.io/"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
 
 
 
@@ -105,7 +125,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -136,6 +156,8 @@
 
 
 </head>
+
+
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -186,7 +208,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -196,7 +218,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            关于
           </a>
         </li>
       
@@ -206,7 +228,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -216,7 +238,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Kategorien
+            分类
           </a>
         </li>
       
@@ -226,15 +248,49 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -268,7 +324,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不才陈某">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/header.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -292,9 +348,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-01T10:31:58+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-01T10:31:58+08:00">
                 2020-04-01
               </time>
             
@@ -313,7 +369,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -330,13 +386,56 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/01/Mysql中的三类锁，你知道吗？/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/04/01/Mysql中的三类锁，你知道吗？/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
           
 
           
+		  
+		  
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
           
 
           
@@ -356,119 +455,27 @@
       
         
           
-            <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
-<li><p>正所谓有人(锁)的地方就有江湖(事务)，人在江湖飘，怎能一无所知？</p>
-</li>
-<li><p>今天来细说一下Mysql中的三类锁，分别是全局锁、表级锁、行级锁。</p>
-</li>
-</ul>
-<h2 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h2><ul>
-<li>全局锁简单的说就是锁住整个数据库实例，命令是<code>Flush tables with read lock</code>。当你需要为整个数据库处于只读的状态的时候，可以使用这个命令。</li>
-<li>一旦使用全局锁，之后其他线程的以下语句会被阻塞：数据更新语句（数据的增删改）、数据定义语句（包括建表、修改表结构等）和更新类事务的提交语句。 </li>
-<li>全局锁的使用场景大部分都是用来<strong>数据库备份</strong>。</li>
-</ul>
-<h3 id="为什么备份要加全局锁？"><a href="#为什么备份要加全局锁？" class="headerlink" title="为什么备份要加全局锁？"></a>为什么备份要加全局锁？</h3><ul>
-<li>用户买东西，首先会从余额里扣除金额，然后在订单里添加商品。如果备份数据库，不加锁，并且备份顺序为先备份用余额，再备份订单商品，有可能备份了用户余额后，用户下订单买东西提交事务，然后再备份订单商品表， 此时订单商品已存在。最后备份出来的数据为。最后用户余额为买东西前的余额，没有减少，但是订单商品却多了。演示如下图：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mysql%E4%B8%AD%E7%9A%84%E9%94%81/1.png" alt=""></p>
-<ul>
-<li>这种情况可能用户会觉得赚了，但是如果备份顺序反过来，先备份商品表再备份余额表，用户就会发现我付了钱，但是商品没有加，这中结果就会更加的严重。 </li>
-<li>因此保证备份数据的一致性很重要，必要的手段就是加锁。</li>
-</ul>
-<h3 id="全局锁有什么坏处？"><a href="#全局锁有什么坏处？" class="headerlink" title="全局锁有什么坏处？"></a>全局锁有什么坏处？</h3><ul>
-<li>全局锁是个啥？介绍完了读者心里已经有数了，让这个库只读？这是多么可怕的操作，简单列举几个危险之处：<ul>
-<li>如果在主库备份，备份期间不能执行任何更新操作，会导致整个业务停摆，高并发情况下更甚。</li>
-<li>如果你在从库上备份，那么备份期间从库不能执行主库同步过来的binlog，会导致主从延迟。</li>
-</ul>
-</li>
-</ul>
-<h3 id="全局备份比较好的解决方案"><a href="#全局备份比较好的解决方案" class="headerlink" title="全局备份比较好的解决方案"></a>全局备份比较好的解决方案</h3><ul>
-<li>全局锁远瞅不错，近瞅吓一跳，陈某在此不推荐使用。</li>
-<li>其实 官方自带的逻辑备份工具是mysqldump。当<strong>mysqldump</strong>使用参数<strong>–single-transaction</strong>的时候，导数据之前就会启动一个事务，来确保拿到一致性视图。而由于MVCC的支持，这个过程中数据是可以正常更新的。 </li>
-<li>一致性备份是好，但前提是存储引擎支持事务，这也是MyISAM被InnoDB取代的原因之一。</li>
-</ul>
-<h2 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h2><ul>
-<li>MySQL里面表级别的锁有两种：一种是表锁，一种是元数据锁（meta data lock，MDL)。 </li>
-<li>表锁一般是在数据库引擎不支持行锁的时候才会被用到的 。</li>
-<li>MDL会直到事务提交才释放，在做<strong>表结构变更</strong>的时候，你一定要小心不要导致锁住线上查询和更新 。</li>
-</ul>
-<h3 id="如何加表锁"><a href="#如何加表锁" class="headerlink" title="如何加表锁"></a>如何加表锁</h3><ul>
-<li>显式加表锁和解锁的语句很简单，如下：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">lock</span> <span class="keyword">tables</span> tb_name <span class="keyword">read</span>/write;</div><div class="line"></div><div class="line"><span class="keyword">unlock</span> <span class="keyword">tables</span>;</div></pre></td></tr></table></figure>
-<ul>
-<li>需要注意，lock tables语法除了会限制别的线程的读写外，也限定了本线程接下来的操作对象。 </li>
-<li>举个例子, 如果在某个线程A中执行<strong>lock tables t1 read, t2 write;</strong> 这个语句，则其他线程写t1、读写t2的语句都会被阻塞。同时，线程A在执行<strong>unlock tables</strong>之前，也只能执行读t1、读写t2的操作。连写t1都不允许，自然也不能访问其他表。 </li>
-</ul>
-<h3 id="MDL"><a href="#MDL" class="headerlink" title="MDL"></a>MDL</h3><ul>
-<li>MDL不需要显式使用，在访问一个表的时候会被自动加上。 </li>
-<li>当对一个表做增删改查操作的时候，加MDL读锁；当要对表做结构变更操作的时候，加MDL写锁。 </li>
-<li><strong>读锁</strong>之间不互斥，因此你可以有多个线程同时对一张表增删改查。 </li>
-<li>读写锁之间、写锁之间是互斥的，用来保证变更表结构操作的安全性。因此，如果有两个线程要同时给一个表加字段，其中一个要等另一个执行完才能开始执行。 </li>
-</ul>
-<h3 id="查询表级锁争用"><a href="#查询表级锁争用" class="headerlink" title="查询表级锁争用"></a>查询表级锁争用</h3><ul>
-<li>查询表级锁的争用可以通过以下参数分析获得：<ul>
-<li><code>Table_locks_immediate</code>：能够立即获得表级锁的次数 </li>
-<li><code>Table_locks_waited</code>： 不能立即获取表级锁而需要等待的次数 </li>
-</ul>
-</li>
-<li>查询语句如下：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">status</span> <span class="keyword">like</span> <span class="string">'table_locks_waited'</span></div></pre></td></tr></table></figure>
-<ul>
-<li>如果<code>Table_locks_waited</code>的值比较大，则说明存在着较严重的表级锁争用情况。 </li>
-</ul>
-<h2 id="行级锁"><a href="#行级锁" class="headerlink" title="行级锁"></a>行级锁</h2><ul>
-<li>MySQL的行锁是在引擎层由各个引擎自己实现的。但并不是所有的引擎都支持行锁，比如MyISAM引擎就不支持行锁。不支持行锁意味着并发控制只能使用表锁，对于这种引擎的表，同一张表上任何时刻只能有一个更新在执行，这就会影响到业务并发度。InnoDB是支持行锁的，这也是MyISAM被InnoDB替代的重要原因之一。 </li>
-<li><strong>InnoDB的行锁是针对索引加的锁，不是针对记录加的锁。并且该索引不能失效，否则都会从行锁升级为表锁</strong>。 </li>
-<li><strong>在InnoDB事务中，行锁是在需要的时候才加上的，但并不是不需要了就立刻释放，而是要等到事务结束时才释放。</strong> </li>
-<li>行级锁分为排它锁（写锁）、共享锁（读锁）、间隙锁。</li>
-</ul>
-<h3 id="排他锁"><a href="#排他锁" class="headerlink" title="排他锁"></a>排他锁</h3><ul>
-<li>排他锁，也称写锁，独占锁，当前写操作没有完成前，它会阻断其他写锁和读锁。 </li>
-<li>Mysql中的更新语句(update/delete/insert)会自动加上排它锁。</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mysql%E4%B8%AD%E7%9A%84%E9%94%81/2.png" alt=""></p>
-<ul>
-<li>如上图，事务B中的update语句被阻塞了，直到事务A提交才能执行更新操作。</li>
-<li>排他锁也可以手动添加，如下：</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="keyword">id</span>=<span class="number">1</span> <span class="keyword">for</span> <span class="keyword">update</span>;</div></pre></td></tr></table></figure>
-<ul>
-<li>注意以下两点：<ul>
-<li>行锁是针对索引加锁的，上述例子中id是主键索引。</li>
-<li><strong>加了排他锁并不是其他的事务不能读取这行的数据，而是不能再在这行上面加锁了。</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="间隙锁"><a href="#间隙锁" class="headerlink" title="间隙锁"></a>间隙锁</h3><ul>
-<li>当我们用范围条件检索数据，并请求共享或排他锁时，InnoDB会给符合条件的已有数据记录的索引项加锁；对于键值在条件范围内但<strong>并不存在</strong>的记录，叫做”间隙(GAP)”。InnoDB也会对这个”间隙”加锁，这种锁机制就是所谓的间隙锁(Next-Key锁)。 </li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mysql%E4%B8%AD%E7%9A%84%E9%94%81/3.png" alt=""></p>
-<ul>
-<li>如上图，给id&gt;5中并不存在的数据加上了间隙锁，当插入id=6的数据时被阻塞了。</li>
-<li>这是一个坑：<strong>若执行的条件是范围过大，则InnoDB会将整个范围内所有的索引键值全部锁定，很容易对性能造成影响</strong> </li>
-</ul>
-<h3 id="共享锁"><a href="#共享锁" class="headerlink" title="共享锁"></a>共享锁</h3><ul>
-<li>共享锁，也称读锁，多用于判断数据是否存在，多个读操作可以同时进行而不会互相影响。当如果事务对读锁进行修改操作，很可能会造成死锁。如下图所示。 </li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mysql%E4%B8%AD%E7%9A%84%E9%94%81/4.png" alt=""></p>
-<h3 id="分析行锁定"><a href="#分析行锁定" class="headerlink" title="分析行锁定"></a>分析行锁定</h3><ul>
-<li>通过检查InnoDB_row_lock 状态变量分析系统上的行锁的争夺情况 。</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> <span class="keyword">status</span> <span class="keyword">like</span> <span class="string">'innodb_row_lock%'</span></div></pre></td></tr></table></figure>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mysql%E4%B8%AD%E7%9A%84%E9%94%81/5.png" alt=""></p>
-<ul>
-<li>innodb_row_lock_current_waits: 当前正在等待锁定的数量。</li>
-<li>innodb_row_lock_time: 从系统启动到现在锁定总时间长度；非常重要的参数</li>
-<li>innodb_row_lock_time_avg: 每次等待所花平均时间；非常重要的参数。</li>
-<li>innodb_row_lock_time_max: 从系统启动到现在等待最常的一次所花的时间； </li>
-<li>innodb_row_lock_waits: 系统启动后到现在总共等待的次数；非常重要的参数。直接决定优化的方向和策略。 </li>
-</ul>
-<h3 id="死锁解决方案"><a href="#死锁解决方案" class="headerlink" title="死锁解决方案"></a>死锁解决方案</h3><p>1、直接进入等待，直到超时。这个超时时间可以通过参数<strong>innodb_lock_wait_timeout</strong>来设置，默认50秒。注意超时时间不能设置太短，如果仅仅是短暂的等待，一旦设置时间很短，很快便解锁了，会出现误伤。</p>
-<p>2、发起死锁检测，发现死锁后，主动回滚死锁链条中的某一个事务，让其他事务得以继续执行。将参数<strong>innodb_deadlock_detect</strong>设置为on，表示开启这个逻辑，默认开启。 主动死锁检测在发生死锁的时候，是能够快速发现并进行处理的，但是它也是有额外负担的。 当并发很高的时候，检测死锁将会消耗大量的资源，因此控制并发也是很重要的一种策略。</p>
+          导读
+正所谓有人(锁)的地方就有江湖(事务)，人在江湖飘，怎能一无所知？
 
-          
+今天来细说一下Mysql中的三类锁，分别是全局锁、表级锁、行级锁。
+
+
+全局锁
+全局锁简单的说就是锁住整个数据库实例，命令是Flush tables with read lock。当你需要为整个数据库处于只读的状态的时候，可以使用这个命令。
+一旦使用全局锁，之后其他线程的以下语句会被阻塞：数据更新语句（数据的增删改）、数据定义语句（包括建表、修改表结构等）和更新类事务的提交语句。 
+全局锁的使用场景大部分都是用来数据库备份。
+
+为什么备份要加全局锁？
+用户买东西，首先会从余额里扣除金额，然后在订单里添加商品。如果备份数
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/04/01/Mysql中的三类锁，你知道吗？/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -481,6 +488,14 @@
     
 
     
+	<div>
+	
+<div>
+      
+</div>
+
+  
+</div>
 
     <footer class="post-footer">
       
@@ -520,7 +535,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不才陈某">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/header.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -544,9 +559,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-23T16:15:12+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-23T16:15:12+08:00">
                 2020-03-23
               </time>
             
@@ -565,7 +580,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -582,13 +597,56 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/03/23/IDEA调试技巧/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/23/IDEA调试技巧/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
           
 
           
+		  
+		  
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
           
 
           
@@ -608,75 +666,22 @@
       
         
           
-            <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
-<li>前天面试了一个985高校的实习生，问了他平时用什么开发工具，他想也没想的说IDEA，于是我抛砖引玉的问了一下IDEA的调试用过吧，你说说怎么设置断点条件？那孩子懵了，想了好一会对我说没用过，甚至都没听说过这个。</li>
-<li>作为一名资深的老司机，IDEA调试可以说是家常便饭，如果不会debug，我都不信你读过源码，就别和我说原理了，直接pass掉。</li>
-</ul>
-<h2 id="基本界面"><a href="#基本界面" class="headerlink" title="基本界面"></a>基本界面</h2><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWFnZXMyMDE3LmNuYmxvZ3MuY29tL2Jsb2cvODU2MTU0LzIwMTcwOS84NTYxNTQtMjAxNzA5MDUyMjE0MTgxNDctMTIwNTA0MzAyMC5wbmc" alt=""></p>
-<p>① 以Debug模式启动服务，左边的一个按钮则是以Run模式启动。在开发中，我一般会直接启动Debug模式，方便随时调试代码。 </p>
-<p>② 断点：在左边行号栏单击左键，或者快捷键Ctrl+F8 打上/取消断点，断点行的颜色可自己去设置。 </p>
-<p>③ Debug窗口：访问请求到达第一个断点后，会自动激活Debug窗口。如果没有自动激活，可以去设置里设置。</p>
-<p>④ 调试按钮：一共有8个按钮，调试的主要功能就对应着这几个按钮，鼠标悬停在按钮上可以查看对应的快捷键。</p>
-<p>⑤ 服务按钮：可以在这里关闭/启动服务，设置断点等。 </p>
-<p>⑥ 方法调用栈：这里显示了该线程调试所经过的所有方法，勾选右上角的[Show All Frames]按钮，就不会显示其它类库的方法了，否则这里会有一大堆的方法。 </p>
-<p>⑦ Variables：在变量区可以查看当前断点之前的当前方法内的变量。 </p>
-<p>⑧  Watches：查看变量，可以将Variables区中的变量拖到Watches中查看 。</p>
-<h2 id="变量查看"><a href="#变量查看" class="headerlink" title="变量查看"></a>变量查看</h2><ul>
-<li>在调试过程中往往需要观察变量的变化来判断业务逻辑，我们可以在以下的四个地方观察。</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032301.png" alt=""></p>
-<p>① 最常用的变量的观察区域variables</p>
-<p>② IDEA中最人性化的地方之一，会将变量的值阴影显示在变量的后面。</p>
-<p>③ watch区域，眼镜的形状，一般不会展开。如下图：</p>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032302.png" alt=""></p>
-<p>点击’+’号可以新增需要观察的变量，点击’-‘号可以删除。</p>
-<p>④ 鼠标悬停在变量上也会出现变量的值，点击展开即可查看。</p>
-<h2 id="计算表达式"><a href="#计算表达式" class="headerlink" title="计算表达式"></a>计算表达式</h2><ul>
-<li>在调试业务逻辑的时候一般总会遇到某个条件或者某个变量的计算值的还不知道的情况下就需要判断下一行代码，那么此处就需要用到计算表达式的功能。计算表达式有两种方法，如下：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032303.png" alt=""></p>
-<p>① 选择需要计算的代码，鼠标右键—-&gt;Evaluate Expression—&gt;Evaluate即可计算。</p>
-<p>② 直接点击计算器形状控件即可弹出计算的窗口，将代码复制进去即可，注意复制进去的代码一定要符合逻辑，比如局部变量一定要是已经声明的。</p>
-<h2 id="断点条件设置"><a href="#断点条件设置" class="headerlink" title="断点条件设置"></a>断点条件设置</h2><ul>
-<li>对于新手要看Spring源码的话，再遇到调试UserService的doGetBean的方法时可能要崩溃，因为doGetBean在容器启动的时候可能会被调用几十次，你把断点打在doGetBean方法体中能让你生不如死。</li>
-<li>设置断点条件有两种方式：<ul>
-<li>①直接在断点上右键，添加condition条件即可。</li>
-<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032304.png" alt=""></li>
-<li>② view breakpoints(ctrl+shift+8)显示所有的断点，在condition中添加条件即可。</li>
-<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032305.png" alt=""></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>异常断点：设置了异常断点后，比如空指针异常，在程序出现需要拦截的异常时会自动定位到指定的行。如下图：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032306.png" alt=""></p>
-<p>① ctrl+shift+F8显示所有断点，点击+号添加<code>Java Exception Breakpoints</code>。</p>
-<p>② debug运行，一旦有代码出现该异常，会自动定位到指定代码。</p>
-<h2 id="线程切换"><a href="#线程切换" class="headerlink" title="线程切换"></a>线程切换</h2><ul>
-<li>通常我们在调试的时候，一个请求过来被拦截了，此时想要发起另外一个请求是无法重新发的，因为另外一个请求被阻塞了，只有当前线程执行完成之后才会走其他的线程。在IDEA中可以改变一下阻塞级别，有两种方法：<ul>
-<li>断点上右键—&gt;选择Thread—-&gt;Make Default，如下图：</li>
-<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032307.png" alt=""></li>
-<li>显示所有断点(crtl+shift+F8)，选中某一个断点，选择Thread，Make Default即可。如下图：</li>
-<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032308.png" alt=""></li>
-</ul>
-</li>
-<li>设置了阻塞级别，此时就可以在线程切换了，如下图：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032309.png" alt=""></p>
-<h2 id="强制抛异常"><a href="#强制抛异常" class="headerlink" title="强制抛异常"></a>强制抛异常</h2><p>这是IDEA 2018年加入的新功能，可以直接在调试中抛出指定的异常。使用方法跟上面的弃栈帧类似，右击栈帧并选择<strong>Throw Exception</strong>，然后输入抛异常的代码，比如<code>throw new NullPointerException</code>，操作如下图：</p>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032310.png" alt=""></p>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032311.png" alt=""></p>
-<h2 id="强制返回"><a href="#强制返回" class="headerlink" title="强制返回"></a>强制返回</h2><ul>
-<li>这是IDEA2015版时增加的功能，类似上面的手动抛异常，只不过是返回一个指定值罢了。使用方法跟上面也都类似，右击栈帧并选择<strong>Force Return</strong>，然后输入要返回的值即可。如果是<code>void</code>的方法那就更简单了，连返回值都不用输。如下图：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA/032312.png" alt=""></p>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
+          导读
+前天面试了一个985高校的实习生，问了他平时用什么开发工具，他想也没想的说IDEA，于是我抛砖引玉的问了一下IDEA的调试用过吧，你说说怎么设置断点条件？那孩子懵了，想了好一会对我说没用过，甚至都没听说过这个。
+作为一名资深的老司机，IDEA调试可以说是家常便饭，如果不会debug，我都不信你读过源码，就别和我说原理了，直接pass掉。
 
-          
+基本界面
+① 以Debug模式启动服务，左边的一个按钮则是以Run模式启动。在开发中，我一般会直接启动Debug模式，方便随时调试代码。 
+② 断点：在左边行号栏单击左键，或者快捷键Ctrl+F8 打上/取消断点，断点行的颜色可自己去设置。 
+③ De
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/03/23/IDEA调试技巧/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -689,6 +694,14 @@
     
 
     
+	<div>
+	
+<div>
+      
+</div>
+
+  
+</div>
 
     <footer class="post-footer">
       
@@ -728,7 +741,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不才陈某">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/header.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -752,9 +765,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-23T10:13:32+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-23T10:13:32+08:00">
                 2020-03-23
               </time>
             
@@ -773,7 +786,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -790,13 +803,56 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/03/23/Spring生命周期/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/23/Spring生命周期/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
           
 
           
+		  
+		  
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
           
 
           
@@ -816,61 +872,23 @@
       
         
           
-            <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
-<li>Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主要是在<code>org.springframework.context.support.AbstractApplicationContext.refresh</code>方法中，下面也是围绕其中的逻辑进行讲解。</li>
-</ul>
-<h2 id="开撸"><a href="#开撸" class="headerlink" title="开撸"></a>开撸</h2><p>【1】 prepareRefresh()</p>
-<p> 内部其实很简单，就是设置一些标志，比如开始时间，激活的状态等。</p>
-<p>【2】prepareBeanFactory(beanFactory)</p>
-<p>做一些简单的准备工作，此处不再赘述！！！</p>
-<p>【3】postProcessBeanFactory(beanFactory)</p>
-<p>主要的作用就是添加了一个后置处理器<code>ServletContextAwareProcessor</code></p>
-<p>【4】invokeBeanFactoryPostProcessors(beanFactory)</p>
-<p>调用容器中的所有的<strong>BeanFactoryPostProcessor</strong>中的<strong>postProcessBeanFactory</strong>方法，按照优先级调用，主要实现逻辑在org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(org.springframework.beans.factory.config.ConfigurableListableBeanFactory, java.util.List<org.springframework.beans.factory.config.beanfactorypostprocessor>)<br>    (1) 执行所有BeanDefinitionRegistryPostProcessor(对BeanFactoryPostProcessor的扩展，运行在普通的实现类之前注册bean)的方法，同样是内部按照优先级进行排序调用<br>    (2) 对剩余的进行按照优先级排序调用，同样是内部进行排序执行</org.springframework.beans.factory.config.beanfactorypostprocessor></p>
-<p>【5】<strong>registerBeanPostProcessors(beanFactory)</strong></p>
-<p>注册所有的<strong>BeanPostProcessor</strong>（后置处理器），按照优先级注册，分别是PriorityOrdered，Ordered，普通的，内部的。主要的实现逻辑在PostProcessorRegistrationDelegate.registerBeanPostProcessors()</p>
-<p>【6】initMessageSource()<br>注册MessageSource,提供消息国际化等功能</p>
-<p>【7】initApplicationEventMulticaster();</p>
-<p>注册事件广播器ApplicationEventMulticaster，用于spring事件的广播和事件监听器的处理</p>
-<p>【8】registerListeners()</p>
-<p>注册事件监听器ApplicationListener，并且广播一些早期的事件，主要的逻辑在org.springframework.context.support.AbstractApplicationContext.registerListeners</p>
-<p>【9】finishBeanFactoryInitialization(beanFactory)</p>
-<p>实例化所有非懒加载的Bean，spring生命周期中的主要方法，主要逻辑在org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons，深入进去其实就是getBean()方法创建，详情向下看。</p>
-<p>【10】finishRefresh()</p>
-<p>主要的功能是发布事件ContextRefreshedEvent</p>
-<p>【11】destroyBeans()</p>
-<p>容器启动出现异常时销毁Bean</p>
-<p>以上就是Spring容器启动的过程，主要的逻辑都在org.springframework.context.support.AbstractApplicationContext#refresh中，其他的都很容易理解，现在我们着重分析一下单例Bean的创建过程，入口是第9步。</p>
-<h2 id="实例化单例Bean"><a href="#实例化单例Bean" class="headerlink" title="实例化单例Bean"></a>实例化单例Bean</h2><p>【1】debug进入，实际主要的逻辑都在org.springframework.beans.factory.support.DefaultListableBeanFactory#preInstantiateSingletons方法中，逻辑如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取所有注入到ioc容器中的bean定义信息</span></div><div class="line">List&lt;String&gt; beanNames = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="keyword">this</span>.beanDefinitionNames);</div><div class="line">		<span class="comment">//循环创建</span></div><div class="line">		<span class="keyword">for</span> (String beanName : beanNames) &#123;</div><div class="line">			RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);</div><div class="line">            <span class="comment">//非抽象，单例，非懒加载的bean初始化</span></div><div class="line">			<span class="keyword">if</span> (!bd.isAbstract() &amp;&amp; bd.isSingleton() &amp;&amp; !bd.isLazyInit()) &#123;</div><div class="line">                <span class="comment">//如果是FactoryBean</span></div><div class="line">				<span class="keyword">if</span> (isFactoryBean(beanName)) &#123;</div><div class="line">                    <span class="comment">//getBean</span></div><div class="line">					Object bean = getBean(FACTORY_BEAN_PREFIX + beanName);</div><div class="line">                    <span class="comment">//非FactoryBean，getBean</span></div><div class="line">				<span class="keyword">else</span> &#123;</div><div class="line">					getBean(beanName);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
-<p>以上源码总结得知，最终实例化Bean的方法肯定在getBean中的，debug进入，得知doGetBean是大boss，spring源码有趣的是最终的实现都是在doxxxx()。</p>
-<p>【2】AbstractBeanFactory#doGetBean，由于篇幅太短，就不贴源码了，只贴关键代码</p>
-<p>实例化的主要流程全部都在这里，下面一一解析即可。</p>
-<p>(1) Object sharedInstance = getSingleton(beanName)</p>
-<p>从早期的缓存中获取，如果存在返回Bean，实例化</p>
-<p>（2）BeanFactory parentBeanFactory = getParentBeanFactory()</p>
-<p>从父工厂的中获取Bean</p>
-<p>（3）if (mbd.isSingleton()) </p>
-<p>分单例和多例进行分开创建Bean，这里只分析单例Bean的创建</p>
-<p>（4）sharedInstance = getSingleton(beanName, () -&gt; {   try {      return createBean(beanName, mbd, args);   }</p>
-<p>createBean方法创建Bean，进入createBean(）</p>
-<p>​    a. Object bean = resolveBeforeInstantiation(beanName, mbdToUse)：执行所有的InstantiationAwareBeanPostProcessor中的<strong>postProcessBeforeInstantiation</strong>，在实例化之前调用，返回null继续下一步，返回一个bean，那么bean实例化完成，将调用其中的<strong>postProcessAfterInstantiation</strong>方法</p>
-<p>​       b. Object beanInstance = doCreateBean(beanName, mbdToUse, args)：创建Bean的完成过程</p>
-<p>​    c. 进入<strong>doCreateBean</strong>，instanceWrapper = createBeanInstance(beanName, mbd, args)：创建Bean的实例</p>
-<p>​    d. populateBean(beanName, mbd, instanceWrapper)：属性装配，执行InstantiationAwareBeanPostProcessor的<strong>postProcessAfterInstantiation</strong>，再执行<strong>postProcessProperties</strong>方法。</p>
-<p>​    e. exposedObject = initializeBean(beanName, exposedObject, mbd)：初始化Bean，debug进入</p>
-<p>​    f. invokeAwareMethods(beanName, bean)：调用<strong>BeanNameAware</strong>，<strong>BeanClassLoaderAware</strong>，<strong>BeanFactoryAware</strong>中的对应方法</p>
-<p>​    g. wrappedBean = applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName)：调用BeanPostProcessord中的<strong>postProcessBeforeInitialization</strong>方法</p>
-<p>​    h. invokeInitMethods(beanName, wrappedBean, mbd)：执行<strong>InitializingBean</strong>中的<strong>afterPropertiesSet</strong></p>
-<p>​    i. wrappedBean = applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName)：调用<strong>BeanPostProcessor</strong>中的<strong>postProcessAfterInitialization</strong>方法</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上是spring容器从启动到销毁的全部过程，根据源码陈某画了一张生命周期的图，仅供参考，请勿转载！！！</p>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/lifecy.png" alt=""></p>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
+          导读
+Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主要是在org.springframework.context.support.AbstractApplicationContext.refresh方法中，下面也是围绕其中的逻辑进行讲解。
 
-          
+开撸【1】 prepareRefresh()
+ 内部其实很简单，就是设置一些标志，比如开始时间，激活的状态等。
+【2】prepareBeanFactory(beanFactory)
+做一些简单的准备工作，此处不再赘述！！！
+【3】postProcessBeanFactory(beanFactory)
+主要的作用就是添加了一个后置处理器S
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/03/23/Spring生命周期/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -883,6 +901,14 @@
     
 
     
+	<div>
+	
+<div>
+      
+</div>
+
+  
+</div>
 
     <footer class="post-footer">
       
@@ -922,7 +948,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不才陈某">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/header.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -946,9 +972,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-23T09:38:58+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-23T09:38:58+08:00">
                 2020-03-23
               </time>
             
@@ -967,7 +993,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -984,13 +1010,56 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/03/23/接口限流算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/23/接口限流算法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
           
 
           
+		  
+		  
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
           
 
           
@@ -1010,126 +1079,27 @@
       
         
           
-            <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
-<li>前几天和一个朋友讨论了他们公司的系统问题，传统的单体应用，集群部署，他说近期服务的并发量可能会出现瞬时增加的风险，虽然部署了集群，但是通过压测后发现请求延迟仍然是很大，想问问我有什么改进的地方。我沉思了一会，现在去改架构显然是不可能的，于是我给出了一个建议，让他去做个接口限流，这样能够保证瞬时并发量飙高也不会出现请求延迟的问题，用户的体验度也会上去。</li>
-<li>至于什么是接口限流？怎么实现接口限流？如何实现单机应用的限流？如何实现分布式应用的限流？本篇文章将会详细阐述。</li>
-</ul>
-<h2 id="限流的常见几种算法"><a href="#限流的常见几种算法" class="headerlink" title="限流的常见几种算法"></a>限流的常见几种算法</h2><ul>
-<li>常见的限流算法有很多，但是最常用的算法无非以下四种。</li>
-</ul>
-<h3 id="固定窗口计数器"><a href="#固定窗口计数器" class="headerlink" title="固定窗口计数器"></a>固定窗口计数器</h3><p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/8ded7a2b90e1482093f92fff555b3615.png" alt=""></p>
-<ul>
-<li>固定算法的概念如下</li>
-</ul>
-<ol>
-<li>将时间划分为多个窗口</li>
-<li>在每个窗口内每有一次请求就将计数器加一</li>
-<li>如果计数器超过了限制数量，则本窗口内所有的请求都被丢弃当时间到达下一个窗口时，计数器重置。</li>
-</ol>
-<ul>
-<li>固定窗口计数器是最为简单的算法，但这个算法有时会让通过请求量允许为限制的两倍。考虑如下情况：限制 1 秒内最多通过 5 个请求，在第一个窗口的最后半秒内通过了 5 个请求，第二个窗口的前半秒内又通过了 5 个请求。这样看来就是在 1 秒内通过了 10 个请求。 </li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/4d03e8e43a8edc3f32376d90e52b85f4.png" alt=""></p>
-<h3 id="滑动窗口计数器"><a href="#滑动窗口计数器" class="headerlink" title="滑动窗口计数器"></a>滑动窗口计数器</h3><p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/ae4d3cd14efb8dc7046d691c90264715.png" alt=""></p>
-<ul>
-<li>滑动窗口计数器算法概念如下：</li>
-</ul>
-<ol>
-<li>将时间划分为多个区间；</li>
-<li>在每个区间内每有一次请求就将计数器加一维持一个时间窗口，占据多个区间；</li>
-<li>每经过一个区间的时间，则抛弃最老的一个区间，并纳入最新的一个区间；</li>
-<li>如果当前窗口内区间的请求计数总和超过了限制数量，则本窗口内所有的请求都被丢弃。</li>
-</ol>
-<ul>
-<li>滑动窗口计数器是通过将窗口再细分，并且按照时间 “ 滑动 “，这种算法避免了固定窗口计数器带来的双倍突发请求，但时间区间的精度越高，算法所需的空间容量就越大。</li>
-</ul>
-<h3 id="漏桶算法"><a href="#漏桶算法" class="headerlink" title="漏桶算法"></a>漏桶算法</h3><p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/75938d1010138ce66e38c6ed0392f103.png" alt=""></p>
-<ul>
-<li>漏桶算法概念如下：</li>
-</ul>
-<ol>
-<li>将每个请求视作 “ 水滴 “ 放入 “ 漏桶 “ 进行存储；</li>
-<li>“漏桶 “ 以固定速率向外 “ 漏 “ 出请求来执行如果 “ 漏桶 “ 空了则停止 “ 漏水”；</li>
-<li>如果 “ 漏桶 “ 满了则多余的 “ 水滴 “ 会被直接丢弃。</li>
-</ol>
-<ul>
-<li>漏桶算法多使用队列实现，服务的请求会存到队列中，服务的提供方则按照固定的速率从队列中取出请求并执行，过多的请求则放在队列中排队或直接拒绝。</li>
-<li>漏桶算法的缺陷也很明显，当短时间内有大量的突发请求时，即便此时服务器没有任何负载，每个请求也都得在队列中等待一段时间才能被响应。</li>
-</ul>
-<h3 id="令牌桶算法"><a href="#令牌桶算法" class="headerlink" title="令牌桶算法"></a>令牌桶算法</h3><p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/eca0e5eaa35dac938c673fecf2ec9a93.png" alt=""></p>
-<ul>
-<li>令牌桶算法概念如下：</li>
-</ul>
-<ol>
-<li>令牌以固定速率生成。</li>
-<li>生成的令牌放入令牌桶中存放，如果令牌桶满了则多余的令牌会直接丢弃，当请求到达时，会尝试从令牌桶中取令牌，取到了令牌的请求可以执行。</li>
-<li>如果桶空了，那么尝试取令牌的请求会被直接丢弃。</li>
-</ol>
-<ul>
-<li>令牌桶算法既能够将所有的请求平均分布到时间区间内，又能接受服务器能够承受范围内的突发请求，因此是目前使用较为广泛的一种限流算法。 </li>
-</ul>
-<h2 id="单体应用实现"><a href="#单体应用实现" class="headerlink" title="单体应用实现"></a>单体应用实现</h2><ul>
-<li>在传统的单体应用中限流只需要考虑到多线程即可，使用Google开源工具类guava即可。其中有一个RateLimiter专门实现了单体应用的限流，使用的是令牌桶算法。</li>
-<li>单体应用的限流不是本文的重点，官网上现成的API，读者自己去看看即可，这里不再详细解释。</li>
-</ul>
-<h2 id="分布式限流"><a href="#分布式限流" class="headerlink" title="分布式限流"></a>分布式限流</h2><ul>
-<li>分布式限流和熔断现在有很多的现成的工具，比如Hystrix，Sentinel  等，但是还是有些企业不引用外来类库，因此就需要自己实现。</li>
-<li>Redis作为单线程多路复用的特性，很显然能够胜任这项任务。</li>
-</ul>
-<h3 id="Redis如何实现"><a href="#Redis如何实现" class="headerlink" title="Redis如何实现"></a>Redis如何实现</h3><ul>
-<li>使用令牌桶的算法实现，根据前面的介绍，我们了解到令牌桶算法的基础需要两个个变量，分别是桶容量，产生令牌的速率。</li>
-<li>这里我们实现的就是每秒产生的速率加上一个桶容量。但是如何实现呢？这里有几个问题。</li>
-<li><p>需要保存什么数据在redis中？</p>
-<ul>
-<li>当前桶的容量，最新的请求时间</li>
-</ul>
-</li>
-<li>以什么数据结构存储？<ul>
-<li>因为是针对接口限流，每个接口的业务逻辑不同，对并发的处理也是不同，因此要细化到每个接口的限流，此时我们选用HashMap的结构，hashKey是接口的唯一id，可以是请求的uri，里面的分别存储当前桶的容量和最新的请求时间。</li>
-</ul>
-</li>
-<li>如何计算需要放令牌？<ul>
-<li>根据redis保存的上次的请求时间和当前时间比较，如果相差大于的<strong>产生令牌的时间（陈某实现的是1秒）</strong>则再次产生令牌，此时的桶容量为当前令牌+产生的令牌</li>
-</ul>
-</li>
-<li>如何保证redis的原子性？<ul>
-<li>保证redis的原子性，使用lua脚本即可解决。</li>
-</ul>
-</li>
-<li>有了上述的几个问题，便能很容易的实现。</li>
-</ul>
-<h3 id="开撸"><a href="#开撸" class="headerlink" title="开撸"></a>开撸</h3><p>1、lua脚本如下：</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> ratelimit_info = redis.<span class="built_in">pcall</span>(<span class="string">'HMGET'</span>,KEYS[<span class="number">1</span>],<span class="string">'last_time'</span>,<span class="string">'current_token'</span>)</div><div class="line"><span class="keyword">local</span> last_time = ratelimit_info[<span class="number">1</span>]</div><div class="line"><span class="keyword">local</span> current_token = <span class="built_in">tonumber</span>(ratelimit_info[<span class="number">2</span>])</div><div class="line"><span class="keyword">local</span> max_token = <span class="built_in">tonumber</span>(ARGV[<span class="number">1</span>])</div><div class="line"><span class="keyword">local</span> token_rate = <span class="built_in">tonumber</span>(ARGV[<span class="number">2</span>])</div><div class="line"><span class="keyword">local</span> current_time = <span class="built_in">tonumber</span>(ARGV[<span class="number">3</span>])</div><div class="line"><span class="keyword">if</span> current_token == <span class="literal">nil</span> <span class="keyword">then</span></div><div class="line">  current_token = max_token</div><div class="line">  last_time = current_time</div><div class="line"><span class="keyword">else</span></div><div class="line">  <span class="keyword">local</span> past_time = current_time-last_time</div><div class="line">  </div><div class="line">  <span class="keyword">if</span> past_time&gt;<span class="number">1000</span> <span class="keyword">then</span></div><div class="line">	  current_token = current_token+token_rate</div><div class="line">	  last_time = current_time</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  ## 防止溢出</div><div class="line">  <span class="keyword">if</span> current_token&gt;max_token <span class="keyword">then</span></div><div class="line">    current_token = max_token</div><div class="line">	last_time = current_time</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="keyword">local</span> result = <span class="number">0</span></div><div class="line"><span class="keyword">if</span>(current_token&gt;<span class="number">0</span>) <span class="keyword">then</span></div><div class="line">  result = <span class="number">1</span></div><div class="line">  current_token = current_token<span class="number">-1</span></div><div class="line">  last_time = current_time</div><div class="line"><span class="keyword">end</span></div><div class="line">redis.call(<span class="string">'HMSET'</span>,KEYS[<span class="number">1</span>],<span class="string">'last_time'</span>,last_time,<span class="string">'current_token'</span>,current_token)</div><div class="line"><span class="keyword">return</span> result</div></pre></td></tr></table></figure>
-<ul>
-<li>调用lua脚本出四个参数，分别是接口方法唯一id，桶容量，每秒产生令牌的数量，当前请求的时间戳。</li>
-</ul>
-<p>2、 SpringBoot代码实现</p>
-<ul>
-<li>采用Spring-data-redis实现lua脚本的执行。</li>
-<li>Redis序列化配置：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">    * 重新注入模板</div><div class="line">    */</div><div class="line">   <span class="meta">@Bean</span>(value = <span class="string">"redisTemplate"</span>)</div><div class="line">   <span class="meta">@Primary</span></div><div class="line">   <span class="function"><span class="keyword">public</span> RedisTemplate <span class="title">redisTemplate</span><span class="params">(RedisConnectionFactory redisConnectionFactory)</span></span>&#123;</div><div class="line">       RedisTemplate&lt;String, Object&gt; template = <span class="keyword">new</span> RedisTemplate&lt;&gt;();</div><div class="line">       template.setConnectionFactory(redisConnectionFactory);</div><div class="line">       ObjectMapper objectMapper = <span class="keyword">new</span> ObjectMapper();</div><div class="line">       objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);</div><div class="line">       objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</div><div class="line">       <span class="comment">//设置序列化方式，key设置string 方式，value设置成json</span></div><div class="line">       StringRedisSerializer stringRedisSerializer = <span class="keyword">new</span> StringRedisSerializer();</div><div class="line">       Jackson2JsonRedisSerializer jsonRedisSerializer = <span class="keyword">new</span> Jackson2JsonRedisSerializer(Object.class);</div><div class="line">       jsonRedisSerializer.setObjectMapper(objectMapper);</div><div class="line">       template.setEnableDefaultSerializer(<span class="keyword">false</span>);</div><div class="line">       template.setKeySerializer(stringRedisSerializer);</div><div class="line">       template.setHashKeySerializer(stringRedisSerializer);</div><div class="line">       template.setValueSerializer(jsonRedisSerializer);</div><div class="line">       template.setHashValueSerializer(jsonRedisSerializer);</div><div class="line">       <span class="keyword">return</span> template;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>限流工具类</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@Description</span> 限流工具类</div><div class="line"> * <span class="doctag">@Author</span> CJB</div><div class="line"> * <span class="doctag">@Date</span> 2020/3/19 17:21</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisLimiterUtils</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> StringRedisTemplate stringRedisTemplate=ApplicationContextUtils.applicationContext.getBean(StringRedisTemplate.class);</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * lua脚本，限流</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String TEXT=<span class="string">"local ratelimit_info = redis.pcall('HMGET',KEYS[1],'last_time','current_token')\n"</span> +</div><div class="line">            <span class="string">"local last_time = ratelimit_info[1]\n"</span> +</div><div class="line">            <span class="string">"local current_token = tonumber(ratelimit_info[2])\n"</span> +</div><div class="line">            <span class="string">"local max_token = tonumber(ARGV[1])\n"</span> +</div><div class="line">            <span class="string">"local token_rate = tonumber(ARGV[2])\n"</span> +</div><div class="line">            <span class="string">"local current_time = tonumber(ARGV[3])\n"</span> +</div><div class="line">            <span class="string">"if current_token == nil then\n"</span> +</div><div class="line">            <span class="string">"  current_token = max_token\n"</span> +</div><div class="line">            <span class="string">"  last_time = current_time\n"</span> +</div><div class="line">            <span class="string">"else\n"</span> +</div><div class="line">            <span class="string">"  local past_time = current_time-last_time\n"</span> +</div><div class="line">            <span class="string">"  \n"</span> +</div><div class="line">            <span class="string">"  if past_time&gt;1000 then\n"</span> +</div><div class="line">            <span class="string">"\t  current_token = current_token+token_rate\n"</span> +</div><div class="line">            <span class="string">"\t  last_time = current_time\n"</span> +</div><div class="line">            <span class="string">"  end\n"</span> +</div><div class="line">            <span class="string">"\n"</span> +</div><div class="line">            <span class="string">"  if current_token&gt;max_token then\n"</span> +</div><div class="line">            <span class="string">"    current_token = max_token\n"</span> +</div><div class="line">            <span class="string">"\tlast_time = current_time\n"</span> +</div><div class="line">            <span class="string">"  end\n"</span> +</div><div class="line">            <span class="string">"end\n"</span> +</div><div class="line">            <span class="string">"\n"</span> +</div><div class="line">            <span class="string">"local result = 0\n"</span> +</div><div class="line">            <span class="string">"if(current_token&gt;0) then\n"</span> +</div><div class="line">            <span class="string">"  result = 1\n"</span> +</div><div class="line">            <span class="string">"  current_token = current_token-1\n"</span> +</div><div class="line">            <span class="string">"  last_time = current_time\n"</span> +</div><div class="line">            <span class="string">"end\n"</span> +</div><div class="line">            <span class="string">"redis.call('HMSET',KEYS[1],'last_time',last_time,'current_token',current_token)\n"</span> +</div><div class="line">            <span class="string">"return result"</span>;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取令牌</div><div class="line">     * <span class="doctag">@param</span> key 请求id</div><div class="line">     * <span class="doctag">@param</span> max 最大能同时承受多少的并发（桶容量）</div><div class="line">     * <span class="doctag">@param</span> rate  每秒生成多少的令牌</div><div class="line">     * <span class="doctag">@return</span> 获取令牌返回true，没有获取返回false</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(String key, <span class="keyword">int</span> max,<span class="keyword">int</span> rate)</span> </span>&#123;</div><div class="line">        List&lt;String&gt; keyList = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="number">1</span>);</div><div class="line">        keyList.add(key);</div><div class="line">        DefaultRedisScript&lt;Long&gt; script = <span class="keyword">new</span> DefaultRedisScript&lt;&gt;();</div><div class="line">        script.setResultType(Long.class);</div><div class="line">        script.setScriptText(TEXT);</div><div class="line">        <span class="keyword">return</span> Long.valueOf(<span class="number">1</span>).equals(stringRedisTemplate.execute(script,keyList,Integer.toString(max), Integer.toString(rate),</div><div class="line">                Long.toString(System.currentTimeMillis())));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>采用拦截器+注解的方式实现，注解如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@Description</span> 限流的注解，标注在类上或者方法上。在方法上的注解会覆盖类上的注解，同<span class="doctag">@Transactional</span></div><div class="line"> * <span class="doctag">@Author</span> CJB</div><div class="line"> * <span class="doctag">@Date</span> 2020/3/20 13:36</div><div class="line"> */</div><div class="line"><span class="meta">@Inherited</span></div><div class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> RateLimit &#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 令牌桶的容量，默认100</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">capacity</span><span class="params">()</span> <span class="keyword">default</span> 100</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 每秒钟默认产生令牌数量，默认10个</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">rate</span><span class="params">()</span> <span class="keyword">default</span> 10</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>拦截器如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@Description</span> 限流的拦器</div><div class="line"> * <span class="doctag">@Author</span> CJB</div><div class="line"> * <span class="doctag">@Date</span> 2020/3/19 14:34</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RateLimiterIntercept</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">if</span> (handler <span class="keyword">instanceof</span> HandlerMethod)&#123;</div><div class="line">            HandlerMethod handlerMethod=(HandlerMethod)handler;</div><div class="line">            Method method = handlerMethod.getMethod();</div><div class="line">            <span class="comment">/**</span></div><div class="line">             * 首先获取方法上的注解</div><div class="line">             */</div><div class="line">            RateLimit rateLimit = AnnotationUtils.findAnnotation(method, RateLimit.class);</div><div class="line">            <span class="comment">//方法上没有标注该注解，尝试获取类上的注解</span></div><div class="line">            <span class="keyword">if</span> (Objects.isNull(rateLimit))&#123;</div><div class="line">                <span class="comment">//获取类上的注解</span></div><div class="line">                rateLimit = AnnotationUtils.findAnnotation(handlerMethod.getBean().getClass(), RateLimit.class);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="comment">//没有标注注解，放行</span></div><div class="line">            <span class="keyword">if</span> (Objects.isNull(rateLimit))</div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line"></div><div class="line">            <span class="comment">//尝试获取令牌，如果没有令牌了</span></div><div class="line">            <span class="keyword">if</span> (!RedisLimiterUtils.tryAcquire(request.getRequestURI(),rateLimit.capacity(),rateLimit.rate()))&#123;</div><div class="line">                <span class="comment">//抛出请求超时的异常</span></div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span>  TimeOutException();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>SpringBoot配置拦截器的代码就不贴了，以上就是完整的代码，至此分布式限流就完成了。</li>
-</ul>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
+          导读
+前几天和一个朋友讨论了他们公司的系统问题，传统的单体应用，集群部署，他说近期服务的并发量可能会出现瞬时增加的风险，虽然部署了集群，但是通过压测后发现请求延迟仍然是很大，想问问我有什么改进的地方。我沉思了一会，现在去改架构显然是不可能的，于是我给出了一个建议，让他去做个接口限流，这样能够保证瞬时并发量飙高也不会出现请求延迟的问题，用户的体验度也会上去。
+至于什么是接口限流？怎么实现接口限流？如何实现单机应用的限流？如何实现分布式应用的限流？本篇文章将会详细阐述。
 
-          
+限流的常见几种算法
+常见的限流算法有很多，但是最常用的算法无非以下四种。
+
+固定窗口计数器
+
+固定算法的概念如下
+
+
+将时间划
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/03/23/接口限流算法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1142,6 +1112,14 @@
     
 
     
+	<div>
+	
+<div>
+      
+</div>
+
+  
+</div>
 
     <footer class="post-footer">
       
@@ -1181,7 +1159,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不才陈某">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/header.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1205,9 +1183,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-18T16:51:57+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-18T16:51:57+08:00">
                 2020-03-18
               </time>
             
@@ -1226,7 +1204,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1243,13 +1221,56 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/03/18/SpringBoot整合多数据源的巨坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/18/SpringBoot整合多数据源的巨坑/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
           
 
           
+		  
+		  
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
           
 
           
@@ -1269,75 +1290,22 @@
       
         
           
-            <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
-<li>本篇文章接上篇<a href="https://chenjiabing666.github.io/2020/03/12/SpringBoot%E6%95%B4%E5%90%88%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%8C%E4%BD%A0%E4%BC%9A%E4%BA%86%E5%90%97%EF%BC%9F/">SpringBoot整合多数据源，你会了吗？</a>，前面文章最后留了几个问题供大家思考，今天一一揭晓。</li>
-</ul>
-<h2 id="配置如何优化"><a href="#配置如何优化" class="headerlink" title="配置如何优化"></a>配置如何优化</h2><ul>
-<li>上文整合的过程中的还顺带整合Mybatis和TransactionManager，为什么还要重新定义他们呢？SpringBoot不是给我们都配置好了吗？注意，此处优化就是这两个配置去掉，直接用SpringBoot的自动配置，顿时高级了，别人一看你的代码如此简单就实现了多数据源的切换，牛叉不？</li>
-<li>如何去掉？SpringBoot万变不离自动配置类，且看MybatisAutoConfiguration，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@org</span>.springframework.context.annotation.Configuration</div><div class="line"><span class="meta">@ConditionalOnClass</span>(&#123; SqlSessionFactory.class, SqlSessionFactoryBean.class &#125;)</div><div class="line"><span class="meta">@ConditionalOnSingleCandidate</span>(DataSource.class)</div><div class="line"><span class="meta">@EnableConfigurationProperties</span>(MybatisProperties.class)</div><div class="line"><span class="meta">@AutoConfigureAfter</span>(DataSourceAutoConfiguration.class)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MybatisAutoConfiguration</span> <span class="keyword">implements</span> <span class="title">InitializingBean</span> </span>&#123;</div></pre></td></tr></table></figure>
-<ul>
-<li>不多帖了，都是废话，看前几行就行了，醒目的一行啊，<code>@ConditionalOnSingleCandidate(DataSource.class)</code>，什么鬼？该注解的意思就是IOC容器中只有一个指定的候选对象才起作用，但是我们注入了几个DataSource，足足三个啊，这还起作用吗？那不废话嘛。</li>
-<li>事务管理器也是一样，且看<code>DataSourceTransactionManagerAutoConfiguration</code>，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataSourceTransactionManagerAutoConfiguration</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Configuration</span></div><div class="line">	<span class="meta">@ConditionalOnSingleCandidate</span>(DataSource.class)</div><div class="line">	<span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">DataSourceTransactionManagerConfiguration</span> </span>&#123;</div></pre></td></tr></table></figure>
-<ul>
-<li>又看到了什么，<code>@ConditionalOnSingleCandidate(DataSource.class)</code>同样的醒目，mmp，这不玩我呢吗。这怎么搞？</li>
-<li>咦，不着急，此时就要看看<code>@ConditionalOnSingleCandidate</code>注解搞了什么，进去看看，有如下的介绍：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The condition will also match <span class="keyword">if</span> multiple matching bean instances are already contained in the BeanFactory but a primary candidate has been defined; essentially, the condition match <span class="keyword">if</span> auto-wiring a bean with the defined type will succeed.</div></pre></td></tr></table></figure>
-<ul>
-<li>什么鬼，看不懂，英语太差了吧，不着急，陈某给大家推荐一个IDEA插件，文档翻译更加专注于程序员的专业术语，不像xx度翻译，如下：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/transac1.png" alt=""></p>
-<ul>
-<li>好了，翻译准确了就知道了，大致意思就是IOC容器中允许你有多个候选对象，但是你必须有一个主（primary）候选对象，顿时灵光一现，这不就是@Primary注解吗，艹，我这也太优秀了吧。</li>
-<li>二话不说，直接开撸，轻轻松松一个注解搞定，此时的数据源配置变得简单多了，如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@Description</span> 数据源的配置</div><div class="line"> * <span class="doctag">@Author</span> CJB</div><div class="line"> * <span class="doctag">@Date</span> 2020/3/9 13:45</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@MapperScan</span>(basePackages = &#123;<span class="string">"com.vivachek.service.dao"</span>,<span class="string">"com.vivachek.service.dao2"</span>&#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DatasourceConfig</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 注入数据源1</div><div class="line">     */</div><div class="line">    <span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"spring.datasource1"</span>)</div><div class="line">    <span class="meta">@Bean</span>(value = <span class="string">"dataSource1"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource1</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DruidDataSource();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 第二个数据源</div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span>(name = <span class="string">"dataSource2"</span>)</div><div class="line">    <span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"spring.datasource2"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource2</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DruidDataSource();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 动态数据源</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="meta">@Primary</span></div><div class="line">    <span class="function"><span class="keyword">public</span> DynamicDataSource <span class="title">dynamicDataSource</span><span class="params">()</span> </span>&#123;</div><div class="line">        DynamicDataSource dataSource = <span class="keyword">new</span> DynamicDataSource();</div><div class="line">        <span class="comment">//默认数据源，在没有切换数据源的时候使用该数据源</span></div><div class="line">        dataSource.setDefaultTargetDataSource(dataSource2());</div><div class="line">        HashMap&lt;Object, Object&gt; map = Maps.newHashMap();</div><div class="line">        map.put(<span class="string">"dataSource1"</span>, dataSource1());</div><div class="line">        map.put(<span class="string">"dataSource2"</span>, dataSource2());</div><div class="line">        <span class="comment">//设置数据源Map，动态切换就是根据key从map中获取</span></div><div class="line">        dataSource.setTargetDataSources(map);</div><div class="line">        <span class="keyword">return</span> dataSource;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>直接在<code>DynamicDataSource</code>添加了一个@Primary就省去了SqlSessionFactory和TransactionManager的手动配置，是不是很easy并且显得自己很牛叉，太有成就感了…..</li>
-<li>好了，牛也吹了，运行一下吧，满怀期待等待30秒…….，what？什么鬼？失败了，抛出了异常，如下：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/circleex.png" alt=""></p>
-<ul>
-<li>什么鬼，循环依赖异常，搞什么飞机，一万个草泥马在奔腾在横无际涯的草原上。。。。。。。。</li>
-<li>别急，还有后续，关注我，将会定时更新后续文章。另外需要源码的联系我，微信联系方式在<a href="https://chenjiabing666.github.io/">个人独立博客</a>【关于我】中，加我注明来意，谢谢。</li>
-<li>别忘了点赞哟，多来走动走动呗……….</li>
-</ul>
-<h2 id="动态路由数据源添加-Primary报循环依赖异常"><a href="#动态路由数据源添加-Primary报循环依赖异常" class="headerlink" title="动态路由数据源添加@Primary报循环依赖异常"></a>动态路由数据源添加@Primary报循环依赖异常</h2><ul>
-<li>前面文章<a href="https://chenjiabing666.github.io/2019/07/17/Spring%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/">Spring解决循环依赖</a>有说过Spring对于循环依赖是完全能够解决的，没有读过的小伙伴建议看一下，里面详细的讲述了Spring是如何解决循环依赖的，此处就不再赘述了。</li>
-<li>既然Spring能够解决循环依赖，为什么这里又会报循环依赖的异常呢？我们不妨跟着代码看看是怎样的循环依赖，如下：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/circleex.png" alt=""></p>
-<ul>
-<li>上面两个数据源都是自己定义的，先不用看，那么肯定是<code>DataSourceInitializerInvoker</code>造成的循环依赖了，果不其然，其中确实依赖了DataSource，源码如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">DataSourceInitializerInvoker(ObjectProvider&lt;DataSource&gt; dataSource, DataSourceProperties properties,</div><div class="line">			ApplicationContext applicationContext) &#123;</div><div class="line">		<span class="keyword">this</span>.dataSource = dataSource;</div><div class="line">		<span class="keyword">this</span>.properties = properties;</div><div class="line">		<span class="keyword">this</span>.applicationContext = applicationContext;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>what？即使依赖了又怎样？Spring不是可以解决循环依赖吗？别着急下面分析</li>
-<li>ObjectProvider应该不陌生吧，其实内部就是从IOC容器中获取Bean而已，但是，转折来了……… ，这是什么，这是构造器，Spring能解决构造器的循环依赖吗？答案是不能，所以原因找到了，这里不再细说了，欲知原因请读<a href="https://chenjiabing666.github.io/2019/07/17/Spring%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/">Spring解循环依赖</a></li>
-<li><p>问题找到了，如何解决？此时心中一万个草泥马奔腾，怎么解决呢？</p>
-</li>
-<li><p>哈哈，此时插播一条广告，本人的独立博客已经发布了很多文章，感兴趣的可以收藏一下，【关于我】中有我的微信联系方式，欢迎交流。</p>
-</li>
-<li>回到正题，如何解决？很简单，找到这个<code>DataSourceInitializerInvoker</code>是什么时候注入到IOC容器中的，因此我们找到了<code>DataSourceAutoConfiguration</code>，继而找到了<code>DataSourceInitializationConfiguration</code>这个配置类，源码如下：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ConditionalOnClass</span>(&#123; DataSource.class, EmbeddedDatabaseType.class &#125;)</div><div class="line"><span class="meta">@EnableConfigurationProperties</span>(DataSourceProperties.class)</div><div class="line"><span class="meta">@Import</span>(&#123; DataSourcePoolMetadataProvidersConfiguration.class, DataSourceInitializationConfiguration.class &#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataSourceAutoConfiguration</span> </span>&#123;</div><div class="line">    <span class="meta">@Configuration</span></div><div class="line">	<span class="meta">@Conditional</span>(EmbeddedDatabaseCondition.class)</div><div class="line">	<span class="meta">@ConditionalOnMissingBean</span>(&#123; DataSource.class, XADataSource.class &#125;)</div><div class="line">	<span class="meta">@Import</span>(EmbeddedDataSourceConfiguration.class)</div><div class="line">	<span class="keyword">protected</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">EmbeddedDatabaseConfiguration</span> </span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Configuration</span></div><div class="line">	<span class="meta">@Conditional</span>(PooledDataSourceCondition.class)</div><div class="line">	<span class="meta">@ConditionalOnMissingBean</span>(&#123; DataSource.class, XADataSource.class &#125;)</div><div class="line">	<span class="meta">@Import</span>(&#123; DataSourceConfiguration.Hikari.class, DataSourceConfiguration.Tomcat.class,</div><div class="line">			DataSourceConfiguration.Dbcp2.class, DataSourceConfiguration.Generic.class,</div><div class="line">			DataSourceJmxConfiguration.class &#125;)</div><div class="line">	<span class="keyword">protected</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">PooledDataSourceConfiguration</span> </span>&#123;</div><div class="line"></div><div class="line">	&#125;   </div><div class="line">&#125;</div><div class="line">    </div><div class="line">    </div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@Import</span>(&#123; DataSourceInitializerInvoker.class, DataSourceInitializationConfiguration.Registrar.class &#125;)</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DataSourceInitializationConfiguration</span> </span>&#123;</div></pre></td></tr></table></figure>
-<ul>
-<li>贴了那么多代码谁看的懂？草泥马又奔腾了，可以看到源码中出现了两次<code>@ConditionalOnMissingBean({ DataSource.class, XADataSource.class })</code>，这什么鬼，不多说了，相信读过SpringBoot源码的都知道，这个配置类根本不起作用啊，那还要它干嘛，直接搞掉不就完事了。好了，分析到这里终于知道解决的方案了，搞掉<code>DataSourceAutoConfiguration</code>，怎么搞呢？一个注解搞定。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//排除配置类</span></div><div class="line"><span class="meta">@SpringBootApplication</span>(exclude = &#123;DataSourceAutoConfiguration.class&#125;)</div></pre></td></tr></table></figure>
-<ul>
-<li>问题迎刃而解了，简单不，惊喜不，不好，又奔腾了。。。。</li>
-</ul>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
+          导读
+本篇文章接上篇SpringBoot整合多数据源，你会了吗？，前面文章最后留了几个问题供大家思考，今天一一揭晓。
 
-          
+配置如何优化
+上文整合的过程中的还顺带整合Mybatis和TransactionManager，为什么还要重新定义他们呢？SpringBoot不是给我们都配置好了吗？注意，此处优化就是这两个配置去掉，直接用SpringBoot的自动配置，顿时高级了，别人一看你的代码如此简单就实现了多数据源的切换，牛叉不？
+如何去掉？SpringBoot万变不离自动配置类，且看MybatisAutoConfiguration，如下：
+
+123456@org.springframework.co
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/03/18/SpringBoot整合多数据源的巨坑/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1350,6 +1318,14 @@
     
 
     
+	<div>
+	
+<div>
+      
+</div>
+
+  
+</div>
 
     <footer class="post-footer">
       
@@ -1389,7 +1365,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不才陈某">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/header.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1413,9 +1389,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-17T01:13:29+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-17T01:13:29+08:00">
                 2019-07-17
               </time>
             
@@ -1434,7 +1410,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1451,13 +1427,56 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/17/Spring解决循环依赖/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/17/Spring解决循环依赖/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
           
 
           
+		  
+		  
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
           
 
           
@@ -1477,81 +1496,29 @@
       
         
           
-            <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
-<li>前几天发表的文章<a href="https://chenjiabing666.github.io/2020/03/12/SpringBoot%E6%95%B4%E5%90%88%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%8C%E4%BD%A0%E4%BC%9A%E4%BA%86%E5%90%97%EF%BC%9F/">SpringBoot多数据源动态切换</a>和<a href="https://chenjiabing666.github.io/2020/03/18/SpringBoot%E6%95%B4%E5%90%88%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E7%9A%84%E5%B7%A8%E5%9D%91/">SpringBoot整合多数据源的巨坑</a>中，提到了一个坑就是动态数据源添加@Primary接口就会造成循环依赖异常，如下图：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/circleex.png" alt="微信所有码猿技术专栏"></p>
-<ul>
-<li>这个就是典型的构造器依赖，详情请看上面两篇文章，这里不再详细赘述了。本篇文章将会从源码深入解析Spring是如何解决循环依赖的？为什么不能解决构造器的循环依赖？</li>
-</ul>
-<h2 id="什么是循环依赖"><a href="#什么是循环依赖" class="headerlink" title="什么是循环依赖"></a>什么是循环依赖</h2><ul>
-<li>简单的说就是A依赖B，B依赖C，C依赖A这样就构成了循环依赖。</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/15282870029143.jpg" alt="微信搜索码猿技术专栏"></p>
-<ul>
-<li>循环依赖分为构造器依赖和属性依赖，众所周知的是Spring能够解决属性的循环依赖（set注入）。下文将从源码角度分析Spring是如何解决属性的循环依赖。</li>
-</ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
-<li>如何解决循环依赖，Spring主要的思路就是依据三级缓存，在实例化A时调用doGetBean，发现A依赖的B的实例，此时调用doGetBean去实例B，实例化的B的时候发现又依赖A，如果不解决这个循环依赖的话此时的doGetBean将会无限循环下去，导致内存溢出，程序奔溃。spring引用了一个早期对象，并且把这个”早期引用”并将其注入到容器中，让B先完成实例化，此时A就获取B的引用，完成实例化。</li>
-</ul>
-<h2 id="三级缓存"><a href="#三级缓存" class="headerlink" title="三级缓存"></a>三级缓存</h2><ul>
-<li>Spring能够轻松的解决属性的循环依赖正式用到了三级缓存，在AbstractBeanFactory中有详细的注释。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**一级缓存，用于存放完全初始化好的 bean，从该缓存中取出的 bean 可以直接使用*/</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; singletonObjects = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;(<span class="number">256</span>);</div><div class="line"></div><div class="line"><span class="comment">/**三级缓存 存放 bean 工厂对象，用于解决循环依赖*/</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, ObjectFactory&lt;?&gt;&gt; singletonFactories = <span class="keyword">new</span> HashMap&lt;&gt;(<span class="number">16</span>);</div><div class="line"></div><div class="line"><span class="comment">/**二级缓存 存放原始的 bean 对象（尚未填充属性），用于解决循环依赖*/</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; earlySingletonObjects = <span class="keyword">new</span> HashMap&lt;&gt;(<span class="number">16</span>);</div></pre></td></tr></table></figure>
-<ul>
-<li>一级缓存：singletonObjects，存放完全实例化属性赋值完成的Bean，直接可以使用。</li>
-<li>二级缓存：earlySingletonObjects，存放早期Bean的引用，尚未属性装配的Bean</li>
-<li>三级缓存：singletonFactories，三级缓存，存放实例化完成的Bean工厂。</li>
-</ul>
-<h2 id="开撸"><a href="#开撸" class="headerlink" title="开撸"></a>开撸</h2><ul>
-<li>先上一张流程图看看Spring是如何解决循环依赖的</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/spring-fix-cirdependence.png" alt="微信搜索码猿技术专栏"></p>
-<ul>
-<li>上图标记蓝色的部分都是涉及到三级缓存的操作，下面我们一个一个方法解析</li>
-</ul>
-<p>【1】 getSingleton(beanName)：源码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">		<span class="comment">//查询缓存</span></div><div class="line">		Object sharedInstance = getSingleton(beanName);</div><div class="line">		<span class="comment">//缓存中存在并且args是null</span></div><div class="line">		<span class="keyword">if</span> (sharedInstance != <span class="keyword">null</span> &amp;&amp; args == <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="comment">//.......省略部分代码</span></div><div class="line">            </div><div class="line">     		<span class="comment">//直接获取Bean实例</span></div><div class="line">			bean = getObjectForBeanInstance(sharedInstance, name, beanName, <span class="keyword">null</span>);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	<span class="comment">//getSingleton源码，DefaultSingletonBeanRegistry#getSingleton</span></div><div class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">getSingleton</span><span class="params">(String beanName, <span class="keyword">boolean</span> allowEarlyReference)</span> </span>&#123;</div><div class="line">    	<span class="comment">//先从一级缓存中获取已经实例化属性赋值完成的Bean</span></div><div class="line">		Object singletonObject = <span class="keyword">this</span>.singletonObjects.get(beanName);</div><div class="line">    	<span class="comment">//一级缓存不存在，并且Bean正处于创建的过程中</span></div><div class="line">		<span class="keyword">if</span> (singletonObject == <span class="keyword">null</span> &amp;&amp; isSingletonCurrentlyInCreation(beanName)) &#123;</div><div class="line">			<span class="keyword">synchronized</span> (<span class="keyword">this</span>.singletonObjects) &#123;</div><div class="line">                <span class="comment">//从二级缓存中查询，获取Bean的早期引用，实例化完成但是未赋值完成的Bean</span></div><div class="line">				singletonObject = <span class="keyword">this</span>.earlySingletonObjects.get(beanName);</div><div class="line">                <span class="comment">//二级缓存中不存在，并且允许创建早期引用（二级缓存中添加）</span></div><div class="line">				<span class="keyword">if</span> (singletonObject == <span class="keyword">null</span> &amp;&amp; allowEarlyReference) &#123;</div><div class="line">                    <span class="comment">//从三级缓存中查询，实例化完成，属性未装配完成</span></div><div class="line">					ObjectFactory&lt;?&gt; singletonFactory = <span class="keyword">this</span>.singletonFactories.get(beanName);</div><div class="line">					<span class="keyword">if</span> (singletonFactory != <span class="keyword">null</span>) &#123;</div><div class="line">						singletonObject = singletonFactory.getObject();</div><div class="line">                        	<span class="comment">//二级缓存中添加</span></div><div class="line">						<span class="keyword">this</span>.earlySingletonObjects.put(beanName, singletonObject);</div><div class="line">                        <span class="comment">//从三级缓存中移除</span></div><div class="line">						<span class="keyword">this</span>.singletonFactories.remove(beanName);</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> singletonObject;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>从源码可以得知，doGetBean最初是查询缓存，一二三级缓存全部查询，如果三级缓存存在则将Bean早期引用存放在二级缓存中并移除三级缓存。（升级为二级缓存）</li>
-</ul>
-<p>【2】addSingletonFactory：源码如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">		<span class="comment">//中间省略部分代码。。。。。</span></div><div class="line">		<span class="comment">//创建Bean的源码，在AbstractAutowireCapableBeanFactory#doCreateBean方法中</span></div><div class="line">		<span class="keyword">if</span> (instanceWrapper == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="comment">//实例化Bean</span></div><div class="line">			instanceWrapper = createBeanInstance(beanName, mbd, args);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//允许提前暴露</span></div><div class="line">		<span class="keyword">if</span> (earlySingletonExposure) &#123;</div><div class="line">            <span class="comment">//添加到三级缓存中</span></div><div class="line">			addSingletonFactory(beanName, () -&gt; getEarlyBeanReference(beanName, mbd, bean));</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//属性装配，属性赋值的时候，如果有发现属性引用了另外一个Bean，则调用getBean方法</span></div><div class="line">			populateBean(beanName, mbd, instanceWrapper);</div><div class="line">            <span class="comment">//初始化Bean，调用init-method，afterproperties方法等操作</span></div><div class="line">			exposedObject = initializeBean(beanName, exposedObject, mbd);</div><div class="line">		&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line"><span class="comment">//添加到三级缓存的源码，在DefaultSingletonBeanRegistry#addSingletonFactory</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">addSingletonFactory</span><span class="params">(String beanName, ObjectFactory&lt;?&gt; singletonFactory)</span> </span>&#123;</div><div class="line">		<span class="keyword">synchronized</span> (<span class="keyword">this</span>.singletonObjects) &#123;</div><div class="line">            <span class="comment">//一级缓存中不存在</span></div><div class="line">			<span class="keyword">if</span> (!<span class="keyword">this</span>.singletonObjects.containsKey(beanName)) &#123;</div><div class="line">                <span class="comment">//放入三级缓存</span></div><div class="line">				<span class="keyword">this</span>.singletonFactories.put(beanName, singletonFactory);</div><div class="line">                <span class="comment">//从二级缓存中移除，</span></div><div class="line">				<span class="keyword">this</span>.earlySingletonObjects.remove(beanName);</div><div class="line">				<span class="keyword">this</span>.registeredSingletons.add(beanName);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>从源码得知，Bean在实例化完成之后会直接将未装配的Bean工厂存放在<strong>三级缓存</strong>中，并且<strong>移除二级缓存</strong></li>
-</ul>
-<p>【3】addSingleton：源码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取单例对象的方法，DefaultSingletonBeanRegistry#getSingleton</span></div><div class="line"><span class="comment">//调用createBean实例化Bean</span></div><div class="line">singletonObject = singletonFactory.getObject();</div><div class="line"></div><div class="line"><span class="comment">//。。。。中间省略部分代码	</span></div><div class="line"></div><div class="line"><span class="comment">//doCreateBean之后才调用，实例化，属性赋值完成的Bean装入一级缓存，可以直接使用的Bean</span></div><div class="line">addSingleton(beanName, singletonObject);</div><div class="line"></div><div class="line"><span class="comment">//addSingleton源码，在DefaultSingletonBeanRegistry#addSingleton方法中</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">addSingleton</span><span class="params">(String beanName, Object singletonObject)</span> </span>&#123;</div><div class="line">		<span class="keyword">synchronized</span> (<span class="keyword">this</span>.singletonObjects) &#123;</div><div class="line">            <span class="comment">//一级缓存中添加</span></div><div class="line">			<span class="keyword">this</span>.singletonObjects.put(beanName, singletonObject);</div><div class="line">            <span class="comment">//移除三级缓存</span></div><div class="line">			<span class="keyword">this</span>.singletonFactories.remove(beanName);</div><div class="line">            <span class="comment">//移除二级缓存</span></div><div class="line">			<span class="keyword">this</span>.earlySingletonObjects.remove(beanName);</div><div class="line">			<span class="keyword">this</span>.registeredSingletons.add(beanName);</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>总之一句话，Bean添加到一级缓存，移除二三级缓存。</li>
-</ul>
-<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p> 【1】为什么Spring不能解决构造器的循环依赖？</p>
-<ul>
-<li>从流程图应该不难看出来，在Bean调用构造器实例化之前，一二三级缓存并没有Bean的任何相关信息，在实例化之后才放入三级缓存中，因此当getBean的时候缓存并没有命中，这样就抛出了循环依赖的异常了。</li>
-</ul>
-<p>【2】为什么多实例Bean不能解决循环依赖？</p>
-<ul>
-<li>多实例Bean是每次创建都会调用doGetBean方法，根本没有使用一二三级缓存，肯定不能解决循环依赖。</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>根据以上的分析，大概清楚了Spring是如何解决循环依赖的。假设A依赖B，B依赖A（注意：这里是set属性依赖）分以下步骤执行：</li>
-</ul>
-<ol>
-<li>A依次执行<strong>doGetBean</strong>、查询缓存、<strong>createBean</strong>创建实例，实例化完成放入三级缓存singletonFactories中，接着执行<strong>populateBean</strong>方法装配属性，但是发现有一个属性是B的对象。</li>
-<li>因此再次调用doGetBean方法创建B的实例，依次执行doGetBean、查询缓存、createBean创建实例，实例化完成之后放入三级缓存singletonFactories中，执行populateBean装配属性，但是此时发现有一个属性是A对象。</li>
-<li>因此再次调用doGetBean创建A的实例，但是执行到getSingleton查询缓存的时候，从三级缓存中查询到了A的实例(早期引用，未完成属性装配)，此时直接返回A，不用执行后续的流程创建A了，那么B就完成了属性装配，此时是一个完整的对象放入到一级缓存singletonObjects中。</li>
-<li>B创建完成了，则A自然完成了属性装配，也创建完成放入了一级缓存singletonObjects中。</li>
-</ol>
-<ul>
-<li>Spring三级缓存的应用完美的解决了循环依赖的问题，下面是循环依赖的解决流程图。</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/cirdependece.PNG" alt="微信搜索码猿技术专栏"></p>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
+          导读
+前几天发表的文章SpringBoot多数据源动态切换和SpringBoot整合多数据源的巨坑中，提到了一个坑就是动态数据源添加@Primary接口就会造成循环依赖异常，如下图：
 
-          
+
+
+这个就是典型的构造器依赖，详情请看上面两篇文章，这里不再详细赘述了。本篇文章将会从源码深入解析Spring是如何解决循环依赖的？为什么不能解决构造器的循环依赖？
+
+什么是循环依赖
+简单的说就是A依赖B，B依赖C，C依赖A这样就构成了循环依赖。
+
+
+
+循环依赖分为构造器依赖和属性依赖，众所周知的是Spring能够解决属性的循环依赖（set注入）。下文将从源码角度分析Spring是如何解决属性的循环依赖。
+
+思
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/07/17/Spring解决循环依赖/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1564,6 +1531,14 @@
     
 
     
+	<div>
+	
+<div>
+      
+</div>
+
+  
+</div>
 
     <footer class="post-footer">
       
@@ -1603,7 +1578,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不才陈某">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/header.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1627,9 +1602,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-16T13:56:28+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T13:56:28+08:00">
                 2018-04-16
               </time>
             
@@ -1648,7 +1623,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1665,13 +1640,56 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/16/设计模式之适配器模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/04/16/设计模式之适配器模式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
           
 
           
+		  
+		  
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
           
 
           
@@ -1691,80 +1709,22 @@
       
         
           
-            <h1 id="结构型模式之适配器模式"><a href="#结构型模式之适配器模式" class="headerlink" title="结构型模式之适配器模式"></a>结构型模式之适配器模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
-<li>适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/adapeter1.png" alt="适配器模式"></p>
-<ul>
-<li>Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一个抽象类或接口，也可以是具体类。</li>
-<li>Adapter（适配器类）：适配器可以调用另一个接口，作为一个转换器，对Adaptee和Target进行适配，适配器类是适配器模式的核心，在对象适配器中，它通过继承Target并关联一个Adaptee对象使二者产生联系。</li>
-<li><p>Adaptee（适配者类）：适配者即被适配的角色，它定义了一个已经存在的接口，这个接口需要适配，适配者类一般是一个具体类，包含了客户希望使用的业务方法，在某些情况下可能没有适配者类的源代码。</p>
-</li>
-<li><p>根据对象适配器模式结构图，在对象适配器中，客户端需要调用request()方法，而适配者类Adaptee没有该方法，但是它所提供的specificRequest()方法却是客户端所需要的。为了使客户端能够使用适配者类，需要提供一个包装类Adapter，即适配器类。这个包装类包装了一个适配者的实例，从而将客户端与适配者衔接起来，在适配器的request()方法中调用适配者的specificRequest()方法。因为适配器类与适配者类是关联关系（也可称之为委派关系），所以这种适配器模式称为对象适配器模式</p>
-</li>
-</ul>
-<h2 id="类适配器"><a href="#类适配器" class="headerlink" title="类适配器"></a>类适配器</h2><ul>
-<li><p>类适配器是继承适配者类实现的，其中对象适配器是使用组合的方式实现的，就是适配者类作为适配器类的成员变量而实现的</p>
-</li>
-<li><p>一般目标抽象类是一个接口，适配者类一般是一个具体的实现类，有时候甚至不知道其中的源代码，因此需要适配器类将适配者类转换成适合用户的目标类</p>
-</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><ul>
-<li>我们知道笔记本充电的电压是5v，但是我们的高压电是220v，那么我们此时就需要一个适配器将这个220v电压转换成为5v的电压给笔记本充电<ul>
-<li>这里的220v电压就是适配者类，即是需要转换的类</li>
-<li>5v电压是目标抽象类，由适配器将220v转换而来</li>
-<li>这里的适配器类的主要功能就是将220v电压转换成5v电压</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>目标接口(5v电压)</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 接口为5v电压的接口  ，  这个目标抽象类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Power5</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">getPower5</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>220v电压的类（这里是一个具体的类，适配者类）</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Power220</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getPower220</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"正在输出220v电压....."</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>适配器类（将220v电压转换成5v）</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 适配器类，主要的目的就是将220v电压转换为5v的电压供笔记本充电</div><div class="line"> * 其中Power5是目标抽象接口，是最终需要的接口，Power220是一个适配者类，是已经存在的，只需要适配器转换即可</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AdapterPower5</span> <span class="keyword">extends</span> <span class="title">Power220</span> <span class="keyword">implements</span> <span class="title">Power5</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 重载Power5中的方法，获取需要的5v电压</div><div class="line">	 * 过程： 先获取220v电压，然后进行转换即可</div><div class="line">	 * 	 */</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getPower5</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>.getPower220();   <span class="comment">//首先获取220v电压</span></div><div class="line">		<span class="keyword">this</span>.transform();   <span class="comment">//将220v电压转换成5v的电压</span></div><div class="line">		System.out.println(<span class="string">"获取5v电压......."</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 将220v电压转换成5v电压的方法</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transform</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"现在将220v电压转换成5v电压......."</span>);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>笔记本充电的类</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 笔记本类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoteBook</span> </span>&#123;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 笔记本充电的方法</div><div class="line">	 * <span class="doctag">@param</span> power5   电压为5v的对象</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">PowerOn</span><span class="params">(Power5 power5)</span></span>&#123;</div><div class="line">		power5.getPower5();   <span class="comment">//获取5v电压</span></div><div class="line">		System.out.println(<span class="string">"笔记本获取了5v的电压，正在开始充电......"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>测试类</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		NoteBook noteBook=<span class="keyword">new</span> NoteBook();   <span class="comment">//创建笔记本的类</span></div><div class="line">		noteBook.PowerOn(<span class="keyword">new</span> AdapterPower5());   <span class="comment">//调用笔记本充电的类</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="对象适配器"><a href="#对象适配器" class="headerlink" title="对象适配器"></a>对象适配器</h2><ul>
-<li>对象适配器是将适配者类作为适配器类的成员变量并不是继承，这个是一种组合方式</li>
-<li>这种方式使用的更加普遍</li>
-</ul>
-<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><ul>
-<li><p>这里的实例还是前面的例子</p>
-</li>
-<li><p>这里唯一不同的就是适配器类，不是继承适配者类，而是使用组合的方式</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 适配器类，这个是对象适配器，适配者类是作为成员变量存在，是组合关系</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">implements</span> <span class="title">Power5</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> Power220 power;   <span class="comment">//220v电压类的对象，作为成员变量</span></div><div class="line"></div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 构造方法，主要是为类初始化Power220v的对象</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Adapter</span><span class="params">(Power220 power)</span></span>&#123;</div><div class="line">		<span class="keyword">this</span>.power=power;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getPower5</span><span class="params">()</span> </span>&#123;</div><div class="line">		power.getPower220();   <span class="comment">//获取220v电压</span></div><div class="line">		transform();   <span class="comment">//转换电压</span></div><div class="line">		System.out.println(<span class="string">"正在输出5v电压......."</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transform</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"将220v电压转换成5v的电压......"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li><p>类适配器是使用类继承的方式，适配器类继承适配者类(不提倡使用)</p>
-</li>
-<li><p>对象适配器使用的是一种组合的方式，将适配者类作为其中的成员变量，那么也是可以实现（提倡使用）</p>
-</li>
-</ul>
-<h2 id="麻烦支持下博主的广告事业，点击下即可"><a href="#麻烦支持下博主的广告事业，点击下即可" class="headerlink" title="麻烦支持下博主的广告事业，点击下即可"></a>麻烦支持下博主的广告事业，点击下即可</h2><p><a href="http://click.linktech.cn/?m=huaweivmall&amp;a=A100234624&amp;l=02300&amp;l_cd1=0&amp;l_cd2=0&amp;u_id=chenjiabing" target="_blank" rel="external"><img src="http://banner.linktech.cn/MC/huaweivmallwap/20171206/450x220.jpg" alt="alt text" title="title"></a></p>
-<p><a href="http://click.linktech.cn/?m=huaweivmall&a=A100234624&l=02300&l_cd1=0&l_cd2=0&u_id=chenjiabing" target="_blank"><img src="http://banner.linktech.cn/MC/huaweivmallwap/20171206/450x220.jpg" width="450" height="220" border="0"></a><img src="http://track.linktech.cn/?m=huaweivmall&a=A100234624&l=02300&l_cd1=0&l_cd2=0" width="1" height="1" border="0" style="display:none"></p>
-<p><a href="http://click.linktech.cn/?m=huaweivmall&a=A100234624&l=02303&l_cd1=0&l_cd2=0&u_id=chenjiabing" target="_blank"><img src="http://banner.linktech.cn/MC/huaweivmall/20171225/640x240.jpg" width="450" height="240" border="0"></a><img src="http://track.linktech.cn/?m=huaweivmall&a=A100234624&l=02303&l_cd1=0&l_cd2=0" width="1" height="1" border="0" style="display:none"></p>
-<p><a href="http://click.linktech.cn/?m=huaweivmall&a=A100234624&l=02302&l_cd1=0&l_cd2=0&u_id=chenjiabing" target="_blank"><img src="http://banner.linktech.cn/MC/huaweivmallwap/20171219/450x220.jpg" width="450" height="220" border="0"></a><img src="http://track.linktech.cn/?m=huaweivmall&a=A100234624&l=02302&l_cd1=0&l_cd2=0" width="1" height="1" border="0" style="display:none"></p>
-<p><a href="http://click.linktech.cn/?m=huaweivmall&a=A100234624&l=02300&l_cd1=0&l_cd2=0&u_id=chenjiabing" target="_blank"><img src="http://banner.linktech.cn/MC/huaweivmallwap/20171206/450x220.jpg" width="450" height="220" border="0"></a><img src="http://track.linktech.cn/?m=huaweivmall&a=A100234624&l=02300&l_cd1=0&l_cd2=0" width="1" height="1" border="0" style="display:none"></p>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
+          结构型模式之适配器模式定义
+适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。
 
-          
+
+
+Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一个抽象类或接口，也可以是具体类。
+Adapter（适配器类）：适配器可以调用另一个接口，作为一个转换器，对Adaptee和Target进行适配，适配器类是适配器模式的核心，在对象适配器中，它通过继承Target并关联一个Adaptee对象使二者产生联系。
+Adaptee（适配者类）：适配者即被适配的角色，它定义了一个已
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/16/设计模式之适配器模式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1777,6 +1737,14 @@
     
 
     
+	<div>
+	
+<div>
+      
+</div>
+
+  
+</div>
 
     <footer class="post-footer">
       
@@ -1816,7 +1784,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不才陈某">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/header.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1840,9 +1808,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-16T13:55:29+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T13:55:29+08:00">
                 2018-04-16
               </time>
             
@@ -1861,7 +1829,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1878,13 +1846,56 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/16/设计模式之桥接模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/04/16/设计模式之桥接模式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
           
 
           
+		  
+		  
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  998
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
           
 
           
@@ -1904,40 +1915,20 @@
       
         
           
-            <h1 id="结构型模式之桥接模式"><a href="#结构型模式之桥接模式" class="headerlink" title="结构型模式之桥接模式"></a>结构型模式之桥接模式</h1><ul>
-<li><p>桥接模式是一种很实用的结构型设计模式，如果软件系统中某个类存在两个独立变化的维度，通过该模式可以将这两个维度分离出来，使两者可以独立扩展，让系统更加符合“单一职责原则”。与多层继承方案不同，它将两个独立变化的维度设计为两个独立的继承等级结构，并且在抽象层建立一个抽象关联，该关联关系类似一条连接两个独立继承结构的桥，故名桥接模式。</p>
-</li>
-<li><p>桥接模式用一种巧妙的方式处理多层继承存在的问题，用抽象关联取代了传统的多层继承，将类之间的静态继承关系转换为动态的对象组合关系，使得系统更加灵活，并易于扩展，同时有效控制了系统中类的个数。桥接定义如下：</p>
-</li>
-<li><p>桥接模式(Bridge Pattern)：将抽象部分与它的实现部分分离，使它们都可以独立地变化。它是一种对象结构型模式，又称为柄体(Handle and Body)模式或接口(Interface)模式。</p>
-</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/bridge1.png" alt="桥接模式"></p>
-<ul>
-<li><p>在桥接模式结构图中包含如下几个角色：</p>
-<ul>
-<li>Abstraction（抽象类）：用于定义抽象类的接口，它一般是抽象类而不是接口，其中定义了一个Implementor（实现类接口）类型的对象并可以维护该对象，它与Implementor之间具有关联关系，它既可以包含抽象业务方法，也可以包含具体业务方法。</li>
-<li>RefinedAbstraction（扩充抽象类）：扩充由Abstraction定义的接口，通常情况下它不再是抽象类而是具体类，它实现了在Abstraction中声明的抽象业务方法，在RefinedAbstraction中可以调用在Implementor中定义的业务方法。</li>
-<li>Implementor（实现类接口）：定义实现类的接口，这个接口不一定要与Abstraction的接口完全一致，事实上这两个接口可以完全不同，一般而言，Implementor接口仅提供基本操作，而Abstraction定义的接口可能会做更多更复杂的操作。Implementor接口对这些基本操作进行了声明，而具体实现交给其子类。通过关联关系，在Abstraction中不仅拥有自己的方法，还可以调用到Implementor中定义的方法，使用关联关系来替代继承关系。</li>
-<li>ConcreteImplementor（具体实现类）：具体实现Implementor接口，在不同的ConcreteImplementor中提供基本操作的不同实现，在程序运行时，ConcreteImplementor对象将替换其父类对象，提供给抽象类具体的业务操作方法。</li>
-</ul>
-</li>
-</ul>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p><img src="http://ono60m7tl.bkt.clouddn.com/bridge2.png" alt="实例"></p>
-<ul>
-<li><p>从上面的这个实例我们可以看出，如果使用多层继承的话，那么我们可以定义是三个抽象类（台式机，笔记本，平板电脑），在这个三个抽象类的下面每个都有三个不同品牌的具体实现类，那么总共要有3x3=9个具体的实现类。不仅仅是类的数量多，在扩展性能上也是成倍的增加，如果想要添加一个品牌，那么需要添加三个类，这个是极其浪费的。</p>
-</li>
-<li><p>针对上面的缺点，我们可以使用桥接模式，将电脑分类，品牌分类分成两个维度，如下图：<br><img src="http://ono60m7tl.bkt.clouddn.com/bridge3.png" alt=""></p>
-</li>
-<li><p>其中Computer是一个抽象类，不是接口，其中Brand（品牌）是其中的成员变量，我们就完成了一个电脑具有不同品牌，那么如果我们想添加一个品牌，就只是添加一个具体的实现类即可，就不需要添加三个了。</p>
-</li>
-</ul>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
+          结构型模式之桥接模式
+桥接模式是一种很实用的结构型设计模式，如果软件系统中某个类存在两个独立变化的维度，通过该模式可以将这两个维度分离出来，使两者可以独立扩展，让系统更加符合“单一职责原则”。与多层继承方案不同，它将两个独立变化的维度设计为两个独立的继承等级结构，并且在抽象层建立一个抽象关联，该关联关系类似一条连接两个独立继承结构的桥，故名桥接模式。
 
-          
+桥接模式用一种巧妙的方式处理多层继承存在的问题，用抽象关联取代了传统的多层继承，将类之间的静态继承关系转换为动态的对象组合关系，使得系统更加灵活，并易于扩展，同时有效控制了系统中类的个数。桥接定义如下：
+
+桥接模式(Bridge Pattern
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/16/设计模式之桥接模式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1950,6 +1941,14 @@
     
 
     
+	<div>
+	
+<div>
+      
+</div>
+
+  
+</div>
 
     <footer class="post-footer">
       
@@ -1989,7 +1988,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不才陈某">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/header.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2013,9 +2012,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-16T13:53:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T13:53:04+08:00">
                 2018-04-16
               </time>
             
@@ -2034,7 +2033,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -2051,13 +2050,56 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/16/设计模式之原型模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/04/16/设计模式之原型模式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
           
 
           
+		  
+		  
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
           
 
           
@@ -2077,103 +2119,25 @@
       
         
           
-            <h1 id="创建型模式之原型模式"><a href="#创建型模式之原型模式" class="headerlink" title="创建型模式之原型模式"></a>创建型模式之原型模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
-<li><p>原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。</p>
-<p>   这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要    在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数据库，以此来减少数据库调用。</p>
-</li>
-<li><p>原型模式可以分为浅克隆和深度克隆</p>
-</li>
-</ul>
-<h2 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h2><p><img src="http://ono60m7tl.bkt.clouddn.com/property1.png" alt="角色"></p>
-<h2 id="java语言中实现克隆的两种方式"><a href="#java语言中实现克隆的两种方式" class="headerlink" title="java语言中实现克隆的两种方式"></a>java语言中实现克隆的两种方式</h2><ol>
-<li><p>直接创建一个对象，然后设置成员变量的值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Obj obj=<span class="keyword">new</span> Obj(); <span class="comment">//创建一个新的对象</span></div><div class="line">obj.setName(<span class="keyword">this</span>.name);   <span class="comment">//设置其中变量的值</span></div><div class="line">obj.setAge(<span class="keyword">this</span>.age);</div></pre></td></tr></table></figure>
-</li>
-<li><p>实现cloneable接口</p>
-</li>
-</ol>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/property2.png" alt=""></p>
-<h2 id="浅克隆"><a href="#浅克隆" class="headerlink" title="浅克隆"></a>浅克隆</h2><ul>
-<li><p>如果克隆的对象的成员变量是值类型的，比如int，double那么使用浅克隆就可以实现克隆完整的原型对象，但是如果其中的成员变量有引用类型的，那么这个引用类型的克隆过去的其实是地址，克隆对象的这个引用类型变量改变了，那么原来变量的值也是会改变的。</p>
-</li>
-<li><p>简单的说，浅克隆只能复制值类型的，对于引用类型的数据只能复制地址</p>
-</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/property3.png" alt="浅克隆"></p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><ul>
-<li>一个公司出版周报，那么这个周报的格式一般是相同的，只是将其中的内容稍作修改即可。但是一开始没有这个原型，员工每周都需要重新手写这个周报，现在有了这个周报的原型，只需要在这个clone这个原型，然后在其基础上修改即可。</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/property4.png" alt="周报"></p>
-<ul>
-<li>其中的Cloneable就是抽象原型类</li>
-</ul>
-<ul>
-<li>附件类（这个是一个引用类型的对象，验证浅克隆只是复制其中的地址，如果两个对象中的任何一个改变了这个变量的值，那么另外一个也会随之改变）</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 附件类，这个是周报的附件</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Attachment</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name; <span class="comment">// 名称</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Attachment</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>周报的类（其中实现了Cloneable接口）<ul>
-<li>其中的clone()方法返回的就是一个克隆的对象，因此我们调用这个方法克隆一个新的对象</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 这个是周报类，这个类是实现接口Prototype这个接口的</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeeklyLog</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name; <span class="comment">// 姓名</span></div><div class="line">	<span class="keyword">private</span> String date; <span class="comment">// 日期</span></div><div class="line">	<span class="keyword">private</span> String content; <span class="comment">// 内容</span></div><div class="line">	<span class="keyword">private</span> Attachment attachment;  <span class="comment">//附件，是一个引用对象，这个只能实现浅克隆</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">WeeklyLog</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 构造方法</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">WeeklyLog</span><span class="params">(String name, String date, String content)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">		<span class="keyword">this</span>.date = date;</div><div class="line">		<span class="keyword">this</span>.content = content;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 提供一个clone方法，返回的是一个clone对象</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> WeeklyLog <span class="title">clone</span><span class="params">()</span> </span>&#123;</div><div class="line">		Object object = <span class="keyword">null</span>; <span class="comment">// 创建一个Object对象</span></div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			object = <span class="keyword">super</span>.clone(); <span class="comment">// 直接调用clone方法，复制对象</span></div><div class="line">			<span class="keyword">return</span> (WeeklyLog) object; <span class="comment">// 返回即可</span></div><div class="line">		&#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</div><div class="line">			System.out.println(<span class="string">"这个对象不能复制....."</span>);</div><div class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>测试类<ul>
-<li>测试浅克隆的值类型是是否完成复制了</li>
-<li>测试引用类型的值能否完成克隆，还是只是复制了一个引用地址</li>
-<li>从结果来看，对象是完成复制了，因为判断两个对象的地址是不一样的，但是其中的引用类型的成员变量没有完成复制，只是复制了一个地址</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</div><div class="line"></div><div class="line">		WeeklyLog p1 = <span class="keyword">new</span> WeeklyLog(<span class="string">"陈加兵"</span>, <span class="string">"第一周"</span>, <span class="string">"获得劳动模范的称号..."</span>); <span class="comment">// 创建一个对象</span></div><div class="line">		Attachment attachment = <span class="keyword">new</span> Attachment(<span class="string">"消息"</span>);</div><div class="line">		p1.setAttachment(attachment); <span class="comment">// 添加附件</span></div><div class="line">		WeeklyLog p2 = p1.clone();</div><div class="line">		System.out.println(p1 == p2); <span class="comment">// 判断是否正确</span></div><div class="line">		p2.setName(<span class="string">"Jack"</span>); <span class="comment">// 修改P2对象的内容</span></div><div class="line">		p2.setDate(<span class="string">"第二周"</span>);</div><div class="line">		p2.setContent(<span class="string">"工作认真....."</span>);</div><div class="line">		System.out.println(p2.getName());</div><div class="line">		<span class="comment">// 返回true，可以知道这两个附件的地址是一样的</span></div><div class="line">		System.out.println(p1.getAttachment() == p2.getAttachment());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>浅克隆对于值类型的数据可以复制成功，但是对于引用卡类型的数据只能复制一个地址，如果一个对象中的引用类型的变量的值改变了，那么另外一个也会随之改变</li>
-</ul>
-<h2 id="深度克隆"><a href="#深度克隆" class="headerlink" title="深度克隆"></a>深度克隆</h2><ul>
-<li>浅克隆只能完成复制值类型，深度克隆可以完成复制引用类型和值类型</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/property5.png" alt="深度克隆"></p>
-<h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><ol>
-<li>引用类型的变量类实现序列化(实现Serializabl接口）</li>
-<li>需要克隆的类实现序列化(实现Serializable接口)</li>
-</ol>
-<h3 id="为什么实现序列化"><a href="#为什么实现序列化" class="headerlink" title="为什么实现序列化"></a>为什么实现序列化</h3><ul>
-<li>因为深度克隆的实现的原理是使用输入和输出流，如果想要将一个对象使用输入和输出流克隆，必须序列化。</li>
-</ul>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
-<li><p>附件类(引用类型的成员变量，实现序列化)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 附件类，这个是周报的附件</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Attachment</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">799959163401886355L</span>;</div><div class="line">	<span class="keyword">private</span> String name; <span class="comment">// 名称</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Attachment</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>周报类（需要克隆的类，因为其中有引用类型的成员变量，因此需要实现序列化)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 这个是周报类，这个类是实现接口Prototype这个接口的</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeeklyLog</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">8782492113927035907L</span>;</div><div class="line">	<span class="keyword">private</span> String name; <span class="comment">// 姓名</span></div><div class="line">	<span class="keyword">private</span> String date; <span class="comment">// 日期</span></div><div class="line">	<span class="keyword">private</span> String content; <span class="comment">// 内容</span></div><div class="line">	<span class="keyword">private</span> Attachment attachment; <span class="comment">// 附件，是一个引用对象，这个只能实现浅克隆</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">WeeklyLog</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 构造方法</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">WeeklyLog</span><span class="params">(String name, String date, String content)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">		<span class="keyword">this</span>.date = date;</div><div class="line">		<span class="keyword">this</span>.content = content;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 提供一个clone方法，返回的是一个clone对象</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> WeeklyLog <span class="title">clone</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">// 将对象写入到对象流中</span></div><div class="line">		ByteArrayOutputStream arrayOutputStream = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			ObjectOutputStream objectOutputStream = <span class="keyword">new</span> ObjectOutputStream(</div><div class="line">					arrayOutputStream); <span class="comment">// 创建对象输出流</span></div><div class="line">			objectOutputStream.writeObject(<span class="keyword">this</span>); <span class="comment">// 将这个类的对象写入到输出流中</span></div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">// 将对象从流中读出</span></div><div class="line">		ByteArrayInputStream arrayInputStream = <span class="keyword">new</span> ByteArrayInputStream(</div><div class="line">				arrayOutputStream.toByteArray());</div><div class="line">		WeeklyLog weeklyLog;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			ObjectInputStream objectInputStream = <span class="keyword">new</span> ObjectInputStream(</div><div class="line">					arrayInputStream);<span class="comment">// 新建对象输入流</span></div><div class="line">			weeklyLog = (WeeklyLog) objectInputStream.readObject(); <span class="comment">// 读取对象从流中</span></div><div class="line">			<span class="keyword">return</span> weeklyLog;</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException | ClassNotFoundException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>测试类</p>
-<ul>
-<li>从中可以看出其中的附件地址是不同的，如果一个对象的附件变量改变了，那么另外一个将保持不变，因此实现了深度克隆，是两个完全不同的对象</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</div><div class="line"></div><div class="line">		WeeklyLog p1 = <span class="keyword">new</span> WeeklyLog(<span class="string">"陈加兵"</span>, <span class="string">"第一周"</span>, <span class="string">"获得劳动模范的称号..."</span>); <span class="comment">// 创建一个对象</span></div><div class="line">		Attachment attachment = <span class="keyword">new</span> Attachment(<span class="string">"消息"</span>);</div><div class="line">		p1.setAttachment(attachment); <span class="comment">// 添加附件</span></div><div class="line">		WeeklyLog p2 = p1.clone();</div><div class="line">		System.out.println(p1 == p2); <span class="comment">// 判断是否正确</span></div><div class="line">		p2.setName(<span class="string">"Jack"</span>); <span class="comment">// 修改P2对象的内容</span></div><div class="line">		p2.setDate(<span class="string">"第二周"</span>);</div><div class="line">		p2.setContent(<span class="string">"工作认真....."</span>);</div><div class="line">		System.out.println(p2.getName());</div><div class="line">		<span class="comment">//返回false，可以看出这个是不同的地址，因此完成了深克隆</span></div><div class="line">		System.out.println(p1.getAttachment() == p2.getAttachment());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>因为深度克隆使用的是将对象写入输入和输出流中的，因此需要实现序列化，否则将不能完成</li>
-</ul>
-<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h2><ol>
-<li><p>浅克隆只能克隆对象中的值类型，不能克隆有引用类型成员变量的对象</p>
-</li>
-<li><p>使用深度克隆：</p>
-<ul>
-<li>引用类型的成员变量的类必须实现序列化</li>
-<li>需要克隆的类必须实现序列化</li>
-</ul>
-</li>
-</ol>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
+          创建型模式之原型模式定义
+原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。
+   这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要    在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数据库，以此来减少数据库调用。
 
-          
+原型模式可以分为浅克隆和深度克隆
+
+
+角色
+java语言中实现克隆的两种方式
+直接创建一个对象，然后设置成员变量的值
+123Obj obj=new 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/16/设计模式之原型模式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2186,6 +2150,14 @@
     
 
     
+	<div>
+	
+<div>
+      
+</div>
+
+  
+</div>
 
     <footer class="post-footer">
       
@@ -2225,7 +2197,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不才陈某">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/header.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2249,9 +2221,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-16T13:52:36+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T13:52:36+08:00">
                 2018-04-16
               </time>
             
@@ -2270,7 +2242,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -2287,13 +2259,56 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/16/设计模式之建造模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/04/16/设计模式之建造模式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
           
 
           
+		  
+		  
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
           
 
           
@@ -2313,66 +2328,26 @@
       
         
           
-            <h1 id="创建型模式之建造者模式"><a href="#创建型模式之建造者模式" class="headerlink" title="创建型模式之建造者模式"></a>创建型模式之建造者模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
-<li><p>建造者模式(Builder Pattern)：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。建造者模式是一种对象创建型模式。</p>
-</li>
-<li><p>简单说，建造者的功能就是先构造复杂对象的每一个部件，指挥者的功能就是将这些部件以一定的步骤组装起来，形成一个具有一定功能的产品或者对象。当然这个步骤是透明的对于客户端。</p>
-</li>
-<li><p>建造者模式一步一步创建一个复杂的对象，它允许用户只通过指定复杂对象的类型和内容就可以构建它们，用户不需要知道内部的具体构建细节。建造者模式结构如图8-2所示：</p>
-</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/BuilderPattern.png" alt="建造者模式"></p>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/builder2.png" alt=""></p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><ul>
-<li><p>下面是一个组装汽车的例子，其中汽车由发动机和轮胎组成，那么我们只需要组装轮胎，发动机即可组装完成一个汽车。</p>
-</li>
-<li><p>汽车包括轮胎，引擎，我们通常在组装汽车的时候一般都是一步一步的组装，比如先装引擎，后装轮胎。使用建造者模式就是将建造汽车的这个过程抽离成几个不同的过程，比如建造引擎和建造轮胎就是两个过程。</p>
-</li>
-<li><p>轮胎的JavaBean</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 轮胎</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tyre</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Tyre</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>引擎的JavaBean</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 引擎</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Engine</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Engine</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>汽车的JavaBean(汽车包含轮胎和引擎，因此使用聚合的关系)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 汽车的类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> Tyre tyre; <span class="comment">// 轮胎</span></div><div class="line">	<span class="keyword">private</span> Engine engine;  <span class="comment">// 引擎</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> Tyre <span class="title">getTyre</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> tyre;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTyre</span><span class="params">(Tyre tyre)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.tyre = tyre;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> Engine <span class="title">getEngine</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> engine;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEngine</span><span class="params">(Engine engine)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.engine = engine;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>抽象建造者(实际上是一个接口，其中定义了建造轮胎和引擎的方法)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Builder</span> </span>&#123;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 构造引擎的方法</div><div class="line">	 */</div><div class="line">	<span class="function">Engine <span class="title">buliderEngine</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 构造轮胎的方法</div><div class="line">	 */</div><div class="line">	<span class="function">Tyre <span class="title">builderTyre</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>具体的建造者(实现了抽象建造者，实现建造轮胎和引擎的详细过程)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 具体的建造者，主要是构造汽车的部件</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BuilderCar</span> <span class="keyword">implements</span> <span class="title">Builder</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Engine <span class="title">buliderEngine</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"构造汽车发动机"</span>);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Engine(<span class="string">"傻逼牌发动机"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Tyre <span class="title">builderTyre</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"构造汽车轮胎"</span>);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Tyre(<span class="string">"傻逼牌轮胎"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>抽象指挥者(定义了一个构造汽车的方法)，指挥者的作用就是按照一定步骤将构造者建造的部件组装起来</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 	指挥者的接口，用来按照顺序组装汽车</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Director</span> </span>&#123;</div><div class="line">	<span class="function">Car <span class="title">CreateCar</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>具体的指挥者(实现了指挥者接口)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 指挥者的实现类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DirectorCar</span> <span class="keyword">implements</span> <span class="title">Director</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> Builder builder; <span class="comment">// 建造者的对象</span></div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 构造方法，主要用来初始化建造者对象</div><div class="line">	 *</div><div class="line">	 * <span class="doctag">@param</span> builder  Builder的对象</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">DirectorCar</span><span class="params">(Builder builder)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.builder = builder;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Car <span class="title">CreateCar</span><span class="params">()</span> </span>&#123;</div><div class="line">		Car car = <span class="keyword">new</span> Car(); <span class="comment">// 创建汽车对象</span></div><div class="line">		Engine engine = builder.buliderEngine(); <span class="comment">// 构建发动机</span></div><div class="line">		Tyre tyre = builder.builderTyre(); <span class="comment">// 构造轮胎</span></div><div class="line">		car.setEngine(engine); <span class="comment">// 设置属性</span></div><div class="line">		car.setTyre(tyre); <span class="comment">// 设置属性</span></div><div class="line">		<span class="keyword">return</span> car; <span class="comment">// 返回构造好的汽车</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>测试类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Director director = <span class="keyword">new</span> DirectorCar(<span class="keyword">new</span> BuilderCar()); <span class="comment">// 创建指挥者的对象</span></div><div class="line">		Car car = director.CreateCar(); <span class="comment">// 获取组装完成的</span></div><div class="line">		System.out.println(car.getEngine().getName()); <span class="comment">// 输出引擎的名字</span></div><div class="line">		System.out.println(car.getTyre().getName()); <span class="comment">// 输出轮胎的名字</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><ul>
-<li><p>基本部件不变，但是其中的组合经常变化的情况</p>
-<ul>
-<li>比如你去肯德基点餐，汉堡，可乐，鸡翅这些食物是不变的，但是套餐的组合是经常变化的，建造者模式的指挥者就是将这些部件按照一定步骤将其组合起来的。</li>
-<li>java中StringBuilder</li>
-</ul>
-</li>
-<li><p>需要生成的对象具有复杂的内部结构</p>
-<ul>
-<li>复杂的内部结构，我们可以使用建造者模式将其分离，先将其中的各个小的部件组装成功，然后由指挥者按照一定的步骤将其组装成一个复杂的对象</li>
-</ul>
-</li>
-<li>需要生成的对象内部属性本身相互依赖。</li>
-</ul>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
+          创建型模式之建造者模式定义
+建造者模式(Builder Pattern)：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。建造者模式是一种对象创建型模式。
 
-          
+简单说，建造者的功能就是先构造复杂对象的每一个部件，指挥者的功能就是将这些部件以一定的步骤组装起来，形成一个具有一定功能的产品或者对象。当然这个步骤是透明的对于客户端。
+
+建造者模式一步一步创建一个复杂的对象，它允许用户只通过指定复杂对象的类型和内容就可以构建它们，用户不需要知道内部的具体构建细节。建造者模式结构如图8-2所示：
+
+
+
+
+实例
+下面是一个组装汽车的例子，其中汽车由发动机和轮胎组成，那么我们只需要组
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/16/设计模式之建造模式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2385,6 +2360,14 @@
     
 
     
+	<div>
+	
+<div>
+      
+</div>
+
+  
+</div>
 
     <footer class="post-footer">
       
@@ -2445,6 +2428,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/header.jpg"
+                alt="不才陈某" />
+            
               <p class="site-author-name" itemprop="name">不才陈某</p>
               <p class="site-description motion-element" itemprop="description">写最精的文章，做最野的程序猿</p>
           </div>
@@ -2457,7 +2444,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">63</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -2466,10 +2453,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">7</span>
-                  <span class="site-state-item-name">Kategorien</span>
-                
+                  <span class="site-state-item-name">分类</span>
+                </a>
               </div>
             
 
@@ -2479,7 +2466,7 @@
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">7</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-name">标签</span>
                 </a>
               </div>
             
@@ -2496,11 +2483,57 @@
           
 
           
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/1556564194374926" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-globe"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/xiao-ming-64-34-45" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_34162294" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png" target="_blank" title="微信公众号">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微信公众号</a>
+                  </span>
+                
+            </div>
+          
 
           
           
 
           
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pexels.com/zh-cn/" title="Pexels" target="_blank">Pexels</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ityouknow.com/" title="纯洁的微笑" target="_blank">纯洁的微笑</a>
+                  </li>
+                
+              </ul>
+            </div>
           
 
           
@@ -2529,21 +2562,45 @@
   <span class="author" itemprop="copyrightHolder">不才陈某</span>
 
   
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">145k</span>
+  
+</div>
+
+<!--
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style='display:none'>
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
-
-
-
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共145k字</span>
+</div>
 
         
 
@@ -2587,6 +2644,8 @@
   
 
 
+  
+
 
 
 
@@ -2625,6 +2684,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -2687,10 +2751,349 @@
 
 
 
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'RtlQOgOT3M0hgyMeogykSQjT-gzGzoHsz',
+        appKey: 'vSCxLU88wnXVf0Pa8mwJrCPm',
+        placeholder: '原创不易，欢迎各位指正',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
 
 
   
 
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
 
 
 
@@ -2700,6 +3103,21 @@
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
   
