@@ -76,453 +76,89 @@
     <div id="container">
       <div id="main">
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/04/16/设计模式之代理模式/" title="设计模式之代理模式" itemprop="url">设计模式之代理模式</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
-		
-  <p class="article-time">
-    <time datetime="2018-04-16T05:52:12.000Z" itemprop="datePublished"> 发表于 2018-04-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="结构型模式之代理模式-静态代理"><a href="#结构型模式之代理模式-静态代理" class="headerlink" title="结构型模式之代理模式(静态代理)"></a>结构型模式之代理模式(静态代理)</h1><ul>
-<li><p>由于某些原因，客户端不想或不能直接访问一个对象，此时可以通过一个称之为“代理”的第三者来实现间接访问，该方案对应的设计模式被称为代理模式。</p>
-</li>
-<li><p>代理其实是实现简介访问的媒介，当然在代理类中还可以在执行代理操作之前，之后，之中，环绕等执行相关动作。<strong>Spring 中面向切面编程</strong>就是这个原理</p>
-</li>
-<li><p>代理模式是一种应用很广泛的结构型设计模式，而且变化形式非常多，常见的代理形式包括远程代理、保护代理、虚拟代理、缓冲代理、智能引用代理等，后面将学习这些不同的代理形式</p>
-</li>
-<li><p>当使用代理类的时候， 真实类中的信息对用户来说是透明的(不可见的)</p>
-</li>
-<li><p><strong>主要就是用于对象的间接访问提供了一个方案，可以对对象的访问进行控制</strong></p>
-</li>
-</ul>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><img src="http://ono60m7tl.bkt.clouddn.com/proxypattern1.png" alt="代理模式"></p>
-<ol>
-<li>Subject（抽象主题角色）：它声明了真实主题和代理主题的共同接口，这样一来在任何使用真实主题的地方都可以使用代理主题，客户端通常需要针对抽象主题角色进行编程。</li>
-<li>Proxy（代理主题角色）：它包含了对真实主题的引用，从而可以在任何时候操作真实主题对象；在代理主题角色中提供一个与真实主题角色相同的接口，以便在任何时候都可以替代真实主题；代理主题角色还可以控制对真实主题的使用，负责在需要的时候创建和删除真实主题对象，并对真实主题对象的使用加以约束。通常，在代理主题角色中，客户端在调用所引用的真实主题操作之前或之后还需要执行其他操作，而不仅仅是单纯调用真实主题对象中的操作。</li>
-<li>RealSubject（真实主题角色）：它定义了代理角色所代表的真实对象，在真实主题角色中实现了真实的业务操作，客户端可以通过代理主题角色间接调用真实主题角色中定义的操作。</li>
-</ol>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="第一个例子"><a href="#第一个例子" class="headerlink" title="第一个例子"></a>第一个例子</h3><ul>
-<li>需求： 我们知道mac笔记本是在美国生产的，那么如果中国供销商想要卖mac笔记本，那么必须从美国供销商那里先进货，然后中国的顾客才可以在中国供销商买mac。这里的中国供销商就相当于代理，美国供销商就相当于真实主题角色</li>
-</ul>
-<ul>
-<li>Mac笔记本抽象接口(相当于其中的抽象主题)</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 苹果笔记本的接口，其中有一个方法实现了买笔记本的动作</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MacBook</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buy</span><span class="params">()</span></span>;   <span class="comment">//购买笔记本的行为</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>美国供销商(相当于这里RealSubject)</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 美国的笔记本，实现了MacBook接口，表示在美国买笔记本</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">USAMac</span> <span class="keyword">implements</span> <span class="title">MacBook</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buy</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"在美国买笔记本"</span>);</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><p>中国供销商(相当于这里的代理角色)</p>
-<ul>
-<li>我们可以看到我们在使用代理模式的时候可以在之前和之后进行操作<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 中国的笔记本，实现了MacBook  表示在中国买笔记本</div><div class="line"> * 但是中国想要买到苹果笔记本，那么还是需要先从美国进货，因此中国只是一个中间的代理作用而已</div><div class="line"> * 当然代理的最大作用就是在代理之前、之后、之中执行相关的操作，这就是面向切面编程的原理</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChinaMac</span> <span class="keyword">implements</span> <span class="title">MacBook</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> MacBook mcBook=<span class="keyword">new</span> USAMac();   <span class="comment">//创建USAMac的对象</span></div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 在购买之前执行的操作</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preBuy</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"购买之前执行的操作"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 在购买之后执行的操作</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterBuy</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"购买之后执行的操作"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buy</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.preBuy();   <span class="comment">//之前执行的操作</span></div><div class="line">		mcBook.buy();  <span class="comment">//在美国买笔记本</span></div><div class="line">		System.out.println(<span class="string">"在中国买笔记本"</span>);</div><div class="line">		<span class="keyword">this</span>.afterBuy();   <span class="comment">//之后执行的操作</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>测试类</p>
-<ul>
-<li>我们在使用的时候直接使用代理类即可，我们根本不知道在真实类的使用，完全是代理类为我们提供了</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		MacBook macBook=<span class="keyword">new</span> ChinaMac();   <span class="comment">//创建ChinaMac对象，在中国买笔记本</span></div><div class="line">		macBook.buy();    <span class="comment">//直接在中国买笔记本</span></div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="第二个例子"><a href="#第二个例子" class="headerlink" title="第二个例子"></a>第二个例子</h3><ul>
-<li><p>我们登录一个网站的服务器端的验证步骤：</p>
-<ul>
-<li>读取用户名和密码</li>
-<li>验证用户名和密码</li>
-<li>记录到日志中</li>
-</ul>
-</li>
-<li><p>这里的验证密码和记录到日志中可以在代理类中实现，在用户执行操作之前需要读取用户名和密码，并且验证，在操作之后需要将用户的一些操作记录到日志中。其实这里的真实用户需要做的只是执行自己的操作，而验证和记录都是交给代理类实现的。</p>
-</li>
-</ul>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
-<li>用户接口(User)</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 用户的抽象类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">User</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DoAction</span><span class="params">()</span></span>;   <span class="comment">//执行动作</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>真实的用户类（实现了用户接口）<ul>
-<li>主要的做的就是执行自己的操作</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RealUser</span> <span class="keyword">implements</span> <span class="title">User</span> </span>&#123;</div><div class="line">	<span class="keyword">public</span> String name;</div><div class="line">	<span class="keyword">public</span> String password;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">RealUser</span><span class="params">(String name, String password)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">		<span class="keyword">this</span>.password = password;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">RealUser</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 执行一些操作</div><div class="line">	 */</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DoAction</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"开始执行操作......"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>代理类(实现了User接口)<ul>
-<li>在执行操作之前验证密码和用户名是否正确</li>
-<li>在执行操作之后记录到日志中</li>
-<li>实际上这里就是面向切面编程</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxUser</span> <span class="keyword">implements</span> <span class="title">User</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> RealUser user; <span class="comment">// 真实用户的对象</span></div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 创建对象</div><div class="line">	 * <span class="doctag">@param</span> name  姓名</div><div class="line">	 * <span class="doctag">@param</span> password   密码</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ProxUser</span><span class="params">(String name, String password)</span> </span>&#123;</div><div class="line">		user = <span class="keyword">new</span> RealUser(name, password);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DoAction</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">//验证用户名和密码</span></div><div class="line">		<span class="keyword">if</span> (Validate()) &#123;</div><div class="line">			user.DoAction();   <span class="comment">//调用真实用户的DoAction方法执行相关操作</span></div><div class="line">			logger();   <span class="comment">//调用日志记录信息</span></div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			System.out.println(<span class="string">"请重新登录......."</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 验证用户的用户名和密码</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> Boolean <span class="title">Validate</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (<span class="string">"陈加兵"</span>.equals(user.name) &amp;&amp; <span class="string">"123456"</span>.equals(user.password)) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 添加日志记录信息</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">logger</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(user.name + <span class="string">"登录成功......"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>测试类<ul>
-<li>实际上执行了验证用户名和密码，记录日志的操作，但是对于客户端来说只能看到自己执行的操作</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		ProxUser proxUser=<span class="keyword">new</span> ProxUser(<span class="string">"陈加兵"</span>, <span class="string">"123456"</span>);   <span class="comment">//创建代理对象</span></div><div class="line">		proxUser.DoAction();   <span class="comment">//执行操作，实际执行了验证信息，doaction(),日志记录这个三个动作</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
-<li>如果增加一个接口就需要增加一个代理类，如果是要增加很多，那么就要增加很多代理类，代码将会重复</li>
-</ul>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ul>
-<li>下面我们将会讲解到动态代理，仅仅需要一个代理类即可</li>
-</ul>
-<h1 id="结构型模式之动态代理模式"><a href="#结构型模式之动态代理模式" class="headerlink" title="结构型模式之动态代理模式"></a>结构型模式之动态代理模式</h1><ul>
-<li><p>前面我们说的代理模式其实是属于静态代理模式，就是说在程序执行之前已经写好了代理类，但是缺点也是说过，必须为每个接口都实现一个代理类，如果有多个接口需要代理，那么代码肯定是要重复的，因此就需要动态代理了。</p>
-</li>
-<li><p>动态代理可以实现多个接口共用一个代理类，只需要改变初始化的参数即可，可以省去很多的重复的代码。</p>
-</li>
-<li><p>JDK的动态代理需要一个类一个接口，分别为Proxy和InvocationHandler</p>
-</li>
-<li><p>主要原理就是利用了反射的原理</p>
-</li>
-</ul>
-<h2 id="InvocationHandler"><a href="#InvocationHandler" class="headerlink" title="InvocationHandler"></a>InvocationHandler</h2><ul>
-<li>这个是代理类必须实现的接口，其中有一个方法<code>public Object invoke(Object proxy,Method method,Object[] args)</code><ul>
-<li><code>Object proxy</code>：指被代理的对象。 </li>
-<li><code>Method method</code>：要调用的方法 </li>
-<li><code>Object[] args</code>：方法调用时所需要的参数 </li>
-</ul>
-</li>
-</ul>
-<h2 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h2><ul>
-<li>Proxy类是专门完成代理的操作类，可以通过此类为一个或多个接口动态地生成实现类，此类提供了如下的操作方法：<br><code>public static Object newProxyInstance(ClassLoader loader, Class&lt;?&gt;[] interfaces, InvocationHandler h)</code><ul>
-<li><code>ClassLoader loader</code>：类加载器 </li>
-<li><code>Class&lt;?&gt;[] interfaces</code>：得到全部的接口 </li>
-<li><code>InvocationHandler h</code>：得到InvocationHandler接口的子类实例 </li>
-</ul>
-</li>
-</ul>
-<h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><ul>
-<li>肯德基的接口</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 肯德基的接口，其中一个eat方法</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IKFC</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>肯德基的实现类(RealSubject)</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * IKFC的实现类</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">KFC</span> <span class="keyword">implements</span> <span class="title">IKFC</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"我在肯德基吃了饭......"</span>);</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>苹果笔记本的接口</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 苹果笔记本的接口</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MacBook</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buy</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>美国供销商的类(RealSubject)</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 美国笔记本的类，实现了MacBook接口</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">USAMacBook</span> <span class="keyword">implements</span> <span class="title">MacBook</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buy</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"在美国买了一个苹果电脑......"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>动态代理的类（实现了InvocationHandler接口）</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</div><div class="line"><span class="keyword">import</span> java.lang.reflect.Method;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 这个是代理类，实现了InvocationHandler接口</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> Object Realobject;   <span class="comment">//被代理的对象</span></div><div class="line"></div><div class="line">	<span class="comment">//构造方法，用来初始化被代理的对象</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ProxyHandler</span><span class="params">(Object obj)</span></span>&#123;</div><div class="line">		<span class="keyword">this</span>.Realobject=obj;   <span class="comment">//初始化真实类的对象</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * <span class="doctag">@param</span> proxy  表示被代理的对象的，就是真实类的对象</div><div class="line">	 * <span class="doctag">@param</span> method 表示要调用真实类的方法</div><div class="line">	 * <span class="doctag">@param</span> args  表示方法调用的时候所需要的参数</div><div class="line">	 * <span class="doctag">@return</span>   方法调用之后的返回值</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span></span></div><div class="line">			<span class="keyword">throws</span> Throwable &#123;</div><div class="line">		prefunction();   <span class="comment">//执行之前调用的方法</span></div><div class="line">		Object res=method.invoke(Realobject, args);    <span class="comment">//Method类中的执行方法的函数，在反射中常用</span></div><div class="line">		afterFunction();   <span class="comment">//执行之后调用的方法</span></div><div class="line">		<span class="keyword">return</span> res;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 执行方法之前调用的方法</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">prefunction</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"执行方法之前......"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 执行方法之后调用的方法</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterFunction</span><span class="params">()</span></span>&#123;</div><div class="line">		System.out.println(<span class="string">"执行方法之后......"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>测试类</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</div><div class="line"><span class="keyword">import</span> com.sun.org.apache.bcel.internal.generic.NEW;</div><div class="line"><span class="keyword">import</span> com.sun.org.apache.bcel.internal.util.Class2HTML;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">		Class[] cls1=&#123;IKFC.class&#125;;   <span class="comment">//第一个代理的所有接口数组，直接用接口的反射即可</span></div><div class="line"></div><div class="line">		Class[] cls2=USAMacBook.class.getInterfaces(); <span class="comment">//直接具体的实现类的反射调用getInterfaces即可返回所有的接口数组</span></div><div class="line"></div><div class="line">		<span class="comment">// 返回KFC的代理对象</span></div><div class="line">		IKFC kfc = (IKFC) Proxy.newProxyInstance(Client.class.getClassLoader(),</div><div class="line">				cls1, <span class="keyword">new</span> ProxyHandler(<span class="keyword">new</span> KFC()));</div><div class="line">		kfc.eat();   <span class="comment">//执行方法</span></div><div class="line"></div><div class="line">		MacBook macBook = (MacBook) Proxy.newProxyInstance(Client.class.getClassLoader(),</div><div class="line">				cls2, <span class="keyword">new</span> ProxyHandler(</div><div class="line">						<span class="keyword">new</span> USAMacBook()));</div><div class="line"></div><div class="line">		macBook.buy();   <span class="comment">//执行方法</span></div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>动态代理的好处<ul>
-<li>即使有多个接口，也仅仅只有一个动态代理类</li>
-</ul>
-</li>
-</ul>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
-</div>
-
-
-  <div class="article-tags">
   
-  <span></span> <a href="/tags/设计模式/">设计模式</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2018/04/16/设计模式之代理模式/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/04/12/设计模式之单例模式/" title="设计模式之单例模式" itemprop="url">设计模式之单例模式</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
-		
-  <p class="article-time">
-    <time datetime="2018-04-12T03:28:05.000Z" itemprop="datePublished"> 发表于 2018-04-12</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="创建型模式之单例模式-Singleton"><a href="#创建型模式之单例模式-Singleton" class="headerlink" title="创建型模式之单例模式(Singleton)"></a>创建型模式之单例模式(Singleton)</h1><h2 id="什么是单例模式"><a href="#什么是单例模式" class="headerlink" title="什么是单例模式"></a>什么是单例模式</h2><ul>
-<li>该类只有一个实例</li>
-<li>构造方法是私有的</li>
-<li>有一个获取该类对象的静态方法getInstance()</li>
-</ul>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ul>
-<li>一个国家只有一个主席</li>
-<li>如果此时的限定必须是抽象出来的类只能是一个对象，这个时候就需要使用单例模式</li>
-</ul>
-<h2 id="懒汉式"><a href="#懒汉式" class="headerlink" title="懒汉式"></a>懒汉式</h2><h3 id="什么是懒汉式"><a href="#什么是懒汉式" class="headerlink" title="什么是懒汉式"></a>什么是懒汉式</h3><ul>
-<li>懒汉式是当用到这个对象的时候才会创建，即是在getInstance()方法创建这个单例对象</li>
-</ul>
-<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
-<li>只有用到的时候才会创建这个对象，因此节省资源</li>
-<li>线程不安全<ul>
-<li>我们知道一旦我们使用了懒汉式就是在getInstance()方法中创建这个单例对象，那么不可避免的就是线程安全问题</li>
-</ul>
-</li>
-</ul>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 懒汉式的单例模式： 不是线程安全的</div><div class="line"> * 优点： 在使用的时候才会初始化，可以节省资源</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SignalLazy</span> </span>&#123;</div><div class="line">	<span class="comment">// 将默认的构造器设置为private类型的</span></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="title">SignalLazy</span><span class="params">()</span> </span>&#123;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 静态的单例对象</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> SignalLazy instance;</div><div class="line"></div><div class="line">	<span class="comment">//静态的获取单例的对象，其中有一个判断，如果没有初始化，那么就创建</span></div><div class="line">	<span class="function"><span class="keyword">public</span>  <span class="keyword">static</span> SignalLazy <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">// 如果instance没有被初始化，那么就创建即可，这个是保证了单例，但是并不是线程安全的</span></div><div class="line">		<span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</div><div class="line">			System.out.println(<span class="string">"this is SignalLazy"</span>);</div><div class="line">			instance = <span class="keyword">new</span> SignalLazy(); <span class="comment">// 创建一 个对象</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> instance; <span class="comment">// 返回这个对象</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><p>从上面的代码中我们可以知道一旦使用多线程创建对象，那么就会出现线程不安全，最后创建出来的就不是单例了</p>
-</li>
-<li><p>测试代码如下</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainTest</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		 <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line"></div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="comment">//创建实例，并且输出其中的地址，如果地址相同， 那么就是同一个实例</span></div><div class="line">				System.out.println(<span class="string">"this is"</span>+ SignalLazy.getInstance());</div><div class="line"></div><div class="line">			&#125;</div><div class="line">		&#125;).start();</div><div class="line"></div><div class="line">		 <span class="comment">//主线程也是创建输出其中的地址，运行可以看出这两个地址是不一样的</span></div><div class="line">		 System.out.println(<span class="string">"this is"</span>+SignalLazy.getInstance());</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="解决线程不安全"><a href="#解决线程不安全" class="headerlink" title="解决线程不安全"></a>解决线程不安全</h3><ul>
-<li>线程同步锁(synchronized)<ul>
-<li>我们知道每一个类都有一个把锁，我们可以使用线程同步锁来实现线程同步方法</li>
-<li>但是使用线程同步锁浪费资源，因为每次创建实例都需要请求同步锁，浪费资源</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> SignalLazy <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">// 如果instance没有被初始化，那么就创建即可，这个是保证了单例，但是并不是线程安全的</span></div><div class="line">		<span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</div><div class="line">			System.out.println(<span class="string">"this is SignalLazy"</span>);</div><div class="line">			instance = <span class="keyword">new</span> SignalLazy(); <span class="comment">// 创建一个对象</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> instance; <span class="comment">// 返回这个对象</span></div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>双重校验<ul>
-<li>双重校验： 两次判断单例对象是否为 null，这样的话，当当线程经过这个判断的时候就会先判断，而不是等待，一旦判断不成立，那么就会继续执行，不需要等待</li>
-<li>相对于前面的同步方法更加节省资源</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SignalTonDoubleCheck</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> SignalTonDoubleCheck instance = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="title">SignalTonDoubleCheck</span><span class="params">()</span> </span>&#123;</div><div class="line">	&#125;; <span class="comment">// 将默认的构造方法设置私有</span></div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SignalTonDoubleCheck <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">synchronized</span> (SignalTonDoubleCheck.class) &#123;</div><div class="line">				<span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</div><div class="line">					<span class="keyword">try</span> &#123;</div><div class="line">						Thread.sleep(<span class="number">1000</span>);</div><div class="line">					&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">						e.printStackTrace();</div><div class="line">					&#125;</div><div class="line">					<span class="comment">// 这个new 并不是原子操作，因此当多线程进行到这里需要及时刷新这个值，因此要设置为voliate</span></div><div class="line">					instance = <span class="keyword">new</span> SignalTonDoubleCheck();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> instance;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>匿名内部类 （推荐使用）<ul>
-<li>我们知道静态变量、静态代码块、静态方法都是在类加载的时候只加载一次</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SignalTonInnerHolder</span> </span>&#123;</div><div class="line">	<span class="comment">//私有构造函数</span></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="title">SignalTonInnerHolder</span><span class="params">()</span> </span>&#123;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 匿名内部类，其中利用了静态成员变量在类加载的时候初始化，并且只加载一次，因此保证了单例</div><div class="line">	 */</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerHolder</span> </span>&#123;</div><div class="line">		<span class="keyword">private</span> <span class="keyword">static</span> SignalTonInnerHolder instance = <span class="keyword">new</span> SignalTonInnerHolder();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SignalTonInnerHolder <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> InnerHolder.instance;  <span class="comment">//加载类</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>一旦加载SignalTonInnerHolder类的时候就会加载其中的静态类，随之加载的就是其中的创建对象语句，因此在类加载的时候就完成了创建，这个和我们后面说的饿汉式有点相同</li>
-</ul>
-<h2 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h2><h3 id="什么是饿汉式"><a href="#什么是饿汉式" class="headerlink" title="什么是饿汉式"></a>什么是饿汉式</h3><ul>
-<li>在类加载的时候就创建单例对象，而不是在getInstance()方法创建</li>
-<li>所谓的饿汉式就是利用静态成员变量或者静态语句块在类加载的时候初始化，并且只初始化一次，因此这个是线程安全的，但是在没有用到的时候就初始化，那么是浪费资源</li>
-</ul>
-<h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
-<li>还没用到就创建，浪费资源</li>
-<li>类加载的时候就创建，线程安全</li>
-</ul>
-<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 饿汉式：线程安全</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SignalHungry</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="title">SignalHungry</span><span class="params">()</span> </span>&#123;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 静态变量只有在类加载的时候初始化一次，因此这个是线程安全的</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> SignalHungry instance = <span class="keyword">new</span> SignalHungry();</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SignalHungry <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> instance;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainTest</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		 <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line"></div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="comment">//创建实例，并且输出其中的地址，如果地址相同， 那么就是同一个实例</span></div><div class="line">				System.out.println(<span class="string">"this is"</span>+ SignalHungry.getInstance());</div><div class="line"></div><div class="line">			&#125;</div><div class="line">		&#125;).start();</div><div class="line"></div><div class="line">		 <span class="comment">//主线程也是创建输出其中的地址，运行可以看出这两个地址是不一样的</span></div><div class="line">		 System.out.println(<span class="string">"this is"</span>+SignalHungry.getInstance());</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>饿汉式在类加载的时候就会创建单例对象，因此浪费资源</li>
-<li>懒汉式在用到的时候才创建，节省资源，但是线程不安全，但是我们可以使用匿名内部类的方式使其线程安全</li>
-<li>一般在使用的时候会使用懒汉式的匿名内部类的实现和饿汉式的创建方式</li>
-</ul>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
-</div>
-
-
-  <div class="article-tags">
+<section class="post" itemscope itemprop="blogitem">
   
-  <span></span> <a href="/tags/设计模式/">设计模式</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2018/04/12/设计模式之单例模式/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/04/12/设计模式之常见关系/" title="设计模式之常见关系" itemprop="url">设计模式之常见关系</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chenjiabing" target="_blank" itemprop="author">Chenjiabing</a>
-		
-  <p class="article-time">
-    <time datetime="2018-04-12T03:27:45.000Z" itemprop="datePublished"> 发表于 2018-04-12</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="继承和泛化"><a href="#继承和泛化" class="headerlink" title="继承和泛化"></a>继承和泛化</h1><ul>
-<li>泛华关系是一种继承关系，表示一般与特殊的关系，它指定了子类如何特化父类的所有特征和行为。</li>
-<li>使用三角箭头的实线表示继承，其中箭头指向的是父类<br><img src="http://ono60m7tl.bkt.clouddn.com/jicheng.png" alt="继承图形"></li>
-</ul>
-<h1 id="接口与实现"><a href="#接口与实现" class="headerlink" title="接口与实现"></a>接口与实现</h1><ul>
-<li>在java中一个类只能继承一个父类，但是可以实现多个接口</li>
-<li>使用的是带三角的虚线表示，其中箭头指向的是接口</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/real.png" alt="实现接口"></p>
-<h1 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h1><ul>
-<li>是一种使用关系，即一个类的实现需要另外一个类的协助，所以尽量不使用双向的依赖关系。</li>
-<li>最典型的就是import</li>
-<li>比如：一个类要定义String类型的变量，那么这个类就是依赖String这个类</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/dependency.png" alt="依赖"></p>
-<h1 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h1><ul>
-<li>是一种拥有的关系，它使一个类知道另外一个类的属性和方法，比如数据库中的关系，通过学生可以查找到自己课程的成绩，只需要在学生中定义一个课程的对象即可。</li>
-<li>代码体现： 成员变量</li>
-<li>带普通箭头的实心线，指向被拥有者</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/association.png" alt="关联"></p>
-<h1 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h1><ul>
-<li><p>是整体和部分的关系，且部分可以离开整体而单独的存在。车和轮胎是整体和部分的关系，但是轮胎离开车还是可以单独存在的</p>
-</li>
-<li><p>代码体现： 成员变量</p>
-</li>
-<li><p>带空心菱形的实心线，菱形指向整体</p>
-</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/aggregation.png" alt="聚合"></p>
-<h1 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h1><ul>
-<li>是整体和部分的关系，但是部分不能离开整体而单独存在</li>
-<li>代码体现：成员变量</li>
-<li>带实心菱形的实线，菱形指向整体</li>
-</ul>
-<p><img src="http://ono60m7tl.bkt.clouddn.com/composition.png" alt="组合"></p>
-<h2 id="笔者有话说"><a href="#笔者有话说" class="headerlink" title="笔者有话说"></a>笔者有话说</h2><ul>
-<li>最近建了一个微信交流群，提供给大家一个交流的平台，扫描下方笔者的微信二维码，备注【交流】，我会把大家拉进群</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg" alt=""></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
-</div>
-
-
-  <div class="article-tags">
+    <a href="/2018/04/16/设计模式之代理模式/" title="设计模式之代理模式" itemprop="url">
   
-  <span></span> <a href="/tags/设计模式/">设计模式</a>
-  </div>
+    <h1 itemprop="name">设计模式之代理模式</h1>
+    
+     
+           <p itemprop="description" >结构型模式之代理模式(静态代理)
+由于某些原因，客户端不想或不能直接访问一个对象，此时可以通过一个称之为“代理”的第三者来实现间接访问，该方案对应的设计模式被称为代理模式。
 
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2018/04/12/设计模式之常见关系/#disqus_thread" class="comments-count-link">Comments</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
+代理其实是实现简介访问的媒介，当然在代理类中还可以在执行代理操作之前，之后，之中，环绕等执行相关动作。S</p>
+        
+    
+    <time datetime="2018-04-16T05:52:12.000Z" itemprop="datePublished">2018-04-16</time>
+  </a>
+</section>
 
 
 
 
 
 
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/12/设计模式之单例模式/" title="设计模式之单例模式" itemprop="url">
+  
+    <h1 itemprop="name">设计模式之单例模式</h1>
+    
+     
+           <p itemprop="description" >创建型模式之单例模式(Singleton)什么是单例模式
+该类只有一个实例
+构造方法是私有的
+有一个获取该类对象的静态方法getInstance()
 
-  <nav id="page-nav" class="clearfix">
+应用场景
+一个国家只有一个主席
+如果此时的限定必须是抽象出来的类只能是一个对象，这个时候就需要使用单例模式
+
+懒汉式什么是懒汉式</p>
+        
+    
+    <time datetime="2018-04-12T03:28:05.000Z" itemprop="datePublished">2018-04-12</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2018/04/12/设计模式之常见关系/" title="设计模式之常见关系" itemprop="url">
+  
+    <h1 itemprop="name">设计模式之常见关系</h1>
+    
+     
+           <p itemprop="description" >继承和泛化
+泛华关系是一种继承关系，表示一般与特殊的关系，它指定了子类如何特化父类的所有特征和行为。
+使用三角箭头的实线表示继承，其中箭头指向的是父类
+
+接口与实现
+在java中一个类只能继承一个父类，但是可以实现多个接口
+使用的是带三角的虚线表示，其中箭头指向的是接口
+
+
+依赖</p>
+        
+    
+    <time datetime="2018-04-12T03:27:45.000Z" itemprop="datePublished">2018-04-12</time>
+  </a>
+</section>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix unexpand">
     <a class="extend prev" rel="prev" href="/page/6/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
   </nav>
 
