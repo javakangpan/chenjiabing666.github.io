@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>不才陈某</title>
+  <title>不才陈某技术博客</title>
   
   <subtitle>微信公众号：码猿技术专栏</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://chenjiabing666.github.io/"/>
+  <link href="https://chenjiabing666.github.io/"/>
   <updated>2020-10-22T13:12:13.784Z</updated>
-  <id>http://chenjiabing666.github.io/</id>
+  <id>https://chenjiabing666.github.io/</id>
   
   <author>
     <name>不才陈某</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Spring Boot 与多数据源的那点事儿~</title>
-    <link href="http://chenjiabing666.github.io/2020/10/21/SpringBoot%E4%B8%8E%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B%E5%84%BF/"/>
-    <id>http://chenjiabing666.github.io/2020/10/21/SpringBoot与多数据源的那点事儿/</id>
+    <link href="https://chenjiabing666.github.io/2020/10/21/SpringBoot%E4%B8%8E%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B%E5%84%BF/"/>
+    <id>https://chenjiabing666.github.io/2020/10/21/SpringBoot与多数据源的那点事儿/</id>
     <published>2020-10-21T08:44:24.000Z</published>
     <updated>2020-10-22T13:12:13.784Z</updated>
     
@@ -30,17 +30,17 @@
     
     </summary>
     
-      <category term="Spring Boot 进阶" scheme="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="Spring Boot" scheme="http://chenjiabing666.github.io/tags/Spring-Boot/"/>
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
     
   </entry>
   
   <entry>
     <title>这类注解都不知道，还好意思说用过Spring Boot~</title>
-    <link href="http://chenjiabing666.github.io/2020/10/20/%E8%BF%99%E7%B1%BB%E6%B3%A8%E8%A7%A3%E9%83%BD%E4%B8%8D%E7%9F%A5%E9%81%93%EF%BC%8C%E8%BF%98%E5%A5%BD%E6%84%8F%E6%80%9D%E8%AF%B4%E7%94%A8%E8%BF%87Spring%20Boot/"/>
-    <id>http://chenjiabing666.github.io/2020/10/20/这类注解都不知道，还好意思说用过Spring Boot/</id>
+    <link href="https://chenjiabing666.github.io/2020/10/20/%E8%BF%99%E7%B1%BB%E6%B3%A8%E8%A7%A3%E9%83%BD%E4%B8%8D%E7%9F%A5%E9%81%93%EF%BC%8C%E8%BF%98%E5%A5%BD%E6%84%8F%E6%80%9D%E8%AF%B4%E7%94%A8%E8%BF%87Spring%20Boot/"/>
+    <id>https://chenjiabing666.github.io/2020/10/20/这类注解都不知道，还好意思说用过Spring Boot/</id>
     <published>2020-10-20T08:44:24.000Z</published>
     <updated>2020-10-22T11:09:53.684Z</updated>
     
@@ -52,17 +52,17 @@
     
     </summary>
     
-      <category term="Spring Boot 进阶" scheme="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="Spring Boot" scheme="http://chenjiabing666.github.io/tags/Spring-Boot/"/>
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
     
   </entry>
   
   <entry>
     <title>Spring Boot整合多点套路，少走点弯路！！！</title>
-    <link href="http://chenjiabing666.github.io/2020/10/15/Spring%20Boot%20%E7%AC%AC%20%E5%8D%81%E4%BA%8C%E5%BC%B9%EF%BC%8CSpring%20Boot%E6%95%B4%E5%90%88%E5%A4%9A%E7%82%B9%E5%A5%97%E8%B7%AF%EF%BC%8C%E5%B0%91%E8%B5%B0%E7%82%B9%E5%BC%AF%E8%B7%AF%EF%BC%81%EF%BC%81%EF%BC%81/"/>
-    <id>http://chenjiabing666.github.io/2020/10/15/Spring Boot 第 十二弹，Spring Boot整合多点套路，少走点弯路！！！/</id>
+    <link href="https://chenjiabing666.github.io/2020/10/15/Spring%20Boot%20%E7%AC%AC%20%E5%8D%81%E4%BA%8C%E5%BC%B9%EF%BC%8CSpring%20Boot%E6%95%B4%E5%90%88%E5%A4%9A%E7%82%B9%E5%A5%97%E8%B7%AF%EF%BC%8C%E5%B0%91%E8%B5%B0%E7%82%B9%E5%BC%AF%E8%B7%AF%EF%BC%81%EF%BC%81%EF%BC%81/"/>
+    <id>https://chenjiabing666.github.io/2020/10/15/Spring Boot 第 十二弹，Spring Boot整合多点套路，少走点弯路！！！/</id>
     <published>2020-10-15T13:18:42.000Z</published>
     <updated>2020-10-23T11:16:27.723Z</updated>
     
@@ -73,19 +73,19 @@
     
     </summary>
     
-      <category term="Spring Boot 进阶" scheme="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="Spring Boot" scheme="http://chenjiabing666.github.io/tags/Spring-Boot/"/>
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
     
   </entry>
   
   <entry>
     <title>优质资源分享 ! Spring Boot 入门到放弃！！！</title>
-    <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%BC%B9%EF%BC%8C%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB%20!%20Spring%20Boot%20%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83%EF%BC%81%EF%BC%81%EF%BC%81/"/>
-    <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot 第十弹，优质资源分享 ! Spring Boot 入门到放弃！！！/</id>
+    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%BC%B9%EF%BC%8C%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB%20!%20Spring%20Boot%20%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83%EF%BC%81%EF%BC%81%EF%BC%81/"/>
+    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot 第十弹，优质资源分享 ! Spring Boot 入门到放弃！！！/</id>
     <published>2020-10-14T02:10:42.000Z</published>
-    <updated>2020-10-23T11:15:06.431Z</updated>
+    <updated>2020-10-23T12:37:12.660Z</updated>
     
     <summary type="html">
     
@@ -94,17 +94,19 @@
     
     </summary>
     
-      <category term="Spring Boot 进阶" scheme="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="Spring Boot,免费资源" scheme="http://chenjiabing666.github.io/tags/Spring-Boot-%E5%85%8D%E8%B4%B9%E8%B5%84%E6%BA%90/"/>
+      <category term="优质资源" scheme="https://chenjiabing666.github.io/tags/%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90/"/>
+    
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
     
   </entry>
   
   <entry>
     <title>满屏的try-catch，你不瘆得慌？</title>
-    <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E4%B9%9D%E5%BC%B9%EF%BC%8C%E6%BB%A1%E5%B1%8F%E7%9A%84try-catch%EF%BC%8C%E4%BD%A0%E4%B8%8D%E7%98%86%E5%BE%97%E6%85%8C%EF%BC%9F/"/>
-    <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot第九弹，满屏的try-catch，你不瘆得慌？/</id>
+    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E4%B9%9D%E5%BC%B9%EF%BC%8C%E6%BB%A1%E5%B1%8F%E7%9A%84try-catch%EF%BC%8C%E4%BD%A0%E4%B8%8D%E7%98%86%E5%BE%97%E6%85%8C%EF%BC%9F/"/>
+    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot第九弹，满屏的try-catch，你不瘆得慌？/</id>
     <published>2020-10-14T02:09:42.000Z</published>
     <updated>2020-10-23T11:13:45.723Z</updated>
     
@@ -115,17 +117,17 @@
     
     </summary>
     
-      <category term="Spring Boot 进阶" scheme="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="Spring Boot" scheme="http://chenjiabing666.github.io/tags/Spring-Boot/"/>
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
     
   </entry>
   
   <entry>
     <title>一波带走，教你Spring Boot如何扩展、接管MVC？</title>
-    <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E5%85%AB%E5%BC%B9%EF%BC%8C%E4%B8%80%E6%B3%A2%E5%B8%A6%E8%B5%B0%EF%BC%8C%E6%95%99%E4%BD%A0Spring%20Boot%E5%A6%82%E4%BD%95%E6%89%A9%E5%B1%95%E3%80%81%E6%8E%A5%E7%AE%A1MVC%EF%BC%9F/"/>
-    <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot第八弹，一波带走，教你Spring Boot如何扩展、接管MVC？/</id>
+    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E5%85%AB%E5%BC%B9%EF%BC%8C%E4%B8%80%E6%B3%A2%E5%B8%A6%E8%B5%B0%EF%BC%8C%E6%95%99%E4%BD%A0Spring%20Boot%E5%A6%82%E4%BD%95%E6%89%A9%E5%B1%95%E3%80%81%E6%8E%A5%E7%AE%A1MVC%EF%BC%9F/"/>
+    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot第八弹，一波带走，教你Spring Boot如何扩展、接管MVC？/</id>
     <published>2020-10-14T02:08:42.000Z</published>
     <updated>2020-10-23T11:13:10.498Z</updated>
     
@@ -136,17 +138,17 @@
     
     </summary>
     
-      <category term="Spring Boot 进阶" scheme="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="Spring Boot" scheme="http://chenjiabing666.github.io/tags/Spring-Boot/"/>
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
     
   </entry>
   
   <entry>
     <title>过滤器如何配置，一波梭哈~</title>
-    <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E4%B8%83%E5%BC%B9%EF%BC%8C%E8%BF%87%E6%BB%A4%E5%99%A8%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%EF%BC%8C%E4%B8%80%E6%B3%A2%E6%A2%AD%E5%93%88~/"/>
-    <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot第七弹，过滤器如何配置，一波梭哈~/</id>
+    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E4%B8%83%E5%BC%B9%EF%BC%8C%E8%BF%87%E6%BB%A4%E5%99%A8%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%EF%BC%8C%E4%B8%80%E6%B3%A2%E6%A2%AD%E5%93%88~/"/>
+    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot第七弹，过滤器如何配置，一波梭哈~/</id>
     <published>2020-10-14T02:07:42.000Z</published>
     <updated>2020-10-23T11:12:33.219Z</updated>
     
@@ -157,17 +159,17 @@
     
     </summary>
     
-      <category term="Spring Boot 进阶" scheme="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="Spring Boot" scheme="http://chenjiabing666.github.io/tags/Spring-Boot/"/>
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
     
   </entry>
   
   <entry>
     <title>拦截器如何配置，看这儿~</title>
-    <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%8B%A6%E6%88%AA%E5%99%A8%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%EF%BC%8C%E7%9C%8B%E8%BF%99%E5%84%BF~/"/>
-    <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot第六弹，拦截器如何配置，看这儿~/</id>
+    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%8B%A6%E6%88%AA%E5%99%A8%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%EF%BC%8C%E7%9C%8B%E8%BF%99%E5%84%BF~/"/>
+    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot第六弹，拦截器如何配置，看这儿~/</id>
     <published>2020-10-14T02:06:42.000Z</published>
     <updated>2020-10-23T11:11:54.018Z</updated>
     
@@ -178,17 +180,17 @@
     
     </summary>
     
-      <category term="Spring Boot 进阶" scheme="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="Spring Boot" scheme="http://chenjiabing666.github.io/tags/Spring-Boot/"/>
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
     
   </entry>
   
   <entry>
     <title>Spring Boot WEB开发初了解~</title>
-    <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E4%BA%94%E5%BC%B9%EF%BC%8CWEB%E5%BC%80%E5%8F%91%E5%88%9D%E4%BA%86%E8%A7%A3~/"/>
-    <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot第五弹，WEB开发初了解~/</id>
+    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E4%BA%94%E5%BC%B9%EF%BC%8CWEB%E5%BC%80%E5%8F%91%E5%88%9D%E4%BA%86%E8%A7%A3~/"/>
+    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot第五弹，WEB开发初了解~/</id>
     <published>2020-10-14T02:05:42.000Z</published>
     <updated>2020-10-23T11:11:13.678Z</updated>
     
@@ -198,17 +200,17 @@
     
     </summary>
     
-      <category term="Spring Boot 进阶" scheme="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="Spring Boot" scheme="http://chenjiabing666.github.io/tags/Spring-Boot/"/>
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
     
   </entry>
   
   <entry>
     <title>一文带你搞懂日志框架如何切换？</title>
-    <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E5%9B%9B%E5%BC%B9%EF%BC%8C%E4%B8%80%E6%96%87%E5%B8%A6%E4%BD%A0%E6%90%9E%E6%87%82%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E5%A6%82%E4%BD%95%E5%88%87%E6%8D%A2%EF%BC%9F/"/>
-    <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot第四弹，一文带你搞懂日志框架如何切换？/</id>
+    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E5%9B%9B%E5%BC%B9%EF%BC%8C%E4%B8%80%E6%96%87%E5%B8%A6%E4%BD%A0%E6%90%9E%E6%87%82%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E5%A6%82%E4%BD%95%E5%88%87%E6%8D%A2%EF%BC%9F/"/>
+    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot第四弹，一文带你搞懂日志框架如何切换？/</id>
     <published>2020-10-14T02:04:42.000Z</published>
     <updated>2020-10-23T11:10:22.671Z</updated>
     
@@ -220,17 +222,17 @@
     
     </summary>
     
-      <category term="Spring Boot 进阶" scheme="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="Spring Boot" scheme="http://chenjiabing666.github.io/tags/Spring-Boot/"/>
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
     
   </entry>
   
   <entry>
     <title>一文带你搞懂日志如何配置？</title>
-    <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E4%B8%89%E5%BC%B9%EF%BC%8C%E4%B8%80%E6%96%87%E5%B8%A6%E4%BD%A0%E6%90%9E%E6%87%82%E6%97%A5%E5%BF%97%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%EF%BC%9F/"/>
-    <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot第三弹，一文带你搞懂日志如何配置？/</id>
+    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E4%B8%89%E5%BC%B9%EF%BC%8C%E4%B8%80%E6%96%87%E5%B8%A6%E4%BD%A0%E6%90%9E%E6%87%82%E6%97%A5%E5%BF%97%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%EF%BC%9F/"/>
+    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot第三弹，一文带你搞懂日志如何配置？/</id>
     <published>2020-10-14T02:03:42.000Z</published>
     <updated>2020-10-23T11:09:45.708Z</updated>
     
@@ -241,17 +243,17 @@
     
     </summary>
     
-      <category term="Spring Boot 进阶" scheme="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="Spring Boot" scheme="http://chenjiabing666.github.io/tags/Spring-Boot/"/>
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
     
   </entry>
   
   <entry>
     <title>Spring Boot 配置文件怎么造？</title>
-    <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%20%E7%AC%AC%E4%BA%8C%E5%BC%B9%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%80%8E%E4%B9%88%E9%80%A0%EF%BC%9F/"/>
-    <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot 第二弹，配置文件怎么造？/</id>
+    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%20%E7%AC%AC%E4%BA%8C%E5%BC%B9%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%80%8E%E4%B9%88%E9%80%A0%EF%BC%9F/"/>
+    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot 第二弹，配置文件怎么造？/</id>
     <published>2020-10-14T02:01:42.000Z</published>
     <updated>2020-10-23T11:09:04.279Z</updated>
     
@@ -263,17 +265,17 @@
     
     </summary>
     
-      <category term="Spring Boot 进阶" scheme="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="Spring Boot" scheme="http://chenjiabing666.github.io/tags/Spring-Boot/"/>
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
     
   </entry>
   
   <entry>
     <title>Spring Boot 第一弹，问候一下世界！！！</title>
-    <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%20%E7%AC%AC%E4%B8%80%E5%BC%B9%EF%BC%8C%E9%97%AE%E5%80%99%E4%B8%80%E4%B8%8B%E4%B8%96%E7%95%8C%EF%BC%81%EF%BC%81%EF%BC%81/"/>
-    <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot 第一弹，问候一下世界！！！/</id>
+    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%20%E7%AC%AC%E4%B8%80%E5%BC%B9%EF%BC%8C%E9%97%AE%E5%80%99%E4%B8%80%E4%B8%8B%E4%B8%96%E7%95%8C%EF%BC%81%EF%BC%81%EF%BC%81/"/>
+    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot 第一弹，问候一下世界！！！/</id>
     <published>2020-10-14T02:00:42.000Z</published>
     <updated>2020-10-23T11:08:23.296Z</updated>
     
@@ -285,17 +287,17 @@
     
     </summary>
     
-      <category term="Spring Boot 进阶" scheme="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="Spring Boot" scheme="http://chenjiabing666.github.io/tags/Spring-Boot/"/>
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
     
   </entry>
   
   <entry>
     <title>Navicat Premium 12破解版安装</title>
-    <link href="http://chenjiabing666.github.io/2020/08/27/Navicat%20Premium%2012%E5%85%8D%E8%B4%B9%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85/"/>
-    <id>http://chenjiabing666.github.io/2020/08/27/Navicat Premium 12免费版本安装/</id>
+    <link href="https://chenjiabing666.github.io/2020/08/27/Navicat%20Premium%2012%E5%85%8D%E8%B4%B9%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85/"/>
+    <id>https://chenjiabing666.github.io/2020/08/27/Navicat Premium 12免费版本安装/</id>
     <published>2020-08-27T07:51:57.000Z</published>
     <updated>2020-10-21T13:35:09.337Z</updated>
     
@@ -311,19 +313,19 @@
     
     </summary>
     
-      <category term="开发工具" scheme="http://chenjiabing666.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
+      <category term="开发工具" scheme="https://chenjiabing666.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="破解" scheme="http://chenjiabing666.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
+      <category term="破解" scheme="https://chenjiabing666.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
     
   </entry>
   
   <entry>
     <title>Mybatis Log plugin破解，亲测可用！！！</title>
-    <link href="http://chenjiabing666.github.io/2020/08/26/plugin%E7%A0%B4%E8%A7%A3%EF%BC%8C%E4%BA%B2%E6%B5%8B%E5%8F%AF%E7%94%A8/"/>
-    <id>http://chenjiabing666.github.io/2020/08/26/plugin破解，亲测可用/</id>
+    <link href="https://chenjiabing666.github.io/2020/08/26/plugin%E7%A0%B4%E8%A7%A3%EF%BC%8C%E4%BA%B2%E6%B5%8B%E5%8F%AF%E7%94%A8/"/>
+    <id>https://chenjiabing666.github.io/2020/08/26/plugin破解，亲测可用/</id>
     <published>2020-08-26T06:50:11.000Z</published>
-    <updated>2020-10-21T13:35:09.415Z</updated>
+    <updated>2020-10-23T12:39:21.293Z</updated>
     
     <summary type="html">
     
@@ -338,19 +340,21 @@
     
     </summary>
     
-      <category term="开发工具" scheme="http://chenjiabing666.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
+      <category term="开发工具" scheme="https://chenjiabing666.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="破解" scheme="http://chenjiabing666.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
+      <category term="破解" scheme="https://chenjiabing666.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
+    
+      <category term="优质资源" scheme="https://chenjiabing666.github.io/tags/%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90/"/>
     
   </entry>
   
   <entry>
     <title>IDEA2020永久破解，亲测可用！！！</title>
-    <link href="http://chenjiabing666.github.io/2020/05/08/IDEA2020%E6%B0%B8%E4%B9%85%E7%A0%B4%E8%A7%A3%EF%BC%8C%E4%BA%B2%E6%B5%8B%E5%8F%AF%E7%94%A8%EF%BC%81%EF%BC%81%EF%BC%81/"/>
-    <id>http://chenjiabing666.github.io/2020/05/08/IDEA2020永久破解，亲测可用！！！/</id>
+    <link href="https://chenjiabing666.github.io/2020/05/08/IDEA2020%E6%B0%B8%E4%B9%85%E7%A0%B4%E8%A7%A3%EF%BC%8C%E4%BA%B2%E6%B5%8B%E5%8F%AF%E7%94%A8%EF%BC%81%EF%BC%81%EF%BC%81/"/>
+    <id>https://chenjiabing666.github.io/2020/05/08/IDEA2020永久破解，亲测可用！！！/</id>
     <published>2020-05-08T10:51:57.000Z</published>
-    <updated>2020-10-22T14:49:50.858Z</updated>
+    <updated>2020-10-23T12:38:46.970Z</updated>
     
     <summary type="html">
     
@@ -365,17 +369,19 @@
     
     </summary>
     
-      <category term="开发工具" scheme="http://chenjiabing666.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
+      <category term="开发工具" scheme="https://chenjiabing666.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="破解" scheme="http://chenjiabing666.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
+      <category term="破解" scheme="https://chenjiabing666.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
+    
+      <category term="优质资源" scheme="https://chenjiabing666.github.io/tags/%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90/"/>
     
   </entry>
   
   <entry>
     <title>select语句做了什么？</title>
-    <link href="http://chenjiabing666.github.io/2020/05/08/select%E8%AF%AD%E5%8F%A5%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/"/>
-    <id>http://chenjiabing666.github.io/2020/05/08/select语句做了什么？/</id>
+    <link href="https://chenjiabing666.github.io/2020/05/08/select%E8%AF%AD%E5%8F%A5%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/"/>
+    <id>https://chenjiabing666.github.io/2020/05/08/select语句做了什么？/</id>
     <published>2020-05-08T10:51:57.000Z</published>
     <updated>2020-10-21T13:35:09.415Z</updated>
     
@@ -391,17 +397,17 @@
     
     </summary>
     
-      <category term="数据库干货篇" scheme="http://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
+      <category term="数据库干货篇" scheme="https://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
     
     
-      <category term="SQL" scheme="http://chenjiabing666.github.io/tags/SQL/"/>
+      <category term="SQL" scheme="https://chenjiabing666.github.io/tags/SQL/"/>
     
   </entry>
   
   <entry>
     <title>线上Bug无法复现怎么办？老司机教你一招，SpringBoot远程调试不用愁！</title>
-    <link href="http://chenjiabing666.github.io/2020/04/28/%E7%BA%BF%E4%B8%8ABug%E6%97%A0%E6%B3%95%E5%A4%8D%E7%8E%B0%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%E8%80%81%E5%8F%B8%E6%9C%BA%E6%95%99%E4%BD%A0%E4%B8%80%E6%8B%9B%EF%BC%8CSpringBoot%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95%E4%B8%8D%E7%94%A8%E6%84%81%EF%BC%81/"/>
-    <id>http://chenjiabing666.github.io/2020/04/28/线上Bug无法复现怎么办？老司机教你一招，SpringBoot远程调试不用愁！/</id>
+    <link href="https://chenjiabing666.github.io/2020/04/28/%E7%BA%BF%E4%B8%8ABug%E6%97%A0%E6%B3%95%E5%A4%8D%E7%8E%B0%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%E8%80%81%E5%8F%B8%E6%9C%BA%E6%95%99%E4%BD%A0%E4%B8%80%E6%8B%9B%EF%BC%8CSpringBoot%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95%E4%B8%8D%E7%94%A8%E6%84%81%EF%BC%81/"/>
+    <id>https://chenjiabing666.github.io/2020/04/28/线上Bug无法复现怎么办？老司机教你一招，SpringBoot远程调试不用愁！/</id>
     <published>2020-04-28T03:03:37.000Z</published>
     <updated>2020-08-19T06:58:25.779Z</updated>
     
@@ -418,17 +424,17 @@
     
     </summary>
     
-      <category term="杂谈" scheme="http://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+      <category term="杂谈" scheme="https://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
     
     
-      <category term="杂谈" scheme="http://chenjiabing666.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+      <category term="杂谈" scheme="https://chenjiabing666.github.io/tags/%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
   <entry>
     <title>大白话布隆过滤器，又能和面试官扯皮了！！！</title>
-    <link href="http://chenjiabing666.github.io/2020/04/26/%E5%A4%A7%E7%99%BD%E8%AF%9D%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%8C%E5%8F%88%E8%83%BD%E5%92%8C%E9%9D%A2%E8%AF%95%E5%AE%98%E6%89%AF%E7%9A%AE%E4%BA%86%EF%BC%81%EF%BC%81%EF%BC%81/"/>
-    <id>http://chenjiabing666.github.io/2020/04/26/大白话布隆过滤器，又能和面试官扯皮了！！！/</id>
+    <link href="https://chenjiabing666.github.io/2020/04/26/%E5%A4%A7%E7%99%BD%E8%AF%9D%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%8C%E5%8F%88%E8%83%BD%E5%92%8C%E9%9D%A2%E8%AF%95%E5%AE%98%E6%89%AF%E7%9A%AE%E4%BA%86%EF%BC%81%EF%BC%81%EF%BC%81/"/>
+    <id>https://chenjiabing666.github.io/2020/04/26/大白话布隆过滤器，又能和面试官扯皮了！！！/</id>
     <published>2020-04-26T14:06:38.000Z</published>
     <updated>2020-04-26T14:07:08.648Z</updated>
     
@@ -445,17 +451,17 @@
     
     </summary>
     
-      <category term="杂谈" scheme="http://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+      <category term="杂谈" scheme="https://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
     
     
-      <category term="杂谈" scheme="http://chenjiabing666.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+      <category term="杂谈" scheme="https://chenjiabing666.github.io/tags/%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
   <entry>
     <title>看完这篇缓存穿透的文章，保证你能和面试官互扯！！！</title>
-    <link href="http://chenjiabing666.github.io/2020/04/26/%E7%9C%8B%E5%AE%8C%E8%BF%99%E7%AF%87%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E7%9A%84%E6%96%87%E7%AB%A0%EF%BC%8C%E4%BF%9D%E8%AF%81%E4%BD%A0%E8%83%BD%E5%92%8C%E9%9D%A2%E8%AF%95%E5%AE%98%E4%BA%92%E6%89%AF%EF%BC%81%EF%BC%81%EF%BC%81/"/>
-    <id>http://chenjiabing666.github.io/2020/04/26/看完这篇缓存穿透的文章，保证你能和面试官互扯！！！/</id>
+    <link href="https://chenjiabing666.github.io/2020/04/26/%E7%9C%8B%E5%AE%8C%E8%BF%99%E7%AF%87%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E7%9A%84%E6%96%87%E7%AB%A0%EF%BC%8C%E4%BF%9D%E8%AF%81%E4%BD%A0%E8%83%BD%E5%92%8C%E9%9D%A2%E8%AF%95%E5%AE%98%E4%BA%92%E6%89%AF%EF%BC%81%EF%BC%81%EF%BC%81/"/>
+    <id>https://chenjiabing666.github.io/2020/04/26/看完这篇缓存穿透的文章，保证你能和面试官互扯！！！/</id>
     <published>2020-04-26T14:05:19.000Z</published>
     <updated>2020-08-19T06:59:25.432Z</updated>
     
@@ -472,10 +478,10 @@
     
     </summary>
     
-      <category term="杂谈" scheme="http://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+      <category term="杂谈" scheme="https://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
     
     
-      <category term="杂谈" scheme="http://chenjiabing666.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+      <category term="杂谈" scheme="https://chenjiabing666.github.io/tags/%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
