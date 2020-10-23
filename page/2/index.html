@@ -45,12 +45,16 @@
 
 
 
+  <meta name="google-site-verification" content="true" />
 
 
 
 
 
 
+
+
+  <meta name="baidu-site-verification" content="code-ltfpVmGDr3" />
 
 
 
@@ -119,7 +123,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -454,10 +458,9 @@
 
       
         
-          
-          持续原创输出，点击上方蓝字关注我吧
-目录前言Spring Boot 版本什么是日志门面？如何做到无感知切换？如何切换？引入依赖指定配置文件日志如何配置？总结前言首先要感谢一下读者朋友们的支持，你们每一个的赞都是对陈某最大的肯定，陈某也会一如既往的加油，奥利给！！！言归正传，上一篇文章写了Spring Boot的默认日志框架Logback的基本配置，有兴趣的可以看看：Spring Boot第三弹，一文带你搞懂日志如何配置？。今天就来介绍一下Spring Boot如何无感的切换日志框架？Spring Boot 版本本文基于的Spring Boot的版本是2.3.4.RELEASE。什么是日志门面？
-          ...
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>首先要感谢一下读者朋友们的支持，你们每一个的赞都是对陈某最大的肯定，陈某也会一如既往的加油，奥利给！！！</p>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Spring%20Boot%E7%AC%AC%E5%9B%9B%E5%BC%B9%EF%BC%8C%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E5%A6%82%E4%BD%95%E5%88%87%E6%8D%A2%EF%BC%9F/1.png" alt=""><br>言归正传，上一篇文章写了Spring Boot的默认日志框架Logback的基本配置，有兴趣的可以看看：<a href="https://mp.weixin.qq.com/s/5hyGi6X6BhfCC5kTEvUyFg">Spring Boot第三弹，一文带你搞懂日志如何配置？</a>。</p>
+<p>今天就来介绍一下Spring Boot如何无感的切换日志框架？</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/10/14/Spring Boot第四弹，一文带你搞懂日志框架如何切换？/#more" rel="contents">
@@ -654,10 +657,8 @@
 
       
         
-          
-          持续原创输出，点击上方蓝字关注我吧
-目录前言Spring Boot 版本日志级别日志框架有哪些？Spring Boot 日志框架代码中如何使用日志？如何定制日志级别？日志如何输出到文件中？如何定制日志格式？如何自定义日志配置？总结前言日志通常不会在需求阶段作为一个功能单独提出来，也不会在产品方案中看到它的细节。但是，这丝毫不影响它在任何一个系统中的重要的地位。今天就来介绍一下Spring Boot中的日志如何配置。Spring Boot 版本本文基于的Spring Boot的版本是2.3.4.RELEASE。日志级别几种常见的日志级别由低到高分为：TRACE &lt; DEBUG &lt; I
-          ...
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>日志通常不会在需求阶段作为一个功能单独提出来，也不会在产品方案中看到它的细节。但是，这丝毫不影响它在任何一个系统中的重要的地位。</p>
+<p>今天就来介绍一下Spring Boot中的日志如何配置。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/10/14/Spring Boot第三弹，一文带你搞懂日志如何配置？/#more" rel="contents">
@@ -854,19 +855,9 @@
 
       
         
-          
-          持续原创输出，点击上方蓝字关注我吧
-
-目录
-
-前言properties格式简介YML格式简介
-
-如何使用总结如何从配置文件取值？
-
-@ConfigurationProperties@Value如何从自定义配置文件中取值？
-前言
-自从用了Spring Boot，个人最喜欢的就是Spring Boot的配置文件了，和Spring比起，Spring Boot更加灵活，修改的某些配置也是更加得心应手。Spring Boot 官方提供了两种常用的配置文件格式，分别是properties、YML格式。相比于properties来说，YML更加年轻，层级也是更加分明。今天这篇文章就来介绍一下Spring B
-          ...
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>自从用了Spring Boot，个人最喜欢的就是Spring Boot的配置文件了，和Spring比起，Spring Boot更加灵活，修改的某些配置也是更加得心应手。</p>
+<p>Spring Boot 官方提供了两种常用的配置文件格式，分别是<code>properties</code>、<code>YML</code>格式。相比于<code>properties</code>来说，<code>YML</code>更加年轻，层级也是更加分明。</p>
+<p>今天这篇文章就来介绍一下Spring Boot的配置文件的语法以及如何从配置文件中取值。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/10/14/Spring Boot 第二弹，配置文件怎么造？/#more" rel="contents">
@@ -1025,7 +1016,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.4k
+                  2.3k
                 </span>
               
 
@@ -1063,10 +1054,9 @@
 
       
         
-          
-          持续原创输出，点击上方蓝字关注我吧
-目录前言什么是Spring Boot？如何搭建一个Spring Boot项目？第一个程序 Hello World依赖解读什么是配置文件？什么是启动类？如何进行单元测试？前言相信从事Java开发的朋友都听说过SSM框架，这还算年轻的，老点的甚至经历过SSH，说起来有点恐怖，哈哈。比如我就是经历过SSH那个时代末流，没办法，很无奈。当然无论是SSM还是SSH都不是今天的重点，今天要说的是Spring Boot，一个令人眼前一亮的框架，从大的说，Spring Boot取代了SSM 中的SS的角色。今天这篇文章就来谈谈Spring Boot，这个我第一次使用直呼爽的
-          ...
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>相信从事Java开发的朋友都听说过<code>SSM</code>框架，这还算年轻的，老点的甚至经历过<code>SSH</code>，说起来有点恐怖，哈哈。比如我就是经历过<code>SSH</code>那个时代末流，没办法，很无奈。</p>
+<p>当然无论是SSM还是SSH都不是今天的重点，今天要说的是<code>Spring Boot</code>，一个令人眼前一亮的框架，从大的说，Spring Boot取代了<code>SSM</code> 中的<code>SS</code>的角色。</p>
+<p>今天这篇文章就来谈谈Spring Boot，这个我第一次使用直呼<code>爽</code>的框架。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/10/14/Spring Boot 第一弹，问候一下世界！！！/#more" rel="contents">
@@ -2447,7 +2437,7 @@ DB 层查询不命中，不将空结果缓存
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2526,6 +2516,13 @@ DB 层查询不命中，不将空结果缓存
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -2551,7 +2548,7 @@ DB 层查询不命中，不将空结果缓存
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">145k</span>
+    <span title="Site words total count">143.1k</span>
   
 </div>
 
@@ -2581,7 +2578,7 @@ DB 层查询不命中，不将空结果缓存
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共145k字</span>
+  <span class="post-count">博客全站共143.1k字</span>
 </div>
 
         
@@ -2596,11 +2593,6 @@ DB 层查询不命中，不将空结果缓存
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     

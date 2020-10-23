@@ -64,17 +64,12 @@
     <link href="http://chenjiabing666.github.io/2020/10/15/Spring%20Boot%20%E7%AC%AC%20%E5%8D%81%E4%BA%8C%E5%BC%B9%EF%BC%8CSpring%20Boot%E6%95%B4%E5%90%88%E5%A4%9A%E7%82%B9%E5%A5%97%E8%B7%AF%EF%BC%8C%E5%B0%91%E8%B5%B0%E7%82%B9%E5%BC%AF%E8%B7%AF%EF%BC%81%EF%BC%81%EF%BC%81/"/>
     <id>http://chenjiabing666.github.io/2020/10/15/Spring Boot 第 十二弹，Spring Boot整合多点套路，少走点弯路！！！/</id>
     <published>2020-10-15T13:18:42.000Z</published>
-    <updated>2020-10-21T13:35:09.337Z</updated>
+    <updated>2020-10-23T11:16:27.723Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;&lt;section id=&quot;nice&quot; data-tool=&quot;mdnice编辑器&quot; data-website=&quot;https://www.mdnice.com&quot; style=&quot;padding: 0 10px; word-spacing: 0px; word-wrap:
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;网上有很多文章都在说&lt;code&gt;Spring Boot 如何整合 xxx&lt;/code&gt;，有文章教你为什么这么整合吗？整合了千万个框架，其实套路就那么几个，干嘛要学千万个，不如来这学习几个套路轻松整合，它不香吗？？？&lt;/p&gt;
+&lt;p&gt;今天写这篇文章的目的就是想从思想上教给大家几个套路，不用提到整合什么就去百度了，自己尝试去亲手整合一个。&lt;/p&gt;
     
     </summary>
     
@@ -90,24 +85,19 @@
     <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%BC%B9%EF%BC%8C%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB%20!%20Spring%20Boot%20%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83%EF%BC%81%EF%BC%81%EF%BC%81/"/>
     <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot 第十弹，优质资源分享 ! Spring Boot 入门到放弃！！！/</id>
     <published>2020-10-14T02:10:42.000Z</published>
-    <updated>2020-10-21T13:35:09.352Z</updated>
+    <updated>2020-10-23T11:15:06.431Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;section id=&quot;nice&quot; data-tool=&quot;mdnice编辑器&quot; data-website=&quot;https://www.mdnice.com&quot; style=&quot;padding: 0 10px; word-spacing: 0px; word-wrap:
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近不知不觉写Spring Boot专栏已经写了九篇文章了，从最底层的项目搭建到源码解析以及高级整合的部分，作者一直在精心准备文章，定时更新，有兴趣的可以看我的专栏&lt;a href=&quot;https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;amp;album_id=1532834475389288449&amp;amp;__biz=MzU3MDAzNDg1MA==#wechat_redirect&quot;&gt;Spring Boot进阶&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;有些读者反映文章更新的有点慢，想要尽快的入门Spring Boot，想我推荐一个Spring Boot的视频教程，最好能够和我的文章大纲有契合的地方。于是作者回家找了一套个人觉得很好的视频教程，今天在这里免费分享给大家。&lt;/p&gt;
     
     </summary>
     
       <category term="Spring Boot 进阶" scheme="http://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="Spring Boot" scheme="http://chenjiabing666.github.io/tags/Spring-Boot/"/>
+      <category term="Spring Boot,免费资源" scheme="http://chenjiabing666.github.io/tags/Spring-Boot-%E5%85%8D%E8%B4%B9%E8%B5%84%E6%BA%90/"/>
     
   </entry>
   
@@ -116,17 +106,12 @@
     <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E4%B9%9D%E5%BC%B9%EF%BC%8C%E6%BB%A1%E5%B1%8F%E7%9A%84try-catch%EF%BC%8C%E4%BD%A0%E4%B8%8D%E7%98%86%E5%BE%97%E6%85%8C%EF%BC%9F/"/>
     <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot第九弹，满屏的try-catch，你不瘆得慌？/</id>
     <published>2020-10-14T02:09:42.000Z</published>
-    <updated>2020-10-21T13:35:09.352Z</updated>
+    <updated>2020-10-23T11:13:45.723Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;&lt;section id=&quot;nice&quot; data-tool=&quot;mdnice编辑器&quot; data-website=&quot;https://www.mdnice.com&quot; style=&quot;padding: 0 10px; word-spacing: 0px; word-wrap:
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;软件开发过程中难免遇到各种的BUG，各种的异常，一直就是在解决异常的路上永不停歇，如果你的代码中再出现&lt;code&gt;try(){...}catch(){...}finally{...}&lt;/code&gt;代码块，你还有心情看下去吗？自己不觉得恶心吗？&lt;/p&gt;
+&lt;p&gt;冗余的代码往往回丧失写代码的动力，每天搬砖似的写代码，真的很难受。今天这篇文章教你如何去掉满屏的&lt;code&gt;try(){...}catch(){...}finally{...}&lt;/code&gt;，解放你的双手。&lt;/p&gt;
     
     </summary>
     
@@ -142,17 +127,12 @@
     <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E5%85%AB%E5%BC%B9%EF%BC%8C%E4%B8%80%E6%B3%A2%E5%B8%A6%E8%B5%B0%EF%BC%8C%E6%95%99%E4%BD%A0Spring%20Boot%E5%A6%82%E4%BD%95%E6%89%A9%E5%B1%95%E3%80%81%E6%8E%A5%E7%AE%A1MVC%EF%BC%9F/"/>
     <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot第八弹，一波带走，教你Spring Boot如何扩展、接管MVC？/</id>
     <published>2020-10-14T02:08:42.000Z</published>
-    <updated>2020-10-21T13:35:09.352Z</updated>
+    <updated>2020-10-23T11:13:10.498Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;&lt;section id=&quot;nice&quot; data-tool=&quot;mdnice编辑器&quot; data-website=&quot;https://www.mdnice.com&quot; style=&quot;padding: 0 10px; word-spacing: 0px; word-wrap:
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;自从用了Spring Boot是否有一个感觉，以前MVC的配置都很少用到了，比如视图解析器，拦截器，过滤器等等，这也正是Spring Boot好处之一。&lt;/p&gt;
+&lt;p&gt;但是往往Spring Boot提供默认的配置不一定适合实际的需求，因此需要能够定制MVC的相关功能，这篇文章就介绍一下如何扩展和全面接管MVC。&lt;/p&gt;
     
     </summary>
     
@@ -168,17 +148,12 @@
     <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E4%B8%83%E5%BC%B9%EF%BC%8C%E8%BF%87%E6%BB%A4%E5%99%A8%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%EF%BC%8C%E4%B8%80%E6%B3%A2%E6%A2%AD%E5%93%88~/"/>
     <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot第七弹，过滤器如何配置，一波梭哈~/</id>
     <published>2020-10-14T02:07:42.000Z</published>
-    <updated>2020-10-21T13:35:09.352Z</updated>
+    <updated>2020-10-23T11:12:33.219Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;&lt;section id=&quot;nice&quot; data-tool=&quot;mdnice编辑器&quot; data-website=&quot;https://www.mdnice.com&quot; style=&quot;padding: 0 10px; word-spacing: 0px; word-wrap:
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;上篇文章介绍了Spring Boot中如何配置拦截器，今天这篇文章就来讲讲类似于拦截器的一个组件：过滤器。&lt;/p&gt;
+&lt;p&gt;其实在实际开发中过滤器真的接触的不多，但是在应用中却是不可或缺的角色，值得花费一个章节专门介绍一下。&lt;/p&gt;
     
     </summary>
     
@@ -194,17 +169,12 @@
     <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%8B%A6%E6%88%AA%E5%99%A8%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%EF%BC%8C%E7%9C%8B%E8%BF%99%E5%84%BF~/"/>
     <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot第六弹，拦截器如何配置，看这儿~/</id>
     <published>2020-10-14T02:06:42.000Z</published>
-    <updated>2020-10-21T13:35:09.399Z</updated>
+    <updated>2020-10-23T11:11:54.018Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;&lt;section id=&quot;nice&quot; data-tool=&quot;mdnice编辑器&quot; data-website=&quot;https://www.mdnice.com&quot; style=&quot;padding: 0 10px; word-spacing: 0px; word-wrap:
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;上篇文章讲了Spring Boot的WEB开发基础内容，相信读者朋友们已经有了初步的了解，知道如何写一个接口。&lt;/p&gt;
+&lt;p&gt;今天这篇文章来介绍一下拦截器在Spring Boot中如何自定义以及配置。&lt;/p&gt;
     
     </summary>
     
@@ -220,17 +190,11 @@
     <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E4%BA%94%E5%BC%B9%EF%BC%8CWEB%E5%BC%80%E5%8F%91%E5%88%9D%E4%BA%86%E8%A7%A3~/"/>
     <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot第五弹，WEB开发初了解~/</id>
     <published>2020-10-14T02:05:42.000Z</published>
-    <updated>2020-10-21T13:35:09.352Z</updated>
+    <updated>2020-10-23T11:11:13.678Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;section id=&quot;nice&quot; data-tool=&quot;mdnice编辑器&quot; data-website=&quot;https://www.mdnice.com&quot; style=&quot;padding: 0 10px; word-spacing: 0px; word-wrap:
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;今天是Spring Boot专栏的第五篇文章，相信大家看了前四篇文章对Spring Boot已经有了初步的了解，今天这篇文章就来介绍一下Spring Boot的重要功能WEB开发。&lt;br&gt;
     
     </summary>
     
@@ -246,17 +210,13 @@
     <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E5%9B%9B%E5%BC%B9%EF%BC%8C%E4%B8%80%E6%96%87%E5%B8%A6%E4%BD%A0%E6%90%9E%E6%87%82%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E5%A6%82%E4%BD%95%E5%88%87%E6%8D%A2%EF%BC%9F/"/>
     <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot第四弹，一文带你搞懂日志框架如何切换？/</id>
     <published>2020-10-14T02:04:42.000Z</published>
-    <updated>2020-10-21T13:35:09.399Z</updated>
+    <updated>2020-10-23T11:10:22.671Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;&lt;section id=&quot;nice&quot; data-tool=&quot;mdnice编辑器&quot; data-website=&quot;https://www.mdnice.com&quot; style=&quot;padding: 0 10px; word-spacing: 0px; word-wrap:
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;首先要感谢一下读者朋友们的支持，你们每一个的赞都是对陈某最大的肯定，陈某也会一如既往的加油，奥利给！！！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://gitee.com/chenjiabing666/Blog-file/raw/master/Spring%20Boot%E7%AC%AC%E5%9B%9B%E5%BC%B9%EF%BC%8C%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E5%A6%82%E4%BD%95%E5%88%87%E6%8D%A2%EF%BC%9F/1.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;言归正传，上一篇文章写了Spring Boot的默认日志框架Logback的基本配置，有兴趣的可以看看：&lt;a href=&quot;https://mp.weixin.qq.com/s/5hyGi6X6BhfCC5kTEvUyFg&quot;&gt;Spring Boot第三弹，一文带你搞懂日志如何配置？&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;今天就来介绍一下Spring Boot如何无感的切换日志框架？&lt;/p&gt;
     
     </summary>
     
@@ -272,17 +232,12 @@
     <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E4%B8%89%E5%BC%B9%EF%BC%8C%E4%B8%80%E6%96%87%E5%B8%A6%E4%BD%A0%E6%90%9E%E6%87%82%E6%97%A5%E5%BF%97%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%EF%BC%9F/"/>
     <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot第三弹，一文带你搞懂日志如何配置？/</id>
     <published>2020-10-14T02:03:42.000Z</published>
-    <updated>2020-10-21T13:35:09.352Z</updated>
+    <updated>2020-10-23T11:09:45.708Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;&lt;section id=&quot;nice&quot; data-tool=&quot;mdnice编辑器&quot; data-website=&quot;https://www.mdnice.com&quot; style=&quot;padding: 0 10px; word-spacing: 0px; word-wrap:
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;日志通常不会在需求阶段作为一个功能单独提出来，也不会在产品方案中看到它的细节。但是，这丝毫不影响它在任何一个系统中的重要的地位。&lt;/p&gt;
+&lt;p&gt;今天就来介绍一下Spring Boot中的日志如何配置。&lt;br&gt;
     
     </summary>
     
@@ -298,17 +253,13 @@
     <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%20%E7%AC%AC%E4%BA%8C%E5%BC%B9%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%80%8E%E4%B9%88%E9%80%A0%EF%BC%9F/"/>
     <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot 第二弹，配置文件怎么造？/</id>
     <published>2020-10-14T02:01:42.000Z</published>
-    <updated>2020-10-21T13:35:09.352Z</updated>
+    <updated>2020-10-23T11:09:04.279Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;&lt;section id=&quot;nice&quot; data-tool=&quot;mdnice编辑器&quot; data-website=&quot;https://www.mdnice.com&quot; style=&quot;padding: 0 10px; word-spacing: 0px; word-wrap:
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;自从用了Spring Boot，个人最喜欢的就是Spring Boot的配置文件了，和Spring比起，Spring Boot更加灵活，修改的某些配置也是更加得心应手。&lt;/p&gt;
+&lt;p&gt;Spring Boot 官方提供了两种常用的配置文件格式，分别是&lt;code&gt;properties&lt;/code&gt;、&lt;code&gt;YML&lt;/code&gt;格式。相比于&lt;code&gt;properties&lt;/code&gt;来说，&lt;code&gt;YML&lt;/code&gt;更加年轻，层级也是更加分明。&lt;/p&gt;
+&lt;p&gt;今天这篇文章就来介绍一下Spring Boot的配置文件的语法以及如何从配置文件中取值。&lt;br&gt;
     
     </summary>
     
@@ -324,17 +275,13 @@
     <link href="http://chenjiabing666.github.io/2020/10/14/Spring%20Boot%20%E7%AC%AC%E4%B8%80%E5%BC%B9%EF%BC%8C%E9%97%AE%E5%80%99%E4%B8%80%E4%B8%8B%E4%B8%96%E7%95%8C%EF%BC%81%EF%BC%81%EF%BC%81/"/>
     <id>http://chenjiabing666.github.io/2020/10/14/Spring Boot 第一弹，问候一下世界！！！/</id>
     <published>2020-10-14T02:00:42.000Z</published>
-    <updated>2020-10-21T13:35:09.337Z</updated>
+    <updated>2020-10-23T11:08:23.296Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;&lt;section id=&quot;nice&quot; data-tool=&quot;mdnice编辑器&quot; data-website=&quot;https://www.mdnice.com&quot; style=&quot;padding: 0 10px; word-spacing: 0px; word-wrap:
-        
-      
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;相信从事Java开发的朋友都听说过&lt;code&gt;SSM&lt;/code&gt;框架，这还算年轻的，老点的甚至经历过&lt;code&gt;SSH&lt;/code&gt;，说起来有点恐怖，哈哈。比如我就是经历过&lt;code&gt;SSH&lt;/code&gt;那个时代末流，没办法，很无奈。&lt;/p&gt;
+&lt;p&gt;当然无论是SSM还是SSH都不是今天的重点，今天要说的是&lt;code&gt;Spring Boot&lt;/code&gt;，一个令人眼前一亮的框架，从大的说，Spring Boot取代了&lt;code&gt;SSM&lt;/code&gt; 中的&lt;code&gt;SS&lt;/code&gt;的角色。&lt;/p&gt;
+&lt;p&gt;今天这篇文章就来谈谈Spring Boot，这个我第一次使用直呼&lt;code&gt;爽&lt;/code&gt;的框架。&lt;br&gt;
     
     </summary>
     

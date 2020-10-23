@@ -45,12 +45,16 @@
 
 
 
+  <meta name="google-site-verification" content="true" />
 
 
 
 
 
 
+
+
+  <meta name="baidu-site-verification" content="code-ltfpVmGDr3" />
 
 
 
@@ -119,7 +123,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -1055,15 +1059,8 @@
 
       
         
-          
-          前言
-网上有很多文章都在说Spring Boot 如何整合 xxx，有文章教你为什么这么整合吗？整合了千万个框架，其实套路就那么几个，干嘛要学千万个，不如来这学习几个套路轻松整合，它不香吗？？？
-今天写这篇文章的目的就是想从思想上教给大家几个套路，不用提到整合什么就去百度了，自己尝试去亲手整合一个。
-Spring Boot 版本
-本文基于的Spring Boot的版本是2.3.4.RELEASE。
-1. 找到自动配置类
-Spring Boot 在整合任何一个组件的时候都会先添加一个依赖starter，比如整合的Mybatis有一个mybatis-spring-boot-starter，依赖如下
-          ...
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>网上有很多文章都在说<code>Spring Boot 如何整合 xxx</code>，有文章教你为什么这么整合吗？整合了千万个框架，其实套路就那么几个，干嘛要学千万个，不如来这学习几个套路轻松整合，它不香吗？？？</p>
+<p>今天写这篇文章的目的就是想从思想上教给大家几个套路，不用提到整合什么就去百度了，自己尝试去亲手整合一个。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/10/15/Spring Boot 第 十二弹，Spring Boot整合多点套路，少走点弯路！！！/#more" rel="contents">
@@ -1222,7 +1219,7 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.7k
+                  1.3k
                 </span>
               
 
@@ -1238,7 +1235,7 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9
+                  4
                 </span>
               
             </div>
@@ -1260,9 +1257,8 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
 
       
         
-          
-          持续原创输出，点击上方蓝字关注我目录前言视频目录如何获取？总结前言最近不知不觉写Spring Boot专栏已经写了九篇文章了，从最底层的项目搭建到源码解析以及高级整合的部分，作者一直在精心准备文章，定时更新，有兴趣的可以看我的专栏Spring Boot进阶。有些读者反映文章更新的有点慢，想要尽快的入门Spring Boot，想我推荐一个Spring Boot的视频教程，最好能够和我的文章大纲有契合的地方。于是作者回家找了一套个人觉得很好的视频教程，今天在这里免费分享给大家。视频目录整个教程分为基础和高级整合两个部分，每套教程都有完整的代码和上课的课件，可以说是非常完整的。基础的部分目录如下：入
-          ...
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近不知不觉写Spring Boot专栏已经写了九篇文章了，从最底层的项目搭建到源码解析以及高级整合的部分，作者一直在精心准备文章，定时更新，有兴趣的可以看我的专栏<a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;album_id=1532834475389288449&amp;__biz=MzU3MDAzNDg1MA==#wechat_redirect">Spring Boot进阶</a>。</p>
+<p>有些读者反映文章更新的有点慢，想要尽快的入门Spring Boot，想我推荐一个Spring Boot的视频教程，最好能够和我的文章大纲有契合的地方。于是作者回家找了一套个人觉得很好的视频教程，今天在这里免费分享给大家。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/10/14/Spring Boot 第十弹，优质资源分享 ! Spring Boot 入门到放弃！！！/#more" rel="contents">
@@ -1421,7 +1417,7 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k
+                  1.8k
                 </span>
               
 
@@ -1437,7 +1433,7 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7
+                  6
                 </span>
               
             </div>
@@ -1459,10 +1455,8 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
 
       
         
-          
-          持续原创输出，点击上方蓝字关注我
-目录前言Spring Boot 版本全局统一异常处理的前世今生Spring Boot的异常如何分类？如何统一异常处理？异常匹配的顺序是什么？总结前言软件开发过程中难免遇到各种的BUG，各种的异常，一直就是在解决异常的路上永不停歇，如果你的代码中再出现try(){…}catch(){…}finally{…}代码块，你还有心情看下去吗？自己不觉得恶心吗？冗余的代码往往回丧失写代码的动力，每天搬砖似的写代码，真的很难受。今天这篇文章教你如何去掉满屏的try(){…}catch(){…}finally{…}，解放你的双手。Spring Boot 版本本文基于的Spri
-          ...
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>软件开发过程中难免遇到各种的BUG，各种的异常，一直就是在解决异常的路上永不停歇，如果你的代码中再出现<code>try(){...}catch(){...}finally{...}</code>代码块，你还有心情看下去吗？自己不觉得恶心吗？</p>
+<p>冗余的代码往往回丧失写代码的动力，每天搬砖似的写代码，真的很难受。今天这篇文章教你如何去掉满屏的<code>try(){...}catch(){...}finally{...}</code>，解放你的双手。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/10/14/Spring Boot第九弹，满屏的try-catch，你不瘆得慌？/#more" rel="contents">
@@ -1621,7 +1615,7 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.7k
+                  1.6k
                 </span>
               
 
@@ -1659,10 +1653,8 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
 
       
         
-          
-          持续原创输出，点击上方蓝字关注我
-目录前言Spring Boot 版本如何扩展MVC？如何自定义一个拦截器？什么都不配置为什么依然能运行MVC相关的功能？如何全面接管MVC？【不推荐】为什么@EnableWebMvc一个注解就能够全面接管MVC？Spring Boot相关资料总结前言自从用了Spring Boot是否有一个感觉，以前MVC的配置都很少用到了，比如视图解析器，拦截器，过滤器等等，这也正是Spring Boot好处之一。但是往往Spring Boot提供默认的配置不一定适合实际的需求，因此需要能够定制MVC的相关功能，这篇文章就介绍一下如何扩展和全面接管MVC。Spring Boo
-          ...
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>自从用了Spring Boot是否有一个感觉，以前MVC的配置都很少用到了，比如视图解析器，拦截器，过滤器等等，这也正是Spring Boot好处之一。</p>
+<p>但是往往Spring Boot提供默认的配置不一定适合实际的需求，因此需要能够定制MVC的相关功能，这篇文章就介绍一下如何扩展和全面接管MVC。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/10/14/Spring Boot第八弹，一波带走，教你Spring Boot如何扩展、接管MVC？/#more" rel="contents">
@@ -1859,10 +1851,8 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
 
       
         
-          
-          持续原创输出，点击上方蓝字关注我
-目录前言Spring Boot 版本什么是过滤器？Filter的执行原理如何自定义一个Filter？Spring Boot如何配置Filter？配置类中使用@Bean注入【推荐使用】使用@WebFilter举个栗子总结前言上篇文章介绍了Spring Boot中如何配置拦截器，今天这篇文章就来讲讲类似于拦截器的一个组件：过滤器。其实在实际开发中过滤器真的接触的不多，但是在应用中却是不可或缺的角色，值得花费一个章节专门介绍一下。Spring Boot 版本本文基于的Spring Boot的版本是2.3.4.RELEASE。什么是过滤器？Filter也称之为过滤器，
-          ...
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上篇文章介绍了Spring Boot中如何配置拦截器，今天这篇文章就来讲讲类似于拦截器的一个组件：过滤器。</p>
+<p>其实在实际开发中过滤器真的接触的不多，但是在应用中却是不可或缺的角色，值得花费一个章节专门介绍一下。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/10/14/Spring Boot第七弹，过滤器如何配置，一波梭哈~/#more" rel="contents">
@@ -2021,7 +2011,7 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.6k
+                  1.5k
                 </span>
               
 
@@ -2059,10 +2049,8 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
 
       
         
-          
-          持续原创输出，点击上方蓝字关注我吧
-目录前言Spring Boot 版本什么是拦截器？如何自定义一个拦截器？如何使其在Spring Boot中生效？举个栗子思路根据什么判断这个接口已经请求了？这个具体的信息存放在哪里？如何实现？总结前言上篇文章讲了Spring Boot的WEB开发基础内容，相信读者朋友们已经有了初步的了解，知道如何写一个接口。今天这篇文章来介绍一下拦截器在Spring Boot中如何自定义以及配置。Spring Boot 版本本文基于的Spring Boot的版本是2.3.4.RELEASE。什么是拦截器？Spring MVC中的拦截器（Interceptor）类似于Serv
-          ...
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上篇文章讲了Spring Boot的WEB开发基础内容，相信读者朋友们已经有了初步的了解，知道如何写一个接口。</p>
+<p>今天这篇文章来介绍一下拦截器在Spring Boot中如何自定义以及配置。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/10/14/Spring Boot第六弹，拦截器如何配置，看这儿~/#more" rel="contents">
@@ -2259,9 +2247,7 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
 
       
         
-          
-          持续原创输出，点击上方蓝字关注我吧目录前言Spring Boot 版本前提条件（必须注意）添加依赖第一个接口开发如何自定义tomcat的端口？如何自定义项目路径？JSON格式化日期格式的设置其他属性的配置如何在配置类配置？总结前言今天是Spring Boot专栏的第五篇文章，相信大家看了前四篇文章对Spring Boot已经有了初步的了解，今天这篇文章就来介绍一下Spring Boot的重要功能WEB开发。Spring Boot 版本本文基于的Spring Boot的版本是2.3.4.RELEASE。前提条件（必须注意）Spring Boot的WEB开发有自己的启动器和自动配置，最好采用Spr
-          ...
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天是Spring Boot专栏的第五篇文章，相信大家看了前四篇文章对Spring Boot已经有了初步的了解，今天这篇文章就来介绍一下Spring Boot的重要功能WEB开发。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/10/14/Spring Boot第五弹，WEB开发初了解~/#more" rel="contents">
@@ -2386,7 +2372,7 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2465,6 +2451,13 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -2490,7 +2483,7 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">145k</span>
+    <span title="Site words total count">143.1k</span>
   
 </div>
 
@@ -2520,7 +2513,7 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共145k字</span>
+  <span class="post-count">博客全站共143.1k字</span>
 </div>
 
         
@@ -2535,11 +2528,6 @@ Spring Boot 在整合任何一个组件的时候都会先添加一个依赖start
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     
