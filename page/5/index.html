@@ -582,8 +582,8 @@ ZooKeeper 本质上是一个分布式的小文件存储系统。提供基于类�
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
+                  <a href="/categories/数据库干货篇/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库干货篇</span>
                   </a>
                 </span>
 
@@ -1916,13 +1916,11 @@ InnoDB引擎并没有直接将总数存在磁盘上，在执行count(*)函数的
 
       
         
-          
-          导读
-索引下推（index condition pushdown ）简称ICP，在Mysql5.6的版本上推出，用于优化查询。
-在不使用ICP的情况下，在使用非主键索引（又叫普通索引或者二级索引）进行查询时，存储引擎通过索引检索到数据，然后返回给MySQL服务器，服务器然后判断数据是否符合条件 。
-在使用ICP的情况下，如果存在某些被索引的列的判断条件时，MySQL服务器将这一部分判断条件传递给存储引擎，然后由存储引擎通过判断索引是否符合MySQL服务器传递的条件，只有当索引符合条件时才会将数据检索出来返回给MySQL服务器 。
-索引条件下推优化可以减少存储引擎查询基础表的次数，也可以减少My
-          ...
+          <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li>索引下推（index condition pushdown ）简称ICP，在Mysql5.6的版本上推出，用于优化查询。</li>
+<li>在不使用ICP的情况下，在使用非主键索引（又叫普通索引或者二级索引）进行查询时，存储引擎通过索引检索到数据，然后返回给MySQL服务器，服务器然后判断数据是否符合条件 。</li>
+<li>在使用ICP的情况下，如果存在某些被索引的列的判断条件时，MySQL服务器将这一部分判断条件传递给存储引擎，然后由存储引擎通过判断索引是否符合MySQL服务器传递的条件，只有当索引符合条件时才会将数据检索出来返回给MySQL服务器 。</li>
+<li>索引条件下推优化可以减少存储引擎查询基础表的次数，也可以减少MySQL服务器从存储引擎接收数据的次数。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/04/01/Mysql性能优化：什么是索引下推？/#more" rel="contents">
@@ -2119,20 +2117,12 @@ InnoDB引擎并没有直接将总数存在磁盘上，在执行count(*)函数的
 
       
         
-          
-          导读
-相信读者看过很多MYSQL索引优化的文章，其中有很多优化的方法，比如最佳左前缀，覆盖索引等方法，但是你真正理解为什么要使用最佳左前缀，为什么使用覆盖索引会提升查询的效率吗？
-
-本篇文章将从MYSQL内部结构上讲一下为什么覆盖索引能够提升效率。
-
-
-InnoDB索引模型
-在InnoDB中，表都是根据主键顺序以索引的形式存放的，这种存储方式的表称为索引组织表。又因为前面我们提到的，InnoDB使用了B+树索引模型，所以数据都是存储在B+树中的。
-每一个索引在InnoDB里面对应一棵B+树。
-
-主键索引和非主键索引的区别
-主键索引又叫聚簇索引 ，非主键索引又叫普通索引，那么这两种索引有什么区别
-          ...
+          <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li><p>相信读者看过很多MYSQL索引优化的文章，其中有很多优化的方法，比如最佳左前缀，覆盖索引等方法，但是你真正理解为什么要使用最佳左前缀，为什么使用覆盖索引会提升查询的效率吗？</p>
+</li>
+<li><p>本篇文章将从MYSQL内部结构上讲一下为什么覆盖索引能够提升效率。</p>
+</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/04/01/Mysql性能优化：为什么使用覆盖索引/#more" rel="contents">
@@ -2329,22 +2319,13 @@ InnoDB索引模型
 
       
         
-          
-          导读
-Mysql在中小型企业中是个香饽饽，目前主流的数据库之一，几乎没有一个后端开发者不会使用的，但是作为一个老司机，仅仅会用真的不够。
-
-今天陈某透过一个简单的查询语句来讲述在Mysql内部的执行过程。
-1select * from table where id=10;
-
-
-撸它
-首先通过一张图片来了解一下Mysql的基础架构，如下：
-
-  
-
-从上图可以看出，Mysql大致分为Server层和存储引擎层两部分。
-Server层包括连接器、查询缓存、分析器、优化器等，其中包含了Mysql的大多数核心功能以及所有的内置函数（如日期，时间函数等），所有跨存储引擎的功能都在这一层实现，比如存储过程
-          ...
+          <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li><p>Mysql在中小型企业中是个香饽饽，目前主流的数据库之一，几乎没有一个后端开发者不会使用的，但是作为一个老司机，仅仅会用真的不够。</p>
+</li>
+<li><p>今天陈某透过一个简单的查询语句来讲述在Mysql内部的执行过程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from table where id=10;</div></pre></td></tr></table></figure>
+</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/04/01/一条查询语句到底是如何执行的/#more" rel="contents">
@@ -2490,7 +2471,7 @@ Server层包括连接器、查询缓存、分析器、优化器等，其中包�
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://juejin.im/user/1556564194374926" target="_blank" title="掘金">
+                    <a href="https://juejin.im/user/2506542244708072" target="_blank" title="掘金">
                       
                         <i class="fa fa-fw fa-globe"></i>掘金</a>
                   </span>
@@ -2580,7 +2561,7 @@ Server层包括连接器、查询缓存、分析器、优化器等，其中包�
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">143.1k</span>
+    <span title="Site words total count">143k</span>
   
 </div>
 
@@ -2610,7 +2591,7 @@ Server层包括连接器、查询缓存、分析器、优化器等，其中包�
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共143.1k字</span>
+  <span class="post-count">博客全站共143k字</span>
 </div>
 
         

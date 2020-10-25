@@ -120,7 +120,7 @@
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/1.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/2.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/3.png">
-<meta property="og:updated_time" content="2020-04-01T02:37:58.828Z">
+<meta property="og:updated_time" content="2020-10-23T13:57:10.088Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql性能优化：什么是索引下推？">
 <meta name="twitter:description" content="导读
@@ -475,7 +475,8 @@
 <li>索引下推（index condition pushdown ）简称ICP，在Mysql5.6的版本上推出，用于优化查询。</li>
 <li>在不使用ICP的情况下，在使用非主键索引（又叫普通索引或者二级索引）进行查询时，存储引擎通过索引检索到数据，然后返回给MySQL服务器，服务器然后判断数据是否符合条件 。</li>
 <li>在使用ICP的情况下，如果存在某些被索引的列的判断条件时，MySQL服务器将这一部分判断条件传递给存储引擎，然后由存储引擎通过判断索引是否符合MySQL服务器传递的条件，只有当索引符合条件时才会将数据检索出来返回给MySQL服务器 。</li>
-<li>索引条件下推优化可以减少存储引擎查询基础表的次数，也可以减少MySQL服务器从存储引擎接收数据的次数。 </li>
+<li>索引条件下推优化可以减少存储引擎查询基础表的次数，也可以减少MySQL服务器从存储引擎接收数据的次数。 <a id="more"></a>
+</li>
 </ul>
 <h2 id="开撸"><a href="#开撸" class="headerlink" title="开撸"></a>开撸</h2><ul>
 <li>在开始之前先先准备一张用户表(user)，其中主要几个字段有：id、name、age、address。建立联合索引（name，age）。</li>
@@ -725,7 +726,7 @@
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://juejin.im/user/1556564194374926" target="_blank" title="掘金">
+                    <a href="https://juejin.im/user/2506542244708072" target="_blank" title="掘金">
                       
                         <i class="fa fa-fw fa-globe"></i>掘金</a>
                   </span>
@@ -831,7 +832,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">143.1k</span>
+    <span title="Site words total count">143k</span>
   
 </div>
 
@@ -861,7 +862,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共143.1k字</span>
+  <span class="post-count">博客全站共143k字</span>
 </div>
 
         

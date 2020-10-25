@@ -106,31 +106,22 @@
 
 
 <meta name="description" content="导读
-本篇文章接上篇SpringBoot整合多数据源，你会了吗？，前面文章最后留了几个问题供大家思考，今天一一揭晓。
-
-配置如何优化
-上文整合的过程中的还顺带整合Mybatis和TransactionManager，为什么还要重新定义他们呢？SpringBoot不是给我们都配置好了吗？注意，此处优化就是这两个配置去掉，直接用SpringBoot的自动配置，顿时高级了，别人一看你的代码如此简单就实现">
+本篇文章接上篇SpringBoot整合多数据源，你会了吗？，前面文章最后留了几个问题供大家思考，今天一一揭晓。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot整合多数据源的巨坑">
 <meta property="og:url" content="https://chenjiabing666.github.io/2020/03/18/SpringBoot整合多数据源的巨坑/index.html">
 <meta property="og:site_name" content="不才陈某技术博客">
 <meta property="og:description" content="导读
-本篇文章接上篇SpringBoot整合多数据源，你会了吗？，前面文章最后留了几个问题供大家思考，今天一一揭晓。
-
-配置如何优化
-上文整合的过程中的还顺带整合Mybatis和TransactionManager，为什么还要重新定义他们呢？SpringBoot不是给我们都配置好了吗？注意，此处优化就是这两个配置去掉，直接用SpringBoot的自动配置，顿时高级了，别人一看你的代码如此简单就实现">
+本篇文章接上篇SpringBoot整合多数据源，你会了吗？，前面文章最后留了几个问题供大家思考，今天一一揭晓。">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/transac1.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/circleex.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/circleex.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
-<meta property="og:updated_time" content="2020-10-21T13:35:09.399Z">
+<meta property="og:updated_time" content="2020-10-23T13:56:45.948Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot整合多数据源的巨坑">
 <meta name="twitter:description" content="导读
-本篇文章接上篇SpringBoot整合多数据源，你会了吗？，前面文章最后留了几个问题供大家思考，今天一一揭晓。
-
-配置如何优化
-上文整合的过程中的还顺带整合Mybatis和TransactionManager，为什么还要重新定义他们呢？SpringBoot不是给我们都配置好了吗？注意，此处优化就是这两个配置去掉，直接用SpringBoot的自动配置，顿时高级了，别人一看你的代码如此简单就实现">
+本篇文章接上篇SpringBoot整合多数据源，你会了吗？，前面文章最后留了几个问题供大家思考，今天一一揭晓。">
 <meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/transac1.png">
 
 
@@ -476,7 +467,8 @@
 
       
         <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
-<li>本篇文章接上篇<a href="https://chenjiabing666.github.io/2020/03/12/SpringBoot%E6%95%B4%E5%90%88%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%8C%E4%BD%A0%E4%BC%9A%E4%BA%86%E5%90%97%EF%BC%9F/">SpringBoot整合多数据源，你会了吗？</a>，前面文章最后留了几个问题供大家思考，今天一一揭晓。</li>
+<li>本篇文章接上篇<a href="https://chenjiabing666.github.io/2020/03/12/SpringBoot%E6%95%B4%E5%90%88%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%8C%E4%BD%A0%E4%BC%9A%E4%BA%86%E5%90%97%EF%BC%9F/">SpringBoot整合多数据源，你会了吗？</a>，前面文章最后留了几个问题供大家思考，今天一一揭晓。<a id="more"></a>
+</li>
 </ul>
 <h2 id="配置如何优化"><a href="#配置如何优化" class="headerlink" title="配置如何优化"></a>配置如何优化</h2><ul>
 <li>上文整合的过程中的还顺带整合Mybatis和TransactionManager，为什么还要重新定义他们呢？SpringBoot不是给我们都配置好了吗？注意，此处优化就是这两个配置去掉，直接用SpringBoot的自动配置，顿时高级了，别人一看你的代码如此简单就实现了多数据源的切换，牛叉不？</li>
@@ -751,7 +743,7 @@
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://juejin.im/user/1556564194374926" target="_blank" title="掘金">
+                    <a href="https://juejin.im/user/2506542244708072" target="_blank" title="掘金">
                       
                         <i class="fa fa-fw fa-globe"></i>掘金</a>
                   </span>
@@ -857,7 +849,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">143.1k</span>
+    <span title="Site words total count">143k</span>
   
 </div>
 
@@ -887,7 +879,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共143.1k字</span>
+  <span class="post-count">博客全站共143k字</span>
 </div>
 
         

@@ -105,24 +105,24 @@
 
 
 
-<meta name="description" content="结构型模式之适配器模式定义
+<meta name="description" content="定义
 适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。
 
 
 
 Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一个抽象类或接口，也可以是具体类。
-Adapter（适配器类）：适配器可以调用另一个接口，作为一个转换器，对Adaptee">
+Adapter（适配器类）：适配器可以调用另一个接口，作为一个转换器，对Adaptee和Target进行适配">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式之适配器模式">
 <meta property="og:url" content="https://chenjiabing666.github.io/2018/04/16/设计模式之适配器模式/index.html">
 <meta property="og:site_name" content="不才陈某技术博客">
-<meta property="og:description" content="结构型模式之适配器模式定义
+<meta property="og:description" content="定义
 适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。
 
 
 
 Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一个抽象类或接口，也可以是具体类。
-Adapter（适配器类）：适配器可以调用另一个接口，作为一个转换器，对Adaptee">
+Adapter（适配器类）：适配器可以调用另一个接口，作为一个转换器，对Adaptee和Target进行适配">
 <meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/adapeter1.png">
 <meta property="og:image" content="http://banner.linktech.cn/MC/huaweivmallwap/20171206/450x220.jpg">
 <meta property="og:image" content="http://banner.linktech.cn/MC/huaweivmallwap/20171206/450x220.jpg">
@@ -134,16 +134,16 @@ Adapter（适配器类）：适配器可以调用另一个接口，作为一个�
 <meta property="og:image" content="http://banner.linktech.cn/MC/huaweivmallwap/20171206/450x220.jpg">
 <meta property="og:image" content="http://track.linktech.cn/?m=huaweivmall&a=A100234624&l=02300&l_cd1=0&l_cd2=0">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
-<meta property="og:updated_time" content="2020-03-13T06:24:25.732Z">
+<meta property="og:updated_time" content="2020-10-23T13:58:04.814Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式之适配器模式">
-<meta name="twitter:description" content="结构型模式之适配器模式定义
+<meta name="twitter:description" content="定义
 适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。
 
 
 
 Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一个抽象类或接口，也可以是具体类。
-Adapter（适配器类）：适配器可以调用另一个接口，作为一个转换器，对Adaptee">
+Adapter（适配器类）：适配器可以调用另一个接口，作为一个转换器，对Adaptee和Target进行适配">
 <meta name="twitter:image" content="http://ono60m7tl.bkt.clouddn.com/adapeter1.png">
 
 
@@ -488,7 +488,7 @@ Adapter（适配器类）：适配器可以调用另一个接口，作为一个�
       
 
       
-        <h1 id="结构型模式之适配器模式"><a href="#结构型模式之适配器模式" class="headerlink" title="结构型模式之适配器模式"></a>结构型模式之适配器模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+        <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
 <li>适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。</li>
 </ul>
 <p><img src="http://ono60m7tl.bkt.clouddn.com/adapeter1.png" alt="适配器模式"></p>
@@ -500,6 +500,7 @@ Adapter（适配器类）：适配器可以调用另一个接口，作为一个�
 <li><p>根据对象适配器模式结构图，在对象适配器中，客户端需要调用request()方法，而适配者类Adaptee没有该方法，但是它所提供的specificRequest()方法却是客户端所需要的。为了使客户端能够使用适配者类，需要提供一个包装类Adapter，即适配器类。这个包装类包装了一个适配者的实例，从而将客户端与适配者衔接起来，在适配器的request()方法中调用适配者的specificRequest()方法。因为适配器类与适配者类是关联关系（也可称之为委派关系），所以这种适配器模式称为对象适配器模式</p>
 </li>
 </ul>
+<a id="more"></a>
 <h2 id="类适配器"><a href="#类适配器" class="headerlink" title="类适配器"></a>类适配器</h2><ul>
 <li><p>类适配器是继承适配者类实现的，其中对象适配器是使用组合的方式实现的，就是适配者类作为适配器类的成员变量而实现的</p>
 </li>
@@ -769,7 +770,7 @@ Adapter（适配器类）：适配器可以调用另一个接口，作为一个�
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://juejin.im/user/1556564194374926" target="_blank" title="掘金">
+                    <a href="https://juejin.im/user/2506542244708072" target="_blank" title="掘金">
                       
                         <i class="fa fa-fw fa-globe"></i>掘金</a>
                   </span>
@@ -834,7 +835,7 @@ Adapter（适配器类）：适配器可以调用另一个接口，作为一个�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#结构型模式之适配器模式"><span class="nav-text">结构型模式之适配器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类适配器"><span class="nav-text">类适配器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象适配器"><span class="nav-text">对象适配器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例-1"><span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#麻烦支持下博主的广告事业，点击下即可"><span class="nav-text">麻烦支持下博主的广告事业，点击下即可</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔者有话说"><span class="nav-text">笔者有话说</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类适配器"><span class="nav-text">类适配器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象适配器"><span class="nav-text">对象适配器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例-1"><span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#麻烦支持下博主的广告事业，点击下即可"><span class="nav-text">麻烦支持下博主的广告事业，点击下即可</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔者有话说"><span class="nav-text">笔者有话说</span></a></li></ol></div>
             
 
           </div>
@@ -875,7 +876,7 @@ Adapter（适配器类）：适配器可以调用另一个接口，作为一个�
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">143.1k</span>
+    <span title="Site words total count">143k</span>
   
 </div>
 
@@ -905,7 +906,7 @@ Adapter（适配器类）：适配器可以调用另一个接口，作为一个�
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共143.1k字</span>
+  <span class="post-count">博客全站共143k字</span>
 </div>
 
         

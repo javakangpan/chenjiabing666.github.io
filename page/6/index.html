@@ -458,21 +458,10 @@
 
       
         
-          
-          导读
-正所谓有人(锁)的地方就有江湖(事务)，人在江湖飘，怎能一无所知？
-
-今天来细说一下Mysql中的三类锁，分别是全局锁、表级锁、行级锁。
-
-
-全局锁
-全局锁简单的说就是锁住整个数据库实例，命令是Flush tables with read lock。当你需要为整个数据库处于只读的状态的时候，可以使用这个命令。
-一旦使用全局锁，之后其他线程的以下语句会被阻塞：数据更新语句（数据的增删改）、数据定义语句（包括建表、修改表结构等）和更新类事务的提交语句。 
-全局锁的使用场景大部分都是用来数据库备份。
-
-为什么备份要加全局锁？
-用户买东西，首先会从余额里扣除金额，然后在订单里添加商品。如果备份数
-          ...
+          <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li><p>正所谓有人(锁)的地方就有江湖(事务)，人在江湖飘，怎能一无所知？</p>
+</li>
+<li><p>今天来细说一下Mysql中的三类锁，分别是全局锁、表级锁、行级锁。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/04/01/Mysql中的三类锁，你知道吗？/#more" rel="contents">
@@ -669,16 +658,9 @@
 
       
         
-          
-          导读
-前天面试了一个985高校的实习生，问了他平时用什么开发工具，他想也没想的说IDEA，于是我抛砖引玉的问了一下IDEA的调试用过吧，你说说怎么设置断点条件？那孩子懵了，想了好一会对我说没用过，甚至都没听说过这个。
-作为一名资深的老司机，IDEA调试可以说是家常便饭，如果不会debug，我都不信你读过源码，就别和我说原理了，直接pass掉。
-
-基本界面
-① 以Debug模式启动服务，左边的一个按钮则是以Run模式启动。在开发中，我一般会直接启动Debug模式，方便随时调试代码。 
-② 断点：在左边行号栏单击左键，或者快捷键Ctrl+F8 打上/取消断点，断点行的颜色可自己去设置。 
-③ De
-          ...
+          <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li>前天面试了一个985高校的实习生，问了他平时用什么开发工具，他想也没想的说IDEA，于是我抛砖引玉的问了一下IDEA的调试用过吧，你说说怎么设置断点条件？那孩子懵了，想了好一会对我说没用过，甚至都没听说过这个。</li>
+<li>作为一名资深的老司机，IDEA调试可以说是家常便饭，如果不会debug，我都不信你读过源码，就别和我说原理了，直接pass掉。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/23/IDEA调试技巧/#more" rel="contents">
@@ -875,17 +857,8 @@
 
       
         
-          
-          导读
-Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主要是在org.springframework.context.support.AbstractApplicationContext.refresh方法中，下面也是围绕其中的逻辑进行讲解。
-
-开撸【1】 prepareRefresh()
- 内部其实很简单，就是设置一些标志，比如开始时间，激活的状态等。
-【2】prepareBeanFactory(beanFactory)
-做一些简单的准备工作，此处不再赘述！！！
-【3】postProcessBeanFactory(beanFactory)
-主要的作用就是添加了一个后置处理器S
-          ...
+          <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li>Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主要是在<code>org.springframework.context.support.AbstractApplicationContext.refresh</code>方法中，下面也是围绕其中的逻辑进行讲解。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/23/Spring生命周期/#more" rel="contents">
@@ -1082,21 +1055,9 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 
       
         
-          
-          导读
-前几天和一个朋友讨论了他们公司的系统问题，传统的单体应用，集群部署，他说近期服务的并发量可能会出现瞬时增加的风险，虽然部署了集群，但是通过压测后发现请求延迟仍然是很大，想问问我有什么改进的地方。我沉思了一会，现在去改架构显然是不可能的，于是我给出了一个建议，让他去做个接口限流，这样能够保证瞬时并发量飙高也不会出现请求延迟的问题，用户的体验度也会上去。
-至于什么是接口限流？怎么实现接口限流？如何实现单机应用的限流？如何实现分布式应用的限流？本篇文章将会详细阐述。
-
-限流的常见几种算法
-常见的限流算法有很多，但是最常用的算法无非以下四种。
-
-固定窗口计数器
-
-固定算法的概念如下
-
-
-将时间划
-          ...
+          <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li>前几天和一个朋友讨论了他们公司的系统问题，传统的单体应用，集群部署，他说近期服务的并发量可能会出现瞬时增加的风险，虽然部署了集群，但是通过压测后发现请求延迟仍然是很大，想问问我有什么改进的地方。我沉思了一会，现在去改架构显然是不可能的，于是我给出了一个建议，让他去做个接口限流，这样能够保证瞬时并发量飙高也不会出现请求延迟的问题，用户的体验度也会上去。</li>
+<li>至于什么是接口限流？怎么实现接口限流？如何实现单机应用的限流？如何实现分布式应用的限流？本篇文章将会详细阐述。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/23/接口限流算法/#more" rel="contents">
@@ -1293,16 +1254,8 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 
       
         
-          
-          导读
-本篇文章接上篇SpringBoot整合多数据源，你会了吗？，前面文章最后留了几个问题供大家思考，今天一一揭晓。
-
-配置如何优化
-上文整合的过程中的还顺带整合Mybatis和TransactionManager，为什么还要重新定义他们呢？SpringBoot不是给我们都配置好了吗？注意，此处优化就是这两个配置去掉，直接用SpringBoot的自动配置，顿时高级了，别人一看你的代码如此简单就实现了多数据源的切换，牛叉不？
-如何去掉？SpringBoot万变不离自动配置类，且看MybatisAutoConfiguration，如下：
-
-123456@org.springframework.co
-          ...
+          <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li>本篇文章接上篇<a href="https://chenjiabing666.github.io/2020/03/12/SpringBoot%E6%95%B4%E5%90%88%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%8C%E4%BD%A0%E4%BC%9A%E4%BA%86%E5%90%97%EF%BC%9F/">SpringBoot整合多数据源，你会了吗？</a>，前面文章最后留了几个问题供大家思考，今天一一揭晓。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/18/SpringBoot整合多数据源的巨坑/#more" rel="contents">
@@ -1499,23 +1452,13 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 
       
         
-          
-          导读
-前几天发表的文章SpringBoot多数据源动态切换和SpringBoot整合多数据源的巨坑中，提到了一个坑就是动态数据源添加@Primary接口就会造成循环依赖异常，如下图：
-
-
-
-这个就是典型的构造器依赖，详情请看上面两篇文章，这里不再详细赘述了。本篇文章将会从源码深入解析Spring是如何解决循环依赖的？为什么不能解决构造器的循环依赖？
-
-什么是循环依赖
-简单的说就是A依赖B，B依赖C，C依赖A这样就构成了循环依赖。
-
-
-
-循环依赖分为构造器依赖和属性依赖，众所周知的是Spring能够解决属性的循环依赖（set注入）。下文将从源码角度分析Spring是如何解决属性的循环依赖。
-
-思
-          ...
+          <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li>前几天发表的文章<a href="https://chenjiabing666.github.io/2020/03/12/SpringBoot%E6%95%B4%E5%90%88%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%8C%E4%BD%A0%E4%BC%9A%E4%BA%86%E5%90%97%EF%BC%9F/">SpringBoot多数据源动态切换</a>和<a href="https://chenjiabing666.github.io/2020/03/18/SpringBoot%E6%95%B4%E5%90%88%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E7%9A%84%E5%B7%A8%E5%9D%91/">SpringBoot整合多数据源的巨坑</a>中，提到了一个坑就是动态数据源添加@Primary接口就会造成循环依赖异常，如下图：</li>
+</ul>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/circleex.png" alt="微信所有码猿技术专栏"></p>
+<ul>
+<li>这个就是典型的构造器依赖，详情请看上面两篇文章，这里不再详细赘述了。本篇文章将会从源码深入解析Spring是如何解决循环依赖的？为什么不能解决构造器的循环依赖？</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/07/17/Spring解决循环依赖/#more" rel="contents">
@@ -1712,16 +1655,18 @@ Spring中Bean的生命周期从容器的启动到停止，涉及到的源码主�
 
       
         
-          
-          结构型模式之适配器模式定义
-适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。
-
-
-
-Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一个抽象类或接口，也可以是具体类。
-Adapter（适配器类）：适配器可以调用另一个接口，作为一个转换器，对Adaptee和Target进行适配，适配器类是适配器模式的核心，在对象适配器中，它通过继承Target并关联一个Adaptee对象使二者产生联系。
-Adaptee（适配者类）：适配者即被适配的角色，它定义了一个已
-          ...
+          <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+<li>适配器模式用于将一个接口转化成客户想要的另一个接口，使接口不兼容的那些类可以一起工作，其别名为包装器(Wrapper)。适配器模式既可以作为类结构型模式，也可以作为对象结构型模式。</li>
+</ul>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/adapeter1.png" alt="适配器模式"></p>
+<ul>
+<li>Target（目标抽象类）：目标抽象类定义客户所需接口，可以是一个抽象类或接口，也可以是具体类。</li>
+<li>Adapter（适配器类）：适配器可以调用另一个接口，作为一个转换器，对Adaptee和Target进行适配，适配器类是适配器模式的核心，在对象适配器中，它通过继承Target并关联一个Adaptee对象使二者产生联系。</li>
+<li><p>Adaptee（适配者类）：适配者即被适配的角色，它定义了一个已经存在的接口，这个接口需要适配，适配者类一般是一个具体类，包含了客户希望使用的业务方法，在某些情况下可能没有适配者类的源代码。</p>
+</li>
+<li><p>根据对象适配器模式结构图，在对象适配器中，客户端需要调用request()方法，而适配者类Adaptee没有该方法，但是它所提供的specificRequest()方法却是客户端所需要的。为了使客户端能够使用适配者类，需要提供一个包装类Adapter，即适配器类。这个包装类包装了一个适配者的实例，从而将客户端与适配者衔接起来，在适配器的request()方法中调用适配者的specificRequest()方法。因为适配器类与适配者类是关联关系（也可称之为委派关系），所以这种适配器模式称为对象适配器模式</p>
+</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/16/设计模式之适配器模式/#more" rel="contents">
@@ -1880,7 +1825,7 @@ Adaptee（适配者类）：适配者即被适配的角色，它定义了一个�
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  998
+                  988
                 </span>
               
 
@@ -1918,14 +1863,22 @@ Adaptee（适配者类）：适配者即被适配的角色，它定义了一个�
 
       
         
-          
-          结构型模式之桥接模式
-桥接模式是一种很实用的结构型设计模式，如果软件系统中某个类存在两个独立变化的维度，通过该模式可以将这两个维度分离出来，使两者可以独立扩展，让系统更加符合“单一职责原则”。与多层继承方案不同，它将两个独立变化的维度设计为两个独立的继承等级结构，并且在抽象层建立一个抽象关联，该关联关系类似一条连接两个独立继承结构的桥，故名桥接模式。
-
-桥接模式用一种巧妙的方式处理多层继承存在的问题，用抽象关联取代了传统的多层继承，将类之间的静态继承关系转换为动态的对象组合关系，使得系统更加灵活，并易于扩展，同时有效控制了系统中类的个数。桥接定义如下：
-
-桥接模式(Bridge Pattern
-          ...
+          <ul>
+<li><p>桥接模式是一种很实用的结构型设计模式，如果软件系统中某个类存在两个独立变化的维度，通过该模式可以将这两个维度分离出来，使两者可以独立扩展，让系统更加符合“单一职责原则”。与多层继承方案不同，它将两个独立变化的维度设计为两个独立的继承等级结构，并且在抽象层建立一个抽象关联，该关联关系类似一条连接两个独立继承结构的桥，故名桥接模式。</p>
+</li>
+<li><p>桥接模式用一种巧妙的方式处理多层继承存在的问题，用抽象关联取代了传统的多层继承，将类之间的静态继承关系转换为动态的对象组合关系，使得系统更加灵活，并易于扩展，同时有效控制了系统中类的个数。桥接定义如下：</p>
+</li>
+<li><p>桥接模式(Bridge Pattern)：将抽象部分与它的实现部分分离，使它们都可以独立地变化。它是一种对象结构型模式，又称为柄体(Handle and Body)模式或接口(Interface)模式。</p>
+</li>
+</ul>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/bridge1.png" alt="桥接模式"></p>
+<ul>
+<li><p>在桥接模式结构图中包含如下几个角色：</p>
+<ul>
+<li>Abstraction（抽象类）：用于定义抽象类的接口，它一般是抽象类而不是接口，其中定义了一个Implementor（实现类接口）类型的对象并可以维护该对象，它与Implementor之间具有关联关系，它既可以包含抽象业务方法，也可以包含具体业务方法。</li>
+<li>RefinedAbstraction（扩充抽象类）：扩充由Abstraction定义的接口，通常情况下它不再是抽象类而是具体类，它实现了在Abstraction中声明的抽象业务方法，在RefinedAbstraction中可以调用在Implementor中定义的业务方法。</li>
+<li>Implementor（实现类接口）：定义实现类的接口，这个接口不一定要与Abstraction的接口完全一致，事实上这两个接口可以完全不同，一般而言，Implementor接口仅提供基本操作，而Abstraction定义的接口可能会做更多更复杂的操作。Implementor接口对这些基本操作进行了声明，而具体实现交给其子类。通过关联关系，在Abstraction中不仅拥有自己的方法，还可以调用到Implementor中定义的方法，使用关联关系来替代继承关系。</li>
+<li>ConcreteImplementor（具体实现类）：具体实现Implementor接口，在不同的ConcreteImplementor中提供基本操作的不同实现，在程序运行时，ConcreteImplementor对象将替换其父类对象，提供给抽象类具体的业务操作方法。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/16/设计模式之桥接模式/#more" rel="contents">
@@ -2122,19 +2075,13 @@ Adaptee（适配者类）：适配者即被适配的角色，它定义了一个�
 
       
         
-          
-          创建型模式之原型模式定义
-原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。
-   这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要    在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数据库，以此来减少数据库调用。
-
-原型模式可以分为浅克隆和深度克隆
-
-
-角色
-java语言中实现克隆的两种方式
-直接创建一个对象，然后设置成员变量的值
-123Obj obj=new 
-          ...
+          <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+<li><p>原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。</p>
+<p>   这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要    在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数据库，以此来减少数据库调用。</p>
+</li>
+<li><p>原型模式可以分为浅克隆和深度克隆</p>
+</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/16/设计模式之原型模式/#more" rel="contents">
@@ -2331,20 +2278,16 @@ java语言中实现克隆的两种方式
 
       
         
-          
-          创建型模式之建造者模式定义
-建造者模式(Builder Pattern)：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。建造者模式是一种对象创建型模式。
-
-简单说，建造者的功能就是先构造复杂对象的每一个部件，指挥者的功能就是将这些部件以一定的步骤组装起来，形成一个具有一定功能的产品或者对象。当然这个步骤是透明的对于客户端。
-
-建造者模式一步一步创建一个复杂的对象，它允许用户只通过指定复杂对象的类型和内容就可以构建它们，用户不需要知道内部的具体构建细节。建造者模式结构如图8-2所示：
-
-
-
-
-实例
-下面是一个组装汽车的例子，其中汽车由发动机和轮胎组成，那么我们只需要组
-          ...
+          <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+<li><p>建造者模式(Builder Pattern)：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。建造者模式是一种对象创建型模式。</p>
+</li>
+<li><p>简单说，建造者的功能就是先构造复杂对象的每一个部件，指挥者的功能就是将这些部件以一定的步骤组装起来，形成一个具有一定功能的产品或者对象。当然这个步骤是透明的对于客户端。</p>
+</li>
+<li><p>建造者模式一步一步创建一个复杂的对象，它允许用户只通过指定复杂对象的类型和内容就可以构建它们，用户不需要知道内部的具体构建细节。建造者模式结构如图8-2所示：</p>
+</li>
+</ul>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/BuilderPattern.png" alt="建造者模式"></p>
+<p><img src="http://ono60m7tl.bkt.clouddn.com/builder2.png" alt=""><br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/16/设计模式之建造模式/#more" rel="contents">
@@ -2490,7 +2433,7 @@ java语言中实现克隆的两种方式
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://juejin.im/user/1556564194374926" target="_blank" title="掘金">
+                    <a href="https://juejin.im/user/2506542244708072" target="_blank" title="掘金">
                       
                         <i class="fa fa-fw fa-globe"></i>掘金</a>
                   </span>
@@ -2580,7 +2523,7 @@ java语言中实现克隆的两种方式
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">143.1k</span>
+    <span title="Site words total count">143k</span>
   
 </div>
 
@@ -2610,7 +2553,7 @@ java语言中实现克隆的两种方式
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共143.1k字</span>
+  <span class="post-count">博客全站共143k字</span>
 </div>
 
         

@@ -105,28 +105,28 @@
 
 
 
-<meta name="description" content="创建型模式之原型模式定义
+<meta name="description" content="定义
 原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。
-   这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要    在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆">
+   这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要    在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式之原型模式">
 <meta property="og:url" content="https://chenjiabing666.github.io/2018/04/16/设计模式之原型模式/index.html">
 <meta property="og:site_name" content="不才陈某技术博客">
-<meta property="og:description" content="创建型模式之原型模式定义
+<meta property="og:description" content="定义
 原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。
-   这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要    在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆">
+   这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要    在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数">
 <meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/property1.png">
 <meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/property2.png">
 <meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/property3.png">
 <meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/property4.png">
 <meta property="og:image" content="http://ono60m7tl.bkt.clouddn.com/property5.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200310211704.jpg">
-<meta property="og:updated_time" content="2020-03-13T06:23:53.726Z">
+<meta property="og:updated_time" content="2020-10-23T13:58:44.607Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式之原型模式">
-<meta name="twitter:description" content="创建型模式之原型模式定义
+<meta name="twitter:description" content="定义
 原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。
-   这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要    在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆">
+   这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要    在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数">
 <meta name="twitter:image" content="http://ono60m7tl.bkt.clouddn.com/property1.png">
 
 
@@ -471,13 +471,14 @@
       
 
       
-        <h1 id="创建型模式之原型模式"><a href="#创建型模式之原型模式" class="headerlink" title="创建型模式之原型模式"></a>创建型模式之原型模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+        <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
 <li><p>原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。</p>
 <p>   这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要    在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数据库，以此来减少数据库调用。</p>
 </li>
 <li><p>原型模式可以分为浅克隆和深度克隆</p>
 </li>
 </ul>
+<a id="more"></a>
 <h2 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h2><p><img src="http://ono60m7tl.bkt.clouddn.com/property1.png" alt="角色"></p>
 <h2 id="java语言中实现克隆的两种方式"><a href="#java语言中实现克隆的两种方式" class="headerlink" title="java语言中实现克隆的两种方式"></a>java语言中实现克隆的两种方式</h2><ol>
 <li><p>直接创建一个对象，然后设置成员变量的值</p>
@@ -775,7 +776,7 @@
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://juejin.im/user/1556564194374926" target="_blank" title="掘金">
+                    <a href="https://juejin.im/user/2506542244708072" target="_blank" title="掘金">
                       
                         <i class="fa fa-fw fa-globe"></i>掘金</a>
                   </span>
@@ -840,7 +841,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建型模式之原型模式"><span class="nav-text">创建型模式之原型模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#角色"><span class="nav-text">角色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java语言中实现克隆的两种方式"><span class="nav-text">java语言中实现克隆的两种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浅克隆"><span class="nav-text">浅克隆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深度克隆"><span class="nav-text">深度克隆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件"><span class="nav-text">条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么实现序列化"><span class="nav-text">为什么实现序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-1"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-2"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔者有话说"><span class="nav-text">笔者有话说</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#角色"><span class="nav-text">角色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java语言中实现克隆的两种方式"><span class="nav-text">java语言中实现克隆的两种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浅克隆"><span class="nav-text">浅克隆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深度克隆"><span class="nav-text">深度克隆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件"><span class="nav-text">条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么实现序列化"><span class="nav-text">为什么实现序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-1"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-2"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔者有话说"><span class="nav-text">笔者有话说</span></a></li></ol></div>
             
 
           </div>
@@ -881,7 +882,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">143.1k</span>
+    <span title="Site words total count">143k</span>
   
 </div>
 
@@ -911,7 +912,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共143.1k字</span>
+  <span class="post-count">博客全站共143k字</span>
 </div>
 
         

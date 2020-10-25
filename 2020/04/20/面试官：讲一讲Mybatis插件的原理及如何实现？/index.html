@@ -107,36 +107,24 @@
 
 <meta name="description" content="前言
 Mybatis的分页插件相信大家都使用过，那么可知道其中的实现原理？分页插件就是利用的Mybatis中的插件机制实现的，在Executor的query执行前后进行分页处理。
-此篇文章就来介绍以下Mybatis的插件机制以及在底层是如何实现的。
-环境配置
-本篇文章讲的一切内容都是基于Mybatis3.5和SpringBoot-2.3.3.RELEASE。
-什么是插件？
-插件是Mybatis中的">
+此篇文章就来介绍以下Mybatis的插件机制以及在底层是如何实现的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试官：讲一讲Mybatis插件的原理及如何实现？">
 <meta property="og:url" content="https://chenjiabing666.github.io/2020/04/20/面试官：讲一讲Mybatis插件的原理及如何实现？/index.html">
 <meta property="og:site_name" content="不才陈某技术博客">
 <meta property="og:description" content="前言
 Mybatis的分页插件相信大家都使用过，那么可知道其中的实现原理？分页插件就是利用的Mybatis中的插件机制实现的，在Executor的query执行前后进行分页处理。
-此篇文章就来介绍以下Mybatis的插件机制以及在底层是如何实现的。
-环境配置
-本篇文章讲的一切内容都是基于Mybatis3.5和SpringBoot-2.3.3.RELEASE。
-什么是插件？
-插件是Mybatis中的">
+此篇文章就来介绍以下Mybatis的插件机制以及在底层是如何实现的。">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/Myabtis-%E6%8F%92%E4%BB%B6/1.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/Myabtis-%E6%8F%92%E4%BB%B6/2.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/Myabtis-%E6%8F%92%E4%BB%B6/3.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/Myabtis-%E6%8F%92%E4%BB%B6/4.png">
-<meta property="og:updated_time" content="2020-10-23T11:05:53.971Z">
+<meta property="og:updated_time" content="2020-10-23T13:55:46.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试官：讲一讲Mybatis插件的原理及如何实现？">
 <meta name="twitter:description" content="前言
 Mybatis的分页插件相信大家都使用过，那么可知道其中的实现原理？分页插件就是利用的Mybatis中的插件机制实现的，在Executor的query执行前后进行分页处理。
-此篇文章就来介绍以下Mybatis的插件机制以及在底层是如何实现的。
-环境配置
-本篇文章讲的一切内容都是基于Mybatis3.5和SpringBoot-2.3.3.RELEASE。
-什么是插件？
-插件是Mybatis中的">
+此篇文章就来介绍以下Mybatis的插件机制以及在底层是如何实现的。">
 <meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/Myabtis-%E6%8F%92%E4%BB%B6/1.png">
 
 
@@ -483,7 +471,7 @@ Mybatis的分页插件相信大家都使用过，那么可知道其中的实现�
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
 <li>Mybatis的分页插件相信大家都使用过，那么可知道其中的实现原理？分页插件就是利用的Mybatis中的插件机制实现的，在<code>Executor</code>的<code>query</code>执行前后进行分页处理。</li>
-<li><p>此篇文章就来介绍以下Mybatis的插件机制以及在底层是如何实现的。</p>
+<li>此篇文章就来介绍以下Mybatis的插件机制以及在底层是如何实现的。<a id="more"></a>
 <h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2></li>
 <li><p>本篇文章讲的一切内容都是基于<code>Mybatis3.5</code>和<code>SpringBoot-2.3.3.RELEASE</code>。</p>
 <h2 id="什么是插件？"><a href="#什么是插件？" class="headerlink" title="什么是插件？"></a>什么是插件？</h2></li>
@@ -793,7 +781,7 @@ Mybatis的分页插件相信大家都使用过，那么可知道其中的实现�
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://juejin.im/user/1556564194374926" target="_blank" title="掘金">
+                    <a href="https://juejin.im/user/2506542244708072" target="_blank" title="掘金">
                       
                         <i class="fa fa-fw fa-globe"></i>掘金</a>
                   </span>
@@ -899,7 +887,7 @@ Mybatis的分页插件相信大家都使用过，那么可知道其中的实现�
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">143.1k</span>
+    <span title="Site words total count">143k</span>
   
 </div>
 
@@ -929,7 +917,7 @@ Mybatis的分页插件相信大家都使用过，那么可知道其中的实现�
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共143.1k字</span>
+  <span class="post-count">博客全站共143k字</span>
 </div>
 
         
