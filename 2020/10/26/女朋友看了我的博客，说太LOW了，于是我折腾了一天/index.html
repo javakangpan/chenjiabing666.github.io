@@ -109,7 +109,7 @@
 其实的三年前看到jacman这个主题还是挺喜欢的，但是现在的看看确实不怎地，哎，老了….
 今天这篇文章来介绍下一款简洁的主题NEXT以及配置方式。先来上一张个人的博客的截图，如下：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="女朋友看了我的博客，说太LOW了，于是我折腾了一天~">
+<meta property="og:title" content="Hexo的Next主题优化教程">
 <meta property="og:url" content="https://chenjiabing666.github.io/2020/10/26/女朋友看了我的博客，说太LOW了，于是我折腾了一天/index.html">
 <meta property="og:site_name" content="不才陈某技术博客">
 <meta property="og:description" content="前言陈某的独立博客搭建已经有三年多时间了，使用Hexo+Git，一直使用的主题是jacman，前几天女票看到说太LOW了，这哪能忍，必须换一个逼格高点的。
@@ -136,9 +136,9 @@
 <meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/HEXO%E7%9A%84NEXT%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/19.gif">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/HEXO%E7%9A%84NEXT%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/20.gif">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png">
-<meta property="og:updated_time" content="2020-10-26T01:49:51.178Z">
+<meta property="og:updated_time" content="2020-10-26T14:15:52.505Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="女朋友看了我的博客，说太LOW了，于是我折腾了一天~">
+<meta name="twitter:title" content="Hexo的Next主题优化教程">
 <meta name="twitter:description" content="前言陈某的独立博客搭建已经有三年多时间了，使用Hexo+Git，一直使用的主题是jacman，前几天女票看到说太LOW了，这哪能忍，必须换一个逼格高点的。
 其实的三年前看到jacman这个主题还是挺喜欢的，但是现在的看看确实不怎地，哎，老了….
 今天这篇文章来介绍下一款简洁的主题NEXT以及配置方式。先来上一张个人的博客的截图，如下：">
@@ -178,7 +178,7 @@
 
 
 
-  <title>女朋友看了我的博客，说太LOW了，于是我折腾了一天~ | 不才陈某技术博客</title>
+  <title>Hexo的Next主题优化教程 | 不才陈某技术博客</title>
   
 
 
@@ -368,7 +368,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">女朋友看了我的博客，说太LOW了，于是我折腾了一天~</h1>
+          <h1 class="post-title" itemprop="name headline">Hexo的Next主题优化教程</h1>
         
 
         <div class="post-meta">
@@ -538,7 +538,7 @@
 <p>以上设置完毕后只是显示整个站点的次数，并没有显示每篇文章的访问次数，效果如下图：</p>
 <p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/HEXO%E7%9A%84NEXT%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/9.png" alt=""></p>
 <p>如果想要显示每篇文章的访问次数，在<code>themes/next/layout/_macro/post.swig</code>文件第一行增加<code>is_pv</code>字段，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;% macro render(post, is_index, is_pv, post_extra_class) %&#125;</div></pre></td></tr></table></figure></p>
-<p>然后将这段代码插入到其中：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;% <span class="keyword">if</span> is_pv %&#125;</div><div class="line">  &lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">"post-meta-divider"</span>&gt;|&lt;/span&gt;</div><div class="line">  &lt;span id=<span class="string">"busuanzi_value_page_pv"</span>&gt;&lt;/span&gt;次阅读</div><div class="line">&#123;% endif %&#125;</div></pre></td></tr></table></figure></p>
+<p>然后将这段代码插入到其中：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;% <span class="keyword">if</span> is_pv %&#125;</div><div class="line">  &lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">"post-meta-divider"</span>&gt;|<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></div><div class="line">  &lt;span id=<span class="string">"busuanzi_value_page_pv"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span>次阅读</div><div class="line">&#123;% endif %&#125;</div></pre></td></tr></table></figure></p>
 <p>插入的位置如下图：</p>
 <p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/HEXO%E7%9A%84NEXT%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/10.png" alt=""></p>
 <p>然后再打开 <code>themes/next/layout/post.swig</code>，这个文件是文章的模板，给<code>render</code>方法传入参数（对应刚才添加的<code>is_pv</code>字段），如下图：</p>
@@ -625,11 +625,11 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2020/10/26/女朋友看了我的博客，说太LOW了，于是我折腾了一天/">女朋友看了我的博客，说太LOW了，于是我折腾了一天~</a></p>
+  <p><span>本文标题:</span><a href="/2020/10/26/女朋友看了我的博客，说太LOW了，于是我折腾了一天/">Hexo的Next主题优化教程</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 不才陈某 的个人博客">不才陈某</a></p>
   <p><span>发布时间:</span>2020年10月26日 - 09:47</p>
-  <p><span>最后更新:</span>2020年10月26日 - 09:49</p>
-  <p><span>原始链接:</span><a href="/2020/10/26/女朋友看了我的博客，说太LOW了，于是我折腾了一天/" title="女朋友看了我的博客，说太LOW了，于是我折腾了一天~">https://chenjiabing666.github.io/2020/10/26/女朋友看了我的博客，说太LOW了，于是我折腾了一天/</a>
+  <p><span>最后更新:</span>2020年10月26日 - 22:15</p>
+  <p><span>原始链接:</span><a href="/2020/10/26/女朋友看了我的博客，说太LOW了，于是我折腾了一天/" title="Hexo的Next主题优化教程">https://chenjiabing666.github.io/2020/10/26/女朋友看了我的博客，说太LOW了，于是我折腾了一天/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://chenjiabing666.github.io/2020/10/26/女朋友看了我的博客，说太LOW了，于是我折腾了一天/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
@@ -780,7 +780,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
