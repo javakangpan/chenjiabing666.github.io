@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chenjiabing666.github.io/"/>
-  <updated>2020-10-26T14:15:52.505Z</updated>
+  <updated>2020-10-27T11:22:27.538Z</updated>
   <id>https://chenjiabing666.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot整合JSR303实现参数校验~</title>
+    <link href="https://chenjiabing666.github.io/2020/10/27/SpringBoot%E6%95%B4%E5%90%88JSR303/"/>
+    <id>https://chenjiabing666.github.io/2020/10/27/SpringBoot整合JSR303/</id>
+    <published>2020-10-27T11:20:43.000Z</published>
+    <updated>2020-10-27T11:22:27.538Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;不知不觉&lt;code&gt;Spring Boot&lt;/code&gt;专栏文章已经写到第十四章了，无论写的好与不好，作者都在尽力写的详细，写的与其它的文章不同，每一章都不是浅尝辄止。如果前面的文章没有看过的朋友，&lt;a href=&quot;https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU3MDAzNDg1MA==&amp;amp;action=getalbum&amp;amp;album_id=1532834475389288449&amp;amp;scene=173&amp;amp;from_msgid=2247485200&amp;amp;from_itemidx=1&amp;amp;count=10#wechat_redirect&amp;amp;scene=126&amp;amp;subscene=0&amp;amp;sessionid=1603793746&amp;amp;enterid=1603793755&quot;&gt;点击这里前往&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;今天介绍一下 Spring Boot 如何优雅的整合&lt;code&gt;JSR-303&lt;/code&gt;进行参数校验，说到参数校验可能都用过，但是你真的会用吗？网上的教程很多，大多是简单的介绍。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
+    
+  </entry>
   
   <entry>
     <title>Hexo的Next主题优化教程</title>
@@ -428,33 +449,6 @@
         
           &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;在部署线上项目时，相信大家都会遇到一个问题，线上的 Bug
-        
-      
-    
-    </summary>
-    
-      <category term="杂谈" scheme="https://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
-    
-    
-      <category term="杂谈" scheme="https://chenjiabing666.github.io/tags/%E6%9D%82%E8%B0%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>大白话布隆过滤器，又能和面试官扯皮了！！！</title>
-    <link href="https://chenjiabing666.github.io/2020/04/26/%E5%A4%A7%E7%99%BD%E8%AF%9D%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%8C%E5%8F%88%E8%83%BD%E5%92%8C%E9%9D%A2%E8%AF%95%E5%AE%98%E6%89%AF%E7%9A%AE%E4%BA%86%EF%BC%81%EF%BC%81%EF%BC%81/"/>
-    <id>https://chenjiabing666.github.io/2020/04/26/大白话布隆过滤器，又能和面试官扯皮了！！！/</id>
-    <published>2020-04-26T14:06:38.000Z</published>
-    <updated>2020-04-26T14:07:08.648Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;文章首发于微信公众号&lt;a
         
       
     
