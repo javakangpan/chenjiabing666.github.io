@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chenjiabing666.github.io/"/>
-  <updated>2020-10-28T15:16:04.968Z</updated>
+  <updated>2020-10-30T05:33:43.872Z</updated>
   <id>https://chenjiabing666.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo博客如何被百度收录？</title>
+    <link href="https://chenjiabing666.github.io/2020/10/30/Hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%A2%AB%E7%99%BE%E5%BA%A6%E6%94%B6%E5%BD%95%EF%BC%9F/"/>
+    <id>https://chenjiabing666.github.io/2020/10/30/Hexo博客如何被百度收录？/</id>
+    <published>2020-10-30T05:32:40.000Z</published>
+    <updated>2020-10-30T05:33:43.872Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;大部分人写博客都希望让别人访问到，但是&lt;code&gt;GitHub&lt;/code&gt;和&lt;code&gt;Coding&lt;/code&gt;都做了防爬虫的处理，因此我们托管在其上的博客就无法被搜索引擎收录，需要我们手动提交。&lt;/p&gt;
+&lt;p&gt;今天作者就来介绍下如何才能让度娘收录你的博客。作者的博客是&lt;code&gt;HEXO+GitHub&lt;/code&gt;搭建的，主题是&lt;code&gt;NEXT&lt;/code&gt;，虽说各种主题不一样，但是大致步骤相同，要学会举一反三。&lt;/p&gt;
+&lt;p&gt;当然觉得&lt;code&gt;NEXT&lt;/code&gt;主题不错的朋友，可以切换主题，之前出过一篇&lt;code&gt;NEXT&lt;/code&gt;主题优化的教程：&lt;a href=&quot;https://mp.weixin.qq.com/s/Y0PyyBLck24ZPu2o6afsLw&quot;&gt;女朋友看了我的博客，说太LOW了，于是我折腾了一天~&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="杂谈" scheme="https://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+      <category term="Hexo" scheme="https://chenjiabing666.github.io/tags/Hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring Boot如何远程调试？</title>
@@ -429,30 +451,6 @@
     
     
       <category term="SQL" scheme="https://chenjiabing666.github.io/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IDEA2020永久破解，亲测可用！！！</title>
-    <link href="https://chenjiabing666.github.io/2020/05/08/IDEA2020%E6%B0%B8%E4%B9%85%E7%A0%B4%E8%A7%A3%EF%BC%8C%E4%BA%B2%E6%B5%8B%E5%8F%AF%E7%94%A8%EF%BC%81%EF%BC%81%EF%BC%81/"/>
-    <id>https://chenjiabing666.github.io/2020/05/08/IDEA2020永久破解，亲测可用！！！/</id>
-    <published>2020-05-08T10:51:57.000Z</published>
-    <updated>2020-10-23T13:55:04.628Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;随着 IDEA 的 2020 版本的发布，新增和优化了很多的功能，今天陈某不说新增的功能，来讲一讲如何永久破解。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;不说别的，先上破解后的效果图：&lt;br&gt;&lt;img src=&quot;https://gitee.com/chenjiabing666/Blog-file/raw/master/IDEA%E7%A0%B4%E8%A7%A3/1.png&quot; alt=&quot;永久破解效果图&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="开发工具" scheme="https://chenjiabing666.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="破解" scheme="https://chenjiabing666.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
-    
-      <category term="优质资源" scheme="https://chenjiabing666.github.io/tags/%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90/"/>
     
   </entry>
   
