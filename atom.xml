@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chenjiabing666.github.io/"/>
-  <updated>2020-10-30T05:33:43.872Z</updated>
+  <updated>2020-11-01T04:34:05.966Z</updated>
   <id>https://chenjiabing666.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>撸了个反代工具,可用于激活JRebel</title>
+    <link href="https://chenjiabing666.github.io/2020/11/01/%E6%92%B8%E4%BA%86%E4%B8%AA%E5%8F%8D%E4%BB%A3%E5%B7%A5%E5%85%B7%E7%94%A8%E4%BA%8E%E6%BF%80%E6%B4%BBJRebel/"/>
+    <id>https://chenjiabing666.github.io/2020/11/01/撸了个反代工具用于激活JRebel/</id>
+    <published>2020-11-01T04:31:01.000Z</published>
+    <updated>2020-11-01T04:34:05.966Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;热部署相信大家都听说过，比如&lt;code&gt;Spring Boot&lt;/code&gt;中的&lt;code&gt;devtools&lt;/code&gt;，但是听说过&lt;code&gt;JRebel&lt;/code&gt;这个工具的却是少之又少，个人觉得作为热部署界的扛把子却鲜为人知，实在是一大憾事。&lt;/p&gt;
+&lt;p&gt;很早之前就有读者找我要过&lt;code&gt;JRebel&lt;/code&gt;的激活方式，由于忙着专栏文章，一直没安排，今天安排上。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://gitee.com/chenjiabing666/BlogImage/raw/master/JRebel%E7%A0%B4%E8%A7%A3/7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;JRebel&lt;/code&gt;目前是收费的，但是中国有大神啊，本篇文章就介绍一下如何撸一个反向代理激活&lt;code&gt;JRebel&lt;/code&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="开发工具" scheme="https://chenjiabing666.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="破解" scheme="https://chenjiabing666.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
+    
+      <category term="优质资源" scheme="https://chenjiabing666.github.io/tags/%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90/"/>
+    
+  </entry>
   
   <entry>
     <title>Hexo博客如何被百度收录？</title>
@@ -425,32 +450,6 @@
       <category term="破解" scheme="https://chenjiabing666.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
     
       <category term="优质资源" scheme="https://chenjiabing666.github.io/tags/%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>select语句做了什么？</title>
-    <link href="https://chenjiabing666.github.io/2020/05/08/select%E8%AF%AD%E5%8F%A5%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F/"/>
-    <id>https://chenjiabing666.github.io/2020/05/08/select语句做了什么？/</id>
-    <published>2020-05-08T10:51:57.000Z</published>
-    <updated>2020-10-21T13:35:09.415Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;&lt;section id=&quot;nice&quot; data-tool=&quot;mdnice编辑器&quot; data-website=&quot;https://www.mdnice.com&quot; style=&quot;padding: 0 10px; word-spacing: 0px; word-wrap:
-        
-      
-    
-    </summary>
-    
-      <category term="数据库干货篇" scheme="https://chenjiabing666.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B2%E8%B4%A7%E7%AF%87/"/>
-    
-    
-      <category term="SQL" scheme="https://chenjiabing666.github.io/tags/SQL/"/>
     
   </entry>
   

@@ -92,7 +92,7 @@
 
 
 
-  <meta name="keywords" content="设计模式," />
+  <meta name="keywords" content="破解,优质资源," />
 
 
 
@@ -105,56 +105,33 @@
 
 
 
-<meta name="description" content="导读
-工厂方法模式是所有设计模式中比较常用的一种模式，但是真正能搞懂用好的少之又少，Spring底层大量的使用该设计模式来进行封装，以致开发者阅读源代码的时候晕头转向。
-今天陈某分别从以下五个方面详细讲述一下工厂方法模式：
-从什么是工厂方法模式
-通用框架实现
-工厂方法模式的优点
-工厂方法模式的升级
-Spring底层如何使用工厂方法模式
+<meta name="description" content="前言热部署相信大家都听说过，比如Spring Boot中的devtools，但是听说过JRebel这个工具的却是少之又少，个人觉得作为热部署界的扛把子却鲜为人知，实在是一大憾事。
+很早之前就有读者找我要过JRebel的激活方式，由于忙着专栏文章，一直没安排，今天安排上。
 
-
-
-什么是工厂方法模式？
-定义：定义一个用于创建对象的 接口">
+JRebel目前是收费的，但是中国有大神啊，本篇文章就介绍一下如何撸一个反向代理激活JRebel。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式：工厂方法模式">
-<meta property="og:url" content="https://chenjiabing666.github.io/2020/04/05/设计模式：工厂方法模式/index.html">
+<meta property="og:title" content="撸了个反代工具,可用于激活JRebel">
+<meta property="og:url" content="https://chenjiabing666.github.io/2020/11/01/撸了个反代工具用于激活JRebel/index.html">
 <meta property="og:site_name" content="不才陈某技术博客">
-<meta property="og:description" content="导读
-工厂方法模式是所有设计模式中比较常用的一种模式，但是真正能搞懂用好的少之又少，Spring底层大量的使用该设计模式来进行封装，以致开发者阅读源代码的时候晕头转向。
-今天陈某分别从以下五个方面详细讲述一下工厂方法模式：
-从什么是工厂方法模式
-通用框架实现
-工厂方法模式的优点
-工厂方法模式的升级
-Spring底层如何使用工厂方法模式
+<meta property="og:description" content="前言热部署相信大家都听说过，比如Spring Boot中的devtools，但是听说过JRebel这个工具的却是少之又少，个人觉得作为热部署界的扛把子却鲜为人知，实在是一大憾事。
+很早之前就有读者找我要过JRebel的激活方式，由于忙着专栏文章，一直没安排，今天安排上。
 
-
-
-什么是工厂方法模式？
-定义：定义一个用于创建对象的 接口">
-<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/1.png">
-<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/2.png">
-<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/3.png">
-<meta property="og:updated_time" content="2020-04-05T13:46:31.832Z">
+JRebel目前是收费的，但是中国有大神啊，本篇文章就介绍一下如何撸一个反向代理激活JRebel。">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/JRebel%E7%A0%B4%E8%A7%A3/7.jpg">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/JRebel%E7%A0%B4%E8%A7%A3/3.jpg">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/JRebel%E7%A0%B4%E8%A7%A3/2.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/JRebel%E7%A0%B4%E8%A7%A3/4.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/JRebel%E7%A0%B4%E8%A7%A3/5.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/JRebel%E7%A0%B4%E8%A7%A3/6.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png">
+<meta property="og:updated_time" content="2020-11-01T04:34:05.966Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式：工厂方法模式">
-<meta name="twitter:description" content="导读
-工厂方法模式是所有设计模式中比较常用的一种模式，但是真正能搞懂用好的少之又少，Spring底层大量的使用该设计模式来进行封装，以致开发者阅读源代码的时候晕头转向。
-今天陈某分别从以下五个方面详细讲述一下工厂方法模式：
-从什么是工厂方法模式
-通用框架实现
-工厂方法模式的优点
-工厂方法模式的升级
-Spring底层如何使用工厂方法模式
+<meta name="twitter:title" content="撸了个反代工具,可用于激活JRebel">
+<meta name="twitter:description" content="前言热部署相信大家都听说过，比如Spring Boot中的devtools，但是听说过JRebel这个工具的却是少之又少，个人觉得作为热部署界的扛把子却鲜为人知，实在是一大憾事。
+很早之前就有读者找我要过JRebel的激活方式，由于忙着专栏文章，一直没安排，今天安排上。
 
-
-
-什么是工厂方法模式？
-定义：定义一个用于创建对象的 接口">
-<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/1.png">
+JRebel目前是收费的，但是中国有大神啊，本篇文章就介绍一下如何撸一个反向代理激活JRebel。">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/JRebel%E7%A0%B4%E8%A7%A3/7.jpg">
 
 
 
@@ -184,13 +161,13 @@ Spring底层如何使用工厂方法模式
 
 
 
-  <link rel="canonical" href="https://chenjiabing666.github.io/2020/04/05/设计模式：工厂方法模式/"/>
+  <link rel="canonical" href="https://chenjiabing666.github.io/2020/11/01/撸了个反代工具用于激活JRebel/"/>
 
 
 
 
 
-  <title>设计模式：工厂方法模式 | 不才陈某技术博客</title>
+  <title>撸了个反代工具,可用于激活JRebel | 不才陈某技术博客</title>
   
 
 
@@ -363,7 +340,7 @@ Spring底层如何使用工厂方法模式
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chenjiabing666.github.io/2020/04/05/设计模式：工厂方法模式/">
+    <link itemprop="mainEntityOfPage" href="https://chenjiabing666.github.io/2020/11/01/撸了个反代工具用于激活JRebel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不才陈某">
@@ -380,7 +357,7 @@ Spring底层如何使用工厂方法模式
 
         
         
-          <h1 class="post-title" itemprop="name headline">设计模式：工厂方法模式</h1>
+          <h1 class="post-title" itemprop="name headline">撸了个反代工具,可用于激活JRebel</h1>
         
 
         <div class="post-meta">
@@ -392,8 +369,8 @@ Spring底层如何使用工厂方法模式
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-05T21:44:06+08:00">
-                2020-04-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-01T12:31:01+08:00">
+                2020-11-01
               </time>
             
 
@@ -415,8 +392,8 @@ Spring底层如何使用工厂方法模式
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
+                  <a href="/categories/开发工具/" itemprop="url" rel="index">
+                    <span itemprop="name">开发工具</span>
                   </a>
                 </span>
 
@@ -433,8 +410,8 @@ Spring底层如何使用工厂方法模式
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/04/05/设计模式：工厂方法模式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/04/05/设计模式：工厂方法模式/" itemprop="commentCount"></span>
+                <a href="/2020/11/01/撸了个反代工具用于激活JRebel/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/01/撸了个反代工具用于激活JRebel/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -461,7 +438,7 @@ Spring底层如何使用工厂方法模式
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k
+                  966
                 </span>
               
 
@@ -477,7 +454,7 @@ Spring底层如何使用工厂方法模式
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  3
                 </span>
               
             </div>
@@ -498,78 +475,53 @@ Spring底层如何使用工厂方法模式
       
 
       
-        <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
-<li>工厂方法模式是所有设计模式中比较常用的一种模式，但是真正能搞懂用好的少之又少，Spring底层大量的使用该设计模式来进行封装，以致开发者阅读源代码的时候晕头转向。</li>
-<li>今天陈某分别从以下五个方面详细讲述一下工厂方法模式：<ol>
-<li><strong>从什么是工厂方法模式</strong></li>
-<li><strong>通用框架实现</strong></li>
-<li><strong>工厂方法模式的优点</strong></li>
-<li><strong>工厂方法模式的升级</strong></li>
-<li><strong>Spring底层如何使用工厂方法模式</strong></li>
-</ol>
-</li>
-</ul>
-<h2 id="什么是工厂方法模式？"><a href="#什么是工厂方法模式？" class="headerlink" title="什么是工厂方法模式？"></a>什么是工厂方法模式？</h2><ul>
-<li>定义：定义一个用于创建对象的 接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。</li>
-<li>工厂方法模式通用类图如下：<br><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/1.png" alt=""></li>
-<li>在工厂方法模式中，抽象产品<code>Product</code>负责定义产品的特性，实现对事物的抽象定义。</li>
-<li><code>AbstractFactory</code>是抽象工厂类，定义了一个抽象工厂方法。具体的如何创建产品由工厂实现类<code>ConcreteFactory</code>完成。</li>
-</ul>
-<h2 id="通用框架实现"><a href="#通用框架实现" class="headerlink" title="通用框架实现"></a>通用框架实现</h2><ul>
-<li>工厂方法模式的变种有很多，陈某给出一个比较实用的通用框架。</li>
-<li><p><code>抽象产品类</code>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 公共逻辑方法</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 抽象方法：由子类实现，根据业务逻辑定义多个</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>具体产品类1</code>，继承抽象产品类，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product1</span> <span class="keyword">extends</span> <span class="title">Product</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 实现抽象产品类的抽象方法</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>具体产品类2</code>，继承抽象产品类，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product2</span> <span class="keyword">extends</span> <span class="title">Product</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 实现抽象产品类的抽象方法</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>抽象工厂类</code>，必须定义一个工厂方法来自己实现具体的创建逻辑，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractFactory</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 工厂方法，需要子类实现</div><div class="line">     * <span class="doctag">@param</span> cls</div><div class="line">     * <span class="doctag">@param</span> &lt;T&gt;</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> &lt;T extends Product&gt; <span class="function">T <span class="title">create</span><span class="params">(Class&lt;T&gt; cls)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>具体工厂类，使用了反射对具体产品的实例化，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteFactory</span> <span class="keyword">extends</span> <span class="title">AbstractFactory</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="keyword">public</span> &lt;T extends Product&gt; <span class="function">T <span class="title">create</span><span class="params">(Class&lt;T&gt; cls)</span> </span>&#123;</div><div class="line">        Product product=<span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            product= (Product) Class.forName(cls.getName()).newInstance();</div><div class="line">        &#125;<span class="keyword">catch</span> (Exception ex)&#123;</div><div class="line">            ex.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> (T) product;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>测试如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">//创建具体工厂类</span></div><div class="line">        ConcreteFactory factory = <span class="keyword">new</span> ConcreteFactory();</div><div class="line">        <span class="comment">//调用工厂方法获取产品类1的实例</span></div><div class="line">        Product1 product1 = factory.create(Product1.class);</div><div class="line">        System.out.println(product1);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>以上是简单的一个通用框架，读者可以根据自己的业务在其上拓展。</p>
-</li>
-</ul>
-<h2 id="工厂方法模式的优点"><a href="#工厂方法模式的优点" class="headerlink" title="工厂方法模式的优点"></a>工厂方法模式的优点</h2><ul>
-<li>良好的封装性，代码结构清晰，调用者不用关系具体的实现过程，只需要提供对应的产品类名称即可。</li>
-<li>易扩展性，在增加产品类的情况下，只需要适当的修改工厂类逻辑或者重新拓展一个工厂类即可。</li>
-<li>屏蔽了产品类，产品类的变化调用者不用关心。比如在使用<code>JDBC</code>连接数据库时，只需要改动一个驱动的名称，数据库就会从<code>Mysql</code>切换到<code>Oracle</code>，极其灵活。</li>
-</ul>
-<h2 id="工厂方法模式的升级"><a href="#工厂方法模式的升级" class="headerlink" title="工厂方法模式的升级"></a>工厂方法模式的升级</h2><ul>
-<li>在复杂的系统中，一个产品的初始化过程是及其复杂的，仅仅一个具体工厂实现可能有些吃力，此时最好的做法就是为每个产品实现一个工厂，达到一个工厂类只负责生产一个产品。</li>
-<li>此时工厂方法模式的类图如下：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/2.png" alt=""></p>
-<ul>
-<li>如上图，每个产品类都对应了一个工厂，一个工厂只负责生产一个产品，非常符合单一职责原则。</li>
-<li>针对上述的升级过程，那么工厂方法中不需要传入抽象产品类了，因为一个工厂只负责一个产品的生产，此时的抽象工厂类如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractFactory</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 工厂方法，需要子类实现</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> &lt;T extends Product&gt; <span class="function">T <span class="title">create</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Spring底层如何使用工厂方法模式？"><a href="#Spring底层如何使用工厂方法模式？" class="headerlink" title="Spring底层如何使用工厂方法模式？"></a>Spring底层如何使用工厂方法模式？</h2><ul>
-<li>工厂方法模式在Spring底层被广泛的使用，陈某今天举个最常用的例子就是<code>AbstractFactoryBean</code>。</li>
-<li>这个抽象工厂很熟悉了，这里不再讨论具体的作用。其实现了<code>FactoryBean</code>接口，这个接口中<code>getObject()</code>方法返回真正的Bean实例。</li>
-<li><p><code>AbstractFactoryBean</code>中的<code>getObject()</code>方法如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> T <span class="title">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    <span class="comment">//单例，从缓存中取，或者暴露一个早期实例解决循环引用</span></div><div class="line">		<span class="keyword">if</span> (isSingleton()) &#123;</div><div class="line">			<span class="keyword">return</span> (<span class="keyword">this</span>.initialized ? <span class="keyword">this</span>.singletonInstance : getEarlySingletonInstance());</div><div class="line">		&#125;</div><div class="line">    <span class="comment">//多实例</span></div><div class="line">		<span class="keyword">else</span> &#123; </div><div class="line">      <span class="comment">//调用createInstance</span></div><div class="line">			<span class="keyword">return</span> createInstance();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">  <span class="comment">//创建对象</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> T <span class="title">createInstance</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>;</div></pre></td></tr></table></figure>
-</li>
-<li><p>从以上代码可以看出，创建对象的职责交给了<code>createInstance</code>这个抽象方法，由其子类去定制自己的创建逻辑。</p>
-</li>
-<li>下图显示了继承了<code>AbstractFactoryBean</code>的具体工厂类，如下：</li>
-</ul>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/3.png" alt=""></p>
-<ul>
-<li>其实与其说<code>AbstractFactoryBean</code>是抽象工厂类，不如说<code>FactoryBean</code>是真正的抽象工厂类，前者只是对后者的一种增强，完成大部分的可复用的逻辑。比如常用的<code>sqlSessionFactoryBean</code>只是简单的实现了<code>FactoryBean</code>，并未继承<code>AbstractFactoryBean</code>，至于结论如何，具体看你从哪方面看了。</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>工厂方法模式是一种常见的设计模式，但是真正能够用的高级，用的透彻还是有些难度的，开发者所能做的就是在此模式基础上思考如何优化自己的代码，达到易扩展、封装性强的效果了。</li>
-</ul>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>热部署相信大家都听说过，比如<code>Spring Boot</code>中的<code>devtools</code>，但是听说过<code>JRebel</code>这个工具的却是少之又少，个人觉得作为热部署界的扛把子却鲜为人知，实在是一大憾事。</p>
+<p>很早之前就有读者找我要过<code>JRebel</code>的激活方式，由于忙着专栏文章，一直没安排，今天安排上。</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/JRebel%E7%A0%B4%E8%A7%A3/7.jpg" alt=""></p>
+<p><code>JRebel</code>目前是收费的，但是中国有大神啊，本篇文章就介绍一下如何撸一个反向代理激活<code>JRebel</code>。</p>
+<a id="more"></a>
+<h2 id="为什么要自己搭建反向代理？"><a href="#为什么要自己搭建反向代理？" class="headerlink" title="为什么要自己搭建反向代理？"></a>为什么要自己搭建反向代理？</h2><p>网上有很多教程都是直接提供一个反向代理的地址，当然这些地址某些时候也是可以用的，但是这些地址也是别人搭建的反向代理，<strong>一旦别人的服务器将程序关掉了，则这个地址就失效了</strong>。</p>
+<p>作为一个程序控，难道要这样依赖别人吗？显然不实际，反正搭建一个很简单，干嘛不自己动手呢？</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/JRebel%E7%A0%B4%E8%A7%A3/3.jpg" alt="真的受够了...."></p>
+<h2 id="本地反向代理"><a href="#本地反向代理" class="headerlink" title="本地反向代理"></a>本地反向代理</h2><p>反向代理可以在服务器本地安装，本地安装仅仅适用于个人使用。</p>
+<p>首先找到反向代理工具包<code>ReverseProxy_windows_amd64.exe</code>（文末下载），在命令行输入<code>ReverseProxy_windows_amd64.exe</code>，如果出现以下窗口则表示代理成功：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/JRebel%E7%A0%B4%E8%A7%A3/2.png" alt=""></p>
+<p>默认启动的是本地<code>8888</code>端口，该命令有个参数<code>-l</code>用来指定启动的端口，如下命令使用本地的<code>9090</code>端口：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ReverseProxy_windows_amd64.exe -l "<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">9090</span>"</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>此时本地代理的<code>URL</code>则是<code>http://127.0.0.1:9090</code>。</p>
+</blockquote>
+<p>但是要想激活<code>JRebel</code>还需一个随机<code>GUID</code>，生成网址：<code>http://www.ofmonkey.com/transfer/guid</code></p>
+<blockquote>
+<p>最终的激活<code>URL</code>则是<code>http://127.0.0.1:9090/guid</code></p>
+</blockquote>
+<p><strong>注意</strong>：此时的命令窗口不能关闭，否则代理将会关闭。不过<code>windows</code>可以配置服务器自启动，这里就不再详细介绍了，感兴趣的可以自己研究下。</p>
+<h2 id="服务器反向代理【个人推荐】"><a href="#服务器反向代理【个人推荐】" class="headerlink" title="服务器反向代理【个人推荐】"></a>服务器反向代理【个人推荐】</h2><p>服务器反向代理和本地的大同小异，只不过服务器上的反向代理可以作用于的多台，更加方便而已。</p>
+<p>首先找到<code>Linux</code>下的反向代理工具包<code>ReverseProxy_linux_amd64</code>，执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./ReverseProxy_linux_amd64 &amp;</div></pre></td></tr></table></figure></p>
+<p>默认代理<code>8888</code>端口，可以运行一下命令指定端口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./ReverseProxy_linux_amd64 -l &quot;ip:port&quot; &amp;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>ip</code>则是服务器的IP地址，<code>port</code>则是指定的端口，<strong>注意这里一定要是开放的端口</strong>。</p>
+</blockquote>
+<p>运行成功后同样需要一个<code>GUID</code>，生成网址同上。</p>
+<p>最终的激活<code>URL</code>则是<code>http://ip:port/guid</code>。</p>
+<h2 id="IDEA安装JRebel并激活"><a href="#IDEA安装JRebel并激活" class="headerlink" title="IDEA安装JRebel并激活"></a>IDEA安装JRebel并激活</h2><p>JRebel在IDEA中提供了插件，只需要在插件市场（<code>setting-&gt;plugins</code>）搜索<code>JRebel</code>，如下：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/JRebel%E7%A0%B4%E8%A7%A3/4.png" alt="IDEA安装JRebel"></p>
+<blockquote>
+<p>点击<code>install</code>安装，安装成功后重启IDEA即可。</p>
+</blockquote>
+<p>选择<code>help-&gt;JRebel-&gt;Activation</code>则出现激活的窗口，如下：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/JRebel%E7%A0%B4%E8%A7%A3/5.png" alt="激活界面"></p>
+<p>第一个输入框填激活的<code>URL</code>，第二个输入框填自己的<code>邮箱</code>，填完之后点击确定，则会验证激活，如果出现以下界面，则表示激活成功：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/JRebel%E7%A0%B4%E8%A7%A3/6.png" alt="激活成功"></p>
+<h2 id="服务器安装JRebel并激活"><a href="#服务器安装JRebel并激活" class="headerlink" title="服务器安装JRebel并激活"></a>服务器安装JRebel并激活</h2><p>如果涉及到远程热部署的话，服务器是需要安装一个<code>JRebel</code>的，首先需要下载一个<code>JRebel</code>安装包<code>jrebel-2020.1.1-nosetup.zip</code>（文末下载），然后解压到指定的目录下。</p>
+<p>这个安装包是免安装的，直接找到<code>bin</code>目录，在其下执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./activate.sh http://ip:port/guid 你的邮箱地址</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>ip</code>则是服务器的IP地址，<code>port</code>则是反向代理的端口，默认<code>8888</code>，<code>guid</code>是生成的随机<code>uid</code>。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>JRebel</code>在热部署界有着举足轻重的地位，无论是本地热部署还是远程热部署都是开发者的一大利器。</p>
+<blockquote>
+<p>文中<strong>反向代理安装包</strong>、<strong>JRebel安装包</strong>在公众号回复关键词<code>JRebel</code>免费获取。</p>
+</blockquote>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png" alt=""></p>
 
       
     </div>
@@ -611,6 +563,35 @@ Spring底层如何使用工厂方法模式
 <div>
       
         
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/11/01/撸了个反代工具用于激活JRebel/">撸了个反代工具,可用于激活JRebel</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 不才陈某 的个人博客">不才陈某</a></p>
+  <p><span>发布时间:</span>2020年11月01日 - 12:31</p>
+  <p><span>最后更新:</span>2020年11月01日 - 12:34</p>
+  <p><span>原始链接:</span><a href="/2020/11/01/撸了个反代工具用于激活JRebel/" title="撸了个反代工具,可用于激活JRebel">https://chenjiabing666.github.io/2020/11/01/撸了个反代工具用于激活JRebel/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://chenjiabing666.github.io/2020/11/01/撸了个反代工具用于激活JRebel/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
       
 </div>
 
@@ -627,7 +608,9 @@ Spring底层如何使用工厂方法模式
       
         <div class="post-tags">
           
-            <a href="/tags/设计模式/" rel="tag"><i class="fa fa-tag"></i> 设计模式</a>
+            <a href="/tags/破解/" rel="tag"><i class="fa fa-tag"></i> 破解</a>
+          
+            <a href="/tags/优质资源/" rel="tag"><i class="fa fa-tag"></i> 优质资源</a>
           
         </div>
       
@@ -640,8 +623,8 @@ Spring底层如何使用工厂方法模式
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/04/05/设计模式：模板模式/" rel="next" title="设计模式：模板模式">
-                <i class="fa fa-chevron-left"></i> 设计模式：模板模式
+              <a href="/2020/10/30/Hexo博客如何被百度收录？/" rel="next" title="Hexo博客如何被百度收录？">
+                <i class="fa fa-chevron-left"></i> Hexo博客如何被百度收录？
               </a>
             
           </div>
@@ -649,10 +632,6 @@ Spring底层如何使用工厂方法模式
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/04/19/面试官：你知道哪些事务失效的场景？/" rel="prev" title="面试官：你知道哪些事务失效的场景？">
-                面试官：你知道哪些事务失效的场景？ <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -844,7 +823,7 @@ Spring底层如何使用工厂方法模式
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导读"><span class="nav-text">导读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是工厂方法模式？"><span class="nav-text">什么是工厂方法模式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通用框架实现"><span class="nav-text">通用框架实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂方法模式的优点"><span class="nav-text">工厂方法模式的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂方法模式的升级"><span class="nav-text">工厂方法模式的升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring底层如何使用工厂方法模式？"><span class="nav-text">Spring底层如何使用工厂方法模式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要自己搭建反向代理？"><span class="nav-text">为什么要自己搭建反向代理？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地反向代理"><span class="nav-text">本地反向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器反向代理【个人推荐】"><span class="nav-text">服务器反向代理【个人推荐】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDEA安装JRebel并激活"><span class="nav-text">IDEA安装JRebel并激活</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器安装JRebel并激活"><span class="nav-text">服务器安装JRebel并激活</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
