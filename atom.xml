@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chenjiabing666.github.io/"/>
-  <updated>2020-11-02T10:45:35.918Z</updated>
+  <updated>2020-11-02T10:49:22.584Z</updated>
   <id>https://chenjiabing666.github.io/</id>
   
   <author>
@@ -21,11 +21,11 @@
     <link href="https://chenjiabing666.github.io/2020/11/02/SpringBoot%E7%83%AD%E9%83%A8%E7%BD%B2%E6%8F%92%E4%BB%B6JRebel/"/>
     <id>https://chenjiabing666.github.io/2020/11/02/SpringBoot热部署插件JRebel/</id>
     <published>2020-11-02T10:44:23.000Z</published>
-    <updated>2020-11-02T10:45:35.918Z</updated>
+    <updated>2020-11-02T10:49:22.584Z</updated>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;持续原创输出，点击上方蓝字关注我&quot;&gt;&lt;a href=&quot;#持续原创输出，点击上方蓝字关注我&quot; class=&quot;headerlink&quot; title=&quot;持续原创输出，点击上方蓝字关注我&quot;&gt;&lt;/a&gt;持续原创输出，点击上方蓝字关注我&lt;/h3&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;&lt;code&gt;Spring Boot&lt;/code&gt;中的热部署相信大家用的最多的就是&lt;code&gt;devtools&lt;/code&gt;，没办法，官推的。&lt;/p&gt;
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;&lt;code&gt;Spring Boot&lt;/code&gt;中的热部署相信大家用的最多的就是&lt;code&gt;devtools&lt;/code&gt;，没办法，官推的。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;JRebel&lt;/code&gt;相对于&lt;code&gt;devtools&lt;/code&gt;，个人觉得无论是加载速度还是使用便捷，&lt;code&gt;JRebel&lt;/code&gt;完胜。&lt;/p&gt;
 &lt;p&gt;作为&lt;strong&gt;前辈级别&lt;/strong&gt;的开发利器，&lt;code&gt;JRebel&lt;/code&gt;真的值得开一章节来好好介绍下。&lt;/p&gt;
     
