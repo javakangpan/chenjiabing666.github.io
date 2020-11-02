@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chenjiabing666.github.io/"/>
-  <updated>2020-11-01T04:34:05.966Z</updated>
+  <updated>2020-11-02T10:45:35.918Z</updated>
   <id>https://chenjiabing666.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring Boot 使用JRebel实现热部署~</title>
+    <link href="https://chenjiabing666.github.io/2020/11/02/SpringBoot%E7%83%AD%E9%83%A8%E7%BD%B2%E6%8F%92%E4%BB%B6JRebel/"/>
+    <id>https://chenjiabing666.github.io/2020/11/02/SpringBoot热部署插件JRebel/</id>
+    <published>2020-11-02T10:44:23.000Z</published>
+    <updated>2020-11-02T10:45:35.918Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;持续原创输出，点击上方蓝字关注我&quot;&gt;&lt;a href=&quot;#持续原创输出，点击上方蓝字关注我&quot; class=&quot;headerlink&quot; title=&quot;持续原创输出，点击上方蓝字关注我&quot;&gt;&lt;/a&gt;持续原创输出，点击上方蓝字关注我&lt;/h3&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;&lt;code&gt;Spring Boot&lt;/code&gt;中的热部署相信大家用的最多的就是&lt;code&gt;devtools&lt;/code&gt;，没办法，官推的。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;JRebel&lt;/code&gt;相对于&lt;code&gt;devtools&lt;/code&gt;，个人觉得无论是加载速度还是使用便捷，&lt;code&gt;JRebel&lt;/code&gt;完胜。&lt;/p&gt;
+&lt;p&gt;作为&lt;strong&gt;前辈级别&lt;/strong&gt;的开发利器，&lt;code&gt;JRebel&lt;/code&gt;真的值得开一章节来好好介绍下。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Spring Boot进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
+    
+  </entry>
   
   <entry>
     <title>撸了个反代工具,可用于激活JRebel</title>
@@ -427,29 +449,6 @@
     
     
       <category term="破解" scheme="https://chenjiabing666.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mybatis Log plugin破解，亲测可用！！！</title>
-    <link href="https://chenjiabing666.github.io/2020/08/26/plugin%E7%A0%B4%E8%A7%A3%EF%BC%8C%E4%BA%B2%E6%B5%8B%E5%8F%AF%E7%94%A8/"/>
-    <id>https://chenjiabing666.github.io/2020/08/26/plugin破解，亲测可用/</id>
-    <published>2020-08-26T06:50:11.000Z</published>
-    <updated>2020-10-23T13:55:33.739Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;今天重新装了IDEA2020，顺带重装了一些插件，毕竟这些插件都是习惯一直在用，其中一款就是Mybatis  Log plugin，按照往常的思路，在IDEA插件市场搜索安装，艹，眼睛一瞟，竟然收费了，对于我这种支持盗版的人来说太难了，于是自己开始捣鼓各种尝试破解，下文分享自己的破解方式。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="开发工具" scheme="https://chenjiabing666.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="破解" scheme="https://chenjiabing666.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
-    
-      <category term="优质资源" scheme="https://chenjiabing666.github.io/tags/%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90/"/>
     
   </entry>
   

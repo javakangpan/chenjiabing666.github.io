@@ -92,7 +92,7 @@
 
 
 
-  <meta name="keywords" content="破解," />
+  <meta name="keywords" content="Spring Boot," />
 
 
 
@@ -105,32 +105,34 @@
 
 
 
-<meta name="description" content="前言
-这几年的工作过程中使用了很多的数据库工具，比如Sqlyog，DBeaver,sqlplus等工具，但是个人觉得很好用的还是Navicat。
-不如人意的就是目前Navicat都在收费，今天就来分享下如何安装免费的Navicat。">
+<meta name="description" content="持续原创输出，点击上方蓝字关注我前言Spring Boot中的热部署相信大家用的最多的就是devtools，没办法，官推的。
+JRebel相对于devtools，个人觉得无论是加载速度还是使用便捷，JRebel完胜。
+作为前辈级别的开发利器，JRebel真的值得开一章节来好好介绍下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Navicat Premium 12破解版安装">
-<meta property="og:url" content="https://chenjiabing666.github.io/2020/08/27/Navicat Premium 12免费版本安装/index.html">
+<meta property="og:title" content="Spring Boot 使用JRebel实现热部署~">
+<meta property="og:url" content="https://chenjiabing666.github.io/2020/11/02/SpringBoot热部署插件JRebel/index.html">
 <meta property="og:site_name" content="不才陈某技术博客">
-<meta property="og:description" content="前言
-这几年的工作过程中使用了很多的数据库工具，比如Sqlyog，DBeaver,sqlplus等工具，但是个人觉得很好用的还是Navicat。
-不如人意的就是目前Navicat都在收费，今天就来分享下如何安装免费的Navicat。">
-<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis-Log-plugin/6.jpg">
-<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/1.png">
-<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/2.png">
-<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/3.png">
-<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/4.png">
-<meta property="og:image" content="https://images2018.cnblogs.com/blog/1023171/201808/1023171-20180819144807854-2077107245.png">
-<meta property="og:image" content="https://images2018.cnblogs.com/blog/1023171/201808/1023171-20180819144833188-1560669113.png">
-<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/5.png">
-<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E4%B8%83%E7%A7%92%E7%BC%96%E7%A8%8B.jpg">
-<meta property="og:updated_time" content="2020-10-23T13:56:33.729Z">
+<meta property="og:description" content="持续原创输出，点击上方蓝字关注我前言Spring Boot中的热部署相信大家用的最多的就是devtools，没办法，官推的。
+JRebel相对于devtools，个人觉得无论是加载速度还是使用便捷，JRebel完胜。
+作为前辈级别的开发利器，JRebel真的值得开一章节来好好介绍下。">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/2.jpg">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/3.jpg">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/4.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/5.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/6.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/4.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/7.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/6.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/8.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/8.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png">
+<meta property="og:updated_time" content="2020-11-02T10:45:35.918Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Navicat Premium 12破解版安装">
-<meta name="twitter:description" content="前言
-这几年的工作过程中使用了很多的数据库工具，比如Sqlyog，DBeaver,sqlplus等工具，但是个人觉得很好用的还是Navicat。
-不如人意的就是目前Navicat都在收费，今天就来分享下如何安装免费的Navicat。">
-<meta name="twitter:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis-Log-plugin/6.jpg">
+<meta name="twitter:title" content="Spring Boot 使用JRebel实现热部署~">
+<meta name="twitter:description" content="持续原创输出，点击上方蓝字关注我前言Spring Boot中的热部署相信大家用的最多的就是devtools，没办法，官推的。
+JRebel相对于devtools，个人觉得无论是加载速度还是使用便捷，JRebel完胜。
+作为前辈级别的开发利器，JRebel真的值得开一章节来好好介绍下。">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/2.jpg">
 
 
 
@@ -160,13 +162,13 @@
 
 
 
-  <link rel="canonical" href="https://chenjiabing666.github.io/2020/08/27/Navicat Premium 12免费版本安装/"/>
+  <link rel="canonical" href="https://chenjiabing666.github.io/2020/11/02/SpringBoot热部署插件JRebel/"/>
 
 
 
 
 
-  <title>Navicat Premium 12破解版安装 | 不才陈某技术博客</title>
+  <title>Spring Boot 使用JRebel实现热部署~ | 不才陈某技术博客</title>
   
 
 
@@ -339,7 +341,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chenjiabing666.github.io/2020/08/27/Navicat Premium 12免费版本安装/">
+    <link itemprop="mainEntityOfPage" href="https://chenjiabing666.github.io/2020/11/02/SpringBoot热部署插件JRebel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不才陈某">
@@ -356,7 +358,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Navicat Premium 12破解版安装</h1>
+          <h1 class="post-title" itemprop="name headline">Spring Boot 使用JRebel实现热部署~</h1>
         
 
         <div class="post-meta">
@@ -368,8 +370,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-27T15:51:57+08:00">
-                2020-08-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-02T18:44:23+08:00">
+                2020-11-02
               </time>
             
 
@@ -391,8 +393,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发工具/" itemprop="url" rel="index">
-                    <span itemprop="name">开发工具</span>
+                  <a href="/categories/Spring-Boot进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring Boot进阶</span>
                   </a>
                 </span>
 
@@ -409,8 +411,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/08/27/Navicat Premium 12免费版本安装/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/08/27/Navicat Premium 12免费版本安装/" itemprop="commentCount"></span>
+                <a href="/2020/11/02/SpringBoot热部署插件JRebel/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/02/SpringBoot热部署插件JRebel/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -437,7 +439,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  401
+                  1.7k
                 </span>
               
 
@@ -453,7 +455,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  6
                 </span>
               
             </div>
@@ -474,50 +476,92 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
-<li>这几年的工作过程中使用了很多的数据库工具，比如Sqlyog，DBeaver,sqlplus等工具，但是个人觉得很好用的还是Navicat。</li>
-<li>不如人意的就是目前Navicat都在收费，今天就来分享下如何安装免费的Navicat。</li>
-<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis-Log-plugin/6.jpg" alt=""><a id="more"></a>
+        <h3 id="持续原创输出，点击上方蓝字关注我"><a href="#持续原创输出，点击上方蓝字关注我" class="headerlink" title="持续原创输出，点击上方蓝字关注我"></a>持续原创输出，点击上方蓝字关注我</h3><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><code>Spring Boot</code>中的热部署相信大家用的最多的就是<code>devtools</code>，没办法，官推的。</p>
+<p><code>JRebel</code>相对于<code>devtools</code>，个人觉得无论是加载速度还是使用便捷，<code>JRebel</code>完胜。</p>
+<p>作为<strong>前辈级别</strong>的开发利器，<code>JRebel</code>真的值得开一章节来好好介绍下。</p>
+<a id="more"></a>
+<h2 id="JRebel收费怎么破？"><a href="#JRebel收费怎么破？" class="headerlink" title="JRebel收费怎么破？"></a>JRebel收费怎么破？</h2><p>前面作者单独写过一篇激活<code>JRebel</code>的文章教程，没钱的可以去看看：<a href="https://mp.weixin.qq.com/s/VBGoGMz0y2Y-y6NcdMcaLg" target="_blank" rel="external">撸了个反向代理工具，搞一搞JRebel</a>。</p>
+<blockquote>
+<p><strong>特此声明</strong>：作者支持原版，不差钱的建议装个原版的，毕竟这么好的工具值得。</p>
+</blockquote>
+<h2 id="什么是本地热部署？"><a href="#什么是本地热部署？" class="headerlink" title="什么是本地热部署？"></a>什么是本地热部署？</h2><p>传统的开发中，项目在启动过程中代码有所改动是不会重新编译运行的，而是要关闭项目重新启动后修改的代码才会生效。</p>
+<blockquote>
+<p><strong>本地热部署</strong>则是能够在项目运行中感知到特定文件代码的修改而使项目不重新启动就能生效。</p>
+</blockquote>
+<h2 id="什么是远程热部署？"><a href="#什么是远程热部署？" class="headerlink" title="什么是远程热部署？"></a>什么是远程热部署？</h2><p>远程热部署的<code>远程</code>两字指的是<strong>远程服务器</strong>，平时开发中，只要本地代码改动了，必须要重新打包上传服务器重新启动之后才会生效，<strong>你这样干过吗？…….</strong></p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/2.jpg" alt="嗯？好像干过"></p>
+<blockquote>
+<p><strong>远程热部署</strong>则是本地代码改变之后，不用重新打包上传服务器重启项目就能生效，本地改变之后能够自动改变服务器上的项目代码。</p>
+</blockquote>
+<p>有些人听到这里懵逼了，这是什么鬼？还有这么神奇的东西………..</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/3.jpg" alt="别惊讶，就是这么神奇"></p>
+<h2 id="JRebel和devtools的区别"><a href="#JRebel和devtools的区别" class="headerlink" title="JRebel和devtools的区别"></a>JRebel和devtools的区别</h2><p>前辈和后辈的比较其实没什么可比性，如果不是JRebel<strong>收费</strong>了，绝对是所有程序员的首选。但还是要说说他们之间的区别，如下：</p>
+<ol>
+<li><code>JRebel</code>加载的速度优于<code>devtools</code></li>
+<li>JRebel不仅仅局限于Spring Boot项目，可以用在任何的Java项目中。</li>
+<li><code>devtools</code> 方式的热部署在功能上有限制，方法内的修改可以实现热部署，但新增的方法或者修改方法参数之后热部署是不生效的。</li>
+</ol>
+<h2 id="如何安装JRebel？"><a href="#如何安装JRebel？" class="headerlink" title="如何安装JRebel？"></a>如何安装JRebel？</h2><p>本地热部署只需要在<code>IDEA</code>中装一个JRebel的插件，远程热部署需要在服务器上装一个JRebel，这两种方式在上一篇文章都介绍过，不会的可以去看看：<a href="https://mp.weixin.qq.com/s/VBGoGMz0y2Y-y6NcdMcaLg" target="_blank" rel="external">撸了个反向代理工具，搞一搞JRebel</a>。</p>
+<h2 id="如何本地热部署？"><a href="#如何本地热部署？" class="headerlink" title="如何本地热部署？"></a>如何本地热部署？</h2><p><code>JRebel</code>插件安装完成之后，将<code>IDEA</code>中的<code>自动编译</code>开启，然后找到<code>IDEA</code>中的<code>JRebel</code>的工具面板，将所需要热部署的项目或者模块勾选上即可，如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/4.png" alt=""></p>
+<blockquote>
+<p>勾选成功之后将会在项目或者模块的<code>src/resource</code>下生成一个<code>rebel.xml</code>文件。</p>
+</blockquote>
+<p>此时在<code>Spring Boot</code>的主启动类上右键，将会出现以<code>JRebel</code>启动的选项，如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/5.png" alt=""></p>
+<p>当然在<code>IDEA</code>的右上角也存在启动的按钮，如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/6.png" alt=""></p>
+<blockquote>
+<p><code>①</code>是本地启动和<code>DEBUG</code>模式启动，<code>②</code>是远程热部署的时候更新按钮。</p>
+</blockquote>
+<p>此时就已经配置成功了，如果勾选的项目或者模块出现了改变，按<code>CRTL+SHIFT+F9</code>则会自动重新编译加载改变的部分，不用再重新启动项目了。</p>
+<h2 id="如何远程热部署？"><a href="#如何远程热部署？" class="headerlink" title="如何远程热部署？"></a>如何远程热部署？</h2><p>远程热部署需要在服务器上安装并激活<code>JRebel</code>，参照上篇文章：<a href="https://mp.weixin.qq.com/s/VBGoGMz0y2Y-y6NcdMcaLg" target="_blank" rel="external">撸了个反向代理工具，搞一搞JRebel</a>。</p>
+<p>激活成功后需要设置远程连接的密码，在<code>JRebel</code>的根目录下执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar jrebel.jar -set-remote-password 123456789</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>此处设置的<code>123456789</code>则是远程的密码，在<code>IDEA</code>连接服务器的时候需要。</p>
+</blockquote>
+<p>服务器配置成功后，在IDEA中JRebel的面板中设置远程热部署的模块，如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/4.png" alt=""></p>
+<blockquote>
+<p>勾选成功后，将会在<code>src/resource</code>下生成一个<code>rebel-remote.xml</code>文件。</p>
+</blockquote>
+<p>此时将<code>Spring Boot</code>项目打包成一个<code>Jar</code>，上传到服务器，执行以下命令启动项目：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup java -agentpath:/usr/local/jrebel/lib/libjrebel64.so  -Drebel.remoting_plugin=true -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9083 -jar xxx.jar &amp;</div></pre></td></tr></table></figure></p>
+<p><code>libjrebel64.so</code>这个文件是<code>JRebel</code>的<code>lib</code>目录下的文件。</p>
+<p><code>-Xdebug</code>之后，<code>-jar</code>之前的命令是开启远程调试的，如果不需要的可以去掉，不知道远程调试的，可以看：<a href="https://mp.weixin.qq.com/s/EoJ8OaJWoXZSrP3Lvexd9Q" target="_blank" rel="external">惊呆了！Spring Boot还能开启远程调试~</a>。</p>
+<blockquote>
+<p>项目启动成功后，服务器上的配置就完成了。</p>
+</blockquote>
+<p>此时在IDEA中需要设置连接到刚才启动的项目，打开<code>File-&gt;setting-&gt;JRbel&amp;XRebel-&gt;JRbel Remote Servers</code>，如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/7.png" alt=""></p>
+<p>步骤如下：</p>
+<ol>
+<li>点击<code>+</code>号添加一个服务</li>
+<li>填写信息<ul>
+<li><code>server name</code>随便起个服务的名字</li>
+<li><code>server URL</code>格式：<code>http://ip:port</code>，这里的<code>ip</code>是服务器的IP，<code>port</code>是项目端口号。</li>
+<li>远程密码则是上文设置的<code>JRebel</code>的密码<code>123456789</code>。</li>
+</ul>
 </li>
-</ul>
-<h2 id="免费版本安装"><a href="#免费版本安装" class="headerlink" title="免费版本安装"></a>免费版本安装</h2><ol>
-<li>首先去官网下载Navicat_12的安装包，根据自己电脑的配置下载合适的。</li>
+<li>点击<code>OK</code>，即可添加成功。</li>
 </ol>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/1.png" alt=""></p>
-<ol>
-<li>下载成功之后，直接<code>安装</code>，<code>启动</code>即可</li>
-<li>启动时选择<code>试用</code>版本。</li>
-<li>打开<strong>神秘的包包</strong>，找到匹配的，如下：</li>
-</ol>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/2.png" alt=""></p>
-<ol>
-<li>将其中的文件全部复制到<code>Navicat_12</code>的根目录，文件如下：</li>
-</ol>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/3.png" alt=""></p>
-<ol>
-<li>重新启动Navicat，出现以下界面，表示安装成功，如下：</li>
-</ol>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/4.png" alt=""></p>
-<h2 id="如何连接Oracle"><a href="#如何连接Oracle" class="headerlink" title="如何连接Oracle"></a>如何连接Oracle</h2><ul>
-<li>如果本地未安装过Oracle数据库，新安装的Navicat默认是连接不上oracle的，需要配置一下<code>oci.dll</code>。</li>
-<li>选择<code>工具</code>-&gt;<code>选项</code></li>
-<li><img src="https://images2018.cnblogs.com/blog/1023171/201808/1023171-20180819144807854-2077107245.png" alt=""></li>
-<li>指定<code>oci.dll</code>的路径，如下：</li>
-<li><img src="https://images2018.cnblogs.com/blog/1023171/201808/1023171-20180819144833188-1560669113.png" alt=""></li>
-<li>重新启动，即可连接。</li>
-<li><strong>注意</strong>：Navicat_12自带的oci.dll如果版本不合适，可以去官网下载对应的版本。</li>
-</ul>
-<h2 id="如何连接Sql-server"><a href="#如何连接Sql-server" class="headerlink" title="如何连接Sql server"></a>如何连接Sql server</h2><ul>
-<li>如果本地未安装过SQL Server数据库，Navicat是不能连接上数据库的，具体解决方案如下：</li>
-<li>在Navicat的根目录下找到<code>sqlncli_x64.msi</code>双击安装即可，当然如果版本不合适，可以自己去官网下载。</li>
-<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/navicat12/5.png" alt=""></li>
-<li>安装成功后，重启启动，即可连接。</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>安装免费版的Navicat很简单，只需要一个神秘的包包，哈哈。</li>
-<li>老规矩，关注公众号【码猿技术专栏】回复关键词<code>Navicat12</code>即可获取。</li>
-<li><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E4%B8%83%E7%A7%92%E7%BC%96%E7%A8%8B.jpg" alt=""></li>
-</ul>
+<p>以上设置成功后，点击右上角的远程部署按钮，下图中的<code>②</code>号按钮，则会自动更新服务器上已启动项目的代码使之本地修改在服务端自动生效：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/6.png" alt=""></p>
+<p>在<code>JRebel Console</code>这个面板中将会打印出远程热部署更新的日志信息，如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%E4%BD%BF%E7%94%A8JRebel%E7%83%AD%E9%83%A8%E7%BD%B2/8.png" alt=""></p>
+<blockquote>
+<p>只要本地有了更改，点击远程热部署按钮，则会自动上传代码到服务器端并实时更新，不用重新启动项目。</p>
+</blockquote>
+<h2 id="多模块开发的一个坑"><a href="#多模块开发的一个坑" class="headerlink" title="多模块开发的一个坑"></a>多模块开发的一个坑</h2><p>如果是多模块开发，比如分为<code>api</code>（最终的<code>Jar</code>包），<code>core</code>（核心包），<code>service</code>（业务层的包），最终打包运行在服务器端的是<code>api</code>这个模块，其余两个模块都是属于依赖模块，虽然在<code>JRebel</code>远程热部署选项中都勾选了，但是它们的代码更改并不会在服务端生效。</p>
+<p>这个如何解决呢？很简单，在<code>api</code>项目下的<code>rebel-remote.xml</code>文件中将其余两个模块添加进去，默认的如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">rebel-remote</span> <span class="attr">xmlns</span>=<span class="string">"http://www.zeroturnaround.com/rebel/remote"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>xx.xx.xx.api<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">rebel-remote</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>添加之后的代码如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">rebel-remote</span> <span class="attr">xmlns</span>=<span class="string">"http://www.zeroturnaround.com/rebel/remote"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>xx.xxx.xx.api<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>xx.xx.xx.service<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>xx.xx.xx.core<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">rebel-remote</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>以上的<code>&lt;id&gt;</code>标签中指定的是模块的包名（package）。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>作为热部署界的前辈，<code>JRebel</code>依然是敌得过后浪，果然是姜还是老的辣……</p>
+<p>希望这篇文章介绍的<code>JRebel</code>能够提高读者们的开发效率，反正我是提高了，哈哈~</p>
+<p>另外作者为大家准备接近<code>10M</code>的面筋，涵盖后端的各个层面，老规矩，公众号内回复<code>Java面试宝典</code>即可获取。</p>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/8.png" alt=""></p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png" alt=""></p>
 
       
     </div>
@@ -559,6 +603,35 @@
 <div>
       
         
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/11/02/SpringBoot热部署插件JRebel/">Spring Boot 使用JRebel实现热部署~</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 不才陈某 的个人博客">不才陈某</a></p>
+  <p><span>发布时间:</span>2020年11月02日 - 18:44</p>
+  <p><span>最后更新:</span>2020年11月02日 - 18:45</p>
+  <p><span>原始链接:</span><a href="/2020/11/02/SpringBoot热部署插件JRebel/" title="Spring Boot 使用JRebel实现热部署~">https://chenjiabing666.github.io/2020/11/02/SpringBoot热部署插件JRebel/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://chenjiabing666.github.io/2020/11/02/SpringBoot热部署插件JRebel/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
       
 </div>
 
@@ -575,7 +648,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/破解/" rel="tag"><i class="fa fa-tag"></i> 破解</a>
+            <a href="/tags/Spring-Boot/" rel="tag"><i class="fa fa-tag"></i> Spring Boot</a>
           
         </div>
       
@@ -588,8 +661,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/08/26/plugin破解，亲测可用/" rel="next" title="Mybatis Log plugin破解，亲测可用！！！">
-                <i class="fa fa-chevron-left"></i> Mybatis Log plugin破解，亲测可用！！！
+              <a href="/2020/11/01/撸了个反代工具用于激活JRebel/" rel="next" title="撸了个反代工具,可用于激活JRebel">
+                <i class="fa fa-chevron-left"></i> 撸了个反代工具,可用于激活JRebel
               </a>
             
           </div>
@@ -597,10 +670,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/10/14/Spring Boot 第一弹，问候一下世界！！！/" rel="prev" title="Spring Boot 第一弹，问候一下世界！！！">
-                Spring Boot 第一弹，问候一下世界！！！ <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -792,7 +861,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#免费版本安装"><span class="nav-text">免费版本安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何连接Oracle"><span class="nav-text">如何连接Oracle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何连接Sql-server"><span class="nav-text">如何连接Sql server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#持续原创输出，点击上方蓝字关注我"><span class="nav-text">持续原创输出，点击上方蓝字关注我</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JRebel收费怎么破？"><span class="nav-text">JRebel收费怎么破？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是本地热部署？"><span class="nav-text">什么是本地热部署？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是远程热部署？"><span class="nav-text">什么是远程热部署？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JRebel和devtools的区别"><span class="nav-text">JRebel和devtools的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何安装JRebel？"><span class="nav-text">如何安装JRebel？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何本地热部署？"><span class="nav-text">如何本地热部署？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何远程热部署？"><span class="nav-text">如何远程热部署？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多模块开发的一个坑"><span class="nav-text">多模块开发的一个坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></div>
             
 
           </div>
