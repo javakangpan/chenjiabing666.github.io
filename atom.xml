@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chenjiabing666.github.io/"/>
-  <updated>2020-11-02T10:49:22.584Z</updated>
+  <updated>2020-11-03T13:18:42.642Z</updated>
   <id>https://chenjiabing666.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>推荐三款插件，让你玩转Github</title>
+    <link href="https://chenjiabing666.github.io/2020/11/03/%E6%8E%A8%E8%8D%90%E4%B8%89%E6%AC%BE%E6%8F%92%E4%BB%B6%EF%BC%8C%E8%AE%A9%E4%BD%A0%E7%8E%A9%E8%BD%ACGithub/"/>
+    <id>https://chenjiabing666.github.io/2020/11/03/推荐三款插件，让你玩转Github/</id>
+    <published>2020-11-03T13:17:24.000Z</published>
+    <updated>2020-11-03T13:18:42.642Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;作为&lt;code&gt;Github&lt;/code&gt;的常客，真的是无法忍受那个速度，加载慢，下载慢，&lt;code&gt;clone&lt;/code&gt;慢，总之慢慢慢……&lt;/p&gt;
+&lt;p&gt;除了慢，还有很多文件夹，层层包裹，你不觉得难受吗？&lt;/p&gt;
+&lt;p&gt;今天，作者推荐三个&lt;code&gt;Chrome&lt;/code&gt;插件，让你喜欢上&lt;code&gt;Github&lt;/code&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="杂谈" scheme="https://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+      <category term="优质资源" scheme="https://chenjiabing666.github.io/tags/%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring Boot 使用JRebel实现热部署~</title>
@@ -426,29 +448,6 @@
     
     
       <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Navicat Premium 12破解版安装</title>
-    <link href="https://chenjiabing666.github.io/2020/08/27/Navicat%20Premium%2012%E5%85%8D%E8%B4%B9%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85/"/>
-    <id>https://chenjiabing666.github.io/2020/08/27/Navicat Premium 12免费版本安装/</id>
-    <published>2020-08-27T07:51:57.000Z</published>
-    <updated>2020-10-23T13:56:33.729Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;这几年的工作过程中使用了很多的数据库工具，比如Sqlyog，DBeaver,sqlplus等工具，但是个人觉得很好用的还是Navicat。&lt;/li&gt;
-&lt;li&gt;不如人意的就是目前Navicat都在收费，今天就来分享下如何安装免费的Navicat。&lt;/li&gt;
-&lt;li&gt;&lt;img src=&quot;https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis-Log-plugin/6.jpg&quot; alt=&quot;&quot;&gt;
-    
-    </summary>
-    
-      <category term="开发工具" scheme="https://chenjiabing666.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="破解" scheme="https://chenjiabing666.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
     
   </entry>
   
