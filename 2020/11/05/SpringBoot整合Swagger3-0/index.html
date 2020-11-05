@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("https://chenjiabing666.github.io/"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="code-ltfpVmGDr3" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spring Boot," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="不才陈某技术博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言最近频繁被Swagger 3.0刷屏，官方表示这是一个突破性的变更，有很多的亮点，我还真不太相信，今天来带大家尝尝鲜，看看这碗汤到底鲜不鲜….
+官方文档如何说？该项目开源在Github上，地址：https://github.com/springfox/springfox。
+Swagger 3.0有何改动？官方文档总结如下几点：
+
+删除了对springfox-swagger2的依赖
+删除所有@E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot 整合 Swagger3.0">
+<meta property="og:url" content="https://chenjiabing666.github.io/2020/11/05/SpringBoot整合Swagger3-0/index.html">
+<meta property="og:site_name" content="不才陈某技术博客">
+<meta property="og:description" content="前言最近频繁被Swagger 3.0刷屏，官方表示这是一个突破性的变更，有很多的亮点，我还真不太相信，今天来带大家尝尝鲜，看看这碗汤到底鲜不鲜….
+官方文档如何说？该项目开源在Github上，地址：https://github.com/springfox/springfox。
+Swagger 3.0有何改动？官方文档总结如下几点：
+
+删除了对springfox-swagger2的依赖
+删除所有@E">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%95%B4%E5%90%88Swagger3.0/1.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%95%B4%E5%90%88Swagger3.0/2.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%95%B4%E5%90%88Swagger3.0/3.jpg">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%95%B4%E5%90%88Swagger3.0/4.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%95%B4%E5%90%88Swagger3.0/5.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%95%B4%E5%90%88Swagger3.0/6.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis%E8%BF%9B%E9%98%B6PDF/2.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png">
+<meta property="og:updated_time" content="2020-11-05T10:53:48.274Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Boot 整合 Swagger3.0">
+<meta name="twitter:description" content="前言最近频繁被Swagger 3.0刷屏，官方表示这是一个突破性的变更，有很多的亮点，我还真不太相信，今天来带大家尝尝鲜，看看这碗汤到底鲜不鲜….
+官方文档如何说？该项目开源在Github上，地址：https://github.com/springfox/springfox。
+Swagger 3.0有何改动？官方文档总结如下几点：
+
+删除了对springfox-swagger2的依赖
+删除所有@E">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%95%B4%E5%90%88Swagger3.0/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chenjiabing666.github.io/2020/11/05/SpringBoot整合Swagger3-0/"/>
+
+
+
+
+
+  <title>Spring Boot 整合 Swagger3.0 | 不才陈某技术博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不才陈某技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">微信公众号：码猿技术专栏</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chenjiabing666.github.io/2020/11/05/SpringBoot整合Swagger3-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="不才陈某">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不才陈某技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spring Boot 整合 Swagger3.0</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-05T18:52:19+08:00">
+                2020-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-Boot进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring Boot进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/11/05/SpringBoot整合Swagger3-0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/05/SpringBoot整合Swagger3-0/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+		  
+		  
+			  <span class="post-meta-divider">|</span>
+			  <span id="busuanzi_value_page_pv"></span>次阅读
+			
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近频繁被<code>Swagger 3.0</code>刷屏，官方表示这是一个突破性的变更，有很多的亮点，我还真不太相信，今天来带大家尝尝鲜，看看这碗汤到底鲜不鲜….</p>
+<h2 id="官方文档如何说？"><a href="#官方文档如何说？" class="headerlink" title="官方文档如何说？"></a>官方文档如何说？</h2><p>该项目开源在<code>Github</code>上，地址：<a href="https://github.com/springfox/springfox" target="_blank" rel="external">https://github.com/springfox/springfox</a>。</p>
+<p><code>Swagger 3.0</code>有何改动？官方文档总结如下几点：</p>
+<ol>
+<li>删除了对<code>springfox-swagger2</code>的依赖</li>
+<li>删除所有<code>@EnableSwagger2...</code>注解</li>
+<li>添加了<code>springfox-boot-starter</code>依赖项</li>
+<li>移除了<code>guava</code>等第三方依赖</li>
+<li>文档访问地址改变了，改成了<code>http://ip:port/project/swagger-ui/index.html</code>。</li>
+</ol>
+<blockquote>
+<p>姑且看到这里，各位初始感觉如何？</p>
+</blockquote>
+<a id="more"></a>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%95%B4%E5%90%88Swagger3.0/1.png" alt=""></p>
+<p>既然人家更新出来了，咱不能不捧场，下面就介绍下<code>Spring Boot</code>如何整合<code>Swagger 3.0</code>吧。</p>
+<h2 id="Spring-Boot版本说明"><a href="#Spring-Boot版本说明" class="headerlink" title="Spring Boot版本说明"></a>Spring Boot版本说明</h2><p>作者使用<code>Spring Boot</code>的版本是<code>2.3.5.RELEASE</code></p>
+<h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h2><p><code>Swagger 3.0</code>已经有了与Spring Boot整合的启动器，只需要添加以下依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="springfox-boot-starter做了什么？"><a href="#springfox-boot-starter做了什么？" class="headerlink" title="springfox-boot-starter做了什么？"></a>springfox-boot-starter做了什么？</h2><p><code>Swagger 3.0</code>主推的一大特色就是这个启动器，那么这个启动器做了什么呢？</p>
+<blockquote>
+<p><strong>记住</strong>：启动器的一切逻辑都在自动配置类中。</p>
+</blockquote>
+<p>找到<code>springfox-boot-starter</code>的自动配置类，在<code>/META-INF/spring.factories</code>文件中，如下：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%95%B4%E5%90%88Swagger3.0/2.png" alt=""></p>
+<p>从上图可以知道，自动配置类就是<code>OpenApiAutoConfiguration</code>，源码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableConfigurationProperties</span>(SpringfoxConfigurationProperties.class)</div><div class="line"><span class="meta">@ConditionalOnProperty</span>(value = <span class="string">"springfox.documentation.enabled"</span>, havingValue = <span class="string">"true"</span>, matchIfMissing = <span class="keyword">true</span>)</div><div class="line"><span class="meta">@Import</span>(&#123;</div><div class="line">    OpenApiDocumentationConfiguration.class,</div><div class="line">    SpringDataRestConfiguration.class,</div><div class="line">    BeanValidatorPluginsConfiguration.class,</div><div class="line">    Swagger2DocumentationConfiguration.class,</div><div class="line">    SwaggerUiWebFluxConfiguration.class,</div><div class="line">    SwaggerUiWebMvcConfiguration.class</div><div class="line">&#125;)</div><div class="line"><span class="meta">@AutoConfigureAfter</span>(&#123; WebMvcAutoConfiguration.class, JacksonAutoConfiguration.class,</div><div class="line">    HttpMessageConvertersAutoConfiguration.class, RepositoryRestMvcAutoConfiguration.class &#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OpenApiAutoConfiguration</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>敢情这个自动配置类啥也没干，就光导入了几个配置类(<code>@Import</code>)以及开启了属性配置(<code>@EnableConfigurationProperties</code>)。</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%95%B4%E5%90%88Swagger3.0/3.jpg" alt="3"></p>
+<blockquote>
+<p><strong>重点</strong>：记住<code>OpenApiDocumentationConfiguration</code>这个配置类，初步看来这是个BUG，本人也不想深入，里面的代码写的实在拙劣，注释都不写。</p>
+</blockquote>
+<h2 id="撸起袖子就是干？"><a href="#撸起袖子就是干？" class="headerlink" title="撸起袖子就是干？"></a>撸起袖子就是干？</h2><p>说真的，还是和以前一样，真的没什么太大的改变，按照文档的步骤一步步来。</p>
+<h3 id="定制一个基本的文档示例"><a href="#定制一个基本的文档示例" class="headerlink" title="定制一个基本的文档示例"></a>定制一个基本的文档示例</h3><p>一切的东西还是需要配置类手动配置，说真的，我以为会在全局配置文件中自己配置就行了。哎，想多了。配置类如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@EnableOpenApi</span></div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableConfigurationProperties</span>(value = &#123;SwaggerProperties.class&#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerConfig</span> </span>&#123;</div><div class="line">  <span class="comment">/**</span></div><div class="line">     * 配置属性</div><div class="line">     */</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> SwaggerProperties properties;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">frontApi</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.OAS_30)</div><div class="line">                <span class="comment">//是否开启，根据环境配置</span></div><div class="line">                .enable(properties.getFront().getEnable())</div><div class="line">                .groupName(properties.getFront().getGroupName())</div><div class="line">                .apiInfo(frontApiInfo())</div><div class="line">                .select()</div><div class="line">                <span class="comment">//指定扫描的包</span></div><div class="line">                .apis(RequestHandlerSelectors.basePackage(properties.getFront().getBasePackage()))</div><div class="line">                .paths(PathSelectors.any())</div><div class="line">                .build();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 前台API信息</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> ApiInfo <span class="title">frontApiInfo</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</div><div class="line">                .title(properties.getFront().getTitle())</div><div class="line">                .description(properties.getFront().getDescription())</div><div class="line">                .version(properties.getFront().getVersion())</div><div class="line">                .contact(    <span class="comment">//添加开发者的一些信息</span></div><div class="line">                        <span class="keyword">new</span> Contact(properties.getFront().getContactName(), properties.getFront().getContactUrl(),</div><div class="line">                                properties.getFront().getContactEmail()))</div><div class="line">                .build();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>@EnableOpenApi</code>这个注解文档解释如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Indicates that Swagger support should be enabled.</div><div class="line">This should be applied to a Spring java config and should have an accompanying &apos;@Configuration&apos; annotation.</div><div class="line">Loads all required beans defined in @see SpringSwaggerConfig</div></pre></td></tr></table></figure></p>
+<p>什么意思呢？大致意思就是<strong>只有在配置类标注了<code>@EnableOpenApi</code>这个注解才会生成Swagger文档</strong>。</p>
+<p><code>@EnableConfigurationProperties</code>这个注解使开启自定义的属性配置，这是作者自定义的<code>Swagger</code>配置。</p>
+<blockquote>
+<p>总之还是和之前一样配置，根据官方文档要求，需要在配置类上加一个<code>@EnableOpenApi</code>注解。</p>
+</blockquote>
+<h3 id="文档如何分组？"><a href="#文档如何分组？" class="headerlink" title="文档如何分组？"></a>文档如何分组？</h3><p>我们都知道，一个项目可能分为<code>前台</code>，<code>后台</code>，<code>APP端</code>，<code>小程序端</code>…..每个端的接口可能还相同，不可能全部放在一起吧，肯定是要区分开的。</p>
+<p>因此，实际开发中文档肯定是要分组的。</p>
+<p>分组其实很简单，<code>Swagger</code>向<code>IOC</code>中注入一个<code>Docket</code>即为一个组的文档，其中有个<code>groupName()</code>方法指定分组的名称。</p>
+<p>因此只需要注入多个<code>Docket</code>指定不同的组名即可，当然，这些文档的标题、描述、扫描的路径都是可以不同定制的。</p>
+<p>如下配置两个<code>Docket</code>，分为前台和后台，配置类如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@EnableOpenApi</span></div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableConfigurationProperties</span>(value = &#123;SwaggerProperties.class&#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerConfig</span> </span>&#123;</div><div class="line">  <span class="comment">/**</span></div><div class="line">     * 配置属性</div><div class="line">     */</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> SwaggerProperties properties;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">frontApi</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.OAS_30)</div><div class="line">                <span class="comment">//是否开启，根据环境配置</span></div><div class="line">                .enable(properties.getFront().getEnable())</div><div class="line">                .groupName(properties.getFront().getGroupName())</div><div class="line">                .apiInfo(frontApiInfo())</div><div class="line">                .select()</div><div class="line">                <span class="comment">//指定扫描的包</span></div><div class="line">                .apis(RequestHandlerSelectors.basePackage(properties.getFront().getBasePackage()))</div><div class="line">                .paths(PathSelectors.any())</div><div class="line">                .build();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 前台API信息</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> ApiInfo <span class="title">frontApiInfo</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</div><div class="line">                .title(properties.getFront().getTitle())</div><div class="line">                .description(properties.getFront().getDescription())</div><div class="line">                .version(properties.getFront().getVersion())</div><div class="line">                .contact(    <span class="comment">//添加开发者的一些信息</span></div><div class="line">                        <span class="keyword">new</span> Contact(properties.getFront().getContactName(), properties.getFront().getContactUrl(),</div><div class="line">                                properties.getFront().getContactEmail()))</div><div class="line">                .build();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 后台API</div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">backApi</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.OAS_30)</div><div class="line">                <span class="comment">//是否开启，根据环境配置</span></div><div class="line">                .enable(properties.getBack().getEnable())</div><div class="line">                .groupName(<span class="string">"后台管理"</span>)</div><div class="line">                .apiInfo(backApiInfo())</div><div class="line">                .select()</div><div class="line">                .apis(RequestHandlerSelectors.basePackage(properties.getBack().getBasePackage()))</div><div class="line">                .paths(PathSelectors.any())</div><div class="line">                .build();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 后台API信息</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> ApiInfo <span class="title">backApiInfo</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</div><div class="line">                .title(properties.getBack().getTitle())</div><div class="line">                .description(properties.getBack().getDescription())</div><div class="line">                .version(properties.getBack().getVersion())</div><div class="line">                .contact(    <span class="comment">//添加开发者的一些信息</span></div><div class="line">                        <span class="keyword">new</span> Contact(properties.getBack().getContactName(), properties.getBack().getContactUrl(),</div><div class="line">                                properties.getBack().getContactEmail()))</div><div class="line">                .build();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>属性配置文件<code>SwaggerProperties</code>如下，分为前台和后台两个不同属性的配置：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * swagger的属性配置类</div><div class="line"> */</div><div class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"spring.swagger"</span>)</div><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerProperties</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 前台接口配置</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> SwaggerEntity front;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 后台接口配置</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> SwaggerEntity back;</div><div class="line"></div><div class="line">    <span class="meta">@Data</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerEntity</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> String groupName;</div><div class="line">        <span class="keyword">private</span> String basePackage;</div><div class="line">        <span class="keyword">private</span> String title;</div><div class="line">        <span class="keyword">private</span> String description;</div><div class="line">        <span class="keyword">private</span> String contactName;</div><div class="line">        <span class="keyword">private</span> String contactEmail;</div><div class="line">        <span class="keyword">private</span> String contactUrl;</div><div class="line">        <span class="keyword">private</span> String version;</div><div class="line">        <span class="keyword">private</span> Boolean enable;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>此时的文档截图如下，可以看到有了两个不同的分组：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%95%B4%E5%90%88Swagger3.0/4.png" alt=""></p>
+<h3 id="如何添加授权信息？"><a href="#如何添加授权信息？" class="headerlink" title="如何添加授权信息？"></a>如何添加授权信息？</h3><p>现在项目API肯定都需要权限认证，否则不能访问，比如请求携带一个<code>TOKEN</code>。</p>
+<p>在Swagger中也是可以配置认证信息，这样在每次请求将会默认携带上。</p>
+<p>在<code>Docket</code>中有如下两个方法指定授权信息，分别是<code>securitySchemes()</code>和<code>securityContexts()</code>。在配置类中的配置如下，在构建Docket的时候设置进去即可：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">@Bean</span></div><div class="line"><span class="function"><span class="keyword">public</span> Docket <span class="title">frontApi</span><span class="params">()</span> </span>&#123;</div><div class="line">    RequestParameter parameter = <span class="keyword">new</span> RequestParameterBuilder()</div><div class="line">            .name(<span class="string">"platform"</span>)</div><div class="line">            .description(<span class="string">"请求头"</span>)</div><div class="line">            .in(ParameterType.HEADER)</div><div class="line">            .required(<span class="keyword">true</span>)</div><div class="line">            .build();</div><div class="line">    List&lt;RequestParameter&gt; parameters = Collections.singletonList(parameter);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.OAS_30)</div><div class="line">            <span class="comment">//是否开启，根据环境配置</span></div><div class="line">            .enable(properties.getFront().getEnable())</div><div class="line">            .groupName(properties.getFront().getGroupName())</div><div class="line">            .apiInfo(frontApiInfo())</div><div class="line">            .select()</div><div class="line">            <span class="comment">//指定扫描的包</span></div><div class="line">            .apis(RequestHandlerSelectors.basePackage(properties.getFront().getBasePackage()))</div><div class="line">            .paths(PathSelectors.any())</div><div class="line">            .build()</div><div class="line">            .securitySchemes(securitySchemes())</div><div class="line">            .securityContexts(securityContexts());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 设置授权信息</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">private</span> List&lt;SecurityScheme&gt; <span class="title">securitySchemes</span><span class="params">()</span> </span>&#123;</div><div class="line">    ApiKey apiKey = <span class="keyword">new</span> ApiKey(<span class="string">"BASE_TOKEN"</span>, <span class="string">"token"</span>, In.HEADER.toValue());</div><div class="line">    <span class="keyword">return</span> Collections.singletonList(apiKey);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 授权信息全局应用</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">private</span> List&lt;SecurityContext&gt; <span class="title">securityContexts</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> Collections.singletonList(</div><div class="line">            SecurityContext.builder()</div><div class="line">                    .securityReferences(Collections.singletonList(<span class="keyword">new</span> SecurityReference(<span class="string">"BASE_TOKEN"</span>, <span class="keyword">new</span> AuthorizationScope[]&#123;<span class="keyword">new</span> AuthorizationScope(<span class="string">"global"</span>, <span class="string">""</span>)&#125;)))</div><div class="line">                    .build()</div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上配置成功后，在Swagger文档的页面中将会有<code>Authorize</code>按钮，只需要将请求头添加进去即可。如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%95%B4%E5%90%88Swagger3.0/5.png" alt=""></p>
+<h3 id="如何携带公共的请求参数？"><a href="#如何携带公共的请求参数？" class="headerlink" title="如何携带公共的请求参数？"></a>如何携带公共的请求参数？</h3><p>不同的架构可能发请求的时候除了携带<code>TOKEN</code>，还会携带不同的参数，比如请求的平台，版本等等，这些每个请求都要携带的参数称之为公共参数。</p>
+<p>那么如何在<code>Swagger</code>中定义公共的参数呢？比如在请求头中携带。</p>
+<p>在<code>Docket</code>中的方法<code>globalRequestParameters()</code>可以设置公共的请求参数，接收的参数是一个<code>List&lt;RequestParameter&gt;</code>，因此只需要构建一个<code>RequestParameter</code>集合即可，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span></div><div class="line"><span class="function"><span class="keyword">public</span> Docket <span class="title">frontApi</span><span class="params">()</span> </span>&#123;</div><div class="line">   <span class="comment">//构建一个公共请求参数platform，放在在header</span></div><div class="line">   RequestParameter parameter = <span class="keyword">new</span> RequestParameterBuilder()</div><div class="line">      <span class="comment">//参数名称</span></div><div class="line">      .name(<span class="string">"platform"</span>)</div><div class="line">      <span class="comment">//描述</span></div><div class="line">      .description(<span class="string">"请求的平台"</span>)</div><div class="line">      <span class="comment">//放在header中</span></div><div class="line">      .in(ParameterType.HEADER)</div><div class="line">      <span class="comment">//是否必传</span></div><div class="line">      .required(<span class="keyword">true</span>)</div><div class="line">      .build();</div><div class="line">      <span class="comment">//构建一个请求参数集合</span></div><div class="line">      List&lt;RequestParameter&gt; parameters = Collections.singletonList(parameter);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.OAS_30)</div><div class="line">                .....</div><div class="line">                .build()</div><div class="line">                .globalRequestParameters(parameters);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>以上配置完成，将会在每个接口中看到一个请求头，如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Spring%20Boot%20%E7%AC%AC%E5%8D%81%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%95%B4%E5%90%88Swagger3.0/6.png" alt=""></p>
+<h2 id="粗略是一个BUG"><a href="#粗略是一个BUG" class="headerlink" title="粗略是一个BUG"></a>粗略是一个BUG</h2><p>作者在介绍自动配置类的时候提到了一嘴，现在来简单分析下。</p>
+<p><code>OpenApiAutoConfiguration</code>这个自动配置类中已经导入<code>OpenApiDocumentationConfiguration</code>这个配置类，如下一段代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Import</span>(&#123;</div><div class="line">    OpenApiDocumentationConfiguration.class,</div><div class="line">    ......</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p><code>@EnableOpenApi</code>的源码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Retention</span>(value = java.lang.annotation.RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Target</span>(value = &#123;java.lang.annotation.ElementType.TYPE&#125;)</div><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="meta">@Import</span>(OpenApiDocumentationConfiguration.class)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableOpenApi &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>从源码可以看出：<code>@EnableOpenApi</code>这个注解的作用就是导入<code>OpenApiDocumentationConfiguration</code>这个配置类，纳尼？？？</p>
+<p>既然已经在自动配置类<code>OpenApiAutoConfiguration</code>导入了，那么无论需不需要在配置类上标注<code>@EnableOpenApi</code>注解不都会开启<code>Swagger</code>支持吗？</p>
+<p><strong>测试一下</strong>：不在配置类上标注<code>@EnableOpenApi</code>这个注解，看看是否<code>Swagger</code>运行正常。结果在意料之中，还是能够正常运行。</p>
+<blockquote>
+<p><strong>总结</strong>：作者只是大致分析了下，这可能是个<code>BUG</code>亦或是后续有其他的目的，至于结果如此，不想验证了，没什么意思。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这篇文章也是尝了个鲜，个人感觉不太香，有点失望。你喜欢吗？</p>
+<blockquote>
+<p><code>Spring Boot</code> 整合的源码已经上传，需要的朋友回复关键词<strong>Swagger3.0</strong>获取。</p>
+</blockquote>
+<p>另外作者的第一本<code>PDF</code>书籍已经整理好了，由浅入深的详细介绍了Mybatis基础以及底层源码，有需要的朋友公众号回复关键词<strong>Mybatis进阶</strong>即可获取，目录如下：</p>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis%E8%BF%9B%E9%98%B6PDF/2.png" alt=""></p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写的可还行？</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="不才陈某 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+	<div>
+	
+<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/11/05/SpringBoot整合Swagger3-0/">Spring Boot 整合 Swagger3.0</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 不才陈某 的个人博客">不才陈某</a></p>
+  <p><span>发布时间:</span>2020年11月05日 - 18:52</p>
+  <p><span>最后更新:</span>2020年11月05日 - 18:53</p>
+  <p><span>原始链接:</span><a href="/2020/11/05/SpringBoot整合Swagger3-0/" title="Spring Boot 整合 Swagger3.0">https://chenjiabing666.github.io/2020/11/05/SpringBoot整合Swagger3-0/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://chenjiabing666.github.io/2020/11/05/SpringBoot整合Swagger3-0/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+      
+</div>
+
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring-Boot/" rel="tag"><i class="fa fa-tag"></i> Spring Boot</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/03/推荐三款插件，让你玩转Github/" rel="next" title="推荐三款插件，让你玩转Github">
+                <i class="fa fa-chevron-left"></i> 推荐三款插件，让你玩转Github
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/header.jpg"
+                alt="不才陈某" />
+            
+              <p class="site-author-name" itemprop="name">不才陈某</p>
+              <p class="site-description motion-element" itemprop="description">本站是不才陈某的技术分享博客。内容涵盖Java后端技术、Spring Boot、微服务架构、系统安全、前端、系统监控等相关的研究与知识分享。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/2506542244708072" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-globe"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/xiao-ming-64-34-45" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_34162294" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png" target="_blank" title="微信公众号">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微信公众号</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pexels.com/zh-cn/" title="Pexels" target="_blank">Pexels</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ityouknow.com/" title="纯洁的微笑" target="_blank">纯洁的微笑</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方文档如何说？"><span class="nav-text">官方文档如何说？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Boot版本说明"><span class="nav-text">Spring Boot版本说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加依赖"><span class="nav-text">添加依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#springfox-boot-starter做了什么？"><span class="nav-text">springfox-boot-starter做了什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撸起袖子就是干？"><span class="nav-text">撸起袖子就是干？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定制一个基本的文档示例"><span class="nav-text">定制一个基本的文档示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文档如何分组？"><span class="nav-text">文档如何分组？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何添加授权信息？"><span class="nav-text">如何添加授权信息？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何携带公共的请求参数？"><span class="nav-text">如何携带公共的请求参数？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#粗略是一个BUG"><span class="nav-text">粗略是一个BUG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不才陈某</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">157.9k</span>
+  
+</div>
+
+<!--
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style='display:none'>
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共157.9k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'RtlQOgOT3M0hgyMeogykSQjT-gzGzoHsz',
+        appKey: 'vSCxLU88wnXVf0Pa8mwJrCPm',
+        placeholder: '原创不易，欢迎各位指正',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chenjiabing666.github.io/"/>
-  <updated>2020-11-03T13:18:42.642Z</updated>
+  <updated>2020-11-05T10:53:48.274Z</updated>
   <id>https://chenjiabing666.github.io/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring Boot 整合 Swagger3.0</title>
+    <link href="https://chenjiabing666.github.io/2020/11/05/SpringBoot%E6%95%B4%E5%90%88Swagger3-0/"/>
+    <id>https://chenjiabing666.github.io/2020/11/05/SpringBoot整合Swagger3-0/</id>
+    <published>2020-11-05T10:52:19.000Z</published>
+    <updated>2020-11-05T10:53:48.274Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近频繁被&lt;code&gt;Swagger 3.0&lt;/code&gt;刷屏，官方表示这是一个突破性的变更，有很多的亮点，我还真不太相信，今天来带大家尝尝鲜，看看这碗汤到底鲜不鲜….&lt;/p&gt;
+&lt;h2 id=&quot;官方文档如何说？&quot;&gt;&lt;a href=&quot;#官方文档如何说？&quot; class=&quot;headerlink&quot; title=&quot;官方文档如何说？&quot;&gt;&lt;/a&gt;官方文档如何说？&lt;/h2&gt;&lt;p&gt;该项目开源在&lt;code&gt;Github&lt;/code&gt;上，地址：&lt;a href=&quot;https://github.com/springfox/springfox&quot;&gt;https://github.com/springfox/springfox&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Swagger 3.0&lt;/code&gt;有何改动？官方文档总结如下几点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;删除了对&lt;code&gt;springfox-swagger2&lt;/code&gt;的依赖&lt;/li&gt;
+&lt;li&gt;删除所有&lt;code&gt;@EnableSwagger2...&lt;/code&gt;注解&lt;/li&gt;
+&lt;li&gt;添加了&lt;code&gt;springfox-boot-starter&lt;/code&gt;依赖项&lt;/li&gt;
+&lt;li&gt;移除了&lt;code&gt;guava&lt;/code&gt;等第三方依赖&lt;/li&gt;
+&lt;li&gt;文档访问地址改变了，改成了&lt;code&gt;http://ip:port/project/swagger-ui/index.html&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;姑且看到这里，各位初始感觉如何？&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="Spring Boot进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
+    
+  </entry>
   
   <entry>
     <title>推荐三款插件，让你玩转Github</title>
@@ -419,28 +451,6 @@
       &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;自从用了Spring Boot，个人最喜欢的就是Spring Boot的配置文件了，和Spring比起，Spring Boot更加灵活，修改的某些配置也是更加得心应手。&lt;/p&gt;
 &lt;p&gt;Spring Boot 官方提供了两种常用的配置文件格式，分别是&lt;code&gt;properties&lt;/code&gt;、&lt;code&gt;YML&lt;/code&gt;格式。相比于&lt;code&gt;properties&lt;/code&gt;来说，&lt;code&gt;YML&lt;/code&gt;更加年轻，层级也是更加分明。&lt;/p&gt;
 &lt;p&gt;今天这篇文章就来介绍一下Spring Boot的配置文件的语法以及如何从配置文件中取值。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spring Boot 第一弹，问候一下世界！！！</title>
-    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%20%E7%AC%AC%E4%B8%80%E5%BC%B9%EF%BC%8C%E9%97%AE%E5%80%99%E4%B8%80%E4%B8%8B%E4%B8%96%E7%95%8C%EF%BC%81%EF%BC%81%EF%BC%81/"/>
-    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot 第一弹，问候一下世界！！！/</id>
-    <published>2020-10-14T02:00:42.000Z</published>
-    <updated>2020-10-23T11:08:23.296Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;相信从事Java开发的朋友都听说过&lt;code&gt;SSM&lt;/code&gt;框架，这还算年轻的，老点的甚至经历过&lt;code&gt;SSH&lt;/code&gt;，说起来有点恐怖，哈哈。比如我就是经历过&lt;code&gt;SSH&lt;/code&gt;那个时代末流，没办法，很无奈。&lt;/p&gt;
-&lt;p&gt;当然无论是SSM还是SSH都不是今天的重点，今天要说的是&lt;code&gt;Spring Boot&lt;/code&gt;，一个令人眼前一亮的框架，从大的说，Spring Boot取代了&lt;code&gt;SSM&lt;/code&gt; 中的&lt;code&gt;SS&lt;/code&gt;的角色。&lt;/p&gt;
-&lt;p&gt;今天这篇文章就来谈谈Spring Boot，这个我第一次使用直呼&lt;code&gt;爽&lt;/code&gt;的框架。&lt;br&gt;
     
     </summary>
     
