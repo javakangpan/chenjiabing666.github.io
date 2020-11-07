@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chenjiabing666.github.io/"/>
-  <updated>2020-11-05T10:53:48.274Z</updated>
+  <updated>2020-11-07T10:26:14.650Z</updated>
   <id>https://chenjiabing666.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>推荐几个压箱底儿的使用工具~</title>
+    <link href="https://chenjiabing666.github.io/2020/11/07/%E6%8E%A8%E8%8D%90%E5%87%A0%E4%B8%AA%E5%8E%8B%E7%AE%B1%E5%BA%95%E5%84%BF%E7%9A%84%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
+    <id>https://chenjiabing666.github.io/2020/11/07/推荐几个压箱底儿的使用工具/</id>
+    <published>2020-11-07T10:23:53.000Z</published>
+    <updated>2020-11-07T10:26:14.650Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;所谓工欲善其事，必先利其器，一个好的工具往往是提升工作效率的关键，今天作者分享几个工作和生活中常用的工具软件。&lt;/p&gt;
+&lt;p&gt;如果和你正在使用的工具重复了，请一笑置之，哈哈……&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="杂谈" scheme="https://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+      <category term="破解" scheme="https://chenjiabing666.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
+    
+      <category term="优质资源" scheme="https://chenjiabing666.github.io/tags/%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring Boot 整合 Swagger3.0</title>
@@ -429,28 +452,6 @@
     
       &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;日志通常不会在需求阶段作为一个功能单独提出来，也不会在产品方案中看到它的细节。但是，这丝毫不影响它在任何一个系统中的重要的地位。&lt;/p&gt;
 &lt;p&gt;今天就来介绍一下Spring Boot中的日志如何配置。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spring Boot 配置文件怎么造？</title>
-    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%20%E7%AC%AC%E4%BA%8C%E5%BC%B9%EF%BC%8C%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%80%8E%E4%B9%88%E9%80%A0%EF%BC%9F/"/>
-    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot 第二弹，配置文件怎么造？/</id>
-    <published>2020-10-14T02:01:42.000Z</published>
-    <updated>2020-10-23T11:09:04.279Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;自从用了Spring Boot，个人最喜欢的就是Spring Boot的配置文件了，和Spring比起，Spring Boot更加灵活，修改的某些配置也是更加得心应手。&lt;/p&gt;
-&lt;p&gt;Spring Boot 官方提供了两种常用的配置文件格式，分别是&lt;code&gt;properties&lt;/code&gt;、&lt;code&gt;YML&lt;/code&gt;格式。相比于&lt;code&gt;properties&lt;/code&gt;来说，&lt;code&gt;YML&lt;/code&gt;更加年轻，层级也是更加分明。&lt;/p&gt;
-&lt;p&gt;今天这篇文章就来介绍一下Spring Boot的配置文件的语法以及如何从配置文件中取值。&lt;br&gt;
     
     </summary>
     
