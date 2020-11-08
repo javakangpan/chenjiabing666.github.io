@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chenjiabing666.github.io/"/>
-  <updated>2020-11-07T11:06:16.207Z</updated>
+  <updated>2020-11-08T13:02:42.797Z</updated>
   <id>https://chenjiabing666.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一次打包引发的思考，原来maven还可以这么玩~</title>
+    <link href="https://chenjiabing666.github.io/2020/11/08/%E4%B8%80%E6%AC%A1%E6%89%93%E5%8C%85%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83%EF%BC%8C%E5%8E%9F%E6%9D%A5maven%E8%BF%98%E5%8F%AF%E4%BB%A5%E8%BF%99%E4%B9%88%E7%8E%A9/"/>
+    <id>https://chenjiabing666.github.io/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/</id>
+    <published>2020-11-08T13:01:55.000Z</published>
+    <updated>2020-11-08T13:02:42.797Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;昨天有一个读者找我的交流工作心得，偶然间提到一个有趣的问题，如下：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;大致的意思&lt;/strong&gt;：公司最近在整&lt;code&gt;多模块&lt;/code&gt;开发，由于模块之间相互依赖，每次打包都很烦，必须根据依赖关系逐一进行打包，有没有省事的办法呢？&lt;/p&gt;
+&lt;p&gt;其实玩转&lt;code&gt;Maven&lt;/code&gt;的朋友都知道，只需要一条命令即可解决问题。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="杂谈" scheme="https://chenjiabing666.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+      <category term="maven" scheme="https://chenjiabing666.github.io/tags/maven/"/>
+    
+  </entry>
   
   <entry>
     <title>分享几个压箱底儿的实用工具~</title>
@@ -431,27 +453,6 @@
       &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;首先要感谢一下读者朋友们的支持，你们每一个的赞都是对陈某最大的肯定，陈某也会一如既往的加油，奥利给！！！&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;https://gitee.com/chenjiabing666/Blog-file/raw/master/Spring%20Boot%E7%AC%AC%E5%9B%9B%E5%BC%B9%EF%BC%8C%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E5%A6%82%E4%BD%95%E5%88%87%E6%8D%A2%EF%BC%9F/1.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;言归正传，上一篇文章写了Spring Boot的默认日志框架Logback的基本配置，有兴趣的可以看看：&lt;a href=&quot;https://mp.weixin.qq.com/s/5hyGi6X6BhfCC5kTEvUyFg&quot;&gt;Spring Boot第三弹，一文带你搞懂日志如何配置？&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;今天就来介绍一下Spring Boot如何无感的切换日志框架？&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>一文带你搞懂日志如何配置？</title>
-    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E4%B8%89%E5%BC%B9%EF%BC%8C%E4%B8%80%E6%96%87%E5%B8%A6%E4%BD%A0%E6%90%9E%E6%87%82%E6%97%A5%E5%BF%97%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%EF%BC%9F/"/>
-    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot第三弹，一文带你搞懂日志如何配置？/</id>
-    <published>2020-10-14T02:03:42.000Z</published>
-    <updated>2020-10-23T11:09:45.708Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;日志通常不会在需求阶段作为一个功能单独提出来，也不会在产品方案中看到它的细节。但是，这丝毫不影响它在任何一个系统中的重要的地位。&lt;/p&gt;
-&lt;p&gt;今天就来介绍一下Spring Boot中的日志如何配置。&lt;br&gt;
     
     </summary>
     

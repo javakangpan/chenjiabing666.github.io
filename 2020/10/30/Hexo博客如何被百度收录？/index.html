@@ -512,7 +512,7 @@
 <p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Hexo%E5%A6%82%E4%BD%95%E8%A2%AB%E7%99%BE%E5%BA%A6%E6%94%B6%E5%BD%95/6.png" alt=""></p>
 <p><strong>自动推送</strong>：这个是今天的重点，下面介绍。</p>
 <h3 id="如何自动推送？"><a href="#如何自动推送？" class="headerlink" title="如何自动推送？"></a>如何自动推送？</h3><p><strong>第一步</strong>：修改主题配置文件，将<code>baidu_push</code>修改为<code>true</code>，如下：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">baidu_push:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
-<p><strong>第二步</strong>：修改<code>themes\next\layout\_scripts\baidu_push.swig</code>（没有这个文件则创建），添加以下代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;% <span class="keyword">if</span> theme.baidu_push %&#125;</div><div class="line">&lt;script&gt;</div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> bp = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">    <span class="keyword">var</span> curProtocol = <span class="built_in">window</span>.location.protocol.split(<span class="string">':'</span>)[<span class="number">0</span>];</div><div class="line">    <span class="keyword">if</span> (curProtocol === <span class="string">'https'</span>) &#123;</div><div class="line">        bp.src = <span class="string">'https://zz.bdstatic.com/linksubmit/push.js'</span>;        </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        bp.src = <span class="string">'http://push.zhanzhang.baidu.com/push.js'</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> s = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"script"</span>)[<span class="number">0</span>];</div><div class="line">    s.parentNode.insertBefore(bp, s);</div><div class="line">&#125;)();</div><div class="line">&lt;/script&gt;</div><div class="line">&#123;% endif %&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>第二步</strong>：修改<code>themes\next\layout\_scripts\baidu_push.swig</code>（没有这个文件则创建），添加以下代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;% <span class="keyword">if</span> theme.baidu_push %&#125;</div><div class="line">&lt;script&gt;</div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> bp = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">    <span class="keyword">var</span> curProtocol = <span class="built_in">window</span>.location.protocol.split(<span class="string">':'</span>)[<span class="number">0</span>];</div><div class="line">    <span class="keyword">if</span> (curProtocol === <span class="string">'https'</span>) &#123;</div><div class="line">        bp.src = <span class="string">'https://zz.bdstatic.com/linksubmit/push.js'</span>;        </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        bp.src = <span class="string">'http://push.zhanzhang.baidu.com/push.js'</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> s = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"script"</span>)[<span class="number">0</span>];</div><div class="line">    s.parentNode.insertBefore(bp, s);</div><div class="line">&#125;)();</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div><div class="line">&#123;% endif %&#125;</div></pre></td></tr></table></figure></p>
 <p>以上配置完成后，每次访问博客首页会自动向百度提交，不用再手动提交了。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>百度收录操作虽然复杂，但是按照作者的步骤来搞还是非常简单的，对于有博客的朋友可以借鉴下。</p>
 <p>另外作者为大家准备接近<code>10M</code>的面筋，涵盖后端的各个层面，老规矩，公众号内回复<code>Java面试宝典</code>即可获取。</p>
@@ -713,7 +713,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -735,7 +735,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -862,7 +862,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">158.7k</span>
+    <span title="Site words total count">159.6k</span>
   
 </div>
 
@@ -892,7 +892,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共158.7k字</span>
+  <span class="post-count">博客全站共159.6k字</span>
 </div>
 
         

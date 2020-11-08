@@ -92,7 +92,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="maven," />
 
 
 
@@ -105,15 +105,28 @@
 
 
 
-<meta name="description" content="本站是不才陈某的技术分享博客。内容涵盖Java后端技术、Spring Boot、微服务架构、系统安全、前端、系统监控等相关的研究与知识分享。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="不才陈某技术博客">
-<meta property="og:url" content="https://chenjiabing666.github.io/archives/2020/04/page/4/index.html">
+<meta name="description" content="前言昨天有一个读者找我的交流工作心得，偶然间提到一个有趣的问题，如下：
+大致的意思：公司最近在整多模块开发，由于模块之间相互依赖，每次打包都很烦，必须根据依赖关系逐一进行打包，有没有省事的办法呢？
+其实玩转Maven的朋友都知道，只需要一条命令即可解决问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一次打包引发的思考，原来maven还可以这么玩~">
+<meta property="og:url" content="https://chenjiabing666.github.io/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/index.html">
 <meta property="og:site_name" content="不才陈某技术博客">
-<meta property="og:description" content="本站是不才陈某的技术分享博客。内容涵盖Java后端技术、Spring Boot、微服务架构、系统安全、前端、系统监控等相关的研究与知识分享。">
+<meta property="og:description" content="前言昨天有一个读者找我的交流工作心得，偶然间提到一个有趣的问题，如下：
+大致的意思：公司最近在整多模块开发，由于模块之间相互依赖，每次打包都很烦，必须根据依赖关系逐一进行打包，有没有省事的办法呢？
+其实玩转Maven的朋友都知道，只需要一条命令即可解决问题。">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/1.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/2.jpg">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/3.jpg">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis%E8%BF%9B%E9%98%B6PDF/2.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png">
+<meta property="og:updated_time" content="2020-11-08T13:02:42.797Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="不才陈某技术博客">
-<meta name="twitter:description" content="本站是不才陈某的技术分享博客。内容涵盖Java后端技术、Spring Boot、微服务架构、系统安全、前端、系统监控等相关的研究与知识分享。">
+<meta name="twitter:title" content="一次打包引发的思考，原来maven还可以这么玩~">
+<meta name="twitter:description" content="前言昨天有一个读者找我的交流工作心得，偶然间提到一个有趣的问题，如下：
+大致的意思：公司最近在整多模块开发，由于模块之间相互依赖，每次打包都很烦，必须根据依赖关系逐一进行打包，有没有省事的办法呢？
+其实玩转Maven的朋友都知道，只需要一条命令即可解决问题。">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/1.png">
 
 
 
@@ -143,13 +156,13 @@
 
 
 
-  <link rel="canonical" href="https://chenjiabing666.github.io/archives/2020/04/page/4/"/>
+  <link rel="canonical" href="https://chenjiabing666.github.io/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/"/>
 
 
 
 
 
-  <title>归档 | 不才陈某技术博客</title>
+  <title>一次打包引发的思考，原来maven还可以这么玩~ | 不才陈某技术博客</title>
   
 
 
@@ -170,7 +183,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -308,188 +321,341 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chenjiabing666.github.io/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="不才陈某">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不才陈某技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
-         
+          <h1 class="post-title" itemprop="name headline">一次打包引发的思考，原来maven还可以这么玩~</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-08T21:01:55+08:00">
+                2020-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        好! 目前共计 73 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂谈/" itemprop="url" rel="index">
+                    <span itemprop="name">杂谈</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2020">2020</h1>
-          </div>
-        
-        
 
-        
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/01/Mysql性能优化：什么是索引下推？/" itemprop="url">
+          
+		  
+		  
+			  <span class="post-meta-divider">|</span>
+			  <span id="busuanzi_value_page_pv"></span>次阅读
+			
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">Mysql性能优化：什么是索引下推？</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  940
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-01T10:37:30+08:00"
-              content="2020-04-01" >
-          04-01
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/01/Mysql性能优化：为什么使用覆盖索引/" itemprop="url">
-              
-                <span itemprop="name">Mysql性能优化：为什么使用覆盖索引?</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-01T10:36:34+08:00"
-              content="2020-04-01" >
-          04-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/01/一条查询语句到底是如何执行的/" itemprop="url">
-              
-                <span itemprop="name">一条查询语句到底是如何执行的?</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-01T10:35:30+08:00"
-              content="2020-04-01" >
-          04-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>昨天有一个读者找我的交流工作心得，偶然间提到一个有趣的问题，如下：</p>
+<p><strong>大致的意思</strong>：公司最近在整<code>多模块</code>开发，由于模块之间相互依赖，每次打包都很烦，必须根据依赖关系逐一进行打包，有没有省事的办法呢？</p>
+<p>其实玩转<code>Maven</code>的朋友都知道，只需要一条命令即可解决问题。</p>
+<a id="more"></a>
+<h2 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h2><p>假设有一个多模块项目，父工程<code>P</code>中含有三个子模块<code>A</code>、<code>B</code>、<code>C</code>，三个模块有如下的依赖关系：</p>
+<ol>
+<li><code>A</code> 依赖 <code>B</code>、<code>C</code>。</li>
+<li><code>B</code> 依赖 <code>C</code>。</li>
+</ol>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/1.png" alt="依赖关系图"></p>
+<p>父工程<code>P</code>的<code>pom.xml</code>如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.....</div><div class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">module</span>&gt;</span>A<span class="tag">&lt;/<span class="name">module</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">module</span>&gt;</span>B<span class="tag">&lt;/<span class="name">module</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">module</span>&gt;</span>C<span class="tag">&lt;/<span class="name">module</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">modules</span>&gt;</span></div><div class="line">.....</div></pre></td></tr></table></figure>
+<p><code>A</code>模块的<code>pom.xml</code>如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">....</div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>xxx.xxxx<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>B<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>xxxx<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">.....</div></pre></td></tr></table></figure>
+<p><code>B</code>模块的<code>pom.xml</code>如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">....</div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>xxx.xxxx<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>C<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>xxxx<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">.....</div></pre></td></tr></table></figure>
+<p><code>C</code>模块的<code>pom.xml</code>如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">....</div></pre></td></tr></table></figure>
+<h2 id="你会怎么做？"><a href="#你会怎么做？" class="headerlink" title="你会怎么做？"></a>你会怎么做？</h2><p>现在产品需要上线项目<code>A</code>，你该如何打包？</p>
+<p>最容易想到的则是分开打包，分别执行如下的命令：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mvn clean install C</div><div class="line">mvn clean install B</div><div class="line">mvn clean package A</div></pre></td></tr></table></figure>
+<p>以上三个模块轮流打包，至少需要五分钟以上吧，你不慌吗？</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/2.jpg" alt="慌的一批"></p>
+<p>重点来了，我只需要如下一条命令即可打包完成：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn clean package -pl A -am -P test -DskipTests=true</div></pre></td></tr></table></figure>
+<p>以上命令有什么高深的吗？<code>-P</code>指定环境，<code>-DskipTests=true</code>跳过测试，但是<code>-pl</code>和<code>-am</code>是什么？</p>
+<p>答案肯定是在<code>-pl</code>和<code>-am</code>这两个参数了。</p>
+<h2 id="必知的几个参数"><a href="#必知的几个参数" class="headerlink" title="必知的几个参数"></a>必知的几个参数</h2><p>从以上的例子中可以知道重要的就是<code>-pl</code>和<code>-am</code>这两个参数，那么是什么意思呢？如下：<br>| 参数 | 说明 |<br>| — | — |<br>| <code>-pl</code> | 可选，指定需要处理的工程，多个使用英文逗号分隔，取值是<code>artifactId</code> |<br>| -am | 可选，同时处理 pl参数 指定模块的依赖模块 |<br>| -amd | 可选，同时处理依赖于 pl参数 指定模块的模块 |<br>| -N | 可选，表示不递归子模块 |</p>
+<p>怎么样，理解了吗？是不是有点晦涩难懂，哈哈….</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/3.jpg" alt="what?"></p>
+<p>别着急，下面通过几个命令理解一下（全部在父工程<code>P</code>的根目录下执行）。</p>
+<ol>
+<li><code>mvn clean install -pl A -am</code></li>
+</ol>
+<p>对父工程<code>P</code>、子模块<code>A</code>以及<code>A</code>模块依赖的<code>B</code>、<code>C</code>模块执行<code>mvn clean install</code>操作。</p>
+<p>这个命令执行成功后，可以看到<code>P</code>、<code>A</code>、<code>B</code>、<code>C</code>四个模块全部安装到本地了。</p>
+<ol>
+<li><code>mvn clean install -pl C -am</code></li>
+</ol>
+<p>对父工程<code>P</code>、子模块<code>C</code>模块执行<code>mvn clean install</code>操作。</p>
+<p>这个命令执行成功后，可以看到<code>P</code>、<code>C</code>两个模块安装到本地。</p>
+<blockquote>
+<p>由于<code>C</code>模块<strong>不依赖</strong>其他的两个子模块，因此<code>A</code>、<code>B</code>模块不会执行相关命令。</p>
+</blockquote>
+<ol>
+<li><code>mvn clean install -pl C -amd</code></li>
+</ol>
+<p>对父工程<code>P</code>、子模块<code>C</code>以及依赖于<code>C</code>模块的B<code>、</code>C<code>模块执行</code>mvn clean install`操作。</p>
+<p>这个命令执行成功后，可以看到<code>P</code>、<code>A</code>、<code>B</code>、<code>C</code>四个模块全部安装到本地了。</p>
+<ol>
+<li><code>mvn clean install -N</code></li>
+</ol>
+<p>只会打包父工程<code>P</code>，它的子模块将不会执行相关操作。</p>
+<p>怎么样？通过以上的命令应该理解了吧。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>随着项目的体量逐渐增长，可不止上面的几个模块，学会以上几个命令，提升的效率可不止一倍啊。</p>
+<p>另外作者的第一本<code>PDF</code>书籍已经整理好了，由浅入深的详细介绍了<code>Mybatis</code>基础以及底层源码，有需要的朋友公众号回复关键词<code>Mybatis进阶</code>即可获取，目录如下：</p>
+<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis%E8%BF%9B%E9%98%B6PDF/2.png" alt=""></p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png" alt=""></p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/04/01/Mysql中的三类锁，你知道吗？/" itemprop="url">
-              
-                <span itemprop="name">Mysql中的三类锁，你知道吗？</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-04-01T10:31:58+08:00"
-              content="2020-04-01" >
-          04-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写的可还行？</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="不才陈某 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+	<div>
+	
+<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/">一次打包引发的思考，原来maven还可以这么玩~</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 不才陈某 的个人博客">不才陈某</a></p>
+  <p><span>发布时间:</span>2020年11月08日 - 21:01</p>
+  <p><span>最后更新:</span>2020年11月08日 - 21:02</p>
+  <p><span>原始链接:</span><a href="/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/" title="一次打包引发的思考，原来maven还可以这么玩~">https://chenjiabing666.github.io/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://chenjiabing666.github.io/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+      
+</div>
+
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/maven/" rel="tag"><i class="fa fa-tag"></i> maven</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/07/推荐几个压箱底儿的使用工具/" rel="next" title="分享几个压箱底儿的实用工具~">
+                <i class="fa fa-chevron-left"></i> 分享几个压箱底儿的实用工具~
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2020/04/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2020/04/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/04/page/3/">3</a><span class="page-number current">4</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -497,6 +663,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -517,8 +690,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -635,6 +817,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖关系"><span class="nav-text">依赖关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你会怎么做？"><span class="nav-text">你会怎么做？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#必知的几个参数"><span class="nav-text">必知的几个参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -808,6 +1006,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
