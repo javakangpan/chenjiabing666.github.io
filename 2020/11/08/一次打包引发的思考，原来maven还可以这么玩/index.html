@@ -120,7 +120,7 @@
 <meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/3.jpg">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis%E8%BF%9B%E9%98%B6PDF/2.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png">
-<meta property="og:updated_time" content="2020-11-08T13:02:42.797Z">
+<meta property="og:updated_time" content="2020-11-08T13:18:58.387Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一次打包引发的思考，原来maven还可以这么玩~">
 <meta name="twitter:description" content="前言昨天有一个读者找我的交流工作心得，偶然间提到一个有趣的问题，如下：
@@ -497,7 +497,33 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn clean package -pl A -am -P test -DskipTests=true</div></pre></td></tr></table></figure>
 <p>以上命令有什么高深的吗？<code>-P</code>指定环境，<code>-DskipTests=true</code>跳过测试，但是<code>-pl</code>和<code>-am</code>是什么？</p>
 <p>答案肯定是在<code>-pl</code>和<code>-am</code>这两个参数了。</p>
-<h2 id="必知的几个参数"><a href="#必知的几个参数" class="headerlink" title="必知的几个参数"></a>必知的几个参数</h2><p>从以上的例子中可以知道重要的就是<code>-pl</code>和<code>-am</code>这两个参数，那么是什么意思呢？如下：<br>| 参数 | 说明 |<br>| — | — |<br>| <code>-pl</code> | 可选，指定需要处理的工程，多个使用英文逗号分隔，取值是<code>artifactId</code> |<br>| -am | 可选，同时处理 pl参数 指定模块的依赖模块 |<br>| -amd | 可选，同时处理依赖于 pl参数 指定模块的模块 |<br>| -N | 可选，表示不递归子模块 |</p>
+<h2 id="必知的几个参数"><a href="#必知的几个参数" class="headerlink" title="必知的几个参数"></a>必知的几个参数</h2><p>从以上的例子中可以知道重要的就是<code>-pl</code>和<code>-am</code>这两个参数，那么是什么意思呢？如下：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-pl</code></td>
+<td>可选，指定需要处理的工程，多个使用英文逗号分隔，取值是<code>artifactId</code></td>
+</tr>
+<tr>
+<td>-am</td>
+<td>可选，同时处理 pl参数 指定模块的依赖模块</td>
+</tr>
+<tr>
+<td>-amd</td>
+<td>可选，同时处理依赖于 pl参数 指定模块的模块</td>
+</tr>
+<tr>
+<td>-N</td>
+<td>可选，表示不递归子模块</td>
+</tr>
+</tbody>
+</table>
 <p>怎么样，理解了吗？是不是有点晦涩难懂，哈哈….</p>
 <p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/3.jpg" alt="what?"></p>
 <p>别着急，下面通过几个命令理解一下（全部在父工程<code>P</code>的根目录下执行）。</p>
@@ -578,7 +604,7 @@
   <p><span>本文标题:</span><a href="/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/">一次打包引发的思考，原来maven还可以这么玩~</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 不才陈某 的个人博客">不才陈某</a></p>
   <p><span>发布时间:</span>2020年11月08日 - 21:01</p>
-  <p><span>最后更新:</span>2020年11月08日 - 21:02</p>
+  <p><span>最后更新:</span>2020年11月08日 - 21:18</p>
   <p><span>原始链接:</span><a href="/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/" title="一次打包引发的思考，原来maven还可以这么玩~">https://chenjiabing666.github.io/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://chenjiabing666.github.io/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/"  aria-label="复制成功！"></i></span>
   </p>
@@ -636,6 +662,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/13/Jenkins部署SpringBoot项目/" rel="prev" title="三十二张图教你Jenkins部署Spring Boot 项目">
+                三十二张图教你Jenkins部署Spring Boot 项目 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -719,7 +749,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-count">75</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -868,7 +898,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">159.6k</span>
+    <span title="Site words total count">163.8k</span>
   
 </div>
 
@@ -898,7 +928,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共159.6k字</span>
+  <span class="post-count">博客全站共163.8k字</span>
 </div>
 
         
