@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chenjiabing666.github.io/"/>
-  <updated>2020-11-13T09:51:37.700Z</updated>
+  <updated>2020-11-18T09:49:03.067Z</updated>
   <id>https://chenjiabing666.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring Boot 整合 AOP 自定义注解</title>
+    <link href="https://chenjiabing666.github.io/2020/11/18/SpringBoot%E6%95%B4%E5%90%88AOP%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/"/>
+    <id>https://chenjiabing666.github.io/2020/11/18/SpringBoot整合AOP自定义注解/</id>
+    <published>2020-11-18T09:47:09.000Z</published>
+    <updated>2020-11-18T09:49:03.067Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;注解相信大家都用过，尤其是&lt;code&gt;Spring Boot&lt;/code&gt; 这个框架，比如&lt;code&gt;@Controller&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;这篇文章就来介绍下&lt;code&gt;Spring Boot&lt;/code&gt; 中如何自定义一个注解，顺带介绍一下&lt;code&gt;Spring Boot&lt;/code&gt; 与 &lt;code&gt;AOP&lt;/code&gt;如何整合。&lt;/p&gt;
+&lt;h2 id=&quot;什么是AOP？&quot;&gt;&lt;a href=&quot;#什么是AOP？&quot; class=&quot;headerlink&quot; title=&quot;什么是AOP？&quot;&gt;&lt;/a&gt;什么是AOP？&lt;/h2&gt;&lt;p&gt;&lt;code&gt;AOP&lt;/code&gt;即是面向切面，是&lt;code&gt;Spring&lt;/code&gt;的核心功能之一，主要的目的即是针对业务处理过程中的横向拓展，以达到低耦合的效果。&lt;/p&gt;
+&lt;p&gt;举个栗子，项目中有记录操作日志的需求、或者流程变更是记录变更履历，无非就是插表操作，很简单的一个&lt;code&gt;save&lt;/code&gt;操作，都是一些记录日志或者其他辅助性的代码。一遍又一遍的重写和调用。不仅浪费了时间，又将项目变得更加的冗余，实在得不偿失。&lt;/p&gt;
+&lt;p&gt;此时&lt;code&gt;AOP&lt;/code&gt;的就该出场了，能够在不改变原逻辑的基础上实现相关功能。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring Boot多环境配置，你喜欢哪种？</title>
@@ -376,9 +400,9 @@
       <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="优质资源" scheme="https://chenjiabing666.github.io/tags/%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90/"/>
-    
       <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
+    
+      <category term="优质资源" scheme="https://chenjiabing666.github.io/tags/%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90/"/>
     
   </entry>
   
@@ -435,27 +459,6 @@
     
       &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;上篇文章介绍了Spring Boot中如何配置拦截器，今天这篇文章就来讲讲类似于拦截器的一个组件：过滤器。&lt;/p&gt;
 &lt;p&gt;其实在实际开发中过滤器真的接触的不多，但是在应用中却是不可或缺的角色，值得花费一个章节专门介绍一下。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>拦截器如何配置，看这儿~</title>
-    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E5%85%AD%E5%BC%B9%EF%BC%8C%E6%8B%A6%E6%88%AA%E5%99%A8%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%EF%BC%8C%E7%9C%8B%E8%BF%99%E5%84%BF~/"/>
-    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot第六弹，拦截器如何配置，看这儿~/</id>
-    <published>2020-10-14T02:06:42.000Z</published>
-    <updated>2020-10-23T11:11:54.018Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;上篇文章讲了Spring Boot的WEB开发基础内容，相信读者朋友们已经有了初步的了解，知道如何写一个接口。&lt;/p&gt;
-&lt;p&gt;今天这篇文章来介绍一下拦截器在Spring Boot中如何自定义以及配置。&lt;/p&gt;
     
     </summary>
     
