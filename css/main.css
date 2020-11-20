@@ -2112,7 +2112,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #3247b5;
+  background: #444fff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3468,14 +3468,10 @@ img:hover {
   border-radius: 20px;
 }
 .highlight {
-  border-radius: 1px;
-  background-color: #f6f8fa;
-  overflow: auto;
-  border-width: 1px 1px 1px 2px;
-  border-style: dashed dashed dashed solid;
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 3px;
   border-color: #aaa #aaa #aaa #6ce26c;
-  border-image: initial;
-  position: relative;
 }
 strong {
   font-weight: bold;
@@ -3519,7 +3515,7 @@ hr {
   color: #d9534f;
 }
 .post-button .btn {
-  color: #555 !important;
+  color: #fff;
   background-color: #fff;
   border-radius: 3px;
   font-size: 15px;
@@ -3528,6 +3524,9 @@ hr {
   transition-property: unset;
   padding: 0 15px;
   border-radius: 30px 30px 30px 30px;
+  border-color: #6f42c1;
+  background: #e431d3;
+  background-image: linear-gradient(90deg, #a166ab 0, #ef4e7b 25%, #f37055 50%, #ef4e7b 75%, #a166ab 100%);
 }
 .post-button .btn:hover {
   border-color: #6f42c1;
