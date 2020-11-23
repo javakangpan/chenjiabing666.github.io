@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chenjiabing666.github.io/"/>
-  <updated>2020-11-20T02:54:52.004Z</updated>
+  <updated>2020-11-23T01:29:32.682Z</updated>
   <id>https://chenjiabing666.github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring Boot自定义启动器</title>
+    <link href="https://chenjiabing666.github.io/2020/11/23/SpringBoot%E8%87%AA%E5%AE%9A%E4%B9%89%E5%90%AF%E5%8A%A8%E5%99%A8/"/>
+    <id>https://chenjiabing666.github.io/2020/11/23/SpringBoot自定义启动器/</id>
+    <published>2020-11-23T01:26:44.000Z</published>
+    <updated>2020-11-23T01:29:32.682Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;日常工作中对于&lt;code&gt;Spring Boot&lt;/code&gt; 提供的一些启动器可能已经足够使用了，但是不可避免的需要自定义启动器，比如整合一个陌生的组件，也想要达到开箱即用的效果。&lt;/p&gt;
+&lt;p&gt;在上一章节从底层源码介绍了&lt;code&gt;Spring Boot&lt;/code&gt; 的自动配置的原理，未读过的朋友建议看一下：&lt;a href=&quot;https://mp.weixin.qq.com/s/cEBvxQ4iDo3QOMYWvwE6nw&quot;&gt;Spring Boot 自动配置源码解析&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这篇文章将会介绍如何自定义一个启动器，同时对于自动配置类的执行顺序做一个详细的分析。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Boot自动配置源码解析~</title>
+    <link href="https://chenjiabing666.github.io/2020/11/23/SpringBoot%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
+    <id>https://chenjiabing666.github.io/2020/11/23/SpringBoot自动配置源码解析/</id>
+    <published>2020-11-23T01:26:29.000Z</published>
+    <updated>2020-11-23T01:28:09.071Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;为什么&lt;code&gt;Spring Boot&lt;/code&gt;这么火？因为便捷，开箱即用，但是你思考过为什么会这么便捷吗？传统的SSM架构配置文件至少要写半天，而使用&lt;code&gt;Spring Boot&lt;/code&gt;之后只需要引入一个&lt;code&gt;starter&lt;/code&gt;之后就能直接使用，why？？？&lt;/p&gt;
+&lt;p&gt;原因很简单，每个&lt;code&gt;starter&lt;/code&gt;内部做了工作，比如&lt;code&gt;Mybatis&lt;/code&gt;的启动器默认内置了可用的&lt;code&gt;SqlSessionFactory&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;至于如何内置的？&lt;code&gt;Spring Boot&lt;/code&gt; 又是如何使其生效的？这篇文章就从源码角度介绍一下&lt;code&gt;Spring Boot&lt;/code&gt;的自动配置原理。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
+    
+    
+      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot启动流程源码分析~</title>
@@ -424,48 +468,6 @@
     
     
       <category term="优质资源" scheme="https://chenjiabing666.github.io/tags/%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90/"/>
-    
-      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>满屏的try-catch，你不瘆得慌？</title>
-    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E4%B9%9D%E5%BC%B9%EF%BC%8C%E6%BB%A1%E5%B1%8F%E7%9A%84try-catch%EF%BC%8C%E4%BD%A0%E4%B8%8D%E7%98%86%E5%BE%97%E6%85%8C%EF%BC%9F/"/>
-    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot第九弹，满屏的try-catch，你不瘆得慌？/</id>
-    <published>2020-10-14T02:09:42.000Z</published>
-    <updated>2020-10-23T11:13:45.723Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;软件开发过程中难免遇到各种的BUG，各种的异常，一直就是在解决异常的路上永不停歇，如果你的代码中再出现&lt;code&gt;try(){...}catch(){...}finally{...}&lt;/code&gt;代码块，你还有心情看下去吗？自己不觉得恶心吗？&lt;/p&gt;
-&lt;p&gt;冗余的代码往往回丧失写代码的动力，每天搬砖似的写代码，真的很难受。今天这篇文章教你如何去掉满屏的&lt;code&gt;try(){...}catch(){...}finally{...}&lt;/code&gt;，解放你的双手。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>一波带走，教你Spring Boot如何扩展、接管MVC？</title>
-    <link href="https://chenjiabing666.github.io/2020/10/14/Spring%20Boot%E7%AC%AC%E5%85%AB%E5%BC%B9%EF%BC%8C%E4%B8%80%E6%B3%A2%E5%B8%A6%E8%B5%B0%EF%BC%8C%E6%95%99%E4%BD%A0Spring%20Boot%E5%A6%82%E4%BD%95%E6%89%A9%E5%B1%95%E3%80%81%E6%8E%A5%E7%AE%A1MVC%EF%BC%9F/"/>
-    <id>https://chenjiabing666.github.io/2020/10/14/Spring Boot第八弹，一波带走，教你Spring Boot如何扩展、接管MVC？/</id>
-    <published>2020-10-14T02:08:42.000Z</published>
-    <updated>2020-10-23T11:13:10.498Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;自从用了Spring Boot是否有一个感觉，以前MVC的配置都很少用到了，比如视图解析器，拦截器，过滤器等等，这也正是Spring Boot好处之一。&lt;/p&gt;
-&lt;p&gt;但是往往Spring Boot提供默认的配置不一定适合实际的需求，因此需要能够定制MVC的相关功能，这篇文章就介绍一下如何扩展和全面接管MVC。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
-    
     
       <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
     
