@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("https://chenjiabing666.github.io/"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="code-ltfpVmGDr3" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Redis," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="不才陈某技术博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言Redis作为内存型的数据库，虽然很快，依然有着很大的隐患，一旦服务器宕机重启，内存中数据还会存在吗？
+很容易想到的一个方案是从后台数据恢复这些数据，如果数据量很小，这倒是一个可行的方案。但是如果数据量过大，频繁的从后台数据库访问数据，压力很大；另外一方面恢复数据的时间极慢。
+对于Redis来说，实现数据的持久化和快速恢复是至关重要。
+今天这篇文章就来介绍一下Redis持久化的两种机制AOF日">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务器宕机，Redis如何恢复数据？">
+<meta property="og:url" content="https://chenjiabing666.github.io/2020/11/24/服务器宕机，Redis如何恢复数据？/index.html">
+<meta property="og:site_name" content="不才陈某技术博客">
+<meta property="og:description" content="前言Redis作为内存型的数据库，虽然很快，依然有着很大的隐患，一旦服务器宕机重启，内存中数据还会存在吗？
+很容易想到的一个方案是从后台数据恢复这些数据，如果数据量很小，这倒是一个可行的方案。但是如果数据量过大，频繁的从后台数据库访问数据，压力很大；另外一方面恢复数据的时间极慢。
+对于Redis来说，实现数据的持久化和快速恢复是至关重要。
+今天这篇文章就来介绍一下Redis持久化的两种机制AOF日">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E5%AE%95%E6%9C%BA%E5%90%8E%E7%9A%84%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D%EF%BC%9F/1.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E5%AE%95%E6%9C%BA%E5%90%8E%E7%9A%84%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D%EF%BC%9F/2.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E5%AE%95%E6%9C%BA%E5%90%8E%E7%9A%84%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D%EF%BC%9F/3.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png">
+<meta property="og:updated_time" content="2020-11-24T06:07:48.854Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="服务器宕机，Redis如何恢复数据？">
+<meta name="twitter:description" content="前言Redis作为内存型的数据库，虽然很快，依然有着很大的隐患，一旦服务器宕机重启，内存中数据还会存在吗？
+很容易想到的一个方案是从后台数据恢复这些数据，如果数据量很小，这倒是一个可行的方案。但是如果数据量过大，频繁的从后台数据库访问数据，压力很大；另外一方面恢复数据的时间极慢。
+对于Redis来说，实现数据的持久化和快速恢复是至关重要。
+今天这篇文章就来介绍一下Redis持久化的两种机制AOF日">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E5%AE%95%E6%9C%BA%E5%90%8E%E7%9A%84%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D%EF%BC%9F/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chenjiabing666.github.io/2020/11/24/服务器宕机，Redis如何恢复数据？/"/>
+
+
+
+
+
+  <title>服务器宕机，Redis如何恢复数据？ | 不才陈某技术博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不才陈某技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">微信公众号：码猿技术专栏</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chenjiabing666.github.io/2020/11/24/服务器宕机，Redis如何恢复数据？/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="不才陈某">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不才陈某技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">服务器宕机，Redis如何恢复数据？</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-24T14:06:29+08:00">
+                2020-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis-进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis 进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/11/24/服务器宕机，Redis如何恢复数据？/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/24/服务器宕机，Redis如何恢复数据？/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+		  
+		  
+			  <span class="post-meta-divider">|</span>
+			  <span id="busuanzi_value_page_pv"></span>次阅读
+			
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><code>Redis</code>作为内存型的数据库，虽然很快，依然有着很大的隐患，一旦<strong>服务器宕机</strong>重启，内存中数据还会存在吗？</p>
+<p>很容易想到的一个方案是从后台数据恢复这些数据，如果数据量很小，这倒是一个可行的方案。但是如果数据量过大，频繁的从后台数据库访问数据，压力很大；另外一方面恢复数据的时间极慢。</p>
+<p>对于<code>Redis</code>来说，实现数据的持久化和快速恢复是至关重要。</p>
+<p>今天这篇文章就来介绍一下<code>Redis</code>持久化的两种机制<code>AOF</code>日志、<code>RDB</code>快照。</p>
+<a id="more"></a>
+<h2 id="什么是-AOF-日志？"><a href="#什么是-AOF-日志？" class="headerlink" title="什么是 AOF 日志？"></a>什么是 AOF 日志？</h2><p><code>AOF</code>(<code>Append Only File</code>)日志称之为<strong>写后日志</strong>，即是命令先执行完成，把数据写入内存，然后才会记录日志。</p>
+<p><code>AOF</code>日志（文本形式）会将收到每一条的命令且执行成功的命令以一定的格式写入到文本中（追加的方式）。</p>
+<p><strong>写后日志有什么好处呢？</strong> 如下：</p>
+<ol>
+<li>对于写前日志无论命令是否执行成功都会被记录，但是<code>Redis</code>的写后日志则只有命令执行成功才会被写入日志，避免了日志中存在错误命令；</li>
+<li>同时由于是命令执行成功之后才会写入日志，因此不会阻塞当前命令的执行。</li>
+</ol>
+<p>但是<code>AOF</code>日志也有<strong>潜在的风险</strong>，分析如下：</p>
+<ol>
+<li>由于是写后日志，如果在命令执行成功之后，在日志未写入磁盘之前服务器突然宕机，那重启恢复数据的时候，这部分的数据肯定在日志文件中不存在了，那么将会丢失。（无法通过后台数据库恢复的情况下）</li>
+<li>虽然不会阻塞当前命令的执行，由于记录日志也是在主线程中（<code>Redis</code>是单线程），如果日志写入磁盘的时候突然阻塞了，肯定会影响下一个命令的执行。</li>
+</ol>
+<p>为了解决上面的风险，<code>AOF</code>日志提供了三种回写策略。</p>
+<h3 id="三种写回策略"><a href="#三种写回策略" class="headerlink" title="三种写回策略"></a>三种写回策略</h3><p><code>AOF</code>机制提供了三种回写策略，这些都在<code>appendfsync</code>配置，如下：</p>
+<ol>
+<li><code>Always</code>（同步写回）：命令执行完成，立马同步的将日志写入磁盘</li>
+<li><code>Everysec</code>（每秒写回）：命令执行完成后，先将日志写入 AOF 文件的内存缓冲区，每隔一秒把缓冲区中内容写入磁盘。</li>
+<li><code>No</code>(操作系统控制的写回)：每个写命令执行完，只是先把日志写到<code>AOF</code>文件的内存缓冲区，由操作系统决定何时将缓冲区内容写回磁盘。</li>
+</ol>
+<p>其实这三中写回策略都无法解决主线程的阻塞和数据丢失的问题，分析如下：</p>
+<ol>
+<li><code>同步写回</code>：基本不丢失数据，但是每步操作都会有一个慢速的落盘操作，不可避免的影响主线程性能。</li>
+<li><code>每秒写回</code>：采用一秒写一次到 AOF 日志文件中，但是一旦宕机还是会丢失一秒的数据。</li>
+<li><code>操作系统控制的写回</code>：在写完缓冲区之后则会写入磁盘，但是数据始终在缓冲区的时间内一旦宕机，数据还是会丢失。</li>
+</ol>
+<p>以上三种策略优缺点总结如下表：<br>| 策略 | 优点 | 缺点 |<br>| — | — | — |<br>| Always | 可靠性高，数据基本不丢失 |每个写命令都要落盘，性能影响较大 |<br>| Everysec | 性能适中 | 宕机时丢失一秒数据 |<br>| No | 性能好 | 宕机时丢失数据较多 |</p>
+<h3 id="日志文件太大怎么办？"><a href="#日志文件太大怎么办？" class="headerlink" title="日志文件太大怎么办？"></a>日志文件太大怎么办？</h3><p>随着数据量的增大，AOF日志文件难免会很大，这样将会导致写入和恢复数据都将变得非常慢。此时AOF提供了一种<strong>重写机制</strong>解决这一问题。</p>
+<blockquote>
+<p>重写机制理解起来很简单，即是<code>Redis</code>会创建一个新的<code>AOF</code>日志文件，将每个键值对最终的值用一条命令写入日志文件中。</p>
+</blockquote>
+<p>比如读取了键值对<code>key1:value1</code>，重写机制会在新的AOF日志文件中记录如下一条命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set key1 value1</div></pre></td></tr></table></figure></p>
+<p>其实即是记录多次修改的最终的值记录在新的AOF日志文件中，这样当恢复数据时可直接执行该命令。</p>
+<p><strong>为什么重写机制能够缩小文件呢？</strong> 当一个键值被多次修改后，<code>AOF</code>日志文件中将会记录多次修改键值的命令，重写机制是根据这个键值最新状态为它生成<strong>写入</strong>命令，这样旧文件中的<strong>多条</strong>命令在重写后的新日志中变成了<strong>一条</strong>命令。</p>
+<p>作者画了一张重写流程图，仅供参考，如下：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E5%AE%95%E6%9C%BA%E5%90%8E%E7%9A%84%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D%EF%BC%9F/1.png" alt="重写机制流程"></p>
+<h3 id="AOF重写会阻塞主线程吗？"><a href="#AOF重写会阻塞主线程吗？" class="headerlink" title="AOF重写会阻塞主线程吗？"></a>AOF重写会阻塞主线程吗？</h3><p>AOF重写虽然能够缩减日志文件的大小，达到减少日志记录和数据恢复的时间，但是在数据量非常的大情况下把整个数据库重写后的日志写入磁盘是一个非常耗时的过程，难道不会阻塞主线程吗？</p>
+<p><strong>答案是：不会阻塞主线程</strong>； 因为AOF重写过程是由后台子进程<code>bgrewriteaof</code>来完成的，这也是为了避免阻塞主线程，导致数据库性能下降。</p>
+<p>其实重写的过程分为两个阶段：<strong>一个拷贝，两处日志</strong>。</p>
+<p><strong>一个拷贝</strong>：指每次执行重写时，主线程都<code>fork</code>一个子线程<code>bgrewriteaof</code>，主线程会把内存数据拷贝一份到子线程，此时子线程中包含了数据库的最新数据。然后子线程就能在不影响主线程的情况下进行AOF重写了。</p>
+<p><strong>两处日志</strong>是什么？如下：</p>
+<ol>
+<li><code>第一处日志</code>：子线程重写并未阻塞主线程，此时主线程仍然会处理请求，此时的AOF日志仍然正在记录着，这样即使宕机了，数据也是齐全的。第一处日志即是值主线程正在使用的日志。</li>
+<li><code>第二处日志</code>：指新的AOF重写日志；重写过程中的操作也会被写到重写日志缓冲区，这样重写日志也不会丢失最新的操作。等到拷贝数据的所有操作记录重写完成后，重写日志记录的这些最新操作也会写入新的 AOF 文件，以保证数据库最新状态的记录。此时，我们就可以用新的 AOF 文件替代旧文件了。</li>
+</ol>
+<blockquote>
+<p><strong>总结</strong>：<code>Redis</code>在进行<code>AOF</code>重写时，会<code>fork</code>一个子线程（不会阻塞主线程）并进行内存拷贝用于重写，然后使用两个日志保证重写过程中，新写入的数据不会丢失。</p>
+</blockquote>
+<h3 id="AOF的缺点"><a href="#AOF的缺点" class="headerlink" title="AOF的缺点"></a>AOF的缺点</h3><p>虽说进行了日志重写后，AOF日志文件会缩减很多，但是在数据恢复过程中仍然是一条命令一条命令（由于单线程，只能顺序执行）的执行恢复数据，这个恢复的过程非常缓慢。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>AOF这种通过逐一记录操作命令的日志方式，提供了三种写回策略保证数据的可靠性，分别是<code>Always</code>、<code>Everysec</code>和<code>No</code>，这三种策略在可靠性上是从高到低，而在性能上则是从低到高。</p>
+<p>为了避免日志文件过大，Redis提供了重写的机制，每次重写都fork一个子线程，拷贝内存数据进行重写，将多条命令缩减成一条生成键值对的命令，最终重写的日志作为新的日志。</p>
+<h2 id="什么是RDB？"><a href="#什么是RDB？" class="headerlink" title="什么是RDB？"></a>什么是RDB？</h2><p><code>RDB</code>(Redis DataBase)是另外一种持久化方式：内存快照。</p>
+<blockquote>
+<p><code>RDB</code>记录的是<strong>某一个时刻</strong>的内存数据，并不是操作命令。</p>
+</blockquote>
+<p>这种方式类似于拍照，只保留某一时刻的形象。内存快照是将某一时刻的状态以文件的形式写入磁盘。这样即使宕机了，数据也不会丢失，这个快照文件就称为<code>RDB</code>文件。</p>
+<blockquote>
+<p>由于记录的是某个时刻的内存数据，数据恢复非常快的，不需要像AOF日志逐一执行记录的命令。</p>
+</blockquote>
+<h3 id="给哪些数据做快照？"><a href="#给哪些数据做快照？" class="headerlink" title="给哪些数据做快照？"></a>给哪些数据做快照？</h3><p>为了保证数据的可靠性，Redis执行的<strong>全量快照</strong>，也就是把内存中的所有数据都写到磁盘中。</p>
+<p>随着数据量的增大，一次性把全部数据都写到磁盘中势必会造成线程阻塞，这就关系到Redis的性能了。</p>
+<p>针对线程阻塞的问题Redis提供了两个命令，如下：</p>
+<ol>
+<li><code>save</code>：在主线程中执行，会导致主线程阻塞。</li>
+<li><code>bgsave</code>：<code>fork</code>一个子进程，专门用于写入<code>RDB</code>文件，避免了主线程的阻塞，这是Redis的默认配置。</li>
+</ol>
+<p>这样就可以使用<code>bgsave</code>命令执行全量快照，既可以保证数据的可靠性也避免了主线程的阻塞。</p>
+<h3 id="快照时能够修改数据吗？"><a href="#快照时能够修改数据吗？" class="headerlink" title="快照时能够修改数据吗？"></a>快照时能够修改数据吗？</h3><p>子线程执行全量快照的同时，主线程仍然在接受着请求，读数据肯定没有问题，但是如果个修改了数据，如何能够保证快照的完整性呢？</p>
+<p><strong>举个栗子</strong>：我在<code>T</code>时刻进行全量快照，假设数据量有<code>8G</code>，写入磁盘的过程至少需要<code>20S</code>，在这<code>20S</code>的时间内，一旦内存中的数据发生了修改，则快照的完整性就破坏了。</p>
+<p>但是如果在快照时不能修改数据，则对Redis的性能有巨大的影响，对于这个问题，Redis是如何解决的呢？</p>
+<blockquote>
+<p><code>Redis</code>借助操作系统提供的<code>写时复制技术</code>（Copy-On-Write, COW），在执行快照的同时，正常处理写操作。</p>
+</blockquote>
+<p>其实很简单，<code>bgsave</code>命令会<code>fork</code>一个子线程，这个子线程共享所有内存的数据，子线程会读取主线程内存中的数据，将他们写入<code>RDB</code>文件。</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E5%AE%95%E6%9C%BA%E5%90%8E%E7%9A%84%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D%EF%BC%9F/2.png" alt="写时复制保证数据可修改"></p>
+<p>如上图，对于<code>键值对A</code>的读取并不会影响子线程，但是如果主线程一旦修改内存中一块数据（例如<code>键值对D</code>），这块数据将会被复制一个副本，然后<code>bgsave</code>子线程会将其写入<code>RDB</code>文件。</p>
+<h3 id="多久做一次快照？"><a href="#多久做一次快照？" class="headerlink" title="多久做一次快照？"></a>多久做一次快照？</h3><p>快照只是记录某一时刻的数据，一旦时间隔离很久，则服务器一旦宕机，则会丢失那段时间的数据。</p>
+<p>比如在<code>T1</code>时间做了一次快照，在<code>T1+t</code>时又做了一次快照，如果在<code>t</code>这个时间段内服务器突然宕机了，则快照中只保存了<code>T1</code>时刻的快照，在<code>t</code>时间段内的数据修改未被记录（丢失）。如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E5%AE%95%E6%9C%BA%E5%90%8E%E7%9A%84%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D%EF%BC%9F/3.png" alt="t时刻宕机，未执行快照"></p>
+<p>从上图明显可以看出，<strong><code>RDB</code>并不是一个完美的日志记录方案</strong>，只有让<code>t</code>时间逐渐缩小，才能保证丢失的数据缩小。</p>
+<p><strong>那么问题来了，时间能够缩短<code>1秒</code>吗？</strong> 即是每秒执行一次快照。</p>
+<blockquote>
+<p>全量快照是记录某一个时刻的<strong>全部</strong>内存数据，每秒执行一次的对Redis性能影响巨大，于是<strong>增量快照</strong>就出来了。</p>
+</blockquote>
+<h3 id="增量快照"><a href="#增量快照" class="headerlink" title="增量快照"></a>增量快照</h3><p><strong>增量快照是指做了一次全量快照之后，后续的快照只对修改的数据进行快照记录</strong>，这样可以避免每次都全量快照的开销。</p>
+<p>增量快照的前提是Redis能够记住修改的数据，这个功能其实开销也是巨大的，需要保存完整的键值对，这对内存的消耗是巨大的。</p>
+<blockquote>
+<p>为了解决这个问题，Redis使用了<code>AOF</code>和<code>RDB</code>混合使用的方式。</p>
+</blockquote>
+<h3 id="AOF和RDB混合使用"><a href="#AOF和RDB混合使用" class="headerlink" title="AOF和RDB混合使用"></a>AOF和RDB混合使用</h3><p>这个概念是在<code>Redis4.0</code>提出的，简单的说就是<strong>内存快照以一定的频率执行，比如1小时一次，在两次快照之间，使用AOF日志记录这期间的所有命令操作。</strong></p>
+<blockquote>
+<p>混合使用的方式使得内存快照不必频繁的执行，并且AOF记录的也不是全部的操作命令，而是两次快照之间的操作命令，不会出现AOF日志文件过大的情况了，避免了AOF重写的开销了。</p>
+</blockquote>
+<p>这个方案既能够用到的RDB的快速恢复的好处，又能享受都只记录操作命令的简单优势，强烈建议使用。</p>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p><code>RDB</code>内存快照记录的是某一个时刻的内存数据，因此能够快速恢复；<code>AOF</code>和<code>RDB</code>混合使用能够使得宕机后数据快速恢复，又能够避免<code>AOF</code>日志文件过大。</p>
+<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h2><p>本文介绍了两种数据恢复和持久化的方案，分别是<code>AOF</code>和<code>RDB</code>。</p>
+<p><code>AOF</code>介绍了什么？如下：</p>
+<ol>
+<li><code>AOF</code>是写后日志，通过记录操作命令持久化数据。</li>
+<li>由于<code>AOF</code>是在命令执行之后记录日志，如果在写入磁盘之前服务器宕机，则会丢失数据；如果写入磁盘的时候突然阻塞，则会阻塞主线程；为了解决以上问题，AOF机制提供了三种写回的策略，每种策略都有不同的优缺点。</li>
+<li><code>AOF</code>日志文件过大怎么办？<code>AOF</code>通过<code>fork</code>一个子线程重写一个新的日志文件（共享主线程的内存，记录最新数据的写入命令），同时子线程重写，避免阻塞主线程。</li>
+</ol>
+<p><code>RDB</code>介绍了什么？如下：</p>
+<ol>
+<li><code>RDB</code>是内存快照，记录某一个时刻的内存数据，而不是操作命令。</li>
+<li><code>Redis</code>提供了两个命令，分别是<code>save</code>、<code>bgsave</code>来执行全量快照，这两个命令的区别则是<code>save</code>是在主线程执行，势必会阻塞主线程，<code>bgsave</code>是在<code>fork</code>一个子线程，共享内存。</li>
+<li>RDB通过操作系统的<strong>写时复制技术</strong>，能够保证在执行快照的同时主线程能够修改快照。</li>
+<li>由于两次快照之间是存在间隔的，一旦服务器宕机，则会丢失两次间隔时刻的数据，<code>Redis4.0</code>开始使用<code>AOF</code>日志记录两次快照之间执行的命令（<code>AOF</code>和<code>RDB</code>混合使用）。</li>
+</ol>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写的可还行？</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="不才陈某 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+	<div>
+	
+<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/11/24/服务器宕机，Redis如何恢复数据？/">服务器宕机，Redis如何恢复数据？</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 不才陈某 的个人博客">不才陈某</a></p>
+  <p><span>发布时间:</span>2020年11月24日 - 14:06</p>
+  <p><span>最后更新:</span>2020年11月24日 - 14:07</p>
+  <p><span>原始链接:</span><a href="/2020/11/24/服务器宕机，Redis如何恢复数据？/" title="服务器宕机，Redis如何恢复数据？">https://chenjiabing666.github.io/2020/11/24/服务器宕机，Redis如何恢复数据？/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://chenjiabing666.github.io/2020/11/24/服务器宕机，Redis如何恢复数据？/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+      
+</div>
+
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"><i class="fa fa-tag"></i> Redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/24/单线程的Redis，有哪些慢动作/" rel="next" title="单线程的Redis，有哪些慢动作？">
+                <i class="fa fa-chevron-left"></i> 单线程的Redis，有哪些慢动作？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/header.jpg"
+                alt="不才陈某" />
+            
+              <p class="site-author-name" itemprop="name">不才陈某</p>
+              <p class="site-description motion-element" itemprop="description">本站是不才陈某的技术分享博客。内容涵盖Java后端技术、Spring Boot、微服务架构、系统安全、前端、系统监控等相关的研究与知识分享。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/2506542244708072" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-globe"></i>掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/xiao-ming-64-34-45" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_34162294" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png" target="_blank" title="微信公众号">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微信公众号</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pexels.com/zh-cn/" title="Pexels" target="_blank">Pexels</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ityouknow.com/" title="纯洁的微笑" target="_blank">纯洁的微笑</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是-AOF-日志？"><span class="nav-text">什么是 AOF 日志？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三种写回策略"><span class="nav-text">三种写回策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志文件太大怎么办？"><span class="nav-text">日志文件太大怎么办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF重写会阻塞主线程吗？"><span class="nav-text">AOF重写会阻塞主线程吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF的缺点"><span class="nav-text">AOF的缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是RDB？"><span class="nav-text">什么是RDB？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#给哪些数据做快照？"><span class="nav-text">给哪些数据做快照？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快照时能够修改数据吗？"><span class="nav-text">快照时能够修改数据吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多久做一次快照？"><span class="nav-text">多久做一次快照？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增量快照"><span class="nav-text">增量快照</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOF和RDB混合使用"><span class="nav-text">AOF和RDB混合使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-1"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-2"><span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不才陈某</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">178.6k</span>
+  
+</div>
+
+<!--
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style='display:none'>
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共178.6k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'RtlQOgOT3M0hgyMeogykSQjT-gzGzoHsz',
+        appKey: 'vSCxLU88wnXVf0Pa8mwJrCPm',
+        placeholder: '原创不易，欢迎各位指正',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
