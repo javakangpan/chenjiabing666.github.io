@@ -121,7 +121,7 @@
 <meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E5%AE%95%E6%9C%BA%E5%90%8E%E7%9A%84%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D%EF%BC%9F/2.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E5%AE%95%E6%9C%BA%E5%90%8E%E7%9A%84%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D%EF%BC%9F/3.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png">
-<meta property="og:updated_time" content="2020-11-24T06:07:48.854Z">
+<meta property="og:updated_time" content="2020-11-24T07:58:22.216Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务器宕机，Redis如何恢复数据？">
 <meta name="twitter:description" content="前言Redis作为内存型的数据库，虽然很快，依然有着很大的隐患，一旦服务器宕机重启，内存中数据还会存在吗？
@@ -502,7 +502,33 @@
 <li><code>每秒写回</code>：采用一秒写一次到 AOF 日志文件中，但是一旦宕机还是会丢失一秒的数据。</li>
 <li><code>操作系统控制的写回</code>：在写完缓冲区之后则会写入磁盘，但是数据始终在缓冲区的时间内一旦宕机，数据还是会丢失。</li>
 </ol>
-<p>以上三种策略优缺点总结如下表：<br>| 策略 | 优点 | 缺点 |<br>| — | — | — |<br>| Always | 可靠性高，数据基本不丢失 |每个写命令都要落盘，性能影响较大 |<br>| Everysec | 性能适中 | 宕机时丢失一秒数据 |<br>| No | 性能好 | 宕机时丢失数据较多 |</p>
+<p>以上三种策略优缺点总结如下表：</p>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Always</td>
+<td>可靠性高，数据基本不丢失</td>
+<td>每个写命令都要落盘，性能影响较大</td>
+</tr>
+<tr>
+<td>Everysec</td>
+<td>性能适中</td>
+<td>宕机时丢失一秒数据</td>
+</tr>
+<tr>
+<td>No</td>
+<td>性能好</td>
+<td>宕机时丢失数据较多</td>
+</tr>
+</tbody>
+</table>
 <h3 id="日志文件太大怎么办？"><a href="#日志文件太大怎么办？" class="headerlink" title="日志文件太大怎么办？"></a>日志文件太大怎么办？</h3><p>随着数据量的增大，AOF日志文件难免会很大，这样将会导致写入和恢复数据都将变得非常慢。此时AOF提供了一种<strong>重写机制</strong>解决这一问题。</p>
 <blockquote>
 <p>重写机制理解起来很简单，即是<code>Redis</code>会创建一个新的<code>AOF</code>日志文件，将每个键值对最终的值用一条命令写入日志文件中。</p>
@@ -636,7 +662,7 @@
   <p><span>本文标题:</span><a href="/2020/11/24/服务器宕机，Redis如何恢复数据？/">服务器宕机，Redis如何恢复数据？</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 不才陈某 的个人博客">不才陈某</a></p>
   <p><span>发布时间:</span>2020年11月24日 - 14:06</p>
-  <p><span>最后更新:</span>2020年11月24日 - 14:07</p>
+  <p><span>最后更新:</span>2020年11月24日 - 15:58</p>
   <p><span>原始链接:</span><a href="/2020/11/24/服务器宕机，Redis如何恢复数据？/" title="服务器宕机，Redis如何恢复数据？">https://chenjiabing666.github.io/2020/11/24/服务器宕机，Redis如何恢复数据？/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://chenjiabing666.github.io/2020/11/24/服务器宕机，Redis如何恢复数据？/"  aria-label="复制成功！"></i></span>
   </p>
