@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chenjiabing666.github.io/"/>
-  <updated>2020-11-24T07:58:22.216Z</updated>
+  <updated>2020-11-27T04:16:42.881Z</updated>
   <id>https://chenjiabing666.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>IDEA2020.2.4最新激活教程，有效期到2089~</title>
+    <link href="https://chenjiabing666.github.io/2020/11/27/IDEA2020-2-4%E6%9C%80%E6%96%B0%E6%BF%80%E6%B4%BB%E6%95%99%E7%A8%8B%EF%BC%8C%E6%9C%89%E6%95%88%E6%9C%9F%E5%88%B02089/"/>
+    <id>https://chenjiabing666.github.io/2020/11/27/IDEA2020-2-4最新激活教程，有效期到2089/</id>
+    <published>2020-11-27T04:14:23.000Z</published>
+    <updated>2020-11-27T04:16:42.881Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;昨天又有好多粉丝反馈Idea失效过期，也有群里的小伙伴私聊问我，最新的&lt;code&gt;Idea2020.2.4&lt;/code&gt; 版本要如何激活？&lt;/p&gt;
+&lt;p&gt;于是自己在网上搜罗了各种注册码、激活码，均以失败告终，有的虽然当时成功了，当时很快就失效了，也许是 IDEA 最近封杀的比较严吧~  但是，最终还是让我找到了破解方法，这里要感谢z大提供的破解补丁。无图无真相，下面就是激活成功的截图！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://gitee.com/chenjiabing666/BlogImage/raw/master/IDEA2.4%E7%A0%B4%E8%A7%A3/1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;申明&lt;/strong&gt;：本教程 IntelliJ IDEA 破解补丁、激活码均收集于网络，请勿商用，仅供个人学习使用，如有侵权，请联系作者删除。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="开发工具" scheme="https://chenjiabing666.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="破解" scheme="https://chenjiabing666.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
+    
+      <category term="优质资源" scheme="https://chenjiabing666.github.io/tags/%E4%BC%98%E8%B4%A8%E8%B5%84%E6%BA%90/"/>
+    
+  </entry>
   
   <entry>
     <title>服务器宕机，Redis如何恢复数据？</title>
@@ -441,28 +468,6 @@
     
       &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;大约在19年的这个时候，老同事公司在做医疗系统，需要和&lt;code&gt;HIS&lt;/code&gt;系统对接一些信息，比如患者、医护、医嘱、科室等信息。但是起初并不知道如何与HIS无缝对接，于是向我取经。&lt;/p&gt;
 &lt;p&gt;最终经过讨论采用了&lt;code&gt;视图对接&lt;/code&gt;的方式，大致就是HIS系统提供视图，他们进行对接。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Spring Boot 进阶" scheme="https://chenjiabing666.github.io/categories/Spring-Boot-%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Spring Boot" scheme="https://chenjiabing666.github.io/tags/Spring-Boot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>这类注解都不知道，还好意思说用过Spring Boot~</title>
-    <link href="https://chenjiabing666.github.io/2020/10/20/%E8%BF%99%E7%B1%BB%E6%B3%A8%E8%A7%A3%E9%83%BD%E4%B8%8D%E7%9F%A5%E9%81%93%EF%BC%8C%E8%BF%98%E5%A5%BD%E6%84%8F%E6%80%9D%E8%AF%B4%E7%94%A8%E8%BF%87Spring%20Boot/"/>
-    <id>https://chenjiabing666.github.io/2020/10/20/这类注解都不知道，还好意思说用过Spring Boot/</id>
-    <published>2020-10-20T08:44:24.000Z</published>
-    <updated>2020-10-22T11:09:53.684Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;不知道大家在使用Spring Boot开发的日常中有没有用过&lt;code&gt;@Conditionalxxx&lt;/code&gt;注解，比如&lt;code&gt;@ConditionalOnMissingBean&lt;/code&gt;。相信看过Spring Boot源码的朋友一定不陌生。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;@Conditionalxxx&lt;/code&gt;这类注解表示某种判断条件成立时才会执行相关操作。掌握该类注解，有助于日常开发，框架的搭建。&lt;/p&gt;
-&lt;p&gt;今天这篇文章就从前世今生介绍一下该类注解。&lt;/p&gt;
     
     </summary>
     
