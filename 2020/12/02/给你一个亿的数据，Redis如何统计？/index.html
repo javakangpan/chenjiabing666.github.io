@@ -92,7 +92,7 @@
 
 
 
-  <meta name="keywords" content="maven," />
+  <meta name="keywords" content="Redis," />
 
 
 
@@ -105,28 +105,49 @@
 
 
 
-<meta name="description" content="前言昨天有一个读者找我的交流工作心得，偶然间提到一个有趣的问题，如下：
-大致的意思：公司最近在整多模块开发，由于模块之间相互依赖，每次打包都很烦，必须根据依赖关系逐一进行打包，有没有省事的办法呢？
-其实玩转Maven的朋友都知道，只需要一条命令即可解决问题。">
+<meta name="description" content="前言不知你大规模的用过Redis吗？还是仅仅作为缓存的工具了？在Redis中使用最多的就是集合了，举个例子，如下场景：
+
+签到系统中，一天对应一系列的用户签到记录。
+电商系统中，一个商品对应一系列的评论。
+交友系统中，某个用户的一系列的好友。
+
+Redis中集合的特点无非是一个Key对应一系列的数据， 但是数据的作用往往是为了统计的，比如：
+
+交友系统中，需要统计每天的新增好友，以及双方的共同好友">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一次打包引发的思考，原来maven还可以这么玩~">
-<meta property="og:url" content="https://chenjiabing666.github.io/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/index.html">
+<meta property="og:title" content="给你一个亿的数据，Redis如何统计？">
+<meta property="og:url" content="https://chenjiabing666.github.io/2020/12/02/给你一个亿的数据，Redis如何统计？/index.html">
 <meta property="og:site_name" content="不才陈某技术博客">
-<meta property="og:description" content="前言昨天有一个读者找我的交流工作心得，偶然间提到一个有趣的问题，如下：
-大致的意思：公司最近在整多模块开发，由于模块之间相互依赖，每次打包都很烦，必须根据依赖关系逐一进行打包，有没有省事的办法呢？
-其实玩转Maven的朋友都知道，只需要一条命令即可解决问题。">
-<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/1.png">
-<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/2.jpg">
-<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/3.jpg">
-<meta property="og:image" content="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis%E8%BF%9B%E9%98%B6PDF/2.png">
+<meta property="og:description" content="前言不知你大规模的用过Redis吗？还是仅仅作为缓存的工具了？在Redis中使用最多的就是集合了，举个例子，如下场景：
+
+签到系统中，一天对应一系列的用户签到记录。
+电商系统中，一个商品对应一系列的评论。
+交友系统中，某个用户的一系列的好友。
+
+Redis中集合的特点无非是一个Key对应一系列的数据， 但是数据的作用往往是为了统计的，比如：
+
+交友系统中，需要统计每天的新增好友，以及双方的共同好友">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1/1.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1/2.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1/3.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1/4.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1/5.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1/6.png">
+<meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/%E4%B8%93%E6%A0%8F%E6%96%87%E7%AB%A0/3.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png">
-<meta property="og:updated_time" content="2020-11-08T13:18:58.387Z">
+<meta property="og:updated_time" content="2020-12-02T11:23:54.887Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一次打包引发的思考，原来maven还可以这么玩~">
-<meta name="twitter:description" content="前言昨天有一个读者找我的交流工作心得，偶然间提到一个有趣的问题，如下：
-大致的意思：公司最近在整多模块开发，由于模块之间相互依赖，每次打包都很烦，必须根据依赖关系逐一进行打包，有没有省事的办法呢？
-其实玩转Maven的朋友都知道，只需要一条命令即可解决问题。">
-<meta name="twitter:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/1.png">
+<meta name="twitter:title" content="给你一个亿的数据，Redis如何统计？">
+<meta name="twitter:description" content="前言不知你大规模的用过Redis吗？还是仅仅作为缓存的工具了？在Redis中使用最多的就是集合了，举个例子，如下场景：
+
+签到系统中，一天对应一系列的用户签到记录。
+电商系统中，一个商品对应一系列的评论。
+交友系统中，某个用户的一系列的好友。
+
+Redis中集合的特点无非是一个Key对应一系列的数据， 但是数据的作用往往是为了统计的，比如：
+
+交友系统中，需要统计每天的新增好友，以及双方的共同好友">
+<meta name="twitter:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1/1.png">
 
 
 
@@ -156,13 +177,13 @@
 
 
 
-  <link rel="canonical" href="https://chenjiabing666.github.io/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/"/>
+  <link rel="canonical" href="https://chenjiabing666.github.io/2020/12/02/给你一个亿的数据，Redis如何统计？/"/>
 
 
 
 
 
-  <title>一次打包引发的思考，原来maven还可以这么玩~ | 不才陈某技术博客</title>
+  <title>给你一个亿的数据，Redis如何统计？ | 不才陈某技术博客</title>
   
 
 
@@ -335,7 +356,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chenjiabing666.github.io/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/">
+    <link itemprop="mainEntityOfPage" href="https://chenjiabing666.github.io/2020/12/02/给你一个亿的数据，Redis如何统计？/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="不才陈某">
@@ -352,7 +373,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">一次打包引发的思考，原来maven还可以这么玩~</h1>
+          <h1 class="post-title" itemprop="name headline">给你一个亿的数据，Redis如何统计？</h1>
         
 
         <div class="post-meta">
@@ -364,8 +385,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-08T21:01:55+08:00">
-                2020-11-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-02T19:22:41+08:00">
+                2020-12-02
               </time>
             
 
@@ -387,8 +408,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
+                  <a href="/categories/Redis-进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis 进阶</span>
                   </a>
                 </span>
 
@@ -405,8 +426,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/" itemprop="commentCount"></span>
+                <a href="/2020/12/02/给你一个亿的数据，Redis如何统计？/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/12/02/给你一个亿的数据，Redis如何统计？/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -433,7 +454,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  940
+                  2.5k
                 </span>
               
 
@@ -449,7 +470,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  8
                 </span>
               
             </div>
@@ -470,89 +491,88 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>昨天有一个读者找我的交流工作心得，偶然间提到一个有趣的问题，如下：</p>
-<p><strong>大致的意思</strong>：公司最近在整<code>多模块</code>开发，由于模块之间相互依赖，每次打包都很烦，必须根据依赖关系逐一进行打包，有没有省事的办法呢？</p>
-<p>其实玩转<code>Maven</code>的朋友都知道，只需要一条命令即可解决问题。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>不知你大规模的用过<code>Redis</code>吗？还是仅仅作为缓存的工具了？在Redis中使用最多的就是集合了，举个例子，如下场景：</p>
+<ol>
+<li>签到系统中，一天对应一系列的用户签到记录。</li>
+<li>电商系统中，一个商品对应一系列的评论。</li>
+<li>交友系统中，某个用户的一系列的好友。</li>
+</ol>
+<p>Redis中集合的特点无非是一个<code>Key</code>对应一系列的数据， 但是数据的作用往往是为了统计的，比如：</p>
+<ol>
+<li>交友系统中，需要统计每天的新增好友，以及双方的共同好友。</li>
+<li>电商系统中，需要统计评论列表中的最新评论。</li>
+<li>签到系统中，需要统计连续一个月的签到的用户数量。</li>
+</ol>
+<p>大型互联网应用中，数据量是巨大的，少说百万，千万，甚至是一个亿，比如电商巨头淘宝，交友巨头微信、微博；办公巨头钉钉等，哪一个的用户不是上亿？</p>
+<p><strong>只有针对不同场景，选择合适的集合，统计才能更方便。</strong> </p>
 <a id="more"></a>
-<h2 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h2><p>假设有一个多模块项目，父工程<code>P</code>中含有三个子模块<code>A</code>、<code>B</code>、<code>C</code>，三个模块有如下的依赖关系：</p>
+<h2 id="聚合统计"><a href="#聚合统计" class="headerlink" title="聚合统计"></a>聚合统计</h2><p><code>聚合统计</code>指的是多个元素聚合的结果，比如统计多个集合的<strong>交集</strong>、<strong>并集</strong>、<strong>差集</strong></p>
+<p><strong>在你需要对多个集合做聚合统计的时候，Set集合是个不错的选择，除了其中无重复的数据外，Redis还提供了对应的API</strong></p>
+<h3 id="交集"><a href="#交集" class="headerlink" title="交集"></a>交集</h3><p>在上述的例子中交友系统中统计双方的共同好友正是聚合统计中的<code>交集</code>。</p>
+<p>在<code>Redis</code>中可以<code>userid</code>作为<code>key</code>，好友的<code>userid</code>作为<code>value</code>，如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1/1.png" alt=""></p>
+<p>统计两个用户的共同好友只需要两个<code>Set</code>集合的交集，命令如下；<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SINTERSTORE userid:new userid:20002 userid:20003</div></pre></td></tr></table></figure></p>
+<p>上述命令运行完成后，<code>userid:new</code>这个key中存储的将是<code>userid:20002</code>、<code>userid:20003</code>两个集合的交集。</p>
+<h3 id="差集"><a href="#差集" class="headerlink" title="差集"></a>差集</h3><p>举个例子：假设交友系统中需要统计每日新增的好友，此时就需要对临近两天的好友集合取差集了，比如<code>2020/11/1</code>日的好友是<code>set1</code>，<code>2020/11/2</code>日的好友是<code>set2</code>，此时只需要对<code>set1</code>和<code>set2</code>做差集。</p>
+<p>此时的结构应该如何设计呢？如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1/2.png" alt=""></p>
+<p><code>userid:20201101</code>这个<code>key</code>记录了<code>userid</code>用户的<code>2020/11/1</code>日的好友集合。</p>
+<p>差集很简单，只需要执行<code>SDIFFSTORE</code>命令，如下：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SDIFFSTORE  user:new  userid:20201102 userid:20201101</div></pre></td></tr></table></figure></p>
+<p>执行完毕，此时的<code>user:new</code>这集合将是<code>2020/11/2</code>日新增的好友。</p>
+<p><strong>这里还有一个更贴切的例子，微博上有个可能认识的人功能，可以使用差集，即是你朋友的好友减去你们共同的好友即是可能认识的人。</strong></p>
+<h3 id="并集"><a href="#并集" class="headerlink" title="并集"></a>并集</h3><p>还是差集的那个例子，假设需要统计<code>2020/11/01</code>和<code>2020/11/2</code>总共新增的好友，此时只需要对这两日新增好友的集合做一个并集。命令如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SUNIONSTORE  userid:new userid:20201102 userid:20201101</div></pre></td></tr></table></figure>
+<p>此时新的集合<code>userid:new</code>则是两日新增的好友。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><code>Set</code>集合的交差并的计算复杂度很高，如果数据量很大的情况下，可能会造成Redis的阻塞。</p>
+<p>那么如何规避阻塞呢？建议如下：</p>
 <ol>
-<li><code>A</code> 依赖 <code>B</code>、<code>C</code>。</li>
-<li><code>B</code> 依赖 <code>C</code>。</li>
+<li>在<code>Redis</code>集群中选一个从库专门负责聚合统计，这样就不会阻塞主库和其他的从库了</li>
+<li>将数据交给客户端，由客户端进行聚合统计。</li>
 </ol>
-<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/1.png" alt="依赖关系图"></p>
-<p>父工程<code>P</code>的<code>pom.xml</code>如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.....</div><div class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">module</span>&gt;</span>A<span class="tag">&lt;/<span class="name">module</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">module</span>&gt;</span>B<span class="tag">&lt;/<span class="name">module</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">module</span>&gt;</span>C<span class="tag">&lt;/<span class="name">module</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">modules</span>&gt;</span></div><div class="line">.....</div></pre></td></tr></table></figure>
-<p><code>A</code>模块的<code>pom.xml</code>如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">....</div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>xxx.xxxx<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>B<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>xxxx<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">.....</div></pre></td></tr></table></figure>
-<p><code>B</code>模块的<code>pom.xml</code>如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">....</div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>xxx.xxxx<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>C<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>xxxx<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">.....</div></pre></td></tr></table></figure>
-<p><code>C</code>模块的<code>pom.xml</code>如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">....</div></pre></td></tr></table></figure>
-<h2 id="你会怎么做？"><a href="#你会怎么做？" class="headerlink" title="你会怎么做？"></a>你会怎么做？</h2><p>现在产品需要上线项目<code>A</code>，你该如何打包？</p>
-<p>最容易想到的则是分开打包，分别执行如下的命令：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mvn clean install C</div><div class="line">mvn clean install B</div><div class="line">mvn clean package A</div></pre></td></tr></table></figure>
-<p>以上三个模块轮流打包，至少需要五分钟以上吧，你不慌吗？</p>
-<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/2.jpg" alt="慌的一批"></p>
-<p>重点来了，我只需要如下一条命令即可打包完成：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn clean package -pl A -am -P test -DskipTests=true</div></pre></td></tr></table></figure>
-<p>以上命令有什么高深的吗？<code>-P</code>指定环境，<code>-DskipTests=true</code>跳过测试，但是<code>-pl</code>和<code>-am</code>是什么？</p>
-<p>答案肯定是在<code>-pl</code>和<code>-am</code>这两个参数了。</p>
-<h2 id="必知的几个参数"><a href="#必知的几个参数" class="headerlink" title="必知的几个参数"></a>必知的几个参数</h2><p>从以上的例子中可以知道重要的就是<code>-pl</code>和<code>-am</code>这两个参数，那么是什么意思呢？如下：</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>-pl</code></td>
-<td>可选，指定需要处理的工程，多个使用英文逗号分隔，取值是<code>artifactId</code></td>
-</tr>
-<tr>
-<td>-am</td>
-<td>可选，同时处理 pl参数 指定模块的依赖模块</td>
-</tr>
-<tr>
-<td>-amd</td>
-<td>可选，同时处理依赖于 pl参数 指定模块的模块</td>
-</tr>
-<tr>
-<td>-N</td>
-<td>可选，表示不递归子模块</td>
-</tr>
-</tbody>
-</table>
-<p>怎么样，理解了吗？是不是有点晦涩难懂，哈哈….</p>
-<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Maven%E5%A4%9A%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85/3.jpg" alt="what?"></p>
-<p>别着急，下面通过几个命令理解一下（全部在父工程<code>P</code>的根目录下执行）。</p>
-<ol>
-<li><code>mvn clean install -pl A -am</code></li>
-</ol>
-<p>对父工程<code>P</code>、子模块<code>A</code>以及<code>A</code>模块依赖的<code>B</code>、<code>C</code>模块执行<code>mvn clean install</code>操作。</p>
-<p>这个命令执行成功后，可以看到<code>P</code>、<code>A</code>、<code>B</code>、<code>C</code>四个模块全部安装到本地了。</p>
-<ol>
-<li><code>mvn clean install -pl C -am</code></li>
-</ol>
-<p>对父工程<code>P</code>、子模块<code>C</code>模块执行<code>mvn clean install</code>操作。</p>
-<p>这个命令执行成功后，可以看到<code>P</code>、<code>C</code>两个模块安装到本地。</p>
-<blockquote>
-<p>由于<code>C</code>模块<strong>不依赖</strong>其他的两个子模块，因此<code>A</code>、<code>B</code>模块不会执行相关命令。</p>
-</blockquote>
-<ol>
-<li><code>mvn clean install -pl C -amd</code></li>
-</ol>
-<p>对父工程<code>P</code>、子模块<code>C</code>以及依赖于<code>C</code>模块的B<code>、</code>C<code>模块执行</code>mvn clean install`操作。</p>
-<p>这个命令执行成功后，可以看到<code>P</code>、<code>A</code>、<code>B</code>、<code>C</code>四个模块全部安装到本地了。</p>
-<ol>
-<li><code>mvn clean install -N</code></li>
-</ol>
-<p>只会打包父工程<code>P</code>，它的子模块将不会执行相关操作。</p>
-<p>怎么样？通过以上的命令应该理解了吧。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>随着项目的体量逐渐增长，可不止上面的几个模块，学会以上几个命令，提升的效率可不止一倍啊。</p>
-<p>另外作者的第一本<code>PDF</code>书籍已经整理好了，由浅入深的详细介绍了<code>Mybatis</code>基础以及底层源码，有需要的朋友公众号回复关键词<code>Mybatis进阶</code>即可获取，目录如下：</p>
-<p><img src="https://gitee.com/chenjiabing666/Blog-file/raw/master/Mybatis%E8%BF%9B%E9%98%B6PDF/2.png" alt=""></p>
+<h2 id="排序统计"><a href="#排序统计" class="headerlink" title="排序统计"></a>排序统计</h2><p>在一些电商网站中可以看到商品的评论总是最新的在上面，这个是怎么做的呢？</p>
+<p>最新评论列表包含了所有的评论，这就要<strong>集合对元素进行保序存储</strong>了。也就是说集合中的元素必须按序存储，称之为有序集合。</p>
+<p><code>Redis</code>中的四种集合中<code>List</code>和<code>Sorted Set</code>属于有序集合。</p>
+<p>但是<code>List</code>和<code>Sorted Set</code>有何区别呢？到底使用哪一种呢？</p>
+<p><strong>List是按照元素进入顺序进行排序，而Sorted Set可以根据元素权重来排序。</strong> 比如可以根据元素插入集合的时间确定权值，先插入的元素权重小，后插入的元素权重大。</p>
+<p>针对这一例子中，显然这两种都是能够满足要求的，List中分页查询命令<code>LRANGE</code>和<code>Sorted Set</code>分页查询命令<code>ZRANGEBYSCORE</code>。</p>
+<p>但是就灵活性来说，List肯定不适合，List只能根据先后插入的顺序排序，但是大多数的场景中可能并不只是按照时间先后排序，可能还会按照一些特定的条件，此时<code>Sorted Set</code>就很合适了，只需要根据独有的算法生成相应的权重即可。</p>
+<h2 id="二值状态统计"><a href="#二值状态统计" class="headerlink" title="二值状态统计"></a>二值状态统计</h2><p><strong>二值状态指的是取值0或者1两种</strong>；在签到打卡的场景中，只需要记录签到（1）和未签到（0）两种状态，这就是典型的二值状态统计。</p>
+<p>二值状态的统计可以使用<code>Redis</code>的扩展数据类型<code>Bitmap</code>，底层使用<code>String</code>类型实现，可以把它看成是一个<code>bit</code>数组。关于详细内容后续介绍………</p>
+<p>在签到统计中，<code>0</code>和<code>1</code>只占了一个<code>bit</code>，即使一年的签到数据才365个<code>bit</code>位。大大减少了存储空间。</p>
+<p>Bitmap 提供了<code>GETBIT/SETBIT</code> 操作，使用一个偏移值 <code>offset</code> 对 bit 数组的某一个 bit 位进行读和写。不过，需要注意的是，Bitmap 的偏移量是从 0 开始算的，也就是说 <code>offset</code> 的最小值是 0。当使用 <code>SETBIT</code> 对一个 bit 位进行写操作时，这个 bit 位会被设置为 1。Bitmap 还提供了 <code>BITCOUNT</code> 操作，用来统计这个 bit 数组中所有<code>1</code>的个数。</p>
+<p>键值如何设计呢？key可以是<code>userid:yyyyMM</code>，即是唯一id加上月份。假设员工id为<code>10001</code>，需要统计<code>2020/11</code>月份的签到打卡记录。</p>
+<p>第一步，执行命令设置值，假设11月2号打卡了，命令如下：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SETBIT userid:10001:202011 1 1</div></pre></td></tr></table></figure></p>
+<p>BitMap是从下标0开始，因此2号则是下标为1，值设置为1则表示成功打卡了。</p>
+<p>第二步，检查该用户11月2号是否打卡了，命令如下：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GETBIT userid:10001:202011 1</div></pre></td></tr></table></figure></p>
+<p>第三步，统计11月的打卡次数，命令如下：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BITCOUNT userid:10001:202011</div></pre></td></tr></table></figure></p>
+<p><strong>那么问题来了，需要统计你这个签到系统中连续20天的签到打卡的用户的总数，如何处理呢？假设用户一个亿。</strong></p>
+<p>比如需要统计<code>2020/11/01</code>到<code>2020/11/20</code>天中连续打卡的人数，如何统计呢？</p>
+<p><code>Bitmap</code>中还支持同时对多个BitMap按位做<code>与</code>、<code>或</code>、<code>异或</code>操作，命令如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1/3.png" alt=""></p>
+<p>思路来了，我们可以将每天的日期作为一个<code>key</code>，对应的<code>BitMap</code>存储一亿个用户当天的打卡情况。如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1/4.png" alt=""></p>
+<p>此时我们只需要对<code>2020/11/1</code>到<code>2020/11/20</code>号的<code>Bitmap</code>做按位<code>与</code>操作，最终得到的一个<code>Bitmap</code>中每个bit位置对应的值则代表连续20天打卡的情况，只有连续20天全部打卡，所在的bit位的值才为1。如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1/5.png" alt=""></p>
+<p>最终可以使用<code>BITCOUNT</code>命令进行统计。</p>
+<p>可以尝试计算下内存开销，每天使用 1 个 1 亿位的 Bitmap，大约占 <code>12MB</code> 的内存（<code>10^8/8/1024/1024</code>），20 天的 Bitmap 的内存开销约为 <code>240MB</code>，内存压力不算太大。不过，在实际应用时，最好对 <code>Bitmap</code> 设置过期时间，让 Redis 自动删除不再需要的签到记录，以节省内存开销。</p>
+<p><strong>如果涉及到二值状态，比如用户是否存在，签到打卡，商品是否存在等情况可以使用Bitmap，可以有效的节省内存空间。</strong></p>
+<h2 id="基数统计"><a href="#基数统计" class="headerlink" title="基数统计"></a>基数统计</h2><p>基数统计指统计一个集合中不重复元素的个数。</p>
+<p>举个栗子：电商网站中通常需要统计每个网页的<code>UV</code>来确定权重，网页的UV肯定是需要去重的，在Redis类型中<code>Set</code>支持去重，第一时间肯定想到的是Set。</p>
+<p>但是这里有一个问题，<code>Set</code>底层使用的是哈希表和整数数组，如果一个网页的UV达到千万级别的话（一个电商网站中何止一个页面），那么对于内存的消耗极大。</p>
+<p><strong>Redis提供了一个扩展类型HyperLogLog用于基数统计，计算2^64个元素大概只需要12KB的内存空间</strong></p>
+<p>是不是很心动？但是<code>HyperLogLog</code>是<strong>存在误差</strong>的，大概是在<code>0.81%</code>，如果需要精准的统计，还是需要使用<code>Set</code>。对于这种网页的UV来说，足够了。</p>
+<p>在统计网页UV的时候，只需要将用户的唯一id存入HyperLogLog中，如下：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PFADD p1:uv 10001 10002 10003 10004</div></pre></td></tr></table></figure></p>
+<p>如果存在重复的元素，将会自动去重。</p>
+<p>统计也很简单，使用<code>PFCOUNT</code>命令，如下：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PFCOUNT p1:uv</div></pre></td></tr></table></figure></p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>本文介绍了统计的几种类型以及应该用什么集合存储，为了方便理解，作者将支持情况和优缺点汇总了一张表格，如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/Redis%E9%9B%86%E5%90%88%E7%BB%9F%E8%AE%A1/6.png" alt=""></p>
+<p><code>Set</code>和<code>Sorted Set</code>支持交集、并集的聚合运算，但是<code>Sorted Set</code>不支差集运算。</p>
+<p><code>Bitmap</code>也能对多个Bitmap做与、异或、或的聚合运算。</p>
+<p><code>List</code>和<code>SortedSet</code>都支持排序统计，但是List是根据元素先后插入顺序排序，Sorted Set支持权重，相对于List排序来说更加灵活。</p>
+<p>对于二值状态统计，判断某个元素是否存在等场景，建议使用<code>Bitmap</code>，节省的内存空间。</p>
+<p>对于基数统计，在大数据量、不要求精准的情况建议使用<code>HyperLogLog</code>，节省内存空间；对于精准的基数统计，最好还是使用<code>Set</code>集合。</p>
+<p>另外，作者已经完成了两个专栏的文章<strong>Mybatis进阶</strong>、<strong>Spring Boot 进阶</strong> ，已经将专栏文章整理成书，有需要的公众号回复关键词<code>Mybatis 进阶</code>、<code>Spring Boot 进阶</code>免费获取。</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/%E4%B8%93%E6%A0%8F%E6%96%87%E7%AB%A0/3.png" alt=""></p>
 <p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/myjszl_log.png" alt=""></p>
 
       
@@ -601,12 +621,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/">一次打包引发的思考，原来maven还可以这么玩~</a></p>
+  <p><span>本文标题:</span><a href="/2020/12/02/给你一个亿的数据，Redis如何统计？/">给你一个亿的数据，Redis如何统计？</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 不才陈某 的个人博客">不才陈某</a></p>
-  <p><span>发布时间:</span>2020年11月08日 - 21:01</p>
-  <p><span>最后更新:</span>2020年11月08日 - 21:18</p>
-  <p><span>原始链接:</span><a href="/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/" title="一次打包引发的思考，原来maven还可以这么玩~">https://chenjiabing666.github.io/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://chenjiabing666.github.io/2020/11/08/一次打包引发的思考，原来maven还可以这么玩/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2020年12月02日 - 19:22</p>
+  <p><span>最后更新:</span>2020年12月02日 - 19:23</p>
+  <p><span>原始链接:</span><a href="/2020/12/02/给你一个亿的数据，Redis如何统计？/" title="给你一个亿的数据，Redis如何统计？">https://chenjiabing666.github.io/2020/12/02/给你一个亿的数据，Redis如何统计？/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://chenjiabing666.github.io/2020/12/02/给你一个亿的数据，Redis如何统计？/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -640,7 +660,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/maven/" rel="tag"><i class="fa fa-tag"></i> maven</a>
+            <a href="/tags/Redis/" rel="tag"><i class="fa fa-tag"></i> Redis</a>
           
         </div>
       
@@ -653,8 +673,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/11/07/推荐几个压箱底儿的使用工具/" rel="next" title="分享几个压箱底儿的实用工具~">
-                <i class="fa fa-chevron-left"></i> 分享几个压箱底儿的实用工具~
+              <a href="/2020/11/27/IDEA2020-2-4最新激活教程，有效期到2089/" rel="next" title="IDEA2020.2.4最新激活教程，有效期到2089~">
+                <i class="fa fa-chevron-left"></i> IDEA2020.2.4最新激活教程，有效期到2089~
               </a>
             
           </div>
@@ -662,10 +682,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/11/13/Jenkins部署SpringBoot项目/" rel="prev" title="三十二张图教你Jenkins部署Spring Boot 项目">
-                三十二张图教你Jenkins部署Spring Boot 项目 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -857,7 +873,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖关系"><span class="nav-text">依赖关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你会怎么做？"><span class="nav-text">你会怎么做？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#必知的几个参数"><span class="nav-text">必知的几个参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合统计"><span class="nav-text">聚合统计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#交集"><span class="nav-text">交集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#差集"><span class="nav-text">差集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并集"><span class="nav-text">并集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序统计"><span class="nav-text">排序统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二值状态统计"><span class="nav-text">二值状态统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基数统计"><span class="nav-text">基数统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-1"><span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
